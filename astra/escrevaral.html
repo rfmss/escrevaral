@@ -955,7 +955,7 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
-  var focusEnabled = true, focusTimer = null, focusMeasure = null;
+  var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   function byId(id) { return document.getElementById(id); }
@@ -1057,6 +1057,7 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
     mirror.className = 'editor-measure'; mirror.style.width = manuscript.clientWidth + 'px';
     mirror.style.font = style.font; mirror.style.fontFamily = style.fontFamily; mirror.style.fontSize = style.fontSize;
     mirror.style.lineHeight = style.lineHeight; mirror.style.letterSpacing = style.letterSpacing;
+    mirror.style.paddingTop = style.paddingTop; mirror.style.paddingBottom = style.paddingBottom;
     var line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
     marker.style.display = 'inline-block'; marker.style.width = '0'; marker.style.height = line + 'px'; marker.style.verticalAlign = 'top';
     text(mirror, manuscript.value.slice(0, offset)); text(marker, '\u200b');
@@ -1083,6 +1084,26 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
     if (!window.getComputedStyle) { return; }
     window.clearTimeout(focusTimer); focusTimer = window.setTimeout(updateFocus, 40);
   }
+  function cancelTypewriter() { window.clearTimeout(typewriterTimer); typewriterTimer = null; }
+  function typewriterInsets() {
+    if (!window.getComputedStyle || !manuscript.style || !manuscript.clientHeight) { return; }
+    var style = window.getComputedStyle(manuscript), line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
+    var inset = Math.max(0, (manuscript.clientHeight - line) / 2);
+    manuscript.style.paddingTop = inset + 'px'; manuscript.style.paddingBottom = inset + 'px';
+    focusMeasure = null;
+  }
+  function centerTypingLine() {
+    typewriterTimer = null;
+    if (!window.getComputedStyle || composing || document.activeElement !== manuscript || manuscript.selectionStart !== manuscript.selectionEnd) { return; }
+    var position = textPosition(manuscript.selectionStart);
+    manuscript.scrollTop = Math.max(0, position.top + position.line / 2 - manuscript.clientHeight / 2);
+    updateFocus();
+  }
+  function followTyping() {
+    cancelTypewriter();
+    if (!window.getComputedStyle || composing || document.activeElement !== manuscript) { return; }
+    typewriterTimer = window.setTimeout(centerTypingLine, 20);
+  }
   function sizeWorkspace() {
     var area = byId('writing-space');
     if (area.style && window.innerHeight) {
@@ -1090,7 +1111,7 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
       area.style.height = height + 'px';
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
     }
-    focusMeasure = null; growManuscript(); renderTimeline(false, null, true);
+    typewriterInsets(); growManuscript(); followTyping(); renderTimeline(false, null, true);
   }
   function shapeWheel() {
     var list = byId('timeline-list'), children = list.childNodes, centre = list.clientHeight / 2, i, node, distance, angle, scale;
@@ -1282,6 +1303,15 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
   listen(document, 'mousedown', function () { document.body.setAttribute('data-input', 'pointer'); });
   listen(document, 'touchstart', function () { document.body.setAttribute('data-input', 'pointer'); });
   listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } shapeWheel(); });
+  listen(manuscript, 'input', followTyping);
+  listen(manuscript, 'compositionend', function () { composing = false; followTyping(); });
+  listen(manuscript, 'compositionstart', cancelTypewriter);
+  listen(manuscript, 'blur', cancelTypewriter);
+  listen(manuscript, 'mousedown', cancelTypewriter);
+  listen(manuscript, 'touchstart', cancelTypewriter);
+  listen(manuscript, 'wheel', cancelTypewriter);
+  listen(manuscript, 'mousewheel', cancelTypewriter);
+  listen(manuscript, 'keyup', function (event) { if (event.keyCode >= 33 && event.keyCode <= 40 && !event.shiftKey) { followTyping(); } });
   listen(manuscript, 'scroll', updateFocus);
   listen(manuscript, 'click', growManuscript);
   listen(manuscript, 'keyup', growManuscript);

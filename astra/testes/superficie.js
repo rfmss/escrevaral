@@ -118,6 +118,23 @@ module.exports = function (h) {
     assert.deepStrictEqual(bounds(5, 11), { start: 4, end: 13 });
     assert.deepStrictEqual(bounds(99, 99), { start: 9, end: 13 });
   });
+  test('Máquina de escrever: centraliza a linha e respeita seleção, composição e rolagem manual', function () {
+    var source = h.source('superficie/ponte.js'), start = source.indexOf('  function cancelTypewriter('), end = source.indexOf('  function sizeWorkspace(', start), pending = null;
+    var editor = { style: {}, clientHeight: 400, selectionStart: 40, selectionEnd: 40, scrollTop: 17 };
+    var context = { manuscript: editor, document: { activeElement: editor }, composing: false, typewriterTimer: null, focusMeasure: null,
+      window: { getComputedStyle: function () { return { lineHeight: '40px', fontSize: '22px' }; }, clearTimeout: function () { pending = null; }, setTimeout: function (fn) { pending = fn; return 1; } },
+      textPosition: function () { return { top: 980, line: 40 }; }, updateFocus: function () {} };
+    h.vm.createContext(context); h.vm.runInContext(source.slice(start, end), context);
+    context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '180px'); assert.strictEqual(editor.style.paddingBottom, '180px');
+    context.followTyping(); pending(); assert.strictEqual(editor.scrollTop, 800);
+    editor.selectionEnd = 45; editor.scrollTop = 23; context.followTyping(); pending(); assert.strictEqual(editor.scrollTop, 23);
+    editor.selectionEnd = 40; context.composing = true; context.followTyping(); assert.strictEqual(pending, null);
+    context.composing = false; context.followTyping(); context.cancelTypewriter(); assert.strictEqual(pending, null);
+    editor.scrollTop = 29; assert.strictEqual(editor.scrollTop, 29);
+    context.document.activeElement = null; context.followTyping(); assert.strictEqual(pending, null);
+    editor.clientHeight = 200; context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '80px');
+    context.document.activeElement = editor; context.textPosition = function () { return { top: 80, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
+  });
   test('Ponte: escrita não dispara análise; gravação tardia e reabertura', function () {
     var a = setup(); a.type('titulo', 'O sal'); a.type('manuscrito', 'uma excessão');
     assert.strictEqual(a.archive().length, 0); assert.strictEqual(a.shortTimers(), 0); assert.strictEqual(a.nodes.findings.childNodes.length, 0);
