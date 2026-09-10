@@ -25,7 +25,9 @@ module.exports = function (h) {
     var html = h.source('index.html'), matches = html.match(/id="[^"]+"/g);
     matches.forEach(function (attr) { nodes[attr.slice(4, -1)] = new Node('div'); });
     ['mesa', 'acervo', 'oficina', 'reset-dismissed'].forEach(function (id) { nodes[id].hidden = true; });
-    nodes['timeline-list'].parentNode = new Node('aside');
+    nodes['timeline-list'].parentNode = new Node('div');
+    nodes['timeline-toggle'].parentNode = new Node('div');
+    nodes['timeline-toggle'].parentNode.parentNode = new Node('aside');
     var lenses = Array.from(html.matchAll(/data-lens="([^"]+)"/g), function (m) { var b = new Node('button'); b.setAttribute('data-lens', m[1]); return b; });
     fakeDocument = new Node('document'); fakeDocument.body = new Node('body'); fakeDocument.hidden = false;
     fakeDocument.getElementById = function (id) { assert.ok(nodes[id], id); return nodes[id]; };
@@ -89,6 +91,33 @@ module.exports = function (h) {
     a.document.emit('keydown', { keyCode: 9 }); assert.strictEqual(a.document.body.getAttribute('data-input'), 'keyboard');
     a.document.emit('touchstart'); assert.strictEqual(a.document.body.getAttribute('data-input'), 'pointer');
   });
+  test('Leitura: temas claro/escuro persistem e preferências antigas migram para claro', function () {
+    var a = setup(); a.nodes['theme-dark'].click();
+    assert.strictEqual(a.document.body.getAttribute('data-theme'), 'escuro');
+    assert.strictEqual(a.nodes['theme-dark'].getAttribute('aria-pressed'), 'true');
+    assert.strictEqual(a.nodes['theme-light'].getAttribute('aria-pressed'), 'false');
+    var b = setup(a.storage); assert.strictEqual(b.document.body.getAttribute('data-theme'), 'escuro');
+    b.nodes['theme-light'].click(); assert.strictEqual(setup(b.storage).document.body.getAttribute('data-theme'), 'claro');
+    b.storage.setItem('escrevaral.astra.theme', 'roteiro'); assert.strictEqual(setup(b.storage).document.body.getAttribute('data-theme'), 'claro');
+  });
+  test('Leitura: foco é opcional, persiste e não altera o manuscrito', function () {
+    var a = setup(); a.type('manuscrito', 'primeiro\n\nsegundo'); a.flush();
+    a.nodes['focus-toggle'].click(); assert.strictEqual(a.nodes['focus-toggle'].getAttribute('aria-pressed'), 'false');
+    var b = setup(a.storage); assert.strictEqual(b.nodes['focus-toggle'].getAttribute('aria-pressed'), 'false');
+    assert.strictEqual(b.nodes.manuscrito.value, 'primeiro\n\nsegundo');
+    b.nodes['focus-toggle'].click(); assert.strictEqual(b.nodes['focus-toggle'].getAttribute('aria-pressed'), 'true');
+  });
+  test('Leitura: limites do foco acompanham caret, parágrafo vazio e seleção entre parágrafos', function () {
+    var source = h.source('superficie/ponte.js'), start = source.indexOf('  function paragraphBounds('), end = source.indexOf('  function textPosition(', start), context = {};
+    h.vm.createContext(context); h.vm.runInContext(source.slice(start, end), context);
+    var value = 'um\n\ndois\ntrês';
+    function bounds(a, b) { return JSON.parse(JSON.stringify(context.paragraphBounds(value, a, b))); }
+    assert.deepStrictEqual(bounds(0, 0), { start: 0, end: 2 });
+    assert.deepStrictEqual(bounds(3, 3), { start: 3, end: 3 });
+    assert.deepStrictEqual(bounds(5, 5), { start: 4, end: 8 });
+    assert.deepStrictEqual(bounds(5, 11), { start: 4, end: 13 });
+    assert.deepStrictEqual(bounds(99, 99), { start: 9, end: 13 });
+  });
   test('Ponte: escrita não dispara análise; gravação tardia e reabertura', function () {
     var a = setup(); a.type('titulo', 'O sal'); a.type('manuscrito', 'uma excessão');
     assert.strictEqual(a.archive().length, 0); assert.strictEqual(a.shortTimers(), 0); assert.strictEqual(a.nodes.findings.childNodes.length, 0);
@@ -145,13 +174,13 @@ module.exports = function (h) {
     var a = setup(); assert.strictEqual(a.nodes.som.checked, false);
     a.document.emit('keydown', { ctrlKey: true, keyCode: 13 }); assert.strictEqual(a.nodes.oficina.hidden, false);
     a.document.emit('keydown', { keyCode: 27 }); assert.strictEqual(a.nodes.oficina.hidden, true); assert.strictEqual(a.document.activeElement, a.nodes.manuscrito);
-    a.nodes.tema.value = 'roteiro'; a.nodes.tema.emit('change'); assert.strictEqual(a.document.body.getAttribute('data-theme'), 'roteiro');
-    var b = setup(a.storage); assert.strictEqual(b.document.body.getAttribute('data-theme'), 'roteiro');
+    a.nodes.tema.value = 'roteiro'; a.nodes.tema.emit('change'); assert.strictEqual(a.document.body.getAttribute('data-theme'), 'claro');
+    var b = setup(a.storage); assert.strictEqual(b.document.body.getAttribute('data-theme'), 'claro');
   });
   test('Ponte: cronologia abre a folha escolhida e preserva escrita antes de trocar', function () {
     var a = setup();
     function entries() { return a.nodes['timeline-list'].childNodes.filter(function (n) { return n.className === 'timeline-entry'; }); }
-    assert.strictEqual(a.document.body.getAttribute('data-theme'), 'roteiro');
+    assert.strictEqual(a.document.body.getAttribute('data-theme'), 'claro');
     assert.ok(a.nodes['manuscript-date'].textContent.indexOf(' de ') !== -1);
     a.type('titulo', 'Primeira'); a.type('manuscrito', 'um'); a.flush();
     a.nodes['timeline-new'].click(); a.type('titulo', 'Segunda'); a.type('manuscrito', 'dois'); a.flush();

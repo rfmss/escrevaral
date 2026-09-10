@@ -12,13 +12,14 @@
   <link rel="stylesheet" href="superficie/fonte-editor.css">
   <link rel="stylesheet" href="superficie/mesa.css">
 </head>
-<body data-theme="roteiro" data-input="keyboard">
+<body data-theme="claro" data-input="keyboard">
   <a class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para guardar e examinar a escrita. Você ainda pode escrever e copiar o texto.</p></noscript>
   <div id="writing-space">
     <header class="masthead">
       <span class="brand-signature"><img class="brand-mark" src="superficie/marca/escrevaral.svg" width="28" height="24" alt="">escrevaral</span>
       <nav class="desk-tools" aria-label="Mesa">
+        <button id="focus-toggle" aria-pressed="true" title="Destacar o parágrafo atual">Foco</button>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
         <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
         <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
@@ -32,22 +33,25 @@
           <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação da folha"></time></p>
         </div>
         <label class="sr-only" for="manuscrito">Manuscrito</label>
+        <div class="editor-viewport" id="editor-viewport">
         <textarea id="manuscrito" placeholder="A folha é sua." spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
+        <div id="focus-before" class="focus-mask" aria-hidden="true" hidden></div><div id="focus-after" class="focus-mask" aria-hidden="true" hidden></div>
+        </div>
         <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span></footer>
       </main>
       <aside class="timeline" aria-label="Folhas por data de criação">
-        <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="timeline-list">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha">+</button></div>
+        <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="timeline-list">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
         <p id="timeline-hint" class="sr-only">Deslize ou role para percorrer as datas. Escolha um título para abrir a folha.</p>
-        <div id="timeline-list" tabindex="0" role="region" aria-label="Roleta de datas" aria-describedby="timeline-hint"></div>
+        <div class="wheel-window"><div id="timeline-list" tabindex="0" role="region" aria-label="Roleta de datas" aria-describedby="timeline-hint"></div></div>
       </aside>
     </div>
   </div>
   <div id="panel-backdrop" class="panel-backdrop" hidden></div>
   <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="mesa-heading">
-    <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes">×</button></div>
+    <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <div class="setting-section"><h3>Ambiente</h3>
-      <div class="setting-row"><label for="tema">Papel</label><select id="tema"><option value="roteiro">Textura sutil</option><option value="folha">Liso</option></select></div>
-      <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"></label>
+      <div class="setting-row"><span>Tema</span><div class="theme-choice" role="group" aria-label="Tema"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
+      <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"></span></label>
       <p id="sound-status" class="quiet" role="status">Som desligado.</p><p class="quiet">O som desliga ao sair desta página.</p>
     </div>
     <div class="setting-section"><h3>Seus textos</h3>
@@ -60,12 +64,12 @@
     <div class="setting-section"><h3>Atalhos</h3><dl class="shortcuts"><div><dt>Examinar</dt><dd>Ctrl / ⌘ + Enter</dd></div><div><dt>Guardar a folha</dt><dd>Ctrl / ⌘ + S</dd></div><div><dt>Fechar painel</dt><dd>Esc</dd></div></dl></div>
   </section>
   <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="acervo-heading">
-    <div class="sheet-heading"><div><p class="eyebrow">SUAS FOLHAS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo">×</button></div>
+    <div class="sheet-heading"><div><p class="eyebrow">SUAS FOLHAS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <div class="archive-intro"><p class="quiet">Um lugar para voltar aos seus textos.</p><button id="new-document">+ Nova folha</button></div>
     <p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
   </section>
   <section id="oficina" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="oficina-heading">
-    <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita">×</button></div>
+    <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <p class="quiet">Uma lente de cada vez. Escolha o que observar no seu manuscrito.</p>
       <div class="lenses" role="group" aria-label="Escolher uma lente">
         <button data-lens="ortografia" aria-pressed="false"><span>01</span> Ortografia</button>

@@ -4,6 +4,7 @@
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
+  var focusEnabled = true, focusTimer = null, focusMeasure = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   function byId(id) { return document.getElementById(id); }
@@ -19,6 +20,7 @@
   function renderTimeline(refresh, previousId, reveal) {
     var list = byId('timeline-list'), date = new Date(noteDate(doc)), monthKey = '', dayKey = '', active = null, oldScroll = list.scrollTop;
     timelineRendering = true;
+    if (list.style && list.clientHeight) { list.style.paddingTop = Math.max(16, list.clientHeight / 2 - 32) + 'px'; list.style.paddingBottom = list.style.paddingTop; }
     text(byId('manuscript-date'), timeLabel(date) + ' · ' + date.getDate() + ' de ' + months[date.getMonth()] + ' de ' + date.getFullYear());
     byId('manuscript-date').setAttribute('datetime', noteDate(doc));
     byId('manuscript-date').setAttribute('aria-label', doc.created && !doc.createdApproximate ? 'Data de criação da folha' : 'Data preservada da folha antiga; criação desconhecida');
@@ -55,7 +57,7 @@
       b.setAttribute('title', entry.title || 'Sem título');
     });
     list.scrollTop = reveal && active ? Math.max(0, active.offsetTop - list.clientHeight / 2 + active.offsetHeight / 2) : oldScroll;
-    timelineRendering = false;
+    timelineRendering = false; shapeWheel();
   }
   function olderNotes() {
     if (timelineRendering || timelineCount >= timelineEntries.length) { return; }
@@ -94,27 +96,71 @@
     label.className = 'note-name'; stamp.className = 'note-time';
     text(label, name || 'Sem título'); text(stamp, when); parent.appendChild(label); parent.appendChild(stamp);
   }
+  function paragraphBounds(value, start, end) {
+    start = Math.max(0, Math.min(value.length, start || 0)); end = Math.max(start, Math.min(value.length, end || start));
+    var left = start ? value.lastIndexOf('\n', start - 1) + 1 : 0, right = value.indexOf('\n', end);
+    return { start: left, end: right === -1 ? value.length : right };
+  }
+  function textPosition(offset) {
+    var mirror = document.createElement('div'), marker = document.createElement('span'), style = window.getComputedStyle(manuscript);
+    mirror.className = 'editor-measure'; mirror.style.width = manuscript.clientWidth + 'px';
+    mirror.style.font = style.font; mirror.style.fontFamily = style.fontFamily; mirror.style.fontSize = style.fontSize;
+    mirror.style.lineHeight = style.lineHeight; mirror.style.letterSpacing = style.letterSpacing;
+    var line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
+    marker.style.display = 'inline-block'; marker.style.width = '0'; marker.style.height = line + 'px'; marker.style.verticalAlign = 'top';
+    text(mirror, manuscript.value.slice(0, offset)); text(marker, '\u200b');
+    mirror.appendChild(marker); document.body.appendChild(mirror);
+    var top = marker.offsetTop;
+    document.body.removeChild(mirror); return { top: top, line: line };
+  }
+  function updateFocus() {
+    if (!window.getComputedStyle || !manuscript.style) { return; }
+    var before = byId('focus-before'), after = byId('focus-after');
+    before.hidden = true; after.hidden = true;
+    if (!focusEnabled || composing || !manuscript.value) { return; }
+    var bounds = paragraphBounds(manuscript.value, manuscript.selectionStart, manuscript.selectionEnd);
+    if (!focusMeasure || focusMeasure.value !== manuscript.value || focusMeasure.width !== manuscript.clientWidth || focusMeasure.start !== bounds.start || focusMeasure.end !== bounds.end) {
+      focusMeasure = { value: manuscript.value, width: manuscript.clientWidth, start: bounds.start, end: bounds.end, first: textPosition(bounds.start), last: textPosition(bounds.end) };
+    }
+    var first = focusMeasure.first, last = focusMeasure.last, height = manuscript.clientHeight;
+    var top = Math.max(0, Math.min(height, first.top - manuscript.scrollTop));
+    var bottom = Math.max(0, Math.min(height, last.top + last.line - manuscript.scrollTop));
+    before.style.height = top + 'px'; after.style.top = bottom + 'px';
+    before.hidden = top === 0; after.hidden = bottom >= height;
+  }
   function growManuscript() {
-    if (!manuscript.style) { return; }
-    var scroll = window.pageYOffset;
-    manuscript.style.height = 'auto';
-    manuscript.style.height = Math.max(320, manuscript.scrollHeight || 320) + 'px';
-    if (window.scrollTo && typeof scroll === 'number' && window.pageYOffset !== scroll) { window.scrollTo(0, scroll); }
+    if (!window.getComputedStyle) { return; }
+    window.clearTimeout(focusTimer); focusTimer = window.setTimeout(updateFocus, 40);
+  }
+  function sizeWorkspace() {
+    var area = byId('writing-space');
+    if (area.style && window.innerHeight) {
+      var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      area.style.height = height + 'px';
+      document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
+    }
+    focusMeasure = null; growManuscript(); renderTimeline(false, null, true);
+  }
+  function shapeWheel() {
+    var list = byId('timeline-list'), children = list.childNodes, centre = list.clientHeight / 2, i, node, distance, angle, scale;
+    if (!list.style) { return; }
+    for (i = 0; i < children.length; i += 1) {
+      node = children[i]; if (node.className !== 'timeline-entry') { continue; }
+      distance = (node.offsetTop + node.offsetHeight / 2 - list.scrollTop - centre) / Math.max(centre, 1);
+      angle = Math.max(-48, Math.min(48, distance * -38)); scale = Math.max(.88, 1 - Math.abs(distance) * .07);
+      node.style.transform = 'perspective(500px) rotateX(' + angle + 'deg) scale(' + scale + ')';
+      node.style.webkitTransform = node.style.transform;
+      node.style.opacity = String(Math.max(.42, 1 - Math.abs(distance) * .35));
+    }
   }
   function revealSelection(start, end) {
     returnToWriting(); manuscript.setSelectionRange(start, end);
-    if (!window.getComputedStyle || !window.scrollTo) { manuscript.scrollIntoView(true); return; }
-    var mirror = document.createElement('div'), marker = document.createElement('span'), style = window.getComputedStyle(manuscript);
-    mirror.className = 'editor-measure'; mirror.style.width = manuscript.clientWidth + 'px';
-    mirror.style.font = style.font; mirror.style.lineHeight = style.lineHeight; mirror.style.letterSpacing = style.letterSpacing;
-    text(mirror, manuscript.value.slice(0, start)); text(marker, manuscript.value.slice(start, start + 1) || '\u200b');
-    mirror.appendChild(marker); document.body.appendChild(mirror);
-    var y = manuscript.getBoundingClientRect().top + (window.pageYOffset || 0) + marker.offsetTop;
-    document.body.removeChild(mirror); window.scrollTo(0, Math.max(0, y - (window.innerHeight || 600) / 3));
+    if (!window.getComputedStyle) { return; }
+    manuscript.scrollTop = Math.max(0, textPosition(start).top - manuscript.clientHeight / 3); updateFocus();
   }
   function collapseTimeline() {
     byId('timeline-toggle').setAttribute('aria-expanded', 'false');
-    byId('timeline-list').parentNode.setAttribute('data-expanded', 'false');
+    byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', 'false');
   }
   function closePanels(restore) {
     var trigger = panelTrigger;
@@ -134,7 +180,7 @@
   }
   function returnToWriting() { closePanels(false); collapseTimeline(); manuscript.focus(); }
   function loadDocument(next) {
-    doc = next; title.value = doc.title; manuscript.value = doc.text; dirty = false; growManuscript();
+    doc = next; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; manuscript.setSelectionRange(0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.');
@@ -271,21 +317,30 @@
     var currentId = storage.getItem('escrevaral.astra.current'), current = currentId ? archive.get(currentId) : null;
     if (!current) { current = archive.list().documents[0]; }
     if (current) { loadDocument(current); }
-    var theme = storage.getItem('escrevaral.astra.theme') === 'folha' ? 'folha' : 'roteiro';
-    byId('tema').value = theme; document.body.setAttribute('data-theme', theme);
+    applyTheme(storage.getItem('escrevaral.astra.theme'));
+    focusEnabled = storage.getItem('escrevaral.astra.focus') !== 'off'; byId('focus-toggle').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
   } catch (e) { message('A gravação pode estar indisponível. Sua folha está aberta; baixe uma cópia em Ajustes.'); }
-  renderTimeline(true, null, true); growManuscript();
-  listen(window, 'resize', growManuscript);
-  listen(window, 'load', growManuscript);
-  listen(byId('timeline-toggle'), 'click', function () { var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-list').parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
+  renderTimeline(true, null, true); sizeWorkspace();
+  listen(window, 'resize', sizeWorkspace);
+  listen(window, 'load', sizeWorkspace);
+  if (window.visualViewport) { listen(window.visualViewport, 'resize', sizeWorkspace); }
+  listen(byId('timeline-toggle'), 'click', function () { var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
   listen(byId('mesa-close'), 'click', function () { closePanels(true); });
   listen(byId('acervo-close'), 'click', function () { closePanels(true); });
   listen(byId('panel-backdrop'), 'click', function () { closePanels(true); });
   listen(document, 'mousedown', function () { document.body.setAttribute('data-input', 'pointer'); });
   listen(document, 'touchstart', function () { document.body.setAttribute('data-input', 'pointer'); });
-  listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } });
+  listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } shapeWheel(); });
+  listen(manuscript, 'scroll', updateFocus);
+  listen(manuscript, 'click', growManuscript);
+  listen(manuscript, 'keyup', growManuscript);
+  listen(manuscript, 'select', growManuscript);
+  listen(manuscript, 'focus', function () { collapseTimeline(); growManuscript(); });
+  listen(title, 'focus', collapseTimeline);
+  listen(document, 'selectionchange', function () { if (document.activeElement === manuscript) { growManuscript(); } });
+  listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
-  listen(manuscript, 'compositionstart', function () { composing = true; window.clearTimeout(timer); });
+  listen(manuscript, 'compositionstart', function () { composing = true; window.clearTimeout(timer); updateFocus(); });
   listen(manuscript, 'compositionend', function () { composing = false; changed(); });
   listen(byId('acervo-toggle'), 'click', function () { if (!persist()) { return; } var open = byId('acervo').hidden; showPanel('acervo', 'acervo-toggle', open); if (open) { renderArchive(); } });
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
@@ -296,7 +351,16 @@
   listen(byId('timeline-new'), 'click', newDocument);
   for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }
   listen(byId('reset-dismissed'), 'click', function () { doc.dismissed = []; dirty = true; persist(); byId('reset-dismissed').hidden = true; invalidate(); text(analysisStatus, 'Escolhas liberadas. Escolha uma lente para examinar de novo.'); lensButtons[0].focus(); });
-  listen(byId('tema'), 'change', function () { document.body.setAttribute('data-theme', this.value); try { if (storage) { storage.setItem('escrevaral.astra.theme', this.value); } } catch (ignore) { /* Tema não bloqueia a escrita. */ } });
+  function applyTheme(value) {
+    var theme = value === 'escuro' ? 'escuro' : 'claro';
+    document.body.setAttribute('data-theme', theme); byId('tema').value = theme;
+    byId('theme-light').setAttribute('aria-pressed', theme === 'claro' ? 'true' : 'false');
+    byId('theme-dark').setAttribute('aria-pressed', theme === 'escuro' ? 'true' : 'false');
+  }
+  function chooseTheme(value) { applyTheme(value); try { if (storage) { storage.setItem('escrevaral.astra.theme', byId('tema').value); } } catch (ignore) { /* Tema não bloqueia a escrita. */ } }
+  listen(byId('theme-light'), 'click', function () { chooseTheme('claro'); });
+  listen(byId('theme-dark'), 'click', function () { chooseTheme('escuro'); });
+  listen(byId('tema'), 'change', function () { chooseTheme(this.value); });
   listen(byId('som'), 'change', function () {
     if (!this.checked) { stopSound(); return; }
     try { var Audio = window.AudioContext || window.webkitAudioContext; audio = new Audio(); if (audio.resume) { audio.resume(); } text(byId('sound-status'), 'Som ligado, em volume discreto.'); } catch (e) { stopSound(); text(byId('sound-status'), 'O som não está disponível neste navegador.'); }
