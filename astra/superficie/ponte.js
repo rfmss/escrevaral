@@ -262,6 +262,8 @@
       li.appendChild(details); list.appendChild(li);
     });
     text(analysisStatus, (visible ? visible + (visible === 1 ? ' observação para você examinar.' : ' observações para você examinar.') : 'Nenhum apontamento novo nesta base limitada.') + (result.limited ? ' A leitura foi limitada aos primeiros 100 apontamentos encontrados.' : ''));
+    if (result.status === 'insuficiente') { text(analysisStatus, result.assessment.reason); }
+    text(byId('analysis-coverage'), result.coverage);
     byId('reset-dismissed').hidden = !doc.dismissed.length;
   }
   function examine(lens) {

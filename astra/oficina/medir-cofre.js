@@ -8,7 +8,7 @@ vm.runInContext("this.fetch=function(){throw Error('Rede proibida');};this.XMLHt
 var start = performance.now(); files.forEach(function (f) { vm.runInContext(fs.readFileSync(path.join(root, f), 'utf8'), context); });
 var startup = performance.now() - start, vault = context.Escr.createVault(context.Escr.knowledge);
 var sample = new Array(10001).join('uma folha sem juízo. ').slice(0, 200000), measurements = [];
-['ortografia', 'acentuacao', 'pontuacao', 'decolonial', 'expressoes', 'rima', 'metrica', 'morfologia', 'sintaxe'].forEach(function (lens) {
+context.Escr.lensCatalog.map(function (p) { return p.id; }).forEach(function (lens) {
   var text = lens === 'rima' || lens === 'metrica' ? new Array(5001).join('o amor que mora na flor\n').slice(0, 200000) : sample;
   var times = [], result;
   for (var i = 0; i < 5; i += 1) { start = performance.now(); result = vault.analyze(lens, text); times.push(performance.now() - start); }

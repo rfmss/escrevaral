@@ -1,3 +1,5 @@
+> Atualização 10/09/2026: veja [MATURACAO.md](MATURACAO.md) para a comparação de 68 branches, treze lentes e critérios atuais. O restante deste documento é o registro histórico da entrega anterior.
+
 # Decisões da entrega
 
 Atualização de 9/9/2026: a expansão para nove lentes, as fontes do cofre recebido e a cobertura efetiva estão em [FASE2.md](FASE2.md). As decisões abaixo documentam a fundação; os novos módulos preservam esses contratos.

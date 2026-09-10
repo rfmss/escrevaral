@@ -72,24 +72,39 @@
   <section id="oficina" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="oficina-heading">
     <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <p class="quiet">Uma lente de cada vez. Escolha o que observar no seu manuscrito.</p>
-      <div class="lenses" role="group" aria-label="Escolher uma lente">
-        <button data-lens="ortografia" aria-pressed="false"><span>01</span> Ortografia</button>
-        <button data-lens="acentuacao" aria-pressed="false"><span>02</span> Acentuação</button>
-        <button data-lens="pontuacao" aria-pressed="false"><span>03</span> Pontuação</button>
+      <p class="quiet">Convenções</p>
+      <div class="lenses" role="group" aria-label="Convenções">
+        <button data-lens="ortografia" aria-pressed="false">Ortografia</button>
+        <button data-lens="acentuacao" aria-pressed="false">Acentuação</button>
+        <button data-lens="pontuacao" aria-pressed="false">Pontuação</button>
+        <button data-lens="crase" aria-pressed="false">Crase</button>
+        <button data-lens="concordancia" aria-pressed="false">Concordância: haver, existir, fazer</button>
+        </div>
+      <p class="quiet">Gramática</p>
+      <div class="lenses" role="group" aria-label="Gramática">
         <button data-lens="morfologia" aria-pressed="false">Classes de palavras</button>
         <button data-lens="sintaxe" aria-pressed="false">Orações simples</button>
+        </div>
+      <p class="quiet">Escolhas de escrita</p>
+      <div class="lenses" role="group" aria-label="Escolhas de escrita">
         <button data-lens="decolonial" aria-pressed="false">Vocabulário decolonial</button>
         <button data-lens="expressoes" aria-pressed="false">Expressões e ênfases</button>
+        <button data-lens="repeticao" aria-pressed="false">Repetição próxima</button>
+        <button data-lens="ritmo" aria-pressed="false">Ritmo das frases</button>
+        </div>
+      <p class="quiet">Poesia</p>
+      <div class="lenses" role="group" aria-label="Poesia">
         <button data-lens="rima" aria-pressed="false">Rimas</button>
         <button data-lens="metrica" aria-pressed="false">Métrica de versos</button>
       </div>
     <p id="analysis-status" role="status" aria-live="polite">Nenhuma análise iniciada.</p>
     <ol id="findings" class="findings"></ol>
     <button id="reset-dismissed" hidden>Rever escolhas mantidas</button>
-    <p class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
+    <p id="analysis-coverage" class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
   </section>
   <script src="conhecimento/base.js"></script>
   <script src="maquina/cofre.js"></script>
+  <script src="maquina/basicas.js"></script>
   <script src="maquina/acervo.js"></script>
   <script src="maquina/instrumentos.js"></script>
   <script src="conhecimento/decolonial.js"></script>
@@ -100,7 +115,12 @@
   <script src="maquina/poesia.js"></script>
   <script src="conhecimento/verbos.js"></script>
   <script src="conhecimento/gramatica.js"></script>
+  <script src="conhecimento/maturacao.js"></script>
+  <script src="maquina/leitura.js"></script>
+  <script src="maquina/infinitivo-contextual.js"></script>
   <script src="maquina/gramatica.js"></script>
+  <script src="maquina/norma-contextual.js"></script>
+  <script src="maquina/ritmo.js"></script>
   <script src="superficie/ponte.js"></script>
 </body>
 </html>

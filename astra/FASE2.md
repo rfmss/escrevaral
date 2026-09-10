@@ -1,3 +1,5 @@
+> Atualização 10/09/2026: veja [MATURACAO.md](MATURACAO.md) para a comparação de 68 branches, treze lentes e critérios atuais. O restante deste documento é o registro histórico da entrega anterior.
+
 # Maturação do núcleo local — 9 de setembro de 2026
 
 O handshake foi retomado no repositório `rfmss/escrevaral`, somente na branch `astra/escrevaral-master`. A ordem recente de transplante orientou vocabulário decolonial, expressões, poesia e empacotamento; em seguida entrou uma primeira base de morfologia e oração simples. A Fase 2 permanece parcial: esta entrega amplia um núcleo verificável, sem declarar cobertura completa da gramática ou maturidade de 100%.

@@ -1,7 +1,7 @@
 # Continuação colável
 
 HANDOFF — Escrevaral PT-BR
-Repo `rfmss/escrevaral`; somente branch `astra/escrevaral-master`. Preservar Constituição e acervo. Revisão por agente de UI/UX autorizada nesta entrega. Não consultar/alterar outras branches. Entrada `astra/escrevaral.html` ou `astra/index.html`; leia `CONSTITUICAO.md`, `DECISOES.md` e `FASE2.md`.
+Repo `rfmss/escrevaral`; somente branch `astra/escrevaral-master`. Preservar Constituição e acervo. Revisão por agente de UI/UX autorizada nesta entrega. Consulta das outras branches autorizada pelo usuário em 10/09 exclusivamente para engines de linguagem; alterações somente nesta branch. Entrada `astra/escrevaral.html` ou `astra/index.html`; leia `CONSTITUICAO.md`, `DECISOES.md` e `FASE2.md`.
 
 Entregue: editor/acervo local, roleta vertical de datas com HH:MM:SS, criação fixa, folhas vazias persistentes e seleção por filete, marca discreta no cabeçalho/favicon branco e visual gesso/grafite, Arial na interface e Escrevaral Mono local (derivada OFL de Courier Prime) só no editor; nove lentes sob demanda, sem reescrita. Novas: decolonial (18/606 entradas), expressões (1.447 locuções), rimas/métrica cautelosas, dez classes em léxico restrito e oração simples. 884 formas verbais exatas, ambiguidades preservadas. Não há API, modelo treinado, backend ou telemetria.
 
@@ -16,3 +16,6 @@ Atualização 10/09: nova fonte OFL preserva acentos; glifos decompostos antes d
 Rolagem de máquina de escrever: a linha ativa fica no centro do editor ao digitar e navegar por teclado; margem interna calculada permite centralizar também a primeira/última linha. Respeita seleção, composição, ponteiro e rolagem manual. O foco por parágrafo usa as mesmas margens. Validar geometria real no navegador/iPad.
 
 Navegação 10/09: área de escrita ampliada (mesa até 1440px; topo 88px; reserva lateral 250px). Tambor substituído por pastas virtuais mês → dia → notas, sem mover dados nem inventar datas. Busca global por título/conteúdo, insensível a caixa e acentos PT-BR, inclui buffer ainda não gravado. Limpar busca conserva pasta. Marcador exclusivo da nota aberta; hover distinto; rolagem não troca documento. Modelo puro browseNotes em maquina/acervo.js; DOM na ponte. Quatro regressões de pastas, busca e seleção aprovadas. Renderização real/aparelho pendentes.
+
+
+Maturação 10/09: leia MATURACAO.md. 68 branches inventariadas em 17 conjuntos de arquivos linguísticos. Treze lentes: adicionadas Crase, Concordância (haver/existir/fazer), Repetição próxima e Ritmo das frases; morfologia ampliada com infinitivo contextual de 65 lemas. Categorias e condições explícitas, sob pedido. O cofre agora é um orquestrador sem regras linguísticas; basicas.js preserva as regras originais. 450 verificações passam, ES5, equivalência portátil e rede/APIs modernas bloqueadas. HTML: 456.821 bytes. Sem mudança de acervo, layout da folha ou Constituição. Concordância restrita e revisão bibliográfica individual pendente; aparelho físico e renderização ainda não validados. Inventário, sondas do legado e medições ficam em oficina, fora do runtime.

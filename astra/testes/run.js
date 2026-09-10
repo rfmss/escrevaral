@@ -137,7 +137,7 @@ test('Mesa portátil completa, sem script ou folha de estilo externos', function
   assert.strictEqual(scripts.length, runtimeFiles.length);
   var isolated = {}; vm.createContext(isolated); scripts.slice(0, -1).forEach(function (js) { vm.runInContext(js, isolated); });
   assert.strictEqual(isolated.Escr.createVault(isolated.Escr.knowledge).analyze('ortografia', 'uma excessão').findings.length, 1);
-  [['decolonial', 'cabelo ruim'], ['expressoes', 'subir para cima'], ['rima', 'amor\nflor'], ['metrica', 'o amor'], ['morfologia', 'Eu leio'], ['sintaxe', 'A escritora leu o livro ontem.']].forEach(function (entry) {
+  [['decolonial', 'cabelo ruim'], ['expressoes', 'subir para cima'], ['rima', 'amor\nflor'], ['metrica', 'o amor'], ['morfologia', 'Eu leio'], ['morfologia', 'para nós escrevermos'], ['sintaxe', 'A escritora leu o livro ontem.'], ['crase', 'à ela'], ['concordancia', 'Houveram muitos problemas.'], ['repeticao', 'memória memória memória'], ['ritmo', 'Ela veio. Ele ficou. A porta abriu.']].forEach(function (entry) {
     assert.strictEqual(JSON.stringify(isolated.Escr.createVault(isolated.Escr.knowledge).analyze(entry[0], entry[1])), JSON.stringify(vault.analyze(entry[0], entry[1])));
   });
 });
@@ -146,4 +146,5 @@ runSurface({ test: test, source: source, Storage: Storage, vm: vm, assert: asser
 require('./transplante.js')({ test: test, source: source, assert: assert, E: E, vault: vault, context: context });
 require('./poesia.js')({ test: test, source: source, assert: assert, E: E, vault: vault });
 require('./gramatica.js')({ test: test, source: source, assert: assert, E: E, vault: vault });
+require('./maturacao.js')({ test: test, source: source, assert: assert, E: E, vault: vault });
 console.log(JSON.stringify({ passed: passed, corpusCases: corpus.length, transplantCases: JSON.parse(source('testes/corpus-transplante.json')).length, literaryCases: corpus.filter(function (e) { return e.category === 'literatura'; }).length, failures: 0, runtime: process.version, physicalLegacyDevice: 'não testado', browserRendering: 'não testado' }, null, 2));

@@ -2,21 +2,6 @@
   'use strict';
   root.Escr = root.Escr || {};
   var own = Object.prototype.hasOwnProperty;
-  function protectedText(text) {
-    /* Substituição de igual comprimento: índices continuam sendo UTF-16 do original. */
-    return text.replace(/```[\s\S]*?(?:```|$)|`[^`\n]*`|https?:\/\/[^\s]+|www\.[^\s]+|[\w.+-]+@[\w.-]+|"[^"\n]*"|“[^”]*”|‘[^’]*’|«[^»]*»/g, function (s) { return s.replace(/[^\n]/g, ' '); });
-  }
-  function makeFinding(rule, text, start, end, reference, sources) {
-    var snippet = text.slice(start, end);
-    return {
-      id: rule.id, lens: rule.lens, feature: rule.lens,
-      severity: rule.severity, confidence: rule.confidence,
-      message: rule.title + (reference ? ': “' + snippet + '” → “' + reference + '”.' : '.'),
-      start: start, end: end, snippet: snippet,
-      evidence: { observation: rule.observation, interpretation: rule.interpretation + (reference ? ' “' + reference + '”.' : ''), ambiguity: rule.ambiguity, limit: rule.limit, source: sources[rule.source] },
-      reference: reference || null
-    };
-  }
   function validate(f, text, lens) {
     if (!f || !/^PTBR-[A-Z]+-[0-9]+$/.test(f.id) || f.lens !== lens || typeof f.feature !== 'string' || !f.feature || typeof f.message !== 'string' || !f.message ||
         ['erro', 'aviso', 'estilo', 'informação'].indexOf(f.severity) < 0 ||
@@ -39,39 +24,18 @@
       if (!own.call(registry, lensId)) { throw new Error('Esta lente não está disponível.'); }
       busy = true;
       try {
+        var policy = root.Escr.lensPolicies && root.Escr.lensPolicies[lensId];
+        var assessment = policy ? policy(text) : { eligible: true, scope: 'Lente registrada sem política de recorte.' };
+        if (!assessment.eligible) { return { lens: lensId, knowledgeVersion: knowledge.version, findings: [], limited: false, status: 'insuficiente', assessment: assessment, coverage: assessment.scope }; }
         var result = registry[lensId].analyze(text, maxFindings + 1), i;
         if (Object.prototype.toString.call(result) !== '[object Array]') { throw new Error('Resposta inválida da lente.'); }
         for (i = 0; i < result.length; i += 1) { validate(result[i], text, lensId); }
         result.sort(function (a, b) { return a.start - b.start || a.end - b.end || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0); });
-        return { lens: lensId, knowledgeVersion: knowledge.version, findings: result.slice(0, maxFindings), limited: result.length > maxFindings, coverage: 'Somente as regras locais desta lente foram examinadas. Silêncio não certifica correção.' };
+        return { lens: lensId, knowledgeVersion: knowledge.version, findings: result.slice(0, maxFindings), limited: result.length > maxFindings, status: 'examinado', assessment: assessment, coverage: assessment.scope + ' Silêncio não certifica correção.' };
       } finally { busy = false; }
     }
-    function builtin(id) {
-      register({ id: id, analyze: function (text, cap) {
-        var clean = protectedText(text), out = [], i, rule, match, regex, token, reference;
-        for (i = 0; i < knowledge.rules.length; i += 1) {
-          rule = knowledge.rules[i];
-          if (rule.lens !== id) { continue; }
-          regex = rule.forms ? /[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+(?:[-'][A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+)*/g : new RegExp(rule.pattern, 'g');
-          while ((match = regex.exec(clean))) {
-            reference = null;
-            if (rule.forms) {
-              token = match[0];
-              /* Maiúscula pode ser nome próprio; silêncio deliberado, inclusive no começo da frase. */
-              if (token !== token.toLowerCase() || !own.call(rule.forms, token)) { continue; }
-              reference = rule.forms[token];
-            }
-            out.push(makeFinding(rule, text, match.index, match.index + match[0].length, reference, knowledge.sources));
-            if (out.length >= cap) { return out; }
-          }
-        }
-        return out;
-      } });
-    }
-    builtin('ortografia'); builtin('acentuacao'); builtin('pontuacao');
     (root.Escr.extensions || []).forEach(function (install) { install(register, knowledge); });
     return { register: register, analyze: analyze, maxLength: maxLength };
   }
   root.Escr.createVault = createVault;
-  root.Escr.protectedText = protectedText;
 }(typeof window !== 'undefined' ? window : this));

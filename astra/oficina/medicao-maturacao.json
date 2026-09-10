@@ -1,0 +1,116 @@
+{
+  "measuredAt": "2026-09-10T11:56:24.590Z",
+  "runtime": "v24.19.0",
+  "platform": "linux",
+  "architecture": "x64",
+  "portableBytes": 456821,
+  "coreStartupMs": 20.347,
+  "measurements": [
+    {
+      "lens": "ortografia",
+      "utf16Units": 200000,
+      "medianMs": 6.789,
+      "maxMs": 15.171,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "acentuacao",
+      "utf16Units": 200000,
+      "medianMs": 6.408,
+      "maxMs": 10.301,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "pontuacao",
+      "utf16Units": 200000,
+      "medianMs": 4.079,
+      "maxMs": 6.158,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "crase",
+      "utf16Units": 200000,
+      "medianMs": 15.998,
+      "maxMs": 19.24,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "concordancia",
+      "utf16Units": 200000,
+      "medianMs": 39.56,
+      "maxMs": 42.538,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "morfologia",
+      "utf16Units": 200000,
+      "medianMs": 14.08,
+      "maxMs": 18.808,
+      "returned": 100,
+      "limited": true
+    },
+    {
+      "lens": "sintaxe",
+      "utf16Units": 200000,
+      "medianMs": 18.065,
+      "maxMs": 20.968,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "decolonial",
+      "utf16Units": 200000,
+      "medianMs": 9.928,
+      "maxMs": 29.192,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "expressoes",
+      "utf16Units": 200000,
+      "medianMs": 14.291,
+      "maxMs": 15.916,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "repeticao",
+      "utf16Units": 200000,
+      "medianMs": 15.433,
+      "maxMs": 18.723,
+      "returned": 100,
+      "limited": true
+    },
+    {
+      "lens": "ritmo",
+      "utf16Units": 200000,
+      "medianMs": 60.901,
+      "maxMs": 101.397,
+      "returned": 1,
+      "limited": false
+    },
+    {
+      "lens": "rima",
+      "utf16Units": 120000,
+      "medianMs": 13.693,
+      "maxMs": 19.84,
+      "returned": 100,
+      "limited": true
+    },
+    {
+      "lens": "metrica",
+      "utf16Units": 120000,
+      "medianMs": 3.154,
+      "maxMs": 3.478,
+      "returned": 100,
+      "limited": true
+    }
+  ],
+  "constraints": "Contexto sem DOM; rede bloqueada; Set, Map, Promise, normalize, includes, at e assign ausentes. Medição de V8 nesta máquina, não WebKit nem iPad. Inclui limites do cofre: não extrapolar throughput.",
+  "physicalDevice": "não medido"
+}

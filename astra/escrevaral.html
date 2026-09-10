@@ -467,28 +467,42 @@ body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64
   <section id="oficina" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="oficina-heading">
     <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <p class="quiet">Uma lente de cada vez. Escolha o que observar no seu manuscrito.</p>
-      <div class="lenses" role="group" aria-label="Escolher uma lente">
-        <button data-lens="ortografia" aria-pressed="false"><span>01</span> Ortografia</button>
-        <button data-lens="acentuacao" aria-pressed="false"><span>02</span> Acentuação</button>
-        <button data-lens="pontuacao" aria-pressed="false"><span>03</span> Pontuação</button>
+      <p class="quiet">Convenções</p>
+      <div class="lenses" role="group" aria-label="Convenções">
+        <button data-lens="ortografia" aria-pressed="false">Ortografia</button>
+        <button data-lens="acentuacao" aria-pressed="false">Acentuação</button>
+        <button data-lens="pontuacao" aria-pressed="false">Pontuação</button>
+        <button data-lens="crase" aria-pressed="false">Crase</button>
+        <button data-lens="concordancia" aria-pressed="false">Concordância: haver, existir, fazer</button>
+        </div>
+      <p class="quiet">Gramática</p>
+      <div class="lenses" role="group" aria-label="Gramática">
         <button data-lens="morfologia" aria-pressed="false">Classes de palavras</button>
         <button data-lens="sintaxe" aria-pressed="false">Orações simples</button>
+        </div>
+      <p class="quiet">Escolhas de escrita</p>
+      <div class="lenses" role="group" aria-label="Escolhas de escrita">
         <button data-lens="decolonial" aria-pressed="false">Vocabulário decolonial</button>
         <button data-lens="expressoes" aria-pressed="false">Expressões e ênfases</button>
+        <button data-lens="repeticao" aria-pressed="false">Repetição próxima</button>
+        <button data-lens="ritmo" aria-pressed="false">Ritmo das frases</button>
+        </div>
+      <p class="quiet">Poesia</p>
+      <div class="lenses" role="group" aria-label="Poesia">
         <button data-lens="rima" aria-pressed="false">Rimas</button>
         <button data-lens="metrica" aria-pressed="false">Métrica de versos</button>
       </div>
     <p id="analysis-status" role="status" aria-live="polite">Nenhuma análise iniciada.</p>
     <ol id="findings" class="findings"></ol>
     <button id="reset-dismissed" hidden>Rever escolhas mantidas</button>
-    <p class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
+    <p id="analysis-coverage" class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
   </section>
   <script>
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
   root.Escr.knowledge = {
-    version: '2.0.0',
+    version: '3.0.0',
     sources: {
       lexical: { title: 'ABL — Vocabulário Ortográfico (referência de conferência; base não incorporada)', url: 'https://www.academia.org.br/nossa-lingua/busca-no-vocabulario' },
       accent: { title: 'Acordo Ortográfico de 1990, Base VIII (oxítonas)', url: 'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/decreto/d6583.htm' },
@@ -531,21 +545,6 @@ body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64
   'use strict';
   root.Escr = root.Escr || {};
   var own = Object.prototype.hasOwnProperty;
-  function protectedText(text) {
-    /* Substituição de igual comprimento: índices continuam sendo UTF-16 do original. */
-    return text.replace(/```[\s\S]*?(?:```|$)|`[^`\n]*`|https?:\/\/[^\s]+|www\.[^\s]+|[\w.+-]+@[\w.-]+|"[^"\n]*"|“[^”]*”|‘[^’]*’|«[^»]*»/g, function (s) { return s.replace(/[^\n]/g, ' '); });
-  }
-  function makeFinding(rule, text, start, end, reference, sources) {
-    var snippet = text.slice(start, end);
-    return {
-      id: rule.id, lens: rule.lens, feature: rule.lens,
-      severity: rule.severity, confidence: rule.confidence,
-      message: rule.title + (reference ? ': “' + snippet + '” → “' + reference + '”.' : '.'),
-      start: start, end: end, snippet: snippet,
-      evidence: { observation: rule.observation, interpretation: rule.interpretation + (reference ? ' “' + reference + '”.' : ''), ambiguity: rule.ambiguity, limit: rule.limit, source: sources[rule.source] },
-      reference: reference || null
-    };
-  }
   function validate(f, text, lens) {
     if (!f || !/^PTBR-[A-Z]+-[0-9]+$/.test(f.id) || f.lens !== lens || typeof f.feature !== 'string' || !f.feature || typeof f.message !== 'string' || !f.message ||
         ['erro', 'aviso', 'estilo', 'informação'].indexOf(f.severity) < 0 ||
@@ -568,13 +567,44 @@ body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64
       if (!own.call(registry, lensId)) { throw new Error('Esta lente não está disponível.'); }
       busy = true;
       try {
+        var policy = root.Escr.lensPolicies && root.Escr.lensPolicies[lensId];
+        var assessment = policy ? policy(text) : { eligible: true, scope: 'Lente registrada sem política de recorte.' };
+        if (!assessment.eligible) { return { lens: lensId, knowledgeVersion: knowledge.version, findings: [], limited: false, status: 'insuficiente', assessment: assessment, coverage: assessment.scope }; }
         var result = registry[lensId].analyze(text, maxFindings + 1), i;
         if (Object.prototype.toString.call(result) !== '[object Array]') { throw new Error('Resposta inválida da lente.'); }
         for (i = 0; i < result.length; i += 1) { validate(result[i], text, lensId); }
         result.sort(function (a, b) { return a.start - b.start || a.end - b.end || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0); });
-        return { lens: lensId, knowledgeVersion: knowledge.version, findings: result.slice(0, maxFindings), limited: result.length > maxFindings, coverage: 'Somente as regras locais desta lente foram examinadas. Silêncio não certifica correção.' };
+        return { lens: lensId, knowledgeVersion: knowledge.version, findings: result.slice(0, maxFindings), limited: result.length > maxFindings, status: 'examinado', assessment: assessment, coverage: assessment.scope + ' Silêncio não certifica correção.' };
       } finally { busy = false; }
     }
+    (root.Escr.extensions || []).forEach(function (install) { install(register, knowledge); });
+    return { register: register, analyze: analyze, maxLength: maxLength };
+  }
+  root.Escr.createVault = createVault;
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  var own = Object.prototype.hasOwnProperty;
+  function protectedText(text) {
+    /* Substituição de igual comprimento: índices continuam sendo UTF-16 do original. */
+    return text.replace(/```[\s\S]*?(?:```|$)|`[^`\n]*`|https?:\/\/[^\s]+|www\.[^\s]+|[\w.+-]+@[\w.-]+|"[^"\n]*"|“[^”]*”|‘[^’]*’|«[^»]*»/g, function (s) { return s.replace(/[^\n]/g, ' '); });
+  }
+  function makeFinding(rule, text, start, end, reference, sources) {
+    var snippet = text.slice(start, end);
+    return {
+      id: rule.id, lens: rule.lens, feature: rule.lens,
+      severity: rule.severity, confidence: rule.confidence,
+      message: rule.title + (reference ? ': “' + snippet + '” → “' + reference + '”.' : '.'),
+      start: start, end: end, snippet: snippet,
+      evidence: { observation: rule.observation, interpretation: rule.interpretation + (reference ? ' “' + reference + '”.' : ''), ambiguity: rule.ambiguity, limit: rule.limit, source: sources[rule.source] },
+      reference: reference || null
+    };
+  }
+  root.Escr.protectedText = protectedText;
+  (root.Escr.extensions = root.Escr.extensions || []).push(function (register, knowledge) {
     function builtin(id) {
       register({ id: id, analyze: function (text, cap) {
         var clean = protectedText(text), out = [], i, rule, match, regex, token, reference;
@@ -598,11 +628,7 @@ body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64
       } });
     }
     builtin('ortografia'); builtin('acentuacao'); builtin('pontuacao');
-    (root.Escr.extensions || []).forEach(function (install) { install(register, knowledge); });
-    return { register: register, analyze: analyze, maxLength: maxLength };
-  }
-  root.Escr.createVault = createVault;
-  root.Escr.protectedText = protectedText;
+  });
 }(typeof window !== 'undefined' ? window : this));
 
 </script>
@@ -946,6 +972,141 @@ body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64
   <script>
 (function (root) {
   'use strict';
+  var E = root.Escr;
+  E.maturationData = {
+    version: '3.0.0',
+    craseSource: { title: 'Senado Federal, Manual de Comunicação, Crase, itens 1 e 4 de Não ocorre crase; consultado em 10/09/2026', url: 'https://www12.senado.leg.br/manualdecomunicacao/estilos/crase' },
+    verbSource: { title: 'Recorte local de concordância; corpus C2 e normativeVerbSupplement.ts de rfmss/escrevaral, main 816ca7e. Regra escolar de haver existencial, existir pessoal e fazer temporal; revisão bibliográfica individual pendente', url: null },
+    styleSource: { title: 'Critério descritivo local v1, adaptado de analise-engine.js e voz-estilistica.js do legado. Limiares operacionais, sem validação como medida de qualidade literária', url: null },
+    crasePronouns: ['ele', 'ela', 'eles', 'elas', 'você', 'vocês', 'mim', 'ti', 'si', 'nós', 'vós'],
+    craseInfinitives: ['partir', 'ler', 'escrever', 'fazer', 'falar', 'pensar', 'trabalhar', 'estudar', 'caminhar', 'dormir', 'comer', 'viver'],
+    /* Só estes substantivos entram na concordância; nunca deduzir plural pelo sufixo s. */
+    pluralNouns: ['problemas', 'livros', 'cartas', 'pessoas', 'autores', 'autoras', 'escritores', 'escritoras', 'leitores', 'leitoras', 'meninos', 'meninas', 'crianças', 'casas', 'poemas', 'textos', 'palavras', 'páginas', 'capítulos', 'exemplos', 'dúvidas', 'erros', 'motivos', 'razões', 'possibilidades', 'diferenças', 'mudanças', 'reuniões', 'vagas', 'flores', 'notícias', 'perdas', 'livrarias', 'opções'],
+    quantifiers: ['os', 'as', 'uns', 'umas', 'muitos', 'muitas', 'vários', 'várias', 'alguns', 'algumas', 'dois', 'duas', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove', 'dez'],
+    pluralAdjectives: ['novos', 'novas', 'antigos', 'antigas', 'abertos', 'abertas', 'fechados', 'fechadas', 'importantes', 'diferentes'],
+    adjuncts: ['hoje', 'ontem', 'amanhã', 'aqui', 'ali', 'lá', 'na mesa', 'sobre a mesa', 'no texto', 'no livro', 'no manuscrito', 'na sala', 'na cidade', 'na escola', 'na reunião', 'no jardim', 'na biblioteca'],
+    haver: { houveram: 'houve', haviam: 'havia', 'haverão': 'haverá', haveriam: 'haveria' },
+    existir: { existe: 'existem', existia: 'existiam', 'existirá': 'existirão', existiria: 'existiriam' },
+    haverAux: { devem: 'deve', deveriam: 'deveria', podem: 'pode', poderiam: 'poderia' },
+    existirAux: { deve: 'devem', deveria: 'deveriam', pode: 'podem', poderia: 'poderiam' },
+    fazer: { fazem: 'faz', faziam: 'fazia', 'farão': 'fará', fariam: 'faria' },
+    timeUnits: ['anos', 'meses', 'semanas', 'dias', 'horas', 'minutos', 'segundos'],
+    amounts: ['dois', 'duas', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove', 'dez', 'onze', 'doze', 'vinte', 'trinta', 'muitos', 'muitas', 'vários', 'várias'],
+    repeatWindow: 40, repeatMinimum: 3,
+    stopwords: ['a', 'o', 'as', 'os', 'um', 'uma', 'uns', 'umas', 'de', 'do', 'da', 'dos', 'das', 'em', 'no', 'na', 'nos', 'nas', 'por', 'para', 'com', 'sem', 'sob', 'sobre', 'entre', 'e', 'ou', 'mas', 'que', 'se', 'como', 'quando', 'onde', 'quem', 'qual', 'quais', 'cujo', 'cuja', 'seus', 'suas', 'seu', 'sua', 'meu', 'minha', 'meus', 'minhas', 'esse', 'essa', 'este', 'esta', 'isso', 'isto', 'aquele', 'aquela', 'porque', 'também', 'muito', 'muita', 'muitos', 'muitas', 'pouco', 'pouca', 'poucos', 'poucas', 'todos', 'todas', 'todo', 'toda', 'eles', 'elas', 'você', 'vocês'],
+    abbreviations: ['sr', 'sra', 'dr', 'dra', 'prof', 'profa', 'etc', 'vs', 'vol', 'cap', 'fig', 'pág', 'art', 'av'],
+    infinitiveLemmas: ['abrir', 'acabar', 'achar', 'ajudar', 'amar', 'analisar', 'andar', 'aprender', 'buscar', 'cantar', 'carregar', 'chamar', 'chegar', 'chover', 'começar', 'comer', 'concluir', 'conhecer', 'continuar', 'correr', 'cortar', 'criar', 'deixar', 'dever', 'dormir', 'escrever', 'esperar', 'estudar', 'evitar', 'falar', 'fechar', 'ficar', 'gostar', 'largar', 'ler', 'lembrar', 'morar', 'mover', 'nascer', 'olhar', 'ouvir', 'partir', 'passar', 'pensar', 'perceber', 'perder', 'permanecer', 'precisar', 'procurar', 'publicar', 'receber', 'resolver', 'responder', 'revisar', 'sair', 'seguir', 'sentir', 'tentar', 'terminar', 'trabalhar', 'usar', 'vender', 'viver', 'voltar', 'varrer'],
+    infinitivePrepositions: ['para', 'sem', 'por', 'de', 'após', 'até'],
+    infinitiveEndings: [['mos', 1, 'plural'], ['des', 2, 'plural'], ['es', 2, 'singular'], ['em', 3, 'plural']],
+    subjects: { eu: [1, 'singular'], tu: [2, 'singular'], ele: [3, 'singular'], ela: [3, 'singular'], 'você': [3, 'singular'], 'nós': [1, 'plural'], 'vós': [2, 'plural'], eles: [3, 'plural'], elas: [3, 'plural'], 'vocês': [3, 'plural'] }
+  };
+  E.lensCatalog = [
+    { id: 'ortografia', group: 'Convenções', minimum: 1, scope: 'Grafias da lista local; palavras desconhecidas ficam sem julgamento.' },
+    { id: 'acentuacao', group: 'Convenções', minimum: 1, scope: 'Acentos da lista local; pares ambíguos ficam sem julgamento.' },
+    { id: 'pontuacao', group: 'Convenções', minimum: 0, scope: 'Somente sequências mecânicas de vírgulas e pontos e vírgulas.' },
+    { id: 'crase', group: 'Convenções', minimum: 2, scope: 'Acento grave diante de pronomes pessoais e infinitivos registrados; não procura crases ausentes.' },
+    { id: 'concordancia', group: 'Convenções', minimum: 3, scope: 'Haver, existir e fazer em construções delimitadas. Orações fora desse recorte ficam sem julgamento.' },
+    { id: 'morfologia', group: 'Gramática', minimum: 1, scope: 'Leituras lexicais e infinitivos em contexto; desconhecidos e ambiguidades são preservados.' },
+    { id: 'sintaxe', group: 'Gramática', minimum: 2, scope: 'Só orações simples inteiras reconhecidas pelo vocabulário local.' },
+    { id: 'decolonial', group: 'Escolhas de escrita', minimum: 2, scope: '18 expressões para reflexão contextual; não atribui intenção nem etimologia.' },
+    { id: 'expressoes', group: 'Escolhas de escrita', minimum: 1, scope: 'Expressões do catálogo; presença não implica clichê ou corte necessário.' },
+    { id: 'repeticao', group: 'Escolhas de escrita', minimum: 3, scope: 'Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional.' },
+    { id: 'ritmo', group: 'Escolhas de escrita', minimum: 3, sentences: 3, scope: 'Extensão e variação de pelo menos três frases delimitadas; não mede qualidade ou voz.' },
+    { id: 'rima', group: 'Poesia', minimum: 2, lines: 2, scope: 'Terminações gráficas de duas ou mais linhas; a confirmação depende da leitura em voz alta.' },
+    { id: 'metrica', group: 'Poesia', minimum: 1, scope: 'Escansão aproximada por linha; sinaliza alternativas de leitura.' }
+  ];
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  var E = root.Escr, S = E.instruments, D = E.maturationData;
+  /* Mantém posições no original; a composição é feita apenas sobre o token. */
+  function canonical(value) {
+    var pairs = { 'a\u0300': 'à', 'a\u0301': 'á', 'a\u0302': 'â', 'a\u0303': 'ã', 'e\u0301': 'é', 'e\u0302': 'ê', 'i\u0301': 'í', 'o\u0301': 'ó', 'o\u0302': 'ô', 'o\u0303': 'õ', 'u\u0301': 'ú', 'u\u0308': 'ü', 'c\u0327': 'ç' };
+    return value.toLowerCase().replace(/[aeiouc][\u0300-\u0303\u0308\u0327]/g, function (s) { return pairs[s] || s; });
+  }
+  function tokens(text) {
+    var ts = S.tokens(text);
+    ts.forEach(function (t) { t.value = canonical(t.value); });
+    return ts;
+  }
+  function sentences(text) {
+    var out = [], start = 0, i = 0, ch, left, last, end;
+    function add(stop, closed) {
+      var a = start, b = stop;
+      while (a < b && /\s/.test(text.charAt(a))) { a += 1; }
+      while (b > a && /\s/.test(text.charAt(b - 1))) { b -= 1; }
+      if (b > a) { out.push({ start: a, end: b, closed: closed }); }
+    }
+    while (i < text.length) {
+      ch = text.charAt(i);
+      if (ch === '\n' || ch === '\r') { add(i, false); start = i + 1; i += 1; continue; }
+      if (/[.!?…;]/.test(ch)) {
+        left = text.slice(Math.max(start, i - 25), i); last = left.match(/([A-Za-zÀ-ÖØ-öø-ÿ]+)$/);
+        if (ch === '.' && ((last && (D.abbreviations.indexOf(canonical(last[1])) !== -1 || last[1].length === 1)) || /[0-9]/.test(text.charAt(i - 1)) && /[0-9]/.test(text.charAt(i + 1)))) { i += 1; continue; }
+        end = i + 1; while (end < text.length && /[.!?…;]/.test(text.charAt(end))) { end += 1; }
+        if (end === text.length || /\s/.test(text.charAt(end))) { add(end, ch !== ';'); start = end; }
+        i = end; continue;
+      }
+      i += 1;
+    }
+    add(text.length, false); return out;
+  }
+  function assess(policy, text) {
+    var clean = E.protectedText(text), count = 0, tokenPattern = /[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+(?:[-'’][A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+)*|[0-9]+/g, reason = '', lines, slices;
+    /* A triagem para ao atingir o mínimo; não duplica a tokenização do livro. */
+    while (count < policy.minimum && tokenPattern.exec(clean)) { count += 1; }
+    if (!clean.replace(/\s/g, '')) { reason = 'Não há trecho disponível fora de citações, código e endereços.'; }
+    else if (count < policy.minimum) { reason = 'Esta lente precisa de pelo menos ' + policy.minimum + ' palavras disponíveis.'; }
+    else if (policy.lines) {
+      lines = clean.split(/\r\n|\n|\r/).filter(function (line) { return tokens(line).length > 0; });
+      if (lines.length < policy.lines) { reason = 'Separe pelo menos duas linhas para comparar terminações. Uma linha não permite procurar pares de rima.'; }
+    } else if (policy.sentences) {
+      slices = sentences(text).filter(function (s) { return s.closed && clean.slice(s.start, s.end) === text.slice(s.start, s.end) && tokens(text.slice(s.start, s.end)).length > 0; });
+      if (slices.length < policy.sentences) { reason = 'O ritmo precisa de pelo menos três frases delimitadas fora das regiões protegidas. O trecho ainda é insuficiente para comparação.'; }
+    }
+    return { eligible: !reason, reason: reason, scope: policy.scope, group: policy.group, minimumTokensChecked: count };
+  }
+  E.reading = { tokens: tokens, canonical: canonical, sentences: sentences };
+  E.lensPolicies = {};
+  E.lensCatalog.forEach(function (policy) { E.lensPolicies[policy.id] = function (text) { return assess(policy, text); }; });
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  var E = root.Escr, D = E.maturationData, known = {};
+  D.infinitiveLemmas.forEach(function (lemma) { known['$' + lemma] = true; });
+  /* Recorte vindo de experiment/encore-piso-2012: lema conhecido + preposição
+     contígua + sujeito opcional. Não escolhe futuro do subjuntivo por sufixo. */
+  function candidates(ts, index, text) {
+    var word = E.reading.canonical(ts[index].value), previous = ts[index - 1], subject, p, result = [], lemma, ending, i;
+    if (!previous) { return result; }
+    subject = D.subjects[E.reading.canonical(previous.value)]; p = index - (subject ? 2 : 1);
+    if (p < 0 || D.infinitivePrepositions.indexOf(E.reading.canonical(ts[p].value)) < 0) { return result; }
+    for (i = p + 1; i <= index; i += 1) { if (!/^[ \t\u00a0]+$/.test(text.slice(ts[i - 1].end, ts[i].start))) { return result; } }
+    if (known['$' + word] && (!subject || subject[1] === 'singular' && (subject[0] === 1 || subject[0] === 3))) {
+      result.push([word, subject ? 'infinitivo pessoal: forma singular' : 'infinitivo: leitura contextual', subject ? subject[0] : null, subject ? subject[1] : null]);
+    }
+    for (i = 0; i < D.infinitiveEndings.length; i += 1) {
+      ending = D.infinitiveEndings[i];
+      if (word.slice(-ending[0].length) !== ending[0]) { continue; }
+      lemma = word.slice(0, -ending[0].length);
+      if (!known['$' + lemma] || subject && (subject[0] !== ending[1] || subject[1] !== ending[2])) { continue; }
+      result.push([lemma, 'infinitivo pessoal', ending[1], ending[2]]);
+    }
+    return result;
+  }
+  E.infinitiveCandidates = candidates;
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
   var E = root.Escr, S = E.instruments, D = E.grammarData, V = E.verbData, lexicon = {};
   function has(list, value) { return list.indexOf(value) !== -1; }
   function add(word, cls) {
@@ -961,9 +1122,20 @@ body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64
     return { classes: (lexicon[key] || []).slice(), verbs: (V.forms[key] || []).map(function (r) { return r.slice(); }) };
   }
   function morphology(text, cap) {
-    var ts = S.tokens(E.protectedText(text)), out = [], i, r, ambiguous;
+    var ts = E.reading.tokens(E.protectedText(text)), out = [], i, r, ambiguous, contextual;
     for (i = 0; i < ts.length && out.length < cap; i += 1) {
-      r = readings(ts[i].value); if (!r.classes.length) { continue; }
+      r = readings(ts[i].value); contextual = E.infinitiveCandidates(ts, i, text);
+      if (contextual.length) {
+        out.push(S.finding('morfologia', 'PTBR-MOR-003', text, ts[i].start, ts[i].end,
+          'Infinitivo: uma leitura apoiada pelo contexto.',
+          'Preposição próxima e lema registrado: ' + contextual.map(function (c) { return c[0] + ', ' + c[1] + (c[2] ? ', ' + c[2] + 'ª pessoa do ' + c[3] : ' sem pessoa escolhida'); }).join('; ') + '.',
+          'A construção admite leitura de infinitivo; as possibilidades flexionais seguem na evidência.',
+          'Formas homógrafas podem admitir outras leituras fora desta construção. Não se deduz lema desconhecido.',
+          'Preposição contígua, com pronome sujeito opcional compatível. Não resolve clíticos, orações intercaladas nem todos os infinitivos acentuados.',
+          D.source, { candidates: { classes: ['verbo'], verbs: contextual } }));
+        continue;
+      }
+      if (!r.classes.length) { continue; }
       ambiguous = r.classes.length > 1 || r.verbs.length > 1;
       out.push(S.finding('morfologia', ambiguous ? 'PTBR-MOR-002' : 'PTBR-MOR-001', text, ts[i].start, ts[i].end,
         'Leituras no léxico local: ' + r.classes.join(', ') + '.',
@@ -1038,6 +1210,127 @@ body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64
   (E.extensions = E.extensions || []).push(function (register) {
     register({ id: 'morfologia', analyze: morphology }); register({ id: 'sintaxe', analyze: syntax });
   });
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  var E = root.Escr, S = E.instruments, R = E.reading, D = E.maturationData;
+  function has(a, v) { return a.indexOf(v) !== -1; }
+  function get(map, key) { return Object.prototype.hasOwnProperty.call(map, key) ? map[key] : null; }
+  function contiguous(text, ts, a, b) {
+    for (var i = a + 1; i < b; i += 1) { if (!/^[ \t\u00a0]+$/.test(text.slice(ts[i - 1].end, ts[i].start))) { return false; } }
+    return true;
+  }
+  function crase(text, cap) {
+    var clean = E.protectedText(text), ts = R.tokens(clean), out = [], i, t, next, infinitive, start;
+    for (i = 0; i + 1 < ts.length && out.length < cap; i += 1) {
+      t = ts[i]; next = ts[i + 1];
+      if (!has(['à', 'às'], t.value) || !contiguous(text, ts, i, i + 2)) { continue; }
+      infinitive = t.value === 'à' && has(D.craseInfinitives, next.value);
+      if (!infinitive && !has(D.crasePronouns, next.value)) { continue; }
+      if (S.contextSilence(text, t.start, next.end)) { continue; }
+      /* Nomes, títulos e rótulos no lugar de pronomes/verbos exigem outra leitura. */
+      if (text.slice(next.start, next.end) !== text.slice(next.start, next.end).toLowerCase()) { continue; }
+      start = t.start;
+      out.push(S.finding('crase', infinitive ? 'PTBR-CRA-001' : 'PTBR-CRA-002', text, start, next.end,
+        'Um acento grave para conferir.', 'Há acento grave antes de ' + (infinitive ? 'um infinitivo registrado' : 'um pronome pessoal registrado') + '.',
+        'Na leitura convencional desse trecho, a referência é “a ' + text.slice(next.start, next.end) + '”.',
+        'Pode ser nome, fala, citação sem marcação ou uso substantivado. A observação não determina sua intenção.',
+        'Só examina este encontro local. Não identifica crase obrigatória, facultativa, elipse de à moda de nem regência geral.', D.craseSource,
+        { severity: 'aviso', confidence: 'moderada', reference: 'a ' + text.slice(next.start, next.end) }));
+    }
+    return out;
+  }
+  function nominalTail(ts, start) {
+    var i = start, values = ts.map(function (t) { return t.value; });
+    if (has(D.quantifiers, values[i]) || /^[0-9]+$/.test(values[i] || '')) { i += 1; }
+    if (!has(D.pluralNouns, values[i])) { return false; }
+    i += 1;
+    if (has(D.pluralAdjectives, values[i])) { i += 1; }
+    return i === values.length || has(D.adjuncts, values.slice(i).join(' '));
+  }
+  function agreement(text, cap) {
+    var clean = E.protectedText(text), slices = R.sentences(text), out = [], i, s, raw, ts, v, replacement, id, kind, end, at;
+    for (i = 0; i < slices.length && out.length < cap; i += 1) {
+      s = slices[i]; raw = text.slice(s.start, s.end);
+      if (raw.length > 1000 || raw !== clean.slice(s.start, s.end) || /^\s*[—–-]/.test(raw)) { continue; }
+      ts = R.tokens(raw); if (ts.length < 3 || !/^\s*$/.test(raw.slice(0, ts[0].start)) || !contiguous(raw, ts, 0, ts.length) || !/^[.!?…;\s]*$/.test(raw.slice(ts[ts.length - 1].end))) { continue; }
+      v = ts[0].value; replacement = ''; id = ''; kind = ''; end = 1;
+      if (get(D.haver, v) && nominalTail(ts, 1)) { replacement = get(D.haver, v); id = '001'; kind = 'haver no sentido de existir'; }
+      else if (get(D.existir, v) && nominalTail(ts, 1)) { replacement = get(D.existir, v); id = '002'; kind = 'existir com sujeito plural'; }
+      else if (get(D.haverAux, v) && ts[1].value === 'haver' && nominalTail(ts, 2)) { replacement = get(D.haverAux, v) + ' haver'; id = '003'; kind = 'auxiliar de haver existencial'; end = 2; }
+      else if (get(D.existirAux, v) && ts[1].value === 'existir' && nominalTail(ts, 2)) { replacement = get(D.existirAux, v) + ' existir'; id = '004'; kind = 'auxiliar de existir com sujeito plural'; end = 2; }
+      else {
+        at = has(['já', 'agora'], v) ? 1 : 0; v = ts[at].value;
+        if (get(D.fazer, v) && ts.length > at + 4 && (has(D.amounts, ts[at + 1].value) || /^[0-9]+$/.test(ts[at + 1].value)) && has(D.timeUnits, ts[at + 2].value) && ts[at + 3].value === 'que') {
+          replacement = get(D.fazer, v); id = '005'; kind = 'fazer indicando tempo decorrido'; end = at + 1;
+        }
+      }
+      if (!id) { continue; }
+      out.push(S.finding('concordancia', 'PTBR-CON-' + id, text, s.start + ts[id === '005' ? end - 1 : 0].start, s.start + ts[end - 1].end,
+        'Concordância para conferir: “' + replacement + '”.',
+        'O trecho cabe no padrão local de ' + kind + '.',
+        'Se esse é o sentido pretendido, a forma de referência é “' + replacement + '”.',
+        'Fala brasileira, elipse, personificação e usos pessoais de haver podem sustentar outra leitura. Não é uma ordem de correção.',
+        'Recorte de início de frase, vocabulário nominal explícito e complementos delimitados. Não faz concordância geral nem condena ter existencial.', D.verbSource,
+        { severity: 'aviso', confidence: 'moderada', reference: replacement }));
+    }
+    return out;
+  }
+  (E.extensions = E.extensions || []).push(function (register) { register({ id: 'crase', analyze: crase }); register({ id: 'concordancia', analyze: agreement }); });
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  var E = root.Escr, S = E.instruments, R = E.reading, D = E.maturationData, stop = {};
+  D.stopwords.forEach(function (w) { stop['$' + w] = true; });
+  function repetition(text, cap) {
+    var clean = E.protectedText(text), ts = R.tokens(clean), out = [], seen = {}, reported = {}, previousEnd = 0, i, t, key, entries, first, f;
+    for (i = 0; i < ts.length && out.length < cap; i += 1) {
+      t = ts[i];
+      /* Nunca unir lados de uma citação ou parágrafos distintos. */
+      if (/\n[ \t\r]*\n/.test(text.slice(previousEnd, t.start)) || clean.slice(previousEnd, t.start) !== text.slice(previousEnd, t.start)) { seen = {}; reported = {}; }
+      previousEnd = t.end; key = '$' + t.value;
+      if (t.value.length < 4 || stop[key] || /[0-9]/.test(t.value)) { continue; }
+      entries = seen[key] || (seen[key] = []);
+      while (entries.length && i - entries[0].index >= D.repeatWindow) { entries.shift(); }
+      entries.push({ index: i, token: t });
+      if (entries.length < D.repeatMinimum || reported[key] && i - reported[key] < D.repeatWindow) { continue; }
+      first = entries[entries.length - D.repeatMinimum].token;
+      f = S.finding('repeticao', 'PTBR-REP-001', text, t.start, t.end,
+        '“' + text.slice(t.start, t.end) + '” aparece três vezes em um trecho próximo.',
+        'Três ocorrências da mesma grafia, ignorando maiúsculas, em até ' + D.repeatWindow + ' palavras do mesmo parágrafo.',
+        'Compare o retorno da palavra: ele pode formar um motivo, uma insistência ou um eco que você queira rever.',
+        'Repetição é recurso literário. Não deduz redundância, pobreza de vocabulário ou necessidade de sinônimo.',
+        'Não reúne flexões nem remove acentos. Lista de palavras funcionais excluídas; citações e parágrafos interrompem a janela.', D.styleSource,
+        { confidence: 'alta', occurrences: entries.slice(-D.repeatMinimum).map(function (e) { return { start: e.token.start, end: e.token.end }; }), contextStart: first.start });
+      out.push(f); reported[key] = i;
+    }
+    return out;
+  }
+  function rhythm(text) {
+    var clean = E.protectedText(text), slices = R.sentences(text), count = 0, sum = 0, sumSquares = 0, min = Infinity, max = 0, first = null, last = null;
+    slices.forEach(function (s) {
+      var raw = text.slice(s.start, s.end), n;
+      if (!s.closed || clean.slice(s.start, s.end) !== raw) { return; }
+      n = R.tokens(raw).length; if (!n) { return; }
+      if (!first) { first = s; } last = s; count += 1; sum += n; sumSquares += n * n; min = Math.min(min, n); max = Math.max(max, n);
+    });
+    if (count < 3) { return []; }
+    var mean = sum / count, deviation = Math.sqrt(Math.max(0, sumSquares / count - mean * mean));
+    return [S.finding('ritmo', 'PTBR-RIT-001', text, first.start, first.end,
+      'Ritmo de ' + count + ' frases: de ' + min + ' a ' + max + ' palavras.',
+      'Média de ' + mean.toFixed(1) + ' palavras; desvio-padrão de ' + deviation.toFixed(1) + '. Foram contadas ' + sum + ' palavras nas frases disponíveis.',
+      'A diferença de extensão mostra uma parte do desenho das pausas. Leia em voz alta para decidir como ela funciona na passagem.',
+      'Frases curtas, longas ou do mesmo tamanho podem ser escolhas deliberadas. A contagem não mede clareza, emoção, voz nem qualidade.',
+      'Segmentação por pontuação com abreviações conhecidas e números decimais protegidos. Trechos sem fechamento e citações ficam fora. Abreviações não registradas podem mudar a contagem.', D.styleSource,
+      { confidence: 'moderada', metrics: { sentences: count, words: sum, shortest: min, longest: max, mean: mean, deviation: deviation }, contextEnd: last.end })];
+  }
+  (E.extensions = E.extensions || []).push(function (register) { register({ id: 'repeticao', analyze: repetition }); register({ id: 'ritmo', analyze: rhythm }); });
 }(typeof window !== 'undefined' ? window : this));
 
 </script>
@@ -1306,6 +1599,8 @@ body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64
       li.appendChild(details); list.appendChild(li);
     });
     text(analysisStatus, (visible ? visible + (visible === 1 ? ' observação para você examinar.' : ' observações para você examinar.') : 'Nenhum apontamento novo nesta base limitada.') + (result.limited ? ' A leitura foi limitada aos primeiros 100 apontamentos encontrados.' : ''));
+    if (result.status === 'insuficiente') { text(analysisStatus, result.assessment.reason); }
+    text(byId('analysis-coverage'), result.coverage);
     byId('reset-dismissed').hidden = !doc.dismissed.length;
   }
   function examine(lens) {

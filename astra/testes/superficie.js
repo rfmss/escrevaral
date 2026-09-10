@@ -246,8 +246,16 @@ module.exports = function (h) {
     assert.strictEqual(entries().filter(function (b) { return b.getAttribute('aria-current') === 'true'; })[0].getAttribute('title'), 'Primeira');
     assert.strictEqual(entries().length, 2);
   });
-  test('Ponte: as seis lentes novas são acionadas explicitamente e preservam a folha', function () {
-    var a = setup(), samples = { decolonial: 'um cabelo ruim', expressoes: 'subir para cima', rima: 'amor\nflor', metrica: 'o amor', morfologia: 'Eu leio', sintaxe: 'A escritora leu o livro ontem.' };
+  test('Ponte: análise insuficiente explica o motivo, e digitar não reanalisa', function () {
+    var a = setup(); a.type('manuscrito', 'Uma única frase.');
+    a.lenses.filter(function (b) { return b.getAttribute('data-lens') === 'ritmo'; })[0].click(); a.flush(20);
+    assert.ok(/três frases/.test(a.nodes['analysis-status'].textContent));
+    assert.ok(/não mede qualidade/.test(a.nodes['analysis-coverage'].textContent));
+    a.type('manuscrito', 'Uma frase. Outra frase. Mais uma.'); a.flush();
+    assert.strictEqual(a.nodes.findings.childNodes.length, 0);
+  });
+  test('Ponte: as lentes adicionais são acionadas explicitamente e preservam a folha', function () {
+    var a = setup(), samples = { decolonial: 'um cabelo ruim', expressoes: 'subir para cima', rima: 'amor\nflor', metrica: 'o amor', morfologia: 'Eu leio', sintaxe: 'A escritora leu o livro ontem.', crase: 'à ela', concordancia: 'Houveram muitos problemas.', repeticao: 'memória memória memória', ritmo: 'Ela veio. Ele voltou. A porta abriu.' };
     Object.keys(samples).forEach(function (lens) {
       a.type('manuscrito', samples[lens]); a.flush(); assert.strictEqual(a.nodes.findings.childNodes.length, 0);
       a.lenses.filter(function (b) { return b.getAttribute('data-lens') === lens; })[0].click(); a.flush(20);

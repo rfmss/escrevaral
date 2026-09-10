@@ -48,3 +48,5 @@ Atualização da mesa de leitura: três regressões verificam persistência/migr
 Rolagem de máquina: teste isolado cobre centralização, margens ao redimensionar, seleção, composição e cancelamento ao navegar manualmente. Geometria do texto no navegador continua pendente.
 
 Pastas/busca: quatro regressões cobrem meses/dias sem troca involuntária, pesquisa global por título/texto/acentos, buffer ainda não gravado, vazio e restauração da pasta, sequência A → B → salvar → A com um único marcador. Não substituem validação visual.
+
+Maturação de 10/09/2026: `run.js` inclui `maturacao.js`. Total atual: 450 verificações; ver `../MATURACAO.md` para escopo, limites e medição.

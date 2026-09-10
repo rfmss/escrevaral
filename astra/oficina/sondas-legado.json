@@ -1,0 +1,49 @@
+{
+  "source": {
+    "branch": "encore",
+    "commit": "2a380c0b4f981dfabc8722271323cfb31236d755",
+    "path": "src/core/engines/morphology.js"
+  },
+  "probes": [
+    {
+      "input": "fui",
+      "setup": "Registrar ser e ir na mesma forma, nessa ordem.",
+      "legacy": {
+        "lema": "ir"
+      },
+      "current": {
+        "classes": [
+          "verbo"
+        ],
+        "verbs": [
+          [
+            "ser",
+            "indicativo:pretérito perfeito",
+            1,
+            "singular"
+          ],
+          [
+            "ir",
+            "indicativo:pretérito perfeito",
+            1,
+            "singular"
+          ]
+        ]
+      },
+      "decision": "Preservar a tabela multileitura atual; o nó _meta do Encore substitui a entrada anterior."
+    },
+    {
+      "input": "amá-me",
+      "setup": "Forma truncada com clítico que não exige queda de r.",
+      "legacy": {
+        "lema": "amar"
+      },
+      "current": {
+        "classes": [],
+        "verbs": []
+      },
+      "decision": "Não transplantar a restauração irrestrita de clíticos; a forma malformada é aceita como amar no legado."
+    }
+  ],
+  "limits": "Duas sondas sintéticas de contrato. Não mede a taxa de acerto geral das engines."
+}

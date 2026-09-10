@@ -15,9 +15,20 @@
     return { classes: (lexicon[key] || []).slice(), verbs: (V.forms[key] || []).map(function (r) { return r.slice(); }) };
   }
   function morphology(text, cap) {
-    var ts = S.tokens(E.protectedText(text)), out = [], i, r, ambiguous;
+    var ts = E.reading.tokens(E.protectedText(text)), out = [], i, r, ambiguous, contextual;
     for (i = 0; i < ts.length && out.length < cap; i += 1) {
-      r = readings(ts[i].value); if (!r.classes.length) { continue; }
+      r = readings(ts[i].value); contextual = E.infinitiveCandidates(ts, i, text);
+      if (contextual.length) {
+        out.push(S.finding('morfologia', 'PTBR-MOR-003', text, ts[i].start, ts[i].end,
+          'Infinitivo: uma leitura apoiada pelo contexto.',
+          'Preposição próxima e lema registrado: ' + contextual.map(function (c) { return c[0] + ', ' + c[1] + (c[2] ? ', ' + c[2] + 'ª pessoa do ' + c[3] : ' sem pessoa escolhida'); }).join('; ') + '.',
+          'A construção admite leitura de infinitivo; as possibilidades flexionais seguem na evidência.',
+          'Formas homógrafas podem admitir outras leituras fora desta construção. Não se deduz lema desconhecido.',
+          'Preposição contígua, com pronome sujeito opcional compatível. Não resolve clíticos, orações intercaladas nem todos os infinitivos acentuados.',
+          D.source, { candidates: { classes: ['verbo'], verbs: contextual } }));
+        continue;
+      }
+      if (!r.classes.length) { continue; }
       ambiguous = r.classes.length > 1 || r.verbs.length > 1;
       out.push(S.finding('morfologia', ambiguous ? 'PTBR-MOR-002' : 'PTBR-MOR-001', text, ts[i].start, ts[i].end,
         'Leituras no léxico local: ' + r.classes.join(', ') + '.',
