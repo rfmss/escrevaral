@@ -1,21 +1,35 @@
-# Continuação colável
+# Continuação do Escrevaral
 
-HANDOFF — Escrevaral PT-BR
-Repo `rfmss/escrevaral`; somente branch `astra/escrevaral-master`. Preservar Constituição e acervo. Revisão por agente de UI/UX autorizada nesta entrega. Consulta das outras branches autorizada pelo usuário em 10/09 exclusivamente para engines de linguagem; alterações somente nesta branch. Entrada `astra/escrevaral.html` ou `astra/index.html`; leia `CONSTITUICAO.md`, `DECISOES.md` e `FASE2.md`.
+Estado consolidado em 10/09/2026. Primeiro leia [PROJECT.md](../PROJECT.md), [AGENTS.md](../AGENTS.md), [CONSTITUICAO.md](CONSTITUICAO.md) e [FILOSOFIA-DE-TRABALHO.md](FILOSOFIA-DE-TRABALHO.md). A Constituição foi preservada literalmente.
 
-Entregue: editor/acervo local, roleta vertical de datas com HH:MM:SS, criação fixa, folhas vazias persistentes e seleção por filete, marca discreta no cabeçalho/favicon branco e visual gesso/grafite, Arial na interface e Escrevaral Mono local (derivada OFL de Courier Prime) só no editor; nove lentes sob demanda, sem reescrita. Novas: decolonial (18/606 entradas), expressões (1.447 locuções), rimas/métrica cautelosas, dez classes em léxico restrito e oração simples. 884 formas verbais exatas, ambiguidades preservadas. Não há API, modelo treinado, backend ou telemetria.
+## Onde retomar
 
-363 verificações aprovadas: corpus original 168, transplante 47, poesia, gramática, contrato, preservação, ponte simulada e ES5. HTML portátil regenerado da mesma fonte. Medição V8 com rede/APIs modernas bloqueadas registrada; navegador/iPad físico e calibração bibliográfica individual pendentes. Prévia privada: https://escrevaral-review.rafamass975189.chatgpt.site. Sem deploy em rafa.pro.br.
+Repositório `rfmss/escrevaral`; alterações somente em `astra/escrevaral-master`. Entrada ativa `astra/escrevaral.html` ou `astra/index.html`. Não reiniciar pela aplicação legada da raiz. Outras branches foram consultadas com autorização, exclusivamente para aprender com as engines; não foram alteradas.
 
-Próximo: validar offline/preservação no aparelho; revisar fontes e paradigmas; completar contexto morfossintático e orações complexas. Fases 2B/2C amplas e Prova de autoria pendentes. Snapshot recebido e hashes em `oficina/proveniencia-cofre.json`; apenas dados auditados extraídos, sem executar engines antigas. Regerar com `node astra/oficina/empacotar.js`; testar com `node astra/testes/run.js`.
+Última entrega de engines: `d0d5b16cafa41be42435689ef53f599fbf072e41`. A atualização documental posterior acrescenta o contrato de colaboração. Conferir o HEAD antes de trabalhar; não usar um SHA histórico como ordem de reset.
 
-Interface revisada: título acima do horário de criação na folha, roleta e acervo; editor com rolagem interna, moldura fixa à tela; painéis laterais exclusivos com fechar/Esc e foco contido; roleta móvel recolhível; controles e estados de foco discretos, temas Claro/Escuro, foco opcional por parágrafo e roleta sem barra visível com profundidade. Revisão estrutural por agente de UI/UX. 363 verificações passam; renderização real permanece pendente porque a prévia supervisionada exige package.json e este produto é estático sem pacotes. Não declarar validação visual/dispositivo concluída.
+Revisão online: https://escrevaral-review.rafamass975189.chatgpt.site. Treze lentes publicadas com sucesso. Documentação de filosofia não exige republicar o runtime.
 
-Atualização 10/09: nova fonte OFL preserva acentos; glifos decompostos antes de mudar proporções, sem escala dupla nos acentos. Ícones arredondados em SVG/PNG. Foco usa máscaras sem modificar texto, mede geometria apenas quando necessária. Altura do teclado tratada por viewport medida quando disponível. Seleção e controles da página têm paleta própria; diálogos de arquivo e alças de seleção do sistema continuam sob controle do SO. Conferir renderização e iPad físico antes de declarar compatibilidade comprovada.
+## Entregue
 
-Rolagem de máquina de escrever: a linha ativa fica no centro do editor ao digitar e navegar por teclado; margem interna calculada permite centralizar também a primeira/última linha. Respeita seleção, composição, ponteiro e rolagem manual. O foco por parágrafo usa as mesmas margens. Validar geometria real no navegador/iPad.
+- Editor e acervo locais; título acima da hora fixa de criação, segundos e folhas vazias persistentes.
+- Navegação mês → dia → notas, busca global por título/texto e marcador exclusivo da nota aberta.
+- Superfície gesso/grafite em claro/escuro, fonte de escrita local, painéis contidos, foco opcional por parágrafo e rolagem de máquina de escrever.
+- Treze lentes sob pedido; critérios de amostra e alcance em [MATURACAO.md](MATURACAO.md). Nada analisa durante a digitação ou reescreve o manuscrito.
+- 884 formas verbais exatas; 65 lemas para infinitivo contextual; 1.447 expressões; 18 observações decoloniais. Crase e concordância são recortes delimitados; ritmo e repetição são observações.
+- Orquestrador independente de regras linguísticas e DOM. Conhecimento, máquina, superfície e oficina permanecem separados.
+- Memória operacional, filosofia e instruções de agentes registram a atuação de Rafa e do parceiro técnico, com base nos dois anexos de 10/09.
 
-Navegação 10/09: área de escrita ampliada (mesa até 1440px; topo 88px; reserva lateral 250px). Tambor substituído por pastas virtuais mês → dia → notas, sem mover dados nem inventar datas. Busca global por título/conteúdo, insensível a caixa e acentos PT-BR, inclui buffer ainda não gravado. Limpar busca conserva pasta. Marcador exclusivo da nota aberta; hover distinto; rolagem não troca documento. Modelo puro browseNotes em maquina/acervo.js; DOM na ponte. Quatro regressões de pastas, busca e seleção aprovadas. Renderização real/aparelho pendentes.
+## Evidências e limites
 
+450 verificações passaram na entrega de engines, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 456.821 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
 
-Maturação 10/09: leia MATURACAO.md. 68 branches inventariadas em 17 conjuntos de arquivos linguísticos. Treze lentes: adicionadas Crase, Concordância (haver/existir/fazer), Repetição próxima e Ritmo das frases; morfologia ampliada com infinitivo contextual de 65 lemas. Categorias e condições explícitas, sob pedido. O cofre agora é um orquestrador sem regras linguísticas; basicas.js preserva as regras originais. 450 verificações passam, ES5, equivalência portátil e rede/APIs modernas bloqueadas. HTML: 456.821 bytes. Sem mudança de acervo, layout da folha ou Constituição. Concordância restrita e revisão bibliográfica individual pendente; aparelho físico e renderização ainda não validados. Inventário, sondas do legado e medições ficam em oficina, fora do runtime.
+Inventário das 68 branches, 17 conjuntos linguísticos, sondas e medições ficam em `oficina/`, fora do runtime. Os catálogos do ZIP recebido têm hashes em `oficina/proveniencia-cofre.json`. Não tratar comentários de maturidade do legado como prova de acerto.
+
+## Como continuar
+
+Priorizar o escopo pedido por Rafa. Para ampliar uma engine, usar os critérios e a bancada da maturação. Para UI, comparar custo real e percepção, investigar simulações baratas e preservar os dados. Resolver escolhas rotineiras autonomamente; discutir trade-offs de produto quando necessários.
+
+Gates de runtime: `node astra/testes/run.js` e `node astra/oficina/empacotar.js --check`; regeneração opcional de manutenção: `node astra/oficina/empacotar.js`. Em alterações só de documentação, conferir links e coerência, sem repetir a bateria do produto.
+
+Pendências reais: aparelho físico, revisão bibliográfica/linguística independente, cobertura sintática mais ampla, clíticos e Prova de autoria. Não prometer conclusão dessas frentes sem implementação e evidência.
