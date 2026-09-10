@@ -7,7 +7,7 @@ module.exports = function (h) {
     function ClockDate(value) { return new Date(arguments.length ? value : clock); }
     ClockDate.parse = Date.parse; ClockDate.UTC = Date.UTC; ClockDate.now = function () { return clock; };
     var nodes = {}, timers = {}, nextTimer = 0, downloads = [], readers = [], events = {}, root, fakeDocument;
-    function Node(tag) { this.tagName = tag; this.childNodes = []; this.attributes = {}; this.handlers = {}; this.value = ''; this.hidden = false; this.disabled = false; this.checked = false; this._text = ''; this.files = []; this.scrollTop = 0; this.clientHeight = 180; this.offsetHeight = 44; if (tag === 'a') { this.download = ''; } }
+    function Node(tag) { this.tagName = tag; this.style = {}; this.childNodes = []; this.attributes = {}; this.handlers = {}; this.value = ''; this.hidden = false; this.disabled = false; this.checked = false; this._text = ''; this.files = []; this.scrollTop = 0; this.clientHeight = 180; this.offsetHeight = 44; if (tag === 'a') { this.download = ''; } }
     Object.defineProperty(Node.prototype, 'textContent', { get: function () { return this._text + this.childNodes.map(function (n) { return n.textContent; }).join(''); }, set: function (s) { this._text = String(s); this.childNodes = []; } });
     Node.prototype.appendChild = function (n) { n.parentNode = this; this.childNodes.push(n); return n; };
     Object.defineProperty(Node.prototype, 'offsetTop', { get: function () { return this.parentNode ? this.parentNode.childNodes.indexOf(this) * 44 : 0; } });
@@ -37,6 +37,7 @@ module.exports = function (h) {
       setTimeout: function (fn, delay) { nextTimer += 1; timers[nextTimer] = { fn: fn, delay: delay }; return nextTimer; },
       clearTimeout: function (id) { delete timers[id]; },
       addEventListener: function (name, fn) { events[name] = fn; },
+      matchMedia: function () { return { addListener: function (fn) { events['print-media'] = fn; } }; },
       URL: { createObjectURL: function (blob) { downloads.push(blob.parts.join('')); return 'blob:local'; }, revokeObjectURL: function () {} },
       Blob: function (parts) { this.parts = parts; },
       FileReader: function () { readers.push(this); this.readAsText = function (file) { this.result = file.contents; }; },
@@ -47,6 +48,7 @@ module.exports = function (h) {
     Array.from(html.matchAll(/<script src="([^"]+)"><\/script>/g), function (m) { return m[1]; }).forEach(function (file) { h.vm.runInContext(h.source(file), root); });
     return {
       setTime: function (value) { clock = new Date(value).getTime(); },
+      event: function (name, props) { if (events[name]) { events[name](props); } },
       nodes: nodes, root: root, lenses: lenses, document: fakeDocument, storage: root.localStorage, downloads: downloads,
       type: function (id, val) { nodes[id].value = val; nodes[id].emit('input'); },
       flush: function (limit) { Object.keys(timers).forEach(function (id) { if (timers[id] && timers[id].delay <= (limit || 1000)) { var fn = timers[id].fn; delete timers[id]; fn(); } }); },
@@ -125,15 +127,62 @@ module.exports = function (h) {
       window: { getComputedStyle: function () { return { lineHeight: '40px', fontSize: '22px' }; }, clearTimeout: function () { pending = null; }, setTimeout: function (fn) { pending = fn; return 1; } },
       textPosition: function () { return { top: 980, line: 40 }; }, updateFocus: function () {} };
     h.vm.createContext(context); h.vm.runInContext(source.slice(start, end), context);
-    context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '180px'); assert.strictEqual(editor.style.paddingBottom, '180px');
-    context.followTyping(); pending(); assert.strictEqual(editor.scrollTop, 800);
+    context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '148px'); assert.strictEqual(editor.style.paddingBottom, '212px');
+    context.followTyping(); pending(); assert.strictEqual(editor.scrollTop, 832);
     editor.selectionEnd = 45; editor.scrollTop = 23; context.followTyping(); pending(); assert.strictEqual(editor.scrollTop, 23);
     editor.selectionEnd = 40; context.composing = true; context.followTyping(); assert.strictEqual(pending, null);
     context.composing = false; context.followTyping(); context.cancelTypewriter(); assert.strictEqual(pending, null);
     editor.scrollTop = 29; assert.strictEqual(editor.scrollTop, 29);
     context.document.activeElement = null; context.followTyping(); assert.strictEqual(pending, null);
-    editor.clientHeight = 200; context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '80px');
-    context.document.activeElement = editor; context.textPosition = function () { return { top: 80, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
+    editor.clientHeight = 200; context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '64px');
+    context.document.activeElement = editor; context.textPosition = function () { return { top: 64, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
+  });
+  test('Foco completo: entrar e sair preserva seleção, texto e destaque independente', function () {
+    var a = setup(); a.type('titulo', 'A folha'); a.type('manuscrito', 'primeiro\n\nsegundo');
+    a.nodes.manuscrito.setSelectionRange(2, 12); a.nodes.manuscrito.scrollTop = 70;
+    a.nodes['immersion-toggle'].click();
+    assert.strictEqual(a.document.body.getAttribute('data-immersion'), 'true');
+    assert.strictEqual(a.nodes['leave-focus'].hidden, false);
+    assert.strictEqual(a.document.activeElement, a.nodes.manuscrito);
+    assert.strictEqual(a.nodes.manuscrito.selectionStart, 2); assert.strictEqual(a.nodes.manuscrito.selectionEnd, 12);
+    assert.strictEqual(a.nodes.manuscrito.scrollTop, 70);
+    a.flush(); assert.strictEqual(a.archive()[0].text, 'primeiro\n\nsegundo');
+    a.document.emit('keydown', { keyCode: 27 });
+    assert.strictEqual(a.document.body.getAttribute('data-immersion'), 'false');
+    assert.strictEqual(a.nodes['leave-focus'].hidden, true);
+    assert.strictEqual(a.nodes['focus-toggle'].getAttribute('aria-pressed'), 'true');
+    assert.strictEqual(a.nodes.titulo.value, 'A folha');
+    a.nodes['immersion-toggle'].click(); a.nodes['leave-focus'].click();
+    assert.strictEqual(a.document.body.getAttribute('data-immersion'), 'false');
+  });
+  test('Foco completo: redimensionamento conserva trecho selecionado e cancela composição', function () {
+    var a = setup(), editor = a.nodes.manuscrito;
+    a.root.getComputedStyle = function () { return { lineHeight: '40px', fontSize: '22px', paddingTop: editor.style.paddingTop, paddingBottom: editor.style.paddingBottom }; };
+    Object.defineProperty(editor, 'clientHeight', { get: function () { return a.document.body.getAttribute('data-immersion') === 'true' ? 600 : 400; } });
+    editor.style.paddingTop = '148px'; editor.scrollTop = 70; editor.setSelectionRange(2, 12);
+    a.nodes['immersion-toggle'].click(); a.flush(40);
+    assert.strictEqual(editor.style.paddingTop, '232px'); assert.strictEqual(editor.style.paddingBottom, '328px');
+    assert.strictEqual(editor.scrollTop, 154); assert.strictEqual(editor.selectionEnd, 12);
+    a.nodes['leave-focus'].click(); a.flush(40); assert.strictEqual(editor.scrollTop, 70);
+    editor.emit('compositionstart'); editor.setSelectionRange(2, 2); a.nodes['immersion-toggle'].click();
+    assert.strictEqual(a.shortTimers(), 1); /* Só máscara, sem recentralização durante composição. */
+  });
+  test('Impressão: texto inteiro ainda não salvo, HTML literal e tema/foco preservados', function () {
+    var a = setup(), value = '<script>literal</script>\n\n' + new Array(2001).join('Uma linha com acentuação.\n'), printed = 0;
+    a.type('titulo', '<b>Título</b>'); a.type('manuscrito', value); a.nodes.manuscrito.setSelectionRange(4, 15);
+    a.nodes['immersion-toggle'].click(); a.nodes['theme-dark'].click();
+    a.root.print = function () { printed += 1; assert.strictEqual(a.nodes['print-text'].textContent, value); };
+    a.nodes['print-document'].click(); assert.strictEqual(printed, 1);
+    assert.strictEqual(a.nodes['print-title'].textContent, '<b>Título</b>');
+    assert.strictEqual(a.nodes['print-text'].childNodes.length, 0);
+    assert.strictEqual(a.document.body.getAttribute('data-theme'), 'escuro');
+    assert.strictEqual(a.document.body.getAttribute('data-immersion'), 'true');
+    assert.strictEqual(a.nodes.manuscrito.value, value); assert.strictEqual(a.nodes.manuscrito.selectionEnd, 15);
+    a.event('afterprint'); assert.strictEqual(a.nodes['print-text'].textContent, '');
+    a.type('manuscrito', 'última edição'); a.event('beforeprint'); assert.strictEqual(a.nodes['print-text'].textContent, 'última edição');
+    a.event('print-media', { matches: false }); assert.strictEqual(a.nodes['print-text'].textContent, '');
+    a.type('titulo', ''); a.type('manuscrito', 'impressão pelo menu antigo'); a.event('print-media', { matches: true });
+    assert.strictEqual(a.nodes['print-text'].textContent, 'impressão pelo menu antigo'); assert.strictEqual(a.nodes['print-title'].hidden, true);
   });
   test('Pastas: meses e dias organizam notas sem trocar a folha aberta', function () {
     var a = setup(null, '2026-08-31T22:30:05'); a.type('titulo', 'Agosto'); a.type('manuscrito', 'mar'); a.flush();

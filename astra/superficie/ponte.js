@@ -4,6 +4,7 @@
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
+  var immersion = false;
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
   var navDay = E.noteDateKey(doc), navMonth = navDay.slice(0, 7), searchTimer = null, timelineTotal = 0, timelineUnreadable = 0;
@@ -158,15 +159,16 @@
   function typewriterInsets() {
     if (!window.getComputedStyle || !manuscript.style || !manuscript.clientHeight) { return; }
     var style = window.getComputedStyle(manuscript), line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
-    var inset = Math.max(0, (manuscript.clientHeight - line) / 2);
-    manuscript.style.paddingTop = inset + 'px'; manuscript.style.paddingBottom = inset + 'px';
+    var target = manuscript.clientHeight * 0.42;
+    manuscript.style.paddingTop = Math.max(0, target - line / 2) + 'px';
+    manuscript.style.paddingBottom = Math.max(0, manuscript.clientHeight - target - line / 2) + 'px';
     focusMeasure = null;
   }
   function centerTypingLine() {
     typewriterTimer = null;
     if (!window.getComputedStyle || composing || document.activeElement !== manuscript || manuscript.selectionStart !== manuscript.selectionEnd) { return; }
     var position = textPosition(manuscript.selectionStart);
-    manuscript.scrollTop = Math.max(0, position.top + position.line / 2 - manuscript.clientHeight / 2);
+    manuscript.scrollTop = Math.max(0, position.top + position.line / 2 - manuscript.clientHeight * 0.42);
     updateFocus();
   }
   function followTyping() {
@@ -209,6 +211,25 @@
     byId(id).hidden = false; byId(toggle).setAttribute('aria-expanded', 'true');
     byId('panel-backdrop').hidden = false; document.body.setAttribute('data-panel', 'open');
     byId(id).focus(); byId('writing-space').setAttribute('aria-hidden', 'true');
+  }
+  function setImmersion(enabled) {
+    var start = manuscript.selectionStart, end = manuscript.selectionEnd, scroll = manuscript.scrollTop;
+    var oldInset = manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0;
+    cancelTypewriter(); closePanels(false); collapseTimeline();
+    immersion = enabled; document.body.setAttribute('data-immersion', enabled ? 'true' : 'false');
+    byId('immersion-toggle').setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    byId('leave-focus').hidden = !enabled;
+    manuscript.focus(); sizeWorkspace();
+    if (typeof start === 'number') { manuscript.setSelectionRange(start, end); }
+    manuscript.scrollTop = Math.max(0, scroll + (manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0) - oldInset);
+    growManuscript();
+  }
+  function preparePrint() {
+    text(byId('print-title'), title.value); byId('print-title').hidden = !title.value;
+    text(byId('print-text'), manuscript.value);
+  }
+  function finishPrint() {
+    text(byId('print-title'), ''); text(byId('print-text'), '');
   }
   function returnToWriting() { closePanels(false); collapseTimeline(); manuscript.focus(); }
   function loadDocument(next) {
@@ -390,6 +411,8 @@
   listen(manuscript, 'focus', function () { collapseTimeline(); growManuscript(); });
   listen(title, 'focus', collapseTimeline);
   listen(document, 'selectionchange', function () { if (document.activeElement === manuscript) { growManuscript(); } });
+  listen(byId('immersion-toggle'), 'click', function () { setImmersion(!immersion); });
+  listen(byId('leave-focus'), 'click', function () { setImmersion(false); });
   listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
   listen(manuscript, 'compositionstart', function () { composing = true; window.clearTimeout(timer); updateFocus(); });
@@ -418,6 +441,16 @@
     try { var Audio = window.AudioContext || window.webkitAudioContext; audio = new Audio(); if (audio.resume) { audio.resume(); } text(byId('sound-status'), 'Som ligado, em volume discreto.'); } catch (e) { stopSound(); text(byId('sound-status'), 'O som não está disponível neste navegador.'); }
   });
   listen(manuscript, 'keydown', playKey);
+  listen(byId('print-document'), 'click', function () {
+    preparePrint();
+    if (window.print) { window.print(); } else { message('Use a opção de impressão do navegador.'); }
+  });
+  listen(window, 'beforeprint', preparePrint);
+  listen(window, 'afterprint', finishPrint);
+  if (window.matchMedia) {
+    var printMedia = window.matchMedia('print');
+    if (printMedia.addListener) { printMedia.addListener(function (event) { if (event.matches) { preparePrint(); } else { finishPrint(); } }); }
+  }
   listen(byId('export-text'), 'click', function () { download((title.value ? title.value + '\n\n' : '') + manuscript.value, 'text/plain', 'manuscrito.txt'); });
   listen(byId('export-backup'), 'click', function () { persist(); try { download(JSON.stringify({ format: 'escrevaral-astra', version: 1, documents: exportedDocuments() }, null, 2), 'application/json', 'escrevaral-copia.json'); } catch (e) { message('Não foi possível reunir o acervo. Baixe o texto da folha atual.'); } });
   listen(byId('import-file'), 'focus', function () { this.parentNode.setAttribute('data-focus', 'true'); });
@@ -438,7 +471,7 @@
     }
     if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); showPanel('oficina', 'examinar-toggle', true); panelTrigger = manuscript; lensButtons[0].focus(); }
     else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
-    else if (code === 27) { if (activePanel) { closePanels(true); } else { collapseTimeline(); } }
+    else if (code === 27) { if (activePanel) { closePanels(true); } else if (immersion) { setImmersion(false); } else { collapseTimeline(); } }
   });
   listen(document, 'visibilitychange', function () { if (document.hidden) { persist(); stopSound(); } });
   listen(window, 'pagehide', persist);

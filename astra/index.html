@@ -20,7 +20,7 @@
       <span class="brand-signature"><img class="brand-mark" src="superficie/marca/escrevaral.svg" width="28" height="24" alt="">escrevaral</span>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar em todas as notas</label><input id="note-search" type="search" placeholder="Buscar em todas as notas" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden>×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
-        <button id="focus-toggle" aria-pressed="true" title="Destacar o parágrafo atual">Foco</button>
+        <button id="immersion-toggle" aria-pressed="false" title="Escrever com a interface recolhida">Foco</button>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
         <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
         <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
@@ -47,22 +47,25 @@
       </aside>
     </div>
   </div>
+  <button id="leave-focus" class="leave-focus" aria-label="Sair do modo foco" title="Sair do foco (Esc)" hidden><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v5H3m13-5v5h5M8 21v-5H3m13 5v-5h5"/></svg></button>
+  <article id="print-sheet" aria-hidden="true"><h1 id="print-title"></h1><div id="print-text"></div></article>
   <div id="panel-backdrop" class="panel-backdrop" hidden></div>
   <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="mesa-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <div class="setting-section"><h3>Ambiente</h3>
       <div class="setting-row"><span>Tema</span><div class="theme-choice" role="group" aria-label="Tema"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
+      <div class="setting-row"><span>Destaque de parágrafo</span><button id="focus-toggle" aria-pressed="true">Destacar</button></div>
       <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"></span></label>
       <p id="sound-status" class="quiet" role="status">Som desligado.</p><p class="quiet">O som desliga ao sair desta página.</p>
     </div>
     <div class="setting-section"><h3>Seus textos</h3>
-      <div class="actions"><button id="export-text">Baixar esta folha <span aria-hidden="true">↓</span></button><button id="export-backup">Baixar cópia do acervo <span aria-hidden="true">↓</span></button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".txt,.json,text/plain,application/json"></label></div>
+      <div class="actions"><button id="print-document">Imprimir esta folha</button><button id="export-text">Baixar esta folha <span aria-hidden="true">↓</span></button><button id="export-backup">Baixar cópia do acervo <span aria-hidden="true">↓</span></button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".txt,.json,text/plain,application/json"></label></div>
       <p id="panel-status" class="quiet" role="status" aria-live="polite"></p>
       <p class="quiet">Textos e cópias trazidos viram novas folhas. Seu acervo permanece.</p>
       <p class="quiet">As folhas ficam neste navegador, neste aparelho. Guarde uma cópia do acervo para levá-las com você.</p>
     </div>
     <div class="setting-section"><h3>Escrever sem internet</h3><p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa <span aria-hidden="true">↗</span></a></p><p class="quiet">Um arquivo único para abrir offline. Em aparelhos antigos, a abertura depende do aplicativo usado.</p></div>
-    <div class="setting-section"><h3>Atalhos</h3><dl class="shortcuts"><div><dt>Examinar</dt><dd>Ctrl / ⌘ + Enter</dd></div><div><dt>Guardar a folha</dt><dd>Ctrl / ⌘ + S</dd></div><div><dt>Fechar painel</dt><dd>Esc</dd></div></dl></div>
+    <div class="setting-section"><h3>Atalhos</h3><dl class="shortcuts"><div><dt>Examinar</dt><dd>Ctrl / ⌘ + Enter</dd></div><div><dt>Guardar a folha</dt><dd>Ctrl / ⌘ + S</dd></div><div><dt>Fechar painel / sair do foco</dt><dd>Esc</dd></div></dl></div>
   </section>
   <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="acervo-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SUAS FOLHAS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
