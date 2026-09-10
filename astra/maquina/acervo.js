@@ -38,6 +38,29 @@
     }
     return { get: get, list: list, save: save, fresh: fresh };
   }
+  function dateKey(entry) {
+    var d = new Date(dateOf(entry));
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function searchKey(value) {
+    return String(value || '').toLowerCase().replace(/[àáâãä]/g, 'a').replace(/[èéêë]/g, 'e').replace(/[ìíîï]/g, 'i').replace(/[òóôõö]/g, 'o').replace(/[ùúûü]/g, 'u').replace(/ç/g, 'c');
+  }
+  function browseNotes(entries, options) {
+    options = options || {};
+    var query = searchKey(options.query).replace(/^\s+|\s+$/g, ''), months = {}, days = {}, notes = [];
+    entries.forEach(function (entry) {
+      var day = dateKey(entry), month = day.slice(0, 7);
+      months[month] = (months[month] || 0) + 1;
+      if (month === options.month) { days[day] = (days[day] || 0) + 1; }
+      if (query ? searchKey(entry.title + '\n' + entry.text).indexOf(query) !== -1 : day === options.day) { notes.push(entry); }
+    });
+    notes.sort(function (a, b) { return Date.parse(dateOf(a)) - Date.parse(dateOf(b)) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0); });
+    function groups(map) { return Object.keys(map).sort().reverse().map(function (key) { return { key: key, count: map[key] }; }); }
+    return { query: query, months: groups(months), days: groups(days), notes: notes };
+  }
+  root.Escr.noteDateKey = dateKey;
+  root.Escr.browseNotes = browseNotes;
   root.Escr.createArchive = createArchive;
   root.Escr.freshDocument = fresh;
   root.Escr.validDocument = valid;

@@ -18,6 +18,7 @@
   <div id="writing-space">
     <header class="masthead">
       <span class="brand-signature"><img class="brand-mark" src="superficie/marca/escrevaral.svg" width="28" height="24" alt="">escrevaral</span>
+      <div class="global-search"><label class="sr-only" for="note-search">Buscar em todas as notas</label><input id="note-search" type="search" placeholder="Buscar em todas as notas" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden>×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
         <button id="focus-toggle" aria-pressed="true" title="Destacar o parágrafo atual">Foco</button>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
@@ -40,9 +41,9 @@
         <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span></footer>
       </main>
       <aside class="timeline" aria-label="Folhas por data de criação">
-        <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="timeline-list">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
-        <p id="timeline-hint" class="sr-only">Deslize ou role para percorrer as datas. Escolha um título para abrir a folha.</p>
-        <div class="wheel-window"><div id="timeline-list" tabindex="0" role="region" aria-label="Roleta de datas" aria-describedby="timeline-hint"></div></div>
+        <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="note-browser">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+        <p id="timeline-hint" class="sr-only">Escolha um mês, depois um dia. Escolha o título para abrir a nota. A busca encontra notas de todas as datas.</p>
+        <div class="wheel-window" id="note-browser"><nav id="date-path" class="date-path" aria-label="Pastas por data"></nav><p id="navigator-status" class="navigator-status" role="status" aria-live="polite"></p><div id="timeline-list" tabindex="0" role="region" aria-label="Notas por data" aria-describedby="timeline-hint"></div></div>
       </aside>
     </div>
   </div>

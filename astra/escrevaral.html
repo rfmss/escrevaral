@@ -336,6 +336,75 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
  body[data-viewport="small"] .timeline { display: none; }
 }
 
+/* One generous writing pane and one compact date browser. */
+.masthead { width: calc(100% - 64px); max-width: 1440px; height: 64px; }
+.desk { width: calc(100% - 64px); max-width: 1440px; top: 88px; bottom: 16px; }
+.paper { right: 250px; }
+.editor-viewport { top: 76px; bottom: 28px; }
+.paper-footer { padding: 4px 0; }
+.global-search { position: relative; flex: 1 1 240px; max-width: 360px; min-width: 140px; margin: 0 20px; }
+.global-search input { width: 100%; height: 40px; border: 1px solid #ddddd4; border-radius: 6px; padding: 8px 38px 8px 12px; background: transparent; font-size: 14px; }
+.global-search input::placeholder { color: #76776e; opacity: 1; }
+.global-search input::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
+.global-search button { position: absolute; right: 0; top: 0; width: 38px; min-height: 40px; padding: 0; font-size: 22px; }
+.desk-tools { flex-shrink: 0; }
+.timeline { width: 216px; height: 100%; max-height: none; }
+.wheel-window { top: 48px; bottom: 0; height: auto; border: 0; border-radius: 0; }
+.wheel-window:before, .wheel-window:after { display: none; }
+.date-path { position: absolute; top: 0; left: 0; right: 0; min-height: 72px; }
+.date-path button { min-height: 32px; padding: 5px 8px; font-size: 13px; color: #62635d; }
+.date-path button + button:before { content: '/'; padding-right: 10px; color: #85867e; }
+.path-label { margin: 7px 8px; font-size: 13px; line-height: 1.6; }
+.navigator-status { position: absolute; left: 8px; right: 8px; top: 80px; margin: 0; font-size: 12px; line-height: 1.5; color: #62635d; }
+#timeline-list { position: absolute; top: 118px; bottom: 0; left: 0; height: auto; max-height: none; padding: 0 24px 18px 0; }
+.timeline-entry, .date-folder { position: relative; display: block; width: 100%; min-height: 62px; margin-bottom: 3px; padding: 10px 12px; text-align: left; border: 0; border-radius: 4px; background: transparent; transform: none; -webkit-transform: none; opacity: 1; }
+.date-folder { padding-left: 34px; }
+.date-folder:before { content: ''; position: absolute; left: 12px; top: 17px; width: 10px; height: 8px; border: 1px solid #85867e; border-radius: 2px; }
+.date-folder:after { content: ''; position: absolute; left: 12px; top: 14px; width: 5px; height: 3px; border: 1px solid #85867e; border-bottom: 0; border-radius: 2px 2px 0 0; }
+.timeline-entry:hover { background: transparent; box-shadow: none; }
+.timeline-entry:hover .note-name { text-decoration: underline; text-underline-offset: 3px; }
+.timeline-entry[aria-current="true"], .timeline-entry[aria-current="true"]:hover { background: #e7e7df; box-shadow: inset 2px 0 #62635d; }
+.timeline-entry[aria-current="true"] .note-name { text-decoration: none; font-weight: 600; }
+body[data-theme="escuro"] .global-search input { border-color: #52564a; }
+body[data-theme="escuro"] .global-search input::placeholder, body[data-theme="escuro"] .date-path button, body[data-theme="escuro"] .navigator-status { color: #b0b2a6; }
+body[data-theme="escuro"] .timeline-entry:hover { background: transparent; }
+body[data-theme="escuro"] .timeline-entry[aria-current="true"], body[data-theme="escuro"] .timeline-entry[aria-current="true"]:hover { background: #363930; box-shadow: inset 2px 0 #b0b2a6; }
+@media (max-width: 760px) {
+ .masthead { display: block; position: relative; width: calc(100% - 32px); height: 102px; }
+ .brand-signature { position: absolute; top: 16px; left: 0; }
+ .desk-tools { position: absolute; top: 8px; right: 0; }
+ .global-search { position: absolute; top: 58px; left: 0; right: 0; max-width: none; margin: 0; }
+ .global-search input { height: 36px; }
+ .global-search button { min-height: 36px; }
+ .desk { width: calc(100% - 32px); top: 116px; bottom: 10px; }
+ .paper { right: 0; }
+ .editor-viewport { top: 76px; bottom: 28px; }
+ .title { width: calc(100% - 132px); }
+ .timeline { top: -6px; right: 0; width: 126px; height: 44px; }
+ #timeline-toggle { padding: 10px 8px; }
+ .wheel-window { top: 48px; right: 0; left: auto; width: 256px; height: 340px; max-height: 60vh; border: 1px solid #cecec5; border-radius: 8px; }
+ .timeline[data-expanded="true"] .wheel-window { display: block; }
+}
+body[data-viewport="compact"] .masthead, body[data-viewport="small"] .masthead { height: 48px; }
+body[data-viewport="compact"] .desk, body[data-viewport="small"] .desk { top: 64px; }
+@media (max-width: 760px) {
+ body[data-viewport="compact"] .masthead, body[data-viewport="small"] .masthead { height: 94px; }
+ body[data-viewport="compact"] .desk { top: 104px; }
+ body[data-viewport="small"] .desk { top: 98px; }
+ body[data-viewport="small"] .editor-viewport { top: 52px; bottom: 20px; }
+ body[data-viewport="small"] .timeline { display: block; }
+ body[data-viewport="small"] .wheel-window { height: 200px; max-height: 50vh; }
+}
+
+@media (max-width: 760px) {
+ .global-search input { font-size: 16px; }
+ body[data-viewport="compact"] .wheel-window, body[data-viewport="small"] .wheel-window { position: fixed; top: 100px; left: 16px; right: 16px; bottom: auto; width: auto; max-height: none; }
+ body[data-viewport="compact"] .date-path, body[data-viewport="small"] .date-path { min-height: 32px; }
+ body[data-viewport="compact"] .date-path [aria-current="page"], body[data-viewport="small"] .date-path [aria-current="page"] { display: none; }
+ body[data-viewport="compact"] .navigator-status, body[data-viewport="small"] .navigator-status { top: 36px; }
+ body[data-viewport="compact"] #timeline-list, body[data-viewport="small"] #timeline-list { top: 60px; }
+}
+
 </style>
 </head>
 <body data-theme="claro" data-input="keyboard">
@@ -344,6 +413,7 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
   <div id="writing-space">
     <header class="masthead">
       <span class="brand-signature"><img class="brand-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii00OCAtNzIgNjg4IDY4OCI+PHBhdGggZD0iTTUgOTBMNTg1IDQ4TTUgMTg5TDU4NSAyMDJNNSAzMTlMNTg1IDI4Nk01IDQxNEw1ODUgNDIyTTgyIDE4VjQ4Mk00OTkgMTJWNDc0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyODI5MjUiIHN0cm9rZS13aWR0aD0iNDUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPgo=" width="28" height="24" alt="">escrevaral</span>
+      <div class="global-search"><label class="sr-only" for="note-search">Buscar em todas as notas</label><input id="note-search" type="search" placeholder="Buscar em todas as notas" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden>×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
         <button id="focus-toggle" aria-pressed="true" title="Destacar o parágrafo atual">Foco</button>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
@@ -366,9 +436,9 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
         <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span></footer>
       </main>
       <aside class="timeline" aria-label="Folhas por data de criação">
-        <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="timeline-list">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
-        <p id="timeline-hint" class="sr-only">Deslize ou role para percorrer as datas. Escolha um título para abrir a folha.</p>
-        <div class="wheel-window"><div id="timeline-list" tabindex="0" role="region" aria-label="Roleta de datas" aria-describedby="timeline-hint"></div></div>
+        <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="note-browser">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+        <p id="timeline-hint" class="sr-only">Escolha um mês, depois um dia. Escolha o título para abrir a nota. A busca encontra notas de todas as datas.</p>
+        <div class="wheel-window" id="note-browser"><nav id="date-path" class="date-path" aria-label="Pastas por data"></nav><p id="navigator-status" class="navigator-status" role="status" aria-live="polite"></p><div id="timeline-list" tabindex="0" role="region" aria-label="Notas por data" aria-describedby="timeline-hint"></div></div>
       </aside>
     </div>
   </div>
@@ -577,6 +647,29 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
     }
     return { get: get, list: list, save: save, fresh: fresh };
   }
+  function dateKey(entry) {
+    var d = new Date(dateOf(entry));
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function searchKey(value) {
+    return String(value || '').toLowerCase().replace(/[àáâãä]/g, 'a').replace(/[èéêë]/g, 'e').replace(/[ìíîï]/g, 'i').replace(/[òóôõö]/g, 'o').replace(/[ùúûü]/g, 'u').replace(/ç/g, 'c');
+  }
+  function browseNotes(entries, options) {
+    options = options || {};
+    var query = searchKey(options.query).replace(/^\s+|\s+$/g, ''), months = {}, days = {}, notes = [];
+    entries.forEach(function (entry) {
+      var day = dateKey(entry), month = day.slice(0, 7);
+      months[month] = (months[month] || 0) + 1;
+      if (month === options.month) { days[day] = (days[day] || 0) + 1; }
+      if (query ? searchKey(entry.title + '\n' + entry.text).indexOf(query) !== -1 : day === options.day) { notes.push(entry); }
+    });
+    notes.sort(function (a, b) { return Date.parse(dateOf(a)) - Date.parse(dateOf(b)) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0); });
+    function groups(map) { return Object.keys(map).sort().reverse().map(function (key) { return { key: key, count: map[key] }; }); }
+    return { query: query, months: groups(months), days: groups(days), notes: notes };
+  }
+  root.Escr.noteDateKey = dateKey;
+  root.Escr.browseNotes = browseNotes;
   root.Escr.createArchive = createArchive;
   root.Escr.freshDocument = fresh;
   root.Escr.validDocument = valid;
@@ -957,6 +1050,7 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
+  var navDay = E.noteDateKey(doc), navMonth = navDay.slice(0, 7), searchTimer = null, timelineTotal = 0, timelineUnreadable = 0;
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   function byId(id) { return document.getElementById(id); }
   function text(node, value) { node.textContent = value; }
@@ -967,51 +1061,71 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
   function pad(n) { return n < 10 ? '0' + n : String(n); }
   function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
   function noteDate(entry) { return entry.created || entry.updated; }
-  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
+  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, text: entry.text || '', created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
+  function monthLabel(key) { return months[Number(key.slice(5, 7)) - 1] + ' ' + key.slice(0, 4); }
+  function dayLabel(key) { var d = new Date(Number(key.slice(0, 4)), Number(key.slice(5, 7)) - 1, Number(key.slice(8, 10))); return d.getDate() + ' · ' + ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'][d.getDay()]; }
+  function openNote(entry) {
+    if (entry.id === doc.id || !persist()) { return; }
+    try {
+      var next = archive && archive.get(entry.id);
+      if (!next) { renderTimeline(true); message('Esta nota mudou. Abra a versão guardada no acervo.'); return; }
+      loadDocument(next); collapseTimeline(); showPanel('oficina', 'examinar-toggle', false);
+      try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
+    } catch (e) { message('Não foi possível abrir esta nota. Sua escrita permanece aqui.'); }
+  }
+  function browseDate(month, day) {
+    navMonth = month; navDay = day; timelineCount = 40; byId('timeline-list').scrollTop = 0; renderTimeline(false);
+  }
   function renderTimeline(refresh, previousId, reveal) {
-    var list = byId('timeline-list'), date = new Date(noteDate(doc)), monthKey = '', dayKey = '', active = null, oldScroll = list.scrollTop;
+    var list = byId('timeline-list'), date = new Date(noteDate(doc)), active = null, oldScroll = list.scrollTop, result;
     timelineRendering = true;
-    if (list.style && list.clientHeight) { list.style.paddingTop = Math.max(16, list.clientHeight / 2 - 32) + 'px'; list.style.paddingBottom = list.style.paddingTop; }
     text(byId('manuscript-date'), timeLabel(date) + ' · ' + date.getDate() + ' de ' + months[date.getMonth()] + ' de ' + date.getFullYear());
     byId('manuscript-date').setAttribute('datetime', noteDate(doc));
     byId('manuscript-date').setAttribute('aria-label', doc.created && !doc.createdApproximate ? 'Data de criação da folha' : 'Data preservada da folha antiga; criação desconhecida');
     if (refresh && archive) {
-      try { timelineEntries = archive.list().documents.map(metadata); } catch (ignore) { /* A folha aberta permanece acessível. */ }
+      try { result = archive.list(); timelineEntries = result.documents.map(metadata); timelineUnreadable = result.unreadable; } catch (ignore) { timelineUnreadable = 1; }
     }
     timelineEntries = timelineEntries.filter(function (entry) { return entry.id !== doc.id && entry.id !== previousId; });
-    timelineEntries.push(metadata(doc));
-    timelineEntries.sort(function (a, b) { return Date.parse(a.created) - Date.parse(b.created) || (a.noteId < b.noteId ? -1 : a.noteId > b.noteId ? 1 : 0); });
-    if (reveal) { timelineEntries.forEach(function (entry, i) { if (entry.id === doc.id) { timelineCount = Math.max(timelineCount, timelineEntries.length - i); } }); }
-    var visible = timelineEntries.slice(-timelineCount);
+    var current = metadata(doc); current.title = title.value; current.text = manuscript.value; timelineEntries.push(current);
+    var model = E.browseNotes(timelineEntries, { month: navMonth, day: navDay, query: byId('note-search').value });
+    var path = byId('date-path'); path.textContent = '';
+    byId('clear-search').hidden = !byId('note-search').value;
+    if (model.query) { paragraph(path, 'Resultados em todas as notas', 'path-label'); }
+    else {
+      button(path, 'Meses', function () { browseDate('', ''); });
+      if (navMonth) { button(path, monthLabel(navMonth), function () { browseDate(navMonth, ''); }); }
+      if (navDay) { var day = paragraph(path, dayLabel(navDay), 'path-label'); day.setAttribute('aria-current', 'page'); }
+    }
     list.textContent = '';
-    if (visible.length < timelineEntries.length) { var older = button(list, 'Anteriores ↑', olderNotes); older.className = 'timeline-older'; }
-    visible.forEach(function (entry) {
-      var when = new Date(entry.created), month = when.getFullYear() + '-' + when.getMonth(), day = month + '-' + when.getDate();
-      if (month !== monthKey) {
-        var m = paragraph(list, months[when.getMonth()].slice(0, 1).toUpperCase() + months[when.getMonth()].slice(1, 3) + ' ' + when.getFullYear(), 'timeline-month');
-        m.setAttribute('title', months[when.getMonth()] + ' de ' + when.getFullYear()); monthKey = month;
-      }
-      if (day !== dayKey) { paragraph(list, when.getDate() + ' ' + ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'][when.getDay()], 'timeline-day'); dayKey = day; }
-      var b = button(list, '', function () {
-        if (entry.id === doc.id || !persist()) { return; }
-        try {
-          var next = archive && archive.get(entry.id);
-          if (!next) { renderTimeline(true); message('Esta folha mudou. Consulte o acervo para abrir a versão guardada.'); return; }
-          loadDocument(next); collapseTimeline(); showPanel('oficina', 'examinar-toggle', false);
-          try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
-        } catch (e) { message('Não foi possível abrir esta folha. Sua escrita permanece aqui.'); }
+    var groups = !model.query && !navDay ? (navMonth ? model.days : model.months) : null;
+    timelineTotal = groups ? 0 : model.notes.length;
+    if (groups) {
+      groups.forEach(function (group) {
+        var b = button(list, '', function () { if (navMonth) { browseDate(navMonth, group.key); } else { browseDate(group.key, ''); } });
+        b.className = 'date-folder';
+        noteLabel(b, navMonth ? dayLabel(group.key) : monthLabel(group.key), group.count + (group.count === 1 ? ' nota' : ' notas'));
       });
-      noteLabel(b, entry.title, timeLabel(when));
-      if (entry.id === doc.id) { active = b; }
-      b.className = 'timeline-entry'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
-      b.setAttribute('aria-label', (entry.title || 'Sem título') + ', ' + when.getDate() + ' de ' + months[when.getMonth()] + ' de ' + when.getFullYear() + ', ' + timeLabel(when) + (entry.createdApproximate ? '; data antiga preservada, criação desconhecida' : ''));
-      b.setAttribute('title', entry.title || 'Sem título');
-    });
+      text(byId('navigator-status'), groups.length ? (navMonth ? 'Escolha um dia' : 'Escolha um mês') : 'Nenhuma nota nesta data.');
+    } else {
+      if (reveal) { model.notes.forEach(function (entry, i) { if (entry.id === doc.id) { timelineCount = Math.max(timelineCount, model.notes.length - i); } }); }
+      var visible = model.notes.slice(-timelineCount);
+      if (visible.length < model.notes.length) { var older = button(list, 'Anteriores ↑', olderNotes); older.className = 'timeline-older'; }
+      visible.forEach(function (entry) {
+        var when = new Date(entry.created), b = button(list, '', function () { openNote(entry); });
+        noteLabel(b, entry.title, timeLabel(when) + (model.query ? ' · ' + when.toLocaleDateString('pt-BR') : ''));
+        if (entry.id === doc.id) { active = b; }
+        b.className = 'timeline-entry'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
+        b.setAttribute('aria-label', (entry.title || 'Sem título') + ', ' + when.toLocaleDateString('pt-BR') + ', ' + timeLabel(when) + (entry.createdApproximate ? '; data antiga preservada, criação desconhecida' : ''));
+        b.setAttribute('title', entry.title || 'Sem título');
+      });
+      text(byId('navigator-status'), model.notes.length ? model.notes.length + (model.notes.length === 1 ? ' nota' : ' notas') : model.query ? 'Nenhuma nota encontrada.' : 'Nenhuma nota neste dia.');
+    }
+    if (timelineUnreadable) { text(byId('navigator-status'), byId('navigator-status').textContent + ' Algumas notas não puderam ser lidas.'); }
     list.scrollTop = reveal && active ? Math.max(0, active.offsetTop - list.clientHeight / 2 + active.offsetHeight / 2) : oldScroll;
-    timelineRendering = false; shapeWheel();
+    timelineRendering = false;
   }
   function olderNotes() {
-    if (timelineRendering || timelineCount >= timelineEntries.length) { return; }
+    if (timelineRendering || timelineCount >= timelineTotal) { return; }
     var list = byId('timeline-list'), oldHeight = list.scrollHeight, oldScroll = list.scrollTop;
     timelineCount += 40; renderTimeline(false);
     list.scrollTop = oldScroll + list.scrollHeight - oldHeight;
@@ -1110,20 +1224,10 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
       var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
       area.style.height = height + 'px';
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
+      var browser = byId('note-browser');
+      if (browser.style) { browser.style.height = window.innerWidth <= 760 && height < 480 ? Math.max(84, height - 108) + 'px' : ''; }
     }
     typewriterInsets(); growManuscript(); followTyping(); renderTimeline(false, null, true);
-  }
-  function shapeWheel() {
-    var list = byId('timeline-list'), children = list.childNodes, centre = list.clientHeight / 2, i, node, distance, angle, scale;
-    if (!list.style) { return; }
-    for (i = 0; i < children.length; i += 1) {
-      node = children[i]; if (node.className !== 'timeline-entry') { continue; }
-      distance = (node.offsetTop + node.offsetHeight / 2 - list.scrollTop - centre) / Math.max(centre, 1);
-      angle = Math.max(-48, Math.min(48, distance * -38)); scale = Math.max(.88, 1 - Math.abs(distance) * .07);
-      node.style.transform = 'perspective(500px) rotateX(' + angle + 'deg) scale(' + scale + ')';
-      node.style.webkitTransform = node.style.transform;
-      node.style.opacity = String(Math.max(.42, 1 - Math.abs(distance) * .35));
-    }
   }
   function revealSelection(start, end) {
     returnToWriting(); manuscript.setSelectionRange(start, end);
@@ -1152,7 +1256,7 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
   }
   function returnToWriting() { closePanels(false); collapseTimeline(); manuscript.focus(); }
   function loadDocument(next) {
-    doc = next; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; manuscript.setSelectionRange(0, 0); growManuscript();
+    doc = next; navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; manuscript.setSelectionRange(0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.');
@@ -1302,7 +1406,16 @@ body[data-theme="escuro"][data-input="keyboard"] .file-label[data-focus="true"] 
   listen(byId('panel-backdrop'), 'click', function () { closePanels(true); });
   listen(document, 'mousedown', function () { document.body.setAttribute('data-input', 'pointer'); });
   listen(document, 'touchstart', function () { document.body.setAttribute('data-input', 'pointer'); });
-  listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } shapeWheel(); });
+  listen(byId('note-search'), 'input', function () {
+    window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(function () {
+      timelineCount = 40; byId('timeline-list').scrollTop = 0; renderTimeline(true);
+      byId('timeline-toggle').setAttribute('aria-expanded', 'true'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', 'true');
+    }, 150);
+  });
+  listen(byId('note-search'), 'keydown', function (event) { if (event.keyCode === 27 && this.value) { event.preventDefault(); this.value = ''; window.clearTimeout(searchTimer); renderTimeline(false); } });
+  listen(byId('clear-search'), 'click', function () { window.clearTimeout(searchTimer); byId('note-search').value = ''; renderTimeline(false); byId('note-search').focus(); });
+  listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } });
   listen(manuscript, 'input', followTyping);
   listen(manuscript, 'compositionend', function () { composing = false; followTyping(); });
   listen(manuscript, 'compositionstart', cancelTypewriter);

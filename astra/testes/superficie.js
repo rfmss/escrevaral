@@ -135,6 +135,44 @@ module.exports = function (h) {
     editor.clientHeight = 200; context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '80px');
     context.document.activeElement = editor; context.textPosition = function () { return { top: 80, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
   });
+  test('Pastas: meses e dias organizam notas sem trocar a folha aberta', function () {
+    var a = setup(null, '2026-08-31T22:30:05'); a.type('titulo', 'Agosto'); a.type('manuscrito', 'mar'); a.flush();
+    a.setTime('2026-09-10T09:15:20'); a.nodes['timeline-new'].click(); a.type('titulo', 'Setembro'); a.type('manuscrito', 'vento'); a.flush();
+    a.button(a.nodes['date-path'], 'Meses').click();
+    var folders = a.nodes['timeline-list'].childNodes; assert.strictEqual(folders.length, 2);
+    folders.filter(function (n) { return n.textContent.indexOf('agosto') === 0; })[0].click();
+    assert.strictEqual(a.nodes.manuscrito.value, 'vento');
+    a.nodes['timeline-list'].childNodes[0].click();
+    var notes = a.nodes['timeline-list'].childNodes.filter(function (n) { return n.className === 'timeline-entry'; });
+    assert.strictEqual(notes.length, 1); assert.strictEqual(notes[0].getAttribute('title'), 'Agosto');
+    assert.strictEqual(a.nodes.manuscrito.value, 'vento'); notes[0].click(); assert.strictEqual(a.nodes.manuscrito.value, 'mar');
+  });
+  test('Busca: título e texto de todas as datas, acentos e retorno à pasta anterior', function () {
+    var a = setup(null, '2026-08-31T22:30:05'); a.type('titulo', 'Memória'); a.type('manuscrito', 'coração no mar'); a.flush();
+    a.setTime('2026-09-10T09:15:20'); a.nodes['timeline-new'].click(); a.type('titulo', 'Setembro'); a.type('manuscrito', 'vento'); a.flush();
+    a.type('note-search', 'CORACAO'); a.flush(150);
+    var list = a.nodes['timeline-list']; assert.strictEqual(list.childNodes.length, 1); assert.strictEqual(list.childNodes[0].getAttribute('title'), 'Memória');
+    assert.strictEqual(a.nodes.manuscrito.value, 'vento');
+    a.type('note-search', 'memoria'); a.flush(150); assert.strictEqual(list.childNodes.length, 1);
+    a.nodes['clear-search'].click(); assert.strictEqual(list.childNodes.length, 1); assert.strictEqual(list.childNodes[0].getAttribute('title'), 'Setembro');
+    a.type('note-search', 'inexistente'); a.flush(150); assert.strictEqual(list.childNodes.length, 0); assert.strictEqual(a.nodes['navigator-status'].textContent, 'Nenhuma nota encontrada.');
+  });
+  test('Seleção: A → B → salvar B → A conserva um único marcador e os textos corretos', function () {
+    var a = setup(null, '2026-09-10T09:15:20'); a.type('titulo', 'A'); a.type('manuscrito', 'primeiro'); a.flush();
+    a.setTime('2026-09-10T09:15:50'); a.nodes['timeline-new'].click(); a.type('titulo', 'B'); a.type('manuscrito', 'segundo'); a.flush();
+    function entries() { return a.nodes['timeline-list'].childNodes.filter(function (n) { return n.className === 'timeline-entry'; }); }
+    function open(name) { entries().filter(function (n) { return n.getAttribute('title') === name; })[0].click(); }
+    function selected(name) { var current = entries().filter(function (n) { return n.getAttribute('aria-current') === 'true'; }); assert.strictEqual(current.length, 1); assert.strictEqual(current[0].getAttribute('title'), name); }
+    open('A'); selected('A'); open('B'); a.type('manuscrito', 'segundo revisto'); a.flush(); selected('B');
+    open('A'); selected('A'); assert.strictEqual(a.nodes.manuscrito.value, 'primeiro'); open('B'); selected('B'); assert.strictEqual(a.nodes.manuscrito.value, 'segundo revisto');
+    assert.strictEqual(a.nodes['manuscript-date'].getAttribute('datetime'), new Date('2026-09-10T09:15:50').toISOString());
+  });
+  test('Busca: inclui a edição ainda não gravada e não troca notas ao rolar', function () {
+    var a = setup(); a.type('titulo', 'Rascunho'); a.type('manuscrito', 'palavra nova');
+    a.type('note-search', 'palavra nova'); a.flush(150);
+    assert.strictEqual(a.archive().length, 0); assert.strictEqual(a.nodes['timeline-list'].childNodes.length, 1);
+    a.nodes['timeline-list'].scrollTop = 30; a.nodes['timeline-list'].emit('scroll'); assert.strictEqual(a.nodes.manuscrito.value, 'palavra nova');
+  });
   test('Ponte: escrita não dispara análise; gravação tardia e reabertura', function () {
     var a = setup(); a.type('titulo', 'O sal'); a.type('manuscrito', 'uma excessão');
     assert.strictEqual(a.archive().length, 0); assert.strictEqual(a.shortTimers(), 0); assert.strictEqual(a.nodes.findings.childNodes.length, 0);

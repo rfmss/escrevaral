@@ -6,6 +6,7 @@
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
+  var navDay = E.noteDateKey(doc), navMonth = navDay.slice(0, 7), searchTimer = null, timelineTotal = 0, timelineUnreadable = 0;
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   function byId(id) { return document.getElementById(id); }
   function text(node, value) { node.textContent = value; }
@@ -16,51 +17,71 @@
   function pad(n) { return n < 10 ? '0' + n : String(n); }
   function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
   function noteDate(entry) { return entry.created || entry.updated; }
-  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
+  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, text: entry.text || '', created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
+  function monthLabel(key) { return months[Number(key.slice(5, 7)) - 1] + ' ' + key.slice(0, 4); }
+  function dayLabel(key) { var d = new Date(Number(key.slice(0, 4)), Number(key.slice(5, 7)) - 1, Number(key.slice(8, 10))); return d.getDate() + ' · ' + ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'][d.getDay()]; }
+  function openNote(entry) {
+    if (entry.id === doc.id || !persist()) { return; }
+    try {
+      var next = archive && archive.get(entry.id);
+      if (!next) { renderTimeline(true); message('Esta nota mudou. Abra a versão guardada no acervo.'); return; }
+      loadDocument(next); collapseTimeline(); showPanel('oficina', 'examinar-toggle', false);
+      try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
+    } catch (e) { message('Não foi possível abrir esta nota. Sua escrita permanece aqui.'); }
+  }
+  function browseDate(month, day) {
+    navMonth = month; navDay = day; timelineCount = 40; byId('timeline-list').scrollTop = 0; renderTimeline(false);
+  }
   function renderTimeline(refresh, previousId, reveal) {
-    var list = byId('timeline-list'), date = new Date(noteDate(doc)), monthKey = '', dayKey = '', active = null, oldScroll = list.scrollTop;
+    var list = byId('timeline-list'), date = new Date(noteDate(doc)), active = null, oldScroll = list.scrollTop, result;
     timelineRendering = true;
-    if (list.style && list.clientHeight) { list.style.paddingTop = Math.max(16, list.clientHeight / 2 - 32) + 'px'; list.style.paddingBottom = list.style.paddingTop; }
     text(byId('manuscript-date'), timeLabel(date) + ' · ' + date.getDate() + ' de ' + months[date.getMonth()] + ' de ' + date.getFullYear());
     byId('manuscript-date').setAttribute('datetime', noteDate(doc));
     byId('manuscript-date').setAttribute('aria-label', doc.created && !doc.createdApproximate ? 'Data de criação da folha' : 'Data preservada da folha antiga; criação desconhecida');
     if (refresh && archive) {
-      try { timelineEntries = archive.list().documents.map(metadata); } catch (ignore) { /* A folha aberta permanece acessível. */ }
+      try { result = archive.list(); timelineEntries = result.documents.map(metadata); timelineUnreadable = result.unreadable; } catch (ignore) { timelineUnreadable = 1; }
     }
     timelineEntries = timelineEntries.filter(function (entry) { return entry.id !== doc.id && entry.id !== previousId; });
-    timelineEntries.push(metadata(doc));
-    timelineEntries.sort(function (a, b) { return Date.parse(a.created) - Date.parse(b.created) || (a.noteId < b.noteId ? -1 : a.noteId > b.noteId ? 1 : 0); });
-    if (reveal) { timelineEntries.forEach(function (entry, i) { if (entry.id === doc.id) { timelineCount = Math.max(timelineCount, timelineEntries.length - i); } }); }
-    var visible = timelineEntries.slice(-timelineCount);
+    var current = metadata(doc); current.title = title.value; current.text = manuscript.value; timelineEntries.push(current);
+    var model = E.browseNotes(timelineEntries, { month: navMonth, day: navDay, query: byId('note-search').value });
+    var path = byId('date-path'); path.textContent = '';
+    byId('clear-search').hidden = !byId('note-search').value;
+    if (model.query) { paragraph(path, 'Resultados em todas as notas', 'path-label'); }
+    else {
+      button(path, 'Meses', function () { browseDate('', ''); });
+      if (navMonth) { button(path, monthLabel(navMonth), function () { browseDate(navMonth, ''); }); }
+      if (navDay) { var day = paragraph(path, dayLabel(navDay), 'path-label'); day.setAttribute('aria-current', 'page'); }
+    }
     list.textContent = '';
-    if (visible.length < timelineEntries.length) { var older = button(list, 'Anteriores ↑', olderNotes); older.className = 'timeline-older'; }
-    visible.forEach(function (entry) {
-      var when = new Date(entry.created), month = when.getFullYear() + '-' + when.getMonth(), day = month + '-' + when.getDate();
-      if (month !== monthKey) {
-        var m = paragraph(list, months[when.getMonth()].slice(0, 1).toUpperCase() + months[when.getMonth()].slice(1, 3) + ' ' + when.getFullYear(), 'timeline-month');
-        m.setAttribute('title', months[when.getMonth()] + ' de ' + when.getFullYear()); monthKey = month;
-      }
-      if (day !== dayKey) { paragraph(list, when.getDate() + ' ' + ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'][when.getDay()], 'timeline-day'); dayKey = day; }
-      var b = button(list, '', function () {
-        if (entry.id === doc.id || !persist()) { return; }
-        try {
-          var next = archive && archive.get(entry.id);
-          if (!next) { renderTimeline(true); message('Esta folha mudou. Consulte o acervo para abrir a versão guardada.'); return; }
-          loadDocument(next); collapseTimeline(); showPanel('oficina', 'examinar-toggle', false);
-          try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
-        } catch (e) { message('Não foi possível abrir esta folha. Sua escrita permanece aqui.'); }
+    var groups = !model.query && !navDay ? (navMonth ? model.days : model.months) : null;
+    timelineTotal = groups ? 0 : model.notes.length;
+    if (groups) {
+      groups.forEach(function (group) {
+        var b = button(list, '', function () { if (navMonth) { browseDate(navMonth, group.key); } else { browseDate(group.key, ''); } });
+        b.className = 'date-folder';
+        noteLabel(b, navMonth ? dayLabel(group.key) : monthLabel(group.key), group.count + (group.count === 1 ? ' nota' : ' notas'));
       });
-      noteLabel(b, entry.title, timeLabel(when));
-      if (entry.id === doc.id) { active = b; }
-      b.className = 'timeline-entry'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
-      b.setAttribute('aria-label', (entry.title || 'Sem título') + ', ' + when.getDate() + ' de ' + months[when.getMonth()] + ' de ' + when.getFullYear() + ', ' + timeLabel(when) + (entry.createdApproximate ? '; data antiga preservada, criação desconhecida' : ''));
-      b.setAttribute('title', entry.title || 'Sem título');
-    });
+      text(byId('navigator-status'), groups.length ? (navMonth ? 'Escolha um dia' : 'Escolha um mês') : 'Nenhuma nota nesta data.');
+    } else {
+      if (reveal) { model.notes.forEach(function (entry, i) { if (entry.id === doc.id) { timelineCount = Math.max(timelineCount, model.notes.length - i); } }); }
+      var visible = model.notes.slice(-timelineCount);
+      if (visible.length < model.notes.length) { var older = button(list, 'Anteriores ↑', olderNotes); older.className = 'timeline-older'; }
+      visible.forEach(function (entry) {
+        var when = new Date(entry.created), b = button(list, '', function () { openNote(entry); });
+        noteLabel(b, entry.title, timeLabel(when) + (model.query ? ' · ' + when.toLocaleDateString('pt-BR') : ''));
+        if (entry.id === doc.id) { active = b; }
+        b.className = 'timeline-entry'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
+        b.setAttribute('aria-label', (entry.title || 'Sem título') + ', ' + when.toLocaleDateString('pt-BR') + ', ' + timeLabel(when) + (entry.createdApproximate ? '; data antiga preservada, criação desconhecida' : ''));
+        b.setAttribute('title', entry.title || 'Sem título');
+      });
+      text(byId('navigator-status'), model.notes.length ? model.notes.length + (model.notes.length === 1 ? ' nota' : ' notas') : model.query ? 'Nenhuma nota encontrada.' : 'Nenhuma nota neste dia.');
+    }
+    if (timelineUnreadable) { text(byId('navigator-status'), byId('navigator-status').textContent + ' Algumas notas não puderam ser lidas.'); }
     list.scrollTop = reveal && active ? Math.max(0, active.offsetTop - list.clientHeight / 2 + active.offsetHeight / 2) : oldScroll;
-    timelineRendering = false; shapeWheel();
+    timelineRendering = false;
   }
   function olderNotes() {
-    if (timelineRendering || timelineCount >= timelineEntries.length) { return; }
+    if (timelineRendering || timelineCount >= timelineTotal) { return; }
     var list = byId('timeline-list'), oldHeight = list.scrollHeight, oldScroll = list.scrollTop;
     timelineCount += 40; renderTimeline(false);
     list.scrollTop = oldScroll + list.scrollHeight - oldHeight;
@@ -159,20 +180,10 @@
       var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
       area.style.height = height + 'px';
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
+      var browser = byId('note-browser');
+      if (browser.style) { browser.style.height = window.innerWidth <= 760 && height < 480 ? Math.max(84, height - 108) + 'px' : ''; }
     }
     typewriterInsets(); growManuscript(); followTyping(); renderTimeline(false, null, true);
-  }
-  function shapeWheel() {
-    var list = byId('timeline-list'), children = list.childNodes, centre = list.clientHeight / 2, i, node, distance, angle, scale;
-    if (!list.style) { return; }
-    for (i = 0; i < children.length; i += 1) {
-      node = children[i]; if (node.className !== 'timeline-entry') { continue; }
-      distance = (node.offsetTop + node.offsetHeight / 2 - list.scrollTop - centre) / Math.max(centre, 1);
-      angle = Math.max(-48, Math.min(48, distance * -38)); scale = Math.max(.88, 1 - Math.abs(distance) * .07);
-      node.style.transform = 'perspective(500px) rotateX(' + angle + 'deg) scale(' + scale + ')';
-      node.style.webkitTransform = node.style.transform;
-      node.style.opacity = String(Math.max(.42, 1 - Math.abs(distance) * .35));
-    }
   }
   function revealSelection(start, end) {
     returnToWriting(); manuscript.setSelectionRange(start, end);
@@ -201,7 +212,7 @@
   }
   function returnToWriting() { closePanels(false); collapseTimeline(); manuscript.focus(); }
   function loadDocument(next) {
-    doc = next; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; manuscript.setSelectionRange(0, 0); growManuscript();
+    doc = next; navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; manuscript.setSelectionRange(0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.');
@@ -351,7 +362,16 @@
   listen(byId('panel-backdrop'), 'click', function () { closePanels(true); });
   listen(document, 'mousedown', function () { document.body.setAttribute('data-input', 'pointer'); });
   listen(document, 'touchstart', function () { document.body.setAttribute('data-input', 'pointer'); });
-  listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } shapeWheel(); });
+  listen(byId('note-search'), 'input', function () {
+    window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(function () {
+      timelineCount = 40; byId('timeline-list').scrollTop = 0; renderTimeline(true);
+      byId('timeline-toggle').setAttribute('aria-expanded', 'true'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', 'true');
+    }, 150);
+  });
+  listen(byId('note-search'), 'keydown', function (event) { if (event.keyCode === 27 && this.value) { event.preventDefault(); this.value = ''; window.clearTimeout(searchTimer); renderTimeline(false); } });
+  listen(byId('clear-search'), 'click', function () { window.clearTimeout(searchTimer); byId('note-search').value = ''; renderTimeline(false); byId('note-search').focus(); });
+  listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } });
   listen(manuscript, 'input', followTyping);
   listen(manuscript, 'compositionend', function () { composing = false; followTyping(); });
   listen(manuscript, 'compositionstart', cancelTypewriter);

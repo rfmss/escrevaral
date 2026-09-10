@@ -9,7 +9,7 @@ node astra/oficina/empacotar.js --check
 
 O produto não requer Node. A bancada usa módulos internos do Node e seu parser Acorn para a verificação ES5. Se uma distribuição não incluir esse parser interno, a oficina pode fornecer `acorn` separadamente; isso nunca entra no produto.
 
-Resultado executado em 9 de setembro de 2026, Node v24.19.0: 359 verificações aprovadas, zero falhas. Destas, 168 são casos anotados do corpus. Há também 47 casos de transplante, testes de poesia e 52 verificações gramaticais; veja [o balanço da Fase 2](../FASE2.md). As demais verificam contrato, limites, determinismo, desacoplamento, armazenamento, concorrência, quota, corrupção, exportação, importação, edição durante importação, invalidação de diagnósticos, atalhos, tema, sintaxe ES5 e recursos locais da edição portátil.
+Resultado executado em 9 de setembro de 2026, Node v24.19.0: 363 verificações aprovadas, zero falhas. Destas, 168 são casos anotados do corpus. Há também 47 casos de transplante, testes de poesia e 52 verificações gramaticais; veja [o balanço da Fase 2](../FASE2.md). As demais verificam contrato, limites, determinismo, desacoplamento, armazenamento, concorrência, quota, corrupção, exportação, importação, edição durante importação, invalidação de diagnósticos, atalhos, tema, sintaxe ES5 e recursos locais da edição portátil.
 
 `corpus-ouro.json` registra texto, lente, categoria, justificativa e os achados esperados com regra, confiança, trecho e offsets. São casos sintéticos desta oficina, exceto os fragmentos literários creditados. Categorias: correto, incorreto convencional, ambíguo, não se meta, exceção, adversarial, regressão e literatura. Não se atribuem exemplos inventados a escritoras reais.
 
@@ -46,3 +46,5 @@ Revisão de interface: quatro regressões cobrem painel exclusivo e retorno de f
 Atualização da mesa de leitura: três regressões verificam persistência/migração dos temas, foco opcional sem alteração do texto e limites de parágrafo/seleção. Fonte WOFF conferida para família, acentos PT-BR e avanço monoespaçado. Geometria de máscaras, contraste real, teclado virtual e roleta precisam de conferência em navegador/aparelho.
 
 Rolagem de máquina: teste isolado cobre centralização, margens ao redimensionar, seleção, composição e cancelamento ao navegar manualmente. Geometria do texto no navegador continua pendente.
+
+Pastas/busca: quatro regressões cobrem meses/dias sem troca involuntária, pesquisa global por título/texto/acentos, buffer ainda não gravado, vazio e restauração da pasta, sequência A → B → salvar → A com um único marcador. Não substituem validação visual.
