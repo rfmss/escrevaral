@@ -22,7 +22,7 @@ Revisão online: https://escrevaral-review.rafamass975189.chatgpt.site. Treze le
 
 ## Evidências e limites
 
-459 verificações passaram após papel, foco e impressão, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 490.130 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
+459 verificações passaram após papel, foco e impressão, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 558.151 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
 
 Inventário das 68 branches, 17 conjuntos linguísticos, sondas e medições ficam em `oficina/`, fora do runtime. Os catálogos do ZIP recebido têm hashes em `oficina/proveniencia-cofre.json`. Não tratar comentários de maturidade do legado como prova de acerto.
 
@@ -70,4 +70,10 @@ Substitui a apresentação anterior de meia tela: a folha ocupa aproximadamente 
 
 Alvo vertical de escrita voltou a 42% inclusive neste modo. A medição já existente devolve também a posição horizontal; depois da rolagem, a haste recebe o ponto visível da escrita e percorre a distância até a base. Nenhuma segunda medição do texto para o efeito. Golpe CSS de 90 ms (aproximação, contato, recolhimento), prefixo WebKit e movimento reduzido quando disponível. Sem animação contínua. Carro limitado a 6 px. Fallback geométrico central nos ambientes sem medição; não simula uma letra nem altera o textarea.
 
-459 verificações aprovadas, incluindo encontro da haste com coordenadas visíveis, cancelamento fora da folha e preservação dos testes anteriores. Portátil 490.130 bytes. O arquivo do carimbo foi inspecionado; aparência final em navegador e percepção do golpe no iPad permanecem pendentes. As proporções e medidas desta seção substituem as da capa anterior.
+459 verificações aprovadas, incluindo encontro da haste com coordenadas visíveis, cancelamento fora da folha e preservação dos testes anteriores. Portátil 558.151 bytes. O arquivo do carimbo foi inspecionado; aparência final em navegador e percepção do golpe no iPad permanecem pendentes. As proporções e medidas desta seção substituem as da capa anterior.
+
+## Tipografia editorial — 11/09/2026
+
+Estudo `stitch_harmonious_typography_refactor.zip` aprovado: Noto Serif Regular na interface, títulos e notas; Courier Prime Regular original no manuscrito e horários. Removida a deformação anterior de altura/largura. Sombras de tinta reduzidas nos dois temas e na máquina. Conservados tamanhos confortáveis, contraste de metadados, área útil e marcador reto. Sem incorporar margens excessivas, dependências de rede ou famílias auxiliares do estudo.
+
+Dois WOFF locais embutidos: Courier Prime original (34.964 bytes) e Noto Serif estática 400/100, subconjunto latino com diacríticos combinantes e pontuação (42.860 bytes). Licenças OFL e hashes de origem/resultado no CSS. Sem fonte variável no runtime; Georgia/Courier como alternativas locais. Glifos PT-BR conferidos. Impressão mantém Times New Roman. A medição da linha usa a tipografia computada do próprio editor. 459 verificações funcionais aprovadas; percepção visual e aparelhos antigos ainda dependem de validação real.

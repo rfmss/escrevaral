@@ -59,11 +59,11 @@ Uma visita ao link não garante reabertura sem internet. O HTML portátil reúne
 
 ## Estado funcional
 
-Editor local com título e hora fixa de criação, navegação mês → dia → notas, busca por título e texto, importação aditiva e exportação. Superfície gesso/grafite em claro/escuro, fonte local de escrita, destaque opcional por parágrafo, modo foco completo e linha ativa a 42% da altura útil. Impressão da folha em A4 limpa, separada do campo de edição; textura estática de papel e marcação reta das notas. Modo opcional Máquina antiga: máquina recortada em carimbo estático (PNG transparente de 12.938 bytes), folha ampliada, haste dirigida à posição de escrita e retorno ao inserir nova linha. Cursores personalizados adiados por pedido de Rafa.
+Editor local com título e hora fixa de criação, navegação mês → dia → notas, busca por título e texto, importação aditiva e exportação. Superfície gesso/grafite em claro/escuro, Noto Serif local na interface e Courier Prime original no manuscrito/horários, destaque opcional por parágrafo, modo foco completo e linha ativa a 42% da altura útil. Impressão da folha em A4 limpa, separada do campo de edição; textura estática de papel e marcação reta das notas. Modo opcional Máquina antiga: máquina recortada em carimbo estático (PNG transparente de 12.938 bytes), folha ampliada, haste dirigida à posição de escrita e retorno ao inserir nova linha. Cursores personalizados adiados por pedido de Rafa.
 
 Treze lentes em quatro categorias: Convenções, Gramática, Escolhas de escrita e Poesia. Crase, concordância de haver/existir/fazer, repetição próxima e ritmo foram acrescentados; infinitivos ganharam contexto delimitado. Há 884 formas verbais exatas, 65 lemas para o recorte contextual, 1.447 expressões e 18 observações decoloniais. Contagem de entradas não significa cobertura integral ou revisão linguística independente.
 
-O arquivo portátil após a rodada de papel, foco e impressão tem 490.130 bytes (entrega anterior de engines: 456.821). A bancada não representa tempo de WebKit, memória do iPad nem taxa geral de acerto linguístico. Medições e limites estão em `astra/MATURACAO.md`.
+O arquivo portátil após a rodada de papel, foco e impressão tem 558.151 bytes (entrega anterior de engines: 456.821). A bancada não representa tempo de WebKit, memória do iPad nem taxa geral de acerto linguístico. Medições e limites estão em `astra/MATURACAO.md`.
 
 ## Retomada e atualização
 

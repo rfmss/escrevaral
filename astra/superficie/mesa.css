@@ -1,7 +1,7 @@
 /* Gesso, grafite e espaço. A tipografia de máquina pertence à escrita. */
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { height: 100%; overflow: hidden; background: #f5f4ef; color: #282925; font-family: Arial, sans-serif;  }
+html { height: 100%; overflow: hidden; background: #f5f4ef; color: #282925; font-family: 'Noto Serif', Georgia, serif;  }
 body { margin: 0; height: 100%; overflow: hidden; }
 button, input, textarea, select { font: inherit; color: inherit; }
 button, select, .file-label { font-size: 14px; }
@@ -26,7 +26,7 @@ body[data-input="keyboard"] #manuscrito:focus { box-shadow: -2px 0 #85867e; }
 .title { display: block; width: 100%; border: 0; border-radius: 0; background: transparent; padding: 4px 0; font-size: 26px; font-weight: 500; line-height: 1.4; }
 .title::placeholder { color: #76776e; opacity: 1; }
 .manuscript-date { margin: 5px 0 0; color: #62635d; font-size: 13px; line-height: 1.6; }
-#manuscrito { display: block; width: 100%; min-height: 340px; min-height: max(340px, calc(100vh - 365px)); height: 340px; resize: none; overflow: hidden; margin: 0; padding: 0 0 24px; border: 0; border-radius: 0; background: transparent; font: 21px/1.7 'Escrevaral Mono', 'Courier New', Courier, monospace; letter-spacing: 0; overflow-wrap: break-word; }
+#manuscrito { display: block; width: 100%; min-height: 340px; min-height: max(340px, calc(100vh - 365px)); height: 340px; resize: none; overflow: hidden; margin: 0; padding: 0 0 24px; border: 0; border-radius: 0; background: transparent; font: 21px/1.7 'Courier Prime', 'Courier New', Courier, monospace; letter-spacing: 0; overflow-wrap: break-word; }
 #manuscrito::placeholder { color: #76776e; opacity: 1; }
 .paper-footer { padding: 18px 0; color: #62635d; font-size: 12px; line-height: 1.6; }
 .timeline { position: absolute; right: 0; top: 0; width: 164px; }
@@ -102,12 +102,12 @@ body[data-input="keyboard"] .file-label[data-focus="true"] { outline: 2px solid 
 .title { font-size: 24px; font-weight: 400; }
 .manuscript-date { font-size: 13px; }
 .editor-viewport { position: absolute; top: 106px; right: 0; bottom: 42px; left: 0; overflow: hidden; }
-#manuscrito { position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-height: 0; padding: 0 18px 45px 0; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; font: 22px/1.7 'Escrevaral Mono', 'Courier New', Courier, monospace; text-shadow: .2px .25px .4px rgba(40,41,37,.25); caret-color: #282925; scrollbar-width: thin; scrollbar-color: #b9bab0 transparent; }
+#manuscrito { position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-height: 0; padding: 0 18px 45px 0; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; font: 22px/1.7 'Courier Prime', 'Courier New', Courier, monospace; text-shadow: .1px .15px .25px rgba(40,41,37,.16); caret-color: #282925; scrollbar-width: thin; scrollbar-color: #b9bab0 transparent; }
 .paper-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 0; }
 .focus-mask { position: absolute; z-index: 1; left: 0; right: 18px; pointer-events: none; background: #f5f4ef; opacity: .68; }
 #focus-before { top: 0; }
 #focus-after { bottom: 0; }
-.editor-measure { position: absolute; left: -10000px; top: 0; visibility: hidden; white-space: pre-wrap; overflow-wrap: break-word; padding: 0 18px 45px 0; border: 0; font: 22px/1.7 'Escrevaral Mono', 'Courier New', Courier, monospace; }
+.editor-measure { position: absolute; left: -10000px; top: 0; visibility: hidden; white-space: pre-wrap; overflow-wrap: break-word; padding: 0 18px 45px 0; border: 0; font: 22px/1.7 'Courier Prime', 'Courier New', Courier, monospace; }
 /* The wheel is a native scrolling list inside a clipped, curved viewing window. */
 .timeline { height: 100%; max-height: 470px; }
 .wheel-window { position: absolute; top: 55px; bottom: 0; left: 0; right: 0; overflow: hidden; }
@@ -123,8 +123,9 @@ body[data-input="keyboard"] .file-label[data-focus="true"] { outline: 2px solid 
 .note-time, .timeline-day, .timeline-month, .rail-label, .eyebrow { font-size: 12px; }
 .timeline-month { margin-top: 18px; }
 .sheet { scrollbar-width: none; -ms-overflow-style: none; }
-/* A single family for controls, a single local face for the manuscript. */
-button, input, select, .quiet, .note-name, .note-time, .paper-footer { font-family: Arial, sans-serif; }
+/* Duas famílias locais: interface editorial e escrita de máquina. */
+button, input, select, .quiet, .note-name, .note-time, .paper-footer { font-family: 'Noto Serif', Georgia, serif; }
+.note-time, .manuscript-date { font-family: 'Courier Prime', 'Courier New', Courier, monospace; }
 .ui-icon { display: inline-block; width: 21px; height: 21px; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .brand-mark { width: 28px; height: 28px; }
 button, input, textarea, .file-label { -webkit-tap-highlight-color: transparent; }
@@ -157,7 +158,7 @@ body[data-theme="escuro"] .sheet, body[data-theme="escuro"] .setting-section, bo
 body[data-theme="escuro"] .timeline-entry[aria-current="true"] { box-shadow: inset 2px 0 #b0b2a6; }
 body[data-theme="escuro"] .wheel-window:before { background: linear-gradient(#242621, rgba(36,38,33,0)); }
 body[data-theme="escuro"] .wheel-window:after { background: linear-gradient(rgba(36,38,33,0), #242621); }
-body[data-theme="escuro"] #manuscrito { caret-color: #e8e8df; text-shadow: .2px .25px .4px rgba(232,232,223,.2); scrollbar-color: #666b5c transparent; }
+body[data-theme="escuro"] #manuscrito { caret-color: #e8e8df; text-shadow: .1px .15px .25px rgba(232,232,223,.12); scrollbar-color: #666b5c transparent; }
 body[data-theme="escuro"] #manuscrito::-webkit-scrollbar-thumb { background: #666b5c; }
 body[data-theme="escuro"] ::selection { color: #242621; background: #c4c7b6; }
 body[data-theme="escuro"] ::-moz-selection { color: #242621; background: #c4c7b6; }
@@ -349,7 +350,7 @@ body[data-machine="true"] #writing-space { background: #e4e3d8; }
 body[data-machine="true"] .desk { top: 12px; bottom: 94px; width: calc(100% - 48px); max-width: none; }
 body[data-machine="true"] .paper { background: #f5f2e5; border: 1px solid #c1c3b2; border-bottom: 0; box-shadow: none; }
 body[data-machine="true"] .editor-viewport { left: 5%; right: 5%; top: 0; bottom: 0; }
-body[data-machine="true"] #manuscrito { color: #30382d; caret-color: #30382d; text-shadow: .2px .2px .3px rgba(48,56,45,.25); }
+body[data-machine="true"] #manuscrito { color: #30382d; caret-color: #30382d; text-shadow: .1px .15px .25px rgba(48,56,45,.16); }
 body[data-machine="true"] #manuscrito::placeholder { color: #737767; }
 body[data-machine="true"] .focus-mask { background: #f5f2e5; }
 body[data-machine="true"] #manuscrito::-webkit-scrollbar-thumb { background: #b5b9a5; }
