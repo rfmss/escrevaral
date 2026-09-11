@@ -480,4 +480,43 @@ module.exports = function (h) {
     assert.strictEqual(a.nodes['manuscript-date'].getAttribute('datetime'), '2020-01-02T22:30:05.000Z');
   });
 
+  test('Gabinete: entrada sem folha fantasma, retorno conserva seleção e conteúdo', function () {
+    var a = setup(); assert.strictEqual(a.nodes.gabinete.hidden, false); assert.strictEqual(a.nodes['writing-space'].hidden, true); assert.strictEqual(a.archive().length, 0);
+    a.nodes['cabinet-write'].click(); a.type('titulo', 'Maré'); a.type('manuscrito', 'primeiro\nsegundo'); a.nodes.manuscrito.setSelectionRange(3, 8); a.nodes.manuscrito.scrollTop = 71;
+    a.nodes['back-cabinet'].click(); assert.strictEqual(a.nodes.gabinete.hidden, false); assert.strictEqual(a.archive()[0].text, 'primeiro\nsegundo');
+    a.nodes['cabinet-resume'].click(); assert.strictEqual(a.nodes.gabinete.hidden, true); assert.strictEqual(a.nodes.manuscrito.selectionStart, 3); assert.strictEqual(a.nodes.manuscrito.selectionEnd, 8); assert.strictEqual(a.nodes.manuscrito.scrollTop, 71);
+  });
+  test('Gabinete: projetos reais sobrevivem a reabertura, exportação e importação', function () {
+    var a = setup(); a.nodes['project-name'].value = 'Contos do mar'; a.nodes['project-form'].emit('submit');
+    a.type('titulo', 'A rede'); a.type('manuscrito', 'O mar levou a rede.'); a.flush();
+    assert.strictEqual(a.archive()[0].project, 'Contos do mar');
+    var b = setup(a.storage); assert.ok(b.nodes['cabinet-projects'].textContent.indexOf('Contos do mar') >= 0);
+    b.nodes['cabinet-backup'].click(); var copy = b.downloads[0]; assert.strictEqual(JSON.parse(copy).documents[0].project, 'Contos do mar');
+    var c = setup(); c.import('copia.json', copy); c.finishImport(); assert.strictEqual(c.archive()[0].project, 'Contos do mar'); assert.strictEqual(c.archive()[0].text, 'O mar levou a rede.');
+  });
+  test('Gabinete: troca A/B abre textos distintos e busca atravessa projetos', function () {
+    var a = setup(); a.nodes['cabinet-new'].click(); a.type('titulo', 'A'); a.type('manuscrito', 'Água no telhado'); a.flush();
+    a.nodes['note-project'].value = 'Mar'; a.nodes['note-project-save'].click(); a.nodes['back-cabinet'].click(); a.nodes['cabinet-new'].click(); a.type('titulo', 'B'); a.type('manuscrito', 'Casa vazia'); a.flush();
+    a.nodes['back-cabinet'].click(); a.type('cabinet-search', 'agua'); a.flush();
+    assert.strictEqual(a.nodes['cabinet-notes'].childNodes.length, 1); a.nodes['cabinet-notes'].childNodes[0].click(); assert.strictEqual(a.nodes.titulo.value, 'A'); assert.strictEqual(a.nodes.manuscrito.value, 'Água no telhado');
+    a.nodes['back-cabinet'].click(); a.nodes['cabinet-clear'].click();
+    var b = a.nodes['cabinet-notes'].childNodes.filter(function (n) { return n.childNodes[0].textContent === 'B'; })[0]; b.click(); assert.strictEqual(a.nodes.manuscrito.value, 'Casa vazia');
+  });
+  test('Gabinete: falha de gravação bloqueia saída e não simula sucesso', function () {
+    var a = setup(); a.nodes['cabinet-write'].click(); a.type('manuscrito', 'Não perder este texto'); a.storage.fail = true; a.nodes['back-cabinet'].click();
+    assert.strictEqual(a.nodes.gabinete.hidden, true); assert.strictEqual(a.nodes.manuscrito.value, 'Não perder este texto'); assert.ok(/Não foi possível guardar/.test(a.nodes['save-status'].textContent));
+    a.nodes['export-backup'].click(); assert.strictEqual(JSON.parse(a.downloads[0]).documents[0].text, 'Não perder este texto');
+  });
+  test('Gabinete: oficinas não analisam sozinhas; Escape respeita composição e painel', function () {
+    var a = setup(); a.nodes['cabinet-poetry'].click(); assert.strictEqual(a.nodes.oficina.hidden, false); assert.strictEqual(a.nodes.findings.childNodes.length, 0); a.document.emit('keydown', { keyCode: 27 }); assert.strictEqual(a.nodes.oficina.hidden, true); assert.strictEqual(a.nodes.gabinete.hidden, true);
+    a.nodes.manuscrito.emit('compositionstart'); a.document.emit('keydown', { keyCode: 27 }); assert.strictEqual(a.nodes.gabinete.hidden, true); a.nodes.manuscrito.emit('compositionend');
+    a.document.emit('keydown', { keyCode: 27 }); assert.strictEqual(a.nodes.gabinete.hidden, false);
+    a.nodes['cabinet-settings'].click(); a.nodes['mesa-close'].click(); assert.strictEqual(a.document.activeElement, a.nodes['cabinet-settings']); assert.strictEqual(a.nodes['cabinet-settings'].getAttribute('aria-expanded'), 'false');
+  });
+  test('Gabinete: escolha tipográfica persiste e nomes de projetos são texto literal', function () {
+    var a = setup(); a.nodes['font-typewriter'].click(); assert.strictEqual(setup(a.storage).document.body.getAttribute('data-letter'), 'maquina');
+    a.nodes['project-name'].value = '<img src=x onerror=alert(1)>'; a.nodes['project-form'].emit('submit'); a.nodes['back-cabinet'].click(); assert.ok(a.nodes['cabinet-projects'].textContent.indexOf('<img src=x onerror=alert(1)>') >= 0);
+    var entry = a.archive()[0]; entry.project = {}; assert.strictEqual(a.root.Escr.validDocument(entry), false);
+  });
+
 };

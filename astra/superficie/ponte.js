@@ -14,7 +14,7 @@
   function listen(node, event, fn) { node.addEventListener(event, fn, false); }
   function paragraph(parent, value, className) { var p = document.createElement('p'); if (className) { p.className = className; } text(p, value); parent.appendChild(p); return p; }
   function button(parent, label, fn) { var b = document.createElement('button'); b.type = 'button'; text(b, label); listen(b, 'click', fn); parent.appendChild(b); return b; }
-  function message(value) { text(saveStatus, value); text(byId('panel-status'), value); if (activePanel === 'acervo') { text(byId('archive-status'), value); } }
+  function message(value) { text(saveStatus, value); text(byId('cabinet-status'), value); text(byId('panel-status'), value); if (activePanel === 'acervo') { text(byId('archive-status'), value); } }
   function pad(n) { return n < 10 ? '0' + n : String(n); }
   function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
   function noteDate(entry) { return entry.created || entry.updated; }
@@ -186,7 +186,7 @@
     var area = byId('writing-space');
     if (area.style && window.innerHeight) {
       var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-      area.style.height = height + 'px';
+      area.style.height = height + 'px'; byId('gabinete').style.height = height + 'px';
       byId('machine-shell').style.height = height + 'px';
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
       var browser = byId('note-browser');
@@ -205,10 +205,11 @@
   }
   function closePanels(restore) {
     var trigger = panelTrigger;
+    if (trigger && trigger.setAttribute) { trigger.setAttribute('aria-expanded', 'false'); }
     panelIds.forEach(function (id, i) { byId(id).hidden = true; byId(panelToggles[i]).setAttribute('aria-expanded', 'false'); });
     activePanel = ''; panelTrigger = null;
     byId('panel-backdrop').hidden = true; document.body.setAttribute('data-panel', 'closed');
-    byId('writing-space').removeAttribute('aria-hidden');
+    byId('writing-space').removeAttribute('aria-hidden'); byId('gabinete').removeAttribute('aria-hidden');
     if (restore && trigger && trigger.focus) { trigger.focus(); }
   }
   function showPanel(id, toggle, open) {
@@ -217,7 +218,8 @@
     panelTrigger = byId(toggle); activePanel = id; text(byId('panel-status'), '');
     byId(id).hidden = false; byId(toggle).setAttribute('aria-expanded', 'true');
     byId('panel-backdrop').hidden = false; document.body.setAttribute('data-panel', 'open');
-    byId(id).focus(); byId('writing-space').setAttribute('aria-hidden', 'true');
+    byId(id).focus(); byId('writing-space').setAttribute('aria-hidden', 'true'); byId('gabinete').setAttribute('aria-hidden', 'true');
+    if (id === 'mesa') { byId('note-project').value = projectName(doc.project); }
   }
   function setImmersion(enabled) {
     var start = manuscript.selectionStart, end = manuscript.selectionEnd, scroll = manuscript.scrollTop;
@@ -300,7 +302,7 @@
   function finishPrint() {
     text(byId('print-title'), ''); text(byId('print-text'), '');
   }
-  function returnToWriting() { closePanels(false); collapseTimeline(); manuscript.focus(); }
+  function returnToWriting() { if (cabinetOpen) { enterDesk(); } closePanels(false); collapseTimeline(); manuscript.focus(); }
   function loadDocument(next) {
     doc = next; navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; manuscript.setSelectionRange(0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
@@ -321,7 +323,7 @@
           if (!persist()) { return; }
           loadDocument(isCurrent ? doc : entry); showPanel('acervo', 'acervo-toggle', false);
           try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
-          message('Folha aberta.');
+          enterDesk(); message('Folha aberta.');
         });
         noteLabel(b, entry.title, timeLabel(new Date(noteDate(entry))) + ' · ' + new Date(noteDate(entry)).toLocaleDateString('pt-BR'));
         b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false'); list.appendChild(li);
@@ -409,12 +411,12 @@
         } else { throw new Error('Traga um texto .txt ou uma cópia .json do Escrevaral.'); }
         if (!archive) {
           if (doc.text || doc.title || entries.length !== 1) { throw new Error('Sem espaço para guardar novas folhas. Baixe sua escrita antes de trocar de navegador.'); }
-          latest = E.freshDocument(); latest.title = entries[0].title; latest.text = entries[0].text; latest.created = noteDate(entries[0]); latest.createdApproximate = !entries[0].created || !!entries[0].createdApproximate; loadDocument(latest); dirty = true; message('Arquivo aberto apenas nesta folha. Baixe uma cópia antes de sair.'); return;
+          latest = E.freshDocument(); latest.title = entries[0].title; latest.text = entries[0].text; latest.project = projectName(entries[0].project); latest.created = noteDate(entries[0]); latest.createdApproximate = !entries[0].created || !!entries[0].createdApproximate; loadDocument(latest); dirty = true; message('Arquivo aberto apenas nesta folha. Baixe uma cópia antes de sair.'); return;
         }
         entries.forEach(function (entry) {
-          var imported = E.freshDocument(); imported.title = entry.title; imported.text = entry.text; imported.dismissed = entry.dismissed.slice(); imported.created = noteDate(entry); imported.createdApproximate = !entry.created || !!entry.createdApproximate; latest = archive.save(imported).document; count += 1;
+          var imported = E.freshDocument(); imported.title = entry.title; imported.text = entry.text; imported.dismissed = entry.dismissed.slice(); imported.project = projectName(entry.project); imported.created = noteDate(entry); imported.createdApproximate = !entry.created || !!entry.createdApproximate; latest = archive.save(imported).document; count += 1;
         });
-        loadDocument(latest); message('Arquivo trazido como ' + count + (count === 1 ? ' nova folha.' : ' novas folhas.')); renderArchive();
+        loadDocument(latest); if (cabinetOpen) { renderCabinet(); } message('Arquivo trazido como ' + count + (count === 1 ? ' nova folha.' : ' novas folhas.')); renderArchive();
       } catch (e) { message((count ? count + ' folhas já foram trazidas. ' : '') + (e.name === 'QuotaExceededError' ? 'Faltou espaço para guardar o restante.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior permanece.'); }
     };
     reader.readAsText(file, 'UTF-8');
@@ -436,6 +438,105 @@
       oscillator.onended = function () { oscillator.disconnect(); gain.disconnect(); };
     } catch (e) { stopSound(); text(byId('sound-status'), 'O som não está disponível neste navegador.'); }
   }
+  /* Gabinete: apresentação do acervo real; o editor e as engines permanecem os mesmos. */
+  var cabinetOpen = false, cabinetProject = null, cabinetLimit = 40, cabinetTimer = null, cabinetSelection = null;
+  function projectName(value) { return String(value || '').replace(/^\s+|\s+$/g, '').slice(0, 120); }
+  function cabinetDocuments() {
+    var result = archive ? archive.list() : { documents: [], unreadable: 0 }, found = false;
+    result.documents = result.documents.map(function (entry) { if (entry.id === doc.id) { found = true; return doc; } return entry; });
+    if (!found && (doc.revision || dirty || title.value || manuscript.value)) { result.documents.unshift(doc); }
+    return result;
+  }
+  function renderCabinet() {
+    var result, list = byId('cabinet-notes'), projects = byId('cabinet-projects'), groups = [], query = byId('cabinet-search').value;
+    try { result = cabinetDocuments(); } catch (e) { message('Não foi possível ler o acervo. Seus registros foram preservados.'); return; }
+    list.textContent = ''; projects.textContent = '';
+    result.documents.forEach(function (entry) {
+      var name = projectName(entry.project), group = null;
+      groups.forEach(function (g) { if (g.name === name) { group = g; } });
+      if (!group) { group = { name: name, count: 0 }; groups.push(group); } group.count += 1;
+    });
+    groups.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+    groups.forEach(function (group) {
+      var b = button(projects, '', function () { cabinetProject = group.name; cabinetLimit = 40; byId('cabinet-search').value = ''; renderCabinet(); byId('cabinet-heading').focus(); });
+      b.className = 'project-link'; b.setAttribute('aria-pressed', cabinetProject === group.name ? 'true' : 'false');
+      var icon = document.createElement('span'); icon.className = 'project-icon'; icon.innerHTML = byId('project-icon-template').innerHTML; b.appendChild(icon);
+      var label = document.createElement('span'); text(label, group.name || 'Folhas avulsas'); b.appendChild(label);
+      var count = document.createElement('small'); text(count, group.count); b.appendChild(count);
+    });
+    byId('cabinet-all').setAttribute('aria-pressed', cabinetProject === null ? 'true' : 'false');
+    var entries = query ? E.browseNotes(result.documents, { query: query }).notes.reverse() : result.documents.filter(function (entry) { return cabinetProject === null || projectName(entry.project) === cabinetProject; });
+    text(byId('cabinet-heading'), query ? 'Busca no gabinete' : cabinetProject === null ? 'Seus escritos' : cabinetProject || 'Folhas avulsas');
+    text(byId('cabinet-count'), entries.length + (entries.length === 1 ? ' folha' : ' folhas'));
+    byId('cabinet-clear').hidden = !query;
+    byId('cabinet-empty').hidden = entries.length > 0;
+    text(byId('cabinet-empty'), query ? 'Nenhuma folha encontrada. Tente outro título ou trecho.' : 'Seu gabinete começa com uma folha. Dê um título e encontre seu primeiro parágrafo.');
+    byId('cabinet-more').hidden = entries.length <= cabinetLimit;
+    byId('cabinet-resume').hidden = !(doc.revision || title.value || manuscript.value) || !!query || (cabinetProject !== null && cabinetProject !== projectName(doc.project));
+    text(byId('resume-title'), title.value || 'Sem título');
+    text(byId('resume-date'), projectName(doc.project) || 'Folha avulsa');
+    entries.slice(0, cabinetLimit).forEach(function (entry) {
+      var b = button(list, '', function () {
+        var isCurrent = entry.id === doc.id;
+        if (!persist()) { return; }
+        if (!isCurrent) {
+          try { var next = archive && archive.get(entry.id); if (!next) { renderCabinet(); message('Esta folha mudou. Escolha sua versão atual no gabinete.'); return; } loadDocument(next); } catch (e) { message('Não foi possível abrir esta folha. O texto atual permanece.'); return; }
+          cabinetSelection = null;
+        }
+        enterDesk();
+      });
+      b.className = 'cabinet-note'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
+      noteLabel(b, entry.title, timeLabel(new Date(noteDate(entry))) + ' · ' + new Date(noteDate(entry)).toLocaleDateString('pt-BR'));
+      paragraph(b, projectName(entry.project) || 'Folha avulsa', 'note-project-label');
+    });
+    if (result.unreadable) { message('Algumas folhas não puderam ser lidas. Os registros originais permanecem.'); }
+  }
+  function enterDesk(focusEditor) {
+    closePanels(false); collapseTimeline(); cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
+    document.body.setAttribute('data-view', 'mesa');
+    sizeWorkspace(); cancelTypewriter();
+    if (focusEditor !== false) { manuscript.focus(); }
+    if (cabinetSelection && cabinetSelection.noteId === (doc.noteId || doc.id)) {
+      manuscript.setSelectionRange(cabinetSelection.start, cabinetSelection.end); manuscript.scrollTop = cabinetSelection.scroll;
+    }
+    growManuscript();
+    try { if (storage && doc.revision) { storage.setItem('escrevaral.astra.current', doc.id); } } catch (ignore) { /* Preferência facultativa. */ }
+  }
+  function openCabinet(initial) {
+    if (!initial && (composing || !persist())) { return false; }
+    cabinetSelection = { noteId: doc.noteId || doc.id, start: manuscript.selectionStart || 0, end: manuscript.selectionEnd || 0, scroll: manuscript.scrollTop };
+    if (machineEnabled) { setMachine(false); }
+    if (immersion) { setImmersion(false); }
+    cancelTypewriter(); closePanels(false); collapseTimeline();
+    cabinetOpen = true; byId('writing-space').hidden = true; byId('gabinete').hidden = false;
+    byId('leave-focus').hidden = true; document.body.setAttribute('data-view', 'gabinete');
+    renderCabinet(); if (!initial) { byId('cabinet-heading').focus(); } return true;
+  }
+  function cabinetPanel(id, trigger) {
+    if (id === 'acervo') { renderArchive(); }
+    showPanel(id, trigger, true);
+  }
+  function createProject(event) {
+    event.preventDefault(); var name = projectName(byId('project-name').value);
+    if (!name) { text(byId('project-error'), 'Dê um nome ao projeto.'); byId('project-name').focus(); return; }
+    if (!persist()) { return; }
+    var next = E.freshDocument(); next.project = name;
+    loadDocument(next); dirty = true;
+    if (!persist()) { enterDesk(); message('Projeto aberto na folha, mas ainda não foi guardado. Baixe uma cópia.'); return; }
+    cabinetProject = name; byId('project-form').hidden = true; byId('project-new').setAttribute('aria-expanded', 'false');
+    byId('project-name').value = ''; cabinetSelection = null; enterDesk(); title.focus();
+  }
+  function chooseFont(value) {
+    var style = value === 'maquina' ? 'maquina' : 'literaria';
+    var start = manuscript.selectionStart, end = manuscript.selectionEnd;
+    document.body.setAttribute('data-letter', style);
+    byId('font-literary').setAttribute('aria-pressed', style === 'literaria' ? 'true' : 'false');
+    byId('font-typewriter').setAttribute('aria-pressed', style === 'maquina' ? 'true' : 'false');
+    focusMeasure = null; typewriterInsets(); growManuscript();
+    if (typeof start === 'number') { manuscript.setSelectionRange(start, end); }
+    try { if (storage) { storage.setItem('escrevaral.astra.letter', style); } } catch (ignore) { /* Préférence facultativa. */ }
+  }
+
   try {
     storage = window.localStorage; archive = E.createArchive(storage);
     var currentId = storage.getItem('escrevaral.astra.current'), current = currentId ? archive.get(currentId) : null;
@@ -496,7 +597,7 @@
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });
   listen(byId('back-writing'), 'click', returnToWriting);
-  function newDocument() { if (!persist()) { return; } loadDocument(E.freshDocument()); dirty = true; persist(); renderTimeline(false, null, true); showPanel('acervo', 'acervo-toggle', false); collapseTimeline(); }
+  function newDocument() { if (!persist()) { return; } var next = E.freshDocument(); next.project = cabinetOpen ? cabinetProject || '' : projectName(doc.project); loadDocument(next); dirty = true; persist(); renderTimeline(false, null, true); cabinetSelection = null; enterDesk(false); byId('back-cabinet').focus(); }
   listen(byId('new-document'), 'click', newDocument);
   listen(byId('timeline-new'), 'click', newDocument);
   for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }
@@ -545,10 +646,36 @@
         else if (!event.shiftKey && (document.activeElement === last || document.activeElement === byId(activePanel))) { event.preventDefault(); first.focus(); }
       }
     }
-    if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); showPanel('oficina', 'examinar-toggle', true); panelTrigger = manuscript; lensButtons[0].focus(); }
+    if ((event.ctrlKey || event.metaKey) && code === 75) { event.preventDefault(); closePanels(false); (cabinetOpen ? byId('cabinet-search') : byId('note-search')).focus(); }
+    else if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); if (cabinetOpen) { enterDesk(); } showPanel('oficina', 'examinar-toggle', true); panelTrigger = manuscript; lensButtons[0].focus(); }
     else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
-    else if (code === 27) { if (activePanel) { closePanels(true); } else if (immersion) { leaveImmersion(); } else { collapseTimeline(); } }
+    else if (code === 27) { if (activePanel) { closePanels(true); } else if (immersion) { leaveImmersion(); } else if (!cabinetOpen) { if (byId('timeline-toggle').getAttribute('aria-expanded') === 'true') { collapseTimeline(); } else { openCabinet(false); } } else if (!byId('project-form').hidden) { byId('project-cancel').click(); } }
   });
+
+  listen(byId('skip-writing'), 'click', function (event) { event.preventDefault(); enterDesk(); });
+  listen(byId('back-cabinet'), 'click', function () { openCabinet(false); });
+  listen(byId('cabinet-return'), 'click', enterDesk);
+  listen(byId('cabinet-resume'), 'click', enterDesk);
+  listen(byId('cabinet-write'), 'click', enterDesk);
+  listen(byId('cabinet-new'), 'click', newDocument);
+  listen(byId('cabinet-settings'), 'click', function () { cabinetPanel('mesa', 'cabinet-settings'); });
+  listen(byId('cabinet-archive'), 'click', function () { cabinetPanel('acervo', 'cabinet-archive'); });
+  listen(byId('cabinet-backup'), 'click', function () { byId('export-backup').click(); });
+  listen(byId('cabinet-examine'), 'click', function () { enterDesk(); showPanel('oficina', 'examinar-toggle', true); lensButtons[0].focus(); });
+  listen(byId('cabinet-poetry'), 'click', function () { enterDesk(); showPanel('oficina', 'examinar-toggle', true); for (var j = 0; j < lensButtons.length; j += 1) { if (lensButtons[j].getAttribute('data-lens') === 'rima') { lensButtons[j].focus(); break; } } });
+  listen(byId('cabinet-all'), 'click', function () { cabinetProject = null; cabinetLimit = 40; byId('cabinet-search').value = ''; renderCabinet(); });
+  listen(byId('cabinet-more'), 'click', function () { cabinetLimit += 40; renderCabinet(); });
+  listen(byId('cabinet-search'), 'input', function () { window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; renderCabinet(); }, 180); });
+  listen(byId('cabinet-clear'), 'click', function () { window.clearTimeout(cabinetTimer); byId('cabinet-search').value = ''; renderCabinet(); byId('cabinet-search').focus(); });
+  listen(byId('project-new'), 'click', function () { byId('project-form').hidden = false; this.setAttribute('aria-expanded', 'true'); text(byId('project-error'), ''); byId('project-name').focus(); });
+  listen(byId('project-cancel'), 'click', function () { byId('project-form').hidden = true; byId('project-new').setAttribute('aria-expanded', 'false'); byId('project-new').focus(); });
+  listen(byId('project-form'), 'submit', createProject);
+  listen(byId('note-project-save'), 'click', function () { doc.project = projectName(byId('note-project').value); dirty = true; if (persist()) { message(doc.project ? 'Folha guardada em ' + doc.project + '.' : 'Folha guardada como avulsa.'); if (cabinetOpen) { renderCabinet(); } } });
+  listen(byId('font-literary'), 'click', function () { chooseFont('literaria'); });
+  listen(byId('font-typewriter'), 'click', function () { chooseFont('maquina'); });
+  try { chooseFont(storage ? storage.getItem('escrevaral.astra.letter') : 'literaria'); } catch (ignore) { chooseFont('literaria'); }
+  openCabinet(true);
+
   listen(document, 'visibilitychange', function () { if (document.hidden) { persist(); stopSound(); stopMachineStrike(); finishMachineFeed(); } });
   listen(window, 'pagehide', persist);
   listen(window, 'beforeunload', function (event) { if (!persist()) { event.preventDefault(); event.returnValue = 'Há escrita que não foi guardada.'; } });
