@@ -24,7 +24,7 @@ module.exports = function (h) {
     Node.prototype.emit = function (name, props) { var node = this; var event = props || {}; event.preventDefault = event.preventDefault || function () {}; (this.handlers[name] || []).slice().forEach(function (fn) { fn.call(node, event); }); };
     var html = h.source('index.html'), matches = html.match(/id="[^"]+"/g);
     matches.forEach(function (attr) { nodes[attr.slice(4, -1)] = new Node('div'); });
-    ['mesa', 'acervo', 'oficina', 'reset-dismissed'].forEach(function (id) { nodes[id].hidden = true; });
+    ['mesa', 'acervo', 'oficina', 'reset-dismissed', 'machine-shell', 'leave-focus'].forEach(function (id) { nodes[id].hidden = true; });
     nodes['timeline-list'].parentNode = new Node('div');
     nodes['timeline-toggle'].parentNode = new Node('div');
     nodes['timeline-toggle'].parentNode.parentNode = new Node('aside');
@@ -123,7 +123,7 @@ module.exports = function (h) {
   test('Máquina de escrever: centraliza a linha e respeita seleção, composição e rolagem manual', function () {
     var source = h.source('superficie/ponte.js'), start = source.indexOf('  function cancelTypewriter('), end = source.indexOf('  function sizeWorkspace(', start), pending = null;
     var editor = { style: {}, clientHeight: 400, selectionStart: 40, selectionEnd: 40, scrollTop: 17 };
-    var context = { manuscript: editor, document: { activeElement: editor }, composing: false, typewriterTimer: null, focusMeasure: null,
+    var context = { machineEnabled: false, manuscript: editor, document: { activeElement: editor }, composing: false, typewriterTimer: null, focusMeasure: null,
       window: { getComputedStyle: function () { return { lineHeight: '40px', fontSize: '22px' }; }, clearTimeout: function () { pending = null; }, setTimeout: function (fn) { pending = fn; return 1; } },
       textPosition: function () { return { top: 980, line: 40 }; }, updateFocus: function () {} };
     h.vm.createContext(context); h.vm.runInContext(source.slice(start, end), context);
@@ -136,6 +136,9 @@ module.exports = function (h) {
     context.document.activeElement = null; context.followTyping(); assert.strictEqual(pending, null);
     editor.clientHeight = 200; context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '64px');
     context.document.activeElement = editor; context.textPosition = function () { return { top: 64, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
+    context.machineEnabled = true; editor.clientHeight = 400; context.typewriterInsets();
+    assert.strictEqual(editor.style.paddingTop, '332px'); assert.strictEqual(editor.style.paddingBottom, '28px');
+    context.textPosition = function () { return { top: 332, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
   });
   test('Foco completo: entrar e sair preserva seleção, texto e destaque independente', function () {
     var a = setup(); a.type('titulo', 'A folha'); a.type('manuscrito', 'primeiro\n\nsegundo');
@@ -227,6 +230,68 @@ module.exports = function (h) {
         assert.strictEqual(before.hidden, true); assert.strictEqual(after.hidden, true);
       });
     });
+  });
+  test('Máquina antiga: capa opcional conserva folha, tema, seleção e foco anterior', function () {
+    var a = setup(); a.type('titulo', 'O papel'); a.type('manuscrito', 'texto meu'); a.nodes.manuscrito.setSelectionRange(2, 5);
+    a.nodes['theme-dark'].click(); assert.strictEqual(a.nodes['machine-shell'].hidden, true);
+    a.nodes['mesa-toggle'].click(); a.nodes['machine-toggle'].click();
+    assert.strictEqual(a.nodes.mesa.hidden, true); assert.strictEqual(a.nodes['machine-shell'].hidden, false);
+    assert.strictEqual(a.document.body.getAttribute('data-machine'), 'true');
+    assert.strictEqual(a.document.body.getAttribute('data-immersion'), 'true');
+    assert.strictEqual(a.nodes.manuscrito.selectionStart, 2); assert.strictEqual(a.nodes.manuscrito.selectionEnd, 5);
+    assert.strictEqual(a.nodes.som.checked, false);
+    a.type('manuscrito', 'texto meu, na máquina'); a.flush();
+    a.document.emit('keydown', { keyCode: 27 });
+    assert.strictEqual(a.nodes['machine-shell'].hidden, true);
+    assert.strictEqual(a.document.body.getAttribute('data-immersion'), 'false');
+    assert.strictEqual(a.document.body.getAttribute('data-theme'), 'escuro');
+    assert.strictEqual(a.nodes.manuscrito.value, 'texto meu, na máquina'); assert.strictEqual(a.nodes.titulo.value, 'O papel');
+    assert.strictEqual(a.archive()[0].text, 'texto meu, na máquina');
+    a.nodes['immersion-toggle'].click(); a.nodes['machine-toggle'].click(); a.nodes['leave-focus'].click();
+    assert.strictEqual(a.document.body.getAttribute('data-machine'), 'false');
+    assert.strictEqual(a.document.body.getAttribute('data-immersion'), 'true');
+    a.nodes['leave-focus'].click(); assert.strictEqual(a.document.body.getAttribute('data-immersion'), 'false');
+  });
+  test('Máquina antiga: golpe limitado, composição sem movimento e Escape respeita acento', function () {
+    var a = setup(); a.nodes['machine-toggle'].click();
+    a.type('manuscrito', 'ma'); assert.strictEqual(a.nodes['machine-hammer'].getAttribute('data-strike'), 'true');
+    for (var i = 0; i < 10; i += 1) { a.type('manuscrito', 'ma' + i); }
+    assert.strictEqual(a.shortTimers(), 1); a.flush(90);
+    assert.strictEqual(a.nodes['machine-hammer'].getAttribute('data-strike'), 'false');
+    a.nodes.manuscrito.emit('compositionstart'); a.type('manuscrito', 'ma~');
+    assert.strictEqual(a.nodes['machine-hammer'].getAttribute('data-strike'), 'false');
+    a.document.emit('keydown', { keyCode: 27 });
+    assert.strictEqual(a.document.body.getAttribute('data-machine'), 'true');
+    a.nodes.manuscrito.value = 'mão'; a.nodes.manuscrito.emit('compositionend');
+    assert.strictEqual(a.nodes['machine-hammer'].getAttribute('data-strike'), 'true');
+    a.nodes.manuscrito.emit('blur'); assert.strictEqual(a.nodes['machine-hammer'].getAttribute('data-strike'), 'false');
+    a.type('manuscrito', 'mão nova'); a.document.hidden = true; a.document.emit('visibilitychange');
+    assert.strictEqual(a.nodes['machine-hammer'].getAttribute('data-strike'), 'false');
+    a.document.hidden = false; a.nodes['leave-focus'].click();
+    assert.strictEqual(a.shortTimers(), 0); assert.strictEqual(a.nodes.manuscrito.value, 'mão nova');
+  });
+  test('Máquina antiga: carro limitado, retorno por Enter e colagem intacta', function () {
+    var a = setup(), editor = a.nodes.manuscrito, paper = a.nodes['writing-paper'];
+    a.nodes['machine-toggle'].click();
+    for (var i = 0; i < 60; i += 1) { a.type('manuscrito', editor.value + 'a'); }
+    assert.strictEqual(paper.style.transform, 'translate(-18px,0px)');
+    editor.setSelectionRange(61, 61); a.type('manuscrito', editor.value + '\n');
+    assert.strictEqual(paper.style.transform, 'translate(0px,-3px)');
+    assert.strictEqual(a.nodes['machine-platen'].getAttribute('data-feed'), 'true');
+    a.flush(120); assert.strictEqual(paper.style.transform, 'translate(0px,0px)');
+    var pasted = editor.value + '<b>mão</b>\ntexto colado'; a.type('manuscrito', pasted);
+    assert.strictEqual(editor.value, pasted); assert.strictEqual(paper.style.transform, 'translate(-0.75px,0px)');
+    a.type('manuscrito', pasted.slice(0, -1)); assert.strictEqual(paper.style.transform, 'translate(0px,0px)');
+    a.nodes['leave-focus'].click(); assert.strictEqual(paper.style.transform, '');
+    a.flush(); assert.strictEqual(a.archive()[0].text, pasted.slice(0, -1));
+  });
+  test('Máquina antiga: impressão usa só o texto atual e não desmonta o modo', function () {
+    var a = setup(); a.type('titulo', 'Acentos'); a.nodes['machine-toggle'].click(); a.type('manuscrito', 'órgão\n\nmão');
+    a.event('beforeprint'); assert.strictEqual(a.nodes['print-text'].textContent, 'órgão\n\nmão');
+    assert.strictEqual(a.nodes['print-title'].textContent, 'Acentos');
+    a.event('afterprint'); assert.strictEqual(a.nodes['print-text'].textContent, '');
+    assert.strictEqual(a.document.body.getAttribute('data-machine'), 'true');
+    assert.strictEqual(a.nodes.manuscrito.value, 'órgão\n\nmão');
   });
   test('Pastas: meses e dias organizam notas sem trocar a folha aberta', function () {
     var a = setup(null, '2026-08-31T22:30:05'); a.type('titulo', 'Agosto'); a.type('manuscrito', 'mar'); a.flush();

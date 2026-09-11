@@ -4,7 +4,7 @@
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
-  var immersion = false;
+  var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0;
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
   var navDay = E.noteDateKey(doc), navMonth = navDay.slice(0, 7), searchTimer = null, timelineTotal = 0, timelineUnreadable = 0;
@@ -160,10 +160,11 @@
     window.clearTimeout(focusTimer); focusTimer = window.setTimeout(updateFocus, 40);
   }
   function cancelTypewriter() { window.clearTimeout(typewriterTimer); typewriterTimer = null; }
+  function typingLineTarget() { return manuscript.clientHeight * (machineEnabled ? 0.88 : 0.42); }
   function typewriterInsets() {
     if (!window.getComputedStyle || !manuscript.style || !manuscript.clientHeight) { return; }
     var style = window.getComputedStyle(manuscript), line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
-    var target = manuscript.clientHeight * 0.42;
+    var target = typingLineTarget();
     manuscript.style.paddingTop = Math.max(0, target - line / 2) + 'px';
     manuscript.style.paddingBottom = Math.max(0, manuscript.clientHeight - target - line / 2) + 'px';
     focusMeasure = null;
@@ -172,7 +173,7 @@
     typewriterTimer = null;
     if (!window.getComputedStyle || composing || document.activeElement !== manuscript || manuscript.selectionStart !== manuscript.selectionEnd) { return; }
     var position = textPosition(manuscript.selectionStart);
-    manuscript.scrollTop = Math.max(0, position.top + position.line / 2 - manuscript.clientHeight * 0.42);
+    manuscript.scrollTop = Math.max(0, position.top + position.line / 2 - typingLineTarget());
     updateFocus();
   }
   function followTyping() {
@@ -185,6 +186,7 @@
     if (area.style && window.innerHeight) {
       var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
       area.style.height = height + 'px';
+      byId('machine-shell').style.height = height + 'px';
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
       var browser = byId('note-browser');
       if (browser.style) { browser.style.height = window.innerWidth <= 760 && height < 480 ? Math.max(84, height - 108) + 'px' : ''; }
@@ -228,6 +230,57 @@
     manuscript.scrollTop = Math.max(0, scroll + (manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0) - oldInset);
     growManuscript();
   }
+  function stopMachineStrike() {
+    window.clearTimeout(machineTimer); machineTimer = null;
+    byId('machine-hammer').setAttribute('data-strike', 'false');
+  }
+  function machineStrike() {
+    if (!machineEnabled || composing || document.hidden || machineTimer !== null) { return; }
+    byId('machine-hammer').setAttribute('data-strike', 'true');
+    machineTimer = window.setTimeout(stopMachineStrike, 90);
+  }
+  function paintMachineCarriage(feed) {
+    var paperTransform = 'translate(' + (-machineCarriage) + 'px,' + (feed ? -3 : 0) + 'px)';
+    var paper = byId('writing-paper'), platen = byId('machine-platen');
+    paper.style.webkitTransform = paperTransform; paper.style.transform = paperTransform;
+    platen.style.webkitTransform = 'translateX(' + (-machineCarriage) + 'px)'; platen.style.transform = platen.style.webkitTransform;
+    platen.setAttribute('data-feed', feed ? 'true' : 'false');
+  }
+  function finishMachineFeed() {
+    window.clearTimeout(machineFeedTimer); machineFeedTimer = null; paintMachineCarriage(false);
+  }
+  function machineInput(event) {
+    if (!machineEnabled || composing || document.hidden) { return; }
+    var delta = manuscript.value.length - machineLastLength, caret = manuscript.selectionStart || 0;
+    var newline = (delta === 1 && manuscript.value.charAt(caret - 1) === '\n') ||
+      (event && (event.inputType === 'insertLineBreak' || event.inputType === 'insertParagraph'));
+    machineLastLength = manuscript.value.length;
+    if (newline) {
+      machineCarriage = 0; window.clearTimeout(machineFeedTimer); paintMachineCarriage(true);
+      machineFeedTimer = window.setTimeout(finishMachineFeed, 120);
+    } else {
+      machineCarriage = Math.max(0, Math.min(18, machineCarriage + (delta > 0 ? 0.75 : delta < 0 ? -0.75 : 0)));
+      paintMachineCarriage(false);
+    }
+    machineStrike();
+  }
+  function setMachine(enabled) {
+    if (enabled === machineEnabled) { return; }
+    if (enabled) { machinePreviousFocus = immersion; }
+    machineEnabled = enabled; stopMachineStrike(); machineCarriage = 0; machineLastLength = manuscript.value.length; finishMachineFeed();
+    document.body.setAttribute('data-machine', enabled ? 'true' : 'false');
+    byId('machine-shell').hidden = !enabled;
+    byId('machine-toggle').setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    text(byId('machine-toggle'), enabled ? 'Desativar' : 'Ativar');
+    byId('leave-focus').setAttribute('aria-label', enabled ? 'Sair da máquina antiga' : 'Sair do modo foco');
+    byId('leave-focus').setAttribute('title', enabled ? 'Sair da máquina antiga (Esc)' : 'Sair do foco (Esc)');
+    if (!enabled) {
+      byId('writing-paper').style.transform = ''; byId('writing-paper').style.webkitTransform = '';
+      byId('machine-platen').style.transform = ''; byId('machine-platen').style.webkitTransform = '';
+    }
+    setImmersion(enabled || machinePreviousFocus);
+  }
+  function leaveImmersion() { if (machineEnabled) { setMachine(false); } else { setImmersion(false); } }
   function preparePrint() {
     text(byId('print-title'), title.value); byId('print-title').hidden = !title.value;
     text(byId('print-text'), manuscript.value);
@@ -401,6 +454,7 @@
   listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } });
   listen(manuscript, 'input', followTyping);
   listen(manuscript, 'blur', cancelTypewriter);
+  listen(manuscript, 'blur', function () { stopMachineStrike(); finishMachineFeed(); });
   listen(manuscript, 'mousedown', cancelTypewriter);
   listen(manuscript, 'touchstart', cancelTypewriter);
   listen(manuscript, 'wheel', cancelTypewriter);
@@ -414,7 +468,9 @@
   listen(title, 'focus', collapseTimeline);
   listen(document, 'selectionchange', function () { if (document.activeElement === manuscript) { growManuscript(); } });
   listen(byId('immersion-toggle'), 'click', function () { setImmersion(!immersion); });
-  listen(byId('leave-focus'), 'click', function () { setImmersion(false); });
+  listen(byId('leave-focus'), 'click', leaveImmersion);
+  listen(byId('machine-toggle'), 'click', function () { setMachine(!machineEnabled); });
+  listen(manuscript, 'input', machineInput);
   listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
   listen(manuscript, 'compositionstart', function () {
@@ -422,7 +478,7 @@
     composing = true; window.clearTimeout(timer);
   });
   listen(manuscript, 'compositionend', function () {
-    composing = false; focusMeasure = null; updateFocus(); changed(); followTyping();
+    composing = false; focusMeasure = null; updateFocus(); changed(); followTyping(); machineInput();
   });
   listen(byId('acervo-toggle'), 'click', function () { if (!persist()) { return; } var open = byId('acervo').hidden; showPanel('acervo', 'acervo-toggle', open); if (open) { renderArchive(); } });
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
@@ -465,6 +521,7 @@
   listen(byId('import-file'), 'change', function () { importFile(this.files[0]); this.value = ''; });
   listen(document, 'keydown', function (event) {
     var code = event.keyCode;
+    if (code === 27 && composing) { return; }
     if (code === 9) {
       document.body.setAttribute('data-input', 'keyboard');
       if (activePanel) {
@@ -478,9 +535,9 @@
     }
     if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); showPanel('oficina', 'examinar-toggle', true); panelTrigger = manuscript; lensButtons[0].focus(); }
     else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
-    else if (code === 27) { if (activePanel) { closePanels(true); } else if (immersion) { setImmersion(false); } else { collapseTimeline(); } }
+    else if (code === 27) { if (activePanel) { closePanels(true); } else if (immersion) { leaveImmersion(); } else { collapseTimeline(); } }
   });
-  listen(document, 'visibilitychange', function () { if (document.hidden) { persist(); stopSound(); } });
+  listen(document, 'visibilitychange', function () { if (document.hidden) { persist(); stopSound(); stopMachineStrike(); finishMachineFeed(); } });
   listen(window, 'pagehide', persist);
   listen(window, 'beforeunload', function (event) { if (!persist()) { event.preventDefault(); event.returnValue = 'Há escrita que não foi guardada.'; } });
 }());

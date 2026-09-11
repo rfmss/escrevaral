@@ -22,7 +22,7 @@ Revisão online: https://escrevaral-review.rafamass975189.chatgpt.site. Treze le
 
 ## Evidências e limites
 
-454 verificações passaram após papel, foco e impressão, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 464.384 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
+458 verificações passaram após papel, foco e impressão, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 479.641 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
 
 Inventário das 68 branches, 17 conjuntos linguísticos, sondas e medições ficam em `oficina/`, fora do runtime. Os catálogos do ZIP recebido têm hashes em `oficina/proveniencia-cofre.json`. Não tratar comentários de maturidade do legado como prova de acerto.
 
@@ -51,3 +51,15 @@ Testes acrescentados cobrem entrada/saída do foco, seleção e deslocamento ao 
 A composição (`~` antes de `a`, por exemplo) apagava ambas as máscaras e devolvia contraste a todos os parágrafos. Agora a superfície conserva a geometria anterior durante a composição, inclusive quando o navegador fornece uma seleção provisória diferente. A rolagem desloca as mesmas máscaras sem medir texto provisório. No fim da composição, o destaque é recalculado e a máquina de escrever retoma. Os eventos duplicados de composição foram consolidados. Sem nova API ou temporizador recorrente.
 
 Regressão reproduzida antes da correção e aprovada depois: til, circunflexo e agudo, claro/escuro, foco completo ligado/desligado, seleção transitória, rolagem e desativação do destaque. 454 verificações aprovadas; teclado real de navegador/iPad ainda sem reprodução instrumental.
+
+## Máquina antiga — capa opcional
+
+Ativar em Ajustes → Máquina antiga. Preserva o mesmo textarea, o tema escolhido e o destaque de parágrafo; recolhe a interface. Escape/botão de saída restauram o estado de foco anterior. Sem persistir o modo automaticamente. Som continua opcional e sintetizado localmente pelo mecanismo já existente.
+
+Composição visual baseada no blueprint de Rafa: carro e papel acima, rolo e fita preta/vermelha ao centro, dois carretéis e cesto de 28 hastes com tipos invertidos abaixo. Desenho geométrico estilizado solicitado em CSS; nenhuma imagem da máquina ou áudio externo. O mecanismo encolhe para um rolo em altura útil inferior a 480 px. Camada decorativa sem eventos de ponteiro e escondida de leitores de tela; impressão já a exclui.
+
+O alvo vertical do modo passa a 88% da janela menor de papel (próximo ao mecanismo); a mesa comum conserva 42%. A haste usa dois estados com um timeout de 90 ms, sem loop; carro desloca no máximo 18 px para manter a folha acessível. Inserção de nova linha retorna o carro e simula avanço de 3 px por 120 ms. São movimentos perceptivos, não uma simulação física. CSS respeita preferência de movimento reduzido onde disponível. Sem WebGL, áudio de rede, captura global para inserir letras ou reinício de animação por leitura forçada de layout.
+
+Eventos reais de edição conduzem o efeito; composição provisória não move o carro, colagem permanece integral, modificadores não geram texto. Escape durante composição cancela o gesto no navegador sem sair do modo. Saída/blur/ocultação cancelam movimentos pendentes. Estado da impressão e a correção anterior de acentos foram preservados.
+
+458 verificações aprovadas: modos, tema, preservação, acentos, impressão, timers limitados, retorno no Enter, colagem e seleção. Portátil 479.641 bytes, aumento de 15.257 bytes sobre a versão de correção de acentos. Sintaxe ES5 e equivalência modular/portátil aprovadas. Aparência, percepção do movimento, CPU/RAM no aparelho e iPad físico ainda sem validação; testes de DOM simulado não medem renderização.
