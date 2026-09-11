@@ -123,7 +123,7 @@ module.exports = function (h) {
   test('Máquina de escrever: centraliza a linha e respeita seleção, composição e rolagem manual', function () {
     var source = h.source('superficie/ponte.js'), start = source.indexOf('  function cancelTypewriter('), end = source.indexOf('  function sizeWorkspace(', start), pending = null;
     var editor = { style: {}, clientHeight: 400, selectionStart: 40, selectionEnd: 40, scrollTop: 17 };
-    var context = { machineEnabled: false, manuscript: editor, document: { activeElement: editor }, composing: false, typewriterTimer: null, focusMeasure: null,
+    var context = { aimMachineStrike: function () {}, machineEnabled: false, manuscript: editor, document: { activeElement: editor }, composing: false, typewriterTimer: null, focusMeasure: null,
       window: { getComputedStyle: function () { return { lineHeight: '40px', fontSize: '22px' }; }, clearTimeout: function () { pending = null; }, setTimeout: function (fn) { pending = fn; return 1; } },
       textPosition: function () { return { top: 980, line: 40 }; }, updateFocus: function () {} };
     h.vm.createContext(context); h.vm.runInContext(source.slice(start, end), context);
@@ -137,8 +137,8 @@ module.exports = function (h) {
     editor.clientHeight = 200; context.typewriterInsets(); assert.strictEqual(editor.style.paddingTop, '64px');
     context.document.activeElement = editor; context.textPosition = function () { return { top: 64, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
     context.machineEnabled = true; editor.clientHeight = 400; context.typewriterInsets();
-    assert.strictEqual(editor.style.paddingTop, '332px'); assert.strictEqual(editor.style.paddingBottom, '28px');
-    context.textPosition = function () { return { top: 332, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
+    assert.strictEqual(editor.style.paddingTop, '148px'); assert.strictEqual(editor.style.paddingBottom, '212px');
+    context.textPosition = function () { return { top: 148, line: 40 }; }; context.centerTypingLine(); assert.strictEqual(editor.scrollTop, 0);
   });
   test('Foco completo: entrar e sair preserva seleção, texto e destaque independente', function () {
     var a = setup(); a.type('titulo', 'A folha'); a.type('manuscrito', 'primeiro\n\nsegundo');
@@ -274,7 +274,7 @@ module.exports = function (h) {
     var a = setup(), editor = a.nodes.manuscrito, paper = a.nodes['writing-paper'];
     a.nodes['machine-toggle'].click();
     for (var i = 0; i < 60; i += 1) { a.type('manuscrito', editor.value + 'a'); }
-    assert.strictEqual(paper.style.transform, 'translate(-18px,0px)');
+    assert.strictEqual(paper.style.transform, 'translate(-6px,0px)');
     editor.setSelectionRange(61, 61); a.type('manuscrito', editor.value + '\n');
     assert.strictEqual(paper.style.transform, 'translate(0px,-3px)');
     assert.strictEqual(a.nodes['machine-platen'].getAttribute('data-feed'), 'true');
@@ -284,6 +284,16 @@ module.exports = function (h) {
     a.type('manuscrito', pasted.slice(0, -1)); assert.strictEqual(paper.style.transform, 'translate(0px,0px)');
     a.nodes['leave-focus'].click(); assert.strictEqual(paper.style.transform, '');
     a.flush(); assert.strictEqual(a.archive()[0].text, pasted.slice(0, -1));
+  });
+  test('Carimbo: haste encontra a linha visível sem medir novamente o texto', function () {
+    var source = h.source('superficie/ponte.js'), start = source.indexOf('  function aimMachineStrike('), end = source.indexOf('  function machineStrike(', start);
+    var hammer = { style: {} }, strikes = 0, stopped = 0, shell = { getBoundingClientRect: function () { return { left: 0, top: 0, right: 1000, bottom: 700 }; } };
+    var ctx = { manuscript: { scrollTop: 500, scrollLeft: 0, getBoundingClientRect: function () { return { left: 50, top: 12 }; } }, byId: function (id) { return id === 'machine-shell' ? shell : hammer; }, machinePendingStrike: true, machineStrike: function () { strikes += 1; }, stopMachineStrike: function () { stopped += 1; } };
+    h.vm.createContext(ctx); h.vm.runInContext(source.slice(start, end), ctx);
+    ctx.aimMachineStrike({ top: 800, left: 230, line: 40 });
+    assert.strictEqual(hammer.style.left, '280px'); assert.strictEqual(hammer.style.top, '332px'); assert.strictEqual(hammer.style.height, '356px'); assert.strictEqual(strikes, 1);
+    ctx.aimMachineStrike({ top: 800, left: 240, line: 40 }); assert.strictEqual(strikes, 1);
+    ctx.aimMachineStrike({ top: 1500, left: 240, line: 40 }); assert.strictEqual(stopped, 1);
   });
   test('Máquina antiga: impressão usa só o texto atual e não desmonta o modo', function () {
     var a = setup(); a.type('titulo', 'Acentos'); a.nodes['machine-toggle'].click(); a.type('manuscrito', 'órgão\n\nmão');

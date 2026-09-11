@@ -4,7 +4,7 @@
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
-  var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0;
+  var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
   var navDay = E.noteDateKey(doc), navMonth = navDay.slice(0, 7), searchTimer = null, timelineTotal = 0, timelineUnreadable = 0;
@@ -133,8 +133,8 @@
     marker.style.display = 'inline-block'; marker.style.width = '0'; marker.style.height = line + 'px'; marker.style.verticalAlign = 'top';
     text(mirror, manuscript.value.slice(0, offset)); text(marker, '\u200b');
     mirror.appendChild(marker); document.body.appendChild(mirror);
-    var top = marker.offsetTop;
-    document.body.removeChild(mirror); return { top: top, line: line };
+    var top = marker.offsetTop, left = marker.offsetLeft;
+    document.body.removeChild(mirror); return { top: top, left: left, line: line };
   }
   function updateFocus() {
     if (!window.getComputedStyle || !manuscript.style) { return; }
@@ -160,7 +160,7 @@
     window.clearTimeout(focusTimer); focusTimer = window.setTimeout(updateFocus, 40);
   }
   function cancelTypewriter() { window.clearTimeout(typewriterTimer); typewriterTimer = null; }
-  function typingLineTarget() { return manuscript.clientHeight * (machineEnabled ? 0.88 : 0.42); }
+  function typingLineTarget() { return manuscript.clientHeight * 0.42; }
   function typewriterInsets() {
     if (!window.getComputedStyle || !manuscript.style || !manuscript.clientHeight) { return; }
     var style = window.getComputedStyle(manuscript), line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
@@ -175,6 +175,7 @@
     var position = textPosition(manuscript.selectionStart);
     manuscript.scrollTop = Math.max(0, position.top + position.line / 2 - typingLineTarget());
     updateFocus();
+    if (machineEnabled) { aimMachineStrike(position); }
   }
   function followTyping() {
     cancelTypewriter();
@@ -231,11 +232,22 @@
     growManuscript();
   }
   function stopMachineStrike() {
-    window.clearTimeout(machineTimer); machineTimer = null;
+    window.clearTimeout(machineTimer); machineTimer = null; machinePendingStrike = false;
     byId('machine-hammer').setAttribute('data-strike', 'false');
   }
-  function machineStrike() {
+  function aimMachineStrike(position) {
+    if (!manuscript.getBoundingClientRect || !byId('machine-shell').getBoundingClientRect) { return; }
+    var rect = manuscript.getBoundingClientRect(), shell = byId('machine-shell').getBoundingClientRect();
+    var x = rect.left + (position.left || 0) - (manuscript.scrollLeft || 0) - shell.left;
+    var y = rect.top + position.top - manuscript.scrollTop + position.line / 2 - shell.top;
+    var height = shell.bottom - shell.top, hammer = byId('machine-hammer');
+    if (y < 0 || y > height - 12 || x < 0 || x > shell.right - shell.left) { stopMachineStrike(); return; }
+    hammer.style.left = x + 'px'; hammer.style.top = y + 'px'; hammer.style.height = Math.max(0, height - 12 - y) + 'px';
+    if (machinePendingStrike) { machinePendingStrike = false; machineStrike(true); }
+  }
+  function machineStrike(ready) {
     if (!machineEnabled || composing || document.hidden || machineTimer !== null) { return; }
+    if (!ready && window.getComputedStyle && manuscript.getBoundingClientRect) { machinePendingStrike = true; return; }
     byId('machine-hammer').setAttribute('data-strike', 'true');
     machineTimer = window.setTimeout(stopMachineStrike, 90);
   }
@@ -259,7 +271,7 @@
       machineCarriage = 0; window.clearTimeout(machineFeedTimer); paintMachineCarriage(true);
       machineFeedTimer = window.setTimeout(finishMachineFeed, 120);
     } else {
-      machineCarriage = Math.max(0, Math.min(18, machineCarriage + (delta > 0 ? 0.75 : delta < 0 ? -0.75 : 0)));
+      machineCarriage = Math.max(0, Math.min(6, machineCarriage + (delta > 0 ? 0.75 : delta < 0 ? -0.75 : 0)));
       paintMachineCarriage(false);
     }
     machineStrike();

@@ -22,7 +22,7 @@ Revisão online: https://escrevaral-review.rafamass975189.chatgpt.site. Treze le
 
 ## Evidências e limites
 
-458 verificações passaram após papel, foco e impressão, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 479.641 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
+459 verificações passaram após papel, foco e impressão, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 490.130 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
 
 Inventário das 68 branches, 17 conjuntos linguísticos, sondas e medições ficam em `oficina/`, fora do runtime. Os catálogos do ZIP recebido têm hashes em `oficina/proveniencia-cofre.json`. Não tratar comentários de maturidade do legado como prova de acerto.
 
@@ -63,3 +63,11 @@ O alvo vertical do modo passa a 88% da janela menor de papel (próximo ao mecani
 Eventos reais de edição conduzem o efeito; composição provisória não move o carro, colagem permanece integral, modificadores não geram texto. Escape durante composição cancela o gesto no navegador sem sair do modo. Saída/blur/ocultação cancelam movimentos pendentes. Estado da impressão e a correção anterior de acentos foram preservados.
 
 458 verificações aprovadas: modos, tema, preservação, acentos, impressão, timers limitados, retorno no Enter, colagem e seleção. Portátil 479.641 bytes, aumento de 15.257 bytes sobre a versão de correção de acentos. Sintaxe ES5 e equivalência modular/portátil aprovadas. Aparência, percepção do movimento, CPU/RAM no aparelho e iPad físico ainda sem validação; testes de DOM simulado não medem renderização.
+
+## Refinamento aprovado: rubber stamp e folha ampla
+
+Substitui a apresentação anterior de meia tela: a folha ocupa aproximadamente 85% em desktop; base de 108 px (78 px em telas estreitas, 48 px com teclado/altura baixa). Carimbo transparente indexado de 1400×160 px e 12.938 bytes em `superficie/marca/maquina-carimbo.png`, pré-calculado a partir da geometria da máquina; textura de tinta já gravada. CSS inclui os mesmos bytes para funcionar em ambas as entradas sem requisição adicional. Dois elementos substituem dezenas de peças DOM. Fonte e manuscrito continuam legíveis, sem aplicar desgaste aos caracteres.
+
+Alvo vertical de escrita voltou a 42% inclusive neste modo. A medição já existente devolve também a posição horizontal; depois da rolagem, a haste recebe o ponto visível da escrita e percorre a distância até a base. Nenhuma segunda medição do texto para o efeito. Golpe CSS de 90 ms (aproximação, contato, recolhimento), prefixo WebKit e movimento reduzido quando disponível. Sem animação contínua. Carro limitado a 6 px. Fallback geométrico central nos ambientes sem medição; não simula uma letra nem altera o textarea.
+
+459 verificações aprovadas, incluindo encontro da haste com coordenadas visíveis, cancelamento fora da folha e preservação dos testes anteriores. Portátil 490.130 bytes. O arquivo do carimbo foi inspecionado; aparência final em navegador e percepção do golpe no iPad permanecem pendentes. As proporções e medidas desta seção substituem as da capa anterior.
