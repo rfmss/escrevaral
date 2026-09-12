@@ -80,3 +80,16 @@ SHA-256 do PDF: `2240e11300a9fd76a187df9314cb51522c5da58bda62f4968307fea232b5591
 SHA-256 do texto recebido: `72428c4a2e11104bb7f61a5ce4b59336c288439ea00a7b21ab692106363455fa`.
 
 Os anexos originais não foram modificados nem copiados integralmente para o repositório. Esta filosofia é independente do nome ou da versão do modelo que ajudar a executar o projeto.
+
+
+## Identidade compartilhada de papel técnico — 12/09/2026
+
+Referências Focus e Switch recebidas após a Mesa editorial. Camada comum `superficie/identidade.css`: base #B8C5B6, papel #C4CFC2, faces #CAD8C8/#D1DED0, tinta #212921, texto principal #111511. No escuro: base #20281F, papel #293327, face #354231, texto #D8E4D6. Títulos e réguas em Oswald; escrita em Noto Serif (equivalente editorial já local) ou Courier Prime; comandos/metadados em Arial. Não importar Anton/Literata via Google nem adicionar famílias para simular fidelidade.
+
+Hierarquia: texto do autor recebe maior contraste; títulos situam; comandos agrupados; metadados recuam sem apagar. Filete tracejado delimita uma janela/ficha, pontilhado separa grupos, borda sólida distingue interação. Estado ativo combina fundo e marca, teclado tem contorno visível. Relevo só em controles pequenos, com borda/sombra estáticas. Textura: primeiro SVG de fibras do Focus reaproveitado no desktop; filtro de turbulência omitido. Folha e máscaras de foco usam exatamente a mesma cor. Sem texturas sob o manuscrito, novos temporizadores, perspective, will-change ou animação contínua.
+
+Classes `scrvrl-paper`, `scrvrl-panel`, `scrvrl-label`, `scrvrl-heading`, `scrvrl-action` preparam as futuras telas para compartilhar o tratamento. CSS usa cores literais e técnicas anteriores a custom properties. A futura integração de relógio/interruptor ainda exigirá portabilidade e ações reais; estas referências foram usadas só na identidade. Mantidos Início e caminho permanentes, impressão branca A4, restrições textuais e ausência de números simulados.
+
+Referência focus-escrevaral.html · SHA-256 1f420e00811d02e3cdb1e24810a4849800f45b8943ade0277e8b98e0a6b7cc33.
+
+Referência switch-escrevaralok.html · SHA-256 416e1447e775d429c48d88ec2665d18984501eeac5f03b43f83790408e96a4f5.

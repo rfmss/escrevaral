@@ -1,0 +1,99 @@
+/* Contrato visual compartilhado: Focus + Switch, recebidos em 12/09/2026.
+   Paleta literal para WebKit antigo; textura sem filtros; relevo apenas 2D.
+   Base #b8c5b6; papel #c4cfc2; face #d1ded0; tinta #212921/#111511.
+   Títulos: Oswald local. Texto literário: Noto Serif local. Comandos: Arial.
+   Classes scrvrl-* são pontos de integração para futuras telas. */
+@media screen {
+ html,body { background-color:#b8c5b6; color:#212921; }
+ #gabinete { background-image:url("data:image/svg+xml,%3Csvg width='320' height='320' viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 45 Q28 47 33 45 M140 180 Q145 183 149 181 M220 70 Q223 74 227 72 M80 240 Q84 243 89 241 M265 210 Q268 214 272 211 M180 25 Q183 27 187 26 M50 150 Q54 153 58 151 M295 125 Q298 128 302 126 M15 285 Q18 288 22 286 M175 295 Q179 298 183 296' stroke='%231a241b' stroke-width='0.7' stroke-linecap='round' fill='none' opacity='0.22'/%3E%3Ccircle cx='45' cy='120' r='0.65' fill='%231a241b' opacity='0.28'/%3E%3Ccircle cx='185' cy='95' r='0.85' fill='%231a241b' opacity='0.22'/%3E%3Ccircle cx='110' cy='270' r='0.55' fill='%231a241b' opacity='0.30'/%3E%3Ccircle cx='280' cy='140' r='0.75' fill='%231a241b' opacity='0.25'/%3E%3Ccircle cx='95' cy='35' r='0.5' fill='%231a241b' opacity='0.28'/%3E%3Ccircle cx='235' cy='260' r='0.8' fill='%231a241b' opacity='0.24'/%3E%3Ccircle cx='155' cy='210' r='0.6' fill='%231a241b' opacity='0.26'/%3E%3C/svg%3E"); background-color:#b8c5b6; outline:1px dashed #889784; outline-offset:-12px; }
+ #writing-space,.scrvrl-paper,.cabinet-window,.sheet,.desk-inspector { background-color:#c4cfc2; color:#212921; }
+ #writing-space #manuscrito,.desktop-reminder textarea { color:#111511; }
+ #writing-space .focus-mask { background:#c4cfc2; }
+ .scrvrl-panel,.cabinet-window,.sheet { border:1px solid #7c8b78; box-shadow:0 3px 0 rgba(33,41,33,.13); }
+ .cabinet-window .project-shelf,.project-shelf { background:#bdcaba; border-color:#93a08f; }
+ .window-bar,.location-path,#system-bar { background:#b2beb0; border-color:#889784; color:#344231; }
+ .window-bar { border-bottom-style:dashed; }
+ .window-name,.os-label,.rail-label,.eyebrow,.scrvrl-label { font:600 14px/1.4 'Oswald','Arial Narrow',Arial,sans-serif; letter-spacing:1px; color:#445140; }
+ .sheet-heading h2,.cabinet-heading h1,.scrvrl-heading { font:600 28px/1.25 'Oswald','Arial Narrow',Arial,sans-serif; color:#111511; letter-spacing:.2px; }
+ .sheet-heading { border-bottom:1px dashed #93a08f; padding-bottom:18px; margin-bottom:24px; }
+ .setting-section { margin-top:24px; padding-top:20px; border-top:1px dotted #93a08f; }
+ .setting-section h3,.desk-inspector h3,.inspector-heading h2 { color:#445140; font:600 15px/1.4 'Oswald','Arial Narrow',Arial,sans-serif; letter-spacing:.6px; }
+ .sheet .quiet,.paper-footer,.note-time,.manuscript-date,.navigator-status,.note-project-label { color:#445140; }
+ .sheet .quiet { font-size:14px; line-height:1.6; }
+ .sheet .setting-row { min-height:54px; padding:5px 0; border-bottom:1px dotted rgba(33,41,33,.12); }
+ .sheet .actions { margin-top:18px; }
+ .sheet .actions button,.file-label { border:0; border-bottom:1px dotted #93a08f; border-radius:0; min-height:48px; }
+ .sheet .lenses { margin:14px 0 24px; }
+ .sheet .lenses button { border:1px solid #8c9b8a; border-radius:2px; min-height:40px; font-size:14px; background:#cad8c8; margin-bottom:4px; }
+ .sheet .lenses button[aria-pressed="true"] { color:#111511; border-left:3px solid #212921; background:#b3c2b1; box-shadow:inset 0 1px 2px rgba(33,41,33,.14); }
+ .sheet .finding { border-top:1px dashed #93a08f; padding:22px 0; }
+ .sheet .finding h3 { font:400 18px/1.5 'Noto Serif',Georgia,serif; color:#111511; }
+ .sheet .finding p { font-size:14px; line-height:1.65; }
+ .evidence { background:#b8c5b6; border-radius:0; }
+ .coverage { border-top-color:#93a08f; }
+ #start-menu { background:#c4cfc2; border:1px solid #7c8b78; box-shadow:0 3px 0 rgba(33,41,33,.16); padding:12px; }
+ #start-menu > .os-label { display:block; margin:4px 8px 12px; padding-bottom:10px; border-bottom:1px dashed #93a08f; }
+ #start-menu .os-app { font-size:15px; border-radius:0; border-left:2px solid transparent; min-height:46px; }
+ #start-menu .os-app:hover,#start-menu .os-app:focus { border-left-color:#212921; background:#b3c2b1; }
+ #start-projects,#start-settings { padding-left:48px !important; }
+ .desktop-imprint { opacity:.17; }
+ .desktop-reminder { background:#cad8c8; border:1px solid #93a08f; border-top:2px solid #65735f; box-shadow:0 2px 0 rgba(33,41,33,.10); padding:14px; }
+ .desktop-reminder textarea { font:16px/1.6 'Noto Serif',Georgia,serif; resize:none; }
+ .desktop-reminder .reminder-trash { color:#445140; }
+ #reminder-new,.scrvrl-action,#cabinet-new,#project-create { border:1px solid #7c8b78; border-radius:2px; background:#cad8c8; box-shadow:inset 0 1px 0 #d8e4d6,0 1px 0 #9fad9b; }
+ .resume-note { border:1px dashed #93a08f; background:#cad8c8; padding:14px; }
+ .resume-note .os-label { color:#445140; }
+ #resume-title { color:#111511; }
+ .cabinet-note[aria-current="true"],.project-link[aria-pressed="true"] { border-left:2px solid #212921; background:#b3c2b1; }
+ .cabinet-note { border-bottom:1px dotted #93a08f; }
+ .cabinet-note .note-name { color:#212921; }
+ .project-form,.project-input,#project-name { border-radius:0; border-color:#7c8b78; background:#cad8c8; }
+ #system-bar .os-tasks button { background:#c4cfc2; border:1px solid #7c8b78; border-radius:2px; color:#212921; }
+ #system-bar #os-start { font:600 14px/1.3 'Oswald',Arial,sans-serif; letter-spacing:.5px; }
+ #system-bar #os-start[aria-expanded="true"] { background:#212921; color:#d8e4d6; box-shadow:inset 0 1px 2px #111511; }
+ .location-path [aria-current] { color:#111511; }
+ .location-path button:hover { background:#9fad9b; }
+ #writing-space .masthead,#writing-space .timeline,.writing-toolbar,.desk-inspector,.desk-inspector section { border-color:#93a08f; }
+ #writing-space .desk-tools button { color:#344231; }
+ #writing-space .title,#desk-words { color:#111511; }
+ #writing-space .desk-tools button:hover,.writing-toolbar button:hover { background:#b3c2b1; }
+ #writing-space .timeline-entry[aria-current="true"] { border-left-color:#212921; background:#b3c2b1; }
+ .theme-choice { border:1px solid #7c8b78; border-radius:2px; padding:2px; background:#b3c2b1; }
+ .theme-choice button { border-radius:1px; }
+ .theme-choice button[aria-pressed="true"] { background:#d1ded0; color:#111511; box-shadow:inset 0 1px 0 #d8e4d6,0 1px 0 #8c9b8a; }
+ .switch-track { width:42px; height:26px; border-radius:2px; border:1px solid #7c8b78; background:#b3c2b1; box-shadow:inset 0 1px 2px rgba(33,41,33,.2); }
+ .switch-track:after { top:3px; left:3px; width:15px; height:18px; border:1px solid #65735f; border-radius:1px; background:#cad8c8; box-shadow:inset 0 1px 0 #d8e4d6,0 1px 0 #8c9b8a; transform:none; -webkit-transform:none; }
+ .check input:checked + .switch-track { background:#9fad9b; }
+ .check input:checked + .switch-track:after { left:22px; background:#212921; transform:none; -webkit-transform:none; box-shadow:inset 0 1px 0 #445140; }
+ button:active,.scrvrl-action:active { box-shadow:inset 0 1px 2px rgba(33,41,33,.2); }
+ button:disabled { cursor:default; }
+ #delete-confirm { background:#cad8c8; border:1px solid #65735f; }
+ #delete-cancel { background:#d1ded0; }
+ #delete-accept { border-color:#212921; color:#111511; }
+ .selection-tools { background:#cad8c8; border-color:#65735f; }
+ .ui-icon { stroke-width:1.5; }
+ ::selection { background:#445140; color:#d8e4d6; }
+ ::-moz-selection { background:#445140; color:#d8e4d6; }
+ /* Estado de teclado legível, sem mudança de geometria nem sombra expansiva. */
+ body[data-input="keyboard"] button:focus,body[data-input="keyboard"] a:focus { outline:2px solid #445140; outline-offset:-3px; }
+ body[data-input="keyboard"] input:focus { outline:1px solid #445140; outline-offset:1px; }
+ body[data-theme="escuro"] { background:#20281f; color:#cad8c8; }
+ body[data-theme="escuro"] #gabinete { background-color:#20281f; outline-color:#53654d; }
+ body[data-theme="escuro"] #writing-space,body[data-theme="escuro"] #writing-space .focus-mask,body[data-theme="escuro"] .scrvrl-paper,body[data-theme="escuro"] .cabinet-window,body[data-theme="escuro"] .sheet,body[data-theme="escuro"] .desk-inspector { background-color:#293327; color:#cad8c8; border-color:#65735f; }
+ body[data-theme="escuro"] #writing-space #manuscrito,body[data-theme="escuro"] .desktop-reminder textarea,body[data-theme="escuro"] #writing-space .title,body[data-theme="escuro"] #desk-words,body[data-theme="escuro"] #resume-title,body[data-theme="escuro"] .cabinet-note .note-name,body[data-theme="escuro"] .sheet-heading h2,body[data-theme="escuro"] .cabinet-heading h1,body[data-theme="escuro"] .sheet .finding h3 { color:#d8e4d6; }
+ body[data-theme="escuro"] .window-bar,body[data-theme="escuro"] .location-path,body[data-theme="escuro"] #system-bar,body[data-theme="escuro"] .project-shelf { background:#20281f; color:#bdcaba; border-color:#53654d; }
+ body[data-theme="escuro"] #start-menu,body[data-theme="escuro"] .desktop-reminder,body[data-theme="escuro"] .selection-tools,body[data-theme="escuro"] .resume-note,body[data-theme="escuro"] #delete-confirm { background:#354231; color:#cad8c8; border-color:#65735f; }
+ body[data-theme="escuro"] #start-menu .os-app:hover,body[data-theme="escuro"] #start-menu .os-app:focus,body[data-theme="escuro"] #writing-space .timeline-entry[aria-current="true"],body[data-theme="escuro"] .project-link[aria-pressed="true"],body[data-theme="escuro"] .cabinet-note[aria-current="true"] { background:#43553d; border-left-color:#d1ded0; }
+ body[data-theme="escuro"] .sheet .lenses button,body[data-theme="escuro"] #system-bar .os-tasks button,body[data-theme="escuro"] #reminder-new,body[data-theme="escuro"] #cabinet-new,body[data-theme="escuro"] #project-create,body[data-theme="escuro"] #delete-cancel,body[data-theme="escuro"] .project-form,body[data-theme="escuro"] .project-input,body[data-theme="escuro"] #project-name { background:#354231; color:#d1ded0; border-color:#65735f; box-shadow:none; }
+ body[data-theme="escuro"] .sheet .lenses button[aria-pressed="true"],body[data-theme="escuro"] .theme-choice button[aria-pressed="true"],body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] { background:#cad8c8; color:#111511; border-color:#cad8c8; box-shadow:none; }
+ body[data-theme="escuro"] .theme-choice,body[data-theme="escuro"] .switch-track { background:#20281f; border-color:#65735f; }
+ body[data-theme="escuro"] .switch-track:after { background:#879c80; border-color:#b3c2b1; box-shadow:none; }
+ body[data-theme="escuro"] .check input:checked + .switch-track:after { background:#d1ded0; box-shadow:none; }
+ body[data-theme="escuro"] .eyebrow,body[data-theme="escuro"] .os-label,body[data-theme="escuro"] .rail-label,body[data-theme="escuro"] .window-name,body[data-theme="escuro"] .sheet .quiet,body[data-theme="escuro"] .desk-inspector h3,body[data-theme="escuro"] .inspector-heading h2,body[data-theme="escuro"] .setting-section h3,body[data-theme="escuro"] .paper-footer,body[data-theme="escuro"] .note-time,body[data-theme="escuro"] .manuscript-date,body[data-theme="escuro"] .navigator-status,body[data-theme="escuro"] .note-project-label,body[data-theme="escuro"] #writing-space .desk-tools button { color:#b3c2b1; }
+ body[data-theme="escuro"] .location-path [aria-current],body[data-theme="escuro"] #delete-accept { color:#d8e4d6; }
+ body[data-theme="escuro"] .evidence { background:#20281f; }
+ body[data-theme="escuro"][data-input="keyboard"] button:focus,body[data-theme="escuro"][data-input="keyboard"] a:focus,body[data-theme="escuro"][data-input="keyboard"] input:focus { outline-color:#d1ded0; }
+ body[data-theme="escuro"] #writing-space .desk-tools button:hover,body[data-theme="escuro"] .writing-toolbar button:hover { color:#d8e4d6; background:#43553d; }
+ @media (max-width:760px) { #writing-space .timeline { background:#c4cfc2; } body[data-theme="escuro"] #writing-space .timeline { background:#293327; } }
+ @media (prefers-reduced-motion:reduce) { .switch-track:after { transition:none; } }
+}

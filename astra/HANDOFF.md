@@ -117,3 +117,5 @@ Pedido de Rafa: fechar Início ao clicar fora e fazer da referência e-ink a Mes
 Menu Início fecha por clique, toque e foco externos; clique nos seus descendentes e no acionador não é fechamento externo. 486 verificações funcionais, ES5 e equivalência portátil; renderização de navegador e iPad físico continuam pendentes. Continuidade do Estúdio em ESTUDIO.md permanece válida.
 
 Ajuste seguinte do lembrete: textarea sem alça de redimensionamento; lixeira como ícone monocromático em alvo de 44 px, com rótulo acessível e título. Início mantém ícone + “Lixeira”. Auditoria futura de hierarquia visual aguarda novas telas do autor; não expandir o escopo antes dos anexos.
+
+A identidade dos anexos Focus/Switch foi aplicada ao conjunto (Gabinete, Mesa, Acervo, Ajustes, Examinar, menu e lembretes), via `superficie/identidade.css`. Paleta comum claro/escuro, hierarquia, fibras estáticas só no desktop, controles com relevo 2D. Relógio/bloqueio/interruptor 3D não foram integrados; próximos arquivos devem reutilizar o contrato visual documentado na Filosofia.
