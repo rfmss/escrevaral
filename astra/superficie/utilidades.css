@@ -1,0 +1,86 @@
+/* Utilitários locais e Focus: ilusão de plaquetas com dois tons e um filete.
+   Sem 3D, filtros de ruído, fonte remota ou animação contínua. */
+@media screen {
+ .menu-line-icon { display:inline-block; width:24px; height:24px; margin-right:12px; vertical-align:middle; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+ #start-projects,#start-settings { padding-left:8px !important; }
+ #start-menu .os-app { white-space:normal; }
+ #system-bar #pomodoro-task { margin:0 8px 0 0; min-height:36px; padding:5px 8px; border:1px solid #7c8b78; border-radius:2px; font-size:12px; }
+ #system-bar #pomodoro-task[hidden] { display:none; }
+ .sheet.utilities-sheet,body[data-view="gabinete"] .sheet.utilities-sheet { position:fixed; left:auto; right:0; top:40px; bottom:44px; width:580px; max-width:100%; margin:0; padding:24px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+ .utilities-sheet [hidden],.focus-pause [hidden] { display:none !important; }
+ .utilities-sheet h3 { font:600 20px/1.4 'Oswald',Arial,sans-serif; }
+ .utility-clock { display:block; margin:24px 0; font:600 64px/1.1 'Oswald',Arial,sans-serif; letter-spacing:2px; }
+ .utilities-sheet input { width:100%; min-height:44px; padding:8px; border:1px solid #7c8b78; border-radius:0; background:transparent; color:inherit; font:16px Arial,sans-serif; }
+ .utilities-sheet label { display:block; margin:12px 0 6px; font-size:14px; }
+ .duration-fields { display:flex; }
+ .duration-fields label { width:50%; padding-right:12px; }
+ .duration-fields input { display:block; margin-top:8px; }
+ .utility-actions { margin:20px 0; }
+ .utility-actions button { margin:0 8px 8px 0; padding:10px 12px; min-height:44px; }
+ #calculator-result { display:block; min-height:72px; padding:16px 0; font:600 28px/1.5 'Oswald',Arial,sans-serif; overflow-wrap:break-word; }
+ .calculator-keys { overflow:hidden; }
+ .calculator-keys button { float:left; width:23%; margin:1%; min-height:52px; border:1px solid #7c8b78; border-radius:2px; background:#cad8c8; font-size:20px; }
+ .calculator-keys button:last-child { width:98%; }
+ .calendar-nav { display:flex; align-items:center; }
+ .calendar-nav h3 { flex:1; text-align:center; margin:0; }
+ .calendar-nav button { min-width:40px; min-height:44px; padding:6px; font-size:24px; }
+ .calendar-months { margin:12px 0; }
+ .calendar-months button { width:16.66%; padding:8px 4px; min-height:40px; border-radius:0; }
+ .calendar-months button[aria-pressed="true"] { border-bottom:2px solid currentColor; }
+ .calendar-table { width:100%; table-layout:fixed; border-collapse:collapse; border-top:1px dashed #93a08f; border-bottom:1px dashed #93a08f; }
+ .calendar-table th { font-size:12px; font-weight:normal; padding:12px 0 8px; }
+ .calendar-table td { padding:0; text-align:center; }
+ .calendar-table button { position:relative; display:block; width:100%; padding:10px 0; min-height:44px; border-radius:0; }
+ .calendar-table button[aria-current="date"] { font-weight:bold; text-decoration:underline; }
+ .calendar-table button[aria-pressed="true"] { color:#d8e4d6; background:#212921; }
+ .calendar-table .has-activity:after { content:''; position:absolute; bottom:5px; width:12px; left:50%; margin-left:-6px; border-bottom:2px solid currentColor; }
+ #calendar-day-heading { border-top:1px dashed #93a08f; padding-top:16px; }
+ .calendar-item { display:flex; align-items:center; border-bottom:1px dotted #93a08f; padding:4px 0; }
+ .calendar-item span { flex:1; overflow-wrap:break-word; min-width:0; font-size:16px; line-height:1.5; }
+ .calendar-item button { min-width:44px; min-height:44px; }
+ .calendar-item.is-done span { text-decoration:line-through; color:#445140; }
+ .calendar-document { display:block; width:100%; text-align:left; border-left:2px solid #65735f; min-height:44px; margin:8px 0; font:16px/1.5 'Noto Serif',Georgia,serif; }
+ #calendar-form select,#calendar-form button { min-height:44px; margin:8px 8px 0 0; }
+ .sheet.focus-pause,body[data-view="gabinete"] .sheet.focus-pause { position:fixed; left:0; right:0; top:40px; bottom:44px; width:auto; max-width:none; margin:0; padding:24px; overflow-y:auto; border:0; background:#b8c5b6; color:#212921; }
+ .focus-header,.focus-footer { max-width:960px; margin:0 auto; border-bottom:1px dashed #889784; display:flex; align-items:center; justify-content:space-between; padding-bottom:16px; }
+ .focus-brand { font:600 28px/1 'Oswald',Impact,sans-serif; letter-spacing:-1px; white-space:nowrap; }
+ .focus-brand span { border:2px solid currentColor; padding:0 3px; margin-left:3px; }
+ .focus-header h2 { font:600 14px/1.5 'Oswald',Arial,sans-serif; letter-spacing:1.5px; margin:0 16px; }
+ .focus-header button { min-height:44px; }
+ .focus-center { max-width:780px; margin:36px auto; text-align:center; }
+ .focus-clock-shell { position:relative; display:inline-block; border:1px dashed #889784; padding:24px 30px; background:#c4cfc2; box-shadow:0 3px 0 rgba(33,41,33,.13); }
+ .focus-clock { white-space:nowrap; }
+ .focus-digit { display:inline-block; position:relative; vertical-align:middle; width:96px; height:142px; margin:0 3px; border:1px solid #8c9b8a; border-radius:3px; background:#d1ded0; background:linear-gradient(#d1ded0 50%,#cad8c8 50%); color:#111511; font:600 106px/142px 'Oswald',Impact,sans-serif; box-shadow:0 2px 0 #9fad9b; }
+ .focus-digit:after { content:''; position:absolute; top:50%; left:0; right:0; border-top:1px solid #8c9b8a; }
+ .focus-colon { display:inline-block; vertical-align:middle; font:600 50px/1 'Oswald',Arial,sans-serif; padding:0 8px; }
+ .focus-register { position:absolute; font:16px/1 Arial,sans-serif; color:#65735f; }
+ .focus-register-tl { top:3px; left:4px; }.focus-register-tr { top:3px; right:4px; }.focus-register-bl { bottom:3px; left:4px; }.focus-register-br { bottom:3px; right:4px; }
+ #focus-status { font:16px/1.6 'Noto Serif',Georgia,serif; padding:0 12px; }
+ .focus-challenge { max-width:640px; margin:24px auto 0; padding:20px; background:#c4cfc2; border:1px solid #7c8b78; }
+ .focus-challenge blockquote { margin:16px 0; font:20px/1.5 'Noto Serif',Georgia,serif; }
+ .focus-challenge cite { font:600 14px/1.5 'Oswald',Arial,sans-serif; letter-spacing:1px; }
+ .focus-challenge label { display:block; font-size:14px; margin:16px 0 10px; }
+ .focus-challenge input { max-width:100%; min-height:44px; border:1px solid #7c8b78; border-radius:0; padding:8px; background:#d1ded0; font:16px Arial,sans-serif; }
+ .focus-challenge button { min-height:44px; padding:10px; }
+ .focus-footer { display:block; border:0; border-top:1px dashed #889784; padding-top:12px; font:12px/1.5 'Oswald',Arial,sans-serif; letter-spacing:1.5px; }
+ .focus-barcode { height:18px; background:repeating-linear-gradient(90deg,#445140 0,#445140 2px,transparent 2px,transparent 5px,#445140 5px,#445140 9px,transparent 9px,transparent 12px); opacity:.45; }
+ body[data-theme="escuro"] .sheet.focus-pause { background:#20281f; color:#d8e4d6; }
+ body[data-theme="escuro"] .focus-clock-shell,body[data-theme="escuro"] .focus-challenge { background:#293327; }
+ body[data-theme="escuro"] .focus-digit { background:linear-gradient(#43553d 50%,#354231 50%); color:#d8e4d6; border-color:#65735f; box-shadow:0 2px 0 #111511; }
+ body[data-theme="escuro"] .calculator-keys button { background:#354231; color:#d8e4d6; }
+ body[data-theme="escuro"] .calendar-table button[aria-pressed="true"] { background:#cad8c8; color:#111511; }
+ body[data-theme="escuro"] .calendar-item.is-done span { color:#b3c2b1; }
+ @media(max-width:760px) { .cabinet-window[data-maximized="true"] { top:146px !important; } }
+ @media(min-width:761px) { .cabinet-window[data-maximized="true"] { top:98px !important; } }
+ @media(max-height:480px) { .cabinet-window[data-maximized="true"] { top:92px !important; } }
+ @media(max-width:600px) {
+  #system-bar #cabinet-return { display:none; }
+  .sheet.utilities-sheet,body[data-view="gabinete"] .sheet.utilities-sheet { left:0; width:100%; padding:16px; }
+  .sheet.focus-pause,body[data-view="gabinete"] .sheet.focus-pause { padding:16px; }
+  .focus-header { flex-wrap:wrap; }.focus-header h2 { width:100%; order:3; margin:14px 0 0; }
+  .focus-brand { font-size:24px; }.focus-center { margin:24px auto; }
+  .focus-clock-shell { padding:18px 10px; }.focus-digit { width:46px; height:76px; font-size:55px; line-height:76px; margin:0 1px; }.focus-colon { font-size:30px; padding:0 4px; }
+  .calendar-nav h3 { font-size:18px; }.calendar-nav button { min-width:32px; }
+ }
+}
+@media print { #utilidades,#focus-pause,#pomodoro-task { display:none !important; } }

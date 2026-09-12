@@ -45,6 +45,13 @@
  .resume-note .os-label { color:#445140; }
  #resume-title { color:#111511; }
  .cabinet-note[aria-current="true"],.project-link[aria-pressed="true"] { border-left:2px solid #212921; background:#b3c2b1; }
+ .cabinet-note-row { position:relative; }
+ .cabinet-note-row .cabinet-note { padding-right:60px; }
+ .note-trash { position:absolute; top:8px; right:8px; width:44px; height:44px; min-height:44px; padding:12px; border:0; border-radius:0; color:#445140; background:transparent; }
+ .note-trash .reminder-trash-icon { width:18px; height:18px; }
+ .note-trash:hover,.note-trash:focus { color:#111511; background:#b3c2b1; }
+ body[data-theme="escuro"] .note-trash { color:#b3c2b1; }
+ body[data-theme="escuro"] .note-trash:hover,body[data-theme="escuro"] .note-trash:focus { color:#d8e4d6; background:#43553d; }
  .cabinet-note { border-bottom:1px dotted #93a08f; }
  .cabinet-note .note-name { color:#212921; }
  .project-form,.project-input,#project-name { border-radius:0; border-color:#7c8b78; background:#cad8c8; }

@@ -119,3 +119,10 @@ Menu Início fecha por clique, toque e foco externos; clique nos seus descendent
 Ajuste seguinte do lembrete: textarea sem alça de redimensionamento; lixeira como ícone monocromático em alvo de 44 px, com rótulo acessível e título. Início mantém ícone + “Lixeira”. Auditoria futura de hierarquia visual aguarda novas telas do autor; não expandir o escopo antes dos anexos.
 
 A identidade dos anexos Focus/Switch foi aplicada ao conjunto (Gabinete, Mesa, Acervo, Ajustes, Examinar, menu e lembretes), via `superficie/identidade.css`. Paleta comum claro/escuro, hierarquia, fibras estáticas só no desktop, controles com relevo 2D. Relógio/bloqueio/interruptor 3D não foram integrados; próximos arquivos devem reutilizar o contrato visual documentado na Filosofia.
+
+
+## Seus textos, calendário, calculadora e Focus — 12/09/2026
+
+Pedidos seguintes integrados à branch ativa. Janela ampliada usa a área útil e minimiza também por duplo clique; lixeira em cada folha; nomenclatura “Seus textos”. Utilitários separados em maquina/utilidades.js e superficie/utilidades.js/.css, consumidos pela ponte existente. Focus é pausa do Pomodoro opt-in, com retorno livre e desafio literário ao fim; versão 2D leve do anexo, sem som obrigatório, punição de aba ou segundo manuscrito.
+
+Calendário: portabilidade do cronograma-controller.js da main, lido pelo conector; nenhum merge da main. Preserva a chave vrda-planner e formato {data:[{id,text,type,completed}]}. Fases lunares são estimativas do algoritmo original. Importação aditiva por arquivo, pois os domínios não compartilham localStorage. A cópia geral de manuscritos continua separada da cópia do calendário. Relógio usa prazo absoluto e inicia a pausa visível quando se volta de uma suspensão além do prazo; não promete executar com navegador fechado. Validação física e renderização continuam pendentes.

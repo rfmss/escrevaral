@@ -3,7 +3,7 @@
   var E = window.Escr, vault = E.createVault(E.knowledge), storage = null, archive = null;
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
-  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
+  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task'];
   var projectScope = false, readingSize = 21;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, deleteTarget = null, sessionKey = 'escrevaral.astra.session.v1';
@@ -249,13 +249,13 @@
         manuscript.setSelectionRange(start, end); manuscript.scrollTop = typeof state.scroll === 'number' && isFinite(state.scroll) ? Math.max(0, state.scroll) : 0;
       } else {
         desktopWindow(state.windowHidden ? 'minimize' : 'open', false);
-        if (state.maximized === true) { byId('cabinet-window').setAttribute('data-maximized', 'true'); byId('window-maximize').setAttribute('aria-pressed', 'true'); }
-        else if (window.innerWidth > 760) {
+        setDesktopMaximized(state.maximized !== false);
+        if (state.maximized === false && window.innerWidth > 760) {
           if (/^\d+(\.\d+)?px$/.test(state.left)) { byId('cabinet-window').style.left = Math.min(parseFloat(state.left), Math.max(0, window.innerWidth - 640)) + 'px'; byId('cabinet-window').style.right = 'auto'; }
           if (/^\d+(\.\d+)?px$/.test(state.top)) { byId('cabinet-window').style.top = Math.min(parseFloat(state.top), Math.max(0, window.innerHeight - 280)) + 'px'; }
         }
       }
-      if (panelIds.indexOf(state.panel) !== -1) { if (state.panel === 'acervo') { renderArchive(); } showPanel(state.panel, panelToggles[panelIds.indexOf(state.panel)], true); }
+      if (['oficina', 'acervo', 'mesa'].indexOf(state.panel) !== -1) { if (state.panel === 'acervo') { renderArchive(); } showPanel(state.panel, panelToggles[panelIds.indexOf(state.panel)], true); }
       if (state.documentId === (doc.noteId || doc.id)) {
         var savedStart = typeof state.start === 'number' && isFinite(state.start) ? Math.max(0, Math.min(doc.text.length, Math.floor(state.start))) : 0;
         var savedEnd = typeof state.end === 'number' && isFinite(state.end) ? Math.max(savedStart, Math.min(doc.text.length, Math.floor(state.end))) : savedStart;
@@ -309,7 +309,7 @@
     text(byId('path-document'), title.value || 'Sem título');
     byId('path-document').setAttribute('title', title.value || 'Sem título');
     byId('path-panel').hidden = byId('path-panel-separator').hidden = !activePanel;
-    text(byId('path-panel'), names[activePanel] || '');
+    text(byId('path-panel'), activePanel === 'utilidades' ? byId('utility-heading').textContent : activePanel === 'focus-pause' ? 'Pausa' : names[activePanel] || '');
     currentId = activePanel ? 'path-panel' : !cabinetOpen ? 'path-document' : project !== null ? 'path-project' : 'path-projects';
     ['path-home', 'path-projects', 'path-project', 'path-document', 'path-panel'].forEach(function (id) {
       byId(id).removeAttribute('aria-current'); if (id === currentId) { byId(id).setAttribute('aria-current', 'location'); }
@@ -350,7 +350,7 @@
     byId('panel-backdrop').hidden = true; document.body.setAttribute('data-panel', 'closed');
     byId('delete-confirm').hidden = true; deleteTarget = null;
     byId('writing-space').removeAttribute('aria-hidden'); byId('gabinete').removeAttribute('aria-hidden');
-    if (restore && trigger && trigger.focus) { trigger.focus(); } queueSession();
+    if (restore && trigger && trigger.focus) { if (/^start-/.test(trigger.id || '') && byId('start-menu').hidden) { byId('os-start').focus(); } else { trigger.focus(); } } queueSession();
   }
   function showPanel(id, toggle, open) {
     if (!open) { if (activePanel === id) { closePanels(true); } return; }
@@ -600,13 +600,21 @@
     byId('os-window-task').hidden = action === 'close';
     byId('os-window-task').setAttribute('aria-pressed', open ? 'true' : 'false');
     queueSession();
-    if (focus !== false) { (open ? byId('cabinet-heading') : byId('os-start')).focus(); }
+    if (focus !== false) { (open ? byId('cabinet-heading') : action === 'minimize' ? byId('os-window-task') : byId('os-start')).focus(); }
     desktopDrag = null;
+  }
+  function setDesktopMaximized(maximized) {
+    var control = byId('window-maximize');
+    byId('cabinet-window').setAttribute('data-maximized', maximized ? 'true' : 'false');
+    control.setAttribute('aria-pressed', maximized ? 'true' : 'false');
+    control.setAttribute('aria-label', maximized ? 'Restaurar tamanho da janela' : 'Ampliar janela');
+    control.setAttribute('title', maximized ? 'Restaurar tamanho da janela' : 'Ampliar janela');
+    desktopDrag = null; queueSession();
   }
   function resetDesktopWindow() {
     var win = byId('cabinet-window');
     win.style.left = ''; win.style.top = ''; win.style.right = ''; win.style.bottom = ''; win.style.width = ''; win.style.height = '';
-    win.setAttribute('data-maximized', 'false'); byId('window-maximize').setAttribute('aria-pressed', 'false'); desktopDrag = null;
+    setDesktopMaximized(false);
   }
   function startDesktopDrag(event) {
     var target = event.target, win = byId('cabinet-window'), surface = byId('desktop-surface');
@@ -654,7 +662,7 @@
     });
     byId('cabinet-all').setAttribute('aria-pressed', cabinetProject === null ? 'true' : 'false');
     var entries = query ? E.browseNotes(result.documents, { query: query }).notes.reverse() : result.documents.filter(function (entry) { return cabinetProject === null || projectName(entry.project) === cabinetProject; });
-    text(byId('cabinet-heading'), query ? 'Busca no gabinete' : cabinetProject === null ? 'Seus escritos' : cabinetProject || 'Folhas avulsas');
+    text(byId('cabinet-heading'), query ? 'Busca no gabinete' : cabinetProject === null ? 'Seus textos' : cabinetProject || 'Folhas avulsas');
     text(byId('cabinet-count'), entries.length + (entries.length === 1 ? ' folha' : ' folhas'));
     byId('cabinet-clear').hidden = !query;
     byId('cabinet-empty').hidden = entries.length > 0;
@@ -664,7 +672,8 @@
     text(byId('resume-title'), title.value || 'Sem título');
     text(byId('resume-date'), projectName(doc.project) || 'Folha avulsa');
     entries.slice(0, cabinetLimit).forEach(function (entry) {
-      var b = button(list, '', function () {
+      var row = document.createElement('div'); row.className = 'cabinet-note-row'; list.appendChild(row);
+      var b = button(row, '', function () {
         var isCurrent = entry.id === doc.id;
         if (!persist()) { return; }
         if (!isCurrent) {
@@ -676,6 +685,11 @@
       b.className = 'cabinet-note'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
       noteLabel(b, entry.title, timeLabel(new Date(noteDate(entry))) + ' · ' + new Date(noteDate(entry)).toLocaleDateString('pt-BR'));
       paragraph(b, projectName(entry.project) || 'Folha avulsa', 'note-project-label');
+      var discard = button(row, '', function () { trashEntry(entry); byId('cabinet-heading').focus(); });
+      discard.className = 'note-trash';
+      discard.setAttribute('aria-label', 'Mover para a lixeira: ' + (entry.title || 'Sem título'));
+      discard.setAttribute('title', 'Mover para a lixeira');
+      discard.innerHTML = '<svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg>';
     });
     if (result.unreadable) { message('Algumas folhas não puderam ser lidas. Os registros originais permanecem.'); }
   }
@@ -738,7 +752,7 @@
     focusEnabled = storage.getItem('escrevaral.astra.focus') !== 'off'; byId('focus-toggle').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
   } catch (e) { message('A gravação pode estar indisponível. Sua folha está aberta; baixe uma cópia em Ajustes.'); }
   renderTimeline(true, null, true); sizeWorkspace();
-  listen(window, 'resize', function () { resetDesktopWindow(); sizeWorkspace(); });
+  listen(window, 'resize', function () { if (byId('cabinet-window').getAttribute('data-maximized') !== 'true') { resetDesktopWindow(); } sizeWorkspace(); });
   listen(window, 'load', sizeWorkspace);
   if (window.visualViewport) { listen(window.visualViewport, 'resize', sizeWorkspace); }
   listen(byId('timeline-toggle'), 'click', function () { document.body.setAttribute('data-counts', 'false'); byId('desk-counts').setAttribute('aria-expanded', 'false'); var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
@@ -832,7 +846,7 @@
     if (code === 9) {
       document.body.setAttribute('data-input', 'keyboard');
       if (activePanel) {
-        var controls = byId(activePanel).querySelectorAll('button, input, select, a[href], [tabindex="0"]'), focusable = [], j;
+        var controls = byId(activePanel).querySelectorAll('button, input, textarea, select, a[href], [tabindex="0"]'), focusable = [], j;
         for (j = 0; j < controls.length; j += 1) { if (!controls[j].disabled && !controls[j].hidden && controls[j].getClientRects().length) { focusable.push(controls[j]); } }
         var paths = byId('location-path').querySelectorAll('button'), pathControls = [];
         for (j = 0; j < paths.length; j += 1) { if (!paths[j].hidden) { pathControls.push(paths[j]); } }
@@ -867,9 +881,15 @@
   listen(byId('window-minimize'), 'click', function () { desktopWindow('minimize'); });
   listen(byId('window-close'), 'click', function () { desktopWindow('close'); });
   listen(byId('window-maximize'), 'click', function () {
-    var maximized = this.getAttribute('aria-pressed') !== 'true';
-    this.setAttribute('aria-pressed', maximized ? 'true' : 'false');
-    byId('cabinet-window').setAttribute('data-maximized', maximized ? 'true' : 'false'); desktopDrag = null;
+    setDesktopMaximized(this.getAttribute('aria-pressed') !== 'true');
+  });
+  listen(byId('cabinet-window-handle'), 'dblclick', function (event) {
+    var target = event.target;
+    while (target && target !== this) {
+      if (String(target.tagName).toLowerCase() === 'button') { return; }
+      target = target.parentNode;
+    }
+    desktopWindow('minimize');
   });
   listen(byId('cabinet-window-handle'), 'mousedown', startDesktopDrag);
   listen(byId('cabinet-window-handle'), 'touchstart', startDesktopDrag);
@@ -980,7 +1000,21 @@
   try { resizeLetter(storage ? storage.getItem('escrevaral.astra.font-size') : 21); } catch (ignore) { resizeLetter(21); }
   byId('desk-paragraph').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
 
-  openCabinet(true); renderReminders(); restoreSession(); sessionReady = true;
+  setDesktopMaximized(true); openCabinet(true); renderReminders(); restoreSession(); sessionReady = true;
+
+  E.mountUtilities({
+    storage: storage, checkpoint: checkpoint, download: download,
+    hideStart: function () { toggleStart(false); },
+    show: function (id, trigger) { toggleStart(false); showPanel(id, trigger, true); },
+    close: function () { closePanels(true); },
+    write: function () { if (cabinetOpen) { enterDesk(true); } else { closePanels(false); manuscript.focus(); growManuscript(); } },
+    documents: function () { return cabinetDocuments().documents; },
+    openNote: function (entry) {
+      if (!checkpoint()) { return; }
+      try { var next = archive.get(entry.id); if (!next || next.trashed) { return; } loadDocument(next); cabinetSelection = null; enterDesk(true); }
+      catch (e) { message('Não foi possível abrir esta folha.'); }
+    }
+  });
 
   listen(document, 'visibilitychange', function () { if (document.hidden) { checkpoint(); stopSound(); stopMachineStrike(); finishMachineFeed(); } });
   listen(window, 'pagehide', checkpoint);

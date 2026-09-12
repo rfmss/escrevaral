@@ -540,9 +540,9 @@ module.exports = function (h) {
     var a = setup(); a.nodes['cabinet-new'].click(); a.type('titulo', 'A'); a.type('manuscrito', 'Água no telhado'); a.flush();
     a.nodes['note-project'].value = 'Mar'; a.nodes['note-project-save'].click(); a.nodes['back-cabinet'].click(); a.nodes['cabinet-new'].click(); a.type('titulo', 'B'); a.type('manuscrito', 'Casa vazia'); a.flush();
     a.nodes['back-cabinet'].click(); a.type('cabinet-search', 'agua'); a.flush();
-    assert.strictEqual(a.nodes['cabinet-notes'].childNodes.length, 1); a.nodes['cabinet-notes'].childNodes[0].click(); assert.strictEqual(a.nodes.titulo.value, 'A'); assert.strictEqual(a.nodes.manuscrito.value, 'Água no telhado');
+    assert.strictEqual(a.nodes['cabinet-notes'].childNodes.length, 1); a.nodes['cabinet-notes'].childNodes[0].childNodes[0].click(); assert.strictEqual(a.nodes.titulo.value, 'A'); assert.strictEqual(a.nodes.manuscrito.value, 'Água no telhado');
     a.nodes['back-cabinet'].click(); a.nodes['cabinet-clear'].click();
-    var b = a.nodes['cabinet-notes'].childNodes.filter(function (n) { return n.childNodes[0].textContent === 'B'; })[0]; b.click(); assert.strictEqual(a.nodes.manuscrito.value, 'Casa vazia');
+    var b = a.nodes['cabinet-notes'].childNodes.filter(function (n) { return n.childNodes[0].childNodes[0].textContent === 'B'; })[0]; b.childNodes[0].click(); assert.strictEqual(a.nodes.manuscrito.value, 'Casa vazia');
   });
   test('Gabinete: falha de gravação bloqueia saída e não simula sucesso', function () {
     var a = setup(); a.nodes['cabinet-write'].click(); a.type('manuscrito', 'Não perder este texto'); a.storage.fail = true; a.nodes['back-cabinet'].click();
@@ -565,15 +565,17 @@ module.exports = function (h) {
     var a = setup(); a.nodes['cabinet-write'].click(); a.type('titulo', 'Um quarto'); a.type('manuscrito', 'Janela para o mar'); a.nodes['back-cabinet'].click();
     a.nodes['window-minimize'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, true); assert.strictEqual(a.nodes['os-window-task'].hidden, false);
     a.nodes['os-window-task'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false);
+    assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'true');
+    a.nodes['window-maximize'].click(); assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'false');
     a.nodes['window-maximize'].click(); assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'true');
     a.nodes['window-close'].click(); assert.strictEqual(a.nodes['os-window-task'].hidden, true);
     a.nodes['os-start'].click(); assert.strictEqual(a.nodes['start-menu'].hidden, false); a.nodes['start-projects'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false); assert.strictEqual(a.nodes['os-window-task'].hidden, false);
     a.nodes['os-arrange'].click(); assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'false');
     a.nodes['window-close'].click(); a.type('cabinet-search', 'quarto'); a.flush(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false);
-    a.nodes['cabinet-notes'].childNodes[0].click(); assert.strictEqual(a.nodes.manuscrito.value, 'Janela para o mar');
+    a.nodes['cabinet-notes'].childNodes[0].childNodes[0].click(); assert.strictEqual(a.nodes.manuscrito.value, 'Janela para o mar');
   });
   test('Desktop: arrasto limitado à área útil, sem capturar botões ou toque estreito', function () {
-    var a = setup(), w = a.nodes['cabinet-window'], hnd = a.nodes['cabinet-window-handle']; a.root.innerWidth = 1200;
+    var a = setup(), w = a.nodes['cabinet-window'], hnd = a.nodes['cabinet-window-handle']; a.root.innerWidth = 1200; a.nodes['os-arrange'].click();
     w.getBoundingClientRect = function () { return { left: 600, top: 100, right: 1100, bottom: 500 }; };
     a.nodes['desktop-surface'].getBoundingClientRect = function () { return { left: 20, top: 60, right: 1180, bottom: 760 }; };
     hnd.emit('mousedown', { target: hnd, button: 0, clientX: 620, clientY: 110 }); a.document.emit('mousemove', { clientX: 4000, clientY: 4000 });
@@ -583,6 +585,64 @@ module.exports = function (h) {
     hnd.emit('mousedown', { target: control, button: 0, clientX: 620, clientY: 110 }); a.document.emit('mousemove', { clientX: 0, clientY: 0 }); assert.strictEqual(w.style.left, '660px');
     a.nodes['os-arrange'].click(); a.root.innerWidth = 400;
     hnd.emit('touchstart', { target: hnd, touches: [{ clientX: 620, clientY: 110 }] }); a.document.emit('touchmove', { touches: [{ clientX: 0, clientY: 0 }] }); assert.strictEqual(w.style.left, '');
+  });
+
+
+  test('Desktop: duplo clique recolhe para tarefa; controles não disparam o gesto', function () {
+    var a = setup(), handle = a.nodes['cabinet-window-handle'];
+    a.root.innerWidth = 1200; a.event('resize');
+    assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'true');
+    handle.emit('dblclick', { target: handle });
+    assert.strictEqual(a.nodes['cabinet-window'].hidden, true);
+    assert.strictEqual(a.document.activeElement, a.nodes['os-window-task']);
+    a.nodes['os-window-task'].click();
+    var control = a.nodes['window-maximize']; control.tagName = 'button'; control.parentNode = handle;
+    handle.emit('dblclick', { target: control });
+    assert.strictEqual(a.nodes['cabinet-window'].hidden, false);
+  });
+  test('Gabinete: lixeira da linha remove só a nota escolhida e permite restaurar', function () {
+    var a = setup(); a.nodes['cabinet-new'].click(); a.type('titulo', 'A'); a.type('manuscrito', 'Texto A'); a.flush();
+    a.nodes['back-cabinet'].click(); a.nodes['cabinet-new'].click(); a.type('titulo', 'B'); a.type('manuscrito', 'Texto B'); a.flush(); a.nodes['back-cabinet'].click();
+    var row = a.nodes['cabinet-notes'].childNodes.filter(function (n) { return n.childNodes[0].childNodes[0].textContent === 'A'; })[0];
+    assert.strictEqual(row.childNodes[1].tagName, 'button'); row.childNodes[1].click();
+    assert.strictEqual(a.archive().length, 1); assert.strictEqual(a.archive()[0].title, 'B');
+    assert.strictEqual(a.nodes.manuscrito.value, 'Texto B'); assert.strictEqual(a.nodes.gabinete.hidden, false);
+    a.nodes['start-trash'].click(); a.nodes['document-list'].childNodes[0].childNodes[1].click();
+    assert.strictEqual(a.archive().length, 2);
+  });
+
+
+  test('Pomodoro: término abre Focus; composição, texto e seleção são preservados', function () {
+    var a = setup(null, '2026-09-12T12:00:00Z'); a.nodes['cabinet-new'].click(); a.type('titulo', 'Mar'); a.type('manuscrito', 'Uma memória.'); a.flush();
+    a.nodes.manuscrito.setSelectionRange(4, 11); a.nodes['start-pomodoro'].click(); a.nodes['pomodoro-work'].value='1'; a.nodes['pomodoro-break'].value='1'; a.nodes['pomodoro-start'].click();
+    assert.strictEqual(a.nodes['pomodoro-task'].hidden, false); assert.strictEqual(a.nodes.manuscrito.selectionStart, 4);
+    a.nodes.manuscrito.emit('compositionstart'); a.setTime('2026-09-12T12:01:01Z'); a.flush(); assert.strictEqual(a.nodes['focus-pause'].hidden, true);
+    a.nodes.manuscrito.emit('compositionend'); assert.strictEqual(a.nodes['focus-pause'].hidden, false); assert.strictEqual(a.nodes.manuscrito.value, 'Uma memória.');
+    a.setTime('2026-09-12T12:02:02Z'); a.flush(); assert.strictEqual(a.nodes['focus-challenge'].hidden, false);
+    a.nodes['focus-close'].click(); assert.strictEqual(a.nodes.manuscrito.selectionStart, 4); assert.strictEqual(a.nodes.manuscrito.selectionEnd, 11);
+    a.nodes['pomodoro-task'].click(); assert.strictEqual(a.nodes['focus-pause'].hidden, false); a.nodes['focus-finish'].click(); assert.strictEqual(a.nodes['pomodoro-task'].hidden, true);
+  });
+  test('Pomodoro: aba oculta, retorno tardio, pausa e restauração', function () {
+    var a=setup(null,'2026-09-12T12:00:00Z'); a.nodes['start-pomodoro'].click(); a.nodes['pomodoro-work'].value='1'; a.nodes['pomodoro-start'].click();
+    a.document.hidden=true; a.document.emit('visibilitychange'); a.setTime('2026-09-12T13:00:00Z'); a.flush(); assert.strictEqual(a.nodes['focus-pause'].hidden,true);
+    a.document.hidden=false; a.document.emit('visibilitychange'); assert.strictEqual(a.nodes['focus-pause'].hidden,false); assert.strictEqual(a.nodes['focus-time'].textContent,'06:00');
+    a.nodes['start-pomodoro'].click(); a.nodes['pomodoro-pause'].click(); a.setTime('2026-09-12T14:00:00Z'); a.flush(); assert.strictEqual(a.nodes['pomodoro-display'].textContent,'06:00');
+    var b=setup(a.storage,'2026-09-12T14:00:00Z'); assert.strictEqual(b.nodes['pomodoro-display'].textContent,'06:00');
+    b.nodes['focus-finish'].click(); assert.strictEqual(b.nodes['pomodoro-task'].hidden,true);
+  });
+  test('Pomodoro: falha ao guardar não oculta texto ainda não salvo', function () {
+    var a=setup(null,'2026-09-12T12:00:00Z');a.nodes['start-pomodoro'].click();a.nodes['pomodoro-work'].value='1';a.nodes['pomodoro-start'].click();a.type('manuscrito','Não perder');a.storage.fail=true;a.setTime('2026-09-12T12:02:00Z');a.flush();assert.strictEqual(a.nodes['focus-pause'].hidden,true);assert.strictEqual(a.nodes.manuscrito.value,'Não perder');
+  });
+  test('Calculadora: conta local por formulário sem tocar no manuscrito', function () {
+    var a=setup();a.nodes['cabinet-write'].click();a.type('manuscrito','Meu texto');a.nodes['start-calculator'].click();a.nodes['calculator-input'].value='(12 + 8) / 4';a.nodes['calculator-form'].emit('submit');assert.strictEqual(a.nodes['calculator-result'].textContent,'5');assert.strictEqual(a.nodes.manuscrito.value,'Meu texto');a.nodes['calculator-input'].value='1/0';a.nodes['calculator-form'].emit('submit');assert.ok(/zero/.test(a.nodes['calculator-result'].textContent));
+  });
+  test('Calendário: tarefa persiste; falha não apaga o campo nem dados antigos', function () {
+    var a=setup(null,'2026-09-12T12:00:00Z');a.nodes['start-calendar'].click();a.nodes['calendar-text'].value='Rever capítulo';a.nodes['calendar-form'].emit('submit');assert.strictEqual(JSON.parse(a.storage.getItem('vrda-planner'))['2026-09-12'][0].text,'Rever capítulo');
+    a.nodes['calendar-items'].childNodes[0].childNodes[0].click();assert.strictEqual(JSON.parse(a.storage.getItem('vrda-planner'))['2026-09-12'][0].completed,true);
+    a.nodes['calendar-text'].value='Anotação pendente';a.storage.fail=true;a.nodes['calendar-form'].emit('submit');assert.strictEqual(a.nodes['calendar-text'].value,'Anotação pendente');assert.strictEqual(JSON.parse(a.storage.getItem('vrda-planner'))['2026-09-12'].length,1);
+    a.storage.fail=false;a.nodes['calendar-export'].click();assert.strictEqual(JSON.parse(a.downloads[0])['2026-09-12'][0].text,'Rever capítulo');
+    var b=setup(a.storage,'2026-09-12T12:00:00Z');b.nodes['start-calendar'].click();assert.ok(/Rever capítulo/.test(b.nodes['calendar-items'].textContent));
+    b.nodes['calendar-import'].files=[{size:100,contents:JSON.stringify({'2026-09-12':[{id:'importada',text:'Outra tarefa',type:'task',completed:false}]})}];b.nodes['calendar-import'].emit('change');b.finishImport();assert.strictEqual(JSON.parse(b.storage.getItem('vrda-planner'))['2026-09-12'].length,2);
   });
 
   test('Início e caminho: apps fora do desktop, navegação sem perder a folha', function () {

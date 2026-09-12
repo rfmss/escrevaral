@@ -88,3 +88,13 @@ Seleção copia para memória interna; recortar, colar internamente e analisar t
 - Encerrar com um resultado utilizável e pendências precisas. O próximo agente deve distinguir concluído, medido, inferido e não testado.
 
 Continuam pendentes: medição física; revisão linguística/bibliográfica independente; cobertura gramatical ampla e clíticos; Prova de autoria. Não converter essas pendências em promessa de implementação sem um próximo pedido definido.
+
+## Utilitários e Seus textos — 12/09/2026
+
+Janela “Seus textos” abre ampliada na primeira sessão, usa a área disponível entre menus e barra de tarefas, e conserva o tamanho escolhido nas sessões seguintes. Minimizar e duplo clique no cabeçalho recolhem para a tarefa; botões do cabeçalho não disparam esse gesto. Cada folha da lista tem lixeira discreta, independente do botão de abrir, com recuperação no Acervo.
+
+Início recebeu os ícones ausentes e Pomodoro, Calculadora e Calendário. Pomodoro opcional 50/6 minutos (ajustáveis), pausa/retomada, estado local, um temporizador apenas enquanto ativo e visível; confere prazo absoluto ao retornar de suspensão. Ao fim da escrita, guarda antes de abrir Focus; aguarda composição e falha de gravação mantém o texto à vista. Focus adapta as plaquetas, ficha literária e papel do anexo em 2D, com fontes locais. Voltar ao texto, encerrar a pausa ou recomeçar pelo primeiro nome do autor são ações reais; não há punição por trocar de aba, segundo editor ou promessa de alarme com o navegador fechado.
+
+Calendário adaptado do cronograma da main: mês/ano, dias, folhas reais, tarefas/notas locais, conclusão e remoção, datas e fases lunares identificadas como estimativas. Corrigida a mistura de DD-MM/MM-DD das datas fixas do legado. Chave vrda-planner e formato preservados; cópia JSON própria com importação aditiva. Armazenamento de escrevaral.com não é acessível automaticamente pelo domínio de revisão. Calculadora sem eval, com operações básicas, parênteses, vírgula decimal e porcentagem simples.
+
+Verificação: 495 casos de lógica/DOM simulado passaram, incluindo término do Pomodoro, composição, suspensão, seleção, persistência do calendário e exclusão da nota correta; ES5 e equivalência portátil. Sem teste de renderização ou aparelho físico nesta rodada.

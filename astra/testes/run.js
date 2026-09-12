@@ -142,6 +142,13 @@ test('Mesa portátil completa, sem script ou folha de estilo externos', function
   });
 });
 require('./estudio.js')({ test: test, assert: assert, E: E, vault: vault, Storage: Storage });
+test('Calculadora: precedência, decimais, negativos, porcentagem e entradas inválidas', function () {
+  [['2+3*4',14],['(2+3)*4',20],['0,1+0,2',0.3],['-2*(-3)',6],['200*10%',20],['.5+1',1.5]].forEach(function (entry) { assert.strictEqual(E.calculate(entry[0]),entry[1]); });
+  ['1/0','window.alert(1)','2+','(1+2','1..2'].forEach(function (input) { assert.throws(function () { E.calculate(input); }); });
+});
+test('Calendário: fevereiro bissexto, virada de ano e datas da main normalizadas', function () {
+  assert.strictEqual(E.calendarMonth(2024,1).days,29);assert.strictEqual(E.calendarMonth(2025,1).days,28);assert.strictEqual(E.calendarMonth(2026,8).dates['09-07'],'Independência do Brasil');assert.strictEqual(E.calendarMonth(2026,11).dates['12-25'],'Natal');assert.strictEqual(E.calendarKey(2027,0,1),'2027-01-01');assert.ok(!E.validPlanner({'bad':[]}));
+});
 var runSurface = require('./superficie.js');
 runSurface({ test: test, source: source, Storage: Storage, vm: vm, assert: assert });
 require('./transplante.js')({ test: test, source: source, assert: assert, E: E, vault: vault, context: context });

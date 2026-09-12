@@ -188,7 +188,8 @@
  .os-tasks button { border: 1px solid #8b9b8c; border-radius: 0; min-height: 30px; font-size: 12px; padding: 5px 12px; margin: 0 8px 0 0; }
  .os-tasks button[aria-pressed="true"] { border-color: #4a544c; background: #c1ccc0; }
  #cabinet-status { margin-left: 12px; margin-right: auto; }
- .cabinet-window[data-maximized="true"] { top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; }
+ .cabinet-window[data-maximized="true"] { position: fixed; top: 40px !important; left: 0 !important; right: 0 !important; bottom: 44px !important; width: auto !important; height: auto !important; min-width: 0; }
+ .cabinet-window[data-maximized="true"] .window-bar { cursor: default; }
  body[data-view="gabinete"] .sheet { left: 50%; right: auto; top: 94px; bottom: 76px; width: 480px; max-width: calc(100% - 32px); margin-left: -240px; border: 1px solid #657367; padding: 24px; }
  body[data-view="gabinete"] .sheet-heading { padding-bottom: 16px; border-bottom-style: solid; }
  .title { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; font-weight: 600; }
