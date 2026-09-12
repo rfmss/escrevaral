@@ -440,6 +440,40 @@
   }
   /* Gabinete: apresentação do acervo real; o editor e as engines permanecem os mesmos. */
   var cabinetOpen = false, cabinetProject = null, cabinetLimit = 40, cabinetTimer = null, cabinetSelection = null;
+  var desktopDrag = null;
+  function desktopWindow(action, focus) {
+    var open = action === 'open', win = byId('cabinet-window');
+    win.hidden = !open;
+    byId('os-window-task').hidden = action === 'close';
+    byId('os-window-task').setAttribute('aria-pressed', open ? 'true' : 'false');
+    byId('os-start').setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (focus !== false) { (open ? byId('cabinet-heading') : byId('os-start')).focus(); }
+    desktopDrag = null;
+  }
+  function resetDesktopWindow() {
+    var win = byId('cabinet-window');
+    win.style.left = ''; win.style.top = ''; win.style.right = ''; win.style.bottom = ''; win.style.width = ''; win.style.height = '';
+    win.setAttribute('data-maximized', 'false'); byId('window-maximize').setAttribute('aria-pressed', 'false'); desktopDrag = null;
+  }
+  function startDesktopDrag(event) {
+    var target = event.target, win = byId('cabinet-window'), surface = byId('desktop-surface');
+    while (target && target !== byId('cabinet-window-handle')) { if (String(target.tagName).toLowerCase() === 'button') { return; } target = target.parentNode; }
+    if (!cabinetOpen || window.innerWidth <= 760 || win.getAttribute('data-maximized') === 'true' || (typeof event.button === 'number' && event.button !== 0)) { return; }
+    var point = event.touches ? event.touches[0] : event;
+    if (!point || !win.getBoundingClientRect || !surface.getBoundingClientRect) { return; }
+    var rect = win.getBoundingClientRect(), parent = surface.getBoundingClientRect();
+    desktopDrag = { x: point.clientX, y: point.clientY, left: rect.left - parent.left, top: rect.top - parent.top, width: rect.right - rect.left, height: rect.bottom - rect.top, maxX: Math.max(0, parent.right - parent.left - (rect.right - rect.left)), maxY: Math.max(0, parent.bottom - parent.top - (rect.bottom - rect.top)) };
+    win.style.width = desktopDrag.width + 'px'; win.style.height = desktopDrag.height + 'px'; win.style.right = 'auto'; win.style.bottom = 'auto';
+    moveDesktopDrag(event); event.preventDefault();
+  }
+  function moveDesktopDrag(event) {
+    if (!desktopDrag) { return; }
+    var point = event.touches ? event.touches[0] : event; if (!point) { return; }
+    var win = byId('cabinet-window');
+    win.style.left = Math.max(0, Math.min(desktopDrag.maxX, desktopDrag.left + point.clientX - desktopDrag.x)) + 'px';
+    win.style.top = Math.max(0, Math.min(desktopDrag.maxY, desktopDrag.top + point.clientY - desktopDrag.y)) + 'px';
+    event.preventDefault();
+  }
   function projectName(value) { return String(value || '').replace(/^\s+|\s+$/g, '').slice(0, 120); }
   function cabinetDocuments() {
     var result = archive ? archive.list() : { documents: [], unreadable: 0 }, found = false;
@@ -492,7 +526,7 @@
     if (result.unreadable) { message('Algumas folhas não puderam ser lidas. Os registros originais permanecem.'); }
   }
   function enterDesk(focusEditor) {
-    closePanels(false); collapseTimeline(); cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
+    closePanels(false); collapseTimeline(); desktopDrag = null; cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
     document.body.setAttribute('data-view', 'mesa');
     sizeWorkspace(); cancelTypewriter();
     if (focusEditor !== false) { manuscript.focus(); }
@@ -510,7 +544,7 @@
     cancelTypewriter(); closePanels(false); collapseTimeline();
     cabinetOpen = true; byId('writing-space').hidden = true; byId('gabinete').hidden = false;
     byId('leave-focus').hidden = true; document.body.setAttribute('data-view', 'gabinete');
-    renderCabinet(); if (!initial) { byId('cabinet-heading').focus(); } return true;
+    desktopWindow('open', false); renderCabinet(); if (!initial) { byId('cabinet-heading').focus(); } return true;
   }
   function cabinetPanel(id, trigger) {
     if (id === 'acervo') { renderArchive(); }
@@ -546,7 +580,7 @@
     focusEnabled = storage.getItem('escrevaral.astra.focus') !== 'off'; byId('focus-toggle').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
   } catch (e) { message('A gravação pode estar indisponível. Sua folha está aberta; baixe uma cópia em Ajustes.'); }
   renderTimeline(true, null, true); sizeWorkspace();
-  listen(window, 'resize', sizeWorkspace);
+  listen(window, 'resize', function () { resetDesktopWindow(); sizeWorkspace(); });
   listen(window, 'load', sizeWorkspace);
   if (window.visualViewport) { listen(window.visualViewport, 'resize', sizeWorkspace); }
   listen(byId('timeline-toggle'), 'click', function () { var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
@@ -652,6 +686,26 @@
     else if (code === 27) { if (activePanel) { closePanels(true); } else if (immersion) { leaveImmersion(); } else if (!cabinetOpen) { if (byId('timeline-toggle').getAttribute('aria-expanded') === 'true') { collapseTimeline(); } else { openCabinet(false); } } else if (!byId('project-form').hidden) { byId('project-cancel').click(); } }
   });
 
+  listen(byId('os-files'), 'click', function () { desktopWindow('open'); renderCabinet(); });
+  listen(byId('os-desk'), 'click', enterDesk);
+  listen(byId('os-arrange'), 'click', function () { resetDesktopWindow(); desktopWindow('open'); });
+  listen(byId('os-start'), 'click', function () { desktopWindow('open'); renderCabinet(); });
+  listen(byId('os-window-task'), 'click', function () { desktopWindow(byId('cabinet-window').hidden ? 'open' : 'minimize'); });
+  listen(byId('window-minimize'), 'click', function () { desktopWindow('minimize'); });
+  listen(byId('window-close'), 'click', function () { desktopWindow('close'); });
+  listen(byId('window-maximize'), 'click', function () {
+    var maximized = this.getAttribute('aria-pressed') !== 'true';
+    this.setAttribute('aria-pressed', maximized ? 'true' : 'false');
+    byId('cabinet-window').setAttribute('data-maximized', maximized ? 'true' : 'false'); desktopDrag = null;
+  });
+  listen(byId('cabinet-window-handle'), 'mousedown', startDesktopDrag);
+  listen(byId('cabinet-window-handle'), 'touchstart', startDesktopDrag);
+  listen(document, 'mousemove', moveDesktopDrag);
+  listen(document, 'touchmove', moveDesktopDrag);
+  listen(document, 'mouseup', function () { desktopDrag = null; });
+  listen(document, 'touchend', function () { desktopDrag = null; });
+  listen(document, 'touchcancel', function () { desktopDrag = null; });
+  listen(window, 'blur', function () { desktopDrag = null; });
   listen(byId('skip-writing'), 'click', function (event) { event.preventDefault(); enterDesk(); });
   listen(byId('back-cabinet'), 'click', function () { openCabinet(false); });
   listen(byId('cabinet-return'), 'click', enterDesk);
@@ -659,13 +713,13 @@
   listen(byId('cabinet-write'), 'click', enterDesk);
   listen(byId('cabinet-new'), 'click', newDocument);
   listen(byId('cabinet-settings'), 'click', function () { cabinetPanel('mesa', 'cabinet-settings'); });
-  listen(byId('cabinet-archive'), 'click', function () { cabinetPanel('acervo', 'cabinet-archive'); });
+  listen(byId('cabinet-archive'), 'click', function () { desktopWindow('open'); renderCabinet(); });
   listen(byId('cabinet-backup'), 'click', function () { byId('export-backup').click(); });
   listen(byId('cabinet-examine'), 'click', function () { enterDesk(); showPanel('oficina', 'examinar-toggle', true); lensButtons[0].focus(); });
   listen(byId('cabinet-poetry'), 'click', function () { enterDesk(); showPanel('oficina', 'examinar-toggle', true); for (var j = 0; j < lensButtons.length; j += 1) { if (lensButtons[j].getAttribute('data-lens') === 'rima') { lensButtons[j].focus(); break; } } });
   listen(byId('cabinet-all'), 'click', function () { cabinetProject = null; cabinetLimit = 40; byId('cabinet-search').value = ''; renderCabinet(); });
   listen(byId('cabinet-more'), 'click', function () { cabinetLimit += 40; renderCabinet(); });
-  listen(byId('cabinet-search'), 'input', function () { window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; renderCabinet(); }, 180); });
+  listen(byId('cabinet-search'), 'input', function () { window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; desktopWindow('open', false); renderCabinet(); }, 180); });
   listen(byId('cabinet-clear'), 'click', function () { window.clearTimeout(cabinetTimer); byId('cabinet-search').value = ''; renderCabinet(); byId('cabinet-search').focus(); });
   listen(byId('project-new'), 'click', function () { byId('project-form').hidden = false; this.setAttribute('aria-expanded', 'true'); text(byId('project-error'), ''); byId('project-name').focus(); });
   listen(byId('project-cancel'), 'click', function () { byId('project-form').hidden = true; byId('project-new').setAttribute('aria-expanded', 'false'); byId('project-new').focus(); });

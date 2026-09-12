@@ -519,4 +519,28 @@ module.exports = function (h) {
     var entry = a.archive()[0]; entry.project = {}; assert.strictEqual(a.root.Escr.validDocument(entry), false);
   });
 
+  test('Desktop: minimizar, fechar e restaurar preservam escritos e tarefas', function () {
+    var a = setup(); a.nodes['cabinet-write'].click(); a.type('titulo', 'Um quarto'); a.type('manuscrito', 'Janela para o mar'); a.nodes['back-cabinet'].click();
+    a.nodes['window-minimize'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, true); assert.strictEqual(a.nodes['os-window-task'].hidden, false);
+    a.nodes['os-window-task'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false);
+    a.nodes['window-maximize'].click(); assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'true');
+    a.nodes['window-close'].click(); assert.strictEqual(a.nodes['os-window-task'].hidden, true);
+    a.nodes['os-start'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false); assert.strictEqual(a.nodes['os-window-task'].hidden, false);
+    a.nodes['os-arrange'].click(); assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'false');
+    a.nodes['window-close'].click(); a.type('cabinet-search', 'quarto'); a.flush(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false);
+    a.nodes['cabinet-notes'].childNodes[0].click(); assert.strictEqual(a.nodes.manuscrito.value, 'Janela para o mar');
+  });
+  test('Desktop: arrasto limitado à área útil, sem capturar botões ou toque estreito', function () {
+    var a = setup(), w = a.nodes['cabinet-window'], hnd = a.nodes['cabinet-window-handle']; a.root.innerWidth = 1200;
+    w.getBoundingClientRect = function () { return { left: 600, top: 100, right: 1100, bottom: 500 }; };
+    a.nodes['desktop-surface'].getBoundingClientRect = function () { return { left: 20, top: 60, right: 1180, bottom: 760 }; };
+    hnd.emit('mousedown', { target: hnd, button: 0, clientX: 620, clientY: 110 }); a.document.emit('mousemove', { clientX: 4000, clientY: 4000 });
+    assert.strictEqual(w.style.left, '660px'); assert.strictEqual(w.style.top, '300px');
+    a.document.emit('mouseup'); a.document.emit('mousemove', { clientX: 0, clientY: 0 }); assert.strictEqual(w.style.left, '660px');
+    var control = a.nodes['window-close']; control.tagName = 'button'; control.parentNode = hnd;
+    hnd.emit('mousedown', { target: control, button: 0, clientX: 620, clientY: 110 }); a.document.emit('mousemove', { clientX: 0, clientY: 0 }); assert.strictEqual(w.style.left, '660px');
+    a.nodes['os-arrange'].click(); a.root.innerWidth = 400;
+    hnd.emit('touchstart', { target: hnd, touches: [{ clientX: 620, clientY: 110 }] }); a.document.emit('touchmove', { touches: [{ clientX: 0, clientY: 0 }] }); assert.strictEqual(w.style.left, '');
+  });
+
 };
