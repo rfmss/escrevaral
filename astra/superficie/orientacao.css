@@ -16,7 +16,11 @@
  #start-menu .os-app:hover,#start-menu .os-app:focus { background:#aebfa8; }
  #desktop-reminders { position:absolute; top:16px; left:0; bottom:80px; width:40%; padding-right:20px; overflow-y:auto; }
  .desktop-reminder { margin:14px 0; padding:12px; border:1px solid #8b9b8c; border-top:3px solid #657367; background:#becab9; }
- .desktop-reminder textarea { display:block; width:100%; min-height:100px; resize:vertical; background:transparent; border:0; color:#1e2320; font:16px/1.5 'Noto Serif',Georgia,serif; }
+ .desktop-reminder .reminder-trash { display:block; width:44px; height:44px; min-height:44px; padding:11px; margin:4px 0 0 auto; border-radius:0; color:#4a544c; }
+ .reminder-trash-icon { display:inline-block; width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; vertical-align:middle; }
+ #start-trash .reminder-trash-icon { margin-right:14px; }
+ body[data-theme="escuro"] .desktop-reminder .reminder-trash { color:#bbc5b5; }
+ .desktop-reminder textarea { display:block; width:100%; min-height:100px; resize:none; background:transparent; border:0; color:#1e2320; font:16px/1.5 'Noto Serif',Georgia,serif; }
  #reminder-status { font:12px/1.4 Arial,sans-serif; }
  #delete-confirm { padding:16px; border:1px solid #657367; margin:16px 0; }
  #delete-confirm button { border:1px solid #657367; margin-right:8px; }

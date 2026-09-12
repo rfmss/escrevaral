@@ -278,7 +278,9 @@
           try { saved = archive.save(next).document; text(byId('reminder-status'), 'Lembrete guardado.'); }
           catch (e) { text(byId('reminder-status'), 'Não foi possível guardar. Copie este lembrete antes de sair.'); }
         });
-        button(card, 'Lixeira', function () { trashEntry(saved); }); list.appendChild(card);
+        var discard = button(card, '', function () { trashEntry(saved); });
+        discard.className = 'reminder-trash'; discard.setAttribute('aria-label', 'Mover lembrete para a lixeira'); discard.setAttribute('title', 'Mover para a lixeira');
+        discard.innerHTML = '<svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg>'; list.appendChild(card);
       });
     } catch (e) { text(byId('reminder-status'), 'Não foi possível ler os lembretes.'); }
   }

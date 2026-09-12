@@ -63,7 +63,7 @@ SCRVRL OS abre numa área de trabalho com projetos/folhas e lembretes. Aplicativ
 
 Quinze lentes em quatro categorias visuais e sete famílias de desenvolvimento: Convenções, Gramática, Escolhas de escrita e Poesia. Crase, concordância de haver/existir/fazer, repetição próxima e ritmo foram acrescentados; a nova etapa inclui 50 formas em -mente e proporção de palavras em linhas com travessão; infinitivos ganharam contexto delimitado. Há 884 formas verbais exatas, 65 lemas para o recorte contextual, 1.447 expressões e 18 observações decoloniais. Contagem de entradas não significa cobertura integral ou revisão linguística independente.
 
-O arquivo portátil após a rodada de papel, foco e impressão tem 691.792 bytes (entrega anterior de engines: 456.821). A bancada não representa tempo de WebKit, memória do iPad nem taxa geral de acerto linguístico. Medições e limites estão em `astra/MATURACAO.md`.
+O arquivo portátil após a rodada de papel, foco e impressão tem 692.818 bytes (entrega anterior de engines: 456.821). A bancada não representa tempo de WebKit, memória do iPad nem taxa geral de acerto linguístico. Medições e limites estão em `astra/MATURACAO.md`.
 
 ## Mesa editorial conectada — 12/09/2026
 
