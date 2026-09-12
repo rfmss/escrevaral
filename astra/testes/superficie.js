@@ -59,6 +59,48 @@ module.exports = function (h) {
       shortTimers: function () { return Object.keys(timers).filter(function (id) { return timers[id].delay < 1000 && timers[id].delay !== 350; /* Temporizador de sessão não é movimento/análise. */ }).length; }
     };
   }
+  test('Início: clique fora, toque e foco externo fecham; descendentes e acionador permanecem', function () {
+    var a = setup(), child = a.document.createElement('span');
+    a.nodes['os-start'].click(); child.parentNode = a.nodes['start-menu'];
+    a.document.emit('click', { target: child }); assert.strictEqual(a.nodes['start-menu'].hidden, false);
+    a.document.emit('click', { target: a.nodes['os-start'] }); assert.strictEqual(a.nodes['start-menu'].hidden, false);
+    a.document.emit('click', { target: a.nodes.manuscrito }); assert.strictEqual(a.nodes['start-menu'].hidden, true);
+    assert.strictEqual(a.nodes['os-start'].getAttribute('aria-expanded'), 'false');
+    a.nodes['os-start'].click(); a.document.emit('touchstart', { target: a.document.body }); assert.strictEqual(a.nodes['start-menu'].hidden, true);
+    a.nodes['os-start'].click(); a.document.emit('focusin', { target: a.nodes['path-home'] }); assert.strictEqual(a.nodes['start-menu'].hidden, true);
+  });
+  test('Mesa editorial: contagens reais após gravação, sem disparar lentes', function () {
+    var a = setup(); a.nodes['cabinet-write'].click(); a.type('titulo', 'Título não entra');
+    a.type('manuscrito', 'Olá, mundo!\n\n— Bom dia. 😀'); a.flush();
+    assert.strictEqual(a.nodes['desk-words'].textContent, '4');
+    assert.strictEqual(a.nodes['desk-paragraphs'].textContent, '2');
+    assert.strictEqual(a.nodes.findings.childNodes.length, 0);
+    a.type('manuscrito', 'Mais uma palavra'); assert.ok(/alterado/.test(a.nodes['desk-count-status'].textContent));
+    a.nodes['desk-refresh'].click(); assert.strictEqual(a.nodes['desk-words'].textContent, '3');
+    a.nodes['desk-export'].click(); assert.strictEqual(a.downloads[0], 'Título não entra\n\nMais uma palavra');
+  });
+  test('Mesa editorial: fonte e tamanho preservam texto/seleção; foco recolhe contagem', function () {
+    var a = setup(); a.nodes['cabinet-write'].click(); a.type('manuscrito', 'um texto intacto'); a.nodes.manuscrito.setSelectionRange(3, 8);
+    a.nodes['desk-font'].click(); a.nodes['type-larger'].click();
+    assert.strictEqual(a.nodes.manuscrito.value, 'um texto intacto'); assert.strictEqual(a.nodes.manuscrito.selectionStart, 3); assert.strictEqual(a.nodes.manuscrito.selectionEnd, 8);
+    assert.strictEqual(a.nodes['desk-font'].textContent, 'Courier Prime'); assert.strictEqual(a.nodes.manuscrito.style.fontSize, '22px');
+    assert.strictEqual(setup(a.storage).nodes.manuscrito.style.fontSize, '22px');
+    a.nodes['desk-counts'].click(); assert.strictEqual(a.document.body.getAttribute('data-counts'), 'true');
+    a.nodes['immersion-toggle'].click(); assert.strictEqual(a.document.body.getAttribute('data-counts'), 'false');
+    a.nodes['desk-paragraph'].click(); assert.strictEqual(a.nodes['focus-toggle'].getAttribute('aria-pressed'), a.nodes['desk-paragraph'].getAttribute('aria-pressed'));
+  });
+  test('Mesa editorial: filtro de projeto, busca global e abertura no mesmo editor', function () {
+    var a = setup(), ar = a.root.Escr.createArchive(a.storage), one = a.root.Escr.freshDocument(), two = a.root.Escr.freshDocument();
+    one.title = 'Cena da praia'; one.text = 'sal e vento'; one.project = 'Mar'; ar.save(one);
+    two.title = 'Cena da rua'; two.text = 'asfalto'; two.project = 'Cidade'; ar.save(two);
+    a.nodes['cabinet-write'].click(); a.nodes['note-project'].value = 'Mar'; a.nodes['note-project-save'].click();
+    a.nodes['scope-project'].click(); a.event('pagehide');
+    assert.strictEqual(setup(a.storage).nodes['scope-project'].getAttribute('aria-pressed'), 'true');
+    assert.ok(a.nodes['timeline-list'].textContent.indexOf('Cena da praia') >= 0); assert.ok(a.nodes['timeline-list'].textContent.indexOf('Cena da rua') < 0);
+    var row = a.nodes['timeline-list'].childNodes.filter(function (n) { return n.getAttribute('title') === 'Cena da praia'; })[0]; row.click();
+    assert.strictEqual(a.nodes.manuscrito.value, 'sal e vento'); assert.strictEqual(a.nodes['desk-project'].textContent, 'Mar');
+    a.type('note-search', 'asfalto'); a.flush(); assert.ok(a.nodes['timeline-list'].textContent.indexOf('Cena da rua') >= 0);
+  });
   test('Interface: painel exclusivo, fechamento e retorno ao controle de origem', function () {
     var a = setup(); a.nodes['mesa-toggle'].focus(); a.nodes['mesa-toggle'].click();
     assert.strictEqual(a.nodes.mesa.hidden, false); assert.strictEqual(a.nodes['panel-backdrop'].hidden, false);

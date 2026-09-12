@@ -108,3 +108,10 @@ Acabamento: Phosphor monocromático preservado, filetes sólidos/pontilhados e e
 Entrega seguinte ao desktop editorial: Início permanente, aplicativos no menu, caminho clicável, lembretes textuais no desktop, estado de sessão, lixeira/restauração/exclusão confirmada e cópia interna por seleção. Novas lentes `adverbios` e `dialogo`; quinze no total. Contrato de análise vincula resultado a documento, registro, revisão e recorte UTF-16.
 
 481 verificações passaram; portátil 670.087 bytes. Verificação lógica, ES5 e equivalência portátil; não houve teste visual de navegador nem físico no iPad. Documento canônico desta etapa: [ESTUDIO.md](ESTUDIO.md), com o mapa aprovado, contratos e pendências. Os pedidos estão aprovados; continuar a migração de projetos com IDs e conectar Varal → Mesa → Revisão, sem apresentar a fundação como Estúdio completo. Os anexos de React e e-ink continuam referências, não o runtime.
+
+
+## Mesa do anexo conectada — 12/09/2026
+
+Pedido de Rafa: fechar Início ao clicar fora e fazer da referência e-ink a Mesa real. Novo `superficie/mesa-editorial.css`, o mesmo editor e armazenamento; cabeçalho editorial com título/data, folhas à esquerda (projeto/data, busca global), instrumentos/contagens à direita. Controles reais: fonte local, tamanho de leitura persistente, parágrafo, foco, exportação, impressão, lixeira e vínculo de projeto. Elementos fictícios/formatação rica do protótipo omitidos. Sem timer de foco automático de seis segundos, fonte remota, contenteditable ou troca de arquitetura. Contagem literal em máquina pura; atualiza após guardar ou ação explícita, sem classificar qualidade nem iniciar análise linguística.
+
+Menu Início fecha por clique, toque e foco externos; clique nos seus descendentes e no acionador não é fechamento externo. 486 verificações funcionais, ES5 e equivalência portátil; renderização de navegador e iPad físico continuam pendentes. Continuidade do Estúdio em ESTUDIO.md permanece válida.

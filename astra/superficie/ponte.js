@@ -4,6 +4,7 @@
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
+  var projectScope = false, readingSize = 21;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, deleteTarget = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
@@ -20,7 +21,7 @@
   function pad(n) { return n < 10 ? '0' + n : String(n); }
   function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
   function noteDate(entry) { return entry.created || entry.updated; }
-  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, text: entry.text || '', created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
+  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, text: entry.text || '', project: entry.project || '', created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
   function monthLabel(key) { return months[Number(key.slice(5, 7)) - 1] + ' ' + key.slice(0, 4); }
   function dayLabel(key) { var d = new Date(Number(key.slice(0, 4)), Number(key.slice(5, 7)) - 1, Number(key.slice(8, 10))); return d.getDate() + ' · ' + ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'][d.getDay()]; }
   function openNote(entry) {
@@ -33,7 +34,7 @@
     } catch (e) { message('Não foi possível abrir esta nota. Sua escrita permanece aqui.'); }
   }
   function browseDate(month, day) {
-    navMonth = month; navDay = day; timelineCount = 40; byId('timeline-list').scrollTop = 0; renderTimeline(false);
+    projectScope = false; navMonth = month; navDay = day; timelineCount = 40; byId('timeline-list').scrollTop = 0; renderTimeline(false);
   }
   function renderTimeline(refresh, previousId, reveal) {
     var list = byId('timeline-list'), date = new Date(noteDate(doc)), active = null, oldScroll = list.scrollTop, result;
@@ -46,17 +47,24 @@
     }
     timelineEntries = timelineEntries.filter(function (entry) { return entry.id !== doc.id && entry.id !== previousId; });
     var current = metadata(doc); current.title = title.value; current.text = manuscript.value; timelineEntries.push(current);
-    var model = E.browseNotes(timelineEntries, { month: navMonth, day: navDay, query: byId('note-search').value });
+    var inProject = projectScope && !byId('note-search').value;
+    var entries = inProject ? timelineEntries.filter(function (entry) { return (entry.project || '') === (doc.project || ''); }) : timelineEntries;
+    var model = E.browseNotes(entries, { month: navMonth, day: navDay, query: byId('note-search').value });
+    if (inProject) { model.notes = entries.slice().sort(function (a, b) { return a.created < b.created ? -1 : a.created > b.created ? 1 : 0; }); }
+    text(byId('desk-project'), doc.project || 'Folhas avulsas');
+    byId('scope-project').setAttribute('aria-pressed', projectScope ? 'true' : 'false');
+    byId('scope-dates').setAttribute('aria-pressed', projectScope ? 'false' : 'true');
     var path = byId('date-path'); path.textContent = '';
     byId('clear-search').hidden = !byId('note-search').value;
-    if (model.query) { paragraph(path, 'Resultados em todas as notas', 'path-label'); }
+    if (inProject) { paragraph(path, doc.project || 'Folhas avulsas', 'path-label'); }
+    else if (model.query) { paragraph(path, 'Resultados em todas as notas', 'path-label'); }
     else {
       button(path, 'Meses', function () { browseDate('', ''); });
       if (navMonth) { button(path, monthLabel(navMonth), function () { browseDate(navMonth, ''); }); }
       if (navDay) { var day = paragraph(path, dayLabel(navDay), 'path-label'); day.setAttribute('aria-current', 'page'); }
     }
     list.textContent = '';
-    var groups = !model.query && !navDay ? (navMonth ? model.days : model.months) : null;
+    var groups = !inProject && !model.query && !navDay ? (navMonth ? model.days : model.months) : null;
     timelineTotal = groups ? 0 : model.notes.length;
     if (groups) {
       groups.forEach(function (group) {
@@ -99,7 +107,7 @@
       message(saved.conflict ? 'Outra versão foi preservada no acervo.' : 'Guardado neste aparelho.');
       try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Só a preferência de abertura falhou. */ }
       if (!byId('acervo').hidden) { renderArchive(); }
-      renderTimeline(false, previousId); saveSession();
+      renderTimeline(false, previousId); refreshCounts(); saveSession();
       return true;
     } catch (e) { message('Não foi possível guardar. Seu texto está na folha; baixe uma cópia em Ajustes.'); return false; }
   }
@@ -112,7 +120,7 @@
   }
   function changed() {
     growManuscript();
-    dirty = true; invalidate(); window.clearTimeout(timer);
+    dirty = true; invalidate(); text(byId('desk-count-status'), 'Texto alterado · contagem será atualizada ao guardar.'); window.clearTimeout(timer);
     if (!composing) { timer = window.setTimeout(persist, 1000); }
   }
   function noteLabel(parent, name, when) {
@@ -209,7 +217,7 @@
     try {
       storage.setItem(sessionKey, JSON.stringify({ version: 1, view: cabinetOpen ? 'gabinete' : 'mesa', documentId: doc.noteId || doc.id,
         recordId: doc.id, start: manuscript.selectionStart || 0, end: manuscript.selectionEnd || 0, scroll: manuscript.scrollTop || 0,
-        project: cabinetProject, panel: activePanel, immersion: immersion, month: navMonth, day: navDay,
+        project: cabinetProject, panel: activePanel, immersion: immersion, month: navMonth, day: navDay, projectScope: projectScope,
         search: byId('cabinet-search').value, noteSearch: byId('note-search').value,
         windowHidden: byId('cabinet-window').hidden, maximized: byId('cabinet-window').getAttribute('data-maximized') === 'true',
         left: byId('cabinet-window').style.left || '', top: byId('cabinet-window').style.top || '' }));
@@ -232,7 +240,7 @@
       byId('note-search').value = typeof state.noteSearch === 'string' ? state.noteSearch.slice(0, 1000) : '';
       if (/^\d{4}-\d{2}$/.test(state.month)) { navMonth = state.month; }
       if (/^\d{4}-\d{2}-\d{2}$/.test(state.day)) { navDay = state.day; }
-      renderCabinet(); renderTimeline(false);
+      projectScope = state.projectScope === true; renderCabinet(); renderTimeline(false);
       if (state.view === 'mesa' && state.documentId === (doc.noteId || doc.id)) {
         enterDesk(false);
         if (state.immersion === true) { immersion = true; document.body.setAttribute('data-immersion', 'true'); byId('immersion-toggle').setAttribute('aria-pressed', 'true'); byId('leave-focus').hidden = false; sizeWorkspace(); }
@@ -328,6 +336,7 @@
     manuscript.scrollTop = Math.max(0, textPosition(start).top - manuscript.clientHeight / 3); updateFocus();
   }
   function collapseTimeline() {
+    byId('desk-documents').setAttribute('aria-expanded', 'false');
     byId('timeline-toggle').setAttribute('aria-expanded', 'false');
     byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', 'false');
   }
@@ -355,6 +364,7 @@
     var start = manuscript.selectionStart, end = manuscript.selectionEnd, scroll = manuscript.scrollTop;
     var oldInset = manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0;
     cancelTypewriter(); closePanels(false); collapseTimeline();
+    document.body.setAttribute('data-counts', 'false'); byId('desk-counts').setAttribute('aria-expanded', 'false');
     immersion = enabled; document.body.setAttribute('data-immersion', enabled ? 'true' : 'false');
     byId('immersion-toggle').setAttribute('aria-pressed', enabled ? 'true' : 'false');
     byId('leave-focus').hidden = !enabled;
@@ -439,7 +449,7 @@
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.'); updatePath();
-    renderTimeline(true, null, true);
+    renderTimeline(true, null, true); refreshCounts();
   }
   function renderArchive() {
     var list = byId('document-list'); list.textContent = '';
@@ -670,7 +680,7 @@
   function enterDesk(focusEditor) {
     toggleStart(false);
     closePanels(false); collapseTimeline(); desktopDrag = null; cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
-    document.body.setAttribute('data-view', 'mesa'); updatePath();
+    document.body.setAttribute('data-view', 'mesa'); updatePath(); refreshCounts();
     sizeWorkspace(); cancelTypewriter();
     if (focusEditor !== false) { manuscript.focus(); }
     if (cabinetSelection && cabinetSelection.noteId === (doc.noteId || doc.id)) {
@@ -711,6 +721,7 @@
     document.body.setAttribute('data-letter', style);
     byId('font-literary').setAttribute('aria-pressed', style === 'literaria' ? 'true' : 'false');
     byId('font-typewriter').setAttribute('aria-pressed', style === 'maquina' ? 'true' : 'false');
+    text(byId('desk-font'), style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
     focusMeasure = null; typewriterInsets(); growManuscript();
     if (typeof start === 'number') { manuscript.setSelectionRange(start, end); }
     try { if (storage) { storage.setItem('escrevaral.astra.letter', style); } } catch (ignore) { /* Préférence facultativa. */ }
@@ -728,7 +739,7 @@
   listen(window, 'resize', function () { resetDesktopWindow(); sizeWorkspace(); });
   listen(window, 'load', sizeWorkspace);
   if (window.visualViewport) { listen(window.visualViewport, 'resize', sizeWorkspace); }
-  listen(byId('timeline-toggle'), 'click', function () { var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
+  listen(byId('timeline-toggle'), 'click', function () { document.body.setAttribute('data-counts', 'false'); byId('desk-counts').setAttribute('aria-expanded', 'false'); var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
   listen(byId('mesa-close'), 'click', function () { closePanels(true); });
   listen(byId('acervo-close'), 'click', function () { closePanels(true); });
   listen(byId('panel-backdrop'), 'click', function () { closePanels(true); });
@@ -763,7 +774,7 @@
   listen(byId('leave-focus'), 'click', leaveImmersion);
   listen(byId('machine-toggle'), 'click', function () { setMachine(!machineEnabled); });
   listen(manuscript, 'input', machineInput);
-  listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
+  listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); byId('desk-paragraph').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
   listen(manuscript, 'compositionstart', function () {
     cancelTypewriter(); window.clearTimeout(focusTimer); updateFocus();
@@ -776,7 +787,7 @@
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });
   listen(byId('back-writing'), 'click', returnToWriting);
-  function newDocument() { if (!persist()) { return; } var next = E.freshDocument(); next.project = cabinetOpen ? cabinetProject || '' : projectName(doc.project); loadDocument(next); dirty = true; persist(); renderTimeline(false, null, true); cabinetSelection = null; enterDesk(false); byId('back-cabinet').focus(); }
+  function newDocument() { if (!persist()) { return; } var next = E.freshDocument(); next.project = cabinetOpen ? cabinetProject || '' : projectName(doc.project); loadDocument(next); dirty = true; persist(); renderTimeline(false, null, true); cabinetSelection = null; enterDesk(false); byId('path-document').focus(); }
   listen(byId('new-document'), 'click', newDocument);
   listen(byId('timeline-new'), 'click', newDocument);
   for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }
@@ -833,6 +844,7 @@
     if ((event.ctrlKey || event.metaKey) && code === 75) { event.preventDefault(); closePanels(false); (cabinetOpen ? byId('cabinet-search') : byId('note-search')).focus(); }
     else if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); if (cabinetOpen) { enterDesk(); } showPanel('oficina', 'examinar-toggle', true); panelTrigger = manuscript; lensButtons[0].focus(); }
     else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
+    else if (code === 27 && document.body.getAttribute('data-counts') === 'true') { byId('desk-counts-close').click(); }
     else if (code === 27) { if (activePanel) { closePanels(true); } else if (immersion) { leaveImmersion(); } else if (!cabinetOpen) { if (byId('timeline-toggle').getAttribute('aria-expanded') === 'true') { collapseTimeline(); } else { openCabinet(false); } } else if (!byId('project-form').hidden) { byId('project-cancel').click(); } }
   });
 
@@ -840,6 +852,15 @@
   listen(byId('os-desk'), 'click', enterDesk);
   listen(byId('os-arrange'), 'click', function () { resetDesktopWindow(); desktopWindow('open'); });
   listen(byId('os-start'), 'click', function () { toggleStart(byId('start-menu').hidden); });
+  function outsideStart(event) {
+    if (byId('start-menu').hidden) { return; }
+    var node = event.target;
+    while (node) { if (node === byId('start-menu') || node === byId('os-start')) { return; } node = node.parentNode; }
+    toggleStart(false);
+  }
+  listen(document, 'click', outsideStart);
+  listen(document, 'touchstart', outsideStart);
+  listen(document, 'focusin', outsideStart);
   listen(byId('os-window-task'), 'click', function () { if (!cabinetOpen) { openCabinet(false); } else { desktopWindow(byId('cabinet-window').hidden ? 'open' : 'minimize'); } });
   listen(byId('window-minimize'), 'click', function () { desktopWindow('minimize'); });
   listen(byId('window-close'), 'click', function () { desktopWindow('close'); });
@@ -918,6 +939,45 @@
   listen(byId('font-typewriter'), 'click', function () { chooseFont('maquina'); });
   try { chooseFont(storage ? storage.getItem('escrevaral.astra.letter') : 'literaria'); } catch (ignore) { chooseFont('literaria'); }
   try { restrictedPaste = !!storage && storage.getItem('escrevaral.astra.restricted-paste') === 'on'; byId('paste-mode').setAttribute('aria-pressed', restrictedPaste ? 'true' : 'false'); } catch (ignore) {}
+
+  function refreshCounts() {
+    var counts = E.countManuscript(manuscript.value);
+    text(byId('desk-words'), counts.words.toLocaleString('pt-BR'));
+    text(byId('desk-characters'), counts.characters.toLocaleString('pt-BR'));
+    text(byId('desk-paragraphs'), counts.paragraphs);
+    text(byId('desk-count-status'), 'Corpo do texto · caracteres incluem espaços; cada linha não vazia conta como parágrafo.');
+  }
+  function resizeLetter(value) {
+    readingSize = Math.max(16, Math.min(30, Number(value) || 21));
+    manuscript.style.fontSize = readingSize + 'px'; text(byId('type-size'), readingSize);
+    byId('type-smaller').disabled = readingSize <= 16; byId('type-larger').disabled = readingSize >= 30;
+    focusMeasure = null; typewriterInsets(); growManuscript();
+    try { if (storage) { storage.setItem('escrevaral.astra.font-size', String(readingSize)); } } catch (ignore) {}
+  }
+  function inspectWith(lens) {
+    analysisRange = null; showPanel('oficina', 'examinar-toggle', true); if (lens) { examine(lens); }
+  }
+  listen(byId('desk-project'), 'click', function () { pathToProjects(false); });
+  listen(byId('scope-project'), 'click', function () { projectScope = true; timelineCount = 40; renderTimeline(true, null, true); queueSession(); });
+  listen(byId('scope-dates'), 'click', function () { projectScope = false; renderTimeline(true, null, true); queueSession(); });
+  listen(byId('desk-documents'), 'click', function () { byId('timeline-toggle').click(); this.setAttribute('aria-expanded', byId('timeline-toggle').getAttribute('aria-expanded')); });
+  listen(byId('desk-font'), 'click', function () { chooseFont(document.body.getAttribute('data-letter') === 'maquina' ? 'literaria' : 'maquina'); });
+  listen(byId('type-smaller'), 'click', function () { resizeLetter(readingSize - 1); });
+  listen(byId('type-larger'), 'click', function () { resizeLetter(readingSize + 1); });
+  listen(byId('desk-paragraph'), 'click', function () { byId('focus-toggle').click(); this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); });
+  listen(byId('desk-print'), 'click', function () { byId('print-document').click(); });
+  listen(byId('desk-export'), 'click', function () { byId('export-text').click(); });
+  listen(byId('desk-counts'), 'click', function () { var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); document.body.setAttribute('data-counts', open ? 'true' : 'false'); if (open) { collapseTimeline(); refreshCounts(); } });
+  listen(byId('desk-counts-close'), 'click', function () { document.body.setAttribute('data-counts', 'false'); byId('desk-counts').setAttribute('aria-expanded', 'false'); byId('desk-counts').focus(); });
+  listen(byId('desk-refresh'), 'click', refreshCounts);
+  listen(byId('desk-conventions'), 'click', function () { inspectWith(''); });
+  listen(byId('desk-rhythm'), 'click', function () { inspectWith('ritmo'); });
+  listen(byId('desk-dialogue'), 'click', function () { inspectWith('dialogo'); });
+  listen(byId('desk-project-change'), 'click', function () { showPanel('mesa', 'mesa-toggle', true); byId('note-project').focus(); });
+  listen(byId('desk-trash'), 'click', function () { trashEntry(doc); });
+  try { resizeLetter(storage ? storage.getItem('escrevaral.astra.font-size') : 21); } catch (ignore) { resizeLetter(21); }
+  byId('desk-paragraph').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
+
   openCabinet(true); renderReminders(); restoreSession(); sessionReady = true;
 
   listen(document, 'visibilitychange', function () { if (document.hidden) { checkpoint(); stopSound(); stopMachineStrike(); finishMachineFeed(); } });

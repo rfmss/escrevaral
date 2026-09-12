@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="superficie/mesa.css">
   <link rel="stylesheet" href="superficie/gabinete.css">
   <link rel="stylesheet" href="superficie/orientacao.css">
+  <link rel="stylesheet" href="superficie/mesa-editorial.css">
 <!-- Ícones Phosphor, SVGs oficiais Light, https://github.com/phosphor-icons/core
 MIT License
 
@@ -77,21 +78,30 @@ SOFTWARE.
   <div id="writing-space">
     <div id="selection-tools" class="selection-tools" role="group" aria-label="Cópia e trecho selecionado" hidden><span id="clipboard-status" role="status"></span><button id="selection-cut">Recortar</button><button id="selection-paste">Colar cópia interna</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
     <header class="masthead">
-      <button id="back-cabinet" class="brand-signature" aria-label="Voltar ao Gabinete" title="Voltar ao Gabinete"><span aria-hidden="true">←</span><span class="cabinet-word">Gabinete</span></button>
+      <button id="back-cabinet" class="brand-signature" aria-label="Voltar ao Gabinete"><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
+        <div class="note-heading"><span class="eyebrow">DOCUMENTO</span>
+          <label class="sr-only" for="titulo">Título do manuscrito</label>
+          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false">
+          <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação da folha"></time></p>
+        </div>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar em todas as notas</label><input id="note-search" type="search" placeholder="Buscar em todas as notas" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden>×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
         <button id="immersion-toggle" aria-pressed="false" title="Escrever com a interface recolhida">Foco</button>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
+        <button id="desk-export" title="Baixar esta folha em texto">Baixar</button>
         <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
         <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
       </nav>
     </header>
     <div class="desk">
       <main class="paper" id="writing-paper">
-        <div class="note-heading">
-          <label class="sr-only" for="titulo">Título do manuscrito</label>
-          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false">
-          <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação da folha"></time></p>
+        <div class="writing-toolbar" role="group" aria-label="Apresentação do manuscrito">
+          <button id="desk-documents" aria-controls="note-browser" aria-expanded="false">Folhas</button>
+          <button id="desk-font" title="Alternar entre letra literária e máquina">Noto Serif</button>
+          <div class="size-control"><button id="type-smaller" aria-label="Diminuir letra">−</button><output id="type-size" aria-label="Tamanho da letra">21</output><button id="type-larger" aria-label="Aumentar letra">+</button></div>
+          <button id="desk-paragraph" aria-pressed="true">Parágrafo</button>
+          <button id="desk-counts" aria-controls="desk-inspector" aria-expanded="false">Contagem</button>
+          <button id="desk-print">Imprimir</button>
         </div>
         <label class="sr-only" for="manuscrito">Manuscrito</label>
         <div class="editor-viewport" id="editor-viewport">
@@ -100,10 +110,17 @@ SOFTWARE.
         </div>
         <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span></footer>
       </main>
-      <aside class="timeline" aria-label="Folhas por data de criação">
+      <aside class="timeline" aria-label="Documentos da Mesa">
+        <div class="desk-project"><span class="eyebrow">PROJETO ATUAL</span><button id="desk-project">Folhas avulsas</button><div class="document-scope" role="group" aria-label="Organizar documentos"><button id="scope-project" aria-pressed="false">Do projeto</button><button id="scope-dates" aria-pressed="true">Por data</button></div></div>
         <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="note-browser">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
         <p id="timeline-hint" class="sr-only">Escolha um mês, depois um dia. Escolha o título para abrir a nota. A busca encontra notas de todas as datas.</p>
         <div class="wheel-window" id="note-browser"><nav id="date-path" class="date-path" aria-label="Pastas por data"></nav><p id="navigator-status" class="navigator-status" role="status" aria-live="polite"></p><div id="timeline-list" tabindex="0" role="region" aria-label="Notas por data" aria-describedby="timeline-hint"></div></div>
+      </aside>
+      <aside id="desk-inspector" class="desk-inspector" aria-label="Contagem e instrumentos do texto">
+        <div class="inspector-heading"><h2>OLHAR DO TEXTO</h2><button id="desk-counts-close" aria-label="Recolher contagem">×</button></div>
+        <section class="desk-count"><span class="eyebrow">NESTA FOLHA</span><strong id="desk-words">0</strong><span>palavras</span><dl><dt>Caracteres</dt><dd id="desk-characters">0</dd><dt>Parágrafos</dt><dd id="desk-paragraphs">0</dd></dl><p id="desk-count-status" class="quiet">Contagem do corpo do texto.</p><button id="desk-refresh">Atualizar contagem</button></section>
+        <section class="desk-instruments"><h3>LINGUAGEM</h3><button id="desk-conventions">Convenções e gramática ↗</button><button id="desk-rhythm">Ritmo e cadência ↗</button><button id="desk-dialogue">Linhas de diálogo ↗</button><p class="quiet">Escolha um instrumento para observar o texto.</p></section>
+        <section class="desk-custody"><h3>SUA FOLHA</h3><button id="desk-project-change">Mudar de projeto ↗</button><button id="desk-trash">Mover para a lixeira</button></section>
       </aside>
     </div>
   </div>
@@ -198,6 +215,7 @@ SOFTWARE.
   <script src="maquina/ritmo.js"></script>
   <script src="maquina/estudio.js"></script>
   <script src="maquina/contratos.js"></script>
+  <script src="maquina/contagem.js"></script>
   <script src="superficie/ponte.js"></script>
 </body>
 </html>

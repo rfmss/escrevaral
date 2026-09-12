@@ -1024,6 +1024,160 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
 @media print { .location-path,#system-bar,#start-menu,#desktop-reminders,.selection-tools { display:none !important; } }
 
 </style>
+  <style>
+/* Mesa editorial: a organização do anexo, com o mesmo textarea e acervo.
+   Posicionamento clássico; sem grid obrigatório, recursos remotos ou filtros. */
+@media screen {
+ #writing-space { background:#c4cfc2; }
+ #writing-space .focus-mask { background:#c4cfc2; }
+ #writing-space .masthead { position:absolute; left:12px; right:12px; top:0; width:auto; max-width:none; height:100px; min-height:0; margin:0; padding:0; display:block; border-bottom:1px dotted #91a08e; background:transparent; }
+ #writing-space #back-cabinet { position:absolute; left:0; top:0; bottom:0; width:210px; padding:16px 12px; border-right:1px dotted #91a08e; display:block; text-align:left; }
+ #back-cabinet strong { display:block; font:600 31px/1.15 'Oswald','Arial Narrow',Arial,sans-serif; letter-spacing:-1px; }
+ #back-cabinet strong span { margin:0 0 0 3px; border:1px solid currentColor; padding:0 2px; }
+ #back-cabinet small { display:block; margin-top:10px; font:10px Arial,sans-serif; letter-spacing:2px; }
+ #writing-space .note-heading { position:absolute; top:16px; left:232px; right:610px; margin:0; }
+ #writing-space .title { font:600 25px/1.3 'Oswald','Arial Narrow',Arial,sans-serif; padding:0; height:34px; }
+ #writing-space .manuscript-date { font:12px/1.5 Arial,sans-serif; margin:3px 0 0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+ #writing-space .global-search { position:absolute; width:240px; left:auto; right:355px; top:28px; margin:0; }
+ #writing-space .global-search input { border:1px solid #91a08e; padding:10px 30px 10px 12px; font-size:14px; }
+ #writing-space .desk-tools { position:absolute; top:28px; right:0; display:flex; }
+ #writing-space .desk-tools button { padding:10px 9px; min-height:44px; }
+ #writing-space .desk { position:absolute; top:100px; bottom:0; left:12px; right:12px; width:auto; max-width:none; margin:0; padding:0; }
+ #writing-space .paper { position:absolute; left:210px; right:230px; top:0; bottom:0; margin:0; padding:0; }
+ #writing-space .editor-viewport { top:62px; bottom:34px; left:32px; right:32px; }
+ #writing-space #manuscrito { min-height:0; font-size:21px; line-height:1.85; background:transparent; }
+ #writing-space .paper-footer { position:absolute; left:32px; right:32px; bottom:0; height:34px; padding:8px 0; font-size:12px; }
+ .writing-toolbar { position:absolute; left:0; right:0; top:0; height:62px; padding:8px 16px; border-bottom:1px dotted #91a08e; display:flex; align-items:center; justify-content:space-between; }
+ .writing-toolbar button { min-height:40px; padding:8px; border-radius:0; font:14px Arial,sans-serif; white-space:nowrap; }
+ .size-control { display:flex; align-items:center; border-left:1px dotted #91a08e; padding-left:8px; }
+ .size-control output { min-width:25px; text-align:center; font:14px Arial,sans-serif; }
+ #desk-documents,#desk-counts { display:none; }
+ #writing-space .timeline { left:0; right:auto; top:0; bottom:0; height:auto; max-height:none; width:210px; padding:20px 14px 0; border-left:0; border-right:1px dotted #91a08e; }
+ .desk-project { margin-bottom:14px; }
+ #desk-project { display:block; width:100%; text-align:left; padding:4px 0; font:600 20px/1.4 'Oswald',Arial,sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+ .document-scope { display:flex; }
+ .document-scope button { min-height:36px; padding:7px; font-size:13px; border-radius:0; border-bottom:1px solid transparent; }
+ .document-scope button[aria-pressed="true"] { border-bottom-color:#4a544c; background:transparent; }
+ #writing-space .rail-heading { height:40px; min-height:40px; }
+ #writing-space .rail-label { padding-left:0; }
+ #writing-space #timeline-toggle { display:none; }
+ #writing-space .wheel-window { display:block; position:absolute; top:168px; bottom:0; left:14px; right:14px; height:auto; max-height:none; width:auto; border:0; background:transparent; }
+ #writing-space .date-path { min-height:64px; padding:0; }
+ #writing-space .date-path button { font-size:13px; min-height:30px; padding:5px 3px; }
+ #writing-space .navigator-status { top:68px; font-size:12px; }
+ #writing-space #timeline-list { top:96px; bottom:0; height:auto; max-height:none; margin:0; padding:0 0 24px; scrollbar-width:none; }
+ #timeline-list::-webkit-scrollbar { display:none; width:0; }
+ #writing-space .timeline-entry { padding:10px 8px; min-height:62px; border-left:2px solid transparent; background:transparent; }
+ #writing-space .timeline-entry[aria-current="true"] { border-left-color:#4a544c; background:#b9c6b6; box-shadow:none; }
+ #writing-space .note-name { font:14px/1.5 'Noto Serif',Georgia,serif; }
+ #writing-space .note-time { font:12px/1.5 Arial,sans-serif; }
+ .desk-inspector { position:absolute; right:0; top:0; bottom:0; width:230px; border-left:1px dotted #91a08e; padding:20px; overflow-y:auto; scrollbar-width:none; }
+ .desk-inspector::-webkit-scrollbar { display:none; width:0; }
+ .inspector-heading { display:flex; align-items:center; justify-content:space-between; }
+ .inspector-heading h2,.desk-inspector h3 { font:600 15px/1.4 'Oswald',Arial,sans-serif; margin:0; color:#4a544c; }
+ #desk-counts-close { display:none; }
+ .desk-inspector section { border-top:1px dotted #91a08e; margin-top:16px; padding-top:16px; }
+ #desk-words { display:block; margin:12px 0 0; font:600 54px/1.1 'Oswald',Arial,sans-serif; letter-spacing:-1px; overflow-wrap:break-word; }
+ .desk-count > span { font-size:14px; }
+ .desk-count dl { font-size:14px; line-height:1.8; overflow:hidden; margin-top:16px; }
+ .desk-count dt { float:left; clear:left; }
+ .desk-count dd { margin:0; text-align:right; }
+ .desk-inspector button { display:block; width:100%; min-height:40px; text-align:left; padding:10px 0; font-size:14px; border-radius:0; }
+ .desk-inspector .quiet { font-size:12px; line-height:1.6; }
+ #desk-refresh { font-size:13px; text-decoration:underline; }
+ #writing-space .selection-tools { left:232px; right:250px; bottom:34px; }
+ body[data-theme="escuro"] #writing-space,body[data-theme="escuro"] #writing-space .focus-mask { background:#242c24; }
+ body[data-theme="escuro"] #writing-space .masthead,body[data-theme="escuro"] #writing-space #back-cabinet,body[data-theme="escuro"] #writing-space .timeline,body[data-theme="escuro"] .writing-toolbar,body[data-theme="escuro"] .desk-inspector,body[data-theme="escuro"] .desk-inspector section { border-color:#596952; }
+ body[data-theme="escuro"] .inspector-heading h2,body[data-theme="escuro"] .desk-inspector h3 { color:#b9c6b6; }
+ body[data-theme="escuro"] #writing-space .timeline-entry[aria-current="true"] { background:#35432f; border-color:#b9c6b6; }
+ body[data-theme="escuro"] .document-scope button[aria-pressed="true"] { border-color:#b9c6b6; }
+ body[data-immersion="true"] #writing-space .desk { top:12px; bottom:12px; left:0; right:0; width:100%; max-width:none; }
+ body[data-immersion="true"] #writing-space .paper { left:0; right:0; max-width:900px; margin:auto; }
+ body[data-immersion="true"] #writing-space .editor-viewport { top:0; bottom:0; }
+ body[data-immersion="true"] .writing-toolbar,body[data-immersion="true"] .desk-inspector { display:none; }
+ @media (max-width:1250px) {
+  #writing-space .note-heading { right:380px; }
+  #writing-space .global-search { right:16px; top:64px; width:320px; }
+  #writing-space .note-heading { top:9px; }
+  #writing-space .desk-tools { top:28px; }
+ }
+ @media (max-width:1100px) {
+  #writing-space .paper { right:0; }
+  .desk-inspector { display:none; z-index:18; width:260px; background:#c4cfc2; }
+  body[data-counts="true"] .desk-inspector { display:block; }
+  #desk-counts,#desk-counts-close { display:block; }
+  #desk-counts-close { width:36px; text-align:center; }
+  body[data-theme="escuro"] .desk-inspector { background:#242c24; }
+  #writing-space .selection-tools { right:16px; }
+  #writing-space .note-heading { right:360px; }
+  #writing-space .global-search { left:auto; right:16px; top:64px; width:320px; }
+  #writing-space .desk-tools { top:10px; }
+ }
+ @media (max-width:760px) {
+  #writing-space .masthead { height:118px; left:12px; right:12px; }
+  #writing-space #back-cabinet { display:none; }
+  #writing-space .note-heading { left:0; top:8px; right:0; }
+  #writing-space .note-heading .eyebrow { display:none; }
+  #writing-space .title { font-size:23px; height:30px; }
+  #writing-space .global-search { left:0; right:0; top:74px; width:calc(100% - 190px); }
+  #writing-space .global-search input { font-size:16px; }
+  #writing-space .desk-tools { top:70px; right:0; }
+  #writing-space .desk-tools button { padding:10px 8px; }
+  #acervo-toggle,#desk-export { display:none; }
+  #writing-space .desk { top:118px; left:12px; right:12px; }
+  #writing-space .paper { left:0; right:0; }
+  #writing-space .editor-viewport { left:6px; right:6px; top:54px; bottom:30px; }
+  .writing-toolbar { height:54px; padding:6px 0; }
+  .writing-toolbar button { padding:6px; font-size:13px; }
+  #desk-documents { display:block; }
+  #desk-paragraph,#desk-print { display:none; }
+  #desk-font { max-width:90px; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+  .size-control { padding-left:2px; }
+  .size-control button { width:30px; }
+  #writing-space .timeline { display:none; width:260px; top:54px; bottom:0; z-index:18; padding-top:12px; background:#c4cfc2; }
+  #writing-space .timeline[data-expanded="true"] { display:block; }
+  #writing-space .timeline .wheel-window { top:158px; height:auto !important; bottom:0; }
+  .desk-inspector { top:54px; }
+  body[data-theme="escuro"] #writing-space .timeline { background:#242c24; }
+  #writing-space .paper-footer { left:6px; right:6px; }
+  #writing-space .selection-tools { left:12px; right:12px; }
+ }
+ @media (max-height:480px) {
+  body[data-view="mesa"] #writing-space .masthead { height:56px; }
+  body[data-view="mesa"] #writing-space .note-heading { top:4px; left:12px; right:190px; }
+  body[data-view="mesa"] #writing-space .note-heading .eyebrow,body[data-view="mesa"] #writing-space #back-cabinet,body[data-view="mesa"] #writing-space .global-search { display:none; }
+  body[data-view="mesa"] #writing-space .desk-tools { top:6px; }
+  body[data-view="mesa"] #writing-space .desk { top:56px; }
+  body[data-view="mesa"] #writing-space .paper { left:0; right:0; }
+  body[data-view="mesa"] #writing-space .timeline,body[data-view="mesa"] .desk-inspector { display:none; }
+  body[data-view="mesa"] #writing-space .timeline[data-expanded="true"],body[data-view="mesa"][data-counts="true"] .desk-inspector { display:block; }
+  #desk-documents,#desk-counts,#desk-counts-close { display:block; }
+  .writing-toolbar { height:44px; padding:2px; }
+  body[data-view="mesa"] #writing-space .editor-viewport { top:44px; bottom:20px; }
+  body[data-view="mesa"] #writing-space .paper-footer { height:20px; padding:0; }
+  body[data-immersion="true"] #writing-space .desk { top:0; }
+  body[data-immersion="true"] #writing-space .editor-viewport { top:0; bottom:0; }
+ }
+ body[data-viewport="compact"] #writing-space .masthead,body[data-viewport="small"] #writing-space .masthead { height:56px; }
+ body[data-viewport="compact"] #writing-space .note-heading,body[data-viewport="small"] #writing-space .note-heading { top:4px; left:12px; right:190px; }
+ body[data-viewport="compact"] #writing-space .global-search,body[data-viewport="small"] #writing-space .global-search,
+ body[data-viewport="compact"] #writing-space #back-cabinet,body[data-viewport="small"] #writing-space #back-cabinet,
+ body[data-viewport="compact"] #writing-space .note-heading .eyebrow,body[data-viewport="small"] #writing-space .note-heading .eyebrow { display:none; }
+ body[data-viewport="compact"] #writing-space .desk-tools,body[data-viewport="small"] #writing-space .desk-tools { top:6px; }
+ body[data-viewport="compact"] #writing-space .desk,body[data-viewport="small"] #writing-space .desk { top:56px; }
+ body[data-viewport="compact"] #writing-space .paper,body[data-viewport="small"] #writing-space .paper { left:0; right:0; }
+ body[data-viewport="compact"] #writing-space .writing-toolbar,body[data-viewport="small"] #writing-space .writing-toolbar { height:44px; padding:2px; }
+ body[data-viewport="compact"] #writing-space .editor-viewport,body[data-viewport="small"] #writing-space .editor-viewport { top:44px; bottom:20px; }
+ body[data-viewport="compact"] #writing-space .timeline,body[data-viewport="small"] #writing-space .timeline { display:none; }
+ body[data-viewport="compact"] #writing-space .timeline[data-expanded="true"],body[data-viewport="small"] #writing-space .timeline[data-expanded="true"] { display:block; }
+ body[data-immersion="true"] #writing-space .desk { top:12px; }
+ body[data-immersion="true"] #writing-space .editor-viewport { top:0; bottom:0; }
+ body[data-immersion="true"] #writing-space .masthead,body[data-immersion="true"] #writing-space .timeline,body[data-immersion="true"] #writing-space .desk-inspector { display:none; }
+
+}
+@media print { .writing-toolbar,.desk-inspector { display:none !important; } }
+
+</style>
 <!-- Ícones Phosphor, SVGs oficiais Light, https://github.com/phosphor-icons/core
 MIT License
 
@@ -1088,21 +1242,30 @@ SOFTWARE.
   <div id="writing-space">
     <div id="selection-tools" class="selection-tools" role="group" aria-label="Cópia e trecho selecionado" hidden><span id="clipboard-status" role="status"></span><button id="selection-cut">Recortar</button><button id="selection-paste">Colar cópia interna</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
     <header class="masthead">
-      <button id="back-cabinet" class="brand-signature" aria-label="Voltar ao Gabinete" title="Voltar ao Gabinete"><span aria-hidden="true">←</span><span class="cabinet-word">Gabinete</span></button>
+      <button id="back-cabinet" class="brand-signature" aria-label="Voltar ao Gabinete"><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
+        <div class="note-heading"><span class="eyebrow">DOCUMENTO</span>
+          <label class="sr-only" for="titulo">Título do manuscrito</label>
+          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false">
+          <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação da folha"></time></p>
+        </div>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar em todas as notas</label><input id="note-search" type="search" placeholder="Buscar em todas as notas" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden>×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
         <button id="immersion-toggle" aria-pressed="false" title="Escrever com a interface recolhida">Foco</button>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
+        <button id="desk-export" title="Baixar esta folha em texto">Baixar</button>
         <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
         <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
       </nav>
     </header>
     <div class="desk">
       <main class="paper" id="writing-paper">
-        <div class="note-heading">
-          <label class="sr-only" for="titulo">Título do manuscrito</label>
-          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false">
-          <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação da folha"></time></p>
+        <div class="writing-toolbar" role="group" aria-label="Apresentação do manuscrito">
+          <button id="desk-documents" aria-controls="note-browser" aria-expanded="false">Folhas</button>
+          <button id="desk-font" title="Alternar entre letra literária e máquina">Noto Serif</button>
+          <div class="size-control"><button id="type-smaller" aria-label="Diminuir letra">−</button><output id="type-size" aria-label="Tamanho da letra">21</output><button id="type-larger" aria-label="Aumentar letra">+</button></div>
+          <button id="desk-paragraph" aria-pressed="true">Parágrafo</button>
+          <button id="desk-counts" aria-controls="desk-inspector" aria-expanded="false">Contagem</button>
+          <button id="desk-print">Imprimir</button>
         </div>
         <label class="sr-only" for="manuscrito">Manuscrito</label>
         <div class="editor-viewport" id="editor-viewport">
@@ -1111,10 +1274,17 @@ SOFTWARE.
         </div>
         <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span></footer>
       </main>
-      <aside class="timeline" aria-label="Folhas por data de criação">
+      <aside class="timeline" aria-label="Documentos da Mesa">
+        <div class="desk-project"><span class="eyebrow">PROJETO ATUAL</span><button id="desk-project">Folhas avulsas</button><div class="document-scope" role="group" aria-label="Organizar documentos"><button id="scope-project" aria-pressed="false">Do projeto</button><button id="scope-dates" aria-pressed="true">Por data</button></div></div>
         <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="note-browser">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
         <p id="timeline-hint" class="sr-only">Escolha um mês, depois um dia. Escolha o título para abrir a nota. A busca encontra notas de todas as datas.</p>
         <div class="wheel-window" id="note-browser"><nav id="date-path" class="date-path" aria-label="Pastas por data"></nav><p id="navigator-status" class="navigator-status" role="status" aria-live="polite"></p><div id="timeline-list" tabindex="0" role="region" aria-label="Notas por data" aria-describedby="timeline-hint"></div></div>
+      </aside>
+      <aside id="desk-inspector" class="desk-inspector" aria-label="Contagem e instrumentos do texto">
+        <div class="inspector-heading"><h2>OLHAR DO TEXTO</h2><button id="desk-counts-close" aria-label="Recolher contagem">×</button></div>
+        <section class="desk-count"><span class="eyebrow">NESTA FOLHA</span><strong id="desk-words">0</strong><span>palavras</span><dl><dt>Caracteres</dt><dd id="desk-characters">0</dd><dt>Parágrafos</dt><dd id="desk-paragraphs">0</dd></dl><p id="desk-count-status" class="quiet">Contagem do corpo do texto.</p><button id="desk-refresh">Atualizar contagem</button></section>
+        <section class="desk-instruments"><h3>LINGUAGEM</h3><button id="desk-conventions">Convenções e gramática ↗</button><button id="desk-rhythm">Ritmo e cadência ↗</button><button id="desk-dialogue">Linhas de diálogo ↗</button><p class="quiet">Escolha um instrumento para observar o texto.</p></section>
+        <section class="desk-custody"><h3>SUA FOLHA</h3><button id="desk-project-change">Mudar de projeto ↗</button><button id="desk-trash">Mover para a lixeira</button></section>
       </aside>
     </div>
   </div>
@@ -2136,12 +2306,31 @@ SOFTWARE.
 
 </script>
   <script>
+(function (root) {
+  'use strict';
+  /* Contagem descritiva, sem diagnóstico. Um composto hifenizado conta como
+     palavra; números contam. Caracteres são pontos de código, com espaços. */
+  root.Escr.countManuscript = function (value) {
+    var words = 0, characters = 0, i, code;
+    var pattern = /[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+(?:[-'’][A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+)*|[0-9]+/g;
+    while (pattern.exec(value)) { words += 1; }
+    for (i = 0; i < value.length; i += 1) {
+      code = value.charCodeAt(i); characters += 1;
+      if (code >= 55296 && code <= 56319 && i + 1 < value.length && value.charCodeAt(i + 1) >= 56320 && value.charCodeAt(i + 1) <= 57343) { i += 1; }
+    }
+    return { words: words, characters: characters, paragraphs: value.split(/\r\n|\r|\n/).filter(function (line) { return /\S/.test(line); }).length };
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
 (function () {
   'use strict';
   var E = window.Escr, vault = E.createVault(E.knowledge), storage = null, archive = null;
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
+  var projectScope = false, readingSize = 21;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, deleteTarget = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
@@ -2158,7 +2347,7 @@ SOFTWARE.
   function pad(n) { return n < 10 ? '0' + n : String(n); }
   function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
   function noteDate(entry) { return entry.created || entry.updated; }
-  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, text: entry.text || '', created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
+  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, text: entry.text || '', project: entry.project || '', created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
   function monthLabel(key) { return months[Number(key.slice(5, 7)) - 1] + ' ' + key.slice(0, 4); }
   function dayLabel(key) { var d = new Date(Number(key.slice(0, 4)), Number(key.slice(5, 7)) - 1, Number(key.slice(8, 10))); return d.getDate() + ' · ' + ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'][d.getDay()]; }
   function openNote(entry) {
@@ -2171,7 +2360,7 @@ SOFTWARE.
     } catch (e) { message('Não foi possível abrir esta nota. Sua escrita permanece aqui.'); }
   }
   function browseDate(month, day) {
-    navMonth = month; navDay = day; timelineCount = 40; byId('timeline-list').scrollTop = 0; renderTimeline(false);
+    projectScope = false; navMonth = month; navDay = day; timelineCount = 40; byId('timeline-list').scrollTop = 0; renderTimeline(false);
   }
   function renderTimeline(refresh, previousId, reveal) {
     var list = byId('timeline-list'), date = new Date(noteDate(doc)), active = null, oldScroll = list.scrollTop, result;
@@ -2184,17 +2373,24 @@ SOFTWARE.
     }
     timelineEntries = timelineEntries.filter(function (entry) { return entry.id !== doc.id && entry.id !== previousId; });
     var current = metadata(doc); current.title = title.value; current.text = manuscript.value; timelineEntries.push(current);
-    var model = E.browseNotes(timelineEntries, { month: navMonth, day: navDay, query: byId('note-search').value });
+    var inProject = projectScope && !byId('note-search').value;
+    var entries = inProject ? timelineEntries.filter(function (entry) { return (entry.project || '') === (doc.project || ''); }) : timelineEntries;
+    var model = E.browseNotes(entries, { month: navMonth, day: navDay, query: byId('note-search').value });
+    if (inProject) { model.notes = entries.slice().sort(function (a, b) { return a.created < b.created ? -1 : a.created > b.created ? 1 : 0; }); }
+    text(byId('desk-project'), doc.project || 'Folhas avulsas');
+    byId('scope-project').setAttribute('aria-pressed', projectScope ? 'true' : 'false');
+    byId('scope-dates').setAttribute('aria-pressed', projectScope ? 'false' : 'true');
     var path = byId('date-path'); path.textContent = '';
     byId('clear-search').hidden = !byId('note-search').value;
-    if (model.query) { paragraph(path, 'Resultados em todas as notas', 'path-label'); }
+    if (inProject) { paragraph(path, doc.project || 'Folhas avulsas', 'path-label'); }
+    else if (model.query) { paragraph(path, 'Resultados em todas as notas', 'path-label'); }
     else {
       button(path, 'Meses', function () { browseDate('', ''); });
       if (navMonth) { button(path, monthLabel(navMonth), function () { browseDate(navMonth, ''); }); }
       if (navDay) { var day = paragraph(path, dayLabel(navDay), 'path-label'); day.setAttribute('aria-current', 'page'); }
     }
     list.textContent = '';
-    var groups = !model.query && !navDay ? (navMonth ? model.days : model.months) : null;
+    var groups = !inProject && !model.query && !navDay ? (navMonth ? model.days : model.months) : null;
     timelineTotal = groups ? 0 : model.notes.length;
     if (groups) {
       groups.forEach(function (group) {
@@ -2237,7 +2433,7 @@ SOFTWARE.
       message(saved.conflict ? 'Outra versão foi preservada no acervo.' : 'Guardado neste aparelho.');
       try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Só a preferência de abertura falhou. */ }
       if (!byId('acervo').hidden) { renderArchive(); }
-      renderTimeline(false, previousId); saveSession();
+      renderTimeline(false, previousId); refreshCounts(); saveSession();
       return true;
     } catch (e) { message('Não foi possível guardar. Seu texto está na folha; baixe uma cópia em Ajustes.'); return false; }
   }
@@ -2250,7 +2446,7 @@ SOFTWARE.
   }
   function changed() {
     growManuscript();
-    dirty = true; invalidate(); window.clearTimeout(timer);
+    dirty = true; invalidate(); text(byId('desk-count-status'), 'Texto alterado · contagem será atualizada ao guardar.'); window.clearTimeout(timer);
     if (!composing) { timer = window.setTimeout(persist, 1000); }
   }
   function noteLabel(parent, name, when) {
@@ -2347,7 +2543,7 @@ SOFTWARE.
     try {
       storage.setItem(sessionKey, JSON.stringify({ version: 1, view: cabinetOpen ? 'gabinete' : 'mesa', documentId: doc.noteId || doc.id,
         recordId: doc.id, start: manuscript.selectionStart || 0, end: manuscript.selectionEnd || 0, scroll: manuscript.scrollTop || 0,
-        project: cabinetProject, panel: activePanel, immersion: immersion, month: navMonth, day: navDay,
+        project: cabinetProject, panel: activePanel, immersion: immersion, month: navMonth, day: navDay, projectScope: projectScope,
         search: byId('cabinet-search').value, noteSearch: byId('note-search').value,
         windowHidden: byId('cabinet-window').hidden, maximized: byId('cabinet-window').getAttribute('data-maximized') === 'true',
         left: byId('cabinet-window').style.left || '', top: byId('cabinet-window').style.top || '' }));
@@ -2370,7 +2566,7 @@ SOFTWARE.
       byId('note-search').value = typeof state.noteSearch === 'string' ? state.noteSearch.slice(0, 1000) : '';
       if (/^\d{4}-\d{2}$/.test(state.month)) { navMonth = state.month; }
       if (/^\d{4}-\d{2}-\d{2}$/.test(state.day)) { navDay = state.day; }
-      renderCabinet(); renderTimeline(false);
+      projectScope = state.projectScope === true; renderCabinet(); renderTimeline(false);
       if (state.view === 'mesa' && state.documentId === (doc.noteId || doc.id)) {
         enterDesk(false);
         if (state.immersion === true) { immersion = true; document.body.setAttribute('data-immersion', 'true'); byId('immersion-toggle').setAttribute('aria-pressed', 'true'); byId('leave-focus').hidden = false; sizeWorkspace(); }
@@ -2466,6 +2662,7 @@ SOFTWARE.
     manuscript.scrollTop = Math.max(0, textPosition(start).top - manuscript.clientHeight / 3); updateFocus();
   }
   function collapseTimeline() {
+    byId('desk-documents').setAttribute('aria-expanded', 'false');
     byId('timeline-toggle').setAttribute('aria-expanded', 'false');
     byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', 'false');
   }
@@ -2493,6 +2690,7 @@ SOFTWARE.
     var start = manuscript.selectionStart, end = manuscript.selectionEnd, scroll = manuscript.scrollTop;
     var oldInset = manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0;
     cancelTypewriter(); closePanels(false); collapseTimeline();
+    document.body.setAttribute('data-counts', 'false'); byId('desk-counts').setAttribute('aria-expanded', 'false');
     immersion = enabled; document.body.setAttribute('data-immersion', enabled ? 'true' : 'false');
     byId('immersion-toggle').setAttribute('aria-pressed', enabled ? 'true' : 'false');
     byId('leave-focus').hidden = !enabled;
@@ -2577,7 +2775,7 @@ SOFTWARE.
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.'); updatePath();
-    renderTimeline(true, null, true);
+    renderTimeline(true, null, true); refreshCounts();
   }
   function renderArchive() {
     var list = byId('document-list'); list.textContent = '';
@@ -2808,7 +3006,7 @@ SOFTWARE.
   function enterDesk(focusEditor) {
     toggleStart(false);
     closePanels(false); collapseTimeline(); desktopDrag = null; cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
-    document.body.setAttribute('data-view', 'mesa'); updatePath();
+    document.body.setAttribute('data-view', 'mesa'); updatePath(); refreshCounts();
     sizeWorkspace(); cancelTypewriter();
     if (focusEditor !== false) { manuscript.focus(); }
     if (cabinetSelection && cabinetSelection.noteId === (doc.noteId || doc.id)) {
@@ -2849,6 +3047,7 @@ SOFTWARE.
     document.body.setAttribute('data-letter', style);
     byId('font-literary').setAttribute('aria-pressed', style === 'literaria' ? 'true' : 'false');
     byId('font-typewriter').setAttribute('aria-pressed', style === 'maquina' ? 'true' : 'false');
+    text(byId('desk-font'), style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
     focusMeasure = null; typewriterInsets(); growManuscript();
     if (typeof start === 'number') { manuscript.setSelectionRange(start, end); }
     try { if (storage) { storage.setItem('escrevaral.astra.letter', style); } } catch (ignore) { /* Préférence facultativa. */ }
@@ -2866,7 +3065,7 @@ SOFTWARE.
   listen(window, 'resize', function () { resetDesktopWindow(); sizeWorkspace(); });
   listen(window, 'load', sizeWorkspace);
   if (window.visualViewport) { listen(window.visualViewport, 'resize', sizeWorkspace); }
-  listen(byId('timeline-toggle'), 'click', function () { var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
+  listen(byId('timeline-toggle'), 'click', function () { document.body.setAttribute('data-counts', 'false'); byId('desk-counts').setAttribute('aria-expanded', 'false'); var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-toggle').parentNode.parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
   listen(byId('mesa-close'), 'click', function () { closePanels(true); });
   listen(byId('acervo-close'), 'click', function () { closePanels(true); });
   listen(byId('panel-backdrop'), 'click', function () { closePanels(true); });
@@ -2901,7 +3100,7 @@ SOFTWARE.
   listen(byId('leave-focus'), 'click', leaveImmersion);
   listen(byId('machine-toggle'), 'click', function () { setMachine(!machineEnabled); });
   listen(manuscript, 'input', machineInput);
-  listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
+  listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); byId('desk-paragraph').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
   listen(manuscript, 'compositionstart', function () {
     cancelTypewriter(); window.clearTimeout(focusTimer); updateFocus();
@@ -2914,7 +3113,7 @@ SOFTWARE.
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });
   listen(byId('back-writing'), 'click', returnToWriting);
-  function newDocument() { if (!persist()) { return; } var next = E.freshDocument(); next.project = cabinetOpen ? cabinetProject || '' : projectName(doc.project); loadDocument(next); dirty = true; persist(); renderTimeline(false, null, true); cabinetSelection = null; enterDesk(false); byId('back-cabinet').focus(); }
+  function newDocument() { if (!persist()) { return; } var next = E.freshDocument(); next.project = cabinetOpen ? cabinetProject || '' : projectName(doc.project); loadDocument(next); dirty = true; persist(); renderTimeline(false, null, true); cabinetSelection = null; enterDesk(false); byId('path-document').focus(); }
   listen(byId('new-document'), 'click', newDocument);
   listen(byId('timeline-new'), 'click', newDocument);
   for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }
@@ -2971,6 +3170,7 @@ SOFTWARE.
     if ((event.ctrlKey || event.metaKey) && code === 75) { event.preventDefault(); closePanels(false); (cabinetOpen ? byId('cabinet-search') : byId('note-search')).focus(); }
     else if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); if (cabinetOpen) { enterDesk(); } showPanel('oficina', 'examinar-toggle', true); panelTrigger = manuscript; lensButtons[0].focus(); }
     else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
+    else if (code === 27 && document.body.getAttribute('data-counts') === 'true') { byId('desk-counts-close').click(); }
     else if (code === 27) { if (activePanel) { closePanels(true); } else if (immersion) { leaveImmersion(); } else if (!cabinetOpen) { if (byId('timeline-toggle').getAttribute('aria-expanded') === 'true') { collapseTimeline(); } else { openCabinet(false); } } else if (!byId('project-form').hidden) { byId('project-cancel').click(); } }
   });
 
@@ -2978,6 +3178,15 @@ SOFTWARE.
   listen(byId('os-desk'), 'click', enterDesk);
   listen(byId('os-arrange'), 'click', function () { resetDesktopWindow(); desktopWindow('open'); });
   listen(byId('os-start'), 'click', function () { toggleStart(byId('start-menu').hidden); });
+  function outsideStart(event) {
+    if (byId('start-menu').hidden) { return; }
+    var node = event.target;
+    while (node) { if (node === byId('start-menu') || node === byId('os-start')) { return; } node = node.parentNode; }
+    toggleStart(false);
+  }
+  listen(document, 'click', outsideStart);
+  listen(document, 'touchstart', outsideStart);
+  listen(document, 'focusin', outsideStart);
   listen(byId('os-window-task'), 'click', function () { if (!cabinetOpen) { openCabinet(false); } else { desktopWindow(byId('cabinet-window').hidden ? 'open' : 'minimize'); } });
   listen(byId('window-minimize'), 'click', function () { desktopWindow('minimize'); });
   listen(byId('window-close'), 'click', function () { desktopWindow('close'); });
@@ -3056,6 +3265,45 @@ SOFTWARE.
   listen(byId('font-typewriter'), 'click', function () { chooseFont('maquina'); });
   try { chooseFont(storage ? storage.getItem('escrevaral.astra.letter') : 'literaria'); } catch (ignore) { chooseFont('literaria'); }
   try { restrictedPaste = !!storage && storage.getItem('escrevaral.astra.restricted-paste') === 'on'; byId('paste-mode').setAttribute('aria-pressed', restrictedPaste ? 'true' : 'false'); } catch (ignore) {}
+
+  function refreshCounts() {
+    var counts = E.countManuscript(manuscript.value);
+    text(byId('desk-words'), counts.words.toLocaleString('pt-BR'));
+    text(byId('desk-characters'), counts.characters.toLocaleString('pt-BR'));
+    text(byId('desk-paragraphs'), counts.paragraphs);
+    text(byId('desk-count-status'), 'Corpo do texto · caracteres incluem espaços; cada linha não vazia conta como parágrafo.');
+  }
+  function resizeLetter(value) {
+    readingSize = Math.max(16, Math.min(30, Number(value) || 21));
+    manuscript.style.fontSize = readingSize + 'px'; text(byId('type-size'), readingSize);
+    byId('type-smaller').disabled = readingSize <= 16; byId('type-larger').disabled = readingSize >= 30;
+    focusMeasure = null; typewriterInsets(); growManuscript();
+    try { if (storage) { storage.setItem('escrevaral.astra.font-size', String(readingSize)); } } catch (ignore) {}
+  }
+  function inspectWith(lens) {
+    analysisRange = null; showPanel('oficina', 'examinar-toggle', true); if (lens) { examine(lens); }
+  }
+  listen(byId('desk-project'), 'click', function () { pathToProjects(false); });
+  listen(byId('scope-project'), 'click', function () { projectScope = true; timelineCount = 40; renderTimeline(true, null, true); queueSession(); });
+  listen(byId('scope-dates'), 'click', function () { projectScope = false; renderTimeline(true, null, true); queueSession(); });
+  listen(byId('desk-documents'), 'click', function () { byId('timeline-toggle').click(); this.setAttribute('aria-expanded', byId('timeline-toggle').getAttribute('aria-expanded')); });
+  listen(byId('desk-font'), 'click', function () { chooseFont(document.body.getAttribute('data-letter') === 'maquina' ? 'literaria' : 'maquina'); });
+  listen(byId('type-smaller'), 'click', function () { resizeLetter(readingSize - 1); });
+  listen(byId('type-larger'), 'click', function () { resizeLetter(readingSize + 1); });
+  listen(byId('desk-paragraph'), 'click', function () { byId('focus-toggle').click(); this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); });
+  listen(byId('desk-print'), 'click', function () { byId('print-document').click(); });
+  listen(byId('desk-export'), 'click', function () { byId('export-text').click(); });
+  listen(byId('desk-counts'), 'click', function () { var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); document.body.setAttribute('data-counts', open ? 'true' : 'false'); if (open) { collapseTimeline(); refreshCounts(); } });
+  listen(byId('desk-counts-close'), 'click', function () { document.body.setAttribute('data-counts', 'false'); byId('desk-counts').setAttribute('aria-expanded', 'false'); byId('desk-counts').focus(); });
+  listen(byId('desk-refresh'), 'click', refreshCounts);
+  listen(byId('desk-conventions'), 'click', function () { inspectWith(''); });
+  listen(byId('desk-rhythm'), 'click', function () { inspectWith('ritmo'); });
+  listen(byId('desk-dialogue'), 'click', function () { inspectWith('dialogo'); });
+  listen(byId('desk-project-change'), 'click', function () { showPanel('mesa', 'mesa-toggle', true); byId('note-project').focus(); });
+  listen(byId('desk-trash'), 'click', function () { trashEntry(doc); });
+  try { resizeLetter(storage ? storage.getItem('escrevaral.astra.font-size') : 21); } catch (ignore) { resizeLetter(21); }
+  byId('desk-paragraph').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
+
   openCabinet(true); renderReminders(); restoreSession(); sessionReady = true;
 
   listen(document, 'visibilitychange', function () { if (document.hidden) { checkpoint(); stopSound(); stopMachineStrike(); finishMachineFeed(); } });

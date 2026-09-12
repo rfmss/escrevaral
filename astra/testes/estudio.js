@@ -1,6 +1,14 @@
 'use strict';
 module.exports = function (h) {
   var a = h.assert, E = h.E, v = h.vault;
+  h.test('Contagem da Mesa: compostos, números, emoji, linhas vazias e corpo literal', function () {
+    var c = E.countManuscript('guarda-chuva 42 café 😀\r\n\r\n— bom dia');
+    a.strictEqual(c.words, 5); a.strictEqual(c.paragraphs, 2);
+    a.strictEqual(E.countManuscript('😀 ').characters, 2);
+    a.strictEqual(E.countManuscript('\n  \n').paragraphs, 0);
+    a.strictEqual(E.countManuscript('“texto citado”').words, 2);
+    a.strictEqual(E.countManuscript('').words, 0);
+  });
   h.test('Estilo: formas registradas, NFD e fronteiras; não classifica qualquer -mente', function () {
     var text = '😀 rapidamente, FACILMENTE e sile\u0302nciomente. mente semente demente Clemente inventadamente. “lentamente”';
     var fs = v.analyze('adverbios', text).findings;

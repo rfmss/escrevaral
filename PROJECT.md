@@ -51,7 +51,7 @@ Não usar como requisito do runtime: módulos/imports modernos, `async/await`, `
 | iPad mini de 2012, MD531GP/A, iOS 9.3.5 | Alvo legado prioritário | Versão atual ainda sem validação física de abertura, edição, análise e preservação |
 | Android KitKat | Alvo legado secundário | Sem validação física desta versão |
 | Navegadores atuais | Também devem funcionar | Compatibilidade pretendida; a bateria de lógica não substitui verificação visual e interação |
-| V8/Linux da oficina | Testes e medições locais | 481 verificações aprovadas, sintaxe ES5, equivalência portátil e cenários com rede/APIs modernas bloqueadas |
+| V8/Linux da oficina | Testes e medições locais | 486 verificações aprovadas, sintaxe ES5, equivalência portátil e cenários com rede/APIs modernas bloqueadas |
 
 A data “2012” é uma referência de recursos, não uma certificação de versão. Compare APIs com o navegador efetivo e mantenha fallback. Não há meta numérica universal de RAM, bateria ou milissegundos aprovada; registre medidas reais e o ambiente, sem inventar orçamento.
 
@@ -63,7 +63,11 @@ SCRVRL OS abre numa área de trabalho com projetos/folhas e lembretes. Aplicativ
 
 Quinze lentes em quatro categorias visuais e sete famílias de desenvolvimento: Convenções, Gramática, Escolhas de escrita e Poesia. Crase, concordância de haver/existir/fazer, repetição próxima e ritmo foram acrescentados; a nova etapa inclui 50 formas em -mente e proporção de palavras em linhas com travessão; infinitivos ganharam contexto delimitado. Há 884 formas verbais exatas, 65 lemas para o recorte contextual, 1.447 expressões e 18 observações decoloniais. Contagem de entradas não significa cobertura integral ou revisão linguística independente.
 
-O arquivo portátil após a rodada de papel, foco e impressão tem 670.087 bytes (entrega anterior de engines: 456.821). A bancada não representa tempo de WebKit, memória do iPad nem taxa geral de acerto linguístico. Medições e limites estão em `astra/MATURACAO.md`.
+O arquivo portátil após a rodada de papel, foco e impressão tem 691.792 bytes (entrega anterior de engines: 456.821). A bancada não representa tempo de WebKit, memória do iPad nem taxa geral de acerto linguístico. Medições e limites estão em `astra/MATURACAO.md`.
+
+## Mesa editorial conectada — 12/09/2026
+
+Anexo `escrevaral-eink.tar(1).gz` adaptado à base existente: título e data no cabeçalho; folhas à esquerda por projeto ou data; mesmo textarea ao centro; contagem descritiva e acesso explícito às lentes à direita. Fonte/tamanho (16–30 px), parágrafo, foco, baixar, imprimir, projeto e lixeira ligados aos controles existentes. Laterais recolhíveis em telas estreitas; teclado reduz o cabeçalho. Início fecha ao clicar/tocar fora ou navegar com foco para fora. Comandos de formatação rica, metas, contadores fictícios, versões e avaliações demonstrativas não entraram. Sem novas fontes, redes ou dependências. `maquina/contagem.js` faz contagem literal separada do DOM, atualizada ao guardar ou pedir; não dispara lentes. Testes simulados cobrem seleção, troca de projeto, busca global, tamanho e fechamento do menu; aparência em navegador e aparelho físico ainda pendentes.
 
 ## Fundação do Estúdio — 12/09/2026
 
