@@ -4,18 +4,18 @@
   var prefix = 'escrevaral.astra.v1.doc.', counter = 0;
   function uid() { counter += 1; return new Date().getTime().toString(36) + '-' + Math.random().toString(36).slice(2, 10) + '-' + counter; }
   function valid(doc) {
-    return doc && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
+    return doc && (typeof doc.trashed === 'undefined' || typeof doc.trashed === 'boolean') && (typeof doc.kind === 'undefined' || doc.kind === 'reminder') && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
   }
   function fresh() { var now = new Date().toISOString(), id = uid(); return { id: id, noteId: id, title: '', text: '', created: now, updated: now, revision: 0, dismissed: [] }; }
   function dateOf(doc) { return doc.created || doc.updated; }
   function createArchive(storage) {
     function get(id) { var raw = storage.getItem(prefix + id), doc = raw ? JSON.parse(raw) : null; if (doc && !valid(doc)) { throw new Error('Esta folha não pôde ser lida. Sua cópia guardada foi preservada.'); } return doc; }
-    function list() {
+    function list(includeAll) {
       var docs = [], unreadable = 0, i, key, doc;
       for (i = 0; i < storage.length; i += 1) {
         key = storage.key(i);
         if (key && key.indexOf(prefix) === 0) {
-          try { doc = get(key.slice(prefix.length)); if (doc) { docs.push(doc); } } catch (e) { unreadable += 1; }
+          try { doc = get(key.slice(prefix.length)); if (doc && (includeAll || (!doc.trashed && doc.kind !== 'reminder'))) { docs.push(doc); } } catch (e) { unreadable += 1; }
         }
       }
       docs.sort(function (a, b) { return Date.parse(dateOf(b)) - Date.parse(dateOf(a)) || ((a.noteId || a.id) < (b.noteId || b.id) ? -1 : (a.noteId || a.id) > (b.noteId || b.id) ? 1 : 0); });
@@ -36,7 +36,16 @@
       if (current && !conflict) { try { storage.removeItem(prefix + doc.id); } catch (e) { /* Cópia extra no acervo. */ } }
       return { document: copy, conflict: conflict };
     }
-    return { get: get, list: list, save: save, fresh: fresh };
+    function trash(doc, value) {
+      var copy = JSON.parse(JSON.stringify(doc)); copy.trashed = value !== false; return save(copy);
+    }
+    function purge(doc) {
+      var current = get(doc.id);
+      if (!current || !current.trashed || current.revision !== doc.revision) { throw new Error('A folha mudou. Abra a lixeira novamente antes de excluir.'); }
+      storage.removeItem(prefix + doc.id);
+      if (storage.getItem(prefix + doc.id) !== null) { throw new Error('A exclusão não foi concluída.'); }
+    }
+    return { get: get, list: list, save: save, fresh: fresh, trash: trash, purge: purge };
   }
   function dateKey(entry) {
     var d = new Date(dateOf(entry));

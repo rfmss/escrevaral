@@ -72,7 +72,7 @@ module.exports = function (h) {
   });
   h.test('Triagem: cada botão tem política, alcance e execução isolada', function () {
     var html = h.source('index.html'), ids = Array.from(html.matchAll(/data-lens="([^"]+)"/g), function (m) { return m[1]; });
-    a.strictEqual(ids.length, 13);
+    a.strictEqual(ids.length, 15);
     ids.forEach(function (id) { a.ok(E.lensPolicies[id]); a.ok(E.lensCatalog.some(function (p) { return p.id === id && p.scope && p.group; })); });
     a.ok(!/knowledge\.rules|builtin\(|protectedText|forms\[/.test(h.source('maquina/cofre.js')));
   });

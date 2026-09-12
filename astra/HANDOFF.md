@@ -101,3 +101,10 @@ Janela de escritos: arrasto por mouse/toque apenas em telas largas, limitado à 
 Acabamento: Phosphor monocromático preservado, filetes sólidos/pontilhados e enquadramento sem sombra dura ou grade xadrez. Oswald 600 reaproveitada do legado, convertida na oficina em WOFF estático latino de 23.056 bytes; licença OFL/origem/hash no CSS. Oswald nos títulos/réguas, Arial nos comandos e Noto Serif no manuscrito; Courier Prime continua alternativa. Sem dependência adicional de execução. Sem inserir contadores, gramatura ou funções fictícias das referências.
 
 467 verificações passaram, incluindo minimizar/fechar/restaurar sem perder texto, busca que restaura a janela, arrasto limitado, botões sem arrasto involuntário e toque em tela estreita. Sintaxe ES5 e edição portátil conferidas. Portátil 638.258 bytes. Nenhuma validação visual de navegador ou física do iPad; a inspeção funcional não atesta aparência final.
+
+
+## Fundação do Estúdio e orientação — 12/09/2026
+
+Entrega seguinte ao desktop editorial: Início permanente, aplicativos no menu, caminho clicável, lembretes textuais no desktop, estado de sessão, lixeira/restauração/exclusão confirmada e cópia interna por seleção. Novas lentes `adverbios` e `dialogo`; quinze no total. Contrato de análise vincula resultado a documento, registro, revisão e recorte UTF-16.
+
+481 verificações passaram; portátil 670.087 bytes. Verificação lógica, ES5 e equivalência portátil; não houve teste visual de navegador nem físico no iPad. Documento canônico desta etapa: [ESTUDIO.md](ESTUDIO.md), com o mapa aprovado, contratos e pendências. Os pedidos estão aprovados; continuar a migração de projetos com IDs e conectar Varal → Mesa → Revisão, sem apresentar a fundação como Estúdio completo. Os anexos de React e e-ink continuam referências, não o runtime.

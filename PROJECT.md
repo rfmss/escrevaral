@@ -1,6 +1,6 @@
 # Escrevaral — memória operacional
 
-Atualizado em 11/09/2026. Este é o mapa do estado atual, não um segundo histórico do projeto.
+Atualizado em 12/09/2026. Este é o mapa do estado atual, não um segundo histórico do projeto.
 
 ## Propósito e forma de trabalhar
 
@@ -51,7 +51,7 @@ Não usar como requisito do runtime: módulos/imports modernos, `async/await`, `
 | iPad mini de 2012, MD531GP/A, iOS 9.3.5 | Alvo legado prioritário | Versão atual ainda sem validação física de abertura, edição, análise e preservação |
 | Android KitKat | Alvo legado secundário | Sem validação física desta versão |
 | Navegadores atuais | Também devem funcionar | Compatibilidade pretendida; a bateria de lógica não substitui verificação visual e interação |
-| V8/Linux da oficina | Testes e medições locais | 467 verificações aprovadas, sintaxe ES5, equivalência portátil e cenários com rede/APIs modernas bloqueadas |
+| V8/Linux da oficina | Testes e medições locais | 481 verificações aprovadas, sintaxe ES5, equivalência portátil e cenários com rede/APIs modernas bloqueadas |
 
 A data “2012” é uma referência de recursos, não uma certificação de versão. Compare APIs com o navegador efetivo e mantenha fallback. Não há meta numérica universal de RAM, bateria ou milissegundos aprovada; registre medidas reais e o ambiente, sem inventar orçamento.
 
@@ -59,11 +59,17 @@ Uma visita ao link não garante reabertura sem internet. O HTML portátil reúne
 
 ## Estado funcional
 
-SCRVRL OS abre numa área de trabalho com ícones de oficina, menus, barra de tarefas e janela móvel de projetos/folhas; busca global e retomada preservadas; abrir uma folha revela o editor existente. Projetos são agrupamentos por nome guardados nas próprias folhas, preservados nas cópias JSON e importações. Editor local com título e hora fixa de criação, navegação mês → dia → notas, busca por título e texto, importação aditiva e exportação. Superfície sage/nanquim no claro e grafite no escuro; Arial nos comandos, Oswald estática local nos títulos/réguas, Noto Serif no manuscrito e Courier Prime como opção local de escrita, destaque opcional por parágrafo, modo foco completo e linha ativa a 42% da altura útil. Impressão da folha em A4 limpa, separada do campo de edição; textura estática de papel e marcação reta das notas. Máquina antiga adiada, controle recolhido nesta rodada (código anterior preservado): máquina recortada em carimbo estático (PNG transparente de 12.938 bytes), folha ampliada, haste dirigida à posição de escrita e retorno ao inserir nova linha. Cursores personalizados adiados por pedido de Rafa.
+SCRVRL OS abre numa área de trabalho com projetos/folhas e lembretes. Aplicativos ficam no menu Início; barra de tarefas e caminho clicável permanecem visíveis em todas as áreas, inclusive no foco. Há lixeira, restauração e exclusão definitiva com confirmação. Sessão reabre área, documento, seleção e rolagem no último estado gravado; busca global e retomada preservadas; abrir uma folha revela o editor existente. Projetos são agrupamentos por nome guardados nas próprias folhas, preservados nas cópias JSON e importações. Editor local com título e hora fixa de criação, navegação mês → dia → notas, busca por título e texto, importação aditiva e exportação. Superfície sage/nanquim no claro e grafite no escuro; Arial nos comandos, Oswald estática local nos títulos/réguas, Noto Serif no manuscrito e Courier Prime como opção local de escrita, destaque opcional por parágrafo, modo foco completo e linha ativa a 42% da altura útil. Impressão da folha em A4 limpa, separada do campo de edição; textura estática de papel e marcação reta das notas. Máquina antiga adiada, controle recolhido nesta rodada (código anterior preservado): máquina recortada em carimbo estático (PNG transparente de 12.938 bytes), folha ampliada, haste dirigida à posição de escrita e retorno ao inserir nova linha. Cursores personalizados adiados por pedido de Rafa.
 
-Treze lentes em quatro categorias: Convenções, Gramática, Escolhas de escrita e Poesia. Crase, concordância de haver/existir/fazer, repetição próxima e ritmo foram acrescentados; infinitivos ganharam contexto delimitado. Há 884 formas verbais exatas, 65 lemas para o recorte contextual, 1.447 expressões e 18 observações decoloniais. Contagem de entradas não significa cobertura integral ou revisão linguística independente.
+Quinze lentes em quatro categorias visuais e sete famílias de desenvolvimento: Convenções, Gramática, Escolhas de escrita e Poesia. Crase, concordância de haver/existir/fazer, repetição próxima e ritmo foram acrescentados; a nova etapa inclui 50 formas em -mente e proporção de palavras em linhas com travessão; infinitivos ganharam contexto delimitado. Há 884 formas verbais exatas, 65 lemas para o recorte contextual, 1.447 expressões e 18 observações decoloniais. Contagem de entradas não significa cobertura integral ou revisão linguística independente.
 
-O arquivo portátil após a rodada de papel, foco e impressão tem 638.258 bytes (entrega anterior de engines: 456.821). A bancada não representa tempo de WebKit, memória do iPad nem taxa geral de acerto linguístico. Medições e limites estão em `astra/MATURACAO.md`.
+O arquivo portátil após a rodada de papel, foco e impressão tem 670.087 bytes (entrega anterior de engines: 456.821). A bancada não representa tempo de WebKit, memória do iPad nem taxa geral de acerto linguístico. Medições e limites estão em `astra/MATURACAO.md`.
+
+## Fundação do Estúdio — 12/09/2026
+
+[ESTUDIO.md](astra/ESTUDIO.md) consolida o desenho aprovado, contratos, checklist e divergências do protótipo/documento. Análises carregam identidade/revisão da folha, recorte, versões e posições no original. Projetos ainda se agrupam por nome; IDs estáveis e a migração das fichas/cenas estão especificados, não ativos. O Estúdio completo ainda não foi conectado.
+
+Seleção copia para memória interna; recortar, colar internamente e analisar trecho são ações reais. Cópia para aplicativos externos é separada e tem alternativa nativa. Restrição de colagem externa é opção em Ajustes; não certifica origem humana. Backup inclui lembretes e lixeira. Sublinhado persistente, .scrvrl, formatos editoriais avançados e prova de autoria continuam pendentes.
 
 ## Retomada e atualização
 

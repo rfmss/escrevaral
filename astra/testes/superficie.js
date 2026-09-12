@@ -24,7 +24,7 @@ module.exports = function (h) {
     Node.prototype.emit = function (name, props) { var node = this; var event = props || {}; event.preventDefault = event.preventDefault || function () {}; (this.handlers[name] || []).slice().forEach(function (fn) { fn.call(node, event); }); };
     var html = h.source('index.html'), matches = html.match(/id="[^"]+"/g);
     matches.forEach(function (attr) { nodes[attr.slice(4, -1)] = new Node('div'); });
-    ['mesa', 'acervo', 'oficina', 'reset-dismissed', 'machine-shell', 'leave-focus'].forEach(function (id) { nodes[id].hidden = true; });
+    ['mesa', 'acervo', 'oficina', 'reset-dismissed', 'machine-shell', 'leave-focus', 'start-menu', 'delete-confirm'].forEach(function (id) { nodes[id].hidden = true; });
     nodes['timeline-list'].parentNode = new Node('div');
     nodes['timeline-toggle'].parentNode = new Node('div');
     nodes['timeline-toggle'].parentNode.parentNode = new Node('aside');
@@ -56,7 +56,7 @@ module.exports = function (h) {
       import: function (name, contents) { nodes['import-file'].files = [{ name: name, size: contents.length, contents: contents }]; nodes['import-file'].emit('change'); },
       finishImport: function () { readers[readers.length - 1].onload(); },
       button: function (node, label) { return node.childNodes.filter(function (x) { return x.tagName === 'button' && x.textContent === label; })[0]; },
-      shortTimers: function () { return Object.keys(timers).filter(function (id) { return timers[id].delay < 1000; }).length; }
+      shortTimers: function () { return Object.keys(timers).filter(function (id) { return timers[id].delay < 1000 && timers[id].delay !== 350; /* Temporizador de sessão não é movimento/análise. */ }).length; }
     };
   }
   test('Interface: painel exclusivo, fechamento e retorno ao controle de origem', function () {
@@ -525,7 +525,7 @@ module.exports = function (h) {
     a.nodes['os-window-task'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false);
     a.nodes['window-maximize'].click(); assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'true');
     a.nodes['window-close'].click(); assert.strictEqual(a.nodes['os-window-task'].hidden, true);
-    a.nodes['os-start'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false); assert.strictEqual(a.nodes['os-window-task'].hidden, false);
+    a.nodes['os-start'].click(); assert.strictEqual(a.nodes['start-menu'].hidden, false); a.nodes['start-projects'].click(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false); assert.strictEqual(a.nodes['os-window-task'].hidden, false);
     a.nodes['os-arrange'].click(); assert.strictEqual(a.nodes['cabinet-window'].getAttribute('data-maximized'), 'false');
     a.nodes['window-close'].click(); a.type('cabinet-search', 'quarto'); a.flush(); assert.strictEqual(a.nodes['cabinet-window'].hidden, false);
     a.nodes['cabinet-notes'].childNodes[0].click(); assert.strictEqual(a.nodes.manuscrito.value, 'Janela para o mar');
@@ -541,6 +541,59 @@ module.exports = function (h) {
     hnd.emit('mousedown', { target: control, button: 0, clientX: 620, clientY: 110 }); a.document.emit('mousemove', { clientX: 0, clientY: 0 }); assert.strictEqual(w.style.left, '660px');
     a.nodes['os-arrange'].click(); a.root.innerWidth = 400;
     hnd.emit('touchstart', { target: hnd, touches: [{ clientX: 620, clientY: 110 }] }); a.document.emit('touchmove', { touches: [{ clientX: 0, clientY: 0 }] }); assert.strictEqual(w.style.left, '');
+  });
+
+  test('Início e caminho: apps fora do desktop, navegação sem perder a folha', function () {
+    var a = setup(); a.nodes['cabinet-write'].click(); a.type('titulo', 'A casa'); a.type('manuscrito', 'Calmamente.'); a.flush();
+    assert.strictEqual(a.nodes['path-document'].textContent, 'A casa');
+    a.nodes['os-start'].click(); assert.strictEqual(a.nodes['start-menu'].hidden, false);
+    a.nodes['start-projects'].click(); assert.strictEqual(a.nodes['gabinete'].hidden, false);
+    a.nodes['cabinet-return'].click(); assert.strictEqual(a.nodes.manuscrito.value, 'Calmamente.');
+    a.nodes['path-projects'].click(); assert.strictEqual(a.nodes['writing-space'].hidden, true);
+  });
+  test('Sessão: reabre na Mesa com texto, seleção e rolagem', function () {
+    var storage = new h.Storage(), a = setup(storage); a.nodes['cabinet-write'].click();
+    a.type('titulo', 'Continuidade'); a.type('manuscrito', 'Uma folha para continuar.'); a.flush();
+    a.nodes.manuscrito.setSelectionRange(4, 9); a.nodes.manuscrito.scrollTop = 76; a.event('pagehide');
+    var b = setup(storage); assert.strictEqual(b.nodes['writing-space'].hidden, false);
+    assert.strictEqual(b.nodes.manuscrito.value, 'Uma folha para continuar.'); assert.strictEqual(b.nodes.manuscrito.selectionStart, 4);
+    assert.strictEqual(b.nodes.manuscrito.selectionEnd, 9); assert.strictEqual(b.nodes.manuscrito.scrollTop, 76);
+  });
+  test('Lembrete persiste separado da escrita e reaparece ao abrir', function () {
+    var storage = new h.Storage(), a = setup(storage); a.nodes['reminder-new'].click();
+    var field = a.nodes['reminder-list'].childNodes[0].childNodes[0]; field.value = 'Telefonar amanhã'; field.emit('input');
+    var b = setup(storage); assert.strictEqual(b.nodes['reminder-list'].childNodes[0].childNodes[0].value, 'Telefonar amanhã');
+    assert.strictEqual(b.archive().length, 0);
+  });
+  test('Excluir: requer aviso, Cancelar preserva e confirmação remove', function () {
+    var a = setup(); a.nodes['cabinet-write'].click(); a.type('titulo', 'Dolorido'); a.type('manuscrito', 'Guardar antes'); a.flush();
+    a.nodes['trash-current'].click(); assert.strictEqual(a.archive().length, 0);
+    a.nodes['start-trash'].click(); var li = a.nodes['document-list'].childNodes[0]; li.childNodes[2].click();
+    assert.strictEqual(a.nodes['delete-confirm'].hidden, false); assert.strictEqual(a.document.activeElement, a.nodes['delete-cancel']);
+    a.nodes['delete-cancel'].click(); assert.strictEqual(a.root.Escr.createArchive(a.storage).list(true).documents.length, 1);
+    li.childNodes[2].click(); a.nodes['delete-accept'].click(); assert.strictEqual(a.root.Escr.createArchive(a.storage).list(true).documents.length, 0);
+  });
+  test('Seleção: cópia interna, recorte e colagem sem alterar outros caracteres', function () {
+    var a = setup(); a.nodes['cabinet-write'].click(); a.type('manuscrito', 'Uma casa azul.');
+    a.nodes.manuscrito.focus(); a.nodes.manuscrito.setSelectionRange(4, 8); a.nodes.manuscrito.emit('select');
+    assert.strictEqual(a.nodes['clipboard-status'].textContent, 'Copiado no Escrevaral'); a.nodes['selection-cut'].click();
+    assert.strictEqual(a.nodes.manuscrito.value, 'Uma  azul.'); a.nodes['selection-paste'].click(); assert.strictEqual(a.nodes.manuscrito.value, 'Uma casa azul.');
+  });
+
+  test('Cópia: restrição opcional bloqueia paste e preserva a escrita', function () {
+    var a = setup(), prevented = false; a.nodes['paste-mode'].click(); a.nodes.manuscrito.value = 'Original';
+    a.nodes.manuscrito.emit('paste', { preventDefault: function () { prevented = true; } });
+    assert.strictEqual(prevented, true); assert.strictEqual(a.nodes.manuscrito.value, 'Original');
+    a.nodes['paste-mode'].click(); prevented = false; a.nodes.manuscrito.emit('paste', { preventDefault: function () { prevented = true; } }); assert.strictEqual(prevented, false);
+  });
+  test('Backup inclui lembretes e lixeira e restaura sem abrir uma nota apagada', function () {
+    var a = setup(); a.nodes['cabinet-write'].click(); a.type('titulo', 'Apagada'); a.type('manuscrito', 'Texto'); a.flush(); a.nodes['trash-current'].click();
+    a.nodes['reminder-new'].click(); var field = a.nodes['reminder-list'].childNodes[0].childNodes[0]; field.value = 'Lembrar'; field.emit('input');
+    a.nodes['export-backup'].click(); var data = a.downloads[a.downloads.length - 1], payload = JSON.parse(data);
+    assert.ok(payload.documents.some(function (d) { return d.trashed; })); assert.ok(payload.documents.some(function (d) { return d.kind === 'reminder'; }));
+    var b = setup(); b.import('acervo.json', data); b.finishImport();
+    assert.ok(b.root.Escr.createArchive(b.storage).list(true).documents.some(function (d) { return d.trashed; }));
+    assert.strictEqual(b.nodes['reminder-list'].childNodes[0].childNodes[0].value, 'Lembrar'); assert.notStrictEqual(b.nodes.titulo.value, 'Apagada');
   });
 
 };

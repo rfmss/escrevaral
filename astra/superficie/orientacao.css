@@ -1,0 +1,52 @@
+/* Caminho constante, também no foco. A impressão continua só com a folha. */
+@media screen {
+ .location-path { position:fixed; top:0; left:0; right:0; height:40px; z-index:1000; display:flex; align-items:center; padding:0 16px; background:#becab9; color:#4a544c; border-bottom:1px solid #8b9b8c; font:13px Arial,Helvetica,sans-serif; }
+ .location-path button { min-width:0; min-height:36px; padding:6px 9px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border:0; border-radius:0; font:inherit; color:inherit; background:transparent; max-width:30%; }
+ .location-path > span { flex-shrink:0; }
+ .location-path [aria-current] { color:#1e2320; font-weight:bold; }
+ .location-path button:hover { background:#aebfa8; }
+ .location-path button:focus { outline:1px solid #1e2320; outline-offset:-3px; }
+ #path-panel { padding:0 9px; }
+ #system-bar { position:fixed; left:0; right:0; bottom:0; height:44px; min-height:44px; padding:0 16px; z-index:1000; background:#becab9; border-top:1px solid #8b9b8c; }
+ #system-bar #cabinet-status { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; padding:0 12px; }
+ #system-bar .os-tasks { flex-shrink:0; }
+ #start-menu { position:fixed; top:auto; bottom:44px; left:12px; right:auto; width:280px; max-height:65%; z-index:1001; padding:16px; border:1px solid #657367; background:#becab9; overflow-y:auto; }
+ #start-menu .os-app { display:block; width:100%; min-height:44px; margin:0; padding:10px 8px; text-align:left; }
+ #start-menu .os-icon { display:inline-block; width:24px; height:24px; margin:0 12px 0 0; vertical-align:middle; }
+ #start-menu .os-app:hover,#start-menu .os-app:focus { background:#aebfa8; }
+ #desktop-reminders { position:absolute; top:16px; left:0; bottom:80px; width:40%; padding-right:20px; overflow-y:auto; }
+ .desktop-reminder { margin:14px 0; padding:12px; border:1px solid #8b9b8c; border-top:3px solid #657367; background:#becab9; }
+ .desktop-reminder textarea { display:block; width:100%; min-height:100px; resize:vertical; background:transparent; border:0; color:#1e2320; font:16px/1.5 'Noto Serif',Georgia,serif; }
+ #reminder-status { font:12px/1.4 Arial,sans-serif; }
+ #delete-confirm { padding:16px; border:1px solid #657367; margin:16px 0; }
+ #delete-confirm button { border:1px solid #657367; margin-right:8px; }
+ #delete-accept { font-weight:bold; }
+ #start-menu[hidden],#delete-confirm[hidden] { display:none; }
+ #writing-space,#gabinete { top:40px; }
+ .masthead { background:#ccd5c7; }
+ .sheet { border-color:#657367; background:#becab9; }
+ .sheet h2 { color:#1e2320; }
+ body[data-view="mesa"] .sheet { top:40px; bottom:44px; }
+ .selection-tools { position:absolute; bottom:38px; left:16px; right:16px; z-index:15; padding:8px; background:#becab9; border:1px solid #657367; display:flex; flex-wrap:wrap; align-items:center; gap:4px; font:12px Arial,sans-serif; }
+ .selection-tools button { padding:8px; min-height:36px; }
+ .selection-tools[hidden] { display:none; }
+ body[data-theme="escuro"] .selection-tools { background:#30382e; color:#e0e5d9; }
+ .window-bar { background:#becab9; }
+ .project-shelf { background:#c4cfbe; }
+ .title { color:#1e2320; }
+ .lenses button[aria-pressed="true"] { border-left:2px solid #1e2320; background:#b3c2ac; }
+ body[data-theme="escuro"] .location-path,body[data-theme="escuro"] .window-bar { background:#30382e; color:#bbc5b5; border-color:#687463; }
+ body[data-theme="escuro"] .location-path [aria-current] { color:#e0e5d9; }
+ body[data-theme="escuro"] .location-path button:hover { background:#404c3b; }
+ body[data-theme="escuro"] .location-path button:focus { outline-color:#ccd5c7; }
+ body[data-theme="escuro"] .sheet,body[data-theme="escuro"] .project-shelf { background:#2c3429; }
+ body[data-theme="escuro"] #system-bar,body[data-theme="escuro"] #start-menu,body[data-theme="escuro"] .desktop-reminder { background:#30382e; color:#bbc5b5; border-color:#687463; }
+ body[data-theme="escuro"] .desktop-reminder textarea { color:#e0e5d9; }
+ body[data-theme="escuro"] #start-menu .os-app:hover,body[data-theme="escuro"] #start-menu .os-app:focus { background:#404c3b; }
+ body[data-theme="escuro"] .title,body[data-theme="escuro"] .sheet h2 { color:#e0e5d9; }
+ body[data-theme="escuro"] .masthead { background:#242621; }
+ body[data-theme="escuro"] .lenses button[aria-pressed="true"] { background:#404c3b; border-color:#ccd5c7; }
+ @media (max-width:760px) { #desktop-reminders { width:100%; padding-right:0; } #system-bar { padding:0 8px; } #system-bar #cabinet-status { display:none; } }
+ @media (max-width:600px) { .location-path { padding:0 4px; font-size:12px; } .location-path button { padding:6px 5px; } #path-home { max-width:76px; } #path-panel { padding:0 4px; } }
+}
+@media print { .location-path,#system-bar,#start-menu,#desktop-reminders,.selection-tools { display:none !important; } }

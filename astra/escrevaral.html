@@ -969,6 +969,61 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
 }
 
 </style>
+  <style>
+/* Caminho constante, também no foco. A impressão continua só com a folha. */
+@media screen {
+ .location-path { position:fixed; top:0; left:0; right:0; height:40px; z-index:1000; display:flex; align-items:center; padding:0 16px; background:#becab9; color:#4a544c; border-bottom:1px solid #8b9b8c; font:13px Arial,Helvetica,sans-serif; }
+ .location-path button { min-width:0; min-height:36px; padding:6px 9px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border:0; border-radius:0; font:inherit; color:inherit; background:transparent; max-width:30%; }
+ .location-path > span { flex-shrink:0; }
+ .location-path [aria-current] { color:#1e2320; font-weight:bold; }
+ .location-path button:hover { background:#aebfa8; }
+ .location-path button:focus { outline:1px solid #1e2320; outline-offset:-3px; }
+ #path-panel { padding:0 9px; }
+ #system-bar { position:fixed; left:0; right:0; bottom:0; height:44px; min-height:44px; padding:0 16px; z-index:1000; background:#becab9; border-top:1px solid #8b9b8c; }
+ #system-bar #cabinet-status { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; padding:0 12px; }
+ #system-bar .os-tasks { flex-shrink:0; }
+ #start-menu { position:fixed; top:auto; bottom:44px; left:12px; right:auto; width:280px; max-height:65%; z-index:1001; padding:16px; border:1px solid #657367; background:#becab9; overflow-y:auto; }
+ #start-menu .os-app { display:block; width:100%; min-height:44px; margin:0; padding:10px 8px; text-align:left; }
+ #start-menu .os-icon { display:inline-block; width:24px; height:24px; margin:0 12px 0 0; vertical-align:middle; }
+ #start-menu .os-app:hover,#start-menu .os-app:focus { background:#aebfa8; }
+ #desktop-reminders { position:absolute; top:16px; left:0; bottom:80px; width:40%; padding-right:20px; overflow-y:auto; }
+ .desktop-reminder { margin:14px 0; padding:12px; border:1px solid #8b9b8c; border-top:3px solid #657367; background:#becab9; }
+ .desktop-reminder textarea { display:block; width:100%; min-height:100px; resize:vertical; background:transparent; border:0; color:#1e2320; font:16px/1.5 'Noto Serif',Georgia,serif; }
+ #reminder-status { font:12px/1.4 Arial,sans-serif; }
+ #delete-confirm { padding:16px; border:1px solid #657367; margin:16px 0; }
+ #delete-confirm button { border:1px solid #657367; margin-right:8px; }
+ #delete-accept { font-weight:bold; }
+ #start-menu[hidden],#delete-confirm[hidden] { display:none; }
+ #writing-space,#gabinete { top:40px; }
+ .masthead { background:#ccd5c7; }
+ .sheet { border-color:#657367; background:#becab9; }
+ .sheet h2 { color:#1e2320; }
+ body[data-view="mesa"] .sheet { top:40px; bottom:44px; }
+ .selection-tools { position:absolute; bottom:38px; left:16px; right:16px; z-index:15; padding:8px; background:#becab9; border:1px solid #657367; display:flex; flex-wrap:wrap; align-items:center; gap:4px; font:12px Arial,sans-serif; }
+ .selection-tools button { padding:8px; min-height:36px; }
+ .selection-tools[hidden] { display:none; }
+ body[data-theme="escuro"] .selection-tools { background:#30382e; color:#e0e5d9; }
+ .window-bar { background:#becab9; }
+ .project-shelf { background:#c4cfbe; }
+ .title { color:#1e2320; }
+ .lenses button[aria-pressed="true"] { border-left:2px solid #1e2320; background:#b3c2ac; }
+ body[data-theme="escuro"] .location-path,body[data-theme="escuro"] .window-bar { background:#30382e; color:#bbc5b5; border-color:#687463; }
+ body[data-theme="escuro"] .location-path [aria-current] { color:#e0e5d9; }
+ body[data-theme="escuro"] .location-path button:hover { background:#404c3b; }
+ body[data-theme="escuro"] .location-path button:focus { outline-color:#ccd5c7; }
+ body[data-theme="escuro"] .sheet,body[data-theme="escuro"] .project-shelf { background:#2c3429; }
+ body[data-theme="escuro"] #system-bar,body[data-theme="escuro"] #start-menu,body[data-theme="escuro"] .desktop-reminder { background:#30382e; color:#bbc5b5; border-color:#687463; }
+ body[data-theme="escuro"] .desktop-reminder textarea { color:#e0e5d9; }
+ body[data-theme="escuro"] #start-menu .os-app:hover,body[data-theme="escuro"] #start-menu .os-app:focus { background:#404c3b; }
+ body[data-theme="escuro"] .title,body[data-theme="escuro"] .sheet h2 { color:#e0e5d9; }
+ body[data-theme="escuro"] .masthead { background:#242621; }
+ body[data-theme="escuro"] .lenses button[aria-pressed="true"] { background:#404c3b; border-color:#ccd5c7; }
+ @media (max-width:760px) { #desktop-reminders { width:100%; padding-right:0; } #system-bar { padding:0 8px; } #system-bar #cabinet-status { display:none; } }
+ @media (max-width:600px) { .location-path { padding:0 4px; font-size:12px; } .location-path button { padding:6px 5px; } #path-home { max-width:76px; } #path-panel { padding:0 4px; } }
+}
+@media print { .location-path,#system-bar,#start-menu,#desktop-reminders,.selection-tools { display:none !important; } }
+
+</style>
 <!-- Ícones Phosphor, SVGs oficiais Light, https://github.com/phosphor-icons/core
 MIT License
 
@@ -997,6 +1052,9 @@ SOFTWARE.
 <body data-theme="claro" data-input="keyboard">
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para guardar e examinar a escrita. Você ainda pode escrever e copiar o texto.</p></noscript>
+  <nav id="location-path" class="location-path" aria-label="Você está aqui">
+    <button id="path-home">SCRVRL OS</button><span aria-hidden="true">/</span><button id="path-projects">Projetos</button><span id="path-project-separator" aria-hidden="true" hidden>/</span><button id="path-project" hidden></button><span id="path-document-separator" aria-hidden="true" hidden>/</span><button id="path-document" hidden></button><span id="path-panel-separator" aria-hidden="true" hidden>/</span><span id="path-panel" hidden></span>
+  </nav>
   <section id="gabinete" aria-labelledby="cabinet-heading" hidden>
     <header class="os-bar">
       <span class="os-signature"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii00OCAtNzIgNjg4IDY4OCI+PHBhdGggZD0iTTUgOTBMNTg1IDQ4TTUgMTg5TDU4NSAyMDJNNSAzMTlMNTg1IDI4Nk01IDQxNEw1ODUgNDIyTTgyIDE4VjQ4Mk00OTkgMTJWNDc0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyODI5MjUiIHN0cm9rZS13aWR0aD0iNDUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPgo=" width="28" height="28" alt=""><strong>ESCREVA<span class="ral-frame">RAL</span> <small>OS</small></strong></span>
@@ -1005,6 +1063,7 @@ SOFTWARE.
       <button id="cabinet-settings" class="os-menu">Ajustes</button>
     </header>
     <div class="cabinet-workspace" id="desktop-surface">
+      <section id="desktop-reminders" aria-label="Lembretes rápidos"><button id="reminder-new">+ Lembrete</button><p id="reminder-status" role="status"></p><div id="reminder-list"></div></section>
       <div class="desktop-imprint" aria-hidden="true"><strong>ESCREVA<span>RAL</span> OS</strong><small>GABINETE DE ESCRITA · PORTUGUÊS BRASILEIRO</small></div>
       <section id="cabinet-window" class="cabinet-window" aria-label="Janela de projetos e escritos">
         <header class="window-bar" id="cabinet-window-handle"><span class="window-name">SEUS ESCRITOS</span><div class="window-controls"><button id="window-minimize" title="Minimizar janela" aria-label="Minimizar janela">−</button><button id="window-maximize" title="Ampliar janela" aria-label="Ampliar janela" aria-pressed="false">□</button><button id="window-close" title="Fechar janela" aria-label="Fechar janela">×</button></div></header>
@@ -1020,11 +1079,14 @@ SOFTWARE.
       </main>
         </div>
       </section>
-      <nav class="os-workshop" aria-label="Oficina"><p class="os-label">OFICINA</p><button id="cabinet-write" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M225.91,74.79,181.22,30.1a14,14,0,0,0-19.8,0L38.1,153.41a13.94,13.94,0,0,0-4.1,9.9V208a14,14,0,0,0,14,14H216a6,6,0,0,0,0-12H110.49L225.91,94.59A14,14,0,0,0,225.91,74.79ZM76.49,188,164,100.48,183.52,120,96,207.51ZM68,179.52,48.49,160,136,72.49,155.52,92ZM46,208V174.48L81.52,210H48A2,2,0,0,1,46,208ZM217.42,86.1,192,111.52,144.49,64,169.9,38.59a2,2,0,0,1,2.83,0l44.69,44.68A2,2,0,0,1,217.42,86.1Z"/></svg>Mesa de escrita</button><button id="cabinet-examine" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M40,86H74.6a30,30,0,0,0,58.8,0H216a6,6,0,0,0,0-12H133.4a30,30,0,0,0-58.8,0H40a6,6,0,0,0,0,12Zm64-24A18,18,0,1,1,86,80,18,18,0,0,1,104,62ZM216,170H197.4a30,30,0,0,0-58.8,0H40a6,6,0,0,0,0,12h98.6a30,30,0,0,0,58.8,0H216a6,6,0,0,0,0-12Zm-48,24a18,18,0,1,1,18-18A18,18,0,0,1,168,194Z"/></svg>Examinar</button><button id="cabinet-poetry" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M54,96v64a6,6,0,0,1-12,0V96a6,6,0,0,1,12,0ZM88,26a6,6,0,0,0-6,6V224a6,6,0,0,0,12,0V32A6,6,0,0,0,88,26Zm40,32a6,6,0,0,0-6,6V192a6,6,0,0,0,12,0V64A6,6,0,0,0,128,58Zm40,32a6,6,0,0,0-6,6v64a6,6,0,0,0,12,0V96A6,6,0,0,0,168,90Zm40-16a6,6,0,0,0-6,6v96a6,6,0,0,0,12,0V80A6,6,0,0,0,208,74Z"/></svg>Rimas e métrica</button><div class="os-divider"></div><button id="cabinet-archive" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M182,112a6,6,0,0,1-6,6H112a6,6,0,0,1,0-12h64A6,6,0,0,1,182,112Zm-6,26H112a6,6,0,0,0,0,12h64a6,6,0,0,0,0-12Zm46-90V208a14,14,0,0,1-14,14H48a14,14,0,0,1-14-14V48A14,14,0,0,1,48,34H208A14,14,0,0,1,222,48ZM48,210H74V46H48a2,2,0,0,0-2,2V208A2,2,0,0,0,48,210ZM210,48a2,2,0,0,0-2-2H86V210H208a2,2,0,0,0,2-2Z"/></svg>Acervo</button><button id="cabinet-backup" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M224,50H32A14,14,0,0,0,18,64V88a14,14,0,0,0,14,14h2v90a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V102h2a14,14,0,0,0,14-14V64A14,14,0,0,0,224,50ZM210,192a2,2,0,0,1-2,2H48a2,2,0,0,1-2-2V102H210ZM226,88a2,2,0,0,1-2,2H32a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H224a2,2,0,0,1,2,2ZM98,136a6,6,0,0,1,6-6h48a6,6,0,0,1,0,12H104A6,6,0,0,1,98,136Z"/></svg>Guardar cópia</button></nav>
+
     </div>
-    <footer class="os-footer"><div class="os-tasks"><button id="os-start" aria-controls="cabinet-window" aria-expanded="true">Início</button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus escritos</button></div><span id="cabinet-status" role="status" aria-live="polite">Seus escritos neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
+
   </section>
+      <nav id="start-menu" class="os-workshop" aria-label="Aplicativos" hidden><p class="os-label">APLICATIVOS</p><button id="start-projects" class="os-app">Projetos e arquivos</button><button id="start-settings" class="os-app">Ajustes</button><button id="start-trash" class="os-app">Lixeira</button><button id="cabinet-write" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M225.91,74.79,181.22,30.1a14,14,0,0,0-19.8,0L38.1,153.41a13.94,13.94,0,0,0-4.1,9.9V208a14,14,0,0,0,14,14H216a6,6,0,0,0,0-12H110.49L225.91,94.59A14,14,0,0,0,225.91,74.79ZM76.49,188,164,100.48,183.52,120,96,207.51ZM68,179.52,48.49,160,136,72.49,155.52,92ZM46,208V174.48L81.52,210H48A2,2,0,0,1,46,208ZM217.42,86.1,192,111.52,144.49,64,169.9,38.59a2,2,0,0,1,2.83,0l44.69,44.68A2,2,0,0,1,217.42,86.1Z"/></svg>Mesa de escrita</button><button id="cabinet-examine" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M40,86H74.6a30,30,0,0,0,58.8,0H216a6,6,0,0,0,0-12H133.4a30,30,0,0,0-58.8,0H40a6,6,0,0,0,0,12Zm64-24A18,18,0,1,1,86,80,18,18,0,0,1,104,62ZM216,170H197.4a30,30,0,0,0-58.8,0H40a6,6,0,0,0,0,12h98.6a30,30,0,0,0,58.8,0H216a6,6,0,0,0,0-12Zm-48,24a18,18,0,1,1,18-18A18,18,0,0,1,168,194Z"/></svg>Examinar</button><button id="cabinet-poetry" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M54,96v64a6,6,0,0,1-12,0V96a6,6,0,0,1,12,0ZM88,26a6,6,0,0,0-6,6V224a6,6,0,0,0,12,0V32A6,6,0,0,0,88,26Zm40,32a6,6,0,0,0-6,6V192a6,6,0,0,0,12,0V64A6,6,0,0,0,128,58Zm40,32a6,6,0,0,0-6,6v64a6,6,0,0,0,12,0V96A6,6,0,0,0,168,90Zm40-16a6,6,0,0,0-6,6v96a6,6,0,0,0,12,0V80A6,6,0,0,0,208,74Z"/></svg>Rimas e métrica</button><div class="os-divider"></div><button id="cabinet-archive" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M182,112a6,6,0,0,1-6,6H112a6,6,0,0,1,0-12h64A6,6,0,0,1,182,112Zm-6,26H112a6,6,0,0,0,0,12h64a6,6,0,0,0,0-12Zm46-90V208a14,14,0,0,1-14,14H48a14,14,0,0,1-14-14V48A14,14,0,0,1,48,34H208A14,14,0,0,1,222,48ZM48,210H74V46H48a2,2,0,0,0-2,2V208A2,2,0,0,0,48,210ZM210,48a2,2,0,0,0-2-2H86V210H208a2,2,0,0,0,2-2Z"/></svg>Acervo</button><button id="cabinet-backup" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M224,50H32A14,14,0,0,0,18,64V88a14,14,0,0,0,14,14h2v90a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V102h2a14,14,0,0,0,14-14V64A14,14,0,0,0,224,50ZM210,192a2,2,0,0,1-2,2H48a2,2,0,0,1-2-2V102H210ZM226,88a2,2,0,0,1-2,2H32a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H224a2,2,0,0,1,2,2ZM98,136a6,6,0,0,1,6-6h48a6,6,0,0,1,0,12H104A6,6,0,0,1,98,136Z"/></svg>Guardar cópia</button></nav>
+    <footer id="system-bar" class="os-footer"><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false">Início</button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus escritos</button></div><span id="cabinet-status" role="status" aria-live="polite">Seus escritos neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
   <div id="writing-space">
+    <div id="selection-tools" class="selection-tools" role="group" aria-label="Cópia e trecho selecionado" hidden><span id="clipboard-status" role="status"></span><button id="selection-cut">Recortar</button><button id="selection-paste">Colar cópia interna</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
     <header class="masthead">
       <button id="back-cabinet" class="brand-signature" aria-label="Voltar ao Gabinete" title="Voltar ao Gabinete"><span aria-hidden="true">←</span><span class="cabinet-word">Gabinete</span></button>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar em todas as notas</label><input id="note-search" type="search" placeholder="Buscar em todas as notas" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden>×</button></div>
@@ -1076,7 +1138,7 @@ SOFTWARE.
       <div class="setting-row"><span>Letra do manuscrito</span><div class="theme-choice" role="group" aria-label="Letra do manuscrito"><button id="font-literary" aria-pressed="true">Literária</button><button id="font-typewriter" aria-pressed="false">Máquina</button></div></div>
       <label class="project-field" for="note-project">Projeto desta folha</label><input id="note-project" class="project-input" maxlength="120" placeholder="Folha avulsa"><button id="note-project-save">Guardar no projeto</button><p class="quiet">Use o mesmo nome para reunir folhas. Deixe vazio para manter a folha avulsa.</p>
     </div>
-    <div class="setting-section"><h3>Seus textos</h3>
+    <div class="setting-section"><h3>Seus textos</h3><button id="paste-mode" aria-pressed="false">Restringir colagem à cópia interna</button><button id="trash-current">Mover esta folha para a lixeira</button>
       <div class="actions"><button id="print-document">Imprimir esta folha</button><button id="export-text">Baixar esta folha <span aria-hidden="true">↓</span></button><button id="export-backup">Baixar cópia do acervo <span aria-hidden="true">↓</span></button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".txt,.json,text/plain,application/json"></label></div>
       <p id="panel-status" class="quiet" role="status" aria-live="polite"></p>
       <p class="quiet">Textos e cópias trazidos viram novas folhas. Seu acervo permanece.</p>
@@ -1088,7 +1150,7 @@ SOFTWARE.
   <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="acervo-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SUAS FOLHAS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <div class="archive-intro"><p class="quiet">Um lugar para voltar aos seus textos.</p><button id="new-document">+ Nova folha</button></div>
-    <p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
+    <button id="trash-toggle" aria-pressed="false">Lixeira</button><div id="delete-confirm" role="alertdialog" aria-labelledby="delete-heading" aria-describedby="delete-message" hidden><h3 id="delete-heading">Excluir definitivamente?</h3><p id="delete-message"></p><button id="delete-cancel">Cancelar</button><button id="delete-accept">Excluir definitivamente</button></div><p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
   </section>
   <section id="oficina" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="oficina-heading">
     <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
@@ -1111,6 +1173,8 @@ SOFTWARE.
         <button data-lens="decolonial" aria-pressed="false">Vocabulário decolonial</button>
         <button data-lens="expressoes" aria-pressed="false">Expressões e ênfases</button>
         <button data-lens="repeticao" aria-pressed="false">Repetição próxima</button>
+        <button data-lens="adverbios" aria-pressed="false">Formas em -mente</button>
+        <button data-lens="dialogo" aria-pressed="false">Linhas de diálogo</button>
         <button data-lens="ritmo" aria-pressed="false">Ritmo das frases</button>
         </div>
       <p class="quiet">Poesia</p>
@@ -1265,18 +1329,18 @@ SOFTWARE.
   var prefix = 'escrevaral.astra.v1.doc.', counter = 0;
   function uid() { counter += 1; return new Date().getTime().toString(36) + '-' + Math.random().toString(36).slice(2, 10) + '-' + counter; }
   function valid(doc) {
-    return doc && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
+    return doc && (typeof doc.trashed === 'undefined' || typeof doc.trashed === 'boolean') && (typeof doc.kind === 'undefined' || doc.kind === 'reminder') && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
   }
   function fresh() { var now = new Date().toISOString(), id = uid(); return { id: id, noteId: id, title: '', text: '', created: now, updated: now, revision: 0, dismissed: [] }; }
   function dateOf(doc) { return doc.created || doc.updated; }
   function createArchive(storage) {
     function get(id) { var raw = storage.getItem(prefix + id), doc = raw ? JSON.parse(raw) : null; if (doc && !valid(doc)) { throw new Error('Esta folha não pôde ser lida. Sua cópia guardada foi preservada.'); } return doc; }
-    function list() {
+    function list(includeAll) {
       var docs = [], unreadable = 0, i, key, doc;
       for (i = 0; i < storage.length; i += 1) {
         key = storage.key(i);
         if (key && key.indexOf(prefix) === 0) {
-          try { doc = get(key.slice(prefix.length)); if (doc) { docs.push(doc); } } catch (e) { unreadable += 1; }
+          try { doc = get(key.slice(prefix.length)); if (doc && (includeAll || (!doc.trashed && doc.kind !== 'reminder'))) { docs.push(doc); } } catch (e) { unreadable += 1; }
         }
       }
       docs.sort(function (a, b) { return Date.parse(dateOf(b)) - Date.parse(dateOf(a)) || ((a.noteId || a.id) < (b.noteId || b.id) ? -1 : (a.noteId || a.id) > (b.noteId || b.id) ? 1 : 0); });
@@ -1297,7 +1361,16 @@ SOFTWARE.
       if (current && !conflict) { try { storage.removeItem(prefix + doc.id); } catch (e) { /* Cópia extra no acervo. */ } }
       return { document: copy, conflict: conflict };
     }
-    return { get: get, list: list, save: save, fresh: fresh };
+    function trash(doc, value) {
+      var copy = JSON.parse(JSON.stringify(doc)); copy.trashed = value !== false; return save(copy);
+    }
+    function purge(doc) {
+      var current = get(doc.id);
+      if (!current || !current.trashed || current.revision !== doc.revision) { throw new Error('A folha mudou. Abra a lixeira novamente antes de excluir.'); }
+      storage.removeItem(prefix + doc.id);
+      if (storage.getItem(prefix + doc.id) !== null) { throw new Error('A exclusão não foi concluída.'); }
+    }
+    return { get: get, list: list, save: save, fresh: fresh, trash: trash, purge: purge };
   }
   function dateKey(entry) {
     var d = new Date(dateOf(entry));
@@ -1647,6 +1720,31 @@ SOFTWARE.
   <script>
 (function (root) {
   'use strict';
+  var E = root.Escr;
+  E.studioData = {
+    version: '1.0.0',
+    source: { title: 'Protocolo descritivo SCRVRL 1.0: catálogo explícito de formas e contagem por linhas; revisão linguística independente pendente.', url: null },
+    adverbs: ['abertamente', 'absolutamente', 'antigamente', 'aparentemente', 'atentamente', 'automaticamente', 'brevemente', 'calmamente', 'certamente', 'claramente', 'completamente', 'cuidadosamente', 'delicadamente', 'dificilmente', 'diretamente', 'docemente', 'especialmente', 'exatamente', 'facilmente', 'felizmente', 'finalmente', 'fortemente', 'francamente', 'frequentemente', 'gentilmente', 'imediatamente', 'infelizmente', 'inteiramente', 'lentamente', 'levemente', 'literalmente', 'naturalmente', 'normalmente', 'novamente', 'pacientemente', 'perfeitamente', 'possivelmente', 'praticamente', 'provavelmente', 'rapidamente', 'raramente', 'realmente', 'recentemente', 'silenciosamente', 'simplesmente', 'somente', 'suavemente', 'totalmente', 'tristemente', 'unicamente'],
+    families: [
+      { id: 'fonetica', lenses: ['rima', 'metrica'] },
+      { id: 'estilo', lenses: ['expressoes', 'repeticao', 'adverbios'] },
+      { id: 'ritmo', lenses: ['ritmo', 'dialogo'] },
+      { id: 'lexico', lenses: [] },
+      { id: 'convencoes', lenses: ['ortografia', 'acentuacao', 'pontuacao'] },
+      { id: 'morfossintaxe', lenses: ['morfologia', 'sintaxe', 'crase', 'concordancia'] },
+      { id: 'contextos', lenses: ['decolonial'] }
+    ]
+  };
+  E.lensCatalog.push(
+    { id: 'adverbios', group: 'Escolhas de escrita', minimum: 1, scope: 'Formas em -mente de uma lista explícita. Presença não implica excesso; desconhecidas não são classificadas.' },
+    { id: 'dialogo', group: 'Escolhas de escrita', minimum: 1, scope: 'Proporção de palavras em linhas iniciadas por travessão. É uma aproximação gráfica, não separação semântica entre fala e narração.' }
+  );
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
   var E = root.Escr, S = E.instruments, D = E.maturationData;
   /* Mantém posições no original; a composição é feita apenas sobre o token. */
   function canonical(value) {
@@ -1961,12 +2059,91 @@ SOFTWARE.
 
 </script>
   <script>
+(function (root) {
+  'use strict';
+  var E = root.Escr, D = E.studioData, R = E.reading, S = E.instruments, words = {};
+  D.adverbs.forEach(function (word) { words['$' + word] = true; });
+  function adverbs(text, cap) {
+    var ts = R.tokens(E.protectedText(text)), out = [], i, t;
+    for (i = 0; i < ts.length && out.length < cap; i += 1) {
+      t = ts[i]; if (!words['$' + t.value]) { continue; }
+      out.push(S.finding('adverbios', 'PTBR-ADV-001', text, t.start, t.end,
+        'Uma forma em -mente para observar: “' + text.slice(t.start, t.end) + '”.',
+        'A grafia está no catálogo local de ' + D.adverbs.length + ' formas em -mente.',
+        'Observe o que a palavra acrescenta ao gesto, ao tempo ou à voz nesta passagem.',
+        'Advérbios podem ser indispensáveis. A presença não indica erro, excesso ou necessidade de corte.',
+        'Não classifica pela terminação sozinha; flexões, nomes próprios e usos inventados podem ficar fora. Código e citações protegidos.', D.source));
+    }
+    return out;
+  }
+  function dialogue(text) {
+    var clean = E.protectedText(text), line = /[^\r\n]+/g, m, ts, total = 0, marked = 0, lines = 0, markedLines = 0, first = null, excluded = 0;
+    while ((m = line.exec(text))) {
+      /* Excluir a linha inteira se contiver região protegida: não somar fragmentos como fala. */
+      if (clean.slice(m.index, m.index + m[0].length) !== m[0]) { excluded += 1; continue; }
+      ts = R.tokens(m[0]); if (!ts.length) { continue; }
+      if (!first) { first = { start: m.index + ts[0].start, end: m.index + ts[0].end }; }
+      total += ts.length; lines += 1;
+      if (/^[ \t\u00a0]*—/.test(m[0])) { marked += ts.length; markedLines += 1; }
+    }
+    if (!total) { return []; }
+    return [S.finding('dialogo', 'PTBR-DIA-001', text, first.start, first.end,
+      (100 * marked / total).toFixed(1) + '% das palavras disponíveis estão em linhas iniciadas por travessão.',
+      marked + ' de ' + total + ' palavras; ' + markedLines + ' de ' + lines + ' linhas. ' + excluded + ' linhas protegidas excluídas.',
+      'Use a proporção para comparar o desenho gráfico das falas entre passagens.',
+      'A linha pode conter fala e intervenção do narrador. Travessões também têm outros usos; não há proporção ideal.',
+      'Reconhece apenas — no início da linha. Falas com aspas, continuação sem travessão e outras convenções não são classificadas. O restante não é automaticamente narração.', D.source,
+      { metrics: { totalWords: total, markedLineWords: marked, unmarkedLineWords: total - marked, markedPercent: 100 * marked / total, lines: lines, markedLines: markedLines, excludedLines: excluded }, method: 'linhas-travessao-v1' })];
+  }
+  (E.extensions = E.extensions || []).push(function (register) {
+    register({ id: 'adverbios', analyze: adverbs }); register({ id: 'dialogo', analyze: dialogue });
+  });
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  var E = root.Escr;
+  function request(doc, text, start, end) {
+    if (!E.validDocument(doc) || typeof text !== 'string') { throw new Error('Documento inválido para análise.'); }
+    start = typeof start === 'undefined' ? 0 : start; end = typeof end === 'undefined' ? text.length : end;
+    if (typeof start !== 'number' || typeof end !== 'number' || !isFinite(start) || !isFinite(end) || start % 1 || end % 1 || start < 0 || end < start || end > text.length) { throw new Error('Trecho inválido para análise.'); }
+    return { schema: 'scrvrl.analysis-request', version: 1, text: text,
+      source: { documentId: doc.noteId || doc.id, recordId: doc.id, revision: doc.revision, projectLabel: doc.project || '', start: start, end: end, draft: doc.text !== text } };
+  }
+  function current(req, doc, text) {
+    return !!req && !!doc && req.source.documentId === (doc.noteId || doc.id) && req.source.recordId === doc.id && req.source.revision === doc.revision && req.text === text;
+  }
+  function analyze(vault, lens, req) {
+    var s = req.source, result = vault.analyze(lens, req.text.slice(s.start, s.end));
+    /* O cofre usa posições no trecho; consumidores recebem posições no original. */
+    result.findings.forEach(function (f) {
+      f.start += s.start; f.end += s.start;
+      if (typeof f.contextStart === 'number') { f.contextStart += s.start; }
+      if (typeof f.contextEnd === 'number') { f.contextEnd += s.start; }
+      if (f.occurrences) { f.occurrences.forEach(function (p) { p.start += s.start; p.end += s.start; }); }
+      if (req.text.slice(f.start, f.end) !== f.snippet) { throw new Error('A posição do resultado não corresponde ao original.'); }
+    });
+    result.schema = 'scrvrl.analysis-result'; result.version = 1;
+    result.source = { documentId: s.documentId, recordId: s.recordId, revision: s.revision, projectLabel: s.projectLabel, start: s.start, end: s.end, draft: s.draft };
+    result.engineVersion = '4.0.0';
+    result.dataVersions = { base: E.knowledge.version, maturation: E.maturationData.version, studio: E.studioData.version };
+    return result;
+  }
+  E.analysisContract = { version: 1, request: request, current: current, analyze: analyze };
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
 (function () {
   'use strict';
   var E = window.Escr, vault = E.createVault(E.knowledge), storage = null, archive = null;
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
+  var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
+  var trashView = false, sessionReady = false, sessionTimer = null, deleteTarget = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
@@ -2060,7 +2237,7 @@ SOFTWARE.
       message(saved.conflict ? 'Outra versão foi preservada no acervo.' : 'Guardado neste aparelho.');
       try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Só a preferência de abertura falhou. */ }
       if (!byId('acervo').hidden) { renderArchive(); }
-      renderTimeline(false, previousId);
+      renderTimeline(false, previousId); saveSession();
       return true;
     } catch (e) { message('Não foi possível guardar. Seu texto está na folha; baixe uma cópia em Ajustes.'); return false; }
   }
@@ -2145,11 +2322,137 @@ SOFTWARE.
     if (!window.getComputedStyle || composing || document.activeElement !== manuscript) { return; }
     typewriterTimer = window.setTimeout(centerTypingLine, 20);
   }
+  function captureSelection() {
+    if (composing || document.activeElement !== manuscript) { return; }
+    var start = manuscript.selectionStart, end = manuscript.selectionEnd;
+    if (typeof start !== 'number' || typeof end !== 'number' || end <= start) { return; }
+    internalClipboard = manuscript.value.slice(start, end);
+    copiedSelection = { documentId: doc.noteId || doc.id, text: manuscript.value, start: start, end: end };
+    byId('selection-tools').hidden = false; text(byId('clipboard-status'), 'Copiado no Escrevaral');
+  }
+  function pasteInternal() {
+    if (composing || !internalClipboard) { return; }
+    var start = manuscript.selectionStart || 0, end = manuscript.selectionEnd || start;
+    manuscript.value = manuscript.value.slice(0, start) + internalClipboard + manuscript.value.slice(end);
+    manuscript.setSelectionRange(start + internalClipboard.length, start + internalClipboard.length); manuscript.focus(); changed(); queueSession();
+  }
+  function toggleStart(open) {
+    if (open) { closePanels(false); }
+    byId('start-menu').hidden = !open;
+    byId('os-start').setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) { byId('start-projects').focus(); }
+  }
+  function saveSession() {
+    if (!sessionReady || !storage) { return; }
+    try {
+      storage.setItem(sessionKey, JSON.stringify({ version: 1, view: cabinetOpen ? 'gabinete' : 'mesa', documentId: doc.noteId || doc.id,
+        recordId: doc.id, start: manuscript.selectionStart || 0, end: manuscript.selectionEnd || 0, scroll: manuscript.scrollTop || 0,
+        project: cabinetProject, panel: activePanel, immersion: immersion, month: navMonth, day: navDay,
+        search: byId('cabinet-search').value, noteSearch: byId('note-search').value,
+        windowHidden: byId('cabinet-window').hidden, maximized: byId('cabinet-window').getAttribute('data-maximized') === 'true',
+        left: byId('cabinet-window').style.left || '', top: byId('cabinet-window').style.top || '' }));
+    } catch (e) { message('O estado da tela não foi guardado. Confira sua cópia do acervo.'); }
+  }
+  function checkpoint() { if (composing) { return false; } window.clearTimeout(sessionTimer); var ok = persist(); if (ok) { saveSession(); } return ok; }
+  function queueSession() {
+    if (!sessionReady || composing) { return; }
+    window.clearTimeout(sessionTimer); sessionTimer = window.setTimeout(checkpoint, 350);
+  }
+  function restoreSession() {
+    if (!storage) { return; }
+    try {
+      var state = JSON.parse(storage.getItem(sessionKey) || 'null'), saved;
+      if (!state || state.version !== 1) { return; }
+      saved = typeof state.recordId === 'string' ? archive.get(state.recordId) : null;
+      if (saved && !saved.trashed && saved.kind !== 'reminder') { loadDocument(saved); }
+      cabinetProject = typeof state.project === 'string' ? projectName(state.project) : null;
+      byId('cabinet-search').value = typeof state.search === 'string' ? state.search.slice(0, 1000) : '';
+      byId('note-search').value = typeof state.noteSearch === 'string' ? state.noteSearch.slice(0, 1000) : '';
+      if (/^\d{4}-\d{2}$/.test(state.month)) { navMonth = state.month; }
+      if (/^\d{4}-\d{2}-\d{2}$/.test(state.day)) { navDay = state.day; }
+      renderCabinet(); renderTimeline(false);
+      if (state.view === 'mesa' && state.documentId === (doc.noteId || doc.id)) {
+        enterDesk(false);
+        if (state.immersion === true) { immersion = true; document.body.setAttribute('data-immersion', 'true'); byId('immersion-toggle').setAttribute('aria-pressed', 'true'); byId('leave-focus').hidden = false; sizeWorkspace(); }
+        var start = typeof state.start === 'number' && isFinite(state.start) ? Math.max(0, Math.min(doc.text.length, Math.floor(state.start))) : 0;
+        var end = typeof state.end === 'number' && isFinite(state.end) ? Math.max(start, Math.min(doc.text.length, Math.floor(state.end))) : start;
+        manuscript.setSelectionRange(start, end); manuscript.scrollTop = typeof state.scroll === 'number' && isFinite(state.scroll) ? Math.max(0, state.scroll) : 0;
+      } else {
+        desktopWindow(state.windowHidden ? 'minimize' : 'open', false);
+        if (state.maximized === true) { byId('cabinet-window').setAttribute('data-maximized', 'true'); byId('window-maximize').setAttribute('aria-pressed', 'true'); }
+        else if (window.innerWidth > 760) {
+          if (/^\d+(\.\d+)?px$/.test(state.left)) { byId('cabinet-window').style.left = Math.min(parseFloat(state.left), Math.max(0, window.innerWidth - 640)) + 'px'; byId('cabinet-window').style.right = 'auto'; }
+          if (/^\d+(\.\d+)?px$/.test(state.top)) { byId('cabinet-window').style.top = Math.min(parseFloat(state.top), Math.max(0, window.innerHeight - 280)) + 'px'; }
+        }
+      }
+      if (panelIds.indexOf(state.panel) !== -1) { if (state.panel === 'acervo') { renderArchive(); } showPanel(state.panel, panelToggles[panelIds.indexOf(state.panel)], true); }
+      if (state.documentId === (doc.noteId || doc.id)) {
+        var savedStart = typeof state.start === 'number' && isFinite(state.start) ? Math.max(0, Math.min(doc.text.length, Math.floor(state.start))) : 0;
+        var savedEnd = typeof state.end === 'number' && isFinite(state.end) ? Math.max(savedStart, Math.min(doc.text.length, Math.floor(state.end))) : savedStart;
+        manuscript.setSelectionRange(savedStart, savedEnd); manuscript.scrollTop = typeof state.scroll === 'number' && isFinite(state.scroll) ? Math.max(0, state.scroll) : 0;
+        cabinetSelection = { noteId: doc.noteId || doc.id, start: savedStart, end: savedEnd, scroll: manuscript.scrollTop };
+      }
+      updatePath();
+    } catch (e) { message('Não foi possível retomar a tela anterior. O acervo foi preservado.'); }
+  }
+  function renderReminders() {
+    var list = byId('reminder-list'); list.textContent = '';
+    if (!archive) { return; }
+    try {
+      archive.list(true).documents.filter(function (entry) { return entry.kind === 'reminder' && !entry.trashed; }).forEach(function (entry) {
+        var card = document.createElement('div'), field = document.createElement('textarea'), saved = entry;
+        card.className = 'desktop-reminder'; field.value = entry.text; field.setAttribute('aria-label', 'Lembrete rápido'); field.setAttribute('maxlength', '2000');
+        field.rows = 4; card.appendChild(field);
+        listen(field, 'input', function () {
+          var next = JSON.parse(JSON.stringify(saved)); next.text = field.value; next.title = field.value.split(/\r?\n/)[0].slice(0, 60) || 'Lembrete';
+          try { saved = archive.save(next).document; text(byId('reminder-status'), 'Lembrete guardado.'); }
+          catch (e) { text(byId('reminder-status'), 'Não foi possível guardar. Copie este lembrete antes de sair.'); }
+        });
+        button(card, 'Lixeira', function () { trashEntry(saved); }); list.appendChild(card);
+      });
+    } catch (e) { text(byId('reminder-status'), 'Não foi possível ler os lembretes.'); }
+  }
+  function trashEntry(entry) {
+    if (!archive || !persist()) { return; }
+    var isCurrent = entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id);
+    try {
+      archive.trash(isCurrent ? doc : entry);
+      if (isCurrent) { var next = archive.list().documents[0] || E.freshDocument(); loadDocument(next); cabinetSelection = null; }
+      renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); saveSession(); message('Movido para a lixeira. Você pode restaurar pelo menu Início.');
+    } catch (e) { message('Não foi possível mover para a lixeira. A folha foi preservada.'); }
+  }
+  function cancelDelete() { deleteTarget = null; byId('delete-confirm').hidden = true; byId('trash-toggle').focus(); }
+  function askDelete(entry) {
+    deleteTarget = entry; byId('delete-confirm').hidden = false;
+    text(byId('delete-message'), '“' + (entry.title || 'Sem título') + '” será apagada definitivamente do acervo deste aparelho. Não será possível restaurar esta cópia. Arquivos exportados e versões em outras abas não são apagados.');
+    byId('delete-cancel').focus();
+  }
+
+  function updatePath() {
+    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes' };
+    byId('path-project').hidden = byId('path-project-separator').hidden = project === null;
+    text(byId('path-project'), project || 'Folhas avulsas');
+    byId('path-project').setAttribute('title', project || 'Folhas avulsas');
+    byId('path-document').hidden = byId('path-document-separator').hidden = cabinetOpen;
+    text(byId('path-document'), title.value || 'Sem título');
+    byId('path-document').setAttribute('title', title.value || 'Sem título');
+    byId('path-panel').hidden = byId('path-panel-separator').hidden = !activePanel;
+    text(byId('path-panel'), names[activePanel] || '');
+    currentId = activePanel ? 'path-panel' : !cabinetOpen ? 'path-document' : project !== null ? 'path-project' : 'path-projects';
+    ['path-home', 'path-projects', 'path-project', 'path-document', 'path-panel'].forEach(function (id) {
+      byId(id).removeAttribute('aria-current'); if (id === currentId) { byId(id).setAttribute('aria-current', 'location'); }
+    });
+  }
+  function pathToProjects(all) {
+    var selected = cabinetOpen ? cabinetProject : projectName(doc.project);
+    if (!openCabinet(false)) { return; }
+    cabinetProject = all ? null : selected; byId('cabinet-search').value = ''; renderCabinet();
+  }
   function sizeWorkspace() {
     var area = byId('writing-space');
     if (area.style && window.innerHeight) {
       var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-      area.style.height = height + 'px'; byId('gabinete').style.height = height + 'px';
+      area.style.height = Math.max(0, height - 84) + 'px'; byId('gabinete').style.height = Math.max(0, height - 84) + 'px';
       byId('machine-shell').style.height = height + 'px';
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
       var browser = byId('note-browser');
@@ -2170,10 +2473,11 @@ SOFTWARE.
     var trigger = panelTrigger;
     if (trigger && trigger.setAttribute) { trigger.setAttribute('aria-expanded', 'false'); }
     panelIds.forEach(function (id, i) { byId(id).hidden = true; byId(panelToggles[i]).setAttribute('aria-expanded', 'false'); });
-    activePanel = ''; panelTrigger = null;
+    activePanel = ''; panelTrigger = null; updatePath();
     byId('panel-backdrop').hidden = true; document.body.setAttribute('data-panel', 'closed');
+    byId('delete-confirm').hidden = true; deleteTarget = null;
     byId('writing-space').removeAttribute('aria-hidden'); byId('gabinete').removeAttribute('aria-hidden');
-    if (restore && trigger && trigger.focus) { trigger.focus(); }
+    if (restore && trigger && trigger.focus) { trigger.focus(); } queueSession();
   }
   function showPanel(id, toggle, open) {
     if (!open) { if (activePanel === id) { closePanels(true); } return; }
@@ -2183,6 +2487,7 @@ SOFTWARE.
     byId('panel-backdrop').hidden = false; document.body.setAttribute('data-panel', 'open');
     byId(id).focus(); byId('writing-space').setAttribute('aria-hidden', 'true'); byId('gabinete').setAttribute('aria-hidden', 'true');
     if (id === 'mesa') { byId('note-project').value = projectName(doc.project); }
+    updatePath(); queueSession();
   }
   function setImmersion(enabled) {
     var start = manuscript.selectionStart, end = manuscript.selectionEnd, scroll = manuscript.scrollTop;
@@ -2267,20 +2572,29 @@ SOFTWARE.
   }
   function returnToWriting() { if (cabinetOpen) { enterDesk(); } closePanels(false); collapseTimeline(); manuscript.focus(); }
   function loadDocument(next) {
+    analysisRange = null; copiedSelection = null; byId('selection-tools').hidden = true;
     doc = next; navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; manuscript.setSelectionRange(0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
-    message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.');
+    message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.'); updatePath();
     renderTimeline(true, null, true);
   }
   function renderArchive() {
     var list = byId('document-list'); list.textContent = '';
     if (!archive) { text(byId('archive-status'), 'O acervo não está disponível. Sua folha continua aberta.'); return; }
     try {
-      var result = archive.list();
+      var result = archive.list(trashView);
+      if (trashView) { result.documents = result.documents.filter(function (entry) { return !!entry.trashed; }); }
+      text(byId('acervo-heading'), trashView ? 'Lixeira' : 'Acervo');
+      text(byId('trash-toggle'), trashView ? 'Voltar ao acervo' : 'Lixeira'); byId('trash-toggle').setAttribute('aria-pressed', trashView ? 'true' : 'false');
       text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : result.documents.length ? '' : 'Sua primeira folha começa aqui.');
       result.documents.forEach(function (entry) {
         var li = document.createElement('li');
+        if (trashView) {
+          paragraph(li, entry.title || (entry.kind === 'reminder' ? 'Lembrete' : 'Sem título'));
+          button(li, 'Restaurar', function () { try { archive.trash(entry, false); renderArchive(); renderReminders(); renderCabinet(); message('Restaurado.'); } catch (e) { message('Não foi possível restaurar. A cópia permanece na lixeira.'); } });
+          button(li, 'Excluir definitivamente', function () { askDelete(entry); }); list.appendChild(li); return;
+        }
         var b = button(li, '', function () {
           var isCurrent = entry.id === doc.id;
           if (!persist()) { return; }
@@ -2289,7 +2603,7 @@ SOFTWARE.
           enterDesk(); message('Folha aberta.');
         });
         noteLabel(b, entry.title, timeLabel(new Date(noteDate(entry))) + ' · ' + new Date(noteDate(entry)).toLocaleDateString('pt-BR'));
-        b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false'); list.appendChild(li);
+        b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false'); button(li, 'Mover para a lixeira', function () { trashEntry(entry); }); list.appendChild(li);
       });
     } catch (e) { text(byId('archive-status'), 'Não foi possível ler o acervo. Nenhum registro foi alterado.'); }
   }
@@ -2318,18 +2632,20 @@ SOFTWARE.
     });
     text(analysisStatus, (visible ? visible + (visible === 1 ? ' observação para você examinar.' : ' observações para você examinar.') : 'Nenhum apontamento novo nesta base limitada.') + (result.limited ? ' A leitura foi limitada aos primeiros 100 apontamentos encontrados.' : ''));
     if (result.status === 'insuficiente') { text(analysisStatus, result.assessment.reason); }
-    text(byId('analysis-coverage'), result.coverage);
+    text(byId('analysis-coverage'), (result.source && (result.source.start || result.source.end < snapshot.length) ? 'Trecho selecionado. ' : '') + result.coverage);
     byId('reset-dismissed').hidden = !doc.dismissed.length;
   }
   function examine(lens) {
     if (pendingAnalysis !== null || composing) { return; }
     snapshot = manuscript.value; activeLens = lens;
+    var selected = analysisRange && analysisRange.documentId === (doc.noteId || doc.id) && analysisRange.text === snapshot ? analysisRange : null;
+    var request = E.analysisContract.request(doc, snapshot, selected ? selected.start : 0, selected ? selected.end : snapshot.length);
     byId('findings').textContent = '';
     text(analysisStatus, 'Observando o manuscrito…');
     for (var i = 0; i < lensButtons.length; i += 1) { lensButtons[i].disabled = true; lensButtons[i].setAttribute('aria-pressed', lensButtons[i].getAttribute('data-lens') === lens ? 'true' : 'false'); }
     pendingAnalysis = window.setTimeout(function () {
       pendingAnalysis = null;
-      try { renderResult(vault.analyze(lens, snapshot)); } catch (e) { text(analysisStatus, e.message); }
+      try { if (E.analysisContract.current(request, doc, manuscript.value)) { renderResult(E.analysisContract.analyze(vault, lens, request)); } else { invalidate(); } } catch (e) { text(analysisStatus, e.message); }
       for (var j = 0; j < lensButtons.length; j += 1) { lensButtons[j].disabled = false; }
     }, 20);
   }
@@ -2347,7 +2663,7 @@ SOFTWARE.
     } catch (e) { message('Este navegador não criou o arquivo. Selecione e copie o manuscrito para outro aplicativo.'); }
   }
   function exportedDocuments() {
-    var result = archive ? archive.list() : { documents: [], unreadable: 0 };
+    var result = archive ? archive.list(true) : { documents: [], unreadable: 0 };
     if (result.unreadable) { throw new Error('Há folhas ilegíveis no acervo.'); }
     var entries = result.documents, current = JSON.parse(JSON.stringify(doc)), found = false;
     current.title = title.value; current.text = manuscript.value;
@@ -2377,9 +2693,9 @@ SOFTWARE.
           latest = E.freshDocument(); latest.title = entries[0].title; latest.text = entries[0].text; latest.project = projectName(entries[0].project); latest.created = noteDate(entries[0]); latest.createdApproximate = !entries[0].created || !!entries[0].createdApproximate; loadDocument(latest); dirty = true; message('Arquivo aberto apenas nesta folha. Baixe uma cópia antes de sair.'); return;
         }
         entries.forEach(function (entry) {
-          var imported = E.freshDocument(); imported.title = entry.title; imported.text = entry.text; imported.dismissed = entry.dismissed.slice(); imported.project = projectName(entry.project); imported.created = noteDate(entry); imported.createdApproximate = !entry.created || !!entry.createdApproximate; latest = archive.save(imported).document; count += 1;
+          var imported = E.freshDocument(); imported.title = entry.title; imported.text = entry.text; imported.dismissed = entry.dismissed.slice(); imported.project = projectName(entry.project); imported.created = noteDate(entry); imported.createdApproximate = !entry.created || !!entry.createdApproximate; imported.kind = entry.kind; imported.trashed = entry.trashed; var savedImport = archive.save(imported).document; if (!savedImport.trashed && savedImport.kind !== 'reminder') { latest = savedImport; } count += 1;
         });
-        loadDocument(latest); if (cabinetOpen) { renderCabinet(); } message('Arquivo trazido como ' + count + (count === 1 ? ' nova folha.' : ' novas folhas.')); renderArchive();
+        if (latest) { loadDocument(latest); } renderReminders(); if (cabinetOpen) { renderCabinet(); } message('Arquivo trazido como ' + count + (count === 1 ? ' nova folha.' : ' novas folhas.')); renderArchive();
       } catch (e) { message((count ? count + ' folhas já foram trazidas. ' : '') + (e.name === 'QuotaExceededError' ? 'Faltou espaço para guardar o restante.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior permanece.'); }
     };
     reader.readAsText(file, 'UTF-8');
@@ -2409,7 +2725,7 @@ SOFTWARE.
     win.hidden = !open;
     byId('os-window-task').hidden = action === 'close';
     byId('os-window-task').setAttribute('aria-pressed', open ? 'true' : 'false');
-    byId('os-start').setAttribute('aria-expanded', open ? 'true' : 'false');
+    queueSession();
     if (focus !== false) { (open ? byId('cabinet-heading') : byId('os-start')).focus(); }
     desktopDrag = null;
   }
@@ -2445,6 +2761,7 @@ SOFTWARE.
     return result;
   }
   function renderCabinet() {
+    updatePath(); queueSession();
     var result, list = byId('cabinet-notes'), projects = byId('cabinet-projects'), groups = [], query = byId('cabinet-search').value;
     try { result = cabinetDocuments(); } catch (e) { message('Não foi possível ler o acervo. Seus registros foram preservados.'); return; }
     list.textContent = ''; projects.textContent = '';
@@ -2489,17 +2806,20 @@ SOFTWARE.
     if (result.unreadable) { message('Algumas folhas não puderam ser lidas. Os registros originais permanecem.'); }
   }
   function enterDesk(focusEditor) {
+    toggleStart(false);
     closePanels(false); collapseTimeline(); desktopDrag = null; cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
-    document.body.setAttribute('data-view', 'mesa');
+    document.body.setAttribute('data-view', 'mesa'); updatePath();
     sizeWorkspace(); cancelTypewriter();
     if (focusEditor !== false) { manuscript.focus(); }
     if (cabinetSelection && cabinetSelection.noteId === (doc.noteId || doc.id)) {
       manuscript.setSelectionRange(cabinetSelection.start, cabinetSelection.end); manuscript.scrollTop = cabinetSelection.scroll;
     }
     growManuscript();
+    queueSession();
     try { if (storage && doc.revision) { storage.setItem('escrevaral.astra.current', doc.id); } } catch (ignore) { /* Preferência facultativa. */ }
   }
   function openCabinet(initial) {
+    toggleStart(false);
     if (!initial && (composing || !persist())) { return false; }
     cabinetSelection = { noteId: doc.noteId || doc.id, start: manuscript.selectionStart || 0, end: manuscript.selectionEnd || 0, scroll: manuscript.scrollTop };
     if (machineEnabled) { setMachine(false); }
@@ -2537,7 +2857,7 @@ SOFTWARE.
   try {
     storage = window.localStorage; archive = E.createArchive(storage);
     var currentId = storage.getItem('escrevaral.astra.current'), current = currentId ? archive.get(currentId) : null;
-    if (!current) { current = archive.list().documents[0]; }
+    if (!current || current.trashed || current.kind === 'reminder') { current = archive.list().documents[0]; }
     if (current) { loadDocument(current); }
     applyTheme(storage.getItem('escrevaral.astra.theme'));
     focusEnabled = storage.getItem('escrevaral.astra.focus') !== 'off'; byId('focus-toggle').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
@@ -2632,11 +2952,16 @@ SOFTWARE.
   listen(document, 'keydown', function (event) {
     var code = event.keyCode;
     if (code === 27 && composing) { return; }
+    if (code === 27 && !byId('delete-confirm').hidden) { event.preventDefault(); cancelDelete(); return; }
+    if (code === 27 && !byId('start-menu').hidden) { event.preventDefault(); toggleStart(false); byId('os-start').focus(); return; }
     if (code === 9) {
       document.body.setAttribute('data-input', 'keyboard');
       if (activePanel) {
         var controls = byId(activePanel).querySelectorAll('button, input, select, a[href], [tabindex="0"]'), focusable = [], j;
         for (j = 0; j < controls.length; j += 1) { if (!controls[j].disabled && !controls[j].hidden && controls[j].getClientRects().length) { focusable.push(controls[j]); } }
+        var paths = byId('location-path').querySelectorAll('button'), pathControls = [];
+        for (j = 0; j < paths.length; j += 1) { if (!paths[j].hidden) { pathControls.push(paths[j]); } }
+        focusable = pathControls.concat(focusable); focusable.push(byId('os-start'));
         var first = focusable[0], last = focusable[focusable.length - 1];
         if (!first) { event.preventDefault(); byId(activePanel).focus(); }
         else if (event.shiftKey && (document.activeElement === first || document.activeElement === byId(activePanel))) { event.preventDefault(); last.focus(); }
@@ -2652,8 +2977,8 @@ SOFTWARE.
   listen(byId('os-files'), 'click', function () { desktopWindow('open'); renderCabinet(); });
   listen(byId('os-desk'), 'click', enterDesk);
   listen(byId('os-arrange'), 'click', function () { resetDesktopWindow(); desktopWindow('open'); });
-  listen(byId('os-start'), 'click', function () { desktopWindow('open'); renderCabinet(); });
-  listen(byId('os-window-task'), 'click', function () { desktopWindow(byId('cabinet-window').hidden ? 'open' : 'minimize'); });
+  listen(byId('os-start'), 'click', function () { toggleStart(byId('start-menu').hidden); });
+  listen(byId('os-window-task'), 'click', function () { if (!cabinetOpen) { openCabinet(false); } else { desktopWindow(byId('cabinet-window').hidden ? 'open' : 'minimize'); } });
   listen(byId('window-minimize'), 'click', function () { desktopWindow('minimize'); });
   listen(byId('window-close'), 'click', function () { desktopWindow('close'); });
   listen(byId('window-maximize'), 'click', function () {
@@ -2684,18 +3009,58 @@ SOFTWARE.
   listen(byId('cabinet-more'), 'click', function () { cabinetLimit += 40; renderCabinet(); });
   listen(byId('cabinet-search'), 'input', function () { window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; desktopWindow('open', false); renderCabinet(); }, 180); });
   listen(byId('cabinet-clear'), 'click', function () { window.clearTimeout(cabinetTimer); byId('cabinet-search').value = ''; renderCabinet(); byId('cabinet-search').focus(); });
+  listen(byId('paste-mode'), 'click', function () { restrictedPaste = !restrictedPaste; this.setAttribute('aria-pressed', restrictedPaste ? 'true' : 'false'); try { if (storage) { storage.setItem('escrevaral.astra.restricted-paste', restrictedPaste ? 'on' : 'off'); } } catch (ignore) {} });
+  listen(manuscript, 'paste', function (event) {
+    if (!restrictedPaste) { return; }
+    event.preventDefault(); message('Colagem externa restrita. Use Colar cópia interna ou Trazer arquivo em Ajustes.');
+  });
+  listen(manuscript, 'mouseup', captureSelection); listen(manuscript, 'keyup', captureSelection); listen(manuscript, 'touchend', captureSelection);
+  listen(manuscript, 'select', captureSelection);
+  listen(byId('selection-close'), 'click', function () { byId('selection-tools').hidden = true; });
+  listen(byId('selection-paste'), 'click', pasteInternal);
+  listen(byId('selection-cut'), 'click', function () {
+    if (composing || !copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { return; }
+    var s = copiedSelection; manuscript.value = s.text.slice(0, s.start) + s.text.slice(s.end); manuscript.setSelectionRange(s.start, s.start); manuscript.focus(); copiedSelection = null; changed(); queueSession();
+  });
+  listen(byId('selection-examine'), 'click', function () {
+    if (!copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { message('Selecione novamente o trecho para analisar.'); return; }
+    analysisRange = copiedSelection; showPanel('oficina', 'examinar-toggle', true); lensButtons[0].focus();
+  });
+  listen(byId('selection-external'), 'click', function () {
+    if (!copiedSelection || copiedSelection.text !== manuscript.value) { message('Selecione novamente o trecho para copiar.'); return; }
+    manuscript.focus(); manuscript.setSelectionRange(copiedSelection.start, copiedSelection.end);
+    try { if (document.execCommand && document.execCommand('copy')) { text(byId('clipboard-status'), 'Copiado para outros aplicativos'); return; } } catch (ignore) { /* Cópia interna já disponível. */ }
+    text(byId('clipboard-status'), 'Use Ctrl+C ou o comando Copiar do aparelho.');
+  });
+  listen(byId('start-settings'), 'click', function () { toggleStart(false); showPanel('mesa', 'mesa-toggle', true); });
+  listen(byId('start-projects'), 'click', function () { pathToProjects(true); });
+  listen(byId('start-trash'), 'click', function () { toggleStart(false); trashView = true; renderArchive(); showPanel('acervo', 'acervo-toggle', true); });
+  listen(byId('trash-toggle'), 'click', function () { cancelDelete(); trashView = !trashView; renderArchive(); });
+  listen(byId('trash-current'), 'click', function () { trashEntry(doc); });
+  listen(byId('delete-cancel'), 'click', cancelDelete);
+  listen(byId('delete-accept'), 'click', function () { if (!deleteTarget) { return; } try { archive.purge(deleteTarget); cancelDelete(); renderArchive(); message('Cópia excluída definitivamente deste acervo.'); } catch (e) { text(byId('delete-message'), e.message); } });
+  listen(byId('reminder-new'), 'click', function () { if (!archive) { message('Armazenamento indisponível.'); return; } try { var note = E.freshDocument(); note.kind = 'reminder'; note.title = 'Lembrete'; archive.save(note); renderReminders(); } catch (e) { message('Não foi possível guardar o lembrete.'); } });
+  listen(manuscript, 'input', queueSession); listen(manuscript, 'keyup', queueSession); listen(manuscript, 'scroll', queueSession); listen(manuscript, 'click', queueSession);
+  listen(title, 'input', queueSession);
+  listen(byId('start-menu'), 'click', function () { toggleStart(false); });
+  listen(byId('path-home'), 'click', function () { pathToProjects(true); });
+  listen(byId('path-projects'), 'click', function () { pathToProjects(true); });
+  listen(byId('path-project'), 'click', function () { pathToProjects(false); });
+  listen(byId('path-document'), 'click', function () { returnToWriting(); updatePath(); });
+  listen(title, 'input', updatePath);
   listen(byId('project-new'), 'click', function () { byId('project-form').hidden = false; this.setAttribute('aria-expanded', 'true'); text(byId('project-error'), ''); byId('project-name').focus(); });
   listen(byId('project-cancel'), 'click', function () { byId('project-form').hidden = true; byId('project-new').setAttribute('aria-expanded', 'false'); byId('project-new').focus(); });
   listen(byId('project-form'), 'submit', createProject);
-  listen(byId('note-project-save'), 'click', function () { doc.project = projectName(byId('note-project').value); dirty = true; if (persist()) { message(doc.project ? 'Folha guardada em ' + doc.project + '.' : 'Folha guardada como avulsa.'); if (cabinetOpen) { renderCabinet(); } } });
+  listen(byId('note-project-save'), 'click', function () { doc.project = projectName(byId('note-project').value); updatePath(); dirty = true; if (persist()) { message(doc.project ? 'Folha guardada em ' + doc.project + '.' : 'Folha guardada como avulsa.'); if (cabinetOpen) { renderCabinet(); } } });
   listen(byId('font-literary'), 'click', function () { chooseFont('literaria'); });
   listen(byId('font-typewriter'), 'click', function () { chooseFont('maquina'); });
   try { chooseFont(storage ? storage.getItem('escrevaral.astra.letter') : 'literaria'); } catch (ignore) { chooseFont('literaria'); }
-  openCabinet(true);
+  try { restrictedPaste = !!storage && storage.getItem('escrevaral.astra.restricted-paste') === 'on'; byId('paste-mode').setAttribute('aria-pressed', restrictedPaste ? 'true' : 'false'); } catch (ignore) {}
+  openCabinet(true); renderReminders(); restoreSession(); sessionReady = true;
 
-  listen(document, 'visibilitychange', function () { if (document.hidden) { persist(); stopSound(); stopMachineStrike(); finishMachineFeed(); } });
-  listen(window, 'pagehide', persist);
-  listen(window, 'beforeunload', function (event) { if (!persist()) { event.preventDefault(); event.returnValue = 'Há escrita que não foi guardada.'; } });
+  listen(document, 'visibilitychange', function () { if (document.hidden) { checkpoint(); stopSound(); stopMachineStrike(); finishMachineFeed(); } });
+  listen(window, 'pagehide', checkpoint);
+  listen(window, 'beforeunload', function (event) { if (!checkpoint()) { event.preventDefault(); event.returnValue = 'Há escrita que não foi guardada.'; } });
 }());
 
 </script>

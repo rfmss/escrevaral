@@ -141,6 +141,7 @@ test('Mesa portátil completa, sem script ou folha de estilo externos', function
     assert.strictEqual(JSON.stringify(isolated.Escr.createVault(isolated.Escr.knowledge).analyze(entry[0], entry[1])), JSON.stringify(vault.analyze(entry[0], entry[1])));
   });
 });
+require('./estudio.js')({ test: test, assert: assert, E: E, vault: vault, Storage: Storage });
 var runSurface = require('./superficie.js');
 runSurface({ test: test, source: source, Storage: Storage, vm: vm, assert: assert });
 require('./transplante.js')({ test: test, source: source, assert: assert, E: E, vault: vault, context: context });
