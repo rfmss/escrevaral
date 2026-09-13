@@ -283,7 +283,10 @@
     out.appendChild(box);
   }
 
+  var session = 0;
+
   function deactivate() {
+    session++; /* invalida respostas pendentes do engine ativo (toggle-off) */
     if (!activeEngine) return;
     area.classList.remove("heavy");
     var prev = document.querySelector("button.active");
@@ -297,7 +300,6 @@
     activeEngine = engineId;
   }
 
-  var session = 0;
   var buttons = document.querySelectorAll("button[data-engine]");
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function () {

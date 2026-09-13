@@ -85,13 +85,23 @@ node run-lexico-adversarial.js                # 35/35
 node run-analise-literaria.js                 # 114/114
 node run-analise-literaria-adversarial.js     # 43/43
 node run-es5-purity.js                        # 9/9  (gate ES5 + proveniência)
-node run-integration.js                       # 6/6  (fila + stale + cápsulas)
+node run-integration.js                       # 7/7  (fila + stale + cápsulas + toggle-off)
 # regressão das 9 engines antigas:
 node run-decolonial.js run-morphology.js run-pontuacao.js \
      run-relative-clause.js run-rima-metro.js run-runtime.js \
      run-sintaxe.js run-voz-estilistica.js    # 7/7 14/14 11/11 11/11 29/29 5/5 31/31 11/11
 ```
 
-**Total: 14 runners, 362/362.** Re-revisar o novo SHA (bruto): `git fetch` +
+**Total: 14 runners, 363/363.** Re-revisar o novo SHA (bruto): `git fetch` +
 `git log -1 origin/feat/cofre-capsulas-m4`. Novo parecer: **MERGE sim/não + argumento**.
 Não mergear — o dono decide.
+
+## RODADA 2.1 — ajustes do re-parecer (toggle-off + proveniência sem o store)
+
+- **R6 residual**: desligar a lente (mesmo botão) deixava a resposta pendente reaparecer.
+  `deactivate()` agora faz `session++` (invalida pendentes). Coberto por teste novo
+  `integração-toggle-off-pendente` → `run-integration.js` **7/7**.
+- **R5 reprodutível em qualquer env**: os dois JSONs-oráculo vão vendados byte-a-byte em
+  `src/test/provenance/` (mesmo sha256 do pin). `run-es5-purity.js` resolve store real →
+  snapshot vendado → FAIL (SKIP nunca vira PASS). Verde também sem o escrevaral: **9/9**.
+- Re-parecer do Astra: R1–R4 fechados nas reproduções; R5 e R6 agora cobertos (Rodada 2.1).

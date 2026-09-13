@@ -34,6 +34,18 @@
         "norma-data.json":   { sha: "d8aca87b3b2b70775cc24f9a2a8e3cc09f2550a49b817da994945addc1d52763", mod: path.join(ROOT, "data", "lexical-norma-data.js"), key: "lexicalNormaData" }
     };
 
+    /* Oráculo de proveniência: usa o store escrevaral quando presente (argv[2]); senão,
+     * o snapshot vendado byte-a-byte em src/test/provenance/ (mesmo sha256). Nunca SKIP:
+     * sem fonte E sem snapshot é FALHA. */
+    var SNAP = path.join(__dirname, "provenance");
+
+    function resolveProvenance(name) {
+        var live = path.join(escr, name);
+        if (fs.existsSync(live)) return live;
+        var snap = path.join(SNAP, name);
+        return fs.existsSync(snap) ? snap : null;
+    }
+
     var total = 0, passed = 0, failures = [];
 
     function sha256(p) { return crypto.createHash("sha256").update(fs.readFileSync(p)).digest("hex"); }
@@ -137,11 +149,11 @@
 
     for (var s = 0; s < srcNames.length; s++) {
         var p = PIN[srcNames[s]];
-        var srcPath = path.join(escr, srcNames[s]);
+        var srcPath = resolveProvenance(srcNames[s]);
         total++;
-        if (!fs.existsSync(srcPath)) {
-            failures.push("proveniência " + srcNames[s] + " -> fonte ausente em " + escr + " (SKIP rebaixado a FALHA)");
-            console.log("FAIL [proveniência " + srcNames[s] + " — fonte ausente, SKIP rebaixado a FALHA]");
+        if (!srcPath) {
+            failures.push("proveniência " + srcNames[s] + " -> fonte ausente (store " + escr + " e snapshot vendado) — SKIP rebaixado a FALHA");
+            console.log("FAIL [proveniência " + srcNames[s] + " — fonte ausente (store e snapshot), SKIP rebaixado a FALHA]");
             continue;
         }
         var got = sha256(srcPath);
@@ -150,7 +162,7 @@
             console.log("FAIL [proveniência " + srcNames[s] + " diverge do pin (" + got.slice(0, 12) + "...) — propagar de propósito e atualizar PIN]");
         } else {
             passed++;
-            console.log("PASS [proveniência " + srcNames[s] + " — sha256 bate com o pin (" + got.slice(0, 12) + "...)]");
+            console.log("PASS [proveniência " + srcNames[s] + " — sha256 bate com o pin (" + got.slice(0, 12) + "...)] " + (srcPath.indexOf(escr) === 0 ? "(store " + escr + ")" : "(snapshot vendado src/test/provenance/)"));
         }
     }
 
@@ -171,8 +183,8 @@
 
     for (var q = 0; q < srcNames.length; q++) {
         var pair = PIN[srcNames[q]];
-        var srcPath2 = path.join(escr, srcNames[q]);
-        if (!fs.existsSync(srcPath2) || pair.sha !== sha256(srcPath2)) {
+        var srcPath2 = resolveProvenance(srcNames[q]);
+        if (!srcPath2 || pair.sha !== sha256(srcPath2)) {
             continue; /* já contabilizado no gate de proveniência acima */
         }
         total++;

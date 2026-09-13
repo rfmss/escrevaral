@@ -52,7 +52,7 @@ severity 1..3, confidence 0..1)`:
 
 Evidência: todos os runners (`-check-contrato`) validam `Array.isArray(span)`, `span[1] >
 span[0]`, severidade numérica em 1..3 e confidence em 0..1 — lexico 36/36, adversarial 35/35,
-analise 114/114, adversarial 43/43, integração 6/6.
+analise 114/114, adversarial 43/43, integração 7/7.
 
 ## R4 — analise ignorava o contexto de poesia (lia `options`, contrato usa `context`)
 
@@ -85,11 +85,26 @@ Resultado: `run-es5-purity.js` **9/9** (5 parse gates + 2 proveniência + 2 igua
 - **Descarte de resposta stale**: contador de sessão; renderização só se a resposta
   pertence à requisição mais nova (cliques rápidos não misturam telas).
 
-Evidência: `run-integration.js` 6/6 — ordem da fila == ordem de enqueue; entre 3 enqueues a
+Evidência: `run-integration.js` 7/7 — ordem da fila == ordem de enqueue; entre 3 enqueues a
 só a última sessão renderiza; contornos quantitativos repetição/ausência; demo chromium
 9 engines registradas, 0 pageerrors.
 
-## Estado final da suíte (Rodada 2)
+## RODADA 2.1 — fechamento do re-parecer do Astra (achados no primeiro giro da 2ª revisão)
+
+- **R6 residual (toggle-off)**: ao clicar de novo no mesmo botão (desligar a lente), a
+  resposta pendente da fila REAPARECIA depois — o `deactivate()` não invalidava a sessão.
+  **Corrigido em `index.html`**: `deactivate()` agora faz `session++` (invalida respostas
+  pendentes) além de limpar a tela. **Coberto por teste novo** `integração-toggle-off-pendente`
+  no `run-integration.js` (ativa → desliga imediatamente → 200 ms depois nada é renderizado).
+- **R5 (proveniência fora do ambiente do Astra)**: o gate exigia o store escrevaral
+  (`/home/…/escrevaral`), ausente no ambiente do revisor → falhava corretamente, mas o
+  revisor não conseguia validar. **Corrigido**: os dois JSONs-oráculo agora vão **vendados
+  byte-a-byte** em `src/test/provenance/` (mesmo sha256 do pin), e `run-es5-purity.js`
+  resolve: store real (argv[2]) → snapshot vendado → **FAIL se nenhum** (SKIP nunca vira
+  PASS). Agora verde em qualquer máquina: store real 9/9, só snapshot 9/9, nada → FAIL 5/7.
+- Re-aprovado nesta rodada: pureza 9/9, integração 7/7, R1–R4 em reproduções do revisor.
+
+## Estado final da suíte (Rodada 2.1)
 
 | runner | resultado |
 |---|---|
@@ -97,16 +112,17 @@ só a última sessão renderiza; contornos quantitativos repetição/ausência; 
 | run-lexico-adversarial | 35/35 |
 | run-analise-literaria | 114/114 |
 | run-analise-literaria-adversarial | 43/43 |
-| run-es5-purity (gate ES5 + proveniência) | 9/9 |
-| run-integration (fila + stale + cápsulas) | 6/6 |
+| run-es5-purity (gate ES5 + proveniência, store ou snapshot) | 9/9 |
+| run-integration (fila + stale + cápsulas + toggle-off) | 7/7 |
 | run-decolonial / morphology / pontuacao / relative-clause / rima-metro | 7/7 14/14 11/11 11/11 29/29 |
 | run-runtime / sintaxe / voz-estilistica | 5/5 31/31 11/11 |
 
-**Total: 14 runners, 362/362.** None da outra 9 engines regrediu (runners antigos intactos).
+**Total: 14 runners, 363/363.** Nenhuma da outra 9 engines regrediu (runners antigos intactos).
 
 ## Próxima ação
 
-Re-revisar o novo SHA da branch (`feat/cofre-capsulas-m4`): **`e4f38e03`**
-(= `b4f2173` handshake + `4cf26c4` parecer + `e4f38e03` correções R1–R6). Rode:
-`git fetch && git log -1 origin/feat/cofre-capsulas-m4`, depois os 14 runners acima.
-Se verde, emita novo parecer: **MERGE sim/não + argumento**. Não mergear — o dono decide.
+Re-revisar o `HEAD` atual da branch `feat/cofre-capsulas-m4` (correções R1–R6 em
+`e4f38e03`; ajustes de re-parecer — toggle-off e proveniência vendada — no HEAD). Rode:
+`git fetch && git log -1 origin/feat/cofre-capsulas-m4`, depois os 14 runners acima
+(proveniência roda sem o store escrevaral — snapshot embutido). Se verde, emita novo
+parecer: **MERGE sim/não + argumento**. Não mergear — o dono decide.
