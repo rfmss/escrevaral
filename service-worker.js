@@ -1,9 +1,10 @@
-const CACHE_NAME = "scrvrl-offline-v1";
-const ASSET_VERSION = "20260913-scrvrl-os-v1";
+const CACHE_NAME = "scrvrl-offline-v2";
+const ASSET_VERSION = "20260913-scrvrl-os-v2";
 
 const CORE_ASSETS = [
   "./",
   "./index.html",
+  "./escrevaral.html",
   "./manifest.webmanifest",
   "./icons/icon.svg",
 ];
