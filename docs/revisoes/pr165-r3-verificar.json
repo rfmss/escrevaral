@@ -1,0 +1,271 @@
+{
+  "node": "v22.22.2",
+  "results": [
+    {
+      "check": "ES5: lexico-classes",
+      "passed": true,
+      "evidence": "src/core/engines/lexico-classes.js"
+    },
+    {
+      "check": "ES5: analise-literaria",
+      "passed": true,
+      "evidence": "src/core/engines/analise-literaria.js"
+    },
+    {
+      "check": "Léxico: tokens reais da interface preservam ocorrências",
+      "passed": true,
+      "evidence": {
+        "text": "A casa caiu. A casa ficou.",
+        "tokens": [
+          {
+            "value": "A",
+            "span": [
+              0,
+              1
+            ]
+          },
+          {
+            "value": "casa",
+            "span": [
+              2,
+              6
+            ]
+          },
+          {
+            "value": "caiu",
+            "span": [
+              7,
+              11
+            ]
+          },
+          {
+            "value": "A",
+            "span": [
+              13,
+              14
+            ]
+          },
+          {
+            "value": "casa",
+            "span": [
+              15,
+              19
+            ]
+          },
+          {
+            "value": "ficou",
+            "span": [
+              20,
+              25
+            ]
+          }
+        ],
+        "actual": [
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": [
+              0,
+              1
+            ],
+            "message": "Artigo (Determinante)",
+            "severity": 1,
+            "confidence": 0.8
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": [
+              2,
+              6
+            ],
+            "message": "Substantivo (Sujeito)",
+            "severity": 1,
+            "confidence": 0.8
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": [
+              7,
+              11
+            ],
+            "message": "Verbo flexionado (Predicado)",
+            "severity": 1,
+            "confidence": 0.8
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": [
+              13,
+              14
+            ],
+            "message": "Artigo (Determinante)",
+            "severity": 1,
+            "confidence": 0.8
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": [
+              15,
+              19
+            ],
+            "message": "Substantivo (Sujeito)",
+            "severity": 1,
+            "confidence": 0.8
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": [
+              20,
+              25
+            ],
+            "message": "Verbo flexionado (Predicado)",
+            "severity": 1,
+            "confidence": 0.8
+          }
+        ]
+      }
+    },
+    {
+      "check": "Léxico: Finding segue contracts.js",
+      "passed": true,
+      "evidence": [
+        {
+          "ruleId": "LEXICO-CLASSES",
+          "span": [
+            2,
+            6
+          ],
+          "message": "Substantivo (Sujeito)",
+          "severity": 1,
+          "confidence": 0.8
+        },
+        {
+          "ruleId": "LEXICO-CLASSES",
+          "span": [
+            2,
+            6
+          ],
+          "message": "Substantivo (Sujeito)",
+          "severity": 1,
+          "confidence": 0.8
+        }
+      ]
+    },
+    {
+      "check": "Léxico: callback assíncrono",
+      "passed": true,
+      "evidence": "Snapshot real do tokenizador; Node, não navegador."
+    },
+    {
+      "check": "Literária: Finding segue contracts.js",
+      "passed": true,
+      "evidence": [
+        {
+          "severity": 3,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 2,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        }
+      ]
+    },
+    {
+      "check": "Literária: check preserva snapshot.context",
+      "passed": true,
+      "evidence": {
+        "sample": "sujeira-vicios",
+        "context": {
+          "poesia": true
+        },
+        "expectedCount": 11,
+        "actualCount": 11,
+        "unexpected": []
+      }
+    },
+    {
+      "check": "Literária: callback assíncrono",
+      "passed": true,
+      "evidence": "A chamada é diferida; isso não mede bloqueio durante o processamento."
+    }
+  ]
+}

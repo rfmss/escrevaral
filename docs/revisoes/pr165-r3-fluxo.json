@@ -1,0 +1,169 @@
+{
+  "node": "v22.22.2",
+  "results": [
+    {
+      "check": "R6: desativar limpa imediatamente",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "check": "R6: desativar invalida resposta pendente",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "check": "R6: trocar lente descarta resposta anterior",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "check": "R1/R2: scripts reais, sem APIs opcionais, analisam o texto",
+      "passed": true,
+      "evidence": [
+        {
+          "className": "finding lex",
+          "text": "Artigo (Determinante)"
+        },
+        {
+          "className": "finding lex",
+          "text": "Substantivo (Sujeito)"
+        },
+        {
+          "className": "finding lex",
+          "text": "Verbo flexionado (Predicado)"
+        },
+        {
+          "className": "finding lex",
+          "text": "Artigo (Determinante)"
+        },
+        {
+          "className": "finding lex",
+          "text": "Substantivo (Sujeito)"
+        },
+        {
+          "className": "finding lex",
+          "text": "Verbo flexionado (Predicado)"
+        }
+      ]
+    },
+    {
+      "check": "R1: análise literária sem APIs opcionais",
+      "passed": true,
+      "evidence": {
+        "count": 12,
+        "boxes": [
+          {
+            "className": "",
+            "text": "",
+            "children": [
+              {
+                "children": [],
+                "textContent": "[economia] voz-passiva — 57.1% de construções passivas. Acima de 20% indica insegurança ou distância excessiva.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[economia] adverbios-mente — 3.2% de advérbios em -mente. Acima de 3% é sinal de verbo fraco.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[economia] redundancia — 4 par(es) redundante(s): subir para cima, entrar para dentro.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[pleonasmos] pleonasmo--subir-para-cima- — 1× «subir para cima» — Prefira «subir».",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[pleonasmos] pleonasmo--entrar-para-dentro- — 1× «entrar para dentro» — Prefira «entrar».",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[confusoes] confusao--n-o-h--como-negar- — 1× «não há como negar» — Construção que evita afirmar diretamente. Prefira afirmar o fato sem mediação retórica.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[confusoes] confusao--a-raz-o---porque- — 1× «a razão é porque» — Tautologia: «razão» e «porque» dizem o mesmo. Use «a razão é que» ou apenas «porque».",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[ritmo] variacao-frase — Desvio padrão de comprimento: 3.5. Texto com ritmo muito uniforme. Varie o comprimento das frases.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[lexico] verbos-estado — 57.1% dos verbos são de estado (ser, estar, ter...). Substitua por verbos de ação.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[lexico] substantivos-vagos — 2.6% de substantivos vagos (coisa, aspecto, questão...). Especifique.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[clareza] flesch-denso — Legibilidade 26/100 (Muito denso). Texto muito exigente — verifique se é intencional para o público-alvo.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              },
+              {
+                "children": [],
+                "textContent": "[clareza] pronome-ambiguo — 7 frases com pronomes de 3ª pessoa em contexto denso. Verifique se o referente está claro para o leitor.",
+                "handlers": {},
+                "classes": {},
+                "className": "finding lit",
+                "classList": {}
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "check": "R1: destaque preserva palavra inteira",
+      "passed": true,
+      "evidence": {
+        "expected": "A <mark>casa</mark> caiu.",
+        "actual": "A <mark>casa</mark> caiu."
+      }
+    }
+  ]
+}
