@@ -1,0 +1,287 @@
+{
+  "node": "v24.19.0",
+  "results": [
+    {
+      "check": "ES5: lexico-classes",
+      "passed": false,
+      "evidence": {
+        "file": "src/core/engines/lexico-classes.js",
+        "error": "Invalid regular expression flag (465:21)"
+      }
+    },
+    {
+      "check": "ES5: analise-literaria",
+      "passed": false,
+      "evidence": {
+        "file": "src/core/engines/analise-literaria.js",
+        "error": "Invalid regular expression flag (1024:14)"
+      }
+    },
+    {
+      "check": "Léxico: tokens reais da interface preservam ocorrências",
+      "passed": false,
+      "evidence": {
+        "text": "A casa caiu. A casa ficou.",
+        "tokens": [
+          {
+            "value": "A",
+            "span": [
+              0,
+              1
+            ]
+          },
+          {
+            "value": "casa",
+            "span": [
+              2,
+              6
+            ]
+          },
+          {
+            "value": "caiu",
+            "span": [
+              7,
+              11
+            ]
+          },
+          {
+            "value": "A",
+            "span": [
+              13,
+              14
+            ]
+          },
+          {
+            "value": "casa",
+            "span": [
+              15,
+              19
+            ]
+          },
+          {
+            "value": "ficou",
+            "span": [
+              20,
+              25
+            ]
+          }
+        ],
+        "actual": [
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": {
+              "start": 0,
+              "length": 15
+            },
+            "message": "Substantivo",
+            "severity": "info",
+            "confidence": "high"
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": {
+              "start": 0,
+              "length": 15
+            },
+            "message": "Substantivo",
+            "severity": "info",
+            "confidence": "high"
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": {
+              "start": 0,
+              "length": 15
+            },
+            "message": "Substantivo",
+            "severity": "info",
+            "confidence": "high"
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": {
+              "start": 0,
+              "length": 15
+            },
+            "message": "Substantivo",
+            "severity": "info",
+            "confidence": "high"
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": {
+              "start": 0,
+              "length": 15
+            },
+            "message": "Substantivo",
+            "severity": "info",
+            "confidence": "high"
+          },
+          {
+            "ruleId": "LEXICO-CLASSES",
+            "span": {
+              "start": 0,
+              "length": 15
+            },
+            "message": "Substantivo",
+            "severity": "info",
+            "confidence": "high"
+          }
+        ]
+      }
+    },
+    {
+      "check": "Léxico: Finding segue contracts.js",
+      "passed": false,
+      "evidence": [
+        {
+          "ruleId": "LEXICO-CLASSES",
+          "span": {
+            "start": 2,
+            "length": 4
+          },
+          "message": "Substantivo (Sujeito)",
+          "severity": "info",
+          "confidence": "high"
+        },
+        {
+          "ruleId": "LEXICO-CLASSES",
+          "span": {
+            "start": 2,
+            "length": 4
+          },
+          "message": "Substantivo (Sujeito)",
+          "severity": "info",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "check": "Léxico: callback assíncrono",
+      "passed": true,
+      "evidence": "Snapshot real do tokenizador; Node, não navegador."
+    },
+    {
+      "check": "Literária: Finding segue contracts.js",
+      "passed": false,
+      "evidence": [
+        {
+          "severity": 1,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        },
+        {
+          "severity": 0.6,
+          "confidence": 0.6,
+          "span": [
+            0,
+            915
+          ]
+        }
+      ]
+    },
+    {
+      "check": "Literária: check preserva snapshot.context",
+      "passed": false,
+      "evidence": {
+        "sample": "sujeira-vicios",
+        "context": {
+          "poesia": true
+        },
+        "expectedCount": 11,
+        "actualCount": 12,
+        "unexpected": [
+          "[economia] redundancia — 4 par(es) redundante(s): subir para cima, entrar para dentro."
+        ]
+      }
+    },
+    {
+      "check": "Literária: callback assíncrono",
+      "passed": true,
+      "evidence": "A chamada é diferida; isso não mede bloqueio durante o processamento."
+    }
+  ]
+}
