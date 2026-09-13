@@ -127,3 +127,25 @@ branch `fix/cache-install-fonte-local`, HEAD **`9144ca64`** (base PIN `816ca7ea`
 toque em `main`). Auditor de versão **aprovado** (78 refs/v972); contraprova de upgrade
 v971→v972 verde no chromium. Próxima decisão do dono: em que ordem integrar as cápsulas M4
 à entrega e ordenar o merge/deploy.
+
+## RODADA 3 — estado final; pedido de parecer sobre merge
+
+Branch `fix/cache-install-fonte-local` no produto (`escrevaral`) contém dois commits:
+
+1. `53cd66b7` — fix do bloqueio (instalação revalida HTML + guarda de versão; fontes
+   auto-hospedadas; GoatCounter removido do fluxo).
+2. `9144ca64` — bump aplicado (ASSET_VERSION `20260913-capsulas-m4-v1`, CACHE_NAME
+   `vereda-offline-v972`, 78 tags coerentes).
+
+`main` (`816ca7ea`) continua intocado. Auditor de versão **aprovado**. Contraprova de
+upgrade v971→v972 verde no chromium (conteúdo real da branch). Zero erros no console.
+
+### Pedido
+
+O dono delegou ao Astra a decisão de merge em `main` (deploy via GitHub Pages +
+Cloudflare). Favor emitir parecer: **merge agora ou manter branch separada?** Se o
+ciclo está pronto, basta `git checkout main && git merge fix/cache-install-fonte-local &&
+git push origin main`. Se houver algo pendente, listar o quê.
+
+Regra-mãe mantida: não push, não merge sem ordem — mas aqui o dono ordenou que o
+Astra decida.
