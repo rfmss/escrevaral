@@ -1432,18 +1432,27 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  .focus-center { max-width:780px; margin:36px auto; text-align:center; }
  .focus-clock-shell { position:relative; display:inline-block; border:1px dashed #889784; padding:24px 30px; background:#c4cfc2; box-shadow:0 3px 0 rgba(33,41,33,.13); }
  .focus-clock { white-space:nowrap; }
- .focus-digit { display:inline-block; position:relative; vertical-align:middle; width:96px; height:142px; margin:0 3px; border:1px solid #8c9b8a; border-radius:3px; box-shadow:0 2px 0 #9fad9b; overflow:hidden; perspective:800px; -webkit-perspective:800px; }
- .focus-digit i.f-l1,.focus-digit i.f-l2 { position:absolute; left:0; width:100%; height:71px; font-style:normal; transform-style:preserve-3d; -webkit-transform-style:preserve-3d; }
- .focus-digit i.f-l1 { top:0; transform-origin:50% 100%; }
- .focus-digit i.f-l2 { top:71px; transform-origin:50% 0; }
- .focus-digit s { position:absolute; left:0; width:100%; height:142px; overflow:hidden; background:#d1ded0; color:#111511; font:600 106px/142px 'Oswald',Impact,sans-serif; font-style:normal; text-decoration:none; text-align:center; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
- .focus-digit s.dn { top:-71px; background:#cad8c8; }
- .focus-digit s.up { top:0; }
- .focus-digit s.back { transform:rotateY(180deg); -webkit-transform:rotateY(180deg); }
- .focus-digit.flipping i.f-l1,.focus-digit.flipping i.f-l2 { animation:fd-flip .32s ease-in-out forwards; -webkit-animation:fd-flip .32s ease-in-out forwards; }
- @keyframes fd-flip { 0% { transform:rotateX(0); -webkit-transform:rotateX(0); } 100% { transform:rotateX(180deg); -webkit-transform:rotateX(180deg); } }
- @media (prefers-reduced-motion:reduce) { .focus-digit.flipping i.f-l1,.focus-digit.flipping i.f-l2 { animation:none; -webkit-animation:none; } }
- .focus-digit:after { content:''; position:absolute; top:50%; left:0; right:0; border-top:1px solid #8c9b8a; z-index:1; }
+ .focus-digit { display:inline-block; position:relative; vertical-align:middle; width:96px; height:142px; margin:0 3px; border:1px solid #8c9b8a; border-radius:3px; background:#d1ded0; box-shadow:0 2px 0 #9fad9b; overflow:hidden; perspective:500px; -webkit-perspective:500px; }
+ .focus-digit:after { content:''; position:absolute; top:50%; left:0; right:0; border-top:1px solid #8c9b8a; z-index:10; }
+ .focus-digit .sd { position:absolute; left:0; width:100%; height:50%; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+ .focus-digit .sd span { position:absolute; left:0; width:100%; text-align:center; font:600 106px/142px 'Oswald',Impact,sans-serif; color:#111511; }
+ .focus-digit .sd.top { top:0; transform-origin:bottom; background:#d1ded0; }
+ .focus-digit .sd.top span { top:0; }
+ .focus-digit .sd.bottom { bottom:0; transform-origin:top; background:#cad8c8; }
+ .focus-digit .sd.bottom span { top:-100%; }
+ .focus-digit .static-top { z-index:1; }
+ .focus-digit .static-bottom { z-index:2; }
+ .focus-digit .flap-front { z-index:3; }
+ .focus-digit .flap-back { z-index:4; transform:rotateX(180deg); -webkit-transform:rotateX(180deg); background:#cad8c8; }
+ .focus-digit.flipping .flap-front { animation:fd-front .55s ease-in forwards; -webkit-animation:fd-front .55s ease-in forwards; }
+ .focus-digit.flipping .flap-back { animation:fd-back .55s ease-in forwards; -webkit-animation:fd-back .55s ease-in forwards; }
+ @keyframes fd-front { 0% { transform:rotateX(0); } 100% { transform:rotateX(-180deg); } }
+ @keyframes fd-back { 0% { transform:rotateX(180deg); } 100% { transform:rotateX(0); } }
+ .focus-digit.flipping .flap-front:after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(33,41,33,.6); opacity:0; animation:fd-sh-front .55s ease-in forwards; -webkit-animation:fd-sh-front .55s ease-in forwards; }
+ .focus-digit.flipping .flap-back:after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(33,41,33,.6); opacity:1; animation:fd-sh-back .55s ease-in forwards; -webkit-animation:fd-sh-back .55s ease-in forwards; }
+ @keyframes fd-sh-front { 0%{opacity:0;} 100%{opacity:1;} }
+ @keyframes fd-sh-back { 0%{opacity:1;} 100%{opacity:0;} }
+ @media (prefers-reduced-motion:reduce) { .focus-digit.flipping .flap-front,.focus-digit.flipping .flap-back { animation:none; -webkit-animation:none; } }
  .focus-colon { display:inline-block; vertical-align:middle; font:600 50px/1 'Oswald',Arial,sans-serif; padding:0 8px; }
  .focus-register { position:absolute; font:16px/1 Arial,sans-serif; color:#65735f; }
  .focus-register-tl { top:3px; left:4px; }.focus-register-tr { top:3px; right:4px; }.focus-register-bl { bottom:3px; left:4px; }.focus-register-br { bottom:3px; right:4px; }
@@ -1458,9 +1467,11 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  .focus-barcode { height:18px; background:repeating-linear-gradient(90deg,#445140 0,#445140 2px,transparent 2px,transparent 5px,#445140 5px,#445140 9px,transparent 9px,transparent 12px); opacity:.45; }
  body[data-theme="escuro"] .sheet.focus-pause { background:#20281f; color:#d8e4d6; }
  body[data-theme="escuro"] .focus-clock-shell,body[data-theme="escuro"] .focus-challenge { background:#293327; }
- body[data-theme="escuro"] .focus-digit { background:linear-gradient(#43553d 50%,#354231 50%); color:#d8e4d6; border-color:#65735f; box-shadow:0 2px 0 #111511; }
-  body[data-theme="escuro"] .focus-digit s { background:#43553d; color:#d8e4d6; }
-  body[data-theme="escuro"] .focus-digit s.dn { background:#354231; }
+ body[data-theme="escuro"] .focus-digit { background:#43553d; border-color:#65735f; box-shadow:0 2px 0 #111511; }
+  body[data-theme="escuro"] .focus-digit:after { border-top-color:#65735f; }
+  body[data-theme="escuro"] .focus-digit .sd.top { background:#43553d; }
+  body[data-theme="escuro"] .focus-digit .sd.bottom { background:#354231; }
+  body[data-theme="escuro"] .focus-digit .sd span { color:#d8e4d6; }
  body[data-theme="escuro"] .calculator-keys button { background:#354231; color:#d8e4d6; }
  body[data-theme="escuro"] .calendar-table button[aria-pressed="true"] { background:#cad8c8; color:#111511; }
  body[data-theme="escuro"] .calendar-item.is-done span { color:#b3c2b1; }
@@ -1473,7 +1484,7 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
   .sheet.focus-pause,body[data-view="gabinete"] .sheet.focus-pause { padding:16px; }
   .focus-header { flex-wrap:wrap; }.focus-header h2 { width:100%; order:3; margin:14px 0 0; }
   .focus-brand { font-size:24px; }.focus-center { margin:24px auto; }
-  .focus-clock-shell { padding:18px 10px; }.focus-digit { width:46px; height:76px; margin:0 1px; }.focus-digit i.f-l1,.focus-digit i.f-l2 { height:38px; }.focus-digit i.f-l2 { top:38px; }.focus-digit s { height:76px; font:600 55px/76px 'Oswald',Impact,sans-serif; }.focus-digit s.dn { top:-38px; }.focus-colon { font-size:30px; padding:0 4px; }
+  .focus-clock-shell { padding:18px 10px; }.focus-digit { width:46px; height:76px; margin:0 1px; }.focus-digit .sd span { font:600 55px/76px 'Oswald',Impact,sans-serif; }.focus-colon { font-size:30px; padding:0 4px; }
   .calendar-nav h3 { font-size:18px; }.calendar-nav button { min-width:32px; }
  }
 }
@@ -1701,7 +1712,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   </section>
   <section id="focus-pause" class="sheet focus-pause" role="dialog" aria-labelledby="focus-heading" tabindex="-1" hidden="">
     <header class="focus-header"><strong class="focus-brand">ESCREVA<span>RAL</span></strong><h2 id="focus-heading">PAUSA CONTEMPLATIVA</h2><button id="focus-close">Voltar ao texto</button></header>
-    <div class="focus-center"><div class="focus-clock-shell"><span class="focus-register focus-register-tl" aria-hidden="true">+</span><span class="focus-register focus-register-tr" aria-hidden="true">+</span><span class="focus-register focus-register-bl" aria-hidden="true">+</span><span class="focus-register focus-register-br" aria-hidden="true">+</span><div class="focus-clock" aria-hidden="true"><span id="focus-digit-0" class="focus-digit" data-digit="4"><i class="f-l1"><s class="up">4</s><s class="dn back"></s></i><i class="f-l2"><s class="dn">4</s><s class="up back"></s></i></span><span id="focus-digit-1" class="focus-digit" data-digit="9"><i class="f-l1"><s class="up">9</s><s class="dn back"></s></i><i class="f-l2"><s class="dn">9</s><s class="up back"></s></i></span><span class="focus-colon">:</span><span id="focus-digit-2" class="focus-digit" data-digit="4"><i class="f-l1"><s class="up">4</s><s class="dn back"></s></i><i class="f-l2"><s class="dn">4</s><s class="up back"></s></i></span><span id="focus-digit-3" class="focus-digit" data-digit="2"><i class="f-l1"><s class="up">2</s><s class="dn back"></s></i><i class="f-l2"><s class="dn">2</s><s class="up back"></s></i></span></div><output id="focus-time" class="sr-only">49:42</output></div>
+    <div class="focus-center"><div class="focus-clock-shell"><span class="focus-register focus-register-tl" aria-hidden="true">+</span><span class="focus-register focus-register-tr" aria-hidden="true">+</span><span class="focus-register focus-register-bl" aria-hidden="true">+</span><span class="focus-register focus-register-br" aria-hidden="true">+</span><div class="focus-clock" aria-hidden="true"><span id="focus-digit-0" class="focus-digit" data-digit="4"><b class="sd top static-top"><span>4</span></b><b class="sd bottom static-bottom"><span>4</span></b><b class="sd top flap-front"><span>4</span></b><b class="sd bottom flap-back"><span>4</span></b></span><span id="focus-digit-1" class="focus-digit" data-digit="9"><b class="sd top static-top"><span>9</span></b><b class="sd bottom static-bottom"><span>9</span></b><b class="sd top flap-front"><span>9</span></b><b class="sd bottom flap-back"><span>9</span></b></span><span class="focus-colon">:</span><span id="focus-digit-2" class="focus-digit" data-digit="4"><b class="sd top static-top"><span>4</span></b><b class="sd bottom static-bottom"><span>4</span></b><b class="sd top flap-front"><span>4</span></b><b class="sd bottom flap-back"><span>4</span></b></span><span id="focus-digit-3" class="focus-digit" data-digit="2"><b class="sd top static-top"><span>2</span></b><b class="sd bottom static-bottom"><span>2</span></b><b class="sd top flap-front"><span>2</span></b><b class="sd bottom flap-back"><span>2</span></b></span></div><output id="focus-time" class="sr-only">49:42</output></div>
     <p id="focus-status" role="status">Afaste os olhos da tela. A escrita pode esperar.</p>
     <div id="focus-challenge" class="focus-challenge" hidden=""><p class="scrvrl-label">DESAFIO DE CONCENTRAÇÃO</p><blockquote><p id="focus-quote">“Penso, logo existo.”</p><cite id="focus-author">René Descartes</cite></blockquote><form id="focus-form"><label for="focus-answer">Digite o primeiro nome do autor para recomeçar</label><input id="focus-answer" autocomplete="off" maxlength="40"><button type="submit" class="scrvrl-action">Recomeçar</button></form><p id="focus-answer-status" role="status"></p></div></div>
     <footer class="focus-footer"><div class="focus-barcode" aria-hidden="true"></div><p>ESCREVARAL · TEMPO DE PAUSA</p><button id="focus-finish">Encerrar pausa</button></footer>
@@ -2732,10 +2743,13 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     function showFocus(){bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();}
     function flipDigit(d,next){
       if(d.getAttribute('data-digit')===next){return;}
-      var now=(d.__flipToken||0)+1;d.__flipToken=now;
-      d.querySelector('.f-l1 s.back').textContent=next;d.querySelector('.f-l2 s.back').textContent=next;
+      var old=d.getAttribute('data-digit');
+      d.querySelector('.static-top span').textContent=next;
+      d.querySelector('.flap-back span').textContent=next;
+      d.querySelector('.static-bottom span').textContent=old;
+      d.querySelector('.flap-front span').textContent=old;
       d.classList.remove('flipping');d.offsetWidth;d.classList.add('flipping');d.setAttribute('data-digit',next);
-      root.setTimeout(function(){if(d.__flipToken===now){d.classList.remove('flipping');d.querySelector('.f-l1 s.up').textContent=next;d.querySelector('.f-l2 s.dn').textContent=next;}},360);
+      root.setTimeout(function(){d.classList.remove('flipping');d.querySelector('.static-bottom span').textContent=next;d.querySelector('.flap-front span').textContent=next;},560);
     }
     function paintTimer(){
       var remaining=state.mode==='idle'?state.work*60:E.pomodoroRemaining(state,Date.now()), display=formatTime(remaining), digits=display.replace(':',''), j;
