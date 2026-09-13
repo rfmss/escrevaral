@@ -207,6 +207,8 @@
   <button data-engine="VOICE">Voz e estilística</button>
   <button data-engine="PONTUACAO">Pontuação</button>
   <button data-engine="SINTAXE">Sintaxe e funções</button>
+  <button data-engine="LEXICO-CLASSES">Classes de palavras</button>
+  <button data-engine="ANALISE-LITERARIA">Análise literária</button>
 </div>
 
 <div id="out"></div>
@@ -226,6 +228,10 @@
 <script src="src/data/syntax-data.js"></script>
 <script src="src/data/norma-data.js"></script>
 <script src="src/core/engines/sintaxe.js"></script>
+<script src="src/data/lexical-data.js"></script>
+<script src="src/data/lexical-norma-data.js"></script>
+<script src="src/core/engines/lexico-classes.js"></script>
+<script src="src/core/engines/analise-literaria.js"></script>
 <script>
 (function () {
   var Encore = window.Encore;
@@ -245,6 +251,8 @@
   Encore.runtime.register(new Encore.core.engines.VoiceEngine());
   Encore.runtime.register(new Encore.core.engines.PunctuationEngine());
   Encore.runtime.register(new Encore.core.engines.SintaxeEngine());
+  Encore.runtime.register(new Encore.core.engines.VeredaLexicalEngine());
+  Encore.runtime.register(new Encore.core.engines.AnaliseLiterariaEngine());
 
   var emptyMsg = {
     "VERB-MORPH":  "(nenhum verbo do vocabulário identificado)",
@@ -253,7 +261,9 @@
     "RIMA-METRICA":"(nada a analisar)",
     "VOICE":       "(nada a analisar)",
     "PONTUACAO":   "(nenhuma questão de pontuação identificada)",
-    "SINTAXE":     "(nada a analisar)"
+    "SINTAXE":     "(nada a analisar)",
+    "LEXICO-CLASSES": "(nenhuma classe de palavra identificada)",
+    "ANALISE-LITERARIA": "(nada a analisar)"
   };
 
   var clsMap = {
@@ -263,7 +273,9 @@
     "RIMA-METRICA":"finding rim",
     "VOICE":       "finding voz",
     "PONTUACAO":   "finding pont",
-    "SINTAXE":     "finding sint"
+    "SINTAXE":     "finding sint",
+    "LEXICO-CLASSES": "finding lex",
+    "ANALISE-LITERARIA": "finding lit"
   };
 
   function render(box) {
@@ -302,7 +314,7 @@
       var text = area.innerText || area.textContent;
       var box = document.createElement("div");
       var self = this;
-      Encore.runtime.runOne(engineId, text, function (findings) {
+      var renderFindings = function (findings) {
         if (!findings.length) {
           box.className = "muted";
           box.textContent = emptyMsg[engineId] || "(nada a analisar)";
@@ -316,7 +328,14 @@
           });
         }
         render(box);
-      });
+      };
+      if (engineId === "LEXICO-CLASSES") {
+        var probes = Encore.core.services.Tokenizer.tokenize(text);
+        var lexEngine = Encore.runtime.byId("LEXICO-CLASSES");
+        lexEngine.check({ text: text, context: { probes: probes } }, renderFindings);
+      } else {
+        Encore.runtime.runOne(engineId, text, renderFindings);
+      }
     });
   }
 })();

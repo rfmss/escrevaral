@@ -7,9 +7,9 @@ Cruzamento das 5 fontes (A=escrevaral main, B=mass-notes, C=antigravity, D=uai.r
 |---|---|---|---|---|---|---|
 | **Morfologia verbal** | syntax-engine (via pt-compromise) | **verbMorphology TS nativo** (34+24 casos, infinitivo pessoal verified) | morphology-lite ES5 (M6) | parte do syntax | wordclass | **C (ES5) p/ base + B (lemas/TD nativo) p/ regras finas** |
 | **Sintaxe / função** | syntax-engine (85% função sintática) | reviewAdapter (bridge) | SintaxeAnalyzer (M6) + syntax service | syntax-engine (26 KB) | grammarLint | **C (M6 ES5)** |
-| **Léxico / classes** | lexical-engine (L7-100%) | lexicalAdapter + contextualResolver | **LexiconAnalyzer (M6, lexicon 100k sem OOM)** | lexical-engine (campo semântico, craft) | lexCheck 360k + pos_lexicon | **C p/ RAM + A p/ riqueza léxica + E p/ dicionário** |
+| **Léxico / classes** | lexical-engine (L7-100%) | lexicalAdapter + contextualResolver | **LexiconAnalyzer (M6, lexicon 100k sem OOM)** | lexical-engine (campo semântico, craft) | lexCheck 360k + pos_lexicon | **C p/ RAM + A p/ riqueza léxica + E p/ dicionário** ✅ portado (M4) |
 | **Pontuação** | punctuation-engine (40 regras) | reviewAdapter (bridge) | PontuacaoAnalyzer (M0) | punctuation-engine (30 regras) | (via grammarLint) | **A (40 regras, 100%)** |
-| **Análise literária / redação** | analise-engine (39 critérios) | reviewAdapter (bridge) | AnaliseLiterariaAnalyzer | — | — | **A (100%)** |
+| **Análise literária / redação** | analise-engine (39 critérios) | reviewAdapter (bridge) | AnaliseLiterariaAnalyzer | — | — | **A (100%)** ✅ portado (M4) |
 | **Voz / estilística** | voice-engine (100%) | voiceAdapter | — | — | styleAnalysis | **A (100%)** |
 | **Rima / métrica** | rimalab-engine (100%) | rimaLabAdapter | — | — | — | **A (100%)** |
 | **Decolonial / termos** | decolonial-engine (100%) | decolonialAdapter | — | — | — | **A (100%)** |

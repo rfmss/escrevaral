@@ -1,0 +1,2695 @@
+{
+  "engine": "VeredaLexical",
+  "version": "1.0.0",
+  "gerado": "fonte ES6 original",
+  "casos": [
+    {
+      "id": "narrativa-3p",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "casa",
+            "ctx": {
+              "word": "casa",
+              "displayWord": "casa",
+              "className": "Substantivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Espaço — identidade, pertencimento, memória",
+              "note": "A casa é o personagem que permanece quando os outros partem. Descreva-a pelo desgaste que a habitação imprimiu nela.",
+              "definicao": "A casa na ficção é o espaço da intimidade — mas também da prisão, do abrigo, da herança, da memória. A casa que a personagem habita modela o que ela pensa ser possível. Casas na ficção brasileira são frequentemente palco de afeto e violência ao mesmo tempo: o lugar que deveria ser seguro e às vezes não é.",
+              "funcaoSintatica": "Sujeito",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "casa",
+              "displayWord": "casa",
+              "className": "Substantivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Espaço — identidade, pertencimento, memória",
+              "note": "A casa é o personagem que permanece quando os outros partem. Descreva-a pelo desgaste que a habitação imprimiu nela.",
+              "definicao": "A casa na ficção é o espaço da intimidade — mas também da prisão, do abrigo, da herança, da memória. A casa que a personagem habita modela o que ela pensa ser possível. Casas na ficção brasileira são frequentemente palco de afeto e violência ao mesmo tempo: o lugar que deveria ser seguro e às vezes não é.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "abaixo",
+            "ctx": {
+              "word": "abaixo",
+              "displayWord": "abaixo",
+              "className": "Advérbio",
+              "decisao": "provavel",
+              "functionName": "Modificador",
+              "field": "Circunstância — modo, tempo, lugar, intensidade",
+              "note": "Advérbios em -mente frequentemente denunciam um verbo fraco. Teste retirar o advérbio e fortalecer o verbo.",
+              "definicao": "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.",
+              "funcaoSintatica": "Adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "abaixo",
+              "displayWord": "abaixo",
+              "className": "Advérbio",
+              "decisao": "provavel",
+              "functionName": "Modificador",
+              "field": "Circunstância — modo, tempo, lugar, intensidade",
+              "note": "Advérbios em -mente frequentemente denunciam um verbo fraco. Teste retirar o advérbio e fortalecer o verbo.",
+              "definicao": "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "em",
+            "ctx": {
+              "word": "em",
+              "displayWord": "em",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "Elemento prepositivo",
+              "count": 2,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "em",
+              "displayWord": "em",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "o",
+            "ctx": {
+              "word": "o",
+              "displayWord": "o",
+              "className": "Pronome pessoal",
+              "decisao": "provavel",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome pessoal — substitui o nome de uma pessoa do discurso.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "o",
+              "displayWord": "o",
+              "className": "Pronome pessoal",
+              "decisao": "provavel",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome pessoal — substitui o nome de uma pessoa do discurso.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "rápido",
+            "ctx": {
+              "word": "rapido",
+              "displayWord": "rápido",
+              "className": "Adjetivo",
+              "decisao": "provavel",
+              "functionName": "Qualificador",
+              "field": "Qualidade — atributo sensorial ou moral",
+              "note": "Adjetivos fortes revelam percepção do narrador/personagem, não apenas aparência do objeto. 'Vermelho' informa; 'encarnado' posiciona.",
+              "definicao": "Adjetivo — atribui qualidade, estado ou característica ao substantivo.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "rapido",
+              "displayWord": "rápido",
+              "className": "Adjetivo",
+              "decisao": "ambiguo",
+              "functionName": "Qualificador",
+              "field": "Qualidade — atributo sensorial ou moral",
+              "note": "Adjetivos fortes revelam percepção do narrador/personagem, não apenas aparência do objeto. 'Vermelho' informa; 'encarnado' posiciona.",
+              "definicao": "Adjetivo — atribui qualidade, estado ou característica ao substantivo.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "segundo",
+            "ctx": {
+              "word": "segundo",
+              "displayWord": "segundo",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavras de tempo controlam o ritmo interno da cena. Quanto mais detalhada a unidade temporal, mais lento o tempo narrativo.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": [
+                "Conjunção conformativa — 'segundo Bechara'",
+                "Adjetivo numeral — 'o segundo capítulo'"
+              ]
+            },
+            "solo": {
+              "word": "segundo",
+              "displayWord": "segundo",
+              "className": "Conjunção",
+              "decisao": "ambiguo",
+              "functionName": "Conector de ideias",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavras de tempo controlam o ritmo interno da cena. Quanto mais detalhada a unidade temporal, mais lento o tempo narrativo.",
+              "definicao": "Conjunção — conecta orações ou termos, estabelecendo relação de sentido.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": [
+                "Adjetivo numeral — 'o segundo capítulo'"
+              ]
+            }
+          },
+          {
+            "token": "correr",
+            "ctx": {
+              "word": "correr",
+              "displayWord": "correr",
+              "className": "Verbo no infinitivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo de ação",
+              "field": "Movimento — urgência, fuga, perseguição",
+              "note": "Quando o personagem corre, a prosa também deveria acelerar — frases curtas, verbos fortes, poucos adjetivos.",
+              "definicao": "Correr na ficção é urgência no corpo. Diferente de caminhar (que é interno), correr é exterior, agressivo, desesperado ou jubiloso. A cena em que a personagem corre tem ritmo diferente — a frase pode encurtar, os detalhes sumem, o corpo domina. A personagem que corre está fugindo, alcançando ou tentando chegar a tempo.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "correr",
+              "displayWord": "correr",
+              "className": "Verbo no infinitivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo de ação",
+              "field": "Movimento — urgência, fuga, perseguição",
+              "note": "Quando o personagem corre, a prosa também deveria acelerar — frases curtas, verbos fortes, poucos adjetivos.",
+              "definicao": "Correr na ficção é urgência no corpo. Diferente de caminhar (que é interno), correr é exterior, agressivo, desesperado ou jubiloso. A cena em que a personagem corre tem ritmo diferente — a frase pode encurtar, os detalhes sumem, o corpo domina. A personagem que corre está fugindo, alcançando ou tentando chegar a tempo.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "nós",
+            "ctx": {
+              "word": "nos",
+              "displayWord": "nós",
+              "className": "Pronome pessoal",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Em dramatologia, o nó da ação: o ponto de máximo entrelaçamento do conflito, antes da resolução. Também chamado de 'complicação'. O escritor precisa saber onde o nó está antes de desatá-lo.",
+              "funcaoSintatica": "",
+              "count": 0
+            },
+            "solo": {
+              "word": "nos",
+              "displayWord": "nós",
+              "className": "Pronome pessoal",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Em dramatologia, o nó da ação: o ponto de máximo entrelaçamento do conflito, antes da resolução. Também chamado de 'complicação'. O escritor precisa saber onde o nó está antes de desatá-lo.",
+              "funcaoSintatica": "",
+              "count": 0
+            }
+          },
+          {
+            "token": "dá",
+            "ctx": {
+              "word": "da",
+              "displayWord": "dá",
+              "className": "Verbo flexionado",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1
+            },
+            "solo": {
+              "word": "da",
+              "displayWord": "dá",
+              "className": "Verbo flexionado",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0
+            }
+          },
+          {
+            "token": "ontem",
+            "ctx": {
+              "word": "ontem",
+              "displayWord": "ontem",
+              "className": "Advérbio",
+              "decisao": "provavel",
+              "functionName": "Modificador",
+              "field": "Circunstância — modo, tempo, lugar, intensidade",
+              "note": "Advérbios em -mente frequentemente denunciam um verbo fraco. Teste retirar o advérbio e fortalecer o verbo.",
+              "definicao": "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "ontem",
+              "displayWord": "ontem",
+              "className": "Advérbio",
+              "decisao": "provavel",
+              "functionName": "Modificador",
+              "field": "Circunstância — modo, tempo, lugar, intensidade",
+              "note": "Advérbios em -mente frequentemente denunciam um verbo fraco. Teste retirar o advérbio e fortalecer o verbo.",
+              "definicao": "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "epistolar-1p",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "Nós",
+            "ctx": {
+              "word": "nos",
+              "displayWord": "Nós",
+              "className": "Preposição/Artigo",
+              "decisao": "ambiguo",
+              "functionName": "Estrutura gramatical",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Em dramatologia, o nó da ação: o ponto de máximo entrelaçamento do conflito, antes da resolução. Também chamado de 'complicação'. O escritor precisa saber onde o nó está antes de desatá-lo.",
+              "funcaoSintatica": "Elemento prepositivo",
+              "count": 1,
+              "alternatives": [
+                "Pronome pessoal — 'ela nos deu o livro'"
+              ]
+            },
+            "solo": {
+              "word": "nos",
+              "displayWord": "Nós",
+              "className": "Pronome pessoal",
+              "decisao": "ambiguo",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Em dramatologia, o nó da ação: o ponto de máximo entrelaçamento do conflito, antes da resolução. Também chamado de 'complicação'. O escritor precisa saber onde o nó está antes de desatá-lo.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": [
+                "Preposição/Artigo — 'nos arredores da cidade'"
+              ]
+            }
+          },
+          {
+            "token": "fê-lo",
+            "ctx": {
+              "word": "fe-lo",
+              "displayWord": "fê-lo",
+              "className": "Verbo flexionado",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1
+            },
+            "solo": {
+              "word": "fe-lo",
+              "displayWord": "fê-lo",
+              "className": "Verbo flexionado",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0
+            }
+          },
+          {
+            "token": "dê",
+            "ctx": {
+              "word": "de",
+              "displayWord": "dê",
+              "className": "Verbo (subjuntivo)",
+              "functionName": "Ação hipotética",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no modo subjuntivo — exprime dúvida, hipótese, desejo ou subordinação.",
+              "funcaoSintatica": "Predicado",
+              "count": 3
+            },
+            "solo": {
+              "word": "de",
+              "displayWord": "dê",
+              "className": "Verbo (subjuntivo)",
+              "functionName": "Ação hipotética",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no modo subjuntivo — exprime dúvida, hipótese, desejo ou subordinação.",
+              "funcaoSintatica": "",
+              "count": 0
+            }
+          },
+          {
+            "token": "comemos",
+            "ctx": {
+              "word": "comemos",
+              "displayWord": "comemos",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Sujeito",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "comemos",
+              "displayWord": "comemos",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "você",
+            "ctx": {
+              "word": "voce",
+              "displayWord": "você",
+              "className": "Pronome pessoal",
+              "decisao": "provavel",
+              "functionName": "Referente de pessoa",
+              "field": "Imagem — matéria narrativa",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome pessoal — substitui o nome de uma pessoa do discurso.",
+              "funcaoSintatica": "Sujeito",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "voce",
+              "displayWord": "você",
+              "className": "Pronome pessoal",
+              "decisao": "provavel",
+              "functionName": "Referente de pessoa",
+              "field": "Imagem — matéria narrativa",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome pessoal — substitui o nome de uma pessoa do discurso.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "comprar-lhe",
+            "ctx": {
+              "word": "comprar-lhe",
+              "displayWord": "comprar-lhe",
+              "className": "Verbo no infinitivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "comprar-lhe",
+              "displayWord": "comprar-lhe",
+              "className": "Verbo no infinitivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "sábado",
+            "ctx": {
+              "word": "sabado",
+              "displayWord": "sábado",
+              "className": "Verbo (particípio)",
+              "decisao": "provavel",
+              "functionName": "Estado resultante",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no particípio — funciona como adjetivo verbal ou em tempos compostos.",
+              "funcaoSintatica": "Adjunto adnominal",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "sabado",
+              "displayWord": "sábado",
+              "className": "Verbo (particípio)",
+              "decisao": "provavel",
+              "functionName": "Estado resultante",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no particípio — funciona como adjetivo verbal ou em tempos compostos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "vi",
+            "ctx": {
+              "word": "vi",
+              "displayWord": "vi",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "vi",
+              "displayWord": "vi",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "de",
+            "ctx": {
+              "word": "de",
+              "displayWord": "de",
+              "className": "Verbo (subjuntivo)",
+              "decisao": "provavel",
+              "functionName": "Ação hipotética",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no modo subjuntivo — exprime dúvida, hipótese, desejo ou subordinação.",
+              "funcaoSintatica": "Predicado",
+              "count": 3,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "de",
+              "displayWord": "de",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "que",
+            "ctx": {
+              "word": "que",
+              "displayWord": "que",
+              "className": "Pronome relativo",
+              "decisao": "provavel",
+              "functionName": "Encadeador de oração",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome relativo — retoma o antecedente e introduz oração adjetiva.",
+              "funcaoSintatica": "Conector de oração relativa",
+              "count": 1,
+              "alternatives": [
+                "Conjunção — 'disse que viria'"
+              ]
+            },
+            "solo": {
+              "word": "que",
+              "displayWord": "que",
+              "className": "Conjunção",
+              "decisao": "ambiguo",
+              "functionName": "Conector de ideias",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Conjunção — conecta orações ou termos, estabelecendo relação de sentido.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": [
+                "Pronome relativo — 'o livro que li'",
+                "Pronome — 'Que saudade!'"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "ensaio-argumentativo",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "Ao",
+            "ctx": {
+              "word": "ao",
+              "displayWord": "Ao",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "Elemento prepositivo",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "ao",
+              "displayWord": "Ao",
+              "className": "Preposição/Artigo",
+              "decisao": "ambiguo",
+              "functionName": "Estrutura gramatical",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "invés",
+            "ctx": {
+              "word": "inves",
+              "displayWord": "invés",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Adjunto adnominal",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "inves",
+              "displayWord": "invés",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "abaixo",
+            "ctx": {
+              "word": "abaixo",
+              "displayWord": "abaixo",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "Elemento prepositivo",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "abaixo",
+              "displayWord": "abaixo",
+              "className": "Advérbio",
+              "decisao": "provavel",
+              "functionName": "Modificador",
+              "field": "Circunstância — modo, tempo, lugar, intensidade",
+              "note": "Advérbios em -mente frequentemente denunciam um verbo fraco. Teste retirar o advérbio e fortalecer o verbo.",
+              "definicao": "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "vista",
+            "ctx": {
+              "word": "vista",
+              "displayWord": "vista",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "vista",
+              "displayWord": "vista",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "padrão",
+            "ctx": {
+              "word": "padrao",
+              "displayWord": "padrão",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Estilo — medida, modelo, repetição",
+              "note": "O padrão é o que se repete até virar ordem. Quebrá-lo é o gesto que o leitor percebe antes da explicação.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "padrao",
+              "displayWord": "padrão",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Estilo — medida, modelo, repetição",
+              "note": "O padrão é o que se repete até virar ordem. Quebrá-lo é o gesto que o leitor percebe antes da explicação.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "é",
+            "ctx": {
+              "word": "e",
+              "displayWord": "é",
+              "className": "Conjunção",
+              "decisao": "provavel",
+              "functionName": "Conector de ideias",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Conjunção — conecta orações ou termos, estabelecendo relação de sentido.",
+              "funcaoSintatica": "Conectivo",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "e",
+              "displayWord": "é",
+              "className": "Conjunção",
+              "decisao": "provavel",
+              "functionName": "Conector de ideias",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Conjunção — conecta orações ou termos, estabelecendo relação de sentido.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "preciso",
+            "ctx": {
+              "word": "preciso",
+              "displayWord": "preciso",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "preciso",
+              "displayWord": "preciso",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "reescrever",
+            "ctx": {
+              "word": "reescrever",
+              "displayWord": "reescrever",
+              "className": "Verbo no infinitivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Reescrever é o trabalho que transforma texto em literatura. A primeira versão existe para que a reescrita possa começar. Reescrever não é consertar: é ver o texto como um todo e perguntar o que está impedindo que ele seja o que quer ser. A escritora que não reescreve está entregando a primeira tentativa; a que reescreve pode entregar o que a primeira tentativa prometia.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "reescrever",
+              "displayWord": "reescrever",
+              "className": "Verbo no infinitivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Reescrever é o trabalho que transforma texto em literatura. A primeira versão existe para que a reescrita possa começar. Reescrever não é consertar: é ver o texto como um todo e perguntar o que está impedindo que ele seja o que quer ser. A escritora que não reescreve está entregando a primeira tentativa; a que reescreve pode entregar o que a primeira tentativa prometia.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "com",
+            "ctx": {
+              "word": "com",
+              "displayWord": "com",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "Elemento prepositivo",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "com",
+              "displayWord": "com",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "clareza",
+            "ctx": {
+              "word": "clareza",
+              "displayWord": "clareza",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "A clareza na ficção não é simplicidade — é a qualidade de ser exatamente tão claro quanto a intenção exige. O texto hermético que não pretende ser compreendido imediatamente pode ser claro nos seus termos. O texto que pretende comunicar e não consegue não é misterioso: é falho. A clareza literária é precisão de intenção: a autora sabe o que quer que a leitora receba, e o texto entrega isso.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "clareza",
+              "displayWord": "clareza",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "A clareza na ficção não é simplicidade — é a qualidade de ser exatamente tão claro quanto a intenção exige. O texto hermético que não pretende ser compreendido imediatamente pode ser claro nos seus termos. O texto que pretende comunicar e não consegue não é misterioso: é falho. A clareza literária é precisão de intenção: a autora sabe o que quer que a leitora receba, e o texto entrega isso.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "sujeira-geral",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "brasiliense",
+            "ctx": {
+              "word": "brasiliense",
+              "displayWord": "brasiliense",
+              "className": "Adjetivo",
+              "decisao": "provavel",
+              "functionName": "Qualificador",
+              "field": "Qualidade — atributo sensorial ou moral",
+              "note": "Adjetivos fortes revelam percepção do narrador/personagem, não apenas aparência do objeto. 'Vermelho' informa; 'encarnado' posiciona.",
+              "definicao": "Adjetivo — atribui qualidade, estado ou característica ao substantivo.",
+              "funcaoSintatica": "Predicativo do sujeito",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "brasiliense",
+              "displayWord": "brasiliense",
+              "className": "Substantivo",
+              "decisao": "ambiguo",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "acriano",
+            "ctx": {
+              "word": "acriano",
+              "displayWord": "acriano",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "acriano",
+              "displayWord": "acriano",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "2º",
+            "ctx": {
+              "word": "2º",
+              "displayWord": "2º",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "2º",
+              "displayWord": "2º",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "ONU",
+            "ctx": {
+              "word": "onu",
+              "displayWord": "ONU",
+              "className": "Substantivo próprio",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo próprio — nome de pessoa, lugar ou entidade específica; sempre com maiúscula.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "onu",
+              "displayWord": "ONU",
+              "className": "Substantivo próprio",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo próprio — nome de pessoa, lugar ou entidade específica; sempre com maiúscula.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "porém",
+            "ctx": {
+              "word": "porem",
+              "displayWord": "porém",
+              "className": "Conjunção",
+              "decisao": "provavel",
+              "functionName": "Conector de ideias",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Conjunção — conecta orações ou termos, estabelecendo relação de sentido.",
+              "funcaoSintatica": "Conectivo",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "porem",
+              "displayWord": "porém",
+              "className": "Conjunção",
+              "decisao": "ambiguo",
+              "functionName": "Conector de ideias",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Conjunção — conecta orações ou termos, estabelecendo relação de sentido.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "se",
+            "ctx": {
+              "word": "se",
+              "displayWord": "se",
+              "className": "Pronome reflexivo",
+              "decisao": "provavel",
+              "functionName": "Substituto nominal",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome — substitui ou acompanha o substantivo.",
+              "funcaoSintatica": "",
+              "count": 1,
+              "alternatives": [
+                "Conjunção condicional — 'se chover, fico'",
+                "Conjunção integrante — 'perguntou se vinha'"
+              ]
+            },
+            "solo": {
+              "word": "se",
+              "displayWord": "se",
+              "className": "Pronome pessoal",
+              "decisao": "ambiguo",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome pessoal — substitui o nome de uma pessoa do discurso.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": [
+                "Conjunção condicional — 'se chover, fico'",
+                "Conjunção integrante — 'perguntou se vinha'",
+                "Pronome reflexivo — 'ela se machucou'"
+              ]
+            }
+          },
+          {
+            "token": "foi",
+            "ctx": {
+              "word": "foi",
+              "displayWord": "foi",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "foi",
+              "displayWord": "foi",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "chegou",
+            "ctx": {
+              "word": "chegou",
+              "displayWord": "chegou",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "chegou",
+              "displayWord": "chegou",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "grande",
+            "ctx": {
+              "word": "grande",
+              "displayWord": "grande",
+              "className": "Adjetivo",
+              "decisao": "provavel",
+              "functionName": "Qualificador",
+              "field": "Qualidade — atributo sensorial ou moral",
+              "note": "Adjetivos fortes revelam percepção do narrador/personagem, não apenas aparência do objeto. 'Vermelho' informa; 'encarnado' posiciona.",
+              "definicao": "Adjetivo — atribui qualidade, estado ou característica ao substantivo.",
+              "funcaoSintatica": "Predicativo do sujeito",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "grande",
+              "displayWord": "grande",
+              "className": "Adjetivo",
+              "decisao": "provavel",
+              "functionName": "Qualificador",
+              "field": "Qualidade — atributo sensorial ou moral",
+              "note": "Adjetivos fortes revelam percepção do narrador/personagem, não apenas aparência do objeto. 'Vermelho' informa; 'encarnado' posiciona.",
+              "definicao": "Adjetivo — atribui qualidade, estado ou característica ao substantivo.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "gabinete",
+            "ctx": {
+              "word": "gabinete",
+              "displayWord": "gabinete",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "gabinete",
+              "displayWord": "gabinete",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "poema",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "Nós",
+            "ctx": {
+              "word": "nos",
+              "displayWord": "Nós",
+              "className": "Pronome pessoal",
+              "decisao": "provavel",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Em dramatologia, o nó da ação: o ponto de máximo entrelaçamento do conflito, antes da resolução. Também chamado de 'complicação'. O escritor precisa saber onde o nó está antes de desatá-lo.",
+              "funcaoSintatica": "Sujeito",
+              "count": 2,
+              "alternatives": [
+                "Preposição/Artigo — 'nos arredores da cidade'"
+              ]
+            },
+            "solo": {
+              "word": "nos",
+              "displayWord": "Nós",
+              "className": "Pronome pessoal",
+              "decisao": "ambiguo",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Em dramatologia, o nó da ação: o ponto de máximo entrelaçamento do conflito, antes da resolução. Também chamado de 'complicação'. O escritor precisa saber onde o nó está antes de desatá-lo.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": [
+                "Preposição/Artigo — 'nos arredores da cidade'"
+              ]
+            }
+          },
+          {
+            "token": "pé",
+            "ctx": {
+              "word": "pe",
+              "displayWord": "pé",
+              "className": "Substantivo",
+              "functionName": "Núcleo nominal",
+              "field": "Corpo — gestualidade, presença física, sensação",
+              "note": "O corpo é o primeiro acesso do leitor ao personagem. Um gesto preciso vale mais que um parágrafo de caracterização.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Adjunto adnominal",
+              "count": 1
+            },
+            "solo": {
+              "word": "pe",
+              "displayWord": "pé",
+              "className": "Substantivo",
+              "functionName": "Núcleo nominal",
+              "field": "Corpo — gestualidade, presença física, sensação",
+              "note": "O corpo é o primeiro acesso do leitor ao personagem. Um gesto preciso vale mais que um parágrafo de caracterização.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0
+            }
+          },
+          {
+            "token": "dês",
+            "ctx": {
+              "word": "des",
+              "displayWord": "dês",
+              "className": "Verbo (subjuntivo)",
+              "decisao": "provavel",
+              "functionName": "Ação hipotética",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no modo subjuntivo — exprime dúvida, hipótese, desejo ou subordinação.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "des",
+              "displayWord": "dês",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "vê",
+            "ctx": {
+              "word": "ve",
+              "displayWord": "vê",
+              "className": "Verbo flexionado",
+              "functionName": "Núcleo de ação",
+              "field": "Cognição — pensamento, memória, percepção",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 2
+            },
+            "solo": {
+              "word": "ve",
+              "displayWord": "vê",
+              "className": "Verbo flexionado",
+              "functionName": "Núcleo de ação",
+              "field": "Cognição — pensamento, memória, percepção",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0
+            }
+          },
+          {
+            "token": "Canta",
+            "ctx": {
+              "word": "canta",
+              "displayWord": "Canta",
+              "className": "Substantivo próprio",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo próprio — nome de pessoa, lugar ou entidade específica; sempre com maiúscula.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 2,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "canta",
+              "displayWord": "Canta",
+              "className": "Substantivo próprio",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo próprio — nome de pessoa, lugar ou entidade específica; sempre com maiúscula.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "noite",
+            "ctx": {
+              "word": "noite",
+              "displayWord": "noite",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Tempo — segredo, risco, descanso ou vigília",
+              "note": "A noite literária não é apenas ausência de luz: é o tempo dos segredos, dos amores e dos medos que o dia esconde.",
+              "definicao": "O período em que a visibilidade diminui e a escuta aumenta. A noite na ficção é tempo de segredo, de decisão adiada, de encontro que não poderia acontecer de dia. O que a personagem faz de noite que não faz de dia diz onde ela vive quando ninguém está olhando.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "noite",
+              "displayWord": "noite",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Tempo — segredo, risco, descanso ou vigília",
+              "note": "A noite literária não é apenas ausência de luz: é o tempo dos segredos, dos amores e dos medos que o dia esconde.",
+              "definicao": "O período em que a visibilidade diminui e a escuta aumenta. A noite na ficção é tempo de segredo, de decisão adiada, de encontro que não poderia acontecer de dia. O que a personagem faz de noite que não faz de dia diz onde ela vive quando ninguém está olhando.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "vem",
+            "ctx": {
+              "word": "vem",
+              "displayWord": "vem",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "vem",
+              "displayWord": "vem",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "para",
+            "ctx": {
+              "word": "para",
+              "displayWord": "para",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "Elemento prepositivo",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "para",
+              "displayWord": "para",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "o",
+            "ctx": {
+              "word": "o",
+              "displayWord": "o",
+              "className": "Pronome pessoal",
+              "decisao": "provavel",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome pessoal — substitui o nome de uma pessoa do discurso.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 2,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "o",
+              "displayWord": "o",
+              "className": "Pronome pessoal",
+              "decisao": "provavel",
+              "functionName": "Referente de pessoa",
+              "field": "Estrutura gramatical — palavra funcional",
+              "note": "Pronomes criam coesão e evitam repetição. Verifique se a referência está clara a 3 frases de distância.",
+              "definicao": "Pronome pessoal — substitui o nome de uma pessoa do discurso.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "calar",
+            "ctx": {
+              "word": "calar",
+              "displayWord": "calar",
+              "className": "Verbo no infinitivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo de ação",
+              "field": "Dicção — silêncio, retenção, recusa",
+              "note": "'Calar' é mais poderoso que 'não dizer'. Implica uma escolha ativa de silêncio.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "calar",
+              "displayWord": "calar",
+              "className": "Verbo no infinitivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo de ação",
+              "field": "Dicção — silêncio, retenção, recusa",
+              "note": "'Calar' é mais poderoso que 'não dizer'. Implica uma escolha ativa de silêncio.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "vocabulario-diverso",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "aberto",
+            "ctx": {
+              "word": "aberto",
+              "displayWord": "aberto",
+              "className": "Verbo (particípio)",
+              "decisao": "provavel",
+              "functionName": "Estado resultante",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no particípio — funciona como adjetivo verbal ou em tempos compostos.",
+              "funcaoSintatica": "Adjunto adnominal",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "aberto",
+              "displayWord": "aberto",
+              "className": "Verbo (particípio)",
+              "decisao": "provavel",
+              "functionName": "Estado resultante",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no particípio — funciona como adjetivo verbal ou em tempos compostos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "segundo",
+            "ctx": {
+              "word": "segundo",
+              "displayWord": "segundo",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavras de tempo controlam o ritmo interno da cena. Quanto mais detalhada a unidade temporal, mais lento o tempo narrativo.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "Elemento prepositivo",
+              "count": 1,
+              "alternatives": [
+                "Conjunção conformativa — 'segundo Bechara'",
+                "Adjetivo numeral — 'o segundo capítulo'"
+              ]
+            },
+            "solo": {
+              "word": "segundo",
+              "displayWord": "segundo",
+              "className": "Conjunção",
+              "decisao": "ambiguo",
+              "functionName": "Conector de ideias",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavras de tempo controlam o ritmo interno da cena. Quanto mais detalhada a unidade temporal, mais lento o tempo narrativo.",
+              "definicao": "Conjunção — conecta orações ou termos, estabelecendo relação de sentido.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": [
+                "Adjetivo numeral — 'o segundo capítulo'"
+              ]
+            }
+          },
+          {
+            "token": "tranquilamente",
+            "ctx": {
+              "word": "tranquilamente",
+              "displayWord": "tranquilamente",
+              "className": "Advérbio",
+              "decisao": "provavel",
+              "functionName": "Modificador",
+              "field": "Circunstância — modo, tempo, lugar, intensidade",
+              "note": "Advérbios em -mente frequentemente denunciam um verbo fraco. Teste retirar o advérbio e fortalecer o verbo.",
+              "definicao": "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.",
+              "funcaoSintatica": "Adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "tranquilamente",
+              "displayWord": "tranquilamente",
+              "className": "Advérbio",
+              "decisao": "provavel",
+              "functionName": "Modificador",
+              "field": "Circunstância — modo, tempo, lugar, intensidade",
+              "note": "Advérbios em -mente frequentemente denunciam um verbo fraco. Teste retirar o advérbio e fortalecer o verbo.",
+              "definicao": "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "razão",
+            "ctx": {
+              "word": "razao",
+              "displayWord": "razão",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "razao",
+              "displayWord": "razão",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "abaixo",
+            "ctx": {
+              "word": "abaixo",
+              "displayWord": "abaixo",
+              "className": "Preposição",
+              "decisao": "provavel",
+              "functionName": "Estrutura gramatical",
+              "field": "Imagem — matéria narrativa",
+              "note": "Palavra fora do dicionário curado — classificação por heurística; confira o sentido no contexto.",
+              "definicao": "Preposição — liga termos da oração, subordinando o segundo ao primeiro.",
+              "funcaoSintatica": "Elemento prepositivo",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "abaixo",
+              "displayWord": "abaixo",
+              "className": "Advérbio",
+              "decisao": "provavel",
+              "functionName": "Modificador",
+              "field": "Circunstância — modo, tempo, lugar, intensidade",
+              "note": "Advérbios em -mente frequentemente denunciam um verbo fraco. Teste retirar o advérbio e fortalecer o verbo.",
+              "definicao": "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "viu",
+            "ctx": {
+              "word": "viu",
+              "displayWord": "viu",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Cognição — pensamento, memória, percepção",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "viu",
+              "displayWord": "viu",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Cognição — pensamento, memória, percepção",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "rápido",
+            "ctx": {
+              "word": "rapido",
+              "displayWord": "rápido",
+              "className": "Adjetivo",
+              "decisao": "provavel",
+              "functionName": "Qualificador",
+              "field": "Qualidade — atributo sensorial ou moral",
+              "note": "Adjetivos fortes revelam percepção do narrador/personagem, não apenas aparência do objeto. 'Vermelho' informa; 'encarnado' posiciona.",
+              "definicao": "Adjetivo — atribui qualidade, estado ou característica ao substantivo.",
+              "funcaoSintatica": "Adjunto adnominal",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "rapido",
+              "displayWord": "rápido",
+              "className": "Adjetivo",
+              "decisao": "ambiguo",
+              "functionName": "Qualificador",
+              "field": "Qualidade — atributo sensorial ou moral",
+              "note": "Adjetivos fortes revelam percepção do narrador/personagem, não apenas aparência do objeto. 'Vermelho' informa; 'encarnado' posiciona.",
+              "definicao": "Adjetivo — atribui qualidade, estado ou característica ao substantivo.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "calou-se",
+            "ctx": {
+              "word": "calou-se",
+              "displayWord": "calou-se",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "calou-se",
+              "displayWord": "calou-se",
+              "className": "Verbo flexionado",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "contrário",
+            "ctx": {
+              "word": "contrario",
+              "displayWord": "contrário",
+              "className": "Substantivo",
+              "decisao": "provavel",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "contrario",
+              "displayWord": "contrário",
+              "className": "Substantivo",
+              "decisao": "indeterminado",
+              "functionName": "Núcleo nominal",
+              "field": "Imagem — substantivo que ancora a cena",
+              "note": "Substantivo concreto que ancora a cena pelo que o personagem faz com ele ou pelo que ele guarda. Se figurar só como cenário, avalie se o objeto pode carregar desejo, memória ou poder — assim vira motor, não decoração.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "linha",
+            "ctx": {
+              "word": "linha",
+              "displayWord": "linha",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Objetos — fio, costura, continuidade",
+              "note": "A linha costura, pendura, amarra. Fio que se toca e se perde — a linha das gerações e a da roupa no varal.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "linha",
+              "displayWord": "linha",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Objetos — fio, costura, continuidade",
+              "note": "A linha costura, pendura, amarra. Fio que se toca e se perde — a linha das gerações e a da roupa no varal.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "cozinha-do-quintal",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "avó",
+            "ctx": {
+              "word": "avo",
+              "displayWord": "avó / avô",
+              "className": "Substantivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Relação — herança afetiva, memória oral, continuidade",
+              "note": "A avó e o avô carregam o tempo que o personagem ainda não viveu. Em narrativa brasileira, são guardiões de história oral e de receitas, rezas e segredos familiares.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Sujeito",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "avo",
+              "displayWord": "avó / avô",
+              "className": "Substantivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Relação — herança afetiva, memória oral, continuidade",
+              "note": "A avó e o avô carregam o tempo que o personagem ainda não viveu. Em narrativa brasileira, são guardiões de história oral e de receitas, rezas e segredos familiares.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "escada",
+            "ctx": {
+              "word": "escada",
+              "displayWord": "escada",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Espaço — verticalidade, subida, passagem",
+              "note": "A escada obriga o corpo a subir ou descer e com isso muda o ponto de vista. Cada degrau é decisão física e moral.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "escada",
+              "displayWord": "escada",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Espaço — verticalidade, subida, passagem",
+              "note": "A escada obriga o corpo a subir ou descer e com isso muda o ponto de vista. Cada degrau é decisão física e moral.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "café",
+            "ctx": {
+              "word": "cafe",
+              "displayWord": "café",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Alimento — rito, conversa, vigília",
+              "note": "O café marca tempo de conversa e de espera — a tarde que se estica em volta dele. Servir café é dar hospitalidade.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "cafe",
+              "displayWord": "café",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Alimento — rito, conversa, vigília",
+              "note": "O café marca tempo de conversa e de espera — a tarde que se estica em volta dele. Servir café é dar hospitalidade.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "caneca",
+            "ctx": {
+              "word": "caneca",
+              "displayWord": "caneca",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Objetos — rotina, costume, intimidade",
+              "note": "A caneca é objeto de rotina — ponta de afeto doméstico. Mudá-la de lugar ou de dono é pequeno deslocamento de intimidade.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "caneca",
+              "displayWord": "caneca",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Objetos — rotina, costume, intimidade",
+              "note": "A caneca é objeto de rotina — ponta de afeto doméstico. Mudá-la de lugar ou de dono é pequeno deslocamento de intimidade.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "orvalho",
+            "ctx": {
+              "word": "orvalho",
+              "displayWord": "orvalho",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Natureza — frescor, manhã, passagem",
+              "note": "O orvalho é a água que a noite empenhou e a manhã devolve ao chão. Escorrer o chão de orvalho, molhar o pé: cena inaugural.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "orvalho",
+              "displayWord": "orvalho",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Natureza — frescor, manhã, passagem",
+              "note": "O orvalho é a água que a noite empenhou e a manhã devolve ao chão. Escorrer o chão de orvalho, molhar o pé: cena inaugural.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "pão",
+            "ctx": {
+              "word": "pao",
+              "displayWord": "pão",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Alimento — escassez, partilha, sagrado cotidiano",
+              "note": "O pão é a necessidade básica. Em narrativa, sua presença ou ausência define a condição material dos personagens.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "pao",
+              "displayWord": "pão",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Alimento — escassez, partilha, sagrado cotidiano",
+              "note": "O pão é a necessidade básica. Em narrativa, sua presença ou ausência define a condição material dos personagens.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "mel",
+            "ctx": {
+              "word": "mel",
+              "displayWord": "mel",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Alimento — doçura, cura, trabalho da abelha",
+              "note": "O mel é doçura ganha do trabalho alheio — e a mão que rouba do mel para o favo. Doce na ferida, metáfora pronta.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "mel",
+              "displayWord": "mel",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Alimento — doçura, cura, trabalho da abelha",
+              "note": "O mel é doçura ganha do trabalho alheio — e a mão que rouba do mel para o favo. Doce na ferida, metáfora pronta.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "quarto",
+            "ctx": {
+              "word": "quarto",
+              "displayWord": "quarto",
+              "className": "Substantivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Espaço — intimidade, limite, interior",
+              "note": "O quarto é o espaço da vida não performática. É onde o personagem existe sem audiência.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "quarto",
+              "displayWord": "quarto",
+              "className": "Substantivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Espaço — intimidade, limite, interior",
+              "note": "O quarto é o espaço da vida não performática. É onde o personagem existe sem audiência.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "neto",
+            "ctx": {
+              "word": "neto",
+              "displayWord": "neto",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Família — herança, continuidade, geração",
+              "note": "A relação avô/neto evoca transmissão — de história, de silêncio, de trauma. Aparece muito em narrativas de memória.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "neto",
+              "displayWord": "neto",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Família — herança, continuidade, geração",
+              "note": "A relação avô/neto evoca transmissão — de história, de silêncio, de trauma. Aparece muito em narrativas de memória.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "dormia",
+            "ctx": {
+              "word": "dormia",
+              "displayWord": "dormia",
+              "className": "Verbo (subjuntivo)",
+              "decisao": "provavel",
+              "functionName": "Ação hipotética",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo no modo subjuntivo — exprime dúvida, hipótese, desejo ou subordinação.",
+              "funcaoSintatica": "Predicado",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "dormia",
+              "displayWord": "dormia",
+              "className": "Verbo (imperfeito)",
+              "decisao": "provavel",
+              "functionName": "Núcleo de ação",
+              "field": "Ação — verbo que move a cena",
+              "note": "Observe se o verbo impulsiona a cena ou apenas descreve movimento já evidente. Verbos fracos escondem ação.",
+              "definicao": "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "descoberta-do-mundo",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "mundo",
+            "ctx": {
+              "word": "mundo",
+              "displayWord": "mundo",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Espaço — tudo que cerca e contém o personagem",
+              "note": "O mundo é o limite que o personagem conhece até deixar de caber nele. Descobrir outro tamanho de mundo é motor de personagem.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Sujeito",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "mundo",
+              "displayWord": "mundo",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Espaço — tudo que cerca e contém o personagem",
+              "note": "O mundo é o limite que o personagem conhece até deixar de caber nele. Descobrir outro tamanho de mundo é motor de personagem.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "dona",
+            "ctx": {
+              "word": "dona",
+              "displayWord": "dona",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Relação — presença, autoridade, cuidado do lar",
+              "note": "A dona sustenta a casa com autoridade silenciosa ou com mando declarado. Dona de quê, dona de quem, até que ponto dona de si?",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "dona",
+              "displayWord": "dona",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Relação — presença, autoridade, cuidado do lar",
+              "note": "A dona sustenta a casa com autoridade silenciosa ou com mando declarado. Dona de quê, dona de quem, até que ponto dona de si?",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "amiga",
+            "ctx": {
+              "word": "amiga",
+              "displayWord": "amiga",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Relação — intimidade livre, cumplicidade",
+              "note": "A amiga é a escolha afetiva sem parentesco nem contrato. Verdades que só a amiga pode dizer, risos que só ela arranca.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "amiga",
+              "displayWord": "amiga",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Relação — intimidade livre, cumplicidade",
+              "note": "A amiga é a escolha afetiva sem parentesco nem contrato. Verdades que só a amiga pode dizer, risos que só ela arranca.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "palavra",
+            "ctx": {
+              "word": "palavra",
+              "displayWord": "palavra",
+              "className": "Substantivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Linguagem — comunicação, poder, limite",
+              "note": "Quando um personagem fala sobre 'palavras', ele geralmente fala sobre o que não consegue dizer.",
+              "definicao": "A unidade básica da presença humana no texto. Mas na ficção, a palavra que a personagem escolhe diz mais do que seu sentido: ela revela classe, educação, emoção, intenção velada. A personagem que usa palavras difíceis num momento de dor está se escondendo atrás delas.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "palavra",
+              "displayWord": "palavra",
+              "className": "Substantivo",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Linguagem — comunicação, poder, limite",
+              "note": "Quando um personagem fala sobre 'palavras', ele geralmente fala sobre o que não consegue dizer.",
+              "definicao": "A unidade básica da presença humana no texto. Mas na ficção, a palavra que a personagem escolhe diz mais do que seu sentido: ela revela classe, educação, emoção, intenção velada. A personagem que usa palavras difíceis num momento de dor está se escondendo atrás delas.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "susto",
+            "ctx": {
+              "word": "susto",
+              "displayWord": "susto",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Emoção — sobressalto, corte na rotina",
+              "note": "O susto é a emoção que não pede permissão: corta a frase, atropela a respiração, deixa o personagem provisoriamente nu.",
+              "definicao": "Reação imediata e involuntária a algo inesperado. Diferente do medo (que se prolonga), o susto é instante — mas deixa rastro emocional na cena e no leitor.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "susto",
+              "displayWord": "susto",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Emoção — sobressalto, corte na rotina",
+              "note": "O susto é a emoção que não pede permissão: corta a frase, atropela a respiração, deixa o personagem provisoriamente nu.",
+              "definicao": "Reação imediata e involuntária a algo inesperado. Diferente do medo (que se prolonga), o susto é instante — mas deixa rastro emocional na cena e no leitor.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "pessoa",
+            "ctx": {
+              "word": "pessoa",
+              "displayWord": "pessoa",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Identidade — ser humano como medida, rosto",
+              "note": "Pessoa é a unidade da narrativa: um rosto, uma biografia, um peso no mundo. Reduzir alguém a não-pessoa é a violência que a história conta.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "pessoa",
+              "displayWord": "pessoa",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Identidade — ser humano como medida, rosto",
+              "note": "Pessoa é a unidade da narrativa: um rosto, uma biografia, um peso no mundo. Reduzir alguém a não-pessoa é a violência que a história conta.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "missão",
+            "ctx": {
+              "word": "missao",
+              "displayWord": "missão",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — tarefa que define, encargo",
+              "note": "A missão empresta sentido à jornada; cumpri-la ou desistir dela é o arco. Missão imposta de fora muda de nome quando o personagem a torna sua.",
+              "definicao": "A missão dá ao personagem direção e propósito. Pode ser grande (salvar alguém, revelar uma verdade) ou pequena (chegar a tempo, não mentir desta vez) — o que importa é que ela organiza as escolhas. A missão que muda no meio do caminho é quando a história realmente começa.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "missao",
+              "displayWord": "missão",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — tarefa que define, encargo",
+              "note": "A missão empresta sentido à jornada; cumpri-la ou desistir dela é o arco. Missão imposta de fora muda de nome quando o personagem a torna sua.",
+              "definicao": "A missão dá ao personagem direção e propósito. Pode ser grande (salvar alguém, revelar uma verdade) ou pequena (chegar a tempo, não mentir desta vez) — o que importa é que ela organiza as escolhas. A missão que muda no meio do caminho é quando a história realmente começa.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "responsabilidade",
+            "ctx": {
+              "word": "responsabilidade",
+              "displayWord": "responsabilidade",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Conflito — peso, encargo, dívida moral",
+              "note": "A responsabilidade é o peso que muda de dono em cada decisão. Recusá-la é alívio; aceitá-la, contrato com a própria história.",
+              "definicao": "A responsabilidade na ficção é tanto ética quanto narrativa. Ética: a escritora que narra experiências de grupos marginalizados tem responsabilidade com como os representa. Narrativa: a personagem que age tem responsabilidade pelas consequências — mesmo que não as preveja, mesmo que não as queira. A ficção que evita a responsabilidade de suas personagens as infantiliza; a que as força a responder pelo que fizeram as humaniza.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "responsabilidade",
+              "displayWord": "responsabilidade",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Conflito — peso, encargo, dívida moral",
+              "note": "A responsabilidade é o peso que muda de dono em cada decisão. Recusá-la é alívio; aceitá-la, contrato com a própria história.",
+              "definicao": "A responsabilidade na ficção é tanto ética quanto narrativa. Ética: a escritora que narra experiências de grupos marginalizados tem responsabilidade com como os representa. Narrativa: a personagem que age tem responsabilidade pelas consequências — mesmo que não as preveja, mesmo que não as queira. A ficção que evita a responsabilidade de suas personagens as infantiliza; a que as força a responder pelo que fizeram as humaniza.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "descoberta",
+            "ctx": {
+              "word": "descoberta",
+              "displayWord": "descoberta",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — revelação, antes e depois",
+              "note": "Toda descoberta divide o tempo em antes e depois. O personagem que descobre muda de mundo sem mudar de lugar.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "descoberta",
+              "displayWord": "descoberta",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — revelação, antes e depois",
+              "note": "Toda descoberta divide o tempo em antes e depois. O personagem que descobre muda de mundo sem mudar de lugar.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "vontade",
+            "ctx": {
+              "word": "vontade",
+              "displayWord": "vontade",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Emoção — impulso, querer, força interna",
+              "note": "A vontade é o querer que atravessa o corpo. Deixar de ter vontade é declínio; recuperá-la é ressurgimento.",
+              "definicao": "A vontade é a força que move a personagem quando o ambiente resiste. Na ficção, a personagem sem vontade é passiva — acontece com ela, não age. A vontade pode ser explícita (ela quer algo claro) ou latente (ela se move sem saber bem por quê). A ficção descobre a vontade latente antes da personagem.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "vontade",
+              "displayWord": "vontade",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Emoção — impulso, querer, força interna",
+              "note": "A vontade é o querer que atravessa o corpo. Deixar de ter vontade é declínio; recuperá-la é ressurgimento.",
+              "definicao": "A vontade é a força que move a personagem quando o ambiente resiste. Na ficção, a personagem sem vontade é passiva — acontece com ela, não age. A vontade pode ser explícita (ela quer algo claro) ou latente (ela se move sem saber bem por quê). A ficção descobre a vontade latente antes da personagem.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "oficio-da-escrita",
+      "payload": {
+        "isLoaded": true,
+        "probes": [
+          {
+            "token": "conto",
+            "ctx": {
+              "word": "conto",
+              "displayWord": "conto",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — unidade curta, giro, concentração",
+              "note": "O conto é a forma que não perdoa excesso: tudo nele deve trabalhar para o giro final. Uma imagem, uma virada, um dente.",
+              "definicao": "Narrativa breve, de tensão unitária. Tem começo, meio e fim — mas cada palavra carrega peso duplo. O conto não tolera gordura. Tchekhov: se há um rifle na parede no primeiro ato, ele deve disparar.",
+              "funcaoSintatica": "Sujeito",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "conto",
+              "displayWord": "conto",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — unidade curta, giro, concentração",
+              "note": "O conto é a forma que não perdoa excesso: tudo nele deve trabalhar para o giro final. Uma imagem, uma virada, um dente.",
+              "definicao": "Narrativa breve, de tensão unitária. Tem começo, meio e fim — mas cada palavra carrega peso duplo. O conto não tolera gordura. Tchekhov: se há um rifle na parede no primeiro ato, ele deve disparar.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "retrato",
+            "ctx": {
+              "word": "retrato",
+              "displayWord": "retrato",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — descrição de rosto e tempo",
+              "note": "O retrato concentra o personagem: o traço que se escolhe entre dez. Retrato fiel não é cópia, é recorte com juízo.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "retrato",
+              "displayWord": "retrato",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — descrição de rosto e tempo",
+              "note": "O retrato concentra o personagem: o traço que se escolhe entre dez. Retrato fiel não é cópia, é recorte com juízo.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "linguagem",
+            "ctx": {
+              "word": "linguagem",
+              "displayWord": "linguagem",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Linguagem — código, voz do texto",
+              "note": "A linguagem é a matéria do escritor: escolher as palavras é escolher o mundo do texto. Linguagem pobre é a única pobreza que o texto não esconde.",
+              "definicao": "A linguagem na ficção não é só meio — é tema, é personagem, é território. A escolha de qual linguagem usar, de qual registrar e silenciar, de qual voz deixar chegar ao texto: tudo isso é decisão literária com consequências políticas. A ficção que escolhe uma linguagem periférica, oral, dialetal ou não-padrão está recusando o apagamento que a norma culta frequentemente pratica.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "linguagem",
+              "displayWord": "linguagem",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Linguagem — código, voz do texto",
+              "note": "A linguagem é a matéria do escritor: escolher as palavras é escolher o mundo do texto. Linguagem pobre é a única pobreza que o texto não esconde.",
+              "definicao": "A linguagem na ficção não é só meio — é tema, é personagem, é território. A escolha de qual linguagem usar, de qual registrar e silenciar, de qual voz deixar chegar ao texto: tudo isso é decisão literária com consequências políticas. A ficção que escolhe uma linguagem periférica, oral, dialetal ou não-padrão está recusando o apagamento que a norma culta frequentemente pratica.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "escrita",
+            "ctx": {
+              "word": "escrita",
+              "displayWord": "escrita",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — ofício, gesto, resto de autoria",
+              "note": "A escrita é trabalho do corpo e da espera: rascunho, rasura, releitura. Escrever é escolher o que fica de fora.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "escrita",
+              "displayWord": "escrita",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — ofício, gesto, resto de autoria",
+              "note": "A escrita é trabalho do corpo e da espera: rascunho, rasura, releitura. Escrever é escolher o que fica de fora.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "esboço",
+            "ctx": {
+              "word": "esboco",
+              "displayWord": "esboço",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — primeiro desenho da ideia",
+              "note": "O esboço é a forma ainda não presa: o fim pode mudar. Esboço é promessa — e o leitor vê a promessa, não o detalhe.",
+              "definicao": "O esboço é o texto antes de ser texto — a primeira tentativa, as ideias sem forma ainda, o traço grosso que diz 'aqui tem algo'. O esboço certo não precisa ser bom: precisa existir. A escritora que espera o momento perfeito para começar muitas vezes está esperando substituir o esboço por algo que não existe antes dele.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "esboco",
+              "displayWord": "esboço",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — primeiro desenho da ideia",
+              "note": "O esboço é a forma ainda não presa: o fim pode mudar. Esboço é promessa — e o leitor vê a promessa, não o detalhe.",
+              "definicao": "O esboço é o texto antes de ser texto — a primeira tentativa, as ideias sem forma ainda, o traço grosso que diz 'aqui tem algo'. O esboço certo não precisa ser bom: precisa existir. A escritora que espera o momento perfeito para começar muitas vezes está esperando substituir o esboço por algo que não existe antes dele.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "manuscrito",
+            "ctx": {
+              "word": "manuscrito",
+              "displayWord": "manuscrito",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Objetos — texto de próprio punho, origem",
+              "note": "O manuscrito é o texto antes da máquina: letra, rasura, margem. Um manuscrito achado é uma voz que voltou.",
+              "definicao": "O texto original do autor antes da edição e publicação. Pode ser literalmente escrito à mão ou em versão digital. O manuscrito é a obra bruta — o que vira livro é resultado de um diálogo entre autor e editor.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "manuscrito",
+              "displayWord": "manuscrito",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Objetos — texto de próprio punho, origem",
+              "note": "O manuscrito é o texto antes da máquina: letra, rasura, margem. Um manuscrito achado é uma voz que voltou.",
+              "definicao": "O texto original do autor antes da edição e publicação. Pode ser literalmente escrito à mão ou em versão digital. O manuscrito é a obra bruta — o que vira livro é resultado de um diálogo entre autor e editor.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "obra",
+            "ctx": {
+              "word": "obra",
+              "displayWord": "obra",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Identidade — trabalho realizado, legado",
+              "note": "A obra é o corpo do que o artista deixa feito: livro, casa, filho, muro. Começar uma obra é apostar no tempo do outro.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "obra",
+              "displayWord": "obra",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Identidade — trabalho realizado, legado",
+              "note": "A obra é o corpo do que o artista deixa feito: livro, casa, filho, muro. Começar uma obra é apostar no tempo do outro.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "artista",
+            "ctx": {
+              "word": "artista",
+              "displayWord": "artista",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Identidade — vocação, ofício do fazer",
+              "note": "O artista troca segurança por obra. Sua vida é a matéria das suas obras — o texto que o retrata precisa do mesmo cuidado.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "artista",
+              "displayWord": "artista",
+              "className": "Substantivo masculino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Identidade — vocação, ofício do fazer",
+              "note": "O artista troca segurança por obra. Sua vida é a matéria das suas obras — o texto que o retrata precisa do mesmo cuidado.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "relação",
+            "ctx": {
+              "word": "relacao",
+              "displayWord": "relação",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Relação — vínculo, ligação, medida de proximidade",
+              "note": "A relação é o fio entre dois personagens — e entre texto e leitor. Toda narrativa é a história de uma relação mudando.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto direto",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "relacao",
+              "displayWord": "relação",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Relação — vínculo, ligação, medida de proximidade",
+              "note": "A relação é o fio entre dois personagens — e entre texto e leitor. Toda narrativa é a história de uma relação mudando.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          },
+          {
+            "token": "gênese",
+            "ctx": {
+              "word": "genese",
+              "displayWord": "gênese",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — origem, primeiro ponto",
+              "note": "A gênese é o começo antes do começo: o primeiro impulso do qual tudo decorre. Contar a gênese é explicar o porquê.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "Objeto indireto / adjunto adverbial",
+              "count": 1,
+              "alternatives": []
+            },
+            "solo": {
+              "word": "genese",
+              "displayWord": "gênese",
+              "className": "Substantivo feminino",
+              "decisao": "classificado",
+              "functionName": "Núcleo nominal",
+              "field": "Narrativa — origem, primeiro ponto",
+              "note": "A gênese é o começo antes do começo: o primeiro impulso do qual tudo decorre. Contar a gênese é explicar o porquê.",
+              "definicao": "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.",
+              "funcaoSintatica": "",
+              "count": 0,
+              "alternatives": []
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

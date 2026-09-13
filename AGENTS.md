@@ -14,7 +14,7 @@ Regra-mãe em ação aqui: **determinar se algo precisa ser melhorado ou colocad
 - **Escrevaral-Encore**: nova encarnação da linhagem de escrita (Vereda → Uairer → Escrevaral → Mass Notes → Antigravity). Offline, democrática (iPad 2012/iOS 9 + Android 4/KitKat), baixa RAM, future-proof, visual "Standard Notes + IA writing".
 - Comece pelo [`docs/index.md`](docs/index.md) — documento-mestre por seção.
 - **ANTES de portar/importar engines de projetos antigos, leia [`catalogo/index.md`](catalogo/index.md)**: inventário das 5 fontes e mapa de decisão por domínio. Regra: escolher a versão mais madura por domínio; reuso de comportamento, não cópia bruta de bases duplicadas.
-- Código em `src/` (ES5). Primeira engine: morfologia verbal (`src/core/engines/morphology.js`), M3, seed 11 formas.
+- Código em `src/` (ES5). Nove engines portadas do catálogo: morfologia verbal, orações adjetivas, decolonial, rima/métrica, voz/estilística, pontuação, sintaxe (M3) e **lexico-classes (VeredaLexical) + analise-literaria (Vereda v3, M4, portadas do Cofre)**.
 - Maturidade por engine em `knowledge/<domínio>/MATURITY.md` (modelo M0–M7). Níveis não podem ser pulados; sem evidência → NO PROMOTION.
 - Conversas NÃO são memória institucional; o estado verdadeiro é o persistido no repo.
 

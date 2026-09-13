@@ -58,3 +58,21 @@ Reuso: SIM (engine pura) | REFERÊNCIA | ATIVO (asset)
 ```
 
 > Objetivo: capturar a **informação essencial** para recriar com criatividade + regra de retrocompatibilidade, não copiar código bruto.
+
+## Engines entregues no runtime
+
+Portadas e validadas na branch. Nove engines ES5, contrato `check(snapshot, done)` assíncrono (Encore.contracts), um engine por vez (Encore.runtime).
+
+| id | domínio | maturidade | source |
+|---|---|---|---|
+| VERB-MORPH | morfologia verbal | M3 | `knowledge/morfologia-verbal/MATURITY.md` |
+| REL-CLAUSE | orações adjetivas | M3 | `knowledge/oracoes-adjetivas/MATURITY.md` |
+| DECOLONIAL | vocabulário decolonial | M3 | `knowledge/decolonial/MATURITY.md` |
+| RIMA-METRICA | rima e métrica | M3 | `knowledge/rima-metrica/MATURITY.md` |
+| VOICE | voz e estilística | M3 | `knowledge/voz-estilistica/MATURITY.md` |
+| PONTUACAO | pontuação | M3 | `knowledge/pontuacao/MATURITY.md` |
+| SINTAXE | sintaxe e funções | M3 | `knowledge/sintaxe-funcao/MATURITY.md` |
+| LEXICO-CLASSES | classes de palavras (VeredaLexical) | **M4** | `knowledge/lexico-classes/MATURITY.md` |
+| ANALISE-LITERARIA | análise literária / redação (Vereda v3) | **M4** | `knowledge/analise-literaria/MATURITY.md` |
+
+As duas M4 vêm do Cofre (`lexico-classes.js` + `analise-literaria.js`, port ES5 puro auditado contra o OURO da fonte A). Confiram `knowledge/lexico-classes/FICHA-FUSAO.md` e `knowledge/analise-literaria/FICHA-FUSAO.md` para proveniência, e `src/test/run-es5-purity.js` para a auditoria de pureza + integridade de dados.
