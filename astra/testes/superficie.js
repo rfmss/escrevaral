@@ -588,6 +588,20 @@ module.exports = function (h) {
   });
 
 
+  test('Início: títulos dos grupos não fecham; ícone da ação fecha; Escape devolve foco', function () {
+    var a = setup(), menu = a.nodes['start-menu'];
+    a.nodes['os-start'].click();
+    var heading = a.nodes['start-group-0']; heading.parentNode = menu;
+    menu.emit('click', { target: heading });
+    assert.strictEqual(menu.hidden, false);
+    var action = a.nodes['start-projects']; action.tagName = 'BUTTON'; action.parentNode = menu;
+    var icon = a.document.createElement('svg'); icon.parentNode = action;
+    menu.emit('click', { target: icon });
+    assert.strictEqual(menu.hidden, true); assert.strictEqual(a.nodes['os-start'].getAttribute('aria-expanded'), 'false');
+    a.nodes['os-start'].click(); a.document.emit('keydown', { keyCode: 27 });
+    assert.strictEqual(menu.hidden, true); assert.strictEqual(a.document.activeElement, a.nodes['os-start']);
+  });
+
   test('Desktop: duplo clique recolhe para tarefa; controles não disparam o gesto', function () {
     var a = setup(), handle = a.nodes['cabinet-window-handle'];
     a.root.innerWidth = 1200; a.event('resize');

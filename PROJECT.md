@@ -98,3 +98,12 @@ Início recebeu os ícones ausentes e Pomodoro, Calculadora e Calendário. Pomod
 Calendário adaptado do cronograma da main: mês/ano, dias, folhas reais, tarefas/notas locais, conclusão e remoção, datas e fases lunares identificadas como estimativas. Corrigida a mistura de DD-MM/MM-DD das datas fixas do legado. Chave vrda-planner e formato preservados; cópia JSON própria com importação aditiva. Armazenamento de escrevaral.com não é acessível automaticamente pelo domínio de revisão. Calculadora sem eval, com operações básicas, parênteses, vírgula decimal e porcentagem simples.
 
 Verificação: 495 casos de lógica/DOM simulado passaram, incluindo término do Pomodoro, composição, suspensão, seleção, persistência do calendário e exclusão da nota correta; ES5 e equivalência portátil. Sem teste de renderização ou aparelho físico nesta rodada.
+
+
+## QA de hierarquia e tecla Início — 13/09/2026
+
+Início recebeu tecla frontal 2D com deslocamento de 3 px conforme aria-expanded, sem perspectiva, filtros ou temporizador. Menu agrupado em Escrever, Instrumentos e Acervo e sistema, mantendo os onze aplicativos. Clique no título de grupo conserva o menu; ação e Escape fecham.
+
+Nova folha destacada junto ao título em telas largas; intervalos menores no retomar/lista, Ajustes, Acervo, Examinar e contagem. Contornos distinguem ações, lentes têm cabeçalhos próprios e margens compatíveis sem depender de flex-gap. Painéis do Gabinete em até 600 px deixam de usar margem negativa de centralização; barra de rolagem do inspetor voltou a aparecer. Preservado o espaço do manuscrito.
+
+QA: 496 verificações funcionais/DOM simulado, ES5 e equivalência portátil aprovadas; IDs e relações ARIA conferidos. Comparações de seis pares de cores sólidas: textos acima de 4,5:1, bordas selecionadas acima de 3:1. Isso não certifica todo estado/composição. Inspeção das capturas fornecidas e CSS; sem renderização de navegador: a prévia supervisionada desta sessão não suporta este projeto estático. iPad físico e percepção final ainda pendentes. Não alterar arquitetura para contornar a limitação de QA.

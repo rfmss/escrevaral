@@ -13,12 +13,12 @@
  .cabinet-window .project-shelf,.project-shelf { background:#bdcaba; border-color:#93a08f; }
  .window-bar,.location-path,#system-bar { background:#b2beb0; border-color:#889784; color:#344231; }
  .window-bar { border-bottom-style:dashed; }
- .window-name,.os-label,.rail-label,.eyebrow,.scrvrl-label { font:600 14px/1.4 'Oswald','Arial Narrow',Arial,sans-serif; letter-spacing:1px; color:#445140; }
+ .window-name,.os-label,.rail-label,.eyebrow,.scrvrl-label { font:600 14px/1.4 'Oswald','Arial Narrow',Arial,sans-serif; letter-spacing:1px; color:#3d4939; }
  .sheet-heading h2,.cabinet-heading h1,.scrvrl-heading { font:600 28px/1.25 'Oswald','Arial Narrow',Arial,sans-serif; color:#111511; letter-spacing:.2px; }
  .sheet-heading { border-bottom:1px dashed #93a08f; padding-bottom:18px; margin-bottom:24px; }
  .setting-section { margin-top:24px; padding-top:20px; border-top:1px dotted #93a08f; }
- .setting-section h3,.desk-inspector h3,.inspector-heading h2 { color:#445140; font:600 15px/1.4 'Oswald','Arial Narrow',Arial,sans-serif; letter-spacing:.6px; }
- .sheet .quiet,.paper-footer,.note-time,.manuscript-date,.navigator-status,.note-project-label { color:#445140; }
+ .setting-section h3,.desk-inspector h3,.inspector-heading h2 { color:#3d4939; font:600 15px/1.4 'Oswald','Arial Narrow',Arial,sans-serif; letter-spacing:.6px; }
+ .sheet .quiet,.paper-footer,.note-time,.manuscript-date,.navigator-status,.note-project-label { color:#3d4939; }
  .sheet .quiet { font-size:14px; line-height:1.6; }
  .sheet .setting-row { min-height:54px; padding:5px 0; border-bottom:1px dotted rgba(33,41,33,.12); }
  .sheet .actions { margin-top:18px; }
@@ -39,15 +39,15 @@
  .desktop-imprint { opacity:.17; }
  .desktop-reminder { background:#cad8c8; border:1px solid #93a08f; border-top:2px solid #65735f; box-shadow:0 2px 0 rgba(33,41,33,.10); padding:14px; }
  .desktop-reminder textarea { font:16px/1.6 'Noto Serif',Georgia,serif; resize:none; }
- .desktop-reminder .reminder-trash { color:#445140; }
+ .desktop-reminder .reminder-trash { color:#3d4939; }
  #reminder-new,.scrvrl-action,#cabinet-new,#project-create { border:1px solid #7c8b78; border-radius:2px; background:#cad8c8; box-shadow:inset 0 1px 0 #d8e4d6,0 1px 0 #9fad9b; }
  .resume-note { border:1px dashed #93a08f; background:#cad8c8; padding:14px; }
- .resume-note .os-label { color:#445140; }
+ .resume-note .os-label { color:#3d4939; }
  #resume-title { color:#111511; }
  .cabinet-note[aria-current="true"],.project-link[aria-pressed="true"] { border-left:2px solid #212921; background:#b3c2b1; }
  .cabinet-note-row { position:relative; }
  .cabinet-note-row .cabinet-note { padding-right:60px; }
- .note-trash { position:absolute; top:8px; right:8px; width:44px; height:44px; min-height:44px; padding:12px; border:0; border-radius:0; color:#445140; background:transparent; }
+ .note-trash { position:absolute; top:8px; right:8px; width:44px; height:44px; min-height:44px; padding:12px; border:0; border-radius:0; color:#3d4939; background:transparent; }
  .note-trash .reminder-trash-icon { width:18px; height:18px; }
  .note-trash:hover,.note-trash:focus { color:#111511; background:#b3c2b1; }
  body[data-theme="escuro"] .note-trash { color:#b3c2b1; }
@@ -71,7 +71,7 @@
  .switch-track { width:42px; height:26px; border-radius:2px; border:1px solid #7c8b78; background:#b3c2b1; box-shadow:inset 0 1px 2px rgba(33,41,33,.2); }
  .switch-track:after { top:3px; left:3px; width:15px; height:18px; border:1px solid #65735f; border-radius:1px; background:#cad8c8; box-shadow:inset 0 1px 0 #d8e4d6,0 1px 0 #8c9b8a; transform:none; -webkit-transform:none; }
  .check input:checked + .switch-track { background:#9fad9b; }
- .check input:checked + .switch-track:after { left:22px; background:#212921; transform:none; -webkit-transform:none; box-shadow:inset 0 1px 0 #445140; }
+ .check input:checked + .switch-track:after { left:22px; background:#212921; transform:none; -webkit-transform:none; box-shadow:inset 0 1px 0 #3d4939; }
  button:active,.scrvrl-action:active { box-shadow:inset 0 1px 2px rgba(33,41,33,.2); }
  button:disabled { cursor:default; }
  #delete-confirm { background:#cad8c8; border:1px solid #65735f; }
@@ -79,11 +79,11 @@
  #delete-accept { border-color:#212921; color:#111511; }
  .selection-tools { background:#cad8c8; border-color:#65735f; }
  .ui-icon { stroke-width:1.5; }
- ::selection { background:#445140; color:#d8e4d6; }
- ::-moz-selection { background:#445140; color:#d8e4d6; }
+ ::selection { background:#3d4939; color:#d8e4d6; }
+ ::-moz-selection { background:#3d4939; color:#d8e4d6; }
  /* Estado de teclado legível, sem mudança de geometria nem sombra expansiva. */
- body[data-input="keyboard"] button:focus,body[data-input="keyboard"] a:focus { outline:2px solid #445140; outline-offset:-3px; }
- body[data-input="keyboard"] input:focus { outline:1px solid #445140; outline-offset:1px; }
+ body[data-input="keyboard"] button:focus,body[data-input="keyboard"] a:focus { outline:2px solid #3d4939; outline-offset:-3px; }
+ body[data-input="keyboard"] input:focus { outline:1px solid #3d4939; outline-offset:1px; }
  body[data-theme="escuro"] { background:#20281f; color:#cad8c8; }
  body[data-theme="escuro"] #gabinete { background-color:#20281f; outline-color:#53654d; }
  body[data-theme="escuro"] #writing-space,body[data-theme="escuro"] #writing-space .focus-mask,body[data-theme="escuro"] .scrvrl-paper,body[data-theme="escuro"] .cabinet-window,body[data-theme="escuro"] .sheet,body[data-theme="escuro"] .desk-inspector { background-color:#293327; color:#cad8c8; border-color:#65735f; }
@@ -103,4 +103,87 @@
  body[data-theme="escuro"] #writing-space .desk-tools button:hover,body[data-theme="escuro"] .writing-toolbar button:hover { color:#d8e4d6; background:#43553d; }
  @media (max-width:760px) { #writing-space .timeline { background:#c4cfc2; } body[data-theme="escuro"] #writing-space .timeline { background:#293327; } }
  @media (prefers-reduced-motion:reduce) { .switch-track:after { transition:none; } }
+}
+
+/* QA de hierarquia: ritmo 8/12/16/24, ações reconhecíveis e tecla frontal.
+   Apenas bordas/gradientes locais; sem perspectiva, filtros ou timers. */
+@media screen {
+ #start-menu { width:304px; max-width:calc(100% - 24px); max-height:calc(100% - 92px); padding:8px; }
+ #start-menu .start-group + .start-group { border-top:1px solid #889784; margin-top:6px; padding-top:6px; }
+ #start-menu .start-group > .os-label { display:block; margin:2px 10px 4px; text-align:left; font-size:13px; letter-spacing:.7px; color:#3d4939; }
+ #start-menu .os-app { min-height:44px; padding-top:8px; padding-bottom:8px; }
+ #start-menu .os-app svg { width:22px; height:22px; margin-right:12px; }
+ #system-bar #os-start { position:relative; min-width:76px; height:40px; min-height:40px; padding:0 5px 5px; border:1px solid #3d4939; border-radius:3px; background:#65735f; box-shadow:inset 0 1px 2px #212921; }
+ #system-bar #os-start .start-key { position:relative; display:block; padding:7px 9px; border:1px solid #65735f; border-radius:2px; background:#d1ded0; background:linear-gradient(#d1ded0,#bdcaba); color:#212921; box-shadow:inset 0 1px 0 #e4ece1,0 3px 0 #889784; top:0; }
+ #system-bar #os-start:active .start-key,#system-bar #os-start[aria-expanded="true"] .start-key { top:3px; background:#b3c2b1; color:#111511; box-shadow:inset 0 1px 2px #889784; }
+ #system-bar .os-tasks #os-window-task { min-height:40px; border-color:#65735f; font-size:14px; }
+ #system-bar .os-tasks #os-window-task[aria-pressed="true"] { border-bottom:3px solid #212921; background:#d1ded0; }
+ .cabinet-heading { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+ .cabinet-heading > div { min-width:0; }
+ .cabinet-heading .os-action { margin:0 0 0 16px; min-height:44px; font-size:14px; }
+ #cabinet-new,#project-create,#new-document,#pomodoro-start,#focus-form button { background:#212921; color:#d8e4d6; border:1px solid #212921; box-shadow:none; }
+ #cabinet-new:hover,#project-create:hover,#new-document:hover,#pomodoro-start:hover,#focus-form button:hover { background:#344231; }
+ .resume-note { padding:12px 14px; margin-bottom:16px; border:1px solid #65735f; border-left:3px solid #3d4939; }
+ #resume-title { margin:4px 0; }
+ .resume-note:hover { background:#d1ded0; }
+ .files-label { padding-bottom:8px; }
+ .cabinet-note { padding-top:10px; padding-bottom:10px; }
+ .cabinet-note:hover { background:#d1ded0; }
+ .cabinet-note .note-time,.note-project-label { margin-top:4px; }
+ .project-link,.project-new { font-size:14px; }
+ .project-shelf > .os-label { margin-bottom:10px; }
+ .sheet .sheet-heading { padding-bottom:12px; margin-bottom:16px; }
+ .sheet .setting-section { margin-top:16px; padding-top:12px; }
+ .sheet-heading + .setting-section { margin-top:0; padding-top:0; border-top:0; }
+ .sheet .setting-section h3 { margin:0 0 8px; }
+ .sheet .setting-row { min-height:48px; }
+ .sheet .setting-row > span:first-child { padding-right:12px; }
+ .sheet .setting-row > button,.sheet #paste-mode,.sheet #trash-current,.sheet #note-project-save,.sheet #trash-toggle,.sheet .utility-actions button,.sheet #calendar-form button,.sheet #focus-challenge button { border:1px solid #65735f; border-radius:2px; margin-top:4px; margin-bottom:4px; }
+ .sheet button[aria-pressed="true"] { border-left:3px solid #212921; background:#b3c2b1; }
+ .sheet .actions { margin-top:12px; }
+ .sheet .actions button,.sheet .file-label { border:1px solid #65735f; min-height:44px; margin-bottom:4px; padding:10px 12px; background:#cad8c8; }
+ .sheet input:not([type="hidden"]),.sheet select { border-color:#65735f; }
+ .sheet button:hover,.sheet .file-label:hover { background:#b3c2b1; color:#111511; }
+ .sheet .lens-group-label { color:#3d4939; font:600 15px/1.4 'Oswald',Arial,sans-serif; letter-spacing:.5px; margin:16px 0 8px; }
+ .sheet .lenses { margin:0 0 12px; gap:0; }
+ .sheet .lenses button { min-height:44px; margin:0 6px 6px 0; border-color:#65735f; }
+ .sheet .finding { padding:16px 0; }
+ .sheet .finding .meta { font-size:12px; color:#3d4939; }
+ .sheet .archive-intro { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+ .sheet .archive-intro button { margin:0 0 0 12px; flex-shrink:0; }
+ .sheet .document-list button { padding:12px; }
+ .sheet .document-list button[aria-current="true"] { background:#b3c2b1; border-left:3px solid #212921; }
+ .sheet .utility-clock { margin:16px 0; }
+ .sheet .utility-actions { margin:12px 0; }
+ .desk-inspector { scrollbar-width:thin; }
+ .desk-inspector::-webkit-scrollbar { display:block; width:6px; }
+ .desk-inspector::-webkit-scrollbar-thumb { background:#65735f; }
+ .desk-inspector section { margin-top:12px; padding-top:12px; }
+ .desk-inspector .quiet { font-size:13px; }
+ .desk-inspector .desk-instruments button,.desk-inspector .desk-custody button { min-height:44px; padding:8px; margin-top:6px; border:1px solid #65735f; }
+ #desk-words { font-size:42px; margin-top:8px; }
+ .writing-toolbar button { min-height:44px; }
+ .writing-toolbar button[aria-pressed="true"] { background:#b3c2b1; border-bottom:2px solid #3d4939; }
+ body[data-input="keyboard"] .sheet select:focus,body[data-input="keyboard"] .sheet textarea:focus { outline:2px solid #3d4939; outline-offset:-2px; }
+ body[data-theme="escuro"] #start-menu .start-group + .start-group { border-color:#65735f; }
+ body[data-theme="escuro"] #start-menu .start-group > .os-label,body[data-theme="escuro"] .sheet .lens-group-label,body[data-theme="escuro"] .sheet .finding .meta { color:#b3c2b1; }
+ body[data-theme="escuro"] #system-bar #os-start { border-color:#b3c2b1; background:#111511; box-shadow:inset 0 1px 2px #111511; }
+ body[data-theme="escuro"] #system-bar #os-start .start-key { background:#43553d; background:linear-gradient(#53654d,#354231); color:#d8e4d6; border-color:#879c80; box-shadow:inset 0 1px 0 #65735f,0 3px 0 #20281f; }
+ body[data-theme="escuro"] #system-bar #os-start:active .start-key,body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] .start-key { background:#cad8c8; color:#111511; box-shadow:inset 0 1px 2px #879c80; }
+ body[data-theme="escuro"] #cabinet-new,body[data-theme="escuro"] #project-create,body[data-theme="escuro"] #new-document,body[data-theme="escuro"] #pomodoro-start,body[data-theme="escuro"] #focus-form button { background:#d1ded0; color:#111511; border-color:#d1ded0; }
+ body[data-theme="escuro"] .resume-note,body[data-theme="escuro"] .sheet .lenses button,body[data-theme="escuro"] .sheet .setting-row > button,body[data-theme="escuro"] .sheet #paste-mode,body[data-theme="escuro"] .sheet #trash-current,body[data-theme="escuro"] .sheet #note-project-save,body[data-theme="escuro"] .sheet #trash-toggle,body[data-theme="escuro"] .sheet .utility-actions button,body[data-theme="escuro"] .desk-inspector .desk-instruments button,body[data-theme="escuro"] .desk-inspector .desk-custody button { border-color:#879c80; }
+ body[data-theme="escuro"] .sheet .actions button,body[data-theme="escuro"] .sheet .file-label { background:#354231; color:#d8e4d6; border-color:#879c80; }
+ body[data-theme="escuro"] .sheet input:not([type="hidden"]),body[data-theme="escuro"] .sheet select { color:#d8e4d6; background:#293327; border-color:#879c80; }
+ body[data-theme="escuro"] .sheet button[aria-pressed="true"],body[data-theme="escuro"] .sheet .document-list button[aria-current="true"],body[data-theme="escuro"] .writing-toolbar button[aria-pressed="true"],body[data-theme="escuro"] #system-bar .os-tasks #os-window-task[aria-pressed="true"] { background:#43553d; color:#d8e4d6; border-color:#b3c2b1; }
+ body[data-theme="escuro"] .sheet button:hover,body[data-theme="escuro"] .sheet .file-label:hover { background:#43553d; color:#d8e4d6; }
+ body[data-theme="escuro"] .cabinet-note:hover,body[data-theme="escuro"] .resume-note:hover { background:#43553d; }
+ body[data-theme="escuro"][data-input="keyboard"] .sheet select:focus,body[data-theme="escuro"][data-input="keyboard"] .sheet textarea:focus { outline-color:#d1ded0; }
+ @media(max-width:600px) {
+  body[data-view="gabinete"] .sheet { left:0; right:0; top:40px; bottom:44px; width:100%; max-width:100%; margin:0; padding:16px; }
+  .cabinet-heading { flex-wrap:wrap; }
+  .cabinet-heading .os-action { margin:8px 0 0; }
+  .cabinet-heading > div { width:100%; }
+  .sheet .setting-row { flex-wrap:wrap; padding:8px 0; }
+  .sheet .theme-choice { flex-shrink:0; }
+ }
 }

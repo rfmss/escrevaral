@@ -947,7 +947,13 @@
   listen(byId('reminder-new'), 'click', function () { if (!archive) { message('Armazenamento indisponível.'); return; } try { var note = E.freshDocument(); note.kind = 'reminder'; note.title = 'Lembrete'; archive.save(note); renderReminders(); } catch (e) { message('Não foi possível guardar o lembrete.'); } });
   listen(manuscript, 'input', queueSession); listen(manuscript, 'keyup', queueSession); listen(manuscript, 'scroll', queueSession); listen(manuscript, 'click', queueSession);
   listen(title, 'input', queueSession);
-  listen(byId('start-menu'), 'click', function () { toggleStart(false); });
+  listen(byId('start-menu'), 'click', function (event) {
+    var node = event.target;
+    while (node && node !== byId('start-menu')) {
+      if (String(node.tagName).toLowerCase() === 'button') { toggleStart(false); return; }
+      node = node.parentNode;
+    }
+  });
   listen(byId('path-home'), 'click', function () { pathToProjects(true); });
   listen(byId('path-projects'), 'click', function () { pathToProjects(true); });
   listen(byId('path-project'), 'click', function () { pathToProjects(false); });

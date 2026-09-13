@@ -126,3 +126,12 @@ A identidade dos anexos Focus/Switch foi aplicada ao conjunto (Gabinete, Mesa, A
 Pedidos seguintes integrados à branch ativa. Janela ampliada usa a área útil e minimiza também por duplo clique; lixeira em cada folha; nomenclatura “Seus textos”. Utilitários separados em maquina/utilidades.js e superficie/utilidades.js/.css, consumidos pela ponte existente. Focus é pausa do Pomodoro opt-in, com retorno livre e desafio literário ao fim; versão 2D leve do anexo, sem som obrigatório, punição de aba ou segundo manuscrito.
 
 Calendário: portabilidade do cronograma-controller.js da main, lido pelo conector; nenhum merge da main. Preserva a chave vrda-planner e formato {data:[{id,text,type,completed}]}. Fases lunares são estimativas do algoritmo original. Importação aditiva por arquivo, pois os domínios não compartilham localStorage. A cópia geral de manuscritos continua separada da cópia do calendário. Relógio usa prazo absoluto e inicia a pausa visível quando se volta de uma suspensão além do prazo; não promete executar com navegador fechado. Validação física e renderização continuam pendentes.
+
+
+## QA de hierarquia e tecla Início — 13/09/2026
+
+Início recebeu tecla frontal 2D com deslocamento de 3 px conforme aria-expanded, sem perspectiva, filtros ou temporizador. Menu agrupado em Escrever, Instrumentos e Acervo e sistema, mantendo os onze aplicativos. Clique no título de grupo conserva o menu; ação e Escape fecham.
+
+Nova folha destacada junto ao título em telas largas; intervalos menores no retomar/lista, Ajustes, Acervo, Examinar e contagem. Contornos distinguem ações, lentes têm cabeçalhos próprios e margens compatíveis sem depender de flex-gap. Painéis do Gabinete em até 600 px deixam de usar margem negativa de centralização; barra de rolagem do inspetor voltou a aparecer. Preservado o espaço do manuscrito.
+
+QA: 496 verificações funcionais/DOM simulado, ES5 e equivalência portátil aprovadas; IDs e relações ARIA conferidos. Comparações de seis pares de cores sólidas: textos acima de 4,5:1, bordas selecionadas acima de 3:1. Isso não certifica todo estado/composição. Inspeção das capturas fornecidas e CSS; sem renderização de navegador: a prévia supervisionada desta sessão não suporta este projeto estático. iPad físico e percepção final ainda pendentes. Não alterar arquitetura para contornar a limitação de QA.
