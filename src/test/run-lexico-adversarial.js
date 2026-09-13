@@ -57,7 +57,10 @@
                     "got " + JSON.stringify(norm({ isLoaded: root.VeredaLexical.isLoaded(), probes: probes })).slice(0, 240));
                 test(c.id + "-isLoaded", engine.isLoaded(), "");
             }
-            var expectedFindings = gold.payload.probes.filter(function (p) { return p.ctx !== null; }).length;
+            var expectedFindings = c.probes.filter(function (t) {
+                var w = String((t && typeof t === "object") ? (t.value || "") : (t || "")).replace(/\s+/g, "");
+                return w && c.text.toLowerCase().indexOf(w.toLowerCase()) >= 0;
+            }).length;
 
             pendingChecks++;
             engine.check(new root.Encore.contracts.LinguisticSnapshot(c.text, { probes: c.probes }), function (findings) {
@@ -66,7 +69,12 @@
                 var allOk = true;
                 for (var f = 0; f < findings.length; f++) {
                     var fd = findings[f];
-                    if (!fd.ruleId || !fd.span || !fd.message) allOk = false;
+                    if (fd.ruleId !== engine.id || !fd.message ||
+                        !Array.isArray(fd.span) || fd.span.length !== 2 ||
+                        typeof fd.span[0] !== "number" || typeof fd.span[1] !== "number" ||
+                        fd.span[0] < 0 || fd.span[1] <= fd.span[0] ||
+                        typeof fd.severity !== "number" || fd.severity < 1 || fd.severity > 3 ||
+                        typeof fd.confidence !== "number" || fd.confidence < 0 || fd.confidence > 1) allOk = false;
                 }
                 test(c.id + "-check-contrato", allOk, "");
                 checkDone++;

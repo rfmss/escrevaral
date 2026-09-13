@@ -11,9 +11,11 @@ if (!String.prototype.startsWith) {
 }
 if (!String.prototype.matchAll) {
   String.prototype.matchAll = function (re) {
-    var str = this, list = [], m, arr, i, copy;
+    var str = this, list = [], m, arr, i, copy, flags = "";
     if (!re.global) throw new TypeError('matchAll exige /g');
-    copy = new RegExp(re.source, re.flags.replace('g', ''));
+    if (re.ignoreCase) flags += "i";
+    if (re.multiline) flags += "m";
+    copy = new RegExp(re.source, flags);
     re.lastIndex = 0;
     while ((m = re.exec(str)) !== null) {
       arr = [];
@@ -1018,28 +1020,41 @@ function toArray(it) {
   // ── TOKENIZADORES ─────────────────────────────────────────────────────────
 
   function tokenizarFrases(texto) {
-    // Divide em sentenças por . ! ? com proteção de abreviações comuns
+    // Divide em sentenças por . ! ? com proteção de abreviações comuns.
+    // ES5: sem lookbehind (/\p{/u) — marca a fronteira com § (lookahead é ES5) e divide.
     return texto
       .replace(/\b(Sr|Sra|Dr|Dra|Prof|Profa|etc|vs|al|op|cit|vol|cap|fig|pág)\./gi, "$1⊙")
-      .split(/(?<=[.!?…])\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÜÇ])/u)
-      .map(function(s) { return (s.replace(/⊙/g, ".").trim()); })
+      .replace(/([.!?…])\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÜÇÀÈÌÒÙ])/g, "$1§")
+      .split("§")
+      .map(function(s) { return (s.replace(/⊙/g, ".").replace(/§/g, " ").trim()); })
       .filter(function(s) { return (s.length > 3); });
   }
 
   function tokenizarPalavras(frase) {
-    return (frase.match(/[\p{L}''-]+/gu) || []);
+    return (frase.match(/[A-Za-zÀ-ÖØ-öø-ÿ''-]+/g) || []);
   }
 
+  var DIACRITICS_PT_AN = {
+    "á": "a", "à": "a", "ã": "a", "â": "a", "ä": "a",
+    "é": "e", "è": "e", "ê": "e", "ë": "e",
+    "í": "i", "ì": "i", "î": "i", "ï": "i",
+    "ó": "o", "ò": "o", "õ": "o", "ô": "o", "ö": "o",
+    "ú": "u", "ù": "u", "û": "u", "ü": "u",
+    "ç": "c", "ñ": "n"
+  };
   function normalizar(palavra) {
-    return palavra
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[̀-ͯ]/g, "")
-      .replace(/['']/g, "");
+    var s = String(palavra).toLowerCase(), out = "", i, code, c;
+    for (i = 0; i < s.length; i++) {
+      code = s.charCodeAt(i);
+      if (code >= 0x0300 && code <= 0x036f) continue; /* marcas combinantes → drop */
+      c = s.charAt(i);
+      out += DIACRITICS_PT_AN[c] || c;
+    }
+    return out.replace(/['']/g, "");
   }
 
   function contarPalavras(texto) {
-    return (texto.match(/[\p{L}''-]+/gu) || []).length;
+    return (texto.match(/[A-Za-zÀ-ÖØ-öø-ÿ''-]+/g) || []).length;
   }
 
   function contarSilabas(palavra) {
@@ -1756,7 +1771,7 @@ function toArray(it) {
         longas: longas, longas_pct: +((longas/total)*100).toFixed(0),
       },
       repeticaoProxima: { ocorrencias: repeticoes.length, lista: repeticoes.slice(0, 8) },
-      aberturaFracos: { paragrafos: paragrafos.length, aberturasFracas },
+      aberturaFracos: { paragrafos: paragrafos.length, aberturasFracas: aberturasFracas },
     };
   }
 
@@ -2083,7 +2098,7 @@ function toArray(it) {
 
     AnaliseLiterariaEngine.prototype.check = function (snapshot, done) {
         var text = (snapshot && snapshot.text) || "";
-        var options = (snapshot && snapshot.options) || {};
+        var options = (snapshot && (snapshot.context || snapshot.options)) || {};
         var self = this;
         setTimeout(function () {
             var findings = [];
@@ -2093,7 +2108,7 @@ function toArray(it) {
                 var alerts = r ? self.interpretarResultado(r) : [];
                 for (var i = 0; i < alerts.length; i++) {
                     var a = alerts[i];
-                    var severity = a.nivel === "alto" ? 1 : (a.nivel === "moderado" ? 0.6 : 0.3);
+                    var severity = a.nivel === "alto" ? 3 : (a.nivel === "moderado" ? 2 : 1);
                     findings.push(new contracts.Finding(self.id,
                         [0, Math.max(1, text.length)],
                         "[" + a.dim + "] " + a.id + " — " + (a.msg || ""), severity, 0.6));

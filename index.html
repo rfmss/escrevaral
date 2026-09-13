@@ -297,6 +297,7 @@
     activeEngine = engineId;
   }
 
+  var session = 0;
   var buttons = document.querySelectorAll("button[data-engine]");
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function () {
@@ -311,10 +312,11 @@
       deactivate();
       activate(engineId, this);
 
+      var sess = ++session;
       var text = area.innerText || area.textContent;
       var box = document.createElement("div");
-      var self = this;
       var renderFindings = function (findings) {
+        if (sess !== session) return; /* descarte de resposta stale (fila serializada) */
         if (!findings.length) {
           box.className = "muted";
           box.textContent = emptyMsg[engineId] || "(nada a analisar)";
@@ -329,13 +331,7 @@
         }
         render(box);
       };
-      if (engineId === "LEXICO-CLASSES") {
-        var probes = Encore.core.services.Tokenizer.tokenize(text);
-        var lexEngine = Encore.runtime.byId("LEXICO-CLASSES");
-        lexEngine.check({ text: text, context: { probes: probes } }, renderFindings);
-      } else {
-        Encore.runtime.runOne(engineId, text, renderFindings);
-      }
+      Encore.runtime.enqueue(engineId, text, renderFindings);
     });
   }
 })();
