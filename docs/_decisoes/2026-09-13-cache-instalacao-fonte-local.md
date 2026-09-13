@@ -36,6 +36,19 @@ confirmados: `ASSET_VERSION="20260913-capsulas-m4-v1"`, `CACHE_NAME="vereda-offl
   `20260801-lexical-algures-outrora-v1`/`vereda-offline-v971` (bump só na entrega das
   cápsulas, após re-auditoria). `state-store.js` e `templates-data.json` intocados.
 
+### Bump aplicado (Rodada 2 — Astra: "Bump: SIM")
+
+O Astra revalidou `53cd66b7` e **aprovou o bump**: HTML novo em v972, remoção de v971,
+guarda rejeitando HTML incompatível, dados preservados, escrita/leitura offline, zero
+erros no console. Valores aprovados aplicados nesta preparação da entrega:
+
+- `ASSET_VERSION = "20260913-capsulas-m4-v1"`, `CACHE_NAME = "vereda-offline-v972"`.
+- 78 tags `?v=` coerentes (77 originais + folha de fontes locais), também em
+  `ui-dialog.js` (carregador dinâmico do controlador lexical).
+- `scripts/auditor-asset-version.py`: **aprovado** — 78 refs, v972.
+- Contraprova de upgrade v971→v972 no chromium (conteúdo real da branch): v972 com HTML
+  novo, v971 podado, sem rede serve a versão nova, zero `pageerror`.
+
 ## Verificação (chromium local, 13/09/2026)
 
 - **Sem bump**: cache `vereda-offline-v971` populado; HTML no cache contém o token atual;
