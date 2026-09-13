@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Símbolo Escrevaral — campo de escrita</title>
+  <desc id="desc">Um E construído por muitas linhas de escrita, organizadas como campo, com uma ruptura vermelha.</desc>
+  <g transform="translate(128 126)">
+    <rect x="0" y="0" width="42" height="772" fill="#36a7d2"/>
+    <rect x="66" y="34" width="486" height="54" fill="#161817"/>
+    <rect x="576" y="34" width="126" height="54" fill="#161817"/>
+
+    <rect x="66" y="142" width="210" height="42" fill="#161817"/>
+    <rect x="302" y="142" width="322" height="42" fill="#161817"/>
+
+    <rect x="66" y="238" width="414" height="54" fill="#161817"/>
+    <rect x="504" y="238" width="162" height="54" fill="#161817"/>
+
+    <rect x="66" y="346" width="548" height="64" fill="#161817"/>
+    <rect x="638" y="346" width="96" height="64" fill="#ff5a19"/>
+
+    <rect x="66" y="458" width="176" height="42" fill="#161817"/>
+    <rect x="268" y="458" width="346" height="42" fill="#161817"/>
+
+    <rect x="66" y="554" width="444" height="54" fill="#161817"/>
+    <rect x="534" y="554" width="124" height="54" fill="#161817"/>
+
+    <rect x="66" y="680" width="386" height="54" fill="#161817"/>
+    <rect x="476" y="680" width="208" height="54" fill="#161817"/>
+  </g>
+</svg>

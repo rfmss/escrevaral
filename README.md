@@ -6,7 +6,7 @@ Oficina de escrita feita no Brasil, para gente brasileira.
 
 Versão: `1.0.0` — Argila, primeiro lançamento público estável.
 
-Documentação: [arquitetura](ARCHITECTURE.md) · [lançamentos](docs/release/README.md) · [checklist](docs/release/LAUNCH_CHECKLIST.md) · [mudanças](CHANGELOG.md)
+Documentação: [identidade do nome e da marca](docs/_decisoes/IDENTIDADE_NOME_ESCREVARAL.md) · [arquitetura](ARCHITECTURE.md) · [lançamentos](docs/release/README.md) · [checklist](docs/release/LAUNCH_CHECKLIST.md) · [mudanças](CHANGELOG.md)
 
 ## Visão geral
 
