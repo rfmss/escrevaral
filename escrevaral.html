@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260913-scrvrl-os-v2">
+  <meta name="asset-version" content="20260913-scrvrl-os-v3">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -1432,8 +1432,18 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  .focus-center { max-width:780px; margin:36px auto; text-align:center; }
  .focus-clock-shell { position:relative; display:inline-block; border:1px dashed #889784; padding:24px 30px; background:#c4cfc2; box-shadow:0 3px 0 rgba(33,41,33,.13); }
  .focus-clock { white-space:nowrap; }
- .focus-digit { display:inline-block; position:relative; vertical-align:middle; width:96px; height:142px; margin:0 3px; border:1px solid #8c9b8a; border-radius:3px; background:#d1ded0; background:linear-gradient(#d1ded0 50%,#cad8c8 50%); color:#111511; font:600 106px/142px 'Oswald',Impact,sans-serif; box-shadow:0 2px 0 #9fad9b; }
- .focus-digit:after { content:''; position:absolute; top:50%; left:0; right:0; border-top:1px solid #8c9b8a; }
+ .focus-digit { display:inline-block; position:relative; vertical-align:middle; width:96px; height:142px; margin:0 3px; border:1px solid #8c9b8a; border-radius:3px; box-shadow:0 2px 0 #9fad9b; overflow:hidden; perspective:800px; -webkit-perspective:800px; }
+ .focus-digit i.f-l1,.focus-digit i.f-l2 { position:absolute; left:0; width:100%; height:71px; font-style:normal; transform-style:preserve-3d; -webkit-transform-style:preserve-3d; }
+ .focus-digit i.f-l1 { top:0; transform-origin:50% 100%; }
+ .focus-digit i.f-l2 { top:71px; transform-origin:50% 0; }
+ .focus-digit s { position:absolute; left:0; width:100%; height:142px; overflow:hidden; background:#d1ded0; color:#111511; font:600 106px/142px 'Oswald',Impact,sans-serif; font-style:normal; text-decoration:none; text-align:center; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+ .focus-digit s.dn { top:-71px; background:#cad8c8; }
+ .focus-digit s.up { top:0; }
+ .focus-digit s.back { transform:rotateY(180deg); -webkit-transform:rotateY(180deg); }
+ .focus-digit.flipping i.f-l1,.focus-digit.flipping i.f-l2 { animation:fd-flip .32s ease-in-out forwards; -webkit-animation:fd-flip .32s ease-in-out forwards; }
+ @keyframes fd-flip { 0% { transform:rotateX(0); -webkit-transform:rotateX(0); } 100% { transform:rotateX(180deg); -webkit-transform:rotateX(180deg); } }
+ @media (prefers-reduced-motion:reduce) { .focus-digit.flipping i.f-l1,.focus-digit.flipping i.f-l2 { animation:none; -webkit-animation:none; } }
+ .focus-digit:after { content:''; position:absolute; top:50%; left:0; right:0; border-top:1px solid #8c9b8a; z-index:1; }
  .focus-colon { display:inline-block; vertical-align:middle; font:600 50px/1 'Oswald',Arial,sans-serif; padding:0 8px; }
  .focus-register { position:absolute; font:16px/1 Arial,sans-serif; color:#65735f; }
  .focus-register-tl { top:3px; left:4px; }.focus-register-tr { top:3px; right:4px; }.focus-register-bl { bottom:3px; left:4px; }.focus-register-br { bottom:3px; right:4px; }
@@ -1449,6 +1459,8 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  body[data-theme="escuro"] .sheet.focus-pause { background:#20281f; color:#d8e4d6; }
  body[data-theme="escuro"] .focus-clock-shell,body[data-theme="escuro"] .focus-challenge { background:#293327; }
  body[data-theme="escuro"] .focus-digit { background:linear-gradient(#43553d 50%,#354231 50%); color:#d8e4d6; border-color:#65735f; box-shadow:0 2px 0 #111511; }
+  body[data-theme="escuro"] .focus-digit s { background:#43553d; color:#d8e4d6; }
+  body[data-theme="escuro"] .focus-digit s.dn { background:#354231; }
  body[data-theme="escuro"] .calculator-keys button { background:#354231; color:#d8e4d6; }
  body[data-theme="escuro"] .calendar-table button[aria-pressed="true"] { background:#cad8c8; color:#111511; }
  body[data-theme="escuro"] .calendar-item.is-done span { color:#b3c2b1; }
@@ -1461,7 +1473,7 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
   .sheet.focus-pause,body[data-view="gabinete"] .sheet.focus-pause { padding:16px; }
   .focus-header { flex-wrap:wrap; }.focus-header h2 { width:100%; order:3; margin:14px 0 0; }
   .focus-brand { font-size:24px; }.focus-center { margin:24px auto; }
-  .focus-clock-shell { padding:18px 10px; }.focus-digit { width:46px; height:76px; font-size:55px; line-height:76px; margin:0 1px; }.focus-colon { font-size:30px; padding:0 4px; }
+  .focus-clock-shell { padding:18px 10px; }.focus-digit { width:46px; height:76px; margin:0 1px; }.focus-digit i.f-l1,.focus-digit i.f-l2 { height:38px; }.focus-digit i.f-l2 { top:38px; }.focus-digit s { height:76px; font:600 55px/76px 'Oswald',Impact,sans-serif; }.focus-digit s.dn { top:-38px; }.focus-colon { font-size:30px; padding:0 4px; }
   .calendar-nav h3 { font-size:18px; }.calendar-nav button { min-width:32px; }
  }
 }
@@ -1689,7 +1701,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   </section>
   <section id="focus-pause" class="sheet focus-pause" role="dialog" aria-labelledby="focus-heading" tabindex="-1" hidden="">
     <header class="focus-header"><strong class="focus-brand">ESCREVA<span>RAL</span></strong><h2 id="focus-heading">PAUSA CONTEMPLATIVA</h2><button id="focus-close">Voltar ao texto</button></header>
-    <div class="focus-center"><div class="focus-clock-shell"><span class="focus-register focus-register-tl" aria-hidden="true">+</span><span class="focus-register focus-register-tr" aria-hidden="true">+</span><span class="focus-register focus-register-bl" aria-hidden="true">+</span><span class="focus-register focus-register-br" aria-hidden="true">+</span><div class="focus-clock" aria-hidden="true"><span id="focus-digit-0" class="focus-digit">4</span><span id="focus-digit-1" class="focus-digit">9</span><span class="focus-colon">:</span><span id="focus-digit-2" class="focus-digit">4</span><span id="focus-digit-3" class="focus-digit">2</span></div><output id="focus-time" class="sr-only">49:42</output></div>
+    <div class="focus-center"><div class="focus-clock-shell"><span class="focus-register focus-register-tl" aria-hidden="true">+</span><span class="focus-register focus-register-tr" aria-hidden="true">+</span><span class="focus-register focus-register-bl" aria-hidden="true">+</span><span class="focus-register focus-register-br" aria-hidden="true">+</span><div class="focus-clock" aria-hidden="true"><span id="focus-digit-0" class="focus-digit" data-digit="4"><i class="f-l1"><s class="up">4</s><s class="dn back"></s></i><i class="f-l2"><s class="dn">4</s><s class="up back"></s></i></span><span id="focus-digit-1" class="focus-digit" data-digit="9"><i class="f-l1"><s class="up">9</s><s class="dn back"></s></i><i class="f-l2"><s class="dn">9</s><s class="up back"></s></i></span><span class="focus-colon">:</span><span id="focus-digit-2" class="focus-digit" data-digit="4"><i class="f-l1"><s class="up">4</s><s class="dn back"></s></i><i class="f-l2"><s class="dn">4</s><s class="up back"></s></i></span><span id="focus-digit-3" class="focus-digit" data-digit="2"><i class="f-l1"><s class="up">2</s><s class="dn back"></s></i><i class="f-l2"><s class="dn">2</s><s class="up back"></s></i></span></div><output id="focus-time" class="sr-only">49:42</output></div>
     <p id="focus-status" role="status">Afaste os olhos da tela. A escrita pode esperar.</p>
     <div id="focus-challenge" class="focus-challenge" hidden=""><p class="scrvrl-label">DESAFIO DE CONCENTRAÇÃO</p><blockquote><p id="focus-quote">“Penso, logo existo.”</p><cite id="focus-author">René Descartes</cite></blockquote><form id="focus-form"><label for="focus-answer">Digite o primeiro nome do autor para recomeçar</label><input id="focus-answer" autocomplete="off" maxlength="40"><button type="submit" class="scrvrl-action">Recomeçar</button></form><p id="focus-answer-status" role="status"></p></div></div>
     <footer class="focus-footer"><div class="focus-barcode" aria-hidden="true"></div><p>ESCREVARAL · TEMPO DE PAUSA</p><button id="focus-finish">Encerrar pausa</button></footer>
@@ -2718,10 +2730,17 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     function saveTimer(){try{if(!storage){throw new Error('storage');}storage.setItem(timerKey,JSON.stringify(state));}catch(e){status('O relógio segue nesta sessão; não foi possível guardar seu estado.');}}
     function formatTime(seconds){return pad(Math.floor(seconds/60))+':'+pad(seconds%60);}
     function showFocus(){bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();}
+    function flipDigit(d,next){
+      if(d.getAttribute('data-digit')===next){return;}
+      var now=(d.__flipToken||0)+1;d.__flipToken=now;
+      d.querySelector('.f-l1 s.back').textContent=next;d.querySelector('.f-l2 s.back').textContent=next;
+      d.classList.remove('flipping');d.offsetWidth;d.classList.add('flipping');d.setAttribute('data-digit',next);
+      root.setTimeout(function(){if(d.__flipToken===now){d.classList.remove('flipping');d.querySelector('.f-l1 s.up').textContent=next;d.querySelector('.f-l2 s.dn').textContent=next;}},360);
+    }
     function paintTimer(){
       var remaining=state.mode==='idle'?state.work*60:E.pomodoroRemaining(state,Date.now()), display=formatTime(remaining), digits=display.replace(':',''), j;
       text(byId('pomodoro-display'),display);text(byId('focus-time'),display);
-      for(j=0;j<4;j+=1){if(byId('focus-digit-'+j).textContent!==digits.charAt(j)){text(byId('focus-digit-'+j),digits.charAt(j));}}
+      for(j=0;j<4;j+=1){flipDigit(byId('focus-digit-'+j),digits.charAt(j));}
       byId('pomodoro-task').hidden=state.mode==='idle';text(byId('pomodoro-task'),(state.mode==='work'?'Escrita ':'Pausa ')+display+(state.paused?' · pausado':''));
       byId('pomodoro-start').hidden=state.mode!=='idle';byId('pomodoro-stop').hidden=state.mode==='idle';byId('pomodoro-pause').hidden=state.mode==='idle'||state.mode==='ready';
       byId('pomodoro-work').disabled=byId('pomodoro-break').disabled=state.mode!=='idle';text(byId('pomodoro-pause'),state.paused?'Retomar contagem':'Pausar contagem');
