@@ -1,0 +1,19 @@
+{
+  "name": "Escrevaral",
+  "short_name": "Escrevaral",
+  "description": "Escrevaral — antes que as palavras sequem. Análise de escrita em tinta sobre papel.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4f1e1",
+  "theme_color": "#f4f1e1",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

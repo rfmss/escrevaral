@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Escrevaral — antes que as palavras sequem. Análise de escrita: morfologia, decolonial, rima e métrica, voz e classes de palavras.">
+<meta name="theme-color" content="#f4f1e1">
+<meta name="asset-version" content="20260913-encore-v1">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
 <title>Escrevaral-Encore</title>
 <style>
   body { 
@@ -337,6 +342,11 @@
     });
   }
 })();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js").catch(function () {});
+}
 </script>
 </body>
 </html>
