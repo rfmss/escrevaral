@@ -108,12 +108,35 @@
                             fd.span[0] === 1 && fd.span[1] === 5 && fd.severity === 2 && fd.confidence === 0.5,
                             JSON.stringify(fd));
 
-                        console.log("-----");
-                        console.log("RESULTADO: " + passed + "/" + total + " passando (integração)");
-                        if (failures.length) {
-                            failures.forEach(function (f) { console.error("FALHA: " + f); });
-                            process.exit(1);
+                        /* 6) Toggle-off (desligar a lente) com resposta pendente: o resultado
+                         *    da fila que chega DEPOIS de desligar NÃO pode reaparecer.
+                         *    Espelha o demo: deactivate() invalida a sessão. */
+                        var sessT = 0, led = 0, rendT = [];
+                        function toggleDemo(id, texto, on) {
+                            if (on) {
+                                sessT++;
+                                led = sessT;
+                                runtime.enqueue(id, texto, function () {
+                                    if (sessT === led) rendT.push(id);
+                                });
+                            } else {
+                                sessT++; /* desliga → invalida a sessão pendente */
+                                led = 0;
+                            }
                         }
+                        toggleDemo("LEXICO-CLASSES", "casa mar porto", true); /* ativa, job na fila */
+                        toggleDemo("LEXICO-CLASSES", "", false);              /* desliga logo em seguida */
+                        setTimeout(function () {
+                            test("integração-toggle-off-pendente", rendT.length === 0 && led === 0,
+                                "renderizados " + JSON.stringify(rendT) + " (deveria ser [])");
+
+                            console.log("-----");
+                            console.log("RESULTADO: " + passed + "/" + total + " passando (integração)");
+                            if (failures.length) {
+                                failures.forEach(function (f) { console.error("FALHA: " + f); });
+                                process.exit(1);
+                            }
+                        }, 200);
                     });
             });
         }, 150);
