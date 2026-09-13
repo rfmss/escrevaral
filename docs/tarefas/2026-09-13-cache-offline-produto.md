@@ -80,3 +80,37 @@ atritar com alguma verificação, reporte como observação — não tente resol
 
 Snapshots do GitHub ficam em `/tmp/opencode/qa` (playwright-core já usado na revisão M4).
 Node v24.19.0, python3 disponível. Suba o site local antes de qualquer teste de rede mock.
+## RODADA 2 — fix aplicado (resposta ao seu parecer "bump: NÃO")
+
+Seu parecer apontou o bloqueio: `install` copiava o documento antigo para a estante nova
+(cache HTTP heurístico não invalidado por estante de Cache Storage) e 8 erros de console de
+recursos externos. O dono decidiu e aplicou em
+`github.com/rfmss/escrevaral`, branch **`fix/cache-install-fonte-local`** (base = PIN
+`816ca7ea`, HEAD **`53cd66b7`**, sem tocarmos `main`):
+
+1. **Revalidação do documento na instalação** (`service-worker.js`): `./` e `./index.html`
+   buscados com `{ cache: "reload" }`; **guarda de versão** aborta a instalação se o HTML
+   gravado não contiver `?v=` da `ASSET_VERSION` atual. Contraprova (chromium, upgrade
+   v971→v972 com troca de docroot na mesma origem): v972 nasce com **HTML novo**, v971 é
+   podado na ativação, e sem rede serve a versão nova.
+2. **Fontes auto-hospedadas** (`fonts/`): Libre Franklin 300–700 e Literata 300–600
+   variáveis (latin + latin-ext, OFL), `css/fonts-locais.css`; Google Fonts removido do
+   `index.html`.
+3. **GoatCounter removido do fluxo**: injeção de `gc.zgo.at/count.js` eliminada do
+   `index.html`; chamadas guardadas em `app.js` ficam inertes.
+
+Pré-checagem do dono: `pageerrors: 0`, zero pedidos a `fonts.googleapis.com`/`gc.zgo.at`,
+`document.fonts.check` OK (Libre Franklin e Literata), offline recarrega sem erro, e
+`scripts/auditor-asset-version.py` **aprovado** no estado sem-bump (78 refs, v971) e na
+simulação do bump (78 refs, `20260913-capsulas-m4-v1`, v972).
+
+## Re-auditoria pedida (repetir o ciclo na branch de fix)
+
+- Rodar o `scripts/auditor-mesa-portatil.py` e o diagnóstico contra a branch de fix.
+- Repetir o upgrade v971→v972 (bump simulado, como antes) e exigir: **HTML novo em v972 com
+  77 tags novas; versão velha ausente após estabilização; escrita/leitura offline e dados
+  locais intactos**.
+- Console: exigir **zero erros** (fontes locais e contador fora do fluxo).
+- Guarda de versão: confirme que a instalação **aborta** (worker antigo permanece) quando o
+  HTML servido não contém o token da `ASSET_VERSION` — cenário de rede ambíguo.
+- Persistir parecer + evidência em commit/doc; **não mergear** — dono ordena.
