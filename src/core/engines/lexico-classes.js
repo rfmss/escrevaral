@@ -3411,12 +3411,13 @@ for (var __i_3 = 0; __i_3 < __iter_3.length; __i_3++) {
   }
   /* ES5: alterna entre runs de [letras|hífen] e runs do resto (equiv. [\p{L}-]+|[^\p{L}-]+). */
   function splitLetterRuns(text) {
-    var out = [], cur = "", i, c, isL, mode = -1;
+    var out = [], cur = "", i, c, isL, m, mode = -1;
     for (i = 0; i < text.length; i++) {
       c = text.charAt(i);
       isL = isLetterPT(c) || c === "-";
-      if (mode === -1 || isL === mode) { mode = isL ? 1 : 0; cur += c; }
-      else { out.push(cur); mode = isL ? 1 : 0; cur = c; }
+      m = isL ? 1 : 0;
+      if (mode === -1 || m === mode) { mode = m; cur += c; }
+      else { out.push(cur); mode = m; cur = c; }
     }
     if (cur) out.push(cur);
     return out;
