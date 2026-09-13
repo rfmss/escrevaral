@@ -62,13 +62,20 @@
         pendingChecks++;
         (function (cc, gg) {
             engine.check(new root.Encore.contracts.LinguisticSnapshot(cc.text, { probes: cc.probes }), function (findings) {
-                var expectedLen = gold.payload.info ? gold.payload.info.findingCount : 0;
-                test(cc.id + "-check-findings", findings.length, gold.payload.probes.length);
+                var expectedLen = cc.probes.filter(function (t) {
+                    var w = String((t && typeof t === "object") ? (t.value || "") : (t || "")).replace(/\s+/g, "");
+                    return w && cc.text.toLowerCase().indexOf(w.toLowerCase()) >= 0;
+                }).length;
+                test(cc.id + "-check-findings", findings.length, expectedLen);
                 var allOk = true;
                 for (var f = 0; f < findings.length; f++) {
                     var fd = findings[f];
-                    if (fd.ruleId !== engine.id || !fd.span || fd.span.start < 0 || !fd.span.length ||
-                        !fd.message || !fd.severity || !fd.confidence) allOk = false;
+                    if (fd.ruleId !== engine.id || !fd.message ||
+                        !Array.isArray(fd.span) || fd.span.length !== 2 ||
+                        typeof fd.span[0] !== "number" || typeof fd.span[1] !== "number" ||
+                        fd.span[0] < 0 || fd.span[1] <= fd.span[0] ||
+                        typeof fd.severity !== "number" || fd.severity < 1 || fd.severity > 3 ||
+                        typeof fd.confidence !== "number" || fd.confidence < 0 || fd.confidence > 1) allOk = false;
                 }
                 test(cc.id + "-check-contrato", allOk, true);
                 checkDone++;

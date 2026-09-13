@@ -2,27 +2,46 @@
     "use strict";
 
     /* Escrevaral/Cofre — Auditoria de pureza ES5 + integridade dos dados embutidos.
-     * 1) Pureza: nenhum marcador ES6/ES2020 fora de strings/comentários nos ports
-     *    (const, let, arrow, `?.`, `new Set|Map(`, `for..of`, spread `...`).
-     * 2) Integridade: os dados embutidos no cofre == os JSONs originais de escrevaral
-     *    (0 diffs — recomendação da revisão independente).
-     * Uso: node run-es5-purity.js [raiz do escrevaral (opcional; sem ela, só pureza)]
+     * v2 (pós-avaliação do Astra):
+     *   - GATE REAL de sintaxe: parse com acorn ecmaVersion:5 (parser de verdade, não
+     *     scanner de marcadores). Detecta `\p{`, lookbehind, flags /u, shorthand de
+     *     objeto, template literals, rest/spread, `?.`, arrow, const/let, for..of,
+     *     normalize("NFD") é checado por marcador (é API, não sintaxe).
+     *   - acorn 8.18.0 vendored (MIT) em vendor/acorn.js para o gate rodar offline.
+     *   - Integridade: dados embutidos == JSONs originais de escrevaral (0 diffs) E
+     *     proveniência pinada por sha256 (fonte divergente = FAIL, não SKIP).
+     *   - Nada conta como PASS sem evidência: fonte ausente = FAIL, vetores vazios = FAIL.
      */
 
     var fs = require("fs");
     var path = require("path");
+    var crypto = require("crypto");
+    var acorn = require("./vendor/acorn.js");
 
-    var FILES = [
-        path.join(__dirname, "..", "core", "engines", "analise-literaria.js"),
-        path.join(__dirname, "..", "core", "engines", "lexico-classes.js")
+    var ROOT = path.join(__dirname, "..");
+    var ENCORE = [
+        path.join(ROOT, "core", "engines", "analise-literaria.js"),
+        path.join(ROOT, "core", "engines", "lexico-classes.js"),
+        path.join(ROOT, "core", "contracts.js"),
+        path.join(ROOT, "core", "runtime.js"),
+        path.join(ROOT, "core", "services", "tokenizer.js")
     ];
+
+    /* Proveniência: sha256 dos JSONs-oráculo no store escrevaral (revisão `2a0d3ff`).
+     * Se o store mudar, atualize aqui E propague para os dados embutidos de propósito. */
+    var PIN = {
+        "lexical-data.json": { sha: "d0e1e3f39b59cca73992dda9d60f240bab739eda8cd29ca6541abd7712e1036f", mod: path.join(ROOT, "data", "lexical-data.js"), key: "lexicalData" },
+        "norma-data.json":   { sha: "d8aca87b3b2b70775cc24f9a2a8e3cc09f2550a49b817da994945addc1d52763", mod: path.join(ROOT, "data", "lexical-norma-data.js"), key: "lexicalNormaData" }
+    };
 
     var total = 0, passed = 0, failures = [];
 
+    function sha256(p) { return crypto.createHash("sha256").update(fs.readFileSync(p)).digest("hex"); }
+
+    /* strip(): remove comentários e strings ' ' / " " (mantém estrutura) — usado só
+     * nos marcadores de DIAGNÓSTICO (o gate é o parse do acorn). */
     function strip(code) {
-        /* Remove comentários // e /* * / e strings ' ' e " " (mantém a estrutura).
-         * Régua simples: fora por estado — suficiente para a auditoria. */
-        var out = "", i = 0, n = code.length, st = 0; // st: 0=code 1=squote 2=dquote 3=line 4=block
+        var out = "", i = 0, n = code.length, st = 0;
         while (i < n) {
             var c = code[i], d = code[i + 1];
             if (st === 0) {
@@ -46,49 +65,56 @@
                 if (c === "\n") { st = 0; out += " "; }
                 i++; continue;
             }
-            // st 4
             if (c === "*" && d === "/") { st = 0; i += 2; continue; }
             i++;
         }
         return out;
     }
 
-    var CHECKS = [
-        { name: "sem arrow =>", re: /=>/ },
-        { name: "sem const", re: /\bconst\b/ },
-        { name: "sem let", re: /\blet\b/ },
-        { name: "sem encadeamento ?.", re: /\?\s*\./ },
-        { name: "sem new Set( nativo", re: /\bnew\s+Set\s*\(/ },
-        { name: "sem new Map( nativo", re: /\bnew\s+Map\s*\(/ },
-        { name: "sem for..of", re: /\bfor\s*\([^)]*\)\s*of\b/ },
-        { name: "sem spread ...", re: /\.\.\./ }
+    /* Marcadores ES6/ES2018/APIs modernas PARA DIAGNÓSTICO (não gating — o parse com
+     * acorn é o gate; marcadores ajudam a explicar o porquê do FAIL). */
+    var MARKERS = [
+        { name: "regEx \\p{", re: /\\p\{/ },
+        { name: "lookbehind (?<=", re: /\(\?<=/ },
+        { name: "lookbehind (?<!", re: /\(\?<!/ },
+        { name: "flag /u", re: /\/u/g },
+        { name: "flag /v", re: /\/v/g },
+        { name: "normalize(", re: /\bnormalize\s*\(/ },
+        { name: "arrow =>", re: /=>/ },
+        { name: "template `", re: /`/ },
+        { name: "encadeamento ?.", re: /\?\s*\./ },
+        { name: "spread ...", re: /\.\.\./ },
+        { name: "const", re: /\bconst\b/ },
+        { name: "let", re: /\blet\b/ },
+        { name: "new Set|Map(", re: /\bnew\s+(Set|Map)\s*\(/ },
+        { name: "for..of", re: /\bfor\s*\([^)]*\)\s*of\b/ }
     ];
 
-    for (var f = 0; f < FILES.length; f++) {
-        var file = FILES[f];
+    for (var e = 0; e < ENCORE.length; e++) {
+        var file = ENCORE[e];
         var code = fs.readFileSync(file, "utf8");
-        var clean = strip(code);
-        var problems = [];
-        for (var c = 0; c < CHECKS.length; c++) {
-            if (CHECKS[c].re.test(clean)) problems.push(CHECKS[c].name);
-        }
         var name = path.basename(file);
+        var markers = [];
+        var clean = strip(code);
+        for (var m = 0; m < MARKERS.length; m++) {
+            MARKERS[m].re.lastIndex = 0;
+            if (MARKERS[m].re.test(clean)) markers.push(MARKERS[m].name);
+        }
+        var parseErr = null;
+        try { acorn.parse(code, { ecmaVersion: 5 }); } catch (e) { parseErr = e; }
         total++;
-        if (problems.length === 0) {
-            passed++;
-            console.log("PASS [pureza " + name + " — 0 marcadores ES6]");
+        if (parseErr) {
+            failures.push("ES5 parse " + name + " -> " + parseErr.message.split("\n")[0]);
+            console.log("FAIL [ES5 parse " + name + " -> " + parseErr.message.split("\n")[0] + (markers.length ? " | marcadores: " + markers.join(", ") : "") + "]");
         } else {
-            failures.push("pureza " + name + " -> " + problems.join(", "));
-            console.log("FAIL [pureza " + name + " -> " + problems.join(", ") + "]");
+            passed++;
+            console.log("PASS [ES5 parse " + name + (markers.length ? " — atenção: marcadores " + markers.join(", ") + " (revisar)" : " — 0 marcadores modernos") + "]");
         }
     }
 
-    /* Integridade dos dados embutidos (0 valDiffs vs escrevaral) */
     var escr = process.argv[2] || "/home/rafamass/projetos/escrevaral";
-    var PAIRS = [
-        { src: "lexical-data.json", mod: "../data/lexical-data.js", key: "lexicalData" },
-        { src: "norma-data.json", mod: "../data/lexical-norma-data.js", key: "lexicalNormaData" }
-    ];
+    var srcNames = Object.keys(PIN);
+    if (!srcNames.length) { failures.push("vetor de proveniência vazio"); process.exit(1); }
 
     function deepEq(a, b) {
         if (a === b) return true;
@@ -109,35 +135,62 @@
         return false;
     }
 
-    for (var p = 0; p < PAIRS.length; p++) {
-        var pair = PAIRS[p];
-        var srcPath = path.join(escr, pair.src);
+    for (var s = 0; s < srcNames.length; s++) {
+        var p = PIN[srcNames[s]];
+        var srcPath = path.join(escr, srcNames[s]);
+        total++;
         if (!fs.existsSync(srcPath)) {
-            total++;
-            passed++;
-            console.log("PASS [dados " + pair.src + " — escrevaral ausente, pulado]");
+            failures.push("proveniência " + srcNames[s] + " -> fonte ausente em " + escr + " (SKIP rebaixado a FALHA)");
+            console.log("FAIL [proveniência " + srcNames[s] + " — fonte ausente, SKIP rebaixado a FALHA]");
             continue;
         }
-        total++;
-        try {
-            var original = JSON.parse(fs.readFileSync(srcPath, "utf8"));
-            var root = typeof global !== "undefined" ? global : window;
-            root.Encore = root.Encore || {};
-            root.Encore.data = root.Encore.data || {};
-            require(pair.mod);
-            var embedded = root.Encore.data[pair.key];
-            if (deepEq(original, embedded)) {
-                passed++;
-                console.log("PASS [dados " + pair.src + " — idêntico ao original (" + Object.keys(original).length + " chaves)]");
-            } else {
-                failures.push("dados " + pair.src + " diverge do original");
-                console.log("FAIL [dados " + pair.src + " diverge do original]");
-            }
-        } catch (e) {
-            failures.push("dados " + pair.src + " -> " + e.message);
-            console.log("FAIL [dados " + pair.src + " -> " + e.message + "]");
+        var got = sha256(srcPath);
+        if (got !== p.sha) {
+            failures.push("proveniência " + srcNames[s] + " diverge do pin (" + got.slice(0, 12) + "...) -> propagar de propósito e atualizar o pin");
+            console.log("FAIL [proveniência " + srcNames[s] + " diverge do pin (" + got.slice(0, 12) + "...) — propagar de propósito e atualizar PIN]");
+        } else {
+            passed++;
+            console.log("PASS [proveniência " + srcNames[s] + " — sha256 bate com o pin (" + got.slice(0, 12) + "...)]");
         }
     }
+
+    var root = typeof global !== "undefined" ? global : window;
+    root.Encore = root.Encore || {};
+    root.Encore.data = root.Encore.data || {};
+    var loaded = {};
+    for (var d = 0; d < srcNames.length; d++) {
+        var p2 = PIN[srcNames[d]];
+        try {
+            delete require.cache[require.resolve(p2.mod)];
+            require(p2.mod);
+            loaded[srcNames[d]] = root.Encore.data[p2.key];
+        } catch (e) {
+            loaded[srcNames[d]] = { __LOAD_ERR__: e.message };
+        }
+    }
+
+    for (var q = 0; q < srcNames.length; q++) {
+        var pair = PIN[srcNames[q]];
+        var srcPath2 = path.join(escr, srcNames[q]);
+        if (!fs.existsSync(srcPath2) || pair.sha !== sha256(srcPath2)) {
+            continue; /* já contabilizado no gate de proveniência acima */
+        }
+        total++;
+        var original = JSON.parse(fs.readFileSync(srcPath2, "utf8"));
+        var embedded = loaded[srcNames[q]];
+        if (!embedded || embedded.__LOAD_ERR__) {
+            failures.push("dados " + srcNames[q] + " -> falha ao carregar módulo: " + (embedded && embedded.__LOAD_ERR__));
+            console.log("FAIL [dados " + srcNames[q] + " -> erro de carga]");
+        } else if (deepEq(original, embedded)) {
+            passed++;
+            console.log("PASS [dados " + srcNames[q] + " — idêntico ao original (" + Object.keys(original).length + " chaves)]");
+        } else {
+            failures.push("dados " + srcNames[q] + " diverge do original");
+            console.log("FAIL [dados " + srcNames[q] + " diverge do original]");
+        }
+    }
+
+    if (!passed && !failures.length) { failures.push("nenhuma verificação executada"); }
 
     console.log("-----\nRESULTADO: " + passed + "/" + total + " passando");
     if (failures.length) {

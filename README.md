@@ -25,8 +25,8 @@ Nova encarnação da linhagem de escrita (Vereda → Uairer → Escrevaral → M
 | VOICE | voz e estilística | M3 | `src/test/run-voz-estilistica.js` |
 | PONTUACAO | pontuação | M3 | `src/test/run-pontuacao.js` |
 | SINTAXE | sintaxe e funções | M3 | `src/test/run-sintaxe.js` |
-| LEXICO-CLASSES | classes de palavras (VeredaLexical) | M4 | `src/test/run-lexico.js` + adversarial + `run-es5-purity.js` |
-| ANALISE-LITERARIA | análise literária / redação (Vereda) | M4 | `src/test/run-analise-literaria.js` + adversarial |
+| LEXICO-CLASSES | classes de palavras (VeredaLexical) | M4 | `src/test/run-lexico.js` + adversarial + `run-es5-purity.js` + `run-integration.js` |
+| ANALISE-LITERARIA | análise literária / redação (Vereda) | M4 | `src/test/run-analise-literaria.js` + adversarial + `run-es5-purity.js` |
 
 ## Pilares
 

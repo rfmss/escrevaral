@@ -11,9 +11,11 @@ if (!String.prototype.startsWith) {
 }
 if (!String.prototype.matchAll) {
   String.prototype.matchAll = function (re) {
-    var str = this, list = [], m, arr, i, copy;
+    var str = this, list = [], m, arr, i, copy, flags = "";
     if (!re.global) throw new TypeError('matchAll exige /g');
-    copy = new RegExp(re.source, re.flags.replace('g', ''));
+    if (re.ignoreCase) flags += "i";
+    if (re.multiline) flags += "m";
+    copy = new RegExp(re.source, flags);
     re.lastIndex = 0;
     while ((m = re.exec(str)) !== null) {
       arr = [];
@@ -462,7 +464,7 @@ function toArray(it) {
       // Antes de substantivo comum (qualquer palavra que não seja preposição/conjunção/artigo)
       if (_n && !/^(de|em|a|o|os|as|para|por|com|sem|sobre|ante|entre|após|até|desde|perante|segundo|conforme|mediante|exceto|salvo|ou|e|mas|pois|que|se|quando|como|porque|porém|contudo|todavia|portanto|logo|senão|embora|ora|quer)$/.test(_n)) {
         // Antes de nome próprio → preposição (ex: "Entreguei a Maria")
-        if (next && /^\p{Lu}/u.test(next)) return "Preposição";
+        if (next && /^[A-ZÁÉÍÓÚÂÊÔÃÕÜÇÀÈÌÒÙ]/.test(next)) return "Preposição";
         // Antes de infinitivo → preposição (a + inf = aspecto)
         if (/^.+(ar|er|ir)$/.test(_n)) return "Preposição";
         return "Artigo"; // caso geral: antes de substantivo/adjetivo
@@ -1226,7 +1228,7 @@ for (var __i_1 = 0; __i_1 < __iter_1.length; __i_1++) {
       word: normalized,
       displayWord: ((lexiconEntry ? lexiconEntry.label : undefined) || selectedWord),
       className: className,
-      decisao, // "classificado" | "provavel" | "ambiguo" | "indeterminado"
+      decisao: decisao, // "classificado" | "provavel" | "ambiguo" | "indeterminado"
       functionName: inferFunctionName(className),
       field: ((lexiconEntry ? lexiconEntry.field : undefined) || inferSemanticField(normalized, className)),
       note: ((lexiconEntry ? lexiconEntry.note : undefined) || createLocalNote(className, normalized)),
@@ -3360,7 +3362,7 @@ for (var __i_2 = 0; __i_2 < __iter_2.length; __i_2++) {
 
   function createHighlightedContext(text, word, escapeHtml) {
     var cleanText = text.replace(/\s+/g, " ").trim();
-    var tokens = cleanText.match(/[\p{L}-]+|[^\p{L}-]+/gu) || [];
+    var tokens = splitLetterRuns(cleanText);
     var currentIndex = 0, matchIndex = -1, matchLength = word.length;
     var __iter_3 = toArray(tokens);
 for (var __i_3 = 0; __i_3 < __iter_3.length; __i_3++) {
@@ -3383,11 +3385,54 @@ for (var __i_3 = 0; __i_3 < __iter_3.length; __i_3++) {
   }
 
   function tokenizeWords(text) {
-    return text.match(/[\p{L}-]+/gu) || [];
+    return splitWordRuns(text);
   }
 
+  var DIACRITICS_PT = {
+    "á": "a", "à": "a", "ã": "a", "â": "a", "ä": "a",
+    "é": "e", "è": "e", "ê": "e", "ë": "e",
+    "í": "i", "ì": "i", "î": "i", "ï": "i",
+    "ó": "o", "ò": "o", "õ": "o", "ô": "o", "ö": "o",
+    "ú": "u", "ù": "u", "û": "u", "ü": "u",
+    "ç": "c", "ñ": "n"
+  };
+  var LETTERS_PT = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+  function isLetterPT(c) { return LETTERS_PT.test(c); }
+  /* ES5: sem \p{L} nem /u — tokenização por classe explícita de letras latinas. */
+  function splitWordRuns(text) {
+    var out = [], cur = "", i, c;
+    for (i = 0; i < text.length; i++) {
+      c = text.charAt(i);
+      if (isLetterPT(c) || c === "-") cur += c;
+      else if (cur) { out.push(cur); cur = ""; }
+    }
+    if (cur) out.push(cur);
+    return out;
+  }
+  /* ES5: alterna entre runs de [letras|hífen] e runs do resto (equiv. [\p{L}-]+|[^\p{L}-]+). */
+  function splitLetterRuns(text) {
+    var out = [], cur = "", i, c, isL, mode = -1;
+    for (i = 0; i < text.length; i++) {
+      c = text.charAt(i);
+      isL = isLetterPT(c) || c === "-";
+      if (mode === -1 || isL === mode) { mode = isL ? 1 : 0; cur += c; }
+      else { out.push(cur); mode = isL ? 1 : 0; cur = c; }
+    }
+    if (cur) out.push(cur);
+    return out;
+  }
+  function stripDiacriticsPT(s) {
+    var out = "", i, code, c;
+    for (i = 0; i < s.length; i++) {
+      code = s.charCodeAt(i);
+      if (code >= 0x0300 && code <= 0x036f) continue; /* marcas combinantes → drop (equiv. [̀-ͯ] do NFD) */
+      c = s.charAt(i);
+      out += DIACRITICS_PT[c] || c;
+    }
+    return out;
+  }
   function normalizeWord(value) {
-    return String(value).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    return stripDiacriticsPT(String(value).toLowerCase());
   }
 
   global.VeredaLexical = {
@@ -3421,18 +3466,40 @@ for (var __i_3 = 0; __i_3 < __iter_3.length; __i_3++) {
         try {
           G.VeredaLexical.ensureLoaded();
           var text = snapshot.text || "";
-          var probes = (snapshot.context && snapshot.context.probes) || (snapshot.options && snapshot.options.probes) || [];
-          for (var i = 0; i < probes.length; i++) {
-            var tk = String(probes[i]);
-            var r = G.VeredaLexical.analyze(tk, text);
+          var ctx = (snapshot.context && snapshot.context) || {};
+          var probes = ctx.probes || ctx.probeList || [];
+          var i, p, tk, span, r;
+          if (!probes.length) {
+            var svc = G.Encore && G.Encore.core && G.Encore.core.services;
+            if (svc && svc.Tokenizer && svc.Tokenizer.tokenize) probes = svc.Tokenizer.tokenize(text);
+            else probes = splitWordRuns(String(text));
+          }
+          for (i = 0; i < probes.length; i++) {
+            p = probes[i];
+            if (p && typeof p === "object") {
+              tk = String(p.value || "");
+              span = (p.span && p.span.length === 2 &&
+                      typeof Number(p.span[0]) === "number" && typeof Number(p.span[1]) === "number" &&
+                      Number(p.span[0]) >= 0 && Number(p.span[1]) > Number(p.span[0]))
+                ? [Number(p.span[0]), Number(p.span[1])] : null;
+            } else {
+              tk = String(p || "");
+              span = null;
+            }
+            if (!tk) continue;
+            r = G.VeredaLexical.analyze(tk, text);
             if (!r) continue;
-            var idx = Math.max(0, text.toLowerCase().indexOf(tk.toLowerCase()));
+            if (!span) {
+              var idx = text.toLowerCase().indexOf(tk.toLowerCase());
+              if (idx < 0) continue;
+              span = [idx, idx + tk.length];
+            }
             findings.push(new G.Encore.contracts.Finding(
               self.id,
-              { start: idx, length: tk.length },
+              span,
               r.className + (r.funcaoSintatica ? " (" + r.funcaoSintatica + ")" : ""),
-              "info",
-              "high"
+              1,
+              0.8
             ));
           }
         } catch (e) {

@@ -56,3 +56,42 @@ Você roda direto no worktree: `/tmp/opencode/encore-work` (worktree do git apon
   shards não são portados**.
 - O dono também está atualizando o **Cofre** (`APAGARvouusar/cofre/`) — este handshake tem
   espelho lá em `cofre/docs/HANDSHAKE-ENCORE.md`.
+
+---
+
+## RODADA 2 — Correções R1–R6 aplicadas (em resposta ao parecer `ASTRA-REVIEW-capsulas-m4.md`)
+
+Resposta completa com evidência por item: **`docs/ASTRA-REVIEW-resposta.md`**. Resumo:
+
+- **R1** — ES5 de verdade: acorn 8.18 vendored (`src/test/vendor/acorn.js`, MIT) como GATE
+  (`acorn.parse` ecmaVersion 5 nas 2 engines + contracts + runtime + tokenizer); removidos
+  `\p{`, lookbehind, `/u`, `normalize("NFD")`, shorthand de objeto, matchAll dependente de
+  `re.flags`. Marcadores modernos → 0 em código.
+- **R2** — probes-objeto `{value, span:[start,end]}` aceitos; span canônico; tokenização
+  interna sem probes (rota do demo).
+- **R3** — Findings canônicos: `[start,end]`, severidade numérica 1..3, confidence 0..1.
+- **R4** — `check()` lê `snapshot.context || snapshot.options` (contexto de poesia flui;
+  goldens 0 diffs).
+- **R5** — `run-es5-purity` v2: SKIP nunca vira PASS; parser ES5 de verdade; proveniência
+  pinada por sha256 do store (fonte divergente = FAIL).
+- **R6** — `index.html`: tudo via `runtime.enqueue` (fila serializada) + descarte de resposta
+  stale (contador de sessão); fim da injeção manual de probes.
+
+Comandos de re-revisão (rodar no worktree `/tmp/opencode/encore-work/src/test`):
+
+```sh
+node run-lexico.js                            # 36/36
+node run-lexico-adversarial.js                # 35/35
+node run-analise-literaria.js                 # 114/114
+node run-analise-literaria-adversarial.js     # 43/43
+node run-es5-purity.js                        # 9/9  (gate ES5 + proveniência)
+node run-integration.js                       # 6/6  (fila + stale + cápsulas)
+# regressão das 9 engines antigas:
+node run-decolonial.js run-morphology.js run-pontuacao.js \
+     run-relative-clause.js run-rima-metro.js run-runtime.js \
+     run-sintaxe.js run-voz-estilistica.js    # 7/7 14/14 11/11 11/11 29/29 5/5 31/31 11/11
+```
+
+**Total: 14 runners, 362/362.** Re-revisar o novo SHA (bruto): `git fetch` +
+`git log -1 origin/feat/cofre-capsulas-m4`. Novo parecer: **MERGE sim/não + argumento**.
+Não mergear — o dono decide.
