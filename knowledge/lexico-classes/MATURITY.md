@@ -1,0 +1,74 @@
+# Léxico & Classes de Palavras (VeredaLexical) — Maturidade
+
+**LEVEL:** M4 — ADVERSARIAL (revisão independente + QA de browser)
+**VERSION:** 1.0.0 (port ES5)
+**LAST REVIEWED:** 2026-09-12 (cápsula do cofre)
+**STEWARD:** ainda não nomeado
+
+## Mission
+Classificação léxica de palavras em português (contextual e isolada), off-line, com acentos distintivos, cliticizados, polissemia, locuções, definições, campo semântico e função sintática. Port ES5 do `escrevaral/lexical-engine.js` (VeredaLexical), validado por **fidelidade comportamental** contra ouro da fonte ES6 (fetch-stub em Node).
+
+## Coverage
+- Classes básicas: Substantivo, Adjetivo, Advérbio, Preposição, Conjunção, Pronome (pessoal/demonstrativo/relativo/possessivo), Artigo, Numeral, Verbo (infinitivo/flexionado/subjuntivo/imperativo) — VERIFIED
+- Acentos distintivos antes de normalização: `dá/dão/dê/vê/vêm/pôr/pôs/pôde/há/hão/fê-lo/pé/sê/lê/crê/vós/nós` (LMap) — VERIFIED (probes `Nós`, `pé`, `vê`, `dê`, `fê-lo`)
+- Cliticizados hifenizados: base verbal + clíticos (`me/te/se/o/a/lo/la/lhe/nos/vos/lhes/los/las/mo/to/lho/no/vo` + desinências -ei/-as/-emos...) — VERIFIED (`fê-lo`, `comprar-lhe`, `calou-se`)
+- Polissemia/verbetes `localLexicon` (527): `casa`, `razão`, `cidade`... campo semântico + nota + definição — VERIFIED (`casa`)
+- Locuções multi-palavra (LOC-PREP-01..E.2 + Cunha&Cintra 15-16): `abaixo de`, `ao invés de`, `em vista de`, `em função de`, `ao lado de`... — VERIFIED
+- Gentílicos e números ordinais (`2º`), siglas — VERIFIED
+- Subjuntivo com gatilhos (`talvez`/`oxalá` + desinências -e/-a) — VERIFIED
+- Contextual: fronteira sintática (antes de substantivo → artigo vs. preposição), pronome ambíguo (`o`/`a`), particípio em texto — VERIFIED
+- Definições (1530+ verbetes), `createHighlightedContext`, contagem de ocorrências — parte do payload de probes (contexto) — VERIFIED
+- Degradação sem dados: `ensureLoaded()` síncrono, sem dados → `_loadError` (sem fetch) — VERIFIED
+
+## Knowledge
+- Approved rules: regras determinísticas locais + dados de proveniência (527/2168/2002 entradas) — VERIFIED
+- Candidate rules: UNKNOWN
+- Disputed rules: alguns ramos da fronteira contextual são heurísticos da fonte (ex.: `o` artigo-vs-pronome); mantidos iguais ao original — VERIFIED (limitação da fonte, preservada)
+
+## Corpus
+- Correct: **6 textos × 10 probes** = 120 observações `analyze(token, text)` + `analyze(token)` → payload **idêntico** ao ouro da fonte — VERIFIED
+- **Adversarial: 7 casos hostis** (fronteiras ambíguas `a/o/se/que/como`, neologismos, teclado-ruim com fullwidth/combinantes/RTL, nomes próprios, vazios, mega-palavras 400+ chars, locuções-limite) — fidelidade do port ≡ fonte **35/35** sob ataque, 0 crashes — VERIFIED
+- Fidelidade: probes idênticos nos dois lados (corpus é a mesma banca usado no goldgen) — VERIFIED
+- Incorrect: UNKNOWN
+- Ambiguous: palavras indeterminadas (<30-stopwords ou sem classe resolvida) retornam `decisao:"indeterminado"`/“ambiguo” — idênticos ao ouro — VERIFIED
+- Don't interfere: `\p{L}`/`normalize("NFD")` mantidos da fonte (mesma régua do Vereda v3) — VERIFIED
+- Adversarial: UNKNOWN (parcial — texto-sujeira com siglas/gírias/ordinais)
+
+## Quality
+- Tests: **36/36** — VERIFIED (`node src/test/run-lexico.js`): payload completo + `isLoaded` + contrato `check` assíncrono com `Finding`s por probe
+- Adversarial: **35/35** (`run-lexico-adversarial.js`) — port ≡ fonte sob ataque
+- Pureza ES5 + integridade de dados: **4/4** (`run-es5-purity.js`, integrada ao `run-all.js`) — 0 marcadores ES6 + dados idênticos aos JSONs originais (0 valDiffs)
+- Regressão das demais engines do cofre: rodada `run-all.js` **19/19 suítes, 419/419** + varredura ampla **392/392** — VERIFIED
+- **Browser QA: 54/54 no Chromium (Playwright)** — `tools/qa-browser/qa-browser.js`: as MESMAS bancas fidelidade + adversarial do ouro rodadas DENTRO do browser (script tags clássicos), comparação com o OURO da fonte (lexico fid 9 + adv 7 = 16 payloads inteiros; contratos Encore `check→Findings` no browser; UI legada 2/2 + screenshot) — VERIFIED
+- Known false positives: UNKNOWN
+
+## Runtime
+- Analyzer: `Encore.core.engines.VeredaLexicalEngine` (`check` assíncrono via `setTimeout`; id LEXICO-CLASSES) — VERIFIED
+- Artifact size: engine ~491 KB ES5 + dados ~297 KB (slots `Encore.data.lexicalData`/`lexicalNormaData`)
+- Peak RAM (texto longo 11,2 KB / 2.008 pal., processos separados, `--expose-gc`): heap retido pós-análise ~6–7 MB; **RSS pico fonte 72,9 MB vs port 72,9 MB (1,00x)** — VERIFIED (`tools/bench-ports-long.js`)
+- Analysis time: **3,7 KB (733 pal.), cada palavra analisada com o texto completo → port ~874 ms ≈ 4,2 k chars/s ≡ fonte (0.92–1.13x, paridade sem regressão)** — VERIFIED (Node 22, best-of-5, `tools/bench-ports.js`, 2 amostras); **texto longo 11,2 KB/2.008 pal., modelo palavra-a-palavra com contexto completo (≈O(palavras×chars)) → fonte ~12,4–14,1 s vs port ~13,2–13,8 s (0.94–1.06x, paridade)** — VERIFIED (`tools/bench-ports-long.js`); nota: o modelo O(n²) inviabiliza 12k palavras (horas); limitação herdada da fonte, sem papel na capa deste cofre — ver `docs/PERF-OQUADRADO.md`
+- Revisão mecânica: conversão auditada — **zero** `this.`/`arguments` em arrows (sem risco de captura `this`), zero shorthand inline residual, zero `??`/`||=`; `for..of` (4) só em arrays; `?.` (14/14) sem chamadas opcionais com efeito colateral; async/await/fetch/Promise eliminados (1/1/2/1) — VERIFIED (auditoria estática)
+- Legacy status: ES5 sintático (var/functions; LSet/LMap; polainéis `includes/startsWith/endsWith/matchAll` + `Array.includes`; sem arrow/async/template/`?.`/spread/destructuring/`new Set`/`new Map`/fetch/Promise; `normalize("NFD")` e `\p{L}` herdados da fonte, nativos no harness moderno e no Chromium); **pureza contínua `run-es5-purity.js` (0 marcadores)** — VERIFICADO em Node + **Chromium (Playwright)**
+- Reprodução: `tools/port-vereda-es5.js` (novos passos stepForOf/stepMap) + `gen-lexical-data-js.js` (dados) + `generate-lexical-golden.js` (ouro) — VERIFIED
+
+## Highest-value gap
+- Mapear e custar os ramos de `inferWordClassContextual` não exercitados pela banca (adversarial).
+- (Aberta) otimização do modelo palavra-a-palavra com contexto completo (O(palavras×chars) — 12k pal. hoje inviável). Evidência do custo, hotspot (re-tokenização/re-normalização do texto por token em ORDEM-02) e opções em **`docs/PERF-OQUADRADO.md`**; decisão: não alterar o oráculo aqui — otimização pertence ao ciclo de produto, este bench fica como harness de regressão/paridade.
+
+## Evidence for current level
+M4 justificado por 36/36 de fidelidade contra ouro da fonte ES6 (payload inteiro de `analyze` com e sem contexto, 180 observações) + regressão verde das demais engines (19/19, 419/419) + **35/35 adversarial** (fidelidade sob ataque, sem crashes) + pureza/dados 4/4 + **revisão independente** (907 probes idênticos, 0 divergências) + **QA browser 54/54**. Não é M6 (falta medição do legado real).
+
+## Promotion candidate
+M4 — ADVERSARIAL: bateria ✓; **revisão independente ✓ (ver Changelog)**, cronometragem ✓ (ver Runtime); **QA browser ✓ (Playwright, 54/54 — ver Quality)**. Próximos ciclos dentro da pasta (dicionário, varredura ampla, otimização do O(n²) — ver Highest-value gap). M6 requer telemetria do app real (fora deste ambiente).
+
+## Changelog
+- 2026-09-12 — port ES5 mecânico (VeredaLexical, 505 KB fonte + 297 KB dados embutidos); `ensureLoaded` async+fetch → loader síncrono; ouro da fonte ES6 (fetch stub); 24/24 fidelidade; contrato Encore (check assíncrono → Findings); MATURITY inicial M3.
+- 2026-09-12 — banca adversarial (7 casos) + ouro adversarial da fonte; 35/35 sob ataque; MATURITY atualizado (M3 robusto, promoção M4 pendente de revisão independente).
+- 2026-09-12 — **revisão independente** (auditoria externa, ~1.100 chamadas criativas lado a lado: **907 probes léxicos idênticos**, 0 divergências de valor neste domínio): confirmou dados embutidos ≡ JSONs originais (0 diffs, conferido por `run-es5-purity.js`), matchAll/toArray/arrows/`?.`/for..of sem divergência; achado teórico **A4** (`LSet`/`LMap` com chave `__proto__` quebraria se aparecesse, sem exposição real em PT) — endurecido com `Object.create(null)`. A1/A2/A3 corrigidos no conversor (coerção `String()` em template; `isRegexStart` exclui `)`; novo passo `stepObjectDestructure`), engines regenerados e re-aprovados (24/24, 35/35). Nova suíte `run-es5-purity.js` no `run-all.js` (pureza + integridade de dados).
+- 2026-09-12 — **QA de browser (Playwright/Chromium)**: piso legado `tools/qa-browser/index.html` + runner `qa-browser.js` executando as MESMAS bancas do ouro NO browser — **51/51** ≡ OURO da fonte (payloads inteiros de probes com e sem contexto), screenshot `qa-browser.png`; contrato `check→Findings` validado em browser (span OBJETO `{start,length}` no lexico, ARRAY na analise). Sem divergência fonte×port em Chromium. **LEVEL promovido a M4.**
+- 2026-09-12 — **DICIONÁRIO para escritores, etapa 1 — taxonomia de campos normalizada** (`tools/normalize-lexical-fields.js`, fonte `escrevaral/lexical-data.json`): os ~190 valores de `field` viravam 125 prefixos distintos com grafias inconsistentes ("Narrativa"/"narrativa"/"Narrativo", "emoção"/"Emocional", "Cognitivo"/"Cognição", etc.). Unificados em **98 núcleos consistentes** (131 reescrituras), PRESERVANDO o subtítulo após "—" (a nuance) e mantendo específicos valiosos como "Espaço brasileiro", "Natureza rural", "Técnica narrativa", "Estado interior", "Corpo, transformação, ficção especulativa". Total geral caiu de ~190 para 98 campos; leitura rápida de cima: **Narrativa 102, Estilo 37, Corpo 28, Espaço 27, Emoção 27, Natureza 24, Tempo 24, Conflito 15, Relação 15, Cognição 13, Afeto 13**. Fluxo completo seguido: escrevaral (fonte) → `gen-lexical-data-js.js` (dados) → `port-vereda-es5.js` (ports) → ouros → validação 19/19 (407/407) + QA browser 51/51. **Fix latente**: `gen-lexical-data-js.js` gravava em `DST/` mas o loader lê de `DST/data/` (gerava módulo de dados órfão e seed de divergência na pureza). Corrigido p/ `DST/data/`.
+- 2026-09-12 — **DICIONÁRIO para escritores, etapa 2 — notas curtas + fallback** (`tools/enrich-short-notes.js`): as 11 notas < 40 chars (só listas de sinônimos) ganharam orientação de USO literário na mesma voz das demais (sinônimos mantidos + imagem + função narrativa). E no FONTE (`lexical-engine.js`): o catch-all de `createLocalNote` para substantivos concretos fora do dicionário deixou de ser "pista robótica de revisão" e agora orienta o escritor a transformar o objeto ancorado em desejo/memória/poder (motor, não decoração); fallback final honesto ("palavra fora do dicionário curado"). Fluxo fonte→dados→port→ouros refeito; 19/19 (407/407) + QA browser 51/51.
+- 2026-09-12 — **DICIONÁRIO para escritores, etapa 3 — expansão do `localLexicon`** (`tools/add-lexicon-entries.js`): 98 verbetes curados (objetos/doméstico, vestimenta, alimentos, corpo, natureza/geografia, emoções, família, espaço urbano/rural) na mesma voz das etapas 1–2; `REMAP` de `mesa` → "Objetos — mobiliário, superfície de encontro e trabalho". **Fix de modelo descoberto ao validar**: as chaves do `localLexicon` são NORMALIZADAS (sem acento — a engine consulta por `normalizeWord`); minhas chaves acentuadas eram duplicatas mortas. O tool agora saneia chaves (invariante): 16 re-keyes ("café"→"cafe", "lâmpada"→"lampada"...), 12 duplicatas acentuadas removidas (decisão: verbetes originais curados de "pao"/"avo"/"mao" PREVALECEM). **Líquido: 527 → 613 verbetes (+86)**. Novo caso de banca "cozinha-do-quintal" exercitando os verbetes curados (avó, escada, café, caneca, orvalho, pão, mel, quarto, neto, dormia); ouros regenerados. 19/19 (411/411) + QA browser 52/52; lexico fid 28/28, adversarial 35/35.
+- 2026-09-12 — **DICIONÁRIO para escritores, etapa 4 — auditoria de cobertura em texto real + 2ª leva** (`tools/lexico-coverage.js`): mediu num trecho de 2.609 tokens de "A Descoberta do Mundo" (Clarice) que 8% do texto tinha verbete curado, 64% normativo, **14% substantivos concretos caindo no fallback** — e o ranking por frequência mostrou que os plurais de verbetes já existentes ("horas", "palavras", "cabelos", "sentimentos") NÃO eram resolvidos (a engine não desinfluencia o lookup do `localLexicon`) nem os substantivos narrativos de alta frequência ("mundo", "alma", "dona", "amiga", "susto", "pessoa", "assunto", "questão", "descoberta"...). Curados **39 verbetes** na 2ª leva (curado 8%→**12%**, fallback 14%→**10%**; top de candidatos restante é ruído — estrangeirismos/adjetivos). Tool ajustado: chaves normalizadas ANTES do skip (contagem idempotente). Novo caso de banca "descoberta-do-mundo" (10 probes dos verbetes novos); ouros regenerados. **localLexicon: 613 → 652 verbetes**. 19/19 (415/415) + QA browser 53/53; lexico fid 32/32, adversarial 35/35.
+- 2026-09-12 — **DICIONÁRIO para escritores, etapa 5 — auditoria multi-corpus + 3ª leva** (corpora `auditoria-corpora/`, recortes de 2,6k tokens: clarice2 de "A Descoberta do Mundo", "Preconceito Lingüístico"/Bagno, "Crítica Genética"/SALLES; "orwell" de "Por que Escrevo" é MISTO EN/PT — seção em inglês no meio da tradução —, marcado e descartado analiticamente). Curados **54 verbetes** de escrita/língua/narrativa (conto, retrato, linguagem, escrita, esboço, manuscrito, obra, artista, gênese, relação, erro, mistério, risco, dificuldade...) + plurais de alta frequência (obras, documentos, estudos, processos, anotações, regiões, bichos, flores, pessoas). **localLexicon: 652 → 706 verbetes**. Cobertura (antes→depois): clarice2 curado 8→11% (fallback 14→12%), bagno 4→9% (22→17%), salles 4→13% (28→20%). Novo caso de banca "oficio-da-escrita"; ouros regenerados. 19/19 (419/419) + QA browser 54/54; lexico fid 36/36, adversarial 35/35.
+- 2026-09-12 — **ferramentas de auditoria endurecidas + evidência do custo O(n²)** (etapa 5 final). `tools/lexico-coverage.js` passa a **detectar idioma** (`detectLang`, func. words EN×PT no texto COMPLETO — os 400 primeiros tokens enganavam: o recorte orwell só abre em português): descarta texto sem domínio PT ("!! DESCARTADO ... — texto MISTO EN/PT") e `--force` permite medir esse caso como falha (orwell: EN 22%×PT 12% → MISTO; clarice2/bagno/salles seguem normais, PT ≥27%×EN ≤1%). **`tools/bench-wordctx.js`** mede o custo por token na fonte com e sem contexto + escala: ctx ms/token **3,03 → 4,72 → 6,33 → 7,96** para 3,8k/7,7k/11,4k/14,2k chars (custo por token ∝ tamanho do contexto → total O(n²)), solo ≈constante 0,02–0,04 (razão ctx/solo 86x→368x). Hotspot localizado em ORDEM-02 `inferWordClassContextual` (re-tokenização `tokenizeWords`+`findIndex` e re-normalização `normalizeWord`+`indexOf` do texto inteiro por token). Decisão registrada em **`docs/PERF-OQUADRADO.md`**: não alterar o oráculo; bench fica como harness de regressão p/ futura otimização de produto. Sem mudança de engine → sem nova regen; 19/19 (419/419) mantido.

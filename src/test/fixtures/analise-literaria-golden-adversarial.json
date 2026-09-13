@@ -1,0 +1,956 @@
+{
+  "fonte": "escrevaral/analise-engine.js (Vereda v3)",
+  "gerado": "cofre/base/tools/generate-analise-golden.js",
+  "adversarial": true,
+  "casos": [
+    {
+      "id": "adv-minimo-pontuado",
+      "result": null,
+      "alertas": []
+    },
+    {
+      "id": "adv-capmisto",
+      "result": {
+        "clareza": {
+          "comprimentoMedio": 4.4,
+          "desvioPadrao": 3.2,
+          "frasesLongas": 0,
+          "frasesVeryLong": 0,
+          "pronomeAmbiguo": {
+            "suspeitas": 1
+          },
+          "subordinacaoExcessiva": {
+            "frasesProblematicas": 0
+          },
+          "tempoVerbal": {
+            "frasesComMistura": 0
+          }
+        },
+        "confusoes": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "economia": {
+          "adverbiosMente": {
+            "densidade": 0,
+            "lista": [],
+            "valor": 0
+          },
+          "negacaoDupla": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "redundancia": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "vozPassiva": {
+            "exemplos": [],
+            "ocorrencias": 0,
+            "proporcao": 0
+          }
+        },
+        "estrutura": {
+          "proporcaoPartes": null,
+          "transicoes": {
+            "comTransicao": 0,
+            "paragrafos": 1,
+            "proporcao": 100,
+            "semTransicao": 0
+          }
+        },
+        "lexico": {
+          "substantivosVagos": {
+            "densidade": 3.2,
+            "lista": [
+              "nada"
+            ],
+            "ocorrencias": 1
+          },
+          "verbosEstado": {
+            "nivel": "baixo",
+            "ocorrencias": 1,
+            "proporcao": 25
+          }
+        },
+        "meta": {
+          "fleschBR": 88,
+          "fleschLabel": "Fácil",
+          "totalFrases": 7,
+          "totalPalavras": 31,
+          "totalParagrafos": 1
+        },
+        "norma": {
+          "pontuacao": null
+        },
+        "pleonasmos": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "pov": {
+          "consistenciaPessoa": {
+            "consistente": true,
+            "frases1a": 0,
+            "frases1aPlural": 0,
+            "frases3a": 1,
+            "frasesAutorRef": 0,
+            "indiceMistura": 0
+          }
+        },
+        "ritmo": {
+          "aberturaFracos": {
+            "aberturasFracas": 1,
+            "paragrafos": 1
+          },
+          "distribuicaoFrases": {
+            "curtas": 6,
+            "curtas_pct": 86,
+            "longas": 0,
+            "longas_pct": 0,
+            "medias": 1,
+            "medias_pct": 14
+          },
+          "repeticaoProxima": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "variacaoFrase": {
+            "dp": 3.2,
+            "nivel": "baixo"
+          }
+        },
+        "voz": {
+          "cliches": {
+            "lista": [],
+            "ocorrencias": 0
+          }
+        }
+      },
+      "alertas": [
+        {
+          "acao": "Após uma frase longa, escreva uma curta. Depois, uma média. Misture tamanhos deliberadamente.",
+          "dim": "ritmo",
+          "id": "variacao-frase",
+          "msg": "Desvio padrão de comprimento: 3.2. Texto com ritmo muito uniforme. Varie o comprimento das frases.",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Substitua cada substantivo vago pelo que ele nomeia: \"a questão\" → \"o prazo\", \"a coisa\" → \"o manuscrito\".",
+          "dim": "lexico",
+          "id": "substantivos-vagos",
+          "msg": "3.2% de substantivos vagos (coisa, aspecto, questão...). Especifique.",
+          "nivel": "moderado"
+        }
+      ]
+    },
+    {
+      "id": "adv-repeticao-janela",
+      "result": {
+        "clareza": {
+          "comprimentoMedio": 16.8,
+          "desvioPadrao": 3.9,
+          "frasesLongas": 0,
+          "frasesVeryLong": 0,
+          "pronomeAmbiguo": {
+            "suspeitas": 2
+          },
+          "subordinacaoExcessiva": {
+            "frasesProblematicas": 0
+          },
+          "tempoVerbal": {
+            "frasesComMistura": 0
+          }
+        },
+        "confusoes": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "economia": {
+          "adverbiosMente": {
+            "densidade": 0,
+            "lista": [],
+            "valor": 0
+          },
+          "negacaoDupla": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "redundancia": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "vozPassiva": {
+            "exemplos": [
+              " foi comido",
+              " foi comido"
+            ],
+            "ocorrencias": 2,
+            "proporcao": 40
+          }
+        },
+        "estrutura": {
+          "proporcaoPartes": null,
+          "transicoes": {
+            "comTransicao": 0,
+            "paragrafos": 1,
+            "proporcao": 100,
+            "semTransicao": 0
+          }
+        },
+        "lexico": {
+          "substantivosVagos": {
+            "densidade": 0,
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "verbosEstado": {
+            "nivel": "alto",
+            "ocorrencias": 7,
+            "proporcao": 63.6
+          }
+        },
+        "meta": {
+          "fleschBR": 58,
+          "fleschLabel": "Denso",
+          "totalFrases": 5,
+          "totalPalavras": 84,
+          "totalParagrafos": 1
+        },
+        "norma": {
+          "pontuacao": null
+        },
+        "pleonasmos": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "pov": {
+          "consistenciaPessoa": {
+            "consistente": true,
+            "frases1a": 0,
+            "frases1aPlural": 0,
+            "frases3a": 0,
+            "frasesAutorRef": 0,
+            "indiceMistura": 0
+          }
+        },
+        "ritmo": {
+          "aberturaFracos": {
+            "aberturasFracas": 1,
+            "paragrafos": 1
+          },
+          "distribuicaoFrases": {
+            "curtas": 0,
+            "curtas_pct": 0,
+            "longas": 0,
+            "longas_pct": 0,
+            "medias": 5,
+            "medias_pct": 100
+          },
+          "repeticaoProxima": {
+            "lista": [
+              "gato",
+              "dormia",
+              "debaixo",
+              "mesa",
+              "sonhava",
+              "peixes",
+              "coloridos",
+              "nadavam"
+            ],
+            "ocorrencias": 13
+          },
+          "variacaoFrase": {
+            "dp": 3.9,
+            "nivel": "baixo"
+          }
+        },
+        "voz": {
+          "cliches": {
+            "lista": [
+              "era uma vez"
+            ],
+            "ocorrencias": 1
+          }
+        }
+      },
+      "alertas": [
+        {
+          "acao": "Reescreva as passivas na voz ativa: quem age? Identifique o sujeito e ponha-o antes do verbo.",
+          "dim": "economia",
+          "id": "voz-passiva",
+          "msg": "40% de construções passivas. Acima de 20% indica insegurança ou distância excessiva.",
+          "nivel": "alto"
+        },
+        {
+          "acao": "Substitua a segunda ocorrência por sinônimo, pronome ou elipse. Se a repetição for intencional como motivo, mantenha-a consciente.",
+          "dim": "ritmo",
+          "id": "repeticao-proxima",
+          "msg": "13 palavras repetidas em frases próximas: gato, dormia, debaixo, mesa.",
+          "nivel": "alto"
+        },
+        {
+          "acao": "Substitua cada clichê por uma imagem ou formulação própria. O que você vê quando pensa nessa ideia? Descreva isso.",
+          "dim": "voz",
+          "id": "cliche",
+          "msg": "1 clichê(s) detectado(s): era uma vez.",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Troque \"é importante\" por \"importa\", \"está presente\" por \"habita\", \"tem influência\" por \"influencia\".",
+          "dim": "lexico",
+          "id": "verbos-estado",
+          "msg": "63.6% dos verbos são de estado (ser, estar, ter...). Substitua por verbos de ação.",
+          "nivel": "moderado"
+        }
+      ]
+    },
+    {
+      "id": "adv-so-passoiva",
+      "result": {
+        "clareza": {
+          "comprimentoMedio": 6,
+          "desvioPadrao": 0,
+          "frasesLongas": 0,
+          "frasesVeryLong": 0,
+          "pronomeAmbiguo": {
+            "suspeitas": 0
+          },
+          "subordinacaoExcessiva": {
+            "frasesProblematicas": 0
+          },
+          "tempoVerbal": {
+            "frasesComMistura": 1
+          }
+        },
+        "confusoes": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "economia": {
+          "adverbiosMente": {
+            "densidade": 0,
+            "lista": [],
+            "valor": 0
+          },
+          "negacaoDupla": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "redundancia": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "vozPassiva": {
+            "exemplos": [
+              " foi comido",
+              " foi pintado",
+              " foi lido"
+            ],
+            "ocorrencias": 4,
+            "proporcao": 57.1
+          }
+        },
+        "estrutura": {
+          "proporcaoPartes": null,
+          "transicoes": {
+            "comTransicao": 0,
+            "paragrafos": 1,
+            "proporcao": 100,
+            "semTransicao": 0
+          }
+        },
+        "lexico": {
+          "substantivosVagos": {
+            "densidade": 0,
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "verbosEstado": {
+            "nivel": "alto",
+            "ocorrencias": 7,
+            "proporcao": 175
+          }
+        },
+        "meta": {
+          "fleschBR": 70,
+          "fleschLabel": "Moderado",
+          "totalFrases": 7,
+          "totalPalavras": 42,
+          "totalParagrafos": 1
+        },
+        "norma": {
+          "pontuacao": null
+        },
+        "pleonasmos": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "pov": {
+          "consistenciaPessoa": {
+            "consistente": true,
+            "frases1a": 0,
+            "frases1aPlural": 0,
+            "frases3a": 0,
+            "frasesAutorRef": 0,
+            "indiceMistura": 0
+          }
+        },
+        "ritmo": {
+          "aberturaFracos": {
+            "aberturasFracas": 1,
+            "paragrafos": 1
+          },
+          "distribuicaoFrases": {
+            "curtas": 7,
+            "curtas_pct": 100,
+            "longas": 0,
+            "longas_pct": 0,
+            "medias": 0,
+            "medias_pct": 0
+          },
+          "repeticaoProxima": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "variacaoFrase": {
+            "dp": 0,
+            "nivel": "baixo"
+          }
+        },
+        "voz": {
+          "cliches": {
+            "lista": [],
+            "ocorrencias": 0
+          }
+        }
+      },
+      "alertas": [
+        {
+          "acao": "Reescreva as passivas na voz ativa: quem age? Identifique o sujeito e ponha-o antes do verbo.",
+          "dim": "economia",
+          "id": "voz-passiva",
+          "msg": "57.1% de construções passivas. Acima de 20% indica insegurança ou distância excessiva.",
+          "nivel": "alto"
+        },
+        {
+          "acao": "Após uma frase longa, escreva uma curta. Depois, uma média. Misture tamanhos deliberadamente.",
+          "dim": "ritmo",
+          "id": "variacao-frase",
+          "msg": "Desvio padrão de comprimento: 0. Texto com ritmo muito uniforme. Varie o comprimento das frases.",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Troque \"é importante\" por \"importa\", \"está presente\" por \"habita\", \"tem influência\" por \"influencia\".",
+          "dim": "lexico",
+          "id": "verbos-estado",
+          "msg": "175% dos verbos são de estado (ser, estar, ter...). Substitua por verbos de ação.",
+          "nivel": "moderado"
+        }
+      ]
+    },
+    {
+      "id": "adv-html-sujo",
+      "result": {
+        "clareza": {
+          "comprimentoMedio": 8.6,
+          "desvioPadrao": 7.1,
+          "frasesLongas": 0,
+          "frasesVeryLong": 0,
+          "pronomeAmbiguo": {
+            "suspeitas": 1
+          },
+          "subordinacaoExcessiva": {
+            "frasesProblematicas": 0
+          },
+          "tempoVerbal": {
+            "frasesComMistura": 0
+          }
+        },
+        "confusoes": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "economia": {
+          "adverbiosMente": {
+            "densidade": 2.3,
+            "lista": [
+              "silenciosamente"
+            ],
+            "valor": 1
+          },
+          "negacaoDupla": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "redundancia": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "vozPassiva": {
+            "exemplos": [],
+            "ocorrencias": 0,
+            "proporcao": 0
+          }
+        },
+        "estrutura": {
+          "proporcaoPartes": null,
+          "transicoes": {
+            "comTransicao": 0,
+            "paragrafos": 1,
+            "proporcao": 100,
+            "semTransicao": 0
+          }
+        },
+        "lexico": {
+          "substantivosVagos": {
+            "densidade": 0,
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "verbosEstado": {
+            "nivel": "baixo",
+            "ocorrencias": 1,
+            "proporcao": 14.3
+          }
+        },
+        "meta": {
+          "fleschBR": 57,
+          "fleschLabel": "Denso",
+          "totalFrases": 5,
+          "totalPalavras": 43,
+          "totalParagrafos": 1
+        },
+        "norma": {
+          "pontuacao": null
+        },
+        "pleonasmos": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "pov": {
+          "consistenciaPessoa": {
+            "consistente": true,
+            "frases1a": 0,
+            "frases1aPlural": 0,
+            "frases3a": 0,
+            "frasesAutorRef": 0,
+            "indiceMistura": 0
+          }
+        },
+        "ritmo": {
+          "aberturaFracos": {
+            "aberturasFracas": 0,
+            "paragrafos": 1
+          },
+          "distribuicaoFrases": {
+            "curtas": 4,
+            "curtas_pct": 80,
+            "longas": 1,
+            "longas_pct": 20,
+            "medias": 0,
+            "medias_pct": 0
+          },
+          "repeticaoProxima": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "variacaoFrase": {
+            "dp": 7.1,
+            "nivel": "moderado"
+          }
+        },
+        "voz": {
+          "cliches": {
+            "lista": [],
+            "ocorrencias": 0
+          }
+        }
+      },
+      "alertas": []
+    },
+    {
+      "id": "adv-pleonasmo-provocado",
+      "result": {
+        "clareza": {
+          "comprimentoMedio": 4.9,
+          "desvioPadrao": 4.7,
+          "frasesLongas": 0,
+          "frasesVeryLong": 0,
+          "pronomeAmbiguo": {
+            "suspeitas": 1
+          },
+          "subordinacaoExcessiva": {
+            "frasesProblematicas": 0
+          },
+          "tempoVerbal": {
+            "frasesComMistura": 0
+          }
+        },
+        "confusoes": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "economia": {
+          "adverbiosMente": {
+            "densidade": 0,
+            "lista": [],
+            "valor": 0
+          },
+          "negacaoDupla": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "redundancia": {
+            "lista": [
+              "subir para cima",
+              "descer para baixo",
+              "entrar para dentro",
+              "sair para fora",
+              "elo de ligação",
+              "acabamento final",
+              "hemorragia de sangue",
+              "subir para cima",
+              "descer para baixo",
+              "entrar para dentro",
+              "sair para fora",
+              "elo de ligação",
+              "hemorragia de sangue"
+            ],
+            "ocorrencias": 13
+          },
+          "vozPassiva": {
+            "exemplos": [],
+            "ocorrencias": 0,
+            "proporcao": 0
+          }
+        },
+        "estrutura": {
+          "proporcaoPartes": null,
+          "transicoes": {
+            "comTransicao": 0,
+            "paragrafos": 1,
+            "proporcao": 100,
+            "semTransicao": 0
+          }
+        },
+        "lexico": {
+          "substantivosVagos": {
+            "densidade": 0,
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "verbosEstado": {
+            "nivel": "baixo",
+            "ocorrencias": 0,
+            "proporcao": 0
+          }
+        },
+        "meta": {
+          "fleschBR": 54,
+          "fleschLabel": "Denso",
+          "totalFrases": 9,
+          "totalPalavras": 44,
+          "totalParagrafos": 1
+        },
+        "norma": {
+          "pontuacao": null
+        },
+        "pleonasmos": {
+          "lista": [
+            {
+              "exemplos": [
+                "subir para cima"
+              ],
+              "ocorrencias": 1,
+              "rotulo": "«subir para cima»",
+              "sugestao": "Prefira «subir»."
+            },
+            {
+              "exemplos": [
+                "descer para baixo"
+              ],
+              "ocorrencias": 1,
+              "rotulo": "«descer para baixo»",
+              "sugestao": "Prefira «descer»."
+            },
+            {
+              "exemplos": [
+                "entrar para dentro"
+              ],
+              "ocorrencias": 1,
+              "rotulo": "«entrar para dentro»",
+              "sugestao": "Prefira «entrar»."
+            },
+            {
+              "exemplos": [
+                "sair para fora"
+              ],
+              "ocorrencias": 1,
+              "rotulo": "«sair para fora»",
+              "sugestao": "Prefira «sair»."
+            },
+            {
+              "exemplos": [
+                "elo de ligação"
+              ],
+              "ocorrencias": 1,
+              "rotulo": "«elo de ligação»",
+              "sugestao": "Prefira «elo»."
+            },
+            {
+              "exemplos": [
+                "acabamento final"
+              ],
+              "ocorrencias": 1,
+              "rotulo": "«acabamento final»",
+              "sugestao": "Prefira «acabamento»."
+            },
+            {
+              "exemplos": [
+                "hemorragia de sangue"
+              ],
+              "ocorrencias": 1,
+              "rotulo": "«hemorragia de sangue»",
+              "sugestao": "Prefira «hemorragia»."
+            }
+          ],
+          "ocorrencias": 7
+        },
+        "pov": {
+          "consistenciaPessoa": {
+            "consistente": true,
+            "frases1a": 1,
+            "frases1aPlural": 0,
+            "frases3a": 0,
+            "frasesAutorRef": 0,
+            "indiceMistura": 0
+          }
+        },
+        "ritmo": {
+          "aberturaFracos": {
+            "aberturasFracas": 0,
+            "paragrafos": 1
+          },
+          "distribuicaoFrases": {
+            "curtas": 8,
+            "curtas_pct": 89,
+            "longas": 0,
+            "longas_pct": 0,
+            "medias": 1,
+            "medias_pct": 11
+          },
+          "repeticaoProxima": {
+            "lista": [
+              "acabamento",
+              "final"
+            ],
+            "ocorrencias": 2
+          },
+          "variacaoFrase": {
+            "dp": 4.7,
+            "nivel": "moderado"
+          }
+        },
+        "voz": {
+          "cliches": {
+            "lista": [],
+            "ocorrencias": 0
+          }
+        }
+      },
+      "alertas": [
+        {
+          "acao": "Remova a palavra que repete o sentido. Ex.: \"subir para cima\" → \"subir\".",
+          "dim": "economia",
+          "id": "redundancia",
+          "msg": "13 par(es) redundante(s): subir para cima, descer para baixo.",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Exemplo encontrado: \"subir para cima\".",
+          "dim": "pleonasmos",
+          "id": "pleonasmo--subir-para-cima-",
+          "msg": "1× «subir para cima» — Prefira «subir».",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Exemplo encontrado: \"descer para baixo\".",
+          "dim": "pleonasmos",
+          "id": "pleonasmo--descer-para-baixo-",
+          "msg": "1× «descer para baixo» — Prefira «descer».",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Exemplo encontrado: \"entrar para dentro\".",
+          "dim": "pleonasmos",
+          "id": "pleonasmo--entrar-para-dentro-",
+          "msg": "1× «entrar para dentro» — Prefira «entrar».",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Exemplo encontrado: \"sair para fora\".",
+          "dim": "pleonasmos",
+          "id": "pleonasmo--sair-para-fora-",
+          "msg": "1× «sair para fora» — Prefira «sair».",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Exemplo encontrado: \"elo de ligação\".",
+          "dim": "pleonasmos",
+          "id": "pleonasmo--elo-de-liga--o-",
+          "msg": "1× «elo de ligação» — Prefira «elo».",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Exemplo encontrado: \"acabamento final\".",
+          "dim": "pleonasmos",
+          "id": "pleonasmo--acabamento-final-",
+          "msg": "1× «acabamento final» — Prefira «acabamento».",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Exemplo encontrado: \"hemorragia de sangue\".",
+          "dim": "pleonasmos",
+          "id": "pleonasmo--hemorragia-de-sangue-",
+          "msg": "1× «hemorragia de sangue» — Prefira «hemorragia».",
+          "nivel": "moderado"
+        }
+      ]
+    },
+    {
+      "id": "adv-mistura-tempos",
+      "result": {
+        "clareza": {
+          "comprimentoMedio": 9.3,
+          "desvioPadrao": 2.9,
+          "frasesLongas": 0,
+          "frasesVeryLong": 0,
+          "pronomeAmbiguo": {
+            "suspeitas": 1
+          },
+          "subordinacaoExcessiva": {
+            "frasesProblematicas": 0
+          },
+          "tempoVerbal": {
+            "frasesComMistura": 0
+          }
+        },
+        "confusoes": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "economia": {
+          "adverbiosMente": {
+            "densidade": 0,
+            "lista": [],
+            "valor": 0
+          },
+          "negacaoDupla": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "redundancia": {
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "vozPassiva": {
+            "exemplos": [],
+            "ocorrencias": 0,
+            "proporcao": 0
+          }
+        },
+        "estrutura": {
+          "proporcaoPartes": null,
+          "transicoes": {
+            "comTransicao": 0,
+            "paragrafos": 1,
+            "proporcao": 100,
+            "semTransicao": 0
+          }
+        },
+        "lexico": {
+          "substantivosVagos": {
+            "densidade": 0,
+            "lista": [],
+            "ocorrencias": 0
+          },
+          "verbosEstado": {
+            "nivel": "alto",
+            "ocorrencias": 7,
+            "proporcao": 116.7
+          }
+        },
+        "meta": {
+          "fleschBR": 54,
+          "fleschLabel": "Denso",
+          "totalFrases": 4,
+          "totalPalavras": 37,
+          "totalParagrafos": 1
+        },
+        "norma": {
+          "pontuacao": null
+        },
+        "pleonasmos": {
+          "lista": [],
+          "ocorrencias": 0
+        },
+        "pov": {
+          "consistenciaPessoa": {
+            "consistente": false,
+            "frases1a": 2,
+            "frases1aPlural": 2,
+            "frases3a": 3,
+            "frasesAutorRef": 0,
+            "indiceMistura": 50
+          }
+        },
+        "ritmo": {
+          "aberturaFracos": {
+            "aberturasFracas": 0,
+            "paragrafos": 1
+          },
+          "distribuicaoFrases": {
+            "curtas": 2,
+            "curtas_pct": 50,
+            "longas": 0,
+            "longas_pct": 0,
+            "medias": 2,
+            "medias_pct": 50
+          },
+          "repeticaoProxima": {
+            "lista": [
+              "fosse"
+            ],
+            "ocorrencias": 1
+          },
+          "variacaoFrase": {
+            "dp": 2.9,
+            "nivel": "baixo"
+          }
+        },
+        "voz": {
+          "cliches": {
+            "lista": [],
+            "ocorrencias": 0
+          }
+        }
+      },
+      "alertas": [
+        {
+          "acao": "Troque \"é importante\" por \"importa\", \"está presente\" por \"habita\", \"tem influência\" por \"influencia\".",
+          "dim": "lexico",
+          "id": "verbos-estado",
+          "msg": "116.7% dos verbos são de estado (ser, estar, ter...). Substitua por verbos de ação.",
+          "nivel": "moderado"
+        },
+        {
+          "acao": "Se não for diálogo ou citação, escolha um ponto de vista e mantenha-o. Defina: quem narra?",
+          "dim": "pov",
+          "id": "pessoa-narrativa",
+          "msg": "Texto mistura 1ª e 3ª pessoa (2 frases em \"eu\" e 3 em \"ele/ela\"). Verifique se é intencional.",
+          "nivel": "moderado"
+        }
+      ]
+    }
+  ]
+}
