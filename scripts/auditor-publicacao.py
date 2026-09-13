@@ -10,6 +10,7 @@ manifest inconsistente ou dependencia externa que enfraquece o offline-first.
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import urllib.error
@@ -24,10 +25,12 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE_URL = "https://escrevaral.com"
+BASE_URL = os.environ.get("ESCREVARAL_AUDIT_URL", "https://escrevaral.com").rstrip("/")
+BASE_HOST = urllib.parse.urlparse(BASE_URL).netloc
 DATA = date.today().isoformat()
-REPORT_MD = ROOT / "reports" / "auditoria" / f"publicacao-offline-{DATA}.md"
-REPORT_JSON = ROOT / "reports" / "auditoria" / f"publicacao-offline-{DATA}.json"
+ENV_TAG = "" if BASE_HOST == "escrevaral.com" else "-candidata"
+REPORT_MD = ROOT / "reports" / "auditoria" / f"publicacao-offline{ENV_TAG}-{DATA}.md"
+REPORT_JSON = ROOT / "reports" / "auditoria" / f"publicacao-offline{ENV_TAG}-{DATA}.json"
 
 TIMEOUT = 18
 ISSUES: list[dict[str, Any]] = []
@@ -72,6 +75,15 @@ def add_issue(severity: str, area: str, title: str, evidence: str, recommendatio
     })
 
 
+def url_local(url: str) -> str:
+    if BASE_HOST == "escrevaral.com":
+        return url
+    parsed = urllib.parse.urlparse(url)
+    if parsed.netloc == "escrevaral.com":
+        return urllib.parse.urlunparse(parsed._replace(scheme=urllib.parse.urlparse(BASE_URL).scheme, netloc=BASE_HOST))
+    return url
+
+
 def normalize_url(url: str, base: str = BASE_URL + "/") -> str | None:
     url = url.strip()
     if not url or url.startswith("#"):
@@ -88,11 +100,11 @@ def without_fragment(url: str) -> str:
 
 
 def is_internal(url: str) -> bool:
-    return urllib.parse.urlparse(url).netloc == "escrevaral.com"
+    return urllib.parse.urlparse(url).netloc in (BASE_HOST, "escrevaral.com")
 
 
 def fetch_url(url: str) -> dict[str, Any]:
-    url = without_fragment(url)
+    url = url_local(without_fragment(url))
     if url in FETCH_CACHE:
         return FETCH_CACHE[url]
     req = urllib.request.Request(url, headers={"User-Agent": "EscrevaralCodexAudit/1.0"})
@@ -129,7 +141,7 @@ def read_sitemap() -> list[str]:
     try:
         root = ET.fromstring(result["body"])
         ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-        urls = [loc.text.strip() for loc in root.findall(".//sm:loc", ns) if loc.text]
+        urls = [url_local(loc.text.strip()) for loc in root.findall(".//sm:loc", ns) if loc.text]
     except Exception as exc:  # noqa: BLE001
         add_issue("P0", "Sitemap", "sitemap.xml invalido", str(exc), "Validar XML.")
         return [BASE_URL + "/"]
@@ -146,7 +158,7 @@ def parse_html(url: str, html: str) -> RefParser:
         if not absolute:
             continue
         parsed = urllib.parse.urlparse(absolute)
-        if parsed.scheme in {"http", "https"} and parsed.netloc and parsed.netloc != "escrevaral.com":
+        if parsed.scheme in {"http", "https"} and parsed.netloc and parsed.netloc not in (BASE_HOST, "escrevaral.com"):
             if parsed.netloc not in EXPECTED_EXTERNAL:
                 add_issue("P2", "Links externos", "dependencia externa nao catalogada", f"{url} -> {raw}", "Confirmar se e intencional.")
             continue
@@ -198,8 +210,14 @@ def audit_service_worker(index_text: str, sitemap_urls: list[str]) -> None:
         add_issue("P1", "Service worker", "versao/cache nao detectados", "CACHE_NAME ou ASSET_VERSION ausente", "Manter versao explicita para invalidacao previsivel.")
     if version and f"v={version}" not in index_text:
         add_issue("P1", "Versionamento", "ASSET_VERSION do service worker nao aparece no index", version, "Alinhar querystring do index e cache offline.")
-    if "install" not in sw_text or "fetch" not in sw_text or "cache.addAll" not in sw_text:
-        add_issue("P0", "Service worker", "offline basico incompleto", "install/fetch/cache.addAll nao detectado", "Revisar registro offline.")
+    has_install = "install" in sw_text
+    has_revalidation = "cache: \"reload\"" in sw_text or "cache: 'reload'" in sw_text
+    has_put = "cache.put" in sw_text
+    has_version_guard = "ASSET_VERSION" in sw_text and "indexOf" in sw_text
+    if not (has_install and has_revalidation and has_put and has_version_guard):
+        add_issue("P0", "Service worker", "offline basico incompleto",
+                  "install/revalidacao/guarda nao detectados",
+                  "Revisar registro offline: instalacao deve revalidar documento e abortar se versao nao conferir.")
 
     broken_assets = []
     for asset in assets:
@@ -213,7 +231,7 @@ def audit_service_worker(index_text: str, sitemap_urls: list[str]) -> None:
             "Service worker",
             "CORE_ASSETS tem recurso quebrado",
             "; ".join(broken_assets[:20]),
-            "Qualquer 404 em cache.addAll pode impedir instalacao offline.",
+            "Qualquer 404 em CORE_ASSETS pode impedir instalacao offline.",
         )
 
     sw_paths = {urllib.parse.urlparse(urllib.parse.urljoin(BASE_URL + "/", asset)).path for asset in assets}
@@ -285,7 +303,7 @@ def audit_external_dependencies(index_parser: RefParser) -> None:
         if not absolute:
             continue
         parsed = urllib.parse.urlparse(absolute)
-        if parsed.scheme in {"http", "https"} and parsed.netloc and parsed.netloc != "escrevaral.com":
+        if parsed.scheme in {"http", "https"} and parsed.netloc and parsed.netloc not in (BASE_HOST, "escrevaral.com"):
             externals[parsed.netloc] += 1
     if "fonts.googleapis.com" in externals:
         add_issue(

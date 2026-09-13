@@ -119,7 +119,19 @@ jobs:
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
           exit 0
 
-      - name: Auditorias de produção
+      - name: Auditoria de publicação/offline da candidata local
+        id: pub_local
+        shell: bash
+        env:
+          ESCREVARAL_AUDIT_URL: http://127.0.0.1:8799
+        run: |
+          set +e
+          python scripts/auditor-publicacao.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Verificação de produção (etapa própria — não bloqueia a candidata)
         id: production
         shell: bash
         run: |
@@ -152,7 +164,7 @@ jobs:
           BOUNDARY_EXIT: ${{ steps.boundary.outputs.exit_code }}
           BASELINE_EXIT: ${{ steps.baseline.outputs.exit_code }}
           PWA_UPGRADE_EXIT: ${{ steps.pwa_upgrade.outputs.exit_code }}
-          PRODUCTION_EXIT: ${{ steps.production.outputs.exit_code }}
+          PUB_LOCAL_EXIT: ${{ steps.pub_local.outputs.exit_code }}
         run: |
           test "$MASTER_EXIT" = "0"
           test "$LOCAL_EXIT" = "0"
@@ -160,7 +172,7 @@ jobs:
           test "$BOUNDARY_EXIT" = "0"
           test "$BASELINE_EXIT" = "0"
           test "$PWA_UPGRADE_EXIT" = "0"
-          test "$PRODUCTION_EXIT" = "0"
+          test "$PUB_LOCAL_EXIT" = "0"
           python - <<'PY'
           import json
           import re
@@ -170,7 +182,7 @@ jobs:
           today = date.today().isoformat()
           root = Path('reports/auditoria')
 
-          publication = json.loads((root / f'publicacao-offline-{today}.json').read_text(encoding='utf-8'))
+          publication = json.loads((root / f'publicacao-offline-candidata-{today}.json').read_text(encoding='utf-8'))
           pub_counts = publication['summary']['counts']
           assert pub_counts.get('P0', 0) == 0, pub_counts
           assert pub_counts.get('P1', 0) == 0, pub_counts

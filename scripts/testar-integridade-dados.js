@@ -65,7 +65,9 @@ function testCorruptStorageCannotBeOverwrittenSilently() {
 function testOfflineInstallToleratesOptionalAssetFailures() {
   const source = fs.readFileSync(path.join(ROOT, "service-worker.js"), "utf8");
   assert.match(source, /Promise\.allSettled/, "recursos opcionais não podem abortar toda a instalação");
-  assert.match(source, /cache\.addAll\(\["\.\/", "\.\/index\.html"\]\)/, "documento base deve continuar obrigatório");
+  assert.match(source, /cache:\s*"reload"/, "documento base deve continuar obrigatório e ser revalidado");
+  assert.match(source, /cache\.put\(caminho, resposta\)/, "documento base deve continuar obrigatório");
+  assert.match(source, /indexOf\("\?v=" \+ ASSET_VERSION\)[\s\S]{0,160}?throw new Error/, "instalação deve abortar se o HTML não confirmar a versão atual");
 }
 
 function testRestoreCreatesRollbackSnapshot() {

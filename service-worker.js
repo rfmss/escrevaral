@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v971";
-const ASSET_VERSION = "20260801-lexical-algures-outrora-v1";
+const CACHE_NAME = "vereda-offline-v972";
+const ASSET_VERSION = "20260913-capsulas-m4-v1";
 
 const CORE_ASSETS = [
   "./",
@@ -7,15 +7,16 @@ const CORE_ASSETS = [
   `./css/00-tokens.css?v=${ASSET_VERSION}`,
   `./css/01-base.css?v=${ASSET_VERSION}`,
   `./css/02-shell-navigation.css?v=${ASSET_VERSION}`,
+  `./css/fonts-locais.css?v=${ASSET_VERSION}`,
   `./styles.css?v=${ASSET_VERSION}`,
-  "./css/13-editor-quiet.css?v=20260801-lexical-algures-outrora-v1",
+  "./css/13-editor-quiet.css?v=20260913-capsulas-m4-v1",
   `./css/20-product-clarity-desktop.css?v=${ASSET_VERSION}`,
   `./css/20-product-clarity-desktop-controls.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive-refine.css?v=${ASSET_VERSION}`,
   `./css/22-product-clarity-workshop-authorship.css?v=${ASSET_VERSION}`,
   `./css/22-product-clarity-workshop-refine.css?v=${ASSET_VERSION}`,
-  "./css/14-archive-inspector.css?v=20260801-lexical-algures-outrora-v1",
+  "./css/14-archive-inspector.css?v=20260913-capsulas-m4-v1",
   `./css/16-entry-argila.css?v=${ASSET_VERSION}`,
   `./css/17-editor-status-argila.css?v=${ASSET_VERSION}`,
   `./css/18-editor-status-layout.css?v=${ASSET_VERSION}`,
@@ -118,18 +119,31 @@ const CORE_ASSETS = [
   "./sounds/typewriter.wav",
   "./sounds/backspace.wav",
   "./sounds/Enter.wav",
+  "./fonts/lf-latin.woff2",
+  "./fonts/lf-latin-ext.woff2",
+  "./fonts/literata-latin.woff2",
+  "./fonts/literata-latin-ext.woff2",
 ];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      // `addAll` tornava a oficina inteira indisponível offline quando um único
-      // áudio, ícone ou material opcional falhava. O documento é obrigatório;
-      // os demais recursos são tentados individualmente e podem ser completados
-      // pela estratégia de runtime cache no próximo acesso online.
+      // O documento é obrigatório e tem de ser a versão atual. `cache: "reload"`
+      // ignora o cache HTTP heurístico, que pode ter guardado o HTML antigo; sem
+      // isso uma estante nova herda o documento anterior e o modo sem internet
+      // serve a versão velha dentro de "versão nova".
       .then(async (cache) => {
-        await cache.addAll(["./", "./index.html"]);
+        const guardarDocumento = (caminho) =>
+          fetch(new Request(caminho, { cache: "reload" })).then((resposta) => {
+            if (!resposta.ok) throw new Error("documento não revalidado: " + caminho);
+            return cache.put(caminho, resposta);
+          });
+        await Promise.all([guardarDocumento("./"), guardarDocumento("./index.html")]);
+        const documento = await (await cache.match("./index.html")).text();
+        if (documento.indexOf("?v=" + ASSET_VERSION) === -1) {
+          throw new Error("HTML da versão atual não confirmado — instalação abortada");
+        }
         const optionalAssets = CORE_ASSETS.filter((asset) => asset !== "./" && asset !== "./index.html");
         await Promise.allSettled(optionalAssets.map((asset) => cache.add(asset)));
       })
