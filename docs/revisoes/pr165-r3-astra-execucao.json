@@ -1,0 +1,187 @@
+{
+  "head": "e4916d08568b71ab23ddcc806141a459f41b4a70",
+  "node": "v24.19.0",
+  "runs": [
+    {
+      "cwd": "docs/revisoes",
+      "command": [
+        "node",
+        "pr165-r2-fluxo.js"
+      ],
+      "exit": 0,
+      "milliseconds": 180,
+      "stdout": "{\n  \"node\": \"v24.19.0\",\n  \"results\": [\n    {\n      \"check\": \"R6: desativar limpa imediatamente\",\n      \"passed\": true,\n      \"evidence\": []\n    },\n    {\n      \"check\": \"R6: desativar invalida resposta pendente\",\n      \"passed\": true,\n      \"evidence\": []\n    },\n    {\n      \"check\": \"R6: trocar lente descarta resposta anterior\",\n      \"passed\": true,\n      \"evidence\": []\n    },\n    {\n      \"check\": \"R1/R2: scripts reais, sem APIs opcionais, analisam o texto\",\n      \"passed\": true,\n      \"evidence\": [\n        {\n          \"className\": \"finding lex\",\n          \"text\": \"Artigo (Determinante)\"\n        },\n        {\n          \"className\": \"finding lex\",\n          \"text\": \"Substantivo (Sujeito)\"\n        },\n        {\n          \"className\": \"finding lex\",\n          \"text\": \"Verbo flexionado (Predicado)\"\n        },\n        {\n          \"className\": \"finding lex\",\n          \"text\": \"Artigo (Determinante)\"\n        },\n        {\n          \"className\": \"finding lex\",\n          \"text\": \"Substantivo (Sujeito)\"\n        },\n        {\n          \"className\": \"finding lex\",\n          \"text\": \"Verbo flexionado (Predicado)\"\n        }\n      ]\n    },\n    {\n      \"check\": \"R1: análise literária sem APIs opcionais\",\n      \"passed\": true,\n      \"evidence\": {\n        \"count\": 12,\n        \"boxes\": [\n          {\n            \"className\": \"\",\n            \"text\": \"\",\n            \"children\": [\n              {\n                \"children\": [],\n                \"textContent\": \"[economia] voz-passiva — 57.1% de construções passivas. Acima de 20% indica insegurança ou distância excessiva.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[economia] adverbios-mente — 3.2% de advérbios em -mente. Acima de 3% é sinal de verbo fraco.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[economia] redundancia — 4 par(es) redundante(s): subir para cima, entrar para dentro.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[pleonasmos] pleonasmo--subir-para-cima- — 1× «subir para cima» — Prefira «subir».\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[pleonasmos] pleonasmo--entrar-para-dentro- — 1× «entrar para dentro» — Prefira «entrar».\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[confusoes] confusao--n-o-h--como-negar- — 1× «não há como negar» — Construção que evita afirmar diretamente. Prefira afirmar o fato sem mediação retórica.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[confusoes] confusao--a-raz-o---porque- — 1× «a razão é porque» — Tautologia: «razão» e «porque» dizem o mesmo. Use «a razão é que» ou apenas «porque».\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[ritmo] variacao-frase — Desvio padrão de comprimento: 3.5. Texto com ritmo muito uniforme. Varie o comprimento das frases.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[lexico] verbos-estado — 57.1% dos verbos são de estado (ser, estar, ter...). Substitua por verbos de ação.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[lexico] substantivos-vagos — 2.6% de substantivos vagos (coisa, aspecto, questão...). Especifique.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[clareza] flesch-denso — Legibilidade 26/100 (Muito denso). Texto muito exigente — verifique se é intencional para o público-alvo.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              },\n              {\n                \"children\": [],\n                \"textContent\": \"[clareza] pronome-ambiguo — 7 frases com pronomes de 3ª pessoa em contexto denso. Verifique se o referente está claro para o leitor.\",\n                \"handlers\": {},\n                \"classes\": {},\n                \"className\": \"finding lit\",\n                \"classList\": {}\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"check\": \"R1: destaque preserva palavra inteira\",\n      \"passed\": true,\n      \"evidence\": {\n        \"expected\": \"A <mark>casa</mark> caiu.\",\n        \"actual\": \"A <mark>casa</mark> caiu.\"\n      }\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "docs/revisoes",
+      "command": [
+        "node",
+        "pr165-verificar.js"
+      ],
+      "exit": 0,
+      "milliseconds": 206,
+      "stdout": "{\n  \"node\": \"v24.19.0\",\n  \"results\": [\n    {\n      \"check\": \"ES5: lexico-classes\",\n      \"passed\": true,\n      \"evidence\": \"src/core/engines/lexico-classes.js\"\n    },\n    {\n      \"check\": \"ES5: analise-literaria\",\n      \"passed\": true,\n      \"evidence\": \"src/core/engines/analise-literaria.js\"\n    },\n    {\n      \"check\": \"Léxico: tokens reais da interface preservam ocorrências\",\n      \"passed\": true,\n      \"evidence\": {\n        \"text\": \"A casa caiu. A casa ficou.\",\n        \"tokens\": [\n          {\n            \"value\": \"A\",\n            \"span\": [\n              0,\n              1\n            ]\n          },\n          {\n            \"value\": \"casa\",\n            \"span\": [\n              2,\n              6\n            ]\n          },\n          {\n            \"value\": \"caiu\",\n            \"span\": [\n              7,\n              11\n            ]\n          },\n          {\n            \"value\": \"A\",\n            \"span\": [\n              13,\n              14\n            ]\n          },\n          {\n            \"value\": \"casa\",\n            \"span\": [\n              15,\n              19\n            ]\n          },\n          {\n            \"value\": \"ficou\",\n            \"span\": [\n              20,\n              25\n            ]\n          }\n        ],\n        \"actual\": [\n          {\n            \"ruleId\": \"LEXICO-CLASSES\",\n            \"span\": [\n              0,\n              1\n            ],\n            \"message\": \"Artigo (Determinante)\",\n            \"severity\": 1,\n            \"confidence\": 0.8\n          },\n          {\n            \"ruleId\": \"LEXICO-CLASSES\",\n            \"span\": [\n              2,\n              6\n            ],\n            \"message\": \"Substantivo (Sujeito)\",\n            \"severity\": 1,\n            \"confidence\": 0.8\n          },\n          {\n            \"ruleId\": \"LEXICO-CLASSES\",\n            \"span\": [\n              7,\n              11\n            ],\n            \"message\": \"Verbo flexionado (Predicado)\",\n            \"severity\": 1,\n            \"confidence\": 0.8\n          },\n          {\n            \"ruleId\": \"LEXICO-CLASSES\",\n            \"span\": [\n              13,\n              14\n            ],\n            \"message\": \"Artigo (Determinante)\",\n            \"severity\": 1,\n            \"confidence\": 0.8\n          },\n          {\n            \"ruleId\": \"LEXICO-CLASSES\",\n            \"span\": [\n              15,\n              19\n            ],\n            \"message\": \"Substantivo (Sujeito)\",\n            \"severity\": 1,\n            \"confidence\": 0.8\n          },\n          {\n            \"ruleId\": \"LEXICO-CLASSES\",\n            \"span\": [\n              20,\n              25\n            ],\n            \"message\": \"Verbo flexionado (Predicado)\",\n            \"severity\": 1,\n            \"confidence\": 0.8\n          }\n        ]\n      }\n    },\n    {\n      \"check\": \"Léxico: Finding segue contracts.js\",\n      \"passed\": true,\n      \"evidence\": [\n        {\n          \"ruleId\": \"LEXICO-CLASSES\",\n          \"span\": [\n            2,\n            6\n          ],\n          \"message\": \"Substantivo (Sujeito)\",\n          \"severity\": 1,\n          \"confidence\": 0.8\n        },\n        {\n          \"ruleId\": \"LEXICO-CLASSES\",\n          \"span\": [\n            2,\n            6\n          ],\n          \"message\": \"Substantivo (Sujeito)\",\n          \"severity\": 1,\n          \"confidence\": 0.8\n        }\n      ]\n    },\n    {\n      \"check\": \"Léxico: callback assíncrono\",\n      \"passed\": true,\n      \"evidence\": \"Snapshot real do tokenizador; Node, não navegador.\"\n    },\n    {\n      \"check\": \"Literária: Finding segue contracts.js\",\n      \"passed\": true,\n      \"evidence\": [\n        {\n          \"severity\": 3,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        },\n        {\n          \"severity\": 2,\n          \"confidence\": 0.6,\n          \"span\": [\n            0,\n            915\n          ]\n        }\n      ]\n    },\n    {\n      \"check\": \"Literária: check preserva snapshot.context\",\n      \"passed\": true,\n      \"evidence\": {\n        \"sample\": \"sujeira-vicios\",\n        \"context\": {\n          \"poesia\": true\n        },\n        \"expectedCount\": 11,\n        \"actualCount\": 11,\n        \"unexpected\": []\n      }\n    },\n    {\n      \"check\": \"Literária: callback assíncrono\",\n      \"passed\": true,\n      \"evidence\": \"A chamada é diferida; isso não mede bloqueio durante o processamento.\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-es5-purity.js"
+      ],
+      "exit": 0,
+      "milliseconds": 141,
+      "stdout": "PASS [ES5 parse analise-literaria.js — 0 marcadores modernos]\nPASS [ES5 parse lexico-classes.js — 0 marcadores modernos]\nPASS [ES5 parse contracts.js — 0 marcadores modernos]\nPASS [ES5 parse runtime.js — 0 marcadores modernos]\nPASS [ES5 parse tokenizer.js — 0 marcadores modernos]\nPASS [proveniência lexical-data.json — sha256 bate com o pin (d0e1e3f39b59...)] (snapshot vendado src/test/provenance/)\nPASS [proveniência norma-data.json — sha256 bate com o pin (d8aca87b3b2b...)] (snapshot vendado src/test/provenance/)\nPASS [dados lexical-data.json — idêntico ao original (3 chaves)]\nPASS [dados norma-data.json — idêntico ao original (12 chaves)]\n-----\nRESULTADO: 9/9 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-lexico.js"
+      ],
+      "exit": 0,
+      "milliseconds": 141,
+      "stdout": "PASS [narrativa-3p-payload]\nPASS [narrativa-3p-isLoaded]\nPASS [epistolar-1p-payload]\nPASS [epistolar-1p-isLoaded]\nPASS [ensaio-argumentativo-payload]\nPASS [ensaio-argumentativo-isLoaded]\nPASS [sujeira-geral-payload]\nPASS [sujeira-geral-isLoaded]\nPASS [poema-payload]\nPASS [poema-isLoaded]\nPASS [vocabulario-diverso-payload]\nPASS [vocabulario-diverso-isLoaded]\nPASS [cozinha-do-quintal-payload]\nPASS [cozinha-do-quintal-isLoaded]\nPASS [descoberta-do-mundo-payload]\nPASS [descoberta-do-mundo-isLoaded]\nPASS [oficio-da-escrita-payload]\nPASS [oficio-da-escrita-isLoaded]\nPASS [narrativa-3p-check-findings]\nPASS [narrativa-3p-check-contrato]\nPASS [epistolar-1p-check-findings]\nPASS [epistolar-1p-check-contrato]\nPASS [ensaio-argumentativo-check-findings]\nPASS [ensaio-argumentativo-check-contrato]\nPASS [sujeira-geral-check-findings]\nPASS [sujeira-geral-check-contrato]\nPASS [poema-check-findings]\nPASS [poema-check-contrato]\nPASS [vocabulario-diverso-check-findings]\nPASS [vocabulario-diverso-check-contrato]\nPASS [cozinha-do-quintal-check-findings]\nPASS [cozinha-do-quintal-check-contrato]\nPASS [descoberta-do-mundo-check-findings]\nPASS [descoberta-do-mundo-check-contrato]\nPASS [oficio-da-escrita-check-findings]\nPASS [oficio-da-escrita-check-contrato]\n-----\nRESULTADO: 36/36 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-lexico-adversarial.js"
+      ],
+      "exit": 0,
+      "milliseconds": 144,
+      "stdout": "PASS [adv-ambiguos-fronteira-crash-guard]\nPASS [adv-ambiguos-fronteira-payload]\nPASS [adv-ambiguos-fronteira-isLoaded]\nPASS [adv-neologismos-crash-guard]\nPASS [adv-neologismos-payload]\nPASS [adv-neologismos-isLoaded]\nPASS [adv-teclado-ruim-crash-guard]\nPASS [adv-teclado-ruim-payload]\nPASS [adv-teclado-ruim-isLoaded]\nPASS [adv-nomes-proprios-crash-guard]\nPASS [adv-nomes-proprios-payload]\nPASS [adv-nomes-proprios-isLoaded]\nPASS [adv-vazios-crash-guard]\nPASS [adv-vazios-payload]\nPASS [adv-vazios-isLoaded]\nPASS [adv-longo-crash-guard]\nPASS [adv-longo-payload]\nPASS [adv-longo-isLoaded]\nPASS [adv-locucoes-limite-crash-guard]\nPASS [adv-locucoes-limite-payload]\nPASS [adv-locucoes-limite-isLoaded]\nPASS [adv-ambiguos-fronteira-check-findings]\nPASS [adv-ambiguos-fronteira-check-contrato]\nPASS [adv-neologismos-check-findings]\nPASS [adv-neologismos-check-contrato]\nPASS [adv-teclado-ruim-check-findings]\nPASS [adv-teclado-ruim-check-contrato]\nPASS [adv-nomes-proprios-check-findings]\nPASS [adv-nomes-proprios-check-contrato]\nPASS [adv-vazios-check-findings]\nPASS [adv-vazios-check-contrato]\nPASS [adv-longo-check-findings]\nPASS [adv-longo-check-contrato]\nPASS [adv-locucoes-limite-check-findings]\nPASS [adv-locucoes-limite-check-contrato]\n-----\nRESULTADO: 35/35 passando (adversarial)\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-analise-literaria.js"
+      ],
+      "exit": 0,
+      "milliseconds": 130,
+      "stdout": "PASS [narrativa-3p-analisar]\nPASS [narrativa-3p-alertas]\nPASS [narrativa-3p-meta]\nPASS [narrativa-3p-economia]\nPASS [narrativa-3p-clareza]\nPASS [narrativa-3p-ritmo]\nPASS [narrativa-3p-voz]\nPASS [narrativa-3p-estrutura]\nPASS [narrativa-3p-pov]\nPASS [narrativa-3p-lexico]\nPASS [narrativa-3p-confusoes]\nPASS [narrativa-3p-pleonasmos]\nPASS [epistolar-1p-analisar]\nPASS [epistolar-1p-alertas]\nPASS [epistolar-1p-meta]\nPASS [epistolar-1p-economia]\nPASS [epistolar-1p-clareza]\nPASS [epistolar-1p-ritmo]\nPASS [epistolar-1p-voz]\nPASS [epistolar-1p-estrutura]\nPASS [epistolar-1p-pov]\nPASS [epistolar-1p-lexico]\nPASS [epistolar-1p-confusoes]\nPASS [epistolar-1p-pleonasmos]\nPASS [ensaio-subordinacao-analisar]\nPASS [ensaio-subordinacao-alertas]\nPASS [ensaio-subordinacao-meta]\nPASS [ensaio-subordinacao-economia]\nPASS [ensaio-subordinacao-clareza]\nPASS [ensaio-subordinacao-ritmo]\nPASS [ensaio-subordinacao-voz]\nPASS [ensaio-subordinacao-estrutura]\nPASS [ensaio-subordinacao-pov]\nPASS [ensaio-subordinacao-lexico]\nPASS [ensaio-subordinacao-confusoes]\nPASS [ensaio-subordinacao-pleonasmos]\nPASS [sujeira-vicios-analisar]\nPASS [sujeira-vicios-alertas]\nPASS [sujeira-vicios-meta]\nPASS [sujeira-vicios-economia]\nPASS [sujeira-vicios-clareza]\nPASS [sujeira-vicios-ritmo]\nPASS [sujeira-vicios-voz]\nPASS [sujeira-vicios-estrutura]\nPASS [sujeira-vicios-pov]\nPASS [sujeira-vicios-lexico]\nPASS [sujeira-vicios-confusoes]\nPASS [sujeira-vicios-pleonasmos]\nPASS [poema-analisar]\nPASS [poema-alertas]\nPASS [poema-meta]\nPASS [poema-economia]\nPASS [poema-clareza]\nPASS [poema-ritmo]\nPASS [poema-voz]\nPASS [poema-estrutura]\nPASS [poema-pov]\nPASS [poema-lexico]\nPASS [poema-confusoes]\nPASS [poema-pleonasmos]\nPASS [curto-analisar]\nPASS [curto-null-curto]\nPASS [opcoes-editor-mode-analisar]\nPASS [opcoes-editor-mode-alertas]\nPASS [opcoes-editor-mode-meta]\nPASS [opcoes-editor-mode-economia]\nPASS [opcoes-editor-mode-clareza]\nPASS [opcoes-editor-mode-ritmo]\nPASS [opcoes-editor-mode-voz]\nPASS [opcoes-editor-mode-estrutura]\nPASS [opcoes-editor-mode-pov]\nPASS [opcoes-editor-mode-lexico]\nPASS [opcoes-editor-mode-confusoes]\nPASS [opcoes-editor-mode-pleonasmos]\nPASS [opcoes-oficio-analisar]\nPASS [opcoes-oficio-alertas]\nPASS [opcoes-oficio-meta]\nPASS [opcoes-oficio-economia]\nPASS [opcoes-oficio-clareza]\nPASS [opcoes-oficio-ritmo]\nPASS [opcoes-oficio-voz]\nPASS [opcoes-oficio-estrutura]\nPASS [opcoes-oficio-pov]\nPASS [opcoes-oficio-lexico]\nPASS [opcoes-oficio-confusoes]\nPASS [opcoes-oficio-pleonasmos]\nPASS [opcoes-formato-5-analisar]\nPASS [opcoes-formato-5-alertas]\nPASS [opcoes-formato-5-meta]\nPASS [opcoes-formato-5-economia]\nPASS [opcoes-formato-5-clareza]\nPASS [opcoes-formato-5-ritmo]\nPASS [opcoes-formato-5-voz]\nPASS [opcoes-formato-5-estrutura]\nPASS [opcoes-formato-5-pov]\nPASS [opcoes-formato-5-lexico]\nPASS [opcoes-formato-5-confusoes]\nPASS [opcoes-formato-5-pleonasmos]\nPASS [narrativa-3p-check-findings]\nPASS [narrativa-3p-check-contrato]\nPASS [epistolar-1p-check-findings]\nPASS [epistolar-1p-check-contrato]\nPASS [ensaio-subordinacao-check-findings]\nPASS [ensaio-subordinacao-check-contrato]\nPASS [sujeira-vicios-check-findings]\nPASS [sujeira-vicios-check-contrato]\nPASS [poema-check-findings]\nPASS [poema-check-contrato]\nPASS [curto-check-findings]\nPASS [curto-check-contrato]\nPASS [opcoes-editor-mode-check-findings]\nPASS [opcoes-editor-mode-check-contrato]\nPASS [opcoes-oficio-check-findings]\nPASS [opcoes-oficio-check-contrato]\n-----\nRESULTADO: 114/114 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-analise-literaria-adversarial.js"
+      ],
+      "exit": 0,
+      "milliseconds": 102,
+      "stdout": "PASS [adv-minimo-pontuado-crash-guard]\nPASS [adv-minimo-pontuado-payload]\nPASS [adv-minimo-pontuado-analisar]\nPASS [adv-minimo-pontuado-alertas]\nPASS [adv-minimo-pontuado-null]\nPASS [adv-capmisto-crash-guard]\nPASS [adv-capmisto-payload]\nPASS [adv-capmisto-analisar]\nPASS [adv-capmisto-alertas]\nPASS [adv-repeticao-janela-crash-guard]\nPASS [adv-repeticao-janela-payload]\nPASS [adv-repeticao-janela-analisar]\nPASS [adv-repeticao-janela-alertas]\nPASS [adv-so-passoiva-crash-guard]\nPASS [adv-so-passoiva-payload]\nPASS [adv-so-passoiva-analisar]\nPASS [adv-so-passoiva-alertas]\nPASS [adv-html-sujo-crash-guard]\nPASS [adv-html-sujo-payload]\nPASS [adv-html-sujo-analisar]\nPASS [adv-html-sujo-alertas]\nPASS [adv-pleonasmo-provocado-crash-guard]\nPASS [adv-pleonasmo-provocado-payload]\nPASS [adv-pleonasmo-provocado-analisar]\nPASS [adv-pleonasmo-provocado-alertas]\nPASS [adv-mistura-tempos-crash-guard]\nPASS [adv-mistura-tempos-payload]\nPASS [adv-mistura-tempos-analisar]\nPASS [adv-mistura-tempos-alertas]\nPASS [adv-minimo-pontuado-check-findings]\nPASS [adv-minimo-pontuado-check-contrato]\nPASS [adv-capmisto-check-findings]\nPASS [adv-capmisto-check-contrato]\nPASS [adv-repeticao-janela-check-findings]\nPASS [adv-repeticao-janela-check-contrato]\nPASS [adv-so-passoiva-check-findings]\nPASS [adv-so-passoiva-check-contrato]\nPASS [adv-html-sujo-check-findings]\nPASS [adv-html-sujo-check-contrato]\nPASS [adv-pleonasmo-provocado-check-findings]\nPASS [adv-pleonasmo-provocado-check-contrato]\nPASS [adv-mistura-tempos-check-findings]\nPASS [adv-mistura-tempos-check-contrato]\n-----\nRESULTADO: 43/43 passando (adversarial)\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-integration.js"
+      ],
+      "exit": 0,
+      "milliseconds": 642,
+      "stdout": "PASS [integração-fila-serializada]\nPASS [integração-stale-discard]\nPASS [cápsula-léxico-enqueue-contrato]\nPASS [cápsula-léxico-repetição]\nPASS [cápsula-análise-enqueue-contrato]\nPASS [finding-canônico]\nPASS [integração-toggle-off-pendente]\n-----\nRESULTADO: 7/7 passando (integração)\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-decolonial.js"
+      ],
+      "exit": 0,
+      "milliseconds": 78,
+      "stdout": "PASS [escravo] findings=1\nPASS [criado-mudo] findings=1\nPASS [sem-termo] findings=0\nPASS [vazio] findings=0\nPASS [só-espaco] findings=0\nPASS [escravo-plural-nao-separa] findings=0\nPASS [acento-normalizado] findings=1\n-----\nRESULTADO: 7/7 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-morphology.js"
+      ],
+      "exit": 0,
+      "milliseconds": 58,
+      "stdout": "PASS [normative] cantávamos -> cantar\nPASS [normative] venderiam -> vender\nPASS [normative] partistes -> partir\nPASS [normative] falarei -> falar\nPASS [normative] comam -> comer\nPASS [normative] escreveste -> escrever\nPASS [normative] veio -> vir\nPASS [cliticos] fazê-lo -> fazer\nPASS [cliticos] dar-te-ei -> dar\nPASS [cliticos] vendê-la -> vender\nPASS [nao-se-meta] desconhecido -> null\nPASS [nao-se-meta] açúcar -> null\nPASS [nao-se-meta] coisa -> null\nPASS [nao-se-meta] usuario -> null\n-----\nRESULTADO: 14/14 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-pontuacao.js"
+      ],
+      "exit": 0,
+      "milliseconds": 75,
+      "stdout": "PASS [getrules-count] got=38\nPASS [r1-ids] got=\"PONT-02,PONT-09\"\nPASS [r1-posicao] got=true\nPASS [r2-ids] got=\"PONT-08,PONT-49,PONT-50\"\nPASS [r2-resumo] got=\"{\\\"alta\\\":1,\\\"media\\\":2,\\\"baixa\\\":0}\"\nPASS [r3-ids] got=\"PONT-07,PONT-27,PONT-43\"\nPASS [r4-ids] got=\"PONT-06,PONT-35,PONT-50,PONT-55\"\nPASS [r5-contextual] got=true\nPASS [r6-curto] got=0\nPASS [r6-rulecount] got=38\nPASS [check-contrato] findings=2\n-----\nRESULTADO: 11/11 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-relative-clause.js"
+      ],
+      "exit": 0,
+      "milliseconds": 55,
+      "stdout": "PASS [restritiva-delimitador] got=restritiva\nPASS [restritiva-apenas] got=restritiva\nPASS [explicativa-referente-unico] got=explicativa\nPASS [explicativa-machado] got=explicativa\nPASS [explicativa-propriedade] got=explicativa\nPASS [ambigua-fallback] got=ambigua\nPASS [conjuncao-integrante] got=null\nPASS [o-que-demonstrativo] got=null\nPASS [vazio] got=null\nPASS [vazio-string] got=null\nPASS [check-contrato] findings=1\n-----\nRESULTADO: 11/11 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-rima-metro.js"
+      ],
+      "exit": 0,
+      "milliseconds": 63,
+      "stdout": "PASS [syl-amor] got=[\"a\",\"mor\"]\nPASS [syl-nh] got=[\"mi\",\"nha\"]\nPASS [syl-hiato] got=[\"ru\",\"a\"]\nPASS [syl-ditongo] got=[\"ba\",\"leias\"]\nPASS [syl-vazio] got=[]\nPASS [ton-oxitona] got=\"oxítona\"\nPASS [ton-paroxitona] got=\"paroxítona\"\nPASS [ton-mono] got=\"monossílabo\"\nPASS [ton-accento] got=\"proparoxítona\"\nPASS [sound-amor] got=\"or\"\nPASS [sound-flor] got=\"or\"\nPASS [scan-syl] got=10\nPASS [scan-name] got=\"decassílabo\"\nPASS [scan-fin] got=\"paroxítona\"\nPASS [scan2-syl] got=10\nPASS [scan2-elision] got=[\"O⌃amor\",\"que⌃arde\"]\nPASS [rhyme-consoante] got=\"pobre\"\nPASS [rhyme-mar-nao] got=false\nPASS [rhyme-toante] got=true\nPASS [scheme-abba] got=\"A B B A\"\nPASS [name-abba] got=\"quarteto abrazado (redondilha)\"\nPASS [full-isprose] got=false\nPASS [full-verses] got=3\nPASS [full-dominant] got=10\nPASS [full-dominantName] got=\"decassílabo\"\nPASS [full-rhymes] got=1\nPASS [full-scheme] got=\"A B B\"\nPASS [prosa-isprose] got=true\nPASS [check-contrato] findings=4\n-----\nRESULTADO: 29/29 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-runtime.js"
+      ],
+      "exit": 0,
+      "milliseconds": 53,
+      "stdout": "PASS \"cantávamos\" -> [\"cantar\"] (esperado [\"cantar\"])\nPASS \"fazê-lo todo dia\" -> [\"fazer\"] (esperado [\"fazer\"])\nPASS \"um lugar\" -> [] (esperado [])\nPASS \"Ela cantava e venderiam.\" -> [\"vender\"] (esperado [\"vender\"])\nPASS \"comam e partistes\" -> [\"comer\",\"partir\"] (esperado [\"comer\",\"partir\"])\n-----\nRUNTIME: 5/5 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-sintaxe.js"
+      ],
+      "exit": 0,
+      "milliseconds": 75,
+      "stdout": "PASS [r1-tipo] got=\"Período simples\"\nPASS [r1-vocativo] got=[\"Pedro\"]\nPASS [r1-aposto-presenca] got=true\nPASS [r1-funcoes] got=true\nPASS [r2-temRelativa] got=false\nPASS [r2-funcoes-conj] got=true\nPASS [r2-predicativo] got=true\nPASS [r3-passiva] got=true\nPASS [r3-auxiliar] got=true\nPASS [r4-tipo] got=\"Período composto misto (coordenação + subordinação)\"\nPASS [r4-orações] got=2\nPASS [r4-femNome] got=true\nPASS [r5-ligacao] got=true\nPASS [r5-predicativo] got=true\nPASS [r6-tipo] got=\"Período composto por subordinação\"\nPASS [r6-conj] got=true\nPASS [r7-od] got=true\nPASS [r8-porque] got=\"subordinativa\"\nPASS [r8-apesardeq] got=\"subordinativa\"\nPASS [r9-gerundio] got=\"Gerúndio\"\nPASS [r9-infinitivo] got=\"Infinitivo\"\nPASS [r10-alertas] got=true\nPASS [r11-adverbio] got=\"Adjunto adverbial de tempo\"\nPASS [r11-periodo] got=\"Período simples\"\nPASS [r12-pronome-verbo] got=true\nPASS [r13-default-noun] got=true\nPASS [r13-que-relativo-tag] got=true\nPASS [rsalvo-preposicao] got=true\nPASS [rcerto-adverbio] got=true\nPASS [rcerto-adjetivo-tag] got=true\nPASS [check-contrato] findings=4\n-----\nRESULTADO: 31/31 passando\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "src/test",
+      "command": [
+        "node",
+        "run-voz-estilistica.js"
+      ],
+      "exit": 0,
+      "milliseconds": 70,
+      "stdout": "PASS [count-words-neg] got=true\nPASS [field-casa] got=\"casa\"\nPASS [confianca-curta] got=\"baixa\"\nPASS [ttr-alto] got=true\nPASS [densidade-ok] got=true\nPASS [gesture-seco] got=\"seco\"\nPASS [drama-emocional] got=true\nPASS [drama-confianca-media] got=\"média\"\nPASS [ensaio-gesto] got=true\nPASS [ensaio-campo] got=\"pensamento\"\nPASS [check-contrato] findings=10\n-----\nRESULTADO: 11/11 passando\n",
+      "stderr": ""
+    }
+  ],
+  "suite": {
+    "passed": 363,
+    "total": 363,
+    "runners": 14
+  }
+}
