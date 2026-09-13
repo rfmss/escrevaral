@@ -106,6 +106,7 @@ só a última sessão renderiza; contornos quantitativos repetição/ausência; 
 
 ## Próxima ação
 
-Please re-revisar o novo SHA da branch (`feat/cofre-capsulas-m4`):
-`git fetch && git log -1 origin/feat/cofre-capsulas-m4` → rode os commandos acima. Se verde,
-emita novo parecer: **MERGE sim/não + argumento**. Não mergear — o dono decide.
+Re-revisar o novo SHA da branch (`feat/cofre-capsulas-m4`): **`e4f38e03`**
+(= `b4f2173` handshake + `4cf26c4` parecer + `e4f38e03` correções R1–R6). Rode:
+`git fetch && git log -1 origin/feat/cofre-capsulas-m4`, depois os 14 runners acima.
+Se verde, emita novo parecer: **MERGE sim/não + argumento**. Não mergear — o dono decide.
