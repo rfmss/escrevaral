@@ -198,8 +198,14 @@ def audit_service_worker(index_text: str, sitemap_urls: list[str]) -> None:
         add_issue("P1", "Service worker", "versao/cache nao detectados", "CACHE_NAME ou ASSET_VERSION ausente", "Manter versao explicita para invalidacao previsivel.")
     if version and f"v={version}" not in index_text:
         add_issue("P1", "Versionamento", "ASSET_VERSION do service worker nao aparece no index", version, "Alinhar querystring do index e cache offline.")
-    if "install" not in sw_text or "fetch" not in sw_text or "cache.addAll" not in sw_text:
-        add_issue("P0", "Service worker", "offline basico incompleto", "install/fetch/cache.addAll nao detectado", "Revisar registro offline.")
+    has_install = "install" in sw_text
+    has_revalidation = "cache: \"reload\"" in sw_text or "cache: 'reload'" in sw_text
+    has_put = "cache.put" in sw_text
+    has_version_guard = "ASSET_VERSION" in sw_text and "indexOf" in sw_text
+    if not (has_install and has_revalidation and has_put and has_version_guard):
+        add_issue("P0", "Service worker", "offline basico incompleto",
+                  "install/revalidacao/guarda nao detectados",
+                  "Revisar registro offline: instalacao deve revalidar documento e abortar se versao nao conferir.")
 
     broken_assets = []
     for asset in assets:
@@ -213,7 +219,7 @@ def audit_service_worker(index_text: str, sitemap_urls: list[str]) -> None:
             "Service worker",
             "CORE_ASSETS tem recurso quebrado",
             "; ".join(broken_assets[:20]),
-            "Qualquer 404 em cache.addAll pode impedir instalacao offline.",
+            "Qualquer 404 em CORE_ASSETS pode impedir instalacao offline.",
         )
 
     sw_paths = {urllib.parse.urlparse(urllib.parse.urljoin(BASE_URL + "/", asset)).path for asset in assets}
