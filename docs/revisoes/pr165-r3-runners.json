@@ -1,0 +1,69 @@
+{
+  "gitHead": "3412be61dd742b1c53e15e6af34f9b8b14c598b8",
+  "es5Parsed": [
+    "lexico-classes.js",
+    "analise-literaria.js"
+  ],
+  "node": "v22.22.2",
+  "date": "2026-09-13T11:14:47.945Z",
+  "runners": {
+    "run-lexico.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 36/36"
+    },
+    "run-lexico-adversarial.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 35/35"
+    },
+    "run-analise-literaria.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 114/114"
+    },
+    "run-analise-literaria-adversarial.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 43/43"
+    },
+    "run-es5-purity.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 9/9"
+    },
+    "run-integration.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 7/7"
+    },
+    "run-decolonial.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 7/7"
+    },
+    "run-morphology.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 14/14"
+    },
+    "run-pontuacao.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 11/11"
+    },
+    "run-relative-clause.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 11/11"
+    },
+    "run-rima-metro.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 29/29"
+    },
+    "run-runtime.js": {
+      "exit": 0,
+      "summary": "RUNTIME: 5/5"
+    },
+    "run-sintaxe.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 31/31"
+    },
+    "run-voz-estilistica.js": {
+      "exit": 0,
+      "summary": "RESULTADO: 11/11"
+    }
+  },
+  "suites": 14,
+  "exitOk": true
+}

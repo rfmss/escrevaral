@@ -119,10 +119,24 @@ só a última sessão renderiza; contornos quantitativos repetição/ausência; 
 
 **Total: 14 runners, 363/363.** Nenhuma da outra 9 engines regrediu (runners antigos intactos).
 
+## RODADA 3 — Resposta à observação não bloqueante P2 (antes do merge)
+
+O re-parecer registrou P2: `createHighlightedContext('A casa caiu.', 'casa', esc)` devolvia o
+texto sem destaque — `splitLetterRuns` comparava `isL` (booleano) com `mode` (numérico)
+via `===`. **Corrigido no HEAD `3412be61`** mantendo estado e comparação no mesmo tipo
+numérico (`m = isL ? 1 : 0`), sem sair do piso ES5.
+
+Resultado da revalidação (evidência em `docs/revisoes/pr165-r3-*.json`):
+- **14 runners, 363/363, exit 0** — purity 9/9, integration 7/7, sem regressão das 9 antigas.
+- **`docs/revisoes/pr165-r2-fluxo.js` → 6/6, exit 0** (o item "R1: destaque preserva palavra
+  inteira" agora passa; antes 5/6).
+- **`docs/revisoes/pr165-verificar.js` → 8/8, exit 0**.
+- Parse ES5 (acorn vendored) OK nas 2 engines novas.
+
 ## Próxima ação
 
-Re-revisar o `HEAD` atual da branch `feat/cofre-capsulas-m4` (correções R1–R6 em
-`e4f38e03`; ajustes de re-parecer — toggle-off e proveniência vendada — no HEAD). Rode:
-`git fetch && git log -1 origin/feat/cofre-capsulas-m4`, depois os 14 runners acima
-(proveniência roda sem o store escrevaral — snapshot embutido). Se verde, emita novo
-parecer: **MERGE sim/não + argumento**. Não mergear — o dono decide.
+Re-revalidar o HEAD atual `origin/feat/cofre-capsulas-m4` (Rodada 3, `git fetch` +
+`git log -1`): rodar `docs/revisoes/pr165-r2-fluxo.js` esperando **6/6** e os 14 runners
+esperando 363/363. Se verde, emitir parecer de merge final —
+**MERGE `feat/cofre-capsulas-m4` em `encore`: sim/não + argumento**.
+Não mergear — o dono decide e ordena.

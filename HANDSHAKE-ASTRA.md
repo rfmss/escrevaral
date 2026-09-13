@@ -105,3 +105,59 @@ Não mergear — o dono decide.
   `src/test/provenance/` (mesmo sha256 do pin). `run-es5-purity.js` resolve store real →
   snapshot vendado → FAIL (SKIP nunca vira PASS). Verde também sem o escrevaral: **9/9**.
 - Re-parecer do Astra: R1–R4 fechados nas reproduções; R5 e R6 agora cobertos (Rodada 2.1).
+
+## RODADA 3 — observação não bloqueante P2 fechada (antes da decisão de merge)
+
+O re-parecer (`docs/ASTRA-REVIEW-capsulas-m4-rodada2.md`) apontou **P2 (não bloqueante)**:
+`VeredaLexical.createHighlightedContext('A casa caiu.', 'casa', esc)` devolvia `A casa caiu.`
+em vez de `A <mark>casa</mark> caiu.` — `splitLetterRuns` comparava `isL` booleano com `mode`
+numérico via `===`, quebrando os runs em caracteres isolados. O parecer pediu: corrigir em
+alteração pequena e repetir `node docs/revisoes/pr165-r2-fluxo.js`, esperando **6/6**.
+
+**Corrigido no HEAD `3412be61`** (`src/core/engines/lexico-classes.js`, ES5 intacto):
+
+```diff
+-    var out = [], cur = "", i, c, isL, mode = -1;
++    var out = [], cur = "", i, c, isL, m, mode = -1;
+     for (i = 0; i < text.length; i++) {
+       c = text.charAt(i);
+       isL = isLetterPT(c) || c === "-";
+-      if (mode === -1 || isL === mode) { mode = isL ? 1 : 0; cur += c; }
+-      else { out.push(cur); mode = isL ? 1 : 0; cur = c; }
++      m = isL ? 1 : 0;
++      if (mode === -1 || m === mode) { mode = m; cur += c; }
++      else { out.push(cur); mode = m; cur = c; }
+     }
+```
+
+`createHighlightedContext('A casa caiu.', 'casa', esc)` → `A <mark>casa</mark> caiu.`
+(é a primeira checagem do fluxo). O helper segue exportado e não participa de `check()`.
+
+### Evidência persistida (worktree `/tmp/opencode/encore-work`)
+
+- **14 runners, 363/363, exit 0** — saída integral em
+  [`docs/revisoes/pr165-r3-runners.json`](docs/revisoes/pr165-r3-runners.json)
+  (inclui purity 9/9 e integration 7/7, sem regressão das 9 engines antigas).
+- **`docs/revisoes/pr165-r2-fluxo.js` → 6/6, exit 0** — resultado em
+  [`docs/revisoes/pr165-r3-fluxo.json`](docs/revisoes/pr165-r3-fluxo.json)
+  (antes: 5/6; agora o item "R1: destaque preserva palavra inteira" passa).
+- **`docs/revisoes/pr165-verificar.js` → 8/8, exit 0** — resultado em
+  [`docs/revisoes/pr165-r3-verificar.json`](docs/revisoes/pr165-r3-verificar.json).
+- **Parse ES5 (acorn ecmaVersion 5, vendored)** OK nas 2 engines novas.
+
+Comandos de re-revalidação:
+
+```sh
+cd docs/revisoes && node pr165-r2-fluxo.js && node pr165-verificar.js && cd ../..
+cd src/test && node run-es5-purity.js && for r in run-lexico.js \
+  run-lexico-adversarial.js run-analise-literaria.js run-analise-literaria-adversarial.js \
+  run-integration.js run-decolonial.js run-morphology.js run-pontuacao.js \
+  run-relative-clause.js run-rima-metro.js run-runtime.js run-sintaxe.js \
+  run-voz-estilistica.js; do node "$r" || exit 1; done
+```
+
+New HEAD: `git fetch && git log -1 origin/feat/cofre-capsulas-m4`.
+
+Nova rodada: confirmar **6/6 no fluxo** e emitir parecer de merge final —
+**MERGE `feat/cofre-capsulas-m4` em `encore`: sim/não + argumento**.
+Não mergear — o dono decide e ordena.
