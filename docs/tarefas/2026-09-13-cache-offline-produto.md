@@ -114,3 +114,16 @@ simulação do bump (78 refs, `20260913-capsulas-m4-v1`, v972).
 - Guarda de versão: confirme que a instalação **aborta** (worker antigo permanece) quando o
   HTML servido não contém o token da `ASSET_VERSION` — cenário de rede ambíguo.
 - Persistir parecer + evidência em commit/doc; **não mergear** — dono ordena.
+
+## RODADA 2 — resultado Astra: **bump: SIM** (aplicado)
+
+O Astra revalidou o fix `53cd66b7` e aprovou o bump: **HTML novo em v972, remoção de v971,
+guarda rejeitando HTML incompatível, dados preservados e escrita/leitura offline; zero
+erros no console**. Valores aprovados: `ASSET_VERSION="20260913-capsulas-m4-v1"`,
+`CACHE_NAME="vereda-offline-v972"`, 78 tags coerentes.
+
+O dono ordenou a preparação da entrega: o bump foi aplicado em cima do fix e pushado —
+branch `fix/cache-install-fonte-local`, HEAD **`9144ca64`** (base PIN `816ca7ea`, nenhum
+toque em `main`). Auditor de versão **aprovado** (78 refs/v972); contraprova de upgrade
+v971→v972 verde no chromium. Próxima decisão do dono: em que ordem integrar as cápsulas M4
+à entrega e ordenar o merge/deploy.
