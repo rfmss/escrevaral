@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260913-scrvrl-cadernos-v5">
+  <meta name="asset-version" content="20260914-scrvrl-controles-v6-1">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -1541,10 +1541,330 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 -->
+<style>
+/* Acabamento v6: controles táteis e tecido com estados estáticos. */
+@media screen {
+ .location-path { height:44px; }
+ .location-path button { min-height:44px; }
+ #writing-space,#gabinete { top:44px; }
+ #system-bar .os-tasks { margin-right:auto; }
+ #system-bar #cabinet-return { margin-left:auto; }
+ #writing-space .global-search input { min-height:44px; }
+ @media(min-width:761px) and (max-width:1250px) { #writing-space .masthead { height:120px; } #writing-space .desk { top:120px; } }
+ @media(min-width:1251px) { #writing-space .global-search { right:414px; width:220px; } #writing-space .note-heading { right:655px; } }
+ @media(max-width:760px) { #writing-space .note-heading .title { max-width:none; width:100%; } }
+}
+
+@media screen {
+ .check .switch-track { border:2px solid #4a544c; background:#b3c2b1; }
+ .check input:checked + .switch-track { background:#4a544c; border-color:#4a544c; }
+ .check input:checked + .switch-track:after { background:#d1ded0; border-color:#1e2320; left:21px; }
+ body[data-theme="escuro"] .check .switch-track { border-color:#a8b8a1; }
+ body[data-theme="escuro"] .check input:checked + .switch-track { background:#a8b8a1; border-color:#a8b8a1; }
+ body[data-theme="escuro"] .check input:checked + .switch-track:after { background:#20281f; }
+ .window-controls button,#desk-minimize,#desk-counts-close,.size-control button { min-width:44px; min-height:44px; }
+ .window-bar { min-height:44px; }
+ .window-body { top:44px; }
+ #system-bar { height:52px; min-height:52px; }
+ #os-start,#screen-lock { min-height:44px; }
+ #system-bar #cabinet-return { display:block; min-height:44px; }
+ .timeline-entry[aria-current="true"] .note-name { visibility:visible; opacity:1; }
+ .cabinet-note-row > button:last-child { opacity:1; visibility:visible; min-width:44px; min-height:44px; }
+ #start-menu { bottom:52px; max-height:calc(100% - 64px); overflow-y:auto; }
+ #system-bar .os-tasks { min-width:0; }
+ #os-window-task { max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+ #screen-lock { width:44px; padding:8px; margin-left:12px; order:5; flex-shrink:0; }
+ #screen-lock svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.5; }
+ button.material-key,#os-start { border:1px solid #52614c; border-bottom:4px solid #66765d; border-right:3px solid #7b8b72; border-radius:3px; background:#b5c3ae; color:#1e2320; box-shadow:inset 2px 2px 0 #e0e7da; }
+ button.material-key:active,#os-start:active,#os-start[aria-expanded="true"] { border-bottom-width:1px; border-top:3px solid #66765d; box-shadow:inset 1px 1px 0 #8c9c83; background:#a8b89f; }
+ #os-start .start-key { background:transparent; border:0; box-shadow:none; padding:4px 10px; }
+ body[data-theme="escuro"] button.material-key,body[data-theme="escuro"] #os-start { background:#354231; color:#d8e4d6; border-color:#819578; box-shadow:inset 2px 2px 0 #506247; }
+ .woven-tab { position:absolute; bottom:17px; left:10px; padding:5px 8px; border:1px dashed #687561; background:#d0d9c5; color:#283322; font:10px/1.3 monospace; letter-spacing:1px; box-shadow:2px 2px 0 #111811; }
+ .woven-tab b { border:1px solid currentColor; padding:0 2px; }
+ .finish-screen { position:fixed; z-index:1200; top:0; right:0; bottom:0; left:0; overflow:auto; padding:24px; background:#ccd5c7; color:#1e2320; }
+ .finish-screen[hidden],.finish-screen [hidden] { display:none !important; }
+ .finish-screen button,.finish-screen input,.finish-screen select { min-height:44px; }
+ .finish-screen button { border:1px solid #657367; padding:8px 12px; color:inherit; }
+ .finish-screen input,.finish-screen textarea,.finish-screen select { color:inherit; background:transparent; border:1px solid #657367; padding:8px; font:16px/1.5 Arial,sans-serif; max-width:100%; }
+ .finish-screen :focus { outline:2px solid currentColor; outline-offset:3px; }
+ .finish-heading { max-width:1120px; margin:auto; padding-bottom:16px; border-bottom:1px dashed #8b9b8c; display:flex; align-items:center; justify-content:space-between; }
+ .finish-heading h2 { font:600 27px/1.3 'Oswald',Arial,sans-serif; margin:0; word-break:break-word; }
+ .finish-heading small { font:12px/1.8 monospace; letter-spacing:1px; }
+ #story-close { margin-left:16px; min-width:44px; }
+ .story-navigation { max-width:1120px; margin:18px auto; }
+ .story-navigation button { margin:0 6px 6px 0; border-color:transparent; border-bottom:1px solid #657367; }
+ .story-navigation button[aria-pressed="true"] { background:#aebfa6; border-bottom:3px solid #354231; }
+ .story-actions,.story-pagination,#story-status { max-width:1120px; margin:12px auto; }
+ .story-actions button,.story-pagination button { margin:0 8px 8px 0; }
+ #story-status { font:14px/1.6 Arial,sans-serif; }
+ #story-list { max-width:1120px; margin:32px auto; padding:0 12px; }
+ .polaroid { position:relative; padding:24px; margin:0 0 28px 24px; border:1px solid #829078; background:#dce2d3; box-shadow:3px 4px 0 #adbaa4; word-wrap:break-word; }
+ .polaroid:before { content:''; position:absolute; width:12px; height:30px; left:32px; top:-14px; background:#829074; border:1px solid #52614c; box-shadow:inset 3px 0 #a5b299; }
+ #story-list[data-mode="chapters"] { border-left:1px dashed #687561; }
+ .polaroid h3 { font:600 26px/1.3 'Oswald',Arial,sans-serif; margin:6px 0 18px; }
+ .polaroid p { font:16px/1.7 Georgia,serif; }
+ .polaroid .story-open { display:block; width:100%; padding:0; border:0; text-align:left; }
+ .polaroid .story-open:focus { outline-offset:6px; }
+ .polaroid .story-open:hover h3 { text-decoration:underline; }
+ .polaroid small,.polaroid .story-meta { font:12px/1.8 monospace; }
+ .story-meta { padding:12px 0; border-top:1px dashed #829078; margin-top:18px; }
+ .story-density { display:block; height:8px; background:#b3c2a9; margin:12px 0; }
+ .story-density span { display:block; height:8px; background:#52614c; }
+ .polaroid .card-actions button { font-size:13px; margin:6px 8px 0 0; }
+ #story-list[data-mode="events"] { overflow-x:auto; white-space:nowrap; border-top:2px solid #687561; padding:24px 8px; }
+ #story-list[data-mode="events"] .polaroid { display:inline-block; vertical-align:top; width:280px; max-width:calc(100vw - 80px); margin:0 24px 20px 0; white-space:normal; }
+ #story-list[data-mode="events"] .polaroid:nth-child(even) { margin-top:30px; }
+ .story-empty { padding:32px 0; font:20px/1.7 Georgia,serif; white-space:normal; }
+ #story-editor { max-width:720px; margin:24px auto; }
+ #story-form > label { display:block; margin:16px 0; font:14px/1.6 Arial,sans-serif; }
+ #story-form > label > input,#story-form > label > textarea,#story-form > label > select { display:block; width:100%; margin-top:6px; }
+ #story-form textarea { min-height:120px; }
+ #story-form fieldset { margin:18px 0; border:1px dashed #829078; padding:12px; }
+ #story-form legend { font:14px/1.6 monospace; }
+ .story-tag { display:inline-block; padding:4px 10px; margin:5px; border:1px dashed #657367; font:14px/1.5 Arial,sans-serif; }
+ .story-tag input { vertical-align:middle; min-height:36px; width:22px; margin-right:8px; }
+ #lock-curtain { z-index:3000; text-align:center; }
+ .lock-card { max-width:540px; margin:5vh auto; }
+ .lock-card h2 { font:600 24px/1.3 'Oswald',Arial,sans-serif; }
+ .author-keychain { position:relative; max-width:420px; margin:40px auto; padding:36px 24px 26px; border:2px dashed #95a588; background:#354231; color:#d8e4d6; box-shadow:5px 6px 0 #9dac92; transform:rotate(-2deg); }
+ #keychain-ring { display:block; position:relative; margin:-65px auto 22px; width:68px; height:68px; padding:0; border:7px double #738073; border-radius:50%; background:#ccd5c7; box-shadow:inset 2px 1px #eff2e9,2px 1px #52614c; }
+ .author-keychain strong { display:block; font:600 32px/1.3 'Oswald',Arial,sans-serif; text-transform:uppercase; overflow-wrap:break-word; }
+ .author-keychain small { display:block; margin:14px 0; font:11px/1.6 monospace; letter-spacing:1px; }
+ .grife-barcode { height:24px; margin-top:20px; background:repeating-linear-gradient(90deg,#bbc8af 0,#bbc8af 2px,transparent 2px,transparent 5px,#bbc8af 5px,#bbc8af 6px,transparent 6px,transparent 9px); }
+ #lock-form label { display:block; margin-bottom:8px; }
+ #lock-form input { width:220px; }
+ #lock-message { min-height:24px; font-size:14px; }
+ body[data-theme="escuro"] .finish-screen { background:#20281f; color:#d8e4d6; }
+ body[data-theme="escuro"] .polaroid { background:#354231; box-shadow:3px 4px #111811; border-color:#819578; }
+ body[data-theme="escuro"] .story-navigation button[aria-pressed="true"] { background:#43553d; border-color:#b3c2a9; }
+ body[data-theme="escuro"] .story-density { background:#52614c; }
+ body[data-theme="escuro"] .story-density span { background:#b3c2a9; }
+ @media(max-width:760px) {
+  #writing-space .masthead { height:174px; }
+  #writing-space .global-search { top:72px; left:0; right:0; width:100%; }
+  #writing-space .desk-tools { top:122px; left:0; right:0; justify-content:space-between; }
+  #writing-space .desk-tools button { padding:8px; }
+  #writing-space .desk { top:174px; }
+  .writing-toolbar { padding:4px 0; }
+  .writing-toolbar button { min-height:44px; padding:4px; }
+  #desk-font { max-width:76px; }
+  #system-bar { padding:0 4px; }
+  #system-bar #cabinet-return { font-size:12px; max-width:none; padding:4px; flex-shrink:0; }
+  #system-bar #cabinet-status,#os-window-task,#pomodoro-task { display:none; }
+  #system-bar .os-tasks { margin-right:4px; }
+  .finish-screen { padding:16px; }
+  .polaroid { padding:20px 14px; margin-left:8px; }
+  .polaroid h3 { font-size:23px; }
+  .finish-heading h2 { font-size:23px; }
+  .finish-heading small { font-size:10px; }
+ }
+ @media(max-height:480px) {
+  body[data-view="mesa"] #writing-space .desk-tools,body[data-viewport="small"] #writing-space .desk-tools,body[data-viewport="compact"] #writing-space .desk-tools { top:6px; left:auto; }
+  .lock-card { margin:0 auto; }
+  .author-keychain { margin:26px auto 20px; padding:12px; }
+  #keychain-ring { margin:0 auto 8px; width:48px; height:48px; }
+  .author-keychain small,.grife-barcode { display:none; }
+ }
+ @media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after { animation:none !important; -webkit-animation:none !important; transition:none !important; }
+  .author-keychain { transform:none; }
+ }
+}
+/* Polaroides deitadas e chaveiro tarja, conforme as referências. */
+@media screen {
+ #story-list[data-mode="chapters"] .polaroid { display:flex; flex-wrap:wrap; align-items:flex-start; padding:18px; }
+ #story-list[data-mode="chapters"] .story-open { width:55%; min-height:240px; padding:18px; border:1px solid #91a08e; background:#e7efe5; }
+ #story-list[data-mode="chapters"] .story-open h3 { border-bottom:1px dashed #91a08e; padding-bottom:12px; }
+ #story-list[data-mode="chapters"] .story-open p { font-size:15px; white-space:pre-line; }
+ #story-list[data-mode="chapters"] .story-meta { width:41%; margin:0 0 0 4%; padding:12px 0; }
+ #story-list[data-mode="chapters"] .card-actions { width:100%; margin-top:12px; }
+ #story-list[data-mode="events"] .polaroid > h3 { padding:16px 10px; min-height:100px; border:1px solid #91a08e; background:#e7efe5; }
+ .polaroid:before { background:#9d8868; border-color:#5a4b33; box-shadow:inset 3px 0 #b9a78c; }
+ body[data-theme="escuro"] #story-list[data-mode="chapters"] .story-open,body[data-theme="escuro"] #story-list[data-mode="events"] .polaroid > h3 { background:#283324; border-color:#829078; }
+ .author-keychain { max-width:450px; min-height:110px; margin:64px 0 56px 70px; padding:20px 18px 16px 58px; text-align:left; background-color:#263024; background-image:repeating-linear-gradient(45deg,transparent 0,transparent 2px,#30392e 2px,#30392e 3px); box-shadow:3px 4px 0 #9dac92; }
+ .author-keychain:before { content:''; position:absolute; left:-16px; top:8px; bottom:8px; width:22px; border:1px solid #1c221d; background:linear-gradient(90deg,#3d4a3e,#899583,#2a332b); }
+ #keychain-ring { position:absolute; left:-64px; top:20px; margin:0; width:64px; height:64px; background:transparent; }
+ .author-keychain strong { font-size:28px; }
+ .author-keychain small { font-size:9px; margin:6px 0 0; }
+ .author-keychain small:last-child { display:none; }
+ .grife-barcode { position:absolute; left:18px; top:22px; width:26px; height:58px; margin:0; }
+ .cabinet-note:after { content:'Abrir →'; display:block; margin-top:5px; font:11px/1.4 monospace; }
+ @media(max-width:600px) {
+  .story-navigation button { font-size:14px; padding:6px 8px; margin-right:2px; }
+  #story-status { font-size:13px; margin:8px auto; }
+  #story-list { margin-top:24px; }
+  #story-list[data-mode="chapters"] .story-open { width:100%; min-height:0; }
+  #story-list[data-mode="chapters"] .story-meta { width:100%; margin:14px 0 0; }
+  .author-keychain { margin:48px 4px 40px 52px; padding:14px 10px 14px 14px; min-height:100px; }
+  .author-keychain strong { font-size:21px; }
+  .author-keychain small { font-size:8px; }
+  .grife-barcode { display:none; }
+  #keychain-ring { width:50px; height:50px; left:-52px; top:23px; }
+ }
+ @media(max-height:480px) { .author-keychain { margin-top:24px; margin-bottom:20px; } }
+}
+@media print { .finish-screen,#screen-lock { display:none !important; } body[data-locked="true"] > * { display:none !important; } }
+
+</style>
+<style>
+/* Controles e diálogos: papel, tinta e relevo curto; sem renderização 3D. */
+@media screen {
+ #system-bar #os-start,
+ #system-bar #os-start[aria-expanded="true"],
+ body[data-theme="escuro"] #system-bar #os-start,
+ body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] {
+  position:relative; width:88px; min-width:88px; height:44px; min-height:44px;
+  padding:2px 4px 7px; border:1px solid #667360; border-radius:3px;
+  background:#8c9b8a; color:#161917;
+  box-shadow:inset 1px 0 0 #b3c2b1,inset -2px 0 0 #7e8c78,0 1px 0 #667360;
+ }
+ #system-bar #os-start .start-key {
+  display:block; position:relative; top:0; padding:7px 10px 6px;
+  border:1px solid #83917c; border-top-color:#f3f8f0; border-bottom:2px solid #75836f;
+  border-radius:2px; background:#d8e5d6;
+  background:linear-gradient(180deg,#f3f8f0 0%,#d8e5d6 38%,#b8c8b6 100%);
+  color:#161917; font:600 15px/18px 'Oswald',Arial,sans-serif; letter-spacing:.6px;
+  text-shadow:0 1px 0 #f3f8f0;
+  box-shadow:inset 0 1px 0 #fff,0 2px 3px rgba(30,35,32,.2);
+ }
+ #system-bar #os-start:active .start-key,
+ #system-bar #os-start[aria-expanded="true"] .start-key {
+  top:3px; background:#b3c2b1; color:#161917;
+  box-shadow:inset 0 1px 2px rgba(30,35,32,.25); border-top-color:#a2b39d;
+ }
+ body[data-theme="escuro"] #system-bar #os-start,
+ body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] {
+  background:#171d17; border-color:#63745b; box-shadow:inset 1px 0 0 #364236,0 1px 0 #111511;
+ }
+ body[data-theme="escuro"] #system-bar #os-start .start-key {
+  background:#263026; background:linear-gradient(180deg,#364236 0%,#263026 40%,#1c231c 100%);
+  color:#d8e4d6; border-color:#141814; border-top-color:#667760; border-bottom-color:#0d100d;
+  box-shadow:inset 0 1px 0 #50614a,0 2px 3px #111511; text-shadow:0 -1px 0 #0f130f;
+ }
+ body[data-theme="escuro"] #system-bar #os-start:active .start-key,
+ body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] .start-key {
+  background:#181f18; color:#d8e4d6; border-top-color:#141814; box-shadow:inset 0 2px 3px #111511;
+ }
+ #system-bar #os-start:focus { outline:2px dashed currentColor; outline-offset:2px; }
+ #system-bar #pomodoro-task:not([hidden]) { display:block; }
+ .sheet,body[data-view="gabinete"] .sheet,body[data-view="mesa"] .sheet {
+  top:44px; bottom:52px; max-height:calc(100% - 96px); overflow-y:auto;
+  scrollbar-width:thin; -webkit-overflow-scrolling:touch;
+ }
+ .sheet::-webkit-scrollbar { width:6px; height:6px; }
+ .sheet::-webkit-scrollbar-thumb { background:#7c8b78; }
+ #focus-pause.sheet { left:0; right:0; width:auto; max-width:none; margin:0; padding:20px 24px; }
+ #focus-pause .focus-center { margin:20px auto; }
+ #focus-pause .focus-header { flex-wrap:wrap; }
+ #focus-pause .focus-challenge { padding:16px 20px; margin-top:16px; }
+ #focus-pause .focus-challenge blockquote { margin:12px 0; }
+ #focus-pause .focus-challenge blockquote p { margin:0 0 12px; }
+ #focus-pause #focus-form { display:flex; flex-wrap:wrap; justify-content:center; }
+ #focus-pause #focus-form label { width:100%; }
+ #focus-pause #focus-form input { flex:1 1 160px; width:160px; max-width:240px; min-width:0; }
+ #focus-pause #focus-form button { flex:0 0 auto; margin:0; }
+ #focus-pause #focus-answer-status:empty { margin:0; }
+ #focus-pause[data-mode="ready"] .focus-center { margin:16px auto; }
+ #focus-pause[data-mode="ready"] .focus-clock-shell { padding:10px 20px; }
+ #focus-pause[data-mode="ready"] .focus-digit { width:64px; height:92px; }
+ #focus-pause[data-mode="ready"] .focus-digit .sd span { font-size:68px; line-height:92px; }
+ #focus-pause[data-mode="ready"] .focus-colon { font-size:36px; }
+ #app-dialog { position:fixed; z-index:4000; top:0; right:0; bottom:0; left:0;
+  padding:48px 16px 24px; overflow:auto; -webkit-overflow-scrolling:touch;
+  background:rgba(20,27,20,.48); color:#1e2320; }
+ #app-dialog[hidden] { display:none !important; }
+ .app-dialog-card { position:relative; width:100%; max-width:480px; margin:0 auto; padding:24px;
+  border:1px solid #65735f; background:#c4cfc2; box-shadow:0 4px 0 rgba(20,27,20,.22);
+  word-wrap:break-word; overflow-wrap:break-word; }
+ .dialog-register { position:absolute; font:14px/1 monospace; opacity:.5; pointer-events:none; }
+ .dialog-register.tl { top:4px; left:5px; }.dialog-register.tr { top:4px; right:5px; }
+ .dialog-register.bl { bottom:4px; left:5px; }.dialog-register.br { bottom:4px; right:5px; }
+ .app-dialog-brand { display:flex; align-items:center; justify-content:space-between;
+  padding-bottom:14px; margin-bottom:20px; border-bottom:1px dashed #889784;
+  font:600 18px/1.2 'Oswald',Arial,sans-serif; }
+ .app-dialog-brand b { border:1px solid currentColor; padding:0 2px; margin-left:2px; }
+ .app-dialog-brand small { font:11px/1.4 Arial,sans-serif; letter-spacing:1px; }
+ #app-dialog h2 { font:600 26px/1.25 'Oswald',Arial,sans-serif; margin:0 0 16px; }
+ #app-dialog-message { font:16px/1.6 'Noto Serif',Georgia,serif; margin:0 0 24px; white-space:pre-line; }
+ .app-dialog-actions { display:flex; justify-content:flex-end; flex-wrap:wrap; border-top:1px dashed #889784; padding-top:16px; }
+ #app-dialog button { min-height:44px; padding:10px 16px; font:14px/1.4 Arial,sans-serif; margin:4px 0 0 8px; }
+ #app-dialog-cancel { color:inherit; border:1px solid #65735f; background:transparent; }
+ #app-dialog-accept { background:#263026; color:#d8e4d6; border:1px solid #141814; border-bottom:3px solid #0d100d;
+  box-shadow:inset 0 1px 0 #50614a; border-radius:2px; }
+ #app-dialog-accept:active { background:#181f18; box-shadow:inset 0 2px 2px #111511; }
+ #app-dialog button:focus { outline:2px dashed currentColor; outline-offset:3px; }
+ body[data-theme="escuro"] .app-dialog-card { background:#293327; color:#d8e4d6; border-color:#879c80; }
+ body[data-theme="escuro"] #app-dialog-cancel { border-color:#879c80; }
+ body[data-theme="escuro"] #app-dialog-accept { background:#d1ded0; color:#161917; border-color:#879c80; border-bottom-color:#65735f; box-shadow:inset 0 1px 0 #f3f8f0; }
+ @media(max-height:740px) {
+  #focus-pause.sheet { padding:12px 20px; }
+  #focus-pause .focus-header { padding-bottom:10px; }
+  #focus-pause .focus-center { margin:14px auto; }
+  #focus-pause .focus-clock-shell { padding:12px 20px; }
+  #focus-pause .focus-digit { width:64px; height:92px; }
+  #focus-pause .focus-digit .sd span { font-size:68px; line-height:92px; }
+  #focus-pause .focus-colon { font-size:36px; }
+ }
+ @media(max-width:600px) {
+  #focus-pause.sheet { padding:12px; }
+  #focus-pause .focus-header h2 { margin:8px 0 0; }
+  #focus-pause .focus-challenge { padding:12px; }
+  #focus-pause .focus-challenge blockquote { font-size:18px; }
+  #focus-pause .focus-clock-shell,#focus-pause[data-mode="ready"] .focus-clock-shell { padding:10px 8px; }
+  #focus-pause .focus-digit,#focus-pause[data-mode="ready"] .focus-digit { width:44px; height:68px; margin:0 1px; }
+  #focus-pause .focus-digit .sd span,#focus-pause[data-mode="ready"] .focus-digit .sd span { font-size:50px; line-height:68px; }
+  #focus-pause .focus-colon,#focus-pause[data-mode="ready"] .focus-colon { font-size:28px; padding:0 4px; }
+  #app-dialog { padding:16px 12px; }
+  .app-dialog-card { padding:20px; }
+  .app-dialog-actions { justify-content:stretch; }
+  #app-dialog button { flex:1 1 100px; margin:4px; }
+  #system-bar .os-tasks { flex-shrink:1; }
+  #system-bar #os-window-task { max-width:90px; min-width:0; }
+  #system-bar #pomodoro-task { max-width:80px; overflow:hidden; text-overflow:ellipsis; margin-right:4px; }
+  #system-bar #cabinet-return { max-width:88px; overflow:hidden; text-overflow:ellipsis; margin-left:auto; }
+  #system-bar #screen-lock { margin-left:4px; }
+ }
+ @media(max-width:380px) {
+  #system-bar #os-window-task { max-width:62px; padding-left:4px; padding-right:4px; }
+  #system-bar #pomodoro-task { max-width:66px; padding-left:4px; padding-right:4px; }
+  #system-bar #cabinet-return { max-width:48px; padding-left:2px; padding-right:2px; }
+ }
+ @media(max-height:480px) {
+  #app-dialog { padding:12px; }
+  .app-dialog-card { padding:16px; }
+  .app-dialog-brand { padding-bottom:8px; margin-bottom:12px; }
+  #focus-pause.sheet { padding:10px 12px; }
+ }
+}
+@media print { #app-dialog { display:none !important; } }
+</style>
 </head>
 <body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
+<section id="story-screen" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="story-heading" tabindex="-1" hidden>
+ <header class="finish-heading"><div><small>ESCREVA[RAL] · UNIVERSO DO CADERNO</small><h2 id="story-heading"></h2></div><button id="story-close" class="material-key" aria-label="Fechar universo do caderno">×</button></header>
+ <nav class="story-navigation" aria-label="Consultar o caderno"><button id="story-chapters" aria-pressed="true">Capítulos</button><button id="story-events" aria-pressed="false">Acontecimentos</button><button id="story-records" aria-pressed="false">Fichas</button></nav>
+ <p id="story-status" role="status"></p><div id="story-actions" class="story-actions"></div>
+ <div id="story-list"></div><div id="story-pagination" class="story-pagination"></div>
+ <section id="story-editor" hidden><h3 id="story-editor-heading"></h3><form id="story-form"></form><p id="story-form-status" role="status"></p></section>
+</section>
+
+<div id="app-dialog" hidden>
+ <section class="app-dialog-card" role="alertdialog" aria-modal="true" aria-labelledby="app-dialog-heading" aria-describedby="app-dialog-message" tabindex="-1">
+  <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span><span class="dialog-register bl" aria-hidden="true">+</span><span class="dialog-register br" aria-hidden="true">+</span>
+  <div class="app-dialog-brand" aria-hidden="true"><span>ESCREVA<b>RAL</b></span><small>GABINETE DE ESCRITA</small></div>
+  <h2 id="app-dialog-heading"></h2><p id="app-dialog-message"></p>
+  <div class="app-dialog-actions"><button id="app-dialog-cancel" type="button">Cancelar</button><button id="app-dialog-accept" type="button"></button></div>
+ </section>
+</div>
+
+<section id="lock-curtain" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="lock-heading" tabindex="-1" hidden>
+ <div class="lock-card"><h2 id="lock-heading">Gabinete fechado</h2><p>O escritor já volta.</p>
+ <div class="author-keychain"><button id="keychain-ring" aria-label="Argola do chaveiro — abrir gabinete"></button><strong id="keychain-name">ESCREVA[RAL]</strong><small>OFICINA AUTORAL · SCRVRL OS</small><div class="grife-barcode" aria-hidden="true"></div><small>ORIGINAIS SOB CUSTÓDIA</small></div>
+ <form id="lock-form" autocomplete="off"><label for="lock-password">Senha</label><input id="lock-password" type="password" autocomplete="new-password" maxlength="120" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore><button type="submit">Entrar</button></form><p id="lock-message" role="status"></p></div>
+</section>
+
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
-  <noscript><p class="notice">Ative o JavaScript para guardar e examinar a escrita. Você ainda pode escrever e copiar o texto.</p></noscript>
+  <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
     <button id="path-home">SCRVRL OS</button><span aria-hidden="true">/</span><button id="path-projects" aria-current="location">Projetos</button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Folhas avulsas" hidden="">Folhas avulsas</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Eu sei que vou te amar em toda a minha vida. " hidden="">Eu sei que vou te amar em toda a minha vida. </button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
   </nav>
@@ -1564,7 +1884,7 @@ SOFTWARE.
         <div class="window-body">
       <nav class="project-shelf" aria-label="Projetos"><p class="os-label">CADERNOS</p><button id="cabinet-all" class="project-link" aria-pressed="true">Todos os textos</button><div id="cabinet-projects"><button type="button" class="project-link" aria-pressed="false"><span class="project-icon"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span><span>Folhas avulsas</span><small>2</small></button></div><span id="project-icon-template" hidden=""><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span></nav>
       <main class="cabinet-files">
-        <div class="notebook-actions"><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg></button></div>
+        <div class="notebook-actions"><button id="notebook-universe" aria-controls="story-screen">Capítulos e universo</button><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg></button></div>
         <div class="cabinet-heading"><div><p class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div><button id="cabinet-new" class="os-action">+ Nova folha</button></div>
 
         <button id="cabinet-resume" class="resume-note"><span class="os-label">CONTINUAR ESCREVENDO</span><span id="resume-title">Eu sei que vou te amar em toda a minha vida. </span><small id="resume-date">Folha avulsa</small></button>
@@ -1582,6 +1902,7 @@ SOFTWARE.
         <div class="start-group" role="group" aria-labelledby="start-group-0"><p id="start-group-0" class="os-label">Escrever</p>
           <button id="start-new-notebook" class="os-app">Novo caderno</button><button id="start-projects" class="os-app"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7V5h7l2 2h9v13H3Z"></path></svg>Cadernos</button>
           <button id="cabinet-write" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M225.91,74.79,181.22,30.1a14,14,0,0,0-19.8,0L38.1,153.41a13.94,13.94,0,0,0-4.1,9.9V208a14,14,0,0,0,14,14H216a6,6,0,0,0,0-12H110.49L225.91,94.59A14,14,0,0,0,225.91,74.79ZM76.49,188,164,100.48,183.52,120,96,207.51ZM68,179.52,48.49,160,136,72.49,155.52,92ZM46,208V174.48L81.52,210H48A2,2,0,0,1,46,208ZM217.42,86.1,192,111.52,144.49,64,169.9,38.59a2,2,0,0,1,2.83,0l44.69,44.68A2,2,0,0,1,217.42,86.1Z"></path></svg>Mesa de escrita</button>
+          <button id="start-universe" class="os-app" aria-controls="story-screen">Universo do caderno</button>
           <button id="start-calendar" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v16H3ZM7 2v6M17 2v6M3 10h18M7 14h2M12 14h2M7 18h2M12 18h2"></path></svg><span>Calendário</span></button>
         </div>
         <div class="start-group" role="group" aria-labelledby="start-group-1"><p id="start-group-1" class="os-label">Instrumentos</p>
@@ -1597,7 +1918,7 @@ SOFTWARE.
           <button id="start-trash" class="os-app"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"></path></svg><span>Lixeira</span></button>
         </div>
       </nav>
-    <footer id="system-bar" class="os-footer"><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="start-key">Início</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
+    <footer id="system-bar" class="os-footer"><button id="screen-lock" class="material-key" aria-label="Fechar gabinete com cadeado" title="Fechar gabinete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5ZM12 14v3"/></svg></button><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="start-key">Início</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
   <div id="notebook-dialog" class="notebook-dialog" hidden><div class="notebook-dialog-card" role="dialog" aria-modal="true" aria-labelledby="notebook-form-heading"><h2 id="notebook-form-heading">Novo caderno</h2><form id="project-form" class="project-form" hidden=""><label for="project-name">Nome do caderno</label><div><input id="project-name" maxlength="120" autocomplete="off" placeholder="Nome do seu projeto ou livro"><button id="project-create" type="submit">Criar</button><button id="project-cancel" type="button">Cancelar</button></div><p id="project-error" role="status"></p></form></div></div>
   <div id="writing-space" style="height: 570px;" hidden="">
     <div id="selection-tools" class="selection-tools" role="group" aria-label="Cópia e trecho selecionado"><span id="clipboard-status" role="status">Copiado no Escrevaral</span><button id="selection-cut">Recortar</button><button id="selection-paste">Colar cópia interna</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
@@ -1681,7 +2002,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="acervo-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SUAS FOLHAS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
     <div class="archive-intro"><p class="quiet">Um lugar para voltar aos seus textos.</p><button id="new-document">+ Nova folha</button></div>
-    <button id="trash-toggle" aria-pressed="false">Lixeira</button><div id="delete-confirm" role="alertdialog" aria-labelledby="delete-heading" aria-describedby="delete-message" hidden=""><h3 id="delete-heading">Excluir definitivamente?</h3><p id="delete-message"></p><button id="delete-cancel">Cancelar</button><button id="delete-accept">Excluir definitivamente</button></div><p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
+    <button id="trash-toggle" aria-pressed="false">Lixeira</button><p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
   </section>
   <section id="oficina" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="oficina-heading">
     <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
@@ -2769,7 +3090,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     var quotes=[{q:'Penso, logo existo.',a:'René Descartes'},{q:'Tudo vale a pena se a alma não é pequena.',a:'Fernando Pessoa'},{q:'Ser ou não ser, eis a questão.',a:'William Shakespeare'}];
     function saveTimer(){try{if(!storage){throw new Error('storage');}storage.setItem(timerKey,JSON.stringify(state));}catch(e){status('O relógio segue nesta sessão; não foi possível guardar seu estado.');}}
     function formatTime(seconds){return pad(Math.floor(seconds/60))+':'+pad(seconds%60);}
-    function showFocus(){bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();}
+    function showFocus(){if(E.dialog&&E.dialog.isOpen()||document.body.getAttribute('data-locked')==='true'){return;}bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();byId('focus-pause').scrollTop=0;}
     function flipDigit(d,next){
       if(d.getAttribute('data-digit')===next){return;}
       var old=d.getAttribute('data-digit');
@@ -2788,7 +3109,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       byId('pomodoro-start').hidden=state.mode!=='idle';byId('pomodoro-stop').hidden=state.mode==='idle';byId('pomodoro-pause').hidden=state.mode==='idle'||state.mode==='ready';
       byId('pomodoro-work').disabled=byId('pomodoro-break').disabled=state.mode!=='idle';text(byId('pomodoro-pause'),state.paused?'Retomar contagem':'Pausar contagem');
       text(byId('focus-status'),state.mode==='ready'?'A pausa terminou. Volte quando quiser.':'Afaste os olhos da tela. A escrita pode esperar.');
-      byId('focus-challenge').hidden=state.mode!=='ready';
+      byId('focus-pause').setAttribute('data-mode',state.mode);byId('focus-challenge').hidden=state.mode!=='ready';
       if(state.mode==='ready'){text(byId('focus-quote'),'“'+quotes[state.quote].q+'”');text(byId('focus-author'),quotes[state.quote].a);}
     }
     function tick(){
@@ -2822,7 +3143,8 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     var calc=byId('calculator-input'),result=byId('calculator-result');
     function calculate(){try{text(result,String(E.calculate(calc.value)).replace('.',','));}catch(e){text(result,e.message);}}
     on(byId('calculator-form'),'submit',function(event){event.preventDefault();calculate();});
-    ['C','⌫','(',')','7','8','9','÷','4','5','6','×','1','2','3','−','0',',','%','+','='].forEach(function(key){var b=button(byId('calculator-keys'),key,function(){if(key==='C'){calc.value='';text(result,'0');}else if(key==='⌫'){calc.value=calc.value.slice(0,-1);}else if(key==='='){calculate();}else if(calc.value.length<160){calc.value+=key;}calc.focus();});if(key==='⌫'){b.setAttribute('aria-label','Apagar último caractere');}if(key==='C'){b.setAttribute('aria-label','Limpar conta');}});
+    byId('calculator-keys').textContent = ''; /* Uma única montagem; remove o conjunto estático. */
+    ['C','⌫','(',')','7','8','9','÷','4','5','6','×','1','2','3','−','0',',','%','+','='].forEach(function(key){var b=button(byId('calculator-keys'),key,function(){if(key==='C'){calc.value='';text(result,'0');}else if(key==='⌫'){calc.value=calc.value.slice(0,-1);}else if(key==='='){calculate();}else if(calc.value.length<160){calc.value+=key;}calc.focus();});if(key==='⌫'){b.setAttribute('aria-label','Apagar último caractere');}if(key==='C'){b.setAttribute('aria-label','Limpar conta');}var labels={'×':'Multiplicar','−':'Subtrair','÷':'Dividir','+':'Somar','=':'Calcular','%':'Porcentagem'};if(labels[key]){b.setAttribute('aria-label',labels[key]);}});
 
     var today=new Date(),year=today.getFullYear(),month=today.getMonth(),selected=E.calendarKey(year,month,today.getDate()),planner={},plannerValid=true,calendarDocs=[];
     function loadPlanner(){try{planner=storage?JSON.parse(storage.getItem('vrda-planner')||'{}'):{};if(!E.validPlanner(planner)){throw new Error('invalid');}plannerValid=true;}catch(e){plannerValid=false;text(byId('calendar-status'),'Não foi possível ler o calendário salvo. Os dados anteriores foram preservados.');planner={};}}
@@ -2869,6 +3191,195 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
 
 </script>
   <script>
+/* Universo do caderno: ES5, dados locais e vínculos estáveis. */
+(function (root) {
+  'use strict';
+  var E = root.Escr;
+  function copy(v) { return JSON.parse(JSON.stringify(v)); }
+  function arr(v) { return Object.prototype.toString.call(v) === '[object Array]'; }
+  function id(v) { return typeof v === 'string' && /^[a-z0-9-]+$/.test(v); }
+  function str(v, n) { return typeof v === 'string' && v.length <= n; }
+  function ids(v) { return arr(v) && v.length <= 5000 && v.every(id) && v.every(function (x, i) { return v.indexOf(x) === i; }); }
+  function empty() { return { version:1, characters:[], settings:[], scenes:[], chapters:[] }; }
+  function valid(s) {
+    if (!s || s.version !== 1 || !arr(s.characters) || !arr(s.settings) || !arr(s.scenes) || !arr(s.chapters)) { return false; }
+    var seen = Object.create(null), characters = Object.create(null), settings = Object.create(null), chapters = Object.create(null);
+    function unique(x) { if (!x || !id(x.id) || seen[x.id]) { return false; } seen[x.id] = true; return true; }
+    function card(x) { return unique(x) && str(x.name,120) && !!x.name.replace(/\s/g,'') && str(x.description,4000); }
+    if (s.characters.length > 5000 || s.settings.length > 5000 || s.scenes.length > 10000 || s.chapters.length > 10000) { return false; }
+    if (!s.characters.every(function(x){if(!card(x)){return false;}characters[x.id]=true;return true;}) || !s.settings.every(function(x){if(!card(x)){return false;}settings[x.id]=true;return true;})) { return false; }
+    function refs(x) { return ids(x.characters) && x.characters.every(function(k){return !!characters[k];}) && ids(x.settings) && x.settings.every(function(k){return !!settings[k];}); }
+    return s.scenes.every(function(x){return unique(x) && str(x.title,120) && !!x.title.replace(/\s/g,'') && str(x.summary,4000) && str(x.when,120) && (x.chapter === '' || id(x.chapter)) && refs(x);}) && s.chapters.every(function(x){if(!x || !id(x.noteId) || chapters[x.noteId] || !refs(x)){return false;}chapters[x.noteId]=true;return true;});
+  }
+  function read(data) { var s = data.story; if (typeof s === 'undefined') { return empty(); } if (!valid(s)) { throw new Error('Não foi possível ler as fichas deste caderno. Os dados foram preservados.'); } return copy(s); }
+  function remap(s, mapping) { var next=copy(s); next.chapters.forEach(function(x){x.noteId=mapping[x.noteId]||x.noteId;});next.scenes.forEach(function(x){x.chapter=mapping[x.chapter]||x.chapter;});return next; }
+  function remove(s, kind, key) {
+    var next=copy(s); next[kind]=next[kind].filter(function(x){return x.id!==key;});
+    if(kind==='characters'||kind==='settings'){next.scenes.concat(next.chapters).forEach(function(x){x[kind]=x[kind].filter(function(k){return k!==key;});});}
+    return next;
+  }
+  function members(s, noteId, kind) { var found=[];s.chapters.filter(function(x){return x.noteId===noteId;}).concat(s.scenes.filter(function(x){return x.chapter===noteId;})).forEach(function(x){x[kind].forEach(function(k){if(found.indexOf(k)<0){found.push(k);}});});return s[kind].filter(function(x){return found.indexOf(x.id)>=0;}); }
+  E.story = { empty:empty, valid:valid, read:read, remap:remap, remove:remove, members:members };
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+<script>
+
+/* Confirmação ES5: continuação explícita, sem substituir window.confirm. */
+(function (root) {
+ 'use strict';
+ var E=root.Escr,D=root.document,layer=D.getElementById('app-dialog'),card=layer.querySelector('.app-dialog-card');
+ var cancel=D.getElementById('app-dialog-cancel'),accept=D.getElementById('app-dialog-accept');
+ var pending=null,previous=null,hidden=[];
+ function visible(n){return n&&D.documentElement.contains(n)&&n.getClientRects().length&&!n.disabled;}
+ function fit(){
+  if(layer.hidden){return;}
+  var v=root.visualViewport,h=v?v.height:root.innerHeight,y=v?v.offsetTop:0;
+  layer.style.top=y+'px';layer.style.height=h+'px';layer.style.bottom='auto';
+  layer.style.paddingTop=Math.max(16,Math.floor((h-card.offsetHeight)/2))+'px';
+ }
+ function finish(ok){
+  if(!pending){return;}
+  var done=pending;pending=null;layer.hidden=true;
+  hidden.forEach(function(p){if(p[1]===null){p[0].removeAttribute('aria-hidden');}else{p[0].setAttribute('aria-hidden',p[1]);}});
+  hidden=[];
+  if(visible(previous)){previous.focus();}else{D.getElementById('os-start').focus();}
+  previous=null;done(ok);
+ }
+ E.dialog={
+  isOpen:function(){return !!pending;},
+  ask:function(options,done){
+   if(pending){done(false);return;}
+   if(D.body.getAttribute('data-locked')==='true'){done(false);return;}
+   previous=D.activeElement;pending=done;
+   D.getElementById('app-dialog-heading').textContent=options.title||'Confirmar ação';
+   D.getElementById('app-dialog-message').textContent=options.message;
+   accept.textContent=options.accept||'Confirmar';
+   layer.hidden=false;fit();layer.scrollTop=0;cancel.focus();
+   hidden=[];
+   for(var i=0;i<D.body.children.length;i+=1){
+    var n=D.body.children[i];
+    if(n!==layer&&n.tagName!=='SCRIPT'&&n.tagName!=='STYLE'){
+     hidden.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');
+    }
+   }
+  }
+ };
+ /* Captura no window: o diálogo tem precedência sobre os atalhos do app e do universo. */
+ function trap(e){
+  if(!pending){return;}
+  var inside=card.contains(e.target),key=e.keyCode;
+  if(e.type==='focusin'){
+   if(!inside){e.stopImmediatePropagation();cancel.focus();}return;
+  }
+  if(e.type==='keydown'){
+   e.stopImmediatePropagation();
+   if(key===27){e.preventDefault();finish(false);return;}
+   if(key===9){e.preventDefault();(D.activeElement===cancel?accept:cancel).focus();return;}
+   if(key===13||key===32){e.preventDefault();if(D.activeElement===accept){finish(true);}else if(D.activeElement===cancel){finish(false);}return;}
+   if(e.ctrlKey||e.metaKey){e.preventDefault();}return;
+  }
+  if(e.type==='click'){
+   e.preventDefault();e.stopImmediatePropagation();
+   if(e.target===cancel){finish(false);}else if(e.target===accept){finish(true);}return;
+  }
+  if(!inside){e.preventDefault();e.stopImmediatePropagation();}
+  else if(e.type==='keyup'||e.type==='keypress'){e.stopImmediatePropagation();}
+ }
+ ['keydown','keyup','keypress','click','dblclick','mousedown','touchstart','focusin'].forEach(function(k){root.addEventListener(k,trap,true);});
+ root.addEventListener('resize',fit,false);
+ if(root.visualViewport){root.visualViewport.addEventListener('resize',fit,false);root.visualViewport.addEventListener('scroll',fit,false);}
+}(window));
+
+</script>
+<script>
+/* Apresentação do universo: apenas a consulta aberta ocupa o DOM. */
+(function (root) {
+ 'use strict';
+ root.Escr.mountFinish = function (bridge) {
+  var E=root.Escr, D=root.document, panel=D.getElementById('story-screen'), curtain=D.getElementById('lock-curtain'), book=null, story=null, docs=[], mode='chapters', page=0, revision='', editing=null, returnFocus=null, lockFocus=null, hiddenNodes=[], metrics=Object.create(null), locked=false;
+  function byId(k){return D.getElementById(k);}
+  function text(n,v){n.textContent=String(v);}
+  function on(n,k,fn){n.addEventListener(k,fn,false);}
+  function el(tag,parent,value,cl){var n=D.createElement(tag);if(typeof value!=='undefined'){text(n,value);}if(cl){n.className=cl;}parent.appendChild(n);return n;}
+  function button(parent,label,fn,cl){var b=el('button',parent,label,cl);b.type='button';on(b,'click',fn);return b;}
+  function clone(v){return JSON.parse(JSON.stringify(v));}
+  function key(d){return d.noteId||d.id;}
+  function named(list){return list.map(function(x){return x.name;}).join(', ');}
+  function getDoc(noteId){for(var i=0;i<docs.length;i+=1){if(key(docs[i])===noteId){return docs[i];}}return null;}
+  function current(){var b=bridge.book();if(!b||!book||b.id!==book.id){throw new Error('O caderno mudou. Feche esta consulta e abra novamente.');}return b;}
+  function reload(){book=current();story=E.story.read(book.data);revision=JSON.stringify(story);docs=bridge.documents();var live=Object.create(null);docs.forEach(function(d){live[d.id]=true;});Object.keys(metrics).forEach(function(k){if(!live[k]){delete metrics[k];}});}
+  function save(next){
+   try {var b=current();if(JSON.stringify(E.story.read(b.data))!==revision){throw new Error('As fichas mudaram em outra aba. Seu formulário permanece aqui; reabra a consulta antes de guardar.');}if(!E.story.valid(next)){throw new Error('Confira os campos e os vínculos.');}b.data.story=next;bridge.save(b);story=next;book=b;revision=JSON.stringify(next);return true;}
+   catch(e){text(byId('story-form-status'),e.message);text(byId('story-status'),e.message);return false;}
+  }
+  function formVisible(show){byId('story-editor').hidden=!show;byId('story-list').hidden=show;byId('story-actions').hidden=show;byId('story-pagination').hidden=show;byId('story-chapters').disabled=byId('story-events').disabled=byId('story-records').disabled=show;}
+  function cancelEdit(){editing=null;formVisible(false);byId('story-form').textContent='';render();panel.focus();}
+  function closeNow(){panel.hidden=true;editing=null;byId('story-form').textContent='';byId('story-list').textContent='';docs=[];if(returnFocus&&D.documentElement.contains(returnFocus)&&returnFocus.getClientRects().length){returnFocus.focus();}else{byId('os-start').focus();}return true;}
+  function discardEdit(done){var pendingEdit=editing;E.dialog.ask({title:'Descartar alterações?',message:'As alterações desta ficha ainda não foram guardadas.',accept:'Descartar'},function(ok){if(ok&&editing===pendingEdit){done();}});}
+  function close(){if(editing){discardEdit(closeNow);return false;}return closeNow();}
+  function open(){if(!bridge.checkpoint()){return;}var b=bridge.book();if(!b){bridge.message('Abra um caderno para consultar capítulos, acontecimentos e fichas.');return;}try{story=E.story.read(b.data);}catch(e){bridge.message(e.message);return;}returnFocus=D.activeElement;bridge.prepare();book=b;mode='chapters';page=0;editing=null;reload();panel.hidden=false;formVisible(false);text(byId('story-heading'),book.name);render();byId('story-chapters').focus();}
+  function openChapter(d){if(close()){bridge.open(d);}}
+  function orderedDocs(){var order=story.chapters.map(function(x){return x.noteId;});return docs.slice().sort(function(a,b){var ai=order.indexOf(key(a)),bi=order.indexOf(key(b));if(ai>=0||bi>=0){return (ai<0?order.length:ai)-(bi<0?order.length:bi);}return Date.parse(a.created||a.updated)-Date.parse(b.created||b.updated);});}
+  function count(d){if(!metrics[d.id]){metrics[d.id]=E.countManuscript(d.text||'');}return metrics[d.id].words;}
+  function shift(kind, itemId, delta){var next=clone(story),list=kind==='chapters'?orderedDocs().map(function(d){return next.chapters.filter(function(x){return x.noteId===key(d);})[0]||{noteId:key(d),characters:[],settings:[]};}):next.scenes;var at=-1;list.forEach(function(x,i){if((x.noteId||x.id)===itemId){at=i;}});if(at<0||at+delta<0||at+delta>=list.length){return;}var item=list.splice(at,1)[0];list.splice(at+delta,0,item);next[kind]=list;if(save(next)){render();panel.focus();}}
+  function reorder(parent,kind,k,index,length){var prev=button(parent,'← Antes',function(){shift(kind,k,-1);});prev.disabled=index===0;prev.setAttribute('aria-label','Mover para antes');var next=button(parent,'Depois →',function(){shift(kind,k,1);});next.disabled=index===length-1;next.setAttribute('aria-label','Mover para depois');}
+  function chapterCard(list,d,index,total,max){
+   var card=el('article',list,undefined,'polaroid'),open=button(card,'',function(){openChapter(d);},'story-open');el('small',open,'CAPÍTULO '+(index<9?'0':'')+(index+1));el('h3',open,d.title||'Sem título');el('p',open,(d.text||'').slice(0,240)||'Este capítulo espera suas primeiras palavras.');el('small',open,'ABRIR CAPÍTULO →');
+   var meta=el('div',card,undefined,'story-meta'),words=count(d);el('div',meta,words+(words===1?' palavra · ':' palavras · ')+story.scenes.filter(function(x){return x.chapter===key(d);}).length+(story.scenes.filter(function(x){return x.chapter===key(d);}).length===1?' cena':' cenas'));var meter=el('span',meta,undefined,'story-density');meter.setAttribute('aria-label','Extensão: '+words+' palavras; maior capítulo: '+max+' palavras.');el('span',meter).style.width=(max?Math.round(words/max*100):0)+'%';el('div',meta,'Personagens: '+(named(E.story.members(story,key(d),'characters'))||'nenhum vinculado'));var places=named(E.story.members(story,key(d),'settings'));if(places){el('div',meta,'Cenários: '+places);}var actions=el('div',card,undefined,'card-actions');button(actions,'Vincular fichas',function(){edit('chapters',key(d));});reorder(actions,'chapters',key(d),index,total);
+  }
+  function sceneCard(list,s,index,total){var card=el('article',list,undefined,'polaroid');el('small',card,(s.when||'ACONTECIMENTO '+(index+1)));el('h3',card,s.title);el('p',card,s.summary||'Sem resumo.');var meta=el('div',card,undefined,'story-meta');el('div',meta,'Personagens: '+(named(story.characters.filter(function(x){return s.characters.indexOf(x.id)>=0;}))||'nenhum vinculado'));el('div',meta,'Cenários: '+(named(story.settings.filter(function(x){return s.settings.indexOf(x.id)>=0;}))||'nenhum vinculado'));var d=getDoc(s.chapter);if(d){button(meta,d.title||'Abrir capítulo',function(){openChapter(d);});}else{el('div',meta,s.chapter?'Capítulo indisponível neste caderno':'Ainda sem capítulo');}var actions=el('div',card,undefined,'card-actions');button(actions,'Editar cena',function(){edit('scenes',s.id);});reorder(actions,'scenes',s.id,index,total);}
+  function recordCard(list,x,kind){var card=el('article',list,undefined,'polaroid');el('small',card,kind==='characters'?'PERSONAGEM':'CENÁRIO');el('h3',card,x.name);el('p',card,x.description||'Sem descrição.');button(card,'Editar ficha',function(){edit(kind,x.id);});}
+  function render(){
+   if(panel.hidden){return;}var list=byId('story-list'),actions=byId('story-actions'),pagination=byId('story-pagination');list.textContent='';actions.textContent='';pagination.textContent='';list.setAttribute('data-mode',mode);['chapters','events','records'].forEach(function(k){byId('story-'+k).setAttribute('aria-pressed',k===mode?'true':'false');});
+   var all=mode==='chapters'?orderedDocs():mode==='events'?story.scenes:story.characters.map(function(x){return {item:x,kind:'characters'};}).concat(story.settings.map(function(x){return {item:x,kind:'settings'};}));var pageSize=12;page=Math.min(page,Math.max(0,Math.ceil(all.length/pageSize)-1));var start=page*pageSize;
+   text(byId('story-status'),mode==='chapters'?'Extensão dos capítulos · comparação por palavras.':mode==='events'?'Ordem dos acontecimentos da história · independente da ordem dos capítulos.':'Fichas deste caderno · selecione seus nomes nos capítulos e cenas.');
+   if(mode==='events'){button(actions,'+ Nova cena',function(){edit('scenes');});}else if(mode==='records'){button(actions,'+ Personagem',function(){edit('characters');});button(actions,'+ Cenário',function(){edit('settings');});}
+   if(!all.length){el('p',list,mode==='chapters'?'Crie uma folha no caderno. Seu título aparecerá aqui.':mode==='events'?'Cadastre a primeira cena para começar a cronologia.':'Cadastre personagens e cenários para vincular à sua história.','story-empty');}
+   var max=0;if(mode==='chapters'){all.forEach(function(d){max=Math.max(max,count(d));});}
+   all.slice(start,start+pageSize).forEach(function(x,i){if(mode==='chapters'){chapterCard(list,x,start+i,all.length,max);}else if(mode==='events'){sceneCard(list,x,start+i,all.length);}else{recordCard(list,x.item,x.kind);}});
+   if(all.length>pageSize){var previous=button(pagination,'← Anteriores',function(){page-=1;render();panel.scrollTop=0;panel.focus();});previous.disabled=page===0;el('span',pagination,' '+(page+1)+' / '+Math.ceil(all.length/pageSize)+' ');var next=button(pagination,'Próximos →',function(){page+=1;render();panel.scrollTop=0;panel.focus();});next.disabled=start+pageSize>=all.length;}
+  }
+  function field(form,label,name,value,multiline,max){var wrap=el('label',form,label),input=el(multiline?'textarea':'input',wrap);input.name=name;input.id='story-field-'+name;input.value=value||'';input.maxLength=max||120;return input;}
+  function tags(form,kind,values){var set=el('fieldset',form);el('legend',set,kind==='characters'?'Personagens':'Cenários');if(!story[kind].length){el('p',set,'Cadastre primeiro em Fichas.');}story[kind].forEach(function(x){var label=el('label',set,undefined,'story-tag'),input=el('input',label);input.type='checkbox';input.name=kind;input.value=x.id;input.checked=values.indexOf(x.id)>=0;el('span',label,x.name);});}
+  function edit(kind,k){
+   editing={kind:kind,id:k||null};var form=byId('story-form'),item=kind==='chapters'?story.chapters.filter(function(x){return x.noteId===k;})[0]:story[kind].filter(function(x){return x.id===k;})[0];item=item||{};form.textContent='';text(byId('story-form-status'),'');text(byId('story-editor-heading'),kind==='characters'?'Ficha de personagem':kind==='settings'?'Ficha de cenário':kind==='scenes'?'Cena':'Fichas do capítulo');formVisible(true);
+   if(kind==='characters'||kind==='settings'){field(form,'Nome','name',item.name).required=true;field(form,'Descrição (opcional)','description',item.description,true,4000);}
+   if(kind==='scenes'){field(form,'Título da cena','title',item.title).required=true;field(form,'Resumo (opcional)','summary',item.summary,true,4000);field(form,'Quando na história (opcional)','when',item.when);var label=el('label',form,'Capítulo'),select=el('select',label);select.name='chapter';select.id='story-field-chapter';var opt=el('option',select,'Ainda sem capítulo');opt.value='';orderedDocs().forEach(function(d){var option=el('option',select,d.title||'Sem título');option.value=key(d);});select.value=getDoc(item.chapter)?item.chapter:'';}
+   if(kind==='scenes'||kind==='chapters'){tags(form,'characters',item.characters||[]);tags(form,'settings',item.settings||[]);}
+   var submit=el('button',form,'Guardar');submit.type='submit';submit.className='material-key';button(form,'Cancelar',cancelEdit);
+   if(k&&kind!=='chapters'){button(form,'Excluir ficha',function(){E.dialog.ask({title:'Excluir ficha?',message:'Este registro e seus vínculos serão excluídos. O texto dos capítulos será preservado.',accept:'Excluir ficha'},function(ok){if(ok&&save(E.story.remove(story,kind,k))){cancelEdit();}});});}
+   var first=form.querySelector('input,select,textarea,button');if(first){first.focus();}
+  }
+  on(byId('story-form'),'submit',function(event){event.preventDefault();if(!editing){return;}var form=this,kind=editing.kind,next=clone(story),item={},k=editing.id;
+   function value(name){var n=form.querySelector('[name="'+name+'"]');return n?n.value.replace(/^\s+|\s+$/g,''):'';}
+   if(kind==='characters'||kind==='settings'){item={id:k||('entity-'+E.freshDocument().id),name:value('name'),description:value('description')};}
+   else {item=kind==='chapters'?{noteId:k}:{id:k||('scene-'+E.freshDocument().id),title:value('title'),summary:value('summary'),when:value('when'),chapter:value('chapter')};['characters','settings'].forEach(function(t){var checks=form.querySelectorAll('input[name="'+t+'"]'),j;item[t]=[];for(j=0;j<checks.length;j+=1){if(checks[j].checked){item[t].push(checks[j].value);}}});}
+   var found=false;next[kind]=next[kind].map(function(x){if((x.id||x.noteId)===k){found=true;return item;}return x;});if(!found){next[kind].push(item);}if(save(next)){cancelEdit();text(byId('story-status'),'Guardado neste caderno.');}
+  });
+  ['chapters','events','records'].forEach(function(k){on(byId('story-'+k),'click',function(){try{reload();mode=k;page=0;render();}catch(e){text(byId('story-status'),e.message);}});});
+  on(byId('story-close'),'click',close);on(byId('start-universe'),'click',open);on(byId('notebook-universe'),'click',open);
+  function lock(){if(!bridge.checkpoint()){return;}lockFocus=D.activeElement;bridge.prepareLock();locked=true;D.body.setAttribute('data-locked','true');text(byId('keychain-name'),(bridge.book()||{}).name||'ESCREVA[RAL]');byId('lock-password').value='';text(byId('lock-message'),'');curtain.hidden=false;hiddenNodes=[];for(var i=0;i<D.body.children.length;i+=1){var n=D.body.children[i];if(n!==curtain&&n.tagName!=='SCRIPT'){hiddenNodes.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');}}try{root.sessionStorage.setItem('escrevaral.curtain','on');}catch(ignore){}curtain.focus();}
+  function unlock(){locked=false;curtain.hidden=true;D.body.removeAttribute('data-locked');hiddenNodes.forEach(function(p){if(p[1]===null){p[0].removeAttribute('aria-hidden');}else{p[0].setAttribute('aria-hidden',p[1]);}});hiddenNodes=[];byId('lock-password').value='';try{root.sessionStorage.removeItem('escrevaral.curtain');}catch(ignore){}if(lockFocus&&D.documentElement.contains(lockFocus)){lockFocus.focus();}}
+  on(byId('screen-lock'),'click',lock);on(byId('keychain-ring'),'click',unlock);on(byId('lock-form'),'submit',function(e){e.preventDefault();byId('lock-password').value='';text(byId('lock-message'),'O gabinete continua fechado.');});
+  /* Captura antes dos atalhos existentes; sem inert/dialog obrigatórios. */
+  function trap(event){if(E.dialog.isOpen()){return;}var modal=locked?curtain:!panel.hidden?panel:null;if(!modal){return;}var inside=modal.contains(event.target);
+   if(!inside){event.preventDefault();event.stopImmediatePropagation();if(event.type==='focusin'){(locked?byId('lock-password'):byId('story-close')).focus();}return;}
+   if(event.type==='keydown'){
+    event.stopPropagation();var code=event.keyCode;
+    if(code===27){event.preventDefault();if(!locked){if(editing){discardEdit(cancelEdit);}else{close();}}}
+    if(code===9){D.body.setAttribute('data-input','keyboard');var nodes=modal.querySelectorAll('button,input,select,textarea,[tabindex="0"]'),items=[],j;for(j=0;j<nodes.length;j+=1){if(!nodes[j].disabled&&nodes[j].getClientRects().length){items.push(nodes[j]);}}var first=items[0],last=items[items.length-1];if(event.shiftKey&&(D.activeElement===first||D.activeElement===modal)){event.preventDefault();last.focus();}else if(!event.shiftKey&&(D.activeElement===last||D.activeElement===modal)){event.preventDefault();first.focus();}}
+    if((event.ctrlKey||event.metaKey)&&[13,75,83].indexOf(code)>=0){event.preventDefault();}
+   }
+  }
+  ['keydown','keypress','keyup','click','dblclick','mousedown','touchstart','focusin'].forEach(function(k){D.addEventListener(k,trap,true);});
+  on(root,'storage',function(e){if(e.key==='escrevaral.astra.notebooks.v1'&&!panel.hidden){text(byId('story-status'),'O caderno mudou em outra aba. Reabra a consulta para atualizar.');}});
+  try{if(root.sessionStorage.getItem('escrevaral.curtain')==='on'){lock();}}catch(ignore){}
+ };
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+<script>
 /* Cadernos: dados ES5, independente da apresentação. */
 (function (root) {
   'use strict';
@@ -2954,7 +3465,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     function validate(payload) {
       var ids = Object.create(null), records = Object.create(null);
       if (!payload || payload.format !== 'escrevaral-cadernos' || payload.version !== 1 || ['all', 'notebook'].indexOf(payload.scope) === -1 || !array(payload.notebooks) || !array(payload.documents) || !payload.notebooks.every(validBook) || !payload.documents.every(E.validDocument) || !payload.inventory || payload.inventory.notebooks !== payload.notebooks.length || payload.inventory.documents !== payload.documents.length || (payload.scope === 'notebook' && payload.notebooks.length !== 1)) { throw new Error('Pacote de caderno inválido ou incompleto.'); }
-      payload.notebooks.forEach(function (b) { if (ids[b.id]) { throw new Error('Caderno repetido no pacote.'); } ids[b.id] = true; if (b.data.planner && !E.validPlanner(b.data.planner)) { throw new Error('Calendário inválido no caderno.'); } });
+      payload.notebooks.forEach(function (b) { if (ids[b.id]) { throw new Error('Caderno repetido no pacote.'); } ids[b.id] = true; if (b.data.planner && !E.validPlanner(b.data.planner)) { throw new Error('Calendário inválido no caderno.'); } if (typeof b.data.story !== 'undefined' && !E.story.valid(b.data.story)) { throw new Error('Fichas ou cenas inválidas no caderno.'); } });
       payload.documents.forEach(function (d) {
         if (records[d.id] || (d.projectId && !ids[d.projectId]) || (!d.projectId && (payload.scope === 'notebook' || d.kind !== 'reminder'))) { throw new Error('Vínculos incompletos no pacote.'); } records[d.id] = true;
       });
@@ -2979,7 +3490,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
         if (b) { d.projectId = b.id; d.project = b.name; }
         writes.push([prefix + d.id, JSON.stringify(d)]);
       });
-      Object.keys(mapping).forEach(function (k) { var b = mapping[k]; if (b.resume && noteIds[b.resume.noteId]) { b.resume.noteId = noteIds[b.resume.noteId]; } });
+      Object.keys(mapping).forEach(function (k) { var b = mapping[k]; if (b.resume && noteIds[b.resume.noteId]) { b.resume.noteId = noteIds[b.resume.noteId]; } if (b.data.story) { b.data.story = E.story.remap(b.data.story, noteIds); } });
       writes.push([key, JSON.stringify(next)]);
       Object.keys(payload.globals).forEach(function (k) {
         var value = payload.globals[k];
@@ -3005,7 +3516,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task'];
   var projectScope = false, readingSize = 21;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
-  var trashView = false, sessionReady = false, sessionTimer = null, deleteTarget = null, sessionKey = 'escrevaral.astra.session.v1';
+  var trashView = false, sessionReady = false, sessionTimer = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
@@ -3027,6 +3538,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     byId('cabinet-search').setAttribute('aria-label', byId('cabinet-search').placeholder);
     byId('notebook-rename').hidden = byId('notebook-export').hidden = byId('notebook-trash').hidden = !book;
     byId('export-notebook').disabled = !book;
+    byId('notebook-universe').hidden = !book;
     byId('note-project').textContent = '';
     if (notebooks) { notebooks.list().filter(function (b) { return !b.trashed; }).forEach(function (b) { var option = document.createElement('option'); option.value = b.id; text(option, b.name); byId('note-project').appendChild(option); }); }
     byId('note-project').value = doc.projectId || activeNotebookId || '';
@@ -3039,6 +3551,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       b.className = 'notebook-cover'; b.setAttribute('title', book.name); b.setAttribute('data-notebook-id', book.id); b.setAttribute('aria-label', 'Abrir caderno ' + book.name);
       b.setAttribute('aria-pressed', activeNotebookId === book.id ? 'true' : 'false');
       var strap = document.createElement('span'); strap.className = 'notebook-strap'; strap.style.backgroundColor = book.color; text(strap, book.name); b.appendChild(strap);
+      var woven = document.createElement('span'); woven.className = 'woven-tab'; woven.setAttribute('aria-hidden', 'true'); woven.innerHTML = 'ESCREVA<b>RAL</b>'; b.appendChild(woven);
       var elastic = document.createElement('span'); elastic.className = 'notebook-elastic'; elastic.setAttribute('aria-hidden', 'true'); b.appendChild(elastic);
     });
     byId('notebook-hint').hidden = !!list.childNodes.length; notebookLabels();
@@ -3124,8 +3637,10 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     listen(byId('desk-minimize'), 'click', closeNotebook);
     listen(byId('notebook-trash'), 'click', function () {
       if (!checkpoint()) { return; } var b = activeNotebook(); if (!b) { return; }
-      if (!window.confirm('Mover o caderno “' + b.name + '” e todo o seu conteúdo para a lixeira? Você poderá restaurá-lo pelo menu Início.')) { return; }
-      try { if (!rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; loadDocument(E.freshDocument()); closeNotebook(); message('Caderno movido para a lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
+      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todo o seu conteúdo. Você poderá restaurá-lo pelo menu Início.',accept:'Mover para a lixeira'},function(ok){
+        if (!ok || activeNotebookId !== b.id || !notebooks.get(b.id)) { return; }
+        try { if (!checkpoint() || !rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; loadDocument(E.freshDocument()); closeNotebook(); message('Caderno movido para a lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
+      });
     });
     listen(window, 'storage', function (event) { if (event.key === 'escrevaral.astra.notebooks.v1') { renderNotebooks(); var b = activeNotebook(); if (b) { cabinetProject = b.name; if (doc.projectId === b.id) { doc.project = b.name; } updatePath(); } } });
     renderNotebooks(); notebookReady = true;
@@ -3413,11 +3928,12 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); saveSession(); message('Movido para a lixeira. Você pode restaurar pelo menu Início.');
     } catch (e) { message('Não foi possível mover para a lixeira. A folha foi preservada.'); }
   }
-  function cancelDelete() { deleteTarget = null; byId('delete-confirm').hidden = true; byId('trash-toggle').focus(); }
   function askDelete(entry) {
-    deleteTarget = entry; byId('delete-confirm').hidden = false;
-    text(byId('delete-message'), '“' + (entry.title || 'Sem título') + '” será apagada definitivamente do acervo deste aparelho. Não será possível restaurar esta cópia. Arquivos exportados e versões em outras abas não são apagados.');
-    byId('delete-cancel').focus();
+    E.dialog.ask({title:'Excluir definitivamente?',message:'“' + (entry.title || 'Sem título') + '” será apagada definitivamente do acervo deste aparelho. Não será possível restaurar esta cópia. Arquivos exportados e versões em outras abas não são apagados.',accept:'Excluir definitivamente'},function(ok){
+      if (!ok) { return; }
+      try { archive.purge(entry); renderArchive(); byId('trash-toggle').focus(); message('Cópia excluída definitivamente deste acervo.'); }
+      catch (e) { text(byId('archive-status'),e.message); }
+    });
   }
 
   function updatePath() {
@@ -3445,8 +3961,10 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     var area = byId('writing-space');
     if (area.style && window.innerHeight) {
       var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-      area.style.height = Math.max(0, height - 84) + 'px'; byId('gabinete').style.height = Math.max(0, height - 84) + 'px';
+      area.style.height = Math.max(0, height - byId('location-path').offsetHeight - byId('system-bar').offsetHeight) + 'px'; byId('gabinete').style.height = Math.max(0, height - byId('location-path').offsetHeight - byId('system-bar').offsetHeight) + 'px';
       byId('machine-shell').style.height = height + 'px';
+      var topBar=byId('location-path').offsetHeight,bottomBar=byId('system-bar').offsetHeight;
+      panelIds.forEach(function(id){var p=byId(id);p.style.top=topBar+'px';p.style.bottom='auto';p.style.height=Math.max(0,height-topBar-bottomBar)+'px';p.style.maxHeight='none';});
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
       var browser = byId('note-browser');
       if (browser.style) { browser.style.height = window.innerWidth <= 760 && height < 480 ? Math.max(84, height - 108) + 'px' : ''; }
@@ -3469,7 +3987,6 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     panelIds.forEach(function (id, i) { byId(id).hidden = true; byId(panelToggles[i]).setAttribute('aria-expanded', 'false'); });
     activePanel = ''; panelTrigger = null; updatePath();
     byId('panel-backdrop').hidden = true; document.body.setAttribute('data-panel', 'closed');
-    byId('delete-confirm').hidden = true; deleteTarget = null;
     byId('writing-space').removeAttribute('aria-hidden'); byId('gabinete').removeAttribute('aria-hidden');
     if (restore && trigger && trigger.focus) { if (/^start-/.test(trigger.id || '') && byId('start-menu').hidden) { byId('os-start').focus(); } else { trigger.focus(); } } queueSession();
   }
@@ -3672,6 +4189,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     if (!file) { return; }
     if (file.size > 50000000) { message('Traga pacotes de até 50 MB por vez.'); return; }
     if (!notebooks || !archive || !checkpoint()) { message('A gravação precisa estar disponível para importar um caderno.'); return; }
+    function importError(e) { message((e.name === 'QuotaExceededError' ? 'Faltou espaço para importar o pacote.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior foi preservado.'); }
     var reader = new FileReader();
     reader.onerror = function () { message('O arquivo não pôde ser lido. O acervo permanece.'); };
     reader.onload = function () {
@@ -3700,14 +4218,18 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
         var incomingGlobals = Object.keys(payload.globals).filter(function (k) { return k !== sessionKey && k !== 'escrevaral.astra.current'; });
         var notice = 'Importar ' + payload.notebooks.length + ' caderno(s) e ' + payload.documents.length + ' registro(s)? Cadernos já existentes serão preservados; os repetidos entrarão como cópias.';
         if (incomingGlobals.length) { notice += ' Esta cópia completa também restaura as preferências e o calendário geral do arquivo, substituindo os atuais.'; }
-        if (!window.confirm(notice)) { return; }
-        if (!checkpoint() || !rememberNotebook()) { return; }
-        var result = notebooks.bring(payload);
-        activeNotebookId = null; cabinetProject = null; loadDocument(E.freshDocument());
-        closeNotebook(); renderNotebooks(); renderReminders(); renderCabinet(); byId('cabinet-window').hidden = true;
-        if (incomingGlobals.length) { window.location.reload(); return; }
-        message(result.notebooks + ' caderno(s) importado(s), ' + result.documents + ' registro(s)' + (result.copies ? '; ' + result.copies + ' como cópia' : '') + '.');
-      } catch (e) { message((e.name === 'QuotaExceededError' ? 'Faltou espaço para importar o pacote.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior foi preservado.'); }
+        E.dialog.ask({title:'Importar cadernos?',message:notice,accept:'Importar'},function(ok){
+          if (!ok) { return; }
+          try {
+            if (!checkpoint() || !rememberNotebook()) { return; }
+            var result = notebooks.bring(payload);
+            activeNotebookId = null; cabinetProject = null; loadDocument(E.freshDocument());
+            closeNotebook(); renderNotebooks(); renderReminders(); renderCabinet(); byId('cabinet-window').hidden = true;
+            if (incomingGlobals.length) { window.location.reload(); return; }
+            message(result.notebooks + ' caderno(s) importado(s), ' + result.documents + ' registro(s)' + (result.copies ? '; ' + result.copies + ' como cópia' : '') + '.');
+          } catch (e) { importError(e); }
+        });
+      } catch (e) { importError(e); }
     };
     reader.readAsText(file, 'UTF-8');
   }
@@ -3972,7 +4494,6 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   listen(document, 'keydown', function (event) {
     var code = event.keyCode;
     if (code === 27 && composing) { return; }
-    if (code === 27 && !byId('delete-confirm').hidden) { event.preventDefault(); cancelDelete(); return; }
     if (code === 27 && !byId('start-menu').hidden) { event.preventDefault(); toggleStart(false); byId('os-start').focus(); return; }
     if (code === 9) {
       document.body.setAttribute('data-input', 'keyboard');
@@ -4071,10 +4592,8 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   listen(byId('start-settings'), 'click', function () { toggleStart(false); showPanel('mesa', 'mesa-toggle', true); });
   listen(byId('start-projects'), 'click', function () { pathToProjects(true); });
   listen(byId('start-trash'), 'click', function () { toggleStart(false); trashView = true; renderArchive(); showPanel('acervo', 'acervo-toggle', true); });
-  listen(byId('trash-toggle'), 'click', function () { cancelDelete(); trashView = !trashView; renderArchive(); });
+  listen(byId('trash-toggle'), 'click', function () { trashView = !trashView; renderArchive(); });
   listen(byId('trash-current'), 'click', function () { trashEntry(doc); });
-  listen(byId('delete-cancel'), 'click', cancelDelete);
-  listen(byId('delete-accept'), 'click', function () { if (!deleteTarget) { return; } try { archive.purge(deleteTarget); cancelDelete(); renderArchive(); message('Cópia excluída definitivamente deste acervo.'); } catch (e) { text(byId('delete-message'), e.message); } });
   listen(byId('reminder-new'), 'click', function () { if (!archive) { message('Armazenamento indisponível.'); return; } try { var note = E.freshDocument(); note.kind = 'reminder'; note.title = 'Lembrete'; if (activeNotebookId) { note.projectId = activeNotebookId; note.project = activeNotebook().name; } archive.save(note); renderReminders(); } catch (e) { message('Não foi possível guardar o lembrete.'); } });
   listen(manuscript, 'input', queueSession); listen(manuscript, 'keyup', queueSession); listen(manuscript, 'scroll', queueSession); listen(manuscript, 'click', queueSession);
   listen(title, 'input', queueSession);
@@ -4141,10 +4660,20 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   else if (!activeNotebookId) { closeNotebook(); }
   notebookLabels();
 
+  ['window-close','window-minimize','window-maximize','desk-minimize','mesa-close','acervo-close','utility-close','desk-counts-close'].forEach(function(id){byId(id).classList.add('material-key');});
+  E.mountFinish({
+    book: activeNotebook, checkpoint: checkpoint, message: message,
+    prepare: function(){closePanels(false);toggleStart(false);},
+    prepareLock: function(){toggleStart(false);stopSound();stopMachineStrike();finishMachineFeed();},
+    save: function(book){notebooks.update(book.id,{data:book.data});},
+    documents: function(){return cabinetDocuments().documents.filter(function(d){return d.projectId===activeNotebookId&&!d.trashed&&d.kind!=='reminder';});},
+    open: function(entry){if(!checkpoint()){return;}try{var next=archive.get(entry.id);if(!next||next.trashed||next.projectId!==activeNotebookId){message('Este capítulo não está disponível.');return;}loadDocument(next);cabinetSelection=null;enterDesk(true);}catch(e){message('Não foi possível abrir o capítulo.');}}
+  });
+
   E.mountUtilities({
     storage: storage ? notebookStorage() : null, checkpoint: checkpoint, download: download,
     hideStart: function () { toggleStart(false); },
-    show: function (id, trigger) { toggleStart(false); showPanel(id, trigger, true); },
+    show: function (id, trigger) { if (document.body.getAttribute('data-locked') === 'true' || !byId('story-screen').hidden) { return; } toggleStart(false); showPanel(id, trigger, true); },
     close: function () { closePanels(true); },
     write: function () { if (cabinetOpen) { enterDesk(true); } else { closePanels(false); manuscript.focus(); growManuscript(); } },
     documents: function () { return cabinetDocuments().documents.filter(function (d) { return !activeNotebookId || d.projectId === activeNotebookId; }); },

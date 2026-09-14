@@ -1,0 +1,60 @@
+name: Controles e responsividade
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - index.html
+      - escrevaral.html
+      - service-worker.js
+      - tests/**
+      - .github/workflows/controles-qa.yml
+permissions:
+  contents: read
+jobs:
+  interface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ferramentas de QA isoladas do aplicativo
+        run: |
+          npm install --prefix "$RUNNER_TEMP/escrevaral-qa" --no-audit --no-fund playwright@1.55.0 acorn@8.15.0
+          "$RUNNER_TEMP/escrevaral-qa/node_modules/.bin/playwright" install --with-deps chromium webkit
+          echo "NODE_PATH=$RUNNER_TEMP/escrevaral-qa/node_modules" >> "$GITHUB_ENV"
+          echo "QA_OUTPUT=$GITHUB_WORKSPACE/qa-output" >> "$GITHUB_ENV"
+          mkdir -p qa-output
+      - name: Sintaxe, pacotes e vínculos
+        run: |
+          node tests/controles-static.cjs
+          node tests/cadernos.cjs
+          node tests/universo.cjs
+      - name: Fluxos anteriores e offline
+        run: |
+          node tests/cadernos-browser.cjs
+          node tests/universo-browser.cjs
+      - name: Confirmações e altura útil — Chromium
+        run: node tests/controles-browser.cjs
+      - name: Confirmações e altura útil — WebKit
+        env:
+          BROWSER_ENGINE: webkit
+        run: node tests/controles-browser.cjs
+      - name: Prévia visual nos logs (dados fictícios)
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path');
+          for(const name of ['chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
+            const file=path.join(process.env.QA_OUTPUT,name+'.png');
+            if(fs.existsSync(file))console.log('QA_IMAGE:'+name+':'+fs.readFileSync(file).toString('base64'));
+          }
+          NODE
+      - name: Capturas para revisão
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: controles-responsividade
+          path: qa-output/
+          retention-days: 7

@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260914-scrvrl-acabamento-v6">
+  <meta name="asset-version" content="20260914-scrvrl-controles-v6-1">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -1706,6 +1706,138 @@ SOFTWARE.
 @media print { .finish-screen,#screen-lock { display:none !important; } body[data-locked="true"] > * { display:none !important; } }
 
 </style>
+<style>
+/* Controles e diálogos: papel, tinta e relevo curto; sem renderização 3D. */
+@media screen {
+ #system-bar #os-start,
+ #system-bar #os-start[aria-expanded="true"],
+ body[data-theme="escuro"] #system-bar #os-start,
+ body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] {
+  position:relative; width:88px; min-width:88px; height:44px; min-height:44px;
+  padding:2px 4px 7px; border:1px solid #667360; border-radius:3px;
+  background:#8c9b8a; color:#161917;
+  box-shadow:inset 1px 0 0 #b3c2b1,inset -2px 0 0 #7e8c78,0 1px 0 #667360;
+ }
+ #system-bar #os-start .start-key {
+  display:block; position:relative; top:0; padding:7px 10px 6px;
+  border:1px solid #83917c; border-top-color:#f3f8f0; border-bottom:2px solid #75836f;
+  border-radius:2px; background:#d8e5d6;
+  background:linear-gradient(180deg,#f3f8f0 0%,#d8e5d6 38%,#b8c8b6 100%);
+  color:#161917; font:600 15px/18px 'Oswald',Arial,sans-serif; letter-spacing:.6px;
+  text-shadow:0 1px 0 #f3f8f0;
+  box-shadow:inset 0 1px 0 #fff,0 2px 3px rgba(30,35,32,.2);
+ }
+ #system-bar #os-start:active .start-key,
+ #system-bar #os-start[aria-expanded="true"] .start-key {
+  top:3px; background:#b3c2b1; color:#161917;
+  box-shadow:inset 0 1px 2px rgba(30,35,32,.25); border-top-color:#a2b39d;
+ }
+ body[data-theme="escuro"] #system-bar #os-start,
+ body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] {
+  background:#171d17; border-color:#63745b; box-shadow:inset 1px 0 0 #364236,0 1px 0 #111511;
+ }
+ body[data-theme="escuro"] #system-bar #os-start .start-key {
+  background:#263026; background:linear-gradient(180deg,#364236 0%,#263026 40%,#1c231c 100%);
+  color:#d8e4d6; border-color:#141814; border-top-color:#667760; border-bottom-color:#0d100d;
+  box-shadow:inset 0 1px 0 #50614a,0 2px 3px #111511; text-shadow:0 -1px 0 #0f130f;
+ }
+ body[data-theme="escuro"] #system-bar #os-start:active .start-key,
+ body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] .start-key {
+  background:#181f18; color:#d8e4d6; border-top-color:#141814; box-shadow:inset 0 2px 3px #111511;
+ }
+ #system-bar #os-start:focus { outline:2px dashed currentColor; outline-offset:2px; }
+ #system-bar #pomodoro-task:not([hidden]) { display:block; }
+ .sheet,body[data-view="gabinete"] .sheet,body[data-view="mesa"] .sheet {
+  top:44px; bottom:52px; max-height:calc(100% - 96px); overflow-y:auto;
+  scrollbar-width:thin; -webkit-overflow-scrolling:touch;
+ }
+ .sheet::-webkit-scrollbar { width:6px; height:6px; }
+ .sheet::-webkit-scrollbar-thumb { background:#7c8b78; }
+ #focus-pause.sheet { left:0; right:0; width:auto; max-width:none; margin:0; padding:20px 24px; }
+ #focus-pause .focus-center { margin:20px auto; }
+ #focus-pause .focus-header { flex-wrap:wrap; }
+ #focus-pause .focus-challenge { padding:16px 20px; margin-top:16px; }
+ #focus-pause .focus-challenge blockquote { margin:12px 0; }
+ #focus-pause .focus-challenge blockquote p { margin:0 0 12px; }
+ #focus-pause #focus-form { display:flex; flex-wrap:wrap; justify-content:center; }
+ #focus-pause #focus-form label { width:100%; }
+ #focus-pause #focus-form input { flex:1 1 160px; width:160px; max-width:240px; min-width:0; }
+ #focus-pause #focus-form button { flex:0 0 auto; margin:0; }
+ #focus-pause #focus-answer-status:empty { margin:0; }
+ #focus-pause[data-mode="ready"] .focus-center { margin:16px auto; }
+ #focus-pause[data-mode="ready"] .focus-clock-shell { padding:10px 20px; }
+ #focus-pause[data-mode="ready"] .focus-digit { width:64px; height:92px; }
+ #focus-pause[data-mode="ready"] .focus-digit .sd span { font-size:68px; line-height:92px; }
+ #focus-pause[data-mode="ready"] .focus-colon { font-size:36px; }
+ #app-dialog { position:fixed; z-index:4000; top:0; right:0; bottom:0; left:0;
+  padding:48px 16px 24px; overflow:auto; -webkit-overflow-scrolling:touch;
+  background:rgba(20,27,20,.48); color:#1e2320; }
+ #app-dialog[hidden] { display:none !important; }
+ .app-dialog-card { position:relative; width:100%; max-width:480px; margin:0 auto; padding:24px;
+  border:1px solid #65735f; background:#c4cfc2; box-shadow:0 4px 0 rgba(20,27,20,.22);
+  word-wrap:break-word; overflow-wrap:break-word; }
+ .dialog-register { position:absolute; font:14px/1 monospace; opacity:.5; pointer-events:none; }
+ .dialog-register.tl { top:4px; left:5px; }.dialog-register.tr { top:4px; right:5px; }
+ .dialog-register.bl { bottom:4px; left:5px; }.dialog-register.br { bottom:4px; right:5px; }
+ .app-dialog-brand { display:flex; align-items:center; justify-content:space-between;
+  padding-bottom:14px; margin-bottom:20px; border-bottom:1px dashed #889784;
+  font:600 18px/1.2 'Oswald',Arial,sans-serif; }
+ .app-dialog-brand b { border:1px solid currentColor; padding:0 2px; margin-left:2px; }
+ .app-dialog-brand small { font:11px/1.4 Arial,sans-serif; letter-spacing:1px; }
+ #app-dialog h2 { font:600 26px/1.25 'Oswald',Arial,sans-serif; margin:0 0 16px; }
+ #app-dialog-message { font:16px/1.6 'Noto Serif',Georgia,serif; margin:0 0 24px; white-space:pre-line; }
+ .app-dialog-actions { display:flex; justify-content:flex-end; flex-wrap:wrap; border-top:1px dashed #889784; padding-top:16px; }
+ #app-dialog button { min-height:44px; padding:10px 16px; font:14px/1.4 Arial,sans-serif; margin:4px 0 0 8px; }
+ #app-dialog-cancel { color:inherit; border:1px solid #65735f; background:transparent; }
+ #app-dialog-accept { background:#263026; color:#d8e4d6; border:1px solid #141814; border-bottom:3px solid #0d100d;
+  box-shadow:inset 0 1px 0 #50614a; border-radius:2px; }
+ #app-dialog-accept:active { background:#181f18; box-shadow:inset 0 2px 2px #111511; }
+ #app-dialog button:focus { outline:2px dashed currentColor; outline-offset:3px; }
+ body[data-theme="escuro"] .app-dialog-card { background:#293327; color:#d8e4d6; border-color:#879c80; }
+ body[data-theme="escuro"] #app-dialog-cancel { border-color:#879c80; }
+ body[data-theme="escuro"] #app-dialog-accept { background:#d1ded0; color:#161917; border-color:#879c80; border-bottom-color:#65735f; box-shadow:inset 0 1px 0 #f3f8f0; }
+ @media(max-height:740px) {
+  #focus-pause.sheet { padding:12px 20px; }
+  #focus-pause .focus-header { padding-bottom:10px; }
+  #focus-pause .focus-center { margin:14px auto; }
+  #focus-pause .focus-clock-shell { padding:12px 20px; }
+  #focus-pause .focus-digit { width:64px; height:92px; }
+  #focus-pause .focus-digit .sd span { font-size:68px; line-height:92px; }
+  #focus-pause .focus-colon { font-size:36px; }
+ }
+ @media(max-width:600px) {
+  #focus-pause.sheet { padding:12px; }
+  #focus-pause .focus-header h2 { margin:8px 0 0; }
+  #focus-pause .focus-challenge { padding:12px; }
+  #focus-pause .focus-challenge blockquote { font-size:18px; }
+  #focus-pause .focus-clock-shell,#focus-pause[data-mode="ready"] .focus-clock-shell { padding:10px 8px; }
+  #focus-pause .focus-digit,#focus-pause[data-mode="ready"] .focus-digit { width:44px; height:68px; margin:0 1px; }
+  #focus-pause .focus-digit .sd span,#focus-pause[data-mode="ready"] .focus-digit .sd span { font-size:50px; line-height:68px; }
+  #focus-pause .focus-colon,#focus-pause[data-mode="ready"] .focus-colon { font-size:28px; padding:0 4px; }
+  #app-dialog { padding:16px 12px; }
+  .app-dialog-card { padding:20px; }
+  .app-dialog-actions { justify-content:stretch; }
+  #app-dialog button { flex:1 1 100px; margin:4px; }
+  #system-bar .os-tasks { flex-shrink:1; }
+  #system-bar #os-window-task { max-width:90px; min-width:0; }
+  #system-bar #pomodoro-task { max-width:80px; overflow:hidden; text-overflow:ellipsis; margin-right:4px; }
+  #system-bar #cabinet-return { max-width:88px; overflow:hidden; text-overflow:ellipsis; margin-left:auto; }
+  #system-bar #screen-lock { margin-left:4px; }
+ }
+ @media(max-width:380px) {
+  #system-bar #os-window-task { max-width:62px; padding-left:4px; padding-right:4px; }
+  #system-bar #pomodoro-task { max-width:66px; padding-left:4px; padding-right:4px; }
+  #system-bar #cabinet-return { max-width:48px; padding-left:2px; padding-right:2px; }
+ }
+ @media(max-height:480px) {
+  #app-dialog { padding:12px; }
+  .app-dialog-card { padding:16px; }
+  .app-dialog-brand { padding-bottom:8px; margin-bottom:12px; }
+  #focus-pause.sheet { padding:10px 12px; }
+ }
+}
+@media print { #app-dialog { display:none !important; } }
+</style>
 </head>
 <body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
 <section id="story-screen" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="story-heading" tabindex="-1" hidden>
@@ -1715,6 +1847,16 @@ SOFTWARE.
  <div id="story-list"></div><div id="story-pagination" class="story-pagination"></div>
  <section id="story-editor" hidden><h3 id="story-editor-heading"></h3><form id="story-form"></form><p id="story-form-status" role="status"></p></section>
 </section>
+
+<div id="app-dialog" hidden>
+ <section class="app-dialog-card" role="alertdialog" aria-modal="true" aria-labelledby="app-dialog-heading" aria-describedby="app-dialog-message" tabindex="-1">
+  <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span><span class="dialog-register bl" aria-hidden="true">+</span><span class="dialog-register br" aria-hidden="true">+</span>
+  <div class="app-dialog-brand" aria-hidden="true"><span>ESCREVA<b>RAL</b></span><small>GABINETE DE ESCRITA</small></div>
+  <h2 id="app-dialog-heading"></h2><p id="app-dialog-message"></p>
+  <div class="app-dialog-actions"><button id="app-dialog-cancel" type="button">Cancelar</button><button id="app-dialog-accept" type="button"></button></div>
+ </section>
+</div>
+
 <section id="lock-curtain" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="lock-heading" tabindex="-1" hidden>
  <div class="lock-card"><h2 id="lock-heading">Gabinete fechado</h2><p>O escritor já volta.</p>
  <div class="author-keychain"><button id="keychain-ring" aria-label="Argola do chaveiro — abrir gabinete"></button><strong id="keychain-name">ESCREVA[RAL]</strong><small>OFICINA AUTORAL · SCRVRL OS</small><div class="grife-barcode" aria-hidden="true"></div><small>ORIGINAIS SOB CUSTÓDIA</small></div>
@@ -1860,7 +2002,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="acervo-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SUAS FOLHAS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
     <div class="archive-intro"><p class="quiet">Um lugar para voltar aos seus textos.</p><button id="new-document">+ Nova folha</button></div>
-    <button id="trash-toggle" aria-pressed="false">Lixeira</button><div id="delete-confirm" role="alertdialog" aria-labelledby="delete-heading" aria-describedby="delete-message" hidden=""><h3 id="delete-heading">Excluir definitivamente?</h3><p id="delete-message"></p><button id="delete-cancel">Cancelar</button><button id="delete-accept">Excluir definitivamente</button></div><p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
+    <button id="trash-toggle" aria-pressed="false">Lixeira</button><p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
   </section>
   <section id="oficina" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="oficina-heading">
     <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
@@ -2948,7 +3090,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     var quotes=[{q:'Penso, logo existo.',a:'René Descartes'},{q:'Tudo vale a pena se a alma não é pequena.',a:'Fernando Pessoa'},{q:'Ser ou não ser, eis a questão.',a:'William Shakespeare'}];
     function saveTimer(){try{if(!storage){throw new Error('storage');}storage.setItem(timerKey,JSON.stringify(state));}catch(e){status('O relógio segue nesta sessão; não foi possível guardar seu estado.');}}
     function formatTime(seconds){return pad(Math.floor(seconds/60))+':'+pad(seconds%60);}
-    function showFocus(){bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();}
+    function showFocus(){if(E.dialog&&E.dialog.isOpen()||document.body.getAttribute('data-locked')==='true'){return;}bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();byId('focus-pause').scrollTop=0;}
     function flipDigit(d,next){
       if(d.getAttribute('data-digit')===next){return;}
       var old=d.getAttribute('data-digit');
@@ -2967,7 +3109,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       byId('pomodoro-start').hidden=state.mode!=='idle';byId('pomodoro-stop').hidden=state.mode==='idle';byId('pomodoro-pause').hidden=state.mode==='idle'||state.mode==='ready';
       byId('pomodoro-work').disabled=byId('pomodoro-break').disabled=state.mode!=='idle';text(byId('pomodoro-pause'),state.paused?'Retomar contagem':'Pausar contagem');
       text(byId('focus-status'),state.mode==='ready'?'A pausa terminou. Volte quando quiser.':'Afaste os olhos da tela. A escrita pode esperar.');
-      byId('focus-challenge').hidden=state.mode!=='ready';
+      byId('focus-pause').setAttribute('data-mode',state.mode);byId('focus-challenge').hidden=state.mode!=='ready';
       if(state.mode==='ready'){text(byId('focus-quote'),'“'+quotes[state.quote].q+'”');text(byId('focus-author'),quotes[state.quote].a);}
     }
     function tick(){
@@ -3082,6 +3224,75 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
 
 </script>
 <script>
+
+/* Confirmação ES5: continuação explícita, sem substituir window.confirm. */
+(function (root) {
+ 'use strict';
+ var E=root.Escr,D=root.document,layer=D.getElementById('app-dialog'),card=layer.querySelector('.app-dialog-card');
+ var cancel=D.getElementById('app-dialog-cancel'),accept=D.getElementById('app-dialog-accept');
+ var pending=null,previous=null,hidden=[];
+ function visible(n){return n&&D.documentElement.contains(n)&&n.getClientRects().length&&!n.disabled;}
+ function fit(){
+  if(layer.hidden){return;}
+  var v=root.visualViewport,h=v?v.height:root.innerHeight,y=v?v.offsetTop:0;
+  layer.style.top=y+'px';layer.style.height=h+'px';layer.style.bottom='auto';
+  layer.style.paddingTop=Math.max(16,Math.floor((h-card.offsetHeight)/2))+'px';
+ }
+ function finish(ok){
+  if(!pending){return;}
+  var done=pending;pending=null;layer.hidden=true;
+  hidden.forEach(function(p){if(p[1]===null){p[0].removeAttribute('aria-hidden');}else{p[0].setAttribute('aria-hidden',p[1]);}});
+  hidden=[];
+  if(visible(previous)){previous.focus();}else{D.getElementById('os-start').focus();}
+  previous=null;done(ok);
+ }
+ E.dialog={
+  isOpen:function(){return !!pending;},
+  ask:function(options,done){
+   if(pending){done(false);return;}
+   if(D.body.getAttribute('data-locked')==='true'){done(false);return;}
+   previous=D.activeElement;pending=done;
+   D.getElementById('app-dialog-heading').textContent=options.title||'Confirmar ação';
+   D.getElementById('app-dialog-message').textContent=options.message;
+   accept.textContent=options.accept||'Confirmar';
+   layer.hidden=false;fit();layer.scrollTop=0;cancel.focus();
+   hidden=[];
+   for(var i=0;i<D.body.children.length;i+=1){
+    var n=D.body.children[i];
+    if(n!==layer&&n.tagName!=='SCRIPT'&&n.tagName!=='STYLE'){
+     hidden.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');
+    }
+   }
+  }
+ };
+ /* Captura no window: o diálogo tem precedência sobre os atalhos do app e do universo. */
+ function trap(e){
+  if(!pending){return;}
+  var inside=card.contains(e.target),key=e.keyCode;
+  if(e.type==='focusin'){
+   if(!inside){e.stopImmediatePropagation();cancel.focus();}return;
+  }
+  if(e.type==='keydown'){
+   e.stopImmediatePropagation();
+   if(key===27){e.preventDefault();finish(false);return;}
+   if(key===9){e.preventDefault();(D.activeElement===cancel?accept:cancel).focus();return;}
+   if(key===13||key===32){e.preventDefault();if(D.activeElement===accept){finish(true);}else if(D.activeElement===cancel){finish(false);}return;}
+   if(e.ctrlKey||e.metaKey){e.preventDefault();}return;
+  }
+  if(e.type==='click'){
+   e.preventDefault();e.stopImmediatePropagation();
+   if(e.target===cancel){finish(false);}else if(e.target===accept){finish(true);}return;
+  }
+  if(!inside){e.preventDefault();e.stopImmediatePropagation();}
+  else if(e.type==='keyup'||e.type==='keypress'){e.stopImmediatePropagation();}
+ }
+ ['keydown','keyup','keypress','click','dblclick','mousedown','touchstart','focusin'].forEach(function(k){root.addEventListener(k,trap,true);});
+ root.addEventListener('resize',fit,false);
+ if(root.visualViewport){root.visualViewport.addEventListener('resize',fit,false);root.visualViewport.addEventListener('scroll',fit,false);}
+}(window));
+
+</script>
+<script>
 /* Apresentação do universo: apenas a consulta aberta ocupa o DOM. */
 (function (root) {
  'use strict';
@@ -3104,7 +3315,9 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   }
   function formVisible(show){byId('story-editor').hidden=!show;byId('story-list').hidden=show;byId('story-actions').hidden=show;byId('story-pagination').hidden=show;byId('story-chapters').disabled=byId('story-events').disabled=byId('story-records').disabled=show;}
   function cancelEdit(){editing=null;formVisible(false);byId('story-form').textContent='';render();panel.focus();}
-  function close(){if(editing&&!root.confirm('Descartar as alterações desta ficha?')){return false;}panel.hidden=true;editing=null;byId('story-form').textContent='';byId('story-list').textContent='';docs=[];if(returnFocus&&D.documentElement.contains(returnFocus)&&returnFocus.getClientRects().length){returnFocus.focus();}else{byId('os-start').focus();}return true;}
+  function closeNow(){panel.hidden=true;editing=null;byId('story-form').textContent='';byId('story-list').textContent='';docs=[];if(returnFocus&&D.documentElement.contains(returnFocus)&&returnFocus.getClientRects().length){returnFocus.focus();}else{byId('os-start').focus();}return true;}
+  function discardEdit(done){var pendingEdit=editing;E.dialog.ask({title:'Descartar alterações?',message:'As alterações desta ficha ainda não foram guardadas.',accept:'Descartar'},function(ok){if(ok&&editing===pendingEdit){done();}});}
+  function close(){if(editing){discardEdit(closeNow);return false;}return closeNow();}
   function open(){if(!bridge.checkpoint()){return;}var b=bridge.book();if(!b){bridge.message('Abra um caderno para consultar capítulos, acontecimentos e fichas.');return;}try{story=E.story.read(b.data);}catch(e){bridge.message(e.message);return;}returnFocus=D.activeElement;bridge.prepare();book=b;mode='chapters';page=0;editing=null;reload();panel.hidden=false;formVisible(false);text(byId('story-heading'),book.name);render();byId('story-chapters').focus();}
   function openChapter(d){if(close()){bridge.open(d);}}
   function orderedDocs(){var order=story.chapters.map(function(x){return x.noteId;});return docs.slice().sort(function(a,b){var ai=order.indexOf(key(a)),bi=order.indexOf(key(b));if(ai>=0||bi>=0){return (ai<0?order.length:ai)-(bi<0?order.length:bi);}return Date.parse(a.created||a.updated)-Date.parse(b.created||b.updated);});}
@@ -3135,7 +3348,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
    if(kind==='scenes'){field(form,'Título da cena','title',item.title).required=true;field(form,'Resumo (opcional)','summary',item.summary,true,4000);field(form,'Quando na história (opcional)','when',item.when);var label=el('label',form,'Capítulo'),select=el('select',label);select.name='chapter';select.id='story-field-chapter';var opt=el('option',select,'Ainda sem capítulo');opt.value='';orderedDocs().forEach(function(d){var option=el('option',select,d.title||'Sem título');option.value=key(d);});select.value=getDoc(item.chapter)?item.chapter:'';}
    if(kind==='scenes'||kind==='chapters'){tags(form,'characters',item.characters||[]);tags(form,'settings',item.settings||[]);}
    var submit=el('button',form,'Guardar');submit.type='submit';submit.className='material-key';button(form,'Cancelar',cancelEdit);
-   if(k&&kind!=='chapters'){button(form,'Excluir ficha',function(){if(root.confirm('Excluir este registro e seus vínculos? O texto dos capítulos será preservado.')){if(save(E.story.remove(story,kind,k))){cancelEdit();}}});}
+   if(k&&kind!=='chapters'){button(form,'Excluir ficha',function(){E.dialog.ask({title:'Excluir ficha?',message:'Este registro e seus vínculos serão excluídos. O texto dos capítulos será preservado.',accept:'Excluir ficha'},function(ok){if(ok&&save(E.story.remove(story,kind,k))){cancelEdit();}});});}
    var first=form.querySelector('input,select,textarea,button');if(first){first.focus();}
   }
   on(byId('story-form'),'submit',function(event){event.preventDefault();if(!editing){return;}var form=this,kind=editing.kind,next=clone(story),item={},k=editing.id;
@@ -3150,11 +3363,11 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   function unlock(){locked=false;curtain.hidden=true;D.body.removeAttribute('data-locked');hiddenNodes.forEach(function(p){if(p[1]===null){p[0].removeAttribute('aria-hidden');}else{p[0].setAttribute('aria-hidden',p[1]);}});hiddenNodes=[];byId('lock-password').value='';try{root.sessionStorage.removeItem('escrevaral.curtain');}catch(ignore){}if(lockFocus&&D.documentElement.contains(lockFocus)){lockFocus.focus();}}
   on(byId('screen-lock'),'click',lock);on(byId('keychain-ring'),'click',unlock);on(byId('lock-form'),'submit',function(e){e.preventDefault();byId('lock-password').value='';text(byId('lock-message'),'O gabinete continua fechado.');});
   /* Captura antes dos atalhos existentes; sem inert/dialog obrigatórios. */
-  function trap(event){var modal=locked?curtain:!panel.hidden?panel:null;if(!modal){return;}var inside=modal.contains(event.target);
+  function trap(event){if(E.dialog.isOpen()){return;}var modal=locked?curtain:!panel.hidden?panel:null;if(!modal){return;}var inside=modal.contains(event.target);
    if(!inside){event.preventDefault();event.stopImmediatePropagation();if(event.type==='focusin'){(locked?byId('lock-password'):byId('story-close')).focus();}return;}
    if(event.type==='keydown'){
     event.stopPropagation();var code=event.keyCode;
-    if(code===27){event.preventDefault();if(!locked){if(editing){if(root.confirm('Descartar as alterações desta ficha?')){cancelEdit();}}else{close();}}}
+    if(code===27){event.preventDefault();if(!locked){if(editing){discardEdit(cancelEdit);}else{close();}}}
     if(code===9){D.body.setAttribute('data-input','keyboard');var nodes=modal.querySelectorAll('button,input,select,textarea,[tabindex="0"]'),items=[],j;for(j=0;j<nodes.length;j+=1){if(!nodes[j].disabled&&nodes[j].getClientRects().length){items.push(nodes[j]);}}var first=items[0],last=items[items.length-1];if(event.shiftKey&&(D.activeElement===first||D.activeElement===modal)){event.preventDefault();last.focus();}else if(!event.shiftKey&&(D.activeElement===last||D.activeElement===modal)){event.preventDefault();first.focus();}}
     if((event.ctrlKey||event.metaKey)&&[13,75,83].indexOf(code)>=0){event.preventDefault();}
    }
@@ -3303,7 +3516,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task'];
   var projectScope = false, readingSize = 21;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
-  var trashView = false, sessionReady = false, sessionTimer = null, deleteTarget = null, sessionKey = 'escrevaral.astra.session.v1';
+  var trashView = false, sessionReady = false, sessionTimer = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
   var lensButtons = document.querySelectorAll('[data-lens]');
@@ -3424,8 +3637,10 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     listen(byId('desk-minimize'), 'click', closeNotebook);
     listen(byId('notebook-trash'), 'click', function () {
       if (!checkpoint()) { return; } var b = activeNotebook(); if (!b) { return; }
-      if (!window.confirm('Mover o caderno “' + b.name + '” e todo o seu conteúdo para a lixeira? Você poderá restaurá-lo pelo menu Início.')) { return; }
-      try { if (!rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; loadDocument(E.freshDocument()); closeNotebook(); message('Caderno movido para a lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
+      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todo o seu conteúdo. Você poderá restaurá-lo pelo menu Início.',accept:'Mover para a lixeira'},function(ok){
+        if (!ok || activeNotebookId !== b.id || !notebooks.get(b.id)) { return; }
+        try { if (!checkpoint() || !rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; loadDocument(E.freshDocument()); closeNotebook(); message('Caderno movido para a lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
+      });
     });
     listen(window, 'storage', function (event) { if (event.key === 'escrevaral.astra.notebooks.v1') { renderNotebooks(); var b = activeNotebook(); if (b) { cabinetProject = b.name; if (doc.projectId === b.id) { doc.project = b.name; } updatePath(); } } });
     renderNotebooks(); notebookReady = true;
@@ -3713,11 +3928,12 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); saveSession(); message('Movido para a lixeira. Você pode restaurar pelo menu Início.');
     } catch (e) { message('Não foi possível mover para a lixeira. A folha foi preservada.'); }
   }
-  function cancelDelete() { deleteTarget = null; byId('delete-confirm').hidden = true; byId('trash-toggle').focus(); }
   function askDelete(entry) {
-    deleteTarget = entry; byId('delete-confirm').hidden = false;
-    text(byId('delete-message'), '“' + (entry.title || 'Sem título') + '” será apagada definitivamente do acervo deste aparelho. Não será possível restaurar esta cópia. Arquivos exportados e versões em outras abas não são apagados.');
-    byId('delete-cancel').focus();
+    E.dialog.ask({title:'Excluir definitivamente?',message:'“' + (entry.title || 'Sem título') + '” será apagada definitivamente do acervo deste aparelho. Não será possível restaurar esta cópia. Arquivos exportados e versões em outras abas não são apagados.',accept:'Excluir definitivamente'},function(ok){
+      if (!ok) { return; }
+      try { archive.purge(entry); renderArchive(); byId('trash-toggle').focus(); message('Cópia excluída definitivamente deste acervo.'); }
+      catch (e) { text(byId('archive-status'),e.message); }
+    });
   }
 
   function updatePath() {
@@ -3747,6 +3963,8 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
       area.style.height = Math.max(0, height - byId('location-path').offsetHeight - byId('system-bar').offsetHeight) + 'px'; byId('gabinete').style.height = Math.max(0, height - byId('location-path').offsetHeight - byId('system-bar').offsetHeight) + 'px';
       byId('machine-shell').style.height = height + 'px';
+      var topBar=byId('location-path').offsetHeight,bottomBar=byId('system-bar').offsetHeight;
+      panelIds.forEach(function(id){var p=byId(id);p.style.top=topBar+'px';p.style.bottom='auto';p.style.height=Math.max(0,height-topBar-bottomBar)+'px';p.style.maxHeight='none';});
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
       var browser = byId('note-browser');
       if (browser.style) { browser.style.height = window.innerWidth <= 760 && height < 480 ? Math.max(84, height - 108) + 'px' : ''; }
@@ -3769,7 +3987,6 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     panelIds.forEach(function (id, i) { byId(id).hidden = true; byId(panelToggles[i]).setAttribute('aria-expanded', 'false'); });
     activePanel = ''; panelTrigger = null; updatePath();
     byId('panel-backdrop').hidden = true; document.body.setAttribute('data-panel', 'closed');
-    byId('delete-confirm').hidden = true; deleteTarget = null;
     byId('writing-space').removeAttribute('aria-hidden'); byId('gabinete').removeAttribute('aria-hidden');
     if (restore && trigger && trigger.focus) { if (/^start-/.test(trigger.id || '') && byId('start-menu').hidden) { byId('os-start').focus(); } else { trigger.focus(); } } queueSession();
   }
@@ -3972,6 +4189,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     if (!file) { return; }
     if (file.size > 50000000) { message('Traga pacotes de até 50 MB por vez.'); return; }
     if (!notebooks || !archive || !checkpoint()) { message('A gravação precisa estar disponível para importar um caderno.'); return; }
+    function importError(e) { message((e.name === 'QuotaExceededError' ? 'Faltou espaço para importar o pacote.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior foi preservado.'); }
     var reader = new FileReader();
     reader.onerror = function () { message('O arquivo não pôde ser lido. O acervo permanece.'); };
     reader.onload = function () {
@@ -4000,14 +4218,18 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
         var incomingGlobals = Object.keys(payload.globals).filter(function (k) { return k !== sessionKey && k !== 'escrevaral.astra.current'; });
         var notice = 'Importar ' + payload.notebooks.length + ' caderno(s) e ' + payload.documents.length + ' registro(s)? Cadernos já existentes serão preservados; os repetidos entrarão como cópias.';
         if (incomingGlobals.length) { notice += ' Esta cópia completa também restaura as preferências e o calendário geral do arquivo, substituindo os atuais.'; }
-        if (!window.confirm(notice)) { return; }
-        if (!checkpoint() || !rememberNotebook()) { return; }
-        var result = notebooks.bring(payload);
-        activeNotebookId = null; cabinetProject = null; loadDocument(E.freshDocument());
-        closeNotebook(); renderNotebooks(); renderReminders(); renderCabinet(); byId('cabinet-window').hidden = true;
-        if (incomingGlobals.length) { window.location.reload(); return; }
-        message(result.notebooks + ' caderno(s) importado(s), ' + result.documents + ' registro(s)' + (result.copies ? '; ' + result.copies + ' como cópia' : '') + '.');
-      } catch (e) { message((e.name === 'QuotaExceededError' ? 'Faltou espaço para importar o pacote.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior foi preservado.'); }
+        E.dialog.ask({title:'Importar cadernos?',message:notice,accept:'Importar'},function(ok){
+          if (!ok) { return; }
+          try {
+            if (!checkpoint() || !rememberNotebook()) { return; }
+            var result = notebooks.bring(payload);
+            activeNotebookId = null; cabinetProject = null; loadDocument(E.freshDocument());
+            closeNotebook(); renderNotebooks(); renderReminders(); renderCabinet(); byId('cabinet-window').hidden = true;
+            if (incomingGlobals.length) { window.location.reload(); return; }
+            message(result.notebooks + ' caderno(s) importado(s), ' + result.documents + ' registro(s)' + (result.copies ? '; ' + result.copies + ' como cópia' : '') + '.');
+          } catch (e) { importError(e); }
+        });
+      } catch (e) { importError(e); }
     };
     reader.readAsText(file, 'UTF-8');
   }
@@ -4272,7 +4494,6 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   listen(document, 'keydown', function (event) {
     var code = event.keyCode;
     if (code === 27 && composing) { return; }
-    if (code === 27 && !byId('delete-confirm').hidden) { event.preventDefault(); cancelDelete(); return; }
     if (code === 27 && !byId('start-menu').hidden) { event.preventDefault(); toggleStart(false); byId('os-start').focus(); return; }
     if (code === 9) {
       document.body.setAttribute('data-input', 'keyboard');
@@ -4371,10 +4592,8 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   listen(byId('start-settings'), 'click', function () { toggleStart(false); showPanel('mesa', 'mesa-toggle', true); });
   listen(byId('start-projects'), 'click', function () { pathToProjects(true); });
   listen(byId('start-trash'), 'click', function () { toggleStart(false); trashView = true; renderArchive(); showPanel('acervo', 'acervo-toggle', true); });
-  listen(byId('trash-toggle'), 'click', function () { cancelDelete(); trashView = !trashView; renderArchive(); });
+  listen(byId('trash-toggle'), 'click', function () { trashView = !trashView; renderArchive(); });
   listen(byId('trash-current'), 'click', function () { trashEntry(doc); });
-  listen(byId('delete-cancel'), 'click', cancelDelete);
-  listen(byId('delete-accept'), 'click', function () { if (!deleteTarget) { return; } try { archive.purge(deleteTarget); cancelDelete(); renderArchive(); message('Cópia excluída definitivamente deste acervo.'); } catch (e) { text(byId('delete-message'), e.message); } });
   listen(byId('reminder-new'), 'click', function () { if (!archive) { message('Armazenamento indisponível.'); return; } try { var note = E.freshDocument(); note.kind = 'reminder'; note.title = 'Lembrete'; if (activeNotebookId) { note.projectId = activeNotebookId; note.project = activeNotebook().name; } archive.save(note); renderReminders(); } catch (e) { message('Não foi possível guardar o lembrete.'); } });
   listen(manuscript, 'input', queueSession); listen(manuscript, 'keyup', queueSession); listen(manuscript, 'scroll', queueSession); listen(manuscript, 'click', queueSession);
   listen(title, 'input', queueSession);
