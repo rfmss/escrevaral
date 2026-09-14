@@ -41,6 +41,16 @@ jobs:
         env:
           BROWSER_ENGINE: webkit
         run: node tests/controles-browser.cjs
+      - name: Prévia visual nos logs (dados fictícios)
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path');
+          for(const name of ['chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
+            const file=path.join(process.env.QA_OUTPUT,name+'.png');
+            if(fs.existsSync(file))console.log('QA_IMAGE:'+name+':'+fs.readFileSync(file).toString('base64'));
+          }
+          NODE
       - name: Capturas para revisão
         if: always()
         uses: actions/upload-artifact@v4

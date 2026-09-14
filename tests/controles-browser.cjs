@@ -38,7 +38,7 @@ async function footer(p){
  const context=await browser.newContext({viewport:{width:1366,height:650},serviceWorkers:'block',hasTouch:true});
  const p=await context.newPage();p.setDefaultTimeout(10000);
  p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>{errors.push('Native dialog '+d.type());d.dismiss();});
- await p.goto(url);await create(p,'Meu primeiro livro');
+ await p.goto(url);await p.locator('#os-start').screenshot({path:path.join(out,engine+'-inicio.png')});await create(p,'Meu primeiro livro');
  // Real notebook trash: no write on open/cancel, explicit action on confirm.
  const original=await p.evaluate(()=>localStorage.getItem('escrevaral.astra.notebooks.v1'));
  await p.click('#notebook-trash');
@@ -68,7 +68,7 @@ async function footer(p){
  await p.click('#app-dialog-cancel');assert.equal(await p.locator('.notebook-cover').count(),1);
  await p.setInputFiles('#import-file',{name:'teste.scrvrl',mimeType:'application/json',buffer:packet});
  await p.waitForSelector('#app-dialog:not([hidden])');
- await p.evaluate(()=>{window.savedSetItem=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){throw new DOMException('quota','QuotaExceededError');};});
+ await p.evaluate(()=>{window.savedSetItem=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==='escrevaral.astra.notebooks.transaction.v1')throw new DOMException('quota','QuotaExceededError');return window.savedSetItem.call(this,k,v);};});
  await p.click('#app-dialog-accept');
  assert.ok((await p.locator('#cabinet-status').textContent()).includes('Faltou espaço'));
  await p.evaluate(()=>{Storage.prototype.setItem=window.savedSetItem;});
