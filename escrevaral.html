@@ -1746,6 +1746,7 @@ SOFTWARE.
   background:#181f18; color:#d8e4d6; border-top-color:#141814; box-shadow:inset 0 2px 3px #111511;
  }
  #system-bar #os-start:focus { outline:2px dashed currentColor; outline-offset:2px; }
+ #system-bar #pomodoro-task:not([hidden]) { display:block; }
  .sheet,body[data-view="gabinete"] .sheet,body[data-view="mesa"] .sheet {
   top:44px; bottom:52px; max-height:calc(100% - 96px); overflow-y:auto;
   scrollbar-width:thin; -webkit-overflow-scrolling:touch;
@@ -1772,9 +1773,12 @@ SOFTWARE.
   padding:48px 16px 24px; overflow:auto; -webkit-overflow-scrolling:touch;
   background:rgba(20,27,20,.48); color:#1e2320; }
  #app-dialog[hidden] { display:none !important; }
- .app-dialog-card { width:100%; max-width:480px; margin:0 auto; padding:24px;
+ .app-dialog-card { position:relative; width:100%; max-width:480px; margin:0 auto; padding:24px;
   border:1px solid #65735f; background:#c4cfc2; box-shadow:0 4px 0 rgba(20,27,20,.22);
   word-wrap:break-word; overflow-wrap:break-word; }
+ .dialog-register { position:absolute; font:14px/1 monospace; opacity:.5; pointer-events:none; }
+ .dialog-register.tl { top:4px; left:5px; }.dialog-register.tr { top:4px; right:5px; }
+ .dialog-register.bl { bottom:4px; left:5px; }.dialog-register.br { bottom:4px; right:5px; }
  .app-dialog-brand { display:flex; align-items:center; justify-content:space-between;
   padding-bottom:14px; margin-bottom:20px; border-bottom:1px dashed #889784;
   font:600 18px/1.2 'Oswald',Arial,sans-serif; }
@@ -1846,6 +1850,7 @@ SOFTWARE.
 
 <div id="app-dialog" hidden>
  <section class="app-dialog-card" role="alertdialog" aria-modal="true" aria-labelledby="app-dialog-heading" aria-describedby="app-dialog-message" tabindex="-1">
+  <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span><span class="dialog-register bl" aria-hidden="true">+</span><span class="dialog-register br" aria-hidden="true">+</span>
   <div class="app-dialog-brand" aria-hidden="true"><span>ESCREVA<b>RAL</b></span><small>GABINETE DE ESCRITA</small></div>
   <h2 id="app-dialog-heading"></h2><p id="app-dialog-message"></p>
   <div class="app-dialog-actions"><button id="app-dialog-cancel" type="button">Cancelar</button><button id="app-dialog-accept" type="button"></button></div>
@@ -3231,6 +3236,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   if(layer.hidden){return;}
   var v=root.visualViewport,h=v?v.height:root.innerHeight,y=v?v.offsetTop:0;
   layer.style.top=y+'px';layer.style.height=h+'px';layer.style.bottom='auto';
+  layer.style.paddingTop=Math.max(16,Math.floor((h-card.offsetHeight)/2))+'px';
  }
  function finish(ok){
   if(!pending){return;}

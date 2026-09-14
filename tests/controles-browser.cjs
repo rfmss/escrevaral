@@ -34,7 +34,7 @@ async function footer(p){
 }
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
- browser=await (engine==='webkit'?webkit:chromium).launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:engine==='chromium'?['--no-sandbox']:[]});
+ browser=await (engine==='webkit'?webkit:chromium).launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:engine==='chromium'?['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']:[]});
  const context=await browser.newContext({viewport:{width:1366,height:650},serviceWorkers:'block',hasTouch:true});
  const p=await context.newPage();p.setDefaultTimeout(10000);
  p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>{errors.push('Native dialog '+d.type());d.dismiss();});
@@ -92,7 +92,7 @@ async function footer(p){
  // Ready timer is restored from real persisted state, not just toggled HTML.
  await p.setViewportSize({width:1366,height:650});
  await p.evaluate(()=>localStorage.setItem('escrevaral.astra.pomodoro.v1',JSON.stringify({mode:'ready',target:0,paused:false,remaining:0,work:50,rest:6,quote:1})));
- await p.reload();assert.equal(await p.locator('#focus-challenge').isVisible(),true);
+ await p.reload();assert.equal(await p.locator('#focus-challenge').isVisible(),true);await p.waitForFunction(()=>document.querySelectorAll('.focus-digit.flipping').length===0);
  for(const [w,h] of [[1366,650],[820,600],[390,844],[320,568],[667,375],[683,325],[320,260]]){
   await p.setViewportSize({width:w,height:h});await p.click('#pomodoro-task');
   const top=await p.locator('#location-path').boundingBox(),bottom=await p.locator('#system-bar').boundingBox(),panel=await p.locator('#focus-pause').boundingBox();
