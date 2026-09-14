@@ -6,7 +6,7 @@ const html = fs.readFileSync(require('node:path').join(__dirname, '../index.html
 const scripts = Array.from(html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g), m => m[1]);
 scripts.forEach((s, i) => new vm.Script(s, {filename:'inline-'+i}));
 const context = vm.createContext({});
-for (const marker of ["var prefix = 'escrevaral.astra.v1.doc.'", 'E.validPlanner =', '/* Cadernos: dados ES5']) {
+for (const marker of ["var prefix = 'escrevaral.astra.v1.doc.'", 'E.validPlanner =', '/* Universo do caderno:', '/* Cadernos: dados ES5']) {
   vm.runInContext(scripts.find(s => s.includes(marker)), context);
 }
 const E = context.Escr;
