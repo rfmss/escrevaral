@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260914-scrvrl-controles-v6-1">
+  <meta name="asset-version" content="20260915-scrvrl-quadro-v6-2">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -1838,8 +1838,74 @@ SOFTWARE.
 }
 @media print { #app-dialog { display:none !important; } }
 </style>
+<style>
+/* Lousa: papel, calha e feltro por CSS estático; uma superfície de desenho. */
+@media screen {
+ #chalkboard { padding:24px; background:#b9c5b5; }
+ .chalk-paper { position:relative; max-width:1100px; margin:0 auto; padding:24px; border:1px solid #7a8973; background:#ccd5c7; box-shadow:3px 4px 0 #8b9985; }
+ #chalkboard .chalk-heading { align-items:flex-start; border-bottom:1px dashed #899681; }
+ #chalkboard .chalk-heading h2 { word-wrap:break-word; overflow-wrap:break-word; margin:12px 0; }
+ #chalkboard .chalk-heading > div { min-width:0; }
+ #chalkboard .chalk-heading small { font:13px/1.8 'Oswald',Arial,sans-serif; letter-spacing:1px; }
+ .chalk-heading small b,.chalk-rail b { border:1px solid currentColor; padding:0 2px; }
+ #chalk-close { flex-shrink:0; min-width:44px; }
+ .chalk-tools,.chalk-actions { display:flex; flex-wrap:wrap; margin:12px -3px; }
+ #chalkboard .chalk-tools button,#chalkboard .chalk-actions button { margin:3px; padding:8px 12px; min-height:44px; background:transparent; }
+ #chalkboard button[aria-pressed="true"] { background:#283326; color:#e0e9da; border-color:#283326; }
+ #chalkboard button:disabled { opacity:.5; }
+ #chalk-help,.chalk-bottom,#chalk-status { font:14px/1.6 Arial,sans-serif; }
+ #chalk-help { max-width:740px; }
+ .chalk-slate { padding:8px 8px 0; border:1px solid #687660; background:#9aaa90; box-shadow:inset 1px 1px 0 #e0e7d8; }
+ #chalk-frame { position:relative; width:100%; background:#e2e9df; border:1px solid #63705e; }
+ #chalk-frame[data-grid="true"] { background-image:linear-gradient(to right,rgba(50,65,45,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(50,65,45,.12) 1px,transparent 1px); background-size:24px 24px; }
+ #chalk-canvas { display:block; width:100%; height:auto; cursor:crosshair; touch-action:none; -ms-touch-action:none; -webkit-user-select:none; user-select:none; }
+ #chalk-canvas:focus { outline:2px dashed #4b6341; outline-offset:2px; }
+ #chalk-cursor { position:absolute; width:12px; height:12px; border:1px solid #1e2320; border-radius:50%; margin:-6px 0 0 -6px; pointer-events:none; background:rgba(190,210,170,.4); }
+ .chalk-rail { display:flex; align-items:center; height:36px; padding:0 12px; border-top:1px solid #65745d; box-shadow:inset 0 3px 2px #73816b; }
+ .chalk-rail i { display:block; width:40px; height:8px; margin-right:12px; background:#eff3e9; border:1px solid #a1ac94; box-shadow:1px 2px 0 #78876f; transform:rotate(-3deg); }
+ .chalk-rail i+i { background:#33402d; width:25px; transform:rotate(2deg); }
+ .chalk-rail span { margin-left:auto; font:10px/1 monospace; color:#263221; letter-spacing:1px; }
+ .chalk-rail em { width:45px; height:17px; margin-left:16px; background:#b7c2a8; border:1px solid #627156; border-bottom:6px solid #303b2a; box-shadow:1px 1px 0 #6e7c64; }
+ .chalk-bottom { display:flex; justify-content:space-between; flex-wrap:wrap; padding:10px 0; border-bottom:1px dashed #8b9984; }
+ .chalk-bottom span { margin-right:12px; }
+ #chalk-status { min-height:24px; }
+ .chalk-upload { position:relative; display:inline-block; overflow:hidden; min-height:44px; margin:3px; padding:10px 12px; border:1px solid #657367; font:14px/1.5 Arial,sans-serif; cursor:pointer; }
+ .chalk-upload input { position:absolute; inset:0; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer; }
+ .chalk-upload:focus-within { outline:2px dashed currentColor; outline-offset:2px; }
+ #chalk-copy { width:100%; min-height:150px; font:13px/1.5 monospace; }
+ body[data-theme="escuro"] #chalkboard { background:#171e15; }
+ body[data-theme="escuro"] .chalk-paper { background:#293327; color:#d8e4d6; border-color:#819478; box-shadow:3px 4px 0 #11180f; }
+ body[data-theme="escuro"] .chalk-slate { background:#3a4932; border-color:#8e9e83; box-shadow:inset 1px 1px 0 #627458; }
+ body[data-theme="escuro"] #chalk-frame { background:#161c15; border-color:#819478; }
+ body[data-theme="escuro"] #chalk-frame[data-grid="true"] { background-image:linear-gradient(to right,rgba(200,220,180,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(200,220,180,.12) 1px,transparent 1px); }
+ body[data-theme="escuro"] #chalkboard button[aria-pressed="true"] { background:#c5d4bc; color:#1d2619; }
+ body[data-theme="escuro"] .chalk-rail { box-shadow:inset 0 3px 2px #23301d; }
+ body[data-theme="escuro"] .chalk-rail span { color:#c6d5bd; }
+ body[data-theme="escuro"] #chalk-canvas:focus,body[data-theme="escuro"] #chalk-cursor { border-color:#d8e4d6; outline-color:#bacfa9; }
+ @media(max-width:600px) { #chalkboard { padding:12px; } .chalk-paper { padding:16px 12px; } #chalkboard .chalk-heading small { font-size:11px; } .chalk-slate { padding:4px 4px 0; } .chalk-rail { padding:0 5px; } .chalk-rail em { margin-left:8px; } }
+ @media(max-height:450px) { #chalkboard { padding:8px; } .chalk-paper { padding:12px; } }
+}
+@media print { #chalkboard { display:none !important; } }
+
+</style>
 </head>
 <body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
+<section id="chalkboard" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="chalk-heading" tabindex="-1" hidden>
+ <div class="chalk-paper">
+  <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span>
+  <header class="finish-heading chalk-heading"><div><small>ESCREVA<b>RAL</b> · QUADRO DE GIZ</small><h2 id="chalk-heading"></h2></div><button id="chalk-close" class="material-key" aria-label="Fechar quadro de giz">×</button></header>
+  <div class="chalk-tools" role="group" aria-label="Ferramentas do quadro">
+   <button id="chalk-fino" aria-pressed="false">Fino</button><button id="chalk-giz" aria-pressed="true">Giz</button><button id="chalk-grosso" aria-pressed="false">Grosso</button><button id="chalk-borracha" aria-pressed="false">Borracha</button><button id="chalk-grid" aria-pressed="false">Grade</button><button id="chalk-undo">Desfazer</button><button id="chalk-clear">Limpar</button>
+  </div>
+  <p id="chalk-help">Desenhe com o dedo, mouse ou caneta. No quadro: setas movem o cursor; Espaço começa ou termina o traço.</p>
+  <div class="chalk-slate"><div id="chalk-frame"><canvas id="chalk-canvas" width="1" height="1" tabindex="0" role="img" aria-label="Desenho do caderno" aria-describedby="chalk-help">Este navegador não exibe o desenho.</canvas><span id="chalk-cursor" aria-hidden="true" hidden></span></div><div class="chalk-rail" aria-hidden="true"><i></i><i></i><span>ESCREVA<b>RAL</b></span><em></em></div></div>
+  <div class="chalk-bottom"><span id="chalk-count">0 traços</span><span>O desenho acompanha este caderno.</span></div>
+  <p id="chalk-status" role="status"></p>
+  <div class="chalk-actions"><button id="chalk-download">Baixar desenho</button><button id="chalk-copy-show">Copiar desenho</button><label class="chalk-upload" for="chalk-import">Trazer desenho<input id="chalk-import" type="file" accept=".txt,.json,.giz" /></label><button id="chalk-retry" hidden>Guardar novamente</button><button id="chalk-discard" hidden>Descartar alterações</button></div>
+  <textarea id="chalk-copy" readonly aria-label="Cópia do desenho em texto" hidden></textarea>
+ </div>
+</section>
+
 <section id="story-screen" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="story-heading" tabindex="-1" hidden>
  <header class="finish-heading"><div><small>ESCREVA[RAL] · UNIVERSO DO CADERNO</small><h2 id="story-heading"></h2></div><button id="story-close" class="material-key" aria-label="Fechar universo do caderno">×</button></header>
  <nav class="story-navigation" aria-label="Consultar o caderno"><button id="story-chapters" aria-pressed="true">Capítulos</button><button id="story-events" aria-pressed="false">Acontecimentos</button><button id="story-records" aria-pressed="false">Fichas</button></nav>
@@ -1884,7 +1950,7 @@ SOFTWARE.
         <div class="window-body">
       <nav class="project-shelf" aria-label="Projetos"><p class="os-label">CADERNOS</p><button id="cabinet-all" class="project-link" aria-pressed="true">Todos os textos</button><div id="cabinet-projects"><button type="button" class="project-link" aria-pressed="false"><span class="project-icon"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span><span>Folhas avulsas</span><small>2</small></button></div><span id="project-icon-template" hidden=""><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span></nav>
       <main class="cabinet-files">
-        <div class="notebook-actions"><button id="notebook-universe" aria-controls="story-screen">Capítulos e universo</button><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg></button></div>
+        <div class="notebook-actions"><button id="notebook-universe" aria-controls="story-screen">Capítulos e universo</button><button id="notebook-chalkboard" aria-controls="chalkboard">Quadro de giz</button><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg></button></div>
         <div class="cabinet-heading"><div><p class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div><button id="cabinet-new" class="os-action">+ Nova folha</button></div>
 
         <button id="cabinet-resume" class="resume-note"><span class="os-label">CONTINUAR ESCREVENDO</span><span id="resume-title">Eu sei que vou te amar em toda a minha vida. </span><small id="resume-date">Folha avulsa</small></button>
@@ -1902,6 +1968,7 @@ SOFTWARE.
         <div class="start-group" role="group" aria-labelledby="start-group-0"><p id="start-group-0" class="os-label">Escrever</p>
           <button id="start-new-notebook" class="os-app">Novo caderno</button><button id="start-projects" class="os-app"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7V5h7l2 2h9v13H3Z"></path></svg>Cadernos</button>
           <button id="cabinet-write" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M225.91,74.79,181.22,30.1a14,14,0,0,0-19.8,0L38.1,153.41a13.94,13.94,0,0,0-4.1,9.9V208a14,14,0,0,0,14,14H216a6,6,0,0,0,0-12H110.49L225.91,94.59A14,14,0,0,0,225.91,74.79ZM76.49,188,164,100.48,183.52,120,96,207.51ZM68,179.52,48.49,160,136,72.49,155.52,92ZM46,208V174.48L81.52,210H48A2,2,0,0,1,46,208ZM217.42,86.1,192,111.52,144.49,64,169.9,38.59a2,2,0,0,1,2.83,0l44.69,44.68A2,2,0,0,1,217.42,86.1Z"></path></svg>Mesa de escrita</button>
+          <button id="start-chalkboard" class="os-app" aria-controls="chalkboard">Quadro de giz</button>
           <button id="start-universe" class="os-app" aria-controls="story-screen">Universo do caderno</button>
           <button id="start-calendar" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v16H3ZM7 2v6M17 2v6M3 10h18M7 14h2M12 14h2M7 18h2M12 18h2"></path></svg><span>Calendário</span></button>
         </div>
@@ -3090,7 +3157,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     var quotes=[{q:'Penso, logo existo.',a:'René Descartes'},{q:'Tudo vale a pena se a alma não é pequena.',a:'Fernando Pessoa'},{q:'Ser ou não ser, eis a questão.',a:'William Shakespeare'}];
     function saveTimer(){try{if(!storage){throw new Error('storage');}storage.setItem(timerKey,JSON.stringify(state));}catch(e){status('O relógio segue nesta sessão; não foi possível guardar seu estado.');}}
     function formatTime(seconds){return pad(Math.floor(seconds/60))+':'+pad(seconds%60);}
-    function showFocus(){if(E.dialog&&E.dialog.isOpen()||document.body.getAttribute('data-locked')==='true'){return;}bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();byId('focus-pause').scrollTop=0;}
+    function showFocus(){if(E.dialog&&E.dialog.isOpen()||document.body.getAttribute('data-locked')==='true'||!byId('chalkboard').hidden){return;}bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();byId('focus-pause').scrollTop=0;}
     function flipDigit(d,next){
       if(d.getAttribute('data-digit')===next){return;}
       var old=d.getAttribute('data-digit');
@@ -3380,6 +3447,163 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
 
 </script>
 <script>
+/* Quadro do caderno: dados ES5, tamanho limitado e gravação por revisão. */
+(function(root){
+ 'use strict';
+ var E=root.Escr,types=['fino','giz','grosso','borracha'];
+ function arr(v){return Object.prototype.toString.call(v)==='[object Array]';}
+ function copy(v){return JSON.parse(JSON.stringify(v));}
+ function empty(){return {version:1,grid:false,strokes:[]};}
+ function valid(v){
+  if(!v||v.version!==1||typeof v.grid!=='boolean'||!arr(v.strokes)||v.strokes.length>500){return false;}
+  var count=0;
+  return v.strokes.every(function(s){
+   if(!s||types.indexOf(s.tool)<0||!arr(s.points)||!s.points.length||s.points.length>2048){return false;}
+   count+=s.points.length;if(count>12000){return false;}
+   return s.points.every(function(p){return arr(p)&&p.length===2&&p.every(function(n){return typeof n==='number'&&isFinite(n)&&n>=0&&n<=10000&&Math.floor(n)===n;});});
+  });
+ }
+ function clean(v){return {version:1,grid:v.grid,strokes:v.strokes.map(function(s){return {tool:s.tool,points:s.points.map(function(p){return [p[0],p[1]];})};})};}
+ function read(data){if(typeof data.chalk==='undefined'){return empty();}if(!valid(data.chalk)){throw new Error('Este quadro não pôde ser lido. Os dados foram preservados.');}return clean(data.chalk);}
+ function write(model,id,revision,next){
+  if(!valid(next)){throw new Error('O desenho ultrapassou os limites do quadro ou contém dados inválidos.');}
+  var b=model.get(id);if(!b||b.trashed){throw new Error('Este caderno não está disponível. Baixe seu desenho antes de fechar.');}
+  if(JSON.stringify(read(b.data))!==revision){throw new Error('O quadro mudou em outra aba. Baixe seu desenho antes de fechar e reabrir.');}
+  b.data.chalk=clean(next);model.update(id,{data:b.data});return JSON.stringify(b.data.chalk);
+ }
+ function pack(title,drawing){if(!valid(drawing)){throw new Error('Desenho inválido.');}return JSON.stringify({format:'escrevaral-giz',version:1,notebook:String(title).slice(0,120),drawing:clean(drawing)});}
+ function parse(raw){if(typeof raw!=='string'||raw.length>524288){throw new Error('O arquivo é grande demais para este quadro.');}var p=JSON.parse(raw);if(!p||p.format!=='escrevaral-giz'||p.version!==1||!valid(p.drawing)){throw new Error('Este arquivo não é um desenho válido do Escrevaral.');}return clean(p.drawing);}
+ E.chalk={empty:empty,valid:valid,read:read,write:write,pack:pack,parse:parse,copy:copy,types:types,maxStrokes:500,maxPoints:12000,maxStrokePoints:2048};
+}(typeof window!=='undefined'?window:this));
+
+</script>
+<script>
+/* Quadro aberto: Canvas 2D sob demanda; Pointer OU mouse/toque. */
+(function(root){
+ 'use strict';
+ root.Escr.mountChalk=function(bridge){
+  var E=root.Escr,C=E.chalk,D=root.document,panel=D.getElementById('chalkboard'),canvas=D.getElementById('chalk-canvas'),frame=D.getElementById('chalk-frame');
+  var ctx=null,book=null,drawing=null,revision='',dirty=false,stroke=null,pointer=null,tool='giz',total=0,previous=null,hidden=[],resizeTimer=null,reader=null,epoch=0,lastTouch=0,kpos=[5000,5000],keyboard=false;
+  function byId(id){return D.getElementById(id);}
+  function on(n,k,f){n.addEventListener(k,f,false);}
+  function status(t){byId('chalk-status').textContent=t;}
+  function active(){return !panel.hidden;}
+  function blocked(){return E.dialog.isOpen()||D.body.getAttribute('data-locked')==='true';}
+  function count(){total=0;drawing.strokes.forEach(function(s){total+=s.points.length;});}
+  function controls(){
+   C.types.forEach(function(t){byId('chalk-'+t).setAttribute('aria-pressed',tool===t?'true':'false');});
+   byId('chalk-grid').setAttribute('aria-pressed',drawing.grid?'true':'false');frame.setAttribute('data-grid',drawing.grid?'true':'false');
+   byId('chalk-count').textContent=drawing.strokes.length+(drawing.strokes.length===1?' traço':' traços');
+   byId('chalk-undo').disabled=byId('chalk-clear').disabled=!drawing.strokes.length;
+   byId('chalk-retry').hidden=byId('chalk-discard').hidden=!dirty;
+  }
+  function paint(s,from){
+   if(!ctx){return;}
+   var w=canvas.width,h=canvas.height,points=s.points,p=points[from||0],size={fino:1.5,giz:3.5,grosso:7.5,borracha:24}[s.tool],ink=D.body.getAttribute('data-theme')==='escuro'?'#dce5da':'#192019';
+   ctx.globalCompositeOperation=s.tool==='borracha'?'destination-out':'source-over';ctx.lineWidth=Math.max(s.tool==='borracha'?6:1,size*w/1000);ctx.strokeStyle=ink;ctx.fillStyle=ink;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();
+   if(points.length===1){ctx.arc(p[0]*w/10000,p[1]*h/10000,ctx.lineWidth/2,0,Math.PI*2);ctx.fill();}
+   else{ctx.moveTo(p[0]*w/10000,p[1]*h/10000);for(var i=(from||0)+1;i<points.length;i+=1){p=points[i];ctx.lineTo(p[0]*w/10000,p[1]*h/10000);}ctx.stroke();}
+   ctx.globalCompositeOperation='source-over';
+  }
+  function redraw(){if(!ctx||!drawing){return;}ctx.clearRect(0,0,canvas.width,canvas.height);drawing.strokes.forEach(function(s){paint(s,0);});}
+  function fit(){
+   if(!active()){return;}var width=Math.max(1,Math.min(1000,Math.floor(frame.clientWidth))),height=Math.max(1,Math.round(width*.6));
+   if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;redraw();}
+  }
+  function save(){
+   if(!dirty){return true;}
+   try{
+    var current=bridge.book();if(!current||current.id!==book.id){throw new Error('O caderno mudou. Baixe seu desenho antes de fechar.');}
+    revision=bridge.save(book.id,revision,drawing);dirty=false;status('Guardado neste caderno.');controls();return true;
+   }catch(e){status(e.name==='QuotaExceededError'?'Faltou espaço para guardar. Seu desenho continua aqui. Baixe uma cópia ou tente guardar novamente.':e.message||'Não foi possível guardar. Baixe uma cópia antes de fechar.');controls();return false;}
+  }
+  function end(){var had=!!stroke;stroke=null;pointer=null;keyboard=false;if(had){save();controls();}return !dirty;}
+  function flush(){if(!active()){return true;}end();return save();}
+  function begin(p,type){
+   if(!ctx||!active()||blocked()||stroke){return false;}
+   if(total>=C.maxPoints||drawing.strokes.length>=C.maxStrokes){status('Este quadro chegou ao limite de traços. Baixe uma cópia antes de limpar ou desfazer.');return false;}
+   stroke={tool:type||tool,points:[p]};drawing.strokes.push(stroke);total+=1;dirty=true;paint(stroke,0);return true;
+  }
+  function move(p){
+   if(!stroke){return;}var last=stroke.points[stroke.points.length-1],dx=p[0]-last[0],dy=p[1]-last[1];if(dx*dx+dy*dy<225){return;}
+   if(total>=C.maxPoints||stroke.points.length>=C.maxStrokePoints){end();status('O traço chegou ao limite. Continue em um novo traço ou baixe uma cópia.');return;}
+   stroke.points.push(p);total+=1;paint(stroke,stroke.points.length-2);
+  }
+  function point(event){var r=canvas.getBoundingClientRect();return [Math.max(0,Math.min(10000,Math.round((event.clientX-r.left)/r.width*10000))),Math.max(0,Math.min(10000,Math.round((event.clientY-r.top)/r.height*10000)))];}
+  function restore(){hidden.forEach(function(p){if(p[1]===null){p[0].removeAttribute('aria-hidden');}else{p[0].setAttribute('aria-hidden',p[1]);}});hidden=[];}
+  function closeNow(){
+   epoch+=1;if(reader&&reader.readyState===1){reader.abort();}reader=null;root.clearTimeout(resizeTimer);resizeTimer=null;
+   panel.hidden=true;restore();stroke=null;pointer=null;dirty=false;drawing=null;book=null;ctx=null;canvas.width=canvas.height=1;
+   byId('chalk-copy').value='';byId('chalk-copy').hidden=true;byId('chalk-cursor').hidden=true;
+   if(previous&&D.documentElement.contains(previous)&&previous.getClientRects().length){previous.focus();}else{byId('os-start').focus();}previous=null;
+  }
+  function close(){if(flush()){closeNow();}}
+  function open(){
+   if(active()||blocked()||!bridge.checkpoint()){return;}
+   try{var b=bridge.book();if(!b||b.trashed){bridge.message('Abra um caderno para usar seu quadro de giz.');return;}drawing=C.read(b.data);book=b;}catch(e){bridge.message(e.message);return;}
+   previous=D.activeElement;bridge.prepare();revision=JSON.stringify(drawing);dirty=false;stroke=null;pointer=null;epoch+=1;panel.hidden=false;panel.scrollTop=0;
+   byId('chalk-heading').textContent=book.name;byId('chalk-copy').value='';byId('chalk-copy').hidden=true;byId('chalk-cursor').hidden=true;tool='giz';count();controls();
+   try{ctx=canvas.getContext('2d');}catch(ignore){ctx=null;}fit();redraw();status(ctx?'Pronto para desenhar.':'Este navegador não desenha em Canvas. Você pode baixar ou copiar o quadro preservado.');
+   for(var i=0;i<D.body.children.length;i+=1){var n=D.body.children[i];if(n!==panel&&n.tagName!=='SCRIPT'){hidden.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');}}
+   byId('chalk-close').focus();
+  }
+  function undo(){if(!drawing.strokes.length){return;}end();drawing.strokes.pop();count();dirty=true;redraw();save();controls();}
+  C.types.forEach(function(t){on(byId('chalk-'+t),'click',function(){end();tool=t;controls();});});
+  on(byId('chalk-grid'),'click',function(){end();drawing.grid=!drawing.grid;dirty=true;controls();save();});
+  on(byId('chalk-undo'),'click',undo);
+  on(byId('chalk-clear'),'click',function(){end();E.dialog.ask({title:'Limpar o quadro?',message:'Todos os traços deste caderno serão apagados. Baixe uma cópia se quiser conservar o desenho.',accept:'Limpar quadro'},function(ok){if(ok&&active()){drawing.strokes=[];total=0;dirty=true;redraw();save();controls();}});});
+  on(byId('chalk-retry'),'click',flush);
+  on(byId('chalk-discard'),'click',function(){E.dialog.ask({title:'Descartar alterações do quadro?',message:'Os traços que não foram guardados serão descartados. O quadro já salvo no caderno será preservado.',accept:'Descartar e fechar'},function(ok){if(ok){closeNow();}});});
+  on(byId('chalk-close'),'click',close);on(byId('start-chalkboard'),'click',open);on(byId('notebook-chalkboard'),'click',open);
+  function textCopy(){end();byId('chalk-copy').value=C.pack(book.name,drawing);byId('chalk-copy').hidden=false;byId('chalk-copy').focus();byId('chalk-copy').select();status('Copie este texto inteiro para conservar o desenho.');}
+  on(byId('chalk-copy-show'),'click',textCopy);
+  on(byId('chalk-download'),'click',function(){end();var raw=C.pack(book.name,drawing);if(bridge.download(raw,'text/plain','quadro-'+book.id+'.giz.txt',panel)){status('Cópia preparada. Confira o arquivo salvo; os traços continuam aqui.');}else{textCopy();status('Não foi possível baixar. Copie o texto do desenho abaixo.');}});
+  on(byId('chalk-import'),'change',function(){
+   var file=this.files&&this.files[0],opened=epoch;this.value='';if(!file){return;}end();
+   if(file.size>524288){status('O arquivo é grande demais para este quadro.');return;}if(!root.FileReader){status('Este navegador não consegue ler este arquivo.');return;}
+   if(reader&&reader.readyState===1){reader.abort();}reader=new root.FileReader();
+   reader.onload=function(){if(!active()||opened!==epoch){return;}var next;try{next=C.parse(String(this.result));}catch(e){status(e.message);return;}
+    E.dialog.ask({title:'Trazer desenho para este caderno?',message:'O desenho do arquivo substituirá o quadro atual. Os capítulos e as fichas serão preservados.',accept:'Trazer desenho'},function(ok){if(ok&&active()&&opened===epoch){drawing=next;count();dirty=true;redraw();save();controls();}});
+   };reader.onerror=function(){if(active()&&opened===epoch){status('Não foi possível ler o arquivo. O quadro foi preservado.');}};reader.readAsText(file);
+  });
+  if(root.PointerEvent){
+   on(canvas,'pointerdown',function(e){if(e.button!==0||e.isPrimary===false||stroke){return;}e.preventDefault();canvas.focus();byId('chalk-cursor').hidden=true;if(begin(point(e),e.ctrlKey?'borracha':tool)){pointer=e.pointerId;try{canvas.setPointerCapture(pointer);}catch(ignore){}}});
+   on(root,'pointermove',function(e){if(stroke&&e.pointerId===pointer){e.preventDefault();move(point(e));}});
+   ['pointerup','pointercancel','lostpointercapture'].forEach(function(k){on(root,k,function(e){if(e.pointerId===pointer){end();}});});
+  }else{
+   on(canvas,'mousedown',function(e){if(e.button!==0||Date.now()-lastTouch<800||stroke){return;}e.preventDefault();canvas.focus();byId('chalk-cursor').hidden=true;if(begin(point(e),e.ctrlKey?'borracha':tool)){pointer='mouse';}});
+   on(root,'mousemove',function(e){if(pointer==='mouse'&&stroke){e.preventDefault();move(point(e));}});on(root,'mouseup',function(){if(pointer==='mouse'){end();}});
+   on(canvas,'touchstart',function(e){lastTouch=Date.now();if(e.touches.length!==1||stroke){end();return;}e.preventDefault();canvas.focus();byId('chalk-cursor').hidden=true;var t=e.touches[0];if(begin(point(t))){pointer=t.identifier;}});
+   on(canvas,'touchmove',function(e){if(!stroke){return;}e.preventDefault();for(var i=0;i<e.changedTouches.length;i+=1){if(e.changedTouches[i].identifier===pointer){move(point(e.changedTouches[i]));}}});
+   ['touchend','touchcancel'].forEach(function(k){on(canvas,k,function(e){lastTouch=Date.now();for(var i=0;i<e.changedTouches.length;i+=1){if(e.changedTouches[i].identifier===pointer){end();}}});});
+  }
+  function cursor(){var n=byId('chalk-cursor');n.hidden=false;n.style.left=kpos[0]/100+'%';n.style.top=kpos[1]/100+'%';}
+  function key(e){
+   var code=e.keyCode;if(code===32){e.preventDefault();if(e.repeat){return;}if(stroke){end();status(dirty?'O traço continua sem guardar.':'Traço encerrado.');}else{keyboard=begin(kpos.slice());cursor();status('Traço iniciado. Use as setas; Espaço termina.');}return;}
+   if(code>=37&&code<=40){e.preventDefault();var step=e.shiftKey?300:60;kpos[0]=Math.max(0,Math.min(10000,kpos[0]+(code===37?-step:code===39?step:0)));kpos[1]=Math.max(0,Math.min(10000,kpos[1]+(code===38?-step:code===40?step:0)));if(keyboard){move(kpos.slice());}cursor();}
+  }
+  function trap(e){
+   if(!active()||blocked()){return;}var inside=panel.contains(e.target);
+   if(!inside){e.preventDefault();e.stopImmediatePropagation();if(e.type==='focusin'){byId('chalk-close').focus();}return;}
+   if(e.type==='keydown'){
+    e.stopPropagation();var code=e.keyCode;
+    if(code===27){e.preventDefault();if(stroke){end();}else{close();}return;}
+    if((e.ctrlKey||e.metaKey)&&code===90&&e.target!==byId('chalk-copy')){e.preventDefault();undo();return;}
+    if((e.ctrlKey||e.metaKey)&&[13,75,83].indexOf(code)>=0){e.preventDefault();if(code===83){flush();}return;}
+    if(e.target===canvas){key(e);}
+    if(code===9){if(stroke){end();}var nodes=panel.querySelectorAll('button,input,textarea,[tabindex="0"]'),items=[];for(var j=0;j<nodes.length;j+=1){if(!nodes[j].disabled&&nodes[j].getClientRects().length){items.push(nodes[j]);}}var first=items[0],last=items[items.length-1];if(e.shiftKey&&(D.activeElement===first||D.activeElement===panel)){e.preventDefault();last.focus();}else if(!e.shiftKey&&(D.activeElement===last||D.activeElement===panel)){e.preventDefault();first.focus();}}
+   }
+  }
+  ['keydown','keypress','keyup','click','dblclick','mousedown','touchstart','focusin'].forEach(function(k){D.addEventListener(k,trap,true);});
+  on(root,'resize',function(){if(!active()){return;}end();root.clearTimeout(resizeTimer);resizeTimer=root.setTimeout(fit,100);});
+  on(root,'blur',function(){if(active()){end();}});
+  on(root,'storage',function(e){if(e.key==='escrevaral.astra.notebooks.v1'&&active()){status('O caderno mudou em outra aba. Feche e reabra o quadro para atualizar; baixe uma cópia se houver traços pendentes.');}});
+  return {flush:flush,isOpen:active};
+ };
+}(window));
+
+</script>
+<script>
 /* Cadernos: dados ES5, independente da apresentação. */
 (function (root) {
   'use strict';
@@ -3465,7 +3689,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     function validate(payload) {
       var ids = Object.create(null), records = Object.create(null);
       if (!payload || payload.format !== 'escrevaral-cadernos' || payload.version !== 1 || ['all', 'notebook'].indexOf(payload.scope) === -1 || !array(payload.notebooks) || !array(payload.documents) || !payload.notebooks.every(validBook) || !payload.documents.every(E.validDocument) || !payload.inventory || payload.inventory.notebooks !== payload.notebooks.length || payload.inventory.documents !== payload.documents.length || (payload.scope === 'notebook' && payload.notebooks.length !== 1)) { throw new Error('Pacote de caderno inválido ou incompleto.'); }
-      payload.notebooks.forEach(function (b) { if (ids[b.id]) { throw new Error('Caderno repetido no pacote.'); } ids[b.id] = true; if (b.data.planner && !E.validPlanner(b.data.planner)) { throw new Error('Calendário inválido no caderno.'); } if (typeof b.data.story !== 'undefined' && !E.story.valid(b.data.story)) { throw new Error('Fichas ou cenas inválidas no caderno.'); } });
+      payload.notebooks.forEach(function (b) { if (ids[b.id]) { throw new Error('Caderno repetido no pacote.'); } ids[b.id] = true; if (b.data.planner && !E.validPlanner(b.data.planner)) { throw new Error('Calendário inválido no caderno.'); } if (typeof b.data.chalk !== 'undefined' && !E.chalk.valid(b.data.chalk)) { throw new Error('Desenho inválido no caderno.'); } if (typeof b.data.story !== 'undefined' && !E.story.valid(b.data.story)) { throw new Error('Fichas ou cenas inválidas no caderno.'); } });
       payload.documents.forEach(function (d) {
         if (records[d.id] || (d.projectId && !ids[d.projectId]) || (!d.projectId && (payload.scope === 'notebook' || d.kind !== 'reminder'))) { throw new Error('Vínculos incompletos no pacote.'); } records[d.id] = true;
       });
@@ -3514,7 +3738,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task'];
-  var projectScope = false, readingSize = 21;
+  var projectScope = false, readingSize = 21, chalkUI = null;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
@@ -3538,7 +3762,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     byId('cabinet-search').setAttribute('aria-label', byId('cabinet-search').placeholder);
     byId('notebook-rename').hidden = byId('notebook-export').hidden = byId('notebook-trash').hidden = !book;
     byId('export-notebook').disabled = !book;
-    byId('notebook-universe').hidden = !book;
+    byId('notebook-universe').hidden = byId('notebook-chalkboard').hidden = !book;
     byId('note-project').textContent = '';
     if (notebooks) { notebooks.list().filter(function (b) { return !b.trashed; }).forEach(function (b) { var option = document.createElement('option'); option.value = b.id; text(option, b.name); byId('note-project').appendChild(option); }); }
     byId('note-project').value = doc.projectId || activeNotebookId || '';
@@ -3857,7 +4081,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
         left: byId('cabinet-window').style.left || '', top: byId('cabinet-window').style.top || '' }));
     } catch (e) { message('O estado da tela não foi guardado. Confira sua cópia do acervo.'); }
   }
-  function checkpoint() { if (composing) { return false; } window.clearTimeout(sessionTimer); var ok = persist(); if (ok) { saveSession(); } return ok; }
+  function checkpoint() { if (chalkUI && !chalkUI.flush()) { return false; } if (composing) { return false; } window.clearTimeout(sessionTimer); var ok = persist(); if (ok) { saveSession(); } return ok; }
   function queueSession() {
     if (!sessionReady || composing) { return; }
     window.clearTimeout(sessionTimer); sessionTimer = window.setTimeout(checkpoint, 350);
@@ -4163,18 +4387,18 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       for (var j = 0; j < lensButtons.length; j += 1) { lensButtons[j].disabled = false; }
     }, 20);
   }
-  function download(contents, mime, name) {
+  function download(contents, mime, name, host) {
     var urlAPI = window.URL || window.webkitURL;
     try {
       var blob = new Blob([contents], { type: mime + ';charset=utf-8' });
-      if (navigator.msSaveBlob) { navigator.msSaveBlob(blob, name); return; }
+      if (navigator.msSaveBlob) { navigator.msSaveBlob(blob, name); return true; }
       var url = urlAPI.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = name;
       if (!('download' in a)) {
         var opened = window.open(url, '_blank');
         message(opened ? 'Arquivo aberto. Use Compartilhar ou Salvar no navegador; se preciso, copie o texto.' : 'O navegador impediu a abertura. Selecione e copie o manuscrito para outro aplicativo.');
-      } else { document.body.appendChild(a); a.click(); document.body.removeChild(a); message('Cópia preparada. Confira o arquivo salvo.'); }
-      window.setTimeout(function () { urlAPI.revokeObjectURL(url); }, 120000);
-    } catch (e) { message('Este navegador não criou o arquivo. Selecione e copie o manuscrito para outro aplicativo.'); }
+      } else { (host || document.body).appendChild(a); a.click(); a.parentNode.removeChild(a); message('Cópia preparada. Confira o arquivo salvo.'); }
+      window.setTimeout(function () { urlAPI.revokeObjectURL(url); }, 120000); return ('download' in a) || !!opened;
+    } catch (e) { message('Este navegador não criou o arquivo. Selecione e copie o manuscrito para outro aplicativo.'); return false; }
   }
   function exportedDocuments() {
     var result = archive ? archive.list(true) : { documents: [], unreadable: 0 };
@@ -4670,10 +4894,15 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     open: function(entry){if(!checkpoint()){return;}try{var next=archive.get(entry.id);if(!next||next.trashed||next.projectId!==activeNotebookId){message('Este capítulo não está disponível.');return;}loadDocument(next);cabinetSelection=null;enterDesk(true);}catch(e){message('Não foi possível abrir o capítulo.');}}
   });
 
+  chalkUI = E.mountChalk({book:activeNotebook, checkpoint:checkpoint, message:message, download:download,
+    prepare:function(){closePanels(false);toggleStart(false);},
+    save:function(id,revision,next){return E.chalk.write(notebooks,id,revision,next);}
+  });
+
   E.mountUtilities({
     storage: storage ? notebookStorage() : null, checkpoint: checkpoint, download: download,
     hideStart: function () { toggleStart(false); },
-    show: function (id, trigger) { if (document.body.getAttribute('data-locked') === 'true' || !byId('story-screen').hidden) { return; } toggleStart(false); showPanel(id, trigger, true); },
+    show: function (id, trigger) { if (document.body.getAttribute('data-locked') === 'true' || !byId('story-screen').hidden || !byId('chalkboard').hidden) { return; } toggleStart(false); showPanel(id, trigger, true); },
     close: function () { closePanels(true); },
     write: function () { if (cabinetOpen) { enterDesk(true); } else { closePanels(false); manuscript.focus(); growManuscript(); } },
     documents: function () { return cabinetDocuments().documents.filter(function (d) { return !activeNotebookId || d.projectId === activeNotebookId; }); },
