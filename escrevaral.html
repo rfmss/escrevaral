@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260915-scrvrl-quadro-v6-2">
+  <meta name="asset-version" content="20260915-scrvrl-orientacao-v6-3">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -1888,8 +1888,74 @@ SOFTWARE.
 @media print { #chalkboard { display:none !important; } }
 
 </style>
+<style>
+@media screen {
+ /* Proporção pelo conteúdo: instrumentos menores; consulta usa mais área. */
+ .sheet:not(#focus-pause) { padding:20px; border:1px solid #7c8b78; box-shadow:3px 4px 0 rgba(33,41,33,.2); }
+ .sheet:not(#focus-pause):before { content:'+'; position:absolute; left:6px; top:3px; font:14px monospace; color:#697963; }
+ .sheet:not(#focus-pause) .sheet-heading { margin-bottom:16px; padding-bottom:12px; border-bottom:1px dashed #87967f; }
+ .sheet:not(#focus-pause) .sheet-heading h2 { font-size:24px; }
+ #utilidades[data-tool="calculator"] #calculator-result { min-height:52px; padding:8px 0; }
+ #utilidades[data-tool="calculator"] .calculator-keys button { min-height:44px; font-size:18px; }
+ #utilidades[data-tool="calculator"] #calculator-input { width:100%; min-height:44px; }
+ #utilidades[data-tool="calculator"] .quiet { font-size:12px; line-height:1.5; }
+ .os-menus { display:none; }
+ #gabinete .cabinet-search { width:44%; max-width:520px; margin:0 auto; }
+ #system-bar #os-start { width:100px; display:flex; align-items:center; justify-content:center; padding:5px 8px; border:1px solid #66785e; border-radius:3px; background:#c2cebf; box-shadow:inset 0 1px 0 #e0e8da,0 2px 0 #7e8e75; }
+ #system-bar #os-start .start-key { position:static; top:0; padding:0 0 0 10px; border:0; box-shadow:none; background:transparent; font:600 13px/1 'Oswald',Arial,sans-serif; letter-spacing:1px; text-transform:uppercase; }
+ .os-rocker { position:relative; width:20px; height:28px; flex-shrink:0; border:2px solid #52634a; border-radius:2px; background:linear-gradient(#e3ebde,#bdcbb7 46%,#a4b59b 50%,#cad8c2); box-shadow:inset 0 -3px 0 #7d906f,0 1px 0 #e8eee3; }
+ .os-rocker:before { content:'I'; position:absolute; top:0; left:0; width:100%; font:10px/11px Arial,sans-serif; opacity:.4; }
+ .os-rocker:after { content:'O'; position:absolute; bottom:2px; left:0; width:100%; font:10px/11px Arial,sans-serif; }
+ #system-bar #os-start[aria-expanded="true"] { background:#bac8b3; box-shadow:inset 0 1px 2px #8b9c80; }
+ #os-start[aria-expanded="true"] .os-rocker { background:linear-gradient(#a4b59b,#c3d1bc 50%,#e2eadc); box-shadow:inset 0 3px 0 #7d906f,0 1px 0 #e8eee3; }
+ #os-start[aria-expanded="true"] .os-rocker:before { opacity:1; top:3px; }
+ #os-start[aria-expanded="true"] .os-rocker:after { opacity:.4; bottom:0; }
+ body[data-theme="escuro"] #system-bar #os-start { background:#293625; color:#d8e4d6; box-shadow:inset 0 1px 0 #506448,0 2px 0 #11190d; }
+ body[data-theme="escuro"] .os-rocker { background:linear-gradient(#627658,#394a31 50%,#506545); border-color:#111b0d; box-shadow:inset 0 -3px 0 #25331e; }
+ body[data-theme="escuro"] #os-start[aria-expanded="true"] .os-rocker { background:linear-gradient(#26341f,#4b603f 50%,#627658); box-shadow:inset 0 3px 0 #1a2514; }
+ #notebook-list .notebook-cover { overflow:visible; margin-bottom:48px; }
+ .notebook-front { position:absolute; top:-1px; bottom:-1px; left:-1px; right:-1px; border:1px solid #111511; border-radius:5px 8px 8px 5px; background:linear-gradient(90deg,#30392e,#111811 7px,#1c241c 12px); overflow:hidden; }
+ #notebook-list .notebook-cover[aria-pressed="true"] { background:repeating-linear-gradient(0deg,#ccd5c3 0,#ccd5c3 3px,#8a9982 4px); border-color:#5c7051; outline:2px solid #6d845e; outline-offset:5px; }
+ .notebook-cover[aria-pressed="true"] .notebook-front { right:11px; transform:skewY(-3deg); transform-origin:left center; box-shadow:4px 1px 0 #111a0e; }
+ .notebook-state { display:none; position:absolute; left:0; bottom:-30px; width:100%; text-align:center; font:600 12px/22px 'Oswald',Arial,sans-serif; letter-spacing:1px; background:#31432b; color:#e3ecdb; }
+ .notebook-cover[aria-pressed="true"] .notebook-state { display:block; }
+ .cabinet-context { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; padding-bottom:12px; margin-bottom:12px; border-bottom:1px dashed #819278; }
+ .cabinet-context p { font:600 13px/1.5 'Oswald',Arial,sans-serif; letter-spacing:1px; margin:0; }
+ .cabinet-context button { min-height:44px; padding:8px 10px; border:1px solid #819278; }
+ #cabinet-window[data-scope="notebook"] .project-shelf { display:none; }
+ #cabinet-window[data-scope="notebook"] .cabinet-files { left:0; }
+ .notebook-actions { display:flex; flex-wrap:wrap; text-align:left; margin:12px -3px; }
+ .notebook-actions button { margin:3px; }
+ #cabinet-window[data-scope="notebook"] .cabinet-heading { padding:12px 0; border-bottom:2px solid #637c55; }
+ @media(max-width:760px) { #gabinete .cabinet-search { width:100%; max-width:none; } .cabinet-context { align-items:flex-start; } .cabinet-context p { padding:8px 0; } .sheet:not(#focus-pause) { padding:16px; } }
+}
+
+@media screen {
+ #lineage-close { min-width:44px; min-height:44px; }
+ #lineage-list { list-style:none; padding-left:18px; border-left:2px solid #7b906d; }
+ #lineage-list li { position:relative; margin:12px 0; }
+ #lineage-list li:before { content:''; position:absolute; left:-24px; top:20px; width:10px; height:10px; background:#7b906d; border:1px solid #405235; }
+ #lineage-list button { display:block; width:100%; min-height:44px; text-align:left; padding:12px; border:1px solid #889d7c; }
+ #lineage-list button[aria-pressed=true] { border-left:4px solid #405a33; background:rgba(90,120,70,.12); }
+ #lineage-list span,#lineage-list small { display:block; margin-top:5px; }
+ #lineage-preview { width:100%; min-height:180px; font:16px/1.6 'Noto Serif',Georgia,serif; }
+ #lineage-changes pre { white-space:pre-wrap; word-wrap:break-word; font:14px/1.5 monospace; max-height:180px; overflow:auto; }
+ #lineage-mark,#lineage-restore { min-height:44px; padding:8px 12px; border:1px solid #718967; }
+ .chalk-paper { max-width:940px; }
+}
+</style>
 </head>
 <body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
+<section id="lineage-panel" class="sheet" role="dialog" aria-labelledby="lineage-heading" tabindex="-1" hidden>
+ <header class="sheet-heading"><div><small>COLABORAÇÃO · LINHAGEM DO TEXTO</small><h2 id="lineage-heading"></h2></div><button id="lineage-close" class="material-key" aria-label="Fechar linhagem">×</button></header>
+ <p id="lineage-book"></p><p id="lineage-status" role="status"></p>
+ <button id="lineage-mark">Guardar marco agora</button>
+ <p class="quiet">Até 20 versões recentes, limitadas a 400 mil caracteres no total. Exporte o caderno para conservar seus marcos. Este histórico local não certifica autoria nem data externa.</p>
+ <ol id="lineage-list"></ol><h3 id="lineage-preview-title"></h3><p id="lineage-diff"></p><textarea id="lineage-preview" readonly aria-label="Texto da versão selecionada"></textarea>
+ <div id="lineage-changes" hidden><p>Trechos alterados (até 3 mil caracteres de cada lado):</p><h4>Removido</h4><pre id="lineage-removed"></pre><h4>Inserido</h4><pre id="lineage-added"></pre></div>
+ <button id="lineage-restore" hidden>Restaurar esta versão</button>
+</section>
+
 <section id="chalkboard" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="chalk-heading" tabindex="-1" hidden>
  <div class="chalk-paper">
   <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span>
@@ -1932,7 +1998,7 @@ SOFTWARE.
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home">SCRVRL OS</button><span aria-hidden="true">/</span><button id="path-projects" aria-current="location">Projetos</button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Folhas avulsas" hidden="">Folhas avulsas</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Eu sei que vou te amar em toda a minha vida. " hidden="">Eu sei que vou te amar em toda a minha vida. </button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
+    <button id="path-home">SCRVRL OS</button><span aria-hidden="true">/</span><button id="path-projects" aria-current="location">Mesa de cadernos</button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Folhas avulsas" hidden="">Folhas avulsas</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Eu sei que vou te amar em toda a minha vida. " hidden="">Eu sei que vou te amar em toda a minha vida. </button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
   </nav>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
     <header class="os-bar">
@@ -1949,7 +2015,7 @@ SOFTWARE.
         <header class="window-bar" id="cabinet-window-handle"><span class="window-name" id="notebook-window-name">SEUS TEXTOS</span><div class="window-controls"><button id="window-minimize" title="Minimizar janela" aria-label="Minimizar janela">−</button><button id="window-maximize" title="Restaurar tamanho da janela" aria-label="Restaurar tamanho da janela" aria-pressed="true">□</button><button id="window-close" title="Fechar janela" aria-label="Fechar janela">×</button></div></header>
         <div class="window-body">
       <nav class="project-shelf" aria-label="Projetos"><p class="os-label">CADERNOS</p><button id="cabinet-all" class="project-link" aria-pressed="true">Todos os textos</button><div id="cabinet-projects"><button type="button" class="project-link" aria-pressed="false"><span class="project-icon"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span><span>Folhas avulsas</span><small>2</small></button></div><span id="project-icon-template" hidden=""><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span></nav>
-      <main class="cabinet-files">
+      <main class="cabinet-files"><div class="cabinet-context"><p id="cabinet-context-label">TODOS OS TEXTOS</p><button id="notebook-back">← Mesa de cadernos</button></div>
         <div class="notebook-actions"><button id="notebook-universe" aria-controls="story-screen">Capítulos e universo</button><button id="notebook-chalkboard" aria-controls="chalkboard">Quadro de giz</button><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg></button></div>
         <div class="cabinet-heading"><div><p class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div><button id="cabinet-new" class="os-action">+ Nova folha</button></div>
 
@@ -1969,6 +2035,7 @@ SOFTWARE.
           <button id="start-new-notebook" class="os-app">Novo caderno</button><button id="start-projects" class="os-app"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7V5h7l2 2h9v13H3Z"></path></svg>Cadernos</button>
           <button id="cabinet-write" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M225.91,74.79,181.22,30.1a14,14,0,0,0-19.8,0L38.1,153.41a13.94,13.94,0,0,0-4.1,9.9V208a14,14,0,0,0,14,14H216a6,6,0,0,0,0-12H110.49L225.91,94.59A14,14,0,0,0,225.91,74.79ZM76.49,188,164,100.48,183.52,120,96,207.51ZM68,179.52,48.49,160,136,72.49,155.52,92ZM46,208V174.48L81.52,210H48A2,2,0,0,1,46,208ZM217.42,86.1,192,111.52,144.49,64,169.9,38.59a2,2,0,0,1,2.83,0l44.69,44.68A2,2,0,0,1,217.42,86.1Z"></path></svg>Mesa de escrita</button>
           <button id="start-chalkboard" class="os-app" aria-controls="chalkboard">Quadro de giz</button>
+          <button id="start-lineage" class="os-app" aria-controls="lineage-panel">Colaboração · Linhagem do texto</button>
           <button id="start-universe" class="os-app" aria-controls="story-screen">Universo do caderno</button>
           <button id="start-calendar" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v16H3ZM7 2v6M17 2v6M3 10h18M7 14h2M12 14h2M7 18h2M12 18h2"></path></svg><span>Calendário</span></button>
         </div>
@@ -1985,12 +2052,12 @@ SOFTWARE.
           <button id="start-trash" class="os-app"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"></path></svg><span>Lixeira</span></button>
         </div>
       </nav>
-    <footer id="system-bar" class="os-footer"><button id="screen-lock" class="material-key" aria-label="Fechar gabinete com cadeado" title="Fechar gabinete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5ZM12 14v3"/></svg></button><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="start-key">Início</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
+    <footer id="system-bar" class="os-footer"><button id="screen-lock" class="material-key" aria-label="Fechar gabinete com cadeado" title="Fechar gabinete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5ZM12 14v3"/></svg></button><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="os-rocker" aria-hidden="true"></span><span class="start-key">Início</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
   <div id="notebook-dialog" class="notebook-dialog" hidden><div class="notebook-dialog-card" role="dialog" aria-modal="true" aria-labelledby="notebook-form-heading"><h2 id="notebook-form-heading">Novo caderno</h2><form id="project-form" class="project-form" hidden=""><label for="project-name">Nome do caderno</label><div><input id="project-name" maxlength="120" autocomplete="off" placeholder="Nome do seu projeto ou livro"><button id="project-create" type="submit">Criar</button><button id="project-cancel" type="button">Cancelar</button></div><p id="project-error" role="status"></p></form></div></div>
   <div id="writing-space" style="height: 570px;" hidden="">
     <div id="selection-tools" class="selection-tools" role="group" aria-label="Cópia e trecho selecionado"><span id="clipboard-status" role="status">Copiado no Escrevaral</span><button id="selection-cut">Recortar</button><button id="selection-paste">Colar cópia interna</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
     <header class="masthead">
-      <button id="back-cabinet" class="brand-signature" aria-label="Voltar ao Gabinete"><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
+      <button id="back-cabinet" class="brand-signature" aria-label="Voltar às folhas do caderno"><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
         <div class="note-heading"><span class="eyebrow">DOCUMENTO</span>
           <label class="sr-only" for="titulo">Título do manuscrito</label>
           <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false" value="Eu sei que vou te amar em toda a minha vida. ">
@@ -2024,7 +2091,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
         <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">Guardado neste aparelho.</span></footer>
       </main>
       <aside class="timeline" aria-label="Documentos da Mesa" data-expanded="false">
-        <div class="desk-project"><span class="eyebrow">PROJETO ATUAL</span><button id="desk-project">Folhas avulsas</button><div class="document-scope" role="group" aria-label="Organizar documentos"><button id="scope-project" aria-pressed="false">Do projeto</button><button id="scope-dates" aria-pressed="true">Por data</button></div></div>
+        <div class="desk-project"><span class="eyebrow">CADERNO ABERTO</span><button id="desk-project">Folhas avulsas</button><div class="document-scope" role="group" aria-label="Organizar documentos"><button id="scope-project" aria-pressed="false">Do projeto</button><button id="scope-dates" aria-pressed="true">Por data</button></div></div>
         <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="note-browser">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></div>
         <p id="timeline-hint" class="sr-only">Escolha um mês, depois um dia. Escolha o título para abrir a nota. A busca encontra notas de todas as datas.</p>
         <div class="wheel-window" id="note-browser"><nav id="date-path" class="date-path" aria-label="Pastas por data"><button type="button">Meses</button><button type="button">setembro 2026</button><p class="path-label" aria-current="page">9 · quarta</p></nav><p id="navigator-status" class="navigator-status" role="status" aria-live="polite">2 notas</p><div id="timeline-list" tabindex="0" role="region" aria-label="Notas por data" aria-describedby="timeline-hint"><button type="button" class="timeline-entry" aria-current="false" aria-label="vamos, 09/09/2026, 10:35:00" title="vamos"><span class="note-name">vamos</span><small class="note-time">10:35:00</small></button><button type="button" class="timeline-entry" aria-current="true" aria-label="Eu sei que vou te amar em toda a minha vida. , 09/09/2026, 10:35:18" title="Eu sei que vou te amar em toda a minha vida. "><span class="note-name">Eu sei que vou te amar em toda a minha vida. </span><small class="note-time">10:35:18</small></button></div></div>
@@ -2191,7 +2258,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       throw new Error('A lente devolveu um diagnóstico fora do contrato.');
     }
   }
-  function createVault(knowledge) {
+  function createVault(knowledge, options) {
     var registry = {}, busy = false, maxLength = 200000, maxFindings = 100;
     function register(lens) {
       if (!lens || !/^[a-z][a-z0-9-]*$/.test(lens.id) || typeof lens.analyze !== 'function' || own.call(registry, lens.id)) { throw new Error('Lente inválida ou já registrada.'); }
@@ -2207,11 +2274,11 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
         var policy = root.Escr.lensPolicies && root.Escr.lensPolicies[lensId];
         var assessment = policy ? policy(text) : { eligible: true, scope: 'Lente registrada sem política de recorte.' };
         if (!assessment.eligible) { return { lens: lensId, knowledgeVersion: knowledge.version, findings: [], limited: false, status: 'insuficiente', assessment: assessment, coverage: assessment.scope }; }
-        var result = registry[lensId].analyze(text, maxFindings + 1), i;
+        var entry=registry[lensId], incremental=entry.incremental&&!(options&&options.incremental===false), result=(incremental?entry.incremental.analyze:entry.analyze)(text,maxFindings+1), i;
         if (Object.prototype.toString.call(result) !== '[object Array]') { throw new Error('Resposta inválida da lente.'); }
         for (i = 0; i < result.length; i += 1) { validate(result[i], text, lensId); }
         result.sort(function (a, b) { return a.start - b.start || a.end - b.end || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0); });
-        return { lens: lensId, knowledgeVersion: knowledge.version, findings: result.slice(0, maxFindings), limited: result.length > maxFindings, status: 'examinado', assessment: assessment, coverage: assessment.scope + ' Silêncio não certifica correção.' };
+        return { lens: lensId, knowledgeVersion: knowledge.version, findings: result.slice(0, maxFindings), limited: result.length > maxFindings, status: 'examinado', assessment: assessment, processing:incremental?entry.incremental.stats():{mode:'integral'}, coverage: assessment.scope + ' Silêncio não certifica correção.' };
       } finally { busy = false; }
     }
     (root.Escr.extensions || []).forEach(function (install) { install(register, knowledge); });
@@ -2243,7 +2310,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   root.Escr.protectedText = protectedText;
   (root.Escr.extensions = root.Escr.extensions || []).push(function (register, knowledge) {
     function builtin(id) {
-      register({ id: id, analyze: function (text, cap) {
+      var full=function (text, cap) {
         var clean = protectedText(text), out = [], i, rule, match, regex, token, reference;
         for (i = 0; i < knowledge.rules.length; i += 1) {
           rule = knowledge.rules[i];
@@ -2262,7 +2329,8 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
           }
         }
         return out;
-      } });
+      };
+      register({id:id,analyze:full,incremental:root.Escr.createIncrementalLexical?root.Escr.createIncrementalLexical(id,full,knowledge):null});
     }
     builtin('ortografia'); builtin('acentuacao'); builtin('pontuacao');
   });
@@ -2276,7 +2344,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   var prefix = 'escrevaral.astra.v1.doc.', counter = 0;
   function uid() { counter += 1; return new Date().getTime().toString(36) + '-' + Math.random().toString(36).slice(2, 10) + '-' + counter; }
   function valid(doc) {
-    return doc && (typeof doc.projectId === 'undefined' || (typeof doc.projectId === 'string' && /^[a-z0-9-]+$/.test(doc.projectId))) && (typeof doc.trashed === 'undefined' || typeof doc.trashed === 'boolean') && (typeof doc.kind === 'undefined' || doc.kind === 'reminder') && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
+    return doc && (typeof doc.lineage==='undefined'||(root.Escr.lineage&&root.Escr.lineage.valid(doc.lineage))) && (typeof doc.linguistics==='undefined'||(doc.linguistics&&doc.linguistics.version===1&&Object.prototype.toString.call(doc.linguistics.records)==='[object Array]'&&doc.linguistics.records.length<=3&&root.Escr.linguistics&&doc.linguistics.records.every(root.Escr.linguistics.valid))) && (typeof doc.projectId === 'undefined' || (typeof doc.projectId === 'string' && /^[a-z0-9-]+$/.test(doc.projectId))) && (typeof doc.trashed === 'undefined' || typeof doc.trashed === 'boolean') && (typeof doc.kind === 'undefined' || doc.kind === 'reminder') && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
   }
   function fresh() { var now = new Date().toISOString(), id = uid(); return { id: id, noteId: id, title: '', text: '', created: now, updated: now, revision: 0, dismissed: [] }; }
   function dateOf(doc) { return doc.created || doc.updated; }
@@ -2293,12 +2361,13 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       docs.sort(function (a, b) { return Date.parse(dateOf(b)) - Date.parse(dateOf(a)) || ((a.noteId || a.id) < (b.noteId || b.id) ? -1 : (a.noteId || a.id) > (b.noteId || b.id) ? 1 : 0); });
       return { documents: docs, unreadable: unreadable };
     }
-    function save(doc) {
+    function save(doc, forceHistory) {
       if (!valid(doc)) { throw new Error('A folha não pôde ser guardada. Baixe uma cópia do texto.'); }
       var current = get(doc.id), copy = JSON.parse(JSON.stringify(doc)), conflict = false;
       if ((current && current.revision !== doc.revision) || (!current && doc.revision !== 0)) {
         copy.title = (copy.title || 'Sem título') + ' — versão preservada'; conflict = true;
       }
+      if(root.Escr.lineage){copy.lineage=root.Escr.lineage.capture(current,copy,forceHistory);}
       /* Folhas antigas só tinham a última gravação: preservar essa data sem inventar a criação. */
       if (!copy.created) { copy.created = copy.updated; copy.createdApproximate = true; }
       copy.noteId = copy.noteId || copy.id; copy.id = uid(); copy.revision += 1; copy.updated = new Date().toISOString();
@@ -3074,7 +3143,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     });
     result.schema = 'scrvrl.analysis-result'; result.version = 1;
     result.source = { documentId: s.documentId, recordId: s.recordId, revision: s.revision, projectLabel: s.projectLabel, start: s.start, end: s.end, draft: s.draft };
-    result.engineVersion = '4.0.0';
+    result.engineVersion = '5.0.0';
     result.dataVersions = { base: E.knowledge.version, maturation: E.maturationData.version, studio: E.studioData.version };
     return result;
   }
@@ -3245,7 +3314,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     });
     function open(kind){
       if(!bridge.checkpoint()){return;}bridge.hideStart();['pomodoro','calculator','calendar'].forEach(function(name){byId(name+'-panel').hidden=name!==kind;});
-      text(byId('utility-heading'),kind==='pomodoro'?'Pomodoro':kind==='calculator'?'Calculadora':'Calendário');
+      byId('utilidades').setAttribute('data-tool',kind);text(byId('utility-heading'),kind==='pomodoro'?'Pomodoro':kind==='calculator'?'Calculadora':'Calendário');
       if(kind==='calendar'){loadPlanner();try{calendarDocs=bridge.documents();}catch(e){calendarDocs=[];text(byId('calendar-status'),'Não foi possível ler as folhas.');}renderCalendar();}
       bridge.show('utilidades','start-'+kind);if(kind==='calculator'){calc.focus();}else{byId('utilidades').focus();}paintTimer();
     }
@@ -3604,6 +3673,158 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
 
 </script>
 <script>
+/* Reuso lexical: fronteiras de linha, proteção global e comparação exata. */
+(function(root){
+ 'use strict';
+ var E=root.Escr;
+ E.createIncrementalLexical=function(id,full,knowledge){
+  if(['ortografia','acentuacao'].indexOf(id)<0||knowledge.rules.some(function(r){return r.lens===id&&!r.forms;})){return null;}
+  var cache=Object.create(null),order=[],chars=0,stats={processed:0,reused:0},rank=Object.create(null);
+  knowledge.rules.forEach(function(r,i){rank[r.id]=i;});
+  function clone(v){return JSON.parse(JSON.stringify(v));}
+  function analyze(text,cap){
+   var fresh=Object.create(null);order=[];chars=0;var clean=E.protectedText(text),parts=clean.split('\n'),offset=0,out=[];stats={processed:0,reused:0};
+   parts.forEach(function(part){
+    var key='$'+part,item=cache[key]||fresh[key],rows;
+    if(item){rows=item.rows;stats.reused+=1;}else{
+     rows=full(part,cap);stats.processed+=1;
+    }
+     if(part.length<=200000&&!fresh[key]){
+      var cost=part.length+JSON.stringify(rows).length;
+      while(order.length&&(order.length>=512||chars+cost>500000)){var old=order.shift();chars-=fresh[old].cost;delete fresh[old];}
+      if(cost<=500000){fresh[key]={rows:clone(rows),cost:cost};order.push(key);chars+=cost;}
+     }
+    rows.forEach(function(f){var copy=clone(f);copy.start+=offset;copy.end+=offset;out.push(copy);});offset+=part.length+1;out.sort(function(a,b){return rank[a.id]-rank[b.id]||a.start-b.start;});if(out.length>cap){out.length=cap;}
+   });
+   /* O motor integral limita na ordem do corpus antes de ordenar na folha. */
+   out.sort(function(a,b){return rank[a.id]-rank[b.id]||a.start-b.start;});
+   cache=fresh;return out.slice(0,cap);
+  }
+  return {analyze:analyze,stats:function(){return {mode:'incremental-lexical',processed:stats.processed,reused:stats.reused};}};
+ };
+}(typeof window!=='undefined'?window:this));
+
+</script>
+<script>
+/* Persistência linguística: IndexedDB opcional; documento e corpus portátil são fallback. */
+(function(root){
+ 'use strict';
+ var E=root.Escr;
+ function version(){return ['5.0.0',E.knowledge.version,E.maturationData.version,E.studioData.version].join('/');}
+ function clone(v){return JSON.parse(JSON.stringify(v));}
+ function valid(record){return record&&record.version===1&&typeof record.text==='string'&&record.text.length<=200000&&typeof record.lens==='string'&&typeof record.corpus==='string'&&record.result&&record.result.schema==='scrvrl.analysis-result'&&record.result.source&&typeof record.result.source.start==='number'&&typeof record.result.source.end==='number'&&Object.prototype.toString.call(record.result.findings)==='[object Array]'&&record.result.findings.length<=100&&record.result.findings.every(function(f){return f&&typeof f.start==='number'&&typeof f.end==='number'&&f.start>=0&&f.end<=record.text.length&&f.end>f.start&&record.text.slice(f.start,f.end)===f.snippet&&f.evidence&&f.evidence.source;});}
+ function match(record,lens,request){return valid(record)&&record.corpus===version()&&record.lens===lens&&record.text===request.text&&record.result.source.start===request.source.start&&record.result.source.end===request.source.end;}
+ function remember(doc,request,result){
+  var record={version:1,corpus:version(),lens:result.lens,text:request.text,at:new Date().toISOString(),result:clone(result)};
+  if(!valid(record)){return null;}var records=doc.linguistics&&doc.linguistics.version===1?doc.linguistics.records.filter(valid):[];
+  records=records.filter(function(r){return r.lens!==record.lens;});records.push(record);
+  var size=0;records.forEach(function(r){size+=r.text.length;});while(records.length>3||size>200000){size-=records.shift().text.length;}
+  doc.linguistics={version:1,records:records};return record;
+ }
+ function fromDoc(doc,lens,request){var records=doc.linguistics&&doc.linguistics.version===1?doc.linguistics.records:[];for(var i=records.length-1;i>=0;i-=1){if(match(records[i],lens,request)){return clone(records[i]);}}return null;}
+ E.linguistics={version:version,valid:valid,match:match,remember:remember,fromDoc:fromDoc};
+ E.createLinguisticStore=function(){
+  var db=null,opening=false,disabled=false,queue=[],epoch=0;
+  function open(done){
+   if(db){done(db);return;}if(disabled){done(null);return;}queue.push(done);if(opening){return;}opening=true;
+   var generation=++epoch,request,timer;
+   function settle(value){if(generation!==epoch){if(value){value.close();}return;}epoch+=1;root.clearTimeout(timer);opening=false;db=value;disabled=!value;var waiting=queue;queue=[];waiting.forEach(function(f){f(value);});}
+   try{
+    if(!root.indexedDB){settle(null);return;}request=root.indexedDB.open('escrevaral-linguistica',1);
+    timer=root.setTimeout(function(){settle(null);},1500);
+    request.onupgradeneeded=function(){var d=request.result;if(!d.objectStoreNames.contains('cache')){d.createObjectStore('cache');}};
+    request.onsuccess=function(){var d=request.result;d.onversionchange=function(){d.close();db=null;disabled=true;};settle(d);};request.onerror=request.onblocked=function(){settle(null);};
+   }catch(ignore){settle(null);}
+  }
+  function get(key,done){
+   open(function(d){if(!d){done(null);return;}var finished=false,timer;
+    function finish(value){if(finished){return;}finished=true;root.clearTimeout(timer);done(value);}
+    try{var tx=d.transaction('cache','readonly'),r=tx.objectStore('cache').get(key);timer=root.setTimeout(function(){finish(null);},1000);r.onsuccess=function(){finish(r.result||null);};r.onerror=tx.onabort=function(){finish(null);};}catch(ignore){finish(null);}
+   });
+  }
+  function put(key,record){
+   open(function(d){if(!d){return;}try{var tx=d.transaction('cache','readwrite'),s=tx.objectStore('cache'),r=s.get('recent');
+    r.onsuccess=function(){var ids=Object.prototype.toString.call(r.result)==='[object Array]'?r.result:[];ids=ids.filter(function(x){return typeof x==='string'&&x!==key;}).slice(-20);ids.push(key);while(ids.length>20){s.delete(ids.shift());}s.put(record,key);s.put(ids,'recent');};
+    tx.onerror=tx.onabort=function(){/* Derivados opcionais; a cópia do documento permanece. */};
+   }catch(ignore){}});
+  }
+  function corpus(){open(function(d){if(!d){return;}try{var tx=d.transaction('cache','readwrite'),s=tx.objectStore('cache'),r=s.get('corpus');r.onsuccess=function(){if(!r.result||r.result.version!==version()){s.put({version:version(),knowledge:E.knowledge,maturation:E.maturationData,studio:E.studioData,style:E.styleData||null,poetry:E.poetryData||null,grammar:E.grammarData||null,verbs:E.verbData||null,decolonial:E.decolonialData||null},'corpus');}};}catch(ignore){}});}
+  function removeDocument(prefix){open(function(d){if(!d){return;}try{var tx=d.transaction('cache','readwrite'),s=tx.objectStore('cache'),r=s.get('recent');r.onsuccess=function(){var ids=Object.prototype.toString.call(r.result)==='[object Array]'?r.result:[],keep=[];ids.forEach(function(k){if(typeof k!=='string'){return;}if(k.indexOf(prefix)===0){s.delete(k);}else{keep.push(k);}});s.put(keep,'recent');};}catch(ignore){}});}
+  return {get:get,put:put,corpus:corpus,removeDocument:removeDocument};
+ };
+}(typeof window!=='undefined'?window:this));
+
+</script>
+<script>
+/* Linhagem local: versões recentes autocontidas, sem promessa de data externa. */
+(function(root){
+ 'use strict';
+ var E=root.Escr,limit=400000,max=20;
+ function arr(v){return Object.prototype.toString.call(v)==='[object Array]';}
+ function valid(h){
+  if(!h||h.version!==1||!arr(h.entries)||h.entries.length>max){return false;}var size=0,seen=Object.create(null);
+  return h.entries.every(function(v){if(!v||typeof v.id!=='string'||!/^[a-z0-9-]+$/.test(v.id)||seen[v.id]||typeof v.title!=='string'||typeof v.text!=='string'||typeof v.at!=='string'||!isFinite(Date.parse(v.at))||typeof v.revision!=='number'||v.revision<0||v.revision%1){return false;}seen[v.id]=true;size+=v.text.length+v.title.length;return size<=limit;});
+ }
+ function read(doc){if(typeof doc.lineage==='undefined'){return {version:1,entries:[]};}if(!valid(doc.lineage)){throw new Error('O histórico desta folha não pôde ser lido. Preserve uma cópia antes de continuar.');}return JSON.parse(JSON.stringify(doc.lineage));}
+ function capture(previous,next,force){
+  var h=read(next);if(!previous){return h;}var last=h.entries[h.entries.length-1],changed=previous.text!==next.text||previous.title!==next.title;
+  if(!force&&!changed){return h;}
+  var elapsed=last?Date.parse(previous.updated)-Date.parse(last.at):Infinity,large=previous.text.length-next.text.length>Math.max(30,previous.text.length*.2);
+  if(!force&&last&&elapsed<60000&&!large&&previous.title===next.title){return h;}
+  if(h.entries.some(function(v){return v.id===previous.id;})){return h;}
+  if(previous.text.length+previous.title.length>limit){return h;}
+  h.entries.push({id:previous.id,title:previous.title,text:previous.text,at:previous.updated,revision:previous.revision});
+  var size=0;h.entries.forEach(function(v){size+=v.text.length+v.title.length;});while(h.entries.length>max||size>limit){var old=h.entries.shift();size-=old.text.length+old.title.length;}
+  return h;
+ }
+ function difference(before,after){
+  var start=0,end=0;while(start<before.length&&start<after.length&&before.charAt(start)===after.charAt(start)){start+=1;}
+  while(end<before.length-start&&end<after.length-start&&before.charAt(before.length-end-1)===after.charAt(after.length-end-1)){end+=1;}
+  return {start:start,removed:before.slice(start,before.length-end),added:after.slice(start,after.length-end)};
+ }
+ E.lineage={valid:valid,read:read,capture:capture,difference:difference,limit:limit,max:max};
+}(typeof window!=='undefined'?window:this));
+
+</script>
+<script>
+/* Colaboração: consulta de versões locais, restauração como nova gravação. */
+(function(root){
+ 'use strict';
+ root.Escr.mountLineage=function(bridge){
+  var E=root.Escr,D=root.document,panel=D.getElementById('lineage-panel'),list=D.getElementById('lineage-list'),active=null,selected=null;
+  function byId(id){return D.getElementById(id);}
+  function el(tag,parent,text){var n=D.createElement(tag);if(typeof text!=='undefined'){n.textContent=text;}parent.appendChild(n);return n;}
+  function status(t){byId('lineage-status').textContent=t;}
+  function versionRow(v,now,index){
+   var row=el('li',list),b=el('button',row);b.type='button';b.className='lineage-version';b.setAttribute('aria-pressed',selected===v.id?'true':'false');
+   el('strong',b,now?'Agora na folha':'Versão '+v.revision);el('span',b,new Date(v.at).toLocaleString('pt-BR'));el('small',b,v.title||'Sem título');el('small',b,E.countManuscript(v.text).words+' palavras');
+   b.addEventListener('click',function(){selected=v.id;show(v,now,index);},false);
+  }
+  function show(v,now,index){
+   var current=bridge.document(),h=E.lineage.read(active),previous=index>0?h.entries[index-1]:null,diff=E.lineage.difference(previous?previous.text:'',v.text);
+   byId('lineage-preview').value=v.text;byId('lineage-preview-title').textContent=v.title||'Sem título';byId('lineage-diff').textContent=now?'Texto atual.':previous?diff.added.length+' caracteres inseridos · '+diff.removed.length+' removidos desde a versão anterior.':'Primeira versão disponível neste histórico.';
+   byId('lineage-added').textContent=diff.added.slice(0,3000);byId('lineage-removed').textContent=diff.removed.slice(0,3000);byId('lineage-changes').hidden=now||!previous;
+   byId('lineage-restore').hidden=now;byId('lineage-restore').onclick=function(){
+    E.dialog.ask({title:'Restaurar esta versão?',message:'O texto escolhido será uma nova gravação. O texto atual será preservado no histórico dentro do limite de espaço.',accept:'Restaurar versão'},function(ok){if(!ok){return;}try{if(!current||bridge.document().id!==current.id||bridge.document().text!==current.text){throw new Error('A folha mudou. Reabra a linhagem antes de restaurar.');}bridge.restore(v);open(true);status('Versão restaurada como nova gravação.');}catch(e){status(e.message);}});
+   };
+   var buttons=list.querySelectorAll('button');for(var j=0;j<buttons.length;j+=1){buttons[j].setAttribute('aria-pressed',j===index?'true':'false');}
+  }
+  function open(already){
+   if(!bridge.checkpoint()){return;}active=bridge.document();if(!active||!active.projectId){bridge.message('Abra uma folha de um caderno para consultar sua linhagem.');return;}
+   try{
+    var h=E.lineage.read(active);list.textContent='';selected=active.id;h.entries.forEach(function(v,i){versionRow(v,false,i);});var now={id:active.id,title:active.title,text:active.text,at:active.updated,revision:active.revision};versionRow(now,true,h.entries.length);
+    byId('lineage-heading').textContent=active.title||'Sem título';byId('lineage-book').textContent='Caderno: '+active.project;show(now,true,h.entries.length);status(h.entries.length?'Versões locais recentes. Datas fornecidas por este aparelho.':'Ainda não há versões anteriores. A linhagem começa nas próximas alterações ou ao guardar um marco.');
+    if(!already){bridge.show();}
+   }catch(e){bridge.message(e.message);}
+  }
+  byId('start-lineage').addEventListener('click',function(){open(false);},false);
+  byId('lineage-close').addEventListener('click',bridge.close,false);
+  byId('lineage-mark').addEventListener('click',function(){try{bridge.mark();open(true);status('Marco guardado no histórico desta folha.');}catch(e){status(e.message);}},false);
+ };
+}(window));
+
+</script>
+<script>
 /* Cadernos: dados ES5, independente da apresentação. */
 (function (root) {
   'use strict';
@@ -3737,8 +3958,8 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   var E = window.Escr, vault = E.createVault(E.knowledge), storage = null, archive = null;
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
-  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task'];
-  var projectScope = false, readingSize = 21, chalkUI = null;
+  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause', 'lineage-panel'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task', 'start-lineage'];
+  var projectScope = false, readingSize = 21, chalkUI = null, forceHistory=false, linguisticStore=E.createLinguisticStore(), analysisEpoch=0;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
@@ -3762,6 +3983,8 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     byId('cabinet-search').setAttribute('aria-label', byId('cabinet-search').placeholder);
     byId('notebook-rename').hidden = byId('notebook-export').hidden = byId('notebook-trash').hidden = !book;
     byId('export-notebook').disabled = !book;
+    byId('cabinet-window').setAttribute('data-scope',book?'notebook':'all');text(byId('cabinet-context-label'),book?'CADERNO ABERTO · SUAS FOLHAS':'CONSULTA · TODOS OS CADERNOS');
+    byId('cabinet-window').setAttribute('aria-label',book?'Caderno aberto: '+book.name:'Consulta de todos os textos');
     byId('notebook-universe').hidden = byId('notebook-chalkboard').hidden = !book;
     byId('note-project').textContent = '';
     if (notebooks) { notebooks.list().filter(function (b) { return !b.trashed; }).forEach(function (b) { var option = document.createElement('option'); option.value = b.id; text(option, b.name); byId('note-project').appendChild(option); }); }
@@ -3774,9 +3997,10 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       var b = button(list, '', function () { openNotebook(book.id); });
       b.className = 'notebook-cover'; b.setAttribute('title', book.name); b.setAttribute('data-notebook-id', book.id); b.setAttribute('aria-label', 'Abrir caderno ' + book.name);
       b.setAttribute('aria-pressed', activeNotebookId === book.id ? 'true' : 'false');
-      var strap = document.createElement('span'); strap.className = 'notebook-strap'; strap.style.backgroundColor = book.color; text(strap, book.name); b.appendChild(strap);
-      var woven = document.createElement('span'); woven.className = 'woven-tab'; woven.setAttribute('aria-hidden', 'true'); woven.innerHTML = 'ESCREVA<b>RAL</b>'; b.appendChild(woven);
-      var elastic = document.createElement('span'); elastic.className = 'notebook-elastic'; elastic.setAttribute('aria-hidden', 'true'); b.appendChild(elastic);
+      var face=document.createElement('span');face.className='notebook-front';face.setAttribute('aria-hidden','true');b.appendChild(face);var mark=document.createElement('span');mark.className='notebook-state';text(mark,'ABERTO');mark.setAttribute('aria-hidden','true');b.appendChild(mark);
+      var strap = document.createElement('span'); strap.className = 'notebook-strap'; strap.style.backgroundColor = book.color; text(strap, book.name); face.appendChild(strap);
+      var woven = document.createElement('span'); woven.className = 'woven-tab'; woven.setAttribute('aria-hidden', 'true'); woven.innerHTML = 'ESCREVA<b>RAL</b>'; face.appendChild(woven);
+      var elastic = document.createElement('span'); elastic.className = 'notebook-elastic'; elastic.setAttribute('aria-hidden', 'true'); face.appendChild(elastic);
     });
     byId('notebook-hint').hidden = !!list.childNodes.length; notebookLabels();
   }
@@ -3961,7 +4185,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     doc.title = title.value; doc.text = manuscript.value;
     if (!archive) { message('Sem gravação neste navegador. Baixe uma cópia em Ajustes.'); return false; }
     try {
-      var previousId = doc.id, saved = archive.save(doc); doc = saved.document; dirty = false;
+      var previousId = doc.id, saved = archive.save(doc,forceHistory); doc = saved.document; dirty = false; forceHistory=false;
       message(saved.conflict ? 'Outra versão foi preservada no acervo.' : 'Guardado neste aparelho.');
       try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Só a preferência de abertura falhou. */ }
       if (!byId('acervo').hidden) { renderArchive(); }
@@ -3971,7 +4195,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   }
   function invalidate() {
     if (pendingAnalysis === null && !activeLens && !byId('findings').childNodes.length) { return; }
-    window.clearTimeout(pendingAnalysis); pendingAnalysis = null;
+    analysisEpoch+=1;window.clearTimeout(pendingAnalysis); pendingAnalysis = null;
     byId('findings').textContent = ''; snapshot = ''; activeLens = '';
     for (var i = 0; i < lensButtons.length; i += 1) { lensButtons[i].disabled = false; lensButtons[i].setAttribute('aria-pressed', 'false'); }
     text(analysisStatus, 'O manuscrito mudou. Escolha uma lente quando quiser examinar de novo.');
@@ -4155,13 +4379,13 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   function askDelete(entry) {
     E.dialog.ask({title:'Excluir definitivamente?',message:'“' + (entry.title || 'Sem título') + '” será apagada definitivamente do acervo deste aparelho. Não será possível restaurar esta cópia. Arquivos exportados e versões em outras abas não são apagados.',accept:'Excluir definitivamente'},function(ok){
       if (!ok) { return; }
-      try { archive.purge(entry); renderArchive(); byId('trash-toggle').focus(); message('Cópia excluída definitivamente deste acervo.'); }
+      try { archive.purge(entry); linguisticStore.removeDocument('analysis/'+(entry.projectId||'avulsos')+'/'+(entry.noteId||entry.id)+'/'); renderArchive(); byId('trash-toggle').focus(); message('Cópia excluída definitivamente deste acervo.'); }
       catch (e) { text(byId('archive-status'),e.message); }
     });
   }
 
   function updatePath() {
-    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes' };
+    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Colaboração' };
     byId('path-project').hidden = byId('path-project-separator').hidden = project === null;
     text(byId('path-project'), project || 'Folhas avulsas');
     byId('path-project').setAttribute('title', project || 'Folhas avulsas');
@@ -4188,12 +4412,19 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
       area.style.height = Math.max(0, height - byId('location-path').offsetHeight - byId('system-bar').offsetHeight) + 'px'; byId('gabinete').style.height = Math.max(0, height - byId('location-path').offsetHeight - byId('system-bar').offsetHeight) + 'px';
       byId('machine-shell').style.height = height + 'px';
       var topBar=byId('location-path').offsetHeight,bottomBar=byId('system-bar').offsetHeight;
-      panelIds.forEach(function(id){var p=byId(id);p.style.top=topBar+'px';p.style.bottom='auto';p.style.height=Math.max(0,height-topBar-bottomBar)+'px';p.style.maxHeight='none';});
+      sizePanels(height,topBar,bottomBar);
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
       var browser = byId('note-browser');
       if (browser.style) { browser.style.height = window.innerWidth <= 760 && height < 480 ? Math.max(84, height - 108) + 'px' : ''; }
     }
     typewriterInsets(); growManuscript(); followTyping(); renderTimeline(false, null, true);
+  }
+  function sizePanels(height,topBar,bottomBar) {
+    panelIds.forEach(function(id){var p=byId(id),margin=window.innerWidth<=760?8:16,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?620:440;
+      p.style.bottom='auto';p.style.top=(topBar+(id==='focus-pause'?0:margin))+'px';
+      if(id==='focus-pause'){p.style.height=Math.max(0,height-topBar-bottomBar)+'px';p.style.maxHeight='none';return;}
+      p.style.width=(window.innerWidth<=760?Math.max(0,window.innerWidth-margin*2):Math.min(width,Math.max(0,window.innerWidth-margin*2)))+'px';p.style.right=margin+'px';p.style.height='auto';p.style.maxHeight=available+'px';
+    });
   }
   function revealSelection(start, end) {
     returnToWriting(); manuscript.setSelectionRange(start, end);
@@ -4221,7 +4452,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     byId(id).hidden = false; byId(toggle).setAttribute('aria-expanded', 'true');
     byId('panel-backdrop').hidden = false; document.body.setAttribute('data-panel', 'open');
     byId(id).focus(); byId('writing-space').setAttribute('aria-hidden', 'true'); byId('gabinete').setAttribute('aria-hidden', 'true');
-    if (id === 'mesa') { notebookLabels(); }
+    if (id === 'mesa') { notebookLabels(); }sizePanels(window.visualViewport?window.visualViewport.height:window.innerHeight,byId('location-path').offsetHeight,byId('system-bar').offsetHeight);
     updatePath(); queueSession();
   }
   function setImmersion(enabled) {
@@ -4375,18 +4606,29 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   }
   function examine(lens) {
     if (pendingAnalysis !== null || composing) { return; }
-    snapshot = manuscript.value; activeLens = lens;
+    if(dirty&&archive){persist();}snapshot = manuscript.value; activeLens = lens;
     var selected = analysisRange && analysisRange.documentId === (doc.noteId || doc.id) && analysisRange.text === snapshot ? analysisRange : null;
     var request = E.analysisContract.request(doc, snapshot, selected ? selected.start : 0, selected ? selected.end : snapshot.length);
     byId('findings').textContent = '';
     text(analysisStatus, 'Observando o manuscrito…');
     for (var i = 0; i < lensButtons.length; i += 1) { lensButtons[i].disabled = true; lensButtons[i].setAttribute('aria-pressed', lensButtons[i].getAttribute('data-lens') === lens ? 'true' : 'false'); }
-    pendingAnalysis = window.setTimeout(function () {
-      pendingAnalysis = null;
-      try { if (E.analysisContract.current(request, doc, manuscript.value)) { renderResult(E.analysisContract.analyze(vault, lens, request)); } else { invalidate(); } } catch (e) { text(analysisStatus, e.message); }
-      for (var j = 0; j < lensButtons.length; j += 1) { lensButtons[j].disabled = false; }
-    }, 20);
+    var token=++analysisEpoch;
+    pendingAnalysis=window.setTimeout(function(){
+      function complete(record){
+        if(token!==analysisEpoch){return;}pendingAnalysis=null;
+        try{
+          if(!E.analysisContract.current(request,doc,manuscript.value)){invalidate();return;}
+          var cached=E.linguistics.match(record,lens,request),result=cached?JSON.parse(JSON.stringify(record.result)):E.analysisContract.analyze(vault,lens,request);
+          if(cached){result.source=JSON.parse(JSON.stringify(request.source));result.processing={mode:'persistido'};}
+          if(!cached||!E.linguistics.fromDoc(doc,lens,request)){var saved=E.linguistics.remember(doc,request,result);if(saved){dirty=true;persist();linguisticStore.put('analysis/'+(doc.projectId||'avulsos')+'/'+(doc.noteId||doc.id)+'/'+lens,saved);}}
+          renderResult(result);linguisticStore.corpus();
+        }catch(e){text(analysisStatus,e.message);}
+        for(var j=0;j<lensButtons.length;j+=1){lensButtons[j].disabled=false;}
+      }
+      var record=E.linguistics.fromDoc(doc,lens,request);if(record){complete(record);}else{linguisticStore.get('analysis/'+(doc.projectId||'avulsos')+'/'+(doc.noteId||doc.id)+'/'+lens,complete);}
+    },20);
   }
+
   function download(contents, mime, name, host) {
     var urlAPI = window.URL || window.webkitURL;
     try {
@@ -4619,7 +4861,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     archive = {
       get: function (id) { var d = rawArchive.get(id); return d ? notebooks.decorate(d) : null; },
       list: function (all) { var hidden = Object.create(null); notebooks.list().forEach(function (b) { if (b.trashed) { hidden[b.id] = true; } }); var r = rawArchive.list(all); r.documents = r.documents.map(notebooks.decorate).filter(function (d) { return all || !hidden[d.projectId]; }); return r; },
-      save: function (d) { return rawArchive.save(notebooks.decorate(d)); },
+      save: function (d, forceHistory) { return rawArchive.save(notebooks.decorate(d), forceHistory); },
       trash: rawArchive.trash, purge: rawArchive.purge
     };
     var currentId = storage.getItem('escrevaral.astra.current'), current = currentId ? archive.get(currentId) : null;
@@ -4753,7 +4995,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   listen(document, 'click', outsideStart);
   listen(document, 'touchstart', outsideStart);
   listen(document, 'focusin', outsideStart);
-  listen(byId('os-window-task'), 'click', function () { if (!cabinetOpen) { openCabinet(false); } else { desktopWindow(byId('cabinet-window').hidden ? 'open' : 'minimize'); } });
+  listen(byId('os-window-task'), 'click', function () { if (!cabinetOpen) { openCabinet(false); } else { if(byId('cabinet-window').hidden){desktopWindow('open');}else{closeNotebook();} } });
   listen(byId('window-minimize'), 'click', function () { desktopWindow('minimize'); });
   listen(byId('window-close'), 'click', function () { desktopWindow('close'); });
   listen(byId('window-maximize'), 'click', function () {
@@ -4786,6 +5028,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   listen(byId('cabinet-backup'), 'click', function () { byId('export-backup').click(); });
   listen(byId('cabinet-examine'), 'click', function () { enterDesk(); showPanel('oficina', 'examinar-toggle', true); lensButtons[0].focus(); });
   listen(byId('cabinet-poetry'), 'click', function () { enterDesk(); showPanel('oficina', 'examinar-toggle', true); for (var j = 0; j < lensButtons.length; j += 1) { if (lensButtons[j].getAttribute('data-lens') === 'rima') { lensButtons[j].focus(); break; } } });
+  listen(byId('notebook-back'),'click',closeNotebook);
   listen(byId('cabinet-all'), 'click', function () { if (!checkpoint() || !rememberNotebook()) { return; } activeNotebookId = null; cabinetProject = null; cabinetLimit = 40; byId('cabinet-search').value = ''; renderCabinet(); });
   listen(byId('cabinet-more'), 'click', function () { cabinetLimit += 40; renderCabinet(); });
   listen(byId('cabinet-search'), 'input', function () { window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; desktopWindow('open', false); renderCabinet(); }, 180); });
@@ -4897,6 +5140,12 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
   chalkUI = E.mountChalk({book:activeNotebook, checkpoint:checkpoint, message:message, download:download,
     prepare:function(){closePanels(false);toggleStart(false);},
     save:function(id,revision,next){return E.chalk.write(notebooks,id,revision,next);}
+  });
+
+  E.mountLineage({checkpoint:checkpoint,message:message,document:function(){return JSON.parse(JSON.stringify(doc));},
+    show:function(){toggleStart(false);showPanel('lineage-panel','start-lineage',true);},close:function(){closePanels(true);},
+    mark:function(){if(!checkpoint()){throw new Error('Guarde a folha antes de criar um marco.');}forceHistory=true;dirty=true;if(!persist()){throw new Error('Não foi possível guardar o marco.');}},
+    restore:function(version){title.value=version.title;manuscript.value=version.text;forceHistory=true;dirty=true;invalidate();if(!persist()){throw new Error('Não foi possível guardar a restauração. O texto escolhido permanece na folha.');}growManuscript();}
   });
 
   E.mountUtilities({
