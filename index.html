@@ -4861,7 +4861,7 @@ desesperadamente eu vou sofrersofrersofrersofrersofrer</textarea>
     archive = {
       get: function (id) { var d = rawArchive.get(id); return d ? notebooks.decorate(d) : null; },
       list: function (all) { var hidden = Object.create(null); notebooks.list().forEach(function (b) { if (b.trashed) { hidden[b.id] = true; } }); var r = rawArchive.list(all); r.documents = r.documents.map(notebooks.decorate).filter(function (d) { return all || !hidden[d.projectId]; }); return r; },
-      save: function (d) { return rawArchive.save(notebooks.decorate(d)); },
+      save: function (d, forceHistory) { return rawArchive.save(notebooks.decorate(d), forceHistory); },
       trash: rawArchive.trash, purge: rawArchive.purge
     };
     var currentId = storage.getItem('escrevaral.astra.current'), current = currentId ? archive.get(currentId) : null;
