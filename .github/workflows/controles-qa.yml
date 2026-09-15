@@ -31,6 +31,7 @@ jobs:
           node tests/controles-static.cjs
           node tests/cadernos.cjs
           node tests/universo.cjs
+          node tests/quadro.cjs
       - name: Fluxos anteriores e offline
         run: |
           node tests/cadernos-browser.cjs
@@ -41,12 +42,18 @@ jobs:
         env:
           BROWSER_ENGINE: webkit
         run: node tests/controles-browser.cjs
+      - name: Quadro por caderno — Chromium
+        run: node tests/quadro-browser.cjs
+      - name: Quadro por caderno — WebKit
+        env:
+          BROWSER_ENGINE: webkit
+        run: node tests/quadro-browser.cjs
       - name: Prévia visual nos logs (dados fictícios)
         if: always()
         run: |
           node - <<'NODE'
           const fs=require('fs'),path=require('path');
-          for(const name of ['chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
+          for(const name of ['chromium-quadro-1366','chromium-quadro-390-escuro','chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
             const file=path.join(process.env.QA_OUTPUT,name+'.png');
             if(fs.existsSync(file))console.log('QA_IMAGE:'+name+':'+fs.readFileSync(file).toString('base64'));
           }
