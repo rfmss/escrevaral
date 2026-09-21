@@ -33,9 +33,13 @@ async function shot(p,name){await p.screenshot({path:path.join(out,engine+'-'+na
   const paper=await p.locator('#editor-viewport').boundingBox();assert.ok(paper.width>200&&paper.height>80,JSON.stringify(paper));
   if(await p.locator('#desk-documents').isVisible())await p.click('#desk-documents');
   await shot(p,'mesa-g2-'+width);assert.equal(await p.locator('[data-route-book="'+second.projectId+'"]').isVisible(),true);const leaves=await p.locator('#timeline-list').boundingBox();assert.ok(leaves.height>=45,'folhas acessíveis em '+width+'x'+height+' '+JSON.stringify(leaves));
-  if(await p.locator('#desk-documents').isVisible())await p.click('#desk-documents');
+  if(await p.locator('#drawer-route-close').isVisible()){
+   const active=await p.locator('[data-route-book="'+second.projectId+'"]').boundingBox(),route=await p.locator('#drawer-route').boundingBox();
+   if(height>480)assert.ok(active.y>=route.y&&active.y+active.height<=route.y+route.height+1,'caderno atual visível sem rolar');
+   await p.click('#drawer-route-close');assert.equal(await p.locator('#desk-documents').getAttribute('aria-expanded'),'false');
+  }
  }
- await p.setViewportSize({width:1366,height:768});await p.evaluate(()=>document.body.setAttribute('data-theme','escuro'));await shot(p,'mesa-g2-escuro');await p.evaluate(()=>document.body.setAttribute('data-theme','claro'));
+ await p.setViewportSize({width:1366,height:768});await p.click('#mesa-toggle');await p.click('#theme-dark');await p.click('#mesa-close');await p.locator('#manuscrito').focus();await p.waitForTimeout(100);await shot(p,'mesa-g2-escuro');await p.click('#mesa-toggle');await p.click('#theme-light');await p.click('#mesa-close');
  await p.click('#desk-minimize');await p.click('#original-back');await p.click('#reminder-new');await p.locator('.desktop-reminder textarea').fill('Rever a chegada.');await p.reload();assert.equal(await p.locator('.desktop-reminder textarea').inputValue(),'Rever a chegada.');await p.click('.reminder-trash');await p.click('#app-dialog-cancel');assert.equal(await p.locator('.desktop-reminder').count(),1);await shot(p,'gavetas-postit-g2');await p.click('.reminder-trash');await p.click('#app-dialog-accept');assert.equal(await p.locator('.desktop-reminder').count(),0);
  const touch=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true,serviceWorkers:'block'}),q=await touch.newPage();await q.goto('http://127.0.0.1:'+server.address().port);assert.equal(await q.locator('.touch-hint').isVisible(),true);assert.equal(await q.locator('.pointer-hint').isVisible(),false);await form(q,'#project-new','Caderno de bolso');assert.equal(await q.locator('#cabinet-window').isVisible(),true);
  assert.deepEqual(errors,[]);console.log('OK '+engine+': Início estável; duplo clique/toque; logo; percurso salva, retoma e bloqueia falha/IME; contagem recolhida; 5 telas; post-it persiste e confirma lixeira.');
