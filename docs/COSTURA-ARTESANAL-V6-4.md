@@ -26,4 +26,6 @@ Aplicativo e arquivo portátil têm conteúdo idêntico. Cache passa a `20260921
 
 Verificações locais: sintaxe ES5 de 37 scripts; versões sincronizadas; contratos de cadernos, quadro, universo, linguística e linhagem; caixas opcionais; pacote completo/parcial; importação v1; cópias; falhas de escrita; recuperação do ensaio; lixeira; duas instâncias de armazenamento.
 
-Fluxos de navegador e capturas estão preparados para GitHub Actions em Chromium e WebKit. Na revisão desta entrega, o GitHub ainda não havia criado uma execução para o PR. O navegador disponível recusou o arquivo local por política de acesso. Portanto renderização, fluxos em navegador e recarga offline da v6.4 permanecem pendentes; o PR deve permanecer em rascunho até essa validação. WebKit atual e tamanhos de viewport não equivalem a teste em iPad iOS 9.3.5 ou Android KitKat físico.
+A primeira execução em Chromium/WebKit passou integralmente: [run 35562527501](https://github.com/rfmss/escrevaral/actions/runs/35562527501), commit `bf5ef674`. As capturas revelaram pouco espaço para caixas em 320 px: a mesa móvel passa a ter uma única rolagem, caixas proporcionais e lembretes abaixo dos cadernos. Um teste verifica que a caixa inteira e o botão de criação cabem na área visível. A execução final valida também esse ajuste e as correções posteriores de recuperação.
+
+WebKit atual e tamanhos de viewport não equivalem a teste em iPad iOS 9.3.5 ou Android KitKat físico.

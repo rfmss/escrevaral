@@ -316,18 +316,6 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 
 
-/* Costura: caixas opcionais, toque e leitura em aparelhos antigos. */
-#original-header button,#original-new,#project-new,#volume-new { min-height:44px; }
-#original-new,#volume-new { padding:8px 14px; border:1px solid #65735f; background:#cad8c8; color:#182017; cursor:pointer; margin:0 6px 8px 0; }
-#notebook-organization { margin-top:18px; border-top:1px solid #819278; padding-top:12px; }
-#notebook-organization label { display:block; margin-bottom:6px; }
-#notebook-parent { width:100%; max-width:100%; min-height:44px; }
-#notebook-parent-save { margin-top:8px; min-height:44px; }
-.original-actions { text-align:right; }
-.original-actions button { margin:3px; }
-.welcome-key-pad svg { margin-right:10px; }
-body[data-theme="escuro"] #original-new,body[data-theme="escuro"] #volume-new { background:#354231; color:#d8e4d6; border-color:#506448; }
-@media(max-width:760px) { .original-actions { text-align:left; } #original-header { display:block; } .welcome-pillars { display:block; border-spacing:0; } .welcome-pillar-tag { display:block; margin:8px 0; } }
 </style>
   <style>
 /* Gesso, grafite e espaço. A tipografia de máquina pertence à escrita. */
@@ -2319,6 +2307,33 @@ body[data-theme="escuro"] .post-write-pwa-action {
   .post-write-pwa { left: 8px; right: 8px; bottom: 4px; padding: 6px 10px; font-size: 12px; flex-direction: column; text-align: center; }
 }
 }
+/* Costura: caixas opcionais, toque e leitura em aparelhos antigos. */
+#original-header button,#original-new,#project-new,#volume-new { min-height:44px; }
+#original-new,#volume-new { padding:8px 14px; border:1px solid #65735f; background:#cad8c8; color:#182017; cursor:pointer; margin:0 6px 8px 0; }
+#notebook-organization { margin-top:18px; border-top:1px solid #819278; padding-top:12px; }
+#notebook-organization label { display:block; margin-bottom:6px; }
+#notebook-parent { width:100%; max-width:100%; min-height:44px; }
+#notebook-parent-save { margin-top:8px; min-height:44px; }
+.original-actions { text-align:right; }
+.original-actions button { margin:3px; }
+.welcome-key-pad svg { margin-right:10px; }
+body[data-theme="escuro"] #original-new,body[data-theme="escuro"] #volume-new { background:#354231; color:#d8e4d6; border-color:#506448; }
+@media(max-width:760px) { .original-actions { text-align:left; } #original-header { display:block; } .welcome-pillars { display:block; border-spacing:0; } .welcome-pillar-tag { display:block; margin:8px 0; } }
+
+@media screen and (max-width:760px) {
+ #desktop-surface { overflow-y:auto; overflow-x:hidden; bottom:8px; -webkit-overflow-scrolling:touch; }
+ #notebook-area { position:relative; top:auto; left:auto; right:auto; bottom:auto; overflow:visible; padding:12px 8px 16px; }
+ #desktop-reminders { position:relative; top:auto; left:auto; right:auto; bottom:auto; width:auto; height:auto; min-height:44px; padding:12px 8px; border-top:1px dashed #819278; overflow:visible; }
+ #notebook-list { min-height:0; }
+ #notebook-list .original-box { width:116px; min-height:168px; margin-right:18px; }
+ .original-box .box-label { margin:10px 6px 8px; padding:8px 4px; }
+ .original-box .box-title { font-size:14px; }
+ .original-box .box-meta { font-size:10px; }
+ .original-box .box-pull { margin:8px auto; }
+ .desktop-imprint { display:none; }
+ .cabinet-window { position:fixed; top:146px !important; bottom:52px !important; height:auto !important; }
+}
+@media screen and (max-width:760px) and (max-height:480px) { .cabinet-window { top:92px !important; } }
 </style>
 </head>
 <body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
@@ -4569,6 +4584,7 @@ body[data-theme="escuro"] .post-write-pwa-action {
     renderNotebooks(); renderReminders(); updatePath(); queueSession();
     var box = previous ? byId('notebook-list').querySelector('[data-original-id="' + previous + '"]') : null;
     (box || byId('project-new')).focus();
+    byId('notebook-area').scrollTop = 0; byId('desktop-surface').scrollTop = 0;
     return true;
   }
   function closeNotebook() {

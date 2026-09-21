@@ -67,7 +67,7 @@ jobs:
         run: |
           node - <<'NODE'
           const fs=require('fs'),path=require('path');
-          for(const name of ['chromium-caixas-1366','chromium-caixas-320','chromium-caixa-aberta','chromium-recepcao','chromium-caderno-aberto','chromium-calculadora-1366','chromium-calculadora-390','chromium-linhagem','chromium-quadro-1366','chromium-quadro-390-escuro','chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
+          for(const name of ['chromium-caixas-1366','chromium-caixas-320','chromium-caixa-aberta','chromium-recepcao','chromium-recepcao-320','chromium-caderno-aberto','chromium-calculadora-1366','chromium-calculadora-390','chromium-linhagem','chromium-quadro-1366','chromium-quadro-390-escuro','chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
             const file=path.join(process.env.QA_OUTPUT,name+'.png');
             if(fs.existsSync(file))console.log('QA_IMAGE:'+name+':'+fs.readFileSync(file).toString('base64'));
           }
