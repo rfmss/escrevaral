@@ -3,13 +3,14 @@ const root=path.join(__dirname,'..'),out=process.env.QA_OUTPUT||'/tmp',engine=pr
 const server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/html');res.end(fs.readFileSync(path.join(root,'index.html')));});let browser;const errors=[];
 const key='escrevaral.astra.notebooks.v1';
 async function create(p,name){await p.click('#project-new');await p.fill('#project-name',name);await p.click('#project-create');}
-async function board(p){await p.click('#os-start');await p.click('#start-chalkboard');await p.waitForSelector('#chalkboard:not([hidden])');}
+async function board(p){await p.click('#os-start');await p.click('#start-tools-toggle');await p.click('#start-chalkboard');await p.waitForSelector('#chalkboard:not([hidden])');}
+async function notebookAction(p,id){if(await p.locator(id).isHidden())await p.click('#notebook-more');await p.click(id);}
 async function draw(p){await p.locator('#chalk-canvas').scrollIntoViewIfNeeded();const r=await p.locator('#chalk-canvas').boundingBox();await p.mouse.move(r.x+r.width*.2,r.y+r.height*.3);await p.mouse.down();await p.mouse.move(r.x+r.width*.7,r.y+r.height*.6,{steps:10});await p.mouse.up();}
 async function saved(p){return p.evaluate(key=>JSON.parse(localStorage.getItem(key))[0].data.chalk,key);}
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));browser=await(engine==='webkit'?webkit:chromium).launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:engine==='chromium'?['--no-sandbox']:[]});
  const context=await browser.newContext({viewport:{width:1366,height:768},hasTouch:true,serviceWorkers:'block'}),p=await context.newPage();p.setDefaultTimeout(10000);p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>{errors.push('diálogo nativo');d.dismiss();});await p.goto('http://127.0.0.1:'+server.address().port);
- await p.click('#os-start');await p.click('#start-chalkboard');assert.equal(await p.locator('#chalkboard').isVisible(),false);
+ await p.click('#os-start');await p.click('#start-tools-toggle');assert.equal(await p.locator('#start-chalkboard').isVisible(),false);assert.equal(await p.locator('#chalkboard').isVisible(),false);
  await p.keyboard.press('Escape');await create(p,'Marés');await board(p);await draw(p);assert.equal((await saved(p)).strokes.length,1);
  await p.click('#chalk-borracha');await p.locator('#chalk-canvas').tap();assert.equal((await saved(p)).strokes[1].tool,'borracha');await p.click('#chalk-undo');assert.equal((await saved(p)).strokes.length,1);
  await p.click('#chalk-grid');assert.equal((await saved(p)).grid,true);
@@ -25,8 +26,8 @@ async function saved(p){return p.evaluate(key=>JSON.parse(localStorage.getItem(k
  await p.click('#chalk-copy-show');assert.equal(JSON.parse(await p.locator('#chalk-copy').inputValue()).drawing.strokes.length,3);
  await p.evaluate(()=>{Storage.prototype.setItem=window.oldSet;});await p.click('#chalk-retry');assert.equal((await saved(p)).strokes.length,3);await p.click('#chalk-close');
  // Notebook package export/import carries drawing.
- ev=p.waitForEvent('download');await p.click('#notebook-export');const packet=fs.readFileSync(await(await ev).path());assert.equal(JSON.parse(packet).notebooks[0].data.chalk.strokes.length,3);
- await p.click('#os-start');await p.click('#start-settings');await p.setInputFiles('#import-file',{name:'mares.scrvrl',mimeType:'application/json',buffer:packet});await p.click('#app-dialog-accept');if(await p.locator('#mesa-close').isVisible())await p.click('#mesa-close');await p.getByRole('button',{name:'Abrir caderno Marés — cópia 1',exact:true}).click();await board(p);assert.equal(await p.locator('#chalk-count').textContent(),'3 traços');
+ ev=p.waitForEvent('download');await notebookAction(p,'#notebook-export');const packet=fs.readFileSync(await(await ev).path());assert.equal(JSON.parse(packet).notebooks[0].data.chalk.strokes.length,3);
+ await p.click('#os-start');await p.click('#start-system-toggle');await p.click('#start-settings');await p.setInputFiles('#import-file',{name:'mares.scrvrl',mimeType:'application/json',buffer:packet});await p.click('#app-dialog-accept');if(await p.locator('#mesa-close').isVisible())await p.click('#mesa-close');await p.getByRole('button',{name:'Abrir caderno Marés — cópia 1',exact:true}).click();await board(p);assert.equal(await p.locator('#chalk-count').textContent(),'3 traços');
  for(const dark of [false,true])for(const [w,h]of [[1366,768],[820,600],[390,844],[320,568],[667,375]]){
   await p.evaluate(d=>document.body.setAttribute('data-theme',d?'escuro':'claro'),dark);await p.setViewportSize({width:w,height:h});await p.waitForTimeout(150);await p.locator('#chalkboard').evaluate(n=>n.scrollTop=0);
   assert.equal(await p.locator('#chalkboard').evaluate(n=>n.scrollWidth>n.clientWidth),false);assert.equal(await p.locator('#chalk-frame').evaluate(n=>n.scrollWidth>n.clientWidth+1),false);

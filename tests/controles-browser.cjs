@@ -12,8 +12,10 @@ const server=http.createServer((req,res)=>{
 });
 let browser;const errors=[];
 async function create(p,name){await p.click('#project-new');await p.fill('#project-name',name);await p.click('#project-create');}
-async function universe(p){await p.click('#os-start');await p.click('#start-universe');}
-async function settings(p){await p.click('#os-start');await p.click('#start-settings');}
+async function startItem(p,id,group){await p.click('#os-start');if(group)await p.click(group);await p.click(id);}
+async function universe(p){await startItem(p,'#start-universe','#start-tools-toggle');}
+async function settings(p){await startItem(p,'#start-settings','#start-system-toggle');}
+async function notebookAction(p,id){if(await p.locator(id).isHidden())await p.click('#notebook-more');await p.click(id);}
 async function snapshot(p,name){await p.screenshot({path:path.join(out,engine+'-'+name+'.png')});}
 async function noOverflow(p,selector){
  const measures=await p.locator(selector).evaluate(n=>({scroll:n.scrollWidth,client:n.clientWidth}));
@@ -38,10 +40,10 @@ async function footer(p){
  const context=await browser.newContext({viewport:{width:1366,height:650},serviceWorkers:'block',hasTouch:true});
  const p=await context.newPage();p.setDefaultTimeout(10000);
  p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>{errors.push('Native dialog '+d.type());d.dismiss();});
- await p.goto(url);await p.locator('#os-start').screenshot({path:path.join(out,engine+'-inicio.png')});await create(p,'Meu primeiro livro');
+ await p.goto(url);await p.click('#os-start');assert.equal(await p.locator('#start-tools-items').isVisible(),false);assert.equal(await p.locator('#start-system-items').isVisible(),false);assert.equal(await p.locator('#start-menu > .start-group:first-child .os-app').count(),3);await p.click('#start-tools-toggle');assert.equal(await p.locator('#start-tools-toggle').getAttribute('aria-expanded'),'true');await p.keyboard.press('Escape');await p.locator('#os-start').screenshot({path:path.join(out,engine+'-inicio.png')});await create(p,'Meu primeiro livro');
  // Real notebook trash: no write on open/cancel, explicit action on confirm.
  const original=await p.evaluate(()=>localStorage.getItem('escrevaral.astra.notebooks.v1'));
- await p.click('#notebook-trash');
+ await notebookAction(p,'#notebook-trash');
  assert.equal(await p.locator('#app-dialog').isVisible(),true);
  assert.equal(await p.evaluate(()=>document.activeElement.id),'app-dialog-cancel');
  assert.equal(await p.evaluate(()=>localStorage.getItem('escrevaral.astra.notebooks.v1')),original);
@@ -49,8 +51,8 @@ async function footer(p){
  await p.keyboard.press('Tab');assert.equal(await p.evaluate(()=>document.activeElement.id),'app-dialog-cancel');
  await p.keyboard.press('Escape');
  assert.equal(await p.evaluate(()=>localStorage.getItem('escrevaral.astra.notebooks.v1')),original);
- assert.equal(await p.evaluate(()=>document.activeElement.id),'notebook-trash');
- await p.click('#notebook-trash');await snapshot(p,'confirmacao-claro');await p.click('#app-dialog-cancel');
+ assert.equal(await p.evaluate(()=>document.activeElement.id),'notebook-more');
+ await notebookAction(p,'#notebook-trash');await snapshot(p,'confirmacao-claro');await p.click('#app-dialog-cancel');
  // Nested dialog in the universe: Escape cancels only the confirmation and preserves form.
  await universe(p);await p.click('#story-records');await p.getByRole('button',{name:'+ Personagem',exact:true}).click();
  await p.fill('#story-field-name','Ana');await p.click('#story-close');
@@ -63,7 +65,7 @@ async function footer(p){
  await p.getByRole('button',{name:'Excluir ficha',exact:true}).click();await p.click('#app-dialog-accept');
  assert.equal(await p.locator('#story-list .polaroid').count(),0);await p.click('#story-close');
  // Export/import: cancellation retains package count; failed write is reported asynchronously.
- const download=p.waitForEvent('download');await p.click('#notebook-export');const packet=fs.readFileSync(await (await download).path());
+ const download=p.waitForEvent('download');await notebookAction(p,'#notebook-export');const packet=fs.readFileSync(await (await download).path());
  await settings(p);await p.setInputFiles('#import-file',{name:'teste.scrvrl',mimeType:'application/json',buffer:packet});
  await p.click('#app-dialog-cancel');assert.equal(await p.locator('.notebook-cover').count(),1);
  await p.setInputFiles('#import-file',{name:'teste.scrvrl',mimeType:'application/json',buffer:packet});
@@ -74,8 +76,8 @@ async function footer(p){
  await p.evaluate(()=>{Storage.prototype.setItem=window.savedSetItem;});
  assert.equal(await p.locator('.notebook-cover').count(),1);
  await p.click('#mesa-close');
- await p.click('#notebook-trash');await p.click('#app-dialog-accept');assert.equal(await p.locator('.notebook-cover').count(),0);
- await p.click('#os-start');await p.click('#start-trash');await p.getByRole('button',{name:'Restaurar caderno completo'}).click();
+ await notebookAction(p,'#notebook-trash');await p.click('#app-dialog-accept');assert.equal(await p.locator('.notebook-cover').count(),0);
+ await startItem(p,'#start-trash','#start-system-toggle');await p.getByRole('button',{name:'Restaurar caderno completo'}).click();
  assert.equal(await p.locator('.notebook-cover').count(),1);await p.click('#acervo-close');await create(p,'Outro projeto com nome longo');
  // Long content, narrow displays, themes: dialogs scroll inside the viewport.
  for(const dark of [false,true]){
@@ -109,7 +111,7 @@ async function footer(p){
  // All existing sheet entry points use the visible height; body stays within viewport.
  await p.setViewportSize({width:320,height:568});await p.click('#focus-close');
  for(const [trigger,panel] of [['#start-settings','#mesa'],['#start-calendar','#utilidades'],['#start-calculator','#utilidades'],['#start-trash','#acervo']]){
-  await p.click('#os-start');await p.click(trigger);await withinViewport(p,panel);await noOverflow(p,panel);await p.keyboard.press('Escape');
+  await startItem(p,trigger,trigger==='#start-settings'||trigger==='#start-trash'?'#start-system-toggle':'#start-tools-toggle');await withinViewport(p,panel);await noOverflow(p,panel);await p.keyboard.press('Escape');
  }
  // Actual dialog on touch, and Start key pressed state, after mobile layout.
  await p.click('#os-start');assert.equal(await p.locator('#os-start').getAttribute('aria-expanded'),'true');
