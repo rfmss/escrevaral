@@ -32,8 +32,8 @@ async function shot(p,name){await p.screenshot({path:path.join(out,engine+'-'+na
   await p.setViewportSize({width,height});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   const paper=await p.locator('#editor-viewport').boundingBox();assert.ok(paper.width>200&&paper.height>80,JSON.stringify(paper));
   if(await p.locator('#desk-documents').isVisible())await p.click('#desk-documents');
-  assert.equal(await p.locator('[data-route-book="'+second.projectId+'"]').isVisible(),true);const leaves=await p.locator('#timeline-list').boundingBox();assert.ok(leaves.height>=45,'folhas acessíveis '+JSON.stringify(leaves));
-  await shot(p,'mesa-g2-'+width);if(await p.locator('#desk-documents').isVisible())await p.click('#desk-documents');
+  await shot(p,'mesa-g2-'+width);assert.equal(await p.locator('[data-route-book="'+second.projectId+'"]').isVisible(),true);const leaves=await p.locator('#timeline-list').boundingBox();assert.ok(leaves.height>=45,'folhas acessíveis em '+width+'x'+height+' '+JSON.stringify(leaves));
+  if(await p.locator('#desk-documents').isVisible())await p.click('#desk-documents');
  }
  await p.setViewportSize({width:1366,height:768});await p.evaluate(()=>document.body.setAttribute('data-theme','escuro'));await shot(p,'mesa-g2-escuro');await p.evaluate(()=>document.body.setAttribute('data-theme','claro'));
  await p.click('#desk-minimize');await p.click('#original-back');await p.click('#reminder-new');await p.locator('.desktop-reminder textarea').fill('Rever a chegada.');await p.reload();assert.equal(await p.locator('.desktop-reminder textarea').inputValue(),'Rever a chegada.');await p.click('.reminder-trash');await p.click('#app-dialog-cancel');assert.equal(await p.locator('.desktop-reminder').count(),1);await shot(p,'gavetas-postit-g2');await p.click('.reminder-trash');await p.click('#app-dialog-accept');assert.equal(await p.locator('.desktop-reminder').count(),0);
