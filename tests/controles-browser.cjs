@@ -113,7 +113,7 @@ async function footer(p){
  }
  // Actual dialog on touch, and Start key pressed state, after mobile layout.
  await p.click('#os-start');assert.equal(await p.locator('#os-start').getAttribute('aria-expanded'),'true');
- assert.equal(await p.locator('#os-start .start-key').evaluate(n=>getComputedStyle(n).top),'3px');
+ assert.equal(await p.locator('#os-start .os-rocker').isVisible(),true);
  await p.keyboard.press('Escape');await p.locator('#screen-lock').tap();await p.locator('#keychain-ring').tap();
  await p.evaluate(()=>Escr.dialog.ask({title:'Confirmar ação',message:'Teste de toque.',accept:'Confirmar'},function(ok){window.touchResult=ok;}));
  await p.locator('#app-dialog-accept').tap();assert.equal(await p.evaluate(()=>window.touchResult),true);

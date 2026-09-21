@@ -30,8 +30,10 @@ jobs:
         run: |
           node tests/controles-static.cjs
           node tests/cadernos.cjs
+          node tests/originais.cjs
           node tests/universo.cjs
           node tests/quadro.cjs
+          node tests/linguistica-linhagem.cjs
       - name: Fluxos anteriores e offline
         run: |
           node tests/cadernos-browser.cjs
@@ -48,12 +50,24 @@ jobs:
         env:
           BROWSER_ENGINE: webkit
         run: node tests/quadro-browser.cjs
+      - name: Orientação, linguística e linhagem — Chromium
+        run: node tests/orientacao-browser.cjs
+      - name: Orientação, linguística e linhagem — WebKit
+        env:
+          BROWSER_ENGINE: webkit
+        run: node tests/orientacao-browser.cjs
+      - name: Caixas opcionais e navegação — Chromium
+        run: node tests/originais-browser.cjs
+      - name: Caixas opcionais e navegação — WebKit
+        env:
+          BROWSER_ENGINE: webkit
+        run: node tests/originais-browser.cjs
       - name: Prévia visual nos logs (dados fictícios)
         if: always()
         run: |
           node - <<'NODE'
           const fs=require('fs'),path=require('path');
-          for(const name of ['chromium-quadro-1366','chromium-quadro-390-escuro','chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
+          for(const name of ['chromium-caixas-1366','chromium-caixas-320','chromium-caixa-aberta','chromium-recepcao','chromium-recepcao-320','chromium-caderno-aberto','chromium-calculadora-1366','chromium-calculadora-390','chromium-linhagem','chromium-quadro-1366','chromium-quadro-390-escuro','chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
             const file=path.join(process.env.QA_OUTPUT,name+'.png');
             if(fs.existsSync(file))console.log('QA_IMAGE:'+name+':'+fs.readFileSync(file).toString('base64'));
           }

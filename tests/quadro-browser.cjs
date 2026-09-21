@@ -7,7 +7,7 @@ async function board(p){await p.click('#os-start');await p.click('#start-chalkbo
 async function draw(p){await p.locator('#chalk-canvas').scrollIntoViewIfNeeded();const r=await p.locator('#chalk-canvas').boundingBox();await p.mouse.move(r.x+r.width*.2,r.y+r.height*.3);await p.mouse.down();await p.mouse.move(r.x+r.width*.7,r.y+r.height*.6,{steps:10});await p.mouse.up();}
 async function saved(p){return p.evaluate(key=>JSON.parse(localStorage.getItem(key))[0].data.chalk,key);}
 (async()=>{
- await new Promise(r=>server.listen(0,'127.0.0.1',r));browser=await(engine==='webkit'?webkit:chromium).launch({headless:true,args:engine==='chromium'?['--no-sandbox']:[]});
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));browser=await(engine==='webkit'?webkit:chromium).launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:engine==='chromium'?['--no-sandbox']:[]});
  const context=await browser.newContext({viewport:{width:1366,height:768},hasTouch:true,serviceWorkers:'block'}),p=await context.newPage();p.setDefaultTimeout(10000);p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>{errors.push('diálogo nativo');d.dismiss();});await p.goto('http://127.0.0.1:'+server.address().port);
  await p.click('#os-start');await p.click('#start-chalkboard');assert.equal(await p.locator('#chalkboard').isVisible(),false);
  await p.keyboard.press('Escape');await create(p,'Marés');await board(p);await draw(p);assert.equal((await saved(p)).strokes.length,1);
