@@ -10,7 +10,9 @@ async function makePage(options={}) { const context=await browser.newContext({se
 async function create(page,name) {await page.click('#project-new');await page.fill('#project-name',name);await page.click('#project-create');assert.equal(await page.locator('#cabinet-heading').textContent(),name);}
 async function write(page,title,body) {await page.click('#cabinet-new');await page.fill('#titulo',title);await page.fill('#manuscrito',body);await page.click('#desk-minimize');}
 async function download(page,selector) {const event=page.waitForEvent('download');await page.click(selector);const d=await event;return {name:d.suggestedFilename(),buffer:fs.readFileSync(await d.path())};}
-async function settings(page) {await page.click('#os-start');await page.click('#start-settings');}
+async function startItem(page,id,group) {await page.click('#os-start');if(group)await page.click(group);await page.click(id);}
+async function settings(page) {await startItem(page,'#start-settings','#start-system-toggle');}
+async function notebookAction(page,id) {if(await page.locator(id).isHidden())await page.click('#notebook-more');await page.click(id);}
 (async()=>{
   await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
   browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:['--no-sandbox']});
@@ -20,9 +22,9 @@ async function settings(page) {await page.click('#os-start');await page.click('#
   await create(p,'Contos');assert.equal(await p.locator('.cabinet-note').count(),0);await write(p,'Outro mundo','Uma chave perdida.');
   await p.getByRole('button',{name:'Abrir caderno Romance do mar',exact:true}).click();assert.equal(await p.locator('#manuscrito').inputValue(),'O mar bateu três vezes à porta.');
   await p.click('#back-cabinet');await p.fill('#cabinet-search','chave');await p.waitForTimeout(250);assert.equal(await p.locator('.cabinet-note').count(),0);await p.click('#cabinet-clear');
-  await p.click('#notebook-rename');await p.fill('#project-name','Mar & <livro>');await p.click('#project-create');assert.equal(await p.locator('#cabinet-heading').textContent(),'Mar & <livro>');assert.equal(await p.locator('.cabinet-note').count(),1);
-  await p.click('#os-start');await p.click('#start-calendar');await p.fill('#calendar-text','Revisar o primeiro capítulo');await p.click('#calendar-form button');await p.click('#utility-close');
-  const packet=await download(p,'#notebook-export');const payload=JSON.parse(packet.buffer);assert.equal(payload.documents.length,1);assert.ok(JSON.stringify(payload.notebooks[0].data.planner).includes('Revisar o primeiro capítulo'));assert.equal(payload.scope,'notebook');
+  await notebookAction(p,'#notebook-rename');await p.fill('#project-name','Mar & <livro>');await p.click('#project-create');assert.equal(await p.locator('#cabinet-heading').textContent(),'Mar & <livro>');assert.equal(await p.locator('.cabinet-note').count(),1);
+  await startItem(p,'#start-calendar','#start-tools-toggle');await p.fill('#calendar-text','Revisar o primeiro capítulo');await p.click('#calendar-form button');await p.click('#utility-close');
+  if(await p.locator('#notebook-export').isHidden())await p.click('#notebook-more');const packet=await download(p,'#notebook-export');const payload=JSON.parse(packet.buffer);assert.equal(payload.documents.length,1);assert.ok(JSON.stringify(payload.notebooks[0].data.planner).includes('Revisar o primeiro capítulo'));assert.equal(payload.scope,'notebook');
   await p.screenshot({path:'/tmp/cadernos-aberto.png'});
   await p.click('#window-minimize');await p.reload();assert.equal(await p.locator('#cabinet-window').isVisible(),false);assert.equal(await p.locator('.notebook-cover').count(),2);
   await p.click('#reminder-new');await p.fill('#reminder-list textarea','Lembrete geral da mesa');
@@ -30,10 +32,10 @@ async function settings(page) {await page.click('#os-start');await page.click('#
   await p.click('#mesa-close');await p.screenshot({path:'/tmp/cadernos-mesa.png'});
   const target=await makePage();await target.goto(url);await settings(target);await target.setInputFiles('#import-file',{name:packet.name,mimeType:'application/json',buffer:packet.buffer});await target.click('#app-dialog-accept');await target.waitForFunction(()=>document.querySelectorAll('.notebook-cover').length===1);
   await target.getByRole('button',{name:'Abrir caderno Mar & <livro>',exact:true}).click();assert.equal(await target.locator('.cabinet-note').count(),1);
-  await target.click('#notebook-export'); // export remains available after importing
+  await notebookAction(target,'#notebook-export'); // export remains available after importing
   await settings(target);await target.setInputFiles('#import-file',{name:packet.name,mimeType:'application/json',buffer:packet.buffer});await target.click('#app-dialog-accept');await target.waitForFunction(()=>document.querySelectorAll('.notebook-cover').length===2);assert.ok((await target.locator('#notebook-list').textContent()).includes('cópia 1'));
-  await target.getByRole('button',{name:'Abrir caderno Mar & <livro>',exact:true}).click();await target.click('#notebook-trash');await target.click('#app-dialog-accept');assert.equal(await target.locator('.notebook-cover').count(),1);
-  await target.click('#os-start');await target.click('#start-trash');await target.getByRole('button',{name:'Restaurar caderno completo'}).click();assert.equal(await target.locator('.notebook-cover').count(),2);
+  await target.getByRole('button',{name:'Abrir caderno Mar & <livro>',exact:true}).click();await notebookAction(target,'#notebook-trash');await target.click('#app-dialog-accept');assert.equal(await target.locator('.notebook-cover').count(),1);
+  await startItem(target,'#start-trash','#start-system-toggle');await target.getByRole('button',{name:'Restaurar caderno completo'}).click();assert.equal(await target.locator('.notebook-cover').count(),2);
   const restore=await makePage();await restore.goto(url);await settings(restore);await restore.setInputFiles('#import-file',{name:full.name,mimeType:'application/json',buffer:full.buffer});await restore.click('#app-dialog-accept');await restore.waitForFunction(()=>document.querySelectorAll('.notebook-cover').length===2);await restore.waitForTimeout(200);assert.equal(await restore.locator('#reminder-list textarea').inputValue(),'Lembrete geral da mesa');
   const legacy=await makePage();await legacy.goto(url);const legacyRaw=await legacy.evaluate(()=>{const d=Escr.freshDocument();d.project='Projeto anterior';d.title='Folha antiga';d.text='Não mudar os meus registros.';const saved=Escr.createArchive(localStorage).save(d).document;return {id:saved.id,raw:localStorage.getItem('escrevaral.astra.v1.doc.'+saved.id)};});await legacy.reload();assert.equal(await legacy.locator('.notebook-cover').count(),1);assert.equal(await legacy.locator('#cabinet-window').isVisible(),false);assert.equal(await legacy.evaluate(id=>localStorage.getItem('escrevaral.astra.v1.doc.'+id),legacyRaw.id),legacyRaw.raw);
   // Falha real no navegador: minimizar não esconde texto que não foi salvo.
