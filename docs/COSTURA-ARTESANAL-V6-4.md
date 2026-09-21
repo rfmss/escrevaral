@@ -26,4 +26,4 @@ Aplicativo e arquivo portátil têm conteúdo idêntico. Cache passa a `20260921
 
 Verificações locais: sintaxe ES5 de 37 scripts; versões sincronizadas; contratos de cadernos, quadro, universo, linguística e linhagem; caixas opcionais; pacote completo/parcial; importação v1; cópias; falhas de escrita; recuperação do ensaio; lixeira; duas instâncias de armazenamento.
 
-Fluxos de navegador e capturas são executados no GitHub Actions em Chromium e WebKit. Resultado final será registrado após a execução. WebKit atual e tamanhos de viewport não equivalem a teste em iPad iOS 9.3.5 ou Android KitKat físico.
+Fluxos de navegador e capturas estão preparados para GitHub Actions em Chromium e WebKit. Na revisão desta entrega, o GitHub ainda não havia criado uma execução para o PR. O navegador disponível recusou o arquivo local por política de acesso. Portanto renderização, fluxos em navegador e recarga offline da v6.4 permanecem pendentes; o PR deve permanecer em rascunho até essa validação. WebKit atual e tamanhos de viewport não equivalem a teste em iPad iOS 9.3.5 ou Android KitKat físico.

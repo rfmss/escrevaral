@@ -2374,7 +2374,7 @@ body[data-theme="escuro"] .post-write-pwa-action {
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home">SCRVRL OS</button><span aria-hidden="true">/</span><button id="path-projects" aria-current="location">Mesa de cadernos</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Fragmentos avulsos" hidden="">Fragmentos avulsos</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Eu sei que vou te amar em toda a minha vida. " hidden="">Eu sei que vou te amar em toda a minha vida. </button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
+    <button id="path-home">SCRVRL OS</button><span aria-hidden="true">/</span><button id="path-projects" aria-current="location">Mesa de cadernos</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Fragmentos avulsos" hidden="">Fragmentos avulsos</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
   </nav>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
     <header class="os-bar">
@@ -2400,14 +2400,14 @@ body[data-theme="escuro"] .post-write-pwa-action {
       <section id="cabinet-window" class="cabinet-window" aria-label="Janela de projetos e textos" data-maximized="true">
         <header class="window-bar" id="cabinet-window-handle"><span class="window-name" id="notebook-window-name">SEUS TEXTOS</span><div class="window-controls"><button id="window-minimize" title="Minimizar janela" aria-label="Minimizar janela">−</button><button id="window-maximize" title="Restaurar tamanho da janela" aria-label="Restaurar tamanho da janela" aria-pressed="true">□</button><button id="window-close" title="Fechar janela" aria-label="Fechar janela">×</button></div></header>
         <div class="window-body">
-      <nav class="project-shelf" aria-label="Projetos"><p class="os-label">VOLUMES</p><button id="cabinet-all" class="project-link" aria-pressed="true">Todos os textos</button><div id="cabinet-projects"><button type="button" class="project-link" aria-pressed="false"><span class="project-icon"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span><span>Fragmentos avulsos</span><small>2</small></button></div><span id="project-icon-template" hidden=""><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span></nav>
+      <nav class="project-shelf" aria-label="Projetos"><p class="os-label">CADERNOS</p><button id="cabinet-all" class="project-link" aria-pressed="true">Todos os textos</button><div id="cabinet-projects"></div><span id="project-icon-template" hidden=""><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span></nav>
       <main class="cabinet-files"><div class="cabinet-context"><p id="cabinet-context-label">TODOS OS TEXTOS</p><button id="notebook-back">← Mesa de cadernos</button></div>
         <div class="notebook-actions"><button id="notebook-universe" aria-controls="story-screen">Capítulos e universo</button><button id="notebook-chalkboard" aria-controls="chalkboard">Quadro de giz</button><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg></button></div>
         <div class="cabinet-heading"><div><p class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div><button id="cabinet-new" class="os-action">+ Novo fragmento</button></div>
 
-        <button id="cabinet-resume" class="resume-note"><span class="os-label">CONTINUAR ESCREVENDO</span><span id="resume-title">Eu sei que vou te amar em toda a minha vida. </span><small id="resume-date">Fragmento avulso</small></button>
+        <button id="cabinet-resume" class="resume-note"><span class="os-label">CONTINUAR ESCREVENDO</span><span id="resume-title">Sem título</span><small id="resume-date">Fragmento avulso</small></button>
         <div class="files-label"><h2 id="cabinet-list-heading">Fragmentos</h2><span id="cabinet-count">2 fragmentos</span></div>
-        <div id="cabinet-notes" class="cabinet-notes" role="group" aria-labelledby="cabinet-list-heading"><div class="cabinet-note-row"><button type="button" class="cabinet-note" aria-current="true"><span class="note-name">Eu sei que vou te amar em toda a minha vida. </span><small class="note-time">10:35:18 · 09/09/2026</small><p class="note-project-label">Fragmento avulso</p></button><button type="button" class="note-trash" aria-label="Mover para a lixeira: Eu sei que vou te amar em toda a minha vida. " title="Mover para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"></path></svg></button></div><div class="cabinet-note-row"><button type="button" class="cabinet-note" aria-current="false"><span class="note-name">vamos</span><small class="note-time">10:35:00 · 09/09/2026</small><p class="note-project-label">Fragmento avulso</p></button><button type="button" class="note-trash" aria-label="Mover para a lixeira: vamos" title="Mover para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"></path></svg></button></div></div><button id="cabinet-more" hidden="">Mostrar mais fragmentos</button>
+        <div id="cabinet-notes" class="cabinet-notes" role="group" aria-labelledby="cabinet-list-heading"></div><button id="cabinet-more" hidden="">Mostrar mais fragmentos</button>
         <p id="cabinet-empty" class="cabinet-empty" hidden="">Seu gabinete começa com um fragmento. Dê um título e encontre seu primeiro parágrafo.</p>
         <div id="welcome-reception" class="welcome-shell" hidden>
           <svg class="welcome-reg-mark welcome-reg-tl" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0v16M0 8h16" stroke="currentColor" stroke-width="1.5"/></svg>
@@ -2490,7 +2490,7 @@ body[data-theme="escuro"] .post-write-pwa-action {
       <button id="back-cabinet" class="brand-signature" aria-label="Voltar aos fragmentos do caderno"><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
         <div class="note-heading"><span class="eyebrow">DOCUMENTO</span>
           <label class="sr-only" for="titulo">Título do manuscrito</label>
-          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false" value="Eu sei que vou te amar em toda a minha vida. ">
+          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false" value="">
           <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação do fragmento" datetime="2026-09-09T13:35:18.128Z">10:35:18 · 9 de setembro de 2026</time></p>
         </div>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar neste caderno</label><input id="note-search" type="search" placeholder="Buscar neste caderno" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden="">×</button></div>
@@ -2527,10 +2527,10 @@ body[data-theme="escuro"] .post-write-pwa-action {
         </footer>
       </main>
       <aside class="timeline" aria-label="Documentos da Mesa" data-expanded="false">
-        <div class="desk-project"><span class="eyebrow">VOLUME ABERTO</span><button id="desk-project">Fragmentos avulsos</button><div class="document-scope" role="group" aria-label="Organizar documentos"><button id="scope-project" aria-pressed="false">Do projeto</button><button id="scope-dates" aria-pressed="true">Por data</button></div></div>
+        <div class="desk-project"><span class="eyebrow">CADERNO ABERTO</span><button id="desk-project">Fragmentos avulsos</button><div class="document-scope" role="group" aria-label="Organizar documentos"><button id="scope-project" aria-pressed="false">Do projeto</button><button id="scope-dates" aria-pressed="true">Por data</button></div></div>
         <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="note-browser">Fragmentos <span aria-hidden="true">⌄</span></button><span class="rail-label">FRAGMENTOS</span><button id="timeline-new" class="new-leaf" aria-label="Novo fragmento" title="Novo fragmento"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></div>
         <p id="timeline-hint" class="sr-only">Escolha um mês, depois um dia. Escolha o título para abrir a nota. A busca encontra notas de todas as datas.</p>
-        <div class="wheel-window" id="note-browser"><nav id="date-path" class="date-path" aria-label="Pastas por data"><button type="button">Meses</button><button type="button">setembro 2026</button><p class="path-label" aria-current="page">9 · quarta</p></nav><p id="navigator-status" class="navigator-status" role="status" aria-live="polite">2 notas</p><div id="timeline-list" tabindex="0" role="region" aria-label="Notas por data" aria-describedby="timeline-hint"><button type="button" class="timeline-entry" aria-current="false" aria-label="vamos, 09/09/2026, 10:35:00" title="vamos"><span class="note-name">vamos</span><small class="note-time">10:35:00</small></button><button type="button" class="timeline-entry" aria-current="true" aria-label="Eu sei que vou te amar em toda a minha vida. , 09/09/2026, 10:35:18" title="Eu sei que vou te amar em toda a minha vida. "><span class="note-name">Eu sei que vou te amar em toda a minha vida. </span><small class="note-time">10:35:18</small></button></div></div>
+        <div class="wheel-window" id="note-browser"><nav id="date-path" class="date-path" aria-label="Pastas por data"></nav><p id="navigator-status" class="navigator-status" role="status" aria-live="polite">2 notas</p><div id="timeline-list" tabindex="0" role="region" aria-label="Notas por data" aria-describedby="timeline-hint"></div></div>
       </aside>
       <aside id="desk-inspector" class="desk-inspector" aria-label="Contagem e instrumentos do texto">
         <div class="inspector-heading"><h2>OLHAR DO TEXTO</h2><button id="desk-counts-close" aria-label="Recolher contagem">×</button></div>
@@ -4303,12 +4303,12 @@ body[data-theme="escuro"] .post-write-pwa-action {
       next.forEach(function (b) { if (seenBooks[b.id] || (b.originalId && !seen[b.originalId])) { throw new Error('Vínculo de caderno incompleto. Preserve uma cópia do acervo.'); } seenBooks[b.id] = true; });
       originals = nextOriginals; books = next; return books;
     }
-    function commit(next) { storage.setItem(key, JSON.stringify(next)); books = next; }
+    function commit(next) { if (storage.getItem(journalKey)) { throw new Error('Há uma recuperação pendente. Reabra o aplicativo.'); } storage.setItem(key, JSON.stringify(next)); books = next; }
     function transaction(writes) {
       if (storage.getItem(journalKey)) { throw new Error('Há uma recuperação pendente. Reabra o aplicativo.'); }
       var before = writes.map(function (p) { return [p[0], storage.getItem(p[0])]; });
       storage.setItem(journalKey, JSON.stringify({ before: before }));
-      try { writes.forEach(function (p) { storage.setItem(p[0], p[1]); }); storage.removeItem(journalKey); reload(); }
+      try { writes.forEach(function (p) { storage.setItem(p[0], p[1]); }); reload(); storage.removeItem(journalKey); }
       catch (e) { try { recover(); reload(); } catch (rollback) { throw new Error('A importação foi interrompida. Reabra o aplicativo para recuperar o estado anterior.'); } throw e; }
     }
     function original(origId) { for (var i = 0; i < originals.length; i += 1) { if (originals[i].id === origId) { return originals[i]; } } return null; }
@@ -4479,11 +4479,12 @@ body[data-theme="escuro"] .post-write-pwa-action {
   var notebooks = null, activeNotebookId = null, notebookEditing = null, notebookReturn = null, notebookReady = false, showingAbout = false, deferredInstallPrompt = null;
   var originals = null, activeOriginalId = null, formTarget = 'volume';
   function availableBook(b) { var o = b && b.originalId && originals ? originals.get(b.originalId) : null; return b && !b.trashed && (!b.originalId || (o && !o.trashed)); }
-  function activeNotebook() { return notebooks && activeNotebookId ? notebooks.get(activeNotebookId) : null; }
+  function activeNotebook() { var b = notebooks && activeNotebookId ? notebooks.get(activeNotebookId) : null; return availableBook(b) ? b : null; }
   function activeOriginal() { return originals && activeOriginalId ? originals.get(activeOriginalId) : null; }
   function rememberNotebook() {
     if (!notebooks || !activeNotebookId || !doc.projectId || doc.projectId !== activeNotebookId) { return true; }
     try {
+      if (!activeNotebook()) { return true; }
       notebooks.update(activeNotebookId, { resume: { noteId: doc.noteId || doc.id, start: manuscript.selectionStart || 0, end: manuscript.selectionEnd || 0, scroll: manuscript.scrollTop || 0, view: cabinetOpen ? 'files' : 'writing' } }); return true;
     } catch (e) { message('O texto está guardado, mas não foi possível guardar a posição no caderno.'); return false; }
   }
@@ -5432,7 +5433,7 @@ body[data-theme="escuro"] .post-write-pwa-action {
   function cabinetDocuments() {
     var result = archive ? archive.list() : { documents: [], unreadable: 0 }, found = false;
     result.documents = result.documents.map(function (entry) { if (entry.id === doc.id) { found = true; return doc; } return entry; });
-    if (!found && (doc.revision || dirty || title.value || manuscript.value)) { result.documents.unshift(doc); }
+    if (!found && (doc.revision || dirty || title.value || manuscript.value) && (!doc.projectId || (notebooks && availableBook(notebooks.get(doc.projectId))))) { result.documents.unshift(doc); }
     return result;
   }
   function renderCabinet() {
@@ -5505,7 +5506,7 @@ body[data-theme="escuro"] .post-write-pwa-action {
     if (result.unreadable) { message('Algumas folhas não puderam ser lidas. Os registros originais permanecem.'); }
   }
   function enterDesk(focusEditor) {
-    if (notebookReady && !activeNotebookId) { if (doc.projectId && notebooks && notebooks.get(doc.projectId) && !notebooks.get(doc.projectId).trashed) { if (!openNotebook(doc.projectId)) { return false; } } else { showNotebookForm(); return false; } }
+    if (notebookReady && !activeNotebookId) { if (doc.projectId && notebooks && availableBook(notebooks.get(doc.projectId))) { if (!openNotebook(doc.projectId)) { return false; } } else { showNotebookForm(); return false; } }
     toggleStart(false);
     closePanels(false); collapseTimeline(); desktopDrag = null; cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
     document.body.setAttribute('data-view', 'mesa'); updatePath(); refreshCounts();
@@ -5527,7 +5528,7 @@ body[data-theme="escuro"] .post-write-pwa-action {
     cancelTypewriter(); closePanels(false); collapseTimeline();
     cabinetOpen = true; byId('writing-space').hidden = true; byId('gabinete').hidden = false;
     byId('leave-focus').hidden = true; document.body.setAttribute('data-view', 'gabinete');
-    if (doc.projectId && !activeNotebookId) { activeNotebookId = doc.projectId; }
+    if (doc.projectId && !activeNotebookId && availableBook(notebooks.get(doc.projectId))) { activeNotebookId = doc.projectId; }
     if (activeNotebookId) { var openedBook = notebooks.get(activeNotebookId); if (openedBook) { cabinetProject = openedBook.name; } }
     desktopWindow('open', false); renderCabinet(); if (!initial) { byId('cabinet-heading').focus(); } return true;
   }
@@ -5616,7 +5617,7 @@ body[data-theme="escuro"] .post-write-pwa-action {
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });
   listen(byId('back-writing'), 'click', returnToWriting);
-  function newDocument() { if (!activeNotebookId) { showNotebookForm(); return; } if (!persist()) { return; } var next = E.freshDocument(); next.projectId = activeNotebookId; next.project = activeNotebook().name; loadDocument(next); dirty = true; if (!persist()) { enterDesk(true); return; } renderTimeline(false, null, true); cabinetSelection = null; enterDesk(false); byId('path-document').focus(); }
+  function newDocument() { if (!activeNotebook()) { showNotebookForm(); return; } if (!persist()) { return; } var next = E.freshDocument(); next.projectId = activeNotebookId; next.project = activeNotebook().name; loadDocument(next); dirty = true; if (!persist()) { enterDesk(true); return; } renderTimeline(false, null, true); cabinetSelection = null; enterDesk(false); byId('path-document').focus(); }
   listen(byId('new-document'), 'click', newDocument);
   listen(byId('timeline-new'), 'click', newDocument);
   for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }

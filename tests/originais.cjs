@@ -33,4 +33,6 @@ m.update(b2.id,{trashed:true});o.update(box.id,{trashed:true});assert.equal(m.ge
 const trashPack=m.pack(archive.list(true).documents);m.validate(trashPack);
 // Duas instâncias leem o cadastro atual antes de escrever.
 const second=E.createNotebooks(s);o.add('Criada na aba A');second.originals.add('Criada na aba B');assert.ok(o.list().some(x=>x.name==='Criada na aba A'));assert.ok(o.list().some(x=>x.name==='Criada na aba B'));
+// Validação após escrita não pode apagar o diário antes de concluir.
+const broken=new Storage();const damagedBooks=plain(books);damagedBooks.push(plain(damagedBooks[0]));broken.setItem('escrevaral.astra.notebooks.v1',JSON.stringify(damagedBooks));broken.setItem('escrevaral.astra.originais.v1',JSON.stringify(o.list()));const brokenBefore=snapshot(broken);assert.throws(()=>E.createNotebooks(broken));assert.equal(snapshot(broken),brokenBefore);
 console.log('OK: caixas opcionais; IDs; nomes por caixa; exportação completa e parcial; legado; colisões; recuperação do ensaio; rollback; lixeira e duas instâncias.');
