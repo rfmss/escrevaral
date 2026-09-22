@@ -73,7 +73,7 @@ jobs:
         run: |
           node - <<'NODE'
           const fs=require('fs'),path=require('path');
-          for(const name of ['chromium-papel-g3-1366','chromium-papel-g3-320','chromium-papel-g3-667','chromium-mesa-g3-1366','chromium-mesa-g3-320','chromium-mesa-g3-escuro','chromium-gavetas-postit-g3','chromium-gavetas-1366','chromium-gavetas-320','chromium-gaveta-aberta','chromium-recepcao','chromium-recepcao-320','chromium-caderno-aberto','chromium-calculadora-1366','chromium-calculadora-390','chromium-linhagem','chromium-quadro-1366','chromium-quadro-390-escuro','chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
+          for(const name of ['chromium-gaveta-aberta-654','chromium-gaveta-aberta-600','chromium-papel-g3-1366','chromium-papel-g3-320','chromium-papel-g3-667','chromium-mesa-g3-1366','chromium-mesa-g3-320','chromium-mesa-g3-escuro','chromium-gavetas-postit-g3','chromium-gavetas-1366','chromium-gavetas-320','chromium-gaveta-aberta','chromium-recepcao','chromium-recepcao-320','chromium-caderno-aberto','chromium-calculadora-1366','chromium-calculadora-390','chromium-linhagem','chromium-quadro-1366','chromium-quadro-390-escuro','chromium-inicio','chromium-confirmacao-claro','chromium-dialogo-390x844-escuro','chromium-pausa-1366x650','chromium-pausa-320x568']){
             const file=path.join(process.env.QA_OUTPUT,name+'.png');
             if(fs.existsSync(file))console.log('QA_IMAGE:'+name+':'+fs.readFileSync(file).toString('base64'));
           }
