@@ -1,5 +1,5 @@
-const CACHE_NAME = "scrvrl-offline-v6-6";
-const ASSET_VERSION = "20260921-scrvrl-mesa-identidade-v6-6";
+const CACHE_NAME = "scrvrl-offline-v6-7";
+const ASSET_VERSION = "20260922-scrvrl-papel-gavetas-v6-7";
 
 const CORE_ASSETS = [
   "./",

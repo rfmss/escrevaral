@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260921-scrvrl-mesa-identidade-v6-6">
+  <meta name="asset-version" content="20260922-scrvrl-papel-gavetas-v6-7">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -2410,6 +2410,137 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
  #original-more-menu,#notebook-more-menu { left:0; right:auto; width:230px; max-width:calc(100vw - 32px); }
 }
 </style>
+<style>
+/* G3: papel e objetos em cores chapadas. O pontilhado é um ladrilho SVG local. */
+@media screen {
+ #gabinete { background-image:none; background-color:#b6c6b8; outline:0; }
+ #notebook-list { padding-top:42px; }
+ #notebook-list .notebook-cover { width:152px; height:218px; margin-right:38px; background:#e4e5d5; background-image:none; box-shadow:4px 5px 0 #869880; }
+ #notebook-list .notebook-cover[aria-pressed="true"] { background:#e4e5d5; }
+ .notebook-front { background:#1d281f; box-shadow:inset 7px 0 0 #111a13,inset 9px 0 0 #43503f; }
+ .notebook-strap { left:14px; right:19px; padding:14px 9px; background:#eeeede !important; border:1px solid #919b85; min-height:66px; }
+ .notebook-elastic { box-shadow:-2px 0 0 #34402f; }
+ .woven-tab { background:#c7d2bb; box-shadow:2px 2px 0 #101a10; }
+ #notebook-list .original-box { width:260px; min-height:140px; margin:76px 38px 30px 0; border:1px solid #63745f; background:#a8bcaa; box-shadow:3px 5px 0 #87997f; }
+ #notebook-list .original-box:hover { transform:none; border-color:#263c2a; }
+ .original-box .box-lid { top:-9px; left:8px; right:8px; height:12px; background:#82967c; }
+ .original-box .drawer-stack { left:12px; right:12px; top:-72px; height:72px; display:block; overflow:hidden; }
+ .original-box .drawer-book-spine { position:absolute; top:48px; left:0; right:0; width:auto; height:42px; padding:6px 9px; background:#f4f0e4; border:1px solid #9c9983; border-left:5px solid #819278; border-radius:4px 4px 0 0; font:12px/18px 'Courier Prime',monospace; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; z-index:4; }
+ .original-box .drawer-book-spine:nth-child(2) { top:32px; left:7px; right:7px; height:42px; background:#e9dfc8; z-index:3; }
+ .original-box .drawer-book-spine:nth-child(3) { top:16px; left:14px; right:14px; height:42px; background:#e0d6be; z-index:2; }
+ .original-box .drawer-book-spine:nth-child(4) { top:0; left:21px; right:21px; height:42px; background:#d7cbb0; z-index:1; }
+ .original-box .box-label { margin:48px 14px 14px; padding:9px 10px; background:#f5f1e5; border:1px solid #998652; min-height:76px; }
+ .original-box .box-tag { font:10px/1.5 'Courier Prime',monospace; letter-spacing:1px; }
+ .original-box .box-title { margin:4px 0; font:600 18px/1.4 'Noto Serif',Georgia,serif; }
+ .original-box .box-meta { font-size:11px; line-height:1.5; }
+ .original-box .box-pull { top:12px; left:calc(50% - 35px); right:auto; width:70px; height:22px; border:1px solid #806b3e; border-radius:16px 16px 2px 2px; background:#c7b27e; box-shadow:inset 0 2px 0 #e4d4ac,0 2px 0 #7e895f; }
+ .original-box .box-pull::before { content:""; position:absolute; left:11px; right:11px; top:5px; height:6px; border-bottom:2px solid #806b3e; border-radius:0 0 5px 5px; background:#a18b54; }
+ .original-box .box-pull::after { content:""; position:absolute; left:5px; top:10px; width:2px; height:2px; background:#65512e; box-shadow:56px 0 0 #65512e; }
+ .original-box .box-pull { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath fill='%23ad965f' d='M0 0h1v1H0zM2 2h1v1H2z'/%3E%3C/svg%3E"); }
+ .desktop-reminder { margin:22px 0; padding:18px 16px 12px; background:#ece9d6; border:1px solid #99a58c; border-radius:1px; box-shadow:2px 3px 0 #99ac94; }
+ .desktop-reminder:nth-child(even) { background:#d4e0c9; }
+ .desktop-reminder::before { content:""; position:absolute; top:-8px; left:calc(50% - 28px); width:56px; height:15px; background:#dbe1cb; border-left:1px solid #bdc8b1; border-right:1px solid #bdc8b1; pointer-events:none; }
+ .desktop-reminder::after { width:12px; height:12px; border-radius:0; background:#c0ceb1; }
+ .desktop-reminder textarea { min-height:90px; font-size:16px; }
+ #system-bar #os-start .os-rocker { background:#c9d5bf; box-shadow:inset 0 -3px 0 #7d906f,0 1px 0 #e8eee3; }
+ #system-bar #os-start[aria-expanded="true"] .os-rocker { background:#b9cbaa; box-shadow:inset 0 3px 0 #7d906f,0 1px 0 #e8eee3; }
+ body[data-theme="escuro"] #system-bar #os-start .os-rocker { background:#43573a; box-shadow:inset 0 -3px 0 #25331e; }
+ body[data-theme="escuro"] #system-bar #os-start[aria-expanded="true"] .os-rocker { background:#526849; box-shadow:inset 0 3px 0 #25331e; }
+ body[data-theme="escuro"] #notebook-list .original-box { background:#40533f; box-shadow:3px 5px 0 #172217; }
+ body[data-theme="escuro"] .original-box .box-label { background:#d4d5bd; color:#172117; }
+ body[data-theme="escuro"] .original-box .box-pull { background-color:#c7b27e; box-shadow:inset 0 2px 0 #e4d4ac,0 2px 0 #202d1f; }
+ body[data-theme="escuro"] .original-box .drawer-book-spine { color:#20291f; }
+ body[data-theme="escuro"] .desktop-reminder { background:#3d4935; box-shadow:2px 3px 0 #162316; }
+ body[data-theme="escuro"] .desktop-reminder::before { background:#738367; border-color:#92a284; }
+ body[data-theme="escuro"] .desktop-reminder::after { background:#617450; }
+ body[data-theme="escuro"] #notebook-list .notebook-cover { box-shadow:4px 5px 0 #172217; }
+ body:not([data-machine="true"]) #writing-space { background:#b6c6b8; }
+ body:not([data-machine="true"]) #writing-space .paper,body:not([data-machine="true"]) #writing-space .focus-mask { background:#f7f4eb; }
+ body[data-theme="escuro"]:not([data-machine="true"]) #writing-space { background:#293728; }
+ body[data-theme="escuro"]:not([data-machine="true"]) #writing-space .paper,body[data-theme="escuro"]:not([data-machine="true"]) #writing-space .focus-mask { background:#20291f; }
+ body[data-view="mesa"] #writing-space .masthead { height:64px; border-bottom:1px solid #9eaf99; }
+ body[data-view="mesa"] #writing-space #back-cabinet { display:flex; align-items:center; padding:12px; border-right:0; background:transparent; }
+ body[data-view="mesa"] #writing-space #back-cabinet .escrevaral-mark { margin:0 9px 0 0; }
+ body[data-view="mesa"] #writing-space #back-cabinet strong { font-size:20px; }
+ body[data-view="mesa"] #writing-space .global-search { left:232px; right:410px; top:10px; width:auto; }
+ body[data-view="mesa"] #writing-space .desk-tools { top:10px; }
+ body[data-view="mesa"] #writing-space .desk { top:64px; }
+ body[data-view="mesa"] #writing-space .paper { top:20px; bottom:20px; left:242px; right:28px; max-width:860px; margin:0 auto; border:1px solid #c4c4b0; box-shadow:3px 4px 0 #96a58c; }
+ body[data-view="mesa"] #writing-space .paper::before { content:""; position:absolute; left:calc(50% - 28px); top:-8px; width:56px; height:16px; background:#e6dfb9; border-left:1px solid #d3cda8; border-right:1px solid #d3cda8; pointer-events:none; }
+ body[data-view="mesa"] #writing-space .note-heading { top:24px; left:40px; right:40px; margin:0; }
+ body[data-view="mesa"] #writing-space .note-heading .eyebrow { font:10px/1.4 'Courier Prime',monospace; letter-spacing:1.2px; }
+ body[data-view="mesa"] #writing-space .title { font:400 30px/1.25 'Noto Serif',Georgia,serif; height:42px; width:100%; max-width:none; }
+ body[data-view="mesa"] #writing-space .manuscript-date { font:11px/1.4 'Courier Prime',monospace; }
+ body[data-view="mesa"] #writing-space .writing-toolbar { top:110px; left:40px; right:40px; height:44px; padding:0; gap:6px; background:transparent; border-bottom:1px solid #d7d8c7; }
+ body[data-view="mesa"] #writing-space .editor-viewport { top:172px; bottom:34px; left:40px; right:40px; }
+ body[data-view="mesa"] #writing-space .paper-footer { left:40px; right:40px; bottom:4px; }
+ body[data-view="mesa"] #writing-space .timeline { border-right:0; padding-top:20px; }
+ body[data-view="mesa"] #writing-space .timeline-entry { border:0; border-left:3px solid transparent; background:#c3d1bd; padding:12px 10px; margin-bottom:12px; }
+ body[data-view="mesa"] #writing-space .timeline-entry[aria-current="true"] { border-left-color:#445d42; background:#f7f4eb; }
+ body[data-theme="escuro"][data-view="mesa"] #writing-space .paper { border-color:#65745b; box-shadow:3px 4px 0 #182416; }
+ body[data-theme="escuro"][data-view="mesa"] #writing-space .paper::before { background:#8b8963; border-color:#a9a57e; }
+ body[data-theme="escuro"][data-view="mesa"] #writing-space .timeline-entry { background:#344431; }
+ body[data-theme="escuro"][data-view="mesa"] #writing-space .timeline-entry[aria-current="true"] { background:#49563d; border-left-color:#b8cba8; }
+}
+@media screen and (min-width:761px) { #notebook-area { right:300px; padding-left:20px; } #desktop-reminders { width:260px; top:100px; padding-right:12px; } }
+@media screen and (min-width:761px) and (max-width:1050px) {
+ body[data-view="mesa"] #writing-space .global-search { left:222px; right:345px; }
+ body[data-view="mesa"] #writing-space .desk-tools button { padding-left:6px; padding-right:6px; }
+ body[data-view="mesa"] #writing-space .paper { left:222px; right:4px; }
+ body[data-view="mesa"] #writing-space .note-heading { left:22px; right:22px; }
+ body[data-view="mesa"] #writing-space .writing-toolbar { left:22px; right:22px; gap:3px; }
+ body[data-view="mesa"] #writing-space .editor-viewport { left:22px; right:22px; }
+}
+@media screen and (max-width:760px) {
+ #notebook-list { padding-top:12px; }
+ #notebook-list .original-box { width:220px; min-height:116px; margin:62px 16px 20px 0; }
+ .original-box .drawer-stack { top:-58px; height:58px; }
+ .original-box .drawer-book-spine { top:36px; }
+ .original-box .drawer-book-spine:nth-child(2) { top:24px; }
+ .original-box .drawer-book-spine:nth-child(3) { top:12px; }
+ .original-box .box-label { margin:42px 10px 10px; min-height:64px; padding:6px 8px; }
+ .original-box .box-title { font-size:16px; }
+ #notebook-list .notebook-cover { width:126px; height:184px; margin-right:20px; }
+ body[data-view="mesa"] #writing-space .masthead { height:98px; }
+ body[data-view="mesa"] #writing-space #back-cabinet { display:none; }
+ body[data-view="mesa"] #writing-space .global-search { top:0; left:0; right:0; width:auto; }
+ body[data-view="mesa"] #writing-space .desk-tools { top:48px; right:0; left:0; justify-content:space-between; }
+ body[data-view="mesa"] #writing-space .desk { top:102px; }
+ body[data-view="mesa"] #writing-space .paper { top:8px; bottom:8px; left:0; right:0; max-width:none; }
+ body[data-view="mesa"] #writing-space .note-heading { top:16px; left:16px; right:16px; }
+ body[data-view="mesa"] #writing-space .title { font-size:24px; height:32px; }
+ body[data-view="mesa"] #writing-space .writing-toolbar { top:90px; left:8px; right:8px; height:48px; gap:0; }
+ body[data-view="mesa"] #writing-space .editor-viewport { top:148px; bottom:30px; left:16px; right:16px; }
+ body[data-view="mesa"] #writing-space .paper-footer { left:16px; right:16px; }
+ body[data-view="mesa"] #writing-space .timeline { background:#b6c6b8; }
+ body[data-theme="escuro"][data-view="mesa"] #writing-space .timeline { background:#293728; }
+ #desktop-reminders { padding:12px 8px; }
+}
+@media screen and (max-height:480px) {
+ body[data-view="mesa"] #writing-space .masthead { height:44px; }
+ body[data-view="mesa"] #writing-space #back-cabinet,body[data-view="mesa"] #writing-space .global-search { display:none; }
+ body[data-view="mesa"] #writing-space .desk-tools { top:0; left:auto; right:0; }
+ body[data-view="mesa"] #writing-space .desk { top:48px; }
+ body[data-view="mesa"] #writing-space .paper { top:0; bottom:0; left:0; right:0; max-width:none; }
+ body[data-view="mesa"] #writing-space .paper::before { display:none; }
+ body[data-view="mesa"] #writing-space .note-heading { top:4px; left:12px; right:12px; }
+ body[data-view="mesa"] #writing-space .title { height:28px; font-size:20px; }
+ body[data-view="mesa"] #writing-space .note-heading .eyebrow,body[data-view="mesa"] #writing-space .manuscript-date { display:none; }
+ body[data-view="mesa"] #writing-space .writing-toolbar { top:36px; height:44px; left:8px; right:8px; }
+ body[data-view="mesa"] #writing-space .editor-viewport { top:84px; bottom:20px; left:16px; right:16px; }
+}
+@media screen and (max-height:360px) {
+ body[data-view="mesa"] #writing-space .note-heading { display:none; }
+ body[data-view="mesa"] #writing-space .writing-toolbar { top:0; }
+ body[data-view="mesa"] #writing-space .editor-viewport { top:44px; }
+}
+@media screen {
+ body[data-immersion="true"][data-view="mesa"] #writing-space .desk { top:0; }
+ body[data-immersion="true"][data-view="mesa"] #writing-space .paper { top:0; bottom:0; left:0; right:0; max-width:none; box-shadow:none; border:0; }
+ body[data-immersion="true"][data-view="mesa"] #writing-space .paper::before,body[data-immersion="true"][data-view="mesa"] #writing-space .note-heading,body[data-immersion="true"][data-view="mesa"] #writing-space .writing-toolbar { display:none; }
+ body[data-immersion="true"][data-view="mesa"] #writing-space .editor-viewport { top:0; bottom:0; }
+}
+</style>
 </head>
 <body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
 <section id="lineage-panel" class="sheet" role="dialog" aria-labelledby="lineage-heading" tabindex="-1" hidden>
@@ -2579,11 +2710,6 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     <div id="selection-tools" class="selection-tools" role="group" aria-label="Cópia e trecho selecionado"><span id="clipboard-status" role="status">Copiado no Escrevaral</span><button id="selection-cut">Recortar</button><button id="selection-paste">Colar cópia interna</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
     <header class="masthead">
       <button id="back-cabinet" class="brand-signature" aria-label="Escrevaral — voltar aos textos do caderno"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
-        <div class="note-heading"><span class="eyebrow">DOCUMENTO</span>
-          <label class="sr-only" for="titulo">Título do manuscrito</label>
-          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false" value="">
-          <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação do texto" datetime="2026-09-09T13:35:18.128Z">10:35:18 · 9 de setembro de 2026</time></p>
-        </div>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar neste caderno</label><input id="note-search" type="search" placeholder="Buscar neste caderno" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden="">×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
         <button id="desk-minimize" title="Fechar o caderno e voltar" aria-label="Minimizar caderno">−</button><button id="immersion-toggle" aria-pressed="false" title="Escrever com a interface recolhida">Foco</button>
@@ -2595,6 +2721,11 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     </header>
     <div class="desk">
       <main class="paper" id="writing-paper" style="transform: translate(0px);">
+        <div class="note-heading"><span class="eyebrow">DOCUMENTO</span>
+          <label class="sr-only" for="titulo">Título do manuscrito</label>
+          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false" value="">
+          <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação do texto" datetime="2026-09-09T13:35:18.128Z">10:35:18 · 9 de setembro de 2026</time></p>
+        </div>
         <div class="writing-toolbar" role="group" aria-label="Apresentação do manuscrito">
           <button id="desk-documents" aria-controls="note-browser" aria-expanded="false">Textos</button>
           <button id="desk-font" title="Alternar entre letra literária e máquina">Courier Prime</button>
@@ -4639,7 +4770,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
         var lid = document.createElement('span'); lid.className = 'box-lid'; b.appendChild(lid);
         var stack = document.createElement('span'); stack.className = 'drawer-stack'; stack.setAttribute('aria-hidden','true'); b.appendChild(stack);
         var shown = Math.min(groups[o.id].length,4), spineIndex;
-        for (spineIndex=0;spineIndex<shown;spineIndex+=1) { var spine=document.createElement('span'); spine.className='drawer-book-spine'; spine.style.backgroundColor=groups[o.id][spineIndex].color; stack.appendChild(spine); }
+        for (spineIndex=0;spineIndex<shown;spineIndex+=1) { var spine=document.createElement('span'); spine.className='drawer-book-spine'; spine.style.borderLeftColor=groups[o.id][spineIndex].color; text(spine,groups[o.id][spineIndex].name); stack.appendChild(spine); }
         var label = document.createElement('span'); label.className = 'box-label'; b.appendChild(label);
         var tag = document.createElement('span'); tag.className = 'box-tag'; text(tag, 'GAVETA'); label.appendChild(tag);
         var titleNode = document.createElement('span'); titleNode.className = 'box-title'; text(titleNode, o.name); label.appendChild(titleNode);
