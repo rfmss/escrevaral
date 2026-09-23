@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260922-scrvrl-gaveta-altura-v6-8">
+  <meta name="asset-version" content="20260923-scrvrl-cadernos-camadas-v6-9">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -2327,7 +2327,7 @@ body[data-theme="escuro"] #original-new,body[data-theme="escuro"] #volume-new { 
  #writing-space .desk-project { margin:4px 0 0; flex-shrink:0; }
  #writing-space .rail-heading { flex-shrink:0; }
  #writing-space .wheel-window { position:relative; top:auto !important; bottom:auto; left:auto; right:auto; height:auto !important; min-height:100px; flex:1; display:flex; flex-direction:column; }
- #writing-space .date-path { min-height:0; flex-shrink:0; }
+ #writing-space .date-path { position:static; min-height:0; flex-shrink:0; }
  #writing-space .navigator-status { position:static; margin:4px 0 10px; font-size:11px; }
  #writing-space #timeline-list { position:relative; top:auto; bottom:auto; width:100%; flex:1; min-height:70px; overflow:auto; padding:0 0 16px 8px; border-left:1px solid #91a08e; scrollbar-width:thin; }
  #writing-space .timeline-entry { margin:0 0 8px; background:#d8e1d1; border:1px solid #a5b29f; border-left:2px solid transparent; min-height:54px; }
@@ -2415,13 +2415,13 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
 @media screen {
  #gabinete { background-image:none; background-color:#b6c6b8; outline:0; }
  #notebook-list { padding-top:42px; }
- #notebook-list .notebook-cover { width:152px; height:218px; margin-right:38px; background:#e4e5d5; background-image:none; box-shadow:4px 5px 0 #869880; }
- #notebook-list .notebook-cover[aria-pressed="true"] { background:#e4e5d5; }
+ #notebook-list .notebook-cover { width:140px; height:202px; margin-right:22px; background:#e4e5d5; background-image:none; box-shadow:4px 5px 0 #869880; }
+ #notebook-list .notebook-cover[aria-pressed="true"] { background:#ccd5c3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='4'%3E%3Cpath fill='%238a9982' d='M0 3h1v1H0z'/%3E%3C/svg%3E") repeat; }
  .notebook-front { background:#1d281f; box-shadow:inset 7px 0 0 #111a13,inset 9px 0 0 #43503f; }
- .notebook-strap { left:14px; right:19px; padding:14px 9px; background:#eeeede !important; border:1px solid #919b85; min-height:66px; }
+ .notebook-strap { left:0; right:0; padding:10px 29px 10px 14px; border:0; border-top:1px dashed #65735f; border-bottom:1px dashed #65735f; min-height:54px; }
  .notebook-elastic { box-shadow:-2px 0 0 #34402f; }
  .woven-tab { background:#c7d2bb; box-shadow:2px 2px 0 #101a10; }
- #notebook-list .original-box { width:260px; min-height:140px; margin:76px 38px 30px 0; border:1px solid #63745f; background:#a8bcaa; box-shadow:3px 5px 0 #87997f; }
+ #notebook-list .original-box { z-index:0; width:260px; min-height:140px; margin:76px 38px 30px 0; border:1px solid #63745f; background:#a8bcaa; box-shadow:3px 5px 0 #87997f; }
  #notebook-list .original-box:hover { transform:none; border-color:#263c2a; }
  .original-box .box-lid { top:-9px; left:8px; right:8px; height:12px; background:#82967c; }
  .original-box .drawer-stack { left:12px; right:12px; top:-72px; height:72px; display:block; overflow:hidden; }
@@ -2510,7 +2510,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
  .original-box .drawer-book-spine:nth-child(3) { top:12px; }
  .original-box .box-label { margin:42px 10px 10px; min-height:64px; padding:6px 8px; }
  .original-box .box-title { font-size:16px; }
- #notebook-list .notebook-cover { width:126px; height:184px; margin-right:20px; }
+ #notebook-list .notebook-cover { width:116px; height:168px; margin-right:18px; }
  body[data-view="mesa"] #writing-space .masthead { height:98px; }
  body[data-view="mesa"] #writing-space #back-cabinet { display:none; }
  body[data-view="mesa"] #writing-space .global-search { top:0; left:0; right:0; width:auto; }
