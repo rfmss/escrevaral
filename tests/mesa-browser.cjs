@@ -22,6 +22,7 @@ async function shot(p,name){await p.screenshot({path:path.join(out,engine+'-'+na
  await form(p,'#volume-new','Segundo caderno');await p.click('#cabinet-new');await p.fill('#titulo','Cena dois');await p.fill('#manuscrito','Uma segunda folha.');await p.keyboard.press('Control+s');const second=await current(p);
  assert.equal(await p.locator('#desk-inspector').isVisible(),false);await p.click('#desk-counts');assert.equal(await p.locator('#desk-inspector').isVisible(),true);await p.keyboard.press('Escape');assert.equal(await p.locator('#desk-inspector').isVisible(),false);
  assert.equal(await p.locator('#back-cabinet .escrevaral-mark path').getAttribute('fill'),'currentColor');
+ await p.click('#scope-dates');const datePath=await p.locator('#date-path').boundingBox(),dateStatus=await p.locator('#navigator-status').boundingBox();assert.ok(datePath.height>0&&datePath.y+datePath.height<=dateStatus.y,'datas e contagem sem sobreposição');await shot(p,'datas-corrigidas');await p.click('#scope-project');
  // Navigation commits the current text before opening a different book.
  await p.fill('#manuscrito','Texto alterado antes da troca.');await p.locator('[data-route-book="'+first.projectId+'"]').click();assert.equal(await p.locator('#manuscrito').inputValue(),first.text);await p.locator('[data-route-book="'+second.projectId+'"]').click();assert.equal(await p.locator('#manuscrito').inputValue(),'Texto alterado antes da troca.');
  // IME and storage failures must keep the active sheet intact.
