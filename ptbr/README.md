@@ -26,3 +26,8 @@
 - Triagem de sinais nas pausas de escrita e execução serial sob comando explícito; o painel não escreve no manuscrito.
 - A revisão individual anterior e as escolhas persistidas do autor ainda precisam ser reconciliadas com a nova superfície antes de aposentar o fluxo original; não anunciar a integração integral do pacote PTBR.
 - Os testes automatizados não substituem QA físico de navegador antigo, instalação offline em perfil limpo e sessões reais de escrita.
+
+## Preservação das decisões do autor (v6-14)
+- O painel consulta `E.ptbrPanelChoices()` da ponte em execução; Findings marcados como escolhas mantidas são ocultados também na leitura progressiva. Não cria um segundo banco de manuscritos.
+- O comando `Consultar lentes individualmente` revela no mesmo painel o fluxo anterior e o botão nativo de rever escolhas, sem abrir outra janela nem executar automaticamente essas lentes.
+- A roleta continua filtrada por sinais, e `que` é exibido apenas como observação de presença; a função sintática não é inferida.
