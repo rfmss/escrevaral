@@ -34,6 +34,12 @@ jobs:
           node tests/universo.cjs
           node tests/quadro.cjs
           node tests/linguistica-linhagem.cjs
+      - name: Menus e cópia — Chromium
+        run: node tests/menus-browser.cjs
+      - name: Menus e cópia — WebKit
+        env:
+          BROWSER_ENGINE: webkit
+        run: node tests/menus-browser.cjs
       - name: Fluxos anteriores e offline
         run: |
           node tests/cadernos-browser.cjs
@@ -68,12 +74,6 @@ jobs:
         env:
           BROWSER_ENGINE: webkit
         run: node tests/mesa-browser.cjs
-      - name: Menus e cópia — Chromium
-        run: node tests/menus-browser.cjs
-      - name: Menus e cópia — WebKit
-        env:
-          BROWSER_ENGINE: webkit
-        run: node tests/menus-browser.cjs
       - name: Prévia visual nos logs (dados fictícios)
         if: always()
         run: |

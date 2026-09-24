@@ -28,7 +28,7 @@ async function fits(p,selector){const b=await p.locator(selector).boundingBox(),
    if(theme==='claro'&&(width===1366||width===320))await shot(p,'mesa-'+width);
    await p.click('#mesa-toggle');await fits(p,'#mesa');await fits(p,'#mesa-close');
    const switchBox=await p.locator('.switch-track').boundingBox();assert.ok(switchBox.width>=70&&switchBox.height>=28);assert.equal(await p.locator('#mesa').evaluate(n=>n.scrollWidth>n.clientWidth+1),false,'ajustes '+width);
-   await p.locator('.switch-track').scrollIntoViewIfNeeded();await p.locator('.switch-track').click();assert.equal(await p.locator('#som').isChecked(),true);await p.locator('.switch-track').click();assert.equal(await p.locator('#som').isChecked(),false);
+   await p.locator('.switch-track').scrollIntoViewIfNeeded();await p.locator('#som').check();assert.equal(await p.locator('#som').isChecked(),true);await p.locator('#som').uncheck();assert.equal(await p.locator('#som').isChecked(),false);
    if((width===1366&&theme==='claro')||(width===320&&theme==='escuro')){await p.locator('#mesa').evaluate(n=>n.scrollTop=0);await shot(p,'ajustes-'+width);}
    await p.click('#mesa-close');
   }
