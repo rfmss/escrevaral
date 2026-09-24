@@ -174,7 +174,7 @@
     var card=el('section',results,'ptbr-outcome'), h=el('h3',card,'',labels[lens]||lens);
     var arr=result.findings||[],i,f,entry,b,detail,ignored=E.ptbrPanelChoices?E.ptbrPanelChoices():[],visible=0;
     for(i=0;i<arr.length;i++){if(ignored.indexOf(arr[i].id+'|'+arr[i].snippet)===-1){visible+=1;}}
-    el('p',card,'',visible?visible+' observação'+(visible!==1?'ões':'')+' nova(s) neste recorte.':'Nenhuma observação nova neste recorte.');
+    el('p',card,'',visible?visible+' '+(visible===1?'observação nova':'observações novas')+' neste recorte.':'Nenhuma observação nova neste recorte.');
     for(i=0;i<arr.length&&i<maxFindings;i++){
       f=arr[i];if(ignored.indexOf(f.id+'|'+f.snippet)!==-1){continue;}
       entry=el('div',card,'ptbr-observation');
