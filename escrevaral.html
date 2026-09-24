@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260924-scrvrl-gaveta-frente-v6-10">
+  <meta name="asset-version" content="20260924-scrvrl-quadro-janela-v6-11">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -2557,6 +2557,49 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
  body[data-immersion="true"][data-view="mesa"] #writing-space .editor-viewport { top:0; bottom:0; }
 }
 </style>
+<style>
+/* Quadro: a janela limita o desenho, sem rolagem ou deformação dos traços. */
+@media screen {
+ #chalkboard { padding:2vh 2vw; overflow:hidden; overscroll-behavior:none; }
+ #chalkboard .chalk-paper { display:flex; flex-direction:column; width:100%; height:100%; max-width:none; min-height:0; margin:0; padding:12px; overflow:hidden; }
+ #chalkboard .chalk-heading { width:100%; max-width:none; margin:0; padding:0 0 6px; flex-shrink:0; }
+ #chalkboard .chalk-heading h2 { margin:2px 0; font-size:24px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+ #chalkboard .chalk-heading > div { overflow:hidden; }
+ #chalk-help { margin:4px 0 6px; max-width:none; font:14px/1.3 Arial,sans-serif; flex-shrink:0; }
+ #chalkboard .chalk-tools,#chalkboard .chalk-actions { margin:2px -2px; flex-shrink:0; }
+ #chalkboard .chalk-tools button,#chalkboard .chalk-actions button,#chalkboard .chalk-upload { margin:2px; padding:6px 10px; min-height:40px; font:14px/1.3 Arial,sans-serif; }
+ #chalkboard .chalk-upload { display:flex; align-items:center; }
+ #chalk-pen { display:none; margin:2px; border:1px solid #657367; background:transparent; color:inherit; }
+ #chalkboard .chalk-slate { position:relative; display:flex; align-items:center; justify-content:center; flex:1 1 0; min-height:0; padding:6px 6px 22px; overflow:hidden; }
+ #chalk-frame { flex-shrink:0; max-width:100%; }
+ #chalkboard .chalk-rail { position:absolute; left:0; right:0; bottom:0; height:22px; padding:0 8px; }
+ #chalkboard .chalk-bottom { flex-shrink:0; padding:2px 0; border:0; font:11px/1.3 Arial,sans-serif; }
+ #chalkboard .chalk-bottom span { margin-right:4px; }
+ #chalk-status { flex-shrink:0; margin:2px 0; min-height:16px; font:12px/1.3 Arial,sans-serif; }
+ #chalkboard #chalk-copy { position:absolute; z-index:2; top:4px; left:4px; width:calc(100% - 8px); height:calc(100% - 46px); min-height:0; margin:0; resize:none; overflow:hidden; background:#e2e9df; }
+ #chalk-copy-close { position:absolute; z-index:3; right:4px; bottom:2px; min-height:36px; }
+ body[data-theme="escuro"] #chalkboard #chalk-copy { background:#161c15; }
+ #chalkboard[data-short="true"] { padding:1vh 1vw; }
+ #chalkboard[data-short="true"] .chalk-paper { padding:6px; }
+ #chalkboard[data-short="true"] .chalk-heading { padding:0; }
+ #chalkboard[data-short="true"] .chalk-heading small { display:none; }
+ #chalkboard[data-short="true"] .chalk-heading h2 { font-size:18px; }
+ #chalkboard[data-short="true"] .chalk-bottom { display:none; }
+ #chalkboard[data-short="true"] #chalk-help { margin:2px 0; font-size:12px; }
+ #chalkboard[data-short="true"] .chalk-tools button,#chalkboard[data-short="true"] .chalk-actions button,#chalkboard[data-short="true"] .chalk-upload,#chalkboard[data-short="true"] #chalk-close,#chalkboard[data-short="true"] #chalk-pen { min-height:32px; padding:4px 6px; }
+ #chalkboard[data-short="true"] .chalk-slate { padding:3px; }
+ #chalkboard[data-short="true"] .chalk-rail { display:none; }
+}
+@media screen and (max-width:600px) {
+ #chalkboard .chalk-paper { padding:8px; }
+ #chalkboard .chalk-heading h2 { font-size:20px; }
+ #chalkboard #chalk-fino,#chalkboard #chalk-giz,#chalkboard #chalk-grosso { display:none; }
+ #chalkboard #chalk-pen { display:block; width:72px; min-height:40px; padding:4px; font-size:13px; }
+ #chalkboard .chalk-tools { flex-wrap:nowrap; }
+ #chalkboard .chalk-tools button { min-width:0; padding:4px; font-size:12px; }
+ #chalkboard .chalk-actions button,#chalkboard .chalk-upload { padding:5px 8px; font-size:13px; }
+}
+</style>
 </head>
 <body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
 <section id="lineage-panel" class="sheet" role="dialog" aria-labelledby="lineage-heading" tabindex="-1" hidden>
@@ -2574,14 +2617,14 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span>
   <header class="finish-heading chalk-heading"><div><small>ESCREVA<b>RAL</b> · QUADRO DE GIZ</small><h2 id="chalk-heading"></h2></div><button id="chalk-close" class="material-key" aria-label="Fechar quadro de giz">×</button></header>
   <div class="chalk-tools" role="group" aria-label="Ferramentas do quadro">
+   <select id="chalk-pen" aria-label="Tipo de giz"><option value="fino">Fino</option><option value="giz" selected>Giz</option><option value="grosso">Grosso</option></select>
    <button id="chalk-fino" aria-pressed="false">Fino</button><button id="chalk-giz" aria-pressed="true">Giz</button><button id="chalk-grosso" aria-pressed="false">Grosso</button><button id="chalk-borracha" aria-pressed="false">Borracha</button><button id="chalk-grid" aria-pressed="false">Grade</button><button id="chalk-undo">Desfazer</button><button id="chalk-clear">Limpar</button>
   </div>
-  <p id="chalk-help">Desenhe com o dedo, mouse ou caneta. No quadro: setas movem o cursor; Espaço começa ou termina o traço.</p>
-  <div class="chalk-slate"><div id="chalk-frame"><canvas id="chalk-canvas" width="1" height="1" tabindex="0" role="img" aria-label="Desenho do caderno" aria-describedby="chalk-help">Este navegador não exibe o desenho.</canvas><span id="chalk-cursor" aria-hidden="true" hidden></span></div><div class="chalk-rail" aria-hidden="true"><i></i><i></i><span>ESCREVA<b>RAL</b></span><em></em></div></div>
+  <p id="chalk-help">Rabisque ideias e enxergue as conexões da sua história.</p><p id="chalk-keyboard-help" class="sr-only">Desenhe com o dedo, mouse ou caneta. No quadro: setas movem o cursor; Espaço começa ou termina o traço.</p>
+  <div class="chalk-slate"><textarea id="chalk-copy" readonly aria-label="Cópia do desenho em texto" hidden></textarea><button id="chalk-copy-close" hidden>Voltar ao desenho</button><div id="chalk-frame"><canvas id="chalk-canvas" width="1" height="1" tabindex="0" role="img" aria-label="Desenho do caderno" aria-describedby="chalk-help chalk-keyboard-help">Este navegador não exibe o desenho.</canvas><span id="chalk-cursor" aria-hidden="true" hidden></span></div><div class="chalk-rail" aria-hidden="true"><i></i><i></i><span>ESCREVA<b>RAL</b></span><em></em></div></div>
   <div class="chalk-bottom"><span id="chalk-count">0 traços</span><span>O desenho acompanha este caderno.</span></div>
   <p id="chalk-status" role="status"></p>
-  <div class="chalk-actions"><button id="chalk-download">Baixar desenho</button><button id="chalk-copy-show">Copiar desenho</button><label class="chalk-upload" for="chalk-import">Trazer desenho<input id="chalk-import" type="file" accept=".txt,.json,.giz" /></label><button id="chalk-retry" hidden>Guardar novamente</button><button id="chalk-discard" hidden>Descartar alterações</button></div>
-  <textarea id="chalk-copy" readonly aria-label="Cópia do desenho em texto" hidden></textarea>
+  <div class="chalk-actions"><button id="chalk-download" title="Baixar desenho">Baixar</button><button id="chalk-copy-show" title="Copiar desenho">Copiar</button><label class="chalk-upload" for="chalk-import" title="Trazer desenho">Trazer<input id="chalk-import" type="file" accept=".txt,.json,.giz" /></label><button id="chalk-retry" hidden>Guardar novamente</button><button id="chalk-discard" hidden>Descartar alterações</button></div>
  </div>
 </section>
 
@@ -4233,7 +4276,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   var ctx=null,book=null,drawing=null,revision='',dirty=false,stroke=null,pointer=null,tool='giz',total=0,previous=null,hidden=[],resizeTimer=null,reader=null,epoch=0,lastTouch=0,kpos=[5000,5000],keyboard=false;
   function byId(id){return D.getElementById(id);}
   function on(n,k,f){n.addEventListener(k,f,false);}
-  function status(t){byId('chalk-status').textContent=t;}
+  function status(t){byId('chalk-status').textContent=t;fit();}
   function active(){return !panel.hidden;}
   function blocked(){return E.dialog.isOpen()||D.body.getAttribute('data-locked')==='true';}
   function count(){total=0;drawing.strokes.forEach(function(s){total+=s.points.length;});}
@@ -4243,6 +4286,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
    byId('chalk-count').textContent=drawing.strokes.length+(drawing.strokes.length===1?' traço':' traços');
    byId('chalk-undo').disabled=byId('chalk-clear').disabled=!drawing.strokes.length;
    byId('chalk-retry').hidden=byId('chalk-discard').hidden=!dirty;
+   if(tool!=='borracha'){byId('chalk-pen').value=tool;}fit();
   }
   function paint(s,from){
    if(!ctx){return;}
@@ -4254,7 +4298,12 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   }
   function redraw(){if(!ctx||!drawing){return;}ctx.clearRect(0,0,canvas.width,canvas.height);drawing.strokes.forEach(function(s){paint(s,0);});}
   function fit(){
-   if(!active()){return;}var width=Math.max(1,Math.min(1000,Math.floor(frame.clientWidth))),height=Math.max(1,Math.round(width*.6));
+   if(!active()){return;}var v=root.visualViewport,viewHeight=v?v.height:root.innerHeight;
+   panel.style.top=(v?v.offsetTop:0)+'px';panel.style.bottom='auto';panel.style.height=viewHeight+'px';panel.setAttribute('data-short',viewHeight<=450?'true':'false');
+   var slate=frame.parentNode,style=root.getComputedStyle(slate),spaceW=slate.clientWidth-(parseFloat(style.paddingLeft)||0)-(parseFloat(style.paddingRight)||0),spaceH=slate.clientHeight-(parseFloat(style.paddingTop)||0)-(parseFloat(style.paddingBottom)||0);
+   var displayWidth=Math.max(1,Math.floor(Math.min(spaceW-2,(spaceH-2)/.6))),displayHeight=Math.max(1,Math.floor(displayWidth*.6));
+   frame.style.width=(displayWidth+2)+'px';frame.style.height=(displayHeight+2)+'px';canvas.style.width=displayWidth+'px';canvas.style.height=displayHeight+'px';
+   var width=Math.min(1000,displayWidth),height=Math.max(1,Math.round(width*.6));
    if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;redraw();}
   }
   function save(){
@@ -4281,7 +4330,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   function closeNow(){
    epoch+=1;if(reader&&reader.readyState===1){reader.abort();}reader=null;root.clearTimeout(resizeTimer);resizeTimer=null;
    panel.hidden=true;restore();stroke=null;pointer=null;dirty=false;drawing=null;book=null;ctx=null;canvas.width=canvas.height=1;
-   byId('chalk-copy').value='';byId('chalk-copy').hidden=true;byId('chalk-cursor').hidden=true;
+   byId('chalk-copy').value='';byId('chalk-copy').hidden=true;byId('chalk-copy-close').hidden=true;byId('chalk-cursor').hidden=true;
    if(previous&&D.documentElement.contains(previous)&&previous.getClientRects().length){previous.focus();}else{byId('os-start').focus();}previous=null;
   }
   function close(){if(flush()){closeNow();}}
@@ -4289,20 +4338,22 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
    if(active()||blocked()||!bridge.checkpoint()){return;}
    try{var b=bridge.book();if(!b||b.trashed){bridge.message('Abra um caderno para usar seu quadro de giz.');return;}drawing=C.read(b.data);book=b;}catch(e){bridge.message(e.message);return;}
    previous=D.activeElement;bridge.prepare();revision=JSON.stringify(drawing);dirty=false;stroke=null;pointer=null;epoch+=1;panel.hidden=false;panel.scrollTop=0;
-   byId('chalk-heading').textContent=book.name;byId('chalk-copy').value='';byId('chalk-copy').hidden=true;byId('chalk-cursor').hidden=true;tool='giz';count();controls();
+   byId('chalk-heading').textContent=book.name;byId('chalk-copy').value='';byId('chalk-copy').hidden=true;byId('chalk-copy-close').hidden=true;byId('chalk-cursor').hidden=true;tool='giz';count();controls();
    try{ctx=canvas.getContext('2d');}catch(ignore){ctx=null;}fit();redraw();status(ctx?'Pronto para desenhar.':'Este navegador não desenha em Canvas. Você pode baixar ou copiar o quadro preservado.');
    for(var i=0;i<D.body.children.length;i+=1){var n=D.body.children[i];if(n!==panel&&n.tagName!=='SCRIPT'){hidden.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');}}
    byId('chalk-close').focus();
   }
   function undo(){if(!drawing.strokes.length){return;}end();drawing.strokes.pop();count();dirty=true;redraw();save();controls();}
   C.types.forEach(function(t){on(byId('chalk-'+t),'click',function(){end();tool=t;controls();});});
+  on(byId('chalk-pen'),'change',function(){end();tool=this.value;controls();});
+  on(byId('chalk-copy-close'),'click',function(){byId('chalk-copy').hidden=true;this.hidden=true;canvas.focus();});
   on(byId('chalk-grid'),'click',function(){end();drawing.grid=!drawing.grid;dirty=true;controls();save();});
   on(byId('chalk-undo'),'click',undo);
   on(byId('chalk-clear'),'click',function(){end();E.dialog.ask({title:'Limpar o quadro?',message:'Todos os traços deste caderno serão apagados. Baixe uma cópia se quiser conservar o desenho.',accept:'Limpar quadro'},function(ok){if(ok&&active()){drawing.strokes=[];total=0;dirty=true;redraw();save();controls();}});});
   on(byId('chalk-retry'),'click',flush);
   on(byId('chalk-discard'),'click',function(){E.dialog.ask({title:'Descartar alterações do quadro?',message:'Os traços que não foram guardados serão descartados. O quadro já salvo no caderno será preservado.',accept:'Descartar e fechar'},function(ok){if(ok){closeNow();}});});
   on(byId('chalk-close'),'click',close);on(byId('start-chalkboard'),'click',open);on(byId('notebook-chalkboard'),'click',open);
-  function textCopy(){end();byId('chalk-copy').value=C.pack(book.name,drawing);byId('chalk-copy').hidden=false;byId('chalk-copy').focus();byId('chalk-copy').select();status('Copie este texto inteiro para conservar o desenho.');}
+  function textCopy(){end();byId('chalk-copy').value=C.pack(book.name,drawing);byId('chalk-copy').hidden=false;byId('chalk-copy-close').hidden=false;byId('chalk-copy').focus();byId('chalk-copy').select();status('Copie este texto inteiro para conservar o desenho.');}
   on(byId('chalk-copy-show'),'click',textCopy);
   on(byId('chalk-download'),'click',function(){end();var raw=C.pack(book.name,drawing);if(bridge.download(raw,'text/plain','quadro-'+book.id+'.giz.txt',panel)){status('Cópia preparada. Confira o arquivo salvo; os traços continuam aqui.');}else{textCopy();status('Não foi possível baixar. Copie o texto do desenho abaixo.');}});
   on(byId('chalk-import'),'change',function(){
@@ -4338,11 +4389,13 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     if((e.ctrlKey||e.metaKey)&&code===90&&e.target!==byId('chalk-copy')){e.preventDefault();undo();return;}
     if((e.ctrlKey||e.metaKey)&&[13,75,83].indexOf(code)>=0){e.preventDefault();if(code===83){flush();}return;}
     if(e.target===canvas){key(e);}
-    if(code===9){if(stroke){end();}var nodes=panel.querySelectorAll('button,input,textarea,[tabindex="0"]'),items=[];for(var j=0;j<nodes.length;j+=1){if(!nodes[j].disabled&&nodes[j].getClientRects().length){items.push(nodes[j]);}}var first=items[0],last=items[items.length-1];if(e.shiftKey&&(D.activeElement===first||D.activeElement===panel)){e.preventDefault();last.focus();}else if(!e.shiftKey&&(D.activeElement===last||D.activeElement===panel)){e.preventDefault();first.focus();}}
+    if(code===9){if(stroke){end();}var nodes=panel.querySelectorAll('button,input,select,textarea,[tabindex="0"]'),items=[];for(var j=0;j<nodes.length;j+=1){if(!nodes[j].disabled&&nodes[j].getClientRects().length){items.push(nodes[j]);}}var first=items[0],last=items[items.length-1];if(e.shiftKey&&(D.activeElement===first||D.activeElement===panel)){e.preventDefault();last.focus();}else if(!e.shiftKey&&(D.activeElement===last||D.activeElement===panel)){e.preventDefault();first.focus();}}
    }
   }
   ['keydown','keypress','keyup','click','dblclick','mousedown','touchstart','focusin'].forEach(function(k){D.addEventListener(k,trap,true);});
-  on(root,'resize',function(){if(!active()){return;}end();root.clearTimeout(resizeTimer);resizeTimer=root.setTimeout(fit,100);});
+  function resizeBoard(){if(!active()){return;}end();root.clearTimeout(resizeTimer);resizeTimer=root.setTimeout(fit,100);}
+  on(root,'resize',resizeBoard);
+  if(root.visualViewport){on(root.visualViewport,'resize',resizeBoard);on(root.visualViewport,'scroll',fit);}
   on(root,'blur',function(){if(active()){end();}});
   on(root,'storage',function(e){if(e.key==='escrevaral.astra.notebooks.v1'&&active()){status('O caderno mudou em outra aba. Feche e reabra o quadro para atualizar; baixe uma cópia se houver traços pendentes.');}});
   return {flush:flush,isOpen:active};

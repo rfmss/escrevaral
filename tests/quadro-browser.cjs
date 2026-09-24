@@ -28,14 +28,20 @@ async function saved(p){return p.evaluate(key=>JSON.parse(localStorage.getItem(k
  // Notebook package export/import carries drawing.
  ev=p.waitForEvent('download');await notebookAction(p,'#notebook-export');const packet=fs.readFileSync(await(await ev).path());assert.equal(JSON.parse(packet).notebooks[0].data.chalk.strokes.length,3);
  await p.click('#os-start');await p.click('#start-system-toggle');await p.click('#start-settings');await p.setInputFiles('#import-file',{name:'mares.scrvrl',mimeType:'application/json',buffer:packet});await p.click('#app-dialog-accept');if(await p.locator('#mesa-close').isVisible())await p.click('#mesa-close');await p.getByRole('button',{name:'Abrir caderno Marés — cópia 1',exact:true}).click();await board(p);assert.equal(await p.locator('#chalk-count').textContent(),'3 traços');
- for(const dark of [false,true])for(const [w,h]of [[1366,768],[820,600],[390,844],[320,568],[667,375]]){
+ for(const dark of [false,true])for(const [w,h]of [[1366,768],[1366,654],[820,600],[390,844],[320,568],[667,375],[320,360],[320,260]]){
   await p.evaluate(d=>document.body.setAttribute('data-theme',d?'escuro':'claro'),dark);await p.setViewportSize({width:w,height:h});await p.waitForTimeout(150);await p.locator('#chalkboard').evaluate(n=>n.scrollTop=0);
-  assert.equal(await p.locator('#chalkboard').evaluate(n=>n.scrollWidth>n.clientWidth),false);assert.equal(await p.locator('#chalk-frame').evaluate(n=>n.scrollWidth>n.clientWidth+1),false);
-  await p.screenshot({path:path.join(out,engine+'-quadro-'+w+(dark?'-escuro':'')+'.png')});await p.locator('#chalk-download').scrollIntoViewIfNeeded();const r=await p.locator('#chalk-download').boundingBox();assert.ok(r.y>=0&&r.y+r.height<=h+1);
+  for(const selector of ['#chalkboard','.chalk-paper','.chalk-slate'])assert.equal(await p.locator(selector).evaluate(n=>n.scrollWidth>n.clientWidth+1||n.scrollHeight>n.clientHeight+1),false,selector+' sem rolagem em '+w+'x'+h);
+  const canvas=await p.locator('#chalk-canvas').boundingBox();assert.ok(canvas.width>30&&canvas.height>20&&canvas.y>=0&&canvas.y+canvas.height<=h,'área de desenho visível');assert.ok(Math.abs(canvas.height/canvas.width-.6)<.02,'proporção do desenho preservada');
+  for(const id of ['#chalk-close','#chalk-borracha','#chalk-grid','#chalk-undo','#chalk-clear','#chalk-download','#chalk-copy-show','.chalk-upload']){const b=await p.locator(id).boundingBox();assert.ok(b.x>=0&&b.y>=0&&b.x+b.width<=w+1&&b.y+b.height<=h+1,id+' acessível sem rolar');}
+  if(w<=600){await p.selectOption('#chalk-pen','grosso');assert.equal(await p.locator('#chalk-grosso').getAttribute('aria-pressed'),'true');}
+  assert.equal(await p.locator('#chalk-help').isVisible(),true);
+
+  await p.screenshot({path:path.join(out,engine+'-quadro-'+w+(dark?'-escuro':'')+'.png')});const r=await p.locator('#chalk-download').boundingBox();assert.ok(r.y>=0&&r.y+r.height<=h+1);
  }
+ await p.click('#chalk-copy-show');assert.equal(JSON.parse(await p.locator('#chalk-copy').inputValue()).drawing.strokes.length,3);assert.equal(await p.locator('#chalkboard').evaluate(n=>n.scrollHeight>n.clientHeight+1),false);await p.click('#chalk-copy-close');assert.equal(await p.locator('#chalk-copy').isVisible(),false);
  await p.click('#chalk-close');await p.reload();await board(p);assert.equal(await p.locator('#chalk-count').textContent(),'3 traços');await p.click('#chalk-close');
  // Fallback without PointerEvent: actual mouse and synthetic legacy touch sequence, no duplicate stroke.
  const legacy=await browser.newContext({viewport:{width:820,height:600},hasTouch:true,serviceWorkers:'block'});await legacy.addInitScript(()=>{window.PointerEvent=undefined;});const l=await legacy.newPage();l.on('pageerror',e=>errors.push(e.message));await l.goto('http://127.0.0.1:'+server.address().port);await create(l,'Legado');await board(l);await draw(l);assert.equal((await saved(l)).strokes.length,1);
  await l.locator('#chalk-canvas').evaluate(c=>{const r=c.getBoundingClientRect();function send(type,x,y){const e=new Event(type,{bubbles:true,cancelable:true});e.changedTouches=[{identifier:7,clientX:r.x+x*r.width,clientY:r.y+y*r.height}];e.touches=type==='touchend'?[]:e.changedTouches;c.dispatchEvent(e);}send('touchstart',.3,.3);send('touchmove',.5,.4);send('touchend',.5,.4);});assert.equal((await saved(l)).strokes.length,2);
- assert.deepEqual(errors,[]);console.log('OK '+engine+': desenho, toque, teclado, borracha, desfazer, confirmação, quota/retry, arquivos, pacotes, isolamento, recarga, 5 viewports e fallback mouse/toque.');
+ assert.deepEqual(errors,[]);console.log('OK '+engine+': desenho, toque, teclado, borracha, desfazer, confirmação, quota/retry, arquivos, pacotes, isolamento, recarga, 8 viewports sem rolagem e fallback mouse/toque.');
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{if(browser)await browser.close();server.close();});
