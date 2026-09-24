@@ -96,9 +96,14 @@
   }
   var style=el('style',D.head,null,
     '#ptbr-dashboard{font-family:inherit;color:inherit;margin:12px 0 22px;min-width:0}' +
-    '#oficina[data-ptbr-dashboard="true"]>.lens-group-label,#oficina[data-ptbr-dashboard="true"]>.lenses,' +
-    '#oficina[data-ptbr-dashboard="true"]>#findings,#oficina[data-ptbr-dashboard="true"]>#analysis-status,' +
-    '#oficina[data-ptbr-dashboard="true"]>#analysis-coverage,#oficina[data-ptbr-dashboard="true"]>#reset-dismissed{display:none!important}' +
+    '#oficina[data-ptbr-dashboard="true"]:not([data-ptbr-legacy="true"])>.lens-group-label,' +
+    '#oficina[data-ptbr-dashboard="true"]:not([data-ptbr-legacy="true"])>.lenses,' +
+    '#oficina[data-ptbr-dashboard="true"]:not([data-ptbr-legacy="true"])>#findings,' +
+    '#oficina[data-ptbr-dashboard="true"]:not([data-ptbr-legacy="true"])>#analysis-status,' +
+    '#oficina[data-ptbr-dashboard="true"]:not([data-ptbr-legacy="true"])>#analysis-coverage,' +
+    '#oficina[data-ptbr-dashboard="true"]:not([data-ptbr-legacy="true"])>#ptbr-dashboard+p.quiet{display:none!important}' +
+    '#oficina[data-ptbr-dashboard="true"]>#reset-dismissed{display:block;margin:12px 0}' +
+    '#oficina[data-ptbr-dashboard="true"]>#reset-dismissed[hidden]{display:none!important}' +
     '.ptbr-rule{border:0;border-top:1px solid currentColor;opacity:.2;margin:14px 0}' +
     '.ptbr-overline{font-size:11px;letter-spacing:.065em;text-transform:uppercase;opacity:.73;font-weight:700;margin:0 0 9px}' +
     '.ptbr-count{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:end}' +
@@ -129,6 +134,15 @@
   el('p',view,'ptbr-overline','O QUE PODE SER EXAMINADO');
   var wheel=el('div',view,'ptbr-wheel'), intro=el('p',view,'ptbr-status','Sinais da escrita, não diagnósticos.');
   var action=el('button',view,'ptbr-action','Análise');action.type='button';
+  var legacy=el('button',view,'ptbr-action ptbr-secondary','Consultar lentes individualmente');
+  legacy.type='button';legacy.setAttribute('aria-expanded','false');
+  legacy.addEventListener('click',function(){
+    var expanded=panel.getAttribute('data-ptbr-legacy')!=='true';
+    panel.setAttribute('data-ptbr-legacy',expanded?'true':'false');
+    legacy.setAttribute('aria-expanded',expanded?'true':'false');
+    legacy.textContent=expanded?'Recolher lentes individuais':'Consultar lentes individualmente';
+    if(!expanded){legacy.focus();}
+  },false);
   var status=el('p',view,'ptbr-status','A análise começa somente quando você pedir.');status.setAttribute('role','status');
   el('hr',view,'ptbr-rule');
   el('p',view,'ptbr-overline','OBSERVAÇÕES');
@@ -158,10 +172,12 @@
   }
   function resultCard(lens, result, snapshot) {
     var card=el('section',results,'ptbr-outcome'), h=el('h3',card,'',labels[lens]||lens);
-    var arr=result.findings||[],i,f,entry,b,detail;
-    el('p',card,'',arr.length?arr.length+' observação'+(arr.length!==1?'ões':'')+' neste recorte.':'Nenhuma observação confirmada neste recorte.');
+    var arr=result.findings||[],i,f,entry,b,detail,ignored=E.ptbrPanelChoices?E.ptbrPanelChoices():[],visible=0;
+    for(i=0;i<arr.length;i++){if(ignored.indexOf(arr[i].id+'|'+arr[i].snippet)===-1){visible+=1;}}
+    el('p',card,'',visible?visible+' observação'+(visible!==1?'ões':'')+' nova(s) neste recorte.':'Nenhuma observação nova neste recorte.');
     for(i=0;i<arr.length&&i<maxFindings;i++){
-      f=arr[i];entry=el('div',card,'ptbr-observation');
+      f=arr[i];if(ignored.indexOf(f.id+'|'+f.snippet)!==-1){continue;}
+      entry=el('div',card,'ptbr-observation');
       el('p',entry,'',f.message+' · confiança '+f.confidence);
       el('blockquote',entry,'',snapshot.slice(Math.max(0,f.start-35),Math.min(snapshot.length,f.end+35)));
       detail=el('div',entry,'ptbr-evidence');detail.hidden=true;
