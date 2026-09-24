@@ -4,7 +4,7 @@ const server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/ht
 async function create(p,name){await p.click('#project-new');await p.fill('#project-name',name);await p.click('#project-create');}
 async function menu(p,id){await p.click('#os-start');await p.click(id==='#start-settings'?'#start-system-toggle':'#start-tools-toggle');await p.click(id);}
 async function notebookAction(p,id){if(await p.locator(id).isHidden())await p.click('#notebook-more');await p.click(id);}
-async function analyze(p){if(await p.locator('#oficina').isHidden())await p.click('#examinar-toggle');await p.click('[data-lens="ortografia"]');await p.waitForFunction(()=>!document.querySelector('[data-lens="ortografia"]').disabled);assert.ok(!(await p.locator('#analysis-status').textContent()).includes('Nenhuma análise iniciada'));}
+async function analyze(p){if(await p.locator('#oficina').isHidden())await p.click('#examinar-toggle');if(await p.locator('[data-lens="ortografia"]').isHidden())await p.getByRole('button',{name:'Consultar lentes individualmente'}).click();await p.click('[data-lens="ortografia"]');await p.waitForFunction(()=>!document.querySelector('[data-lens="ortografia"]').disabled);assert.ok(!(await p.locator('#analysis-status').textContent()).includes('Nenhuma análise iniciada'));}
 async function current(p){return p.evaluate(()=>JSON.parse(localStorage.getItem('escrevaral.astra.v1.doc.'+localStorage.getItem('escrevaral.astra.current'))));}
 async function shot(p,name){await p.screenshot({path:path.join(out,engine+'-'+name+'.png')});}
  (async()=>{
