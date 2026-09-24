@@ -9,7 +9,7 @@ async function fits(p,selector){const b=await p.locator(selector).boundingBox(),
  await new Promise(r=>server.listen(0,'127.0.0.1',r));browser=await(engine==='webkit'?webkit:chromium).launch({headless:true,args:engine==='chromium'?['--no-sandbox']:[]});
  const c=await browser.newContext({viewport:{width:1366,height:654},serviceWorkers:'block'}),p=await c.newPage();p.setDefaultTimeout(12000);p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:'+server.address().port);
  assert.equal(await p.locator('#path-home').isVisible(),false);assert.equal(await p.locator('#path-projects').isVisible(),true);
- assert.equal(await p.locator('#path-projects').innerText(),'Início');assert.equal(await p.locator('#os-start .start-key').innerText(),'Menu');assert.equal(await p.locator('#start-menu').getAttribute('aria-label'),'Menu');
+ assert.equal(await p.locator('#path-projects').innerText(),'Início');assert.equal((await p.locator('#os-start .start-key').textContent()).trim(),'Menu');assert.equal(await p.locator('#start-menu').getAttribute('aria-label'),'Menu');
  await p.click('#os-start');assert.equal(await p.locator('#start-menu').isVisible(),true);await p.click('#os-start');assert.equal(await p.locator('#start-menu').isVisible(),false);
  // O botão Menu abre o mesmo painel na largura estreita e o Esc o recolhe.
  await p.setViewportSize({width:320,height:568});await p.click('#os-start');assert.equal(await p.locator('#start-menu').isVisible(),true);await fits(p,'#start-menu');await p.keyboard.press('Escape');assert.equal(await p.locator('#start-menu').isVisible(),false);await p.setViewportSize({width:1366,height:654});
