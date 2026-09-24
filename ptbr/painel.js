@@ -8,7 +8,7 @@
   if (!E || !E.createVault || !E.reading || !E.knowledge) { return; }
   var panel = D.getElementById('oficina'), manuscript = D.getElementById('manuscrito');
   if (!panel || !manuscript || D.getElementById('ptbr-dashboard')) { return; }
-  var own = Object.prototype.hasOwnProperty, epoch = 0, debounce = null, draft = null, busy = false;
+  var own = Object.prototype.hasOwnProperty, epoch = 0, debounce = null, draft = null, busy = false, composing = false;
   var fullScope = 200000, idleScope = 40000, maxFindings = 100;
   var labels = {
     ortografia:'Ortografia', acentuacao:'Acentuação', pontuacao:'Pontuação',
@@ -150,7 +150,7 @@
   var note=el('p',view,'ptbr-status','O silêncio de uma lente não certifica o texto. A escrita permanece sua.');
   function clearResults(){results.textContent='';}
   function refresh(force) {
-    if(busy||panel.hidden&&!force){return;}
+    if(composing||busy||panel.hidden&&!force){return;}
     if(!force&&draft&&draft.text===manuscript.value){return;}
     epoch++;root.clearTimeout(debounce);busy=false;clearResults();
     var s=manuscript.value;draft=indexed(s,force?fullScope:idleScope);
@@ -235,11 +235,12 @@
   manuscript.addEventListener('input',function(){
     epoch++;busy=false;root.clearTimeout(debounce);action.disabled=true;clearResults();
     status.textContent='O texto mudou. Os resultados anteriores foram retirados.';
+    if(composing){return;}
     if(!panel.hidden){debounce=root.setTimeout(function(){refresh(true);},700);}
     else{debounce=root.setTimeout(function(){draft=indexed(manuscript.value,idleScope);},700);}
   },false);
-  manuscript.addEventListener('compositionstart',function(){root.clearTimeout(debounce);epoch++;busy=false;},false);
-  manuscript.addEventListener('compositionend',function(){root.clearTimeout(debounce);debounce=root.setTimeout(function(){if(!panel.hidden){refresh(true);}else{draft=indexed(manuscript.value,idleScope);}},700);},false);
+  manuscript.addEventListener('compositionstart',function(){composing=true;root.clearTimeout(debounce);epoch++;busy=false;},false);
+  manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);debounce=root.setTimeout(function(){if(!panel.hidden){refresh(true);}else{draft=indexed(manuscript.value,idleScope);}},700);},false);
   panel.addEventListener('focus',function(){if(!panel.hidden){refresh(true);}},false);
   var openers=['examinar-toggle','cabinet-examine'];
   for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);},false);}}
