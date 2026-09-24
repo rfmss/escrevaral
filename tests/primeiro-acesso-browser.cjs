@@ -1,0 +1,46 @@
+// Regressao: a recepcao conduz a um caderno real, sem criar textos avulsos.
+const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
+const root=path.join(__dirname,'..');
+const server=http.createServer((req,res)=>{const name=req.url.split('?')[0]==='/'?'index.html':req.url.split('?')[0].replace(/^\//,'');const file=path.join(root,name);
+  if(!file.startsWith(root)||!fs.existsSync(file)){res.writeHead(404);res.end();return;}
+  res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':'text/html');res.end(fs.readFileSync(file));});
+let browser;
+(async()=>{
+  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
+  browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+  const ctx=await browser.newContext({viewport:{width:1366,height:768},serviceWorkers:'block',acceptDownloads:true}),p=await ctx.newPage();
+  const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto(url);
+  assert.equal(await p.locator('#first-run').isVisible(),true,'recepcao deve aparecer no gabinete sem cadernos');
+  assert.equal(await p.locator('#cabinet-window').isVisible(),false,'sem nova janela obrigatoria');
+  assert.equal(await p.locator('#project-new').isVisible(),true,'nomeacao manual continua acessivel');
+  await p.click('#first-run-write');
+  assert.equal(await p.locator('#manuscrito').isVisible(),true,'o primeiro toque abre a folha');
+  assert.equal(await p.evaluate(()=>document.activeElement.id),'manuscrito','cursor entra no editor');
+  assert.equal(await p.locator('#path-project').innerText(),'Meu primeiro caderno','o texto pertence ao caderno');
+  await p.fill('#titulo','Primeira folha');await p.fill('#manuscrito','O primeiro parágrafo é meu.');await p.keyboard.press('Control+s');
+  await p.click('#desk-minimize');
+  assert.equal(await p.locator('#first-run').isVisible(),false,'recepcao some apos criar um caderno');
+  await p.reload();assert.equal(await p.locator('#first-run').isVisible(),false,'retorno nao obriga recepcao');
+  await p.getByRole('button',{name:'Abrir caderno Meu primeiro caderno',exact:true}).click();
+  assert.equal(await p.locator('#manuscrito').inputValue(),'O primeiro parágrafo é meu.','texto guardado sem alteracao');
+  if(await p.locator('#writing-space').isVisible())await p.click('#back-cabinet');
+  if(await p.locator('#notebook-rename').isHidden())await p.click('#notebook-more');
+  await p.click('#notebook-rename');await p.fill('#project-name','Caderno renomeado');await p.click('#project-create');
+  assert.equal(await p.locator('#cabinet-heading').innerText(),'Caderno renomeado');
+  await p.click('#window-close');
+  await p.reload();assert.equal(await p.locator('#first-run').isVisible(),false,'renomeacao persiste');
+  await p.getByRole('button',{name:'Abrir caderno Caderno renomeado',exact:true}).click();
+  assert.equal(await p.locator('#manuscrito').inputValue(),'O primeiro parágrafo é meu.');
+  const mctx=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true,serviceWorkers:'block',acceptDownloads:true}),m=await mctx.newPage();
+  m.on('pageerror',e=>errors.push(e.message));await m.goto(url);assert.equal(await m.locator('#first-run').isVisible(),true,'recepcao no mobile');
+  await m.click('#first-run-write');await m.fill('#titulo','Texto no celular');await m.fill('#manuscrito','Meu texto portatil.');
+  await m.keyboard.press('Control+s');await m.click('#os-start');await m.click('#start-system-toggle');
+  assert.equal(await m.locator('#start-export-text').isVisible(),true,'baixar texto encontrado no Menu');
+  const download=m.waitForEvent('download');await m.click('#start-export-text');const item=await download;
+  assert.equal(item.suggestedFilename(),'manuscrito.txt');assert.ok(fs.readFileSync(await item.path(),'utf8').includes('Meu texto portatil.'));
+  await m.click('#os-start');await m.click('#start-system-toggle');await m.click('#cabinet-archive');
+  assert.equal(await m.locator('#cabinet-window').isVisible(),true,'acervo acessivel no mobile');
+  assert.equal(await m.locator('#writing-space').isVisible(),false,'acervo nao fica atras do editor');
+  assert.equal(await m.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'sem vazamento horizontal no mobile');
+  assert.deepEqual(errors,[]);console.log('PRIMEIRO ACESSO OK: caderno inicial, foco, persistencia, renomeacao, retorno e download mobile.');
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{if(browser)await browser.close();server.close();});

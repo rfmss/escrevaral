@@ -44,6 +44,8 @@ jobs:
         run: |
           node tests/cadernos-browser.cjs
           node tests/universo-browser.cjs
+      - name: Primeiro acesso e exportacao mobile
+        run: node tests/primeiro-acesso-browser.cjs
       - name: Confirmações e altura útil — Chromium
         run: node tests/controles-browser.cjs
       - name: Confirmações e altura útil — WebKit

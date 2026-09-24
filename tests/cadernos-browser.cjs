@@ -17,7 +17,7 @@ async function notebookAction(page,id) {if(await page.locator(id).isHidden())awa
   await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
   browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:['--no-sandbox']});
   const p=await makePage();await p.goto(url);assert.equal(await p.locator('#cabinet-window').isVisible(),false);
-  await p.locator('#notebook-area').dblclick({position:{x:400,y:100}});assert.equal(await p.locator('#notebook-dialog').isVisible(),true);await p.keyboard.press('Escape');assert.equal(await p.locator('#notebook-dialog').isVisible(),false);
+  await p.locator('#notebook-hint').dblclick();assert.equal(await p.locator('#notebook-dialog').isVisible(),true);await p.keyboard.press('Escape');assert.equal(await p.locator('#notebook-dialog').isVisible(),false);
   await create(p,'Romance do mar');await write(p,'Capítulo um','O mar bateu três vezes à porta.');
   await create(p,'Contos');assert.equal(await p.locator('.cabinet-note').count(),0);await write(p,'Outro mundo','Uma chave perdida.');
   await p.getByRole('button',{name:'Abrir caderno Romance do mar',exact:true}).click();assert.equal(await p.locator('#manuscrito').inputValue(),'O mar bateu três vezes à porta.');
