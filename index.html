@@ -4840,7 +4840,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause', 'lineage-panel'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task', 'start-lineage'];
   var projectScope = false, readingSize = 21, chalkUI = null, forceHistory=false, linguisticStore=E.createLinguisticStore(), analysisEpoch=0;
-  var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
+  var restrictedPaste = false, internalClipboard = '', copiedSelection = null, dismissedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
@@ -5345,10 +5345,13 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     if (!window.getComputedStyle || composing || document.activeElement !== manuscript) { return; }
     typewriterTimer = window.setTimeout(centerTypingLine, 20);
   }
+  function dismissSelection() { dismissedSelection = copiedSelection; byId('selection-tools').hidden = true; }
   function captureSelection() {
-    if (composing || document.activeElement !== manuscript) { return; }
+    if (composing || activePanel || cabinetOpen || !byId('start-menu').hidden || document.activeElement !== manuscript) { return; }
     var start = manuscript.selectionStart, end = manuscript.selectionEnd;
-    if (typeof start !== 'number' || typeof end !== 'number' || end <= start) { copiedSelection = null; byId('selection-tools').hidden = true; return; }
+    if (typeof start !== 'number' || typeof end !== 'number' || end <= start) { copiedSelection = null; dismissedSelection = null; byId('selection-tools').hidden = true; return; }
+    if (dismissedSelection && dismissedSelection.documentId === (doc.noteId || doc.id) && dismissedSelection.text === manuscript.value && dismissedSelection.start === start && dismissedSelection.end === end) { return; }
+    dismissedSelection = null;
     copiedSelection = { documentId: doc.noteId || doc.id, text: manuscript.value, start: start, end: end };
     byId('selection-tools').hidden = false; text(byId('clipboard-status'), 'Trecho selecionado');
   }
@@ -5366,7 +5369,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     copiedSelection = null; byId('selection-tools').hidden = true; changed(); queueSession();
   }
   function toggleStart(open) {
-    if (open) { closePanels(false); }
+    if (open) { dismissSelection(); closePanels(false); }
     if (open) { setDisclosure('start-tools-toggle','start-tools-items',false); setDisclosure('start-system-toggle','start-system-items',false); }
     byId('start-menu').hidden = !open;
     byId('os-start').setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -5552,6 +5555,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     if (restore && trigger && trigger.focus) { if (/^start-/.test(trigger.id || '') && byId('start-menu').hidden) { byId('os-start').focus(); } else { trigger.focus(); } } queueSession();
   }
   function showPanel(id, toggle, open) {
+    dismissSelection();
     if (!open) { if (activePanel === id) { closePanels(true); } return; }
     closePanels(false); collapseTimeline();
     panelTrigger = byId(toggle); activePanel = id; text(byId('panel-status'), '');
@@ -6217,7 +6221,9 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   });
   listen(manuscript, 'mouseup', captureSelection); listen(manuscript, 'keyup', function (event) { if (event.keyCode !== 27) { captureSelection(); } }); listen(manuscript, 'touchend', captureSelection);
   listen(manuscript, 'select', captureSelection);
-  listen(byId('selection-close'), 'click', function () { byId('selection-tools').hidden = true; manuscript.focus(); });
+  listen(byId('selection-close'), 'click', function () { dismissSelection(); manuscript.focus(); });
+  listen(manuscript, 'mousedown', function () { dismissedSelection = null; });
+  listen(manuscript, 'touchstart', function () { dismissedSelection = null; });
   listen(byId('selection-copy'), 'click', copyInternal);
   listen(byId('desk-paste'), 'click', pasteInternal);
   listen(manuscript, 'copy', function () { captureSelection(); copyInternal(); });
