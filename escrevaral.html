@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260924-scrvrl-quadro-janela-v6-11">
+  <meta name="asset-version" content="20260924-scrvrl-menus-mesa-v6-12">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -2600,6 +2600,83 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
  #chalkboard .chalk-actions button,#chalkboard .chalk-upload { padding:5px 8px; font-size:13px; }
 }
 </style>
+
+<style>
+/* 24 set: uma hierarquia comum, cores chapadas e controles sem efeito de movimento. */
+@media screen {
+ .sheet .sheet-heading { padding:0 0 16px; margin-bottom:20px; border-bottom:2px solid #65735f; }
+ .sheet .setting-section { padding:0 12px 14px; margin:18px 0 0; border:1px solid #97a58f; background:#d3ddcd; }
+ .sheet .setting-section h3,.sheet .lens-group-label { margin:0 -12px 12px; padding:9px 12px; background:#374932; color:#f0f2e7; font:600 14px/1.4 'Oswald',Arial,sans-serif; letter-spacing:.5px; }
+ .sheet .lens-group-label { margin:18px 0 8px; }
+ .sheet .setting-row { gap:8px; min-height:52px; border-bottom:1px solid #b2bfa9; }
+ .sheet .setting-row > span:first-child { flex:1; }
+ .sheet .theme-choice { flex-shrink:0; }
+ .sheet .setting-section .quiet { line-height:1.5; }
+ .sheet .check { padding-right:0; }
+ .sheet .check input { top:4px; right:0; margin:0; width:76px; height:44px; }
+ .sheet .check .switch-track { flex:none; width:76px; height:30px; border:1px solid #65735f; border-radius:2px; background:#b6c6ac; box-shadow:none; }
+ .sheet .check .switch-track:after { top:3px; left:3px; width:23px; height:22px; border:1px solid #65735f; background:#f2f2e6; box-shadow:none; }
+ .switch-off,.switch-on { position:absolute; top:4px; font:12px/20px Arial,sans-serif; }
+ .switch-off { right:8px; }.switch-on { left:8px; display:none; }
+ .sheet .check input:checked + .switch-track { background:#374932; color:#f0f2e7; }
+ .sheet .check input:checked + .switch-track:after { left:48px; background:#f2f2e6; }
+ .check input:checked + .switch-track .switch-off { display:none; }
+ .check input:checked + .switch-track .switch-on { display:block; }
+ #start-menu .start-group-toggle { font-weight:bold; padding:10px; }
+ #start-menu .start-group-toggle[aria-expanded="true"],#start-menu .start-group-items { background:#374932; color:#f0f2e7; border:0; }
+ #start-menu .start-group-items { padding:4px 6px 8px; }
+ #start-menu .start-group-items .os-app { color:inherit; }
+ #start-menu .start-group-items .os-app:hover,#start-menu .start-group-items .os-app:focus { background:#506249; border-left-color:#f0f2e7; }
+ .context-overflow { border-top:3px solid #374932; padding:4px; }
+ .context-overflow button { font-size:14px; }
+ body[data-view="mesa"] #writing-space .desk-tools button { font-size:13px; padding:8px; border:0; border-bottom:2px solid transparent; box-shadow:none; background:transparent; }
+ body[data-view="mesa"] #writing-space .desk-tools button[aria-expanded="true"],body[data-view="mesa"] #writing-space .desk-tools button[aria-pressed="true"] { border-bottom-color:currentColor; }
+ body[data-view="mesa"] #writing-space .desk-tools #desk-minimize { width:36px; min-width:36px; padding:4px; border-right:1px solid #91a08e; margin-right:4px; }
+ body[data-view="mesa"] #writing-space #immersion-toggle { font-weight:bold; }
+ body[data-view="mesa"] #writing-space #desk-paragraph { background:transparent; border:0; border-bottom:2px solid transparent; box-shadow:none; padding:6px; font-size:12px; }
+ body[data-view="mesa"] #writing-space #desk-paragraph[aria-pressed="true"] { border-bottom-color:#65735f; }
+ #writing-space #desk-paste { position:absolute; right:0; bottom:0; min-height:32px; padding:6px 8px; font-size:12px; border:1px solid #91a08e; background:transparent; }
+ #writing-space .paper-footer #save-status { display:block; max-width:calc(100% - 58px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+ body[data-view="mesa"] #writing-space .timeline { padding-left:6px; padding-right:10px; }
+ #drawer-route { max-height:50%; }
+ .route-books { margin-left:4px; padding-left:3px; }
+ .route-drawer > summary { background:transparent; border:0; border-bottom:1px solid #91a08e; font-size:13px; }
+ .route-drawer[open] > summary { border-bottom:1px solid #65735f; }
+ .route-books button { font-size:12px; }
+ #writing-space #timeline-list { border-left:0; padding-left:0; }
+ body[data-view="mesa"] #writing-space .timeline-entry { padding:8px; min-height:54px; margin-bottom:8px; background:transparent; border:1px solid #9eaf99; border-left:2px solid transparent; }
+ body[data-view="mesa"] #writing-space .timeline-entry[aria-current="true"] { background:#f7f4eb; border-left-color:#445d42; }
+ #writing-space .timeline-entry .note-name { font-size:13px; }
+ #writing-space .timeline-entry .note-time { font:10px/1.6 'Courier Prime',monospace; }
+ #system-bar #os-window-task[data-notebook="true"] { border-left-width:3px; }
+ #os-window-task[data-notebook="true"]::before { content:""; display:inline-block; vertical-align:middle; margin-right:7px; width:11px; height:17px; border:1px solid #1d281f; border-radius:1px 3px 3px 1px; background:#1d281f; box-shadow:inset 2px 0 #72826b,inset -2px 0 #cbd1bd; }
+ #writing-space .selection-tools { position:fixed; left:50%; right:auto; bottom:64px; width:580px; max-width:calc(100% - 24px); transform:translateX(-50%); -webkit-transform:translateX(-50%); padding:8px 10px; background:#f7f4eb; color:#243020; border:1px solid #65735f; border-top:3px solid #374932; box-shadow:2px 3px 0 #8c9d83; z-index:30; }
+ #clipboard-status { width:100%; font-size:11px; padding:0 28px 4px 0; }
+ #writing-space .selection-tools button { min-height:40px; font-size:13px; padding:8px; }
+ #selection-close { position:absolute; top:0; right:2px; }
+ #selection-copy { font-weight:bold; }
+ #selection-external { border-left:1px solid #a6b49c; }
+ #lock-help { max-width:340px; margin:10px auto; font-size:15px; }
+ body[data-theme="escuro"] .sheet .setting-section { background:#293728; border-color:#65735f; }
+ body[data-theme="escuro"] .sheet .setting-section h3,body[data-theme="escuro"] .sheet .lens-group-label,body[data-theme="escuro"] #start-menu .start-group-toggle[aria-expanded="true"],body[data-theme="escuro"] #start-menu .start-group-items { background:#c0ceb3; color:#1d281f; }
+ body[data-theme="escuro"] #start-menu .start-group-items .os-app:hover,body[data-theme="escuro"] #start-menu .start-group-items .os-app:focus { background:#a3b497; border-left-color:#1d281f; }
+ body[data-theme="escuro"] .sheet .setting-row { border-color:#52664b; }
+ body[data-theme="escuro"] .sheet .check .switch-track { color:#1d281f; }
+ body[data-theme="escuro"] .sheet .check input:checked + .switch-track { color:#f0f2e7; }
+ body[data-theme="escuro"] #writing-space .selection-tools { background:#293728; color:#e0e8d8; border-color:#9aaf89; box-shadow:2px 3px 0 #182416; }
+ body[data-theme="escuro"] .route-drawer > summary { background:transparent; }
+ body[data-theme="escuro"][data-view="mesa"] #writing-space .timeline-entry { background:transparent; border-color:#52664b; }
+ body[data-theme="escuro"][data-view="mesa"] #writing-space .timeline-entry[aria-current="true"] { background:#49563d; border-left-color:#b8cba8; }
+ body[data-theme="escuro"][data-view="mesa"] #writing-space #desk-paragraph[aria-pressed="true"] { border-bottom-color:#b8cba8; }
+}
+@media screen and (max-width:600px) {
+ .sheet .setting-row { flex-wrap:wrap; padding:6px 0; }
+ .sheet .setting-section { padding-left:10px; padding-right:10px; }
+ .sheet .setting-section h3 { margin-left:-10px; margin-right:-10px; }
+ body[data-view="mesa"] #writing-space .desk-tools button { padding:6px; font-size:12px; }
+ #writing-space .selection-tools { bottom:60px; }
+}
+</style>
 </head>
 <body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
 <section id="lineage-panel" class="sheet" role="dialog" aria-labelledby="lineage-heading" tabindex="-1" hidden>
@@ -2646,15 +2723,15 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
 </div>
 
 <section id="lock-curtain" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="lock-heading" tabindex="-1" hidden>
- <div class="lock-card"><h2 id="lock-heading">Gabinete fechado</h2><p>O escritor já volta.</p>
- <div class="author-keychain"><button id="keychain-ring" aria-label="Argola do chaveiro — abrir gabinete"></button><strong id="keychain-name">ESCREVA[RAL]</strong><small>OFICINA AUTORAL · SCRVRL OS</small><div class="grife-barcode" aria-hidden="true"></div><small>ORIGINAIS SOB CUSTÓDIA</small></div>
+ <div class="lock-card"><h2 id="lock-heading">Gabinete fechado</h2><p id="lock-help">Toque ou clique na argola do chaveiro para voltar à escrita.</p>
+ <div class="author-keychain"><button id="keychain-ring" aria-describedby="lock-help" aria-label="Argola do chaveiro — abrir gabinete"></button><strong id="keychain-name">ESCREVA[RAL]</strong><small>OFICINA AUTORAL · SCRVRL OS</small><div class="grife-barcode" aria-hidden="true"></div><small>ORIGINAIS SOB CUSTÓDIA</small></div>
  <form id="lock-form" autocomplete="off"><label for="lock-password">Senha</label><input id="lock-password" type="password" autocomplete="new-password" maxlength="120" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore><button type="submit">Entrar</button></form><p id="lock-message" role="status"></p></div>
 </section>
 
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home">SCRVRL OS</button><span aria-hidden="true">/</span><button id="path-projects" aria-current="location">Mesa de cadernos</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
+    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Mesa de cadernos</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
   </nav>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
     <header class="os-bar">
@@ -2766,7 +2843,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     <footer id="system-bar" class="os-footer"><button id="screen-lock" class="material-key" aria-label="Fechar gabinete com cadeado" title="Fechar gabinete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5ZM12 14v3"/></svg></button><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="os-rocker" aria-hidden="true"></span><span class="start-key">Início</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
   <div id="notebook-dialog" class="notebook-dialog" hidden><div class="notebook-dialog-card" role="dialog" aria-modal="true" aria-labelledby="notebook-form-heading"><h2 id="notebook-form-heading">Nova gaveta</h2><form id="project-form" class="project-form" hidden=""><label for="project-name">Nome da obra ou projeto</label><div><input id="project-name" maxlength="120" autocomplete="off" placeholder="Nome do seu livro ou projeto"><button id="project-create" type="submit">Criar</button><button id="project-cancel" type="button">Cancelar</button></div><p id="project-error" role="status"></p></form></div></div>
   <div id="writing-space" style="height: 570px;" hidden="">
-    <div id="selection-tools" class="selection-tools" role="group" aria-label="Cópia e trecho selecionado"><span id="clipboard-status" role="status">Copiado no Escrevaral</span><button id="selection-cut">Recortar</button><button id="selection-paste">Colar cópia interna</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
+    <div id="selection-tools" class="selection-tools" role="group" aria-label="Trecho selecionado" hidden><span id="clipboard-status" role="status">Trecho selecionado</span><button id="selection-copy" title="Guardar este trecho na cópia interna">Copiar</button><button id="selection-cut">Recortar</button><button id="selection-paste" disabled>Colar</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
     <header class="masthead">
       <button id="back-cabinet" class="brand-signature" aria-label="Escrevaral — voltar aos textos do caderno"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar neste caderno</label><input id="note-search" type="search" placeholder="Buscar neste caderno" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden="">×</button></div>
@@ -2798,7 +2875,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
         <textarea id="manuscrito" placeholder="O texto é seu." spellcheck="false" autocorrect="off" autocapitalize="off" style="padding-top: 137.655px; padding-bottom: 197.495px; font-size: 21px;"></textarea>
         <div id="focus-before" class="focus-mask" aria-hidden="true" style="height: 138px;"></div><div id="focus-after" class="focus-mask" aria-hidden="true" style="top: 176.85px;"></div>
         </div>
-        <footer class="paper-footer">
+        <footer class="paper-footer"><button id="desk-paste" title="Colar o trecho guardado no Escrevaral" hidden>Colar</button>
           <span id="save-status" role="status" aria-live="polite">Guardado neste aparelho.</span>
           <div id="post-write-pwa" class="post-write-pwa" hidden>
             <span>Adicione a oficina à tela inicial para abrir direto.</span>
@@ -2836,7 +2913,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
       <div class="setting-row"><span>Tema</span><div class="theme-choice" role="group" aria-label="Tema"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
       <div class="setting-row" hidden=""><span>Máquina antiga</span><button id="machine-toggle" aria-pressed="false">Ativar</button></div>
       <div class="setting-row"><span>Destaque de parágrafo</span><button id="focus-toggle" aria-pressed="true">Destacar</button></div>
-      <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"></span></label>
+      <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"><span class="switch-off">Não</span><span class="switch-on">Sim</span></span></label>
       <p id="sound-status" class="quiet" role="status">Som desligado.</p><p class="quiet">O som desliga ao sair desta página.</p>
     </div>
     <div class="setting-section"><h3>Sua escrita</h3>
@@ -4216,12 +4293,12 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   });
   ['chapters','events','records'].forEach(function(k){on(byId('story-'+k),'click',function(){try{reload();mode=k;page=0;render();}catch(e){text(byId('story-status'),e.message);}});});
   on(byId('story-close'),'click',close);on(byId('start-universe'),'click',open);on(byId('notebook-universe'),'click',open);
-  function lock(){if(!bridge.checkpoint()){return;}lockFocus=D.activeElement;bridge.prepareLock();locked=true;D.body.setAttribute('data-locked','true');text(byId('keychain-name'),(bridge.book()||{}).name||'ESCREVA[RAL]');byId('lock-password').value='';text(byId('lock-message'),'');curtain.hidden=false;hiddenNodes=[];for(var i=0;i<D.body.children.length;i+=1){var n=D.body.children[i];if(n!==curtain&&n.tagName!=='SCRIPT'){hiddenNodes.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');}}try{root.sessionStorage.setItem('escrevaral.curtain','on');}catch(ignore){}curtain.focus();}
+  function lock(){if(!bridge.checkpoint()){return;}lockFocus=D.activeElement;bridge.prepareLock();locked=true;D.body.setAttribute('data-locked','true');text(byId('keychain-name'),(bridge.book()||{}).name||'ESCREVA[RAL]');byId('lock-password').value='';text(byId('lock-message'),'');curtain.hidden=false;hiddenNodes=[];for(var i=0;i<D.body.children.length;i+=1){var n=D.body.children[i];if(n!==curtain&&n.tagName!=='SCRIPT'){hiddenNodes.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');}}try{root.sessionStorage.setItem('escrevaral.curtain','on');}catch(ignore){}byId('keychain-ring').focus();}
   function unlock(){locked=false;curtain.hidden=true;D.body.removeAttribute('data-locked');hiddenNodes.forEach(function(p){if(p[1]===null){p[0].removeAttribute('aria-hidden');}else{p[0].setAttribute('aria-hidden',p[1]);}});hiddenNodes=[];byId('lock-password').value='';try{root.sessionStorage.removeItem('escrevaral.curtain');}catch(ignore){}if(lockFocus&&D.documentElement.contains(lockFocus)){lockFocus.focus();}}
-  on(byId('screen-lock'),'click',lock);on(byId('keychain-ring'),'click',unlock);on(byId('lock-form'),'submit',function(e){e.preventDefault();byId('lock-password').value='';text(byId('lock-message'),'O gabinete continua fechado.');});
+  on(byId('screen-lock'),'click',lock);on(byId('keychain-ring'),'click',unlock);on(byId('lock-form'),'submit',function(e){e.preventDefault();byId('lock-password').value='';text(byId('lock-message'),'Para abrir, toque ou clique na argola do chaveiro.');});
   /* Captura antes dos atalhos existentes; sem inert/dialog obrigatórios. */
   function trap(event){if(E.dialog.isOpen()){return;}var modal=locked?curtain:!panel.hidden?panel:null;if(!modal){return;}var inside=modal.contains(event.target);
-   if(!inside){event.preventDefault();event.stopImmediatePropagation();if(event.type==='focusin'){(locked?byId('lock-password'):byId('story-close')).focus();}return;}
+   if(!inside){event.preventDefault();event.stopImmediatePropagation();if(event.type==='focusin'){(locked?byId('keychain-ring'):byId('story-close')).focus();}return;}
    if(event.type==='keydown'){
     event.stopPropagation();var code=event.keyCode;
     if(code===27){event.preventDefault();if(!locked){if(editing){discardEdit(cancelEdit);}else{close();}}}
@@ -4763,7 +4840,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause', 'lineage-panel'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task', 'start-lineage'];
   var projectScope = false, readingSize = 21, chalkUI = null, forceHistory=false, linguisticStore=E.createLinguisticStore(), analysisEpoch=0;
-  var restrictedPaste = false, internalClipboard = '', copiedSelection = null, analysisRange = null;
+  var restrictedPaste = false, internalClipboard = '', copiedSelection = null, dismissedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, sessionKey = 'escrevaral.astra.session.v1';
   var immersion = false, machineEnabled = false, machinePreviousFocus = false, machineTimer = null, machineFeedTimer = null, machineCarriage = 0, machineLastLength = 0, machinePendingStrike = false;
   var focusEnabled = true, focusTimer = null, focusMeasure = null, typewriterTimer = null;
@@ -4786,6 +4863,8 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   function notebookLabels() {
     var book = activeNotebook(), label = book ? book.name : 'Todos os textos';
     text(byId('notebook-window-name'), label); text(byId('os-window-task'), label);
+    byId('os-window-task').setAttribute('data-notebook', book ? 'true' : 'false'); byId('os-window-task').setAttribute('title', label);
+    if (book) { byId('os-window-task').style.borderLeftColor = book.color; }
     byId('cabinet-search').placeholder = book ? 'Buscar neste caderno' : 'Buscar em todos os textos';
     byId('cabinet-search').setAttribute('aria-label', byId('cabinet-search').placeholder);
     byId('notebook-rename').hidden = byId('notebook-export').hidden = byId('notebook-trash').hidden = !book;
@@ -5266,22 +5345,31 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     if (!window.getComputedStyle || composing || document.activeElement !== manuscript) { return; }
     typewriterTimer = window.setTimeout(centerTypingLine, 20);
   }
+  function dismissSelection() { dismissedSelection = copiedSelection; byId('selection-tools').hidden = true; }
   function captureSelection() {
-    if (composing || document.activeElement !== manuscript) { return; }
+    if (composing || activePanel || cabinetOpen || !byId('start-menu').hidden || document.activeElement !== manuscript) { return; }
     var start = manuscript.selectionStart, end = manuscript.selectionEnd;
-    if (typeof start !== 'number' || typeof end !== 'number' || end <= start) { return; }
-    internalClipboard = manuscript.value.slice(start, end);
+    if (typeof start !== 'number' || typeof end !== 'number' || end <= start) { copiedSelection = null; dismissedSelection = null; byId('selection-tools').hidden = true; return; }
+    if (dismissedSelection && dismissedSelection.documentId === (doc.noteId || doc.id) && dismissedSelection.text === manuscript.value && dismissedSelection.start === start && dismissedSelection.end === end) { return; }
+    dismissedSelection = null;
     copiedSelection = { documentId: doc.noteId || doc.id, text: manuscript.value, start: start, end: end };
-    byId('selection-tools').hidden = false; text(byId('clipboard-status'), 'Copiado no Escrevaral');
+    byId('selection-tools').hidden = false; text(byId('clipboard-status'), 'Trecho selecionado');
+  }
+  function copyInternal() {
+    if (composing || !copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { return false; }
+    internalClipboard = manuscript.value.slice(copiedSelection.start, copiedSelection.end);
+    byId('desk-paste').hidden = false; byId('selection-paste').disabled = false;
+    text(byId('clipboard-status'), 'Cópia interna guardada'); return true;
   }
   function pasteInternal() {
     if (composing || !internalClipboard) { return; }
     var start = manuscript.selectionStart || 0, end = manuscript.selectionEnd || start;
     manuscript.value = manuscript.value.slice(0, start) + internalClipboard + manuscript.value.slice(end);
-    manuscript.setSelectionRange(start + internalClipboard.length, start + internalClipboard.length); manuscript.focus(); changed(); queueSession();
+    manuscript.setSelectionRange(start + internalClipboard.length, start + internalClipboard.length); manuscript.focus();
+    copiedSelection = null; byId('selection-tools').hidden = true; changed(); queueSession();
   }
   function toggleStart(open) {
-    if (open) { closePanels(false); }
+    if (open) { dismissSelection(); closePanels(false); }
     if (open) { setDisclosure('start-tools-toggle','start-tools-items',false); setDisclosure('start-system-toggle','start-system-items',false); }
     byId('start-menu').hidden = !open;
     byId('os-start').setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -5467,6 +5555,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     if (restore && trigger && trigger.focus) { if (/^start-/.test(trigger.id || '') && byId('start-menu').hidden) { byId('os-start').focus(); } else { trigger.focus(); } } queueSession();
   }
   function showPanel(id, toggle, open) {
+    dismissSelection();
     if (!open) { if (activePanel === id) { closePanels(true); } return; }
     closePanels(false); collapseTimeline();
     panelTrigger = byId(toggle); activePanel = id; text(byId('panel-status'), '');
@@ -6010,6 +6099,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     var code = event.keyCode;
     if (code === 27 && composing) { return; }
     if (code === 27 && !byId('start-menu').hidden) { event.preventDefault(); toggleStart(false); byId('os-start').focus(); return; }
+    if (code === 27 && !activePanel && !byId('selection-tools').hidden) { event.preventDefault(); byId('selection-close').click(); return; }
     if (code === 27 && closeContextMenus(true)) { event.preventDefault(); return; }
     if (code === 9) {
       document.body.setAttribute('data-input', 'keyboard');
@@ -6129,20 +6219,28 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
     if (!restrictedPaste) { return; }
     event.preventDefault(); message('Colagem externa restrita. Use Colar cópia interna ou Trazer arquivo em Ajustes.');
   });
-  listen(manuscript, 'mouseup', captureSelection); listen(manuscript, 'keyup', captureSelection); listen(manuscript, 'touchend', captureSelection);
+  listen(manuscript, 'mouseup', captureSelection); listen(manuscript, 'keyup', function (event) { if (event.keyCode !== 27) { captureSelection(); } }); listen(manuscript, 'touchend', captureSelection);
   listen(manuscript, 'select', captureSelection);
-  listen(byId('selection-close'), 'click', function () { byId('selection-tools').hidden = true; });
+  listen(byId('selection-close'), 'click', function () { dismissSelection(); manuscript.focus(); });
+  listen(manuscript, 'mousedown', function () { dismissedSelection = null; });
+  listen(manuscript, 'touchstart', function () { dismissedSelection = null; });
+  listen(byId('selection-copy'), 'click', copyInternal);
+  listen(byId('desk-paste'), 'click', pasteInternal);
+  listen(manuscript, 'copy', function () { captureSelection(); copyInternal(); });
+  listen(manuscript, 'cut', function () { captureSelection(); copyInternal(); });
+  listen(manuscript, 'input', function () { copiedSelection = null; byId('selection-tools').hidden = true; });
   listen(byId('selection-paste'), 'click', pasteInternal);
   listen(byId('selection-cut'), 'click', function () {
     if (composing || !copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { return; }
-    var s = copiedSelection; manuscript.value = s.text.slice(0, s.start) + s.text.slice(s.end); manuscript.setSelectionRange(s.start, s.start); manuscript.focus(); copiedSelection = null; changed(); queueSession();
+    if (!copyInternal()) { return; }
+    var s = copiedSelection; byId('selection-tools').hidden = true; manuscript.value = s.text.slice(0, s.start) + s.text.slice(s.end); manuscript.setSelectionRange(s.start, s.start); manuscript.focus(); copiedSelection = null; changed(); queueSession();
   });
   listen(byId('selection-examine'), 'click', function () {
     if (!copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { message('Selecione novamente o trecho para analisar.'); return; }
     analysisRange = copiedSelection; showPanel('oficina', 'examinar-toggle', true); lensButtons[0].focus();
   });
   listen(byId('selection-external'), 'click', function () {
-    if (!copiedSelection || copiedSelection.text !== manuscript.value) { message('Selecione novamente o trecho para copiar.'); return; }
+    if (!copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { message('Selecione novamente o trecho para copiar.'); return; }
     manuscript.focus(); manuscript.setSelectionRange(copiedSelection.start, copiedSelection.end);
     try { if (document.execCommand && document.execCommand('copy')) { text(byId('clipboard-status'), 'Copiado para outros aplicativos'); return; } } catch (ignore) { /* Cópia interna já disponível. */ }
     text(byId('clipboard-status'), 'Use Ctrl+C ou o comando Copiar do aparelho.');
