@@ -3,9 +3,9 @@
 **Autoridade de implementação:** `rfmss/escrevaral@main`. O protótipo ASTRA, outras branches e o pacote recebido são referências de extração; não são base para substituir o produto.
 
 ## Estado desta entrega
-- `ptbr/triagem.js` é a primeira camada transplantada. É uma API ES5 independente, **ainda não ligada ao HTML**, ao editor, ao painel nem ao service worker. O site publicado permanece como estava.
+- `ptbr/triagem.js` é a primeira camada transplantada. É uma API ES5 independente, **ligada ao painel nativo por cópia embutida** no HTML de entrada e no HTML portátil. A triagem legada continua disponível como módulo isolado; o painel publicado usa o cofre já presente na main, não o novo motor PTBR.
 - `ptbr/teste-triagem.js` é um teste isolado com motor simulado, executável com `node ptbr/teste-triagem.js`. Ele não substitui testes de integração real ou de navegador.
-- O arquivo PTBR.tar.gz recebido **não foi incorporado ao repositório nesta entrega**. Não anunciar a nova análise como disponível até a carga real do motor e dos dados.
+- O arquivo PTBR.tar.gz recebido **não foi incorporado ao repositório nesta entrega**. O painel publicado executa somente as lentes legadas disponíveis no cofre da main; não anunciar a nova classificação contextual PTBR até a carga real do novo motor e dos dados.
 - A triagem observa presença de formas do léxico, dificuldades, expressões e token `que`; este último **não** comprova oração subordinada ou função sintática.
 - A versão da triagem fica em memória, não armazena manuscrito fora do aparelho. `run()` compara o texto integral com a versão triada, processa somente lentes sinalizadas, valida Findings por posição e pode ser cancelado.
 
@@ -19,3 +19,10 @@
 7. Antes de ativar: testes do pacote, `node ptbr/teste-triagem.js`, testes atuais do Escrevaral, instalação offline em perfil limpo, HTML portátil em modo avião e verificação de composição/acento, foco, pouca memória e dispositivo legado.
 
 **Regra de publicação:** uma etapa técnica verde não autoriza dizer que a funcionalidade está disponível na interface. Documentar separadamente testes locais, automáticos e em dispositivo real.
+
+## Painel na main (v6-13)
+- Fonte: `ptbr/painel.js`, embutida integralmente em `index.html` e `escrevaral.html` após a ponte e antes do service worker; nenhum novo arquivo externo obrigatório.
+- A referência visual não forneceu métricas: mostramos apenas contagens do manuscrito real. Não inferimos complexidade, tempo verbal, distribuição de narração ou percentuais sem fonte.
+- Triagem de sinais nas pausas de escrita e execução serial sob comando explícito; o painel não escreve no manuscrito.
+- A revisão individual anterior e as escolhas persistidas do autor ainda precisam ser reconciliadas com a nova superfície antes de aposentar o fluxo original; não anunciar a integração integral do pacote PTBR.
+- Os testes automatizados não substituem QA físico de navegador antigo, instalação offline em perfil limpo e sessões reais de escrita.
