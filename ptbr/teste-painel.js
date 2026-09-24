@@ -16,7 +16,7 @@ Node.prototype.insertBefore = function (n) { return this.appendChild(n); };
 Node.prototype.setAttribute = function (k, v) { this.attrs[k] = String(v); };
 Node.prototype.getAttribute = function (k) { return this.attrs[k] || null; };
 Node.prototype.addEventListener = function (k, f) { (this.listeners[k] || (this.listeners[k] = [])).push(f); };
-Node.prototype.emit = function (k) { (this.listeners[k] || []).forEach(function (f) { f({ keyCode: 0 }); }); };
+Node.prototype.emit = function (k) { var self = this; (this.listeners[k] || []).forEach(function (f) { f.call(self, { keyCode: 0 }); }); };
 Node.prototype.click = function () { this.emit('click'); };
 Node.prototype.focus = function () { this.emit('focus'); };
 Node.prototype.querySelector = function (s) { return s === '.sheet-heading' ? this.heading : null; };
