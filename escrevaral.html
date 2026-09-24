@@ -6253,7 +6253,7 @@ body[data-theme="escuro"] .first-run #first-run-write { background:#d1ded0; bord
     if (actionBtn && !isStandaloneApp()) { actionBtn.hidden = false; }
   });
   listen(byId('cabinet-settings'), 'click', function () { cabinetPanel('mesa', 'cabinet-settings'); });
-  listen(byId('cabinet-archive'), 'click', function () { desktopWindow('open'); renderCabinet(); });
+  listen(byId('cabinet-archive'), 'click', function () { toggleStart(false); openCabinet(false); });
   listen(byId('cabinet-backup'), 'click', function () { byId('export-backup').click(); });
   listen(byId('start-export-text'), 'click', function () { toggleStart(false); if (!activeNotebook()) { message('Abra um caderno para baixar seu texto.'); return; } byId('export-text').click(); });
   listen(byId('cabinet-examine'), 'click', function () { enterDesk(); showPanel('oficina', 'examinar-toggle', true); lensButtons[0].focus(); });
