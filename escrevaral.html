@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260924-scrvrl-ptbr-dashboard-v6-15">
+  <meta name="asset-version" content="20260924-scrvrl-ptbr-dashboard-v6-16">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -6373,7 +6373,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   if (!E || !E.createVault || !E.reading || !E.knowledge) { return; }
   var panel = D.getElementById('oficina'), manuscript = D.getElementById('manuscrito');
   if (!panel || !manuscript || D.getElementById('ptbr-dashboard')) { return; }
-  var own = Object.prototype.hasOwnProperty, epoch = 0, debounce = null, draft = null, busy = false;
+  var own = Object.prototype.hasOwnProperty, epoch = 0, debounce = null, draft = null, busy = false, composing = false;
   var fullScope = 200000, idleScope = 40000, maxFindings = 100;
   var labels = {
     ortografia:'Ortografia', acentuacao:'Acentuação', pontuacao:'Pontuação',
@@ -6515,7 +6515,7 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   var note=el('p',view,'ptbr-status','O silêncio de uma lente não certifica o texto. A escrita permanece sua.');
   function clearResults(){results.textContent='';}
   function refresh(force) {
-    if(busy||panel.hidden&&!force){return;}
+    if(composing||busy||panel.hidden&&!force){return;}
     if(!force&&draft&&draft.text===manuscript.value){return;}
     epoch++;root.clearTimeout(debounce);busy=false;clearResults();
     var s=manuscript.value;draft=indexed(s,force?fullScope:idleScope);
@@ -6600,11 +6600,12 @@ body[data-theme="escuro"] .original-box .box-pull { background:#20291e; box-shad
   manuscript.addEventListener('input',function(){
     epoch++;busy=false;root.clearTimeout(debounce);action.disabled=true;clearResults();
     status.textContent='O texto mudou. Os resultados anteriores foram retirados.';
+    if(composing){return;}
     if(!panel.hidden){debounce=root.setTimeout(function(){refresh(true);},700);}
     else{debounce=root.setTimeout(function(){draft=indexed(manuscript.value,idleScope);},700);}
   },false);
-  manuscript.addEventListener('compositionstart',function(){root.clearTimeout(debounce);epoch++;busy=false;},false);
-  manuscript.addEventListener('compositionend',function(){root.clearTimeout(debounce);debounce=root.setTimeout(function(){if(!panel.hidden){refresh(true);}else{draft=indexed(manuscript.value,idleScope);}},700);},false);
+  manuscript.addEventListener('compositionstart',function(){composing=true;root.clearTimeout(debounce);epoch++;busy=false;},false);
+  manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);debounce=root.setTimeout(function(){if(!panel.hidden){refresh(true);}else{draft=indexed(manuscript.value,idleScope);}},700);},false);
   panel.addEventListener('focus',function(){if(!panel.hidden){refresh(true);}},false);
   var openers=['examinar-toggle','cabinet-examine'];
   for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);},false);}}

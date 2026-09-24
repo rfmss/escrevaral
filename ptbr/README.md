@@ -31,3 +31,7 @@
 - O painel consulta `E.ptbrPanelChoices()` da ponte em execução; Findings marcados como escolhas mantidas são ocultados também na leitura progressiva. Não cria um segundo banco de manuscritos.
 - O comando `Consultar lentes individualmente` revela no mesmo painel o fluxo anterior e o botão nativo de rever escolhas, sem abrir outra janela nem executar automaticamente essas lentes.
 - A roleta continua filtrada por sinais, e `que` é exibido apenas como observação de presença; a função sintática não é inferida.
+
+## QA rebaseado na main v6-16
+- Sincronização atômica do fonte de painel, HTML de entrada, HTML portátil e service worker, preservando alterações posteriores da main na barra e nos menus.
+- `node ptbr/teste-painel.js` contempla triagem silenciosa, composição IME, histórico de escolhas, acesso às lentes individuais, cancelamento, paridade portátil/cache.
