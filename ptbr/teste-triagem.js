@@ -12,7 +12,7 @@ var engine = {
     validateFinding: function (f) { return !!(f && f.id === 'PTBR-MORFOLOGIA-001'); }
   },
   dificuldades: { resolve: function (w) { return w === 'para' ? { nota: 'homógrafo' } : null; } },
-  expressoes: { scan: function (s) { var i = s.indexOf('ao longo'); return i < 0 ? [] : [{ start: i, end: i + 8 }]; } }
+  expressoes: { has: function (s) { return s === 'rua'; } }
 };
 var tr = create(engine), source = 'A rua para que o tempo passe ao longo.', t = tr.triage(source);
 assert.strictEqual(t.status, 'pronto');
