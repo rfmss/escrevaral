@@ -9,6 +9,8 @@ async function fits(p,selector){const b=await p.locator(selector).boundingBox(),
  await new Promise(r=>server.listen(0,'127.0.0.1',r));browser=await(engine==='webkit'?webkit:chromium).launch({headless:true,args:engine==='chromium'?['--no-sandbox']:[]});
  const c=await browser.newContext({viewport:{width:1366,height:654},serviceWorkers:'block'}),p=await c.newPage();p.setDefaultTimeout(12000);p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:'+server.address().port);
  assert.equal(await p.locator('#path-home').isVisible(),false);assert.equal(await p.locator('#path-projects').isVisible(),true);
+ assert.equal(await p.locator('#path-projects').innerText(),'Início');assert.equal(await p.locator('#os-start .start-key').innerText(),'Menu');assert.equal(await p.locator('#start-menu').getAttribute('aria-label'),'Menu');
+ await p.click('#os-start');assert.equal(await p.locator('#start-menu').isVisible(),true);await p.click('#os-start');assert.equal(await p.locator('#start-menu').isVisible(),false);
  await p.click('#project-new');await p.fill('#project-name','Caderno das marés');await p.click('#project-create');await p.click('#cabinet-new');await p.fill('#titulo','O cais');await p.fill('#manuscrito','Maré alta. O barco espera.');
  await select(p,0,4);assert.equal(await p.locator('#desk-paste').isVisible(),false);await p.click('#selection-copy');assert.equal(await p.locator('#desk-paste').isVisible(),true);
  // A seleção de destino não substitui a cópia; colar funciona também só com o cursor.
