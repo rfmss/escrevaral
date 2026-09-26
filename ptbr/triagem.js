@@ -1,280 +1,54 @@
-/* Escrevaral / PTBR: pré-diagnóstico opcional, independente do editor e da interface.
- * ES5. A escrita agenda triage(texto) somente após pausa (~700ms), fora da
- * composição de teclado. run() exige ação explícita do autor.
- * Nenhuma destas funções corrige texto ou produz Findings durante a digitação.
- */
-(function (root) {
+/* Sinais das lentes atuais. Trabalho limitado por caracteres e tokens, sem Findings.
+ * O debounce é do painel; esta camada não agenda nem executa lentes. ES5. */
+(function(root){
   'use strict';
-  var own = Object.prototype.hasOwnProperty;
-  function create(engine) {
-    if (!engine || !engine.core || typeof engine.core.tokenizeWithOffsets !== 'function') {
-      throw new Error('Pacote PTBR ainda não inicializado.');
+  function create(E,options){
+    options=options||{};
+    var maxChars=Math.min(options.maxChars||8000,8000),maxTokens=Math.min(options.maxTokens||1600,1600);
+    var own=Object.prototype.hasOwnProperty,keys={},adverbs={},rules=E.knowledge.rules||[],i,k,j;
+    var format=E.reading.canonical||function(x){return x.toLowerCase();};
+    for(i=0;i<rules.length;i++)if(rules[i].forms){for(k in rules[i].forms)if(own.call(rules[i].forms,k)){
+      var key='$'+format(k),lenses=keys[key]||(keys[key]=[]);if(lenses.indexOf(rules[i].lens)<0)lenses.push(rules[i].lens);
+    }}
+    (E.studioData.adverbs||[]).forEach(function(w){adverbs['$'+format(w)]=true;});
+    function scan(input){
+      var s=String(input||''),check=s.slice(0,maxChars),clean=E.protectedText(check),ts=E.reading.tokens(clean),signals={},visits=0;
+      if(ts.length>maxTokens){ts=ts.slice(0,maxTokens);check=check.slice(0,ts[ts.length-1].end);clean=clean.slice(0,check.length);}
+      else if(check.length<s.length&&ts.length&&ts[ts.length-1].end===check.length&&/[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f0-9'’\-]/.test(s.charAt(check.length))){
+        var last=ts.pop();check=check.slice(0,last.start);clean=clean.slice(0,last.start);
+      }
+      var probe=E.localLanguageRules.repetitionProbe(),D=E.maturationData,t,w,key,a,hit;
+      for(var i=0;i<ts.length;i++){
+        visits++;t=ts[i];w=t.value;key='$'+w;a=keys[key]||[];
+        for(var j=0;j<a.length;j++)signals[a[j]]=true;
+        if(own.call(adverbs,key))signals.adverbios=true;
+        if(w==='que')signals['que-contextual']=true;
+        if(!signals.expressoes&&E.localLanguageRules.expressionAt(clean,ts,i,E.styleData.index))signals.expressoes=true;
+        if(!signals.repeticao&&probe.feed(t,check,clean))signals.repeticao=true;
+        if(!signals.morfologia&&E.grammar&&E.grammar.readings(w).classes.length)signals.morfologia=true;
+        if(!signals.crase&&(w==='à'||w==='às')&&ts[i+1]&&
+          ((D.crasePronouns||[]).indexOf(ts[i+1].value)>=0||(D.craseInfinitives||[]).indexOf(ts[i+1].value)>=0))signals.crase=true;
+        if(!signals.concordancia&&ts[i+1]&&(own.call(D.haver||{},w)||own.call(D.existir||{},w)||own.call(D.fazer||{},w)))signals.concordancia=true;
+      }
+      if(/,{2,}|;{2,}/.test(clean))signals.pontuacao=true;
+      if(/(^|[\r\n])[ \t]*[—–-][ \t]+\S/m.test(clean))signals.dialogo=true;
+      if(E.reading.sentences){var sentences=E.reading.sentences(clean),closed=0;
+        for(i=0;i<sentences.length&&closed<3;i++)if(sentences[i].closed)closed++;
+        if(closed>=3)signals.ritmo=true;
+      }
+      var parts=clean.split(/\r\n|\n|\r/),shortLines=0,ends={},lineWords,end,suffix;
+      for(i=0;i<parts.length;i++){
+        if(!parts[i].replace(/\s/g,'')||parts[i].length>90)continue;
+        shortLines++;lineWords=E.reading.tokens(parts[i]);
+        if(!lineWords.length)continue;end=lineWords[lineWords.length-1].value;suffix='$'+end.slice(-2);
+        if(end.length>=3){if(own.call(ends,suffix)&&ends[suffix]!==end)signals.rima=true;ends[suffix]=end;}
+      }
+      if(shortLines>=2)signals.metrica=true;else delete signals.rima;
+      return{text:s,read:check.length,signals:signals,words:E.reading.tokens(check).length,chars:s.length,
+        partial:check.length<s.length,work:{characters:check.length,tokens:visits,maxCharacters:maxChars,maxTokens:maxTokens}};
     }
-    var lex = (engine.dados && engine.dados.lexico) || (engine.data && engine.data.lexico) || {}, known = {};
-    var groups = lex.functionWords || {}, dict = lex.localLexicon || {};
-    Object.keys(groups).forEach(function (group) {
-      var words = groups[group] || [], i;
-      if (Object.prototype.toString.call(words) !== '[object Array]') { return; }
-      for (i = 0; i < words.length; i += 1) { known['
-    });
-    function triage(input) {
-      var s = String(input || ''), cap = 40000, tokens, i, t, k, signals = {}, examples = {};
-      if (s.length > cap) {
-        return { status: 'limite', source: null, signals: {}, examples: {}, scope: cap,
-          message: 'Pré-diagnóstico limitado a 40 mil caracteres; o manuscrito não foi alterado.' };
-      }
-      tokens = engine.core.tokenizeWithOffsets(s);
-      for (i = 0; i < tokens.length; i += 1) {
-        t = tokens[i]; k = t.token.toLowerCase();
-        if (!signals.morfologia && (own.call(dict, k) || own.call(known, '
-          signals.morfologia = true; examples.morfologia = t;
-        }
-        if (!signals.dificuldades && engine.dificuldades && typeof engine.dificuldades.resolve === 'function' && engine.dificuldades.resolve(t.token)) {
-          signals.dificuldades = true; examples.dificuldades = t;
-        }
-        if (!signals['que-contextual'] && k === 'que') {
-          signals['que-contextual'] = true; examples['que-contextual'] = t;
-        }
-      }
-      /* Varredura de expressões apenas quando solicitada no exame: scan() percorre
-       * todo o texto e duplicaria a tokenização a cada pausa de digitação. */
-      if (engine.expressoes && typeof engine.expressoes.has === 'function' && tokens.length) {
-        for (i = 0; i < tokens.length && !signals.expressoes; i += 1) {
-          if (engine.expressoes.has(tokens[i].token)) {
-            signals.expressoes = true; examples.expressoes = tokens[i];
-          }
-        }
-      }
-      return { status: 'pronto', source: s, signals: signals, examples: examples, scope: s.length,
-        message: 'Sinais para escolher lentes; nenhuma classe, oração ou ocorrência foi confirmada.' };
-    }
-    function run(text, triageResult, lenses, analyze, progress, finish, later) {
-      var snapshot = String(text || ''), list = [], i, cancelled = false, position = 0;
-      if (!triageResult || triageResult.status !== 'pronto' || triageResult.source !== snapshot ||
-          Object.prototype.toString.call(lenses) !== '[object Array]' || typeof analyze !== 'function') {
-        throw new Error('Triagem e texto precisam corresponder antes da análise.');
-      }
-      for (i = 0; i < lenses.length; i += 1) {
-        if (triageResult.signals[lenses[i]] && list.indexOf(lenses[i]) === -1) { list.push(lenses[i]); }
-      }
-      later = later || function (fn) { root.setTimeout(fn, 0); };
-      function next() {
-        var id, findings, f, j;
-        if (cancelled) { return; }
-        if (position === list.length) { if (finish) { finish(); } return; }
-        id = list[position++];
-        try {
-          findings = analyze(id, snapshot);
-          if (Object.prototype.toString.call(findings) !== '[object Array]') { throw new Error('A lente não devolveu uma lista.'); }
-          for (j = 0; j < findings.length; j += 1) {
-            f = findings[j];
-            if (!engine.core.validateFinding(f) || f.start < 0 || f.end > snapshot.length ||
-                snapshot.slice(f.start, f.end) !== f.snippet) {
-              throw new Error('Finding inválido: ' + id);
-            }
-          }
-          if (progress) { progress(id, findings); }
-        } catch (e) { if (progress) { progress(id, [], e); } }
-        if (!cancelled) { later(next); }
-      }
-      later(next);
-      return function () { cancelled = true; };
-    }
-    return { triage: triage, run: run };
+    return{scan:scan};
   }
-  root.Escr = root.Escr || {};
-  root.Escr.createPTBRTriage = create;
-  if (typeof module !== 'undefined' && module.exports) { module.exports = create; }
-}(typeof window !== 'undefined' ? window : this));
- + String(words[i]).toLowerCase()] = true; }
-    });
-    function triage(input) {
-      var s = String(input || ''), cap = 40000, tokens, i, t, k, signals = {}, examples = {}, matches;
-      if (s.length > cap) {
-        return { status: 'limite', source: null, signals: {}, examples: {}, scope: cap,
-          message: 'Pré-diagnóstico limitado a 40 mil caracteres; o manuscrito não foi alterado.' };
-      }
-      tokens = engine.core.tokenizeWithOffsets(s);
-      for (i = 0; i < tokens.length; i += 1) {
-        t = tokens[i]; k = t.token.toLowerCase();
-        if (!signals.morfologia && (own.call(dict, k) || own.call(known, '$' + k))) {
-          signals.morfologia = true; examples.morfologia = t;
-        }
-        if (!signals.dificuldades && engine.dificuldades && typeof engine.dificuldades.resolve === 'function' && engine.dificuldades.resolve(t.token)) {
-          signals.dificuldades = true; examples.dificuldades = t;
-        }
-        if (!signals['que-contextual'] && k === 'que') {
-          signals['que-contextual'] = true; examples['que-contextual'] = t;
-        }
-      }
-      if (engine.expressoes && typeof engine.expressoes.scan === 'function' && tokens.length) {
-        matches = engine.expressoes.scan(s);
-        if (matches.length) { signals.expressoes = true; examples.expressoes = matches[0]; }
-      }
-      return { status: 'pronto', source: s, signals: signals, examples: examples, scope: s.length,
-        message: 'Sinais para escolher lentes; nenhuma classe, oração ou ocorrência foi confirmada.' };
-    }
-    function run(text, triageResult, lenses, analyze, progress, finish, later) {
-      var snapshot = String(text || ''), list = [], i, cancelled = false, position = 0;
-      if (!triageResult || triageResult.status !== 'pronto' || triageResult.source !== snapshot ||
-          Object.prototype.toString.call(lenses) !== '[object Array]' || typeof analyze !== 'function') {
-        throw new Error('Triagem e texto precisam corresponder antes da análise.');
-      }
-      for (i = 0; i < lenses.length; i += 1) {
-        if (triageResult.signals[lenses[i]] && list.indexOf(lenses[i]) === -1) { list.push(lenses[i]); }
-      }
-      later = later || function (fn) { root.setTimeout(fn, 0); };
-      function next() {
-        var id, findings, f, j;
-        if (cancelled) { return; }
-        if (position === list.length) { if (finish) { finish(); } return; }
-        id = list[position++];
-        try {
-          findings = analyze(id, snapshot);
-          if (Object.prototype.toString.call(findings) !== '[object Array]') { throw new Error('A lente não devolveu uma lista.'); }
-          for (j = 0; j < findings.length; j += 1) {
-            f = findings[j];
-            if (!engine.core.validateFinding(f) || f.start < 0 || f.end > snapshot.length ||
-                snapshot.slice(f.start, f.end) !== f.snippet) {
-              throw new Error('Finding inválido: ' + id);
-            }
-          }
-          if (progress) { progress(id, findings); }
-        } catch (e) { if (progress) { progress(id, [], e); } }
-        if (!cancelled) { later(next); }
-      }
-      later(next);
-      return function () { cancelled = true; };
-    }
-    return { triage: triage, run: run };
-  }
-  root.Escr = root.Escr || {};
-  root.Escr.createPTBRTriage = create;
-  if (typeof module !== 'undefined' && module.exports) { module.exports = create; }
-}(typeof window !== 'undefined' ? window : this));
- + k))) {
-          signals.morfologia = true; examples.morfologia = t;
-        }
-        if (!signals.dificuldades && engine.dificuldades && typeof engine.dificuldades.resolve === 'function' && engine.dificuldades.resolve(t.token)) {
-          signals.dificuldades = true; examples.dificuldades = t;
-        }
-        if (!signals['que-contextual'] && k === 'que') {
-          signals['que-contextual'] = true; examples['que-contextual'] = t;
-        }
-      }
-      /* Varredura de expressões apenas quando solicitada no exame: scan() percorre
-       * todo o texto e duplicaria a tokenização a cada pausa de digitação. */
-      if (engine.expressoes && typeof engine.expressoes.has === 'function' && tokens.length) {
-        for (i = 0; i < tokens.length && !signals.expressoes; i += 1) {
-          if (engine.expressoes.has(tokens[i].token)) {
-            signals.expressoes = true; examples.expressoes = tokens[i];
-          }
-        }
-      }
-      return { status: 'pronto', source: s, signals: signals, examples: examples, scope: s.length,
-        message: 'Sinais para escolher lentes; nenhuma classe, oração ou ocorrência foi confirmada.' };
-    }
-    function run(text, triageResult, lenses, analyze, progress, finish, later) {
-      var snapshot = String(text || ''), list = [], i, cancelled = false, position = 0;
-      if (!triageResult || triageResult.status !== 'pronto' || triageResult.source !== snapshot ||
-          Object.prototype.toString.call(lenses) !== '[object Array]' || typeof analyze !== 'function') {
-        throw new Error('Triagem e texto precisam corresponder antes da análise.');
-      }
-      for (i = 0; i < lenses.length; i += 1) {
-        if (triageResult.signals[lenses[i]] && list.indexOf(lenses[i]) === -1) { list.push(lenses[i]); }
-      }
-      later = later || function (fn) { root.setTimeout(fn, 0); };
-      function next() {
-        var id, findings, f, j;
-        if (cancelled) { return; }
-        if (position === list.length) { if (finish) { finish(); } return; }
-        id = list[position++];
-        try {
-          findings = analyze(id, snapshot);
-          if (Object.prototype.toString.call(findings) !== '[object Array]') { throw new Error('A lente não devolveu uma lista.'); }
-          for (j = 0; j < findings.length; j += 1) {
-            f = findings[j];
-            if (!engine.core.validateFinding(f) || f.start < 0 || f.end > snapshot.length ||
-                snapshot.slice(f.start, f.end) !== f.snippet) {
-              throw new Error('Finding inválido: ' + id);
-            }
-          }
-          if (progress) { progress(id, findings); }
-        } catch (e) { if (progress) { progress(id, [], e); } }
-        if (!cancelled) { later(next); }
-      }
-      later(next);
-      return function () { cancelled = true; };
-    }
-    return { triage: triage, run: run };
-  }
-  root.Escr = root.Escr || {};
-  root.Escr.createPTBRTriage = create;
-  if (typeof module !== 'undefined' && module.exports) { module.exports = create; }
-}(typeof window !== 'undefined' ? window : this));
- + String(words[i]).toLowerCase()] = true; }
-    });
-    function triage(input) {
-      var s = String(input || ''), cap = 40000, tokens, i, t, k, signals = {}, examples = {}, matches;
-      if (s.length > cap) {
-        return { status: 'limite', source: null, signals: {}, examples: {}, scope: cap,
-          message: 'Pré-diagnóstico limitado a 40 mil caracteres; o manuscrito não foi alterado.' };
-      }
-      tokens = engine.core.tokenizeWithOffsets(s);
-      for (i = 0; i < tokens.length; i += 1) {
-        t = tokens[i]; k = t.token.toLowerCase();
-        if (!signals.morfologia && (own.call(dict, k) || own.call(known, '$' + k))) {
-          signals.morfologia = true; examples.morfologia = t;
-        }
-        if (!signals.dificuldades && engine.dificuldades && typeof engine.dificuldades.resolve === 'function' && engine.dificuldades.resolve(t.token)) {
-          signals.dificuldades = true; examples.dificuldades = t;
-        }
-        if (!signals['que-contextual'] && k === 'que') {
-          signals['que-contextual'] = true; examples['que-contextual'] = t;
-        }
-      }
-      if (engine.expressoes && typeof engine.expressoes.scan === 'function' && tokens.length) {
-        matches = engine.expressoes.scan(s);
-        if (matches.length) { signals.expressoes = true; examples.expressoes = matches[0]; }
-      }
-      return { status: 'pronto', source: s, signals: signals, examples: examples, scope: s.length,
-        message: 'Sinais para escolher lentes; nenhuma classe, oração ou ocorrência foi confirmada.' };
-    }
-    function run(text, triageResult, lenses, analyze, progress, finish, later) {
-      var snapshot = String(text || ''), list = [], i, cancelled = false, position = 0;
-      if (!triageResult || triageResult.status !== 'pronto' || triageResult.source !== snapshot ||
-          Object.prototype.toString.call(lenses) !== '[object Array]' || typeof analyze !== 'function') {
-        throw new Error('Triagem e texto precisam corresponder antes da análise.');
-      }
-      for (i = 0; i < lenses.length; i += 1) {
-        if (triageResult.signals[lenses[i]] && list.indexOf(lenses[i]) === -1) { list.push(lenses[i]); }
-      }
-      later = later || function (fn) { root.setTimeout(fn, 0); };
-      function next() {
-        var id, findings, f, j;
-        if (cancelled) { return; }
-        if (position === list.length) { if (finish) { finish(); } return; }
-        id = list[position++];
-        try {
-          findings = analyze(id, snapshot);
-          if (Object.prototype.toString.call(findings) !== '[object Array]') { throw new Error('A lente não devolveu uma lista.'); }
-          for (j = 0; j < findings.length; j += 1) {
-            f = findings[j];
-            if (!engine.core.validateFinding(f) || f.start < 0 || f.end > snapshot.length ||
-                snapshot.slice(f.start, f.end) !== f.snippet) {
-              throw new Error('Finding inválido: ' + id);
-            }
-          }
-          if (progress) { progress(id, findings); }
-        } catch (e) { if (progress) { progress(id, [], e); } }
-        if (!cancelled) { later(next); }
-      }
-      later(next);
-      return function () { cancelled = true; };
-    }
-    return { triage: triage, run: run };
-  }
-  root.Escr = root.Escr || {};
-  root.Escr.createPTBRTriage = create;
-  if (typeof module !== 'undefined' && module.exports) { module.exports = create; }
-}(typeof window !== 'undefined' ? window : this));
+  root.Escr=root.Escr||{};root.Escr.createSignalTriage=create;
+  if(typeof module!=='undefined'&&module.exports)module.exports=create;
+}(typeof window!=='undefined'?window:this));

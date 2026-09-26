@@ -1,0 +1,4 @@
+Skipping host requirements validation logic because `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS` env variable is set.
+BASE 9d16740 WEBKIT OFFLINE FAILED: page.reload: WebKit encountered an internal error
+Call log:
+[2m  - waiting for navigation until "load"[22m

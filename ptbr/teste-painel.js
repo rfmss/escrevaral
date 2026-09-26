@@ -38,7 +38,7 @@ function setup(initial, dismissed) {
   var E = {
     knowledge: { rules: [{ lens: 'ortografia', forms: { 'excessão': 'exceção' } }] },
     styleData: { entries: [{ term: 'ao longo do tempo' }] },
-    studioData: { adverbs: [] }, maturationData: { stopwords: [] },
+    studioData: { adverbs: [] }, maturationData: { stopwords: [], repeatWindow:40, repeatMinimum:3 }, lensCatalog: [],
     protectedText: function (s) { return s; },
     reading: { tokens: tokenize, sentences: function () { return []; } },
     grammar: { readings: function (word) { return { classes: word === 'rua' ? ['substantivo'] : [] }; } },
@@ -57,6 +57,8 @@ function setup(initial, dismissed) {
     setTimeout: function (fn, delay) { var timer = { id: ++next, fn: fn, delay: delay, cancelled: false }; timers.push(timer); return timer.id; },
     clearTimeout: function (id) { timers.forEach(function (timer) { if (timer.id === id) { timer.cancelled = true; } }); }
   };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'regras-locais.js'),'utf8'),{window:window});
+  E.createSignalTriage=require('./triagem');
   vm.runInNewContext(source, { window: window, document: document });
   var board = panel.childNodes[0];
   function child(className) { return board.childNodes.filter(function (n) { return n.className === className; })[0]; }

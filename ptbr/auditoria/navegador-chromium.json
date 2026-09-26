@@ -1,0 +1,65 @@
+{
+  "engine": "chromium",
+  "viewports": [
+    {
+      "width": 1366,
+      "height": 768,
+      "box": {
+        "x": 910,
+        "y": 60,
+        "width": 440,
+        "height": 640
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "box": {
+        "x": 8,
+        "y": 52,
+        "width": 374,
+        "height": 732
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "box": {
+        "x": 8,
+        "y": 52,
+        "width": 304,
+        "height": 456
+      }
+    }
+  ],
+  "performance": [
+    {
+      "inputCharacters": 200000,
+      "work": {
+        "characters": 7998,
+        "tokens": 1032,
+        "maxCharacters": 8000,
+        "maxTokens": 1600
+      },
+      "partial": true,
+      "medianMs": 9.699999999953434,
+      "maxMs": 24.099999999976717
+    },
+    {
+      "inputCharacters": 800000,
+      "work": {
+        "characters": 7998,
+        "tokens": 1032,
+        "maxCharacters": 8000,
+        "maxTokens": 1600
+      },
+      "partial": true,
+      "medianMs": 5.399999999906868,
+      "maxMs": 7.900000000023283
+    }
+  ],
+  "offline": true,
+  "portableOffline": true,
+  "portableMethod": "context-offline",
+  "errors": []
+}

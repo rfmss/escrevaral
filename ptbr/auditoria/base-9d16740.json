@@ -1,0 +1,281 @@
+{
+  "base": "9d167407962300d82393dee3262c3dbb32cc994f",
+  "expressionCount": 1447,
+  "cases": [
+    {
+      "lens": "expressoes",
+      "text": "De vez em quando, volto.",
+      "result": {
+        "lens": "expressoes",
+        "knowledgeVersion": "3.0.0",
+        "findings": [],
+        "limited": false,
+        "status": "examinado",
+        "assessment": {
+          "eligible": true,
+          "reason": "",
+          "scope": "Expressões do catálogo; presença não implica clichê ou corte necessário.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 1
+        },
+        "processing": {
+          "mode": "integral"
+        },
+        "coverage": "Expressões do catálogo; presença não implica clichê ou corte necessário. Silêncio não certifica correção."
+      }
+    },
+    {
+      "lens": "expressoes",
+      "text": "No final. Das contas, volto.",
+      "result": {
+        "lens": "expressoes",
+        "knowledgeVersion": "3.0.0",
+        "findings": [],
+        "limited": false,
+        "status": "examinado",
+        "assessment": {
+          "eligible": true,
+          "reason": "",
+          "scope": "Expressões do catálogo; presença não implica clichê ou corte necessário.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 1
+        },
+        "processing": {
+          "mode": "integral"
+        },
+        "coverage": "Expressões do catálogo; presença não implica clichê ou corte necessário. Silêncio não certifica correção."
+      }
+    },
+    {
+      "lens": "expressoes",
+      "text": "No\tfinal das contas, volto.",
+      "result": {
+        "lens": "expressoes",
+        "knowledgeVersion": "3.0.0",
+        "findings": [
+          {
+            "id": "PTBR-EST-001",
+            "lens": "expressoes",
+            "feature": "expressão recorrente",
+            "severity": "estilo",
+            "confidence": "alta",
+            "message": "Uma expressão do repertório compartilhado.",
+            "start": 0,
+            "end": 19,
+            "snippet": "No\tfinal das contas",
+            "reference": null,
+            "evidence": {
+              "observation": "O trecho corresponde literalmente a uma entrada do catálogo herdado: expressão recorrente.",
+              "interpretation": "A expressão pode dar familiaridade, marcar um registro ou servir como contraste no texto.",
+              "ambiguity": "Frequência no catálogo não mede frequência no português brasileiro. Sobreposição não implica redundância dispensável. A função depende da passagem.",
+              "limit": "Não há nota, instrução para cortar, substituição nem avaliação da originalidade. A lente identifica locuções contíguas e preserva diacríticos.",
+              "source": {
+                "title": "Listas CLIQUES_PT e PLEONASMOS do analise-engine.js recebido; classificação herdada tratada somente como observação.",
+                "url": null
+              }
+            }
+          }
+        ],
+        "limited": false,
+        "status": "examinado",
+        "assessment": {
+          "eligible": true,
+          "reason": "",
+          "scope": "Expressões do catálogo; presença não implica clichê ou corte necessário.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 1
+        },
+        "processing": {
+          "mode": "integral"
+        },
+        "coverage": "Expressões do catálogo; presença não implica clichê ou corte necessário. Silêncio não certifica correção."
+      }
+    },
+    {
+      "lens": "expressoes",
+      "text": "Em última análise, volto.",
+      "result": {
+        "lens": "expressoes",
+        "knowledgeVersion": "3.0.0",
+        "findings": [],
+        "limited": false,
+        "status": "examinado",
+        "assessment": {
+          "eligible": true,
+          "reason": "",
+          "scope": "Expressões do catálogo; presença não implica clichê ou corte necessário.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 1
+        },
+        "processing": {
+          "mode": "integral"
+        },
+        "coverage": "Expressões do catálogo; presença não implica clichê ou corte necessário. Silêncio não certifica correção."
+      }
+    },
+    {
+      "lens": "expressoes",
+      "text": "“No final das contas”",
+      "result": {
+        "lens": "expressoes",
+        "knowledgeVersion": "3.0.0",
+        "findings": [],
+        "limited": false,
+        "status": "insuficiente",
+        "assessment": {
+          "eligible": false,
+          "reason": "Não há trecho disponível fora de citações, código e endereços.",
+          "scope": "Expressões do catálogo; presença não implica clichê ou corte necessário.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 0
+        },
+        "coverage": "Expressões do catálogo; presença não implica clichê ou corte necessário."
+      }
+    },
+    {
+      "lens": "repeticao",
+      "text": "muito muito",
+      "result": {
+        "lens": "repeticao",
+        "knowledgeVersion": "3.0.0",
+        "findings": [],
+        "limited": false,
+        "status": "insuficiente",
+        "assessment": {
+          "eligible": false,
+          "reason": "Esta lente precisa de pelo menos 3 palavras disponíveis.",
+          "scope": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 2
+        },
+        "coverage": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional."
+      }
+    },
+    {
+      "lens": "repeticao",
+      "text": "falou que falou",
+      "result": {
+        "lens": "repeticao",
+        "knowledgeVersion": "3.0.0",
+        "findings": [],
+        "limited": false,
+        "status": "examinado",
+        "assessment": {
+          "eligible": true,
+          "reason": "",
+          "scope": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 3
+        },
+        "processing": {
+          "mode": "integral"
+        },
+        "coverage": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional. Silêncio não certifica correção."
+      }
+    },
+    {
+      "lens": "repeticao",
+      "text": "pomodoro pomodoro pomodoro",
+      "result": {
+        "lens": "repeticao",
+        "knowledgeVersion": "3.0.0",
+        "findings": [
+          {
+            "id": "PTBR-REP-001",
+            "lens": "repeticao",
+            "feature": "repeticao",
+            "severity": "informação",
+            "confidence": "alta",
+            "message": "“pomodoro” aparece três vezes em um trecho próximo.",
+            "start": 18,
+            "end": 26,
+            "snippet": "pomodoro",
+            "reference": null,
+            "evidence": {
+              "observation": "Três ocorrências da mesma grafia, ignorando maiúsculas, em até 40 palavras do mesmo parágrafo.",
+              "interpretation": "Compare o retorno da palavra: ele pode formar um motivo, uma insistência ou um eco que você queira rever.",
+              "ambiguity": "Repetição é recurso literário. Não deduz redundância, pobreza de vocabulário ou necessidade de sinônimo.",
+              "limit": "Não reúne flexões nem remove acentos. Lista de palavras funcionais excluídas; citações e parágrafos interrompem a janela.",
+              "source": {
+                "title": "Critério descritivo local v1, adaptado de analise-engine.js e voz-estilistica.js do legado. Limiares operacionais, sem validação como medida de qualidade literária",
+                "url": null
+              }
+            },
+            "occurrences": [
+              {
+                "start": 0,
+                "end": 8
+              },
+              {
+                "start": 9,
+                "end": 17
+              },
+              {
+                "start": 18,
+                "end": 26
+              }
+            ],
+            "contextStart": 0
+          }
+        ],
+        "limited": false,
+        "status": "examinado",
+        "assessment": {
+          "eligible": true,
+          "reason": "",
+          "scope": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 3
+        },
+        "processing": {
+          "mode": "integral"
+        },
+        "coverage": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional. Silêncio não certifica correção."
+      }
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa\n“citação”\ncasa casa",
+      "result": {
+        "lens": "repeticao",
+        "knowledgeVersion": "3.0.0",
+        "findings": [],
+        "limited": false,
+        "status": "examinado",
+        "assessment": {
+          "eligible": true,
+          "reason": "",
+          "scope": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 3
+        },
+        "processing": {
+          "mode": "integral"
+        },
+        "coverage": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional. Silêncio não certifica correção."
+      }
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa casa\n\ncasa",
+      "result": {
+        "lens": "repeticao",
+        "knowledgeVersion": "3.0.0",
+        "findings": [],
+        "limited": false,
+        "status": "examinado",
+        "assessment": {
+          "eligible": true,
+          "reason": "",
+          "scope": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional.",
+          "group": "Escolhas de escrita",
+          "minimumTokensChecked": 3
+        },
+        "processing": {
+          "mode": "integral"
+        },
+        "coverage": "Três ocorrências da mesma grafia em até 40 palavras, dentro do mesmo parágrafo; pode ser um motivo intencional. Silêncio não certifica correção."
+      }
+    }
+  ]
+}

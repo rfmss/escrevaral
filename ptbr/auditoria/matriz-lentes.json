@@ -1,0 +1,291 @@
+{
+  "base": "9d167407962300d82393dee3262c3dbb32cc994f",
+  "cases": [
+    {
+      "lens": "expressoes",
+      "text": "De vez em quando, volto.",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-EST-003",
+          "start": 0,
+          "end": 16,
+          "snippet": "De vez em quando"
+        }
+      ]
+    },
+    {
+      "lens": "expressoes",
+      "text": "No final. Das contas, volto.",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "expressoes",
+      "text": "No\tfinal das contas, volto.",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-EST-001",
+          "start": 0,
+          "end": 19,
+          "snippet": "No\tfinal das contas"
+        }
+      ]
+    },
+    {
+      "lens": "expressoes",
+      "text": "Em última análise, volto.",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-EST-001",
+          "start": 0,
+          "end": 19,
+          "snippet": "Em última análise"
+        }
+      ]
+    },
+    {
+      "lens": "expressoes",
+      "text": "em ultima analise",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "expressoes",
+      "text": "no final das contasextras",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "expressoes",
+      "text": "no final\ndas contas",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "expressoes",
+      "text": "“de vez em quando”",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "expressoes",
+      "text": "“de vez em quando",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "expressoes",
+      "text": "`de vez em quando` e https://exemplo.com/de-vez-em-quando",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "expressoes",
+      "text": "No final das contas. No final das contas.",
+      "expected": 2,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-EST-001",
+          "start": 0,
+          "end": 19,
+          "snippet": "No final das contas"
+        },
+        {
+          "id": "PTBR-EST-001",
+          "start": 21,
+          "end": 40,
+          "snippet": "No final das contas"
+        }
+      ]
+    },
+    {
+      "lens": "repeticao",
+      "text": "muito muito",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-REP-002",
+          "start": 6,
+          "end": 11,
+          "snippet": "muito"
+        }
+      ]
+    },
+    {
+      "lens": "repeticao",
+      "text": "MUITO muito muito",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-REP-002",
+          "start": 6,
+          "end": 11,
+          "snippet": "muito"
+        }
+      ]
+    },
+    {
+      "lens": "repeticao",
+      "text": "falou que falou",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-REP-003",
+          "start": 10,
+          "end": 15,
+          "snippet": "falou"
+        }
+      ]
+    },
+    {
+      "lens": "repeticao",
+      "text": "falou que escreveu",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "muito, muito",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa azul casa verde casa",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-REP-001",
+          "start": 21,
+          "end": 25,
+          "snippet": "casa"
+        }
+      ]
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa “casa” casa",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa\n\ncasa",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa\ncasa",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa azul\ncasa verde casa",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-REP-001",
+          "start": 21,
+          "end": 25,
+          "snippet": "casa"
+        }
+      ]
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa. Casa",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "pode pôde",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "café café",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-REP-002",
+          "start": 5,
+          "end": 10,
+          "snippet": "café"
+        }
+      ]
+    },
+    {
+      "lens": "repeticao",
+      "text": "falou falaram fala",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "a a",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "22 22",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa casa e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e casa",
+      "expected": 1,
+      "signal": true,
+      "findings": [
+        {
+          "id": "PTBR-REP-002",
+          "start": 5,
+          "end": 9,
+          "snippet": "casa"
+        }
+      ]
+    },
+    {
+      "lens": "repeticao",
+      "text": "casa e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e casa e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e casa",
+      "expected": 0,
+      "signal": false,
+      "findings": []
+    }
+  ]
+}

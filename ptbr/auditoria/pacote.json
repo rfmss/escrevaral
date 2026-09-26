@@ -1,0 +1,118 @@
+{
+  "hashes": [
+    {
+      "name": "dicionario-ptbr.json",
+      "expected": "9a21e6d80bf7995c05cbee03f7d9463a8b2d4372781155f6f9fe77cace9df570",
+      "actual": "9a21e6d80bf7995c05cbee03f7d9463a8b2d4372781155f6f9fe77cace9df570",
+      "ok": true
+    },
+    {
+      "name": "norma-lexico.json",
+      "expected": "e47630bb1a851fb22aea6d4b46f60ce0182516bcecc20b809bb1220d9a13bf79",
+      "actual": "e47630bb1a851fb22aea6d4b46f60ce0182516bcecc20b809bb1220d9a13bf79",
+      "ok": true
+    },
+    {
+      "name": "classes-10.json",
+      "expected": "bd265d276404e3b30b74f0cbf4de38d8e8dcbbaf781c3fc14cb17c2df931bc6c",
+      "actual": "bd265d276404e3b30b74f0cbf4de38d8e8dcbbaf781c3fc14cb17c2df931bc6c",
+      "ok": true
+    },
+    {
+      "name": "dicionario-sinonimos.json",
+      "expected": "bd3102ecfd6379b4d8edaae9a0a34ca08d87986ba102348f310510d43ef914ff",
+      "actual": "bd3102ecfd6379b4d8edaae9a0a34ca08d87986ba102348f310510d43ef914ff",
+      "ok": true
+    },
+    {
+      "name": "dicionario-expressoes.json",
+      "expected": "0fe7da7918c54fa5117bfd6791fa40b719ccb2b00f75213f77c058da2a206151",
+      "actual": "0fe7da7918c54fa5117bfd6791fa40b719ccb2b00f75213f77c058da2a206151",
+      "ok": true
+    },
+    {
+      "name": "dicionario-dificuldades.json",
+      "expected": "5e5150d390be849406fb16ecf9da175eacbd9c556094617536888a715813213b",
+      "actual": "5e5150d390be849406fb16ecf9da175eacbd9c556094617536888a715813213b",
+      "ok": true
+    },
+    {
+      "name": "verbos.json",
+      "expected": "e4e471607a18e1cd01f7e8d005b6fe1ee1bbc9daabe210811039606b83512b7a",
+      "actual": "e4e471607a18e1cd01f7e8d005b6fe1ee1bbc9daabe210811039606b83512b7a",
+      "ok": true
+    }
+  ],
+  "es5": [
+    {
+      "name": "classes-morfologia.js",
+      "ok": false,
+      "error": "Invalid regular expression flag (465:21)"
+    },
+    {
+      "name": "dificuldades.js",
+      "ok": true
+    },
+    {
+      "name": "expressoes.js",
+      "ok": true
+    },
+    {
+      "name": "index.js",
+      "ok": true
+    },
+    {
+      "name": "loader.js",
+      "ok": true
+    },
+    {
+      "name": "ptbr-core.js",
+      "ok": true
+    },
+    {
+      "name": "sinonimos-resolver.js",
+      "ok": true
+    }
+  ],
+  "suites": {
+    "original": {
+      "exitCode": 0,
+      "stdout": "[pureza-ES5] pass=1 fail=0\n[corpus-ouro] pass=228 fail=0\n[adversarial] pass=23 fail=0\n[apoiadores] pass=10 fail=0\n[proveniência] pass=3 fail=0\n\n== RESUMO: TUDO OK ==\n",
+      "stderr": ""
+    },
+    "originalInjected": {
+      "exitCode": 0,
+      "stdout": "[pureza-ES5] pass=1 fail=0\n  FALHA: FALHA INJETADA PARA TESTAR O EXECUTOR\n[corpus-ouro] pass=228 fail=1\n[adversarial] pass=23 fail=0\n[apoiadores] pass=10 fail=0\n[proveniência] pass=3 fail=0\n\n== RESUMO: TUDO OK ==\n",
+      "stderr": ""
+    },
+    "corrected": {
+      "exitCode": 0,
+      "stdout": "[pureza-ES5] pass=1 fail=0\n[corpus-ouro] pass=228 fail=0\n[adversarial] pass=23 fail=0\n[apoiadores] pass=10 fail=0\n[proveniência] pass=3 fail=0\n\n== RESUMO: TUDO OK ==\n",
+      "stderr": ""
+    },
+    "correctedInjected": {
+      "exitCode": 1,
+      "stdout": "[pureza-ES5] pass=1 fail=0\n  FALHA: FALHA INJETADA PARA TESTAR O EXECUTOR\n[corpus-ouro] pass=228 fail=1\n[adversarial] pass=23 fail=0\n[apoiadores] pass=10 fail=0\n[proveniência] pass=3 fail=0\n\n== RESUMO: FALHAS: 1 ==\n",
+      "stderr": ""
+    },
+    "integration": {
+      "exitCode": 0,
+      "stdout": "  ok  boot (env.boot)\n  ok  10 classes presentes\n  ok  analyzeSelection(rua)\n  ok  Finding id/contrato\n  ok  sinonimos.amor\n  ok  expressoes.has\n  ok  dificuldades.para\n\nINTEGRAÇÃO OK\n",
+      "stderr": ""
+    }
+  },
+  "coverage": {
+    "missing": [],
+    "punctuation": [
+      {
+        "term": "no final das contas",
+        "kind": "expressão recorrente",
+        "id": "PTBR-EST-001",
+        "start": 0,
+        "end": 20
+      }
+    ]
+  },
+  "license": "Não validada: integridade não comprova permissão de redistribuição.",
+  "status": "Integração completa adiada; falhas de cobertura, compatibilidade e proveniência exigem etapa própria."
+}

@@ -7,6 +7,7 @@ on:
       - escrevaral.html
       - service-worker.js
       - tests/**
+      - ptbr/**
       - .github/workflows/controles-qa.yml
 permissions:
   contents: read
@@ -34,6 +35,15 @@ jobs:
           node tests/universo.cjs
           node tests/quadro.cjs
           node tests/linguistica-linhagem.cjs
+          node tests/ptbr-lentes.cjs
+          node ptbr/teste-triagem.js
+          node ptbr/teste-painel.js
+      - name: Lentes PTBR — Chromium
+        run: node tests/ptbr-browser.cjs
+      - name: Lentes PTBR — WebKit
+        env:
+          BROWSER_ENGINE: webkit
+        run: node tests/ptbr-browser.cjs
       - name: Menus e cópia — Chromium
         run: node tests/menus-browser.cjs
       - name: Menus e cópia — WebKit

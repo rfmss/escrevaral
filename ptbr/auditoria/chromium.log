@@ -1,0 +1,2 @@
+PTBR BROWSER OK chromium: posições NFD, autoria persistida, lentes manuais, IME, edição, troca de folha, 3 larguras, triagem limitada e HTML portátil. PWA offline: OK.
+[{"inputCharacters":200000,"work":{"characters":7998,"tokens":1032,"maxCharacters":8000,"maxTokens":1600},"partial":true,"medianMs":9.699999999953434,"maxMs":24.099999999976717},{"inputCharacters":800000,"work":{"characters":7998,"tokens":1032,"maxCharacters":8000,"maxTokens":1600},"partial":true,"medianMs":5.399999999906868,"maxMs":7.900000000023283}]

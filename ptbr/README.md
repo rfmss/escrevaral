@@ -1,37 +1,76 @@
-# PTBR na main do Escrevaral
+# Lentes de português — etapa 1
 
-**Autoridade de implementação:** `rfmss/escrevaral@main`. O protótipo ASTRA, outras branches e o pacote recebido são referências de extração; não são base para substituir o produto.
+Base: `rfmss/escrevaral`, `main`, `9d167407962300d82393dee3262c3dbb32cc994f`.
+As mudanças desta entrega estão locais. Não foram enviadas ao GitHub nem publicadas.
 
-## Estado desta entrega
-- `ptbr/triagem.js` é a primeira camada transplantada. É uma API ES5 independente, **ligada ao painel nativo por cópia embutida** no HTML de entrada e no HTML portátil. A triagem legada continua disponível como módulo isolado; o painel publicado usa o cofre já presente na main, não o novo motor PTBR.
-- `ptbr/teste-triagem.js` é um teste isolado com motor simulado, executável com `node ptbr/teste-triagem.js`. Ele não substitui testes de integração real ou de navegador.
-- O arquivo PTBR.tar.gz recebido **não foi incorporado ao repositório nesta entrega**. O painel publicado executa somente as lentes legadas disponíveis no cofre da main; não anunciar a nova classificação contextual PTBR até a carga real do novo motor e dos dados.
-- A triagem observa presença de formas do léxico, dificuldades, expressões e token `que`; este último **não** comprova oração subordinada ou função sintática.
-- A versão da triagem fica em memória, não armazena manuscrito fora do aparelho. `run()` compara o texto integral com a versão triada, processa somente lentes sinalizadas, valida Findings por posição e pode ser cancelado.
+## Decisão de escopo
 
-## Ordem de integração
-1. Extrair e conferir SHA-256 de todos os JSON de `PTBR/dados/_proveniencia.json`. Executar `node PTBR/testes/run.js` e `node PTBR/testes/integracao.js`.
-2. Auditar efeitos globais antes do transplante: `classes-morfologia.js` adiciona polyfills a `String.prototype` e `Array.prototype`; o polyfill de `matchAll` acessa `RegExp.flags`, não garantido no piso ES5. Isolar e testar em Safari/iOS antigo; não adicionar polyfills globais à main sem necessidade.
-3. Integrar motor/dados com **carga sob demanda** no modo de exame. Não aumentar a inicialização do gabinete com todos os inventários. Garantir que a versão HTML portátil também funcione sem rede e sem módulos modernos; não usar `fetch` como único caminho em navegadores antigos.
-4. No texto em edição, agendar somente `triage(texto)` após pausa de 600–800 ms; cancelar durante composição IME. Nenhum Finding completo a cada tecla. Quando o comprimento exceder o limite, mostrar alcance parcial sem fazer parecer que tudo foi examinado.
-5. Preservar o painel existente: em tela grande, lateral; em tela pequena, vertical. A roleta apresenta só lentes com sinais. O botão **Análise** inicia a execução serial e mostra resultados por lente à medida que concluem, sem substituir o texto. A triagem não é um parser sintático.
-6. Reaproveitar o contrato de Finding, os controles de autoria e o cancelamento já existentes. Não criar armazenamento paralelo dos manuscritos; não alterar gavetas, cadernos e exportação.
-7. Antes de ativar: testes do pacote, `node ptbr/teste-triagem.js`, testes atuais do Escrevaral, instalação offline em perfil limpo, HTML portátil em modo avião e verificação de composição/acento, foco, pouca memória e dispositivo legado.
+1. Estabilizar e comprovar as lentes que já existem na main.
+2. Decidir posteriormente sobre o pacote PTBR completo, após revisão de licença, dados, compatibilidade e custo.
 
-**Regra de publicação:** uma etapa técnica verde não autoriza dizer que a funcionalidade está disponível na interface. Documentar separadamente testes locais, automáticos e em dispositivo real.
+O catálogo da base já contém 1.447 expressões. Esta etapa acrescenta apenas a entrada editorial `de vez em quando`; não importa os inventários do pacote recebido. Não há novo motor de sinônimos ou morfologia.
 
-## Painel na main (v6-13)
-- Fonte: `ptbr/painel.js`, embutida integralmente em `index.html` e `escrevaral.html` após a ponte e antes do service worker; nenhum novo arquivo externo obrigatório.
-- A referência visual não forneceu métricas: mostramos apenas contagens do manuscrito real. Não inferimos complexidade, tempo verbal, distribuição de narração ou percentuais sem fonte.
-- Triagem de sinais nas pausas de escrita e execução serial sob comando explícito; o painel não escreve no manuscrito.
-- A revisão individual anterior e as escolhas persistidas do autor ainda precisam ser reconciliadas com a nova superfície antes de aposentar o fluxo original; não anunciar a integração integral do pacote PTBR.
-- Os testes automatizados não substituem QA físico de navegador antigo, instalação offline em perfil limpo e sessões reais de escrita.
+## Regras observáveis
 
-## Preservação das decisões do autor (v6-14)
-- O painel consulta `E.ptbrPanelChoices()` da ponte em execução; Findings marcados como escolhas mantidas são ocultados também na leitura progressiva. Não cria um segundo banco de manuscritos.
-- O comando `Consultar lentes individualmente` revela no mesmo painel o fluxo anterior e o botão nativo de rever escolhas, sem abrir outra janela nem executar automaticamente essas lentes.
-- A roleta continua filtrada por sinais, e `que` é exibido apenas como observação de presença; a função sintática não é inferida.
+| Lente | Critério | Limites |
+| --- | --- | --- |
+| Expressões | Palavras contíguas do catálogo; vence a correspondência mais longa | Espaço, tabulação e espaço inseparável são aceitos. Pontuação, quebras de linha e regiões protegidas interrompem. Máximo de 16 palavras por expressão. |
+| Repetição adjacente | Duas palavras iguais, de pelo menos duas letras | Sem números; apenas espaço/tabulação entre elas. Inclui palavras funcionais, como `muito muito`. |
+| Retorno X que X | Mesma palavra antes e depois de `que` | X tem pelo menos quatro letras e não pertence à lista de palavras funcionais. Não admite pontuação. Não é análise sintática. |
+| Repetição próxima | Três ocorrências da mesma palavra numa janela de 40 tokens | Pelo menos quatro letras, sem números ou palavras funcionais. Citações e parágrafos interrompem a janela. |
 
-## QA rebaseado na main v6-16
-- Sincronização atômica do fonte de painel, HTML de entrada, HTML portátil e service worker, preservando alterações posteriores da main na barra e nos menus.
-- `node ptbr/teste-painel.js` contempla triagem silenciosa, composição IME, histórico de escolhas, acesso às lentes individuais, cancelamento, paridade portátil/cache.
+A normalização ignora maiúsculas e compõe acentos equivalentes; não remove acentos nem reúne flexões. As posições são índices UTF-16 no texto original, inclusive com acentos decompostos. Um apontamento por palavra a cada 40 tokens evita repetir avisos sobre a mesma sequência. Repetição intencional também pode ser observada: confiança alta significa contagem confirmada, não erro de escrita.
+
+As lentes compartilham `regras-locais.js` com a triagem. `expressoes.js` e `repeticao.js` produzem apontamentos com evidência, fonte e limites; não alteram o manuscrito.
+
+## Triagem, custo e autoria
+
+- Pausa de 700 ms; composição IME suspende a triagem. Digitar não executa lentes completas.
+- O texto é cortado **antes** da proteção e tokenização: no máximo 8.000 unidades UTF-16. O exame de sinais visita no máximo 1.600 tokens; proteção/tokenização e contagem ainda podem percorrer todo o recorte de 8.000 caracteres. A contagem inclui palavras citadas, embora elas não gerem sinais.
+- Rimas usam índice de terminações, sem comparar todos os pares de linhas. A triagem não cria Findings nem mantém histórico de textos.
+- A interface identifica contagem parcial. A roleta é uma sugestão conservadora: pode omitir sinais além do recorte. As lentes individuais continuam acessíveis.
+- O botão Análise executa as lentes sinalizadas em série, sob comando. Aceita até 200 mil caracteres e apresenta até 100 apontamentos por lente. Esse limite **não comprova** que qualquer lente completa será rápida em dispositivo antigo.
+- Edição, composição ou troca de folha invalida a fila e os resultados. A identidade usa `noteId`, preservado quando uma gravação cria nova revisão.
+- `Manter minha escolha` utiliza o armazenamento e a chave de decisão existentes. O fluxo individual e o painel consultam as mesmas escolhas. Uma falha ao guardar não deve ocultar a observação.
+- Aspas/código sem fechamento também são protegidos até o fim aplicável; isso impede que um corte da triagem transforme conteúdo citado em sinal.
+
+## Fontes e sincronização
+
+`node ptbr/ferramentas/sincronizar.cjs` atualiza somente os blocos linguísticos e as pontes pontuais do HTML existente, replica o HTML portátil e alinha as versões do cache. Não use uma cópia antiga do HTML para integrar esta entrega.
+
+Os pontos compartilhados são: versão do corpus, proteção de trechos, expressão, repetição, inclusão dos módulos, ponte das escolhas/identidade, invalidação ao carregar folha, painel e versão de assets/cache. O patch precisa de revisão antes da integração; nada aqui autoriza publicação.
+
+## Verificação reproduzível
+
+Dependências exclusivas de QA: Node, `acorn@8.15.0`, `playwright@1.55.0` e navegadores/dependências do Playwright. O produto não depende desses pacotes.
+
+```sh
+node ptbr/teste-triagem.js
+node ptbr/teste-painel.js
+node tests/ptbr-lentes.cjs
+node tests/controles-static.cjs
+node tests/linguistica-linhagem.cjs
+node tests/ptbr-browser.cjs
+BROWSER_ENGINE=webkit node tests/ptbr-browser.cjs
+# Gate PWA separado (falha conhecida também na base):
+PTBR_PWA_WEBKIT=1 BROWSER_ENGINE=webkit node tests/ptbr-browser.cjs
+node tests/primeiro-acesso-browser.cjs
+node tests/orientacao-browser.cjs
+```
+
+- `auditoria/base-9d16740.json`: casos executados na base antes da correção.
+- `auditoria/matriz-lentes.json`: positivos, negativos e posições nas lentes reais.
+- `auditoria/pacote.json`: hashes, suites, falha deliberada do executor, análise ES5 e cobertura do pacote externo.
+- `auditoria/verificacao.md`: resultados, estados e lacunas desta entrega.
+
+## Pacote recebido: avaliação separada
+
+```sh
+node ptbr/ferramentas/auditar-pacote.cjs /caminho/PTBR > auditoria.json
+```
+
+O auditor não modifica o pacote. Executa os motores em subprocessos; aplica em memória uma correção do acumulador de falhas e injeta uma falha para verificar o código de saída. O retorno 1 do auditor significa bloqueio para integração, mesmo que as suites originais imprimam sucesso.
+
+Os sete hashes conferem. O executor original retorna sucesso mesmo com uma falha injetada no corpus; o acumulador corrigido retorna 1. Acorn em ES5 rejeita `classes-morfologia.js`. O motor do pacote não cobre `de vez em quando` e junta indevidamente `No final. Das contas`. Hashes comprovam integridade, não licença nem qualidade linguística.
+
+A etapa 2 precisa revisar a licença e origem de cada inventário, os efeitos sobre protótipos globais, APIs além de ES5, a qualidade das leituras morfológicas, carga sob demanda, HTML portátil e aparelhos antigos. Sinônimos e morfologia permanecem adiados.

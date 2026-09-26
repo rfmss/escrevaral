@@ -1,0 +1,35 @@
+$ node ptbr/teste-triagem.js
+TRIAGEM OK: 16 casos; acentos e posições; limite de 8.000 caracteres/1.600 tokens; sem Findings; citações cortadas protegidas.
+exit=0
+
+$ node ptbr/teste-painel.js
+PAINEL OK: sinais, análise serial, escolhas, lente individual, cancelamento, IME, HTML portátil e cache
+exit=0
+
+$ node tests/ptbr-lentes.cjs
+LENTES OK: 29 casos reais, posições UTF-16, dupla ocorrência, limites, diacríticos, citações, código, autoria e catálogo existente + 1 expressão local.
+exit=0
+
+$ node tests/controles-static.cjs
+OK: 41 scripts ES5, versão offline e HTML portátil sincronizados.
+exit=0
+
+$ node tests/linguistica-linhagem.cjs
+OK: corpus incremental equivalente, reuso parcial, regiões protegidas, limite de apontamentos; análises persistíveis; linhagem, limite, quota e pacotes.
+exit=0
+
+$ node tests/cadernos.cjs
+OK: sintaxe; migração; identidade; caderno vazio; pacote completo; ida e volta; autoria; colisões; validação; rollback; recuperação; lixeira.
+exit=0
+
+$ node tests/originais.cjs
+OK: caixas opcionais; IDs; nomes por caixa; exportação completa e parcial; legado; colisões; recuperação do ensaio; rollback; lixeira e duas instâncias.
+exit=0
+
+$ node tests/universo.cjs
+OK: fichas, vínculos, isolamento, dados existentes, exportação, cópia com remapeamento, exclusão sem perda de texto e rejeição transacional de vínculos inválidos.
+exit=0
+
+$ node tests/quadro.cjs
+OK: quadro isolado; ida/volta e cópia; lixeira; quota; conflito; limites e validação antes de gravar.
+exit=0

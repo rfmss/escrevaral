@@ -1,47 +1,34 @@
-/* Executar: node ptbr/teste-triagem.js (não requer o pacote PTBR). */
+/* Testes da triagem contra os módulos reais da main. */
 'use strict';
-var assert = require('assert'), create = require('./triagem');
-var engine = {
-  dados: { lexico: { localLexicon: { rua: { className: 'Substantivo' } }, functionWords: { artigos: ['a', 'o'] } } },
-  core: {
-    tokenizeWithOffsets: function (s) {
-      var m, a = [], re = /[A-Za-zÀ-ÖØ-öø-ÿ]+/g;
-      while ((m = re.exec(s))) { a.push({ token: m[0], start: m.index, end: m.index + m[0].length }); }
-      return a;
-    },
-    validateFinding: function (f) { return !!(f && f.id === 'PTBR-MORFOLOGIA-001'); }
-  },
-  dificuldades: { resolve: function (w) { return w === 'para' ? { nota: 'homógrafo' } : null; } },
-  expressoes: { has: function (s) { return s === 'rua'; } }
-};
-var tr = create(engine), source = 'A rua para que o tempo passe ao longo.', t = tr.triage(source);
-assert.strictEqual(t.status, 'pronto');
-assert.deepStrictEqual(Object.keys(t.signals).sort(), ['dificuldades', 'expressoes', 'morfologia', 'que-contextual']);
-assert.strictEqual(t.examples['que-contextual'].start, 11);
-assert.strictEqual(Object.prototype.hasOwnProperty.call(t, 'findings'), false);
-assert.strictEqual(tr.triage('').signals.morfologia, undefined);
-assert.strictEqual(tr.triage(new Array(40002).join('a')).status, 'limite');
-assert.throws(function () { tr.run(source.replace('rua', 'sol'), t, [], function () {}); }, /corresponder/);
-var queue = [], seen = [], ended = 0;
-tr.run(source, t, ['expressoes', 'nao-existe', 'morfologia', 'morfologia'], function (id) {
-  seen.push(id);
-  return [{ id: 'PTBR-MORFOLOGIA-001', start: 2, end: 5, snippet: 'rua' }];
-}, function (id, f) { assert.strictEqual(f.length, 1); }, function () { ended++; }, function (fn) { queue.push(fn); });
-while (queue.length) { queue.shift()(); }
-assert.deepStrictEqual(seen, ['expressoes', 'morfologia']);
-assert.strictEqual(ended, 1);
-queue = []; seen = []; ended = 0;
-var cancel = tr.run(source, t, ['morfologia', 'expressoes'], function (id) {
-  seen.push(id); return [];
-}, null, function () { ended++; }, function (fn) { queue.push(fn); });
-queue.shift()(); cancel();
-while (queue.length) { queue.shift()(); }
-assert.deepStrictEqual(seen, ['morfologia']);
-assert.strictEqual(ended, 0);
-queue = []; seen = [];
-tr.run(source, t, ['morfologia'], function () { return [{ id: 'invalido' }]; }, function (id, f, e) {
-  assert.ok(e); seen.push(id);
-}, null, function (fn) { queue.push(fn); });
-while (queue.length) { queue.shift()(); }
-assert.deepStrictEqual(seen, ['morfologia']);
-console.log('TRIAGEM OK: sinais, offsets, silêncio, limite, texto atual, serial, cancelamento, Finding inválido');
+var assert=require('assert'),fs=require('fs'),vm=require('vm'),path=require('path');
+var html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),scripts=[],re=/<script\b[^>]*>([\s\S]*?)<\/script>/g,m,ctx=vm.createContext({});
+while((m=re.exec(html)))scripts.push(m[1]);
+for(var i=0;i<scripts.length;i++){if(scripts[i].indexOf('root.Escr.mountUtilities')>=0)break;vm.runInContext(scripts[i],ctx);}
+var E=ctx.Escr,tr=E.createSignalTriage(E);
+var cases=[
+ ['De vez em quando, volto.','expressoes',true],
+ ['No final. Das contas, volto.','expressoes',false],
+ ['No\tfinal\u00a0das contas, volto.','expressoes',true],
+ ['Em u\u0301ltima ana\u0301lise, volto.','expressoes',true],
+ ['“No final das contas”','expressoes',false],
+ ['“No final das contas','expressoes',false],
+ ['No final\ndas contas','expressoes',false],
+ ['muito muito','repeticao',true],
+ ['falou que falou','repeticao',true],
+ ['falou que escreveu','repeticao',false],
+ ['muito, muito','repeticao',false],
+ ['pomodoro pomodoro pomodoro','repeticao',true],
+ ['casa\n“citação”\ncasa casa','repeticao',true],
+ ['casa casa\n\ncasa','repeticao',true],
+ ['casa\n\ncasa','repeticao',false],
+ ['casa “citada” casa','repeticao',false]
+];
+cases.forEach(function(c){var r=tr.scan(c[0]);assert.strictEqual(!!r.signals[c[1]],c[2],JSON.stringify(c));assert.strictEqual(r.findings,undefined);});
+assert.strictEqual(tr.scan('“muito muito” casa').words,3,'contagem inclui palavras protegidas, sem analisá-las');
+var many=new Array(100001).join('palavra '),r=tr.scan(many);
+assert.ok(r.work.characters<=8000&&r.work.tokens<=1600);assert.ok(r.partial);assert.ok(r.words<=1600);
+var tail=tr.scan(new Array(8001).join(' ')+ 'de vez em quando');assert.strictEqual(!!tail.signals.expressoes,false,'sinal fora do recorte não é anunciado');
+var quote=tr.scan('“'+new Array(7901).join(' ')+'de vez em quando'+new Array(101).join(' ')+'”');assert.strictEqual(!!quote.signals.expressoes,false,'corte no meio de citação permanece protegido');
+var repeatedNFD=tr.scan('café cafe\u0301');assert.strictEqual(repeatedNFD.signals.repeticao,true);
+var accents=tr.scan('pode pôde');assert.strictEqual(!!accents.signals.repeticao,false);
+console.log('TRIAGEM OK: '+cases.length+' casos; acentos e posições; limite de 8.000 caracteres/1.600 tokens; sem Findings; citações cortadas protegidas.');

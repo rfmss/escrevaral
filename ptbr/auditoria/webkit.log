@@ -1,0 +1,3 @@
+Skipping host requirements validation logic because `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS` env variable is set.
+PTBR BROWSER OK webkit: posições NFD, autoria persistida, lentes manuais, IME, edição, troca de folha, 3 larguras, triagem limitada e HTML portátil. PWA offline: não validado.
+[{"inputCharacters":200000,"work":{"characters":7998,"tokens":1032,"maxCharacters":8000,"maxTokens":1600},"partial":true,"medianMs":6,"maxMs":7},{"inputCharacters":800000,"work":{"characters":7998,"tokens":1032,"maxCharacters":8000,"maxTokens":1600},"partial":true,"medianMs":6,"maxMs":10}]
