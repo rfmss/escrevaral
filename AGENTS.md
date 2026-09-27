@@ -16,8 +16,8 @@ Este arquivo orienta IAs que trabalham neste repositório. Instruções atuais d
 - A base de trabalho é `rfmss/escrevaral`, branch `main`. Não crie outra branch por rotina quando a orientação vigente é trabalhar apenas na main.
 - O editor pertence ao autor. Nenhuma lente, sugestão, análise, botão de resultado ou motor pode substituir, corrigir, completar ou apagar seu texto. Selecionar um trecho não é editar.
 - O botão Escrevaral liga/desliga a área de análise. Essa interface está especificada na jornada; não a anuncie como implementada antes da integração real.
-- Uma análise por vez, sempre por escolha explícita do escritor. Ligar apenas abre opções; não inicia varredura geral. Trocar de lente cancela a anterior; não executar fila de outras lentes nem reanálise automática durante a escrita. Receber resultados nunca autoriza modificar o editor.
-- Desde v6-23, o painel publicado executa uma lente por escolha, sem triagem automática. A apresentação final do controle Escrevaral e a auditoria ampla de navegador permanecem pendentes.
+- Uma análise completa por vez, sempre por escolha explícita do escritor. A direção de 27/09/2026 permite preparação leve incremental nas pausas, ainda não implementada; consultar o contrato de pacotes. Ligar apenas abre opções; não inicia varredura geral. Trocar de lente cancela a anterior; não executar fila de outras lentes nem reanálise automática durante a escrita. Receber resultados nunca autoriza modificar o editor.
+- Desde v6-23, o painel publicado executa uma lente por escolha, sem triagem automática. A apresentação final do controle Escrevaral permanece pendente. A preparação incremental agora planejada não está ativa; testes visuais não são requisito.
 - O usuário recebe trechos exatos, explicações e limites na mesma área. Qualquer sugestão de lente permanece opcional; acesso manual preservado.
 - Não use o exemplo anotado em `/jornada/` como se fosse um detector geral. Não conclua subordinação pela presença de `que`.
 - Não apresente uma leitura estilística como erro nem crie notas de qualidade, intenção ou complexidade sem fundamento e validação.
@@ -63,3 +63,9 @@ Mantenha `docs/jornada/plano-voo.json` com IDs, TODO/DONE, evidências e critér
 ## Decisão vigente — referência de época, sem homologação (27/09/2026)
 
 KitKat e iPad de 2012 orientam a economia de recursos e as escolhas conservadoras; **não são aparelhos a testar**. Rafael dispensou testes nesses dispositivos e teste visual antes da publicação. Não recriar essa exigência como pendência, gate ou pedido de autorização. Publicar incrementos aprovados com verificações essenciais de integridade e ajustar a experiência conforme o retorno do autor. Não declarar uma certificação de compatibilidade que não foi realizada. Esta decisão substitui instruções históricas sobre homologação de aparelhos e auditoria visual obrigatória.
+
+## Coordenação ASTRA 1 / ASTRA 2 — 27/09/2026
+
+Leia `docs/CONTRATO-PACOTES-LINGUISTICOS.md`. Rafael admite acervo grande em disco, inclusive próximo de 1 GB, sob limites independentes de memória, inicialização e trabalho. Preparação leve nas pausas passa a ser planejada, sem fila de lentes completas; suspender na digitação, IME, página oculta e análise desligada. Não ativar antes dos contratos e verificações. Prazo de calendário retirado; entregas delimitadas.
+
+ASTRA 1 integra/publica e cuida de produto, C04, instalação/persistência/offline, interface e contratos de produção. ASTRA 2 trabalha a primeira prova em `packages/experiments/lexical-index/` e comparação em `docs/recursos/`, sem alterar manifestos, bundles ou main. Mudanças em arquivos existentes do cofre/motores exigem delimitação entre as frentes. Este arranjo substitui a decisão anterior de concentrar todas as tarefas no assistente principal; não cria autorização para outros agentes publicarem na main.

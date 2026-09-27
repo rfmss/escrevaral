@@ -1,5 +1,9 @@
 # Manual dos conectores
 
+## Evolução planejada — pacotes e preparação incremental
+
+A [proposta v0 de contrato de pacotes](CONTRATO-PACOTES-LINGUISTICOS.md) delimita ASTRA 1/2, leitor de blocos injetado, consultas canceláveis, identidade/versões e primeira prova lexical. Ainda não é API implementada. O cofre abaixo permanece síncrono; I/O assíncrono fica em uma fronteira separada. Preparação nas pausas foi autorizada como direção, preservando análise completa explícita e acesso a todas as lentes.
+
 ## Usar o cofre em outro projeto
 
 Gerar e copiar o arquivo único descrito em [packages/cofre/README.md](../packages/cofre/README.md). O pacote contém código e dados necessários às lentes atuais; não copiar index, editor, cadernos ou localStorage. Manter a versão do pacote e `knowledgeVersion` junto dos resultados persistidos. O teste `tests/cofre-portabilidade.cjs` demonstra esse transporte.

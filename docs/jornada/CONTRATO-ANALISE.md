@@ -1,5 +1,11 @@
 # Contrato da cortina Escrevaral
 
+## Evolução vigente — 27/09/2026
+
+Rafael passou a permitir preparação leve e incremental nas pausas, ainda **não implementada**. Isso substitui a proibição abrangente de preparação automática das decisões históricas abaixo; exames completos continuam explícitos, um por escolha, sem fila de lentes. Suspender na digitação, IME, página oculta e controle desligado. Folha, geração do rascunho, contexto e versões vinculam cada resposta. Falta de sinal, falta de verificação e falta de cobertura são estados diferentes; manter “Todas as análises”.
+
+[Contrato proposto e divisão de trabalho](../CONTRATO-PACOTES-LINGUISTICOS.md). Orçamentos históricos de sinais não são limites aprovados para a nova preparação; fixá-los pela prova. A v6-28 permanece sem triagem automática. Teste visual/aparelhos não é gate, conforme decisão posterior já vigente.
+
 ## Experiência proposta pelo autor
 
 O autor escreve no editor. O controle **Escrevaral** começa desligado. Ao ligar, abre uma área com as análises disponíveis. O autor escolhe **Orações subordinadas** e recebe, na própria área, trechos extraídos da sua versão do texto, com explicações. Nada substitui, corrige ou reescreve o editor, nem por ação de um botão de resultado.

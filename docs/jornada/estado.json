@@ -4,10 +4,10 @@
   "baseline": "d5faf397ea953e31401326b0b0ff8aa27ac41b52",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-28 publicada na main; CI e Pages concluídos com sucesso. C02: painel sem Grid/Flex/gap. C03: arquivo portátil sem registro de worker; site com estado do cache e caminhos explícitos de transporte/recuperação do acervo. Plano v2: 8/21 DONE; ciclo +2 (C02/C03); próximo C04. Referência de época, sem testes visuais ou em aparelhos. Nenhuma ampliação dos motores neste ciclo.",
+  "current": "Produto v6-28 publicado; main de referência 019e910. Plano v3: 8/24 DONE, +0 nesta revisão de direção. Acrescentados A01–A03 para consulta particionada, pacotes persistentes/offline e preparação incremental. Acervo próximo de 1 GB é admissível em disco sob limites de recursos, não capacidade garantida. Implementação atual permanece sem triagem automática. ASTRA 1 segue C04 e integra na main; ASTRA 2 pode executar A01 isoladamente.",
   "next": [
     "C04: revisar APIs e alternativas de salvar/importar/exportar/selecionar, preservando texto e pacotes com verificações essenciais.",
-    "Após C04, seguir M00: avaliar motor brasileiro isoladamente, sem elevar os requisitos do editor.",
+    "ASTRA 2: A01 em paralelo isolado, comparação técnica e prova lexical indexada; ASTRA 1 estabiliza contratos antes de A02/A03.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
     "Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.",
     "Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.",
@@ -664,10 +664,10 @@
   ],
   "primarySource": "B09 — Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017.",
   "focusDecision": {
-    "date": "26/09/2026",
-    "request": "Retomar o plano completo e concentrar a execução no assistente principal.",
-    "decision": "Nenhuma nova tarefa depende de colaboração com outro modelo. Avaliações anteriores permanecem apenas como histórico; não serão reabertas na fila atual. Consolidar dependências lexicais e sintáticas antes de somar novos subtipos de subordinadas.",
-    "nextDeliverable": "C04: revisar APIs e alternativas de salvar/importar/exportar/selecionar, preservando texto e pacotes com verificações essenciais."
+    "date": "27/09/2026",
+    "request": "Coordenar ASTRA 1/2; admitir acervo grande em disco e preparação leve nas pausas; retirar prazo de calendário.",
+    "decision": "ASTRA 1 mantém produto, C04 e integração na main. ASTRA 2 cuida da primeira prova isolada em packages/experiments/lexical-index/ e docs/recursos/. Contratos compartilhados por proposta; não alterar cofre síncrono nem manifestos de produção em paralelo.",
+    "nextDeliverable": "ASTRA 1: C04. ASTRA 2: A01. A02/A03 seguem após contratos e limites medidos."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -689,5 +689,13 @@
     "date": "27/09/2026",
     "decision": "Referência tecnológica da época KitKat/iPad 2012; não realizar nem exigir testes nesses dispositivos ou teste visual antes de publicar. Manter integridade, simplicidade e ajustes conforme retorno do autor.",
     "supersedes": "Exigência de homologação e auditoria visual em versões anteriores do plano."
+  },
+  "resourceDirection": {
+    "date": "27/09/2026",
+    "contract": "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
+    "status": "Direção registrada; preparação e pacotes grandes ainda não implementados.",
+    "deadline": "Sem prazo de calendário; entregas delimitadas.",
+    "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
+    "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   }
 }

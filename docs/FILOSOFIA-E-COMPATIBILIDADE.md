@@ -29,7 +29,7 @@ A digitação não espera transições nem análises. O limite de 16 ms do anexo
 | Um único `index.html` | Fontes modulares aprovadas permanecem. O site tem assets externos; `escrevaral.html` é a distribuição única gerada. A estratégia deve ser coerente com a referência de época, sem exigir ensaio em iOS antigo. |
 | PWA como arquivo autossuficiente | Cache do site e abertura de arquivo portátil são caminhos diferentes. Não afirmar que um service worker resolve o navegador antigo ou funciona via `file:`. |
 | Sem npm | Sem dependência de runtime npm/CDN no produto; ferramentas de montagem/teste ficam fora do aparelho do autor. |
-| Análise após pausa e filtros que escondem lentes | Prevalece uma lente por escolha explícita, sem varredura de fundo nem ocultação impeditiva de acesso manual. Contagens mecânicas não autorizam diagnóstico automático. |
+| Análise após pausa e filtros que escondem lentes | Direção revista em 27/09/2026: preparação leve incremental nas pausas passa a ser planejada (A03), com orçamento e suspensão. Exames completos continuam explícitos; manter acesso a todas as lentes e distinguir sinal ausente de não verificado. |
 | “Prosa limpa” | Não usar como aprovação linguística. Ausência de achados significa apenas ausência dentro do recorte examinado. |
 | `.scrvrl` como YAML + Markdown | Os pacotes existentes são estruturados em JSON legível. Documentar o formato real e conservar importação/exportação; não migrar o acervo apenas para imitar um exemplo do anexo. |
 | OPFS/IndexedDB | Possíveis camadas opcionais futuras, não pré-requisito nem implementação presumida. Preservar o armazenamento atual até uma migração própria. |
@@ -50,3 +50,9 @@ As fontes técnicas já consultadas para a triagem foram os anúncios oficiais d
 ## Regra de conclusão
 
 Cada caixa do plano tem escopo, evidência e critério. `DONE` significa que aquela entrega delimitada foi concluída; não implica certificação de aparelhos. Não há exigência de testes nesses aparelhos ou de teste visual como condição de publicação. O avanço público usa contagens de caixas e seu delta, sem porcentagem de “língua coberta”.
+
+## Acervo grande e duas frentes — direção de 27/09/2026
+
+Tamanho instalado não se confunde com memória residente. Um acervo próximo de 1 GB pode ser viável se particionado, consultado em pequenos blocos e instalado com recuperação; não é meta nem garantia de capacidade. Índice, bloco descomprimido, cache e trabalho por pausa precisam de limites medidos. O núcleo portátil não incorpora automaticamente os pacotes grandes. [Contrato proposto e responsabilidades](CONTRATO-PACOTES-LINGUISTICOS.md).
+
+ASTRA 1 integra produto; ASTRA 2 entrega recursos/conversores/motores puros em área combinada. Não há prazo de calendário. Esta direção substitui a concentração anterior de todas as tarefas no assistente principal e a proibição abrangente de preparação automática; não autoriza fila automática de diagnósticos.

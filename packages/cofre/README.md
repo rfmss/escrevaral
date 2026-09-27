@@ -30,3 +30,7 @@ Os resultados incluem `lens`, `knowledgeVersion`, `findings`, `status`, `limited
 Cada achado informa `id`, `lens`, `feature`, `severity`, `confidence`, `message`, `start`, `end`, `snippet` e `evidence`. O registro verifica inteiros, limites, trecho literal e explicação com fonte. `start` é inclusivo, `end` exclusivo, ambos em **UTF-16**, sem normalização do original. Referências, relações e componentes opcionais pertencem ao contrato específico da lente.
 
 O cofre não gerencia cancelamento de tarefas síncronas nem identidade/revisão de documentos. O hospedeiro deve descartar resultados antigos. Para trabalho pesado, planejar Worker/processo e cancelamento no conector; não prometer interrupção de uma chamada síncrona. Veja [manual dos conectores](../../docs/CONECTORES.md).
+
+## Evolução proposta
+
+Consulta a pacotes particionados e preparação nas pausas são trabalho futuro, descrito em [contrato de pacotes v0](../../docs/CONTRATO-PACOTES-LINGUISTICOS.md). Não alteram a API síncrona 1.0.0 acima. A primeira prova usa leitor de blocos injetado em área experimental, sem integrar dados ou dependências à produção.

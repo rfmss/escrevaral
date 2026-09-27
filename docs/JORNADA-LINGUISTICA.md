@@ -6,7 +6,7 @@ Atualizado em 27/09/2026. Base do produto auditada: `d5faf397ea953e31401326b0b0f
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-28 publicada na main; CI e Pages concluídos com sucesso. C02: painel sem Grid/Flex/gap. C03: arquivo portátil sem registro de worker; site com estado do cache e caminhos explícitos de transporte/recuperação do acervo. Plano v2: 8/21 DONE; ciclo +2 (C02/C03); próximo C04. Referência de época, sem testes visuais ou em aparelhos. Nenhuma ampliação dos motores neste ciclo.
+**Estado:** Produto v6-28 publicado; main de referência 019e910. Plano v3: 8/24 DONE, +0 nesta revisão de direção. Acrescentados A01–A03 para consulta particionada, pacotes persistentes/offline e preparação incremental. Acervo próximo de 1 GB é admissível em disco sob limites de recursos, não capacidade garantida. Implementação atual permanece sem triagem automática. ASTRA 1 segue C04 e integra na main; ASTRA 2 pode executar A01 isoladamente.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -17,7 +17,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 ## Fila atual
 
 - C04: revisar APIs e alternativas de salvar/importar/exportar/selecionar, preservando texto e pacotes com verificações essenciais.
-- Após C04, seguir M00: avaliar motor brasileiro isoladamente, sem elevar os requisitos do editor.
+- ASTRA 2: A01 em paralelo isolado, comparação técnica e prova lexical indexada; ASTRA 1 estabiliza contratos antes de A02/A03.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.
