@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 27/09/2026. Base do produto auditada: `db3fde26d0662568ac198f878d3cc861babfc8f0`.
+Atualizado em 27/09/2026. Base do produto auditada: `e7742bdaa91027ca43de2a2aed979d5da5b04bfe`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-25 publicada. Entrega v6-26 implementada e em verificação: filosofia do anexo incorporada, árvore TODO/DONE e relógio com troca discreta sem animação 3D. Prioridade agora é adequação ao piso KitKat/iPad de 2012; compatibilidade real ainda não homologada. Portparser permanece isolado e sem inferência.
+**Estado:** v6-26 publicada na main, com CI e GitHub Pages concluídos. Filosofia do anexo consolidada, árvore de 21 marcos e relógio com troca discreta sem animação 3D. Plano v1: 6/21 DONE, entrega +2 (F05, C01); próximo C02, layout do painel pelo piso antigo. Compatibilidade real KitKat/iPad 2012 ainda não homologada; Portparser permanece isolado e sem inferência.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 

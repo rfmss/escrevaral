@@ -6,7 +6,7 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 27/09/2026, horário de Brasília:** main `cb9c6ec1cfb5e8dffecda1c45a59b676ac9291fa`; produto v6-25 em `db3fde26d0662568ac198f878d3cc861babfc8f0`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
+**Retrato conferido em 27/09/2026, horário de Brasília:** produto v6-26 na main `e7742bdaa91027ca43de2a2aed979d5da5b04bfe`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
 
 
 ## Constituição do projeto
@@ -135,7 +135,7 @@ Na base conferida, há **16 lentes com escopos delimitados**. Isso não signific
 
 A v6-25 entregou fontes separadas, build reproduzível, cofre transportável, manual de conectores e CI na main. O controlador legado do editor continua grande e a cascata CSS mantém a ordem histórica.
 
-**Evidência conhecida:** 17 scripts de verificação essenciais; 290 casos equivalentes entre a ordem anterior dos módulos e o cofre isolado; CI e deploy da v6-25 concluídos. Os 290 casos são evidência de preservação na reorganização, não medição de cobertura do português ou avaliação reservada do modelo.
+**Evidência conhecida:** 18 scripts de verificação essenciais no CI da v6-26; 290 casos equivalentes entre a ordem anterior dos módulos e o cofre isolado; CI e deploy da v6-26 concluídos. O relatório da [v6-26](jornada/ENTREGA-V6-26.md) registra F05/C01 e seus limites. Os 290 casos são evidência de preservação na reorganização, não medição de cobertura do português ou avaliação reservada do modelo.
 
 **Portparser:** snapshot seletivo atribuído e fixado por commit; adaptador local CoNLL-U testado com anotação manual. Pesos, léxicos e runtime de inferência não instalados. Não executado nem integrado como motor do produto. [Estado e critérios completos](../packages/connectors/portparser/README.md).
 
