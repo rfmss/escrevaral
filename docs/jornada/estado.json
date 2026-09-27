@@ -1,13 +1,13 @@
 {
   "version": 15,
   "updated": "27/09/2026",
-  "baseline": "69051b81f69739d16cdb049039c10812a6978daf",
+  "baseline": "d5faf397ea953e31401326b0b0ff8aa27ac41b52",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-27 publicada, CI e Pages aprovados. C02 DONE: painel sem Grid/Flex/gap, com colunas simples e faixas roláveis. Plano v2: 7/21; próxima C03, acesso e recuperação offline. Referência de época sem teste visual ou em aparelhos. C03 implementada e verificada em 6.28.0, aguardando publicação.",
+  "current": "v6-28 publicada na main; CI e Pages concluídos com sucesso. C02: painel sem Grid/Flex/gap. C03: arquivo portátil sem registro de worker; site com estado do cache e caminhos explícitos de transporte/recuperação do acervo. Plano v2: 8/21 DONE; ciclo +2 (C02/C03); próximo C04. Referência de época, sem testes visuais ou em aparelhos. Nenhuma ampliação dos motores neste ciclo.",
   "next": [
-    "C03: distinguir site/PWA/arquivo portátil; indicar preparação e falha do cache e orientar transporte/recuperação sem exigir APIs modernas.",
-    "C03–C04: implementar e verificar a lógica do caminho offline legado e fluxos de salvar/importar/exportar/selecionar; registrar APIs e alternativas.",
+    "C04: revisar APIs e alternativas de salvar/importar/exportar/selecionar, preservando texto e pacotes com verificações essenciais.",
+    "Após C04, seguir M00: avaliar motor brasileiro isoladamente, sem elevar os requisitos do editor.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
     "Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.",
     "Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.",
@@ -667,7 +667,7 @@
     "date": "26/09/2026",
     "request": "Retomar o plano completo e concentrar a execução no assistente principal.",
     "decision": "Nenhuma nova tarefa depende de colaboração com outro modelo. Avaliações anteriores permanecem apenas como histórico; não serão reabertas na fila atual. Consolidar dependências lexicais e sintáticas antes de somar novos subtipos de subordinadas.",
-    "nextDeliverable": "C03: distinguir site/PWA/arquivo portátil; indicar preparação e falha do cache e orientar transporte/recuperação sem exigir APIs modernas."
+    "nextDeliverable": "C04: revisar APIs e alternativas de salvar/importar/exportar/selecionar, preservando texto e pacotes com verificações essenciais."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -678,10 +678,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "v6-27 publicada; CI e GitHub Pages concluídos com sucesso",
-    "commit": "69051b81f69739d16cdb049039c10812a6978daf",
-    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36318079279",
-    "verification": "CI 36318088428 e Pages 36318079279: completed/success."
+    "status": "v6-28 publicada; CI e GitHub Pages concluídos com sucesso",
+    "commit": "d5faf397ea953e31401326b0b0ff8aa27ac41b52",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36342143714",
+    "verification": "CI 36342144219 e Pages 36342143714: completed/success. 19 scripts essenciais aprovados no CI. Sem teste visual ou em aparelhos."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",

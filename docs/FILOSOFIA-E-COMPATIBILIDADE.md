@@ -41,7 +41,7 @@ A digitação não espera transições nem análises. O limite de 16 ms do anexo
 ## Pendências identificadas no código
 
 1. Painel: C02 concluída na v6-27; tabela CSS, blocos e margens substituem Grid/Flex/gap, com rolagem e seleção preservadas.
-2. `src/app/service-worker.template.js`: APIs/sintaxe posteriores ao piso; manter isoladas e desenhar um caminho legado de offline/exportação realmente utilizável.
+2. C03 concluída na v6-28: worker moderno isolado e opcional; arquivo portátil sem registro/cache, estados de falha e instruções de recuperação. C04 revisa as APIs de transporte do acervo.
 3. Download, importação, clipboard, seleção e salvamento: revisar APIs e caminhos alternativos no código, preservando dados.
 4. Relógio: animação 3D substituída na entrega C01 por duas metades estáticas, troca intermediária de 70 ms e estado final. Relógio oculto e preferência de movimento reduzido fazem troca direta; Q01 revisa simplicidade e acessibilidade no código.
 

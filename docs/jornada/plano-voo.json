@@ -89,10 +89,13 @@
         {
           "id": "C03",
           "title": "Caminho offline legado",
-          "state": "TODO",
-          "acceptance": "Separar site/PWA/portátil e implementar caminhos de acesso/recuperação sem exigir APIs posteriores à referência tecnológica; verificar lógica e integridade sem teste em aparelho.",
+          "state": "DONE",
+          "acceptance": "Site/cache opcional e portátil separados; arquivo sem registro de worker, estados de preparação/ativação/falha, instruções de transporte/recuperação, verificações de integridade e publicação confirmadas.",
           "evidence": [
-            "docs/ARQUITETURA.md"
+            "docs/ARQUITETURA.md",
+            "src/app/offline.js",
+            "tests/offline-access.cjs",
+            "docs/jornada/ENTREGA-V6-28.md"
           ]
         },
         {
@@ -235,15 +238,16 @@
       ]
     }
   ],
-  "next": "C03",
+  "next": "C04",
   "lastDelivery": {
-    "version": "6.27.0",
+    "version": "6.28.0",
     "completed": [
-      "C02"
+      "C02",
+      "C03"
     ],
     "baselineDone": 6,
-    "publication": "69051b81f69739d16cdb049039c10812a6978daf; CI 36318088428 e Pages 36318079279: success.",
-    "evidence": "docs/jornada/ENTREGA-V6-27.md"
+    "publication": "d5faf397ea953e31401326b0b0ff8aa27ac41b52; CI 36342144219 e Pages 36342143714: success.",
+    "evidence": "docs/jornada/ENTREGA-V6-28.md"
   },
   "scopeChanges": [
     {

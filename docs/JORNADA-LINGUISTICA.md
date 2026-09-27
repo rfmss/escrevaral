@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 27/09/2026. Base do produto auditada: `69051b81f69739d16cdb049039c10812a6978daf`.
+Atualizado em 27/09/2026. Base do produto auditada: `d5faf397ea953e31401326b0b0ff8aa27ac41b52`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-27 publicada, CI e Pages aprovados. C02 DONE: painel sem Grid/Flex/gap, com colunas simples e faixas roláveis. Plano v2: 7/21; próxima C03, acesso e recuperação offline. Referência de época sem teste visual ou em aparelhos. C03 implementada e verificada em 6.28.0, aguardando publicação.
+**Estado:** v6-28 publicada na main; CI e Pages concluídos com sucesso. C02: painel sem Grid/Flex/gap. C03: arquivo portátil sem registro de worker; site com estado do cache e caminhos explícitos de transporte/recuperação do acervo. Plano v2: 8/21 DONE; ciclo +2 (C02/C03); próximo C04. Referência de época, sem testes visuais ou em aparelhos. Nenhuma ampliação dos motores neste ciclo.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,8 +16,8 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- C03: distinguir site/PWA/arquivo portátil; indicar preparação e falha do cache e orientar transporte/recuperação sem exigir APIs modernas.
-- C03–C04: implementar e verificar a lógica do caminho offline legado e fluxos de salvar/importar/exportar/selecionar; registrar APIs e alternativas.
+- C04: revisar APIs e alternativas de salvar/importar/exportar/selecionar, preservando texto e pacotes com verificações essenciais.
+- Após C04, seguir M00: avaliar motor brasileiro isoladamente, sem elevar os requisitos do editor.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.
