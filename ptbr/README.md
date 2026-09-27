@@ -1,5 +1,7 @@
 # Lentes de português — continuidade PT-BR
 
+**Retomada atual:** [Plano mestre](../docs/PLANO-MESTRE.md) e [estado da Jornada](../docs/jornada/estado.json). Este arquivo reúne incrementos históricos; as seções de triagem em série descrevem comportamento anterior à v6-23. Desde v6-25, `sincronizar.cjs` apenas encaminha para o build modular; não edite blocos inline no HTML.
+
 Base: `rfmss/escrevaral`, `main`, `9d167407962300d82393dee3262c3dbb32cc994f`.
 Etapa publicada na `main` em 25/09/2026: `1d649c2ca3f47db7570bdf1b3c20f6e075705535`. As auditorias preservam o estado histórico anterior à publicação.
 

@@ -1,6 +1,6 @@
 # Passagem de trabalho entre pessoas e IAs
 
-Antes de continuar: ler `AGENTS.md`, consultar a main remota, verificar alterações locais e conferir `estado.json`. O mapa descreve compromissos e evidências, não autoriza dizer que uma capacidade planejada existe.
+Antes de continuar: ler `AGENTS.md` e [Plano mestre](../PLANO-MESTRE.md), consultar a main remota, verificar alterações locais e conferir `estado.json`. O mapa descreve compromissos e evidências, não autoriza dizer que uma capacidade planejada existe.
 
 ## Modelo de entrega
 
@@ -20,6 +20,8 @@ Antes de continuar: ler `AGENTS.md`, consultar a main remota, verificar alteraç
 ## Atualização do mapa
 
 Editar a etapa em `docs/jornada/estado.json` somente quando existir evidência correspondente. Ajustar data, pendências, evidências e próximos passos. Rodar `python3 ferramentas/gerar-jornada.py`; revisar os diffs de `docs/JORNADA-LINGUISTICA.md` e `jornada/index.html`.
+
+Se decisões, escopo, marcos ou sequência mudarem, atualizar também `docs/PLANO-MESTRE.md`. Conferir campos auxiliares de `estado.json`, como `publicationDecision` e `focusDecision`, para não deixar um estado antigo contradizer o resumo atual.
 
 O campo `baseline` registra a versão do produto auditada pelo mapa; não é o SHA do próprio arquivo. Não fabricar porcentagem de conclusão da língua. Se uma etapa muda de escopo, preservar a decisão e seu motivo no histórico Git.
 

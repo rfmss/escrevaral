@@ -4,6 +4,8 @@ Editor local para escrever e examinar textos em português brasileiro. As lentes
 
 **Site:** https://escrevaral.com · **Plano e pendências:** [Jornada](docs/JORNADA-LINGUISTICA.md)
 
+**Vai continuar o projeto? Leia primeiro o [Plano mestre e guia de retomada](docs/PLANO-MESTRE.md).** Ele reúne decisões, estado dos motores, sequência de trabalho e como conferir a evolução real na main.
+
 ## Desenvolver
 
 Node.js 22 ou superior. As dependências npm são ferramentas de desenvolvimento; o aplicativo não carrega bibliotecas de CDN.

@@ -4,11 +4,12 @@ Este arquivo orienta IAs que trabalham neste repositório. Instruções atuais d
 
 ## Leia antes de alterar
 
-1. `docs/JORNADA-LINGUISTICA.md`: visão, etapas e critérios.
-2. `docs/jornada/estado.json`: estado atual e fonte da página pública `/jornada/`.
-3. `docs/jornada/CONTRATO-ANALISE.md`: manuscrito imutável e comportamento da cortina.
-4. `docs/jornada/PASSAGEM-DE-TRABALHO.md`: registro obrigatório de uma entrega.
-5. `ptbr/README.md` e documentos pertinentes à tarefa. Confira o código real e a HEAD remota; documentação histórica pode descrever uma versão anterior.
+1. `docs/PLANO-MESTRE.md`: ponto de entrada completo, decisões, sequência e procedimento para conferir evolução na main.
+2. `docs/JORNADA-LINGUISTICA.md`: visão, etapas e critérios.
+3. `docs/jornada/estado.json`: estado atual e fonte da página pública `/jornada/`.
+4. `docs/jornada/CONTRATO-ANALISE.md`: manuscrito imutável e comportamento da cortina.
+5. `docs/jornada/PASSAGEM-DE-TRABALHO.md`: registro obrigatório de uma entrega.
+6. `ptbr/README.md` e documentos pertinentes à tarefa. Confira o código real e a HEAD remota; documentação histórica pode descrever uma versão anterior.
 
 ## Decisões do autor
 

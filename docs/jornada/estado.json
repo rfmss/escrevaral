@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "updated": "27/09/2026",
   "baseline": "db3fde26d0662568ac198f878d3cc861babfc8f0",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
@@ -665,7 +665,7 @@
     "date": "26/09/2026",
     "request": "Retomar o plano completo e concentrar a execução no assistente principal.",
     "decision": "Nenhuma nova tarefa depende de colaboração com outro modelo. Avaliações anteriores permanecem apenas como histórico; não serão reabertas na fila atual. Consolidar dependências lexicais e sintáticas antes de somar novos subtipos de subordinadas.",
-    "nextDeliverable": "Inventário e regência do recorte sintático organizados, lacunas explícitas e casos contrastantes que sustentem a próxima ampliação de relativas."
+    "nextDeliverable": "Avaliação isolada do Portparser: fixar dependências, licenças, corpus reservado e orçamento antes de executar inferência. A ampliação de relativas continua na fila P03–P06; se a avaliação externa estiver bloqueada, avançar um recorte independente com evidências."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -678,9 +678,10 @@
       "PWA offline em WebKit",
       "Avaliação linguística reservada"
     ],
-    "status": "v6-23 publicada; GitHub Pages concluído com sucesso; v6-24 integrado para publicação no mesmo escopo autorizado",
-    "commit": "e1c9a699f32138284e1311dbedd3ca58aae738b7",
-    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36284731353",
-    "verification": "GitHub Pages: completed/success. Acesso HTTP direto ao domínio retornou 403 neste ambiente; QA completo em navegador permanece pendente."
-  }
+    "status": "v6-25 publicada; CI de integridade e GitHub Pages concluídos com sucesso; confirmação documental publicada em cb9c6ec",
+    "commit": "db3fde26d0662568ac198f878d3cc861babfc8f0",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36299174790",
+    "verification": "CI 36299175168 e GitHub Pages 36299174790: completed/success. Commit documental cb9c6ec também teve CI e deploy concluídos. QA visual completo permanece pendente."
+  },
+  "continuityGuide": "docs/PLANO-MESTRE.md"
 }
