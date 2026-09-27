@@ -1,7 +1,7 @@
 // Regressões do percurso visual: estado, persistência e espaço útil da escrita.
 const {chromium,webkit}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..'),out=process.env.QA_OUTPUT||'/tmp',engine=process.env.BROWSER_ENGINE||'chromium';fs.mkdirSync(out,{recursive:true});let browser;const errors=[];
-const server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/html');res.end(fs.readFileSync(path.join(root,'index.html')));});
+const server=http.createServer(require('../scripts/static-handler.cjs')(root));
 async function form(p,id,name){await p.click(id);await p.fill('#project-name',name);await p.click('#project-create');}
 async function current(p){return p.evaluate(()=>JSON.parse(localStorage.getItem('escrevaral.astra.v1.doc.'+localStorage.getItem('escrevaral.astra.current'))));}
 async function shot(p,name){await p.screenshot({path:path.join(out,engine+'-'+name+'.png')});}

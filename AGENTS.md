@@ -44,3 +44,11 @@ O mapa é documentação de produto; sua publicação não publica automaticamen
 ## Decisão de publicação — 26/09/2026
 
 Rafael autorizou expressamente publicar os incrementos atuais na main para testá-los, seguir o próximo passo e concentrar a auditoria ampla em etapa posterior. A ausência de QA completo em navegador não bloqueia por si só esses pushes autorizados. Manter as verificações essenciais de integridade, registrar pendências e nunca apresentar publicação como aprovação da auditoria. Essa decisão atual prevalece sobre os gates históricos de navegador descritos nos relatórios anteriores.
+
+## Arquitetura a partir de v6-25
+
+- Não editar `index.html`, `escrevaral.html`, `service-worker.js` ou `assets/` manualmente. São distribuições geradas por `npm run build`; fontes e ordem em `src/`, `packages/`, `resources/`, `ptbr/` e `build/modules.json`.
+- Leia `README.md`, `docs/ARQUITETURA.md` e `docs/CONECTORES.md`. O HTML único é exclusivamente a distribuição portátil.
+- O cofre puro não pode depender de DOM, localStorage, cadernos ou rede. Adaptadores experimentais não entram automaticamente na montagem do site.
+- Antes do push: `npm run build:check` e verificações essenciais pertinentes. O CI da main confere montagem, contratos e regressões. A auditoria ampla de navegador continua separada conforme autorização vigente.
+- Referências externas precisam de commit, hashes, licença e cobertura. Não confundir snapshot ou teste de transporte com instalação, inferência ou validação de um modelo.

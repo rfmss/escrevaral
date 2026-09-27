@@ -1,10 +1,18 @@
-
-const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),acorn=require('acorn');
-const root=path.join(__dirname,'..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)];
-scripts.forEach((m,i)=>{try{acorn.parse(m[1],{ecmaVersion:5});}catch(e){throw new Error('Script '+i+': '+e.message);}});
-assert.equal(html,fs.readFileSync(path.join(root,'escrevaral.html'),'utf8'),'O arquivo portátil deve acompanhar o site.');
-assert.ok(!/\b(?:window|root)\.(?:alert|confirm|prompt)\s*\(/.test(html),'Sem diálogos nativos nos fluxos do app.');
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),acorn=require('acorn'),crypto=require('node:crypto');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const html=read('index.html'),portable=read('escrevaral.html'),sources=require('./helpers/sources.cjs').scripts();
+sources.forEach(s=>acorn.parse(s,{ecmaVersion:5}));
+assert.equal([...html.matchAll(/<script\b[^>]*src=/g)].length,2);
+assert.ok([...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].every(m=>!m[1].trim()),'Sem scripts inline');
+assert.ok(!/<style\b/.test(html),'CSS fora da index');
+for(const asset of require('../build/assets.json').assets){
+ const body=read(asset.path);
+ assert.equal(crypto.createHash('sha256').update(body).digest('hex'),asset.sha256);
+ assert.ok(html.includes(asset.path));assert.ok(portable.includes(body));
+ if(asset.path.endsWith('.js'))acorn.parse(body,{ecmaVersion:5});
+}
+assert.ok(!/\b(?:window|root)\.(?:alert|confirm|prompt)\s*\(/.test(portable));
 const version=html.match(/name="asset-version" content="([^"]+)"/)[1];
-assert.ok(fs.readFileSync(path.join(root,'service-worker.js'),'utf8').includes(version),'Cache com a mesma versão.');
-console.log('OK: '+scripts.length+' scripts ES5, versão offline e HTML portátil sincronizados.');
+assert.ok(read('service-worker.js').includes(version));assert.ok(portable.includes(version));
+console.log('OK: fontes ES5; index sem código inline; hashes e versões site/portátil.');

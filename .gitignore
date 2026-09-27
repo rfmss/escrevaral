@@ -1,0 +1,7 @@
+node_modules/
+dist/
+packages/*/dist/
+qa-output/
+.external/
+*.tgz
+__pycache__/

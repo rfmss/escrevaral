@@ -1,0 +1,41 @@
+/* Quadro: a janela limita o desenho, sem rolagem ou deformação dos traços. */
+@media screen {
+ #chalkboard { padding:2vh 2vw; overflow:hidden; overscroll-behavior:none; }
+ #chalkboard .chalk-paper { display:flex; flex-direction:column; width:100%; height:100%; max-width:none; min-height:0; margin:0; padding:12px; overflow:hidden; }
+ #chalkboard .chalk-heading { width:100%; max-width:none; margin:0; padding:0 0 6px; flex-shrink:0; }
+ #chalkboard .chalk-heading h2 { margin:2px 0; font-size:24px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+ #chalkboard .chalk-heading > div { overflow:hidden; }
+ #chalk-help { margin:4px 0 6px; max-width:none; font:14px/1.3 Arial,sans-serif; flex-shrink:0; }
+ #chalkboard .chalk-tools,#chalkboard .chalk-actions { margin:2px 0; flex-shrink:0; }
+ #chalkboard .chalk-tools button,#chalkboard .chalk-actions button,#chalkboard .chalk-upload { margin:2px; padding:6px 10px; min-height:40px; font:14px/1.3 Arial,sans-serif; }
+ #chalkboard .chalk-upload { display:flex; align-items:center; }
+ #chalk-pen { display:none; margin:2px; border:1px solid #657367; background:transparent; color:inherit; }
+ #chalkboard .chalk-slate { position:relative; display:flex; align-items:center; justify-content:center; flex:1 1 0; min-height:0; padding:6px 6px 22px; overflow:hidden; }
+ #chalk-frame { flex-shrink:0; max-width:100%; }
+ #chalkboard .chalk-rail { position:absolute; left:0; right:0; bottom:0; height:22px; padding:0 8px; }
+ #chalkboard .chalk-bottom { flex-shrink:0; padding:2px 0; border:0; font:11px/1.3 Arial,sans-serif; }
+ #chalkboard .chalk-bottom span { margin-right:4px; }
+ #chalk-status { flex-shrink:0; margin:2px 0; min-height:16px; font:12px/1.3 Arial,sans-serif; }
+ #chalkboard #chalk-copy { position:absolute; z-index:2; top:4px; left:4px; width:calc(100% - 8px); height:calc(100% - 46px); min-height:0; margin:0; resize:none; overflow:hidden; background:#e2e9df; }
+ #chalk-copy-close { position:absolute; z-index:3; right:4px; bottom:2px; min-height:36px; }
+ body[data-theme="escuro"] #chalkboard #chalk-copy { background:#161c15; }
+ #chalkboard[data-short="true"] { padding:1vh 1vw; }
+ #chalkboard[data-short="true"] .chalk-paper { padding:6px; }
+ #chalkboard[data-short="true"] .chalk-heading { padding:0; }
+ #chalkboard[data-short="true"] .chalk-heading small { display:none; }
+ #chalkboard[data-short="true"] .chalk-heading h2 { font-size:18px; }
+ #chalkboard[data-short="true"] .chalk-bottom { display:none; }
+ #chalkboard[data-short="true"] #chalk-help { margin:2px 0; font-size:12px; }
+ #chalkboard[data-short="true"] .chalk-tools button,#chalkboard[data-short="true"] .chalk-actions button,#chalkboard[data-short="true"] .chalk-upload,#chalkboard[data-short="true"] #chalk-close,#chalkboard[data-short="true"] #chalk-pen { min-height:32px; padding:4px 6px; }
+ #chalkboard[data-short="true"] .chalk-slate { padding:3px; }
+ #chalkboard[data-short="true"] .chalk-rail { display:none; }
+}
+@media screen and (max-width:600px) {
+ #chalkboard .chalk-paper { padding:8px; }
+ #chalkboard .chalk-heading h2 { font-size:20px; }
+ #chalkboard #chalk-fino,#chalkboard #chalk-giz,#chalkboard #chalk-grosso { display:none; }
+ #chalkboard #chalk-pen { display:block; width:72px; min-height:40px; padding:4px; font-size:13px; }
+ #chalkboard .chalk-tools { flex-wrap:nowrap; }
+ #chalkboard .chalk-tools button { min-width:0; padding:4px; font-size:12px; }
+ #chalkboard .chalk-actions button,#chalkboard .chalk-upload { padding:5px 8px; font-size:13px; }
+}

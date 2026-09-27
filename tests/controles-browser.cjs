@@ -5,11 +5,7 @@ const {chromium,webkit}=require('playwright');
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..'),out=process.env.QA_OUTPUT||'/tmp',engine=process.env.BROWSER_ENGINE||'chromium';
 fs.mkdirSync(out,{recursive:true});
-const server=http.createServer((req,res)=>{
- const file=path.join(root,req.url==='/'?'index.html':req.url.split('?')[0]);
- if(!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.writeHead(404);return res.end();}
- res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':'text/html');res.end(fs.readFileSync(file));
-});
+const server=http.createServer(require('../scripts/static-handler.cjs')(root));
 let browser;const errors=[];
 async function create(p,name){await p.click('#project-new');await p.fill('#project-name',name);await p.click('#project-create');}
 async function startItem(p,id,group){await p.click('#os-start');if(group)await p.click(group);await p.click(id);}

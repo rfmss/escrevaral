@@ -1,9 +1,7 @@
 // Regressao: a recepcao conduz a um caderno real, sem criar textos avulsos.
 const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..');
-const server=http.createServer((req,res)=>{const name=req.url.split('?')[0]==='/'?'index.html':req.url.split('?')[0].replace(/^\//,'');const file=path.join(root,name);
-  if(!file.startsWith(root)||!fs.existsSync(file)){res.writeHead(404);res.end();return;}
-  res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':'text/html');res.end(fs.readFileSync(file));});
+const server=http.createServer(require('../scripts/static-handler.cjs')(root));
 let browser;
 (async()=>{
   await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;

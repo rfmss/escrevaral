@@ -2,7 +2,7 @@
 const {chromium,webkit}=require('playwright'),fs=require('fs'),path=require('path'),http=require('http'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),out=process.env.QA_OUTPUT||path.join(root,'../qa-output'),engine=process.env.BROWSER_ENGINE||'chromium';
 fs.mkdirSync(out,{recursive:true});let browser;const errors=[],evidence={engine,viewports:[],performance:[]};
-const server=http.createServer((req,res)=>{const name=req.url.split('?')[0],file=path.join(root,name==='/'?'index.html':name);if(!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.writeHead(404);return res.end();}res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.webmanifest')?'application/manifest+json':'text/html');res.end(fs.readFileSync(file));});
+const server=http.createServer(require('../scripts/static-handler.cjs')(root));
 async function start(p,url){p.on('pageerror',e=>errors.push(e.message));await p.goto(url);await p.click('#first-run-write');}
 async function open(p){if(await p.locator('#oficina').isHidden())await p.click('#examinar-toggle');await p.waitForFunction(()=>document.querySelector('#ptbr-dashboard .ptbr-wheel button'));}
 async function lens(p,id){await open(p);await p.click('[data-ptbr-lens="'+id+'"]');await p.waitForFunction(()=>/Análise concluída/.test(document.querySelector('#ptbr-dashboard [role=status]').textContent));}

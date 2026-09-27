@@ -2,8 +2,8 @@
 const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
-const html = fs.readFileSync(require('node:path').join(__dirname, '../index.html'), 'utf8');
-const scripts = Array.from(html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g), m => m[1]);
+const html = require('./helpers/sources.cjs').scripts().join('\n');
+const scripts = require('./helpers/sources.cjs').scripts();
 scripts.forEach((s, i) => new vm.Script(s, {filename:'inline-'+i}));
 const context = vm.createContext({});
 for (const marker of ["var prefix = 'escrevaral.astra.v1.doc.'", 'E.validPlanner =', '/* Universo do caderno:', '/* Cadernos: dados ES5']) {

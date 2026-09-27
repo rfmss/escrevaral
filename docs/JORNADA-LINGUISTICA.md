@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 27/09/2026. Base do produto auditada: `e1c9a699f32138284e1311dbedd3ca58aae738b7`.
+Atualizado em 27/09/2026. Base do produto auditada: `f095b784424106f7d00c5285e190a696cd13344f`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-23 publicada na main e deploy do GitHub Pages concluído. Incremento v6-24: léxico sintático e 21 padrões de uso verbal separados do analisador, preservando o recorte nos 227 casos de sintaxe, locuções e relativas. Próximo trabalho: estudar que-objeto e sujeito posposto. Auditoria ampla de navegador, acessibilidade, offline e avaliação linguística reservada permanece pendente.
+**Estado:** v6-24 publicada na main. Reorganização v6-25 implementada: fontes separadas, montagem reproduzível, cofre transportável e manual dos conectores. Verificações essenciais concluídas; publicação desta reorganização em preparação. Portparser recebido em snapshot seletivo e adaptador local de avaliação, sem execução do modelo nem integração ao editor. Auditoria ampla de navegador, acessibilidade e offline permanece pendente.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,11 +16,13 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
+- Publicar a reorganização aprovada e verificar CI/deploy; manter pendências de navegador explícitas.
+- Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
+- Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.
 - Continuar P03–P05 por unidades delimitadas: revisar outros usos dos verbos, registrar candidatos de regência e ampliar dados somente com fonte, contexto e limites. O inventário atual não é dicionário geral.
 - Publicar incrementos autorizados com verificações essenciais e pendências explícitas; reunir a auditoria ampla de navegador, acessibilidade e offline em frente própria, conforme decisão de Rafael em 26/09/2026.
 - Preparar avaliação reservada com critérios definidos antes da execução; não tratar casos usados no desenvolvimento como prova de generalização nem depender de outro modelo para continuar.
-- Conferir main remota e diff; publicar incrementos aprovados e verificar o deploy. Manter a visão completa de convenções, texto, estilo e variação no mapa.
 
 ## Etapas
 
@@ -33,9 +35,9 @@ Lentes atuais, posições, autoria e triagem limitada.
 - Registrar a versão publicada e suas evidências.
 - Conservar o editor, os cadernos, a exportação e o acesso manual.
 
-**Condição de conclusão:** 29 casos de lentes, 16 de triagem e registros de navegador disponíveis; PWA WebKit e aparelhos antigos permanecem pendentes.
+**Condição de conclusão:** 29 casos de lentes, 16 de triagem e registros de navegador disponíveis; PWA WebKit e aparelhos antigos permanecem pendentes. Reorganização v6-25 implementada: separação de fontes e cofre, 290 casos equivalentes no transporte, cache por geração/hashes e CI na main. Snapshot Portparser ainda sem inferência.
 
-Evidências: `ptbr/README.md`, `ptbr/auditoria/verificacao.md`.
+Evidências: `ptbr/README.md`, `ptbr/auditoria/verificacao.md`, `docs/ARQUITETURA.md`, `docs/CONECTORES.md`, `docs/jornada/ENTREGA-V6-25.md`.
 
 ### P01 — Receber e estudar os livros
 

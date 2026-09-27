@@ -1,7 +1,7 @@
 /* Contratos de caixas: dados reais, falhas de escrita e ida/volta. Sem dependências. */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
+const html=require('./helpers/sources.cjs').scripts().join('\n');
+const scripts=require('./helpers/sources.cjs').scripts();
 const c=vm.createContext({});
 for(const marker of ["var prefix = 'escrevaral.astra.v1.doc.'",'E.validPlanner =','/* Universo do caderno:','/* Quadro do caderno:','/* Cadernos: dados ES5'])vm.runInContext(scripts.find(s=>s.includes(marker)),c);
 const E=c.Escr,plain=v=>JSON.parse(JSON.stringify(v));

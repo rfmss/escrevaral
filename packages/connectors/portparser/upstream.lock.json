@@ -1,0 +1,38 @@
+{
+  "repository": "https://github.com/LuceleneL/Portparser.v2",
+  "commit": "9a76e8d3dd8564182ff5cb4b3884b68d1b5fa79d",
+  "license": "MIT (code only; verify models and datasets separately)",
+  "scope": "Selective unmodified snapshot; no weights or lexicons",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "d9406b1dd1d25a18b2dcfc27c52738b23f28aa812324c6147dd7885b6840caf6",
+      "bytes": 1071
+    },
+    {
+      "path": "README.md",
+      "sha256": "a7cd8ae6e28935718eac4ca6530a85dc07bf3837aa1ee335b3de3c22f377fd6b",
+      "bytes": 6463
+    },
+    {
+      "path": "postproc/conlluFile.py",
+      "sha256": "c522491b1c95cf919cf991d4fe056a889c9d1c19869cb76ce22af0f4a771d8a0",
+      "bytes": 15175
+    },
+    {
+      "path": "postproc/lexikon.py",
+      "sha256": "b631c92c5f5ffeeb38c9e5934540dbf326b794483c193b9df2b7a3c97c740f70",
+      "bytes": 4413
+    },
+    {
+      "path": "postproc/postprocess.py",
+      "sha256": "a28fdccf9915797d1fca88ca813300c295befc9bc71db180ba29380c939f726e",
+      "bytes": 25340
+    },
+    {
+      "path": "Portparser_v2_model/options.json",
+      "sha256": "724d21a961b9b64578f5731d6af22251f352c4e9a56fc38b402c1690d5befa17",
+      "bytes": 1076
+    }
+  ]
+}

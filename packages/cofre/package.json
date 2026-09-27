@@ -1,0 +1,1 @@
+{"name":"@escrevaral/cofre","version":"1.0.0","private":true,"main":"dist/cofre.cjs","files":["dist/cofre.cjs","README.md"],"description":"Cofre PT-BR sem DOM, armazenamento ou rede"}

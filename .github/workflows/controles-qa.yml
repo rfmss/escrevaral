@@ -1,5 +1,6 @@
 name: Controles e responsividade
 on:
+  workflow_dispatch:
   pull_request:
     branches: [main]
     paths:
@@ -8,6 +9,11 @@ on:
       - service-worker.js
       - tests/**
       - ptbr/**
+      - src/**
+      - packages/**
+      - assets/**
+      - scripts/**
+      - build/**
       - .github/workflows/controles-qa.yml
 permissions:
   contents: read

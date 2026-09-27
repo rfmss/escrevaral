@@ -1,0 +1,52 @@
+{
+  "batch_size": 64,
+  "deprel": "full",
+  "dev": [
+    "Porttinari-base.v2-dev.conllu"
+  ],
+  "dropout": 0.5,
+  "embed_tags": [],
+  "epochs": 70,
+  "epochs_frozen": 10,
+  "exp": "Porttinari-base.v2.model",
+  "label_smoothing": 0.03,
+  "learning_rate": 2e-05,
+  "learning_rate_decay": "cos",
+  "learning_rate_warmup": 2000,
+  "load": [],
+  "logdir": "Portparser_v2_model",
+  "max_train_sentence_len": 150,
+  "optimizer": "adam",
+  "parse": 1,
+  "parse_attention_dim": 512,
+  "rnn_dim": 512,
+  "rnn_layers": 2,
+  "rnn_type": "LSTMTorch",
+  "save_checkpoint": true,
+  "script": "latinpipe_evalatin24.py",
+  "seed": 42,
+  "single_root": 1,
+  "steps_per_epoch": 1000,
+  "subword_combination": "last",
+  "tags": [
+    2,
+    1,
+    4
+  ],
+  "task_hidden_layer": 2048,
+  "test": [
+    "Porttinari-base.v2-test.conllu"
+  ],
+  "threads": 4,
+  "train": [
+    "Porttinari-base.v2-train.conllu"
+  ],
+  "train_sampling_exponent": 0.5,
+  "transformers": [
+    "neuralmind/bert-base-portuguese-cased"
+  ],
+  "treebank_ids": false,
+  "verbose": 2,
+  "wandb": false,
+  "word_masking": null
+}

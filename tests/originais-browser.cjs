@@ -1,6 +1,6 @@
 const {chromium,webkit}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..'),out=process.env.QA_OUTPUT||'/tmp',engine=process.env.BROWSER_ENGINE||'chromium';fs.mkdirSync(out,{recursive:true});let browser;const errors=[];
-const server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/html');res.end(fs.readFileSync(path.join(root,'index.html')));});
+const server=http.createServer(require('../scripts/static-handler.cjs')(root));
 async function form(p,trigger,name){if(trigger==='#original-new')await p.click('#desktop-organize');await p.click(trigger);await p.fill('#project-name',name);await p.click('#project-create');}
 async function menu(p,trigger){await p.click('#os-start');await p.click('#start-system-toggle');await p.click(trigger);}
 async function originalAction(p,id){if(await p.locator(id).isHidden())await p.click('#original-more');await p.click(id);}

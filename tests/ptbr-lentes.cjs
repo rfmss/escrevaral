@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict'),path=require('path');
-const root=path.resolve(__dirname,'..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8'),ctx=vm.createContext({});
-const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
+const root=path.resolve(__dirname,'..'),html=require('./helpers/sources.cjs').scripts().join('\n'),ctx=vm.createContext({});
+const scripts=require('./helpers/sources.cjs').scripts();
 for(const s of scripts){if(s.includes('root.Escr.mountUtilities'))break;vm.runInContext(s,ctx);}
 const E=ctx.Escr,vault=E.createVault(E.knowledge),tr=E.createSignalTriage(E),cases=[];
 function test(lens,text,count,kind){const result=vault.analyze(lens,text);assert.equal(result.findings.length,count,lens+': '+text);for(const f of result.findings){assert.equal(text.slice(f.start,f.end),f.snippet);assert.ok(f.evidence.source&&f.evidence.limit);if(kind)assert.equal(f.id,kind);for(const o of f.occurrences||[])assert.equal(E.reading.canonical(text.slice(o.start,o.end)),E.reading.canonical(f.snippet));}cases.push({lens,text,expected:count,signal:!!tr.scan(text).signals[lens],findings:result.findings.map(f=>({id:f.id,start:f.start,end:f.end,snippet:f.snippet}))});return result;}

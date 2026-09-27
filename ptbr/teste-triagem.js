@@ -1,8 +1,7 @@
 /* Testes da triagem contra os módulos reais da main. */
 'use strict';
 var assert=require('assert'),fs=require('fs'),vm=require('vm'),path=require('path');
-var html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),scripts=[],re=/<script\b[^>]*>([\s\S]*?)<\/script>/g,m,ctx=vm.createContext({});
-while((m=re.exec(html)))scripts.push(m[1]);
+var scripts=require('../tests/helpers/sources.cjs').scripts(),ctx=vm.createContext({});
 for(var i=0;i<scripts.length;i++){if(scripts[i].indexOf('root.Escr.mountUtilities')>=0)break;vm.runInContext(scripts[i],ctx);}
 var E=ctx.Escr,tr=E.createSignalTriage(E);
 var cases=[

@@ -1,6 +1,6 @@
 const {chromium,webkit}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..'),out=process.env.QA_OUTPUT||'/tmp',engine=process.env.BROWSER_ENGINE||'chromium';fs.mkdirSync(out,{recursive:true});
-const server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/html');res.end(fs.readFileSync(path.join(root,'index.html')));});let browser;const errors=[];
+const server=http.createServer(require('../scripts/static-handler.cjs')(root));let browser;const errors=[];
 async function create(p,name){await p.click('#project-new');await p.fill('#project-name',name);await p.click('#project-create');}
 async function menu(p,id){await p.click('#os-start');await p.click(id==='#start-settings'?'#start-system-toggle':'#start-tools-toggle');await p.click(id);}
 async function notebookAction(p,id){if(await p.locator(id).isHidden())await p.click('#notebook-more');await p.click(id);}

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Uma mesa de escrita em português brasileiro. Manuscritos no seu aparelho, instrumentos que explicam o que encontram.">
+  <link rel="canonical" href="https://escrevaral.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Escrevaral | Gabinete de escrita">
+  <meta property="og:description" content="Sua mesa de escrita em português brasileiro. Seus manuscritos ficam no seu aparelho.">
+  <meta property="og:url" content="https://escrevaral.com/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Escrevaral | Gabinete de escrita">
+  <meta name="twitter:description" content="Sua mesa de escrita em português brasileiro. Seus manuscritos ficam no seu aparelho.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src {{SCRIPT_POLICY}}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>SCRVRL OS — Gabinete de escrita</title>
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="asset-version" content="{{ASSET_VERSION}}">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii00OCAtNzIgNjg4IDY4OCI+PHJlY3QgeD0iLTQ4IiB5PSItNzIiIHdpZHRoPSI2ODgiIGhlaWdodD0iNjg4IiByeD0iMTI2IiBmaWxsPSIjZjVmNGVmIi8+PHBhdGggZD0iTTUgOTBMNTg1IDQ4TTUgMTg5TDU4NSAyMDJNNSAzMTlMNTg1IDI4Nk01IDQxNEw1ODUgNDIyTTgyIDE4VjQ4Mk00OTkgMTJWNDc0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyODI5MjUiIHN0cm9rZS13aWR0aD0iNDUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPgo=">
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+  {{STYLES}}
+
+<!-- Ícones Phosphor, SVGs oficiais Light, https://github.com/phosphor-icons/core
+MIT License
+
+Copyright (c) 2023 Phosphor Icons
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-->
+
+</head>
+<body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
+<section id="lineage-panel" class="sheet" role="dialog" aria-labelledby="lineage-heading" tabindex="-1" hidden>
+ <header class="sheet-heading"><div><small>COLABORAÇÃO · LINHAGEM DO TEXTO</small><h2 id="lineage-heading"></h2></div><button id="lineage-close" class="material-key" aria-label="Fechar linhagem">×</button></header>
+ <p id="lineage-book"></p><p id="lineage-status" role="status"></p>
+ <button id="lineage-mark">Guardar marco agora</button>
+ <p class="quiet">Até 20 versões recentes, limitadas a 400 mil caracteres no total. Exporte o caderno para conservar seus marcos. Este histórico local não certifica autoria nem data externa.</p>
+ <ol id="lineage-list"></ol><h3 id="lineage-preview-title"></h3><p id="lineage-diff"></p><textarea id="lineage-preview" readonly aria-label="Texto da versão selecionada"></textarea>
+ <div id="lineage-changes" hidden><p>Trechos alterados (até 3 mil caracteres de cada lado):</p><h4>Removido</h4><pre id="lineage-removed"></pre><h4>Inserido</h4><pre id="lineage-added"></pre></div>
+ <button id="lineage-restore" hidden>Restaurar esta versão</button>
+</section>
+
+<section id="chalkboard" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="chalk-heading" tabindex="-1" hidden>
+ <div class="chalk-paper">
+  <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span>
+  <header class="finish-heading chalk-heading"><div><small>ESCREVA<b>RAL</b> · QUADRO DE GIZ</small><h2 id="chalk-heading"></h2></div><button id="chalk-close" class="material-key" aria-label="Fechar quadro de giz">×</button></header>
+  <div class="chalk-tools" role="group" aria-label="Ferramentas do quadro">
+   <select id="chalk-pen" aria-label="Tipo de giz"><option value="fino">Fino</option><option value="giz" selected>Giz</option><option value="grosso">Grosso</option></select>
+   <button id="chalk-fino" aria-pressed="false">Fino</button><button id="chalk-giz" aria-pressed="true">Giz</button><button id="chalk-grosso" aria-pressed="false">Grosso</button><button id="chalk-borracha" aria-pressed="false">Borracha</button><button id="chalk-grid" aria-pressed="false">Grade</button><button id="chalk-undo">Desfazer</button><button id="chalk-clear">Limpar</button>
+  </div>
+  <p id="chalk-help">Rabisque ideias e enxergue as conexões da sua história.</p><p id="chalk-keyboard-help" class="sr-only">Desenhe com o dedo, mouse ou caneta. No quadro: setas movem o cursor; Espaço começa ou termina o traço.</p>
+  <div class="chalk-slate"><textarea id="chalk-copy" readonly aria-label="Cópia do desenho em texto" hidden></textarea><button id="chalk-copy-close" hidden>Voltar ao desenho</button><div id="chalk-frame"><canvas id="chalk-canvas" width="1" height="1" tabindex="0" role="img" aria-label="Desenho do caderno" aria-describedby="chalk-help chalk-keyboard-help">Este navegador não exibe o desenho.</canvas><span id="chalk-cursor" aria-hidden="true" hidden></span></div><div class="chalk-rail" aria-hidden="true"><i></i><i></i><span>ESCREVA<b>RAL</b></span><em></em></div></div>
+  <div class="chalk-bottom"><span id="chalk-count">0 traços</span><span>O desenho acompanha este caderno.</span></div>
+  <p id="chalk-status" role="status"></p>
+  <div class="chalk-actions"><button id="chalk-download" title="Baixar desenho">Baixar</button><button id="chalk-copy-show" title="Copiar desenho">Copiar</button><label class="chalk-upload" for="chalk-import" title="Trazer desenho">Trazer<input id="chalk-import" type="file" accept=".txt,.json,.giz" /></label><button id="chalk-retry" hidden>Guardar novamente</button><button id="chalk-discard" hidden>Descartar alterações</button></div>
+ </div>
+</section>
+
+<section id="story-screen" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="story-heading" tabindex="-1" hidden>
+ <header class="finish-heading"><div><small>ESCREVA[RAL] · UNIVERSO DO CADERNO</small><h2 id="story-heading"></h2></div><button id="story-close" class="material-key" aria-label="Fechar universo do caderno">×</button></header>
+ <nav class="story-navigation" aria-label="Consultar o caderno"><button id="story-chapters" aria-pressed="true">Capítulos</button><button id="story-events" aria-pressed="false">Acontecimentos</button><button id="story-records" aria-pressed="false">Fichas</button></nav>
+ <p id="story-status" role="status"></p><div id="story-actions" class="story-actions"></div>
+ <div id="story-list"></div><div id="story-pagination" class="story-pagination"></div>
+ <section id="story-editor" hidden><h3 id="story-editor-heading"></h3><form id="story-form"></form><p id="story-form-status" role="status"></p></section>
+</section>
+
+<div id="app-dialog" hidden>
+ <section class="app-dialog-card" role="alertdialog" aria-modal="true" aria-labelledby="app-dialog-heading" aria-describedby="app-dialog-message" tabindex="-1">
+  <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span><span class="dialog-register bl" aria-hidden="true">+</span><span class="dialog-register br" aria-hidden="true">+</span>
+  <div class="app-dialog-brand" aria-hidden="true"><span>ESCREVA<b>RAL</b></span><small>GABINETE DE ESCRITA</small></div>
+  <h2 id="app-dialog-heading"></h2><p id="app-dialog-message"></p>
+  <div class="app-dialog-actions"><button id="app-dialog-cancel" type="button">Cancelar</button><button id="app-dialog-accept" type="button"></button></div>
+ </section>
+</div>
+
+<section id="lock-curtain" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="lock-heading" tabindex="-1" hidden>
+ <div class="lock-card"><h2 id="lock-heading">Gabinete fechado</h2><p id="lock-help">Toque ou clique na argola do chaveiro para voltar à escrita.</p>
+ <div class="author-keychain"><button id="keychain-ring" aria-describedby="lock-help" aria-label="Argola do chaveiro — abrir gabinete"></button><strong id="keychain-name">ESCREVA[RAL]</strong><small>OFICINA AUTORAL · SCRVRL OS</small><div class="grife-barcode" aria-hidden="true"></div><small>ORIGINAIS SOB CUSTÓDIA</small></div>
+ <form id="lock-form" autocomplete="off"><label for="lock-password">Senha</label><input id="lock-password" type="password" autocomplete="new-password" maxlength="120" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore><button type="submit">Entrar</button></form><p id="lock-message" role="status"></p></div>
+</section>
+
+  <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
+  <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
+  <nav id="location-path" class="location-path" aria-label="Você está aqui">
+    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
+  </nav>
+  <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
+    <header class="os-bar">
+      <span class="os-signature"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span class="ral-frame">RAL</span> <small>OS</small></strong></span>
+      <nav class="os-menus" aria-label="Sistema"><button id="os-files">Arquivo</button><button id="os-desk">Escrita</button><button id="os-arrange">Exibir</button></nav>
+      <div class="cabinet-search"><label class="sr-only" for="cabinet-search">Buscar nos seus textos</label><input id="cabinet-search" type="search" placeholder="Buscar nos seus textos" autocomplete="off"><button id="cabinet-clear" aria-label="Limpar busca" hidden="">×</button></div>
+      <button id="cabinet-settings" class="os-menu">Ajustes</button>
+    </header>
+    <div class="cabinet-workspace" id="desktop-surface">
+      <section id="notebook-area" aria-label="Suas gavetas e cadernos">
+        <div id="original-header" class="cabinet-context" hidden>
+          <p id="original-title-label">GAVETA</p>
+          <div class="original-actions"><button id="original-back">← Gabinete</button><button id="original-more" aria-expanded="false" aria-controls="original-more-menu">Opções da gaveta</button><div id="original-more-menu" class="context-overflow" hidden><button id="original-rename">Renomear gaveta</button><button id="original-export">Exportar gaveta</button><button id="original-trash" aria-label="Mover gaveta para a lixeira">Mover para a lixeira</button></div></div>
+        </div>
+        <div id="desktop-primary-actions"><button id="project-new">+ Novo caderno</button><button id="desktop-organize" aria-expanded="false" aria-controls="desktop-organize-menu">Organizar</button><div id="desktop-organize-menu" class="context-overflow" hidden><button id="original-new">+ Nova gaveta</button></div></div>
+        <button id="volume-new" hidden>+ Novo caderno</button>
+        <section id="first-run" class="first-run" aria-labelledby="first-run-heading" hidden>
+          <p class="os-label">BEM-VINDO AO ESCREVARAL</p>
+          <h2 id="first-run-heading">Sua obra. Seu silêncio. Seu aparelho.</h2>
+          <p>Comece com uma folha. Seus textos ficam neste aparelho e acompanham seu caderno quando você exporta uma cópia.</p>
+          <button id="first-run-write" type="button">Começar a escrever</button>
+          <p class="first-run-help">Um caderno inicial será criado. Você poderá renomeá-lo depois ou escolher “+ Novo caderno” para dar um nome agora.</p>
+          <p id="first-run-status" role="status"></p>
+        </section>
+        <p id="notebook-hint">Abra um caderno para escrever. Use gavetas apenas quando quiser reunir uma obra.</p>
+        <div id="notebook-list"></div>
+      </section>
+      <section id="desktop-reminders" aria-label="Post-its"><button id="reminder-new">+ Post-it</button><p id="reminder-status" role="status"></p><div id="reminder-list"></div></section>
+      <div class="desktop-imprint" aria-hidden="true"><strong>ESCREVA<span>RAL</span> OS</strong><small>GABINETE DE ESCRITA · PORTUGUÊS BRASILEIRO</small></div>
+      <section id="cabinet-window" class="cabinet-window" aria-label="Janela de projetos e textos" data-maximized="true">
+        <header class="window-bar" id="cabinet-window-handle"><span class="window-name" id="notebook-window-name">SEUS TEXTOS</span><div class="window-controls"><button id="window-minimize" title="Minimizar janela" aria-label="Minimizar janela">−</button><button id="window-maximize" title="Restaurar tamanho da janela" aria-label="Restaurar tamanho da janela" aria-pressed="true">□</button><button id="window-close" title="Fechar janela" aria-label="Fechar janela">×</button></div></header>
+        <div class="window-body">
+      <nav class="project-shelf" aria-label="Projetos"><p class="os-label">CADERNOS</p><button id="cabinet-all" class="project-link" aria-pressed="true">Todos os textos</button><div id="cabinet-projects"></div><span id="project-icon-template" hidden=""><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span></nav>
+      <main class="cabinet-files"><div class="cabinet-context"><p id="cabinet-context-label">TODOS OS TEXTOS</p><button id="notebook-back">← Mesa de cadernos</button></div>
+        <div class="notebook-actions"><button id="notebook-universe" aria-controls="story-screen">Universo</button><button id="notebook-chalkboard" aria-controls="chalkboard">Quadro</button><button id="notebook-more" aria-expanded="false" aria-controls="notebook-more-menu">Mais</button><div id="notebook-more-menu" class="context-overflow" hidden><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg> Mover para a lixeira</button></div></div>
+        <div class="cabinet-heading"><div><p class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div><button id="cabinet-new" class="os-action">+ Novo texto</button></div>
+
+        <button id="cabinet-resume" class="resume-note"><span class="os-label">CONTINUAR ESCREVENDO</span><span id="resume-title">Sem título</span><small id="resume-date">Texto avulso</small></button>
+        <div class="files-label"><h2 id="cabinet-list-heading">Textos</h2><span id="cabinet-count">2 textos</span></div>
+        <div id="cabinet-notes" class="cabinet-notes" role="group" aria-labelledby="cabinet-list-heading"></div><button id="cabinet-more" hidden="">Mostrar mais textos</button>
+        <p id="cabinet-empty" class="cabinet-empty" hidden="">Seu gabinete começa com um texto. Dê um título e encontre seu primeiro parágrafo.</p>
+        <div id="welcome-reception" class="welcome-shell" hidden>
+          <svg class="welcome-reg-mark welcome-reg-tl" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0v16M0 8h16" stroke="currentColor" stroke-width="1.5"/></svg>
+          <svg class="welcome-reg-mark welcome-reg-tr" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0v16M0 8h16" stroke="currentColor" stroke-width="1.5"/></svg>
+          <svg class="welcome-reg-mark welcome-reg-bl" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0v16M0 8h16" stroke="currentColor" stroke-width="1.5"/></svg>
+          <svg class="welcome-reg-mark welcome-reg-br" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0v16M0 8h16" stroke="currentColor" stroke-width="1.5"/></svg>
+          <button id="welcome-back-notes" type="button" class="welcome-back-btn" hidden>&larr; Voltar aos seus textos</button>
+          <span class="welcome-stamp">OFICINA DE ESCRITA · PORTUGUÊS BRASILEIRO</span>
+          <h2 class="welcome-title">Sua obra. Seu silêncio. Seu aparelho.</h2>
+          <p class="welcome-desc">Uma oficina de escrita em português brasileiro. Sem internet, sem nuvem, sem cadastro. Seus textos ficam neste aparelho. Exporte uma cópia para guardá-los também fora do navegador.</p>
+          <div class="welcome-key-container">
+            <button id="welcome-start-btn" type="button" class="welcome-key-pad">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              COMEÇAR A ESCREVER
+            </button>
+          </div>
+          <div class="welcome-pillars">
+            <div class="welcome-pillar-tag">
+              <span class="welcome-pillar-code">01 // AUTONOMIA</span>
+              <div class="welcome-pillar-title">Silêncio total</div>
+              <p class="welcome-pillar-desc">Sem login, sem rede, sem ninguém observando seus rascunhos.</p>
+            </div>
+            <div class="welcome-pillar-tag">
+              <span class="welcome-pillar-code">02 // PRIVACIDADE</span>
+              <div class="welcome-pillar-title">Seus textos ficam aqui</div>
+              <p class="welcome-pillar-desc">Textos vivem no armazenamento local. Zero telemetria.</p>
+            </div>
+            <div class="welcome-pillar-tag">
+              <span class="welcome-pillar-code">03 // PACTO LIVRE</span>
+              <div class="welcome-pillar-title">Casa aberta</div>
+              <p class="welcome-pillar-desc">Sem assinatura. Mantida pela comunidade que lê e escreve.</p>
+            </div>
+          </div>
+          <div class="welcome-actions">
+            <div class="welcome-sub-btns">
+              <button id="welcome-pwa-btn" type="button" class="welcome-btn-tech" hidden>Guardar no aparelho &darr;</button>
+              <button id="welcome-donate-link" type="button" class="welcome-btn-tech">Sobre o apoio à oficina</button>
+            </div>
+            <span class="welcome-hash">ESCREVARAL.COM · RAFA MASS</span>
+          </div>
+          <div id="welcome-ios-hint" class="welcome-ios-toast" hidden>
+            INSTALAÇÃO SAFARI // TOQUE EM COMPARTILHAR <span aria-hidden="true">&#x23ce;</span> &rarr; ADICIONAR À TELA DE INÍCIO
+          </div>
+        </div>
+      </main>
+        </div>
+      </section>
+
+    </div>
+
+  </section>
+      <nav id="start-menu" class="os-workshop" aria-label="Menu" hidden="">
+        <div class="start-group" role="group" aria-labelledby="start-group-0"><p id="start-group-0" class="os-label">Agora</p>
+          <button id="start-projects" class="os-app"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7V5h7l2 2h9v13H3Z"></path></svg>Cadernos e gavetas</button>
+          <button id="cabinet-write" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M225.91,74.79,181.22,30.1a14,14,0,0,0-19.8,0L38.1,153.41a13.94,13.94,0,0,0-4.1,9.9V208a14,14,0,0,0,14,14H216a6,6,0,0,0,0-12H110.49L225.91,94.59A14,14,0,0,0,225.91,74.79ZM76.49,188,164,100.48,183.52,120,96,207.51ZM68,179.52,48.49,160,136,72.49,155.52,92ZM46,208V174.48L81.52,210H48A2,2,0,0,1,46,208ZM217.42,86.1,192,111.52,144.49,64,169.9,38.59a2,2,0,0,1,2.83,0l44.69,44.68A2,2,0,0,1,217.42,86.1Z"></path></svg>Mesa de escrita</button>
+          <button id="start-new-notebook" class="os-app">Novo caderno</button>
+        </div>
+        <div class="start-group" role="group" aria-labelledby="start-tools-toggle"><button id="start-tools-toggle" class="start-group-toggle" data-start-disclosure="true" aria-expanded="false" aria-controls="start-tools-items">Ferramentas</button><div id="start-tools-items" class="start-group-items" hidden>
+          <button id="start-chalkboard" class="os-app" aria-controls="chalkboard">Quadro de giz</button>
+          <button id="start-lineage" class="os-app" aria-controls="lineage-panel">Colaboração · Linhagem do texto</button>
+          <button id="start-universe" class="os-app" aria-controls="story-screen">Universo da obra</button>
+          <button id="start-calendar" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v16H3ZM7 2v6M17 2v6M3 10h18M7 14h2M12 14h2M7 18h2M12 18h2"></path></svg><span>Calendário</span></button>
+          <button id="cabinet-examine" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M40,86H74.6a30,30,0,0,0,58.8,0H216a6,6,0,0,0,0-12H133.4a30,30,0,0,0-58.8,0H40a6,6,0,0,0,0,12Zm64-24A18,18,0,1,1,86,80,18,18,0,0,1,104,62ZM216,170H197.4a30,30,0,0,0-58.8,0H40a6,6,0,0,0,0,12h98.6a30,30,0,0,0,58.8,0H216a6,6,0,0,0,0-12Zm-48,24a18,18,0,1,1,18-18A18,18,0,0,1,168,194Z"></path></svg>Examinar</button>
+          <button id="cabinet-poetry" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M54,96v64a6,6,0,0,1-12,0V96a6,6,0,0,1,12,0ZM88,26a6,6,0,0,0-6,6V224a6,6,0,0,0,12,0V32A6,6,0,0,0,88,26Zm40,32a6,6,0,0,0-6,6V192a6,6,0,0,0,12,0V64A6,6,0,0,0,128,58Zm40,32a6,6,0,0,0-6,6v64a6,6,0,0,0,12,0V96A6,6,0,0,0,168,90Zm40-16a6,6,0,0,0-6,6v96a6,6,0,0,0,12,0V80A6,6,0,0,0,208,74Z"></path></svg>Rimas e métrica</button>
+          <button id="start-pomodoro" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 2h6M12 2v3M19 5l2 2M12 9v5l3 2M20 14a8 8 0 1 1-16 0 8 8 0 0 1 16 0"></path></svg><span>Pomodoro</span></button>
+          <button id="start-calculator" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 2h14v20H5ZM8 5h8v4H8ZM8 13h1M12 13h1M16 13h1M8 17h1M12 17h1M16 17h1"></path></svg><span>Calculadora</span></button>
+        </div></div>
+        <div class="start-group" role="group" aria-labelledby="start-system-toggle"><button id="start-system-toggle" class="start-group-toggle" data-start-disclosure="true" aria-expanded="false" aria-controls="start-system-items">Organizar e guardar</button><div id="start-system-items" class="start-group-items" hidden>
+          <button id="start-new-original" class="os-app">Nova gaveta</button>
+          <button id="cabinet-archive" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M182,112a6,6,0,0,1-6,6H112a6,6,0,0,1,0-12h64A6,6,0,0,1,182,112Zm-6,26H112a6,6,0,0,0,0,12h64a6,6,0,0,0,0-12Zm46-90V208a14,14,0,0,1-14,14H48a14,14,0,0,1-14-14V48A14,14,0,0,1,48,34H208A14,14,0,0,1,222,48ZM48,210H74V46H48a2,2,0,0,0-2,2V208A2,2,0,0,0,48,210ZM210,48a2,2,0,0,0-2-2H86V210H208a2,2,0,0,0,2-2Z"></path></svg>Acervo</button>
+          <button id="start-export-text" class="os-app">Baixar este texto</button>
+          <button id="cabinet-backup" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M224,50H32A14,14,0,0,0,18,64V88a14,14,0,0,0,14,14h2v90a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V102h2a14,14,0,0,0,14-14V64A14,14,0,0,0,224,50ZM210,192a2,2,0,0,1-2,2H48a2,2,0,0,1-2-2V102H210ZM226,88a2,2,0,0,1-2,2H32a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H224a2,2,0,0,1,2,2ZM98,136a6,6,0,0,1,6-6h48a6,6,0,0,1,0,12H104A6,6,0,0,1,98,136Z"></path></svg>Guardar cópia</button>
+          <button id="start-settings" class="os-app"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 17h16M8 4v6M16 14v6"></path></svg>Ajustes</button>
+          <button id="start-trash" class="os-app"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"></path></svg><span>Lixeira</span></button>
+          <button id="start-about" class="os-app"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>Sobre a oficina</span></button>
+        </div></div>
+      </nav>
+    <footer id="system-bar" class="os-footer"><button id="screen-lock" class="material-key" aria-label="Fechar gabinete com cadeado" title="Fechar gabinete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5ZM12 14v3"/></svg></button><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="os-rocker" aria-hidden="true"></span><span class="start-key">Menu</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
+  <div id="notebook-dialog" class="notebook-dialog" hidden><div class="notebook-dialog-card" role="dialog" aria-modal="true" aria-labelledby="notebook-form-heading"><h2 id="notebook-form-heading">Nova gaveta</h2><form id="project-form" class="project-form" hidden=""><label for="project-name">Nome da obra ou projeto</label><div><input id="project-name" maxlength="120" autocomplete="off" placeholder="Nome do seu livro ou projeto"><button id="project-create" type="submit">Criar</button><button id="project-cancel" type="button">Cancelar</button></div><p id="project-error" role="status"></p></form></div></div>
+  <div id="writing-space" style="height: 570px;" hidden="">
+    <div id="selection-tools" class="selection-tools" role="group" aria-label="Trecho selecionado" hidden><span id="clipboard-status" role="status">Trecho selecionado</span><button id="selection-copy" title="Guardar este trecho na cópia interna">Copiar</button><button id="selection-cut">Recortar</button><button id="selection-paste" disabled>Colar</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
+    <header class="masthead">
+      <button id="back-cabinet" class="brand-signature" aria-label="Escrevaral — voltar aos textos do caderno"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
+      <div class="global-search"><label class="sr-only" for="note-search">Buscar neste caderno</label><input id="note-search" type="search" placeholder="Buscar neste caderno" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden="">×</button></div>
+      <nav class="desk-tools" aria-label="Mesa">
+        <button id="desk-minimize" title="Fechar o caderno e voltar" aria-label="Minimizar caderno">−</button><button id="immersion-toggle" aria-pressed="false" title="Escrever com a interface recolhida">Foco</button>
+        <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
+        <button id="desk-export" title="Baixar este texto">Baixar</button>
+        <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
+        <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
+      </nav>
+    </header>
+    <div class="desk">
+      <main class="paper" id="writing-paper" style="transform: translate(0px);">
+        <div class="note-heading"><span class="eyebrow">DOCUMENTO</span>
+          <label class="sr-only" for="titulo">Título do manuscrito</label>
+          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false" value="">
+          <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação do texto" datetime="2026-09-09T13:35:18.128Z">10:35:18 · 9 de setembro de 2026</time></p>
+        </div>
+        <div class="writing-toolbar" role="group" aria-label="Apresentação do manuscrito">
+          <button id="desk-documents" aria-controls="note-browser" aria-expanded="false">Textos</button>
+          <button id="desk-font" title="Alternar entre letra literária e máquina">Courier Prime</button>
+          <div class="size-control"><button id="type-smaller" aria-label="Diminuir letra">−</button><output id="type-size" aria-label="Tamanho da letra">21</output><button id="type-larger" aria-label="Aumentar letra">+</button></div>
+          <button id="desk-paragraph" aria-pressed="true">Parágrafo</button>
+          <button id="desk-counts" aria-controls="desk-inspector" aria-expanded="false">Contagem</button>
+          <button id="desk-print">Imprimir</button>
+        </div>
+        <label class="sr-only" for="manuscrito">Manuscrito</label>
+        <div class="editor-viewport" id="editor-viewport">
+        <textarea id="manuscrito" placeholder="O texto é seu." spellcheck="false" autocorrect="off" autocapitalize="off" style="padding-top: 137.655px; padding-bottom: 197.495px; font-size: 21px;"></textarea>
+        <div id="focus-before" class="focus-mask" aria-hidden="true" style="height: 138px;"></div><div id="focus-after" class="focus-mask" aria-hidden="true" style="top: 176.85px;"></div>
+        </div>
+        <footer class="paper-footer"><button id="desk-paste" title="Colar o trecho guardado no Escrevaral" hidden>Colar</button>
+          <span id="save-status" role="status" aria-live="polite">Guardado neste aparelho.</span>
+          <div id="post-write-pwa" class="post-write-pwa" hidden>
+            <span>Adicione a oficina à tela inicial para abrir direto.</span>
+            <button id="post-write-pwa-action" type="button" class="post-write-pwa-action" hidden>Guardar no aparelho</button>
+            <button id="post-write-pwa-dismiss" type="button" class="post-write-pwa-dismiss" aria-label="Fechar aviso">&times;</button>
+          </div>
+        </footer>
+      </main>
+      <aside class="timeline" aria-label="Gavetas, cadernos e textos" data-expanded="false">
+        <button id="drawer-route-close">← Voltar ao texto</button>
+        <nav id="drawer-route" aria-label="Gavetas e cadernos"></nav>
+        <div class="desk-project"><button id="desk-project" hidden>Textos avulsos</button><div class="document-scope" role="group" aria-label="Organizar documentos"><button id="scope-project" aria-pressed="false">Do caderno</button><button id="scope-dates" aria-pressed="true">Por data</button></div></div>
+        <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="note-browser">Textos <span aria-hidden="true">⌄</span></button><span class="rail-label">TEXTOS</span><button id="timeline-new" class="new-leaf" aria-label="Novo texto" title="Novo texto"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></div>
+        <p id="timeline-hint" class="sr-only">Escolha um mês, depois um dia. Escolha o título para abrir a nota. A busca encontra notas de todas as datas.</p>
+        <div class="wheel-window" id="note-browser"><nav id="date-path" class="date-path" aria-label="Pastas por data"></nav><p id="navigator-status" class="navigator-status" role="status" aria-live="polite">2 notas</p><div id="timeline-list" tabindex="0" role="region" aria-label="Notas por data" aria-describedby="timeline-hint"></div></div>
+      </aside>
+      <aside id="desk-inspector" class="desk-inspector" aria-label="Contagem e instrumentos do texto">
+        <div class="inspector-heading"><h2>OLHAR DO TEXTO</h2><button id="desk-counts-close" aria-label="Recolher contagem">×</button></div>
+        <section class="desk-count"><span class="eyebrow">NESTE TEXTO</span><strong id="desk-words">14</strong><span>palavras</span><dl><dt>Caracteres</dt><dd id="desk-characters">106</dd><dt>Parágrafos</dt><dd id="desk-paragraphs">2</dd></dl><p id="desk-count-status" class="quiet">Corpo do texto · caracteres incluem espaços; cada linha não vazia conta como parágrafo.</p><button id="desk-refresh">Atualizar contagem</button></section>
+        <section class="desk-instruments"><h3>LINGUAGEM</h3><button id="desk-conventions">Convenções e gramática ↗</button><button id="desk-rhythm">Ritmo e cadência ↗</button><button id="desk-dialogue">Linhas de diálogo ↗</button><p class="quiet">Escolha um instrumento para observar o texto.</p></section>
+        <section class="desk-custody"><h3>SEU TEXTO</h3><button id="desk-project-change">Mudar de caderno ↗</button><button id="desk-trash">Mover para a lixeira</button></section>
+      </aside>
+    </div>
+  </div>
+  <div id="machine-shell" class="machine-shell" aria-hidden="true" hidden="" style="height: 654px;">
+    <div id="machine-platen" class="machine-stamp" style="transform: translateX(0px);" data-feed="false"></div>
+    <div id="machine-hammer" class="machine-hammer" data-strike="false"></div>
+  </div>
+  <button id="leave-focus" class="leave-focus" aria-label="Sair do modo foco" title="Sair do foco (Esc)" hidden=""><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v5H3m13-5v5h5M8 21v-5H3m13 5v-5h5"></path></svg></button>
+  <article id="print-sheet" aria-hidden="true"><h1 id="print-title"></h1><div id="print-text"></div></article>
+  <div id="panel-backdrop" class="panel-backdrop" hidden=""></div>
+  <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="mesa-heading">
+    <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
+    <div class="setting-section"><h3>Ambiente</h3>
+      <div class="setting-row"><span>Tema</span><div class="theme-choice" role="group" aria-label="Tema"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
+      <div class="setting-row" hidden=""><span>Máquina antiga</span><button id="machine-toggle" aria-pressed="false">Ativar</button></div>
+      <div class="setting-row"><span>Destaque de parágrafo</span><button id="focus-toggle" aria-pressed="true">Destacar</button></div>
+      <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"><span class="switch-off">Não</span><span class="switch-on">Sim</span></span></label>
+      <p id="sound-status" class="quiet" role="status">Som desligado.</p><p class="quiet">O som desliga ao sair desta página.</p>
+    </div>
+    <div class="setting-section"><h3>Sua escrita</h3>
+      <div class="setting-row"><span>Letra do manuscrito</span><div class="theme-choice" role="group" aria-label="Letra do manuscrito"><button id="font-literary" aria-pressed="false">Literária</button><button id="font-typewriter" aria-pressed="true">Máquina</button></div></div>
+      <label class="project-field" for="note-project">Caderno deste texto</label><select id="note-project" class="project-input"></select><button id="note-project-save">Mover para este caderno</button><div id="notebook-organization" hidden><label for="notebook-parent">Gaveta deste caderno</label><select id="notebook-parent"><option value="">Na mesa, sem gaveta</option></select><button id="notebook-parent-save">Guardar organização</button></div><p class="quiet">O texto acompanha o caderno ao exportar.</p>
+    </div>
+    <div class="setting-section"><h3>Seus textos</h3><button id="paste-mode" aria-pressed="false">Restringir colagem à cópia interna</button><button id="trash-current">Mover este texto para a lixeira</button>
+      <div class="actions"><button id="print-document">Imprimir este texto</button><button id="export-text">Baixar este texto <span aria-hidden="true">↓</span></button><button id="export-notebook">Exportar este caderno ↓</button><button id="export-backup">Exportar tudo ↓</button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".scrvrl,.txt,.json,text/plain,application/json"></label></div>
+      <p id="panel-status" class="quiet" role="status" aria-live="polite"></p>
+      <p class="quiet">Textos e cópias trazidos viram novos textos. Seu acervo permanece.</p>
+      <p class="quiet">Os textos ficam neste navegador, neste aparelho. Guarde uma cópia do acervo para levá-los com você.</p>
+    </div>
+    <div class="setting-section"><h3>Escrever sem internet</h3><p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa <span aria-hidden="true">↗</span></a></p><p class="quiet">Um arquivo único para abrir offline. Em aparelhos antigos, a abertura depende do aplicativo usado.</p></div>
+    <div class="setting-section"><h3>Atalhos</h3><dl class="shortcuts"><div><dt>Buscar</dt><dd>Ctrl / ⌘ + K</dd></div><div><dt>Examinar</dt><dd>Ctrl / ⌘ + Enter</dd></div><div><dt>Guardar o texto</dt><dd>Ctrl / ⌘ + S</dd></div><div><dt>Fechar painel / sair do foco / voltar ao Gabinete</dt><dd>Esc</dd></div></dl></div>
+  </section>
+  <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="acervo-heading">
+    <div class="sheet-heading"><div><p class="eyebrow">SEUS TEXTOS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
+    <div class="archive-intro"><p class="quiet">Um lugar para voltar aos seus textos.</p><button id="new-document">+ Novo texto</button></div>
+    <button id="trash-toggle" aria-pressed="false">Lixeira</button><p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
+  </section>
+  <section id="oficina" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="oficina-heading">
+    <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
+    <p class="quiet">Uma lente de cada vez. Escolha o que observar no seu manuscrito.</p>
+      <p class="lens-group-label">Convenções</p>
+      <div class="lenses" role="group" aria-label="Convenções">
+        <button data-lens="ortografia" aria-pressed="false">Ortografia</button>
+        <button data-lens="acentuacao" aria-pressed="false">Acentuação</button>
+        <button data-lens="pontuacao" aria-pressed="false">Pontuação</button>
+        <button data-lens="crase" aria-pressed="false">Crase</button>
+        <button data-lens="concordancia" aria-pressed="false">Concordância: haver, existir, fazer</button>
+        </div>
+      <p class="lens-group-label">Gramática</p>
+      <div class="lenses" role="group" aria-label="Gramática">
+        <button data-lens="morfologia" aria-pressed="false">Classes de palavras</button>
+        <button data-lens="sintaxe" aria-pressed="false">Orações simples</button>
+        </div>
+      <p class="lens-group-label">Escolhas de escrita</p>
+      <div class="lenses" role="group" aria-label="Escolhas de escrita">
+        <button data-lens="decolonial" aria-pressed="false">Vocabulário decolonial</button>
+        <button data-lens="expressoes" aria-pressed="false">Expressões e ênfases</button>
+        <button data-lens="repeticao" aria-pressed="false">Repetição próxima</button>
+        <button data-lens="adverbios" aria-pressed="false">Formas em -mente</button>
+        <button data-lens="dialogo" aria-pressed="false">Linhas de diálogo</button>
+        <button data-lens="ritmo" aria-pressed="false">Ritmo das frases</button>
+        </div>
+      <p class="lens-group-label">Poesia</p>
+      <div class="lenses" role="group" aria-label="Poesia">
+        <button data-lens="rima" aria-pressed="false">Rimas</button>
+        <button data-lens="metrica" aria-pressed="false">Métrica de versos</button>
+      </div>
+    <p id="analysis-status" role="status" aria-live="polite">Nenhuma análise iniciada.</p>
+    <ol id="findings" class="findings"></ol>
+    <button id="reset-dismissed" hidden="">Rever escolhas mantidas</button>
+    <p id="analysis-coverage" class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
+  </section>
+  <section id="utilidades" class="sheet utilities-sheet" role="dialog" aria-labelledby="utility-heading" tabindex="-1" hidden="">
+    <header class="sheet-heading"><h2 id="utility-heading">Pomodoro</h2><button id="utility-close" aria-label="Fechar janela">×</button></header>
+    <div id="pomodoro-panel" hidden="">
+      <p class="quiet">Um tempo para escrever. Outro para respirar.</p>
+      <output id="pomodoro-display" class="utility-clock" aria-label="Tempo restante">49:42</output>
+      <p id="pomodoro-state" role="status">Tempo de escrita em andamento.</p>
+      <div class="duration-fields"><label for="pomodoro-work">Escrita · minutos<input id="pomodoro-work" type="number" min="1" max="99" value="52" disabled="disabled"></label><label for="pomodoro-break">Pausa · minutos<input id="pomodoro-break" type="number" min="1" max="30" value="6" disabled="disabled"></label></div>
+      <div class="utility-actions"><button id="pomodoro-start" class="scrvrl-action" hidden="">Começar a escrever</button><button id="pomodoro-pause">Pausar contagem</button><button id="pomodoro-stop">Encerrar</button></div>
+      <p class="quiet">Ao terminar a escrita, o Focus abre para a pausa. Se o aparelho dormir, o tempo é conferido ao voltar.</p>
+    </div>
+    <div id="calculator-panel" hidden="">
+      <form id="calculator-form"><label for="calculator-input">Conta</label><input id="calculator-input" autocomplete="off" maxlength="160" placeholder="Ex.: (12 + 8) ÷ 4"><output id="calculator-result" role="status">0</output><div id="calculator-keys" class="calculator-keys"><button type="button" aria-label="Limpar conta">C</button><button type="button" aria-label="Apagar último caractere">⌫</button><button type="button">(</button><button type="button">)</button><button type="button">7</button><button type="button">8</button><button type="button">9</button><button type="button">÷</button><button type="button">4</button><button type="button">5</button><button type="button">6</button><button type="button">×</button><button type="button">1</button><button type="button">2</button><button type="button">3</button><button type="button">−</button><button type="button">0</button><button type="button">,</button><button type="button">%</button><button type="button">+</button><button type="button">=</button></div><button type="submit" class="sr-only">Calcular</button></form>
+      <p class="quiet">Use vírgula ou ponto decimal. % divide o número por 100.</p>
+    </div>
+    <div id="calendar-panel" hidden="">
+      <nav class="calendar-nav" aria-label="Navegar no calendário"><button id="calendar-year-prev" aria-label="Ano anterior">«</button><button id="calendar-prev" aria-label="Mês anterior">‹</button><h3 id="calendar-month"></h3><button id="calendar-next" aria-label="Próximo mês">›</button><button id="calendar-year-next" aria-label="Próximo ano">»</button></nav>
+      <button id="calendar-today">Hoje</button><div id="calendar-months" class="calendar-months"></div><table class="calendar-table"><caption class="sr-only">Escolha um dia</caption><thead><tr><th scope="col">Dom</th><th scope="col">Seg</th><th scope="col">Ter</th><th scope="col">Qua</th><th scope="col">Qui</th><th scope="col">Sex</th><th scope="col">Sáb</th></tr></thead><tbody id="calendar-grid"></tbody></table>
+      <p id="calendar-moons" class="quiet"></p><h3 id="calendar-day-heading" tabindex="-1"></h3><p id="calendar-date-label" class="quiet"></p><div id="calendar-items"></div>
+      <form id="calendar-form"><label for="calendar-text">Planejar este dia</label><input id="calendar-text" maxlength="500" required="" placeholder="O que quer lembrar?"><label for="calendar-kind" class="sr-only">Tipo de registro</label><select id="calendar-kind"><option value="task" selected="selected">Tarefa</option><option value="note">Nota</option></select><button type="submit" class="scrvrl-action">Adicionar</button></form><p id="calendar-status" role="status"></p><button id="calendar-export">Guardar cópia do calendário</button><label for="calendar-import">Trazer calendário<input id="calendar-import" type="file" accept=".json,application/json"></label>
+    </div>
+  </section>
+  <section id="focus-pause" class="sheet focus-pause" role="dialog" aria-labelledby="focus-heading" tabindex="-1" hidden="">
+    <header class="focus-header"><strong class="focus-brand">ESCREVA<span>RAL</span></strong><h2 id="focus-heading">PAUSA CONTEMPLATIVA</h2><button id="focus-close">Voltar ao texto</button></header>
+    <div class="focus-center"><div class="focus-clock-shell"><span class="focus-register focus-register-tl" aria-hidden="true">+</span><span class="focus-register focus-register-tr" aria-hidden="true">+</span><span class="focus-register focus-register-bl" aria-hidden="true">+</span><span class="focus-register focus-register-br" aria-hidden="true">+</span><div class="focus-clock" aria-hidden="true"><span id="focus-digit-0" class="focus-digit" data-digit="4"><b class="sd top static-top"><span>4</span></b><b class="sd bottom static-bottom"><span>4</span></b><b class="sd top flap-front"><span>4</span></b><b class="sd bottom flap-back"><span>4</span></b></span><span id="focus-digit-1" class="focus-digit" data-digit="9"><b class="sd top static-top"><span>9</span></b><b class="sd bottom static-bottom"><span>9</span></b><b class="sd top flap-front"><span>9</span></b><b class="sd bottom flap-back"><span>9</span></b></span><span class="focus-colon">:</span><span id="focus-digit-2" class="focus-digit" data-digit="4"><b class="sd top static-top"><span>4</span></b><b class="sd bottom static-bottom"><span>4</span></b><b class="sd top flap-front"><span>4</span></b><b class="sd bottom flap-back"><span>4</span></b></span><span id="focus-digit-3" class="focus-digit" data-digit="2"><b class="sd top static-top"><span>2</span></b><b class="sd bottom static-bottom"><span>2</span></b><b class="sd top flap-front"><span>2</span></b><b class="sd bottom flap-back"><span>2</span></b></span></div><output id="focus-time" class="sr-only">49:42</output></div>
+    <p id="focus-status" role="status">Afaste os olhos da tela. A escrita pode esperar.</p>
+    <div id="focus-challenge" class="focus-challenge" hidden=""><p class="scrvrl-label">DESAFIO DE CONCENTRAÇÃO</p><blockquote><p id="focus-quote">“Penso, logo existo.”</p><cite id="focus-author">René Descartes</cite></blockquote><form id="focus-form"><label for="focus-answer">Digite o primeiro nome do autor para recomeçar</label><input id="focus-answer" autocomplete="off" maxlength="40"><button type="submit" class="scrvrl-action">Recomeçar</button></form><p id="focus-answer-status" role="status"></p></div></div>
+    <footer class="focus-footer"><div class="focus-barcode" aria-hidden="true"></div><p>ESCREVARAL · TEMPO DE PAUSA</p><button id="focus-finish">Encerrar pausa</button></footer>
+  </section>
+  {{SCRIPTS}}
+
+</body></html>

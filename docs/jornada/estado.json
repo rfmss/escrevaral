@@ -1,16 +1,18 @@
 {
-  "version": 9,
+  "version": 10,
   "updated": "27/09/2026",
-  "baseline": "e1c9a699f32138284e1311dbedd3ca58aae738b7",
+  "baseline": "f095b784424106f7d00c5285e190a696cd13344f",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-23 publicada na main e deploy do GitHub Pages concluído. Incremento v6-24: léxico sintático e 21 padrões de uso verbal separados do analisador, preservando o recorte nos 227 casos de sintaxe, locuções e relativas. Próximo trabalho: estudar que-objeto e sujeito posposto. Auditoria ampla de navegador, acessibilidade, offline e avaliação linguística reservada permanece pendente.",
+  "current": "v6-24 publicada na main. Reorganização v6-25 implementada: fontes separadas, montagem reproduzível, cofre transportável e manual dos conectores. Verificações essenciais concluídas; publicação desta reorganização em preparação. Portparser recebido em snapshot seletivo e adaptador local de avaliação, sem execução do modelo nem integração ao editor. Auditoria ampla de navegador, acessibilidade e offline permanece pendente.",
   "next": [
+    "Publicar a reorganização aprovada e verificar CI/deploy; manter pendências de navegador explícitas.",
+    "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
+    "Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.",
     "Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.",
     "Continuar P03–P05 por unidades delimitadas: revisar outros usos dos verbos, registrar candidatos de regência e ampliar dados somente com fonte, contexto e limites. O inventário atual não é dicionário geral.",
     "Publicar incrementos autorizados com verificações essenciais e pendências explícitas; reunir a auditoria ampla de navegador, acessibilidade e offline em frente própria, conforme decisão de Rafael em 26/09/2026.",
-    "Preparar avaliação reservada com critérios definidos antes da execução; não tratar casos usados no desenvolvimento como prova de generalização nem depender de outro modelo para continuar.",
-    "Conferir main remota e diff; publicar incrementos aprovados e verificar o deploy. Manter a visão completa de convenções, texto, estilo e variação no mapa."
+    "Preparar avaliação reservada com critérios definidos antes da execução; não tratar casos usados no desenvolvimento como prova de generalização nem depender de outro modelo para continuar."
   ],
   "phases": [
     {
@@ -23,10 +25,13 @@
         "Registrar a versão publicada e suas evidências.",
         "Conservar o editor, os cadernos, a exportação e o acesso manual."
       ],
-      "done": "29 casos de lentes, 16 de triagem e registros de navegador disponíveis; PWA WebKit e aparelhos antigos permanecem pendentes.",
+      "done": "29 casos de lentes, 16 de triagem e registros de navegador disponíveis; PWA WebKit e aparelhos antigos permanecem pendentes. Reorganização v6-25 implementada: separação de fontes e cofre, 290 casos equivalentes no transporte, cache por geração/hashes e CI na main. Snapshot Portparser ainda sem inferência.",
       "evidence": [
         "ptbr/README.md",
-        "ptbr/auditoria/verificacao.md"
+        "ptbr/auditoria/verificacao.md",
+        "docs/ARQUITETURA.md",
+        "docs/CONECTORES.md",
+        "docs/jornada/ENTREGA-V6-25.md"
       ]
     },
     {

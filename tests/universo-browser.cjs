@@ -1,7 +1,7 @@
 // Teste de integração; Playwright é ferramenta de QA e não integra o aplicativo.
 const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict');
 const root=path.join(__dirname,'..'),out=process.env.QA_OUTPUT||'/tmp';
-const server=http.createServer((req,res)=>{const file=path.join(root,req.url==='/'?'index.html':req.url.split('?')[0]);if(!fs.existsSync(file)){res.writeHead(404);return res.end();}res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':'text/html');res.end(fs.readFileSync(file));});
+const server=http.createServer(require('../scripts/static-handler.cjs')(root));
 let browser;const errors=[];
 async function create(p,name){await p.click('#project-new');await p.fill('#project-name',name);await p.click('#project-create');}
 async function write(p,title,body){await p.click('#cabinet-new');await p.fill('#titulo',title);await p.fill('#manuscrito',body);await p.click('#desk-minimize');}

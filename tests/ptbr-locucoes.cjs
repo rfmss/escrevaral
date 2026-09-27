@@ -1,6 +1,6 @@
 const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),assert=require('node:assert/strict');
-const root=path.resolve(__dirname,'..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8'),ctx=vm.createContext({});
-for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)){if(m[1].includes('root.Escr.mountUtilities'))break;vm.runInContext(m[1],ctx);}
+const root=path.resolve(__dirname,'..'),html=require('./helpers/sources.cjs').scripts().join('\n'),ctx=vm.createContext({});
+for(const source of require('./helpers/sources.cjs').scripts()){if(source.includes('root.Escr.mountUtilities'))break;vm.runInContext(source,ctx);}
 const E=ctx.Escr,vault=E.createVault(E.knowledge),corpus=require('../ptbr/corpus/locucoes-1.json'),failures=[];
 function exact(text,findings){for(const f of findings){for(const s of [f,f.head,f.clause,...f.context,...f.components].filter(Boolean)){assert.equal(text.slice(s.start,s.end),s.snippet);}for(const c of f.components){assert.ok(c.start>=f.start&&c.end<=f.end);}}}
 for(const c of corpus.cases){try{const r=vault.analyze('sintaxe',c.text);exact(c.text,r.findings);const groups=r.findings.filter(f=>f.feature==='Locução verbal');

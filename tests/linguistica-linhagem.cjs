@@ -1,5 +1,5 @@
 const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),assert=require('node:assert/strict');
-const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]),context=vm.createContext({setTimeout,clearTimeout});
+const html=require('./helpers/sources.cjs').scripts().join('\n'),scripts=require('./helpers/sources.cjs').scripts(),context=vm.createContext({setTimeout,clearTimeout});
 for(const s of scripts){if(s.includes('root.Escr.mountUtilities'))break;vm.runInContext(s,context);}
 for(const marker of ['/* Universo do caderno:','/* Quadro do caderno:','/* Reuso lexical:','/* Persistência linguística:','/* Linhagem local:','/* Cadernos: dados ES5'])vm.runInContext(scripts.find(s=>s.includes(marker)),context);
 const E=context.Escr,full=E.createVault(E.knowledge,{incremental:false}),inc=E.createVault(E.knowledge),plain=v=>JSON.parse(JSON.stringify(v));

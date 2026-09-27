@@ -1,0 +1,25 @@
+name: Integridade e montagem
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integridade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run build:check
+      - run: npm test
+      - run: npm run build
+      - name: Distribuição reproduzível
+        run: git diff --exit-code -- index.html escrevaral.html service-worker.js build/assets.json assets/

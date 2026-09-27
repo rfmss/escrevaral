@@ -1,0 +1,32 @@
+# Cofre linguístico
+
+API de transporte **1.0.0**, variedade alvo `pt-BR`. A versão dos dados aparece em `knowledgeVersion`. Nenhum pacote npm externo é necessário em execução.
+
+Na raiz do repositório, rode `npm run build`. Copie `packages/cofre/dist/cofre.cjs` para qualquer projeto Node.js:
+
+```js
+const Cofre = require('./cofre.cjs');
+const vault = Cofre.create({ incremental: false });
+const text = 'A menina leu a carta.';
+const result = vault.analyze('sintaxe', text);
+for (const f of result.findings) {
+  console.log(text.slice(f.start, f.end), f.message);
+}
+```
+
+No navegador, carregue o bundle como script externo (pode ser renomeado para `.js`, servido com MIME JavaScript). A API aparece em `EscrCofre`; não cria `window.Escr`. `createRuntime()` expõe a instância interna para a ponte de compatibilidade do Escrevaral, sem garantia de estabilidade desses campos internos.
+
+## Contrato público
+
+- `create(options)` cria um cofre independente, com todas as lentes locais registradas. `incremental: false` desliga o reuso interno; a ausência dessa opção preserva o padrão atual.
+- `vault.analyze(lensId, text)` executa uma lente de forma síncrona. Não modifica o texto, não faz requisições nem grava dados.
+- `vault.register({id, analyze})` instala uma lente local síncrona. O identificador deve ser único; `analyze(text, limit)` retorna um array de achados válidos. Um registro externo não passa a ter política de recorte automaticamente.
+- `vault.maxLength` informa o limite geral de 200.000 unidades UTF-16. Cada lente pode examinar um recorte menor; consultar `assessment`, `coverage` e `coverageInfo`.
+
+IDs atualmente disponíveis devem ser consultados nas políticas de `resources/pt-BR/local/estudio.js` e no catálogo registrado pelos módulos de `ptbr/`; exemplos estáveis usados pelo projeto: `ortografia`, `expressoes`, `repeticao`, `morfologia`, `sintaxe`, `relativas`. ID inexistente, texto inválido ou diagnóstico fora do contrato gera exceção.
+
+Os resultados incluem `lens`, `knowledgeVersion`, `findings`, `status`, `limited`, `assessment` e `coverage`; alguns campos de cobertura/processamento dependem da lente. `findings` tem no máximo 100 ocorrências. Não interpretar array vazio como aprovação do texto.
+
+Cada achado informa `id`, `lens`, `feature`, `severity`, `confidence`, `message`, `start`, `end`, `snippet` e `evidence`. O registro verifica inteiros, limites, trecho literal e explicação com fonte. `start` é inclusivo, `end` exclusivo, ambos em **UTF-16**, sem normalização do original. Referências, relações e componentes opcionais pertencem ao contrato específico da lente.
+
+O cofre não gerencia cancelamento de tarefas síncronas nem identidade/revisão de documentos. O hospedeiro deve descartar resultados antigos. Para trabalho pesado, planejar Worker/processo e cancelamento no conector; não prometer interrupção de uma chamada síncrona. Veja [manual dos conectores](../../docs/CONECTORES.md).

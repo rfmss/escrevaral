@@ -1,8 +1,8 @@
 // Teste de apresentação com o motor real e DOM simulado; não certifica geometria CSS.
 const {Node,setup}=require('../ptbr/teste-painel.js');
 const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict'),path=require('path');
-const root=path.resolve(__dirname,'..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8'),ctx=vm.createContext({});
-for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)){if(m[1].includes('root.Escr.mountUtilities'))break;vm.runInContext(m[1],ctx);}
+const root=path.resolve(__dirname,'..'),html=require('./helpers/sources.cjs').scripts().join('\n'),ctx=vm.createContext({});
+for(const source of require('./helpers/sources.cjs').scripts()){if(source.includes('root.Escr.mountUtilities'))break;vm.runInContext(source,ctx);}
 const E=ctx.Escr,doc=new Node('document'),timers=[];
 doc.createElement=tag=>new Node(tag);doc.createElementNS=(ns,tag)=>new Node(tag);
 Node.prototype.getBoundingClientRect=function(){return{left:this.attrs['data-reading-index']*95||0,width:this.className==='ptbr-word-row'?1000:90};};
@@ -26,7 +26,7 @@ renderer.destroy();assert.equal(listeners.resize,undefined,'remove listener ao t
 current=true;cantos[0].click();assert.equal(picked.length,before,'renderer cancelado não reage');
 const invalid=new Node('div');E.renderReadingMap(invalid,{snapshot:source,lens:'morfologia',findings:[{start:0,end:2,snippet:'errado'}],onSelect:()=>assert.fail('span inválido')});assert.equal(all(invalid,'ptbr-word').length,0);
 const literal='<img src=x onerror=alert(1)>',safe=new Node('div');E.renderReadingMap(safe,{snapshot:literal,lens:'ortografia',findings:[{start:0,end:literal.length,snippet:literal}],onSelect:()=>{}});assert.equal(tags(safe,'img').length,0);assert.ok(safe.textContent.includes(literal));
-assert.ok(html.includes(fs.readFileSync(path.join(root,'ptbr/leitura-visual.js'),'utf8')));assert.ok(html.includes(fs.readFileSync(path.join(root,'ptbr/leitura-visual.css'),'utf8')));
+assert.ok(html.includes(fs.readFileSync(path.join(root,'ptbr/leitura-visual.js'),'utf8')));assert.ok(fs.readFileSync(path.join(root,require('../build/assets.json').assets.find(a=>a.id==='styles').path),'utf8').includes(fs.readFileSync(path.join(root,'ptbr/leitura-visual.css'),'utf8')));
 const syntaxText='A menina não leu a carta ontem. A menina canta.',syntaxFindings=E.createVault(E.knowledge).analyze('sintaxe',syntaxText).findings,syntaxParent=new Node('div');
 current=true;picked=[];
 const syntaxRenderer=E.renderReadingMap(syntaxParent,{snapshot:syntaxText,lens:'sintaxe',findings:syntaxFindings,isCurrent:()=>current,onSelect:f=>picked.push(f)});

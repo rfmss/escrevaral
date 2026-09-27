@@ -1,0 +1,261 @@
+/* SCRVRL OS: gabinete pessoal, tinta sage, objetos e comandos no lugar certo.
+   CSS clássico, sem variáveis, filtros, animação contínua ou nova dependência. */
+@media screen {
+ html, button, input, select, .quiet, .note-name, .paper-footer { font-family: Arial, Helvetica, sans-serif; }
+ .title, h2, .cabinet-heading h1, .cabinet-note .note-name, #resume-title { font-family: 'Noto Serif', Georgia, serif; }
+ .note-time, .manuscript-date { font-family: Arial, Helvetica, sans-serif; letter-spacing: .2px; }
+ #manuscrito { font: 21px/1.85 'Noto Serif', Georgia, serif; text-shadow: none; }
+ body[data-letter="maquina"] #manuscrito, body[data-machine="true"] #manuscrito { font-family: 'Courier Prime', 'Courier New', Courier, monospace; line-height: 1.7; }
+ body[data-theme="escuro"] #manuscrito { text-shadow: none; }
+ .sheet { border-left-style: solid; }
+ .panel-backdrop { background: rgba(30,35,32,.04); }
+ body[data-theme="escuro"] .panel-backdrop { background: rgba(0,0,0,.18); }
+ #back-cabinet { text-transform: none; font-size: 14px; font-weight: normal; letter-spacing: 0; min-height: 44px; padding: 0 10px 0 0; }
+ #back-cabinet span { margin-right: 8px; }
+ .project-field { display: block; font-size: 14px; margin: 24px 0 8px; }
+ .project-input { width: 100%; min-height: 44px; padding: 8px; border: 1px solid #8b9b8c; border-radius: 0; background: transparent; font-size: 16px; }
+ .os-bar { position: absolute; top: 0; left: 24px; right: 24px; height: 64px; border-bottom: 1px solid #8b9b8c; display: flex; align-items: center; }
+ .os-signature { display: inline-flex; align-items: center; min-width: 180px; font-size: 16px; letter-spacing: 2px; }
+ .os-signature img { margin-right: 12px; }
+ .os-signature small { font-size: 12px; letter-spacing: 1px; font-weight: normal; }
+ .os-menu { margin-left: auto; padding: 10px 12px; }
+ #gabinete { position: fixed; top: 0; bottom: 0; left: 0; right: 0; background: #ccd5c7; color: #1e2320; }
+ .cabinet-search { position: relative; margin: 0 auto; width: 38%; max-width: 460px; }
+ .cabinet-search input { width: 100%; min-height: 40px; font-size: 14px; padding: 8px 38px 8px 0; color: inherit; background: transparent; border: 0; border-bottom: 1px solid #8b9b8c; border-radius: 0; }
+ .cabinet-search input::placeholder { color: #4a544c; opacity: 1; }
+ .cabinet-search button { position: absolute; top: 0; right: 0; min-height: 40px; width: 36px; padding: 0; font-size: 24px; }
+ .cabinet-workspace { position: absolute; top: 88px; bottom: 66px; left: 24px; right: 24px; }
+ .os-label { font-size: 12px; line-height: 1.5; letter-spacing: 1.5px; font-weight: normal; color: #4a544c; }
+ .project-shelf { position: absolute; left: 0; top: 0; bottom: 0; width: 200px; overflow-y: auto; padding: 4px 16px 24px 0; border-right: 1px solid #8b9b8c; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+ .project-shelf > .os-label { margin: 12px 10px 24px; }
+ .project-link { display: flex; align-items: center; width: 100%; min-height: 48px; padding: 10px; text-align: left; border-left: 2px solid transparent; border-radius: 0; line-height: 1.4; word-wrap: break-word; }
+ .project-link span { min-width: 0; overflow-wrap: break-word; word-wrap: break-word; }
+ .project-link .project-icon { flex: 0 0 24px; width: 24px; margin-right: 10px; }
+ .project-icon svg { display: block; width: 24px; height: 24px; }
+ .project-link small { margin-left: auto; padding-left: 8px; font-size: 12px; color: #4a544c; }
+ .project-link[aria-pressed="true"] { border-left-color: #1e2320; background: transparent; font-weight: bold; }
+ .project-new { font-size: 14px; padding: 12px 10px; margin-top: 20px; text-align: left; }
+ .cabinet-files { position: absolute; top: 0; left: 236px; right: 148px; bottom: 0; overflow-y: auto; overflow-x: hidden; padding: 0 24px 32px 0; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+ .cabinet-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+ .cabinet-heading .os-label { margin: 12px 0 10px; }
+ .cabinet-heading h1 { font-weight: normal; font-size: 32px; line-height: 1.4; margin: 0; word-wrap: break-word; }
+ .cabinet-heading h1:focus { outline: none; }
+ .os-action { white-space: nowrap; margin-left: 16px; border: 1px solid #8b9b8c; border-radius: 0; padding: 10px 14px; }
+ .resume-note { display: block; position: relative; width: 100%; text-align: left; padding: 18px 22px; border: 1px solid #8b9b8c; border-left: 3px solid #4a544c; border-radius: 0; margin: 0 0 32px; background: #c1ccc0; }
+ .resume-note .os-label, #resume-title, #resume-date { display: block; }
+ #resume-title { font-size: 21px; line-height: 1.5; margin: 10px 0 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+ #resume-date { font-size: 13px; color: #4a544c; }
+ .files-label { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid #8b9b8c; padding-bottom: 12px; }
+ .files-label h2 { margin: 0; font-size: 17px; font-weight: normal; }
+ #cabinet-count { font-size: 12px; color: #4a544c; }
+ .cabinet-note { display: block; position: relative; width: 100%; padding: 18px 12px 18px 14px; border: 0; border-left: 2px solid transparent; border-bottom: 1px dotted #8b9b8c; border-radius: 0; text-align: left; }
+ .cabinet-note .note-name { font-size: 18px; line-height: 1.6; white-space: normal; overflow-wrap: break-word; word-wrap: break-word; font-weight: normal; }
+ .cabinet-note .note-time { font-size: 12px; color: #4a544c; margin-top: 6px; }
+ .cabinet-note[aria-current="true"] { border-left-color: #4a544c; }
+ .note-project-label { position: absolute; right: 12px; bottom: 18px; max-width: 40%; font-size: 12px; color: #4a544c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; }
+ .cabinet-note .note-time { padding-right: 42%; }
+ .cabinet-empty { font-family: 'Noto Serif', Georgia, serif; font-size: 19px; line-height: 1.8; max-width: 30em; margin-top: 32px; color: #4a544c; }
+ .os-workshop { position: absolute; top: 0; bottom: 0; right: 0; width: 124px; border-left: 1px solid #8b9b8c; padding: 4px 0 20px 16px; overflow-y: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+ .os-workshop > .os-label { text-align: center; margin: 12px 0 24px; }
+ .os-app { width: 100%; display: block; padding: 12px 4px; margin-bottom: 12px; font-size: 13px; line-height: 1.5; border-radius: 0; }
+ .os-app .os-icon { display: block; width: 36px; height: 36px; margin: 0 auto 9px; }
+ .os-icon { fill: currentColor; stroke: none; }
+ .os-divider { margin: 14px 8px; border-top: 1px dotted #8b9b8c; }
+ .os-footer { position: absolute; bottom: 0; left: 24px; right: 24px; min-height: 44px; border-top: 1px solid #8b9b8c; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #4a544c; }
+ .os-footer > span:first-child { letter-spacing: 1.5px; margin-right: 20px; }
+ #cabinet-status { line-height: 1.5; }
+ .os-footer button { font-size: 13px; white-space: nowrap; margin-left: 16px; }
+ .project-form { border-bottom: 1px solid #8b9b8c; margin-bottom: 24px; padding: 0 0 20px; }
+ .project-form label { display: block; margin-bottom: 10px; font-size: 14px; }
+ .project-form > div { display: flex; flex-wrap: wrap; }
+ .project-form input { min-width: 120px; width: 100%; min-height: 44px; border: 1px solid #8b9b8c; background: transparent; font-size: 16px; padding: 8px 12px; border-radius: 0; margin-bottom: 6px; }
+ #project-error { font-size: 14px; }
+ body[data-theme="escuro"] #gabinete { background: #242621; color: #e8e8df; }
+ body[data-theme="escuro"] .os-label, body[data-theme="escuro"] .os-footer, body[data-theme="escuro"] #resume-date,
+ body[data-theme="escuro"] .note-project-label, body[data-theme="escuro"] .cabinet-note .note-time, body[data-theme="escuro"] #cabinet-count,
+ body[data-theme="escuro"] .cabinet-empty, body[data-theme="escuro"] .project-link small { color: #b6bfaa; }
+ body[data-theme="escuro"] .cabinet-search input::placeholder { color: #b6bfaa; }
+ body[data-theme="escuro"] .os-bar, body[data-theme="escuro"] .project-shelf, body[data-theme="escuro"] .os-workshop,
+ body[data-theme="escuro"] .os-footer, body[data-theme="escuro"] .cabinet-search input, body[data-theme="escuro"] .cabinet-note,
+ body[data-theme="escuro"] .resume-note, body[data-theme="escuro"] .files-label, body[data-theme="escuro"] .os-action,
+ body[data-theme="escuro"] .project-input, body[data-theme="escuro"] .project-form input, body[data-theme="escuro"] .project-form,
+ body[data-theme="escuro"] .os-divider { border-color: #656e5e; }
+ body[data-theme="escuro"] .resume-note { background: #363930; }
+ body[data-theme="escuro"] .project-link[aria-pressed="true"], body[data-theme="escuro"] .cabinet-note[aria-current="true"] { border-left-color: #b6bfaa; }
+ @media (max-width: 1000px) {
+  .project-shelf { width: 170px; padding-right: 10px; }
+  .cabinet-files { left: 194px; right: 110px; padding-right: 20px; }
+  .os-workshop { width: 96px; padding-left: 10px; }
+  .cabinet-heading { display: block; }
+  .cabinet-heading .os-action { margin: 16px 0 0; }
+  .note-project-label { position: static; max-width: 100%; margin-top: 6px; }
+  .cabinet-note .note-time { padding-right: 0; }
+ }
+ @media (max-width: 760px) {
+  #manuscrito { font-size: 19px; }
+  .os-bar { left: 16px; right: 16px; height: 104px; display: block; }
+  .os-signature { position: absolute; left: 0; top: 16px; min-width: 0; font-size: 15px; }
+  .os-menu { position: absolute; right: 0; top: 8px; }
+  .cabinet-search { position: absolute; left: 0; right: 0; top: 56px; width: auto; max-width: none; }
+  .cabinet-search input { font-size: 16px; }
+  .cabinet-workspace { top: 120px; bottom: 60px; left: 16px; right: 16px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .project-shelf { position: static; width: auto; border-right: 0; border-bottom: 1px solid #8b9b8c; padding: 0 0 12px; overflow: visible; }
+  .project-shelf > .os-label { margin: 0 0 6px; }
+  .project-link { display: inline-flex; width: auto; max-width: 100%; vertical-align: middle; margin-right: 8px; }
+  #cabinet-projects { display: inline; }
+  .project-new { margin: 0; }
+  .cabinet-files { position: static; width: auto; overflow: visible; padding: 24px 0; }
+  .cabinet-heading { margin-bottom: 24px; }
+  .cabinet-heading h1 { font-size: 27px; }
+  .cabinet-heading .os-action { margin-top: 12px; }
+  .resume-note { padding: 14px 16px; margin-bottom: 24px; }
+  .os-workshop { position: static; width: auto; border: 0; border-top: 1px solid #8b9b8c; padding: 12px 0; overflow: visible; }
+  .os-workshop > .os-label { text-align: left; margin: 0 0 8px; }
+  .os-app { display: inline-block; vertical-align: top; width: 31%; margin: 0 1% 6px 0; }
+  .os-divider { display: none; }
+  .os-footer { left: 16px; right: 16px; }
+  .os-footer > span:first-child { display: none; }
+  #cabinet-status { font-size: 12px; }
+  .os-footer button { margin-left: 8px; padding-right: 0; }
+ }
+ @media (max-width: 430px) {
+  #back-cabinet { width: 40px; padding: 0; }
+  #back-cabinet .cabinet-word { display: none; }
+  #back-cabinet span { margin: 0; }
+ }
+ @media (max-height: 480px) {
+  .os-bar { height: 52px; }
+  .cabinet-workspace { top: 66px; bottom: 52px; }
+  .os-bar .os-signature { display: none; }
+  .cabinet-search { top: 4px; left: 0; right: 80px; width: auto; margin: 0; }
+  .os-menu { top: 4px; }
+  .cabinet-heading .os-label { display: none; }
+ }
+}
+
+/* Área de trabalho e janelas; acabamento editorial-industrial da referência 01.4. */
+@media screen {
+ #gabinete { outline: 1px dotted #8b9b8c; outline-offset: -12px; }
+ .os-bar { left: 24px; right: 24px; height: 58px; }
+ .os-signature { min-width: 214px; letter-spacing: -.5px; }
+ .os-signature strong { font: 600 25px/1 'Oswald', 'Arial Narrow', Arial, sans-serif; }
+ .os-signature img { width: 24px; height: 24px; margin-right: 10px; }
+ .os-signature small { font: 12px Arial, sans-serif; letter-spacing: 1px; margin-left: 5px; }
+ .ral-frame { border: 1px solid currentColor; padding: 0 2px; margin-left: 1px; }
+ .os-menus { display: flex; flex-shrink: 0; }
+ .os-menus button { padding: 10px 9px; border-radius: 0; }
+ .cabinet-search { width: 30%; margin: 0 24px 0 auto; }
+ .cabinet-search input { font-size: 13px; min-height: 34px; }
+ .cabinet-search button { min-height: 34px; }
+ .cabinet-workspace { top: 76px; bottom: 64px; left: 32px; right: 32px; overflow: hidden; }
+ .desktop-imprint { position: absolute; bottom: 8px; left: 6px; pointer-events: none; color: #4a544c; opacity: .36; }
+ .desktop-imprint strong { display: block; font: 600 42px/1.2 'Oswald', 'Arial Narrow', Arial, sans-serif; letter-spacing: -1px; }
+ .desktop-imprint strong span { border: 1px solid currentColor; margin-left: 3px; padding: 0 2px; }
+ .desktop-imprint small { display: block; margin-top: 8px; font-size: 10px; letter-spacing: 1px; }
+ .os-workshop { position: absolute; top: 16px; left: 0; right: auto; bottom: 94px; width: 43%; padding: 0 20px 0 0; border: 0; overflow-y: auto; display: block; }
+ .os-workshop > .os-label, .os-workshop .os-divider { display: none; }
+ .os-app { display: inline-block; width: 94px; vertical-align: top; margin: 0 8px 22px 0; padding: 10px 6px; border: 1px solid transparent; border-radius: 0; font-size: 13px; line-height: 1.4; }
+ .os-app .os-icon { width: 42px; height: 42px; margin: 0 auto 12px; }
+ .os-app:hover { background: transparent; border-color: #8b9b8c; }
+ .os-app:focus { outline-offset: -2px; }
+ .cabinet-window { position: absolute; top: 20px; right: 0; bottom: 30px; width: 56%; min-width: 600px; z-index: 2; border: 1px solid #657367; background: #ccd5c7; }
+ .window-bar { height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 0 0 16px; border-bottom: 1px solid #8b9b8c; cursor: move; touch-action: none; -webkit-user-select: none; user-select: none; }
+ .window-name, .os-label, .rail-label, .eyebrow { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; font-weight: 600; letter-spacing: .5px; font-size: 14px; }
+ .window-controls { display: flex; }
+ .window-controls button { width: 38px; min-height: 42px; font: 20px/1 Arial, sans-serif; padding: 0; border: 0; border-left: 1px dotted #8b9b8c; border-radius: 0; }
+ .window-body { position: absolute; top: 44px; bottom: 0; right: 0; left: 0; overflow: hidden; }
+ .cabinet-window .project-shelf { top: 0; bottom: 0; left: 0; width: 164px; padding: 14px 10px 14px 8px; border-right: 1px dotted #8b9b8c; overflow-y: auto; }
+ .project-shelf > .os-label { margin: 4px 10px 18px; }
+ .project-link { font-size: 13px; padding: 9px 6px; }
+ .project-link .project-icon { flex-basis: 22px; width: 22px; margin-right: 6px; }
+ .project-new { padding: 12px 6px; font-size: 13px; }
+ .cabinet-window .cabinet-files { top: 0; bottom: 0; left: 164px; right: 0; padding: 18px 22px 28px; overflow-y: auto; }
+ .cabinet-heading { display: block; margin-bottom: 18px; }
+ .cabinet-heading .os-label { display: none; }
+ .cabinet-heading h1 { font: 600 28px/1.3 'Oswald', 'Arial Narrow', Arial, sans-serif; letter-spacing: .1px; }
+ .cabinet-heading .os-action { margin: 12px 0 0; padding: 6px 10px; min-height: 38px; font-size: 13px; border-style: dotted; }
+ .resume-note { border: 0; border-top: 1px solid #8b9b8c; border-bottom: 1px solid #8b9b8c; padding: 14px 0; margin-bottom: 24px; background: transparent; }
+ #resume-title { font-size: 19px; margin: 6px 0; }
+ .resume-note .os-label { font-size: 13px; }
+ .files-label h2 { font: 600 16px 'Oswald', 'Arial Narrow', Arial, sans-serif; text-transform: uppercase; }
+ .cabinet-note { padding: 14px 10px; }
+ .cabinet-note .note-name { font-size: 16px; }
+ .cabinet-note .note-time { padding-right: 0; }
+ .note-project-label { position: static; max-width: 100%; margin-top: 6px; }
+ .cabinet-empty { font-size: 17px; margin-top: 22px; }
+ .os-footer { left: 24px; right: 24px; bottom: 12px; min-height: 36px; }
+ .os-tasks { display: flex; align-items: center; }
+ .os-tasks button { border: 1px solid #8b9b8c; border-radius: 0; min-height: 30px; font-size: 12px; padding: 5px 12px; margin: 0 8px 0 0; }
+ .os-tasks button[aria-pressed="true"] { border-color: #4a544c; background: #c1ccc0; }
+ #cabinet-status { margin-left: 12px; margin-right: auto; }
+ .cabinet-window[data-maximized="true"] { position: fixed; top: 40px !important; left: 0 !important; right: 0 !important; bottom: 44px !important; width: auto !important; height: auto !important; min-width: 0; }
+ .cabinet-window[data-maximized="true"] .window-bar { cursor: default; }
+ body[data-view="gabinete"] .sheet { left: 50%; right: auto; top: 94px; bottom: 76px; width: 480px; max-width: calc(100% - 32px); margin-left: -240px; border: 1px solid #657367; padding: 24px; }
+ body[data-view="gabinete"] .sheet-heading { padding-bottom: 16px; border-bottom-style: solid; }
+ .title { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; font-weight: 600; }
+ .sheet-heading h2 { font: 600 28px/1.3 'Oswald', 'Arial Narrow', Arial, sans-serif; }
+ body[data-theme="escuro"] .cabinet-window { background: #242621; border-color: #8b9b8c; }
+ body[data-theme="escuro"] .window-bar, body[data-theme="escuro"] .window-controls button, body[data-theme="escuro"] .os-tasks button { border-color: #656e5e; }
+ body[data-theme="escuro"] .resume-note { background: transparent; }
+ body[data-theme="escuro"] .desktop-imprint { color: #b6bfaa; }
+ body[data-theme="escuro"] .os-app:hover { background: transparent; border-color: #8b9b8c; }
+ body[data-theme="escuro"] .os-tasks button[aria-pressed="true"] { background: #363930; }
+ @media (max-width: 1080px) {
+  .os-signature { min-width: 180px; }
+  .os-signature strong { font-size: 21px; }
+  .os-signature img { display: none; }
+  .cabinet-window { width: 68%; min-width: 540px; }
+  .os-workshop { width: 30%; }
+  .os-app { width: 84px; margin-right: 2px; }
+  .desktop-imprint strong { font-size: 30px; }
+  .desktop-imprint small { max-width: 180px; line-height: 1.5; }
+  #cabinet-status { max-width: 42%; }
+ }
+ @media (max-width: 760px) {
+  .os-bar { height: 106px; left: 16px; right: 16px; }
+  .os-signature { top: 17px; left: 0; }
+  .os-signature strong { font-size: 22px; }
+  .os-signature img { display: none; }
+  .os-menus { position: absolute; top: 4px; right: 56px; }
+  .os-menus button { font-size: 13px; padding: 10px 7px; }
+  #os-desk { display: none; }
+  .os-menu { top: 4px; right: 0; font-size: 13px; padding: 10px 4px; }
+  .cabinet-search { top: 60px; left: 0; right: 0; width: auto; margin: 0; }
+  .cabinet-search input { font-size: 16px; }
+  .cabinet-workspace { top: 120px; bottom: 64px; left: 16px; right: 16px; overflow: hidden; }
+  .os-workshop { width: 100%; top: 0; bottom: 0; padding: 0; }
+  .os-app { width: 96px; margin: 6px 4px 18px 0; }
+  .desktop-imprint { bottom: 12px; }
+  .cabinet-window { top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100%; min-width: 0; height: 100%; }
+  .window-bar { cursor: default; }
+  #window-maximize { display: none; }
+  .window-body { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .cabinet-window .project-shelf { position: static; width: auto; padding: 12px; border-right: 0; border-bottom: 1px dotted #8b9b8c; overflow: visible; }
+  .project-shelf > .os-label { display: none; }
+  .project-link { display: inline-flex; width: auto; max-width: 100%; }
+  .project-new { margin-top: 0; }
+  .cabinet-window .cabinet-files { position: static; width: auto; padding: 20px 16px; overflow: visible; }
+  .os-footer { left: 16px; right: 16px; bottom: 12px; min-height: 40px; }
+  .os-footer button { font-size: 12px; }
+  .os-tasks button { padding: 5px 8px; }
+  #cabinet-status { position: absolute; bottom: -10px; left: 0; max-width: 100%; margin: 0; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  body[data-view="gabinete"] .sheet { left: 16px; right: 16px; top: 60px; bottom: 60px; margin-left: 0; width: auto; }
+ }
+ @media (max-width: 430px) {
+  .os-signature { min-width: 0; }
+  .os-signature strong { font-size: 18px; }
+  .os-signature small { display: none; }
+  .os-menus { right: 52px; }
+  .os-menus button { padding: 10px 5px; }
+ }
+ @media (max-height: 480px) {
+  .os-bar { height: 52px; }
+  .os-menus { display: none; }
+  .cabinet-search { top: 4px; left: 0; right: 90px; width: auto; margin: 0; }
+  .cabinet-workspace { top: 64px; bottom: 60px; }
+  .cabinet-window { top: 0; bottom: 0; }
+  .os-app .os-icon { width: 30px; height: 30px; }
+  .desktop-imprint { display: none; }
+  body[data-view="gabinete"] .sheet { top: 16px; bottom: 16px; }
+ }
+}

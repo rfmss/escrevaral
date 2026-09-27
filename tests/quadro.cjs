@@ -1,5 +1,5 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8'),scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]),context=vm.createContext({});
+const html=require('./helpers/sources.cjs').scripts().join('\n'),scripts=require('./helpers/sources.cjs').scripts(),context=vm.createContext({});
 for(const marker of ["var prefix = 'escrevaral.astra.v1.doc.'",'E.validPlanner =','/* Universo do caderno:','/* Quadro do caderno:','/* Cadernos: dados ES5'])vm.runInContext(scripts.find(s=>s.includes(marker)),context);
 const E=context.Escr,C=E.chalk;
 class Storage{constructor(){this.data=new Map();this.fail=false;}getItem(k){return this.data.get(k)||null;}setItem(k,v){if(this.fail)throw new Error('quota');this.data.set(k,v);}removeItem(k){this.data.delete(k);}}

@@ -1,6 +1,6 @@
 /* Dados de personagens/cenas: vínculos, cópia e importação transacional. */
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
-const html=fs.readFileSync(require('path').join(__dirname,'../index.html'),'utf8'),scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(x=>x[1]),ctx=vm.createContext({});
+const html=require('./helpers/sources.cjs').scripts().join('\n'),scripts=require('./helpers/sources.cjs').scripts(),ctx=vm.createContext({});
 for(const marker of ["var prefix = 'escrevaral.astra.v1.doc.'",'E.validPlanner =','/* Universo do caderno:','/* Cadernos: dados ES5'])vm.runInContext(scripts.find(s=>s.includes(marker)),ctx);
 const E=ctx.Escr;
 class Storage{constructor(){this.data=new Map();}get length(){return this.data.size;}key(i){return [...this.data.keys()][i];}getItem(k){return this.data.get(k)||null;}setItem(k,v){this.data.set(k,String(v));}removeItem(k){this.data.delete(k);}}

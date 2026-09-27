@@ -3,7 +3,7 @@
 const {chromium} = require('playwright');
 const fs = require('node:fs'), path = require('node:path'), http = require('node:http'), assert = require('node:assert/strict');
 const root = path.join(__dirname,'..');
-const server = http.createServer((req,res)=>{const f=path.join(root,req.url==='/'?'index.html':req.url.split('?')[0]); if(!f.startsWith(root)||!fs.existsSync(f)){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',f.endsWith('.js')?'text/javascript':'text/html');res.end(fs.readFileSync(f));});
+const server = http.createServer(require('../scripts/static-handler.cjs')(root));
 let browser;
 const errors=[];
 async function makePage(options={}) { const context=await browser.newContext({serviceWorkers:'block',acceptDownloads:true,viewport:{width:1366,height:768},...options});const page=await context.newPage();page.setDefaultTimeout(8000);page.on('pageerror',e=>errors.push(e.stack));page.on('dialog',d=>{errors.push('Diálogo nativo inesperado: '+d.type());d.dismiss();});return page; }

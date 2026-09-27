@@ -1,89 +1,57 @@
-const CACHE_NAME = "scrvrl-offline-v6-24";
-const ASSET_VERSION = "20260927-scrvrl-regencia-v6-24";
-
-const CORE_ASSETS = [
-  "./",
-  "./index.html",
-  "./escrevaral.html",
-  "./manifest.webmanifest",
-  "./icons/icon.svg",
+/* Gerado: editar src/app/service-worker.template.js. */
+const CACHE_NAME = "scrvrl-offline-v6-25-b70bb9507fe1";
+const ASSET_VERSION = "20260927-scrvrl-modular-v6-25";
+const REQUIRED_ASSETS = [
+  {
+    "url": "./assets/20260927-scrvrl-modular-v6-25/cofre.4668b55c3a49a07d.js",
+    "sha256": "4668b55c3a49a07df52cfaa8574c275dceb554043e8d391dd31b416a21a5f2ea"
+  },
+  {
+    "url": "./assets/20260927-scrvrl-modular-v6-25/app.2849c5ac65e16906.js",
+    "sha256": "2849c5ac65e16906af6fb5f96755cbbbf67d1633f683e33604b552e66ba6e354"
+  },
+  {
+    "url": "./assets/20260927-scrvrl-modular-v6-25/styles.05de5cdd1be6ad3d.css",
+    "sha256": "05de5cdd1be6ad3d623b16ef43e032445243c121ce02be172d3e0dd8d20f6da4"
+  }
 ];
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      // O documento é obrigatório e tem de ser a versão atual. `cache: "reload"`
-      // ignora o cache HTTP heurístico e garante que a instalação só completa
-      // quando o HTML carregado é realmente desta versão.
-      .then(async (cache) => {
-        const guardarDocumento = (caminho) =>
-          fetch(new Request(caminho, { cache: "reload" })).then((resposta) => {
-            if (!resposta.ok) throw new Error("documento não revalidado: " + caminho);
-            return cache.put(caminho, resposta);
-          });
-        await Promise.all([guardarDocumento("./"), guardarDocumento("./index.html")]);
-        const documento = await (await cache.match("./index.html")).text();
-        if (documento.indexOf(`content="` + ASSET_VERSION + `"`) === -1) {
-          throw new Error("HTML da versão atual não confirmado — instalação abortada");
-        }
-        const optionalAssets = CORE_ASSETS.filter((asset) => asset !== "./" && asset !== "./index.html");
-        await Promise.allSettled(optionalAssets.map((asset) => cache.add(asset)));
-      })
-      .then(() => self.skipWaiting())
-  );
+const scopeURL = new URL('./', self.registration.scope);
+const appPaths = [scopeURL.pathname, new URL('index.html',scopeURL).pathname];
+async function checkedAsset(asset) {
+  const response=await fetch(new Request(asset.url,{cache:'reload'}));
+  if(!response.ok)throw new Error('Recurso indisponível: '+asset.url);
+  const digest=await crypto.subtle.digest('SHA-256',await response.clone().arrayBuffer());
+  const actual=Array.from(new Uint8Array(digest),n=>n.toString(16).padStart(2,'0')).join('');
+  if(actual!==asset.sha256)throw new Error('Recurso de outra versão: '+asset.url);
+  return response;
+}
+self.addEventListener('install',event=>{
+ event.waitUntil((async()=>{
+  const cache=await caches.open(CACHE_NAME);
+  const index=await checkedAsset({url:'./index.html',sha256:'310ea79d6971fd8aa6691735b6c000aeef66616a80661bacfa68539d4db02efe'});
+  if(!index.ok||(await index.clone().text()).indexOf('content="'+ASSET_VERSION+'"')<0)throw new Error('Documento de outra versão');
+  await Promise.all(REQUIRED_ASSETS.map(async asset=>cache.put(asset.url,await checkedAsset(asset))));
+  await cache.put('./index.html',index.clone());await cache.put('./',index);
+  // Ícone e arquivo portátil não impedem o editor de funcionar offline.
+  await Promise.allSettled(['./escrevaral.html','./manifest.webmanifest','./icons/icon.svg'].map(p=>cache.add(p)));
+  await self.skipWaiting();
+ })());
 });
-
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches
-      .keys()
-      .then((cacheNames) =>
-        Promise.all(
-          cacheNames
-            .filter((cacheName) => cacheName.startsWith("scrvrl-offline-") && cacheName !== CACHE_NAME)
-            .map((cacheName) => caches.delete(cacheName))
-        )
-      )
-      .then(() => self.clients.claim())
-  );
+self.addEventListener('activate',event=>{
+ event.waitUntil((async()=>{
+  for(const name of await caches.keys())if(name.startsWith('scrvrl-offline-')&&name!==CACHE_NAME)await caches.delete(name);
+  await self.clients.claim();
+ })());
 });
-
-self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") {
-    return;
-  }
-
-  if (event.request.mode === "navigate") {
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", responseClone));
-          return response;
-        })
-        .catch(() => caches.match("./index.html"))
-    );
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(event.request)
-        .then((response) => {
-          if (!response || response.status >= 400) {
-            return response;
-          }
-
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
-          return response;
-        })
-        .catch(() => cachedResponse || new Response("", { status: 503, statusText: "Offline" }));
-    })
-  );
+self.addEventListener('fetch',event=>{
+ if(event.request.method!=='GET')return;
+ const url=new URL(event.request.url);if(url.origin!==scopeURL.origin)return;
+ const isApp=event.request.mode==='navigate'&&appPaths.includes(url.pathname);
+ event.respondWith((async()=>{
+  const cache=await caches.open(CACHE_NAME);
+  // Uma geração completa permanece consistente até a ativação do próximo worker.
+  if(isApp){const page=await cache.match('./index.html');if(page)return page;}
+  const cached=await cache.match(event.request);if(cached)return cached;
+  try{return await fetch(event.request);}catch(error){return new Response('Recurso indisponível offline.',{status:503});}
+ })());
 });

@@ -1,0 +1,193 @@
+{
+  "baseline": "f095b784424106f7d00c5285e190a696cd13344f",
+  "scripts": [
+    {
+      "path": "resources/pt-BR/local/conhecimento.js",
+      "sha256": "094b928f20994c1a82ecade07fe13aa89c4b506213906fe975d0aa4f4eb114bb"
+    },
+    {
+      "path": "packages/cofre/src/registro.js",
+      "sha256": "734c31a0f2506811cf86738649195333575153eaa76e40369db1aa51fa991223"
+    },
+    {
+      "path": "packages/cofre/src/protecao-e-ortografia.js",
+      "sha256": "614dff4fea77f117447549579f196dbf712f8a4b788c69ba7cbac6b5b83f0f7f"
+    },
+    {
+      "path": "src/storage/documentos.js",
+      "sha256": "3662d2ab56bcf8f39723f301e67ba8f66e0bff2a30e6744544ffa37817b3b191"
+    },
+    {
+      "path": "packages/cofre/src/achados.js",
+      "sha256": "b5f96a9ad29300a524563bab1ee084029925c036a4d85c1589532f9fcb709f1c"
+    },
+    {
+      "path": "resources/pt-BR/local/expressoes-contextuais.js",
+      "sha256": "b8211bc1610e343372a8c4d40918c34c739b83d3aa627c7eecb2f2a9963fe329"
+    },
+    {
+      "path": "packages/cofre/src/lentes/contexto-cultural.js",
+      "sha256": "132286840c81b9052bf1651e98801196967fc7d58c153c348d45a4946b4f0ee9"
+    },
+    {
+      "path": "resources/pt-BR/local/expressoes.js",
+      "sha256": "1b6451de94fd6486981477319b1969a4c881c4e49200c77d946eb7e607ad2dd2"
+    },
+    {
+      "path": "ptbr/expressoes.js",
+      "sha256": "f440c916cde99f30d5e2379599d2b639e904afb0a8c554ad49c4fe6f22da0933"
+    },
+    {
+      "path": "resources/pt-BR/local/poesia.js",
+      "sha256": "4d00dbe15f13f638231d6ce409f92cca5b929f08b17f0c5b6fe2e9852028a119"
+    },
+    {
+      "path": "packages/cofre/src/lentes/poesia.js",
+      "sha256": "248f26ab9eafd407d4906543be7bc8c1335f89ec3a493b3a28f51f0cc99f0d2d"
+    },
+    {
+      "path": "resources/pt-BR/local/verbos.js",
+      "sha256": "4bf17b68fd518ed9721f160b27adfe59449b4d74c234c2efadd6fca4fd8d7baf"
+    },
+    {
+      "path": "resources/pt-BR/local/gramatica.js",
+      "sha256": "03bc184a749b1fdc96b487000f6c04c1519c2cb16fac51dcf27211f413ba742b"
+    },
+    {
+      "path": "resources/pt-BR/local/maturacao.js",
+      "sha256": "44a504129da92b4e49a34a9b8e86bab84ebc702185fd6f31da81bd87198bad59"
+    },
+    {
+      "path": "resources/pt-BR/local/estudio.js",
+      "sha256": "9d301856c5e94ddad26cc6eccc5a5a15ae35c9c4909b064606aafeaeda5ccecb"
+    },
+    {
+      "path": "packages/cofre/src/leitura.js",
+      "sha256": "e402521c7d63ff8647ffcf5a1561954af9e0766b47ede330956b97191e2a9b0e"
+    },
+    {
+      "path": "packages/cofre/src/infinitivos.js",
+      "sha256": "e0ee063b4337429753ff9194f938207571963000f75fae9489b179e4dbf4279a"
+    },
+    {
+      "path": "packages/cofre/src/lentes/gramatica.js",
+      "sha256": "d78a2242c73424254e022a47e545f3496bcbebefe2414d9e7a859010f4aba8ad"
+    },
+    {
+      "path": "packages/cofre/src/lentes/concordancia-crase.js",
+      "sha256": "cc34ca87ee0426e77abe3b703a1b2956666f5115c81bb34e743478b0d7b96de0"
+    },
+    {
+      "path": "ptbr/morfologia-contextual.js",
+      "sha256": "6caae24a2fe60e38d4c64c1d2af7a46d288b3d2324e08bd904df8a2cea31fcad"
+    },
+    {
+      "path": "ptbr/grupos-verbais.js",
+      "sha256": "b34ffad1c651fdcf5a21737af52699e48ad734d4ffacc69be579706aa112ee71"
+    },
+    {
+      "path": "ptbr/lexico-sintatico.js",
+      "sha256": "4b6ea1bc32b6805351fe30a173791185266fc9ecc904ceae7cca52c5b866c9f1"
+    },
+    {
+      "path": "ptbr/relacoes-sintaticas.js",
+      "sha256": "7d40606da971c480144e2669d227def5a08253aeb5c9a5532fe6b7f79ddbe12d"
+    },
+    {
+      "path": "ptbr/relativas.js",
+      "sha256": "751ffecd3c186cd7af7673b6d236425aeca1f977aa45c7df161f8b73ee198f2a"
+    },
+    {
+      "path": "ptbr/regras-locais.js",
+      "sha256": "eb21737b2990640dd4effabc600bbf5849a87051225e6e2bbdc36efa8e4a11ed"
+    },
+    {
+      "path": "ptbr/repeticao.js",
+      "sha256": "5a3cae01c01ee89daef36280ea65ef6323893073a71a8fe4ce0ae8bf9a09fb71"
+    },
+    {
+      "path": "ptbr/triagem.js",
+      "sha256": "f7248b8f34fd857806257d97fae1b86dcbba86236c0cec0a696c3dd9c2bd79ee"
+    },
+    {
+      "path": "packages/cofre/src/lentes/ritmo.js",
+      "sha256": "5aa0538cc53fc01f31431c3ee91bb912631d83781d76bde910dfb891d0e1541b"
+    },
+    {
+      "path": "packages/cofre/src/lentes/estudio.js",
+      "sha256": "b59b6822ab595f1131f0e2d7c9184c90f7fe2f1b6108870aa376750d83d24541"
+    },
+    {
+      "path": "src/editor/contrato-analise.js",
+      "sha256": "f2217fa0e771f6c2c2ec23cc5b227de60bc385d16cca8ce592d95d903a3519a4"
+    },
+    {
+      "path": "packages/cofre/src/contagem.js",
+      "sha256": "30ac4b3396bb063bc39393b71ca1e961726f3b8134465abd1fc14a3f68cafa02"
+    },
+    {
+      "path": "src/app/utilitarios.js",
+      "sha256": "e70b2d470a5d6a0e07745e7c86748a3222fb6ed0e052bb915ff0924f5a67585a"
+    },
+    {
+      "path": "src/ui/utilitarios.js",
+      "sha256": "8c77d2c257a6deb4781915568b165444d500cb9dfa5629aa15e54bcb9100134f"
+    },
+    {
+      "path": "src/storage/universo.js",
+      "sha256": "30af9f7ae8c8c18ec334243999bcd51b51f87bb74dad8f3c4eec7c51f196bd02"
+    },
+    {
+      "path": "src/ui/dialogos.js",
+      "sha256": "261a93567088f4cec04796a81ef5ab0d155543610f103a4b0fe13dfacc053e0b"
+    },
+    {
+      "path": "src/ui/universo.js",
+      "sha256": "4ed73207cb664e9c9d0ce0408a302afb60cb6224e6be77e27785726fdd9594c1"
+    },
+    {
+      "path": "src/storage/quadro.js",
+      "sha256": "7c3e6d0e2779a17cd65e56f0766027b9034b1a87da14c769d2ce8c9a4fb323e9"
+    },
+    {
+      "path": "src/ui/quadro.js",
+      "sha256": "9e143a4835ad68ad62bcfa5c38236f050b17af0b54c12b635e2ba7b6d1de7ad6"
+    },
+    {
+      "path": "packages/cofre/src/incremental.js",
+      "sha256": "71f0ca1d6e4b112e2bbc97914914fb5f3acfe44eca64e74ca6053fa5bb7fdc92"
+    },
+    {
+      "path": "src/storage/analises.js",
+      "sha256": "7aa3b36f074a241093da51c438d9de07616edb0958a0ef853c1c6f2ced3c7a6b"
+    },
+    {
+      "path": "src/storage/linhagem.js",
+      "sha256": "427c887541f3ae61696cfb7c5c252e76d65b54a1c59cb7172dea917ce4d88ff2"
+    },
+    {
+      "path": "src/ui/linhagem.js",
+      "sha256": "a52d19a982b3eb10674a48e7a127b1ff1916595f09faad22c80cc3c54d9b0475"
+    },
+    {
+      "path": "src/storage/cadernos.js",
+      "sha256": "b1dd69d07eeff6a6bc9851f588e250042aff893263a2acf60b06296b44755153"
+    },
+    {
+      "path": "src/editor/controlador.js",
+      "sha256": "22004645d32b12675489e858b5b08077ee465275ec6198574d3b893073c45e33"
+    },
+    {
+      "path": "ptbr/leitura-visual.js",
+      "sha256": "522a1a9de13bb950db8617590b397d6a1e65439f174b57d767c388a3baa5123e"
+    },
+    {
+      "path": "ptbr/painel.js",
+      "sha256": "51883a71e48648b0d09aeb1e60115cb6c634c8a7f2fc4a2b6679c8e5f198e138"
+    },
+    {
+      "path": "src/app/offline.js",
+      "sha256": "c7eb0eaef3c7c5b93bdfe50607f7ae6ad3dc71febe7140c10a5752e506711fa4"
+    }
+  ]
+}

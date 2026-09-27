@@ -1,7 +1,7 @@
 // Observações de 24/09: cópia independente da seleção e hierarquia com controles acessíveis.
 const {chromium,webkit}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..'),out=process.env.QA_OUTPUT||'/tmp',engine=process.env.BROWSER_ENGINE||'chromium';fs.mkdirSync(out,{recursive:true});let browser;const errors=[];
-const server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/html');res.end(fs.readFileSync(path.join(root,'index.html')));});
+const server=http.createServer(require('../scripts/static-handler.cjs')(root));
 async function select(p,a,b){await p.locator('#manuscrito').evaluate((n,[a,b])=>{n.focus();n.setSelectionRange(0,0);n.dispatchEvent(new Event('select'));n.setSelectionRange(a,b);n.dispatchEvent(new Event('select'));},[a,b]);}
 async function shot(p,name){await p.screenshot({path:path.join(out,engine+'-24set-'+name+'.png')});}
 async function fits(p,selector){const b=await p.locator(selector).boundingBox(),v=p.viewportSize();assert.ok(b&&b.x>=-1&&b.y>=-1&&b.x+b.width<=v.width+1&&b.y+b.height<=v.height+1,selector+' '+JSON.stringify(b));}
