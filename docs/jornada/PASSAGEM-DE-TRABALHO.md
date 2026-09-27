@@ -28,3 +28,7 @@ O campo `baseline` registra a versão do produto auditada pelo mapa; não é o S
 ## Encerramento da primeira jornada
 
 Uma versão completa do escopo acordado pode ser encerrada quando todos os módulos prometidos têm fontes, critérios, implementação real, avaliação reservada e interface acessível; o manuscrito permanece intacto; qualidade e custo atendem às metas definidas; pendências aceitas estão públicas; e o deploy foi conferido. Não equivale a conhecer toda a língua nem elimina manutenção. Não declarar conclusão enquanto metas ou avaliações obrigatórias estiverem indefinidas.
+
+## Árvore e delta por entrega
+
+Atualizar `plano-voo.json`, regenerar a árvore do Plano Mestre e registrar IDs concluídos nesta entrega. Usar sempre a linha curta definida no AGENTS.md. Mudanças no denominador exigem nova versão do plano; não contam como avanço implementado.

@@ -53,3 +53,9 @@ Rafael autorizou expressamente publicar os incrementos atuais na main para test�
 - O cofre puro não pode depender de DOM, localStorage, cadernos ou rede. Adaptadores experimentais não entram automaticamente na montagem do site.
 - Antes do push: `npm run build:check` e verificações essenciais pertinentes. O CI da main confere montagem, contratos e regressões. A auditoria ampla de navegador continua separada conforme autorização vigente.
 - Referências externas precisam de commit, hashes, licença e cobertura. Não confundir snapshot ou teste de transporte com instalação, inferência ou validação de um modelo.
+
+## Filosofia e progresso — decisão de 27/09/2026
+
+Leia `docs/FILOSOFIA-E-COMPATIBILIDADE.md` e a árvore no Plano Mestre. Priorize o piso KitKat/iPad de 2012 antes de aumentar requisitos. Não prometa compatibilidade só porque o JavaScript passa em ES5; confira navegador, CSS, APIs, armazenamento e custo.
+
+Mantenha `docs/jornada/plano-voo.json` com IDs, TODO/DONE, evidências e critério; regenere com `python3 ferramentas/gerar-plano-voo.py`. Cada entrega mostra árvore curta por ramo e a linha: `Plano vN: X/Y DONE | entrega +Z (IDs) | próximo ID | publicação: SHA/estado | limite: pendência`. Conte marcos, nunca porcentagem da língua ou do esforço. A avaliação ampla continua separada; não repetir testes sem risco concreto.

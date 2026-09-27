@@ -8,6 +8,62 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Retrato conferido em 27/09/2026, horário de Brasília:** main `cb9c6ec1cfb5e8dffecda1c45a59b676ac9291fa`; produto v6-25 em `db3fde26d0662568ac198f878d3cc861babfc8f0`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
 
+
+## Constituição do projeto
+
+A filosofia do anexo foi incorporada em [Filosofia de engenharia e compatibilidade](FILOSOFIA-E-COMPATIBILIDADE.md), com [identificação e hash da referência](jornada/referencia-design.json). O alvo é uma oficina acessível em KitKat e iPads de 2012, com baixo custo e recursos da época no caminho essencial. A matriz exata de navegador/SO ainda precisa ser homologada. As decisões posteriores de modularidade, autoria e execução explícita continuam valendo; conflitos do anexo estão explicados no documento.
+
+A árvore abaixo é gerada de [plano-voo.json](jornada/plano-voo.json). Atualize essa fonte e rode `python3 ferramentas/gerar-plano-voo.py`; não marque conclusão apenas pela existência de código. Os 12 estágios P00–P11 continuam sendo o mapa de dependências; os IDs F/C/M/U/Q são marcos de execução ligados a ele.
+
+<!-- PLANO-VOO:INICIO -->
+## Árvore de execução — plano v1
+
+**6/21 marcos DONE · nesta entrega +2 (F05, C01) · próximo C02**
+
+Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.
+
+`DONE` = critério delimitado atendido. `TODO` pode conter implementação parcial; sua caixa só fecha quando o critério inteiro for atendido. Publicação e homologação real são estados separados.
+
+### Fundação — 5/5
+
+- [x] **F01 — Fontes modulares e montagem reproduzível** — DONE. Site e portátil gerados das mesmas fontes; montagem confere no CI. Evidência: [docs/jornada/ENTREGA-V6-25.md](jornada/ENTREGA-V6-25.md).
+- [x] **F02 — Cofre transportável e contrato de conectores** — DONE. Pacote independente executa fora do editor, com posições preservadas. Evidência: [tests/cofre-portabilidade.cjs](../tests/cofre-portabilidade.cjs), [docs/CONECTORES.md](CONECTORES.md).
+- [x] **F03 — CI e publicação rastreáveis** — DONE. Main com verificações essenciais e evidência de deploy. Evidência: [.github/workflows/ci.yml](../.github/workflows/ci.yml), [docs/jornada/ENTREGA-V6-25.md](jornada/ENTREGA-V6-25.md).
+- [x] **F04 — Plano mestre e passagem entre pessoas/IAs** — DONE. Retomada aponta main, estado, decisões e evidências. Evidência: [docs/PLANO-MESTRE.md](PLANO-MESTRE.md), [AGENTS.md](../AGENTS.md).
+- [x] **F05 — Filosofia do anexo e árvore de execução** — DONE. Diretrizes conciliadas, conflitos explícitos e caixas com critérios. Evidência: [docs/FILOSOFIA-E-COMPATIBILIDADE.md](FILOSOFIA-E-COMPATIBILIDADE.md), [docs/jornada/referencia-design.json](jornada/referencia-design.json).
+
+### Compatibilidade e custo — 1/4
+
+- [x] **C01 — Relógio com movimento discreto** — DONE. Sem animação 3D/interpolação; troca breve, callbacks antigos descartados, modo reduzido e oculto sem timer visual. Homologação em Q01. Evidência: [src/ui/digito-relogio.js](../src/ui/digito-relogio.js), [tests/relogio-discreto.cjs](../tests/relogio-discreto.cjs), [docs/jornada/ENTREGA-V6-26.md](jornada/ENTREGA-V6-26.md).
+- [ ] **C02 — Layout do painel pelo piso antigo** — TODO. Substituir dependência de Grid/gap; preservar leitura, seleção, arcos e acesso em tela estreita; registrar verificação visual. Evidência: [ptbr/leitura-visual.css](../ptbr/leitura-visual.css).
+- [ ] **C03 — Caminho offline legado** — TODO. Separar site/PWA/portátil; demonstrar um fluxo de abertura e recuperação offline no perfil alvo, sem exigir APIs inexistentes. Evidência: [docs/ARQUITETURA.md](ARQUITETURA.md).
+- [ ] **C04 — Salvar, importar, exportar e selecionar no piso** — TODO. Inventário de APIs, alternativas e falhas de armazenamento; texto e pacotes preservados nos fluxos essenciais. Evidência: [src/editor/controlador.js](../src/editor/controlador.js), [src/storage/](../src/storage/).
+
+### Motores linguísticos — 0/8
+
+- [ ] **M00 — Decidir reaproveitamento de motor brasileiro** — TODO. Protocolo e ambiente isolados; resultado real ou bloqueio documentado; decisão de viabilidade contra o piso antes de integrar. Evidência: [packages/connectors/portparser/README.md](../packages/connectors/portparser/README.md).
+- [ ] **M01 — Léxico e flexões da primeira versão** — TODO. Fechar inventário/recorte da versão, fontes/licenças e casos reservados; entregar consulta e integração com limites. P03. Evidência: [ptbr/REGENCIA-1.md](../ptbr/REGENCIA-1.md).
+- [ ] **M02 — Classes em contexto da primeira versão** — TODO. Fechar cobertura das dez classes/locuções; implementar recortes com ambiguidades, abstenções e avaliação por classe. P04. Evidência: [ptbr/CONTEXTO-1.md](../ptbr/CONTEXTO-1.md).
+- [ ] **M03 — Relações da oração da primeira versão** — TODO. Fechar construções, núcleos, locuções e exclusões; avaliar relações/limites e integrar. P05. Evidência: [ptbr/SINTAXE-1.md](../ptbr/SINTAXE-1.md), [ptbr/LOCUCOES-1.md](../ptbr/LOCUCOES-1.md).
+- [ ] **M04 — Subordinação da primeira versão** — TODO. Fechar recortes de substantivas/adjetivas/adverbiais/reduzidas; começar por contrastes de que; ampliar somente com fontes e evidência. P06. Evidência: [ptbr/RELATIVAS-1.md](../ptbr/RELATIVAS-1.md).
+- [ ] **M05 — Convenções da primeira versão** — TODO. Fechar regras de ortografia, pontuação, concordância, regência/crase/pronomes; demonstrar alcance e exceções. P07. Evidência: [docs/JORNADA-LINGUISTICA.md](JORNADA-LINGUISTICA.md).
+- [ ] **M06 — Sentido, coesão e texto da primeira versão** — TODO. Definir leituras viáveis e limites; avaliar ambiguidades e referências sem atribuir intenção ou certificar coerência geral. P08. Evidência: [docs/JORNADA-LINGUISTICA.md](JORNADA-LINGUISTICA.md).
+- [ ] **M07 — Estilo e poesia da primeira versão** — TODO. Definir alcance de repetição, expressão, ritmo, rima e métrica; documentar algoritmos e validar aproximações. P08. Evidência: [docs/JORNADA-LINGUISTICA.md](JORNADA-LINGUISTICA.md).
+
+### Experiência do autor — 0/2
+
+- [ ] **U01 — Controle Escrevaral final** — TODO. Uma lente por escolha; explicar/localizar/copiar sem editar; foco/teclado, invalidação e cancelamento verificados. P09. Evidência: [docs/jornada/CONTRATO-ANALISE.md](jornada/CONTRATO-ANALISE.md).
+- [ ] **U02 — Coerência visual e oficina** — TODO. Inventariar discrepâncias com a filosofia; fechar componentes/menu/guias desta versão e revisar sem reconstruir os fluxos aprovados. Evidência: [docs/FILOSOFIA-E-COMPATIBILIDADE.md](FILOSOFIA-E-COMPATIBILIDADE.md).
+
+### Validação e encerramento — 0/2
+
+- [ ] **Q01 — Homologação de aparelhos e acessibilidade** — TODO. Matriz com navegador/SO exatos, fluxos essenciais, offline, teclado, IME, foco, responsividade, custo; indicar testes reais e emulados. P10. Evidência: [docs/jornada/estado.json](jornada/estado.json).
+- [ ] **Q02 — Avaliação reservada e fechamento da versão** — TODO. Limiares definidos antes da avaliação; qualidade/custo medidos por recorte, lacunas aceitas, piloto e release documentados. P02/P10/P11. Evidência: [docs/jornada/PASSAGEM-DE-TRABALHO.md](jornada/PASSAGEM-DE-TRABALHO.md).
+
+**Formato fixo das entregas:** `Plano vN: X/Y DONE | entrega +Z (IDs) | próximo ID | publicação: SHA/estado | limite: pendência relevante`. A árvore resumida usa uma linha por ramo. Não somar marcos como se tivessem o mesmo custo. Ao dividir/ampliar o plano, incrementar sua versão e explicar a mudança do denominador.
+
+<!-- PLANO-VOO:FIM -->
+
 ## 1. O que estamos construindo
 
 Um ambiente de escrita em português brasileiro em que o autor conserva controle sobre cada palavra e pode examinar seu texto por lentes linguísticas. Cada leitura apresenta trecho literal, explicação, fonte, alternativas e limites. O objetivo abrange palavras, orações, texto e recursos expressivos, com aprofundamento acessível e sem atribuir nota de valor literário.
@@ -133,21 +189,13 @@ O mapa inclui as áreas abaixo. Elas descrevem o destino; não são alegações 
 
 ## 7. Sequência de execução na retomada
 
-**Primeiro conferir se a main já avançou além deste retrato.** Se avançou, atualizar a fila a partir dos commits e evidências, sem repetir trabalho pronto.
+Primeiro conferir a main e a árvore atual. A prioridade mudou com a diretriz de compatibilidade: **C02 → C03 → C04**, mantendo Q01 como homologação explícita, antes de exigir novos motores pesados. C01 é o primeiro ajuste concluído desse percurso; F01–F04 já eram a base entregue. F05 incorpora a filosofia e a contagem padronizada.
 
-| Ordem | Próxima entrega delimitada | Como saber que terminou |
-| --- | --- | --- |
-| 1 | Preparar avaliação local do Portparser: inventário completo de runtime, tokenização, pesos, dados, versões e licenças; definir corpus reservado e orçamento de execução antes de medir | Manifesto reproduzível e protocolo escritos; dependências obtidas/ausentes explicitadas; nenhum envio de manuscrito |
-| 2 | Executar inferência isolada quando o ambiente estiver disponível; medir tokenização, morfologia, dependências, posições UTF-16, contrações, abstenções, memória e latência | Relatório com comandos, versões, amostra, resultados reais, falhas e conclusão de viabilidade; não substituir por métricas anunciadas pelo upstream |
-| 3 | Decidir como aproveitar o motor e os dados, mantendo o cofre transportável | Integração proposta a partir da evidência; serviço remoto ou alteração material do produto depende de decisão específica; nenhuma ativação automática |
-| 4 | Ampliar o recorte P06: contrastar que-sujeito, que-objeto, sujeito posposto e integrante; sustentar regras e abstenções com P03–P05 | Estudo e casos contrastantes antes do código; depois implementação delimitada, regressões, integração e publicação com alcance declarado |
-| 5 | Continuar os demais recortes de P03–P08 conforme dependências, sem abandonar o plano amplo | Uma capacidade de cada vez com fonte, contrato, cobertura e evidência, incluindo negativos/ambíguos |
+Depois, executar M00 em ambiente separado e continuar P03–P08 pelos marcos M01–M07. A avaliação externa não bloqueia estudo/corpus independentes. Não começar um download/modelo grande sem antes esclarecer licença, custo e utilidade para o piso alvo.
 
-Se pesos, licença ou ambiente impedirem a inferência, registrar o bloqueio concreto e avançar uma tarefa independente de P03–P06. Não ficar repetindo downloads/testes bloqueados nem declarar o motor avaliado.
+Para terminar em um horizonte controlável: trabalhar uma entrega delimitada por vez; explicitar exclusões; definir critérios e recortes antes de codificar; não reabrir marcos DONE por preferência estética. Se um marco exigir mais de uma entrega, subdividi-lo com IDs estáveis e atualizar a versão do plano. Não prometer data global enquanto recortes, capacidade de execução e acesso aos aparelhos de teste estiverem indefinidos.
 
-A definição do catálogo fechado da primeira versão deve acompanhar o planejamento dos próximos recortes para permitir acompanhar progresso. Não existe aprovação para fingir que essa definição já aconteceu.
-
-**Frente técnica de manutenção:** decompor o controlador por fluxo, preservar a compatibilidade e melhorar limites de módulos conforme o uso justificar. A extração inicial está entregue; não reiniciá-la. **Frente de auditoria posterior:** navegador, teclado/foco, zoom/contraste, IME, cancelamento, aparelhos modestos, PWA/offline/portátil e avaliação linguística reservada. Manter essa fila visível sem transformar sua pendência num pedido repetido de autorização para publicar incrementos já aprovados.
+A auditoria ampla permanece Q01/Q02, conforme a autorização do autor. Isso permite continuar publicando os incrementos técnicos com verificações essenciais e lacunas explícitas; não permite declarar compatibilidade integral antecipadamente.
 
 ## 8. Onde alterar e como verificar
 

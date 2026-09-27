@@ -6,7 +6,7 @@ Atualizado em 27/09/2026. Base do produto auditada: `db3fde26d0662568ac198f878d3
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-25 publicada na main; CI de integridade e deploy do GitHub Pages concluídos com sucesso. Fontes separadas, montagem reproduzível, cofre transportável e manual dos conectores. Portparser recebido em snapshot seletivo e adaptador local de avaliação, sem execução do modelo nem integração ao editor. Auditoria ampla de navegador, acessibilidade e offline permanece pendente.
+**Estado:** v6-25 publicada. Entrega v6-26 implementada e em verificação: filosofia do anexo incorporada, árvore TODO/DONE e relógio com troca discreta sem animação 3D. Prioridade agora é adequação ao piso KitKat/iPad de 2012; compatibilidade real ainda não homologada. Portparser permanece isolado e sem inferência.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,6 +16,8 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
+- C02: substituir Grid/gap no painel por composição compatível com o piso, preservando seleção, arcos e acesso em tela estreita.
+- C03–C04: comprovar caminho offline legado e fluxos de salvar/importar/exportar/selecionar; registrar APIs e alternativas.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.

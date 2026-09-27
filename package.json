@@ -1,9 +1,11 @@
 {
   "name": "escrevaral",
-  "version": "6.25.0",
+  "version": "6.26.0",
   "private": true,
-  "description": "Editor local e cofre linguístico para português brasileiro",
-  "engines": {"node": ">=22"},
+  "description": "Editor local e cofre lingu\u00edstico para portugu\u00eas brasileiro",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "node scripts/build.cjs",
     "build:check": "node scripts/build.cjs --check",
@@ -12,5 +14,8 @@
     "start": "node scripts/serve.cjs",
     "cofre:example": "node packages/cofre/examples/analisar.cjs"
   },
-  "devDependencies": {"acorn": "8.15.0", "playwright": "1.55.0"}
+  "devDependencies": {
+    "acorn": "8.15.0",
+    "playwright": "1.55.0"
+  }
 }

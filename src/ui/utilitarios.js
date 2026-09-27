@@ -13,20 +13,10 @@
     function saveTimer(){try{if(!storage){throw new Error('storage');}storage.setItem(timerKey,JSON.stringify(state));}catch(e){status('O relógio segue nesta sessão; não foi possível guardar seu estado.');}}
     function formatTime(seconds){return pad(Math.floor(seconds/60))+':'+pad(seconds%60);}
     function showFocus(){if(E.dialog&&E.dialog.isOpen()||document.body.getAttribute('data-locked')==='true'||!byId('chalkboard').hidden){return;}bridge.show('focus-pause','pomodoro-task');byId('focus-close').focus();byId('focus-pause').scrollTop=0;}
-    function flipDigit(d,next){
-      if(d.getAttribute('data-digit')===next){return;}
-      var old=d.getAttribute('data-digit');
-      d.querySelector('.static-top span').textContent=next;
-      d.querySelector('.flap-back span').textContent=next;
-      d.querySelector('.static-bottom span').textContent=old;
-      d.querySelector('.flap-front span').textContent=old;
-      d.classList.remove('flipping');d.offsetWidth;d.classList.add('flipping');d.setAttribute('data-digit',next);
-      root.setTimeout(function(){d.classList.remove('flipping');d.querySelector('.static-bottom span').textContent=next;d.querySelector('.flap-front span').textContent=next;},560);
-    }
     function paintTimer(){
       var remaining=state.mode==='idle'?state.work*60:E.pomodoroRemaining(state,Date.now()), display=formatTime(remaining), digits=display.replace(':',''), j;
       text(byId('pomodoro-display'),display);text(byId('focus-time'),display);
-      for(j=0;j<4;j+=1){flipDigit(byId('focus-digit-'+j),digits.charAt(j));}
+      for(j=0;j<4;j+=1){E.setClockDigit(byId('focus-digit-'+j),digits.charAt(j),!byId('focus-pause').hidden);}
       byId('pomodoro-task').hidden=state.mode==='idle';text(byId('pomodoro-task'),(state.mode==='work'?'Escrita ':'Pausa ')+display+(state.paused?' · pausado':''));
       byId('pomodoro-start').hidden=state.mode!=='idle';byId('pomodoro-stop').hidden=state.mode==='idle';byId('pomodoro-pause').hidden=state.mode==='idle'||state.mode==='ready';
       byId('pomodoro-work').disabled=byId('pomodoro-break').disabled=state.mode!=='idle';text(byId('pomodoro-pause'),state.paused?'Retomar contagem':'Pausar contagem');

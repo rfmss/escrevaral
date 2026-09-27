@@ -1,11 +1,13 @@
 {
-  "version": 12,
+  "version": 13,
   "updated": "27/09/2026",
   "baseline": "db3fde26d0662568ac198f878d3cc861babfc8f0",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-25 publicada na main; CI de integridade e deploy do GitHub Pages concluídos com sucesso. Fontes separadas, montagem reproduzível, cofre transportável e manual dos conectores. Portparser recebido em snapshot seletivo e adaptador local de avaliação, sem execução do modelo nem integração ao editor. Auditoria ampla de navegador, acessibilidade e offline permanece pendente.",
+  "current": "v6-25 publicada. Entrega v6-26 implementada e em verificação: filosofia do anexo incorporada, árvore TODO/DONE e relógio com troca discreta sem animação 3D. Prioridade agora é adequação ao piso KitKat/iPad de 2012; compatibilidade real ainda não homologada. Portparser permanece isolado e sem inferência.",
   "next": [
+    "C02: substituir Grid/gap no painel por composição compatível com o piso, preservando seleção, arcos e acesso em tela estreita.",
+    "C03–C04: comprovar caminho offline legado e fluxos de salvar/importar/exportar/selecionar; registrar APIs e alternativas.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
     "Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.",
     "Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.",
@@ -665,7 +667,7 @@
     "date": "26/09/2026",
     "request": "Retomar o plano completo e concentrar a execução no assistente principal.",
     "decision": "Nenhuma nova tarefa depende de colaboração com outro modelo. Avaliações anteriores permanecem apenas como histórico; não serão reabertas na fila atual. Consolidar dependências lexicais e sintáticas antes de somar novos subtipos de subordinadas.",
-    "nextDeliverable": "Avaliação isolada do Portparser: fixar dependências, licenças, corpus reservado e orçamento antes de executar inferência. A ampliação de relativas continua na fila P03–P06; se a avaliação externa estiver bloqueada, avançar um recorte independente com evidências."
+    "nextDeliverable": "C02: substituir Grid/gap no painel por composição compatível com o piso, preservando seleção, arcos e acesso em tela estreita."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -683,5 +685,6 @@
     "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36299174790",
     "verification": "CI 36299175168 e GitHub Pages 36299174790: completed/success. Commit documental cb9c6ec também teve CI e deploy concluídos. QA visual completo permanece pendente."
   },
-  "continuityGuide": "docs/PLANO-MESTRE.md"
+  "continuityGuide": "docs/PLANO-MESTRE.md",
+  "executionPlan": "docs/jornada/plano-voo.json"
 }

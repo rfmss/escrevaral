@@ -1,0 +1,16 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const tasks=new Map();let serial=0,reduced=false;
+const root={document:{hidden:false},matchMedia:()=>({matches:reduced}),setTimeout:(fn,ms)=>{assert.equal(ms,70);tasks.set(++serial,fn);return serial;},clearTimeout:id=>tasks.delete(id)};
+vm.runInNewContext(fs.readFileSync('src/ui/digito-relogio.js','utf8'),{window:root});
+const parts=Array.from({length:4},()=>({textContent:'1'})),attrs={'data-digit':'1'};
+const node={getAttribute:k=>attrs[k],setAttribute:(k,v)=>{attrs[k]=v;},querySelector:s=>parts[['.static-top span','.static-bottom span','.flap-front span','.flap-back span'].indexOf(s)]};
+root.Escr.setClockDigit(node,'2');assert.equal(attrs['data-digit-phase'],'middle');assert.equal(parts[0].textContent,'2');assert.equal(parts[1].textContent,'1');assert.equal(tasks.size,1);
+const obsolete=Array.from(tasks.values())[0];root.Escr.setClockDigit(node,'3');assert.equal(tasks.size,1);obsolete();assert.equal(parts[0].textContent,'3');assert.equal(parts[1].textContent,'2');assert.ok(node._escrDigitTimer);
+root.Escr.setClockDigit(node,'2');obsolete();assert.equal(parts[1].textContent,'3');assert.equal(tasks.size,1);root.Escr.setClockDigit(node,'3');
+for(const fn of tasks.values())fn();tasks.clear();assert.ok(parts.every(p=>p.textContent==='3'));assert.equal(attrs['data-digit-phase'],'rest');
+root.Escr.setClockDigit(node,'3');assert.equal(tasks.size,0);
+reduced=true;root.Escr.setClockDigit(node,'4');assert.equal(tasks.size,0);assert.ok(parts.every(p=>p.textContent==='4'));
+reduced=false;root.document.hidden=true;root.Escr.setClockDigit(node,'5');assert.equal(tasks.size,0);assert.ok(parts.every(p=>p.textContent==='5'));
+root.document.hidden=false;root.Escr.setClockDigit(node,'6',false);assert.equal(tasks.size,0);assert.ok(parts.every(p=>p.textContent==='6'));
+console.log('RELÓGIO: troca discreta, callback antigo descartado, repetição sem trabalho, movimento reduzido e relógio oculto sem timer visual.');

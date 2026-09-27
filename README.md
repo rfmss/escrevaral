@@ -6,6 +6,8 @@ Editor local para escrever e examinar textos em português brasileiro. As lentes
 
 **Vai continuar o projeto? Leia primeiro o [Plano mestre e guia de retomada](docs/PLANO-MESTRE.md).** Ele reúne decisões, estado dos motores, sequência de trabalho e como conferir a evolução real na main.
 
+**Filosofia e progresso:** [engenharia para aparelhos antigos](docs/FILOSOFIA-E-COMPATIBILIDADE.md) · [árvore TODO/DONE](docs/PLANO-MESTRE.md#árvore-de-execução--plano-v1). Compatibilidade KitKat/iPad 2012 ainda em adequação e homologação.
+
 ## Desenvolver
 
 Node.js 22 ou superior. As dependências npm são ferramentas de desenvolvimento; o aplicativo não carrega bibliotecas de CDN.

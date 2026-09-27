@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "planVersion": 1,
+  "updated": "2026-09-27",
+  "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
+  "doneDefinition": "Entrega delimitada implementada/documentada e verificada conforme seu critério. Publicação e homologação de aparelhos são registradas separadamente.",
+  "tracks": [
+    {
+      "id": "F",
+      "title": "Fundação",
+      "items": [
+        {
+          "id": "F01",
+          "title": "Fontes modulares e montagem reproduzível",
+          "state": "DONE",
+          "acceptance": "Site e portátil gerados das mesmas fontes; montagem confere no CI.",
+          "evidence": [
+            "docs/jornada/ENTREGA-V6-25.md"
+          ]
+        },
+        {
+          "id": "F02",
+          "title": "Cofre transportável e contrato de conectores",
+          "state": "DONE",
+          "acceptance": "Pacote independente executa fora do editor, com posições preservadas.",
+          "evidence": [
+            "tests/cofre-portabilidade.cjs",
+            "docs/CONECTORES.md"
+          ]
+        },
+        {
+          "id": "F03",
+          "title": "CI e publicação rastreáveis",
+          "state": "DONE",
+          "acceptance": "Main com verificações essenciais e evidência de deploy.",
+          "evidence": [
+            ".github/workflows/ci.yml",
+            "docs/jornada/ENTREGA-V6-25.md"
+          ]
+        },
+        {
+          "id": "F04",
+          "title": "Plano mestre e passagem entre pessoas/IAs",
+          "state": "DONE",
+          "acceptance": "Retomada aponta main, estado, decisões e evidências.",
+          "evidence": [
+            "docs/PLANO-MESTRE.md",
+            "AGENTS.md"
+          ]
+        },
+        {
+          "id": "F05",
+          "title": "Filosofia do anexo e árvore de execução",
+          "state": "DONE",
+          "acceptance": "Diretrizes conciliadas, conflitos explícitos e caixas com critérios.",
+          "evidence": [
+            "docs/FILOSOFIA-E-COMPATIBILIDADE.md",
+            "docs/jornada/referencia-design.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "title": "Compatibilidade e custo",
+      "items": [
+        {
+          "id": "C01",
+          "title": "Relógio com movimento discreto",
+          "state": "DONE",
+          "acceptance": "Sem animação 3D/interpolação; troca breve, callbacks antigos descartados, modo reduzido e oculto sem timer visual. Homologação em Q01.",
+          "evidence": [
+            "src/ui/digito-relogio.js",
+            "tests/relogio-discreto.cjs",
+            "docs/jornada/ENTREGA-V6-26.md"
+          ]
+        },
+        {
+          "id": "C02",
+          "title": "Layout do painel pelo piso antigo",
+          "state": "TODO",
+          "acceptance": "Substituir dependência de Grid/gap; preservar leitura, seleção, arcos e acesso em tela estreita; registrar verificação visual.",
+          "evidence": [
+            "ptbr/leitura-visual.css"
+          ]
+        },
+        {
+          "id": "C03",
+          "title": "Caminho offline legado",
+          "state": "TODO",
+          "acceptance": "Separar site/PWA/portátil; demonstrar um fluxo de abertura e recuperação offline no perfil alvo, sem exigir APIs inexistentes.",
+          "evidence": [
+            "docs/ARQUITETURA.md"
+          ]
+        },
+        {
+          "id": "C04",
+          "title": "Salvar, importar, exportar e selecionar no piso",
+          "state": "TODO",
+          "acceptance": "Inventário de APIs, alternativas e falhas de armazenamento; texto e pacotes preservados nos fluxos essenciais.",
+          "evidence": [
+            "src/editor/controlador.js",
+            "src/storage/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M",
+      "title": "Motores linguísticos",
+      "items": [
+        {
+          "id": "M00",
+          "title": "Decidir reaproveitamento de motor brasileiro",
+          "state": "TODO",
+          "acceptance": "Protocolo e ambiente isolados; resultado real ou bloqueio documentado; decisão de viabilidade contra o piso antes de integrar.",
+          "evidence": [
+            "packages/connectors/portparser/README.md"
+          ]
+        },
+        {
+          "id": "M01",
+          "title": "Léxico e flexões da primeira versão",
+          "state": "TODO",
+          "acceptance": "Fechar inventário/recorte da versão, fontes/licenças e casos reservados; entregar consulta e integração com limites. P03.",
+          "evidence": [
+            "ptbr/REGENCIA-1.md"
+          ]
+        },
+        {
+          "id": "M02",
+          "title": "Classes em contexto da primeira versão",
+          "state": "TODO",
+          "acceptance": "Fechar cobertura das dez classes/locuções; implementar recortes com ambiguidades, abstenções e avaliação por classe. P04.",
+          "evidence": [
+            "ptbr/CONTEXTO-1.md"
+          ]
+        },
+        {
+          "id": "M03",
+          "title": "Relações da oração da primeira versão",
+          "state": "TODO",
+          "acceptance": "Fechar construções, núcleos, locuções e exclusões; avaliar relações/limites e integrar. P05.",
+          "evidence": [
+            "ptbr/SINTAXE-1.md",
+            "ptbr/LOCUCOES-1.md"
+          ]
+        },
+        {
+          "id": "M04",
+          "title": "Subordinação da primeira versão",
+          "state": "TODO",
+          "acceptance": "Fechar recortes de substantivas/adjetivas/adverbiais/reduzidas; começar por contrastes de que; ampliar somente com fontes e evidência. P06.",
+          "evidence": [
+            "ptbr/RELATIVAS-1.md"
+          ]
+        },
+        {
+          "id": "M05",
+          "title": "Convenções da primeira versão",
+          "state": "TODO",
+          "acceptance": "Fechar regras de ortografia, pontuação, concordância, regência/crase/pronomes; demonstrar alcance e exceções. P07.",
+          "evidence": [
+            "docs/JORNADA-LINGUISTICA.md"
+          ]
+        },
+        {
+          "id": "M06",
+          "title": "Sentido, coesão e texto da primeira versão",
+          "state": "TODO",
+          "acceptance": "Definir leituras viáveis e limites; avaliar ambiguidades e referências sem atribuir intenção ou certificar coerência geral. P08.",
+          "evidence": [
+            "docs/JORNADA-LINGUISTICA.md"
+          ]
+        },
+        {
+          "id": "M07",
+          "title": "Estilo e poesia da primeira versão",
+          "state": "TODO",
+          "acceptance": "Definir alcance de repetição, expressão, ritmo, rima e métrica; documentar algoritmos e validar aproximações. P08.",
+          "evidence": [
+            "docs/JORNADA-LINGUISTICA.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "U",
+      "title": "Experiência do autor",
+      "items": [
+        {
+          "id": "U01",
+          "title": "Controle Escrevaral final",
+          "state": "TODO",
+          "acceptance": "Uma lente por escolha; explicar/localizar/copiar sem editar; foco/teclado, invalidação e cancelamento verificados. P09.",
+          "evidence": [
+            "docs/jornada/CONTRATO-ANALISE.md"
+          ]
+        },
+        {
+          "id": "U02",
+          "title": "Coerência visual e oficina",
+          "state": "TODO",
+          "acceptance": "Inventariar discrepâncias com a filosofia; fechar componentes/menu/guias desta versão e revisar sem reconstruir os fluxos aprovados.",
+          "evidence": [
+            "docs/FILOSOFIA-E-COMPATIBILIDADE.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Q",
+      "title": "Validação e encerramento",
+      "items": [
+        {
+          "id": "Q01",
+          "title": "Homologação de aparelhos e acessibilidade",
+          "state": "TODO",
+          "acceptance": "Matriz com navegador/SO exatos, fluxos essenciais, offline, teclado, IME, foco, responsividade, custo; indicar testes reais e emulados. P10.",
+          "evidence": [
+            "docs/jornada/estado.json"
+          ]
+        },
+        {
+          "id": "Q02",
+          "title": "Avaliação reservada e fechamento da versão",
+          "state": "TODO",
+          "acceptance": "Limiares definidos antes da avaliação; qualidade/custo medidos por recorte, lacunas aceitas, piloto e release documentados. P02/P10/P11.",
+          "evidence": [
+            "docs/jornada/PASSAGEM-DE-TRABALHO.md"
+          ]
+        }
+      ]
+    }
+  ],
+  "next": "C02",
+  "lastDelivery": {
+    "version": "6.26.0",
+    "completed": [
+      "F05",
+      "C01"
+    ],
+    "baselineDone": 4,
+    "publication": "pendente",
+    "evidence": "docs/jornada/ENTREGA-V6-26.md"
+  }
+}

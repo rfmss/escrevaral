@@ -1,0 +1,13 @@
+{
+  "name": "Escrevaral OS — Documento de Arquitetura e Decisões de Design.docx",
+  "sha256": "2763ebe5cb1755174cde5ade2dd7ab2e5de93c5e700e68c0eed80ff281f017bb",
+  "received": "2026-09-27",
+  "pagesInProvidedExtraction": 18,
+  "role": "Referência de filosofia e design; decisões posteriores consolidadas em docs/FILOSOFIA-E-COMPATIBILIDADE.md",
+  "sourceSectionsUsed": [
+    "1–3: filosofia, materiais e arquitetura",
+    "4–8: movimento, persistência, formato e custo",
+    "9–10: autoria e análise",
+    "11–15: componentes, responsividade, instalação e dois estados"
+  ]
+}
