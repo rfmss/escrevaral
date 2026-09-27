@@ -1,0 +1,966 @@
+{
+  "version": "sintaxe-1",
+  "rules": [
+    {
+      "id": "PTBR-REL-001",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Sujeito",
+      "variety": "pt-BR",
+      "framework": "Terminologia tradicional de Cunha/Cintra e Lições de Bechara; não adota a taxonomia alternativa mencionada no prefácio.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            154
+          ],
+          "filePages": [
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            187
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            22,
+            48,
+            75,
+            76,
+            94,
+            95,
+            96,
+            103
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Grupo nominal/pronominal explícito e forma finita compatível; a noção não se reduz a agente.",
+      "requiredContext": [
+        "Construção inteira, fora de região protegida, até 24 tokens; posições UTF-16 exatas.",
+        "Sujeito explícito; indicativo compatível; nominal conhecido; uma análise completa possível."
+      ],
+      "positiveCriteria": [
+        "Padrões locais completos, vocabulário registrado e sem palavras residuais.",
+        "Nós, núcleos e relações com limites e contenção verificáveis."
+      ],
+      "exceptions": [
+        "Verbo de ligação não recebe rótulo de núcleo verbal significativo.",
+        "Nomes próprios restritos aos já registrados, com inicial maiúscula."
+      ],
+      "abstainWhen": [
+        "Inversão, elipse, passiva, clítico, coordenação, subordinação ou locução verbal.",
+        "Adjetivo após objeto com possível leitura predicativa; aberto e flexões após ser/estar.",
+        "Desconhecidos, incompatibilidade formal no recorte, mais de uma análise ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Sentido discursivo, variedades e outras construções podem sustentar outra leitura. Silêncio não é erro."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-P01–REL-P29"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-N01–REL-N49, exceto REL-N39 reanotado"
+      ],
+      "ambiguousCases": [
+        "Eu vi a menina feliz.",
+        "A porta é aberta."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Grupo nominal/pronominal explícito e forma finita compatível; a noção não se reduz a agente.",
+        "expanded": "Ver docs/jornada/ESTUDO-SINTAXE-1.md e evidência por ocorrência.",
+        "limitations": "Construções locais, sem análise sintática geral ou diagnóstico de correção."
+      },
+      "implementation": {
+        "version": "sintaxe-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "confronto de fontes, inspeção visual de páginas selecionadas, exemplos próprios e regressões técnicas"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; painel real com DOM simulado; navegador pendente",
+        "publishedCommit": null
+      }
+    },
+    {
+      "id": "PTBR-REL-002",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Predicado",
+      "variety": "pt-BR",
+      "framework": "Terminologia tradicional de Cunha/Cintra e Lições de Bechara; não adota a taxonomia alternativa mencionada no prefácio.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            154
+          ],
+          "filePages": [
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            187
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            22,
+            48,
+            75,
+            76,
+            94,
+            95,
+            96,
+            103
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Grupo que contém o verbo e as expansões reconhecidas no segmento.",
+      "requiredContext": [
+        "Construção inteira, fora de região protegida, até 24 tokens; posições UTF-16 exatas.",
+        "Sujeito explícito; indicativo compatível; nominal conhecido; uma análise completa possível."
+      ],
+      "positiveCriteria": [
+        "Padrões locais completos, vocabulário registrado e sem palavras residuais.",
+        "Nós, núcleos e relações com limites e contenção verificáveis."
+      ],
+      "exceptions": [
+        "Verbo de ligação não recebe rótulo de núcleo verbal significativo.",
+        "Nomes próprios restritos aos já registrados, com inicial maiúscula."
+      ],
+      "abstainWhen": [
+        "Inversão, elipse, passiva, clítico, coordenação, subordinação ou locução verbal.",
+        "Adjetivo após objeto com possível leitura predicativa; aberto e flexões após ser/estar.",
+        "Desconhecidos, incompatibilidade formal no recorte, mais de uma análise ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Sentido discursivo, variedades e outras construções podem sustentar outra leitura. Silêncio não é erro."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-P01–REL-P29"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-N01–REL-N49, exceto REL-N39 reanotado"
+      ],
+      "ambiguousCases": [
+        "Eu vi a menina feliz.",
+        "A porta é aberta."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Grupo que contém o verbo e as expansões reconhecidas no segmento.",
+        "expanded": "Ver docs/jornada/ESTUDO-SINTAXE-1.md e evidência por ocorrência.",
+        "limitations": "Construções locais, sem análise sintática geral ou diagnóstico de correção."
+      },
+      "implementation": {
+        "version": "sintaxe-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "confronto de fontes, inspeção visual de páginas selecionadas, exemplos próprios e regressões técnicas"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; painel real com DOM simulado; navegador pendente",
+        "publishedCommit": null
+      }
+    },
+    {
+      "id": "PTBR-REL-003",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Núcleo verbal ou verbo de ligação",
+      "variety": "pt-BR",
+      "framework": "Terminologia tradicional de Cunha/Cintra e Lições de Bechara; não adota a taxonomia alternativa mencionada no prefácio.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            154
+          ],
+          "filePages": [
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            187
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            22,
+            48,
+            75,
+            76,
+            94,
+            95,
+            96,
+            103
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Distinguir emprego significativo e ligação; não chamar ligação de núcleo verbal do predicado nominal.",
+      "requiredContext": [
+        "Construção inteira, fora de região protegida, até 24 tokens; posições UTF-16 exatas.",
+        "Sujeito explícito; indicativo compatível; nominal conhecido; uma análise completa possível."
+      ],
+      "positiveCriteria": [
+        "Padrões locais completos, vocabulário registrado e sem palavras residuais.",
+        "Nós, núcleos e relações com limites e contenção verificáveis."
+      ],
+      "exceptions": [
+        "Verbo de ligação não recebe rótulo de núcleo verbal significativo.",
+        "Nomes próprios restritos aos já registrados, com inicial maiúscula."
+      ],
+      "abstainWhen": [
+        "Inversão, elipse, passiva, clítico, coordenação, subordinação ou locução verbal.",
+        "Adjetivo após objeto com possível leitura predicativa; aberto e flexões após ser/estar.",
+        "Desconhecidos, incompatibilidade formal no recorte, mais de uma análise ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Sentido discursivo, variedades e outras construções podem sustentar outra leitura. Silêncio não é erro."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-P01–REL-P29"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-N01–REL-N49, exceto REL-N39 reanotado"
+      ],
+      "ambiguousCases": [
+        "Eu vi a menina feliz.",
+        "A porta é aberta."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Distinguir emprego significativo e ligação; não chamar ligação de núcleo verbal do predicado nominal.",
+        "expanded": "Ver docs/jornada/ESTUDO-SINTAXE-1.md e evidência por ocorrência.",
+        "limitations": "Construções locais, sem análise sintática geral ou diagnóstico de correção."
+      },
+      "implementation": {
+        "version": "sintaxe-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "confronto de fontes, inspeção visual de páginas selecionadas, exemplos próprios e regressões técnicas"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; painel real com DOM simulado; navegador pendente",
+        "publishedCommit": null
+      }
+    },
+    {
+      "id": "PTBR-REL-004",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Objeto direto",
+      "variety": "pt-BR",
+      "framework": "Terminologia tradicional de Cunha/Cintra e Lições de Bechara; não adota a taxonomia alternativa mencionada no prefácio.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            154
+          ],
+          "filePages": [
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            187
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            22,
+            48,
+            75,
+            76,
+            94,
+            95,
+            96,
+            103
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Grupo nominal posterior em uso transitivo direto reconhecido na construção inteira; sem adjetivo ambíguo.",
+      "requiredContext": [
+        "Construção inteira, fora de região protegida, até 24 tokens; posições UTF-16 exatas.",
+        "Sujeito explícito; indicativo compatível; nominal conhecido; uma análise completa possível."
+      ],
+      "positiveCriteria": [
+        "Padrões locais completos, vocabulário registrado e sem palavras residuais.",
+        "Nós, núcleos e relações com limites e contenção verificáveis."
+      ],
+      "exceptions": [
+        "Verbo de ligação não recebe rótulo de núcleo verbal significativo.",
+        "Nomes próprios restritos aos já registrados, com inicial maiúscula."
+      ],
+      "abstainWhen": [
+        "Inversão, elipse, passiva, clítico, coordenação, subordinação ou locução verbal.",
+        "Adjetivo após objeto com possível leitura predicativa; aberto e flexões após ser/estar.",
+        "Desconhecidos, incompatibilidade formal no recorte, mais de uma análise ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Sentido discursivo, variedades e outras construções podem sustentar outra leitura. Silêncio não é erro."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-P01–REL-P29"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-N01–REL-N49, exceto REL-N39 reanotado"
+      ],
+      "ambiguousCases": [
+        "Eu vi a menina feliz.",
+        "A porta é aberta."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Grupo nominal posterior em uso transitivo direto reconhecido na construção inteira; sem adjetivo ambíguo.",
+        "expanded": "Ver docs/jornada/ESTUDO-SINTAXE-1.md e evidência por ocorrência.",
+        "limitations": "Construções locais, sem análise sintática geral ou diagnóstico de correção."
+      },
+      "implementation": {
+        "version": "sintaxe-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "confronto de fontes, inspeção visual de páginas selecionadas, exemplos próprios e regressões técnicas"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; painel real com DOM simulado; navegador pendente",
+        "publishedCommit": null
+      }
+    },
+    {
+      "id": "PTBR-REL-005",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Objeto indireto",
+      "variety": "pt-BR",
+      "framework": "Terminologia tradicional de Cunha/Cintra e Lições de Bechara; não adota a taxonomia alternativa mencionada no prefácio.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            154
+          ],
+          "filePages": [
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            187
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            22,
+            48,
+            75,
+            76,
+            94,
+            95,
+            96,
+            103
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Somente dar + grupo nominal + a + grupo nominal; leitura de destinatário.",
+      "requiredContext": [
+        "Construção inteira, fora de região protegida, até 24 tokens; posições UTF-16 exatas.",
+        "Sujeito explícito; indicativo compatível; nominal conhecido; uma análise completa possível."
+      ],
+      "positiveCriteria": [
+        "Padrões locais completos, vocabulário registrado e sem palavras residuais.",
+        "Nós, núcleos e relações com limites e contenção verificáveis."
+      ],
+      "exceptions": [
+        "Verbo de ligação não recebe rótulo de núcleo verbal significativo.",
+        "Nomes próprios restritos aos já registrados, com inicial maiúscula."
+      ],
+      "abstainWhen": [
+        "Inversão, elipse, passiva, clítico, coordenação, subordinação ou locução verbal.",
+        "Adjetivo após objeto com possível leitura predicativa; aberto e flexões após ser/estar.",
+        "Desconhecidos, incompatibilidade formal no recorte, mais de uma análise ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Sentido discursivo, variedades e outras construções podem sustentar outra leitura. Silêncio não é erro."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-P01–REL-P29"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-N01–REL-N49, exceto REL-N39 reanotado"
+      ],
+      "ambiguousCases": [
+        "Eu vi a menina feliz.",
+        "A porta é aberta."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Somente dar + grupo nominal + a + grupo nominal; leitura de destinatário.",
+        "expanded": "Ver docs/jornada/ESTUDO-SINTAXE-1.md e evidência por ocorrência.",
+        "limitations": "Construções locais, sem análise sintática geral ou diagnóstico de correção."
+      },
+      "implementation": {
+        "version": "sintaxe-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "confronto de fontes, inspeção visual de páginas selecionadas, exemplos próprios e regressões técnicas"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; painel real com DOM simulado; navegador pendente",
+        "publishedCommit": null
+      }
+    },
+    {
+      "id": "PTBR-REL-006",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Predicativo do sujeito",
+      "variety": "pt-BR",
+      "framework": "Terminologia tradicional de Cunha/Cintra e Lições de Bechara; não adota a taxonomia alternativa mencionada no prefácio.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            154
+          ],
+          "filePages": [
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            187
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            22,
+            48,
+            75,
+            76,
+            94,
+            95,
+            96,
+            103
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Somente ser/estar + adjetivo registrado; excluir aberto e suas flexões neste recorte.",
+      "requiredContext": [
+        "Construção inteira, fora de região protegida, até 24 tokens; posições UTF-16 exatas.",
+        "Sujeito explícito; indicativo compatível; nominal conhecido; uma análise completa possível."
+      ],
+      "positiveCriteria": [
+        "Padrões locais completos, vocabulário registrado e sem palavras residuais.",
+        "Nós, núcleos e relações com limites e contenção verificáveis."
+      ],
+      "exceptions": [
+        "Verbo de ligação não recebe rótulo de núcleo verbal significativo.",
+        "Nomes próprios restritos aos já registrados, com inicial maiúscula."
+      ],
+      "abstainWhen": [
+        "Inversão, elipse, passiva, clítico, coordenação, subordinação ou locução verbal.",
+        "Adjetivo após objeto com possível leitura predicativa; aberto e flexões após ser/estar.",
+        "Desconhecidos, incompatibilidade formal no recorte, mais de uma análise ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Sentido discursivo, variedades e outras construções podem sustentar outra leitura. Silêncio não é erro."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-P01–REL-P29"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-N01–REL-N49, exceto REL-N39 reanotado"
+      ],
+      "ambiguousCases": [
+        "Eu vi a menina feliz.",
+        "A porta é aberta."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Somente ser/estar + adjetivo registrado; excluir aberto e suas flexões neste recorte.",
+        "expanded": "Ver docs/jornada/ESTUDO-SINTAXE-1.md e evidência por ocorrência.",
+        "limitations": "Construções locais, sem análise sintática geral ou diagnóstico de correção."
+      },
+      "implementation": {
+        "version": "sintaxe-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "confronto de fontes, inspeção visual de páginas selecionadas, exemplos próprios e regressões técnicas"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; painel real com DOM simulado; navegador pendente",
+        "publishedCommit": null
+      }
+    },
+    {
+      "id": "PTBR-REL-007",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Negação",
+      "variety": "pt-BR",
+      "framework": "Terminologia tradicional de Cunha/Cintra e Lições de Bechara; não adota a taxonomia alternativa mencionada no prefácio.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            154
+          ],
+          "filePages": [
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            187
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            22,
+            48,
+            75,
+            76,
+            94,
+            95,
+            96,
+            103
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Não imediatamente antes da forma finita; parte do predicado.",
+      "requiredContext": [
+        "Construção inteira, fora de região protegida, até 24 tokens; posições UTF-16 exatas.",
+        "Sujeito explícito; indicativo compatível; nominal conhecido; uma análise completa possível."
+      ],
+      "positiveCriteria": [
+        "Padrões locais completos, vocabulário registrado e sem palavras residuais.",
+        "Nós, núcleos e relações com limites e contenção verificáveis."
+      ],
+      "exceptions": [
+        "Verbo de ligação não recebe rótulo de núcleo verbal significativo.",
+        "Nomes próprios restritos aos já registrados, com inicial maiúscula."
+      ],
+      "abstainWhen": [
+        "Inversão, elipse, passiva, clítico, coordenação, subordinação ou locução verbal.",
+        "Adjetivo após objeto com possível leitura predicativa; aberto e flexões após ser/estar.",
+        "Desconhecidos, incompatibilidade formal no recorte, mais de uma análise ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Sentido discursivo, variedades e outras construções podem sustentar outra leitura. Silêncio não é erro."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-P01–REL-P29"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-N01–REL-N49, exceto REL-N39 reanotado"
+      ],
+      "ambiguousCases": [
+        "Eu vi a menina feliz.",
+        "A porta é aberta."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Não imediatamente antes da forma finita; parte do predicado.",
+        "expanded": "Ver docs/jornada/ESTUDO-SINTAXE-1.md e evidência por ocorrência.",
+        "limitations": "Construções locais, sem análise sintática geral ou diagnóstico de correção."
+      },
+      "implementation": {
+        "version": "sintaxe-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "confronto de fontes, inspeção visual de páginas selecionadas, exemplos próprios e regressões técnicas"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; painel real com DOM simulado; navegador pendente",
+        "publishedCommit": null
+      }
+    },
+    {
+      "id": "PTBR-REL-008",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Adjunto adverbial",
+      "variety": "pt-BR",
+      "framework": "Terminologia tradicional de Cunha/Cintra e Lições de Bechara; não adota a taxonomia alternativa mencionada no prefácio.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            154
+          ],
+          "filePages": [
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            187
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            22,
+            48,
+            75,
+            76,
+            94,
+            95,
+            96,
+            103
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Circunstância final registrada; não confundir com objeto.",
+      "requiredContext": [
+        "Construção inteira, fora de região protegida, até 24 tokens; posições UTF-16 exatas.",
+        "Sujeito explícito; indicativo compatível; nominal conhecido; uma análise completa possível."
+      ],
+      "positiveCriteria": [
+        "Padrões locais completos, vocabulário registrado e sem palavras residuais.",
+        "Nós, núcleos e relações com limites e contenção verificáveis."
+      ],
+      "exceptions": [
+        "Verbo de ligação não recebe rótulo de núcleo verbal significativo.",
+        "Nomes próprios restritos aos já registrados, com inicial maiúscula."
+      ],
+      "abstainWhen": [
+        "Inversão, elipse, passiva, clítico, coordenação, subordinação ou locução verbal.",
+        "Adjetivo após objeto com possível leitura predicativa; aberto e flexões após ser/estar.",
+        "Desconhecidos, incompatibilidade formal no recorte, mais de uma análise ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Sentido discursivo, variedades e outras construções podem sustentar outra leitura. Silêncio não é erro."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-P01–REL-P29"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/sintaxe-1.json: REL-N01–REL-N49, exceto REL-N39 reanotado"
+      ],
+      "ambiguousCases": [
+        "Eu vi a menina feliz.",
+        "A porta é aberta."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Circunstância final registrada; não confundir com objeto.",
+        "expanded": "Ver docs/jornada/ESTUDO-SINTAXE-1.md e evidência por ocorrência.",
+        "limitations": "Construções locais, sem análise sintática geral ou diagnóstico de correção."
+      },
+      "implementation": {
+        "version": "sintaxe-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "confronto de fontes, inspeção visual de páginas selecionadas, exemplos próprios e regressões técnicas"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; painel real com DOM simulado; navegador pendente",
+        "publishedCommit": null
+      }
+    }
+  ],
+  "evaluationNote": "78 casos de desenvolvimento/regressão; conjunto reservado independente ainda não disponível. Métricas de generalização não calculadas."
+}

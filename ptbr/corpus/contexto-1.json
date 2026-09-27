@@ -1,0 +1,637 @@
+{
+  "version": 1,
+  "kind": "desenvolvimento-e-regressao",
+  "review": "Exemplos próprios e expectativas anotadas pela IA implementadora; sem revisão linguística independente. Não é avaliação cega nem certificação geral.",
+  "cases": [
+    {
+      "id": "CTX-001",
+      "text": "Eu canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-002",
+      "text": "Eu não canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-003",
+      "text": "Eu o canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-004",
+      "text": "Eu não o canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-005",
+      "text": "Ela cobra o pagamento.",
+      "target": "cobra",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-006",
+      "text": "Eu jogo.",
+      "target": "jogo",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-007",
+      "text": "Eu sonho.",
+      "target": "sonho",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-008",
+      "text": "Eu trabalho.",
+      "target": "trabalho",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-009",
+      "text": "Eu olho.",
+      "target": "olho",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-010",
+      "text": "Nós cantamos.",
+      "target": "cantamos",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-011",
+      "text": "Você canta.",
+      "target": "canta",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-012",
+      "text": "Tu cantas.",
+      "target": "cantas",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-013",
+      "text": "Eles cantam.",
+      "target": "cantam",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-014",
+      "text": "O canto terminou.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-015",
+      "text": "A cobra atravessou o caminho.",
+      "target": "cobra",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-016",
+      "text": "O jogo terminou.",
+      "target": "jogo",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-017",
+      "text": "O trabalho terminou.",
+      "target": "trabalho",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-018",
+      "text": "O sonho terminou.",
+      "target": "sonho",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-019",
+      "text": "O olho chegou.",
+      "target": "olho",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-020",
+      "text": "A mulher chegou.",
+      "target": "mulher",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-021",
+      "text": "Vi a menina.",
+      "target": "menina",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-022",
+      "text": "O filho da vizinha chegou.",
+      "target": "filho",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-023",
+      "text": "A mulher chegou.",
+      "target": "A",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "artigo"
+      }
+    },
+    {
+      "id": "CTX-024",
+      "text": "Vi a menina.",
+      "target": "a",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "artigo"
+      }
+    },
+    {
+      "id": "CTX-025",
+      "text": "O canto terminou.",
+      "target": "O",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "artigo"
+      }
+    },
+    {
+      "id": "CTX-026",
+      "text": "Os livros chegaram.",
+      "target": "Os",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "artigo"
+      }
+    },
+    {
+      "id": "CTX-027",
+      "text": "Eu a vi.",
+      "target": "a",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "pronome"
+      }
+    },
+    {
+      "id": "CTX-028",
+      "text": "Eu não a vi.",
+      "target": "a",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "pronome"
+      }
+    },
+    {
+      "id": "CTX-029",
+      "text": "Ela a cobra.",
+      "target": "a",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "pronome"
+      }
+    },
+    {
+      "id": "CTX-030",
+      "text": "Eu o canto.",
+      "target": "o",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "pronome"
+      }
+    },
+    {
+      "id": "CTX-031",
+      "text": "Nós os vimos.",
+      "target": "os",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "pronome"
+      }
+    },
+    {
+      "id": "CTX-032",
+      "text": "canto",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-033",
+      "text": "cobra",
+      "target": "cobra",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-034",
+      "text": "O canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-035",
+      "text": "Ela canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-036",
+      "text": "Eu. Canto.",
+      "target": "Canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-037",
+      "text": "Eu, canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-038",
+      "text": "Eu\ncanto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-039",
+      "text": "Eu “ontem” canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-040",
+      "text": "Eu `hoje` canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-041",
+      "text": "que",
+      "target": "que",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-042",
+      "text": "se",
+      "target": "se",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-043",
+      "text": "como",
+      "target": "como",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-044",
+      "text": "O cantar terminou.",
+      "target": "cantar",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-045",
+      "text": "O canto, terminou.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "ambiguo",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-046",
+      "text": "mulher",
+      "target": "mulher",
+      "occurrence": 0,
+      "expected": {
+        "status": "lexical",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-047",
+      "text": "casa",
+      "target": "casa",
+      "occurrence": 0,
+      "expected": {
+        "status": "lexical",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-048",
+      "text": "Ela mulher.",
+      "target": "mulher",
+      "occurrence": 0,
+      "expected": {
+        "status": "lexical",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-049",
+      "text": "xilofonizar",
+      "target": "xilofonizar",
+      "occurrence": 0,
+      "expected": {
+        "status": "desconhecido",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-050",
+      "text": "inventadamente",
+      "target": "inventadamente",
+      "occurrence": 0,
+      "expected": {
+        "status": "desconhecido",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-051",
+      "text": "qwertyer",
+      "target": "qwertyer",
+      "occurrence": 0,
+      "expected": {
+        "status": "desconhecido",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-052",
+      "text": "ultracoisificação",
+      "target": "ultracoisificação",
+      "occurrence": 0,
+      "expected": {
+        "status": "desconhecido",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-053",
+      "text": "“Eu canto.”",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "protegido",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-054",
+      "text": "`Eu canto.`",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "protegido",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-055",
+      "text": "https://exemplo.com/canto",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "protegido",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-056",
+      "text": "“Eu canto",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "protegido",
+        "selected": null
+      }
+    },
+    {
+      "id": "CTX-057",
+      "text": "Eu canto. O canto terminou.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-058",
+      "text": "Eu canto. O canto terminou.",
+      "target": "canto",
+      "occurrence": 1,
+      "expected": {
+        "status": "contextual",
+        "selected": "substantivo"
+      }
+    },
+    {
+      "id": "CTX-059",
+      "text": "🎼 Eu canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-060",
+      "text": "Nós cantamos.",
+      "target": "cantamos",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-061",
+      "text": "Eu\tnão canto.",
+      "target": "canto",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-062",
+      "text": "Antes de cantar.",
+      "target": "cantar",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    },
+    {
+      "id": "CTX-063",
+      "text": "Para nós cantarmos.",
+      "target": "cantarmos",
+      "occurrence": 0,
+      "expected": {
+        "status": "contextual",
+        "selected": "verbo"
+      }
+    }
+  ]
+}

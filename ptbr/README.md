@@ -1,7 +1,25 @@
-# Lentes de português — etapa 1
+# Lentes de português — continuidade PT-BR
 
 Base: `rfmss/escrevaral`, `main`, `9d167407962300d82393dee3262c3dbb32cc994f`.
-As mudanças desta entrega estão locais. Não foram enviadas ao GitHub nem publicadas.
+Etapa publicada na `main` em 25/09/2026: `1d649c2ca3f47db7570bdf1b3c20f6e075705535`. As auditorias preservam o estado histórico anterior à publicação.
+
+**Continuidade:** [Mapa da jornada](../docs/JORNADA-LINGUISTICA.md) · [Página consultável](https://escrevaral.com/jornada/) · [Guia para IAs](../AGENTS.md). A cortina Escrevaral e a lente geral de subordinadas estão planejadas; não foram incorporadas por esta documentação.
+
+## Incremento contextual local — 26/09/2026
+
+[Relatório, regras, fontes e limites](CONTEXTO-1.md). Classes contextualizadas em recorte restrito; 63 casos de desenvolvimento/regressão. Painel com uma lente por escolha e sem triagem automática. Não publicado; validação em navegador pendente por limitações do ambiente de QA. O restante deste README descreve a etapa 1 histórica.
+
+## Leitura anotada e relações locais — 26/09/2026
+
+[Apresentação visual](LEITURA-VISUAL.md) e [relações da oração](SINTAXE-1.md): etiquetas, grupos, núcleos e explicação lateral com vínculos da construção selecionada. 78 casos de sintaxe e integração simulada aprovados. Estudo delimitado de Cunha/Cintra e Bechara registrado; revisão independente, QA em navegador e publicação continuam pendentes. Versão local de assets/cache: `v6-23`.
+
+## Locuções verbais — 26/09/2026
+
+[Incremento e limites](LOCUCOES-1.md): quatro padrões, 19 lemas e componentes com posições próprias; 65 casos aprovados. [Avaliação do pacote Gemini](auditoria/GEMINI-SET26.md) registrada. Navegador, revisão independente e publicação continuam pendentes.
+
+## Relativas e revisão externa — 26/09/2026
+
+[Primeiro recorte de relativas](RELATIVAS-1.md): antecedente nominal explícito, que-sujeito e duas predicações completas; 84 casos de desenvolvimento aprovados. A lente é parcial. [Devolução Gemini auditada](auditoria/DEVOLUCAO-GEMINI-1.md): identidade confirmada, 80 entradas reproduzidas na base v6-22, com divergências de resultados e lacunas de evidência. A avaliação recebida não aprova navegador nem o incremento v6-23.
 
 ## Decisão de escopo
 

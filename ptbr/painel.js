@@ -1,6 +1,6 @@
 /* Painel de análise da main. ES5, sem rede, sem alterar manuscritos nem o cofre.
  * O editor existente permanece a origem da escrita e das escolhas persistidas.
- * Integração visual progressiva: só a ação Análise executa lentes.
+ * Uma lente por escolha explícita; sem triagem enquanto o escritor digita.
  */
 (function (root) {
   'use strict';
@@ -9,12 +9,13 @@
   var panel = D.getElementById('oficina'), manuscript = D.getElementById('manuscrito');
   if (!panel || !manuscript || D.getElementById('ptbr-dashboard')) { return; }
   var own = Object.prototype.hasOwnProperty, epoch = 0, debounce = null, draft = null, busy = false, composing = false;
-  var fullScope = 200000, maxFindings = 100;
+  var fullScope = 200000, maxFindings = 100, lastLens = null, readingView = null;
   var labels = {
     ortografia:'Ortografia', acentuacao:'Acentuação', pontuacao:'Pontuação',
     crase:'Crase', concordancia:'Concordância', morfologia:'Classes de palavras',
     expressoes:'Expressões', repeticao:'Repetição próxima', adverbios:'Formas em -mente',
-    dialogo:'Linhas de diálogo', ritmo:'Ritmo', rima:'Rimas', metrica:'Métrica'
+    dialogo:'Linhas de diálogo', ritmo:'Ritmo', rima:'Rimas', metrica:'Métrica',
+    sintaxe:'Relações da oração', relativas:'Orações relativas · recorte inicial', decolonial:'Vocabulário decolonial'
   };
   function el(tag, parent, cls, value) {
     var n = D.createElement(tag);
@@ -27,9 +28,7 @@
     var item=el('div',parent,major?'ptbr-stat ptbr-stat-major':'ptbr-stat');
     el('strong',item,'',String(value));el('span',item,'',label);return item;
   }
-  var triage=E.createSignalTriage(E);
   function documentKey(){return E.ptbrPanelDocument?E.ptbrPanelDocument():null;}
-  function indexed(s){var result=triage.scan(s);result.document=documentKey();return result;}
   var style=el('style',D.head,null,
     '#ptbr-dashboard{font-family:inherit;color:inherit;margin:12px 0 22px;min-width:0}' +
     '#oficina[data-ptbr-dashboard="true"]:not([data-ptbr-legacy="true"])>.lens-group-label,' +
@@ -63,16 +62,18 @@
   );
   var view=el('div',null,'');view.id='ptbr-dashboard';
   var heading=panel.querySelector('.sheet-heading');panel.insertBefore(view,heading?heading.nextSibling:panel.firstChild);
-  el('p',view,'ptbr-overline','CONTAGEM');
-  var stats=el('div',view,'ptbr-count'), wordStat=stat(stats,'0','palavras',true),
+  el('p',view,'ptbr-overline','ESCREVARAL · UMA LENTE POR VEZ');
+  var stats=el('div',view,'ptbr-count'), wordStat=stat(stats,'—','palavras no recorte analisado',true),
     charStat=stat(stats,'0','unidades de texto',false);
   el('hr',view,'ptbr-rule');
   el('p',view,'ptbr-overline','O QUE PODE SER EXAMINADO');
-  var wheel=el('div',view,'ptbr-wheel'), intro=el('p',view,'ptbr-status','Sinais da escrita, não diagnósticos.');
-  var action=el('button',view,'ptbr-action','Análise');action.type='button';
+  var wheel=el('div',view,'ptbr-wheel'), intro=el('p',view,'ptbr-status','Escolha o que deseja examinar.');
+  var action=el('button',view,'ptbr-action','Reexaminar lente escolhida');action.type='button';
+  var cancel=el('button',view,'ptbr-cancel','Cancelar análise');cancel.type='button';cancel.hidden=true;
   var legacy=el('button',view,'ptbr-action ptbr-secondary','Consultar lentes individualmente');
   legacy.type='button';legacy.setAttribute('aria-expanded','false');
   legacy.addEventListener('click',function(){
+    E.ptbrPanelReset();if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
     var expanded=panel.getAttribute('data-ptbr-legacy')!=='true';
     panel.setAttribute('data-ptbr-legacy',expanded?'true':'false');
     legacy.setAttribute('aria-expanded',expanded?'true':'false');
@@ -83,28 +84,27 @@
   el('hr',view,'ptbr-rule');
   el('p',view,'ptbr-overline','OBSERVAÇÕES');
   var results=el('div',view,'ptbr-results');
+  var empty=el('div',results,'ptbr-empty','Seu texto, por dentro. Escolha uma lente para abrir a leitura anotada.');
   var note=el('p',view,'ptbr-status','O silêncio de uma lente não certifica o texto. A escrita permanece sua.');
-  function clearResults(){results.textContent='';}
+  function clearResults(){if(readingView){readingView.destroy();readingView=null;}results.textContent='';}
   function refresh(force) {
     if(composing||busy||panel.hidden&&!force){return;}
     if(!force&&draft&&draft.text===manuscript.value&&draft.document===documentKey()){return;}
     epoch++;root.clearTimeout(debounce);busy=false;clearResults();
-    var s=manuscript.value;draft=indexed(s);
-    wordStat.firstChild.textContent=draft.words.toLocaleString('pt-BR');
-    wordStat.childNodes[1].textContent=draft.partial?'palavras no recorte':'palavras';
-    charStat.firstChild.textContent=draft.chars.toLocaleString('pt-BR');
+    el('div',results,'ptbr-empty','Seu texto, por dentro. Escolha uma lente para abrir a leitura anotada.');
+    var s=manuscript.value;draft={text:s,document:documentKey()};
+    wordStat.firstChild.textContent='—';
+    charStat.firstChild.textContent=s.length.toLocaleString('pt-BR');
     wheel.textContent='';var chosen=[],id,btn,k;
-    for(k in labels){if(own.call(labels,k)&&draft.signals[k]){chosen.push(k);}}
+    for(k in labels){if(own.call(labels,k)){chosen.push(k);}}
     for(var i=0;i<chosen.length;i++){id=chosen[i];
       btn=el('button',wheel,'',null);btn.type='button';el('span',btn,'',labels[id]);btn.setAttribute('data-ptbr-lens',id);
-      btn.setAttribute('aria-label','Examinar sinal de '+labels[id]);
+      btn.setAttribute('aria-label','Examinar '+labels[id]);
       btn.addEventListener('click',function(){run(this.getAttribute('data-ptbr-lens'));},false);}
-    action.disabled=!chosen.length||s.length>fullScope;
+    action.disabled=!lastLens||!s.length||s.length>fullScope;
     intro.textContent=s.length>fullScope?'O exame aceita até 200 mil caracteres por vez. Selecione um trecho e consulte as lentes individualmente.':
-      draft.read<s.length?'Triagem parcial: primeiros '+draft.read+' caracteres. As lentes individuais permitem examinar o restante.':
-      chosen.length?'Sinais presentes no texto. A análise verificará cada um.':'Nenhum sinal neste recorte. Você pode consultar as lentes individualmente.';
+      'Escolha uma lente. Abrir este painel e digitar não executa análises. Classes em contexto examina até 8.000 unidades de texto e informa o recorte.';
     status.textContent='A análise começa somente quando você pedir.';
-    if(draft.signals['que-contextual']){intro.textContent+=' Ocorrência de “que”: função sintática ainda não confirmada.';}
     note.textContent='Leituras possíveis não são correções. O autor decide.';
   }
   function resultCard(lens, result, snapshot) {
@@ -112,14 +112,16 @@
     var documentAtResult=documentKey();
     var arr=result.findings||[],i,f,entry,b,detail,ignored=E.ptbrPanelChoices?E.ptbrPanelChoices():[],visible=0;
     for(i=0;i<arr.length;i++){if(ignored.indexOf(arr[i].id+'|'+arr[i].snippet)===-1){visible+=1;}}
+    var accepted=[],observations=[],stash=el('div',card,'ptbr-observation-list');
     var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'observação nova':'observações novas')+' neste recorte.':'Nenhuma observação nova neste recorte.');
     for(i=0;i<arr.length&&i<maxFindings;i++){
       f=arr[i];if(ignored.indexOf(f.id+'|'+f.snippet)!==-1){continue;}
-      entry=el('div',card,'ptbr-observation');
+      entry=el('div',stash,'ptbr-observation');accepted.push(f);observations.push(entry);
       el('p',entry,'',f.message+' · confiança '+f.confidence);
-      el('blockquote',entry,'',snapshot.slice(Math.max(0,f.start-35),Math.min(snapshot.length,f.end+35)));
+      el('blockquote',entry,'',f.snippet);
       detail=el('div',entry,'ptbr-evidence');detail.hidden=true;
       if(f.evidence){
+        el('p',entry,'ptbr-reading-summary',f.evidence.observation);
         el('p',detail,'','Observação: '+f.evidence.observation);
         el('p',detail,'','Interpretação: '+f.evidence.interpretation);
         el('p',detail,'','Ambiguidade: '+f.evidence.ambiguity);
@@ -143,23 +145,41 @@
         (function(finding,row,button){button.addEventListener('click',function(){
           if(manuscript.value!==snapshot||documentKey()!==documentAtResult){refresh(true);return;}
           if(E.ptbrPanelKeep(finding,snapshot,documentAtResult)){
-            row.hidden=true;visible--;countLabel.textContent=visible?visible+' '+(visible===1?'observação nova':'observações novas')+' neste recorte.':'Nenhuma observação nova neste recorte.';status.textContent='Escolha mantida nesta folha.';
+            clearResults();resultCard(lens,result,snapshot);status.textContent='Escolha mantida nesta folha.';
             var reset=D.getElementById('reset-dismissed');if(reset){reset.focus();}
           }else{status.textContent='Não foi possível guardar a escolha. Tente novamente.';}
         },false);}(f,entry,b));
       }
     }
+    if(E.renderReadingMap){
+      stash.hidden=true;
+      readingView=E.renderReadingMap(card,{lens:lens,snapshot:snapshot,findings:accepted,
+        isCurrent:function(){return !panel.hidden&&manuscript.value===snapshot&&documentKey()===documentAtResult;},
+        onSelect:function(finding,target,user){
+          for(var at=0;at<observations.length;at++){stash.appendChild(observations[at]);}
+          target.textContent='';var at=accepted.indexOf(finding);
+          if(at>=0){target.appendChild(observations[at]);}
+        }
+      });
+      el('p',card,'ptbr-legend',lens==='morfologia'?'Etiqueta contínua: hipótese contextual. Tracejada: possibilidade no léxico. Sem leitura: fora da cobertura. Arcos pontilhados: apoios, não uma árvore sintática completa.':lens==='sintaxe'?'Os grupos podem se conter: o predicado inclui verbo e complementos. Os arcos mostram vínculos da hipótese selecionada; as mesmas relações aparecem por escrito.':'Os trechos pertencem à lente escolhida. Selecione um para consultar a explicação.');
+    }
     if(result.limited){el('p',card,'','O cofre limitou a apresentação aos primeiros 100 apontamentos.');}
+    if(result.coverageInfo){
+      el('p',card,'ptbr-scope',result.coverageInfo.summary);
+      wordStat.firstChild.textContent=String(result.coverageInfo.work.tokens);
+    }
     if(result.assessment&&!result.assessment.eligible){el('p',card,'',result.assessment.reason);}
     return h;
   }
   function run(selected) {
-    if(busy||composing){return;}refresh(true);if(!draft||!draft.text||action.disabled){return;}
+    if(composing||panel.hidden||!selected||!own.call(labels,selected)){return;}
+    if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
+    epoch++;busy=false;lastLens=selected;refresh(true);if(!draft||!draft.text||draft.text.length>fullScope){return;}
     var snapshot=draft.text, documentAtRun=documentKey(), candidates=[],k,token=++epoch,vault;
-    for(k in labels){if(own.call(labels,k)&&draft.signals[k]&&(!selected||selected===k)){candidates.push(k);}}
+    candidates.push(selected);
     if(!candidates.length){return;}
     try{vault=E.createVault(E.knowledge);}catch(e){status.textContent='O cofre não pôde iniciar: '+e.message;return;}
-    busy=true;action.disabled=true;clearResults();var cursor=0;
+    busy=true;action.disabled=true;cancel.hidden=false;clearResults();var cursor=0;
     function step(){
       if(token!==epoch){return;}
       if(manuscript.value!==snapshot||panel.hidden||documentKey()!==documentAtRun){
@@ -167,7 +187,7 @@
         if(manuscript.value!==snapshot){refresh(true);}return;
       }
       if(cursor>=candidates.length){
-        busy=false;action.disabled=false;status.textContent='Análise concluída. '+candidates.length+' lente(s) examinada(s).';return;
+        busy=false;cancel.hidden=true;action.disabled=false;status.textContent='Análise concluída. Uma lente examinada: '+labels[selected]+'.';return;
       }
       var lens=candidates[cursor++],buttons=wheel.querySelectorAll('button'),i;
       for(i=0;i<buttons.length;i++){buttons[i].setAttribute('aria-current',buttons[i].getAttribute('data-ptbr-lens')===lens?'true':'false');}
@@ -182,22 +202,22 @@
     }
     step();
   }
-  action.addEventListener('click',function(){run(null);},false);
+  action.addEventListener('click',function(){run(lastLens);},false);
+  cancel.addEventListener('click',function(){E.ptbrPanelReset();status.textContent='Análise cancelada. Escolha uma lente para recomeçar.';},false);
   manuscript.addEventListener('input',function(){
     epoch++;busy=false;root.clearTimeout(debounce);action.disabled=true;clearResults();
     status.textContent='O texto mudou. Os resultados anteriores foram retirados.';
-    if(composing){return;}
-    if(!panel.hidden){debounce=root.setTimeout(function(){refresh(true);},700);}
-    else{debounce=root.setTimeout(function(){draft=indexed(manuscript.value);},700);}
+    cancel.hidden=true;draft=null;wordStat.firstChild.textContent='—';
   },false);
-  manuscript.addEventListener('compositionstart',function(){composing=true;root.clearTimeout(debounce);epoch++;busy=false;action.disabled=true;clearResults();},false);
-  manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);debounce=root.setTimeout(function(){if(!panel.hidden){refresh(true);}else{draft=indexed(manuscript.value);}},700);},false);
+  manuscript.addEventListener('compositionstart',function(){composing=true;root.clearTimeout(debounce);epoch++;busy=false;draft=null;action.disabled=true;cancel.hidden=true;wordStat.firstChild.textContent='—';clearResults();},false);
+  manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);},false);
   panel.addEventListener('focus',function(){if(!panel.hidden){refresh(true);}},false);
   var openers=['examinar-toggle','cabinet-examine'];
   for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);},false);}}
   D.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.keyCode===13){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);}},false);
-  E.ptbrPanelReset=function(){epoch++;busy=false;draft=null;root.clearTimeout(debounce);clearResults();action.disabled=true;};
+  E.ptbrPanelReset=function(){epoch++;busy=false;draft=null;root.clearTimeout(debounce);clearResults();action.disabled=true;cancel.hidden=true;};
+  E.ptbrPanelFocus=function(){var first=wheel.querySelectorAll('button')[0];if(first){first.focus();}};
   /* Reutiliza o painel nativo, mantendo os botões originais se a inicialização falhar. */
   panel.setAttribute('data-ptbr-dashboard','true');
-  refresh(true);
+  if(!panel.hidden){refresh(true);}
 }(typeof window!=='undefined'?window:this));

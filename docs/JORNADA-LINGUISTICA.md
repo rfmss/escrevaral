@@ -1,0 +1,269 @@
+# Jornada linguística do Escrevaral
+
+Página permanente: https://escrevaral.com/jornada/
+
+Atualizado em 26/09/2026. Base do produto auditada: `1d649c2ca3f47db7570bdf1b3c20f6e075705535`.
+
+**Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
+
+**Estado:** Incrementos v6-23 preparados para publicação na main por autorização expressa de Rafael em 26/09/2026. Motor e simulação verificados; auditoria ampla de navegador, acessibilidade e offline pendente. Publicação não equivale à aprovação dessa auditoria. Próximo trabalho: consolidar léxico e regência.
+
+Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
+
+## Compromisso de produto
+
+O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exatos e explicados na mesma área. Nenhuma análise altera, corrige, completa ou substitui o manuscrito. O exemplo público é manual e não certifica um detector geral de subordinadas.
+
+## Fila atual
+
+- Consolidar P03–P05: separar inventário lexical de padrões sintáticos, registrar formas e leituras possíveis e explicitar a regência dos verbos do recorte. Preservar ambiguidades em vez de resolvê-las por ordem ou sufixo.
+- Usar essa base para ampliar P06: estudar e distinguir que-sujeito, que-objeto, sujeito posposto e integrante, com exemplos contrastantes; depois avançar para explicativas e demais subordinadas.
+- Publicar incrementos autorizados com verificações essenciais e pendências explícitas; reunir a auditoria ampla de navegador, acessibilidade e offline em frente própria, conforme decisão de Rafael em 26/09/2026.
+- Preparar avaliação reservada com critérios definidos antes da execução; não tratar casos usados no desenvolvimento como prova de generalização nem depender de outro modelo para continuar.
+- Conferir main remota e diff; publicar incrementos aprovados e verificar o deploy. Manter a visão completa de convenções, texto, estilo e variação no mapa.
+
+## Etapas
+
+### P00 — Preservar a base
+
+Estado: **Publicado com limites**. Depende de: base existente.
+
+Lentes atuais, posições, autoria e triagem limitada.
+
+- Registrar a versão publicada e suas evidências.
+- Conservar o editor, os cadernos, a exportação e o acesso manual.
+
+**Condição de conclusão:** 29 casos de lentes, 16 de triagem e registros de navegador disponíveis; PWA WebKit e aparelhos antigos permanecem pendentes.
+
+Evidências: `ptbr/README.md`, `ptbr/auditoria/verificacao.md`.
+
+### P01 — Receber e estudar os livros
+
+Estado: **Em estudo inicial**. Depende de: P00.
+
+Construir uma biblioteca de referências verificáveis.
+
+- Catalogar obra, edição, autor, variedade linguística e estrutura.
+- Conferir OCR, páginas impressas e páginas do arquivo.
+- Ler por capítulos e registrar conceitos, exemplos, exceções e divergências.
+- Cunha e Cintra é o guia principal. Demais obras são apoios por demanda; leitura integral ainda não concluída.
+
+**Condição de conclusão:** Cada unidade estudada tem referência localizável, síntese própria e questões abertas. Receber um PDF não conta como leitura concluída.
+
+Evidências: `docs/jornada/fontes.json`, `docs/jornada/LEITURA-INICIAL.md`, `docs/jornada/COMO-ESTUDAR.md`, `ptbr/CONTEXTO-1.md`, `docs/jornada/BASE-26SET.md`, `docs/jornada/ESTUDO-SINTAXE-1.md`, `docs/jornada/ESTUDO-LOCUCOES-1.md`, `docs/jornada/ESTUDO-RELATIVAS-1.md`.
+
+### P02 — Criar o corpus de avaliação
+
+Estado: **Corpus de desenvolvimento e avaliação externa com divergências; nova avaliação reservada pendente**. Depende de: P01.
+
+Separar exemplos de aprendizado de exemplos de avaliação.
+
+- Anotar positivos, negativos, ambiguidades e casos fora da cobertura.
+- Revisar discordâncias e guardar textos de avaliação que não orientem as regras.
+- Usar exemplos próprios ou autorizados; jamais colher silenciosamente manuscritos reais.
+
+**Condição de conclusão:** Corpus versionado com limites exatos dos trechos, classificação esperada ou abstenção e revisão linguística registrada.
+
+Evidências: `docs/jornada/corpus-inicial.json`, `docs/jornada/regra-modelo.json`, `ptbr/corpus/contexto-1.json`, `ptbr/corpus/sintaxe-1.json`, `docs/jornada/regras-sintaxe-1.json`, `ptbr/corpus/locucoes-1.json`, `docs/jornada/regras-locucoes-1.json`, `ptbr/corpus/relativas-1.json`, `docs/jornada/regras-relativas-1.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/auditoria/devolucao-gemini-reproducao-v6-22.json`.
+
+### P03 — Consolidar o dicionário PTBR
+
+Estado: **Parcial**. Depende de: P01, P02.
+
+Dar às palavras inventário, flexões e possibilidades coerentes.
+
+- Aproveitar seletivamente os dados já auditados.
+- Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.
+- Carregar dados maiores sob demanda, com índices e sem polyfills globais.
+
+**Condição de conclusão:** Dados têm origem rastreável, integridade, casos de cobertura e custo medido. Dicionário não é anunciado como analisador contextual.
+
+Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`.
+
+### P04 — Reconhecer classes no contexto
+
+Estado: **Incremento contextual local**. Depende de: P02, P03.
+
+Ir das classes possíveis à leitura sustentada pela frase.
+
+- Cobrir as dez classes e suas locuções.
+- Distinguir flexão, classe e função sintática.
+- Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
+
+**Condição de conclusão:** Conjunto reservado de avaliação separa acertos, falsos alarmes, perdas e abstenções por classe. Casos ambíguos preservam alternativas.
+
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`.
+
+### P05 — Construir as relações da oração
+
+Estado: **Relações simples e locuções integradas localmente; revisão independente pendente**. Depende de: P04.
+
+Reconhecer núcleos, dependências e fronteiras.
+
+- Segmentar períodos e orações com posições no original.
+- Tratar locuções verbais, elipse, sujeito não expresso, coordenação e encaixamento.
+- Separar hipóteses de análise das relações confirmadas.
+
+**Condição de conclusão:** Testes verificam constituintes, vínculos, sujeito e limites; locução verbal não vira várias orações por contagem mecânica.
+
+Evidências: `docs/jornada/ESTUDO-SINTAXE-1.md`, `docs/jornada/regras-sintaxe-1.json`, `ptbr/relacoes-sintaticas.js`, `tests/ptbr-sintaxe.cjs`, `ptbr/SINTAXE-1.md`, `docs/jornada/ESTUDO-LOCUCOES-1.md`, `docs/jornada/regras-locucoes-1.json`, `ptbr/grupos-verbais.js`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`.
+
+### P06 — Entregar orações subordinadas
+
+Estado: **Primeiro recorte de relativas integrado localmente; alcance geral pendente**. Depende de: P05.
+
+Permitir escolher a lente e ler os trechos na própria aba.
+
+- Cobrir substantivas, adjetivas, adverbiais e formas reduzidas.
+- Mostrar relação com a oração ou termo de referência.
+- Representar orações encaixadas e casos de classificação controversa.
+
+**Condição de conclusão:** Detecção geral aprovada em exemplos inéditos. O parágrafo da demonstração integra o corpus, mas acertá-lo sozinho não aprova a lente.
+
+Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `docs/jornada/ESTUDO-RELATIVAS-1.md`, `docs/jornada/regras-relativas-1.json`, `ptbr/relativas.js`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`.
+
+### P07 — Conferir convenções de escrita
+
+Estado: **Parcial**. Depende de: P04, P05.
+
+Explicar ocorrências de ortografia e gramática dentro de critérios explícitos.
+
+- Ampliar ortografia, acentuação, hífen e uso de maiúsculas.
+- Ampliar concordância, regência, crase, pronomes e pontuação.
+- Distinguir variedade, registro, opção estilística e infração de regra aplicável.
+
+**Condição de conclusão:** Toda observação diz o critério, o contexto necessário e as exceções. Nenhuma correção automática ou selo de texto perfeito.
+
+### P08 — Ler o texto e seus efeitos
+
+Estado: **Parcial**. Depende de: P05, P06.
+
+Observar relações além de uma palavra isolada.
+
+- Coesão, referência, conectores, progressão temática e ambiguidades.
+- Repetição, expressões, figuras, ritmo, rima e métrica com escopo próprio.
+- Adaptar explicações a gêneros e finalidades sem pontuar valor literário.
+
+**Condição de conclusão:** Efeitos de sentido são leituras possíveis. Métricas só aparecem com algoritmo explicado e validação; intenção do autor não é inventada.
+
+### P09 — Construir a cortina Escrevaral
+
+Estado: **Leitura anotada integrada localmente; QA visual pendente**. Depende de: P00.
+
+Uma entrada simples para estudar o próprio texto.
+
+- Escrevaral desligado: área recolhida e nenhum exame ativo.
+- Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.
+- Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar.
+
+**Condição de conclusão:** Simulação verifica uma lente por escolha e cancelamento. Validação em navegador, acessibilidade completa e apresentação final do controle ainda pendentes.
+
+Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`.
+
+### P10 — Integrar e comprovar cada módulo
+
+Estado: **Motor e simulação aprovados; navegador bloqueado**. Depende de: P02, P09.
+
+Transformar conhecimento em comportamento confiável no produto.
+
+- Integrar primeiro um lote restrito de P04 e depois de P06, sem esperar todo o mapa.
+- Testar cancelamento, IME, versões do texto, memória, offline e portátil.
+- Medir qualidade e custo por lente; conservar regressões e preparar reversão.
+
+**Condição de conclusão:** Zero mutação do manuscrito e zero erro conhecido de posição no corpus de liberação. Limiares linguísticos e orçamento de desempenho definidos antes da avaliação reservada.
+
+Evidências: `tests/ptbr-contexto.cjs`, `tests/ptbr-browser.cjs`, `ptbr/CONTEXTO-1.md`, `tests/ptbr-visual.cjs`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/auditoria/custo-relativas-1.json`.
+
+### P11 — Pilotar, publicar e manter
+
+Estado: **Contínuo**. Depende de: P10.
+
+Entregar versões úteis e manter a confiança ao longo do tempo.
+
+- Observar usuários com diferentes experiências, gêneros e recursos de acesso.
+- Publicar lotes aprovados na main conforme autorização vigente.
+- Registrar SHA, evidências, limitações, decisão de publicação e retorno de uso.
+
+**Condição de conclusão:** Cada versão declarada concluída cobre o escopo prometido, tem evidências e limitações acessíveis. Incidentes geram regressões; a manutenção continua.
+
+Evidências: `docs/jornada/PASSAGEM-DE-TRABALHO.md`.
+
+## Cobertura de estudo
+
+### Escrita e sons
+
+Fonemas e grafemas; dígrafos; encontros vocálicos e consonantais; sílaba e tonicidade; ortografia; acentuação; hífen; maiúsculas; abreviações; convenções gráficas.
+
+### Palavras e formação
+
+Morfemas; radical e afixos; derivação e composição; famílias; flexão nominal; flexão verbal; homógrafos; locuções; neologismos; limites do léxico.
+
+### Dez classes
+
+Substantivo; artigo; adjetivo; numeral; pronome; verbo; advérbio; preposição; conjunção; interjeição. Registrar outras taxonomias das obras sem misturá-las silenciosamente.
+
+### Sistema verbal
+
+Pessoa, número, tempo, modo e aspecto; vozes; formas nominais; auxiliares e locuções; verbos impessoais; valores contextuais e correlação temporal.
+
+### Oração e período
+
+Frase, oração e período; constituintes e núcleos; sujeito e predicado; objetos e complementos; adjuntos; aposto e vocativo; predicativos; elipse; ordem; coordenação.
+
+### Subordinação substantiva
+
+Subjetiva; objetiva direta; objetiva indireta; completiva nominal; predicativa; apositiva. Vínculos e critérios dependem da abordagem explicitada.
+
+### Subordinação adjetiva
+
+Restritiva e explicativa; pronomes relativos; antecedente; relativas sem antecedente expresso; encaixamento; efeito da pontuação.
+
+### Subordinação adverbial
+
+Causal; comparativa; concessiva; condicional; conformativa; consecutiva; final; proporcional; temporal. Conectivo isolado não determina a classificação.
+
+### Formas reduzidas
+
+Infinitivo, gerúndio e particípio; sujeito e controle; relações sem conectivo; ambiguidades de vínculo; distinção de locuções verbais e usos adjetivais.
+
+### Relações normativas
+
+Concordância nominal e verbal; regência nominal e verbal; crase; colocação pronominal; pontuação; paralelismo; adequação de registro.
+
+### Sentido e texto
+
+Polissemia; sinonímia por sentido; antonímia; ambiguidade; pressupostos e inferências; referência; coesão; coerência; progressão; discurso direto, indireto e indireto livre.
+
+### Estilo, gêneros e variação
+
+Figuras; imagens; repetição; ritmo; rima e métrica; gêneros escolares, profissionais e literários; oralidade; variedades brasileiras e lusófonas; registro e intenção declarada pelo autor.
+
+## Experiência e continuidade
+
+- [Como estudar](jornada/COMO-ESTUDAR.md)
+- [Contrato de análise](jornada/CONTRATO-ANALISE.md)
+- [Passagem de trabalho](jornada/PASSAGEM-DE-TRABALHO.md)
+- [Modelo de regra](jornada/regra-modelo.json)
+- [Instruções para futuras IAs](../AGENTS.md)
+
+## Primeiro conjunto de livros
+
+Guia principal: Cunha e Cintra (B09). Dezessete obras catalogadas; leitura parcial, nenhuma leitura integral declarada. Consulte [inventário](jornada/fontes.json), [leitura inicial](jornada/LEITURA-INICIAL.md) e [corpus proposto](jornada/corpus-inicial.json).
+
+## Exemplo de referência
+
+No silêncio dourado do entardecer, as folhas dançavam suavemente ao ritmo do vento, como se sussurrassem segredos antigos ao horizonte. Cada raio de sol que escapava entre os galhos parecia pintar no céu uma promessa de esperança, enquanto os passos tranquilos ecoavam pela trilha esquecida, onde o tempo parecia hesitar, convidando a alma a mergulhar na calmaria infinita daquele instante.
+
+Os recortes e suas posições estão em `jornada/estado.json`. São leituras manuais para especificar a experiência; os limites, alternativas e relações são parte da demonstração. Não é uma análise exaustiva.
+
+## Referências de apoio ao exemplo
+
+- [Carla Marques — «Como se fosse» e «como fosse» (Ciberdúvidas, 2021)](https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/como-se-fosse-e-como-fosse/36489)
+- [Carla Marques — Oração comparativo-condicional (Ciberdúvidas, 2024)](https://ciberduvidas-ql.iscte-iul.pt/consultorio/perguntas/oracao-compartiva-condicional-como-se-o-conhecessemos/38351)
+- [Filipe Carvalho — Ambiguidade sintática e gerúndio (Ciberdúvidas, 2016)](https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/ambiguidade-sintatica-a-mae-pegou-o-bebe-chorando/33958)
+
+As referências apoiam conceitos gerais; a aplicação ao parágrafo é uma leitura proposta, ainda sem revisão linguística independente.
+
+## Encerramento e manutenção
+
+Uma entrega termina quando cumpre seu escopo, tem evidências e limitações registradas e sua publicação é verificada. A primeira jornada termina com os módulos prometidos aprovados, uma interface acessível e custo compatível com os dispositivos homologados. Manutenção, novos casos e novas obras seguem em versões posteriores.

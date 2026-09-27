@@ -1,0 +1,676 @@
+{
+  "version": 8,
+  "updated": "26/09/2026",
+  "baseline": "1d649c2ca3f47db7570bdf1b3c20f6e075705535",
+  "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
+  "bookCount": 17,
+  "current": "Incrementos v6-23 preparados para publicação na main por autorização expressa de Rafael em 26/09/2026. Motor e simulação verificados; auditoria ampla de navegador, acessibilidade e offline pendente. Publicação não equivale à aprovação dessa auditoria. Próximo trabalho: consolidar léxico e regência.",
+  "next": [
+    "Consolidar P03–P05: separar inventário lexical de padrões sintáticos, registrar formas e leituras possíveis e explicitar a regência dos verbos do recorte. Preservar ambiguidades em vez de resolvê-las por ordem ou sufixo.",
+    "Usar essa base para ampliar P06: estudar e distinguir que-sujeito, que-objeto, sujeito posposto e integrante, com exemplos contrastantes; depois avançar para explicativas e demais subordinadas.",
+    "Publicar incrementos autorizados com verificações essenciais e pendências explícitas; reunir a auditoria ampla de navegador, acessibilidade e offline em frente própria, conforme decisão de Rafael em 26/09/2026.",
+    "Preparar avaliação reservada com critérios definidos antes da execução; não tratar casos usados no desenvolvimento como prova de generalização nem depender de outro modelo para continuar.",
+    "Conferir main remota e diff; publicar incrementos aprovados e verificar o deploy. Manter a visão completa de convenções, texto, estilo e variação no mapa."
+  ],
+  "phases": [
+    {
+      "id": "P00",
+      "title": "Preservar a base",
+      "status": "Publicado com limites",
+      "depends": [],
+      "goal": "Lentes atuais, posições, autoria e triagem limitada.",
+      "tasks": [
+        "Registrar a versão publicada e suas evidências.",
+        "Conservar o editor, os cadernos, a exportação e o acesso manual."
+      ],
+      "done": "29 casos de lentes, 16 de triagem e registros de navegador disponíveis; PWA WebKit e aparelhos antigos permanecem pendentes.",
+      "evidence": [
+        "ptbr/README.md",
+        "ptbr/auditoria/verificacao.md"
+      ]
+    },
+    {
+      "id": "P01",
+      "title": "Receber e estudar os livros",
+      "status": "Em estudo inicial",
+      "depends": [
+        "P00"
+      ],
+      "goal": "Construir uma biblioteca de referências verificáveis.",
+      "tasks": [
+        "Catalogar obra, edição, autor, variedade linguística e estrutura.",
+        "Conferir OCR, páginas impressas e páginas do arquivo.",
+        "Ler por capítulos e registrar conceitos, exemplos, exceções e divergências.",
+        "Cunha e Cintra é o guia principal. Demais obras são apoios por demanda; leitura integral ainda não concluída."
+      ],
+      "done": "Cada unidade estudada tem referência localizável, síntese própria e questões abertas. Receber um PDF não conta como leitura concluída.",
+      "evidence": [
+        "docs/jornada/fontes.json",
+        "docs/jornada/LEITURA-INICIAL.md",
+        "docs/jornada/COMO-ESTUDAR.md",
+        "ptbr/CONTEXTO-1.md",
+        "docs/jornada/BASE-26SET.md",
+        "docs/jornada/ESTUDO-SINTAXE-1.md",
+        "docs/jornada/ESTUDO-LOCUCOES-1.md",
+        "docs/jornada/ESTUDO-RELATIVAS-1.md"
+      ]
+    },
+    {
+      "id": "P02",
+      "title": "Criar o corpus de avaliação",
+      "status": "Corpus de desenvolvimento e avaliação externa com divergências; nova avaliação reservada pendente",
+      "depends": [
+        "P01"
+      ],
+      "goal": "Separar exemplos de aprendizado de exemplos de avaliação.",
+      "tasks": [
+        "Anotar positivos, negativos, ambiguidades e casos fora da cobertura.",
+        "Revisar discordâncias e guardar textos de avaliação que não orientem as regras.",
+        "Usar exemplos próprios ou autorizados; jamais colher silenciosamente manuscritos reais."
+      ],
+      "done": "Corpus versionado com limites exatos dos trechos, classificação esperada ou abstenção e revisão linguística registrada.",
+      "evidence": [
+        "docs/jornada/corpus-inicial.json",
+        "docs/jornada/regra-modelo.json",
+        "ptbr/corpus/contexto-1.json",
+        "ptbr/corpus/sintaxe-1.json",
+        "docs/jornada/regras-sintaxe-1.json",
+        "ptbr/corpus/locucoes-1.json",
+        "docs/jornada/regras-locucoes-1.json",
+        "ptbr/corpus/relativas-1.json",
+        "docs/jornada/regras-relativas-1.json",
+        "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
+        "ptbr/auditoria/devolucao-gemini-reproducao-v6-22.json"
+      ]
+    },
+    {
+      "id": "P03",
+      "title": "Consolidar o dicionário PTBR",
+      "status": "Parcial",
+      "depends": [
+        "P01",
+        "P02"
+      ],
+      "goal": "Dar às palavras inventário, flexões e possibilidades coerentes.",
+      "tasks": [
+        "Aproveitar seletivamente os dados já auditados.",
+        "Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.",
+        "Carregar dados maiores sob demanda, com índices e sem polyfills globais."
+      ],
+      "done": "Dados têm origem rastreável, integridade, casos de cobertura e custo medido. Dicionário não é anunciado como analisador contextual.",
+      "evidence": [
+        "ptbr/auditoria/pacote.json",
+        "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md"
+      ]
+    },
+    {
+      "id": "P04",
+      "title": "Reconhecer classes no contexto",
+      "status": "Incremento contextual local",
+      "depends": [
+        "P02",
+        "P03"
+      ],
+      "goal": "Ir das classes possíveis à leitura sustentada pela frase.",
+      "tasks": [
+        "Cobrir as dez classes e suas locuções.",
+        "Distinguir flexão, classe e função sintática.",
+        "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
+      ],
+      "done": "Conjunto reservado de avaliação separa acertos, falsos alarmes, perdas e abstenções por classe. Casos ambíguos preservam alternativas.",
+      "evidence": [
+        "ptbr/morfologia-contextual.js",
+        "tests/ptbr-contexto.cjs",
+        "ptbr/CONTEXTO-1.md"
+      ]
+    },
+    {
+      "id": "P05",
+      "title": "Construir as relações da oração",
+      "status": "Relações simples e locuções integradas localmente; revisão independente pendente",
+      "depends": [
+        "P04"
+      ],
+      "goal": "Reconhecer núcleos, dependências e fronteiras.",
+      "tasks": [
+        "Segmentar períodos e orações com posições no original.",
+        "Tratar locuções verbais, elipse, sujeito não expresso, coordenação e encaixamento.",
+        "Separar hipóteses de análise das relações confirmadas."
+      ],
+      "done": "Testes verificam constituintes, vínculos, sujeito e limites; locução verbal não vira várias orações por contagem mecânica.",
+      "evidence": [
+        "docs/jornada/ESTUDO-SINTAXE-1.md",
+        "docs/jornada/regras-sintaxe-1.json",
+        "ptbr/relacoes-sintaticas.js",
+        "tests/ptbr-sintaxe.cjs",
+        "ptbr/SINTAXE-1.md",
+        "docs/jornada/ESTUDO-LOCUCOES-1.md",
+        "docs/jornada/regras-locucoes-1.json",
+        "ptbr/grupos-verbais.js",
+        "ptbr/LOCUCOES-1.md",
+        "tests/ptbr-locucoes.cjs"
+      ]
+    },
+    {
+      "id": "P06",
+      "title": "Entregar orações subordinadas",
+      "status": "Primeiro recorte de relativas integrado localmente; alcance geral pendente",
+      "depends": [
+        "P05"
+      ],
+      "goal": "Permitir escolher a lente e ler os trechos na própria aba.",
+      "tasks": [
+        "Cobrir substantivas, adjetivas, adverbiais e formas reduzidas.",
+        "Mostrar relação com a oração ou termo de referência.",
+        "Representar orações encaixadas e casos de classificação controversa."
+      ],
+      "done": "Detecção geral aprovada em exemplos inéditos. O parágrafo da demonstração integra o corpus, mas acertá-lo sozinho não aprova a lente.",
+      "evidence": [
+        "docs/jornada/CONTRATO-ANALISE.md",
+        "docs/jornada/ESTUDO-RELATIVAS-1.md",
+        "docs/jornada/regras-relativas-1.json",
+        "ptbr/relativas.js",
+        "ptbr/RELATIVAS-1.md",
+        "tests/ptbr-relativas.cjs"
+      ]
+    },
+    {
+      "id": "P07",
+      "title": "Conferir convenções de escrita",
+      "status": "Parcial",
+      "depends": [
+        "P04",
+        "P05"
+      ],
+      "goal": "Explicar ocorrências de ortografia e gramática dentro de critérios explícitos.",
+      "tasks": [
+        "Ampliar ortografia, acentuação, hífen e uso de maiúsculas.",
+        "Ampliar concordância, regência, crase, pronomes e pontuação.",
+        "Distinguir variedade, registro, opção estilística e infração de regra aplicável."
+      ],
+      "done": "Toda observação diz o critério, o contexto necessário e as exceções. Nenhuma correção automática ou selo de texto perfeito.",
+      "evidence": []
+    },
+    {
+      "id": "P08",
+      "title": "Ler o texto e seus efeitos",
+      "status": "Parcial",
+      "depends": [
+        "P05",
+        "P06"
+      ],
+      "goal": "Observar relações além de uma palavra isolada.",
+      "tasks": [
+        "Coesão, referência, conectores, progressão temática e ambiguidades.",
+        "Repetição, expressões, figuras, ritmo, rima e métrica com escopo próprio.",
+        "Adaptar explicações a gêneros e finalidades sem pontuar valor literário."
+      ],
+      "done": "Efeitos de sentido são leituras possíveis. Métricas só aparecem com algoritmo explicado e validação; intenção do autor não é inventada.",
+      "evidence": []
+    },
+    {
+      "id": "P09",
+      "title": "Construir a cortina Escrevaral",
+      "status": "Leitura anotada integrada localmente; QA visual pendente",
+      "depends": [
+        "P00"
+      ],
+      "goal": "Uma entrada simples para estudar o próprio texto.",
+      "tasks": [
+        "Escrevaral desligado: área recolhida e nenhum exame ativo.",
+        "Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.",
+        "Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar."
+      ],
+      "done": "Simulação verifica uma lente por escolha e cancelamento. Validação em navegador, acessibilidade completa e apresentação final do controle ainda pendentes.",
+      "evidence": [
+        "docs/jornada/CONTRATO-ANALISE.md",
+        "ptbr/CONTEXTO-1.md",
+        "ptbr/leitura-visual.js",
+        "ptbr/leitura-visual.css",
+        "ptbr/LEITURA-VISUAL.md",
+        "ptbr/SINTAXE-1.md",
+        "tests/ptbr-sintaxe.cjs",
+        "ptbr/LOCUCOES-1.md",
+        "tests/ptbr-locucoes.cjs",
+        "ptbr/auditoria/GEMINI-SET26.md",
+        "ptbr/RELATIVAS-1.md",
+        "tests/ptbr-relativas.cjs"
+      ]
+    },
+    {
+      "id": "P10",
+      "title": "Integrar e comprovar cada módulo",
+      "status": "Motor e simulação aprovados; navegador bloqueado",
+      "depends": [
+        "P02",
+        "P09"
+      ],
+      "goal": "Transformar conhecimento em comportamento confiável no produto.",
+      "tasks": [
+        "Integrar primeiro um lote restrito de P04 e depois de P06, sem esperar todo o mapa.",
+        "Testar cancelamento, IME, versões do texto, memória, offline e portátil.",
+        "Medir qualidade e custo por lente; conservar regressões e preparar reversão."
+      ],
+      "done": "Zero mutação do manuscrito e zero erro conhecido de posição no corpus de liberação. Limiares linguísticos e orçamento de desempenho definidos antes da avaliação reservada.",
+      "evidence": [
+        "tests/ptbr-contexto.cjs",
+        "tests/ptbr-browser.cjs",
+        "ptbr/CONTEXTO-1.md",
+        "tests/ptbr-visual.cjs",
+        "ptbr/LEITURA-VISUAL.md",
+        "ptbr/SINTAXE-1.md",
+        "tests/ptbr-sintaxe.cjs",
+        "ptbr/LOCUCOES-1.md",
+        "tests/ptbr-locucoes.cjs",
+        "ptbr/auditoria/GEMINI-SET26.md",
+        "ptbr/RELATIVAS-1.md",
+        "tests/ptbr-relativas.cjs",
+        "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
+        "ptbr/auditoria/custo-relativas-1.json"
+      ]
+    },
+    {
+      "id": "P11",
+      "title": "Pilotar, publicar e manter",
+      "status": "Contínuo",
+      "depends": [
+        "P10"
+      ],
+      "goal": "Entregar versões úteis e manter a confiança ao longo do tempo.",
+      "tasks": [
+        "Observar usuários com diferentes experiências, gêneros e recursos de acesso.",
+        "Publicar lotes aprovados na main conforme autorização vigente.",
+        "Registrar SHA, evidências, limitações, decisão de publicação e retorno de uso."
+      ],
+      "done": "Cada versão declarada concluída cobre o escopo prometido, tem evidências e limitações acessíveis. Incidentes geram regressões; a manutenção continua.",
+      "evidence": [
+        "docs/jornada/PASSAGEM-DE-TRABALHO.md"
+      ]
+    }
+  ],
+  "areas": [
+    {
+      "title": "Escrita e sons",
+      "scope": "Fonemas e grafemas; dígrafos; encontros vocálicos e consonantais; sílaba e tonicidade; ortografia; acentuação; hífen; maiúsculas; abreviações; convenções gráficas."
+    },
+    {
+      "title": "Palavras e formação",
+      "scope": "Morfemas; radical e afixos; derivação e composição; famílias; flexão nominal; flexão verbal; homógrafos; locuções; neologismos; limites do léxico."
+    },
+    {
+      "title": "Dez classes",
+      "scope": "Substantivo; artigo; adjetivo; numeral; pronome; verbo; advérbio; preposição; conjunção; interjeição. Registrar outras taxonomias das obras sem misturá-las silenciosamente."
+    },
+    {
+      "title": "Sistema verbal",
+      "scope": "Pessoa, número, tempo, modo e aspecto; vozes; formas nominais; auxiliares e locuções; verbos impessoais; valores contextuais e correlação temporal."
+    },
+    {
+      "title": "Oração e período",
+      "scope": "Frase, oração e período; constituintes e núcleos; sujeito e predicado; objetos e complementos; adjuntos; aposto e vocativo; predicativos; elipse; ordem; coordenação."
+    },
+    {
+      "title": "Subordinação substantiva",
+      "scope": "Subjetiva; objetiva direta; objetiva indireta; completiva nominal; predicativa; apositiva. Vínculos e critérios dependem da abordagem explicitada."
+    },
+    {
+      "title": "Subordinação adjetiva",
+      "scope": "Restritiva e explicativa; pronomes relativos; antecedente; relativas sem antecedente expresso; encaixamento; efeito da pontuação."
+    },
+    {
+      "title": "Subordinação adverbial",
+      "scope": "Causal; comparativa; concessiva; condicional; conformativa; consecutiva; final; proporcional; temporal. Conectivo isolado não determina a classificação."
+    },
+    {
+      "title": "Formas reduzidas",
+      "scope": "Infinitivo, gerúndio e particípio; sujeito e controle; relações sem conectivo; ambiguidades de vínculo; distinção de locuções verbais e usos adjetivais."
+    },
+    {
+      "title": "Relações normativas",
+      "scope": "Concordância nominal e verbal; regência nominal e verbal; crase; colocação pronominal; pontuação; paralelismo; adequação de registro."
+    },
+    {
+      "title": "Sentido e texto",
+      "scope": "Polissemia; sinonímia por sentido; antonímia; ambiguidade; pressupostos e inferências; referência; coesão; coerência; progressão; discurso direto, indireto e indireto livre."
+    },
+    {
+      "title": "Estilo, gêneros e variação",
+      "scope": "Figuras; imagens; repetição; ritmo; rima e métrica; gêneros escolares, profissionais e literários; oralidade; variedades brasileiras e lusófonas; registro e intenção declarada pelo autor."
+    }
+  ],
+  "sample": "No silêncio dourado do entardecer, as folhas dançavam suavemente ao ritmo do vento, como se sussurrassem segredos antigos ao horizonte. Cada raio de sol que escapava entre os galhos parecia pintar no céu uma promessa de esperança, enquanto os passos tranquilos ecoavam pela trilha esquecida, onde o tempo parecia hesitar, convidando a alma a mergulhar na calmaria infinita daquele instante.",
+  "examples": [
+    {
+      "id": "D01",
+      "text": "como se sussurrassem segredos antigos ao horizonte",
+      "start": 84,
+      "end": 134,
+      "title": "Comparação hipotética",
+      "simple": "Compara a dança das folhas à ação imaginada de sussurrar.",
+      "reading": "Leitura de demonstração: subordinada adverbial comparativa. Outras abordagens descrevem valor comparativo-condicional.",
+      "limit": "A leitura depende da construção, não apenas da presença de “como”.",
+      "source": "R01",
+      "parent": null
+    },
+    {
+      "id": "D02",
+      "text": "que escapava entre os galhos",
+      "start": 153,
+      "end": 181,
+      "title": "Oração relativa restritiva",
+      "simple": "Delimita os raios de sol de que o período fala.",
+      "reading": "Leitura de demonstração: subordinada adjetiva restritiva, ligada ao grupo nominal “raio de sol”.",
+      "limit": "A relação com o antecedente e a ausência de isolamento por vírgulas sustentam esta leitura.",
+      "source": "EXEMPLO-AUTOR",
+      "parent": null
+    },
+    {
+      "id": "D03",
+      "text": "enquanto os passos tranquilos ecoavam pela trilha esquecida, onde o tempo parecia hesitar, convidando a alma a mergulhar na calmaria infinita daquele instante",
+      "start": 231,
+      "end": 389,
+      "title": "Relação temporal",
+      "simple": "Apresenta uma cena simultânea àquela descrita na oração principal.",
+      "reading": "Leitura de demonstração: subordinada adverbial temporal. O recorte inclui construções encaixadas.",
+      "limit": "O alcance final e os vínculos internos precisam de análise estrutural; os recortes não devem ser somados como blocos independentes.",
+      "source": "EXEMPLO-AUTOR",
+      "parent": null
+    },
+    {
+      "id": "D04",
+      "text": "onde o tempo parecia hesitar, convidando a alma a mergulhar na calmaria infinita daquele instante",
+      "start": 292,
+      "end": 389,
+      "title": "Oração relativa explicativa",
+      "simple": "Acrescenta uma descrição do lugar referido por “trilha esquecida”.",
+      "reading": "Leitura de demonstração: subordinada adjetiva explicativa, introduzida por “onde”.",
+      "limit": "Está dentro do recorte temporal. A sequência no gerúndio exige análise própria de vínculo.",
+      "source": "EXEMPLO-AUTOR",
+      "parent": "D03"
+    },
+    {
+      "id": "D05",
+      "text": "convidando a alma a mergulhar na calmaria infinita daquele instante",
+      "start": 322,
+      "end": 389,
+      "title": "Construção com gerúndio · em revisão",
+      "simple": "Destaca uma ação apresentada no gerúndio.",
+      "reading": "Candidata a análise de oração reduzida; não fixamos subtipo nem sujeito nesta demonstração.",
+      "limit": "É necessário decidir a que termo ou cena “convidando” se liga. Não atribuir certeza apenas pela terminação.",
+      "source": "R03",
+      "parent": "D04"
+    }
+  ],
+  "sources": [
+    {
+      "id": "R01",
+      "title": "Carla Marques — «Como se fosse» e «como fosse» (Ciberdúvidas, 2021)",
+      "url": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/como-se-fosse-e-como-fosse/36489"
+    },
+    {
+      "id": "R02",
+      "title": "Carla Marques — Oração comparativo-condicional (Ciberdúvidas, 2024)",
+      "url": "https://ciberduvidas-ql.iscte-iul.pt/consultorio/perguntas/oracao-compartiva-condicional-como-se-o-conhecessemos/38351"
+    },
+    {
+      "id": "R03",
+      "title": "Filipe Carvalho — Ambiguidade sintática e gerúndio (Ciberdúvidas, 2016)",
+      "url": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/ambiguidade-sintatica-a-mae-pegou-o-bebe-chorando/33958"
+    }
+  ],
+  "books": [
+    {
+      "id": "B01",
+      "title": "A descoberta do mundo",
+      "author": "Clarice Lispector",
+      "edition": "Edição do arquivo não identificada; datas das crônicas não são data da edição.",
+      "kind": "Literatura e processo de escrita",
+      "role": "Repetição, ritmo e escolhas expressivas como recursos possíveis.",
+      "quality": "Texto legível na amostra; sem paginação impressa verificável. Há material de distribuição ao final, a separar da obra.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "ebb1dadb9968d242f8d7376f287f058391fe6a9590a54c355c635d08eeb2037d",
+      "bytes": 1024289,
+      "lineCount": 14555,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 15,
+          "end": 31
+        },
+        {
+          "start": 67,
+          "end": 119
+        },
+        {
+          "start": 6667,
+          "end": 6687
+        }
+      ],
+      "next": "Ler a unidade completa em torno da reflexão sobre repetição e criar contraexemplos próprios."
+    },
+    {
+      "id": "B02",
+      "title": "Preconceito linguístico: o que é, como se faz",
+      "author": "Marcos Bagno",
+      "edition": "Folha editorial: 48ª e 49ª edições, junho de 2007; obra ©1999.",
+      "kind": "Variação e ensino",
+      "role": "Distinguir língua, norma, contexto social e convenção; evitar estigmatização.",
+      "quality": "Amostra legível, com quebras de linha e pequenas falhas de OCR; há marcadores [pg.].",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "ee284fc2037cf37335aa1c41116b52eb88463aacd5d1898e04cc1943b4a5010c",
+      "bytes": 291626,
+      "lineCount": 5133,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 86,
+          "end": 99
+        },
+        {
+          "start": 109,
+          "end": 143
+        },
+        {
+          "start": 180,
+          "end": 222
+        }
+      ],
+      "next": "Estudar a distinção entre uso, norma e registro; confrontar com a aplicação editorial dos manuais."
+    },
+    {
+      "id": "B03",
+      "title": "Novo manual da redação",
+      "author": "Folha de S.Paulo",
+      "edition": "CIP 1992; folha editorial indica edição de novembro de 1998, numeração a conferir no original.",
+      "kind": "Manual editorial histórico",
+      "role": "Comparar decisões de estilo e sua evolução; separar convenções do jornal de regras gerais.",
+      "quality": "OCR muito ruidoso e colunas misturadas. O arquivo termina no meio de um item do índice: completude não confirmada.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "0b23751bb4a8cfef032eecc48a9b43aa95fcb9a2deefbc75e952080ad35f03a5",
+      "bytes": 1220608,
+      "lineCount": 16120,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 21,
+          "end": 59
+        },
+        {
+          "start": 197,
+          "end": 218
+        },
+        {
+          "start": 326,
+          "end": 355
+        }
+      ],
+      "next": "Conferir versão visual/edição e sequência de páginas antes de derivar regras deste OCR."
+    },
+    {
+      "id": "B04",
+      "title": "Manual de redação e estilo de O Estado de S. Paulo",
+      "author": "Eduardo Martins",
+      "edition": "3ª edição revista e ampliada, 1997.",
+      "kind": "Manual editorial e consulta gramatical",
+      "role": "Concordância, regência, crase, pontuação e convenções de redação em contexto jornalístico.",
+      "quality": "Amostra legível; páginas em colunas podem intercalar verbetes e quebrar palavras.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "c50feed4810d4a5dbadd7a5a688e2cf43069dbe97c1816d49325f546434b5054",
+      "bytes": 1589494,
+      "lineCount": 21799,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 1,
+          "end": 64
+        },
+        {
+          "start": 204,
+          "end": 263
+        }
+      ],
+      "next": "Estudar verbetes delimitados, registrando escopo editorial, exceções e diferenças em relação a outras fontes."
+    },
+    {
+      "id": "B05",
+      "title": "Manual da redação: Folha de S.Paulo",
+      "author": "Folha de S.Paulo",
+      "edition": "12ª edição revista e atualizada, Publifolha, 2007; folha de direitos ©2001.",
+      "kind": "Manual editorial e anexo gramatical",
+      "role": "Comparar orientações de estilo e consultar o anexo gramatical sem universalizar a política do veículo.",
+      "quality": "Extração com cabeçalhos de páginas e colunas; conferir ordem de leitura e tabelas.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "4af801d5684801277587cf902045e56d39575597dc288d6866c99e24ff552631",
+      "bytes": 2000489,
+      "lineCount": 24394,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 28,
+          "end": 83
+        },
+        {
+          "start": 96,
+          "end": 164
+        }
+      ],
+      "next": "Mapear o anexo gramatical e comparar sua organização à edição anterior; não confundir os dois arquivos."
+    },
+    {
+      "id": "B06",
+      "title": "Linguagem jornalística",
+      "author": "Nilson Lage — identificação pelo arquivo recebido",
+      "edition": "Edição e ano não confirmados no trecho bibliográfico disponível; arquivo começa no capítulo 1.",
+      "kind": "Linguagem, registro e jornalismo",
+      "role": "Relação entre registro, comunicação, estruturas sintáticas e contexto de produção.",
+      "quality": "Amostra legível, com palavras partidas entre linhas e termos que exigem conferência; paginação extraída presente.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "bd6ff3577340e206263ec95a431adf3b49f763661c29787445985332ee7f58ae",
+      "bytes": 142895,
+      "lineCount": 1981,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 1,
+          "end": 79
+        },
+        {
+          "start": 915,
+          "end": 960
+        },
+        {
+          "start": 1428,
+          "end": 1464
+        }
+      ],
+      "next": "Estudar integralmente a seção de registro e a de pontuação, revendo terminologia e exemplos sintáticos."
+    },
+    {
+      "id": "B07",
+      "title": "Por que escrevo",
+      "author": "George Orwell; tradução de Alexandre Pires Vieira",
+      "edition": "Montecristo, versão digital de 24/02/2021; ISBN 978-1-61965-243-9.",
+      "kind": "Ensaios sobre escrita e linguagem",
+      "role": "Examinar clareza, intenção declarada e escolhas expressivas; não transportar prescrições do inglês como gramática do português.",
+      "quality": "Amostra legível com pelo menos um lapso textual; reúne tradução, originais em inglês e material adicional, que precisam ser segmentados.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "e98fe6d6912c24dbab2c0003937ebca110e43cb864e75a1ac64427810d6778f7",
+      "bytes": 244613,
+      "lineCount": 2063,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 13,
+          "end": 123
+        },
+        {
+          "start": 242,
+          "end": 278
+        },
+        {
+          "start": 685,
+          "end": 731
+        }
+      ],
+      "next": "Ler cada ensaio como unidade, separando idioma, tradução e escopo; estudar também as ressalvas das recomendações."
+    },
+    {
+      "id": "B08",
+      "title": "Crítica genética: fundamentos dos estudos genéticos sobre o processo de criação artística",
+      "author": "Cecilia Almeida Salles",
+      "edition": "3ª edição revista, EDUC, 2008; ISBN 978-85-283-0372-8.",
+      "kind": "Processo criativo e versões",
+      "role": "Tratar rascunhos e escolhas como trajetórias; não deduzir intenção completa a partir de um texto final.",
+      "quality": "Amostra legível com marcadores [pag.]; notas, citações e texto principal precisam permanecer separados.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "9f250914c6eee7d86dc51dec69fad93095608e72a926f450b6d0221aacae892d",
+      "bytes": 167934,
+      "lineCount": 2468,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 1,
+          "end": 53
+        },
+        {
+          "start": 80,
+          "end": 139
+        },
+        {
+          "start": 403,
+          "end": 442
+        }
+      ],
+      "next": "Estudar demarcação do campo e limites de inferência antes de propor leituras de versões autorais."
+    }
+  ],
+  "primarySource": "B09 — Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017.",
+  "focusDecision": {
+    "date": "26/09/2026",
+    "request": "Retomar o plano completo e concentrar a execução no assistente principal.",
+    "decision": "Nenhuma nova tarefa depende de colaboração com outro modelo. Avaliações anteriores permanecem apenas como histórico; não serão reabertas na fila atual. Consolidar dependências lexicais e sintáticas antes de somar novos subtipos de subordinadas.",
+    "nextDeliverable": "Inventário e regência do recorte sintático organizados, lacunas explícitas e casos contrastantes que sustentem a próxima ampliação de relativas."
+  },
+  "publicationDecision": {
+    "authorizedBy": "Rafael",
+    "date": "26/09/2026",
+    "scope": "Publicar o estado atual na main para testes do autor; continuar a próxima etapa lógica.",
+    "validationPolicy": "Verificações essenciais de integridade em cada incremento; auditoria ampla em frente própria posterior.",
+    "pending": [
+      "Navegador e aparelhos",
+      "Acessibilidade completa",
+      "PWA offline em WebKit",
+      "Avaliação linguística reservada"
+    ],
+    "status": "autorizada; push em preparação",
+    "commit": null
+  }
+}

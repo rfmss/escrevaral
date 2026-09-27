@@ -11,7 +11,7 @@ Object.defineProperty(Node.prototype, 'textContent', {
   get: function () { return this._text + this.childNodes.map(function (n) { return n.textContent; }).join(''); },
   set: function (v) { this._text = String(v); this.childNodes = []; this.firstChild = null; }
 });
-Node.prototype.appendChild = function (n) { this.childNodes.push(n); this.firstChild = this.childNodes[0]; return n; };
+Node.prototype.appendChild = function (n) { if(n.parentNode){var old=n.parentNode;old.childNodes.splice(old.childNodes.indexOf(n),1);old.firstChild=old.childNodes[0]||null;} n.parentNode=this;this.childNodes.push(n); this.firstChild = this.childNodes[0]; return n; };
 Node.prototype.insertBefore = function (n) { return this.appendChild(n); };
 Node.prototype.setAttribute = function (k, v) { this.attrs[k] = String(v); };
 Node.prototype.getAttribute = function (k) { return this.attrs[k] || null; };
@@ -22,7 +22,7 @@ Node.prototype.focus = function () { this.emit('focus'); };
 Node.prototype.querySelector = function (s) { return s === '.sheet-heading' ? this.heading : null; };
 Node.prototype.querySelectorAll = function (s) { return s === 'button' ? this.childNodes.filter(function (n) { return n.tagName === 'button'; }) : []; };
 Node.prototype.setSelectionRange = function (a, b) { this.selectionStart = a; this.selectionEnd = b; };
-function setup(initial, dismissed) {
+function setup(initial, dismissed, realEngine) {
   var document = new Node('document'), panel = new Node('section'), manuscript = new Node('textarea'),
     opener = new Node('button'), back = new Node('button'), timers = [], calls = [], next = 0;
   document.head = new Node('head'); document.createElement = function (tag) { return new Node(tag); };
@@ -53,12 +53,18 @@ function setup(initial, dismissed) {
       }] : [], limited: false };
     } }; }
   };
+  if(realEngine){
+    var choices=E.ptbrPanelChoices;
+    E={};Object.keys(realEngine).forEach(function(k){E[k]=realEngine[k];});E.ptbrPanelChoices=choices;
+    E.createVault=function(){var v=realEngine.createVault.apply(realEngine,arguments),analyze=v.analyze;v.analyze=function(lens,text){calls.push(lens);return analyze.call(v,lens,text);};return v;};
+  }
   var window = { document: document, Escr: E,
     setTimeout: function (fn, delay) { var timer = { id: ++next, fn: fn, delay: delay, cancelled: false }; timers.push(timer); return timer.id; },
     clearTimeout: function (id) { timers.forEach(function (timer) { if (timer.id === id) { timer.cancelled = true; } }); }
   };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'regras-locais.js'),'utf8'),{window:window});
   E.createSignalTriage=require('./triagem');
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'leitura-visual.js'),'utf8'),{window:window});
   vm.runInNewContext(source, { window: window, document: document });
   var board = panel.childNodes[0];
   function child(className) { return board.childNodes.filter(function (n) { return n.className === className; })[0]; }
@@ -77,11 +83,12 @@ var sample = 'A rua excessão,, que é ao longo do tempo', a = setup(sample);
 assert.strictEqual(a.calls.length, 0, 'triagem não executa lentes');
 assert.strictEqual(a.manuscript.value, sample);
 a.panel.hidden = false; a.panel.focus();
-assert.deepStrictEqual(a.wheel.childNodes.map(function (n) { return n.textContent; }),
-  ['Ortografia', 'Pontuação', 'Classes de palavras', 'Expressões']);
-assert.ok(a.board.textContent.indexOf('função sintática ainda não confirmada') !== -1);
+assert.ok(a.wheel.childNodes.length >= 15, 'todas as lentes disponíveis sem triagem');
+assert.strictEqual(a.action.disabled, true, 'nenhuma lente escolhida');
 a.action.click(); a.flush();
-assert.deepStrictEqual(a.calls, ['ortografia', 'pontuacao', 'morfologia', 'expressoes']);
+assert.deepStrictEqual(a.calls, [], 'abrir e botão sem seleção não analisam');
+a.wheel.childNodes[0].click(); a.flush();
+assert.deepStrictEqual(a.calls, ['ortografia'], 'uma lente por escolha');
 assert.ok(a.board.textContent.indexOf('Grafia para conferir') !== -1);
 assert.ok(a.board.textContent.indexOf('Análise concluída') !== -1);
 assert.strictEqual(a.manuscript.value, sample, 'análise não modifica o original');
@@ -96,7 +103,7 @@ assert.ok(b.board.textContent.indexOf('Nenhuma observação nova neste recorte.'
   'respeita escolha mantida');
 assert.ok(b.board.textContent.indexOf('Grafia para conferir') === -1);
 var c = setup(sample);
-c.panel.hidden = false; c.panel.focus(); c.action.click();
+c.panel.hidden = false; c.panel.focus(); c.wheel.childNodes[0].click();
 c.manuscript.value = 'Texto alterado'; c.manuscript.emit('input'); c.flush();
 assert.strictEqual(c.calls.length, 0, 'análise antiga cancelada pela edição');
 assert.ok(c.board.textContent.indexOf('Grafia para conferir') === -1);
@@ -105,10 +112,13 @@ d.manuscript.emit('compositionstart'); d.manuscript.value = 'aç'; d.manuscript.
 assert.strictEqual(d.timers.filter(function (x) { return !x.cancelled; }).length, 0,
   'não agendar triagem durante composição');
 d.manuscript.emit('compositionend');
-assert.strictEqual(d.timers.filter(function (x) { return !x.cancelled; }).length, 1,
-  'triagem agendada após composição');
+assert.strictEqual(d.timers.filter(function (x) { return !x.cancelled; }).length, 0,
+  'não executar triagem após composição');
 d.flush();
 assert.strictEqual(d.calls.length, 0);
+var e = setup(sample); e.panel.hidden=false; e.panel.focus();
+e.wheel.childNodes[0].click(); e.wheel.childNodes[2].click(); e.flush();
+assert.deepStrictEqual(e.calls,['pontuacao'],'trocar lente cancela a fila anterior');
 var html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 var portable = fs.readFileSync(path.join(root, 'escrevaral.html'), 'utf8');
 var worker = fs.readFileSync(path.join(root, 'service-worker.js'), 'utf8');
@@ -118,4 +128,6 @@ assert.ok(html.indexOf('E.ptbrPanelChoices=function()') !== -1, 'a ponte não re
 var version = /name="asset-version" content="([^"]+)"/.exec(html);
 assert.ok(version && worker.indexOf('ASSET_VERSION = "' + version[1] + '"') !== -1,
   'cache e HTML em versões diferentes');
-console.log('PAINEL OK: sinais, análise serial, escolhas, lente individual, cancelamento, IME, HTML portátil e cache');
+console.log('PAINEL OK: escolha explícita, uma lente, troca/cancelamento, escolhas, lente individual, cancelamento, IME, HTML portátil e cache');
+
+if(require.main!==module){module.exports={Node:Node,setup:setup};}

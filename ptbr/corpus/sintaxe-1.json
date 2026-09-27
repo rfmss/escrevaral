@@ -1,0 +1,572 @@
+{
+  "version": "sintaxe-1",
+  "kind": "desenvolvimento e regressão; exemplos próprios; não é avaliação independente",
+  "independentReview": false,
+  "cases": [
+    {
+      "id": "REL-P01",
+      "text": "Eu leio o livro.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "leio o livro",
+        "Verbo": "leio",
+        "Objeto direto": "o livro"
+      }
+    },
+    {
+      "id": "REL-P02",
+      "text": "Tu lês a carta.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Tu",
+        "Predicado": "lês a carta",
+        "Verbo": "lês",
+        "Objeto direto": "a carta"
+      }
+    },
+    {
+      "id": "REL-P03",
+      "text": "Ela leu o poema.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Ela",
+        "Predicado": "leu o poema",
+        "Verbo": "leu",
+        "Objeto direto": "o poema"
+      }
+    },
+    {
+      "id": "REL-P04",
+      "text": "Nós lemos os livros.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Nós",
+        "Predicado": "lemos os livros",
+        "Verbo": "lemos",
+        "Objeto direto": "os livros"
+      }
+    },
+    {
+      "id": "REL-P05",
+      "text": "Eles leram as cartas.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eles",
+        "Predicado": "leram as cartas",
+        "Verbo": "leram",
+        "Objeto direto": "as cartas"
+      }
+    },
+    {
+      "id": "REL-P06",
+      "text": "A menina escreveu a carta.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "A menina",
+        "Predicado": "escreveu a carta",
+        "Verbo": "escreveu",
+        "Objeto direto": "a carta"
+      }
+    },
+    {
+      "id": "REL-P07",
+      "text": "As meninas escreveram cartas.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "As meninas",
+        "Predicado": "escreveram cartas",
+        "Verbo": "escreveram",
+        "Objeto direto": "cartas"
+      }
+    },
+    {
+      "id": "REL-P08",
+      "text": "O homem comprou o pão.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "O homem",
+        "Predicado": "comprou o pão",
+        "Verbo": "comprou",
+        "Objeto direto": "o pão"
+      }
+    },
+    {
+      "id": "REL-P09",
+      "text": "Os homens compraram livros.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Os homens",
+        "Predicado": "compraram livros",
+        "Verbo": "compraram",
+        "Objeto direto": "livros"
+      }
+    },
+    {
+      "id": "REL-P10",
+      "text": "A mulher não leu a revista ontem.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "A mulher",
+        "Predicado": "não leu a revista ontem",
+        "Verbo": "leu",
+        "Objeto direto": "a revista"
+      }
+    },
+    {
+      "id": "REL-P11",
+      "text": "A menina feliz canta.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "A menina feliz",
+        "Predicado": "canta",
+        "Verbo": "canta"
+      }
+    },
+    {
+      "id": "REL-P12",
+      "text": "Eu canto.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "canto",
+        "Verbo": "canto"
+      }
+    },
+    {
+      "id": "REL-P13",
+      "text": "Nós cantamos hoje.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Nós",
+        "Predicado": "cantamos hoje",
+        "Verbo": "cantamos"
+      }
+    },
+    {
+      "id": "REL-P14",
+      "text": "O canto terminou.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "O canto",
+        "Predicado": "terminou",
+        "Verbo": "terminou"
+      }
+    },
+    {
+      "id": "REL-P15",
+      "text": "O menino chegou.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "O menino",
+        "Predicado": "chegou",
+        "Verbo": "chegou"
+      }
+    },
+    {
+      "id": "REL-P16",
+      "text": "Eu não canto.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "não canto",
+        "Verbo": "canto"
+      }
+    },
+    {
+      "id": "REL-P17",
+      "text": "A menina é feliz.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "A menina",
+        "Predicado": "é feliz",
+        "Verbo": "é"
+      }
+    },
+    {
+      "id": "REL-P18",
+      "text": "As casas são bonitas.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "As casas",
+        "Predicado": "são bonitas",
+        "Verbo": "são"
+      }
+    },
+    {
+      "id": "REL-P19",
+      "text": "Eu dei o livro a Maria.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "dei o livro a Maria",
+        "Verbo": "dei",
+        "Objeto direto": "o livro"
+      }
+    },
+    {
+      "id": "REL-P20",
+      "text": "Maria leu o livro.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Maria",
+        "Predicado": "leu o livro",
+        "Verbo": "leu",
+        "Objeto direto": "o livro"
+      }
+    },
+    {
+      "id": "REL-P21",
+      "text": "João escreveu cartas.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "João",
+        "Predicado": "escreveu cartas",
+        "Verbo": "escreveu",
+        "Objeto direto": "cartas"
+      }
+    },
+    {
+      "id": "REL-P22",
+      "text": "Eu\tli o livro.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "li o livro",
+        "Verbo": "li",
+        "Objeto direto": "o livro"
+      }
+    },
+    {
+      "id": "REL-P23",
+      "text": "Nós lemos a carta.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Nós",
+        "Predicado": "lemos a carta",
+        "Verbo": "lemos",
+        "Objeto direto": "a carta"
+      }
+    },
+    {
+      "id": "REL-P24",
+      "text": "A mulher leu a opinião.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "A mulher",
+        "Predicado": "leu a opinião",
+        "Verbo": "leu",
+        "Objeto direto": "a opinião"
+      }
+    },
+    {
+      "id": "REL-P25",
+      "text": "Eu canto",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "canto",
+        "Verbo": "canto"
+      }
+    },
+    {
+      "id": "REL-P26",
+      "text": "Eu canto!",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "canto",
+        "Verbo": "canto"
+      }
+    },
+    {
+      "id": "REL-P27",
+      "text": "Eu canto?",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "canto",
+        "Verbo": "canto"
+      }
+    },
+    {
+      "id": "REL-P28",
+      "text": "Eu canto…",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "canto",
+        "Verbo": "canto"
+      }
+    },
+    {
+      "id": "REL-P29",
+      "text": "O tempo corre.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "O tempo",
+        "Predicado": "corre",
+        "Verbo": "corre"
+      }
+    },
+    {
+      "id": "REL-N01",
+      "text": "Eu canta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N02",
+      "text": "Eles canta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N03",
+      "text": "As menina cantam.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N04",
+      "text": "O menina canta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N05",
+      "text": "Ela foi vista.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N06",
+      "text": "A porta é aberta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N07",
+      "text": "A porta está aberta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N08",
+      "text": "Eu vi a menina feliz.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N09",
+      "text": "Eu comprei a casa nova.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N10",
+      "text": "Canto.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N11",
+      "text": "Chegou a menina.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N12",
+      "text": "O livro eu li.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N13",
+      "text": "A menina e o menino cantam.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N14",
+      "text": "Eu canto e ela corre.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N15",
+      "text": "O livro que eu li chegou.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N16",
+      "text": "Se eu canto, ela corre.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N17",
+      "text": "Eu quero ler o livro.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N18",
+      "text": "Eu estou lendo o livro.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "estou lendo o livro",
+        "Locução verbal": "estou lendo",
+        "Objeto direto": "o livro"
+      },
+      "note": "Cobertura adicionada por locucoes-1; expectativa anterior de abstenção preservada neste registro."
+    },
+    {
+      "id": "REL-N19",
+      "text": "Eu o leio.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N20",
+      "text": "Eu não o leio.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N21",
+      "text": "Há livros.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N22",
+      "text": "Havia livros.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N23",
+      "text": "Choveu.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N24",
+      "text": "Precisa-se de livros.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N25",
+      "text": "A gente canta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N26",
+      "text": "Tu canta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N27",
+      "text": "Nós canta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N28",
+      "text": "A qwerty canta.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N29",
+      "text": "Eu qwertyo o livro.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N30",
+      "text": "Eu li o qwerty.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N31",
+      "text": "\"Eu canto.\"",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N32",
+      "text": "“Eu canto.”",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N33",
+      "text": "`Eu canto.`",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N34",
+      "text": "```\nEu canto.\n```",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N35",
+      "text": "Eu “não” canto.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N36",
+      "text": "Eu https://example.com canto.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N37",
+      "text": "Eu, canto.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N38",
+      "text": "Dr. Eu canto.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N39",
+      "text": "Eu canto... ela corre.",
+      "expect": "leitura",
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "canto",
+        "Verbo": "canto"
+      },
+      "constructions": 2,
+      "note": "Anotação revisada: reticências delimitam dois segmentos analisáveis; não exigir silêncio. ID preservado."
+    },
+    {
+      "id": "REL-N40",
+      "text": "a Maria leu o livro.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N41",
+      "text": "eu cantar",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N42",
+      "text": "Eu\ncanto.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N43",
+      "text": "O canto.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N44",
+      "text": "Canto terminou.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N45",
+      "text": "Eu dei a carta a a a Maria.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N46",
+      "text": "Eu gosto do livro.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N47",
+      "text": "Eu amar a vida.",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N48",
+      "text": "<script>Eu canto.</script>",
+      "expect": "abstencao"
+    },
+    {
+      "id": "REL-N49",
+      "text": "Eu 2 canto.",
+      "expect": "abstencao"
+    }
+  ]
+}

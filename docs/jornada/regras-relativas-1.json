@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "PTBR-ORA-001",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Relativa restritiva com que-sujeito em recorte inicial",
+      "variety": "pt-BR",
+      "framework": "Abordagem tradicional de Cunha/Cintra e Lições de Bechara. Hipótese condicionada ao inventário e aos padrões, não análise geral de subordinação.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            358,
+            614,
+            615,
+            616,
+            617,
+            618
+          ],
+          "filePages": [
+            391,
+            646,
+            647,
+            648,
+            649,
+            650
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Rosto 19ª/2014; ficha digital 20ª/2018; divergência preservada",
+          "printedPages": [],
+          "filePages": [
+            236,
+            237,
+            239,
+            244,
+            245,
+            246,
+            253
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Uma relativa delimita o antecedente nominal e contém um relativo com função própria. Neste recorte, que é lido como sujeito, e antecedente e principal precisam ser explícitos.",
+      "requiredContext": [
+        "Artigo + substantivo registrado, imediatamente seguidos por um único que.",
+        "Principal e relativa completas e compatíveis com o inventário, com uma única fronteira no recorte.",
+        "Predicado relativo intransitivo ou de ligação; principal conforme sintaxe simples."
+      ],
+      "positiveCriteria": [
+        "Sem vírgulas ou pontuação interna; dois predicados compatíveis com o sujeito nominal.",
+        "Locuções registradas permitidas, sem contar formas verbais como orações.",
+        "Spans literais e hipóteses de predicação conferidas separadamente."
+      ],
+      "exceptions": [
+        "Função do antecedente não determina a função do relativo.",
+        "Existem relativas sem antecedente, com antecedente afastado, relativo objeto e função em oração interna; não cobertas."
+      ],
+      "abstainWhen": [
+        "Objeto expresso na relativa, que-objeto, antecedente pronominal ou mais de um possível antecedente.",
+        "Explicativa, integrante, outros relativos, modal, passiva, clítico, coordenação, elipse ou encaixamento.",
+        "Desconhecido, fronteira não única, incompatibilidade no recorte ou corte do orçamento."
+      ],
+      "alternativeReadings": [
+        "Restrição do inventário não demonstra que outros usos de um verbo sejam impossíveis.",
+        "Restritiva/explicativa dependem também de sentido; a lente não corrige pontuação nem presume intenção."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/relativas-1.json: ORA-P01–ORA-P30"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/relativas-1.json: ORA-N01–ORA-N54"
+      ],
+      "ambiguousCases": [
+        "A menina que viu o menino canta.",
+        "A filha da mulher que canta trabalha."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "A relativa delimita o antecedente; que o retoma e é sujeito nesta hipótese.",
+        "expanded": "docs/jornada/ESTUDO-RELATIVAS-1.md",
+        "limitations": "Lente parcial, sem detecção geral de subordinadas ou certificação de intenção."
+      },
+      "implementation": {
+        "version": "relativas-1",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "fontes delimitadas, conferência visual, corpus de desenvolvimento, seleção e painel simulado"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTMLs locais; navegador e publicação pendentes",
+        "publishedCommit": null
+      }
+    }
+  ],
+  "evaluationNote": "84 casos de desenvolvimento; corpus Gemini avalia outra base e não valida esta lente."
+}

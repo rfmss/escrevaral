@@ -1,0 +1,421 @@
+{
+  "version": "locucoes-1",
+  "kind": "desenvolvimento e regressão; exemplos próprios; revisão independente pendente",
+  "cases": [
+    {
+      "id": "LOC-P01",
+      "text": "Eu estou lendo o livro.",
+      "group": "estou lendo",
+      "auxiliary": "estou",
+      "main": "lendo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P02",
+      "text": "Tu estás lendo a carta.",
+      "group": "estás lendo",
+      "auxiliary": "estás",
+      "main": "lendo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P03",
+      "text": "Ela está escrevendo a carta.",
+      "group": "está escrevendo",
+      "auxiliary": "está",
+      "main": "escrevendo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P04",
+      "text": "Nós estamos cantando.",
+      "group": "estamos cantando",
+      "auxiliary": "estamos",
+      "main": "cantando",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P05",
+      "text": "Vocês estão trabalhando.",
+      "group": "estão trabalhando",
+      "auxiliary": "estão",
+      "main": "trabalhando",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P06",
+      "text": "A menina estava lendo o poema.",
+      "group": "estava lendo",
+      "auxiliary": "estava",
+      "main": "lendo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P07",
+      "text": "As meninas estavam lendo o poema.",
+      "group": "estavam lendo",
+      "auxiliary": "estavam",
+      "main": "lendo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P08",
+      "text": "Eu não estou lendo a carta hoje.",
+      "group": "estou lendo",
+      "auxiliary": "estou",
+      "main": "lendo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P09",
+      "text": "Nós estávamos saindo.",
+      "group": "estávamos saindo",
+      "auxiliary": "estávamos",
+      "main": "saindo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P10",
+      "text": "Ela estava a ler o livro.",
+      "group": "estava a ler",
+      "auxiliary": "estava",
+      "main": "ler",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P11",
+      "text": "Eu estou a cantar.",
+      "group": "estou a cantar",
+      "auxiliary": "estou",
+      "main": "cantar",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P12",
+      "text": "Nós estamos a escrever a carta.",
+      "group": "estamos a escrever",
+      "auxiliary": "estamos",
+      "main": "escrever",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P13",
+      "text": "Eu tenho lido livros.",
+      "group": "tenho lido",
+      "auxiliary": "tenho",
+      "main": "lido",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P14",
+      "text": "Ela tem escrito cartas.",
+      "group": "tem escrito",
+      "auxiliary": "tem",
+      "main": "escrito",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P15",
+      "text": "Elas têm escrito poemas.",
+      "group": "têm escrito",
+      "auxiliary": "têm",
+      "main": "escrito",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P16",
+      "text": "Eu tinha aberto a porta.",
+      "group": "tinha aberto",
+      "auxiliary": "tinha",
+      "main": "aberto",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P17",
+      "text": "Nós tínhamos comprado o pão.",
+      "group": "tínhamos comprado",
+      "auxiliary": "tínhamos",
+      "main": "comprado",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P18",
+      "text": "A menina havia lido a carta.",
+      "group": "havia lido",
+      "auxiliary": "havia",
+      "main": "lido",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P19",
+      "text": "As meninas haviam lido as cartas.",
+      "group": "haviam lido",
+      "auxiliary": "haviam",
+      "main": "lido",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P20",
+      "text": "Ela havia partido.",
+      "group": "havia partido",
+      "auxiliary": "havia",
+      "main": "partido",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P21",
+      "text": "Eu não tinha visto o livro.",
+      "group": "tinha visto",
+      "auxiliary": "tinha",
+      "main": "visto",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P22",
+      "text": "Nós vamos ler o poema.",
+      "group": "vamos ler",
+      "auxiliary": "vamos",
+      "main": "ler",
+      "kind": "prospectiva"
+    },
+    {
+      "id": "LOC-P23",
+      "text": "Ela vai escrever a carta.",
+      "group": "vai escrever",
+      "auxiliary": "vai",
+      "main": "escrever",
+      "kind": "prospectiva"
+    },
+    {
+      "id": "LOC-P24",
+      "text": "Elas vão trabalhar.",
+      "group": "vão trabalhar",
+      "auxiliary": "vão",
+      "main": "trabalhar",
+      "kind": "prospectiva"
+    },
+    {
+      "id": "LOC-P25",
+      "text": "Eu vou chegar.",
+      "group": "vou chegar",
+      "auxiliary": "vou",
+      "main": "chegar",
+      "kind": "prospectiva"
+    },
+    {
+      "id": "LOC-P26",
+      "text": "Eu vou dar o livro a Maria.",
+      "group": "vou dar",
+      "auxiliary": "vou",
+      "main": "dar",
+      "kind": "prospectiva"
+    },
+    {
+      "id": "LOC-P27",
+      "text": "Ela está dando a carta a Maria.",
+      "group": "está dando",
+      "auxiliary": "está",
+      "main": "dando",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P28",
+      "text": "Nós estamos saindo.",
+      "group": "estamos saindo",
+      "auxiliary": "estamos",
+      "main": "saindo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-P29",
+      "text": "Elas têm saído.",
+      "group": "têm saído",
+      "auxiliary": "têm",
+      "main": "saído",
+      "kind": "tempo composto"
+    },
+    {
+      "id": "LOC-P30",
+      "text": "Eu\testou lendo o livro.",
+      "group": "estou lendo",
+      "auxiliary": "estou",
+      "main": "lendo",
+      "kind": "progressiva"
+    },
+    {
+      "id": "LOC-N01",
+      "text": "Eu está lendo o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N02",
+      "text": "Ela estão lendo o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N03",
+      "text": "Elas tem escrito poemas.",
+      "group": null
+    },
+    {
+      "id": "LOC-N04",
+      "text": "Eu estou qwertyando o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N05",
+      "text": "Eu tenho qwertyado.",
+      "group": null
+    },
+    {
+      "id": "LOC-N06",
+      "text": "Eu vou qwertyar.",
+      "group": null
+    },
+    {
+      "id": "LOC-N07",
+      "text": "Eu quero ler o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N08",
+      "text": "Eu posso ler o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N09",
+      "text": "Ela deve ler o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N10",
+      "text": "Ela viu a menina correr.",
+      "group": null
+    },
+    {
+      "id": "LOC-N11",
+      "text": "Ela mandou a menina ler o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N12",
+      "text": "A carta foi escrita.",
+      "group": null
+    },
+    {
+      "id": "LOC-N13",
+      "text": "A porta está aberta.",
+      "group": null
+    },
+    {
+      "id": "LOC-N14",
+      "text": "Eu tenho a carta escrita.",
+      "group": null
+    },
+    {
+      "id": "LOC-N15",
+      "text": "Eu tenho partido.",
+      "group": null
+    },
+    {
+      "id": "LOC-N16",
+      "text": "Eu tenho sido visto.",
+      "group": null
+    },
+    {
+      "id": "LOC-N17",
+      "text": "Eu estou sendo visto.",
+      "group": null
+    },
+    {
+      "id": "LOC-N18",
+      "text": "Eu vou estar lendo o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N19",
+      "text": "Eu estou ler o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N20",
+      "text": "Eu tenho escrevendo a carta.",
+      "group": null
+    },
+    {
+      "id": "LOC-N21",
+      "text": "Eu estou escrito.",
+      "group": null
+    },
+    {
+      "id": "LOC-N22",
+      "text": "Nós estamos lerem o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N23",
+      "text": "Eu estou não lendo o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N24",
+      "text": "Eu estou, lendo o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N25",
+      "text": "Eu estou\nlendo o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N26",
+      "text": "“Eu estou lendo o livro.”",
+      "group": null
+    },
+    {
+      "id": "LOC-N27",
+      "text": "`Eu estou lendo o livro.`",
+      "group": null
+    },
+    {
+      "id": "LOC-N28",
+      "text": "Eu estou https://exemplo.com lendo o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N29",
+      "text": "Eu estou a carta.",
+      "group": null
+    },
+    {
+      "id": "LOC-N30",
+      "text": "Eu estava para ler o livro.",
+      "group": null
+    },
+    {
+      "id": "LOC-N31",
+      "text": "Ela tinha escritos os poemas.",
+      "group": null
+    },
+    {
+      "id": "LOC-N32",
+      "text": "Ela tinha escritas as cartas.",
+      "group": null
+    },
+    {
+      "id": "LOC-N33",
+      "text": "Eu estou lendo o livro que chegou.",
+      "group": null
+    },
+    {
+      "id": "LOC-N34",
+      "text": "Eu estou lendo e ela canta.",
+      "group": null
+    },
+    {
+      "id": "LOC-N35",
+      "text": "Eu estou lendo a menina feliz.",
+      "group": null
+    }
+  ]
+}

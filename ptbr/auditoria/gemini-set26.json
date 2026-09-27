@@ -1,0 +1,185 @@
+{
+  "artifact": "Gemini SET26",
+  "scope": "Inspeção estática e execução do Worker em Node VM; não certifica navegador, offline ou dispositivos.",
+  "files": [
+    {
+      "name": "index.html",
+      "sha256": "3613d67e402c5c3e8174470dc1b02b330e0db162d833b1729bd78141504076a8"
+    },
+    {
+      "name": "worker-nlp.js",
+      "sha256": "aae35acf81ee2dac2153666bfef3572c31d6f84f30d2b203da0b48e26ecb1ebf"
+    },
+    {
+      "name": "dicionario-compilado.js",
+      "sha256": "ee2b8292c92701cbcd987c696e1ae082e9c087ad9212bf04001cf54b0a49236a"
+    }
+  ],
+  "observations": [
+    {
+      "input": "A menina canta.",
+      "tokens": [
+        {
+          "surface": "A",
+          "pos": "P",
+          "head": -1,
+          "deprel": ""
+        },
+        {
+          "surface": "menina",
+          "pos": "UNK",
+          "head": -1,
+          "deprel": ""
+        },
+        {
+          "surface": "canta",
+          "pos": "UNK",
+          "head": -1,
+          "deprel": ""
+        },
+        {
+          "surface": ".",
+          "pos": "PUNCT",
+          "head": -1,
+          "deprel": ""
+        }
+      ],
+      "syntax": {
+        "subject": "Frase sem verbo (Nominal)",
+        "predicate": "—",
+        "predicateType": "Nominal",
+        "voice": "Voz ativa",
+        "transitivity": "—"
+      },
+      "poeticCount": 5
+    },
+    {
+      "input": "Eu estou lendo o livro.",
+      "tokens": [
+        {
+          "surface": "Eu",
+          "pos": "N",
+          "head": 2,
+          "deprel": "nsubj:pass"
+        },
+        {
+          "surface": "estou",
+          "pos": "V",
+          "head": 2,
+          "deprel": "aux"
+        },
+        {
+          "surface": "lendo",
+          "pos": "V",
+          "head": -1,
+          "deprel": "ROOT"
+        },
+        {
+          "surface": "o",
+          "pos": "D",
+          "head": 4,
+          "deprel": "det"
+        },
+        {
+          "surface": "livro",
+          "pos": "N",
+          "head": 2,
+          "deprel": "obj"
+        },
+        {
+          "surface": ".",
+          "pos": "PUNCT",
+          "head": -1,
+          "deprel": ""
+        }
+      ],
+      "syntax": {
+        "subject": "Eu",
+        "predicate": "lendo o livro",
+        "predicateType": "Verbal",
+        "voice": "Voz Passiva",
+        "transitivity": "Transitivo Direto"
+      },
+      "poeticCount": 7
+    },
+    {
+      "input": "Eu canto.",
+      "tokens": [
+        {
+          "surface": "Eu",
+          "pos": "N",
+          "head": -1,
+          "deprel": ""
+        },
+        {
+          "surface": "canto",
+          "pos": "UNK",
+          "head": -1,
+          "deprel": ""
+        },
+        {
+          "surface": ".",
+          "pos": "PUNCT",
+          "head": -1,
+          "deprel": ""
+        }
+      ],
+      "syntax": {
+        "subject": "Frase sem verbo (Nominal)",
+        "predicate": "—",
+        "predicateType": "Nominal",
+        "voice": "Voz ativa",
+        "transitivity": "—"
+      },
+      "poeticCount": 2
+    },
+    {
+      "input": "qwertyer",
+      "tokens": [
+        {
+          "surface": "qwertyer",
+          "pos": "V",
+          "head": -1,
+          "deprel": "ROOT"
+        }
+      ],
+      "syntax": {
+        "subject": "Os alunos dedicados",
+        "predicate": "qwertyer",
+        "predicateType": "Verbal",
+        "voice": "Voz ativa predominante",
+        "transitivity": "Intransitivo"
+      },
+      "poeticCount": 2
+    },
+    {
+      "input": "",
+      "tokens": [],
+      "syntax": null,
+      "poeticCount": 12
+    }
+  ],
+  "lexicalCollisions": {
+    "a": {
+      "pos": "P",
+      "lemma": "a"
+    },
+    "esta": {
+      "pos": "V",
+      "lemma": "estar"
+    },
+    "nos": {
+      "pos": "P",
+      "lemma": "em"
+    }
+  },
+  "syllables": {
+    "voo": [
+      "voo"
+    ],
+    "água": [
+      "água"
+    ]
+  },
+  "integrationDecision": "Não importar o motor: inferência por sufixo, colisões lexicais, saídas fixas, ausência de spans/revisão e análise automática incompatíveis com o contrato atual. Aproveitar casos de regressão e estudar transporte Worker cancelável em etapa própria."
+}

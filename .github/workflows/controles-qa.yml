@@ -36,6 +36,11 @@ jobs:
           node tests/quadro.cjs
           node tests/linguistica-linhagem.cjs
           node tests/ptbr-lentes.cjs
+          node tests/ptbr-contexto.cjs
+          node tests/ptbr-sintaxe.cjs
+          node tests/ptbr-locucoes.cjs
+          node tests/ptbr-relativas.cjs
+          node tests/ptbr-visual.cjs
           node ptbr/teste-triagem.js
           node ptbr/teste-painel.js
       - name: Lentes PTBR — Chromium

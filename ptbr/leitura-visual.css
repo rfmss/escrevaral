@@ -1,0 +1,74 @@
+/* Roupa do Escrevaral: papel, tipos existentes, etiquetas e linhas de caderno. */
+#oficina[data-ptbr-dashboard="true"] { width:1080px; max-width:100%; padding:28px 32px; }
+body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] { left:50%; right:auto; width:1080px; max-width:calc(100% - 32px); margin-left:0; transform:translateX(-50%); }
+#oficina[data-ptbr-dashboard="true"] .sheet-heading { margin-bottom:16px; padding-bottom:16px; }
+#ptbr-dashboard .ptbr-count { display:flex; gap:24px; align-items:baseline; }
+#ptbr-dashboard .ptbr-stat { flex-direction:row; align-items:baseline; gap:8px; }
+#ptbr-dashboard .ptbr-stat-major strong { font-size:22px; letter-spacing:0; }
+#ptbr-dashboard .ptbr-overline { font:12px/1.6 'Courier Prime','Courier New',monospace; letter-spacing:1.4px; }
+#ptbr-dashboard .ptbr-wheel { gap:5px; margin:12px 0; }
+#ptbr-dashboard .ptbr-wheel button { min-height:40px; border-color:#7d8a79; font-family:'Courier Prime','Courier New',monospace; }
+#ptbr-dashboard .ptbr-wheel button[aria-current="true"] { background:#354c3d; color:#eef1e9; border-color:#354c3d; }
+#ptbr-dashboard .ptbr-wheel button[aria-current="true"] span { color:inherit; }
+#ptbr-dashboard .ptbr-action { display:inline-block; width:auto; margin-right:12px; font-size:12px; font-weight:400; border:0; border-bottom:1px dotted currentColor; }
+#ptbr-dashboard .ptbr-status { font-size:12px; }
+#ptbr-dashboard .ptbr-reading { display:grid; grid-template-columns:minmax(0,1fr) 290px; border:1px solid #a0ac99; margin-top:18px; min-width:0; }
+#ptbr-dashboard .ptbr-reading-paper { padding:24px; min-width:0; background:rgba(255,255,255,.16); }
+#ptbr-dashboard .ptbr-reading-help { max-width:60ch; font-size:13px; line-height:1.65; margin:0 0 24px; }
+#ptbr-dashboard .ptbr-reading-aside { min-width:0; padding:24px 20px; border-left:1px dotted #86927f; background:rgba(53,76,61,.045); overflow-wrap:anywhere; }
+#ptbr-dashboard .ptbr-reading-selection { font:20px/1.5 'Courier Prime','Courier New',monospace; margin:18px 0; }
+#ptbr-dashboard .ptbr-reading-aside .ptbr-observation { border-top:1px dotted #86927f; padding-top:16px; }
+#ptbr-dashboard .ptbr-reading-aside p { font-size:13px; line-height:1.65; }
+#ptbr-dashboard .ptbr-reading-aside blockquote { font:19px/1.6 'Courier Prime','Courier New',monospace; white-space:pre-wrap; }
+#ptbr-dashboard .ptbr-reading-aside button { min-height:44px; border:1px dotted #86927f; border-radius:0; }
+#ptbr-dashboard .ptbr-fragment-number { font:11px/1.5 'Courier Prime','Courier New',monospace; letter-spacing:1.5px; margin:0; opacity:.8; }
+#ptbr-dashboard .ptbr-reading-fragment { border-bottom:1px dotted #a0ac99; padding:14px 0 22px; }
+#ptbr-dashboard .ptbr-word-scroll { max-width:100%; overflow-x:auto; padding:4px 0 10px; scrollbar-width:thin; }
+#ptbr-dashboard .ptbr-word-row { position:relative; display:inline-flex; padding:68px 4px 5px; gap:12px; min-width:100%; align-items:flex-start; }
+#ptbr-dashboard .ptbr-relation-arcs { position:absolute; top:4px; left:0; pointer-events:none; color:#42684e; }
+#ptbr-dashboard .ptbr-word { display:flex; flex-direction:column; align-items:center; gap:10px; flex:0 0 auto; margin:0; padding:8px 6px; border:1px solid transparent; border-radius:0; background:transparent; }
+#ptbr-dashboard .ptbr-word-text { font:22px/1.4 'Courier Prime','Courier New',monospace; white-space:pre-wrap; }
+#ptbr-dashboard .ptbr-word-tag { font:11px/1.4 'Courier Prime','Courier New',monospace; letter-spacing:.3px; padding:3px 6px; border:1px solid currentColor; color:#4e554b; background:rgba(255,255,255,.12); white-space:nowrap; }
+#ptbr-dashboard [data-word-class="artigo"] .ptbr-word-tag { color:#28576c; }
+#ptbr-dashboard [data-word-class="substantivo"] .ptbr-word-tag { color:#285c3d; }
+#ptbr-dashboard [data-word-class="verbo"] .ptbr-word-tag { color:#85472e; }
+#ptbr-dashboard [data-word-class="adjetivo"] .ptbr-word-tag { color:#715119; }
+#ptbr-dashboard [data-word-class="advérbio"] .ptbr-word-tag, #ptbr-dashboard [data-word-class="adverbio"] .ptbr-word-tag { color:#645071; }
+#ptbr-dashboard [data-reading-state="lexical"] .ptbr-word-tag, #ptbr-dashboard [data-reading-state="ambiguo"] .ptbr-word-tag { border-style:dashed; }
+#ptbr-dashboard .ptbr-word[aria-pressed="true"], #ptbr-dashboard .ptbr-excerpt[aria-pressed="true"] { border-color:#42684e; background:rgba(66,104,78,.08); }
+#ptbr-dashboard [data-reading-support="true"] .ptbr-word-text { text-decoration:underline; text-decoration-style:dotted; text-underline-offset:5px; }
+#ptbr-dashboard .ptbr-fragment-original { font:14px/1.7 'Courier Prime','Courier New',monospace; white-space:pre-wrap; overflow-wrap:anywhere; margin:14px 0 0; opacity:.8; }
+#ptbr-dashboard .ptbr-excerpt { display:flex; flex-direction:column; align-items:flex-start; gap:12px; text-align:left; padding:12px; max-width:100%; overflow-wrap:anywhere; }
+#ptbr-dashboard .ptbr-excerpt .ptbr-word-tag { white-space:normal; }
+#ptbr-dashboard .ptbr-reading-empty { font-size:14px; line-height:1.7; padding:28px 0; }
+#ptbr-dashboard .ptbr-legend { font:12px/1.7 'Courier Prime','Courier New',monospace; margin-top:18px; }
+#ptbr-dashboard .ptbr-empty { padding:30px; border:1px dotted #86927f; margin:16px 0; }
+#ptbr-dashboard .ptbr-syntax-row { display:inline-flex; position:relative; gap:18px; padding:70px 4px 6px; min-width:100%; align-items:flex-start; }
+#ptbr-dashboard .ptbr-syntax-predicate { border-left:1px dotted #86927f; padding-left:16px; }
+#ptbr-dashboard .ptbr-syntax-parts { display:flex; align-items:flex-start; gap:10px; }
+#ptbr-dashboard .ptbr-syntax-term, #ptbr-dashboard .ptbr-syntax-whole { display:flex; flex-direction:column; align-items:flex-start; gap:8px; min-height:44px; margin:0 0 12px; padding:8px; border:1px dotted #86927f; background:transparent; color:inherit; text-align:left; }
+#ptbr-dashboard .ptbr-syntax-whole { max-width:36ch; }
+#ptbr-dashboard .ptbr-syntax-whole .ptbr-word-text { font-size:15px; overflow-wrap:anywhere; }
+#ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"], #ptbr-dashboard .ptbr-syntax-whole[aria-pressed="true"] { outline:2px solid currentColor; outline-offset:2px; background:rgba(66,104,78,.08); }
+#ptbr-dashboard .ptbr-syntax-head { font:12px/1.6 'Courier Prime','Courier New',monospace; }
+#ptbr-dashboard .ptbr-syntax-links { border-bottom:1px dotted #86927f; padding-bottom:14px; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-reading { border-color:#65735e; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-reading-paper { background:rgba(255,255,255,.025); }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-word-tag { color:#c5cabb; background:transparent; }
+body[data-theme="escuro"] #ptbr-dashboard [data-word-class="artigo"] .ptbr-word-tag { color:#a4c9dc; }
+body[data-theme="escuro"] #ptbr-dashboard [data-word-class="substantivo"] .ptbr-word-tag { color:#b2d4b4; }
+body[data-theme="escuro"] #ptbr-dashboard [data-word-class="verbo"] .ptbr-word-tag { color:#e2b69d; }
+body[data-theme="escuro"] #ptbr-dashboard [data-word-class="adjetivo"] .ptbr-word-tag { color:#dbc896; }
+body[data-theme="escuro"] #ptbr-dashboard [data-word-class="adverbio"] .ptbr-word-tag { color:#cbb8db; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-relation-arcs { color:#b2d4b4; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"], body[data-theme="escuro"] #ptbr-dashboard .ptbr-excerpt[aria-pressed="true"] { border-color:#b2d4b4; }
+@media(max-width:760px) {
+ #oficina[data-ptbr-dashboard="true"] { padding:20px 16px; }
+ #ptbr-dashboard .ptbr-reading { grid-template-columns:minmax(0,1fr); }
+ #ptbr-dashboard .ptbr-reading-paper, #ptbr-dashboard .ptbr-reading-aside { padding:18px 14px; }
+ #ptbr-dashboard .ptbr-reading-aside { border-left:0; border-top:1px dotted #86927f; }
+ #ptbr-dashboard .ptbr-count { flex-wrap:wrap; gap:0 18px; }
+ #ptbr-dashboard .ptbr-wheel button { min-height:44px; }
+ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] { left:0; right:0; top:0; bottom:0; width:100%; max-width:100%; transform:none; }
+}
+@media(forced-colors:active) { #ptbr-dashboard .ptbr-word[aria-pressed="true"] { outline:2px solid Highlight; } }

@@ -1,0 +1,661 @@
+{
+  "version": 1,
+  "purpose": "desenvolvimento/regressão; não é o corpus reservado do Gemini",
+  "review": "assistente implementador; não independente",
+  "cases": [
+    {
+      "id": "ORA-P01",
+      "text": "O menino que canta trabalha.",
+      "expect": "leitura",
+      "relative": "que canta",
+      "antecedent": "O menino",
+      "relativeVerb": "canta",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P02",
+      "text": "A menina que trabalha canta.",
+      "expect": "leitura",
+      "relative": "que trabalha",
+      "antecedent": "A menina",
+      "relativeVerb": "trabalha",
+      "matrixVerb": "canta",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P03",
+      "text": "Os meninos que cantam trabalham.",
+      "expect": "leitura",
+      "relative": "que cantam",
+      "antecedent": "Os meninos",
+      "relativeVerb": "cantam",
+      "matrixVerb": "trabalham",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P04",
+      "text": "As meninas que trabalham cantam.",
+      "expect": "leitura",
+      "relative": "que trabalham",
+      "antecedent": "As meninas",
+      "relativeVerb": "trabalham",
+      "matrixVerb": "cantam",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P05",
+      "text": "Um escritor que corre lê o livro.",
+      "expect": "leitura",
+      "relative": "que corre",
+      "antecedent": "Um escritor",
+      "relativeVerb": "corre",
+      "matrixVerb": "lê",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P06",
+      "text": "Uma escritora que canta escreve a carta.",
+      "expect": "leitura",
+      "relative": "que canta",
+      "antecedent": "Uma escritora",
+      "relativeVerb": "canta",
+      "matrixVerb": "escreve",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P07",
+      "text": "O homem que saiu chegou.",
+      "expect": "leitura",
+      "relative": "que saiu",
+      "antecedent": "O homem",
+      "relativeVerb": "saiu",
+      "matrixVerb": "chegou",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P08",
+      "text": "A mulher que chegou leu o livro.",
+      "expect": "leitura",
+      "relative": "que chegou",
+      "antecedent": "A mulher",
+      "relativeVerb": "chegou",
+      "matrixVerb": "leu",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P09",
+      "text": "Os homens que saíram chegaram.",
+      "expect": "leitura",
+      "relative": "que saíram",
+      "antecedent": "Os homens",
+      "relativeVerb": "saíram",
+      "matrixVerb": "chegaram",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P10",
+      "text": "As mulheres que chegaram leram o livro.",
+      "expect": "leitura",
+      "relative": "que chegaram",
+      "antecedent": "As mulheres",
+      "relativeVerb": "chegaram",
+      "matrixVerb": "leram",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P11",
+      "text": "O menino que não canta trabalha.",
+      "expect": "leitura",
+      "relative": "que não canta",
+      "antecedent": "O menino",
+      "relativeVerb": "canta",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P12",
+      "text": "A menina que canta não trabalha.",
+      "expect": "leitura",
+      "relative": "que canta",
+      "antecedent": "A menina",
+      "relativeVerb": "canta",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P13",
+      "text": "O menino que corre hoje trabalha.",
+      "expect": "leitura",
+      "relative": "que corre hoje",
+      "antecedent": "O menino",
+      "relativeVerb": "corre",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P14",
+      "text": "A menina que canta trabalha hoje.",
+      "expect": "leitura",
+      "relative": "que canta",
+      "antecedent": "A menina",
+      "relativeVerb": "canta",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P15",
+      "text": "A menina que é feliz canta.",
+      "expect": "leitura",
+      "relative": "que é feliz",
+      "antecedent": "A menina",
+      "relativeVerb": "é",
+      "matrixVerb": "canta",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P16",
+      "text": "O menino que está triste trabalha.",
+      "expect": "leitura",
+      "relative": "que está triste",
+      "antecedent": "O menino",
+      "relativeVerb": "está",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P17",
+      "text": "As meninas que são felizes cantam.",
+      "expect": "leitura",
+      "relative": "que são felizes",
+      "antecedent": "As meninas",
+      "relativeVerb": "são",
+      "matrixVerb": "cantam",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P18",
+      "text": "Os meninos que estão tristes trabalham.",
+      "expect": "leitura",
+      "relative": "que estão tristes",
+      "antecedent": "Os meninos",
+      "relativeVerb": "estão",
+      "matrixVerb": "trabalham",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P19",
+      "text": "A menina que está cantando trabalha.",
+      "expect": "leitura",
+      "relative": "que está cantando",
+      "antecedent": "A menina",
+      "relativeVerb": "está cantando",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P20",
+      "text": "As meninas que estão cantando trabalham.",
+      "expect": "leitura",
+      "relative": "que estão cantando",
+      "antecedent": "As meninas",
+      "relativeVerb": "estão cantando",
+      "matrixVerb": "trabalham",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P21",
+      "text": "O menino que tem trabalhado canta.",
+      "expect": "leitura",
+      "relative": "que tem trabalhado",
+      "antecedent": "O menino",
+      "relativeVerb": "tem trabalhado",
+      "matrixVerb": "canta",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P22",
+      "text": "Os meninos que têm trabalhado cantam.",
+      "expect": "leitura",
+      "relative": "que têm trabalhado",
+      "antecedent": "Os meninos",
+      "relativeVerb": "têm trabalhado",
+      "matrixVerb": "cantam",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P23",
+      "text": "A mulher que vai sair está lendo o livro.",
+      "expect": "leitura",
+      "relative": "que vai sair",
+      "antecedent": "A mulher",
+      "relativeVerb": "vai sair",
+      "matrixVerb": "está lendo",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P24",
+      "text": "O homem que está a trabalhar vai ler o livro.",
+      "expect": "leitura",
+      "relative": "que está a trabalhar",
+      "antecedent": "O homem",
+      "relativeVerb": "está a trabalhar",
+      "matrixVerb": "vai ler",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P25",
+      "text": "As mulheres que haviam saído chegaram.",
+      "expect": "leitura",
+      "relative": "que haviam saído",
+      "antecedent": "As mulheres",
+      "relativeVerb": "haviam saído",
+      "matrixVerb": "chegaram",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P26",
+      "text": "A menina\tque canta\ttrabalha.",
+      "expect": "leitura",
+      "relative": "que canta",
+      "antecedent": "A menina",
+      "relativeVerb": "canta",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P27",
+      "text": "A menina que canta trabalha.",
+      "expect": "leitura",
+      "relative": "que canta",
+      "antecedent": "A menina",
+      "relativeVerb": "canta",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P28",
+      "text": "A menina que canta trabalha",
+      "expect": "leitura",
+      "relative": "que canta",
+      "antecedent": "A menina",
+      "relativeVerb": "canta",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P29",
+      "text": "a menina que canta trabalha!",
+      "expect": "leitura",
+      "relative": "que canta",
+      "antecedent": "a menina",
+      "relativeVerb": "canta",
+      "matrixVerb": "trabalha",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-P30",
+      "text": "As meninas que têm saído trabalham.",
+      "expect": "leitura",
+      "relative": "que têm saído",
+      "antecedent": "As meninas",
+      "relativeVerb": "têm saído",
+      "matrixVerb": "trabalham",
+      "function": "sujeito",
+      "type": "restritiva"
+    },
+    {
+      "id": "ORA-N01",
+      "text": "Eu sei que a menina canta.",
+      "expect": "abstencao",
+      "reason": "integrante; não é relativa"
+    },
+    {
+      "id": "ORA-N02",
+      "text": "A notícia de que a menina saiu chegou.",
+      "expect": "abstencao",
+      "reason": "completiva nominal; não é relativa"
+    },
+    {
+      "id": "ORA-N03",
+      "text": "A menina quer que o menino cante.",
+      "expect": "abstencao",
+      "reason": "integrante; predicação não coberta"
+    },
+    {
+      "id": "ORA-N04",
+      "text": "Que menina canta?",
+      "expect": "abstencao",
+      "reason": "interrogativo"
+    },
+    {
+      "id": "ORA-N05",
+      "text": "Que lindo!",
+      "expect": "abstencao",
+      "reason": "exclamativo"
+    },
+    {
+      "id": "ORA-N06",
+      "text": "A menina é que canta.",
+      "expect": "abstencao",
+      "reason": "realce; não é relativa do recorte"
+    },
+    {
+      "id": "ORA-N07",
+      "text": "A menina canta mais que o menino.",
+      "expect": "abstencao",
+      "reason": "comparação"
+    },
+    {
+      "id": "ORA-N08",
+      "text": "A menina canta tanto que o menino saiu.",
+      "expect": "abstencao",
+      "reason": "consecutiva"
+    },
+    {
+      "id": "ORA-N09",
+      "text": "Canta, que a menina chegou.",
+      "expect": "abstencao",
+      "reason": "que explicativo/causal, não relativo"
+    },
+    {
+      "id": "ORA-N10",
+      "text": "A menina, que canta, trabalha.",
+      "expect": "abstencao",
+      "reason": "explicativa: relativa válida fora do recorte"
+    },
+    {
+      "id": "ORA-N11",
+      "text": "A menina que canta, trabalha.",
+      "expect": "abstencao",
+      "reason": "vírgula fora do padrão; não corrigir"
+    },
+    {
+      "id": "ORA-N12",
+      "text": "A menina, que canta trabalha.",
+      "expect": "abstencao",
+      "reason": "fronteira não determinada"
+    },
+    {
+      "id": "ORA-N13",
+      "text": "A menina que o menino viu canta.",
+      "expect": "abstencao",
+      "reason": "que-objeto; relativa válida fora do recorte"
+    },
+    {
+      "id": "ORA-N14",
+      "text": "O livro que a menina leu terminou.",
+      "expect": "abstencao",
+      "reason": "que-objeto"
+    },
+    {
+      "id": "ORA-N15",
+      "text": "A menina que leu a carta chegou.",
+      "expect": "abstencao",
+      "reason": "objeto expresso na relativa: recorte adiado"
+    },
+    {
+      "id": "ORA-N16",
+      "text": "A menina que viu o menino canta.",
+      "expect": "abstencao",
+      "reason": "que-sujeito ou que-objeto com sujeito posposto; não escolher pela ordem"
+    },
+    {
+      "id": "ORA-N17",
+      "text": "A menina que vê a mulher canta.",
+      "expect": "abstencao",
+      "reason": "ambiguidade de função; sujeito posposto possível"
+    },
+    {
+      "id": "ORA-N18",
+      "text": "O menino de que a menina gosta canta.",
+      "expect": "abstencao",
+      "reason": "relativo preposicionado"
+    },
+    {
+      "id": "ORA-N19",
+      "text": "O menino com quem a menina trabalha canta.",
+      "expect": "abstencao",
+      "reason": "relativo diferente de que"
+    },
+    {
+      "id": "ORA-N20",
+      "text": "A casa onde a menina mora é bonita.",
+      "expect": "abstencao",
+      "reason": "relativo onde fora do recorte"
+    },
+    {
+      "id": "ORA-N21",
+      "text": "O menino cujo livro chegou canta.",
+      "expect": "abstencao",
+      "reason": "relativo cujo fora do recorte"
+    },
+    {
+      "id": "ORA-N22",
+      "text": "Quem canta trabalha.",
+      "expect": "abstencao",
+      "reason": "sem antecedente nominal explícito; taxonomia discutida"
+    },
+    {
+      "id": "ORA-N23",
+      "text": "O que canta trabalha.",
+      "expect": "abstencao",
+      "reason": "antecedente pronominal"
+    },
+    {
+      "id": "ORA-N24",
+      "text": "Ela que canta trabalha.",
+      "expect": "abstencao",
+      "reason": "antecedente pronominal"
+    },
+    {
+      "id": "ORA-N25",
+      "text": "Ana que canta trabalha.",
+      "expect": "abstencao",
+      "reason": "nome próprio sem determinante fora do recorte"
+    },
+    {
+      "id": "ORA-N26",
+      "text": "A menina feliz que canta trabalha.",
+      "expect": "abstencao",
+      "reason": "antecedente com adjetivo fora do recorte"
+    },
+    {
+      "id": "ORA-N27",
+      "text": "A filha da mulher que canta trabalha.",
+      "expect": "abstencao",
+      "reason": "mais de um candidato a antecedente"
+    },
+    {
+      "id": "ORA-N28",
+      "text": "A menina que a mulher disse que canta trabalha.",
+      "expect": "abstencao",
+      "reason": "encaixamento; função em oração interna"
+    },
+    {
+      "id": "ORA-N29",
+      "text": "A menina que canta e trabalha chegou.",
+      "expect": "abstencao",
+      "reason": "coordenação"
+    },
+    {
+      "id": "ORA-N30",
+      "text": "A menina que canta trabalha e corre.",
+      "expect": "abstencao",
+      "reason": "coordenação da principal"
+    },
+    {
+      "id": "ORA-N31",
+      "text": "A menina que canta que trabalha chegou.",
+      "expect": "abstencao",
+      "reason": "mais de um que"
+    },
+    {
+      "id": "ORA-N32",
+      "text": "A menina que foi vista canta.",
+      "expect": "abstencao",
+      "reason": "passiva"
+    },
+    {
+      "id": "ORA-N33",
+      "text": "A menina que pode cantar trabalha.",
+      "expect": "abstencao",
+      "reason": "modal"
+    },
+    {
+      "id": "ORA-N34",
+      "text": "A menina que está sendo vista canta.",
+      "expect": "abstencao",
+      "reason": "cadeia de auxiliares"
+    },
+    {
+      "id": "ORA-N35",
+      "text": "A menina que se senta canta.",
+      "expect": "abstencao",
+      "reason": "clítico"
+    },
+    {
+      "id": "ORA-N36",
+      "text": "A menina que canta.",
+      "expect": "abstencao",
+      "reason": "grupo nominal sem predicado principal"
+    },
+    {
+      "id": "ORA-N37",
+      "text": "A menina que canta trabalhar.",
+      "expect": "abstencao",
+      "reason": "principal sem forma finita do recorte"
+    },
+    {
+      "id": "ORA-N38",
+      "text": "A menina que cantam trabalha.",
+      "expect": "abstencao",
+      "reason": "incompatibilidade no recorte; silêncio não é diagnóstico"
+    },
+    {
+      "id": "ORA-N39",
+      "text": "As meninas que canta trabalham.",
+      "expect": "abstencao",
+      "reason": "incompatibilidade no recorte"
+    },
+    {
+      "id": "ORA-N40",
+      "text": "A menina que canta trabalham.",
+      "expect": "abstencao",
+      "reason": "incompatibilidade na principal"
+    },
+    {
+      "id": "ORA-N41",
+      "text": "A qwertya que canta trabalha.",
+      "expect": "abstencao",
+      "reason": "nome desconhecido"
+    },
+    {
+      "id": "ORA-N42",
+      "text": "A menina que qwertyer trabalha.",
+      "expect": "abstencao",
+      "reason": "forma desconhecida"
+    },
+    {
+      "id": "ORA-N43",
+      "text": "A menina que canta qwertyer.",
+      "expect": "abstencao",
+      "reason": "principal desconhecida"
+    },
+    {
+      "id": "ORA-N44",
+      "text": "A menina que canta tem partido.",
+      "expect": "abstencao",
+      "reason": "principal ambígua"
+    },
+    {
+      "id": "ORA-N45",
+      "text": "A menina que tem partido canta.",
+      "expect": "abstencao",
+      "reason": "relativa ambígua"
+    },
+    {
+      "id": "ORA-N46",
+      "text": "A porta que está aberta terminou.",
+      "expect": "abstencao",
+      "reason": "particípio/adjetivo não decidido"
+    },
+    {
+      "id": "ORA-N47",
+      "text": "A menina que canta\ntrabalha.",
+      "expect": "abstencao",
+      "reason": "fronteira de linha fora do recorte"
+    },
+    {
+      "id": "ORA-N48",
+      "text": "A menina que canta: trabalha.",
+      "expect": "abstencao",
+      "reason": "pontuação interna não suportada"
+    },
+    {
+      "id": "ORA-N49",
+      "text": "“A menina que canta trabalha.”",
+      "expect": "abstencao",
+      "reason": "citação protegida"
+    },
+    {
+      "id": "ORA-N50",
+      "text": "`A menina que canta trabalha.`",
+      "expect": "abstencao",
+      "reason": "código protegido"
+    },
+    {
+      "id": "ORA-N51",
+      "text": "https://exemplo.org/A/menina/que/canta/trabalha",
+      "expect": "abstencao",
+      "reason": "URL protegida"
+    },
+    {
+      "id": "ORA-N52",
+      "text": "",
+      "expect": "abstencao",
+      "reason": "texto vazio"
+    },
+    {
+      "id": "ORA-N53",
+      "text": "...?!",
+      "expect": "abstencao",
+      "reason": "sem construção"
+    },
+    {
+      "id": "ORA-N54",
+      "text": "que",
+      "expect": "abstencao",
+      "reason": "sem antecedente e predicação"
+    }
+  ]
+}

@@ -1,0 +1,503 @@
+{
+  "received": "26/09/2026",
+  "note": "17 obras catalogadas. Guia principal B09. Leitura parcial e intervalos efetivamente consultados registrados por obra; nenhuma leitura integral declarada.",
+  "books": [
+    {
+      "id": "B01",
+      "title": "A descoberta do mundo",
+      "author": "Clarice Lispector",
+      "edition": "Edição do arquivo não identificada; datas das crônicas não são data da edição.",
+      "kind": "Literatura e processo de escrita",
+      "role": "Repetição, ritmo e escolhas expressivas como recursos possíveis.",
+      "quality": "Texto legível na amostra; sem paginação impressa verificável. Há material de distribuição ao final, a separar da obra.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "ebb1dadb9968d242f8d7376f287f058391fe6a9590a54c355c635d08eeb2037d",
+      "bytes": 1024289,
+      "lineCount": 14555,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 15,
+          "end": 31
+        },
+        {
+          "start": 67,
+          "end": 119
+        },
+        {
+          "start": 6667,
+          "end": 6687
+        }
+      ],
+      "next": "Ler a unidade completa em torno da reflexão sobre repetição e criar contraexemplos próprios."
+    },
+    {
+      "id": "B02",
+      "title": "Preconceito linguístico: o que é, como se faz",
+      "author": "Marcos Bagno",
+      "edition": "Folha editorial: 48ª e 49ª edições, junho de 2007; obra ©1999.",
+      "kind": "Variação e ensino",
+      "role": "Distinguir língua, norma, contexto social e convenção; evitar estigmatização.",
+      "quality": "Amostra legível, com quebras de linha e pequenas falhas de OCR; há marcadores [pg.].",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "ee284fc2037cf37335aa1c41116b52eb88463aacd5d1898e04cc1943b4a5010c",
+      "bytes": 291626,
+      "lineCount": 5133,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 86,
+          "end": 99
+        },
+        {
+          "start": 109,
+          "end": 143
+        },
+        {
+          "start": 180,
+          "end": 222
+        }
+      ],
+      "next": "Estudar a distinção entre uso, norma e registro; confrontar com a aplicação editorial dos manuais."
+    },
+    {
+      "id": "B03",
+      "title": "Novo manual da redação",
+      "author": "Folha de S.Paulo",
+      "edition": "CIP 1992; folha editorial indica edição de novembro de 1998, numeração a conferir no original.",
+      "kind": "Manual editorial histórico",
+      "role": "Comparar decisões de estilo e sua evolução; separar convenções do jornal de regras gerais.",
+      "quality": "OCR muito ruidoso e colunas misturadas. O arquivo termina no meio de um item do índice: completude não confirmada.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "0b23751bb4a8cfef032eecc48a9b43aa95fcb9a2deefbc75e952080ad35f03a5",
+      "bytes": 1220608,
+      "lineCount": 16120,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 21,
+          "end": 59
+        },
+        {
+          "start": 197,
+          "end": 218
+        },
+        {
+          "start": 326,
+          "end": 355
+        }
+      ],
+      "next": "Conferir versão visual/edição e sequência de páginas antes de derivar regras deste OCR."
+    },
+    {
+      "id": "B04",
+      "title": "Manual de redação e estilo de O Estado de S. Paulo",
+      "author": "Eduardo Martins",
+      "edition": "3ª edição revista e ampliada, 1997.",
+      "kind": "Manual editorial e consulta gramatical",
+      "role": "Concordância, regência, crase, pontuação e convenções de redação em contexto jornalístico.",
+      "quality": "Amostra legível; páginas em colunas podem intercalar verbetes e quebrar palavras.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "c50feed4810d4a5dbadd7a5a688e2cf43069dbe97c1816d49325f546434b5054",
+      "bytes": 1589494,
+      "lineCount": 21799,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 1,
+          "end": 64
+        },
+        {
+          "start": 204,
+          "end": 263
+        }
+      ],
+      "next": "Estudar verbetes delimitados, registrando escopo editorial, exceções e diferenças em relação a outras fontes."
+    },
+    {
+      "id": "B05",
+      "title": "Manual da redação: Folha de S.Paulo",
+      "author": "Folha de S.Paulo",
+      "edition": "12ª edição revista e atualizada, Publifolha, 2007; folha de direitos ©2001.",
+      "kind": "Manual editorial e anexo gramatical",
+      "role": "Comparar orientações de estilo e consultar o anexo gramatical sem universalizar a política do veículo.",
+      "quality": "Extração com cabeçalhos de páginas e colunas; conferir ordem de leitura e tabelas.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "4af801d5684801277587cf902045e56d39575597dc288d6866c99e24ff552631",
+      "bytes": 2000489,
+      "lineCount": 24394,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 28,
+          "end": 83
+        },
+        {
+          "start": 96,
+          "end": 164
+        }
+      ],
+      "next": "Mapear o anexo gramatical e comparar sua organização à edição anterior; não confundir os dois arquivos."
+    },
+    {
+      "id": "B06",
+      "title": "Linguagem jornalística",
+      "author": "Nilson Lage — identificação pelo arquivo recebido",
+      "edition": "Edição e ano não confirmados no trecho bibliográfico disponível; arquivo começa no capítulo 1.",
+      "kind": "Linguagem, registro e jornalismo",
+      "role": "Relação entre registro, comunicação, estruturas sintáticas e contexto de produção.",
+      "quality": "Amostra legível, com palavras partidas entre linhas e termos que exigem conferência; paginação extraída presente.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "bd6ff3577340e206263ec95a431adf3b49f763661c29787445985332ee7f58ae",
+      "bytes": 142895,
+      "lineCount": 1981,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 1,
+          "end": 79
+        },
+        {
+          "start": 915,
+          "end": 960
+        },
+        {
+          "start": 1428,
+          "end": 1464
+        }
+      ],
+      "next": "Estudar integralmente a seção de registro e a de pontuação, revendo terminologia e exemplos sintáticos."
+    },
+    {
+      "id": "B07",
+      "title": "Por que escrevo",
+      "author": "George Orwell; tradução de Alexandre Pires Vieira",
+      "edition": "Montecristo, versão digital de 24/02/2021; ISBN 978-1-61965-243-9.",
+      "kind": "Ensaios sobre escrita e linguagem",
+      "role": "Examinar clareza, intenção declarada e escolhas expressivas; não transportar prescrições do inglês como gramática do português.",
+      "quality": "Amostra legível com pelo menos um lapso textual; reúne tradução, originais em inglês e material adicional, que precisam ser segmentados.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "e98fe6d6912c24dbab2c0003937ebca110e43cb864e75a1ac64427810d6778f7",
+      "bytes": 244613,
+      "lineCount": 2063,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 13,
+          "end": 123
+        },
+        {
+          "start": 242,
+          "end": 278
+        },
+        {
+          "start": 685,
+          "end": 731
+        }
+      ],
+      "next": "Ler cada ensaio como unidade, separando idioma, tradução e escopo; estudar também as ressalvas das recomendações."
+    },
+    {
+      "id": "B08",
+      "title": "Crítica genética: fundamentos dos estudos genéticos sobre o processo de criação artística",
+      "author": "Cecilia Almeida Salles",
+      "edition": "3ª edição revista, EDUC, 2008; ISBN 978-85-283-0372-8.",
+      "kind": "Processo criativo e versões",
+      "role": "Tratar rascunhos e escolhas como trajetórias; não deduzir intenção completa a partir de um texto final.",
+      "quality": "Amostra legível com marcadores [pag.]; notas, citações e texto principal precisam permanecer separados.",
+      "status": "Catalogado · leitura inicial parcial",
+      "completeReading": false,
+      "sha256": "9f250914c6eee7d86dc51dec69fad93095608e72a926f450b6d0221aacae892d",
+      "bytes": 167934,
+      "lineCount": 2468,
+      "lineConvention": "Linhas do TXT contado por LF; form feed preservado. Referência só vale para este hash.",
+      "inspectedRanges": [
+        {
+          "start": 1,
+          "end": 53
+        },
+        {
+          "start": 80,
+          "end": 139
+        },
+        {
+          "start": 403,
+          "end": 442
+        }
+      ],
+      "next": "Estudar demarcação do campo e limites de inferência antes de propor leituras de versões autorais."
+    },
+    {
+      "id": "B09",
+      "title": "Nova gramática do português contemporâneo",
+      "author": "Celso Cunha e Lindley Cintra",
+      "edition": "7ª edição, 2ª impressão; Lexikon, 2017; edição original deste número em 2016.",
+      "kind": "Gramática de referência",
+      "role": "Guia principal da jornada; referências secundárias por demanda.",
+      "quality": "Texto extraído com ruídos; conferir imagens para tabelas, diacríticos e diagramas. Paginação impressa e digital registradas separadamente.",
+      "status": "Leitura parcial: relações, locuções e primeira unidade de relativas estudadas; revisão independente pendente",
+      "completeReading": false,
+      "sha256": "20bb75c7549fb372a06d9e9c1fb1a5d3c7f43c576091f6434f63422a3eaa7302",
+      "bytes": 47789122,
+      "pages": 795,
+      "inspectedPDFPages": [
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        124,
+        125,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        187,
+        188,
+        224,
+        252,
+        322,
+        347,
+        390,
+        391,
+        393,
+        394,
+        426,
+        427,
+        428,
+        441,
+        442,
+        443,
+        444,
+        646,
+        647,
+        648,
+        649,
+        650,
+        651,
+        652,
+        657,
+        658
+      ],
+      "evidence": "ptbr/CONTEXTO-1.md",
+      "studyUnits": [
+        "docs/jornada/ESTUDO-SINTAXE-1.md",
+        "docs/jornada/ESTUDO-LOCUCOES-1.md",
+        "docs/jornada/ESTUDO-RELATIVAS-1.md"
+      ]
+    },
+    {
+      "id": "B10",
+      "title": "Não erre mais!",
+      "author": "Luiz Antonio Sacconi",
+      "edition": "Capa: 32ª edição; ficha: Matrix, 1ª edição, 2018. Divergência interna a conferir.",
+      "kind": "Norma e dúvidas de uso",
+      "role": "Apoio por demanda; Cunha e Cintra permanece guia principal.",
+      "status": "Recebido e catalogado; inspeção inicial das prévias fornecidas, estudo por capítulo pendente",
+      "completeReading": false,
+      "libraryFileId": "libfile_1fc0bded7eb48191ab59ff824f671c72",
+      "sha256": "7bac2d1e60bde99bf4c28f815508e361aeb7e4dabe4d8822e3b754ea1f3bce62",
+      "bytes": 2756316,
+      "pages": 472,
+      "initialInspection": "Capa, créditos, apresentação, sumário e início dos casos gerais nas prévias do anexo.",
+      "evidence": "docs/jornada/BASE-26SET.md"
+    },
+    {
+      "id": "B11",
+      "title": "1001 dicas de português: manual descomplicado",
+      "author": "Dad Squarisi e Paulo José Cunha",
+      "edition": "Contexto, 2015.",
+      "kind": "Consulta rápida e dúvidas de uso",
+      "role": "Apoio por demanda; Cunha e Cintra permanece guia principal.",
+      "status": "Recebido e catalogado; inspeção inicial das prévias fornecidas, estudo por capítulo pendente",
+      "completeReading": false,
+      "libraryFileId": "libfile_a75fe8e473a48191bbd4b457665b022f",
+      "sha256": "23c93fd9b049f05ec31f6d1da5d2dd75d11ce20eccf28fa4ae48a39e6464bf1a",
+      "bytes": 2212109,
+      "pages": null,
+      "initialInspection": "Créditos, sumário, introdução e verbetes iniciais nas prévias do EPUB.",
+      "evidence": "docs/jornada/BASE-26SET.md"
+    },
+    {
+      "id": "B12",
+      "title": "Guia prático do português correto: pontuação",
+      "author": "Cláudio Moreno",
+      "edition": "Apresentação datada de 2010; ficha editorial ainda não conferida.",
+      "kind": "Pontuação e relações sintáticas",
+      "role": "Apoio por demanda; Cunha e Cintra permanece guia principal.",
+      "status": "Recebido e catalogado; inspeção inicial das prévias fornecidas, estudo por capítulo pendente",
+      "completeReading": false,
+      "libraryFileId": "libfile_a28319327a1081918fce760f63278b02",
+      "sha256": "6c58794af550fcb293760a879ecd402d3934bba248935c4587e8603fdd8070a9",
+      "bytes": 335324,
+      "pages": null,
+      "initialInspection": "Apresentação, Falar e escrever e início de Princípios gerais nas prévias do EPUB.",
+      "evidence": "docs/jornada/BASE-26SET.md"
+    },
+    {
+      "id": "B13",
+      "title": "A arte da pontuação",
+      "author": "Noah Lukeman; tradução Marcelo Dias Almada",
+      "edition": "Martins Fontes, 2011; original inglês, 2005.",
+      "kind": "Estilo, ritmo e pontuação",
+      "role": "Apoio por demanda; Cunha e Cintra permanece guia principal.",
+      "status": "Recebido e catalogado; inspeção inicial das prévias fornecidas, estudo por capítulo pendente",
+      "completeReading": false,
+      "libraryFileId": "libfile_36f35eb991d08191aaccf67a7ce74123",
+      "sha256": "d1ddb4f0bc6012af5019b3a31fe4a4101d7154aa2d9c652d6b7628f35d97b775",
+      "bytes": 18688466,
+      "pages": 150,
+      "initialInspection": "Imagens fornecidas: capa, créditos, sumário e introdução. Arquivo digitalizado sem texto extraído.",
+      "evidence": "docs/jornada/BASE-26SET.md"
+    },
+    {
+      "id": "B14",
+      "title": "Dicionário de sinônimos",
+      "author": "Antenor Nascentes",
+      "edition": "Rosto: 4ª edição revista e atualizada, 2ª impressão; ficha: Lexikon, 2018; créditos também mencionam 5ª edição de 2019. Conferir.",
+      "kind": "Nuances lexicais e sinonímia",
+      "role": "Apoio por demanda; Cunha e Cintra permanece guia principal.",
+      "status": "Recebido e catalogado; inspeção inicial das prévias fornecidas, estudo por capítulo pendente",
+      "completeReading": false,
+      "libraryFileId": "libfile_0e05cbbb685c8191b7068384b98121e2",
+      "sha256": "1e975ddf5904d2bfce52a44562fd6004ca55dee5ecf1b7b4a037ff9322261012",
+      "bytes": 12339317,
+      "pages": 780,
+      "initialInspection": "Capa, créditos, introduções e verbetes iniciais nas prévias do anexo.",
+      "evidence": "docs/jornada/BASE-26SET.md"
+    },
+    {
+      "id": "B15",
+      "title": "Novo dicionário de dúvidas da língua portuguesa",
+      "author": "Evanildo Bechara; colaboração Shahira Mahmud",
+      "edition": "Nova Fronteira, 2ª edição, 2018; copyright 2016.",
+      "kind": "Consulta normativa e variantes",
+      "role": "Apoio por demanda; Cunha e Cintra permanece guia principal.",
+      "status": "Recebido e catalogado; inspeção inicial das prévias fornecidas, estudo por capítulo pendente",
+      "completeReading": false,
+      "libraryFileId": "libfile_992e0c6cd1808191a573fc5ed39d4c80",
+      "sha256": "354a094b0d7497f9deb35acc277bc2b2f84007d23bd55d473ee7e81356d7c917",
+      "bytes": 3083050,
+      "pages": 427,
+      "initialInspection": "Créditos, prefácio e verbetes iniciais nas prévias do anexo.",
+      "evidence": "docs/jornada/BASE-26SET.md"
+    },
+    {
+      "id": "B16",
+      "title": "Lições de português pela análise sintática",
+      "author": "Evanildo Bechara",
+      "edition": "Rosto: 19ª edição, 2014; ficha digital: 20ª edição revista e ampliada, Nova Fronteira, 2018. Conferir.",
+      "kind": "Sintaxe e relações entre termos",
+      "role": "Apoio por demanda; Cunha e Cintra permanece guia principal.",
+      "status": "Leitura parcial: relações, locuções e primeira unidade de relativas estudadas; revisão independente pendente",
+      "completeReading": false,
+      "libraryFileId": "libfile_437112fe36648191a5e34992c7f8eeef",
+      "sha256": "c9d72b89348d99a35a02342f1d7b8109835104cc90b114ebab01c1f75810e16c",
+      "bytes": 2873840,
+      "pages": 656,
+      "initialInspection": "Rosto, ficha, sumário, apresentação e prefácios nas prévias do anexo.",
+      "evidence": "docs/jornada/BASE-26SET.md",
+      "inspectedPDFPages": [
+        22,
+        23,
+        24,
+        48,
+        75,
+        76,
+        94,
+        95,
+        96,
+        99,
+        103,
+        222,
+        224,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        248,
+        253,
+        318,
+        322,
+        340,
+        341,
+        342,
+        343,
+        346
+      ],
+      "studyUnits": [
+        "docs/jornada/ESTUDO-SINTAXE-1.md",
+        "docs/jornada/ESTUDO-LOCUCOES-1.md",
+        "docs/jornada/ESTUDO-RELATIVAS-1.md"
+      ]
+    },
+    {
+      "id": "B17",
+      "title": "Compreender e interpretar os textos",
+      "author": "Evanildo Bechara; colaboração Shahira Mahmud e Fatima Amendoeira Maciel",
+      "edition": "Nova Fronteira, 1ª edição, 2020.",
+      "kind": "Semântica, figuras e leitura textual",
+      "role": "Apoio por demanda; Cunha e Cintra permanece guia principal.",
+      "status": "Recebido e catalogado; inspeção inicial das prévias fornecidas, estudo por capítulo pendente",
+      "completeReading": false,
+      "libraryFileId": "libfile_a0e667a108d48191911ec86d09261f01",
+      "sha256": "edab9cb0646cd239e60d760605595944ddb05231b31b487476d87f54aa675937",
+      "bytes": 832456,
+      "pages": 78,
+      "initialInspection": "Créditos, sumário, apresentação e início de figuras de sintaxe nas prévias do anexo.",
+      "evidence": "docs/jornada/BASE-26SET.md"
+    }
+  ],
+  "primarySource": "B09"
+}

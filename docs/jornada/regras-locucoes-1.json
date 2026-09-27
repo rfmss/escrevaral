@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "PTBR-LOC-001",
+      "status": "implementado-e-testado-localmente",
+      "phenomenon": "Locução verbal em construção simples",
+      "variety": "pt-BR",
+      "framework": "Abordagem tradicional de Cunha/Cintra e Lições de Bechara; leitura contextual restrita, não análise geral.",
+      "sources": [
+        {
+          "sourceId": "B09",
+          "edition": "7ª ed., 2ª impressão, 2017",
+          "printedPages": [
+            408,
+            409,
+            410,
+            411,
+            625,
+            626
+          ],
+          "filePages": [
+            441,
+            442,
+            443,
+            444,
+            657,
+            658
+          ],
+          "readAndChecked": true
+        },
+        {
+          "sourceId": "B16",
+          "edition": "Divergência conservada: rosto 19ª/2014; ficha digital 20ª/2018",
+          "printedPages": [],
+          "filePages": [
+            318,
+            322,
+            340,
+            341,
+            342,
+            343,
+            346
+          ],
+          "readAndChecked": true
+        }
+      ],
+      "definitionInOwnWords": "Auxiliar flexionado e principal nominal compõem um grupo, sem multiplicar automaticamente o número de orações.",
+      "requiredContext": [
+        "Construção inteira reconhecida, sujeito explícito e concordância compatível no inventário local.",
+        "Formas nominais explicitamente registradas; limites e posições da sintaxe-1 preservados."
+      ],
+      "positiveCriteria": [
+        "estar + gerúndio; estar + a + infinitivo; ter/haver + particípio; ir + infinitivo.",
+        "Principal permite um dos padrões de complementação já cobertos."
+      ],
+      "exceptions": [
+        "ter + partido permanece ambíguo entre forma verbal e posse nominal."
+      ],
+      "abstainWhen": [
+        "Passiva, modal, cadeia de auxiliares, elipse, clítico, coordenação ou subordinação.",
+        "Forma desconhecida, incompatibilidade no recorte, análise não única ou segmento truncado."
+      ],
+      "alternativeReadings": [
+        "Auxiliaridade pode depender de contexto e abordagem; não se infere intenção autoral."
+      ],
+      "positiveCases": [
+        "ptbr/corpus/locucoes-1.json: casos com leitura esperada"
+      ],
+      "negativeCases": [
+        "ptbr/corpus/locucoes-1.json: casos com abstenção esperada"
+      ],
+      "ambiguousCases": [
+        "Eu tenho partido.",
+        "Eu tenho a carta escrita."
+      ],
+      "heldOutEvaluation": {
+        "corpusVersion": null,
+        "targetsDefinedBeforeEvaluation": false,
+        "precision": null,
+        "recall": null,
+        "abstentionRate": null,
+        "boundaryAccuracy": null
+      },
+      "explanation": {
+        "simple": "Auxiliar e principal formam um grupo verbal nesta construção.",
+        "expanded": "docs/jornada/ESTUDO-LOCUCOES-1.md",
+        "limitations": "19 lemas; quatro padrões; hipótese contextual limitada."
+      },
+      "implementation": {
+        "version": "sintaxe-2-locucoes",
+        "commit": null
+      },
+      "review": {
+        "performed": true,
+        "by": "assistente implementador; não independente",
+        "method": "fontes delimitadas, imagens selecionadas, regressões e painel com DOM simulado"
+      },
+      "release": {
+        "integrated": true,
+        "integrationScope": "HTML local; navegador pendente",
+        "publishedCommit": null
+      }
+    }
+  ],
+  "evaluationNote": "65 casos de desenvolvimento; avaliação reservada independente ainda pendente."
+}

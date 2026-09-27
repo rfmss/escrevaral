@@ -1,0 +1,22 @@
+{
+  "id": "PREENCHER-ID-ESTAVEL",
+  "status": "modelo-nao-implementado",
+  "phenomenon": "",
+  "variety": "pt-BR",
+  "framework": "",
+  "sources": [{"sourceId": "", "edition": "", "printedPages": [], "filePages": [], "readAndChecked": false}],
+  "definitionInOwnWords": "",
+  "requiredContext": [],
+  "positiveCriteria": [],
+  "exceptions": [],
+  "abstainWhen": [],
+  "alternativeReadings": [],
+  "positiveCases": [],
+  "negativeCases": [],
+  "ambiguousCases": [],
+  "heldOutEvaluation": {"corpusVersion": null, "targetsDefinedBeforeEvaluation": false, "precision": null, "recall": null, "abstentionRate": null, "boundaryAccuracy": null},
+  "explanation": {"simple": "", "expanded": "", "limitations": ""},
+  "implementation": {"version": null, "commit": null},
+  "review": {"performed": false, "by": null, "method": null},
+  "release": {"integrated": false, "publishedCommit": null}
+}

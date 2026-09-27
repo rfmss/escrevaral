@@ -1,0 +1,114 @@
+{
+  "status": "proposta de desenvolvimento, anotação manual não homologada",
+  "notHeldOut": true,
+  "source": "Exemplos próprios criados para delimitar a etapa P04; não copiados das obras.",
+  "evaluatedByEngine": false,
+  "cases": [
+    {
+      "id": "CTX-01",
+      "text": "Eu canto ao amanhecer.",
+      "focus": "canto",
+      "proposedReading": "verbo",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-02",
+      "text": "O canto da sala está vazio.",
+      "focus": "canto",
+      "proposedReading": "substantivo",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-03",
+      "text": "A casa é antiga.",
+      "focus": "A",
+      "proposedReading": "artigo",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-04",
+      "text": "Eu a vi ontem.",
+      "focus": "a",
+      "proposedReading": "pronome pessoal",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-05",
+      "text": "Voltei a caminhar.",
+      "focus": "a",
+      "proposedReading": "preposição",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-06",
+      "text": "O livro que li chegou.",
+      "focus": "que",
+      "proposedReading": "pronome relativo",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-07",
+      "text": "Espero que você volte.",
+      "focus": "que",
+      "proposedReading": "conjunção integrante",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-08",
+      "text": "Como choveu, ficamos em casa.",
+      "focus": "Como",
+      "proposedReading": "conjunção com valor causal",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-09",
+      "text": "Como você resolveu isso?",
+      "focus": "Como",
+      "proposedReading": "advérbio interrogativo de modo",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-10",
+      "text": "Se chover, ficaremos em casa.",
+      "focus": "Se",
+      "proposedReading": "conjunção condicional",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    },
+    {
+      "id": "CTX-11",
+      "text": "Ela se penteou.",
+      "focus": "se",
+      "proposedReading": "pronome reflexivo",
+      "requiresIndependentReview": true,
+      "mustNotChangeText": true
+    }
+  ],
+  "authorialCases": [
+    {
+      "id": "AUT-01",
+      "text": "Volta, volta, volta.",
+      "expectation": "Repetição pode ser observada descritivamente; não exigir corte nem substituir palavras."
+    },
+    {
+      "id": "AUT-02",
+      "text": "O resultado foi divulgado pela equipe.",
+      "expectation": "Voz passiva não deve receber condenação automática a partir de recomendação de estilo para o inglês."
+    },
+    {
+      "id": "AUT-03",
+      "text": "A gente conta histórias.",
+      "expectation": "Identificar a construção e seu contexto de uso sem julgamento sobre escolaridade do autor."
+    }
+  ],
+  "missing": "Revisão gramatical independente, mais negativos próximos, casos ambíguos e corpus reservado de avaliação."
+}
