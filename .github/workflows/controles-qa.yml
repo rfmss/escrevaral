@@ -1,20 +1,7 @@
 name: Controles e responsividade
+# Ferramenta opcional, somente por solicitação explícita; nunca gate automático.
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [main]
-    paths:
-      - index.html
-      - escrevaral.html
-      - service-worker.js
-      - tests/**
-      - ptbr/**
-      - src/**
-      - packages/**
-      - assets/**
-      - scripts/**
-      - build/**
-      - .github/workflows/controles-qa.yml
 permissions:
   contents: read
 jobs:

@@ -6,7 +6,7 @@ Atualizado em 27/09/2026. Base do produto auditada: `e7742bdaa91027ca43de2a2aed9
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-26 publicada na main, com CI e GitHub Pages concluídos. Filosofia do anexo consolidada, árvore de 21 marcos e relógio com troca discreta sem animação 3D. Plano v1: 6/21 DONE, entrega +2 (F05, C01); próximo C02, layout do painel pelo piso antigo. Compatibilidade real KitKat/iPad 2012 ainda não homologada; Portparser permanece isolado e sem inferência.
+**Estado:** v6-26 publicada na main, com CI e GitHub Pages concluídos. Filosofia do anexo consolidada, árvore de 21 marcos e relógio com troca discreta sem animação 3D. Plano v2: 6/21 DONE; referência de época sem exigência de teste visual ou em aparelhos; próximo C02, layout do painel pelo piso antigo. KitKat/iPad 2012 orientam a simplicidade do código; Portparser permanece isolado e sem inferência.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -17,12 +17,12 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 ## Fila atual
 
 - C02: substituir Grid/gap no painel por composição compatível com o piso, preservando seleção, arcos e acesso em tela estreita.
-- C03–C04: comprovar caminho offline legado e fluxos de salvar/importar/exportar/selecionar; registrar APIs e alternativas.
+- C03–C04: implementar e verificar a lógica do caminho offline legado e fluxos de salvar/importar/exportar/selecionar; registrar APIs e alternativas.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.
 - Continuar P03–P05 por unidades delimitadas: revisar outros usos dos verbos, registrar candidatos de regência e ampliar dados somente com fonte, contexto e limites. O inventário atual não é dicionário geral.
-- Publicar incrementos autorizados com verificações essenciais e pendências explícitas; reunir a auditoria ampla de navegador, acessibilidade e offline em frente própria, conforme decisão de Rafael em 26/09/2026.
+- Publicar incrementos autorizados com verificações essenciais e pendências explícitas; revisar simplicidade/acessibilidade no código e ajustar o visual pelo retorno do autor, conforme decisão de 27/09/2026.
 - Preparar avaliação reservada com critérios definidos antes da execução; não tratar casos usados no desenvolvimento como prova de generalização nem depender de outro modelo para continuar.
 
 ## Etapas
@@ -36,7 +36,7 @@ Lentes atuais, posições, autoria e triagem limitada.
 - Registrar a versão publicada e suas evidências.
 - Conservar o editor, os cadernos, a exportação e o acesso manual.
 
-**Condição de conclusão:** 29 casos de lentes, 16 de triagem e registros de navegador disponíveis; PWA WebKit e aparelhos antigos permanecem pendentes. Reorganização v6-25 implementada: separação de fontes e cofre, 290 casos equivalentes no transporte, cache por geração/hashes e CI na main. Snapshot Portparser ainda sem inferência.
+**Condição de conclusão:** 29 casos de lentes, 16 de triagem e registros de navegador disponíveis; Aparelhos e teste visual não são requisitos de entrega, conforme decisão atual. Reorganização v6-25 implementada: separação de fontes e cofre, 290 casos equivalentes no transporte, cache por geração/hashes e CI na main. Snapshot Portparser ainda sem inferência.
 
 Evidências: `ptbr/README.md`, `ptbr/auditoria/verificacao.md`, `docs/ARQUITETURA.md`, `docs/CONECTORES.md`, `docs/jornada/ENTREGA-V6-25.md`.
 
@@ -151,7 +151,7 @@ Observar relações além de uma palavra isolada.
 
 ### P09 — Construir a cortina Escrevaral
 
-Estado: **Leitura anotada publicada; QA visual e apresentação final pendentes**. Depende de: P00.
+Estado: **Leitura anotada publicada; apresentação final em evolução pelo retorno do autor**. Depende de: P00.
 
 Uma entrada simples para estudar o próprio texto.
 
@@ -159,18 +159,18 @@ Uma entrada simples para estudar o próprio texto.
 - Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.
 - Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar.
 
-**Condição de conclusão:** Simulação verifica uma lente por escolha e cancelamento. Validação em navegador, acessibilidade completa e apresentação final do controle ainda pendentes.
+**Condição de conclusão:** Uma lente por escolha e cancelamento verificados por simulação; apresentação final e acessibilidade evoluem pelo código e pelo retorno do autor. Teste visual/aparelhos dispensado.
 
 Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`.
 
 ### P10 — Integrar e comprovar cada módulo
 
-Estado: **Verificações essenciais aprovadas; auditoria ampla posterior autorizada**. Depende de: P02, P09.
+Estado: **Verificações essenciais; revisão do código e avaliação linguística**. Depende de: P02, P09.
 
 Transformar conhecimento em comportamento confiável no produto.
 
 - Integrar primeiro um lote restrito de P04 e depois de P06, sem esperar todo o mapa.
-- Testar cancelamento, IME, versões do texto, memória, offline e portátil.
+- Verificar lógica de cancelamento, IME, versões, armazenamento e montagem offline/portátil; revisar APIs e custo sem exigir teste visual ou em aparelhos.
 - Medir qualidade e custo por lente; conservar regressões e preparar reversão.
 
 **Condição de conclusão:** Zero mutação do manuscrito e zero erro conhecido de posição no corpus de liberação. Limiares linguísticos e orçamento de desempenho definidos antes da avaliação reservada.

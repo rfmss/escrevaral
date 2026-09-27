@@ -35,7 +35,7 @@ A raiz gerada é mantida por compatibilidade com GitHub Pages. Para outro hosped
 - CSP da index aceita scripts locais externos, sem `unsafe-inline` para JavaScript. O portátil requer scripts inline e conserva essa permissão.
 - O service worker só ativa depois de conferir por hash a index, o cofre, o aplicativo e o CSS. Um download parcial ou de outra geração falha sem substituir o worker ativo.
 - A navegação do editor usa a geração completa em cache; `/jornada/` e outras páginas não são substituídas pelo editor.
-- A simulação de cache cobre falha de integridade, ativação e leitura offline. Navegadores e dispositivos reais continuam uma verificação distinta.
+- A simulação de cache cobre falha de integridade, ativação e leitura offline. Não há exigência de teste visual ou em dispositivos; a referência tecnológica orienta o código.
 - O servidor de desenvolvimento restringe arquivos à sua raiz, resolve links e informa MIME correto. É local, não um servidor de produção.
 - `package-lock.json` fixa as ferramentas. CI roda na `main` e em PRs: montagem reproduzível, contratos e regressões essenciais.
 
@@ -43,4 +43,4 @@ A raiz gerada é mantida por compatibilidade com GitHub Pages. Para outro hosped
 
 `src/editor/controlador.js` ainda concentra coordenação de fluxos antigos. Os estilos mantêm a ordem histórica da cascata. Os módulos puros de `ptbr/` ainda compartilham espaço com corpus e documentação. A decomposição seguinte deve tratar um fluxo por vez, com contratos próprios, sem trocar armazenamento ou UX por conveniência.
 
-Ainda faltam auditoria ampla de acessibilidade/navegador/offline, medições em máquinas modestas, avaliação linguística reservada e uma decisão sobre execução local de modelos grandes. O bundle do cofre inclui os inventários atuais; carregamento por lente e execução em Worker são evoluções possíveis, não capacidades entregues.
+Continuam revisão de acessibilidade e custo no código, avaliação linguística reservada e decisão sobre modelos grandes. Testes visuais e em dispositivos foram dispensados por Rafael; não são pendência de entrega. O bundle do cofre inclui os inventários atuais; carregamento por lente e execução em Worker são evoluções possíveis, não capacidades entregues.

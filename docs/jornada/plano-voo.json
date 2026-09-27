@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "planVersion": 1,
+  "planVersion": 2,
   "updated": "2026-09-27",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
-  "doneDefinition": "Entrega delimitada implementada/documentada e verificada conforme seu critério. Publicação e homologação de aparelhos são registradas separadamente.",
+  "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
     {
       "id": "F",
@@ -68,7 +68,7 @@
           "id": "C01",
           "title": "Relógio com movimento discreto",
           "state": "DONE",
-          "acceptance": "Sem animação 3D/interpolação; troca breve, callbacks antigos descartados, modo reduzido e oculto sem timer visual. Homologação em Q01.",
+          "acceptance": "Sem animação 3D/interpolação; troca breve, callbacks antigos descartados, modo reduzido e oculto sem timer visual.",
           "evidence": [
             "src/ui/digito-relogio.js",
             "tests/relogio-discreto.cjs",
@@ -79,7 +79,7 @@
           "id": "C02",
           "title": "Layout do painel pelo piso antigo",
           "state": "TODO",
-          "acceptance": "Substituir dependência de Grid/gap; preservar leitura, seleção, arcos e acesso em tela estreita; registrar verificação visual.",
+          "acceptance": "Substituir dependência de Grid/gap; preservar estrutura de leitura, seleção, arcos e acesso em tela estreita; conferir código e integridade, publicar e ajustar pelo retorno do autor.",
           "evidence": [
             "ptbr/leitura-visual.css"
           ]
@@ -88,7 +88,7 @@
           "id": "C03",
           "title": "Caminho offline legado",
           "state": "TODO",
-          "acceptance": "Separar site/PWA/portátil; demonstrar um fluxo de abertura e recuperação offline no perfil alvo, sem exigir APIs inexistentes.",
+          "acceptance": "Separar site/PWA/portátil e implementar caminhos de acesso/recuperação sem exigir APIs posteriores à referência tecnológica; verificar lógica e integridade sem teste em aparelho.",
           "evidence": [
             "docs/ARQUITETURA.md"
           ]
@@ -97,7 +97,7 @@
           "id": "C04",
           "title": "Salvar, importar, exportar e selecionar no piso",
           "state": "TODO",
-          "acceptance": "Inventário de APIs, alternativas e falhas de armazenamento; texto e pacotes preservados nos fluxos essenciais.",
+          "acceptance": "Revisar APIs e alternativas de salvar/importar/exportar/selecionar; preservar texto e pacotes com verificações essenciais de integridade, sem matriz de aparelhos.",
           "evidence": [
             "src/editor/controlador.js",
             "src/storage/"
@@ -214,9 +214,9 @@
       "items": [
         {
           "id": "Q01",
-          "title": "Homologação de aparelhos e acessibilidade",
+          "title": "Revisão de simplicidade e acessibilidade no código",
           "state": "TODO",
-          "acceptance": "Matriz com navegador/SO exatos, fluxos essenciais, offline, teclado, IME, foco, responsividade, custo; indicar testes reais e emulados. P10.",
+          "acceptance": "Revisar dependências, custo evitável, marcação semântica, foco/teclado e caminhos de falha; corrigir problemas identificáveis no código e no retorno do autor. Sem homologação de aparelhos ou teste visual obrigatório. P10.",
           "evidence": [
             "docs/jornada/estado.json"
           ]
@@ -235,13 +235,16 @@
   ],
   "next": "C02",
   "lastDelivery": {
-    "version": "6.26.0",
-    "completed": [
-      "F05",
-      "C01"
-    ],
-    "baselineDone": 4,
-    "publication": "main e7742bdaa91027ca43de2a2aed979d5da5b04bfe; CI 36317124967 e deploy 36317124442 concluídos com sucesso",
-    "evidence": "docs/jornada/ENTREGA-V6-26.md"
-  }
+    "version": "diretriz-2026-09-27",
+    "completed": [],
+    "baselineDone": 6,
+    "publication": "Registro documental na main; conferir commit e CI no histórico do GitHub.",
+    "evidence": "docs/jornada/DECISAO-SEM-HOMOLOGACAO.md"
+  },
+  "scopeChanges": [
+    {
+      "version": 2,
+      "reason": "Rafael dispensou testes KitKat/iPad e teste visual como requisito. Referência de época orienta implementação; Q01 passa a revisão do código. Denominador preservado: 21. Nenhuma caixa foi concluída por retirar a exigência."
+    }
+  ]
 }

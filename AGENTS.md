@@ -32,7 +32,7 @@ Estude livros pelo procedimento em `docs/jornada/COMO-ESTUDAR.md`. Cite obra/edi
 
 Antes de editar, confira o estado de trabalho e preserve mudanças concorrentes. Prefira módulos e patches pequenos. Não reintroduza HTML antigo. Não altere recepção, cadernos, navegação, armazenamento, exportação ou PWA por conveniência de uma tarefa linguística.
 
-Teste o risco real: posições no original, texto intacto, falsos positivos, negativos, ambiguidades, cancelamento, IME e troca de folha. Teste navegadores/dispositivos conforme o alcance prometido; emulação não certifica aparelho físico. Não reexecute suites alheias sem motivo concreto.
+Teste o risco real: posições no original, texto intacto, falsos positivos, negativos, ambiguidades, cancelamento, IME e troca de folha. Não exigir nem executar por rotina teste visual ou em KitKat/iPad; a época orienta escolhas de código. Não reexecute suites alheias sem motivo concreto.
 
 Antes de publicar, confirme a autorização vigente, a HEAD, o diff e as verificações pertinentes. Autorizações já dadas continuam válidas dentro de seu escopo; não peça repetidamente. Nunca force a atualização da main nem contorne permissões ou requisitos do repositório. Se houver concorrência, reaplique o lote sobre a nova base e valide o que mudou.
 
@@ -44,14 +44,14 @@ O mapa é documentação de produto; sua publicação não publica automaticamen
 
 ## Decisão de publicação — 26/09/2026
 
-Rafael autorizou expressamente publicar os incrementos atuais na main para testá-los, seguir o próximo passo e concentrar a auditoria ampla em etapa posterior. A ausência de QA completo em navegador não bloqueia por si só esses pushes autorizados. Manter as verificações essenciais de integridade, registrar pendências e nunca apresentar publicação como aprovação da auditoria. Essa decisão atual prevalece sobre os gates históricos de navegador descritos nos relatórios anteriores.
+Rafael autorizou expressamente publicar os incrementos atuais na main para testá-los, seguir o próximo passo e concentrar a auditoria ampla em etapa posterior (decisão histórica; a exigência de aparelhos/visual foi retirada em 27/09/2026). A ausência de QA completo em navegador não bloqueia por si só esses pushes autorizados. Manter as verificações essenciais de integridade, registrar pendências e nunca apresentar publicação como aprovação da auditoria. Essa decisão atual prevalece sobre os gates históricos de navegador descritos nos relatórios anteriores.
 
 ## Arquitetura a partir de v6-25
 
 - Não editar `index.html`, `escrevaral.html`, `service-worker.js` ou `assets/` manualmente. São distribuições geradas por `npm run build`; fontes e ordem em `src/`, `packages/`, `resources/`, `ptbr/` e `build/modules.json`.
 - Leia `README.md`, `docs/ARQUITETURA.md` e `docs/CONECTORES.md`. O HTML único é exclusivamente a distribuição portátil.
 - O cofre puro não pode depender de DOM, localStorage, cadernos ou rede. Adaptadores experimentais não entram automaticamente na montagem do site.
-- Antes do push: `npm run build:check` e verificações essenciais pertinentes. O CI da main confere montagem, contratos e regressões. A auditoria ampla de navegador continua separada conforme autorização vigente.
+- Antes do push: `npm run build:check` e verificações essenciais pertinentes. O CI da main confere montagem, contratos e regressões. Teste visual ou em aparelhos não é gate de publicação, conforme decisão vigente.
 - Referências externas precisam de commit, hashes, licença e cobertura. Não confundir snapshot ou teste de transporte com instalação, inferência ou validação de um modelo.
 
 ## Filosofia e progresso — decisão de 27/09/2026
@@ -59,3 +59,7 @@ Rafael autorizou expressamente publicar os incrementos atuais na main para test�
 Leia `docs/FILOSOFIA-E-COMPATIBILIDADE.md` e a árvore no Plano Mestre. Priorize o piso KitKat/iPad de 2012 antes de aumentar requisitos. Não prometa compatibilidade só porque o JavaScript passa em ES5; confira navegador, CSS, APIs, armazenamento e custo.
 
 Mantenha `docs/jornada/plano-voo.json` com IDs, TODO/DONE, evidências e critério; regenere com `python3 ferramentas/gerar-plano-voo.py`. Cada entrega mostra árvore curta por ramo e a linha: `Plano vN: X/Y DONE | entrega +Z (IDs) | próximo ID | publicação: SHA/estado | limite: pendência`. Conte marcos, nunca porcentagem da língua ou do esforço. A avaliação ampla continua separada; não repetir testes sem risco concreto.
+
+## Decisão vigente — referência de época, sem homologação (27/09/2026)
+
+KitKat e iPad de 2012 orientam a economia de recursos e as escolhas conservadoras; **não são aparelhos a testar**. Rafael dispensou testes nesses dispositivos e teste visual antes da publicação. Não recriar essa exigência como pendência, gate ou pedido de autorização. Publicar incrementos aprovados com verificações essenciais de integridade e ajustar a experiência conforme o retorno do autor. Não declarar uma certificação de compatibilidade que não foi realizada. Esta decisão substitui instruções históricas sobre homologação de aparelhos e auditoria visual obrigatória.

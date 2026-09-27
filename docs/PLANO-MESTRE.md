@@ -11,18 +11,18 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 ## Constituição do projeto
 
-A filosofia do anexo foi incorporada em [Filosofia de engenharia e compatibilidade](FILOSOFIA-E-COMPATIBILIDADE.md), com [identificação e hash da referência](jornada/referencia-design.json). O alvo é uma oficina acessível em KitKat e iPads de 2012, com baixo custo e recursos da época no caminho essencial. A matriz exata de navegador/SO ainda precisa ser homologada. As decisões posteriores de modularidade, autoria e execução explícita continuam valendo; conflitos do anexo estão explicados no documento.
+A filosofia do anexo foi incorporada em [Filosofia de engenharia e compatibilidade](FILOSOFIA-E-COMPATIBILIDADE.md), com [identificação e hash da referência](jornada/referencia-design.json). O alvo é uma oficina acessível em KitKat e iPads de 2012, com baixo custo e recursos da época no caminho essencial. A época é referência de engenharia; por decisão de Rafael, não haverá exigência de testes em KitKat/iPad nem de teste visual para publicar. As decisões posteriores de modularidade, autoria e execução explícita continuam valendo; conflitos do anexo estão explicados no documento.
 
 A árvore abaixo é gerada de [plano-voo.json](jornada/plano-voo.json). Atualize essa fonte e rode `python3 ferramentas/gerar-plano-voo.py`; não marque conclusão apenas pela existência de código. Os 12 estágios P00–P11 continuam sendo o mapa de dependências; os IDs F/C/M/U/Q são marcos de execução ligados a ele.
 
 <!-- PLANO-VOO:INICIO -->
-## Árvore de execução — plano v1
+## Árvore de execução — plano v2
 
-**6/21 marcos DONE · nesta entrega +2 (F05, C01) · próximo C02**
+**6/21 marcos DONE · nesta entrega +0 (ajuste de diretriz) · próximo C02**
 
 Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.
 
-`DONE` = critério delimitado atendido. `TODO` pode conter implementação parcial; sua caixa só fecha quando o critério inteiro for atendido. Publicação e homologação real são estados separados.
+`DONE` = critério delimitado atendido. `TODO` pode conter implementação parcial; sua caixa só fecha quando o critério inteiro for atendido. Teste visual ou em aparelhos não é requisito de conclusão/publicação.
 
 ### Fundação — 5/5
 
@@ -34,10 +34,10 @@ Marcos da primeira versão; não são porcentagem da língua, esforço ou precis
 
 ### Compatibilidade e custo — 1/4
 
-- [x] **C01 — Relógio com movimento discreto** — DONE. Sem animação 3D/interpolação; troca breve, callbacks antigos descartados, modo reduzido e oculto sem timer visual. Homologação em Q01. Evidência: [src/ui/digito-relogio.js](../src/ui/digito-relogio.js), [tests/relogio-discreto.cjs](../tests/relogio-discreto.cjs), [docs/jornada/ENTREGA-V6-26.md](jornada/ENTREGA-V6-26.md).
-- [ ] **C02 — Layout do painel pelo piso antigo** — TODO. Substituir dependência de Grid/gap; preservar leitura, seleção, arcos e acesso em tela estreita; registrar verificação visual. Evidência: [ptbr/leitura-visual.css](../ptbr/leitura-visual.css).
-- [ ] **C03 — Caminho offline legado** — TODO. Separar site/PWA/portátil; demonstrar um fluxo de abertura e recuperação offline no perfil alvo, sem exigir APIs inexistentes. Evidência: [docs/ARQUITETURA.md](ARQUITETURA.md).
-- [ ] **C04 — Salvar, importar, exportar e selecionar no piso** — TODO. Inventário de APIs, alternativas e falhas de armazenamento; texto e pacotes preservados nos fluxos essenciais. Evidência: [src/editor/controlador.js](../src/editor/controlador.js), [src/storage/](../src/storage/).
+- [x] **C01 — Relógio com movimento discreto** — DONE. Sem animação 3D/interpolação; troca breve, callbacks antigos descartados, modo reduzido e oculto sem timer visual. Evidência: [src/ui/digito-relogio.js](../src/ui/digito-relogio.js), [tests/relogio-discreto.cjs](../tests/relogio-discreto.cjs), [docs/jornada/ENTREGA-V6-26.md](jornada/ENTREGA-V6-26.md).
+- [ ] **C02 — Layout do painel pelo piso antigo** — TODO. Substituir dependência de Grid/gap; preservar estrutura de leitura, seleção, arcos e acesso em tela estreita; conferir código e integridade, publicar e ajustar pelo retorno do autor. Evidência: [ptbr/leitura-visual.css](../ptbr/leitura-visual.css).
+- [ ] **C03 — Caminho offline legado** — TODO. Separar site/PWA/portátil e implementar caminhos de acesso/recuperação sem exigir APIs posteriores à referência tecnológica; verificar lógica e integridade sem teste em aparelho. Evidência: [docs/ARQUITETURA.md](ARQUITETURA.md).
+- [ ] **C04 — Salvar, importar, exportar e selecionar no piso** — TODO. Revisar APIs e alternativas de salvar/importar/exportar/selecionar; preservar texto e pacotes com verificações essenciais de integridade, sem matriz de aparelhos. Evidência: [src/editor/controlador.js](../src/editor/controlador.js), [src/storage/](../src/storage/).
 
 ### Motores linguísticos — 0/8
 
@@ -57,7 +57,7 @@ Marcos da primeira versão; não são porcentagem da língua, esforço ou precis
 
 ### Validação e encerramento — 0/2
 
-- [ ] **Q01 — Homologação de aparelhos e acessibilidade** — TODO. Matriz com navegador/SO exatos, fluxos essenciais, offline, teclado, IME, foco, responsividade, custo; indicar testes reais e emulados. P10. Evidência: [docs/jornada/estado.json](jornada/estado.json).
+- [ ] **Q01 — Revisão de simplicidade e acessibilidade no código** — TODO. Revisar dependências, custo evitável, marcação semântica, foco/teclado e caminhos de falha; corrigir problemas identificáveis no código e no retorno do autor. Sem homologação de aparelhos ou teste visual obrigatório. P10. Evidência: [docs/jornada/estado.json](jornada/estado.json).
 - [ ] **Q02 — Avaliação reservada e fechamento da versão** — TODO. Limiares definidos antes da avaliação; qualidade/custo medidos por recorte, lacunas aceitas, piloto e release documentados. P02/P10/P11. Evidência: [docs/jornada/PASSAGEM-DE-TRABALHO.md](jornada/PASSAGEM-DE-TRABALHO.md).
 
 **Formato fixo das entregas:** `Plano vN: X/Y DONE | entrega +Z (IDs) | próximo ID | publicação: SHA/estado | limite: pendência relevante`. A árvore resumida usa uma linha por ramo. Não somar marcos como se tivessem o mesmo custo. Ao dividir/ampliar o plano, incrementar sua versão e explicar a mudança do denominador.
@@ -82,7 +82,7 @@ O cofre linguístico deve poder ser transportado para outro projeto sem carregar
 | O que foi implementado de fato? | Código na main atual, [manifesto de módulos](../build/modules.json) e diff dos commits |
 | O que foi testado e com qual alcance? | Testes/corpus e relatório da entrega correspondente; sucesso de CI não certifica toda a língua |
 | O que foi publicado? | SHA remoto + execução do GitHub Pages para esse SHA; conferir separadamente CI e deploy |
-| O que o autor realmente vê? | Inspeção do produto no navegador, quando disponível; deploy não substitui essa inspeção |
+| Como ajustar a experiência visual? | Retorno de uso do autor; não exigir inspeção visual prévia para publicar |
 | Como retomar uma entrega anterior? | [Modelo de passagem](jornada/PASSAGEM-DE-TRABALHO.md) e [entrega v6-25](jornada/ENTREGA-V6-25.md) |
 
 Conversa, ZIP, screenshot e relatório antigo ajudam a reconstruir decisões, mas não substituem a main atual. A página Jornada é gerada de `estado.json`; não é uma segunda fonte independente.
@@ -117,7 +117,7 @@ Sem shell, consulte main, commits, arquivos e Actions pelo GitHub/API. Sem acess
 - **Arquitetura modular.** A index contém estrutura e referências. O HTML único é distribuição portátil gerada. Não voltar a desenvolver dentro dele.
 - **Preservar experiência e dados.** Não mudar recepção, cadernos, navegação, chaves de armazenamento ou exportação por conveniência de uma tarefa linguística.
 - **Execução autônoma no escopo aprovado.** Rafael autorizou implementar e publicar incrementos na main, com verificações essenciais. Não solicitar a mesma autorização de novo. Não interpretar essa autorização como permissão para novas dependências de serviço ou mudanças materiais de produto.
-- **Auditoria ampla em frente própria.** Navegadores, aparelhos, acessibilidade e offline real continuam pendentes. A decisão do autor permite publicar incrementos com essas lacunas registradas; não permite dizer que foram auditados.
+- **Publicar sem teste visual obrigatório.** Não criar ou manter exigência de ensaio em KitKat/iPad. Manter verificações essenciais de integridade e revisão do código; o autor orienta os ajustes visuais pelo uso. Acessibilidade continua objetivo de implementação, sem transformar uma auditoria visual em gate.
 - **Continuidade independente de outros modelos.** Avaliações antigas do Gemini são histórico; a fila atual não depende de delegação ou de uma nova devolução dele.
 
 O comportamento detalhado está no [contrato de análise](jornada/CONTRATO-ANALISE.md). A versão publicada usa o painel Examinar; a apresentação final do controle/cortina Escrevaral ainda está pendente.
@@ -162,8 +162,8 @@ As dependências e estados abaixo reproduzem o retrato de `estado.json` na data 
 | P06 — Entregar orações subordinadas | Permitir escolher a lente e ler os trechos na própria aba. Cobrir substantivas, adjetivas, adverbiais e formas reduzidas. Mostrar relação com a oração ou termo de referência. Representar orações encaixadas e casos de classificação controversa. | P05 | Primeiro recorte de relativas publicado; alcance geral pendente |
 | P07 — Conferir convenções de escrita | Explicar ocorrências de ortografia e gramática dentro de critérios explícitos. Ampliar ortografia, acentuação, hífen e uso de maiúsculas. Ampliar concordância, regência, crase, pronomes e pontuação. Distinguir variedade, registro, opção estilística e infração de regra aplicável. | P04, P05 | Parcial |
 | P08 — Ler o texto e seus efeitos | Observar relações além de uma palavra isolada. Coesão, referência, conectores, progressão temática e ambiguidades. Repetição, expressões, figuras, ritmo, rima e métrica com escopo próprio. Adaptar explicações a gêneros e finalidades sem pontuar valor literário. | P05, P06 | Parcial |
-| P09 — Construir a cortina Escrevaral | Uma entrada simples para estudar o próprio texto. Escrevaral desligado: área recolhida e nenhum exame ativo. Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor. Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar. | P00 | Leitura anotada publicada; QA visual e apresentação final pendentes |
-| P10 — Integrar e comprovar cada módulo | Transformar conhecimento em comportamento confiável no produto. Integrar primeiro um lote restrito de P04 e depois de P06, sem esperar todo o mapa. Testar cancelamento, IME, versões do texto, memória, offline e portátil. Medir qualidade e custo por lente; conservar regressões e preparar reversão. | P02, P09 | Verificações essenciais aprovadas; auditoria ampla posterior autorizada |
+| P09 — Construir a cortina Escrevaral | Uma entrada simples para estudar o próprio texto. Escrevaral desligado: área recolhida e nenhum exame ativo. Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor. Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar. | P00 | Leitura anotada publicada; apresentação final em evolução pelo retorno do autor |
+| P10 — Integrar e comprovar cada módulo | Transformar conhecimento em comportamento confiável no produto. Integrar primeiro um lote restrito de P04 e depois de P06, sem esperar todo o mapa. Verificar lógica de cancelamento, IME, versões, armazenamento e montagem offline/portátil; revisar APIs e custo sem exigir teste visual ou em aparelhos. Medir qualidade e custo por lente; conservar regressões e preparar reversão. | P02, P09 | Verificações essenciais; revisão do código e avaliação linguística |
 | P11 — Pilotar, publicar e manter | Entregar versões úteis e manter a confiança ao longo do tempo. Observar usuários com diferentes experiências, gêneros e recursos de acesso. Publicar lotes aprovados na main conforme autorização vigente. Registrar SHA, evidências, limitações, decisão de publicação e retorno de uso. | P10 | Contínuo |
 
 P00 e P09 dão sustentação ao produto; P01–P02 alimentam evidências; P03–P08 constroem capacidade linguística; P10 comprova cada incremento; P11 publica e acompanha. Não é necessário terminar toda a gramática para integrar um recorte útil.
@@ -189,13 +189,13 @@ O mapa inclui as áreas abaixo. Elas descrevem o destino; não são alegações 
 
 ## 7. Sequência de execução na retomada
 
-Primeiro conferir a main e a árvore atual. A prioridade mudou com a diretriz de compatibilidade: **C02 → C03 → C04**, mantendo Q01 como homologação explícita, antes de exigir novos motores pesados. C01 é o primeiro ajuste concluído desse percurso; F01–F04 já eram a base entregue. F05 incorpora a filosofia e a contagem padronizada.
+Primeiro conferir a main e a árvore atual. A prioridade mudou com a diretriz de compatibilidade: **C02 → C03 → C04**, com Q01 como revisão de simplicidade e acessibilidade no código, antes de exigir novos motores pesados. C01 é o primeiro ajuste concluído desse percurso; F01–F04 já eram a base entregue. F05 incorpora a filosofia e a contagem padronizada.
 
 Depois, executar M00 em ambiente separado e continuar P03–P08 pelos marcos M01–M07. A avaliação externa não bloqueia estudo/corpus independentes. Não começar um download/modelo grande sem antes esclarecer licença, custo e utilidade para o piso alvo.
 
-Para terminar em um horizonte controlável: trabalhar uma entrega delimitada por vez; explicitar exclusões; definir critérios e recortes antes de codificar; não reabrir marcos DONE por preferência estética. Se um marco exigir mais de uma entrega, subdividi-lo com IDs estáveis e atualizar a versão do plano. Não prometer data global enquanto recortes, capacidade de execução e acesso aos aparelhos de teste estiverem indefinidos.
+Para terminar em um horizonte controlável: trabalhar uma entrega delimitada por vez; explicitar exclusões; definir critérios e recortes antes de codificar; não reabrir marcos DONE por preferência estética. Se um marco exigir mais de uma entrega, subdividi-lo com IDs estáveis e atualizar a versão do plano. Não prometer data global enquanto recortes e capacidade de execução estiverem indefinidos.
 
-A auditoria ampla permanece Q01/Q02, conforme a autorização do autor. Isso permite continuar publicando os incrementos técnicos com verificações essenciais e lacunas explícitas; não permite declarar compatibilidade integral antecipadamente.
+Q01 revisa código e acessibilidade; Q02 mantém a avaliação linguística reservada. Nenhum deles exige aparelhos ou teste visual. Publicar com integridade conferida e ajustar pelo retorno do autor, sem anunciar compatibilidade universal certificada.
 
 ## 8. Onde alterar e como verificar
 
@@ -226,7 +226,7 @@ npm test
 npm start
 ```
 
-A auditoria em navegador tem comando/workflow próprios no [README](../README.md). Uma falha de instalação do navegador não é falha linguística, nem conta como teste visual executado. Alteração exclusivamente documental exige conferir conteúdo, referências e arquivos gerados pertinentes; não exige reexecutar toda a auditoria.
+Os testes de navegador existentes ficam como ferramentas opcionais e históricas; não executá-los por rotina nem usá-los como bloqueio de entrega. Alteração exclusivamente documental exige conferir conteúdo, referências e arquivos gerados pertinentes; não exige reexecutar toda a auditoria.
 
 ## 9. Como usar livros e recursos externos
 

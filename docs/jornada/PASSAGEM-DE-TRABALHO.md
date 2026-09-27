@@ -10,7 +10,7 @@ Antes de continuar: ler `AGENTS.md` e [Plano mestre](../PLANO-MESTRE.md), consul
 - **Decisões:** terminologia, alternativas rejeitadas, incertezas preservadas e autorização aplicável.
 - **Alterações:** arquivos, regras/dados e efeitos esperados na interface.
 - **Evidência linguística:** casos, métricas por fenômeno, revisão feita, falsos alarmes, perdas e abstenções.
-- **Evidência técnica:** posições, manuscrito intacto, cancelamento, desempenho, navegadores e dispositivos realmente usados.
+- **Evidência técnica:** posições, manuscrito intacto, cancelamento, custo e verificações de código efetivamente realizadas. Teste visual/aparelhos não é requisito.
 - **Estados separados:** estudado / implementado / testado / integrado / publicado.
 - **Lacunas:** problemas reproduzíveis, impacto, passos e responsável pela próxima ação.
 - **Publicação:** SHA local e remoto, árvore de arquivos, resultado do deploy e URL verificada; ou motivo de não publicação.

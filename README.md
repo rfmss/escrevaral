@@ -6,7 +6,7 @@ Editor local para escrever e examinar textos em português brasileiro. As lentes
 
 **Vai continuar o projeto? Leia primeiro o [Plano mestre e guia de retomada](docs/PLANO-MESTRE.md).** Ele reúne decisões, estado dos motores, sequência de trabalho e como conferir a evolução real na main.
 
-**Filosofia e progresso:** [engenharia para aparelhos antigos](docs/FILOSOFIA-E-COMPATIBILIDADE.md) · [árvore TODO/DONE](docs/PLANO-MESTRE.md#árvore-de-execução--plano-v1). Compatibilidade KitKat/iPad 2012 ainda em adequação e homologação.
+**Filosofia e progresso:** [engenharia para aparelhos antigos](docs/FILOSOFIA-E-COMPATIBILIDADE.md) · [árvore TODO/DONE](docs/PLANO-MESTRE.md#árvore-de-execução--plano-v2). A época KitKat/iPad 2012 é referência de engenharia, sem exigência de teste nesses aparelhos.
 
 ## Desenvolver
 
@@ -26,7 +26,7 @@ npm test            # integridade, corpus de regressão, contratos e cache simul
 npm run cofre:example
 ```
 
-A auditoria de navegador é separada: `npx playwright install chromium` e `npm run test:browser`. O workflow **Controles e responsividade** também pode ser disparado manualmente. Regressão local não equivale a certificação linguística nem a teste em aparelho físico.
+Ferramentas opcionais de navegador, fora do fluxo obrigatório de entrega: `npx playwright install chromium` e `npm run test:browser`. O workflow **Controles e responsividade** também pode ser disparado manualmente. Regressão local não equivale a certificação linguística nem a teste em aparelho físico.
 
 ## Onde trabalhar
 
