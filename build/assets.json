@@ -1,24 +1,24 @@
 {
   "schemaVersion": 1,
-  "version": "20260927-scrvrl-legado-v6-26",
+  "version": "20260927-scrvrl-legado-v6-27",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20260927-scrvrl-legado-v6-26/cofre.4668b55c3a49a07d.js",
+      "path": "assets/20260927-scrvrl-legado-v6-27/cofre.4668b55c3a49a07d.js",
       "sha256": "4668b55c3a49a07df52cfaa8574c275dceb554043e8d391dd31b416a21a5f2ea",
       "bytes": 377228
     },
     {
       "id": "app",
-      "path": "assets/20260927-scrvrl-legado-v6-26/app.1b02c1f82c23bc41.js",
-      "sha256": "1b02c1f82c23bc4127301c11ee0eb42ce7dd251f0e1b6dfad51aaf8748e36392",
-      "bytes": 254980
+      "path": "assets/20260927-scrvrl-legado-v6-27/app.2aed617cbe9e7f60.js",
+      "sha256": "2aed617cbe9e7f6018c4bd4ab017ec9c99bf1748910b95e402001db86ec78e7d",
+      "bytes": 254893
     },
     {
       "id": "styles",
-      "path": "assets/20260927-scrvrl-legado-v6-26/styles.edb32d2d8c288360.css",
-      "sha256": "edb32d2d8c288360578f30ebbb363b8ebcdeff5a148a4e0cd48e8235b8808349",
-      "bytes": 360524
+      "path": "assets/20260927-scrvrl-legado-v6-27/styles.d1f0b5eb0696291a.css",
+      "sha256": "d1f0b5eb0696291a86c0b3ddeec259c3851504185b7bbfcd707ff95bfbda6f37",
+      "bytes": 361716
     }
   ]
 }

@@ -235,11 +235,11 @@
   ],
   "next": "C02",
   "lastDelivery": {
-    "version": "diretriz-2026-09-27",
+    "version": "6.27.0",
     "completed": [],
     "baselineDone": 6,
-    "publication": "Registro documental na main; conferir commit e CI no histórico do GitHub.",
-    "evidence": "docs/jornada/DECISAO-SEM-HOMOLOGACAO.md"
+    "publication": "C02 implementada e verificada; aguardando publicação e confirmação de CI/deploy.",
+    "evidence": "docs/jornada/ENTREGA-V6-27.md"
   },
   "scopeChanges": [
     {

@@ -6,7 +6,7 @@ Atualizado em 27/09/2026. Base do produto auditada: `e7742bdaa91027ca43de2a2aed9
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-26 publicada na main, com CI e GitHub Pages concluídos. Filosofia do anexo consolidada, árvore de 21 marcos e relógio com troca discreta sem animação 3D. Plano v2: 6/21 DONE; referência de época sem exigência de teste visual ou em aparelhos; próximo C02, layout do painel pelo piso antigo. KitKat/iPad 2012 orientam a simplicidade do código; Portparser permanece isolado e sem inferência.
+**Estado:** v6-26 é a última publicação confirmada. C02 implementada e verificada para v6-27: painel sem dependência de Grid/Flex/gap, com colunas simples e faixas roláveis. Publicação em andamento; confirmação remota fechará o marco. Referência de época sem teste visual ou em aparelhos.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
