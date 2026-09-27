@@ -7,8 +7,8 @@
 - **Preservação:** mesmas classes, botões, ordem do DOM, atributos ARIA, callbacks e pontos relativos usados pelo SVG. A lógica dos motores, o texto, o armazenamento e o formato dos pacotes não mudaram. Cofre e versão do conhecimento mantidos.
 - **Fontes:** código local do painel, renderizador, estilos e contrato de análise; nenhuma nova regra linguística ou leitura bibliográfica neste lote.
 - **Verificação:** após regenerar a distribuição, `node tests/ptbr-visual.cjs` (DOM simulado: seleção, apoios, spans, cancelamento e manuscrito), `node tests/controles-static.cjs` (ES5, montagem e hashes), `npm run build:check` e `git diff --check` passaram. A primeira tentativa do teste de painel detectou a distribuição ainda não regenerada; passou após o build. Não foi executado teste visual ou em aparelhos.
-- **Estados:** código implementado, verificado e integrado à montagem 6.27.0; publicação e conclusão do marco aguardam confirmação remota.
+- **Estados:** código implementado, verificado, integrado e publicado em 6.27.0; C02 DONE. Plano v2: 7/21; entrega +1.
 - **Limites:** verificações de DOM não medem geometria renderizada. Ajustes de aparência seguem o retorno do autor; isso não constitui gate nem homologação de dispositivos. Nenhum avanço de cobertura linguística é atribuído a este lote.
-- **Publicação:** aguardando push, CI e GitHub Pages.
+- **Publicação:** main `69051b81f69739d16cdb049039c10812a6978daf`, árvore `95b8b563684516b0278bf997bb05a24b21358bf2`; [CI](https://github.com/rfmss/escrevaral/actions/runs/36318088428) e [GitHub Pages](https://github.com/rfmss/escrevaral/actions/runs/36318079279) concluídos com sucesso.
 - **Reversão:** commit normal de reversão e distribuição regenerada; nenhuma migração de dados.
 - **Próximo:** C03 — caminhos de acesso e recuperação offline sem depender de APIs posteriores à referência tecnológica.

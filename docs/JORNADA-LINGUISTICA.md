@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 27/09/2026. Base do produto auditada: `e7742bdaa91027ca43de2a2aed979d5da5b04bfe`.
+Atualizado em 27/09/2026. Base do produto auditada: `69051b81f69739d16cdb049039c10812a6978daf`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-26 é a última publicação confirmada. C02 implementada e verificada para v6-27: painel sem dependência de Grid/Flex/gap, com colunas simples e faixas roláveis. Publicação em andamento; confirmação remota fechará o marco. Referência de época sem teste visual ou em aparelhos.
+**Estado:** v6-27 publicada, CI e Pages aprovados. C02 DONE: painel sem Grid/Flex/gap, com colunas simples e faixas roláveis. Plano v2: 7/21; próxima C03, acesso e recuperação offline. Referência de época sem teste visual ou em aparelhos. C03 implementada e verificada em 6.28.0, aguardando publicação.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- C02: substituir Grid/gap no painel por composição compatível com o piso, preservando seleção, arcos e acesso em tela estreita.
+- C03: distinguir site/PWA/arquivo portátil; indicar preparação e falha do cache e orientar transporte/recuperação sem exigir APIs modernas.
 - C03–C04: implementar e verificar a lógica do caminho offline legado e fluxos de salvar/importar/exportar/selecionar; registrar APIs e alternativas.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.

@@ -38,6 +38,7 @@ const assets=[['cofre',cofre,'js'],['app',app,'js'],['styles',css,'css']].map(([
 const template=read('src/index.template.html');
 function render(portable){
  let s=template.replace('{{ASSET_VERSION}}',release.assetVersion)
+ .replace('{{DISTRIBUTION_MODE}}',portable?'portable':'site')
  .replace('{{SCRIPT_POLICY}}',portable?"'self' 'unsafe-inline'":"'self'")
  .replace('{{STYLES}}',()=>portable?'<style>\n'+css+'\n</style>':'<link rel="stylesheet" href="'+assets[2].path+'">')
  .replace('{{SCRIPTS}}',()=>portable?'<script>\n'+cofre+'\n</script>\n<script>\n'+app+'\n</script>':assets.slice(0,2).map(a=>'<script src="'+a.path+'"></script>').join('\n'));

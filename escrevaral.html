@@ -16,7 +16,8 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260927-scrvrl-legado-v6-27">
+  <meta name="asset-version" content="20260927-scrvrl-legado-v6-28">
+  <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAACvAAAArwErsBW5AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABMtJREFUWIXFl1tsFGUUx3+zM3uZmd2Z0qUhtOVBiilPIBqFPsiDoJhCICCUm2AiNcSYgj6oIT4Qo2AQitBEHhVjNaRBSltuAXxDCE/KU0UoYtJyaellZmemuzu7jA+zW9i2ENJ29f/ynTnf5X++M+c75/sEz/MAePDgQUxRpA/xWAfMAWSmFsPADQSvRbEzhykrswAEz/NIJBLVopA9g8DsKSYdHwJdYlasDcdifwl9fX0xRZauAc8Vi29gcIDSaaVjjFBs94WAokg7R5N/sWcPH3/yKQ8fPpw0+Y/Nzbz+xpucv3ihsMOjylGlHRIedaMntbW143keQ0ODlJbGJ0yeTKa4cfMmAJcvX0EMiJiGSTKdYtXKlSiyXCfhB1yhcbnAzDW4rotpmhiGgZFvDcPXmQZDQwamYTJkGJimLxumQTKZGlmzo+MUHR2nCng2rl//vATI/f39HD9xgsH+AQzTHBmwZes7JBIJnOHhCXshj3g8zqzKCjRdJx6Ps/S1JQCKBPDzsWMcPfrDmEn3e3sLvnVdR9d0NF1D1zV0TUfXNHRdR9PzspaTdUpKdA41NdHaepK6tWupr982hkMCeGv1GjKZDLIso2kajY0HAWg6dIjKWZWU6DqapiEIwqQ9Ma4B5eUz+WjnzhFl3oC5c6uJxycehM+CQFFXfwZIAJcu/cZX+/YhSWJB5wcNDUQiEWRZASAYlFAiviwFJWTFz9YhKUhYzsmhIHI47I8Ph7l9628AurpuceHXiwBEFZWFCxcSCAQQbGvQa27+iW8OHy72Zgvw2a5drFmz2vfA5s2bqKlZRDqdJplOU1//HgCf795NWPZ3kxpOkU6nAUimkrg52Ukmcd2Mrx92cDO+7DgOWTdL5/VOurt7mFVRycyKchzHIShJzJ8/D8j9AkEQqKqqGmNlTc2iSQfhl3v30t3dw4oVy598DIsFy7JI5bLhnbt3uXzlCpZtkXEzLF2yhFAo9HQDenru0Nvbi2VZWJaNbdtYjo2VsHzZtrBMC8vOf+fGWDaWlShYq629nbb29seMs6lbt9YPwqtXr/L1gQMMDRnYto3rulPujVhMo6KiHFVVKdF1djQ0UFlZ4Xugs/NPbt/+Z8wkVVWJqiqKqhKLRVHVKFFFJabHUJVcX9RvVVUlFo0SjcZQR3RRDhxspLX1JG9v2vjkGNi6dQs1NYsQRQlVVVixchUArb8cL3omlAACgQDV1dVFJXqqAYmEScfpM4RDIQQeFZyzZ88xY+aMwgkB30uPIxgKEcllvzwikQjBYAjbsgEwEwkGBgcIShKSFEKWIwB+EH575AjffX90ynf3JAQCARr372fx4ld9D9TW1nLv3n3ctB/9+Zz94oIFSMEgANlsFsdxChZKp9OkUskCXTKZJJV6dIpSqeRIBs1DFEWCQT8DCLY16I228KWXXwHg/LmzU5IJW1tP8v727eOegnHLcf7iMRX3DzniV8l85RwNCf/FUtC7ccMGDNNg2ui7/ARQv+1d5lTNZtmyZeN1O4JtDV4D5k2aaWL4I4DgtfxP5Hh4Lf7TTJF+x2NsPS4mBG4qtrsgMH369ISYFWsR6PovycWsuJyyMkvIv4Lo64s6qrQDT1gHVFOc5/l1D69FVdNNMMMG+BetpeKNejSAkwAAAABJRU5ErkJggg==">
@@ -3030,7 +3031,16 @@ SOFTWARE.
       <p class="quiet">Textos e cópias trazidos viram novos textos. Seu acervo permanece.</p>
       <p class="quiet">Os textos ficam neste navegador, neste aparelho. Guarde uma cópia do acervo para levá-los com você.</p>
     </div>
-    <div class="setting-section"><h3>Escrever sem internet</h3><p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa <span aria-hidden="true">↗</span></a></p><p class="quiet">Um arquivo único para abrir offline. Em aparelhos antigos, a abertura depende do aplicativo usado.</p></div>
+    <div class="setting-section"><h3>Escrever sem internet</h3>
+      <p id="offline-status" class="quiet" role="status" aria-live="polite">Guarde a mesa portátil e uma cópia dos seus textos para escrever sem internet.</p>
+      <p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa ↓</a> · <a href="escrevaral.html">Abrir a mesa portátil ↗</a></p>
+      <ol class="quiet">
+        <li>Enquanto estiver conectado, guarde a mesa completa. Se o link apenas abrir a página, use “Salvar página” no navegador, quando disponível, e escolha HTML completo.</li>
+        <li>Em “Seus textos”, use “Exportar tudo”. O arquivo da mesa contém o editor; seus textos viajam na cópia do acervo.</li>
+        <li>Abra o arquivo guardado em um navegador. Use “Trazer arquivo” para trazer a cópia do acervo. Seus textos atuais permanecem; a cópia entra como novos textos.</li>
+      </ol>
+      <p class="quiet">O site e o arquivo guardado podem ter acervos separados. A abertura de HTML local depende do navegador ou aplicativo escolhido. Se ele não abrir a mesa, volte ao site quando tiver conexão e traga a cópia do acervo.</p>
+    </div>
     <div class="setting-section"><h3>Atalhos</h3><dl class="shortcuts"><div><dt>Buscar</dt><dd>Ctrl / ⌘ + K</dd></div><div><dt>Examinar</dt><dd>Ctrl / ⌘ + Enter</dd></div><div><dt>Guardar o texto</dt><dd>Ctrl / ⌘ + S</dd></div><div><dt>Fechar painel / sair do foco / voltar ao Gabinete</dt><dd>Esc</dd></div></dl></div>
   </section>
   <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="acervo-heading">
@@ -7454,13 +7464,47 @@ SOFTWARE.
 
 ;
 /* Fonte: src/app/offline.js */
-(function () {
+/* O arquivo portátil é autossuficiente. Cache do site é um recurso opcional. */
+(function (root) {
   'use strict';
-  if (location.protocol !== 'https:' && location.protocol !== 'http:') { return; }
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js').catch(function () {});
+  var D = root.document, status = D.getElementById('offline-status');
+  var mode = D.querySelector('meta[name="distribution-mode"]');
+  function show(state, message) {
+    if (status) { status.setAttribute('data-offline-state', state); status.textContent = message; }
   }
-}());
+  function fallback() {
+    show('portable-needed', 'A cópia automática do site não está disponível. Guarde a mesa portátil e uma cópia dos seus textos seguindo os passos abaixo.');
+  }
+  if (root.location.protocol === 'file:' || mode && mode.getAttribute('content') === 'portable') {
+    show('portable', 'Você está na mesa portátil. Este arquivo contém o editor e as lentes para abrir sem internet. Guarde seus textos separadamente em “Exportar tudo”.');
+    return;
+  }
+  var N = root.navigator, sw = N && N.serviceWorker;
+  if (!/^https?:$/.test(root.location.protocol) || root.isSecureContext === false || !sw || !sw.register ||
+      !root.Promise || !root.caches || !root.crypto || !root.crypto.subtle || !root.crypto.subtle.digest) {
+    fallback(); return;
+  }
+  show('preparing', 'Preparando uma cópia do site neste navegador. Para guardar uma mesa independente, use o arquivo portátil abaixo.');
+  try {
+    sw.register('service-worker.js').then(function (registration) {
+      function available() {
+        show('cached', 'Uma cópia do site está preparada neste navegador para voltar sem internet. O navegador pode removê-la; guarde também a mesa portátil e seus textos.');
+      }
+      function inspect() {
+        if (registration.active && registration.active.state === 'activated') { available(); return; }
+        var worker = registration.installing || registration.waiting || registration.active;
+        if (!worker) { fallback(); return; }
+        function changed() {
+          if (worker.state === 'activated') { available(); }
+          else if (worker.state === 'redundant') { fallback(); }
+        }
+        if (worker.addEventListener) { worker.addEventListener('statechange', changed, false); }
+        changed();
+      }
+      inspect();
+    }, fallback);
+  } catch (error) { fallback(); }
+}(window));
 
 </script>
 

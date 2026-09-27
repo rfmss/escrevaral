@@ -39,6 +39,18 @@ A raiz gerada é mantida por compatibilidade com GitHub Pages. Para outro hosped
 - O servidor de desenvolvimento restringe arquivos à sua raiz, resolve links e informa MIME correto. É local, não um servidor de produção.
 - `package-lock.json` fixa as ferramentas. CI roda na `main` e em PRs: montagem reproduzível, contratos e regressões essenciais.
 
+## Acesso offline e recuperação — C03 / v6-28
+
+| Caminho | Dependências e estado | Recuperação |
+| --- | --- | --- |
+| Site | HTML + três recursos locais. Tenta cache opcional apenas com APIs disponíveis e contexto permitido. Informa preparação, ativação ou alternativa portátil; registrar um worker não basta para anunciar prontidão. | Voltar ao site conectado; trazer cópia do acervo pelos controles existentes. |
+| Site instalado / PWA | Mesma aplicação e mesmo cache; instalação não substitui cópia dos textos. Cache pode ser removido pelo navegador. | Guardar mesa portátil e exportar acervo separadamente. |
+| Arquivo portátil | CSS, fontes, cofre e aplicativo incorporados. Identificado pelo build, inclusive se servido por HTTP. Não registra worker nem depende de Promise, Cache API ou Web Crypto para inicializar seu caminho offline. | Abrir o HTML num navegador que aceite arquivos locais e usar “Trazer arquivo”. Não presumir que o acervo do domínio aparece na origem do arquivo. |
+
+A seção “Escrever sem internet” oferece link de download e link comum para abrir a mesa; este último permite salvar a página onde o navegador disponibilizar essa opção. As instruções são HTML estático e não dependem do sucesso do registro/cache. Exportar tudo continua sendo uma ação explícita. Importar a cópia acrescenta textos; não substitui o acervo existente. Não há migração silenciosa entre origens.
+
+O worker moderno permanece isolado em seu próprio arquivo. Falha de registro/instalação e ausência de APIs levam à orientação portátil. `tests/offline-access.cjs` verifica essa decisão, a ativação efetiva e a incorporação dos recursos essenciais; `tests/offline-cache.cjs` verifica geração/cache por simulação. Estes testes não certificam navegadores específicos. C04 revisará os mecanismos de download, importação, exportação e seleção; C03 não declara essa revisão concluída.
+
 ## Dívidas explícitas
 
 `src/editor/controlador.js` ainda concentra coordenação de fluxos antigos. Os estilos mantêm a ordem histórica da cascata. Os módulos puros de `ptbr/` ainda compartilham espaço com corpus e documentação. A decomposição seguinte deve tratar um fluxo por vez, com contratos próprios, sem trocar armazenamento ou UX por conveniência.

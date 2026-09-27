@@ -78,10 +78,12 @@
         {
           "id": "C02",
           "title": "Layout do painel pelo piso antigo",
-          "state": "TODO",
-          "acceptance": "Substituir dependência de Grid/gap; preservar estrutura de leitura, seleção, arcos e acesso em tela estreita; conferir código e integridade, publicar e ajustar pelo retorno do autor.",
+          "state": "DONE",
+          "acceptance": "Painel sem Grid/Flex/gap, com colunas simples, faixas roláveis, seleção e lógica dos arcos preservadas; integridade, CI e publicação confirmados.",
           "evidence": [
-            "ptbr/leitura-visual.css"
+            "ptbr/leitura-visual.css",
+            "ptbr/painel.js",
+            "docs/jornada/ENTREGA-V6-27.md"
           ]
         },
         {
@@ -233,12 +235,14 @@
       ]
     }
   ],
-  "next": "C02",
+  "next": "C03",
   "lastDelivery": {
     "version": "6.27.0",
-    "completed": [],
+    "completed": [
+      "C02"
+    ],
     "baselineDone": 6,
-    "publication": "C02 implementada e verificada; aguardando publicação e confirmação de CI/deploy.",
+    "publication": "69051b81f69739d16cdb049039c10812a6978daf; CI 36318088428 e Pages 36318079279: success.",
     "evidence": "docs/jornada/ENTREGA-V6-27.md"
   },
   "scopeChanges": [
