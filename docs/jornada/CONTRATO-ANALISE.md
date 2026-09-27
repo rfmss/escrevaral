@@ -72,3 +72,7 @@ Texto idêntico antes/depois de ligar, desligar, analisar, localizar, copiar, ca
 ## Incremento local de 26/09/2026
 
 O comportamento de uma lente por escolha e suspensão de triagem automática foi integrado ao painel Examinar na cópia de trabalho. A apresentação definitiva do controle Escrevaral e a validação em navegador continuam pendentes. Estado e evidências: `ptbr/CONTEXTO-1.md`. Os parágrafos sobre o painel publicado acima descrevem a base remota 1d649c2.
+
+## Publicação de 27/09/2026
+
+O incremento v6-23 foi publicado em `e1c9a69`; o GitHub Pages concluiu o deploy com sucesso. As descrições da execução serial acima são históricas. A versão publicada já oferece uma lente por escolha, sem triagem automática; a apresentação final e a auditoria ampla continuam pendentes.

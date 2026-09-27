@@ -1,41 +1,37 @@
 /* Relações em construções simples. ES5; recebe texto, nunca o editor. */
 (function (root) {
   'use strict';
-  var E = root.Escr, D = E.grammarData, version = 'sintaxe-2-locucoes';
+  var E = root.Escr, D = E.grammarData, version = 'sintaxe-3-regencia';
   var source = { title: 'Cunha e Cintra, 7ª ed., 2ª impressão, 2017, pp. 136–140, 145–152 e 154; Bechara, Lições de Português pela Análise Sintática, arquivo recebido, páginas PDF 22, 48, 75–76, 94–96 e 103. Terminologia tradicional; critérios computacionais locais, não algoritmos dos autores.', url: null };
   var groupSource={title:source.title+' Locuções: Cunha/Cintra, pp. 408–411; Bechara, páginas PDF 318, 322 e 340–343. Limites de auxiliaridade preservados.',url:null};
-  var nouns = {}, articles = { o:['m','singular'], a:['f','singular'], os:['m','plural'], as:['f','plural'], um:['m','singular'], uma:['f','singular'], uns:['m','plural'], umas:['f','plural'] };
+  var L=E.syntaxLexicon;
   function has(a, s) { return a.indexOf(s) >= 0; }
-  function put(words, gender, number) { words.split(' ').forEach(function (w) { nouns['$' + w] = [gender, number]; }); }
-  /* Flexões explícitas: não inferir número pelo último caractere. */
-  put('livro menino homem escritor poema canto mar pão silêncio tempo fogo dia vento jogo sonho trabalho olho filho pagamento caminho', 'm', 'singular');
-  put('livros meninos homens escritores poemas cantos pães silêncios tempos jogos sonhos trabalhos olhos filhos', 'm', 'plural');
-  put('casa menina mulher escritora carta porta revista opinião rosa flor água mesa vida música notícia família noite cobra vizinha', 'f', 'singular');
-  put('casas meninas mulheres escritoras cartas portas revistas opiniões rosas flores águas mesas vidas cobras vizinhas', 'f', 'plural');
   function span(text, a, b) { return { start:a, end:b, snippet:text.slice(a,b) }; }
   function parse(text, ts) {
-    var n = ts.length, v, firstVerb, forms, lemma, subject, object, end = n, adv = -1, neg = -1, split, roles, group, verbEnd;
+    var n = ts.length, v, firstVerb, forms, lemma, subject, object, end = n, adv = -1, neg = -1, split, roles, group, verbEnd, frame;
     if(n>24){return null;}
     function nominal(a, b, isSubject) {
-      var p = a, article, noun, head, pronoun;
+      var p = a, article, noun, candidates, head, pronoun;
       if (b <= a) { return null; }
       pronoun = E.maturationData.subjects[ts[a].value];
       if (isSubject && b === a + 1 && pronoun) { return {head:a, person:pronoun[0], number:pronoun[1]}; }
-      article = articles[ts[p].value]; if (article) { p++; }
+      article = L.articleReading(ts[p].value); if (article) { p++; }
       if (p >= b) { return null; }
-      head = p; noun = nouns['$' + ts[p].value];
+      head = p; candidates=L.nounReadings(ts[p].value);
+      if(article){candidates=candidates.filter(function(r){return r.gender===article[0]&&r.number===article[1];});}
+      if(candidates.length>1){return null;}
+      noun=candidates[0];
       if (!noun) {
-        if (p === a && b === a + 1 && has(['ana','maria','joão','pedro'],ts[p].value) && /^[A-ZÀ-ÖØ-Þ]/.test(text.charAt(ts[p].start))) { return {head:p,person:3,number:'singular'}; }
+        if (p === a && b === a + 1 && L.isProperName(ts[p].value) && /^[A-ZÀ-ÖØ-Þ]/.test(text.charAt(ts[p].start))) { return {head:p,person:3,number:'singular'}; }
         return null;
       }
-      if (article && (article[0] !== noun[0] || article[1] !== noun[1])) { return null; }
       /* Um homógrafo sem determinante fica sem decisão neste recorte. */
       if (!article && E.contextualMorphology.readings(ts[p].value).classes.length > 1) { return null; }
       p++;
       if(!isSubject && p<b){return null;} /* Adjetivo pode ser predicativo do objeto. */
       if (b - p > 2) { return null; }
       for (; p < b; p++) { if (!has(D.classes.adjetivo,ts[p].value)) { return null; } }
-      return {head:head,person:3,number:noun[1]};
+      return {head:head,person:3,number:noun.number};
     }
     /* A fronteira sujeito/verbo deve permitir a análise de todo o segmento. */
     var matches = [];
@@ -51,12 +47,12 @@
       if (end > verbEnd && has(D.finalAdverbs, ts[end-1].value)) { adv=--end; }
       roles = [{key:'sujeito',role:'Sujeito',a:0,b:firstVerb,head:subject.head}, {key:'predicado',role:'Predicado',a:firstVerb,b:n}, {key:'verbo',role:group?'Locução verbal':'Núcleo verbal',a:v,b:verbEnd,head:group?group.main:v}];
       object = nominal(verbEnd,end,false);
-      if (has(D.directVerbs,lemma) && object) {
+      if ((frame=L.frame(lemma,'objeto-direto')) && object) {
         roles.push({key:'objeto',role:'Objeto direto',a:verbEnd,b:end,head:object.head});
-      } else if (!group && has(D.linkingVerbs,lemma) && end === v+2 && has(D.classes.adjetivo,ts[v+1].value) && !has(['aberto','aberta','abertos','abertas'],ts[v+1].value)) {
+      } else if (!group && (frame=L.frame(lemma,'predicativo')) && end === v+2 && has(D.classes.adjetivo,ts[v+1].value) && !has(['aberto','aberta','abertos','abertas'],ts[v+1].value)) {
         roles[2].role = 'Verbo de ligação';
         roles.push({key:'predicativo',role:'Predicativo do sujeito',a:v+1,b:end,head:v+1});
-      } else if (lemma === 'dar') {
+      } else if ((frame=L.frame(lemma,'direto-e-indireto-a'))) {
         split = -1;
         for (var j=verbEnd+1;j<end;j++) { if (ts[j].value === 'a') { if (split >= 0) { split=-2; break; } split=j; } }
         object = split >= 0 && nominal(verbEnd,split,false);
@@ -64,10 +60,10 @@
         if (!object || !indirect) { continue; }
         roles.push({key:'objeto',role:'Objeto direto',a:verbEnd,b:split,head:object.head});
         roles.push({key:'indireto',role:'Objeto indireto',a:split,b:end,head:indirect.head});
-      } else if (!((has(D.intransitiveVerbs,lemma) || has(['chegar','terminar'],lemma)) && end === verbEnd)) { continue; }
+      } else if (!((frame=L.frame(lemma,'sem-complemento')) && end === verbEnd)) { continue; }
       if (neg >= 0) { roles.push({key:'negacao',role:'Negação',a:neg,b:neg+1,head:neg}); }
       if (adv >= 0) { roles.push({key:'adjunto',role:'Adjunto adverbial',a:adv,b:adv+1,head:adv}); }
-      matches.push({roles:roles,verb:v,verbEnd:verbEnd,lemma:lemma,forms:forms,group:group||null});
+      matches.push({roles:roles,verb:v,verbEnd:verbEnd,lemma:lemma,forms:forms,group:group||null,frame:frame});
     }
     return matches.length === 1 ? matches[0] : null;
   }
@@ -124,7 +120,7 @@
           'O contexto discursivo e outros sentidos podem mudar a leitura. Sujeito não é necessariamente quem pratica uma ação. Auxiliaridade depende da abordagem e do contexto; não se deduz voz passiva da presença de duas formas. A compatibilidade formal não certifica correção nem intenção.',limit,result.group?groupSource:source,
           {feature:p.role,analysisStatus:'contextual',nodeId:id+'-'+p.key,parentId:p.key==='sujeito'||p.key==='predicado'?id:id+'-predicado',
             clause:span(text,clause.start,clause.end),head:head,relations:edges.map(function(e){return{from:e.from,to:e.to,type:e.type,label:e.label};}),
-            components:components,groupKind:result.group&&p.key==='verbo'?result.group.kind:null,
+            components:components,valencyFrame:{id:result.frame.id,lemma:result.frame.lemma,pattern:result.frame.pattern},groupKind:result.group&&p.key==='verbo'?result.group.kind:null,
             context:[span(text,verb.start,ts[result.verbEnd-1].end)],compatibleVerbs:result.forms.map(function(f){return f.slice();})}));
       });
     });

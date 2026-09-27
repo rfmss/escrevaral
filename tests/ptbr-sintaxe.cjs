@@ -32,5 +32,11 @@ const dotTail=' '.repeat(7991)+'Eu canto.x';assert.equal(E.syntaxRelations.analy
 assert.equal(E.syntaxRelations.analyze('“'+' '.repeat(7990)+'Eu canto.”',100).length,0);
 const f=vault.analyze('sintaxe','A menina não leu a carta ontem.').findings;assert.equal(f.find(x=>x.feature==='Sujeito').head.snippet,'menina');assert.equal(f.find(x=>x.feature==='Objeto direto').head.snippet,'carta');assert.ok(f.some(x=>x.feature==='Negação'));assert.ok(f.some(x=>x.feature==='Adjunto adverbial'));
 assert.ok(html.includes(fs.readFileSync(path.join(root,'ptbr/relacoes-sintaticas.js'),'utf8')));
+assert.ok(html.includes(fs.readFileSync(path.join(root,'ptbr/lexico-sintatico.js'),'utf8')));
+assert.ok(f.every(x=>x.valencyFrame&&x.valencyFrame.lemma==='ler'&&x.valencyFrame.pattern==='objeto-direto'));
+const copy=E.syntaxLexicon.nounReadings('menina');copy[0].number='plural';
+assert.equal(E.syntaxLexicon.nounReadings('menina')[0].number,'singular','consultas não alteram o inventário');
+assert.equal(E.syntaxLexicon.framesFor('inventado').length,0);
+assert.equal(E.syntaxLexicon.articleReading('constructor'),null);
 assert.deepEqual(failures,[]);
 console.log('SINTAXE OK: '+corpus.cases.length+' casos de desenvolvimento/regressão; relações, núcleos, contenção, repetição, seleção UTF-16, proteção e recorte. Revisão independente pendente.');

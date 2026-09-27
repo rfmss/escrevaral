@@ -16,7 +16,7 @@ Este arquivo orienta IAs que trabalham neste repositório. Instruções atuais d
 - O editor pertence ao autor. Nenhuma lente, sugestão, análise, botão de resultado ou motor pode substituir, corrigir, completar ou apagar seu texto. Selecionar um trecho não é editar.
 - O botão Escrevaral liga/desliga a área de análise. Essa interface está especificada na jornada; não a anuncie como implementada antes da integração real.
 - Uma análise por vez, sempre por escolha explícita do escritor. Ligar apenas abre opções; não inicia varredura geral. Trocar de lente cancela a anterior; não executar fila de outras lentes nem reanálise automática durante a escrita. Receber resultados nunca autoriza modificar o editor.
-- O painel publicado ainda tem uma ação serial anterior; este contrato é a direção da próxima interface, não uma alegação de que ela já foi integrada.
+- Desde v6-23, o painel publicado executa uma lente por escolha, sem triagem automática. A apresentação final do controle Escrevaral e a auditoria ampla de navegador permanecem pendentes.
 - O usuário recebe trechos exatos, explicações e limites na mesma área. Qualquer sugestão de lente permanece opcional; acesso manual preservado.
 - Não use o exemplo anotado em `/jornada/` como se fosse um detector geral. Não conclua subordinação pela presença de `que`.
 - Não apresente uma leitura estilística como erro nem crie notas de qualidade, intenção ou complexidade sem fundamento e validação.

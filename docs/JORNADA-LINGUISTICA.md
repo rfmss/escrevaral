@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 26/09/2026. Base do produto auditada: `1d649c2ca3f47db7570bdf1b3c20f6e075705535`.
+Atualizado em 27/09/2026. Base do produto auditada: `e1c9a699f32138284e1311dbedd3ca58aae738b7`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** Incrementos v6-23 preparados para publicação na main por autorização expressa de Rafael em 26/09/2026. Motor e simulação verificados; auditoria ampla de navegador, acessibilidade e offline pendente. Publicação não equivale à aprovação dessa auditoria. Próximo trabalho: consolidar léxico e regência.
+**Estado:** v6-23 publicada na main e deploy do GitHub Pages concluído. Incremento v6-24: léxico sintático e 21 padrões de uso verbal separados do analisador, preservando o recorte nos 227 casos de sintaxe, locuções e relativas. Próximo trabalho: estudar que-objeto e sujeito posposto. Auditoria ampla de navegador, acessibilidade, offline e avaliação linguística reservada permanece pendente.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,8 +16,8 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- Consolidar P03–P05: separar inventário lexical de padrões sintáticos, registrar formas e leituras possíveis e explicitar a regência dos verbos do recorte. Preservar ambiguidades em vez de resolvê-las por ordem ou sufixo.
-- Usar essa base para ampliar P06: estudar e distinguir que-sujeito, que-objeto, sujeito posposto e integrante, com exemplos contrastantes; depois avançar para explicativas e demais subordinadas.
+- Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.
+- Continuar P03–P05 por unidades delimitadas: revisar outros usos dos verbos, registrar candidatos de regência e ampliar dados somente com fonte, contexto e limites. O inventário atual não é dicionário geral.
 - Publicar incrementos autorizados com verificações essenciais e pendências explícitas; reunir a auditoria ampla de navegador, acessibilidade e offline em frente própria, conforme decisão de Rafael em 26/09/2026.
 - Preparar avaliação reservada com critérios definidos antes da execução; não tratar casos usados no desenvolvimento como prova de generalização nem depender de outro modelo para continuar.
 - Conferir main remota e diff; publicar incrementos aprovados e verificar o deploy. Manter a visão completa de convenções, texto, estilo e variação no mapa.
@@ -68,7 +68,7 @@ Evidências: `docs/jornada/corpus-inicial.json`, `docs/jornada/regra-modelo.json
 
 ### P03 — Consolidar o dicionário PTBR
 
-Estado: **Parcial**. Depende de: P01, P02.
+Estado: **Inventário sintático separado; dicionário geral parcial**. Depende de: P01, P02.
 
 Dar às palavras inventário, flexões e possibilidades coerentes.
 
@@ -78,11 +78,11 @@ Dar às palavras inventário, flexões e possibilidades coerentes.
 
 **Condição de conclusão:** Dados têm origem rastreável, integridade, casos de cobertura e custo medido. Dicionário não é anunciado como analisador contextual.
 
-Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`.
+Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`.
 
 ### P04 — Reconhecer classes no contexto
 
-Estado: **Incremento contextual local**. Depende de: P02, P03.
+Estado: **Incremento contextual publicado; avaliação reservada pendente**. Depende de: P02, P03.
 
 Ir das classes possíveis à leitura sustentada pela frase.
 
@@ -96,7 +96,7 @@ Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/C
 
 ### P05 — Construir as relações da oração
 
-Estado: **Relações simples e locuções integradas localmente; revisão independente pendente**. Depende de: P04.
+Estado: **Relações e locuções publicadas; padrões de regência separados no incremento v6-24**. Depende de: P04.
 
 Reconhecer núcleos, dependências e fronteiras.
 
@@ -106,11 +106,11 @@ Reconhecer núcleos, dependências e fronteiras.
 
 **Condição de conclusão:** Testes verificam constituintes, vínculos, sujeito e limites; locução verbal não vira várias orações por contagem mecânica.
 
-Evidências: `docs/jornada/ESTUDO-SINTAXE-1.md`, `docs/jornada/regras-sintaxe-1.json`, `ptbr/relacoes-sintaticas.js`, `tests/ptbr-sintaxe.cjs`, `ptbr/SINTAXE-1.md`, `docs/jornada/ESTUDO-LOCUCOES-1.md`, `docs/jornada/regras-locucoes-1.json`, `ptbr/grupos-verbais.js`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`.
+Evidências: `docs/jornada/ESTUDO-SINTAXE-1.md`, `docs/jornada/regras-sintaxe-1.json`, `ptbr/relacoes-sintaticas.js`, `tests/ptbr-sintaxe.cjs`, `ptbr/SINTAXE-1.md`, `docs/jornada/ESTUDO-LOCUCOES-1.md`, `docs/jornada/regras-locucoes-1.json`, `ptbr/grupos-verbais.js`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`.
 
 ### P06 — Entregar orações subordinadas
 
-Estado: **Primeiro recorte de relativas integrado localmente; alcance geral pendente**. Depende de: P05.
+Estado: **Primeiro recorte de relativas publicado; alcance geral pendente**. Depende de: P05.
 
 Permitir escolher a lente e ler os trechos na própria aba.
 
@@ -148,7 +148,7 @@ Observar relações além de uma palavra isolada.
 
 ### P09 — Construir a cortina Escrevaral
 
-Estado: **Leitura anotada integrada localmente; QA visual pendente**. Depende de: P00.
+Estado: **Leitura anotada publicada; QA visual e apresentação final pendentes**. Depende de: P00.
 
 Uma entrada simples para estudar o próprio texto.
 
@@ -162,7 +162,7 @@ Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/lei
 
 ### P10 — Integrar e comprovar cada módulo
 
-Estado: **Motor e simulação aprovados; navegador bloqueado**. Depende de: P02, P09.
+Estado: **Verificações essenciais aprovadas; auditoria ampla posterior autorizada**. Depende de: P02, P09.
 
 Transformar conhecimento em comportamento confiável no produto.
 

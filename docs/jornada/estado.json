@@ -1,13 +1,13 @@
 {
-  "version": 8,
-  "updated": "26/09/2026",
-  "baseline": "1d649c2ca3f47db7570bdf1b3c20f6e075705535",
+  "version": 9,
+  "updated": "27/09/2026",
+  "baseline": "e1c9a699f32138284e1311dbedd3ca58aae738b7",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "Incrementos v6-23 preparados para publicação na main por autorização expressa de Rafael em 26/09/2026. Motor e simulação verificados; auditoria ampla de navegador, acessibilidade e offline pendente. Publicação não equivale à aprovação dessa auditoria. Próximo trabalho: consolidar léxico e regência.",
+  "current": "v6-23 publicada na main e deploy do GitHub Pages concluído. Incremento v6-24: léxico sintático e 21 padrões de uso verbal separados do analisador, preservando o recorte nos 227 casos de sintaxe, locuções e relativas. Próximo trabalho: estudar que-objeto e sujeito posposto. Auditoria ampla de navegador, acessibilidade, offline e avaliação linguística reservada permanece pendente.",
   "next": [
-    "Consolidar P03–P05: separar inventário lexical de padrões sintáticos, registrar formas e leituras possíveis e explicitar a regência dos verbos do recorte. Preservar ambiguidades em vez de resolvê-las por ordem ou sufixo.",
-    "Usar essa base para ampliar P06: estudar e distinguir que-sujeito, que-objeto, sujeito posposto e integrante, com exemplos contrastantes; depois avançar para explicativas e demais subordinadas.",
+    "Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.",
+    "Continuar P03–P05 por unidades delimitadas: revisar outros usos dos verbos, registrar candidatos de regência e ampliar dados somente com fonte, contexto e limites. O inventário atual não é dicionário geral.",
     "Publicar incrementos autorizados com verificações essenciais e pendências explícitas; reunir a auditoria ampla de navegador, acessibilidade e offline em frente própria, conforme decisão de Rafael em 26/09/2026.",
     "Preparar avaliação reservada com critérios definidos antes da execução; não tratar casos usados no desenvolvimento como prova de generalização nem depender de outro modelo para continuar.",
     "Conferir main remota e diff; publicar incrementos aprovados e verificar o deploy. Manter a visão completa de convenções, texto, estilo e variação no mapa."
@@ -86,7 +86,7 @@
     {
       "id": "P03",
       "title": "Consolidar o dicionário PTBR",
-      "status": "Parcial",
+      "status": "Inventário sintático separado; dicionário geral parcial",
       "depends": [
         "P01",
         "P02"
@@ -100,13 +100,15 @@
       "done": "Dados têm origem rastreável, integridade, casos de cobertura e custo medido. Dicionário não é anunciado como analisador contextual.",
       "evidence": [
         "ptbr/auditoria/pacote.json",
-        "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md"
+        "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
+        "ptbr/lexico-sintatico.js",
+        "ptbr/REGENCIA-1.md"
       ]
     },
     {
       "id": "P04",
       "title": "Reconhecer classes no contexto",
-      "status": "Incremento contextual local",
+      "status": "Incremento contextual publicado; avaliação reservada pendente",
       "depends": [
         "P02",
         "P03"
@@ -127,7 +129,7 @@
     {
       "id": "P05",
       "title": "Construir as relações da oração",
-      "status": "Relações simples e locuções integradas localmente; revisão independente pendente",
+      "status": "Relações e locuções publicadas; padrões de regência separados no incremento v6-24",
       "depends": [
         "P04"
       ],
@@ -148,13 +150,15 @@
         "docs/jornada/regras-locucoes-1.json",
         "ptbr/grupos-verbais.js",
         "ptbr/LOCUCOES-1.md",
-        "tests/ptbr-locucoes.cjs"
+        "tests/ptbr-locucoes.cjs",
+        "ptbr/lexico-sintatico.js",
+        "ptbr/REGENCIA-1.md"
       ]
     },
     {
       "id": "P06",
       "title": "Entregar orações subordinadas",
-      "status": "Primeiro recorte de relativas integrado localmente; alcance geral pendente",
+      "status": "Primeiro recorte de relativas publicado; alcance geral pendente",
       "depends": [
         "P05"
       ],
@@ -211,7 +215,7 @@
     {
       "id": "P09",
       "title": "Construir a cortina Escrevaral",
-      "status": "Leitura anotada integrada localmente; QA visual pendente",
+      "status": "Leitura anotada publicada; QA visual e apresentação final pendentes",
       "depends": [
         "P00"
       ],
@@ -240,7 +244,7 @@
     {
       "id": "P10",
       "title": "Integrar e comprovar cada módulo",
-      "status": "Motor e simulação aprovados; navegador bloqueado",
+      "status": "Verificações essenciais aprovadas; auditoria ampla posterior autorizada",
       "depends": [
         "P02",
         "P09"
@@ -670,7 +674,9 @@
       "PWA offline em WebKit",
       "Avaliação linguística reservada"
     ],
-    "status": "autorizada; push em preparação",
-    "commit": null
+    "status": "v6-23 publicada; GitHub Pages concluído com sucesso; v6-24 integrado para publicação no mesmo escopo autorizado",
+    "commit": "e1c9a699f32138284e1311dbedd3ca58aae738b7",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36284731353",
+    "verification": "GitHub Pages: completed/success. Acesso HTTP direto ao domínio retornou 403 neste ambiente; QA completo em navegador permanece pendente."
   }
 }

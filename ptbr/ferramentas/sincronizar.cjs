@@ -2,7 +2,7 @@
 const fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'../..');
 const read=n=>fs.readFileSync(path.join(root,'ptbr',n),'utf8');let html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 function replaceOne(re,value,label){let count=0;html=html.replace(re,()=>{count++;return value;});if(count!==1)throw Error(label+': esperava um bloco, encontrou '+count);}
-const helpers='<!-- PTBR-REGRAS:inicio -->\n<script>\n'+read('morfologia-contextual.js')+'\n</script>\n<script>\n'+read('grupos-verbais.js')+'\n</script>\n<script>\n'+read('relacoes-sintaticas.js')+'\n</script>\n<script>\n'+read('relativas.js')+'\n</script>\n<script>\n'+read('regras-locais.js')+'\n</script>\n<script>\n'+read('repeticao.js')+'\n</script>\n<script>\n'+read('triagem.js')+'\n</script>\n<!-- PTBR-REGRAS:fim -->';
+const helpers='<!-- PTBR-REGRAS:inicio -->\n<script>\n'+read('morfologia-contextual.js')+'\n</script>\n<script>\n'+read('grupos-verbais.js')+'\n</script>\n<script>\n'+read('lexico-sintatico.js')+'\n</script>\n<script>\n'+read('relacoes-sintaticas.js')+'\n</script>\n<script>\n'+read('relativas.js')+'\n</script>\n<script>\n'+read('regras-locais.js')+'\n</script>\n<script>\n'+read('repeticao.js')+'\n</script>\n<script>\n'+read('triagem.js')+'\n</script>\n<!-- PTBR-REGRAS:fim -->';
 if(html.includes('<!-- PTBR-REGRAS:inicio -->'))replaceOne(/<!-- PTBR-REGRAS:inicio -->[\s\S]*?<!-- PTBR-REGRAS:fim -->/,helpers,'regras');
 else{const marker="  var E = root.Escr, S = E.instruments, R = E.reading, D = E.maturationData, stop = {};";const at=html.lastIndexOf('<script>',html.indexOf(marker));if(at<0)throw Error('Bloco de repetição não localizado');html=html.slice(0,at)+helpers+'\n'+html.slice(at);}
 if(!html.includes('/* Lente existente: correspondência literal')){
@@ -24,8 +24,8 @@ if(html.includes('E.ptbrPanelDocument=function'))replaceOne(/  E\.ptbrPanelDocum
 else html=html.replace('  E.ptbrPanelChoices=function()',bridge+'  E.ptbrPanelChoices=function()');
 if(!html.includes('if(E.ptbrPanelReset){E.ptbrPanelReset();}'))html=html.replace(/function loadDocument\(([^)]*)\) \{/,(match,args)=> 'function loadDocument('+args+') {\n    if(E.ptbrPanelReset){E.ptbrPanelReset();}');
 // Invalidate old cached results after a changed linguistic rule, without changing storage.
-html=html.replace(/(root\.Escr\.knowledge = \{\s*version: ')[^']+/,"$1local-20260926-relativas-1");
-html=html.replace(/name="asset-version" content="[^"]+"/,'name="asset-version" content="20260926-scrvrl-relativas-v6-23"');
+html=html.replace(/(root\.Escr\.knowledge = \{\s*version: ')[^']+/,"$1local-20260927-regencia-1");
+html=html.replace(/name="asset-version" content="[^"]+"/,'name="asset-version" content="20260927-scrvrl-regencia-v6-24"');
 fs.writeFileSync(path.join(root,'index.html'),html);fs.writeFileSync(path.join(root,'escrevaral.html'),html);
-let sw=fs.readFileSync(path.join(root,'service-worker.js'),'utf8').replace(/const CACHE_NAME = "[^"]+"/,'const CACHE_NAME = "scrvrl-offline-v6-23"').replace(/const ASSET_VERSION = "[^"]+"/,'const ASSET_VERSION = "20260926-scrvrl-relativas-v6-23"');fs.writeFileSync(path.join(root,'service-worker.js'),sw);
+let sw=fs.readFileSync(path.join(root,'service-worker.js'),'utf8').replace(/const CACHE_NAME = "[^"]+"/,'const CACHE_NAME = "scrvrl-offline-v6-24"').replace(/const ASSET_VERSION = "[^"]+"/,'const ASSET_VERSION = "20260927-scrvrl-regencia-v6-24"');fs.writeFileSync(path.join(root,'service-worker.js'),sw);
 console.log('Patch linguístico sincronizado; '+Buffer.byteLength(html)+' bytes por HTML.');
