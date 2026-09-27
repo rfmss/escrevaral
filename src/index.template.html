@@ -303,6 +303,17 @@ SOFTWARE.
     </div>
     <div class="setting-section"><h3>Seus textos</h3><button id="paste-mode" aria-pressed="false">Restringir colagem à cópia interna</button><button id="trash-current">Mover este texto para a lixeira</button>
       <div class="actions"><button id="print-document">Imprimir este texto</button><button id="export-text">Baixar este texto <span aria-hidden="true">↓</span></button><button id="export-notebook">Exportar este caderno ↓</button><button id="export-backup">Exportar tudo ↓</button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".scrvrl,.txt,.json,text/plain,application/json"></label></div>
+      <button id="import-copied" type="button">Trazer conteúdo copiado</button>
+      <div id="transfer-box" hidden>
+        <p id="transfer-help" class="quiet"></p>
+        <label for="transfer-name">Nome do arquivo (.txt, .json ou .scrvrl)</label>
+        <input id="transfer-name" class="project-input" type="text" value="copia.scrvrl">
+        <label for="transfer-content">Conteúdo da cópia</label>
+        <textarea id="transfer-content" rows="8" spellcheck="false"></textarea>
+        <button id="transfer-select" type="button">Selecionar conteúdo</button>
+        <button id="transfer-import" type="button">Conferir importação</button>
+        <button id="transfer-close" type="button">Fechar cópia</button>
+      </div>
       <p id="panel-status" class="quiet" role="status" aria-live="polite"></p>
       <p class="quiet">Textos e cópias trazidos viram novos textos. Seu acervo permanece.</p>
       <p class="quiet">Os textos ficam neste navegador, neste aparelho. Guarde uma cópia do acervo para levá-los com você.</p>

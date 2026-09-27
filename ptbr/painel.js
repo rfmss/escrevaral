@@ -138,7 +138,10 @@
       (function(start,end,textAtRun){b.addEventListener('click',function(){
         if(manuscript.value!==textAtRun||documentKey()!==documentAtResult){refresh(true);return;}
         var back=D.getElementById('back-writing');if(back){back.click();}
-        manuscript.focus();manuscript.setSelectionRange(start,end);
+        manuscript.focus();
+        if(!E.transfer.selectRange(manuscript,start,end)){
+          var notice=D.getElementById('save-status')||status;notice.textContent='Selecione o trecho manualmente no manuscrito.';
+        }
       },false);}(f.start,f.end,snapshot));
       if(E.ptbrPanelKeep){
         b=el('button',entry,'','Manter minha escolha');b.type='button';

@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20260927-scrvrl-legado-v6-28">
+  <meta name="asset-version" content="20260927-scrvrl-legado-v6-29">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -1783,6 +1783,11 @@ body[data-theme="escuro"] #notebook-hint { color:#bbc5b5; }
 }
 @media print { #app-dialog { display:none !important; } }
 
+/* Alternativa manual de transporte, dentro dos Ajustes existentes. */
+#transfer-box { margin:16px 0; padding:12px; border:1px dotted currentColor; }
+#transfer-box label { display:block; margin-top:10px; }
+#transfer-content { display:block; width:100%; font:14px/1.5 monospace; margin:8px 0; }
+
 /* Fonte: src/ui/styles/quadro.css */
 /* Lousa: papel, calha e feltro por CSS estático; uma superfície de desenho. */
 @media screen {
@@ -3027,6 +3032,17 @@ SOFTWARE.
     </div>
     <div class="setting-section"><h3>Seus textos</h3><button id="paste-mode" aria-pressed="false">Restringir colagem à cópia interna</button><button id="trash-current">Mover este texto para a lixeira</button>
       <div class="actions"><button id="print-document">Imprimir este texto</button><button id="export-text">Baixar este texto <span aria-hidden="true">↓</span></button><button id="export-notebook">Exportar este caderno ↓</button><button id="export-backup">Exportar tudo ↓</button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".scrvrl,.txt,.json,text/plain,application/json"></label></div>
+      <button id="import-copied" type="button">Trazer conteúdo copiado</button>
+      <div id="transfer-box" hidden>
+        <p id="transfer-help" class="quiet"></p>
+        <label for="transfer-name">Nome do arquivo (.txt, .json ou .scrvrl)</label>
+        <input id="transfer-name" class="project-input" type="text" value="copia.scrvrl">
+        <label for="transfer-content">Conteúdo da cópia</label>
+        <textarea id="transfer-content" rows="8" spellcheck="false"></textarea>
+        <button id="transfer-select" type="button">Selecionar conteúdo</button>
+        <button id="transfer-import" type="button">Conferir importação</button>
+        <button id="transfer-close" type="button">Fechar cópia</button>
+      </div>
       <p id="panel-status" class="quiet" role="status" aria-live="polite"></p>
       <p class="quiet">Textos e cópias trazidos viram novos textos. Seu acervo permanece.</p>
       <p class="quiet">Os textos ficam neste navegador, neste aparelho. Guarde uma cópia do acervo para levá-los com você.</p>
@@ -5515,6 +5531,56 @@ SOFTWARE.
 }(typeof window !== 'undefined' ? window : this));
 
 ;
+/* Fonte: src/ui/transferencia.js */
+/* Transporte explícito de texto/pacotes. ES5; sem rede e sem acesso ao manuscrito. */
+(function (root) {
+  'use strict';
+  var E = root.Escr;
+  function selectRange(field, start, end) {
+    if (!field || typeof field.value !== 'string' || typeof start !== 'number' || typeof end !== 'number' ||
+        !isFinite(start) || !isFinite(end) || start % 1 || end % 1 || start < 0 || end < start || end > field.value.length) { return false; }
+    try { if (field.setSelectionRange) { field.setSelectionRange(start, end); return typeof field.selectionStart !== 'number' || (field.selectionStart === start && field.selectionEnd === end); } } catch (ignore) {}
+    try {
+      if (typeof field.selectionStart === 'number') {
+        field.selectionStart = start; field.selectionEnd = end;
+        return field.selectionStart === start && field.selectionEnd === end;
+      }
+    } catch (ignore2) {}
+    return false;
+  }
+  function download(contents, mime, name, fallback, host) {
+    var D = root.document, urlAPI = root.URL || root.webkitURL, url, a;
+    try {
+      if (!root.Blob) { throw new Error('blob'); }
+      var blob = new root.Blob([contents], { type: mime + ';charset=utf-8' });
+      if (root.navigator.msSaveBlob && root.navigator.msSaveBlob(blob, name) !== false) { return true; }
+      a = D.createElement('a');
+      if (!('download' in a) || !a.click || !urlAPI || !urlAPI.createObjectURL) { throw new Error('download'); }
+      url = urlAPI.createObjectURL(blob); a.href = url; a.download = name;
+      (host || D.body).appendChild(a); a.click();
+      return true;
+    } catch (error) { fallback(contents, name); return false; }
+    finally {
+      if (a && a.parentNode) { a.parentNode.removeChild(a); }
+      if (url && urlAPI.revokeObjectURL) { root.setTimeout(function () { urlAPI.revokeObjectURL(url); }, 120000); }
+    }
+  }
+  function read(file, done) {
+    var reader, ended = false;
+    function finish(error, value) { if (!ended) { ended = true; done(error, value); } }
+    try {
+      if (!root.FileReader) { throw new Error('Este navegador não lê arquivos. Use “Trazer conteúdo copiado”.'); }
+      reader = new root.FileReader();
+      reader.onerror = function () { finish(new Error('O arquivo não pôde ser lido. O acervo permanece.')); };
+      reader.onabort = function () { finish(new Error('Leitura cancelada. O acervo permanece.')); };
+      reader.onload = function () { finish(null, String(reader.result)); };
+      reader.readAsText(file, 'UTF-8');
+    } catch (error) { finish(error); }
+  }
+  E.transfer = { selectRange: selectRange, download: download, read: read };
+}(window));
+
+;
 /* Fonte: src/editor/controlador.js */
 (function () {
   'use strict';
@@ -5718,8 +5784,7 @@ SOFTWARE.
     } catch (e) { text(byId('project-error'), e.message || 'Não foi possível guardar.'); }
   }
   function exportNotebook(all) {
-    if (!notebooks || !checkpoint()) { return; }
-    if (!rememberNotebook()) { return; }
+    if (!notebooks || composing || (chalkUI && !chalkUI.flush())) { return; }
     try {
       var book = activeNotebook(); if (!all && !book) { throw new Error('Abra o caderno que deseja exportar.'); }
       var payload = notebooks.pack(exportedDocuments(), all ? null : book.id); notebooks.validate(payload);
@@ -5746,7 +5811,7 @@ SOFTWARE.
     listen(byId('start-new-original'), 'click', function () { showNotebookForm(null, 'original'); });
     listen(byId('original-rename'), 'click', function () { showNotebookForm(activeOriginalId, 'original'); });
     listen(byId('original-export'), 'click', function () {
-      if (!checkpoint() || !rememberNotebook() || !activeOriginalId) { return; }
+      if (!notebooks || composing || !activeOriginalId || (chalkUI && !chalkUI.flush())) { return; }
       try { var o = activeOriginal(), payload = notebooks.pack(exportedDocuments(), null, o.id); notebooks.validate(payload); download(JSON.stringify(payload), 'application/json', (o.name.replace(/[^A-Za-z0-9À-ÿ_-]+/g, '-').slice(0, 80) || 'original') + '.scrvrl'); }
       catch (e) { message(e.message || 'Não foi possível exportar a gaveta.'); }
     });
@@ -6050,7 +6115,7 @@ SOFTWARE.
     if (composing || !internalClipboard) { return; }
     var start = manuscript.selectionStart || 0, end = manuscript.selectionEnd || start;
     manuscript.value = manuscript.value.slice(0, start) + internalClipboard + manuscript.value.slice(end);
-    manuscript.setSelectionRange(start + internalClipboard.length, start + internalClipboard.length); manuscript.focus();
+    E.transfer.selectRange(manuscript, start + internalClipboard.length, start + internalClipboard.length); manuscript.focus();
     copiedSelection = null; byId('selection-tools').hidden = true; changed(); queueSession();
   }
   function toggleStart(open) {
@@ -6109,7 +6174,7 @@ SOFTWARE.
         if (state.immersion === true) { immersion = true; document.body.setAttribute('data-immersion', 'true'); byId('immersion-toggle').setAttribute('aria-pressed', 'true'); byId('leave-focus').hidden = false; sizeWorkspace(); }
         var start = typeof state.start === 'number' && isFinite(state.start) ? Math.max(0, Math.min(doc.text.length, Math.floor(state.start))) : 0;
         var end = typeof state.end === 'number' && isFinite(state.end) ? Math.max(start, Math.min(doc.text.length, Math.floor(state.end))) : start;
-        manuscript.setSelectionRange(start, end); manuscript.scrollTop = typeof state.scroll === 'number' && isFinite(state.scroll) ? Math.max(0, state.scroll) : 0;
+        E.transfer.selectRange(manuscript, start, end); manuscript.scrollTop = typeof state.scroll === 'number' && isFinite(state.scroll) ? Math.max(0, state.scroll) : 0;
       } else {
         desktopWindow(state.windowHidden ? 'minimize' : 'open', false);
         setDesktopMaximized(state.maximized !== false);
@@ -6122,7 +6187,7 @@ SOFTWARE.
       if (state.documentId === (doc.noteId || doc.id)) {
         var savedStart = typeof state.start === 'number' && isFinite(state.start) ? Math.max(0, Math.min(doc.text.length, Math.floor(state.start))) : 0;
         var savedEnd = typeof state.end === 'number' && isFinite(state.end) ? Math.max(savedStart, Math.min(doc.text.length, Math.floor(state.end))) : savedStart;
-        manuscript.setSelectionRange(savedStart, savedEnd); manuscript.scrollTop = typeof state.scroll === 'number' && isFinite(state.scroll) ? Math.max(0, state.scroll) : 0;
+        E.transfer.selectRange(manuscript, savedStart, savedEnd); manuscript.scrollTop = typeof state.scroll === 'number' && isFinite(state.scroll) ? Math.max(0, state.scroll) : 0;
         cabinetSelection = { noteId: doc.noteId || doc.id, start: savedStart, end: savedEnd, scroll: manuscript.scrollTop };
       }
       updatePath();
@@ -6221,7 +6286,7 @@ SOFTWARE.
     });
   }
   function revealSelection(start, end) {
-    returnToWriting(); manuscript.setSelectionRange(start, end);
+    returnToWriting(); if (!E.transfer.selectRange(manuscript, start, end)) { message('Selecione o trecho manualmente no manuscrito.'); return; }
     if (!window.getComputedStyle) { return; }
     manuscript.scrollTop = Math.max(0, textPosition(start).top - manuscript.clientHeight / 3); updateFocus();
   }
@@ -6261,7 +6326,7 @@ SOFTWARE.
     byId('immersion-toggle').setAttribute('aria-pressed', enabled ? 'true' : 'false');
     byId('leave-focus').hidden = !enabled;
     manuscript.focus(); sizeWorkspace();
-    if (typeof start === 'number') { manuscript.setSelectionRange(start, end); }
+    if (typeof start === 'number') { E.transfer.selectRange(manuscript, start, end); }
     manuscript.scrollTop = Math.max(0, scroll + (manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0) - oldInset);
     growManuscript();
   }
@@ -6338,7 +6403,7 @@ SOFTWARE.
   function loadDocument(next) {
     if(E.ptbrPanelReset){E.ptbrPanelReset();}
     analysisRange = null; copiedSelection = null; byId('selection-tools').hidden = true;
-    doc = next; if (doc.projectId) { activeNotebookId = doc.projectId; cabinetProject = doc.project || ''; var loadedBook = notebooks && notebooks.get(doc.projectId); activeOriginalId = loadedBook ? loadedBook.originalId || null : null; } navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; manuscript.setSelectionRange(0, 0); growManuscript();
+    doc = next; if (doc.projectId) { activeNotebookId = doc.projectId; cabinetProject = doc.project || ''; var loadedBook = notebooks && notebooks.get(doc.projectId); activeOriginalId = loadedBook ? loadedBook.originalId || null : null; } navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; E.transfer.selectRange(manuscript, 0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.'); updatePath();
@@ -6439,18 +6504,19 @@ SOFTWARE.
     },20);
   }
 
+  function showTransfer(contents, name, importing) {
+    showPanel('mesa', 'mesa-toggle', true);
+    byId('transfer-box').hidden = false;
+    byId('transfer-content').value = contents; byId('transfer-content').readOnly = !importing;
+    byId('transfer-name').value = name; byId('transfer-name').readOnly = !importing;
+    byId('transfer-import').hidden = !importing;
+    text(byId('transfer-help'), importing ? 'Cole o conteúdo completo do arquivo. Ele será conferido antes de pedir sua confirmação.' : 'O download não ficou disponível. Copie todo este conteúdo e guarde em um arquivo de texto com o nome indicado. Esta cópia contém exatamente o que seria baixado.');
+    byId('transfer-content').focus();
+  }
   function download(contents, mime, name, host) {
-    var urlAPI = window.URL || window.webkitURL;
-    try {
-      var blob = new Blob([contents], { type: mime + ';charset=utf-8' });
-      if (navigator.msSaveBlob) { navigator.msSaveBlob(blob, name); return true; }
-      var url = urlAPI.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = name;
-      if (!('download' in a)) {
-        var opened = window.open(url, '_blank');
-        message(opened ? 'Arquivo aberto. Use Compartilhar ou Salvar no navegador; se preciso, copie o texto.' : 'O navegador impediu a abertura. Selecione e copie o manuscrito para outro aplicativo.');
-      } else { (host || document.body).appendChild(a); a.click(); a.parentNode.removeChild(a); message('Cópia preparada. Confira o arquivo salvo.'); }
-      window.setTimeout(function () { urlAPI.revokeObjectURL(url); }, 120000); return ('download' in a) || !!opened;
-    } catch (e) { message('Este navegador não criou o arquivo. Selecione e copie o manuscrito para outro aplicativo.'); return false; }
+    var saved = E.transfer.download(contents, mime, name, function (value, filename) { showTransfer(value, filename, false); }, host);
+    message(saved ? 'Cópia preparada. Confira o arquivo salvo.' : 'Cópia disponível em Ajustes para selecionar e guardar.');
+    return saved;
   }
   function exportedDocuments() {
     var result = archive ? archive.list(true) : { documents: [], unreadable: 0 };
@@ -6465,49 +6531,52 @@ SOFTWARE.
     if (!file) { return; }
     if (file.size > 50000000) { message('Traga pacotes de até 50 MB por vez.'); return; }
     if (!notebooks || !archive || !checkpoint()) { message('A gravação precisa estar disponível para importar um caderno.'); return; }
+    E.transfer.read(file, function (error, contents) {
+      if (error) { message(error.message); return; }
+      importContents(contents, file.name, file.type);
+    });
+  }
+  function importContents(contents, name, type) {
+    if (typeof contents !== 'string' || contents.length > 50000000) { message('Traga uma cópia menor, em partes de até 50 milhões de unidades de texto.'); return; }
+    if (!notebooks || !archive || !checkpoint()) { message('A gravação precisa estar disponível para importar um caderno.'); return; }
     function importError(e) { message((e.name === 'QuotaExceededError' ? 'Faltou espaço para importar o pacote.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior foi preservado.'); }
-    var reader = new FileReader();
-    reader.onerror = function () { message('O arquivo não pôde ser lido. O acervo permanece.'); };
-    reader.onload = function () {
-      try {
-        var payload, docs, converted = [], i;
-        if (/\.(scrvrl|json)$/i.test(file.name)) {
-          payload = JSON.parse(reader.result);
-          if (payload && payload.format === 'escrevaral-astra' && payload.version === 1 && Object.prototype.toString.call(payload.documents) === '[object Array]' && payload.documents.every(E.validDocument)) {
-            docs = payload.documents; payload = null;
-          }
-        } else if (/\.txt$/i.test(file.name) || file.type === 'text/plain') {
-          var entry = E.freshDocument(); entry.title = file.name.replace(/\.txt$/i, ''); entry.text = String(reader.result); entry.project = activeNotebook() ? activeNotebook().name + ' — importado' : 'Texto importado'; docs = [entry];
-        } else { throw new Error('Traga um caderno .scrvrl, uma cópia .json ou um texto .txt.'); }
-        if (docs) {
-          docs = JSON.parse(JSON.stringify(docs));
-          docs.forEach(function (d) {
-            if (d.kind === 'reminder' && !projectName(d.project)) { delete d.projectId; return; }
-            var title = projectName(d.project) || 'Avulsos', book = null;
-            converted.forEach(function (b) { if (b.name === title) { book = b; } });
-            if (!book) { book = { id: 'book-' + E.freshDocument().id, name: title, aliases: [], color: '#c4cfc2', data: {} }; converted.push(book); }
-            d.projectId = book.id; d.project = book.name;
-          });
-          payload = { format: 'escrevaral-cadernos', version: 1, scope: 'all', notebooks: converted, documents: docs, globals: {}, inventory: { notebooks: converted.length, documents: docs.length } };
+    try {
+      var payload, docs, converted = [], i;
+      if (/\.(scrvrl|json)$/i.test(name)) {
+        payload = JSON.parse(contents);
+        if (payload && payload.format === 'escrevaral-astra' && payload.version === 1 && Object.prototype.toString.call(payload.documents) === '[object Array]' && payload.documents.every(E.validDocument)) {
+          docs = payload.documents; payload = null;
         }
-        notebooks.validate(payload);
-        var incomingGlobals = Object.keys(payload.globals).filter(function (k) { return k !== sessionKey && k !== 'escrevaral.astra.current'; });
-        var notice = 'Importar ' + payload.notebooks.length + ' caderno(s) e ' + payload.documents.length + ' registro(s)? Cadernos já existentes serão preservados; os repetidos entrarão como cópias.';
-        if (incomingGlobals.length) { notice += ' Esta cópia completa também restaura as preferências e o calendário geral do arquivo, substituindo os atuais.'; }
-        E.dialog.ask({title:'Importar cadernos?',message:notice,accept:'Importar'},function(ok){
-          if (!ok) { return; }
-          try {
-            if (!checkpoint() || !rememberNotebook()) { return; }
-            var result = notebooks.bring(payload);
-            activeNotebookId = null; activeOriginalId = null; cabinetProject = null; loadDocument(E.freshDocument());
-            closeNotebook(); renderNotebooks(); renderReminders(); renderCabinet(); byId('cabinet-window').hidden = true;
-            if (incomingGlobals.length) { window.location.reload(); return; }
-            message(result.notebooks + ' caderno(s) importado(s), ' + result.documents + ' registro(s)' + (result.copies ? '; ' + result.copies + ' como cópia' : '') + '.');
-          } catch (e) { importError(e); }
+      } else if (/\.txt$/i.test(name) || type === 'text/plain') {
+        var entry = E.freshDocument(); entry.title = name.replace(/\.txt$/i, ''); entry.text = String(contents); entry.project = activeNotebook() ? activeNotebook().name + ' — importado' : 'Texto importado'; docs = [entry];
+      } else { throw new Error('Traga um caderno .scrvrl, uma cópia .json ou um texto .txt.'); }
+      if (docs) {
+        docs = JSON.parse(JSON.stringify(docs));
+        docs.forEach(function (d) {
+          if (d.kind === 'reminder' && !projectName(d.project)) { delete d.projectId; return; }
+          var title = projectName(d.project) || 'Avulsos', book = null;
+          converted.forEach(function (b) { if (b.name === title) { book = b; } });
+          if (!book) { book = { id: 'book-' + E.freshDocument().id, name: title, aliases: [], color: '#c4cfc2', data: {} }; converted.push(book); }
+          d.projectId = book.id; d.project = book.name;
         });
-      } catch (e) { importError(e); }
-    };
-    reader.readAsText(file, 'UTF-8');
+        payload = { format: 'escrevaral-cadernos', version: 1, scope: 'all', notebooks: converted, documents: docs, globals: {}, inventory: { notebooks: converted.length, documents: docs.length } };
+      }
+      notebooks.validate(payload);
+      var incomingGlobals = Object.keys(payload.globals).filter(function (k) { return k !== sessionKey && k !== 'escrevaral.astra.current'; });
+      var notice = 'Importar ' + payload.notebooks.length + ' caderno(s) e ' + payload.documents.length + ' registro(s)? Cadernos já existentes serão preservados; os repetidos entrarão como cópias.';
+      if (incomingGlobals.length) { notice += ' Esta cópia completa também restaura as preferências e o calendário geral do arquivo, substituindo os atuais.'; }
+      E.dialog.ask({title:'Importar cadernos?',message:notice,accept:'Importar'},function(ok){
+        if (!ok) { return; }
+        try {
+          if (!checkpoint() || !rememberNotebook()) { return; }
+          var result = notebooks.bring(payload);
+          activeNotebookId = null; activeOriginalId = null; cabinetProject = null; loadDocument(E.freshDocument());
+          closeNotebook(); renderNotebooks(); renderReminders(); renderCabinet(); byId('cabinet-window').hidden = true;
+          if (incomingGlobals.length) { window.location.reload(); return; }
+          message(result.notebooks + ' caderno(s) importado(s), ' + result.documents + ' registro(s)' + (result.copies ? '; ' + result.copies + ' como cópia' : '') + '.');
+        } catch (e) { importError(e); }
+      });
+    } catch (e) { importError(e); }
   }
   function stopSound() {
     byId('som').checked = false;
@@ -6655,7 +6724,7 @@ SOFTWARE.
     sizeWorkspace(); cancelTypewriter();
     if (focusEditor !== false) { manuscript.focus(); }
     if (cabinetSelection && cabinetSelection.noteId === (doc.noteId || doc.id)) {
-      manuscript.setSelectionRange(cabinetSelection.start, cabinetSelection.end); manuscript.scrollTop = cabinetSelection.scroll;
+      E.transfer.selectRange(manuscript, cabinetSelection.start, cabinetSelection.end); manuscript.scrollTop = cabinetSelection.scroll;
     }
     growManuscript();
     queueSession();
@@ -6686,7 +6755,7 @@ SOFTWARE.
     byId('font-typewriter').setAttribute('aria-pressed', style === 'maquina' ? 'true' : 'false');
     text(byId('desk-font'), style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
     focusMeasure = null; typewriterInsets(); growManuscript();
-    if (typeof start === 'number') { manuscript.setSelectionRange(start, end); }
+    if (typeof start === 'number') { E.transfer.selectRange(manuscript, start, end); }
     try { if (storage) { storage.setItem('escrevaral.astra.letter', style); } } catch (ignore) { /* Préférence facultativa. */ }
   }
 
@@ -6808,7 +6877,14 @@ SOFTWARE.
   listen(byId('export-backup'), 'click', function () { exportNotebook(true); });
   listen(byId('import-file'), 'focus', function () { this.parentNode.setAttribute('data-focus', 'true'); });
   listen(byId('import-file'), 'blur', function () { this.parentNode.setAttribute('data-focus', 'false'); });
-  listen(byId('import-file'), 'change', function () { importFile(this.files[0]); this.value = ''; });
+  listen(byId('import-file'), 'change', function () { importFile(this.files && this.files[0]); this.value = ''; });
+  listen(byId('import-copied'), 'click', function () { showTransfer('', 'copia.scrvrl', true); });
+  listen(byId('transfer-import'), 'click', function () { importContents(byId('transfer-content').value, byId('transfer-name').value, ''); });
+  listen(byId('transfer-select'), 'click', function () {
+    var field = byId('transfer-content'); field.focus();
+    if (!E.transfer.selectRange(field, 0, field.value.length)) { message('Use Selecionar tudo e Copiar no campo da cópia.'); }
+  });
+  listen(byId('transfer-close'), 'click', function () { byId('transfer-content').value = ''; byId('transfer-box').hidden = true; byId('import-copied').focus(); });
   listen(document, 'keydown', function (event) {
     var code = event.keyCode;
     if (code === 27 && composing) { return; }
@@ -6948,7 +7024,7 @@ SOFTWARE.
   listen(byId('selection-cut'), 'click', function () {
     if (composing || !copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { return; }
     if (!copyInternal()) { return; }
-    var s = copiedSelection; byId('selection-tools').hidden = true; manuscript.value = s.text.slice(0, s.start) + s.text.slice(s.end); manuscript.setSelectionRange(s.start, s.start); manuscript.focus(); copiedSelection = null; changed(); queueSession();
+    var s = copiedSelection; byId('selection-tools').hidden = true; manuscript.value = s.text.slice(0, s.start) + s.text.slice(s.end); E.transfer.selectRange(manuscript, s.start, s.start); manuscript.focus(); copiedSelection = null; changed(); queueSession();
   });
   listen(byId('selection-examine'), 'click', function () {
     if (!copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { message('Selecione novamente o trecho para analisar.'); return; }
@@ -6956,7 +7032,7 @@ SOFTWARE.
   });
   listen(byId('selection-external'), 'click', function () {
     if (!copiedSelection || copiedSelection.text !== manuscript.value || copiedSelection.documentId !== (doc.noteId || doc.id)) { message('Selecione novamente o trecho para copiar.'); return; }
-    manuscript.focus(); manuscript.setSelectionRange(copiedSelection.start, copiedSelection.end);
+    manuscript.focus(); if (!E.transfer.selectRange(manuscript, copiedSelection.start, copiedSelection.end)) { text(byId('clipboard-status'), 'Selecione o trecho manualmente e use Copiar.'); return; }
     try { if (document.execCommand && document.execCommand('copy')) { text(byId('clipboard-status'), 'Copiado para outros aplicativos'); return; } } catch (ignore) { /* Cópia interna já disponível. */ }
     text(byId('clipboard-status'), 'Use Ctrl+C ou o comando Copiar do aparelho.');
   });
@@ -7378,7 +7454,10 @@ SOFTWARE.
       (function(start,end,textAtRun){b.addEventListener('click',function(){
         if(manuscript.value!==textAtRun||documentKey()!==documentAtResult){refresh(true);return;}
         var back=D.getElementById('back-writing');if(back){back.click();}
-        manuscript.focus();manuscript.setSelectionRange(start,end);
+        manuscript.focus();
+        if(!E.transfer.selectRange(manuscript,start,end)){
+          var notice=D.getElementById('save-status')||status;notice.textContent='Selecione o trecho manualmente no manuscrito.';
+        }
       },false);}(f.start,f.end,snapshot));
       if(E.ptbrPanelKeep){
         b=el('button',entry,'','Manter minha escolha');b.type='button';

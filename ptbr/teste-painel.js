@@ -65,6 +65,7 @@ function setup(initial, dismissed, realEngine) {
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'regras-locais.js'),'utf8'),{window:window});
   E.createSignalTriage=require('./triagem');
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'leitura-visual.js'),'utf8'),{window:window});
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../src/ui/transferencia.js'),'utf8'),{window:window});
   vm.runInNewContext(source, { window: window, document: document });
   var board = panel.childNodes[0];
   function child(className) { return board.childNodes.filter(function (n) { return n.className === className; })[0]; }

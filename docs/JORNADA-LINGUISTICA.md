@@ -6,7 +6,7 @@ Atualizado em 27/09/2026. Base do produto auditada: `d5faf397ea953e31401326b0b0f
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** Produto v6-28 publicado; main de referência 019e910. Plano v3: 8/24 DONE, +0 nesta revisão de direção. Acrescentados A01–A03 para consulta particionada, pacotes persistentes/offline e preparação incremental. Acervo próximo de 1 GB é admissível em disco sob limites de recursos, não capacidade garantida. Implementação atual permanece sem triagem automática. ASTRA 1 segue C04 e integra na main; ASTRA 2 pode executar A01 isoladamente.
+**Estado:** Produto v6-28 publicado; main de referência 019e910. Plano v3: 8/24 DONE, +0 nesta revisão de direção. Acrescentados A01–A03 para consulta particionada, pacotes persistentes/offline e preparação incremental. Acervo próximo de 1 GB é admissível em disco sob limites de recursos, não capacidade garantida. Implementação atual permanece sem triagem automática. ASTRA 1 segue C04 e integra na main; ASTRA 2 pode executar A01 isoladamente. C04 implementada e verificada localmente para v6-29, aguardando publicação: alternativas de transporte manual e seleção protegida.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 

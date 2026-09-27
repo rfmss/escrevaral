@@ -92,3 +92,8 @@
  }
 }
 @media print { #app-dialog { display:none !important; } }
+
+/* Alternativa manual de transporte, dentro dos Ajustes existentes. */
+#transfer-box { margin:16px 0; padding:12px; border:1px dotted currentColor; }
+#transfer-box label { display:block; margin-top:10px; }
+#transfer-content { display:block; width:100%; font:14px/1.5 monospace; margin:8px 0; }

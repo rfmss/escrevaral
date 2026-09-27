@@ -56,3 +56,7 @@ O worker moderno permanece isolado em seu próprio arquivo. Falha de registro/in
 `src/editor/controlador.js` ainda concentra coordenação de fluxos antigos. Os estilos mantêm a ordem histórica da cascata. Os módulos puros de `ptbr/` ainda compartilham espaço com corpus e documentação. A decomposição seguinte deve tratar um fluxo por vez, com contratos próprios, sem trocar armazenamento ou UX por conveniência.
 
 Continuam revisão de acessibilidade e custo no código, avaliação linguística reservada e decisão sobre modelos grandes. Testes visuais e em dispositivos foram dispensados por Rafael; não são pendência de entrega. O bundle do cofre inclui os inventários atuais; carregamento por lente e execução em Worker são evoluções possíveis, não capacidades entregues.
+
+## Transporte e seleção — C04 / v6-29
+
+`src/ui/transferencia.js` isola capacidades do navegador; o controlador mantém a política e validação dos pacotes. Download indisponível apresenta cópia literal nos Ajustes; conteúdo colado e FileReader convergem para a mesma importação confirmada. Seleção tem alternativa e falha recuperável, sem editar o manuscrito. Exportação do rascunho não exige nova gravação. Ver [entrega e limites](jornada/ENTREGA-V6-29.md). Formatos e transações existentes foram preservados; pacotes linguísticos grandes continuam em A02.

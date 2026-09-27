@@ -4,7 +4,7 @@
   "baseline": "d5faf397ea953e31401326b0b0ff8aa27ac41b52",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "Produto v6-28 publicado; main de referência 019e910. Plano v3: 8/24 DONE, +0 nesta revisão de direção. Acrescentados A01–A03 para consulta particionada, pacotes persistentes/offline e preparação incremental. Acervo próximo de 1 GB é admissível em disco sob limites de recursos, não capacidade garantida. Implementação atual permanece sem triagem automática. ASTRA 1 segue C04 e integra na main; ASTRA 2 pode executar A01 isoladamente.",
+  "current": "Produto v6-28 publicado; main de referência 019e910. Plano v3: 8/24 DONE, +0 nesta revisão de direção. Acrescentados A01–A03 para consulta particionada, pacotes persistentes/offline e preparação incremental. Acervo próximo de 1 GB é admissível em disco sob limites de recursos, não capacidade garantida. Implementação atual permanece sem triagem automática. ASTRA 1 segue C04 e integra na main; ASTRA 2 pode executar A01 isoladamente. C04 implementada e verificada localmente para v6-29, aguardando publicação: alternativas de transporte manual e seleção protegida.",
   "next": [
     "C04: revisar APIs e alternativas de salvar/importar/exportar/selecionar, preservando texto e pacotes com verificações essenciais.",
     "ASTRA 2: A01 em paralelo isolado, comparação técnica e prova lexical indexada; ASTRA 1 estabiliza contratos antes de A02/A03.",
