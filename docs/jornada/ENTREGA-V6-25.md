@@ -8,7 +8,17 @@
 - **Evidência técnica:** `npm run build:check`; 17 scripts essenciais via `npm test`; cofre copiado para pasta temporária e executado sem DOM/armazenamento; 290 casos equivalentes entre ordem original e pacote isolado; regressões existentes de revisão, posições, IME, cancelamento, documentos/cadernos e corpus. Cache testado por simulação, incluindo hashes inválidos, versão completa e rotas.
 - **Portparser:** código MIT recebido seletivamente com hashes, adaptador CoNLL-U testado com anotação manual própria. Pesos, léxicos e runtime de inferência não instalados. Não há novo motor de produto nem evidência de qualidade do modelo medida por nós.
 - **Navegador:** tentativa de executar `tests/ptbr-browser.cjs` interrompida por ausência de `chromium_headless_shell-1187`. Não foi produzida nova certificação visual ou de offline real nesta etapa. Workflow de auditoria disponível separadamente.
-- **Estados:** fontes separadas / cofre implementado e testado / integração da montagem feita / modelo externo somente preparado / publicação pendente de confirmação.
+- **Estados:** fontes separadas / cofre implementado e testado / integração da montagem feita / modelo externo somente preparado / publicado; CI e deploy confirmados.
 - **Limites:** controlador legado grande, namespace de compatibilidade na aplicação, cascata CSS histórica, auditoria ampla e avaliação reservada pendentes. Ausência de achados não certifica qualidade do texto.
 - **Reversão:** reverter a entrega via commit normal; não há migração do formato de manuscritos nem mudança das chaves persistidas. Reverter também worker/distribuição de forma coerente; nunca force push.
-- **Próxima ação:** concluir publicação e verificar CI/deploy. Depois preparar ambiente e protocolo reservado do Portparser; somente decidir integração após custo, alinhamento e licenças conhecidos.
+- **Próxima ação:** preparar ambiente e protocolo reservado do Portparser; somente decidir integração após custo, alinhamento e licenças conhecidos.
+
+## Publicação confirmada
+
+- Commit local de preparação: `6580799f4391731f22dea94cfa479b828415cc25`.
+- Commit remoto na main: `db3fde26d0662568ac198f878d3cc861babfc8f0`.
+- Árvore idêntica conferida: `8641dcad965017a3f728e8596caddfe480691388`. Main local alinhada sem apagar alterações.
+- [CI de integridade](https://github.com/rfmss/escrevaral/actions/runs/36299175168): **success**, incluindo instalação pelo lockfile, 17 verificações, montagem e diff reproduzível em Node 22.
+- [GitHub Pages](https://github.com/rfmss/escrevaral/actions/runs/36299174790): **success**.
+- Destino: https://escrevaral.com. Confirmação de deploy pela API do GitHub; não equivale a nova inspeção visual do domínio neste ambiente.
+- Este registro posterior altera documentação; não altera a distribuição do editor.
