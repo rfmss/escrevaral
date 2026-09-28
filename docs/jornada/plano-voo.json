@@ -122,7 +122,11 @@
           "state": "TODO",
           "acceptance": "ASTRA 2: comparar recursos/procedência/licenças e entregar prova isolada reproduzível com blocos/index limitado, ambiguidades, posições e custo medido. Contrato compartilhado revisto antes da integração.",
           "evidence": [
-            "docs/CONTRATO-PACOTES-LINGUISTICOS.md"
+            "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
+            "docs/recursos/REVISAO-A1-A01-2026-09-28.md",
+            "docs/recursos/ENTREGA-A2-A01.md",
+            "packages/experiments/lexical-index/README.md",
+            "tests/a01-lexical.cjs"
           ]
         },
         {
@@ -285,8 +289,8 @@
     "version": "6.32.0",
     "completed": [],
     "baselineDone": 9,
-    "publication": "v6-32 publicada em 63acd3c08ebaa65dc83dcf4df2b8e21fec932218; CI 36427773399 e Pages 36427772211 aprovados. A02 parcial, sem marco concluído.",
-    "evidence": "docs/jornada/ENTREGA-V6-32.md"
+    "publication": "Primeira prova A01 revisada e incorporada localmente; publicação aguardando confirmação.",
+    "evidence": "docs/jornada/ENTREGA-A01-REVISAO.md"
   },
   "scopeChanges": [
     {

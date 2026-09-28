@@ -1,0 +1,481 @@
+{
+  "schemaVersion": 1,
+  "checked": "2026-09-27 America/Sao_Paulo",
+  "method": "GitHub REST tree recursive, not truncated; sizes are upstream blob bytes, not installed footprint. Inspected text SHA-256 calculated locally. No external dataset imported.",
+  "sources": [
+    {
+      "repository": "LuceleneL/PortiLexicon-UD",
+      "commit": "315e063da1f89c89e2097c6e72428ebefb9ab1d1",
+      "treeTruncated": false,
+      "sourceTreeBytes": 95774240,
+      "files": [
+        {
+          "path": ".DS_Store",
+          "bytes": 6148,
+          "gitBlobSha": "5008ddfcf53c02e82d7eee2e57c38e5672ef89f6"
+        },
+        {
+          "path": ".gitattributes",
+          "bytes": 66,
+          "gitBlobSha": "dfe0770424b2a19faf507a501ebfc23be8f54e7b"
+        },
+        {
+          "path": ".gitignore",
+          "bytes": 45,
+          "gitBlobSha": "90994ce88641f0f38601c30ab2bfde35a7741442"
+        },
+        {
+          "path": "ADJ.tsv",
+          "bytes": 6373677,
+          "gitBlobSha": "869f95f0e7bdd129a481657dfc7a9439e0006072"
+        },
+        {
+          "path": "ADP.tsv",
+          "bytes": 531,
+          "gitBlobSha": "f330b4dcfcac8305a23a5e281ee535990f7a80c4"
+        },
+        {
+          "path": "ADV.tsv",
+          "bytes": 159958,
+          "gitBlobSha": "86495895800dfdbe9ff2f11f24b8e48060623f28"
+        },
+        {
+          "path": "AUX.tsv",
+          "bytes": 26088,
+          "gitBlobSha": "3d83e647efa2b538caf83c8a01a148e6b902926e"
+        },
+        {
+          "path": "CCONJ.tsv",
+          "bytes": 356,
+          "gitBlobSha": "6444a7efa3d1ab42fed2af6c016cb079f47b82e1"
+        },
+        {
+          "path": "DET.tsv",
+          "bytes": 6005,
+          "gitBlobSha": "e5908823e5e1138a01567dd01baae32596522b29"
+        },
+        {
+          "path": "INTJ.tsv",
+          "bytes": 476,
+          "gitBlobSha": "c0b91b3bbd788f15acc9ff9432dcb4f9d3e4c549"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1071,
+          "gitBlobSha": "769e891e62740e0054c587278af57d53a802123b"
+        },
+        {
+          "path": "NOUN.tsv",
+          "bytes": 3296258,
+          "gitBlobSha": "d91409cba53177ed90b400acb8c129ce4ca808df"
+        },
+        {
+          "path": "NUM.tsv",
+          "bytes": 1815,
+          "gitBlobSha": "0c567153370d9d56a99e37acd00d2766f388f72c"
+        },
+        {
+          "path": "PRON.tsv",
+          "bytes": 9244,
+          "gitBlobSha": "dcc08f1a720ab71b8f13d1c618ffa45ec9666330"
+        },
+        {
+          "path": "README.md",
+          "bytes": 3710,
+          "gitBlobSha": "fa1bbdeb21c0fcec0fac811beb934463a9092f89"
+        },
+        {
+          "path": "SCONJ.tsv",
+          "bytes": 218,
+          "gitBlobSha": "90d95c5267182b383d9f7437731b61de58e1c5c3"
+        },
+        {
+          "path": "UDlexPT.py",
+          "bytes": 4574,
+          "gitBlobSha": "ad8b6b5822db031e7dccf7874c01aa86a6bee328"
+        },
+        {
+          "path": "VERB.tsv",
+          "bytes": 71016248,
+          "gitBlobSha": "cc13a4feb6c7d868dc51a15dce70ddfbe53a67c0"
+        },
+        {
+          "path": "WORDmaster.txt",
+          "bytes": 14866932,
+          "gitBlobSha": "ee93b7cda6b9c58b06559b638424caf91ffd2dc1"
+        },
+        {
+          "path": "lexUI.py",
+          "bytes": 820,
+          "gitBlobSha": "528c3da8d90076ac5c67f3d9d3efc03828abaa5d"
+        }
+      ],
+      "inspected": [
+        {
+          "path": "README.md",
+          "sha256": "dc1ab10b4098bfc8dc4dd181544116d6badd10922d0fbc1524afd79c20224beb",
+          "utf8Bytes": 3710,
+          "url": "https://github.com/LuceleneL/PortiLexicon-UD/blob/315e063da1f89c89e2097c6e72428ebefb9ab1d1/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "938395de7af2c5d93635dde41c6b67e5e47f56ee341eb2fca6b0ed855518c653",
+          "utf8Bytes": 1071,
+          "url": "https://github.com/LuceleneL/PortiLexicon-UD/blob/315e063da1f89c89e2097c6e72428ebefb9ab1d1/LICENSE"
+        },
+        {
+          "path": "UDlexPT.py",
+          "sha256": "4c0ee6d34f8221e9ae08ecf7e053f015e615e7ddafb4703060362e9c9ba7e078",
+          "utf8Bytes": 4574,
+          "url": "https://github.com/LuceleneL/PortiLexicon-UD/blob/315e063da1f89c89e2097c6e72428ebefb9ab1d1/UDlexPT.py"
+        }
+      ]
+    },
+    {
+      "repository": "LuceleneL/portTokenizer",
+      "commit": "3a96f320b96b870737e5eace63c4b139ee7522a7",
+      "treeTruncated": false,
+      "sourceTreeBytes": 95834804,
+      "files": [
+        {
+          "path": ".DS_Store",
+          "bytes": 6148,
+          "gitBlobSha": "50d046f436ec5c56cbd644322019ef86c8627786"
+        },
+        {
+          "path": ".gitattributes",
+          "bytes": 66,
+          "gitBlobSha": "dfe0770424b2a19faf507a501ebfc23be8f54e7b"
+        },
+        {
+          "path": ".gitignore",
+          "bytes": 10,
+          "gitBlobSha": "e43b0f988953ae3a84b00331d0ccf5f7d51cb3cf"
+        },
+        {
+          "path": "ADJ.tsv",
+          "bytes": 6373517,
+          "gitBlobSha": "5d7613a0be9cef1a187b3c76e49925e9b7a933d4"
+        },
+        {
+          "path": "ADP.tsv",
+          "bytes": 531,
+          "gitBlobSha": "f330b4dcfcac8305a23a5e281ee535990f7a80c4"
+        },
+        {
+          "path": "ADV.tsv",
+          "bytes": 159958,
+          "gitBlobSha": "86495895800dfdbe9ff2f11f24b8e48060623f28"
+        },
+        {
+          "path": "AUX.tsv",
+          "bytes": 26088,
+          "gitBlobSha": "3d83e647efa2b538caf83c8a01a148e6b902926e"
+        },
+        {
+          "path": "CCONJ.tsv",
+          "bytes": 356,
+          "gitBlobSha": "6444a7efa3d1ab42fed2af6c016cb079f47b82e1"
+        },
+        {
+          "path": "DET.tsv",
+          "bytes": 6005,
+          "gitBlobSha": "e5908823e5e1138a01567dd01baae32596522b29"
+        },
+        {
+          "path": "INTJ.tsv",
+          "bytes": 476,
+          "gitBlobSha": "c0b91b3bbd788f15acc9ff9432dcb4f9d3e4c549"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1071,
+          "gitBlobSha": "769e891e62740e0054c587278af57d53a802123b"
+        },
+        {
+          "path": "NOUN.tsv",
+          "bytes": 3296258,
+          "gitBlobSha": "d91409cba53177ed90b400acb8c129ce4ca808df"
+        },
+        {
+          "path": "NUM.tsv",
+          "bytes": 1815,
+          "gitBlobSha": "0c567153370d9d56a99e37acd00d2766f388f72c"
+        },
+        {
+          "path": "PRON.tsv",
+          "bytes": 9244,
+          "gitBlobSha": "dcc08f1a720ab71b8f13d1c618ffa45ec9666330"
+        },
+        {
+          "path": "README.md",
+          "bytes": 5658,
+          "gitBlobSha": "a980c3fcd45aabbe22aad22c5b57acd083b43fcc"
+        },
+        {
+          "path": "SCONJ.tsv",
+          "bytes": 218,
+          "gitBlobSha": "90d95c5267182b383d9f7437731b61de58e1c5c3"
+        },
+        {
+          "path": "VERB.tsv",
+          "bytes": 71016248,
+          "gitBlobSha": "cc13a4feb6c7d868dc51a15dce70ddfbe53a67c0"
+        },
+        {
+          "path": "WORDmaster.txt",
+          "bytes": 14866932,
+          "gitBlobSha": "ee93b7cda6b9c58b06559b638424caf91ffd2dc1"
+        },
+        {
+          "path": "__pycache__/lexikon.cpython-311.pyc",
+          "bytes": 6629,
+          "gitBlobSha": "06d0f4cafe4c3dbcc7ce0b8fb7e8f2007fbb8697"
+        },
+        {
+          "path": "__pycache__/lexikon.cpython-312.pyc",
+          "bytes": 6057,
+          "gitBlobSha": "5a07edb08a3ac7f43af58d8b56e0a0baa0b7d13f"
+        },
+        {
+          "path": "__pycache__/lexikon.cpython-37.pyc",
+          "bytes": 2922,
+          "gitBlobSha": "167f29368f81e31e29b9689b7dd034decf1aad4f"
+        },
+        {
+          "path": "abbrev.txt",
+          "bytes": 1872,
+          "gitBlobSha": "cda9429d085c2f8da0205ce5de49e0483ad248ad"
+        },
+        {
+          "path": "lexikon.py",
+          "bytes": 4413,
+          "gitBlobSha": "34c02251d00be717bd8fb985ca7f605bc2456b50"
+        },
+        {
+          "path": "portTok.py",
+          "bytes": 39329,
+          "gitBlobSha": "a67ff310f9f36c2b05e1d61ae14e437a2235ad8b"
+        },
+        {
+          "path": "sents.conllu",
+          "bytes": 2624,
+          "gitBlobSha": "d71bbd7c50fb44c38fd3bc7dda32e8cc6e4877dc"
+        },
+        {
+          "path": "sents.txt",
+          "bytes": 359,
+          "gitBlobSha": "4c0d1c064873d899efdd95d9943b17cc2bd61e86"
+        }
+      ],
+      "inspected": [
+        {
+          "path": "README.md",
+          "sha256": "9eba4ff6e2984dccdbd22f1f6fa0e9c2797d649aa9a7dbb6ff5cca7c6a60aafa",
+          "utf8Bytes": 5658,
+          "url": "https://github.com/LuceleneL/portTokenizer/blob/3a96f320b96b870737e5eace63c4b139ee7522a7/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "938395de7af2c5d93635dde41c6b67e5e47f56ee341eb2fca6b0ed855518c653",
+          "utf8Bytes": 1071,
+          "url": "https://github.com/LuceleneL/portTokenizer/blob/3a96f320b96b870737e5eace63c4b139ee7522a7/LICENSE"
+        }
+      ]
+    },
+    {
+      "repository": "languagetool-org/languagetool",
+      "commit": "622328535865050c077ccb64cabb5fad77038bc4",
+      "treeTruncated": false,
+      "sourceTreeBytes": 273854084,
+      "files": [
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/archaisms.txt",
+          "bytes": 24,
+          "gitBlobSha": "be51c74ca955dd3532187da53c44ae4245f1b60d"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/barbarisms.txt",
+          "bytes": 4520,
+          "gitBlobSha": "374207b37d64c5bd71f785d807023cc1c447e00b"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/cliches.txt",
+          "bytes": 178,
+          "gitBlobSha": "3233d4011220f46053c44f3320835e9653dd477b"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/confusion_pairs.txt",
+          "bytes": 1594,
+          "gitBlobSha": "de91d7acfce9795e41bb774b68b530078401c550"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/grammar.xml",
+          "bytes": 92309,
+          "gitBlobSha": "d1b520f80a457e39cb86e6d93ec27bf1d20214f2"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/redundancies.txt",
+          "bytes": 450,
+          "gitBlobSha": "9953babe97ed79d02a1a28f908f0cba8c8a2464b"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/replace.txt",
+          "bytes": 7037,
+          "gitBlobSha": "2e0baa0e8da1c7dd808e21c7f299e70821a24681"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/style.xml",
+          "bytes": 47724,
+          "gitBlobSha": "9c4de56c8f45e33bbb363bcbf2e2526edcbb48b0"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/wikipedia.txt",
+          "bytes": 69,
+          "gitBlobSha": "bdc64afcf17ec884216af9524e2ac2e183a403d9"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/wordiness.txt",
+          "bytes": 150,
+          "gitBlobSha": "e8ba7fd0b2689b289cecfc3ef90b0458df7caf9e"
+        },
+        {
+          "path": "pom.xml",
+          "bytes": 68156,
+          "gitBlobSha": "21a59f6191b2baa50fb5252e6849030d49eabcd3"
+        }
+      ],
+      "inspected": [
+        {
+          "path": "pom.xml",
+          "sha256": "c48e5d13fd465b280a27bf22ced4fc1c336aff2c26cd0dbdd1073c5c5815ff37",
+          "utf8Bytes": 68156,
+          "url": "https://github.com/languagetool-org/languagetool/blob/622328535865050c077ccb64cabb5fad77038bc4/pom.xml"
+        },
+        {
+          "path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/grammar.xml",
+          "sha256": "a723155f6a68a730a4087466c599f67a1151547ec9c82897155563bacc56df96",
+          "utf8Bytes": 92309,
+          "url": "https://github.com/languagetool-org/languagetool/blob/622328535865050c077ccb64cabb5fad77038bc4/languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-BR/grammar.xml"
+        }
+      ]
+    },
+    {
+      "repository": "cogroo/cogroo4",
+      "commit": "b6228900c20c6b37eac10a03708a9669dd562f52",
+      "treeTruncated": false,
+      "sourceTreeBytes": 17178159,
+      "files": [
+        {
+          "path": "cogroo-distr/src/main/readme/LICENSE",
+          "bytes": 13048,
+          "gitBlobSha": "8ea47fade7eb41cfd0e506c1a197709097c2ccb9"
+        },
+        {
+          "path": "cogroo-distr/src/main/readme/NOTICE",
+          "bytes": 986,
+          "gitBlobSha": "e521909512e1619a272def1cc00e3a0f8f9db963"
+        },
+        {
+          "path": "lang/pt_br/cogroo-gc/rules/README.txt",
+          "bytes": 1096,
+          "gitBlobSha": "3bf4dad0e5263fed9cab042cbe2513724c414438"
+        },
+        {
+          "path": "lang/pt_br/cogroo-gc/rules/rules.xml",
+          "bytes": 256374,
+          "gitBlobSha": "43ac9ad66058184af2d588147c0872a4fb34e916"
+        },
+        {
+          "path": "lang/pt_br/cogroo-res/models/README.md",
+          "bytes": 1341,
+          "gitBlobSha": "b5a92b5e7e75297cf6d90d53cbf66d8b4760c0bb"
+        }
+      ],
+      "inspected": [
+        {
+          "path": "cogroo-distr/src/main/readme/LICENSE",
+          "sha256": "44ebd77738460767ea80d0419fea4ed210263c0553789d40f015c93cd876107c",
+          "utf8Bytes": 13048,
+          "url": "https://github.com/cogroo/cogroo4/blob/b6228900c20c6b37eac10a03708a9669dd562f52/cogroo-distr/src/main/readme/LICENSE"
+        },
+        {
+          "path": "cogroo-distr/src/main/readme/NOTICE",
+          "sha256": "944bd90abac670a8063fc4b759242f7600571f83d36ffafb0c29b9d007936e57",
+          "utf8Bytes": 986,
+          "url": "https://github.com/cogroo/cogroo4/blob/b6228900c20c6b37eac10a03708a9669dd562f52/cogroo-distr/src/main/readme/NOTICE"
+        },
+        {
+          "path": "lang/pt_br/cogroo-gc/rules/README.txt",
+          "sha256": "2bda965ba49f88f8fd45a61b117d05dfc7e3ce813ca987ae5340859c9cf1cad1",
+          "utf8Bytes": 1096,
+          "url": "https://github.com/cogroo/cogroo4/blob/b6228900c20c6b37eac10a03708a9669dd562f52/lang/pt_br/cogroo-gc/rules/README.txt"
+        },
+        {
+          "path": "lang/pt_br/cogroo-res/models/README.md",
+          "sha256": "08393f1c7e10f2aaa62fc88eb787da83c529b3cbe23d86f77c18d18b6c0215a6",
+          "utf8Bytes": 1341,
+          "url": "https://github.com/cogroo/cogroo4/blob/b6228900c20c6b37eac10a03708a9669dd562f52/lang/pt_br/cogroo-res/models/README.md"
+        }
+      ]
+    },
+    {
+      "repository": "UniversalDependencies/UD_Portuguese-Porttinari",
+      "commit": "87a07e1fb761d6d0a6e2a4d82b11b308344dabb9",
+      "treeTruncated": false,
+      "sourceTreeBytes": 23671500,
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "bytes": 188,
+          "gitBlobSha": "a7b465577bca288b1eb6f7eed92d83558e038d68"
+        },
+        {
+          "path": "README.md",
+          "bytes": 4821,
+          "gitBlobSha": "3091fe6d652b45b2117c486c5b16de4af190705c"
+        },
+        {
+          "path": "not-to-release/porttinari.conllu",
+          "bytes": 11679306,
+          "gitBlobSha": "e3824831c78daee69bdc55802394598a8b10e35e"
+        },
+        {
+          "path": "pt_porttinari-ud-dev.conllu",
+          "bytes": 1151522,
+          "gitBlobSha": "19e5a75cec5087a7aa92dc112e21e9f9d74bdaa7"
+        },
+        {
+          "path": "pt_porttinari-ud-test.conllu",
+          "bytes": 2333627,
+          "gitBlobSha": "af98886be049bbfc6bc5ddd0b2c367c4004bb82f"
+        },
+        {
+          "path": "pt_porttinari-ud-train.conllu",
+          "bytes": 8194157,
+          "gitBlobSha": "6dac8d4a5b6bf208dc9146291e7b9014e404bc59"
+        }
+      ],
+      "inspected": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "5cbfe2d4d12938f9961bf5a0028390f4b6b60749b075e228a5740848afcb4a9b",
+          "utf8Bytes": 188,
+          "url": "https://github.com/UniversalDependencies/UD_Portuguese-Porttinari/blob/87a07e1fb761d6d0a6e2a4d82b11b308344dabb9/LICENSE.txt"
+        },
+        {
+          "path": "README.md",
+          "sha256": "792c93a16a60136179e8e5bd76660d617fbb97892d03618aa903f87a963fde84",
+          "utf8Bytes": 4821,
+          "url": "https://github.com/UniversalDependencies/UD_Portuguese-Porttinari/blob/87a07e1fb761d6d0a6e2a4d82b11b308344dabb9/README.md"
+        }
+      ]
+    }
+  ],
+  "additionalReferences": [
+    {
+      "url": "https://sites.google.com/icmc.usp.br/poetisa/resources-and-tools",
+      "finding": "PortiLexicon data advertised as CC-BY; repository root has MIT. Scope/version of data license requires confirmation before redistribution."
+    }
+  ]
+}
