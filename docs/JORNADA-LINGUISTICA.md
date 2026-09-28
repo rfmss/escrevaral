@@ -6,7 +6,7 @@ Atualizado em 27/09/2026. Base do produto auditada: `db3d63c2ad3cc6434167824f759
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-31 publicada, com CI e Pages aprovados. A02 parcial: persistência transacional e coordenador sequencial de instalação, com progresso por gravação confirmada, cancelamento e retomada. Fábricas integradas à montagem, ainda sem consumidor na interface, catálogo, transporte ou pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos. A integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.
+**Estado:** v6-31 publicada, com CI e Pages aprovados. A02 parcial: persistência transacional e coordenador sequencial de instalação, com progresso por gravação confirmada, cancelamento e retomada. Fábricas integradas à montagem, ainda sem consumidor na interface, catálogo, transporte ou pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos. A integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada. v6-32 em preparação: transporte local de blocos por faixas limitadas, com cancelamento e timeout; ainda sem catálogo/interface e sem publicação confirmada.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
