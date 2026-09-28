@@ -285,7 +285,7 @@
     "version": "6.32.0",
     "completed": [],
     "baselineDone": 9,
-    "publication": "A02 parcial implementada; publicação da v6-32 aguardando confirmação.",
+    "publication": "v6-32 publicada em 63acd3c08ebaa65dc83dcf4df2b8e21fec932218; CI 36427773399 e Pages 36427772211 aprovados. A02 parcial, sem marco concluído.",
     "evidence": "docs/jornada/ENTREGA-V6-32.md"
   },
   "scopeChanges": [

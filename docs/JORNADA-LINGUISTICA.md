@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 27/09/2026. Base do produto auditada: `db3d63c2ad3cc6434167824f759e3eb755da5e8a`.
+Atualizado em 28/09/2026. Base do produto auditada: `63acd3c08ebaa65dc83dcf4df2b8e21fec932218`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-31 publicada, com CI e Pages aprovados. A02 parcial: persistência transacional e coordenador sequencial de instalação, com progresso por gravação confirmada, cancelamento e retomada. Fábricas integradas à montagem, ainda sem consumidor na interface, catálogo, transporte ou pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos. A integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada. v6-32 em preparação: transporte local de blocos por faixas limitadas, com cancelamento e timeout; ainda sem catálogo/interface e sem publicação confirmada.
+**Estado:** v6-32 publicada, com CI e Pages aprovados. A02 parcial: persistência transacional, coordenador de instalação e leitor local por faixas limitadas antes da leitura, com cancelamento e timeout. Fábricas integradas à montagem, ainda sem consumidor na interface, catálogo/manifesto aprovado ou pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos. Integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A1: continuar A02 — definir catálogo aprovado e transporte limitado com base em A01; conectar instalação/recuperação explícitas à interface com capacidade, espaço e erros apresentados. Persistência e coordenador já publicados; A02 continua TODO até cumprir o escopo completo.
+- A1: continuar A02 — integrar manifesto/catálogo aprovado e controles explícitos de instalação/recuperação quando A01 fornecer dados, procedência e limites. Persistência, coordenador e transporte local já publicados como fábricas opcionais; A02 continua TODO até cumprir o escopo completo.
 - A2: entregar A01 em área isolada — comparação e prova lexical indexada. Nada da pesquisa foi incorporado ao produto.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.

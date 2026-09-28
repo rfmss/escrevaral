@@ -1,12 +1,12 @@
 {
-  "version": 17,
-  "updated": "27/09/2026",
-  "baseline": "db3d63c2ad3cc6434167824f759e3eb755da5e8a",
+  "version": 18,
+  "updated": "28/09/2026",
+  "baseline": "63acd3c08ebaa65dc83dcf4df2b8e21fec932218",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-31 publicada, com CI e Pages aprovados. A02 parcial: persistência transacional e coordenador sequencial de instalação, com progresso por gravação confirmada, cancelamento e retomada. Fábricas integradas à montagem, ainda sem consumidor na interface, catálogo, transporte ou pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos. A integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada. v6-32 em preparação: transporte local de blocos por faixas limitadas, com cancelamento e timeout; ainda sem catálogo/interface e sem publicação confirmada.",
+  "current": "v6-32 publicada, com CI e Pages aprovados. A02 parcial: persistência transacional, coordenador de instalação e leitor local por faixas limitadas antes da leitura, com cancelamento e timeout. Fábricas integradas à montagem, ainda sem consumidor na interface, catálogo/manifesto aprovado ou pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos. Integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.",
   "next": [
-    "A1: continuar A02 — definir catálogo aprovado e transporte limitado com base em A01; conectar instalação/recuperação explícitas à interface com capacidade, espaço e erros apresentados. Persistência e coordenador já publicados; A02 continua TODO até cumprir o escopo completo.",
+    "A1: continuar A02 — integrar manifesto/catálogo aprovado e controles explícitos de instalação/recuperação quando A01 fornecer dados, procedência e limites. Persistência, coordenador e transporte local já publicados como fábricas opcionais; A02 continua TODO até cumprir o escopo completo.",
     "A2: entregar A01 em área isolada — comparação e prova lexical indexada. Nada da pesquisa foi incorporado ao produto.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
     "Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.",
@@ -667,7 +667,7 @@
     "date": "27/09/2026",
     "request": "Coordenar ASTRA 1/2; admitir acervo grande em disco e preparação leve nas pausas; retirar prazo de calendário.",
     "decision": "ASTRA 1 mantém produto, C04 e integração na main. ASTRA 2 cuida da primeira prova isolada em packages/experiments/lexical-index/ e docs/recursos/. Contratos compartilhados por proposta; não alterar cofre síncrono nem manifestos de produção em paralelo.",
-    "nextDeliverable": "A1: catálogo/transporte e interface de A02 sobre a base v6-31. A2: A01; integração lexical condicionada à prova e ao contrato."
+    "nextDeliverable": "A1: catálogo/manifesto e interface de A02 sobre a base v6-32. A2: A01; integração lexical condicionada à prova e ao contrato."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -678,10 +678,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "v6-31 publicada; CI e GitHub Pages concluídos com sucesso",
-    "commit": "db3d63c2ad3cc6434167824f759e3eb755da5e8a",
-    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36365964029",
-    "verification": "CI 36365964682 e Pages 36365964029: completed/success. 22 scripts essenciais aprovados pelo CI; sem testes visuais ou em aparelhos. Coordenador exercitado com leitor injetado e IndexedDB simulado; não comprova transporte real ou reabertura física offline."
+    "status": "v6-32 publicada; CI e GitHub Pages concluídos com sucesso",
+    "commit": "63acd3c08ebaa65dc83dcf4df2b8e21fec932218",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36427772211",
+    "verification": "CI 36427773399 e Pages 36427772211: completed/success. 23 scripts essenciais aprovados pelo CI; sem testes visuais ou em aparelhos. Leitor local integrado ao coordenador em prova com Blob do Node, FileReader controlado e IndexedDB simulado; não comprova reabertura física offline."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",
@@ -693,7 +693,7 @@
   "resourceDirection": {
     "date": "27/09/2026",
     "contract": "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
-    "status": "A02 parcial publicada na v6-31: persistência por versão/bloco e coordenação sequencial da instalação. Catálogo, transporte, interface, pacotes reais e preparação incremental ainda pendentes.",
+    "status": "A02 parcial publicada na v6-32: persistência por versão/bloco, coordenação da instalação e leitura local por recortes limitados. Catálogo/manifesto aprovado, interface, pacotes reais e preparação incremental ainda pendentes.",
     "deadline": "Sem prazo de calendário; entregas delimitadas.",
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
