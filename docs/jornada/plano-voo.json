@@ -101,11 +101,13 @@
         {
           "id": "C04",
           "title": "Salvar, importar, exportar e selecionar no piso",
-          "state": "TODO",
-          "acceptance": "Revisar APIs e alternativas de salvar/importar/exportar/selecionar; preservar texto e pacotes com verificações essenciais de integridade, sem matriz de aparelhos.",
+          "state": "DONE",
+          "acceptance": "Transporte por download ou conteúdo copiado, leitura de arquivos protegida, importação validada/confirmada, exportação do rascunho sem exigir gravação e seleção com alternativa; integridade, CI e publicação confirmados.",
           "evidence": [
+            "src/ui/transferencia.js",
             "src/editor/controlador.js",
-            "src/storage/"
+            "tests/transferencia.cjs",
+            "docs/jornada/ENTREGA-V6-29.md"
           ]
         }
       ]
@@ -271,13 +273,15 @@
       ]
     }
   ],
-  "next": "C04",
+  "next": "A02",
   "lastDelivery": {
-    "version": "diretriz-pacotes-2026-09-27",
-    "completed": [],
+    "version": "6.29.0",
+    "completed": [
+      "C04"
+    ],
     "baselineDone": 8,
-    "publication": "Registro documental da direção e fronteiras; produto v6-28 permanece inalterado. Conferir o commit deste registro na main.",
-    "evidence": "docs/CONTRATO-PACOTES-LINGUISTICOS.md"
+    "publication": "d2f2a285595b2ca93de759a21012010adb52c2c8; CI 36343607618 e Pages 36343606917: success.",
+    "evidence": "docs/jornada/ENTREGA-V6-29.md"
   },
   "scopeChanges": [
     {

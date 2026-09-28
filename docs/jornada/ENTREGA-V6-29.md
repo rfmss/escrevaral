@@ -27,6 +27,8 @@ Arquivo de importação conserva limite de 50 MB; conteúdo colado recebe també
 - `tests/cadernos.cjs`: formatos, ida/volta, identidade, conflitos, quota/rollback e recuperação existentes.
 - `tests/ptbr-visual.cjs`: integração da seleção com motor real e DOM simulado, preservando texto e ocorrência; não é teste visual de navegador.
 - `tests/controles-static.cjs`, `npm run build:check`, `git diff --check`: ES5, hashes e distribuição reproduzível.
-- Estados: implementado, integrado e verificado localmente; publicação aguardando confirmação. C04 continua TODO até confirmar a entrega remota.
+- Estados: implementado, integrado, verificado e publicado. C04 DONE; plano v3: 9/24, entrega +1.
 - Reversão: commit normal do lote e montagem regenerada; sem migração de formatos/chaves.
 - Próximo de A1: preparação de A02 (persistência/instalação), integração condicionada à prova A01 e contratos medidos de A2. Não duplicar a seleção de recursos de A2.
+
+Publicação confirmada: main `d2f2a285595b2ca93de759a21012010adb52c2c8`, árvore `32ace3664db80ea6f613cde6f5bdee09a09c8fa6`; [CI](https://github.com/rfmss/escrevaral/actions/runs/36343607618) e [Pages](https://github.com/rfmss/escrevaral/actions/runs/36343606917) concluídos com sucesso. 20 verificações essenciais aprovadas no CI.

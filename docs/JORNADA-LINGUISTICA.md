@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 27/09/2026. Base do produto auditada: `d5faf397ea953e31401326b0b0ff8aa27ac41b52`.
+Atualizado em 27/09/2026. Base do produto auditada: `d2f2a285595b2ca93de759a21012010adb52c2c8`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** Produto v6-28 publicado; main de referência 019e910. Plano v3: 8/24 DONE, +0 nesta revisão de direção. Acrescentados A01–A03 para consulta particionada, pacotes persistentes/offline e preparação incremental. Acervo próximo de 1 GB é admissível em disco sob limites de recursos, não capacidade garantida. Implementação atual permanece sem triagem automática. ASTRA 1 segue C04 e integra na main; ASTRA 2 pode executar A01 isoladamente. C04 implementada e verificada localmente para v6-29, aguardando publicação: alternativas de transporte manual e seleção protegida.
+**Estado:** v6-29 publicada, com CI e Pages aprovados. C04 DONE: transporte manual de cópias completas, leitura protegida, importação validada/confirmada, exportação do rascunho sem nova gravação e seleção com alternativa. Plano v3: 9/24 DONE; entrega +1 (C04); compatibilidade 4/4 no escopo delimitado, sem certificação de aparelhos. A1 segue a preparação de A02; integração dos pacotes depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,8 +16,8 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- C04: revisar APIs e alternativas de salvar/importar/exportar/selecionar, preservando texto e pacotes com verificações essenciais.
-- ASTRA 2: A01 em paralelo isolado, comparação técnica e prova lexical indexada; ASTRA 1 estabiliza contratos antes de A02/A03.
+- A1: preparar A02 — persistência, instalação interrompida e recuperação; integração do formato/dados depende da prova A01 e contratos medidos.
+- A2: entregar A01 em área isolada — comparação e prova lexical indexada. Nada da pesquisa foi incorporado ao produto.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.

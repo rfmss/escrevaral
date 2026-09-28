@@ -6,12 +6,12 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 27/09/2026, horário de Brasília:** produto v6-28 na main `d5faf397ea953e31401326b0b0ff8aa27ac41b52`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
+**Retrato conferido em 27/09/2026, horário de Brasília:** produto v6-29 na main `d2f2a285595b2ca93de759a21012010adb52c2c8`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
 
 
 ## Coordenação e nova direção — 27/09/2026
 
-Leia o [contrato proposto de pacotes e preparação](CONTRATO-PACOTES-LINGUISTICOS.md) antes de alterar áreas compartilhadas. ASTRA 1 mantém C04, produto e integração na main; ASTRA 2 faz A01 isoladamente. Acervo grande em disco é permitido sob limites independentes de memória e trabalho; preparação leve nas pausas passa a ser planejada, sem execução automática das lentes completas. Não há prazo de calendário. Nada disso já está ativo na v6-28.
+Leia o [contrato proposto de pacotes e preparação](CONTRATO-PACOTES-LINGUISTICOS.md) antes de alterar áreas compartilhadas. ASTRA 1 concluiu C04 e mantém produto, preparação de A02 e integração na main; ASTRA 2 faz A01 isoladamente. Acervo grande em disco é permitido sob limites independentes de memória e trabalho; preparação leve nas pausas passa a ser planejada, sem execução automática das lentes completas. Não há prazo de calendário. Nada disso já está ativo na v6-28.
 
 Plano v3 acrescenta A01–A03: **8/21 → 8/24**, por ampliação de escopo, sem apagar entregas nem contar documentação como implementação. C03 tratou o núcleo portátil; pacotes grandes persistentes/offline serão A02.
 
@@ -24,7 +24,7 @@ A árvore abaixo é gerada de [plano-voo.json](jornada/plano-voo.json). Atualize
 <!-- PLANO-VOO:INICIO -->
 ## Árvore de execução — plano v3
 
-**8/24 marcos DONE · nesta entrega +0 (ajuste de diretriz) · próximo C04**
+**9/24 marcos DONE · nesta entrega +1 (C04) · próximo A02**
 
 Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.
 
@@ -38,12 +38,12 @@ Marcos da primeira versão; não são porcentagem da língua, esforço ou precis
 - [x] **F04 — Plano mestre e passagem entre pessoas/IAs** — DONE. Retomada aponta main, estado, decisões e evidências. Evidência: [docs/PLANO-MESTRE.md](PLANO-MESTRE.md), [AGENTS.md](../AGENTS.md).
 - [x] **F05 — Filosofia do anexo e árvore de execução** — DONE. Diretrizes conciliadas, conflitos explícitos e caixas com critérios. Evidência: [docs/FILOSOFIA-E-COMPATIBILIDADE.md](FILOSOFIA-E-COMPATIBILIDADE.md), [docs/jornada/referencia-design.json](jornada/referencia-design.json).
 
-### Compatibilidade e custo — 3/4
+### Compatibilidade e custo — 4/4
 
 - [x] **C01 — Relógio com movimento discreto** — DONE. Sem animação 3D/interpolação; troca breve, callbacks antigos descartados, modo reduzido e oculto sem timer visual. Evidência: [src/ui/digito-relogio.js](../src/ui/digito-relogio.js), [tests/relogio-discreto.cjs](../tests/relogio-discreto.cjs), [docs/jornada/ENTREGA-V6-26.md](jornada/ENTREGA-V6-26.md).
 - [x] **C02 — Layout do painel pelo piso antigo** — DONE. Painel sem Grid/Flex/gap, com colunas simples, faixas roláveis, seleção e lógica dos arcos preservadas; integridade, CI e publicação confirmados. Evidência: [ptbr/leitura-visual.css](../ptbr/leitura-visual.css), [ptbr/painel.js](../ptbr/painel.js), [docs/jornada/ENTREGA-V6-27.md](jornada/ENTREGA-V6-27.md).
 - [x] **C03 — Caminho offline legado** — DONE. Site/cache opcional e portátil separados; arquivo sem registro de worker, estados de preparação/ativação/falha, instruções de transporte/recuperação, verificações de integridade e publicação confirmadas. Evidência: [docs/ARQUITETURA.md](ARQUITETURA.md), [src/app/offline.js](../src/app/offline.js), [tests/offline-access.cjs](../tests/offline-access.cjs), [docs/jornada/ENTREGA-V6-28.md](jornada/ENTREGA-V6-28.md).
-- [ ] **C04 — Salvar, importar, exportar e selecionar no piso** — TODO. Revisar APIs e alternativas de salvar/importar/exportar/selecionar; preservar texto e pacotes com verificações essenciais de integridade, sem matriz de aparelhos. Evidência: [src/editor/controlador.js](../src/editor/controlador.js), [src/storage/](../src/storage/).
+- [x] **C04 — Salvar, importar, exportar e selecionar no piso** — DONE. Transporte por download ou conteúdo copiado, leitura de arquivos protegida, importação validada/confirmada, exportação do rascunho sem exigir gravação e seleção com alternativa; integridade, CI e publicação confirmados. Evidência: [src/ui/transferencia.js](../src/ui/transferencia.js), [src/editor/controlador.js](../src/editor/controlador.js), [tests/transferencia.cjs](../tests/transferencia.cjs), [docs/jornada/ENTREGA-V6-29.md](jornada/ENTREGA-V6-29.md).
 
 ### Acervo e preparação incremental — 0/3
 
@@ -147,7 +147,7 @@ Na base conferida, há **16 lentes com escopos delimitados**. Isso não signific
 
 A v6-25 entregou fontes separadas, build reproduzível, cofre transportável, manual de conectores e CI na main. O controlador legado do editor continua grande e a cascata CSS mantém a ordem histórica.
 
-**Evidência conhecida:** 19 scripts essenciais no CI da v6-28; C02/C03 publicadas com [registro de acesso offline](jornada/ENTREGA-V6-28.md); 290 casos equivalentes entre a ordem anterior dos módulos e o cofre isolado; CI e deploy da v6-26 concluídos. O relatório da [v6-26](jornada/ENTREGA-V6-26.md) registra F05/C01 e seus limites. Os 290 casos são evidência de preservação na reorganização, não medição de cobertura do português ou avaliação reservada do modelo.
+**Evidência conhecida:** 20 scripts essenciais no CI da v6-29; [C04 publicada](jornada/ENTREGA-V6-29.md); C02/C03 publicadas com [registro de acesso offline](jornada/ENTREGA-V6-28.md); 290 casos equivalentes entre a ordem anterior dos módulos e o cofre isolado; CI e deploy da v6-26 concluídos. O relatório da [v6-26](jornada/ENTREGA-V6-26.md) registra F05/C01 e seus limites. Os 290 casos são evidência de preservação na reorganização, não medição de cobertura do português ou avaliação reservada do modelo.
 
 **Portparser:** snapshot seletivo atribuído e fixado por commit; adaptador local CoNLL-U testado com anotação manual. Pesos, léxicos e runtime de inferência não instalados. Não executado nem integrado como motor do produto. [Estado e critérios completos](../packages/connectors/portparser/README.md).
 
@@ -201,7 +201,7 @@ O mapa inclui as áreas abaixo. Elas descrevem o destino; não são alegações 
 
 ## 7. Sequência de execução na retomada
 
-Primeiro conferir a main e a árvore atual. A prioridade mudou com a diretriz de compatibilidade: **C04**, com Q01 como revisão de simplicidade e acessibilidade no código, antes de exigir novos motores pesados. C01, C02 e C03 estão concluídos nesse percurso; F01–F04 já eram a base entregue. F05 incorpora a filosofia e a contagem padronizada.
+Primeiro conferir a main e a árvore atual. A prioridade mudou com a diretriz de compatibilidade: **preparar A02**, com integração dependente de A01 e Q01 como revisão de simplicidade e acessibilidade no código, antes de exigir novos motores pesados. C01–C04 estão concluídos nesse percurso; F01–F04 já eram a base entregue. F05 incorpora a filosofia e a contagem padronizada.
 
 Em paralelo isolado, ASTRA 2 executa A01. A02/A03 dependem dos contratos e limites resultantes, com instalação/integração a cargo de ASTRA 1. Depois, executar M00 em ambiente separado e continuar P03–P08 pelos marcos M01–M07. A avaliação externa não bloqueia estudo/corpus independentes. Não começar um download/modelo grande sem antes esclarecer licença, custo e utilidade para o piso alvo.
 

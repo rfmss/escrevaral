@@ -42,7 +42,7 @@ A digitação não espera transições nem análises. O limite de 16 ms do anexo
 
 1. Painel: C02 concluída na v6-27; tabela CSS, blocos e margens substituem Grid/Flex/gap, com rolagem e seleção preservadas.
 2. C03 concluída na v6-28: worker moderno isolado e opcional; arquivo portátil sem registro/cache, estados de falha e instruções de recuperação. C04 revisa as APIs de transporte do acervo.
-3. Download, importação, clipboard, seleção e salvamento: revisar APIs e caminhos alternativos no código, preservando dados.
+3. C04 concluída na v6-29: transporte manual de cópias completas, importação confirmada, exportação do rascunho sem nova gravação e seleção protegida. Limites em ENTREGA-V6-29.md.
 4. Relógio: animação 3D substituída na entrega C01 por duas metades estáticas, troca intermediária de 70 ms e estado final. Relógio oculto e preferência de movimento reduzido fazem troca direta; Q01 revisa simplicidade e acessibilidade no código.
 
 As fontes técnicas já consultadas para a triagem foram os anúncios oficiais do WebKit sobre [Safari 10.1](https://webkit.org/blog/7477/new-web-features-in-safari-10-1/) e [Safari 14.1](https://webkit.org/blog/11648/new-webkit-features-in-safari-14-1/). Essas fontes orientam escolhas conservadoras de recursos; sintaxe ES5 isoladamente não garante todas as APIs. Não criar uma fila de ensaios em aparelhos.
