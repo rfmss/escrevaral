@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 27/09/2026. Base do produto auditada: `d2f2a285595b2ca93de759a21012010adb52c2c8`.
+Atualizado em 28/09/2026. Base do produto auditada: `fb759e0d430e0a049038971c51d03386b27ab03a`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-29 publicada, com CI e Pages aprovados. C04 DONE: transporte manual de cópias completas, leitura protegida, importação validada/confirmada, exportação do rascunho sem nova gravação e seleção com alternativa. Plano v3: 9/24 DONE; entrega +1 (C04); compatibilidade 4/4 no escopo delimitado, sem certificação de aparelhos. A1 segue a preparação de A02; integração dos pacotes depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada. A02 parcial implementada e verificada localmente para v6-30: base transacional de versões/blocos, sem instalador ou pacotes reais; publicação pendente.
+**Estado:** v6-30 publicada, com CI e Pages aprovados. A02 parcial: base transacional opcional de versões e blocos, retomada, integridade, dependências fixadas e preservação da versão anterior durante atualização. Fábrica integrada à montagem, ainda sem consumidor ou instalador na interface e sem pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos; C01–C04 permanecem concluídos no escopo delimitado. A integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A1: preparar A02 — persistência, instalação interrompida e recuperação; integração do formato/dados depende da prova A01 e contratos medidos.
+- A1: continuar A02 — fluxo explícito de instalação/recuperação sobre a base publicada, com progresso, cancelamento e tratamento de falhas. Adaptar formato/dados quando A01 entregar a prova e os limites medidos; manter A02 TODO até cumprir o escopo completo.
 - A2: entregar A01 em área isolada — comparação e prova lexical indexada. Nada da pesquisa foi incorporado ao produto.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
@@ -269,4 +269,4 @@ As referências apoiam conceitos gerais; a aplicação ao parágrafo é uma leit
 
 ## Encerramento e manutenção
 
-Uma entrega termina quando cumpre seu escopo, tem evidências e limitações registradas e sua publicação é verificada. A primeira jornada termina com os módulos prometidos aprovados, uma interface acessível e custo compatível com os dispositivos homologados. Manutenção, novos casos e novas obras seguem em versões posteriores.
+Uma entrega termina quando cumpre seu escopo, tem evidências e limitações registradas e sua publicação é verificada. A primeira jornada termina com os módulos prometidos aprovados, uma interface acessível e custo compatível com os limites definidos para a referência tecnológica, sem exigência de homologação de aparelhos. Manutenção, novos casos e novas obras seguem em versões posteriores.

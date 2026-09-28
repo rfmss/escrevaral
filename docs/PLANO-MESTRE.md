@@ -6,12 +6,12 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 27/09/2026, horário de Brasília:** produto v6-29 na main `d2f2a285595b2ca93de759a21012010adb52c2c8`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
+**Retrato conferido em 28/09/2026 (UTC):** produto v6-30 na main `fb759e0d430e0a049038971c51d03386b27ab03a`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
 
 
 ## Coordenação e nova direção — 27/09/2026
 
-Leia o [contrato proposto de pacotes e preparação](CONTRATO-PACOTES-LINGUISTICOS.md) antes de alterar áreas compartilhadas. ASTRA 1 concluiu C04 e mantém produto, preparação de A02 e integração na main; ASTRA 2 faz A01 isoladamente. Acervo grande em disco é permitido sob limites independentes de memória e trabalho; preparação leve nas pausas passa a ser planejada, sem execução automática das lentes completas. Não há prazo de calendário. Nada disso já está ativo na v6-28.
+Leia o [contrato proposto de pacotes e preparação](CONTRATO-PACOTES-LINGUISTICOS.md) antes de alterar áreas compartilhadas. ASTRA 1 concluiu C04 e mantém produto, preparação de A02 e integração na main; ASTRA 2 faz A01 isoladamente. Acervo grande em disco é permitido sob limites independentes de memória e trabalho; preparação leve nas pausas passa a ser planejada, sem execução automática das lentes completas. Não há prazo de calendário. A v6-30 inclui apenas a base opcional de persistência; instalador, pacotes reais e preparação incremental continuam pendentes. Veja a [entrega parcial A02](jornada/ENTREGA-V6-30.md).
 
 Plano v3 acrescenta A01–A03: **8/21 → 8/24**, por ampliação de escopo, sem apagar entregas nem contar documentação como implementação. C03 tratou o núcleo portátil; pacotes grandes persistentes/offline serão A02.
 
@@ -147,7 +147,7 @@ Na base conferida, há **16 lentes com escopos delimitados**. Isso não signific
 
 A v6-25 entregou fontes separadas, build reproduzível, cofre transportável, manual de conectores e CI na main. O controlador legado do editor continua grande e a cascata CSS mantém a ordem histórica.
 
-**Evidência conhecida:** 20 scripts essenciais no CI da v6-29; [C04 publicada](jornada/ENTREGA-V6-29.md); C02/C03 publicadas com [registro de acesso offline](jornada/ENTREGA-V6-28.md); 290 casos equivalentes entre a ordem anterior dos módulos e o cofre isolado; CI e deploy da v6-26 concluídos. O relatório da [v6-26](jornada/ENTREGA-V6-26.md) registra F05/C01 e seus limites. Os 290 casos são evidência de preservação na reorganização, não medição de cobertura do português ou avaliação reservada do modelo.
+**Evidência conhecida:** 21 scripts essenciais no CI da v6-30; [persistência A02 parcial publicada](jornada/ENTREGA-V6-30.md); [C04 publicada](jornada/ENTREGA-V6-29.md); C02/C03 publicadas com [registro de acesso offline](jornada/ENTREGA-V6-28.md); 290 casos equivalentes entre a ordem anterior dos módulos e o cofre isolado; CI e deploy da v6-26 concluídos. O relatório da [v6-26](jornada/ENTREGA-V6-26.md) registra F05/C01 e seus limites. Os 290 casos são evidência de preservação na reorganização, não medição de cobertura do português ou avaliação reservada do modelo.
 
 **Portparser:** snapshot seletivo atribuído e fixado por commit; adaptador local CoNLL-U testado com anotação manual. Pesos, léxicos e runtime de inferência não instalados. Não executado nem integrado como motor do produto. [Estado e critérios completos](../packages/connectors/portparser/README.md).
 
