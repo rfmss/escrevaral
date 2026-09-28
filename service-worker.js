@@ -1,17 +1,17 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-31-5625966eeb98";
-const ASSET_VERSION = "20260927-scrvrl-legado-v6-31";
+const CACHE_NAME = "scrvrl-offline-v6-32-4262344199b1";
+const ASSET_VERSION = "20260928-scrvrl-legado-v6-32";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20260927-scrvrl-legado-v6-31/cofre.4668b55c3a49a07d.js",
+    "url": "./assets/20260928-scrvrl-legado-v6-32/cofre.4668b55c3a49a07d.js",
     "sha256": "4668b55c3a49a07df52cfaa8574c275dceb554043e8d391dd31b416a21a5f2ea"
   },
   {
-    "url": "./assets/20260927-scrvrl-legado-v6-31/app.b3785e99f937f64a.js",
-    "sha256": "b3785e99f937f64a13a053fbf17f7b4c2a988b83c1af158754d46cca3efcf53b"
+    "url": "./assets/20260928-scrvrl-legado-v6-32/app.44d00fc15e39236d.js",
+    "sha256": "44d00fc15e39236d88c625ae899200cf6091c65d98fafaa1969dd351a5abb04f"
   },
   {
-    "url": "./assets/20260927-scrvrl-legado-v6-31/styles.200ed33cf9f86d6b.css",
+    "url": "./assets/20260928-scrvrl-legado-v6-32/styles.200ed33cf9f86d6b.css",
     "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90"
   }
 ];
@@ -28,7 +28,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
   const cache=await caches.open(CACHE_NAME);
-  const index=await checkedAsset({url:'./index.html',sha256:'c843530e955676f7aa8239be6d422dfc611180c3a8414db22cf5cee56d595c69'});
+  const index=await checkedAsset({url:'./index.html',sha256:'b16c6c43ec801b12835e1bedb033be6ddb43594c5a24784c251f79b9a5387a28'});
   if(!index.ok||(await index.clone().text()).indexOf('content="'+ASSET_VERSION+'"')<0)throw new Error('Documento de outra versão');
   await Promise.all(REQUIRED_ASSETS.map(async asset=>cache.put(asset.url,await checkedAsset(asset))));
   await cache.put('./index.html',index.clone());await cache.put('./',index);

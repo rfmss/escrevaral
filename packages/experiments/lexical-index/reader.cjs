@@ -5,8 +5,8 @@ const {performance}=require('node:perf_hooks');
 exports.create=function(bundles, options={}) {
   const catalogs=new Map(bundles.map(b=>[b.manifest.packageId+'@'+b.manifest.version,b]));
   const stats={reads:0,bytesRead:0,readMs:0,verifyMs:0,canceled:0};
-  function readBlock(packageId,version,id,done) {
-    const bundle=catalogs.get(packageId+'@'+version), d=bundle?.manifest.index.find(x=>x.id===id);
+  function readBlock(packageId,version,id,done,expected) {
+    const bundle=catalogs.get(packageId+'@'+version), d=bundle&&(expected||bundle.manifest.index?.find(x=>x.id===id));
     let canceled=false,finished=false;
     const started=performance.now();
     const handle={cancel(){if(!canceled&&!finished){canceled=true;stats.canceled++;}}};
@@ -20,13 +20,13 @@ exports.create=function(bundles, options={}) {
       done(null,{text,byteLength:bytes.length,sha256:digest});
     }
     stats.reads++;
-    if(!d) {setTimeout(()=>deliver({code:'missing'}),0);return handle;}
+    if(!d || d.id!==id) {setTimeout(()=>deliver({code:'missing'}),0);return handle;}
     if(!bundle.directory) {
       setTimeout(()=>deliver(bundle.blocks[id]===undefined?{code:'missing'}:null,bundle.blocks[id]),options.delay||0);
       return handle;
     }
     // Leitura limitada a bytes declarados + 1; não aloca pelo tamanho do arquivo.
-    if(d.encodedBytes>4096 || !/^b\d{6}$/.test(id)) {setTimeout(()=>deliver({code:'block-budget'}),0);return handle;}
+    if(d.encodedBytes>4096 || !/^[bp]\d{6}$/.test(id)) {setTimeout(()=>deliver({code:'block-budget'}),0);return handle;}
     fs.open(path.join(bundle.directory,id+'.json'),'r',(error,fd)=>{
       if(error) return deliver({code:error.code==='ENOENT'?'missing':'io'});
       const buffer=Buffer.alloc(d.encodedBytes+1);let offset=0;

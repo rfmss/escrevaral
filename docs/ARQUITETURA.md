@@ -68,3 +68,7 @@ Continuam revisão de acessibilidade e custo no código, avaliação linguístic
 ## Instalação coordenada — v6-31, A02 parcial
 
 `src/storage/instalador-pacotes.js` consome a persistência v6-30 e um leitor limitado fornecido pelo hospedeiro. Coordena uma instalação e um bloco por vez, com progresso confirmado e retomada; não conhece rede, léxico ou manuscritos. Incluído no bundle como fábrica opcional, sem inicialização ou consumidor na interface. Contrato, cancelamento e pendências em [Persistência de pacotes](PERSISTENCIA-PACOTES.md).
+
+## Transporte local — v6-32, A02 parcial
+
+`src/storage/leitor-pacotes.js` adapta arquivos já escolhidos pelo hospedeiro para o contrato de leitura do coordenador. Valida a faixa e o limite antes de `FileReader.readAsArrayBuffer`, usando apenas o recorte necessário. Não resolve nomes/URLs nem interpreta índices. Cancelamento/timeout abortam; se a interrupção não puder ser confirmada, a instância recusa novas leituras. Fábrica opcional na montagem, sem novo controle na interface. Veja [Persistência de pacotes](PERSISTENCIA-PACOTES.md).

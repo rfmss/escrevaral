@@ -1,6 +1,6 @@
 # A01 — consulta lexical por blocos, prova isolada
 
-Experimento do ASTRA 2, entregue para revisão do ASTRA 1. Não integra o aplicativo, o cofre, o instalador ou o build. Não implementa triagem nem preparação durante a digitação. Não envia texto à rede.
+Experimento do ASTRA 2, entregue para revisão do ASTRA 1. A extensão [de paginação](../../../../docs/recursos/A01-PAGINACAO.md) acrescenta formato v2 e preserva a comparação v1. Não integra o aplicativo, o cofre, o instalador ou o build. Não implementa triagem nem preparação durante a digitação. Não envia texto à rede.
 
 Comprova uma consulta explícita com índice ordenado por chave completa, blocos limitados por bytes/linhas, versões fixas, ambiguidades preservadas e resultado vinculado ao pedido. Não deduz classe em contexto, subordinação ou definições de dicionário.
 
@@ -11,6 +11,7 @@ Na raiz do repositório, com Node moderno (medido em 24.19.0):
 ```sh
 npm ci --ignore-scripts
 node packages/experiments/lexical-index/test.cjs
+node packages/experiments/lexical-index/test-paged.cjs
 node packages/experiments/lexical-index/build.cjs /tmp/a01-pacote 10000
 node packages/experiments/lexical-index/benchmark.cjs > /tmp/a01-medicoes.json
 npm run build:check
@@ -43,7 +44,7 @@ handle.cancel();
 engine.dispose();
 ```
 
-`readBlock(packageId, version, blockId, done)` retorna `{cancel:function(){}}`. `done(error, payload)` recebe `{text, byteLength, sha256}`. O hospedeiro deve verificar **os bytes reais** contra o manifesto confiável; o runtime confere a declaração e a estrutura, mas não executa criptografia. Hash sem procedência confiável não autentica a origem. O exemplo Node faz a verificação real.
+`readBlock(packageId, version, blockId, done, descriptor)` retorna `{cancel:function(){}}`. `done(error, payload)` recebe `{text, byteLength, sha256}`. O hospedeiro deve verificar **os bytes reais** contra o manifesto confiável; o runtime confere a declaração e a estrutura, mas não executa criptografia. Hash sem procedência confiável não autentica a origem. O exemplo Node faz a verificação real.
 
 O leitor entrega uma string imutável, não uma visão sobre buffer reutilizável. Depois de entregar, pode liberar seus buffers. O runtime retém a string no cache ou em callback pendente, e descarta arrays decodificados após cada bloco. Uma leitura física pode atender vários consumidores: cancelar um não cancela os outros; o último pede cancelamento físico. O leitor deve concluir exatamente uma vez, inclusive após cancelamento. A vaga física permanece ocupada até essa confirmação; uma tentativa sobre a mesma leitura em encerramento recebe falha `read-draining`. Resposta tardia de um pedido cancelado não preenche cache nem chega ao consumidor; callback duplicado é ignorado. Se o leitor nunca concluir, a vaga não será artificialmente liberada. O consumidor deve liberar handles/resultados de que não precisa; a memória desses objetos também conta no produto.
 
@@ -66,7 +67,7 @@ Todas as versões do catálogo são imutáveis na instância. Dependências usam
 
 Resposta inclui identidade, scope, snippet literal, chave, razão, candidatos e cobertura por pacote visitado. Se a resolução de dependências falhar antes de terminar, cobertura pode ficar vazia. Cancelamento silencioso é uma proposta para o contrato v0, não uma alteração unilateral do produto.
 
-Padrões provisórios: bloco ≤ 4.096 bytes UTF-8 e ≤ 8.192 bytes de string UTF-16; ≤ 64 linhas; soma dos manifestos ≤ 1.048.576 bytes de string; cache ≤ 65.536 bytes de payload e 16 blocos; ≤ 8 pedidos, 4 leituras físicas, 32 blocos/pedido, 256 candidatos, 8 manifestos; snapshot ≤ 4.096 unidades e chave normalizada ≤ 128 unidades UTF-16. O índice fica inteiro em memória nesta prova. O limite é verificado antes do parse, mas não representa a RAM dos objetos resultantes.
+Padrões provisórios: bloco ≤ 4.096 bytes UTF-8 e ≤ 8.192 bytes de string UTF-16; ≤ 64 linhas; soma dos manifestos ≤ 1.048.576 bytes de string; cache ≤ 65.536 bytes de payload e 16 blocos; ≤ 8 pedidos, 4 leituras físicas, 32 blocos/pedido, 256 candidatos, 8 manifestos; snapshot ≤ 4.096 unidades e chave normalizada ≤ 128 unidades UTF-16. O índice v1 fica inteiro em memória; no formato v2 somente a raiz e páginas consultadas são carregadas. O limite é verificado antes do parse, mas não representa a RAM dos objetos resultantes.
 
 **`maxCachePayloadBytes` não é teto da RAM total.** `residentPayloadBytes` e `peakCachePayloadBytes` contabilizam somente strings mantidas no cache após evicção. Índices, objetos do parser, candidatos, callbacks, buffers do leitor e a própria VM ficam fora dessa conta; o benchmark observa também memória real do processo. `indexStringBytes` estima a representação textual, não o heap do índice. Buffers podem coexistir com strings. Em leitura fria há duas decodificações: validação antes do cache e consulta por consumidor; isso está incluído no tempo medido.
 
@@ -74,6 +75,12 @@ Cada bloco produz uma pausa no fluxo assíncrono. `maxSliceMs:4` apenas registra
 
 ## Evidência e próximos passos
 
-22 casos de teste; 222 consultas comparadas com referência independente. Reabertura local sem rede, bytes inválidos, ambiguidades, Unicode, versões, dependência compartilhada e descarte estão exercitados. O teste de cache frio/quente não depende de preparação.
+22 casos anteriores (222 consultas de referência) e 9 casos de paginação (221 consultas comparadas com v1 e referência independente). Reabertura local sem rede, bytes inválidos, ambiguidades, Unicode, versões, dependência compartilhada e descarte estão exercitados. O teste de cache frio/quente não depende de preparação.
 
-Veja [comparação](../../../../docs/recursos/A01-COMPARACAO.md), [medições](../../../../docs/recursos/A01-MEDICOES.json) e [entrega](../../../../docs/recursos/ENTREGA-A2-A01.md). As medições são Node/Linux; não certificam navegador ou aparelho. Não foi importado léxico externo nem demonstrado acervo de 1 GB. Antes dessa escala: índice paginado, orçamento de inicialização/heap e conversor streaming, além de A02 para instalação atômica e recuperação. Teste visual/aparelhos não é gate desta entrega.
+Veja [comparação](../../../../docs/recursos/A01-COMPARACAO.md), [medições](../../../../docs/recursos/A01-MEDICOES.json) e [entrega](../../../../docs/recursos/ENTREGA-A2-A01.md). As medições são Node/Linux; não certificam navegador ou aparelho. Não foi importado léxico externo nem demonstrado acervo de 1 GB. A paginação agora tem prova até 100.098 entradas. Antes da escala de 1 GB: orçamento dos metadados de instalação/heap e conversor streaming, além de A02 para persistência/recuperação. Teste visual/aparelhos não é gate desta entrega.
+
+## Formato paginado experimental
+
+`build-paged.cjs`, `test-paged.cjs` e `benchmark-paged.cjs` reproduzem a segunda prova. `build-paged.cjs /tmp/a01-paginado 100000` gera dados e páginas sem incorporar arquivos gerados no repo. O runtime aceita schemaVersion 1 e 2; use outra versão de recurso quando mudar o formato. O quinto argumento do leitor é uma cópia do descritor de bloco verificado na página pai; leitores v1 que usam somente quatro argumentos continuam funcionando para v1.
+
+No caminho v2, configure `limits:{maxIndexDecodedBytes:8192}` para limitar a soma das raízes antes de JSON.parse. Há também limites de 32 páginas por consulta, profundidade 8 e raiz de 8 KiB; os demais limites continuam compartilhados. Leia o relatório de paginação para os custos de páginas intermediárias e o crescimento do envelope A02, que a paginação lexical sozinha não resolve.

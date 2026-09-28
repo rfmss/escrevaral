@@ -4,7 +4,8 @@ var norm = require('./normalize');
 var defaults = {maxBlockEncodedBytes:4096,maxBlockDecodedBytes:8192,maxRows:64,
   maxIndexDecodedBytes:1048576,maxCachePayloadBytes:65536,maxCacheEntries:16,
   maxRequests:8,maxConcurrentReads:4,maxBlocksPerRequest:32,maxCandidates:256,
-  maxSnapshotUnits:4096,maxKeyUnits:128,maxPackages:8,maxSliceMs:4};
+  maxSnapshotUnits:4096,maxKeyUnits:128,maxPackages:8,maxSliceMs:4,
+  maxRootDecodedBytes:8192,maxIndexPagesPerRequest:32,maxIndexDepth:8};
 function clone(x) { return JSON.parse(JSON.stringify(x)); }
 function integer(x) { return typeof x === 'number' && isFinite(x) && x >= 0 && Math.floor(x) === x; }
 function safeId(x) { return typeof x === 'string' && /^[a-zA-Z0-9_.-]{1,80}$/.test(x); }
@@ -16,27 +17,41 @@ exports.create = function (options) {
   var schedule=options.schedule || function(fn) { return setTimeout(fn,0); };
   var unschedule=options.unschedule || function(id) { clearTimeout(id); };
   var now=options.now || function() { return Date.now(); };
-  var stats={reads:0,bytesRead:0,cacheHits:0,sharedReads:0,staleDropped:0,canceled:0,peakCachePayloadBytes:0,decodeMs:0,searchMs:0,maxDecodeMs:0,maxSearchMs:0,sliceOverruns:0};
+  var stats={reads:0,indexReads:0,dataReads:0,bytesRead:0,indexBytesRead:0,dataBytesRead:0,cacheHits:0,sharedReads:0,staleDropped:0,canceled:0,peakCachePayloadBytes:0,decodeMs:0,searchMs:0,maxDecodeMs:0,maxSearchMs:0,sliceOverruns:0};
   if(typeof options.readBlock!=='function' || typeof options.isCurrent!=='function') throw Error('host-required');
   for(k in options.limits) if(Object.prototype.hasOwnProperty.call(options.limits,k)) {
     if(!Object.prototype.hasOwnProperty.call(limits,k) || !integer(options.limits[k]) || !options.limits[k]) throw Error('invalid-limit');
     limits[k]=options.limits[k];
   }
   if(!Array.isArray(options.manifests) || options.manifests.length>limits.maxPackages) throw Error('manifest-budget');
+  function descriptors(list,parent) {
+    var previous=null,seen=Object.create(null);
+    list.forEach(function(d) {
+      if(!d || !safeId(d.id) || seen[d.id] || typeof d.min!=='string' || typeof d.max!=='string' || d.min>d.max ||
+        d.min.length>limits.maxKeyUnits || d.max.length>limits.maxKeyUnits || (previous && previous.max>d.min) ||
+        !integer(d.rows) || d.rows<1 || d.rows>limits.maxRows || !integer(d.encodedBytes) || d.encodedBytes<1 || d.encodedBytes>limits.maxBlockEncodedBytes ||
+        !integer(d.decodedBytes) || d.decodedBytes<1 || d.decodedBytes>limits.maxBlockDecodedBytes || !/^[a-f0-9]{64}$/.test(d.sha256)) throw Error('invalid-block-descriptor');
+      if(parent || d.kind!==undefined) {
+        if((d.kind!=='data'&&d.kind!=='index') || !integer(d.level) || d.level>limits.maxIndexDepth ||
+          (d.kind==='data'?d.level!==0:d.level<1) || (parent && (d.level!==parent.level-1 || d.min<parent.min || d.max>parent.max))) throw Error('invalid-index-descriptor');
+      }
+      previous=d;seen[d.id]=true;
+    });
+    if(parent && (list[0].min!==parent.min || list[list.length-1].max!==parent.max)) throw Error('index-range-mismatch');
+  }
   options.manifests.forEach(function(text) {
-    var m, previous=null, seen=Object.create(null);
+    var m;
     if(typeof text!=='string' || (indexBytes+=text.length*2)>limits.maxIndexDecodedBytes) throw Error('index-budget');
     m=JSON.parse(text);
-    if(m.schema!=='scrvrl.lexical-package' || m.schemaVersion!==1 || !safeId(m.packageId) || !safeId(m.version) || m.normalization!==norm.id || !Array.isArray(m.index) || !Array.isArray(m.dependencies) || !m.source || typeof m.coverage!=='string') throw Error('invalid-manifest');
+    if(m.schema!=='scrvrl.lexical-package' || (m.schemaVersion!==1&&m.schemaVersion!==2) || !safeId(m.packageId) || !safeId(m.version) || m.normalization!==norm.id || !Array.isArray(m.dependencies) || !m.source || typeof m.coverage!=='string') throw Error('invalid-manifest');
     k=m.packageId+'@'+m.version;
     if(manifests[k]) throw Error('duplicate-package');
-    m.index.forEach(function(d) {
-      if(!safeId(d.id) || seen[d.id] || typeof d.min!=='string' || typeof d.max!=='string' || d.min>d.max ||
-        d.min.length>limits.maxKeyUnits || d.max.length>limits.maxKeyUnits || (previous && previous.max>d.min) ||
-        !integer(d.rows) || d.rows<1 || d.rows>limits.maxRows || !integer(d.encodedBytes) || d.encodedBytes>limits.maxBlockEncodedBytes ||
-        !integer(d.decodedBytes) || d.decodedBytes>limits.maxBlockDecodedBytes || !/^[a-f0-9]{64}$/.test(d.sha256)) throw Error('invalid-block-descriptor');
-      previous=d; seen[d.id]=true;
-    });
+    if(m.schemaVersion===1) {if(!Array.isArray(m.index)) throw Error('invalid-manifest');descriptors(m.index,null);}
+    else {
+      if(text.length*2>limits.maxRootDecodedBytes || m.index!==undefined) throw Error('root-budget');
+      if(m.root===null) {if(m.source.entries!==0) throw Error('invalid-empty-root');}
+      else {descriptors([m.root],null);if(m.root.kind!=='index') throw Error('invalid-root');}
+    }
     m.dependencies.forEach(function(dep){if(!safeId(dep.packageId)||!safeId(dep.version)) throw Error('invalid-dependency');});
     manifests[k]=m;
   });
@@ -76,18 +91,19 @@ exports.create = function (options) {
     if(typeof text!=='string' || text.length*2!==d.decodedBytes || norm.utf8Bytes(text)!==d.encodedBytes) throw Error('length-mismatch');
     rows=JSON.parse(text);
     if(!Array.isArray(rows)||rows.length!==d.rows) throw Error('invalid-rows');
-    rows.forEach(function(row) {
+    if(d.kind==='index') descriptors(rows,d);
+    else rows.forEach(function(row) {
       if(!row || ['key','form','lemma','pos','features','id'].some(function(f){return typeof row[f]!=='string';}) ||
         row.key!==norm.key(row.form) || row.key<d.min || row.key>d.max || (prev!==null && row.key<prev)) throw Error('invalid-row');
       prev=row.key;
     });
-    if(rows[0].key!==d.min || rows[rows.length-1].key!==d.max) throw Error('range-mismatch');
+    if(d.kind!=='index' && (rows[0].key!==d.min || rows[rows.length-1].key!==d.max)) throw Error('range-mismatch');
     var elapsed=now()-started;stats.decodeMs+=elapsed;stats.maxDecodeMs=Math.max(stats.maxDecodeMs,elapsed);
     if(elapsed>limits.maxSliceMs) stats.sliceOverruns+=1;
     return rows;
   }
   function acquire(task,cb) {
-    var id=task.m.packageId+'@'+task.m.version+'/'+task.d.id, job=jobs[id], sub={active:true,cb:cb};
+    var id=task.m.packageId+'@'+task.m.version+'/'+task.d.id+'/'+task.d.sha256, job=jobs[id], sub={active:true,cb:cb};
     if(cache[id]) {
       stats.cacheHits+=1;
       var text=cache[id];lru.splice(lru.indexOf(id),1);lru.push(id);
@@ -98,6 +114,7 @@ exports.create = function (options) {
     else {
       if(reads>=limits.maxConcurrentReads) {cb({code:'read-budget'});return {cancel:function(){}};}
       job={subs:[sub],closed:false,abandoned:false,handle:null};jobs[id]=job;reads+=1;stats.reads+=1;
+      stats[task.d.kind==='index'?'indexReads':'dataReads']+=1;
       function completed(error,payload) {
         if(job.closed) return;
         job.closed=true;delete jobs[id];reads-=1;
@@ -108,13 +125,14 @@ exports.create = function (options) {
             payload.byteLength!==task.d.encodedBytes || payload.sha256!==task.d.sha256) error={code:'integrity'};
           else {
             text=payload.text; stats.bytesRead+=payload.byteLength;
+            stats[task.d.kind==='index'?'indexBytesRead':'dataBytesRead']+=payload.byteLength;
             try { decode(text,task.d);remember(id,text); } catch(e) {error={code:e.message};}
           }
         }
         job.subs.forEach(function(s){if(s.active) {s.active=false;s.cb(error,text);}});
         job.subs=[];
       }
-      try {job.handle=options.readBlock(task.m.packageId,task.m.version,task.d.id,completed);} catch(e) {completed({code:'reader-threw'});}
+      try {job.handle=options.readBlock(task.m.packageId,task.m.version,task.d.id,completed,clone(task.d));} catch(e) {completed({code:'reader-threw'});}
     }
     return {cancel:function() {
       if(!sub.active) return;sub.active=false;
@@ -130,7 +148,7 @@ exports.create = function (options) {
     var versions=Object.create(null), visited={}, visiting={}, tasks=[], coverage=[];
     function visit(dep) {
       if(!safeId(dep.packageId)||!safeId(dep.version)) throw Error('invalid-resource');
-      var id=dep.packageId+'@'+dep.version,m=manifests[id],lo,hi,mid,i;
+      var id=dep.packageId+'@'+dep.version,m=manifests[id],list;
       if(versions[dep.packageId] && versions[dep.packageId]!==dep.version) throw Error('version-conflict');
       versions[dep.packageId]=dep.version;
       if(visiting[id]) throw Error('dependency-cycle');
@@ -138,14 +156,17 @@ exports.create = function (options) {
       if(!m) throw Error('package-unavailable');
       visiting[id]=true;m.dependencies.forEach(visit);delete visiting[id];visited[id]=true;
       coverage.push({packageId:m.packageId,version:m.version,scope:m.coverage,source:clone(m.source)});
-      lo=0;hi=m.index.length;
-      while(lo<hi){mid=Math.floor((lo+hi)/2);if(m.index[mid].max<key) lo=mid+1;else hi=mid;}
-      for(i=lo;i<m.index.length && m.index[i].min<=key;i+=1) {
-        tasks.push({m:m,d:m.index[i]});
-        if(tasks.length>limits.maxBlocksPerRequest) throw Error('block-budget');
-      }
+      list=m.schemaVersion===1?m.index:(m.root?[m.root]:[]);
+      matching(list,key).forEach(function(d){tasks.push({m:m,d:d});});
+      if(tasks.length>limits.maxBlocksPerRequest+limits.maxIndexPagesPerRequest) throw Error('block-budget');
     }
     resources.forEach(visit);return {tasks:tasks,coverage:coverage};
+  }
+  function matching(list,key) {
+    var lo=0,hi=list.length,mid,out=[];
+    while(lo<hi){mid=Math.floor((lo+hi)/2);if(list[mid].max<key) lo=mid+1;else hi=mid;}
+    while(lo<list.length && list[lo].min<=key) {out.push(list[lo]);lo+=1;}
+    return out;
   }
   function lookup(input,done) {
     if(disposed) throw Error('disposed');
@@ -171,10 +192,21 @@ exports.create = function (options) {
       var plan;
       try {plan=resolve(identity.resources,req.key);req.coverage=plan.coverage;}
       catch(e){finish(req,e.message==='package-unavailable'?'indisponivel':'falha',e.message);return;}
-      var cursor=0;
+      var pageCount=0,dataCount=0,seen=Object.create(null);
+      function enqueue(list) {
+        for(var i=0;i<list.length;i+=1) {
+          var t=list[i],id=t.m.packageId+'@'+t.m.version+'/'+t.d.id;
+          if(seen[id]) throw Error('duplicate-block');seen[id]=true;
+          if(t.d.kind==='index') {pageCount+=1;if(pageCount>limits.maxIndexPagesPerRequest) throw Error('index-page-budget');}
+          else {dataCount+=1;if(dataCount>limits.maxBlocksPerRequest) throw Error('block-budget');}
+        }
+        plan.tasks=list.concat(plan.tasks);
+      }
+      var initial=plan.tasks;plan.tasks=[];
+      try {enqueue(initial);} catch(e){finish(req,'falha',e.message);return;}
       function next() {
-        if(cursor>=plan.tasks.length){finish(req,req.candidates.length?'encontrado':'ausente-no-pacote');return;}
-        var task=plan.tasks[cursor++];
+        if(!plan.tasks.length){finish(req,req.candidates.length?'encontrado':'ausente-no-pacote');return;}
+        var task=plan.tasks.shift();
         req.ticket=acquire(task,function(error,text) {
           // Always yield, including cache hits and synchronous readers.
           later(req,function() {
@@ -182,7 +214,11 @@ exports.create = function (options) {
             var rows,started;
             try {rows=decode(text,task.d);} catch(e){finish(req,'falha',e.message);return;}
             started=now();
-            for(var i=0;i<rows.length;i+=1) if(rows[i].key===req.key) {
+            if(task.d.kind==='index') {
+              try {enqueue(matching(rows,req.key).map(function(d){return {m:task.m,d:d};}));}
+              catch(e){finish(req,'falha',e.message);return;}
+            }
+            else for(var i=0;i<rows.length;i+=1) if(rows[i].key===req.key) {
               var row=clone(rows[i]);row.packageId=task.m.packageId;row.packageVersion=task.m.version;req.candidates.push(row);
               if(req.candidates.length>limits.maxCandidates){finish(req,'falha','candidate-budget');return;}
             }

@@ -69,3 +69,9 @@ KitKat e iPad de 2012 orientam a economia de recursos e as escolhas conservadora
 Leia `docs/CONTRATO-PACOTES-LINGUISTICOS.md`. Rafael admite acervo grande em disco, inclusive próximo de 1 GB, sob limites independentes de memória, inicialização e trabalho. Preparação leve nas pausas passa a ser planejada, sem fila de lentes completas; suspender na digitação, IME, página oculta e análise desligada. Não ativar antes dos contratos e verificações. Prazo de calendário retirado; entregas delimitadas.
 
 ASTRA 1 integra/publica e cuida de produto, C04, instalação/persistência/offline, interface e contratos de produção. ASTRA 2 trabalha a primeira prova em `packages/experiments/lexical-index/` e comparação em `docs/recursos/`, sem alterar manifestos, bundles ou main. Mudanças em arquivos existentes do cofre/motores exigem delimitação entre as frentes. Este arranjo substitui a decisão anterior de concentrar todas as tarefas no assistente principal; não cria autorização para outros agentes publicarem na main.
+
+Em 28/09/2026 A1 revisou a primeira prova da A2 no PR #188, SHA `1ae834f`, para incorporação isolada. Leia `docs/recursos/REVISAO-A1-A01-2026-09-28.md` e consulte o head/estado do PR #188 (`a2/a01-lexical-index-20260928`) antes de dizer que a A2 não entregou. A main contém apenas lotes já integrados; a paginação segue com A2. Não integrar automaticamente versões posteriores do draft nem adicionar o experimento ao bundle sem revisão.
+
+## Comunicação econômica — 28/09/2026
+
+Rafael pediu concentrar os detalhes nos documentos do repositório e reduzir muito a conversa. Manter plano, árvore, delta, decisões, evidências e pendências completos no repo. No chat, retornar poucas linhas com entrega/publicação e próximo passo; não repetir tabela ou plano inteiro por rotina. “Continue”, “segue” e “limite voltou” mantêm a execução autônoma dentro da autorização vigente. Atualizações de andamento devem ser curtas e necessárias.

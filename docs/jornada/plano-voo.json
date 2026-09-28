@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 3,
-  "updated": "2026-09-27",
+  "updated": "2026-09-28",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -122,7 +122,11 @@
           "state": "TODO",
           "acceptance": "ASTRA 2: comparar recursos/procedência/licenças e entregar prova isolada reproduzível com blocos/index limitado, ambiguidades, posições e custo medido. Contrato compartilhado revisto antes da integração.",
           "evidence": [
-            "docs/CONTRATO-PACOTES-LINGUISTICOS.md"
+            "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
+            "docs/recursos/REVISAO-A1-A01-2026-09-28.md",
+            "docs/recursos/ENTREGA-A2-A01.md",
+            "packages/experiments/lexical-index/README.md",
+            "tests/a01-lexical.cjs"
           ]
         },
         {
@@ -136,7 +140,9 @@
             "src/storage/pacotes.js",
             "tests/pacotes.cjs",
             "src/storage/instalador-pacotes.js",
-            "tests/instalador-pacotes.cjs"
+            "tests/instalador-pacotes.cjs",
+            "src/storage/leitor-pacotes.js",
+            "tests/leitor-pacotes.cjs"
           ]
         },
         {
@@ -280,11 +286,11 @@
   ],
   "next": "A02",
   "lastDelivery": {
-    "version": "6.31.0",
+    "version": "6.32.0",
     "completed": [],
     "baselineDone": 9,
-    "publication": "v6-31 publicada em db3d63c2ad3cc6434167824f759e3eb755da5e8a; CI 36365964682 e Pages 36365964029 aprovados. A02 parcial, sem marco concluído.",
-    "evidence": "docs/jornada/ENTREGA-V6-31.md"
+    "publication": "Primeira prova A01 revisada e incorporada localmente; publicação aguardando confirmação.",
+    "evidence": "docs/jornada/ENTREGA-A01-REVISAO.md"
   },
   "scopeChanges": [
     {

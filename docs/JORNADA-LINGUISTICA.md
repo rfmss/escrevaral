@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 27/09/2026. Base do produto auditada: `db3d63c2ad3cc6434167824f759e3eb755da5e8a`.
+Atualizado em 28/09/2026. Base do produto auditada: `63acd3c08ebaa65dc83dcf4df2b8e21fec932218`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-31 publicada, com CI e Pages aprovados. A02 parcial: persistência transacional e coordenador sequencial de instalação, com progresso por gravação confirmada, cancelamento e retomada. Fábricas integradas à montagem, ainda sem consumidor na interface, catálogo, transporte ou pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos. A integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.
+**Estado:** Produto v6-32 publicado. A1 localizou e revisou a primeira prova A01 da A2 no PR #188 (1ae834f), reproduzindo 22 casos e 222 consultas. Lote incorporado localmente como experimento isolado, sem alteração do aplicativo; publicação aguardando confirmação. A02 parcial continua com persistência, coordenador e transporte local. Paginação fica com A2; ponte textual e integração de produto com A1. Preparação automática não implementada.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,8 +16,8 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A1: continuar A02 — definir catálogo aprovado e transporte limitado com base em A01; conectar instalação/recuperação explícitas à interface com capacidade, espaço e erros apresentados. Persistência e coordenador já publicados; A02 continua TODO até cumprir o escopo completo.
-- A2: entregar A01 em área isolada — comparação e prova lexical indexada. Nada da pesquisa foi incorporado ao produto.
+- A1: preparar ponte ArrayBuffer/UTF-8 estrita, limitada e sem TextDecoder obrigatório; fixar tickets de versão e serializar leituras para A02. Depois integrar índice paginado/catálogo e controles explícitos.
+- A2: concluir paginação em packages/experiments/lexical-index/ e entregar diff após 1ae834f no PR #188. Primeira prova já revisada; nenhuma fonte externa aprovada para importação.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.

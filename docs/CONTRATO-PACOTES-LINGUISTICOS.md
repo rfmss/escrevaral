@@ -73,3 +73,11 @@ C03 cobriu o núcleo atual: reabrir a mesa portátil e recuperar acervo; **não 
 ## Sequência
 
 ASTRA 1 continua C04. ASTRA 2 pode avançar A01 isoladamente em paralelo. A02 (pacotes persistentes/offline) depende de A01 e C04; A03 (preparação nas pausas e destaque de lentes) depende de contratos estabilizados em A01/A02. “Todas as análises” permanece acessível; triagem não elimina opções com base em indícios incompletos. O controle final U01 deve refletir essa direção sem executar exames completos automaticamente.
+
+## Aceite da primeira prova — 28/09/2026
+
+A sequência acima registra a decisão original. C04 foi concluída; A1 revisou a primeira prova A01 da A2, SHA `1ae834fbd675e1bed27acd42ac930082791ce7a2`, no PR #188. Aceite, reprodução e limites em [Revisão A1](recursos/REVISAO-A1-A01-2026-09-28.md); publicação em [Entrega A01](jornada/ENTREGA-A01-REVISAO.md). Não há importação do experimento no runtime de produção.
+
+Para a ponte seguinte, ficam aceitas as distinções de orçamento de payload versus RAM total, completude versus êxito técnico, versão/geração fixadas e conclusão física obrigatória mesmo após cancelamento. A consulta pode cancelar silenciosamente sua entrega de resultado; o callback do leitor precisa concluir para liberar a vaga, e o instalador continua reportando cancelamento. A fronteira do produto captura exceções síncronas sem convertê-las em ausência lexical.
+
+`maxSliceMs` é observação, não preempção de parse. O índice integral limitado serviu à primeira prova; a paginação e a raiz pequena serão a próxima entrega da A2 para A02. A1 fará decodificação UTF-8 estrita e limitada, ligação de tickets e identidade real do rascunho. Bytes de índices também são blocos sujeitos aos limites de A02. Não embutir índice grande nos metadados de instalação. Nenhuma dessas decisões ativa preparação incremental ou aprova redistribuição de corpus externo.
