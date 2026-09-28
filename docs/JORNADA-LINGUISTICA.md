@@ -6,7 +6,7 @@ Atualizado em 27/09/2026. Base do produto auditada: `d2f2a285595b2ca93de759a2101
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-29 publicada, com CI e Pages aprovados. C04 DONE: transporte manual de cópias completas, leitura protegida, importação validada/confirmada, exportação do rascunho sem nova gravação e seleção com alternativa. Plano v3: 9/24 DONE; entrega +1 (C04); compatibilidade 4/4 no escopo delimitado, sem certificação de aparelhos. A1 segue a preparação de A02; integração dos pacotes depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.
+**Estado:** v6-29 publicada, com CI e Pages aprovados. C04 DONE: transporte manual de cópias completas, leitura protegida, importação validada/confirmada, exportação do rascunho sem nova gravação e seleção com alternativa. Plano v3: 9/24 DONE; entrega +1 (C04); compatibilidade 4/4 no escopo delimitado, sem certificação de aparelhos. A1 segue a preparação de A02; integração dos pacotes depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada. A02 parcial implementada e verificada localmente para v6-30: base transacional de versões/blocos, sem instalador ou pacotes reais; publicação pendente.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 

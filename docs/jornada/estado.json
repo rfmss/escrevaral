@@ -4,7 +4,7 @@
   "baseline": "d2f2a285595b2ca93de759a21012010adb52c2c8",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-29 publicada, com CI e Pages aprovados. C04 DONE: transporte manual de cópias completas, leitura protegida, importação validada/confirmada, exportação do rascunho sem nova gravação e seleção com alternativa. Plano v3: 9/24 DONE; entrega +1 (C04); compatibilidade 4/4 no escopo delimitado, sem certificação de aparelhos. A1 segue a preparação de A02; integração dos pacotes depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.",
+  "current": "v6-29 publicada, com CI e Pages aprovados. C04 DONE: transporte manual de cópias completas, leitura protegida, importação validada/confirmada, exportação do rascunho sem nova gravação e seleção com alternativa. Plano v3: 9/24 DONE; entrega +1 (C04); compatibilidade 4/4 no escopo delimitado, sem certificação de aparelhos. A1 segue a preparação de A02; integração dos pacotes depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada. A02 parcial implementada e verificada localmente para v6-30: base transacional de versões/blocos, sem instalador ou pacotes reais; publicação pendente.",
   "next": [
     "A1: preparar A02 — persistência, instalação interrompida e recuperação; integração do formato/dados depende da prova A01 e contratos medidos.",
     "A2: entregar A01 em área isolada — comparação e prova lexical indexada. Nada da pesquisa foi incorporado ao produto.",

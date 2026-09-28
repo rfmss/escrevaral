@@ -60,3 +60,7 @@ Continuam revisão de acessibilidade e custo no código, avaliação linguístic
 ## Transporte e seleção — C04 / v6-29
 
 `src/ui/transferencia.js` isola capacidades do navegador; o controlador mantém a política e validação dos pacotes. Download indisponível apresenta cópia literal nos Ajustes; conteúdo colado e FileReader convergem para a mesma importação confirmada. Seleção tem alternativa e falha recuperável, sem editar o manuscrito. Exportação do rascunho não exige nova gravação. Ver [entrega e limites](jornada/ENTREGA-V6-29.md). Formatos e transações existentes foram preservados; pacotes linguísticos grandes continuam em A02.
+
+## Pacotes opcionais — A02 parcial / v6-30
+
+`src/storage/pacotes.js` declara uma fábrica transacional de versões/blocos; não abre banco automaticamente nem inicia downloads. Detalhes, envelope experimental, testes e pendências em [Persistência de pacotes](PERSISTENCIA-PACOTES.md). O módulo não interpreta léxico nem integra o conteúdo de A01. A02 continua TODO; o pacote de teste IndexedDB só pertence ao desenvolvimento.

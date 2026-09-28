@@ -10,7 +10,7 @@ assert all(i['evidence'] for i in items if i['state']=='DONE')
 assert d['next'] in {i['id'] for i in items if i['state']=='TODO'}
 done=sum(i['state']=='DONE' for i in items)
 a='<!-- PLANO-VOO:INICIO -->';b='<!-- PLANO-VOO:FIM -->'
-lines=[a,'## Árvore de execução — plano v'+str(d['planVersion']),'',f"**{done}/{len(items)} marcos DONE · nesta entrega +{len(d['lastDelivery']['completed'])} ({', '.join(d['lastDelivery']['completed']) or 'ajuste de diretriz'}) · próximo {d['next']}**",'',d['scope'],'','`DONE` = critério delimitado atendido. `TODO` pode conter implementação parcial; sua caixa só fecha quando o critério inteiro for atendido. Teste visual ou em aparelhos não é requisito de conclusão/publicação.','']
+lines=[a,'## Árvore de execução — plano v'+str(d['planVersion']),'',f"**{done}/{len(items)} marcos DONE · nesta entrega +{len(d['lastDelivery']['completed'])} ({', '.join(d['lastDelivery']['completed']) or 'nenhum marco concluído'}) · próximo {d['next']}**",'',d['scope'],'','`DONE` = critério delimitado atendido. `TODO` pode conter implementação parcial; sua caixa só fecha quando o critério inteiro for atendido. Teste visual ou em aparelhos não é requisito de conclusão/publicação.','']
 for t in d['tracks']:
  n=sum(i['state']=='DONE' for i in t['items']);lines += ['### '+t['title']+f' — {n}/{len(t["items"])}','']
  for i in t['items']:

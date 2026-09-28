@@ -131,7 +131,10 @@
           "state": "TODO",
           "acceptance": "ASTRA 1, após A01/C04: instalar/atualizar sem ativar versão parcial, conferir integridade, tratar quota/corrupção e preservar versão anterior; demonstrar reabertura e consultas locais sem rede, com alternativa explícita para APIs ausentes.",
           "evidence": [
-            "docs/CONTRATO-PACOTES-LINGUISTICOS.md"
+            "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
+            "docs/PERSISTENCIA-PACOTES.md",
+            "src/storage/pacotes.js",
+            "tests/pacotes.cjs"
           ]
         },
         {
@@ -275,13 +278,11 @@
   ],
   "next": "A02",
   "lastDelivery": {
-    "version": "6.29.0",
-    "completed": [
-      "C04"
-    ],
-    "baselineDone": 8,
-    "publication": "d2f2a285595b2ca93de759a21012010adb52c2c8; CI 36343607618 e Pages 36343606917: success.",
-    "evidence": "docs/jornada/ENTREGA-V6-29.md"
+    "version": "6.30.0",
+    "completed": [],
+    "baselineDone": 9,
+    "publication": "A02 parcial implementada; publicação aguardando confirmação.",
+    "evidence": "docs/jornada/ENTREGA-V6-30.md"
   },
   "scopeChanges": [
     {

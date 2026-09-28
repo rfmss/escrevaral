@@ -24,7 +24,7 @@ A árvore abaixo é gerada de [plano-voo.json](jornada/plano-voo.json). Atualize
 <!-- PLANO-VOO:INICIO -->
 ## Árvore de execução — plano v3
 
-**9/24 marcos DONE · nesta entrega +1 (C04) · próximo A02**
+**9/24 marcos DONE · nesta entrega +0 (nenhum marco concluído) · próximo A02**
 
 Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.
 
@@ -48,7 +48,7 @@ Marcos da primeira versão; não são porcentagem da língua, esforço ou precis
 ### Acervo e preparação incremental — 0/3
 
 - [ ] **A01 — Contrato de pacotes e prova lexical indexada** — TODO. ASTRA 2: comparar recursos/procedência/licenças e entregar prova isolada reproduzível com blocos/index limitado, ambiguidades, posições e custo medido. Contrato compartilhado revisto antes da integração. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md).
-- [ ] **A02 — Instalação persistente e offline dos pacotes** — TODO. ASTRA 1, após A01/C04: instalar/atualizar sem ativar versão parcial, conferir integridade, tratar quota/corrupção e preservar versão anterior; demonstrar reabertura e consultas locais sem rede, com alternativa explícita para APIs ausentes. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md).
+- [ ] **A02 — Instalação persistente e offline dos pacotes** — TODO. ASTRA 1, após A01/C04: instalar/atualizar sem ativar versão parcial, conferir integridade, tratar quota/corrupção e preservar versão anterior; demonstrar reabertura e consultas locais sem rede, com alternativa explícita para APIs ausentes. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md), [docs/PERSISTENCIA-PACOTES.md](PERSISTENCIA-PACOTES.md), [src/storage/pacotes.js](../src/storage/pacotes.js), [tests/pacotes.cjs](../tests/pacotes.cjs).
 - [ ] **A03 — Preparação incremental e pertinência das lentes** — TODO. ASTRA 1, após A01/A02: trabalho limitado por trecho/contexto nas pausas; suspender na digitação, IME, página oculta e análise desligada; descartar revisões antigas, limitar cache e distinguir os três estados de sinal. Exame completo explícito e acesso a todas as análises. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md).
 
 ### Motores linguísticos — 0/8
