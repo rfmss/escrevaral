@@ -64,3 +64,7 @@ Continuam revisão de acessibilidade e custo no código, avaliação linguístic
 ## Pacotes opcionais — A02 parcial / v6-30
 
 `src/storage/pacotes.js` declara uma fábrica transacional de versões/blocos; não abre banco automaticamente nem inicia downloads. Detalhes, envelope experimental, testes e pendências em [Persistência de pacotes](PERSISTENCIA-PACOTES.md). O módulo não interpreta léxico nem integra o conteúdo de A01. A02 continua TODO; o pacote de teste IndexedDB só pertence ao desenvolvimento.
+
+## Instalação coordenada — v6-31, A02 parcial
+
+`src/storage/instalador-pacotes.js` consome a persistência v6-30 e um leitor limitado fornecido pelo hospedeiro. Coordena uma instalação e um bloco por vez, com progresso confirmado e retomada; não conhece rede, léxico ou manuscritos. Incluído no bundle como fábrica opcional, sem inicialização ou consumidor na interface. Contrato, cancelamento e pendências em [Persistência de pacotes](PERSISTENCIA-PACOTES.md).

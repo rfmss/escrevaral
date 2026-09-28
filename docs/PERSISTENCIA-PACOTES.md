@@ -56,7 +56,25 @@ Falhas de quota/gravação abortam a transação. A versão anterior ativa não 
 
 O simulador mantém dados em memória: reabrir uma conexão nele comprova continuidade lógica, **não persistência física entre processos ou reinícios do navegador**. Não foi feito teste visual/aparelho, conforme orientação do projeto. O módulo expõe uma fronteira persistente nativa; ainda não declaramos A02 concluída.
 
-Faltam prova A01 e adaptação do manifesto, catálogo/instalador explícito, escolha de recursos, estimativa de espaço, progresso, limpeza segura, caminho de pacote para capacidades antigas, recuperação apresentada ao usuário e evidência de consulta dos pacotes reais offline após reabertura. Escrita e núcleo portátil continuam disponíveis independentemente dessas capacidades.
+Faltam prova A01 e adaptação do manifesto, catálogo/interface de instalação, escolha de recursos, estimativa de espaço, apresentação do progresso, limpeza segura, caminho de pacote para capacidades antigas, recuperação apresentada ao usuário e evidência de consulta dos pacotes reais offline após reabertura. Escrita e núcleo portátil continuam disponíveis independentemente dessas capacidades.
+
+## Coordenação de instalação — v6-31, A02 parcial
+
+`src/storage/instalador-pacotes.js` acrescenta `Escr.createPackageInstaller({store, readBlock})`. Usa a fábrica de armazenamento acima, sem modificar seu esquema. O hospedeiro fornece uma instância dedicada à instalação e um leitor; o coordenador não escolhe transporte, URLs, fontes ou licenças. Fábrica incluída na montagem, ainda sem consumidor na interface. Não há instalação automática nem acervo novo nesta entrega.
+
+`installer.install(manifest, onProgress, done)` retorna `{cancel()}`. O manifesto é copiado na chamada; a validação permanece no armazenamento. O início e as continuações cedem execução por `setTimeout`, inclusive quando o leitor responde sincronamente. Uma instalação em curso por coordenador; outra recebe `BUSY`. Não há orçamento global entre instâncias/abas.
+
+O leitor recebe `readBlock({id, version, block:{id, bytes, sha256}}, done)` e pode retornar `{cancel()}`. Deve respeitar o tamanho declarado **antes de alocar/baixar** e entregar um `ArrayBuffer` de sua propriedade, que não será alterado nem reutilizado após o callback. O armazenamento copia esse buffer e verifica tamanho/hash. O pico inclui pelo menos payload e cópia; uma unidade de cada vez não significa ausência de cópias. Não implementar transporte que leia o pacote inteiro para extrair um bloco.
+
+O leitor deve concluir exatamente uma vez, inclusive após cancelamento ou timeout definido pelo próprio transporte. O coordenador tolera callback duplicado/tardio, mas não transforma silêncio em término físico: permanece ocupado até a resposta para não sobrepor trabalho ainda em curso. Leitor que nunca conclui impede a retomada nessa instância; o adaptador de transporte deverá garantir esse contrato. Não há repetição automática de tentativas nem resolução/download implícito das dependências.
+
+Fluxo: `stage` → `inspect` → receber/gravar cada bloco faltante → `activate`. Retomar usa recibos persistidos e preserva blocos completos; não certifica novamente todos os bytes já presentes. A consulta continua verificando hash, como descrito acima. Instalar explicitamente uma versão pronta reaproveita seus blocos e ativa a versão solicitada, mesmo que outra esteja ativa; isso não é seleção automática da versão mais recente.
+
+Progresso e resultado são snapshots com `phase`, `ticket`, `storedBlocks`, `storedBytes`, `totalBlocks` e `totalBytes`. O total é conhecido após inspeção do envelope validado. Fases: `staging`, `inspecting`, `resumed`, `receiving`, `storing`, `stored`, `activating`; conclusão em `done(error, report)` com `installed`, `failed` ou `cancelled`. Contadores avançam após gravação confirmada; todos os bytes gravados ainda não significam versão ativa. Erros mantêm código/nome original (integridade, quota, dependência, transporte); nunca viram ausência lexical. O relatório de falha pode conter ticket para inspeção/descarte explícito. Uma gravação confirmada pouco antes do cancelamento pode reaparecer apenas na inspeção da retomada.
+
+`cancel()` retorna `true` ao aceitar interrupção antes da ativação. Solicita cancelamento da operação em curso, aguarda sua conclusão, descarta sua resposta e não recebe outro bloco. A versão incompleta é preservada para retomar; não há descarte automático. Na fase `activating`, retorna `false` e aguarda sucesso/falha da transação curta: não promete desfazer uma ativação que pode já ter sido confirmada. Também retorna `false` depois do término ou num pedido recusado por `BUSY`.
+
+`tests/instalador-pacotes.cjs` exercita armazenamento real do módulo sobre IndexedDB simulado: sequência/progresso, interrupção/retomada, quota, hash inválido, dependência ausente, callback síncrono/duplicado/tardio, cancelamento, entrada mutável e exceções do leitor/progresso. A prova não demonstra instalação real via rede/arquivo nem reabertura física offline. A02 continua TODO; próxima integração requer catálogo aprovado, transporte limitado e controles visíveis ao autor.
 
 ## Referências técnicas consultadas
 

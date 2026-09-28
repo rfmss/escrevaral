@@ -6,7 +6,7 @@ Atualizado em 28/09/2026. Base do produto auditada: `fb759e0d430e0a049038971c51d
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-30 publicada, com CI e Pages aprovados. A02 parcial: base transacional opcional de versões e blocos, retomada, integridade, dependências fixadas e preservação da versão anterior durante atualização. Fábrica integrada à montagem, ainda sem consumidor ou instalador na interface e sem pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos; C01–C04 permanecem concluídos no escopo delimitado. A integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada.
+**Estado:** v6-30 publicada, com CI e Pages aprovados. A02 parcial: base transacional opcional de versões e blocos, retomada, integridade, dependências fixadas e preservação da versão anterior durante atualização. Fábrica integrada à montagem, ainda sem consumidor ou instalador na interface e sem pacotes reais. Plano v3: 9/24 DONE; entrega +0 marcos; C01–C04 permanecem concluídos no escopo delimitado. A integração lexical depende da prova A01 de A2, ainda não entregue na main consultada. Preparação automática continua não implementada. v6-31 em preparação: coordenador de instalação sequencial, progresso por gravação confirmada e cancelamento/retomada; ainda sem UI/transporte e sem publicação confirmada.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
