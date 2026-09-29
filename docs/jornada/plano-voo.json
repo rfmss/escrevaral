@@ -297,7 +297,7 @@
     "version": "6.32.0",
     "completed": [],
     "baselineDone": 10,
-    "publication": "Metadados endereçados testados localmente; publicação/CI/Pages aguardando confirmação. A02 continua TODO.",
+    "publication": "Store endereçado experimental A02 publicado na main 44c92d6043163dd45da491a47e22aa6dd6f875de; CI 36646518644 e Pages 36646517577 concluídos com sucesso. A02 permanece TODO, avanço parcial registrado.",
     "evidence": "docs/jornada/ENTREGA-A02-METADADOS-2026-09-29.md"
   },
   "scopeChanges": [

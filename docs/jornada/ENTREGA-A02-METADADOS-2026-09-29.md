@@ -6,7 +6,7 @@ Base main `2521956ba78d802a9d13c8320b19a0a189000c2c`, conferida novamente após 
 
 A [decisão de arquitetura](DECISAO-A02-METADADOS-2026-09-29.md) foi registrada antes da implementação: usar registros por chave do IndexedDB, em vez de outra árvore de catálogo ou aumento de metadataChars. `addressed-store.js` implementa a prova em banco separado. `store-reader.js` aceita modo explícito `addressed:true`, usando cabeçalho e leitura verificada por chave; o modo v1 continua disponível. Sem mudanças nos stores, bundles ou dados do aplicativo publicado.
 
-Estudado/decidido: formato, atomicidade, migração e limites. Implementado/testado: store experimental, retomada por ordinal e consulta ligada à ponte/lookup. Publicação/CI/Pages deste lote: aguardando confirmação. Integração de produto e conclusão de A02: pendentes.
+Estudado/decidido: formato, atomicidade, migração e limites. Implementado/testado: store experimental, retomada por ordinal e consulta ligada à ponte/lookup. Publicação na main: `44c92d6043163dd45da491a47e22aa6dd6f875de`. [CI](https://github.com/rfmss/escrevaral/actions/runs/36646518644) e [Pages](https://github.com/rfmss/escrevaral/actions/runs/36646517577): completed/success. Árvore publicada idêntica à testada: `aa23a7fd0d028c546ed6bb30697eab17ec8c7706`. Integração de produto e conclusão de A02: pendentes.
 
 ## Contrato implementado
 
@@ -30,7 +30,7 @@ Todos os métodos operacionais recebem callback e retornam cancel(). Uma operaç
 
 A consulta fria da chave densa carregado preservou suas 80 alternativas: no pacote menor, 4 payloads e 8 registros de metadados; no maior, 5 payloads e 10 registros. O número de páginas lexicais pode aumentar com a árvore, mas cada acesso ao catálogo de instalação continua pontual. Esses tamanhos são caracteres JSON observados, não bytes de heap nem certificação de RAM constante do navegador.
 
-A implementação foi analisada como ES5. `npm run build:check` aprovou os 7 arquivos de produção. Wrapper essencial ampliado para cinco suítes: 72 casos programados no CI (22 + 9 + 11 + 15 + 15). Plano e Jornada regenerados; referências locais e geração determinística conferidas. Nenhuma dependência adicionada; produção permanece sem importar os módulos experimentais.
+A implementação foi analisada como ES5. `npm run build:check` aprovou os 7 arquivos de produção. Wrapper essencial ampliado para cinco suítes: 72 casos aprovados no CI (22 + 9 + 11 + 15 + 15). Plano e Jornada regenerados; referências locais e geração determinística conferidas. Nenhuma dependência adicionada; produção permanece sem importar os módulos experimentais.
 
 ## Limites preservados
 
@@ -52,4 +52,4 @@ Reversão por commit retirando o novo store/teste e o modo addressed da ponte, r
 
 Próximo A02: gerar o catálogo de descritores em arquivo sequencial no conversor externo, com hash final, limites e raiz lexical transportável; criar coordenador de instalação por unidades/retomada usando stage/append/describe/put/activate. Provar o caminho de arquivos ao store, cancelar/retomar e reabrir sem depender da fixture integral do teste. Depois integrar catálogo/controles explícitos, alternativa de capacidade e comprovar persistência física offline. Não repetir o store nem a ponte já entregues.
 
-Plano v3: 10/24 DONE | entrega +0 (A02 parcial: metadados por chave) | próximo A02 (catálogo em arquivo e instalação sequencial) | publicação: aguardando confirmação | limite: produtor/coordenador, integração e persistência física. Fundação 5/5; compatibilidade 4/4; acervo 1/3; motores 0/8; experiência 0/2; revisão 0/2.
+Plano v3: 10/24 DONE | entrega +0 (A02 parcial: metadados por chave) | próximo A02 (catálogo em arquivo e instalação sequencial) | publicação: main 44c92d6, CI/Pages success | limite: produtor/coordenador, integração e persistência física. Fundação 5/5; compatibilidade 4/4; acervo 1/3; motores 0/8; experiência 0/2; revisão 0/2.

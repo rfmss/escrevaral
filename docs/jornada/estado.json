@@ -1,10 +1,10 @@
 {
   "version": 21,
   "updated": "29/09/2026",
-  "baseline": "2521956ba78d802a9d13c8320b19a0a189000c2c",
+  "baseline": "44c92d6043163dd45da491a47e22aa6dd6f875de",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "Produto v6-32 preservado; A01 ampliada e ponte A02 publicadas. Novo store experimental com cabeçalhos compactos e descritores por chave implementado/testado, ligado à ponte por modo explícito. Abertura e leitura não carregam catálogo integral nesse modo; 15 casos novos e 15 da ponte aprovados. Publicação deste incremento aguardando confirmação. Store publicado v1 permanece intacto. A02 continua parcial: produtor de catálogo em arquivo, coordenador sequencial, interface e persistência física offline pendentes; A03 não implementada.",
+  "current": "Produto v6-32 preservado; A01 ampliada e ponte A02 publicadas. Novo store experimental com cabeçalhos compactos e descritores por chave implementado/testado, ligado à ponte por modo explícito. Abertura e leitura não carregam catálogo integral nesse modo; 15 casos novos e 15 da ponte aprovados. Incremento publicado na main 44c92d6, com CI e Pages aprovados; cinco suítes lexicais totalizam 72 casos no CI. Store publicado v1 permanece intacto. A02 continua parcial: produtor de catálogo em arquivo, coordenador sequencial, interface e persistência física offline pendentes; A03 não implementada.",
   "next": [
     "A02: ampliar o conversor externo para produzir catálogo sequencial de descritores, hash final e raiz lexical transportável, sob limites de memória/disco. Implementar coordenador por unidades com retomada no store endereçado, sem reconstruir lista integral.",
     "Depois provar o caminho de arquivos ao store, cancelar/retomar e reabrir; integrar catálogo e controles explícitos, alternativa para APIs ausentes e persistência física offline. Store endereçado e ponte já verificados como experimentos; nenhuma fonte externa aprovada para importação.",
@@ -678,10 +678,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "Ponte experimental A02 publicada na main fac34c6; CI e GitHub Pages concluídos com sucesso. Produto permanece v6-32.",
-    "commit": "fac34c665080bbc42dca7d91a697389ef88a2590",
-    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36559879277",
-    "verification": "CI 36559880501 e Pages 36559879277: completed/success, conferidos em 29/09/2026. 15 casos novos e 2417 vetores UTF-8 aprovados localmente; quatro suítes lexicais (57 casos) e demais verificações essenciais aprovadas no CI. Sem instalação na interface nem prova de persistência física offline."
+    "status": "Store endereçado experimental A02 publicado na main 44c92d6; CI e GitHub Pages concluídos com sucesso. Produto permanece v6-32.",
+    "commit": "44c92d6043163dd45da491a47e22aa6dd6f875de",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36646517577",
+    "verification": "CI 36646518644 e Pages 36646517577: completed/success, conferidos em 29/09/2026. 15 casos novos e 15 da ponte aprovados localmente; cinco suítes lexicais (72 casos) e demais verificações essenciais aprovadas no CI. Sem migração de banco publicado, instalação na interface ou prova de persistência física offline."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",
