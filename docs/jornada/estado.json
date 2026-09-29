@@ -1,10 +1,10 @@
 {
   "version": 20,
   "updated": "29/09/2026",
-  "baseline": "b72c00dc89180eb6d2cb4ac1d02d1e9c1caec5f8",
+  "baseline": "fac34c665080bbc42dca7d91a697389ef88a2590",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "Produto v6-32 preservado; A01 ampliada publicada. A2 implementou e testou a ponte experimental entre store de pacotes e consulta lexical paginada: tickets fixados, UTF-8 estrito, fila limitada e cancelamento com conclusão física. 15 casos novos aprovados; integração instalador/store/ponte/lookup com reabertura lógica em IndexedDB simulado. Publicação deste incremento aguardando confirmação. A02 continua parcial: envelope plano, catálogo/interface e reabertura física offline pendentes. A03 não implementada.",
+  "current": "Produto v6-32 preservado; A01 ampliada publicada. A2 implementou e testou a ponte experimental entre store de pacotes e consulta lexical paginada: tickets fixados, UTF-8 estrito, fila limitada e cancelamento com conclusão física. 15 casos novos aprovados; integração instalador/store/ponte/lookup com reabertura lógica em IndexedDB simulado. Incremento publicado na main fac34c6, com CI e Pages aprovados; as quatro suítes lexicais totalizam 57 casos no CI. A02 continua parcial: envelope plano, catálogo/interface e reabertura física offline pendentes. A03 não implementada.",
   "next": [
     "A02: decidir formato/versionamento para endereçamento limitado dos descritores; comparar catálogo paginado e registros separados, preservando integridade, retomada e versão anterior. Consultar bloco sem carregar lista integral; não aumentar metadataChars para esconder retenção.",
     "Depois: ampliar piloto e integrar catálogo, seleção/instalação explícita, falhas recuperáveis e reabertura física offline com alternativa para APIs ausentes. Ponte textual já verificada como experimento, sem consumidor no aplicativo; nenhuma fonte externa aprovada para importação.",
@@ -678,10 +678,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "Retomada A2 e prova A01 ampliada publicadas na main; CI e GitHub Pages concluídos com sucesso. Produto permanece v6-32.",
-    "commit": "345abc3627d63e15c7733e3b5912aa26d3b4a6a0",
-    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36507634363",
-    "verification": "CI 36507635457 e Pages 36507634363: completed/success, conferidos em 28/09/2026. Wrapper com 42 casos, 503 consultas de referência e 80 arquivos equivalentes aprovado localmente; suíte essencial completa aprovada no CI. Experimento continua fora do bundle; A02 ainda parcial."
+    "status": "Ponte experimental A02 publicada na main fac34c6; CI e GitHub Pages concluídos com sucesso. Produto permanece v6-32.",
+    "commit": "fac34c665080bbc42dca7d91a697389ef88a2590",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36559879277",
+    "verification": "CI 36559880501 e Pages 36559879277: completed/success, conferidos em 29/09/2026. 15 casos novos e 2417 vetores UTF-8 aprovados localmente; quatro suítes lexicais (57 casos) e demais verificações essenciais aprovadas no CI. Sem instalação na interface nem prova de persistência física offline."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",

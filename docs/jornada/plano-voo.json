@@ -294,7 +294,7 @@
     "version": "6.32.0",
     "completed": [],
     "baselineDone": 10,
-    "publication": "Ponte A02 testada localmente; publicação/CI/Pages aguardando confirmação. Marco A02 continua TODO.",
+    "publication": "Ponte experimental A02 publicada na main fac34c665080bbc42dca7d91a697389ef88a2590; CI 36559880501 e Pages 36559879277 concluídos com sucesso. A02 permanece TODO, avanço parcial registrado.",
     "evidence": "docs/jornada/ENTREGA-A02-PONTE-2026-09-29.md"
   },
   "scopeChanges": [

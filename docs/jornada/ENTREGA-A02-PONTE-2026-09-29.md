@@ -34,7 +34,7 @@ Ensaio integrado: `createPackageInstaller` → `createPackageStore` → fechar/r
 
 O ensaio usa fake-indexeddb em memória, hash do Node e instalação de fixture já disponível no teste. Demonstra encadeamento e reabertura lógica; não persistência física entre processos, interface, recursos linguísticos reais, 1 GB ou desempenho de aparelhos. Tempos observados em uma execução são telemetria, não benchmark. Manuscritos não foram acessados.
 
-`npm run build:check`: aprovado, 7 arquivos. Wrapper essencial `tests/a01-lexical.cjs` ampliado de três para quatro suítes, incluindo estes 15 casos; total programado de 57 casos. CI e Pages do novo commit serão conferidos após publicação. Não repetidas medições anteriores sem risco novo.
+`npm run build:check`: aprovado, 7 arquivos. Wrapper essencial `tests/a01-lexical.cjs` ampliado de três para quatro suítes, incluindo estes 15 casos; total de 57 casos aprovado pelo CI da main fac34c6. CI e Pages concluídos com sucesso. Não repetidas medições anteriores sem risco novo.
 
 ## Reprodução
 
@@ -48,8 +48,10 @@ Ferramentas Node/dependências de desenvolvimento já existentes; nenhuma depend
 
 ## Plano e próximo incremento
 
-Estudado: contrato do store e UTF-8. Implementado/testado: ponte experimental e ensaio encadeado. Integração no aplicativo: pendente. Publicação na main/CI/Pages deste lote: aguardando confirmação. Atualizados estado.json, plano-voo.json, Plano Mestre e Jornada gerada; registro de avanço parcial não fecha caixa indevida.
+Estudado: contrato do store e UTF-8. Implementado/testado: ponte experimental e ensaio encadeado. Integração no aplicativo: pendente. Publicação na main: `fac34c665080bbc42dca7d91a697389ef88a2590`. [CI](https://github.com/rfmss/escrevaral/actions/runs/36559880501) e [Pages](https://github.com/rfmss/escrevaral/actions/runs/36559879277): completed/success. Árvore publicada idêntica à testada: `551ba14a4df85e580d5cfe85aedf59fcb6db0710`. Atualizados estado.json, plano-voo.json, Plano Mestre e Jornada gerada; registro de avanço parcial não fecha caixa indevida.
 
 Próximo A02: decidir e implementar endereçamento limitado dos descritores de instalação. Comparar catálogo paginado versus descritores em registros separados, com orçamento de abertura/ativação, integridade, retomada, migração e preservação da versão anterior. Critério: consultar um bloco sem carregar a lista integral, instalar sem ativar conteúdo parcial e provar falhas/cancelamento. Só depois ampliar o piloto, catálogo e controles de instalação/reabertura offline. A03 continua dependente desse contrato.
 
-Plano v3: 10/24 DONE | entrega +0 (avanço parcial A02: ponte) | próximo A02 (metadados limitados) | publicação: aguardando confirmação | limite: catálogo plano, integração do produto e persistência física. Fundação 5/5; compatibilidade 4/4; acervo 1/3; motores 0/8; experiência 0/2; revisão 0/2.
+Plano v3: 10/24 DONE | entrega +0 (avanço parcial A02: ponte) | próximo A02 (metadados limitados) | publicação: main fac34c6, CI/Pages success | limite: catálogo plano, integração do produto e persistência física. Fundação 5/5; compatibilidade 4/4; acervo 1/3; motores 0/8; experiência 0/2; revisão 0/2.
+
+O gerador do Plano Mestre agora apresenta o campo opcional de progresso parcial de cada marco. Assim, o avanço aparece na árvore sem converter TODO em DONE; a geração foi conferida como determinística.

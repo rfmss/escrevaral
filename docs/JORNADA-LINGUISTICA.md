@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 29/09/2026. Base do produto auditada: `b72c00dc89180eb6d2cb4ac1d02d1e9c1caec5f8`.
+Atualizado em 29/09/2026. Base do produto auditada: `fac34c665080bbc42dca7d91a697389ef88a2590`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** Produto v6-32 preservado; A01 ampliada publicada. A2 implementou e testou a ponte experimental entre store de pacotes e consulta lexical paginada: tickets fixados, UTF-8 estrito, fila limitada e cancelamento com conclusão física. 15 casos novos aprovados; integração instalador/store/ponte/lookup com reabertura lógica em IndexedDB simulado. Publicação deste incremento aguardando confirmação. A02 continua parcial: envelope plano, catálogo/interface e reabertura física offline pendentes. A03 não implementada.
+**Estado:** Produto v6-32 preservado; A01 ampliada publicada. A2 implementou e testou a ponte experimental entre store de pacotes e consulta lexical paginada: tickets fixados, UTF-8 estrito, fila limitada e cancelamento com conclusão física. 15 casos novos aprovados; integração instalador/store/ponte/lookup com reabertura lógica em IndexedDB simulado. Incremento publicado na main fac34c6, com CI e Pages aprovados; as quatro suítes lexicais totalizam 57 casos no CI. A02 continua parcial: envelope plano, catálogo/interface e reabertura física offline pendentes. A03 não implementada.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
