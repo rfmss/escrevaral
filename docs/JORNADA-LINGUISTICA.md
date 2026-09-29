@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 28/09/2026. Base do produto auditada: `494b0f1a8ee2566c9846097c2578904d7d206315`.
+Atualizado em 28/09/2026. Base do produto auditada: `345abc3627d63e15c7733e3b5912aa26d3b4a6a0`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** Produto v6-32 e primeira prova A01 publicados; CI e Pages da main 494b0f1 confirmados. Rafael transferiu a coordenação e integração à A2 em 28/09/2026. Paginação e conversão externa do PR #188 incorporadas localmente como experimentos, com testes ampliados no CI; publicação deste incremento aguardando confirmação. A02 parcial mantém persistência, coordenador e transporte local; ponte textual, catálogo/instalação no produto e preparação incremental permanecem pendentes.
+**Estado:** Produto v6-32 e prova A01 ampliada publicados; CI e Pages da main 345abc3 confirmados. Rafael transferiu a coordenação e integração à A2 em 28/09/2026. Paginação e conversão externa do PR #188 integradas na main como experimentos, com as três suítes aprovadas no CI; PR #188 incorporado. A02 parcial mantém persistência, coordenador e transporte local; ponte textual, catálogo/instalação no produto e preparação incremental permanecem pendentes.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 

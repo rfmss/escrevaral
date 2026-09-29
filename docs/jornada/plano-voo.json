@@ -292,7 +292,7 @@
       "A01"
     ],
     "baselineDone": 9,
-    "publication": "Confirmação retrospectiva da primeira prova na main 494b0f1 (CI/Pages success); incorporação da extensão e retomada em preparação. +1 regulariza o mapa, não representa novo aceite linguístico.",
+    "publication": "Main 345abc3627d63e15c7733e3b5912aa26d3b4a6a0: paginação e conversão externa incorporadas, CI/Pages success. +1 regulariza A01 já aceita por A1; sem novo aceite linguístico.",
     "evidence": "docs/jornada/RETOMADA-A2-2026-09-28.md"
   },
   "scopeChanges": [

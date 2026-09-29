@@ -6,7 +6,7 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 28/09/2026, horário de Brasília:** produto v6-32 e primeira prova A01 na main `494b0f1a8ee2566c9846097c2578904d7d206315`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
+**Retrato conferido em 28/09/2026, horário de Brasília:** produto v6-32 e prova A01 ampliada na main `345abc3627d63e15c7733e3b5912aa26d3b4a6a0`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
 
 
 ## Coordenação e nova direção — 27/09/2026

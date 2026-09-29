@@ -56,7 +56,7 @@ Falhas de quota/gravação abortam a transação. A versão anterior ativa não 
 
 O simulador mantém dados em memória: reabrir uma conexão nele comprova continuidade lógica, **não persistência física entre processos ou reinícios do navegador**. Não foi feito teste visual/aparelho, conforme orientação do projeto. O módulo expõe uma fronteira persistente nativa; ainda não declaramos A02 concluída.
 
-Faltam prova A01 e adaptação do manifesto, catálogo/interface de instalação, escolha de recursos, estimativa de espaço, apresentação do progresso, limpeza segura, caminho de pacote para capacidades antigas, recuperação apresentada ao usuário e evidência de consulta dos pacotes reais offline após reabertura. Escrita e núcleo portátil continuam disponíveis independentemente dessas capacidades.
+A prova A01 e suas extensões foram incorporadas isoladamente na main (ver [retomada A2](jornada/RETOMADA-A2-2026-09-28.md)). Faltam ponte textual e adaptação do manifesto, catálogo/interface de instalação, escolha de recursos, estimativa de espaço, apresentação do progresso, limpeza segura, caminho de pacote para capacidades antigas, recuperação apresentada ao usuário e evidência de consulta dos pacotes reais offline após reabertura. Escrita e núcleo portátil continuam disponíveis independentemente dessas capacidades.
 
 ## Coordenação de instalação — v6-31, A02 parcial
 
