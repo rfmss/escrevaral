@@ -75,3 +75,9 @@ Em 28/09/2026 A1 revisou a primeira prova da A2 no PR #188, SHA `1ae834f`, para 
 ## Comunicação econômica — 28/09/2026
 
 Rafael pediu concentrar os detalhes nos documentos do repositório e reduzir muito a conversa. Manter plano, árvore, delta, decisões, evidências e pendências completos no repo. No chat, retornar poucas linhas com entrega/publicação e próximo passo; não repetir tabela ou plano inteiro por rotina. “Continue”, “segue” e “limite voltou” mantêm a execução autônoma dentro da autorização vigente. Atualizações de andamento devem ser curtas e necessárias.
+
+## Coordenação vigente — transferência para A2, 28/09/2026
+
+Rafael transferiu a continuidade do projeto para esta frente: “vou passar a bola pra vc, consegue retomar o projeto?”. A2 assume coordenação, integração e publicação na main dentro do plano aprovado, sem depender de resposta do A1. Esta decisão substitui a exclusividade de integração do A1 e a restrição anterior de A2 a dois diretórios. Não autoriza trabalho concorrente irrestrito: qualquer retorno de A1 deve começar por conferir a main e a [passagem de retomada](docs/jornada/RETOMADA-A2-2026-09-28.md), antes de editar os mesmos arquivos.
+
+A transferência preserva as decisões de produto, o cofre síncrono, os limites de recursos, o manuscrito imutável e as verificações essenciais. Não implica ativar experimentos no aplicativo. A02 é o próximo marco; A03 e novas integrações linguísticas dependem dos contratos e evidências anteriores.

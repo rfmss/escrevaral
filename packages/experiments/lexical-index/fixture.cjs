@@ -26,3 +26,9 @@ exports.entries = function (extra = 0, dense = 0) {
   for (let i=0;i<dense;i++) rows.push({id:'dense-'+i,form:'carregado',lemma:'artificial-'+i,pos:'TEST',features:'EngineeringOnly=Yes'});
   return rows;
 };
+// Gerador equivalente, sem reter todas as formas artificiais na memória.
+exports.iterate = function* (extra = 0, dense = 0) {
+  for(const row of exports.entries())yield row;
+  for(let i=0;i<extra;i++)yield {id:'stress-'+i,form:'car'+String(i).padStart(7,'0'),lemma:'artificial',pos:'TEST',features:'EngineeringOnly=Yes'};
+  for(let i=0;i<dense;i++)yield {id:'dense-'+i,form:'carregado',lemma:'artificial-'+i,pos:'TEST',features:'EngineeringOnly=Yes'};
+};

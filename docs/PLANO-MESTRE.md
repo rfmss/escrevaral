@@ -6,12 +6,12 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 28/09/2026, horário de Brasília:** produto v6-32 na main `63acd3c08ebaa65dc83dcf4df2b8e21fec932218`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
+**Retrato conferido em 28/09/2026, horário de Brasília:** produto v6-32 e primeira prova A01 na main `494b0f1a8ee2566c9846097c2578904d7d206315`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
 
 
 ## Coordenação e nova direção — 27/09/2026
 
-Leia o [contrato proposto de pacotes e preparação](CONTRATO-PACOTES-LINGUISTICOS.md) antes de alterar áreas compartilhadas. ASTRA 1 concluiu C04 e mantém produto, preparação de A02 e integração na main; ASTRA 2 faz A01 isoladamente. Acervo grande em disco é permitido sob limites independentes de memória e trabalho; preparação leve nas pausas passa a ser planejada, sem execução automática das lentes completas. Não há prazo de calendário. A v6-32 inclui persistência, coordenador e transporte local limitado opcionais; catálogo/manifesto aprovado, interface de instalação, pacotes reais e preparação incremental continuam pendentes. Veja a [entrega parcial A02](jornada/ENTREGA-V6-32.md).
+Leia o [contrato proposto de pacotes e preparação](CONTRATO-PACOTES-LINGUISTICOS.md) antes de alterar áreas compartilhadas. C04 e a primeira prova A01 foram aceitas/publicadas. Em 28/09/2026 Rafael transferiu a coordenação e integração para A2; não é necessário aguardar resposta do A1. A retomada incorpora paginação/conversão externa como experimentos, amplia o CI e segue para a ponte A02. Consulte a [passagem atual](jornada/RETOMADA-A2-2026-09-28.md). Acervo grande em disco é permitido sob limites independentes de memória e trabalho; preparação leve nas pausas passa a ser planejada, sem execução automática das lentes completas. Não há prazo de calendário. A v6-32 inclui persistência, coordenador e transporte local limitado opcionais; catálogo/manifesto aprovado, interface de instalação, pacotes reais e preparação incremental continuam pendentes. Veja a [entrega parcial A02](jornada/ENTREGA-V6-32.md).
 
 Plano v3 acrescenta A01–A03: **8/21 → 8/24**, por ampliação de escopo, sem apagar entregas nem contar documentação como implementação. C03 tratou o núcleo portátil; pacotes grandes persistentes/offline serão A02.
 
@@ -24,7 +24,7 @@ A árvore abaixo é gerada de [plano-voo.json](jornada/plano-voo.json). Atualize
 <!-- PLANO-VOO:INICIO -->
 ## Árvore de execução — plano v3
 
-**9/24 marcos DONE · nesta entrega +0 (nenhum marco concluído) · próximo A02**
+**10/24 marcos DONE · nesta entrega +1 (A01) · próximo A02**
 
 Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.
 
@@ -45,11 +45,11 @@ Marcos da primeira versão; não são porcentagem da língua, esforço ou precis
 - [x] **C03 — Caminho offline legado** — DONE. Site/cache opcional e portátil separados; arquivo sem registro de worker, estados de preparação/ativação/falha, instruções de transporte/recuperação, verificações de integridade e publicação confirmadas. Evidência: [docs/ARQUITETURA.md](ARQUITETURA.md), [src/app/offline.js](../src/app/offline.js), [tests/offline-access.cjs](../tests/offline-access.cjs), [docs/jornada/ENTREGA-V6-28.md](jornada/ENTREGA-V6-28.md).
 - [x] **C04 — Salvar, importar, exportar e selecionar no piso** — DONE. Transporte por download ou conteúdo copiado, leitura de arquivos protegida, importação validada/confirmada, exportação do rascunho sem exigir gravação e seleção com alternativa; integridade, CI e publicação confirmados. Evidência: [src/ui/transferencia.js](../src/ui/transferencia.js), [src/editor/controlador.js](../src/editor/controlador.js), [tests/transferencia.cjs](../tests/transferencia.cjs), [docs/jornada/ENTREGA-V6-29.md](jornada/ENTREGA-V6-29.md).
 
-### Acervo e preparação incremental — 0/3
+### Acervo e preparação incremental — 1/3
 
-- [ ] **A01 — Contrato de pacotes e prova lexical indexada** — TODO. ASTRA 2: comparar recursos/procedência/licenças e entregar prova isolada reproduzível com blocos/index limitado, ambiguidades, posições e custo medido. Contrato compartilhado revisto antes da integração. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md), [docs/recursos/REVISAO-A1-A01-2026-09-28.md](recursos/REVISAO-A1-A01-2026-09-28.md), [docs/recursos/ENTREGA-A2-A01.md](recursos/ENTREGA-A2-A01.md), [packages/experiments/lexical-index/README.md](../packages/experiments/lexical-index/README.md), [tests/a01-lexical.cjs](../tests/a01-lexical.cjs).
-- [ ] **A02 — Instalação persistente e offline dos pacotes** — TODO. ASTRA 1, após A01/C04: instalar/atualizar sem ativar versão parcial, conferir integridade, tratar quota/corrupção e preservar versão anterior; demonstrar reabertura e consultas locais sem rede, com alternativa explícita para APIs ausentes. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md), [docs/PERSISTENCIA-PACOTES.md](PERSISTENCIA-PACOTES.md), [src/storage/pacotes.js](../src/storage/pacotes.js), [tests/pacotes.cjs](../tests/pacotes.cjs), [src/storage/instalador-pacotes.js](../src/storage/instalador-pacotes.js), [tests/instalador-pacotes.cjs](../tests/instalador-pacotes.cjs), [src/storage/leitor-pacotes.js](../src/storage/leitor-pacotes.js), [tests/leitor-pacotes.cjs](../tests/leitor-pacotes.cjs).
-- [ ] **A03 — Preparação incremental e pertinência das lentes** — TODO. ASTRA 1, após A01/A02: trabalho limitado por trecho/contexto nas pausas; suspender na digitação, IME, página oculta e análise desligada; descartar revisões antigas, limitar cache e distinguir os três estados de sinal. Exame completo explícito e acesso a todas as análises. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md).
+- [x] **A01 — Contrato de pacotes e prova lexical indexada** — DONE. Comparação e primeira prova isolada aceitas por A1 e publicadas na main 494b0f1, com CI e Pages confirmados. Paginação e conversão externa ampliam o experimento; não equivalem à instalação A02 nem à aprovação de corpus externo. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md), [docs/recursos/REVISAO-A1-A01-2026-09-28.md](recursos/REVISAO-A1-A01-2026-09-28.md), [docs/recursos/ENTREGA-A2-A01.md](recursos/ENTREGA-A2-A01.md), [packages/experiments/lexical-index/README.md](../packages/experiments/lexical-index/README.md), [tests/a01-lexical.cjs](../tests/a01-lexical.cjs), [docs/jornada/RETOMADA-A2-2026-09-28.md](jornada/RETOMADA-A2-2026-09-28.md).
+- [ ] **A02 — Instalação persistente e offline dos pacotes** — TODO. Coordenação A2, após A01/C04: instalar/atualizar sem ativar versão parcial, conferir integridade, tratar quota/corrupção e preservar versão anterior; demonstrar reabertura e consultas locais sem rede, com alternativa explícita para APIs ausentes. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md), [docs/PERSISTENCIA-PACOTES.md](PERSISTENCIA-PACOTES.md), [src/storage/pacotes.js](../src/storage/pacotes.js), [tests/pacotes.cjs](../tests/pacotes.cjs), [src/storage/instalador-pacotes.js](../src/storage/instalador-pacotes.js), [tests/instalador-pacotes.cjs](../tests/instalador-pacotes.cjs), [src/storage/leitor-pacotes.js](../src/storage/leitor-pacotes.js), [tests/leitor-pacotes.cjs](../tests/leitor-pacotes.cjs).
+- [ ] **A03 — Preparação incremental e pertinência das lentes** — TODO. Coordenação A2, após A01/A02: trabalho limitado por trecho/contexto nas pausas; suspender na digitação, IME, página oculta e análise desligada; descartar revisões antigas, limitar cache e distinguir os três estados de sinal. Exame completo explícito e acesso a todas as análises. Evidência: [docs/CONTRATO-PACOTES-LINGUISTICOS.md](CONTRATO-PACOTES-LINGUISTICOS.md).
 
 ### Motores linguísticos — 0/8
 
@@ -130,7 +130,7 @@ Sem shell, consulte main, commits, arquivos e Actions pelo GitHub/API. Sem acess
 - **Preservar experiência e dados.** Não mudar recepção, cadernos, navegação, chaves de armazenamento ou exportação por conveniência de uma tarefa linguística.
 - **Execução autônoma no escopo aprovado.** Rafael autorizou implementar e publicar incrementos na main, com verificações essenciais. Não solicitar a mesma autorização de novo. Não interpretar essa autorização como permissão para novas dependências de serviço ou mudanças materiais de produto.
 - **Publicar sem teste visual obrigatório.** Não criar ou manter exigência de ensaio em KitKat/iPad. Manter verificações essenciais de integridade e revisão do código; o autor orienta os ajustes visuais pelo uso. Acessibilidade continua objetivo de implementação, sem transformar uma auditoria visual em gate.
-- **Frentes coordenadas.** ASTRA 1 integra o produto; ASTRA 2 desenvolve recursos e a prova A01 isolada, conforme o contrato de pacotes. Avaliações antigas do Gemini permanecem histórico.
+- **Coordenação vigente.** Rafael transferiu a integração e continuidade à ASTRA 2 em 28/09/2026. ASTRA 1 deve conferir a passagem e a main antes de retomar arquivos compartilhados. Avaliações antigas do Gemini permanecem histórico.
 
 O comportamento detalhado está no [contrato de análise](jornada/CONTRATO-ANALISE.md). A versão publicada usa o painel Examinar; a apresentação final do controle/cortina Escrevaral ainda está pendente.
 

@@ -11,3 +11,7 @@
 - **Publicação:** aguardando push, CI e Pages. Publicar a prova/documentação não altera as capacidades do produto.
 - **Reversão:** commit normal retirando apenas o lote e wrapper; nenhuma migração de dados.
 - **Próximo:** A2 entrega paginação; A1 desenvolve a ponte ArrayBuffer/UTF-8 e tickets fixados para A02, depois catálogo/controles explícitos. Conferir também PR #188, não só main, antes de declarar ausência de entrega.
+
+## Confirmação posterior — retomada A2, 28/09/2026
+
+A publicação que estava pendente acima foi confirmada na main `494b0f1a8ee2566c9846097c2578904d7d206315`: [CI 36429627022](https://github.com/rfmss/escrevaral/actions/runs/36429627022) e [Pages 36429626226](https://github.com/rfmss/escrevaral/actions/runs/36429626226), ambos completed/success. O mapa foi regularizado para A01 DONE, 10/24, conforme o aceite já dado por A1. A transferência de coordenação e o lote seguinte constam da [passagem de retomada](RETOMADA-A2-2026-09-28.md).

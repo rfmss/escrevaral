@@ -12,7 +12,11 @@ A fronteira de invalidação pode exceder o trecho editado: token, oração, par
 
 Sem prazo de calendário. Entregas delimitadas e evidência orientam a sequência. KitKat/iPad 2012 seguem referências de economia tecnológica; não são aparelhos a homologar.
 
-## Divisão de arquivos e integração
+## Coordenação atual — 28/09/2026
+
+Rafael transferiu a continuidade e integração à A2 nesta data. A2 pode trabalhar nas áreas antes reservadas a A1 e publicar incrementos na main, preservando o plano e as verificações. Não há dependência de resposta do A1 para continuar. A divisão abaixo permanece como registro histórico, substituída quanto à exclusividade de arquivos/publicação. Consulte [a passagem de retomada](jornada/RETOMADA-A2-2026-09-28.md).
+
+## Divisão original de arquivos e integração (histórico)
 
 | Responsável | Área | Regra |
 | --- | --- | --- |
@@ -81,3 +85,9 @@ A sequência acima registra a decisão original. C04 foi concluída; A1 revisou 
 Para a ponte seguinte, ficam aceitas as distinções de orçamento de payload versus RAM total, completude versus êxito técnico, versão/geração fixadas e conclusão física obrigatória mesmo após cancelamento. A consulta pode cancelar silenciosamente sua entrega de resultado; o callback do leitor precisa concluir para liberar a vaga, e o instalador continua reportando cancelamento. A fronteira do produto captura exceções síncronas sem convertê-las em ausência lexical.
 
 `maxSliceMs` é observação, não preempção de parse. O índice integral limitado serviu à primeira prova; a paginação e a raiz pequena serão a próxima entrega da A2 para A02. A1 fará decodificação UTF-8 estrita e limitada, ligação de tickets e identidade real do rascunho. Bytes de índices também são blocos sujeitos aos limites de A02. Não embutir índice grande nos metadados de instalação. Nenhuma dessas decisões ativa preparação incremental ou aprova redistribuição de corpus externo.
+
+## Paginação e conversão externa — retomada A2
+
+O lote exato `cb7e349032b9c322bfc09e468ac28fbd3006a723` do PR #188 acrescenta formato lexical v2 com raiz pequena, páginas verificadas e conversão NDJSON por ordenação externa. Incorporação isolada e verificações registradas na passagem; nenhuma nova API foi ativada no aplicativo. O leitor experimental aceita o descritor como quinto argumento, além da assinatura original, para verificar páginas sem catálogo integral.
+
+A ponte A02 deve fixar tickets por versão, preservar os limites antes da decodificação UTF-8, serializar acesso ao store e confirmar conclusão física após cancelar. Seu primeiro ensaio pode usar pacote pequeno dentro dos limites atuais. Antes de ampliar o acervo, resolver o envelope plano de instalação e o acesso a descritores: paginar somente o léxico não limita os metadados do store. Não elevar `metadataChars` para disfarçar esse custo.

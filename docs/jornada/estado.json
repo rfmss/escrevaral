@@ -1,13 +1,13 @@
 {
-  "version": 18,
+  "version": 19,
   "updated": "28/09/2026",
-  "baseline": "63acd3c08ebaa65dc83dcf4df2b8e21fec932218",
+  "baseline": "494b0f1a8ee2566c9846097c2578904d7d206315",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "Produto v6-32 publicado. A1 localizou e revisou a primeira prova A01 da A2 no PR #188 (1ae834f), reproduzindo 22 casos e 222 consultas. Lote incorporado localmente como experimento isolado, sem alteração do aplicativo; publicação aguardando confirmação. A02 parcial continua com persistência, coordenador e transporte local. Paginação fica com A2; ponte textual e integração de produto com A1. Preparação automática não implementada.",
+  "current": "Produto v6-32 e primeira prova A01 publicados; CI e Pages da main 494b0f1 confirmados. Rafael transferiu a coordenação e integração à A2 em 28/09/2026. Paginação e conversão externa do PR #188 incorporadas localmente como experimentos, com testes ampliados no CI; publicação deste incremento aguardando confirmação. A02 parcial mantém persistência, coordenador e transporte local; ponte textual, catálogo/instalação no produto e preparação incremental permanecem pendentes.",
   "next": [
-    "A1: preparar ponte ArrayBuffer/UTF-8 estrita, limitada e sem TextDecoder obrigatório; fixar tickets de versão e serializar leituras para A02. Depois integrar índice paginado/catálogo e controles explícitos.",
-    "A2: concluir paginação em packages/experiments/lexical-index/ e entregar diff após 1ae834f no PR #188. Primeira prova já revisada; nenhuma fonte externa aprovada para importação.",
+    "A2, agora na coordenação: implementar a ponte ArrayBuffer/UTF-8 estrita e limitada, sem TextDecoder obrigatório, com tickets fixados por versão, leituras serializadas e cancelamento que aguarda conclusão física. Ensaio inicial pequeno dentro dos limites atuais do store.",
+    "Antes de escalar A02: substituir o custo do envelope plano por endereçamento de metadados limitado; não elevar metadataChars para esconder crescimento. Depois integrar catálogo, controles explícitos, reabertura offline e alternativa para APIs ausentes. Fontes externas continuam sem aprovação de importação.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
     "Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.",
     "Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.",
@@ -664,10 +664,10 @@
   ],
   "primarySource": "B09 — Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017.",
   "focusDecision": {
-    "date": "27/09/2026",
-    "request": "Coordenar ASTRA 1/2; admitir acervo grande em disco e preparação leve nas pausas; retirar prazo de calendário.",
-    "decision": "ASTRA 1 mantém produto, C04 e integração na main. ASTRA 2 cuida da primeira prova isolada em packages/experiments/lexical-index/ e docs/recursos/. Contratos compartilhados por proposta; não alterar cofre síncrono nem manifestos de produção em paralelo.",
-    "nextDeliverable": "A1: catálogo/manifesto e interface de A02 sobre a base v6-32. A2: A01; integração lexical condicionada à prova e ao contrato."
+    "date": "28/09/2026",
+    "request": "Rafael: vou passar a bola pra vc, consegue retomar o projeto?",
+    "decision": "A2 assume continuidade, coordenação, integração e publicação na main no escopo aprovado; substitui exclusividade anterior do A1. Conferir a main antes de qualquer retomada concorrente. Mantidos cofre síncrono, manuscrito imutável e análise explícita.",
+    "nextDeliverable": "Ponte textual A02 com tickets fixados e leitura limitada, seguida da solução do envelope plano antes da escala."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -678,10 +678,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "v6-32 publicada; CI e GitHub Pages concluídos com sucesso",
-    "commit": "63acd3c08ebaa65dc83dcf4df2b8e21fec932218",
-    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36427772211",
-    "verification": "CI 36427773399 e Pages 36427772211: completed/success. 23 scripts essenciais aprovados pelo CI; sem testes visuais ou em aparelhos. Leitor local integrado ao coordenador em prova com Blob do Node, FileReader controlado e IndexedDB simulado; não comprova reabertura física offline."
+    "status": "v6-32 e primeira prova A01 publicadas; CI e GitHub Pages de 494b0f1 confirmados. Retomada/extensão ainda aguardando publicação.",
+    "commit": "494b0f1a8ee2566c9846097c2578904d7d206315",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36429626226",
+    "verification": "CI 36429627022 e Pages 36429626226: completed/success, conferidos em 28/09/2026. Confirmação da primeira prova isolada; não comprova instalação lexical no aplicativo."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",

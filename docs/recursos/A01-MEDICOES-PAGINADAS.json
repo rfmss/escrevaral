@@ -1,0 +1,681 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-09-28T13:29:39.064Z",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "cpu": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "method": {
+    "source": "own fixture; 80 artificial same-key alternatives; no external data",
+    "isolation": "conversion and each query scenario in separate processes; 7 cold/warm pairs; GC before retained samples",
+    "cold": "engine cache empty; OS filesystem cache not cleared",
+    "time": "performance.now milliseconds; wall includes timers; decode includes validation, twice on cold reads",
+    "memory": "process bytes sampled each 1 ms and explicit points, may miss transients; maxRSS KiB high-water process-wide, not engine-only",
+    "budgets": "8 KiB aggregate root strings before parse; 4 KiB encoded pages/data; 64 KiB shared retained payload strings; actual object/VM memory measured separately",
+    "comparison": "flat index byte count from same conversion; historical A01 timings are not a controlled speed comparison; conversion still holds entire source/blocks in RAM"
+  },
+  "datasets": [
+    {
+      "artificialRows": 10000,
+      "conversion": {
+        "rows": 10098,
+        "conversionMs": 123.181689,
+        "conversionAndWriteMs": 136.51792700000001,
+        "rootEncodedBytes": 818,
+        "rootDecodedStringBytes": 1624,
+        "flatIndexEncodedBytes": 57831,
+        "depth": 2,
+        "indexPages": 18,
+        "dataBlocks": 316,
+        "a02FlatEnvelopeEncodedBytes": 35527,
+        "a02FlatEnvelopeChars": 35527,
+        "pageEncodedBytes": 68278,
+        "dataEncodedBytes": 1281137,
+        "memoryBeforeConversion": {
+          "heapUsed": 9237088,
+          "rss": 45416448,
+          "external": 3861196,
+          "arrayBuffers": 146595
+        },
+        "memoryAfterWrite": {
+          "heapUsed": 20513288,
+          "rss": 67174400,
+          "external": 3861236,
+          "arrayBuffers": 146595
+        },
+        "processPeakRssKiB": 65728
+      },
+      "queries": [
+        {
+          "word": "CARRO",
+          "iterations": 7,
+          "loadRootMs": 0.09042599999999368,
+          "initMs": {
+            "n": 7,
+            "min": 0.03393099999999549,
+            "median": 0.05384100000000558,
+            "max": 0.34997599999999807
+          },
+          "coldWallMs": {
+            "n": 7,
+            "min": 9.48121599999999,
+            "median": 9.839259999999996,
+            "max": 12.405550000000005
+          },
+          "warmWallMs": {
+            "n": 7,
+            "min": 8.103645999999998,
+            "median": 8.405299999999983,
+            "max": 10.61631700000001
+          },
+          "indexPagesPerCold": 2,
+          "dataBlocksPerCold": 1,
+          "indexEncodedBytesPerCold": 5943,
+          "dataEncodedBytesPerCold": 1880,
+          "retainedPayloadBytes": 15644,
+          "rootStringBytes": 1624,
+          "coldReadMs": {
+            "n": 7,
+            "min": 0.9447400000000528,
+            "median": 1.0804430000000167,
+            "max": 1.3736540000000161
+          },
+          "coldVerifyMs": {
+            "n": 7,
+            "min": 0.05277899999998681,
+            "median": 0.07267899999999372,
+            "max": 0.27302099999998575
+          },
+          "coldDecodeMs": {
+            "n": 7,
+            "min": 0.18690199999997503,
+            "median": 0.2128489999999772,
+            "max": 1.380155000000002
+          },
+          "warmDecodeMs": {
+            "n": 7,
+            "min": 0.08993499999999699,
+            "median": 0.11450099999998997,
+            "max": 0.21086700000000747
+          },
+          "coldSearchMs": {
+            "n": 7,
+            "min": 0.012948999999991884,
+            "median": 0.019548000000014554,
+            "max": 0.057355000000001155
+          },
+          "warmSearchMs": {
+            "n": 7,
+            "min": 0.01338000000001216,
+            "median": 0.025859999999994443,
+            "max": 1.9473360000000213
+          },
+          "sliceOverruns": 0,
+          "memory": {
+            "baseline": {
+              "heapUsed": 7384680,
+              "rss": 41078784,
+              "external": 3861196,
+              "arrayBuffers": 146559
+            },
+            "firstEngineAfterGc": {
+              "heapUsed": 6995040,
+              "rss": 41078784,
+              "external": 3861200,
+              "arrayBuffers": 146559
+            },
+            "firstWarmAfterGc": {
+              "heapUsed": 7164488,
+              "rss": 45273088,
+              "external": 3899233,
+              "arrayBuffers": 146559
+            },
+            "sampledPeak": {
+              "heapUsed": 8288088,
+              "rss": 45928448,
+              "external": 4003899,
+              "arrayBuffers": 259051
+            },
+            "afterDisposeAndGc": {
+              "heapUsed": 7313488,
+              "rss": 45928448,
+              "external": 4003899,
+              "arrayBuffers": 212095
+            },
+            "processPeakRssKiB": 44852
+          }
+        },
+        {
+          "word": "carregado",
+          "iterations": 7,
+          "loadRootMs": 0.0775069999999971,
+          "initMs": {
+            "n": 7,
+            "min": 0.03808799999998769,
+            "median": 0.055924000000004526,
+            "max": 0.35838800000000504
+          },
+          "coldWallMs": {
+            "n": 7,
+            "min": 16.69050299999998,
+            "median": 18.75423999999998,
+            "max": 25.761218000000014
+          },
+          "warmWallMs": {
+            "n": 7,
+            "min": 15.115512000000024,
+            "median": 15.424567000000025,
+            "max": 15.912419
+          },
+          "indexPagesPerCold": 2,
+          "dataBlocksPerCold": 4,
+          "indexEncodedBytesPerCold": 5943,
+          "dataEncodedBytesPerCold": 13911,
+          "retainedPayloadBytes": 39706,
+          "rootStringBytes": 1624,
+          "coldReadMs": {
+            "n": 7,
+            "min": 2.0429609999999343,
+            "median": 2.271782999999971,
+            "max": 6.782261000000034
+          },
+          "coldVerifyMs": {
+            "n": 7,
+            "min": 0.11806700000002479,
+            "median": 0.14059999999994943,
+            "max": 0.3290139999999724
+          },
+          "coldDecodeMs": {
+            "n": 7,
+            "min": 0.4594200000000228,
+            "median": 0.5102069999999799,
+            "max": 1.6006270000000313
+          },
+          "warmDecodeMs": {
+            "n": 7,
+            "min": 0.21292099999999436,
+            "median": 0.2540209999999945,
+            "max": 0.30797300000000405
+          },
+          "coldSearchMs": {
+            "n": 7,
+            "min": 0.09547299999996994,
+            "median": 0.11252799999999752,
+            "max": 0.20333599999997887
+          },
+          "warmSearchMs": {
+            "n": 7,
+            "min": 0.09405999999995629,
+            "median": 0.10100099999982604,
+            "max": 0.14137299999998731
+          },
+          "sliceOverruns": 0,
+          "memory": {
+            "baseline": {
+              "heapUsed": 6971136,
+              "rss": 40976384,
+              "external": 3861196,
+              "arrayBuffers": 146559
+            },
+            "firstEngineAfterGc": {
+              "heapUsed": 6995496,
+              "rss": 41107456,
+              "external": 3861200,
+              "arrayBuffers": 146559
+            },
+            "firstWarmAfterGc": {
+              "heapUsed": 7255672,
+              "rss": 45563904,
+              "external": 3911267,
+              "arrayBuffers": 146559
+            },
+            "sampledPeak": {
+              "heapUsed": 9191712,
+              "rss": 46874624,
+              "external": 4161578,
+              "arrayBuffers": 416730
+            },
+            "afterDisposeAndGc": {
+              "heapUsed": 7397912,
+              "rss": 47005696,
+              "external": 4133612,
+              "arrayBuffers": 212095
+            },
+            "processPeakRssKiB": 45904
+          }
+        },
+        {
+          "word": "zzzz-ausente",
+          "iterations": 7,
+          "loadRootMs": 0.07438199999999995,
+          "initMs": {
+            "n": 7,
+            "min": 0.022333000000003267,
+            "median": 0.050084999999995716,
+            "max": 0.39891000000000076
+          },
+          "coldWallMs": {
+            "n": 7,
+            "min": 1.161095000000003,
+            "median": 1.2419159999999891,
+            "max": 2.0853440000000063
+          },
+          "warmWallMs": {
+            "n": 7,
+            "min": 1.1603939999999966,
+            "median": 1.2111400000000003,
+            "max": 1.221685000000008
+          },
+          "indexPagesPerCold": 0,
+          "dataBlocksPerCold": 0,
+          "indexEncodedBytesPerCold": 0,
+          "dataEncodedBytesPerCold": 0,
+          "retainedPayloadBytes": 0,
+          "rootStringBytes": 1624,
+          "coldReadMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "coldVerifyMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "coldDecodeMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "warmDecodeMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "coldSearchMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "warmSearchMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "sliceOverruns": 0,
+          "memory": {
+            "baseline": {
+              "heapUsed": 6971984,
+              "rss": 41238528,
+              "external": 3861196,
+              "arrayBuffers": 146559
+            },
+            "firstEngineAfterGc": {
+              "heapUsed": 6995472,
+              "rss": 41238528,
+              "external": 3861200,
+              "arrayBuffers": 146559
+            },
+            "firstWarmAfterGc": {
+              "heapUsed": 7050200,
+              "rss": 41369600,
+              "external": 3891407,
+              "arrayBuffers": 146559
+            },
+            "sampledPeak": {
+              "heapUsed": 7415872,
+              "rss": 41631744,
+              "external": 3891407,
+              "arrayBuffers": 146559
+            },
+            "afterDisposeAndGc": {
+              "heapUsed": 7163168,
+              "rss": 41631744,
+              "external": 3891407,
+              "arrayBuffers": 146559
+            },
+            "processPeakRssKiB": 40656
+          }
+        }
+      ]
+    },
+    {
+      "artificialRows": 100000,
+      "conversion": {
+        "rows": 100098,
+        "conversionMs": 853.6946399999999,
+        "conversionAndWriteMs": 1139.768777,
+        "rootEncodedBytes": 818,
+        "rootDecodedStringBytes": 1624,
+        "flatIndexEncodedBytes": 583275,
+        "depth": 3,
+        "indexPages": 180,
+        "dataBlocks": 3219,
+        "a02FlatEnvelopeEncodedBytes": 360417,
+        "a02FlatEnvelopeChars": 360417,
+        "pageEncodedBytes": 696918,
+        "dataEncodedBytes": 12804040,
+        "memoryBeforeConversion": {
+          "heapUsed": 23961456,
+          "rss": 70950912,
+          "external": 3861196,
+          "arrayBuffers": 146595
+        },
+        "memoryAfterWrite": {
+          "heapUsed": 109438744,
+          "rss": 220622848,
+          "external": 3861200,
+          "arrayBuffers": 146559
+        },
+        "processPeakRssKiB": 215452
+      },
+      "queries": [
+        {
+          "word": "CARRO",
+          "iterations": 7,
+          "loadRootMs": 0.09556399999999599,
+          "initMs": {
+            "n": 7,
+            "min": 0.03096600000000649,
+            "median": 0.0342109999999991,
+            "max": 0.3203710000000086
+          },
+          "coldWallMs": {
+            "n": 7,
+            "min": 12.060281000000003,
+            "median": 12.294583999999986,
+            "max": 17.941238
+          },
+          "warmWallMs": {
+            "n": 7,
+            "min": 9.320049000000012,
+            "median": 10.405434999999983,
+            "max": 12.08009100000001
+          },
+          "indexPagesPerCold": 3,
+          "dataBlocksPerCold": 1,
+          "indexEncodedBytesPerCold": 7176,
+          "dataEncodedBytesPerCold": 2630,
+          "retainedPayloadBytes": 19610,
+          "rootStringBytes": 1624,
+          "coldReadMs": {
+            "n": 7,
+            "min": 1.2431479999999624,
+            "median": 1.4073849999999766,
+            "max": 4.031296999999995
+          },
+          "coldVerifyMs": {
+            "n": 7,
+            "min": 0.06730099999998629,
+            "median": 0.0943629999999871,
+            "max": 0.5239070000000083
+          },
+          "coldDecodeMs": {
+            "n": 7,
+            "min": 0.2411509999999737,
+            "median": 0.3439070000000015,
+            "max": 1.1766590000000008
+          },
+          "warmDecodeMs": {
+            "n": 7,
+            "min": 0.11257900000001086,
+            "median": 0.12587699999997426,
+            "max": 0.1834559999999783
+          },
+          "coldSearchMs": {
+            "n": 7,
+            "min": 0.01893799999999146,
+            "median": 0.02003100000001723,
+            "max": 0.10314500000001203
+          },
+          "warmSearchMs": {
+            "n": 7,
+            "min": 0.01553400000000238,
+            "median": 0.018497999999965486,
+            "max": 0.05007599999999002
+          },
+          "sliceOverruns": 0,
+          "memory": {
+            "baseline": {
+              "heapUsed": 7181064,
+              "rss": 41123840,
+              "external": 3861196,
+              "arrayBuffers": 146559
+            },
+            "firstEngineAfterGc": {
+              "heapUsed": 6995464,
+              "rss": 41123840,
+              "external": 3861200,
+              "arrayBuffers": 146559
+            },
+            "firstWarmAfterGc": {
+              "heapUsed": 7171048,
+              "rss": 45449216,
+              "external": 3901217,
+              "arrayBuffers": 146559
+            },
+            "sampledPeak": {
+              "heapUsed": 8557024,
+              "rss": 45981696,
+              "external": 4081339,
+              "arrayBuffers": 336491
+            },
+            "afterDisposeAndGc": {
+              "heapUsed": 7329360,
+              "rss": 46243840,
+              "external": 4081339,
+              "arrayBuffers": 212095
+            },
+            "processPeakRssKiB": 45160
+          }
+        },
+        {
+          "word": "carregado",
+          "iterations": 7,
+          "loadRootMs": 0.08393699999999171,
+          "initMs": {
+            "n": 7,
+            "min": 0.03249900000000139,
+            "median": 0.03978999999998223,
+            "max": 0.3184880000000021
+          },
+          "coldWallMs": {
+            "n": 7,
+            "min": 19.259950000000003,
+            "median": 20.25300199999998,
+            "max": 24.340182999999996
+          },
+          "warmWallMs": {
+            "n": 7,
+            "min": 16.33078899999998,
+            "median": 17.596859999999992,
+            "max": 18.347194000000002
+          },
+          "indexPagesPerCold": 3,
+          "dataBlocksPerCold": 4,
+          "indexEncodedBytesPerCold": 7176,
+          "dataEncodedBytesPerCold": 14701,
+          "retainedPayloadBytes": 43752,
+          "rootStringBytes": 1624,
+          "coldReadMs": {
+            "n": 7,
+            "min": 1.997019000000023,
+            "median": 2.1608719999999835,
+            "max": 3.216294000000019
+          },
+          "coldVerifyMs": {
+            "n": 7,
+            "min": 0.1073910000000069,
+            "median": 0.1195389999999179,
+            "max": 0.3519879999999631
+          },
+          "coldDecodeMs": {
+            "n": 7,
+            "min": 0.46389499999986583,
+            "median": 0.5534109999998691,
+            "max": 1.3614759999999677
+          },
+          "warmDecodeMs": {
+            "n": 7,
+            "min": 0.24010200000000737,
+            "median": 0.3331200000000081,
+            "max": 0.3877430000000004
+          },
+          "coldSearchMs": {
+            "n": 7,
+            "min": 0.0972150000000056,
+            "median": 0.12384600000004298,
+            "max": 0.18624000000001217
+          },
+          "warmSearchMs": {
+            "n": 7,
+            "min": 0.09979900000001862,
+            "median": 0.11653500000005579,
+            "max": 0.2276019999999619
+          },
+          "sliceOverruns": 0,
+          "memory": {
+            "baseline": {
+              "heapUsed": 7180600,
+              "rss": 40972288,
+              "external": 3861196,
+              "arrayBuffers": 146559
+            },
+            "firstEngineAfterGc": {
+              "heapUsed": 6995048,
+              "rss": 41103360,
+              "external": 3861200,
+              "arrayBuffers": 146559
+            },
+            "firstWarmAfterGc": {
+              "heapUsed": 7275816,
+              "rss": 45559808,
+              "external": 3913291,
+              "arrayBuffers": 146559
+            },
+            "sampledPeak": {
+              "heapUsed": 9197624,
+              "rss": 47796224,
+              "external": 4160846,
+              "arrayBuffers": 414369
+            },
+            "afterDisposeAndGc": {
+              "heapUsed": 7399728,
+              "rss": 47796224,
+              "external": 4146488,
+              "arrayBuffers": 212095
+            },
+            "processPeakRssKiB": 46676
+          }
+        },
+        {
+          "word": "zzzz-ausente",
+          "iterations": 7,
+          "loadRootMs": 0.08704000000000178,
+          "initMs": {
+            "n": 7,
+            "min": 0.024667000000007988,
+            "median": 0.05495299999999759,
+            "max": 0.886651999999998
+          },
+          "coldWallMs": {
+            "n": 7,
+            "min": 1.155066000000005,
+            "median": 1.2382410000000021,
+            "max": 2.160445999999993
+          },
+          "warmWallMs": {
+            "n": 7,
+            "min": 0.1392489999999924,
+            "median": 1.1941050000000075,
+            "max": 1.344530000000006
+          },
+          "indexPagesPerCold": 0,
+          "dataBlocksPerCold": 0,
+          "indexEncodedBytesPerCold": 0,
+          "dataEncodedBytesPerCold": 0,
+          "retainedPayloadBytes": 0,
+          "rootStringBytes": 1624,
+          "coldReadMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "coldVerifyMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "coldDecodeMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "warmDecodeMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "coldSearchMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "warmSearchMs": {
+            "n": 7,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "sliceOverruns": 0,
+          "memory": {
+            "baseline": {
+              "heapUsed": 6971040,
+              "rss": 41213952,
+              "external": 3861196,
+              "arrayBuffers": 146559
+            },
+            "firstEngineAfterGc": {
+              "heapUsed": 6995048,
+              "rss": 41213952,
+              "external": 3861200,
+              "arrayBuffers": 146559
+            },
+            "firstWarmAfterGc": {
+              "heapUsed": 7049648,
+              "rss": 41345024,
+              "external": 3891407,
+              "arrayBuffers": 146559
+            },
+            "sampledPeak": {
+              "heapUsed": 7391608,
+              "rss": 41476096,
+              "external": 3891407,
+              "arrayBuffers": 146559
+            },
+            "afterDisposeAndGc": {
+              "heapUsed": 7163080,
+              "rss": 41476096,
+              "external": 3891407,
+              "arrayBuffers": 146559
+            },
+            "processPeakRssKiB": 40504
+          }
+        }
+      ]
+    }
+  ]
+}

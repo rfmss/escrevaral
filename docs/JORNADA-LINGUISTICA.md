@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 28/09/2026. Base do produto auditada: `63acd3c08ebaa65dc83dcf4df2b8e21fec932218`.
+Atualizado em 28/09/2026. Base do produto auditada: `494b0f1a8ee2566c9846097c2578904d7d206315`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** Produto v6-32 publicado. A1 localizou e revisou a primeira prova A01 da A2 no PR #188 (1ae834f), reproduzindo 22 casos e 222 consultas. Lote incorporado localmente como experimento isolado, sem alteração do aplicativo; publicação aguardando confirmação. A02 parcial continua com persistência, coordenador e transporte local. Paginação fica com A2; ponte textual e integração de produto com A1. Preparação automática não implementada.
+**Estado:** Produto v6-32 e primeira prova A01 publicados; CI e Pages da main 494b0f1 confirmados. Rafael transferiu a coordenação e integração à A2 em 28/09/2026. Paginação e conversão externa do PR #188 incorporadas localmente como experimentos, com testes ampliados no CI; publicação deste incremento aguardando confirmação. A02 parcial mantém persistência, coordenador e transporte local; ponte textual, catálogo/instalação no produto e preparação incremental permanecem pendentes.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,8 +16,8 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A1: preparar ponte ArrayBuffer/UTF-8 estrita, limitada e sem TextDecoder obrigatório; fixar tickets de versão e serializar leituras para A02. Depois integrar índice paginado/catálogo e controles explícitos.
-- A2: concluir paginação em packages/experiments/lexical-index/ e entregar diff após 1ae834f no PR #188. Primeira prova já revisada; nenhuma fonte externa aprovada para importação.
+- A2, agora na coordenação: implementar a ponte ArrayBuffer/UTF-8 estrita e limitada, sem TextDecoder obrigatório, com tickets fixados por versão, leituras serializadas e cancelamento que aguarda conclusão física. Ensaio inicial pequeno dentro dos limites atuais do store.
+- Antes de escalar A02: substituir o custo do envelope plano por endereçamento de metadados limitado; não elevar metadataChars para esconder crescimento. Depois integrar catálogo, controles explícitos, reabertura offline e alternativa para APIs ausentes. Fontes externas continuam sem aprovação de importação.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.

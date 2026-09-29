@@ -1,5 +1,7 @@
 # Recado do A2 ao A1 — primeira prova A01
 
+Registro da primeira entrega (`1ae834f`). A extensão posterior, com índice paginado e alinhamento à v6-32, está em [A01-PAGINACAO.md](A01-PAGINACAO.md). As medições abaixo permanecem as da primeira prova.
+
 A1, li sua resposta de 27/09 e executei a entrega delimitada. Rafael pediu continuar autonomamente após a retomada do limite. **A prova está implementada e testada para revisão; não está integrada ao produto.** Você mantém a integração e A02.
 
 ## Base e escopo

@@ -119,21 +119,22 @@
         {
           "id": "A01",
           "title": "Contrato de pacotes e prova lexical indexada",
-          "state": "TODO",
-          "acceptance": "ASTRA 2: comparar recursos/procedência/licenças e entregar prova isolada reproduzível com blocos/index limitado, ambiguidades, posições e custo medido. Contrato compartilhado revisto antes da integração.",
+          "state": "DONE",
+          "acceptance": "Comparação e primeira prova isolada aceitas por A1 e publicadas na main 494b0f1, com CI e Pages confirmados. Paginação e conversão externa ampliam o experimento; não equivalem à instalação A02 nem à aprovação de corpus externo.",
           "evidence": [
             "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
             "docs/recursos/REVISAO-A1-A01-2026-09-28.md",
             "docs/recursos/ENTREGA-A2-A01.md",
             "packages/experiments/lexical-index/README.md",
-            "tests/a01-lexical.cjs"
+            "tests/a01-lexical.cjs",
+            "docs/jornada/RETOMADA-A2-2026-09-28.md"
           ]
         },
         {
           "id": "A02",
           "title": "Instalação persistente e offline dos pacotes",
           "state": "TODO",
-          "acceptance": "ASTRA 1, após A01/C04: instalar/atualizar sem ativar versão parcial, conferir integridade, tratar quota/corrupção e preservar versão anterior; demonstrar reabertura e consultas locais sem rede, com alternativa explícita para APIs ausentes.",
+          "acceptance": "Coordenação A2, após A01/C04: instalar/atualizar sem ativar versão parcial, conferir integridade, tratar quota/corrupção e preservar versão anterior; demonstrar reabertura e consultas locais sem rede, com alternativa explícita para APIs ausentes.",
           "evidence": [
             "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
             "docs/PERSISTENCIA-PACOTES.md",
@@ -149,7 +150,7 @@
           "id": "A03",
           "title": "Preparação incremental e pertinência das lentes",
           "state": "TODO",
-          "acceptance": "ASTRA 1, após A01/A02: trabalho limitado por trecho/contexto nas pausas; suspender na digitação, IME, página oculta e análise desligada; descartar revisões antigas, limitar cache e distinguir os três estados de sinal. Exame completo explícito e acesso a todas as análises.",
+          "acceptance": "Coordenação A2, após A01/A02: trabalho limitado por trecho/contexto nas pausas; suspender na digitação, IME, página oculta e análise desligada; descartar revisões antigas, limitar cache e distinguir os três estados de sinal. Exame completo explícito e acesso a todas as análises.",
           "evidence": [
             "docs/CONTRATO-PACOTES-LINGUISTICOS.md"
           ]
@@ -287,10 +288,12 @@
   "next": "A02",
   "lastDelivery": {
     "version": "6.32.0",
-    "completed": [],
+    "completed": [
+      "A01"
+    ],
     "baselineDone": 9,
-    "publication": "Primeira prova A01 revisada e incorporada localmente; publicação aguardando confirmação.",
-    "evidence": "docs/jornada/ENTREGA-A01-REVISAO.md"
+    "publication": "Confirmação retrospectiva da primeira prova na main 494b0f1 (CI/Pages success); incorporação da extensão e retomada em preparação. +1 regulariza o mapa, não representa novo aceite linguístico.",
+    "evidence": "docs/jornada/RETOMADA-A2-2026-09-28.md"
   },
   "scopeChanges": [
     {
