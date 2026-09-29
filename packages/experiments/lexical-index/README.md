@@ -84,3 +84,9 @@ Veja [comparação](../../../../docs/recursos/A01-COMPARACAO.md), [medições](.
 `build-paged.cjs`, `test-paged.cjs` e `benchmark-paged.cjs` reproduzem a segunda prova. `build-paged.cjs /tmp/a01-paginado 100000` gera dados e páginas sem incorporar arquivos gerados no repo. O runtime aceita schemaVersion 1 e 2; use outra versão de recurso quando mudar o formato. O quinto argumento do leitor é uma cópia do descritor de bloco verificado na página pai; leitores v1 que usam somente quatro argumentos continuam funcionando para v1.
 
 No caminho v2, configure `limits:{maxIndexDecodedBytes:8192}` para limitar a soma das raízes antes de JSON.parse. Há também limites de 32 páginas por consulta, profundidade 8 e raiz de 8 KiB; os demais limites continuam compartilhados. Leia o relatório de paginação para os custos de páginas intermediárias e o crescimento do envelope A02, que a paginação lexical sozinha não resolve.
+
+## Conversão externa por partes
+
+[Relatório de conversão](../../../../docs/recursos/A01-CONVERSAO-EXTERNA.md): `build-stream.cjs` ordena entrada NDJSON em disco, rejeita duplicatas globais e produz o mesmo formato v2 sem manter todas as entradas, blocos ou descritores na RAM. Exige procedência explícita; o comando `convert-own-fixture` só serve para a fixture própria. Não sobrescreve destinos existentes.
+
+`test-stream.cjs` acrescenta 11 casos, comparação byte a byte e 60 consultas de referência. `benchmark-stream.cjs` mede conversão sob limite V8 e reabre o pacote em outro processo, até 400.098 entradas artificiais. O conversor anterior permanece como referência independente. Esta ferramenta Node é de construção; nenhum novo requisito chega ao aparelho do escritor. Orçamentos de disco, memória observada, falhas e limitações estão no relatório.
