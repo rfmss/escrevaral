@@ -14,6 +14,7 @@ lines=[a,'## Árvore de execução — plano v'+str(d['planVersion']),'',f"**{do
 for t in d['tracks']:
  n=sum(i['state']=='DONE' for i in t['items']);lines += ['### '+t['title']+f' — {n}/{len(t["items"])}','']
  for i in t['items']:
+  if i.get('progress'): lines += ['  Progresso parcial de '+i['id']+': '+i['progress'],'']
   lines += ['- ['+('x' if i['state']=='DONE' else ' ')+'] **'+i['id']+' — '+i['title']+'** — '+i['state']+'. '+i['acceptance']+' Evidência: '+', '.join('['+p+']('+('../'+p if not p.startswith('docs/') else p[5:])+')' for p in i['evidence'])+'.']
  lines += ['']
 lines += ['**Formato fixo das entregas:** `Plano vN: X/Y DONE | entrega +Z (IDs) | próximo ID | publicação: SHA/estado | limite: pendência relevante`. A árvore resumida usa uma linha por ramo. Não somar marcos como se tivessem o mesmo custo. Ao dividir/ampliar o plano, incrementar sua versão e explicar a mudança do denominador.','',b]

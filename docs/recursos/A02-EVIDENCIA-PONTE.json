@@ -1,0 +1,39 @@
+{
+  "capturedAt": "2026-09-29T11:04:32.781438+00:00",
+  "method": "Suíte de integração em Node com createPackageStore/createPackageInstaller e fake-indexeddb. Reabertura de conexão em memória; não persistência física entre processos. Contagens e payloads; tempos de uma execução não são benchmark nem teto de RAM.",
+  "node": "v24.19.0",
+  "result": "passed",
+  "cases": 15,
+  "utf8Vectors": 2417,
+  "evidence": {
+    "integration": {
+      "entries": 138,
+      "descriptors": 22,
+      "metadataChars": 2440,
+      "rootBytes": 813,
+      "runtime": {
+        "reads": 15,
+        "indexReads": 3,
+        "dataReads": 12,
+        "bytesRead": 15743,
+        "indexBytesRead": 3824,
+        "dataBytesRead": 11919,
+        "cacheHits": 17,
+        "sharedReads": 0,
+        "staleDropped": 0,
+        "canceled": 0,
+        "peakCachePayloadBytes": 31462,
+        "decodeMs": 3,
+        "searchMs": 1,
+        "maxDecodeMs": 1,
+        "maxSearchMs": 1,
+        "sliceOverruns": 0,
+        "residentPayloadBytes": 31462,
+        "indexStringBytes": 1614,
+        "activeRequests": 0,
+        "activeReads": 0,
+        "cacheEntries": 15
+      }
+    }
+  }
+}

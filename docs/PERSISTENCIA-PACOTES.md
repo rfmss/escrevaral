@@ -56,7 +56,7 @@ Falhas de quota/gravação abortam a transação. A versão anterior ativa não 
 
 O simulador mantém dados em memória: reabrir uma conexão nele comprova continuidade lógica, **não persistência física entre processos ou reinícios do navegador**. Não foi feito teste visual/aparelho, conforme orientação do projeto. O módulo expõe uma fronteira persistente nativa; ainda não declaramos A02 concluída.
 
-A prova A01 e suas extensões foram incorporadas isoladamente na main (ver [retomada A2](jornada/RETOMADA-A2-2026-09-28.md)). Faltam ponte textual e adaptação do manifesto, catálogo/interface de instalação, escolha de recursos, estimativa de espaço, apresentação do progresso, limpeza segura, caminho de pacote para capacidades antigas, recuperação apresentada ao usuário e evidência de consulta dos pacotes reais offline após reabertura. Escrita e núcleo portátil continuam disponíveis independentemente dessas capacidades.
+A prova A01 e suas extensões foram incorporadas isoladamente na main (ver [retomada A2](jornada/RETOMADA-A2-2026-09-28.md)). A ponte textual experimental foi implementada/testada (ver [entrega parcial](jornada/ENTREGA-A02-PONTE-2026-09-29.md)); falta integrá-la ao produto. Faltam endereçamento limitado dos metadados e adaptação do manifesto, catálogo/interface de instalação, escolha de recursos, estimativa de espaço, apresentação do progresso, limpeza segura, caminho de pacote para capacidades antigas, recuperação apresentada ao usuário e evidência de consulta dos pacotes reais offline após reabertura. Escrita e núcleo portátil continuam disponíveis independentemente dessas capacidades.
 
 ## Coordenação de instalação — v6-31, A02 parcial
 
@@ -95,3 +95,7 @@ Outros erros: `BUSY`, `CLOSED`, `INVALID_BLOCK_REQUEST`, `BLOCK_LIMIT`, `FILE_RA
 - [W3C IndexedDB, recomendação de 2015](https://www.w3.org/TR/2015/REC-IndexedDB-20150108/): transações, eventos de conclusão/aborto e atualização de esquema. A atomicidade é da transação; não manter transação aberta esperando hash assíncrono.
 - [fakeIndexedDB, documentação oficial](https://github.com/dumbmatter/fakeIndexedDB): implementação em memória para testes, não persistência em disco. Versão e integridade da dependência fixadas em `package-lock.json`; não entra nos bundles.
 - [W3C File API, fonte oficial](https://github.com/w3c/FileAPI/blob/main/index.bs), blob consultado `3401950c80b200ade94063e3ac9b9c13cf5b42d8`, em 28/09/2026: seções `slice-method-algo`, `readAsArrayBuffer` e `abort`. Referência do contrato de bytes/estados, sem cópia de código ou promessa de suporte universal. Consulta feita pelo repositório oficial após falha da ferramenta de navegação nas páginas W3C.
+
+## Ponte textual experimental — 29/09/2026
+
+`packages/experiments/lexical-index/store-reader.js` liga uma instância dedicada deste store à consulta lexical paginada, com tickets fixados e UTF-8 estrito. Ver [contrato, verificações e limites](jornada/ENTREGA-A02-PONTE-2026-09-29.md). O store e seu esquema não mudaram. `inspect`/`read` ainda materializam o envelope plano: próximo incremento deve resolver esse custo antes da escala. A fábrica experimental não entra no bundle nem oferece instalação na interface.

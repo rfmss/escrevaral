@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 3,
-  "updated": "2026-09-28",
+  "updated": "2026-09-29",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -143,8 +143,12 @@
             "src/storage/instalador-pacotes.js",
             "tests/instalador-pacotes.cjs",
             "src/storage/leitor-pacotes.js",
-            "tests/leitor-pacotes.cjs"
-          ]
+            "tests/leitor-pacotes.cjs",
+            "docs/jornada/ENTREGA-A02-PONTE-2026-09-29.md",
+            "packages/experiments/lexical-index/store-reader.js",
+            "packages/experiments/lexical-index/test-store-reader.cjs"
+          ],
+          "progress": "Ponte textual experimental implementada/testada: tickets fixados, UTF-8 estrito, fila e cancelamento; falta substituir retenção do envelope plano antes de escalar e integrar no produto."
         },
         {
           "id": "A03",
@@ -288,12 +292,10 @@
   "next": "A02",
   "lastDelivery": {
     "version": "6.32.0",
-    "completed": [
-      "A01"
-    ],
-    "baselineDone": 9,
-    "publication": "Main 345abc3627d63e15c7733e3b5912aa26d3b4a6a0: paginação e conversão externa incorporadas, CI/Pages success. +1 regulariza A01 já aceita por A1; sem novo aceite linguístico.",
-    "evidence": "docs/jornada/RETOMADA-A2-2026-09-28.md"
+    "completed": [],
+    "baselineDone": 10,
+    "publication": "Ponte A02 testada localmente; publicação/CI/Pages aguardando confirmação. Marco A02 continua TODO.",
+    "evidence": "docs/jornada/ENTREGA-A02-PONTE-2026-09-29.md"
   },
   "scopeChanges": [
     {

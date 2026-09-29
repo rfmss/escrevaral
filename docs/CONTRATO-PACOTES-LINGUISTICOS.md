@@ -91,3 +91,7 @@ Para a ponte seguinte, ficam aceitas as distinções de orçamento de payload ve
 O lote exato `cb7e349032b9c322bfc09e468ac28fbd3006a723` do PR #188 acrescenta formato lexical v2 com raiz pequena, páginas verificadas e conversão NDJSON por ordenação externa. Incorporação isolada e verificações registradas na passagem; nenhuma nova API foi ativada no aplicativo. O leitor experimental aceita o descritor como quinto argumento, além da assinatura original, para verificar páginas sem catálogo integral.
 
 A ponte A02 deve fixar tickets por versão, preservar os limites antes da decodificação UTF-8, serializar acesso ao store e confirmar conclusão física após cancelar. Seu primeiro ensaio pode usar pacote pequeno dentro dos limites atuais. Antes de ampliar o acervo, resolver o envelope plano de instalação e o acesso a descritores: paginar somente o léxico não limita os metadados do store. Não elevar `metadataChars` para disfarçar esse custo.
+
+## Ponte A02 verificada — 29/09/2026
+
+A ponte experimental de tickets/UTF-8 e fila está implementada e testada conforme a [entrega parcial](jornada/ENTREGA-A02-PONTE-2026-09-29.md). Não exige mudança da API do cofre nem do store; não foi ativada no aplicativo. Próximo limite: endereçamento de metadados sem catálogo integral por consulta. A02 permanece TODO.

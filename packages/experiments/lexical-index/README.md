@@ -90,3 +90,7 @@ No caminho v2, configure `limits:{maxIndexDecodedBytes:8192}` para limitar a som
 [Relatório de conversão](../../../../docs/recursos/A01-CONVERSAO-EXTERNA.md): `build-stream.cjs` ordena entrada NDJSON em disco, rejeita duplicatas globais e produz o mesmo formato v2 sem manter todas as entradas, blocos ou descritores na RAM. Exige procedência explícita; o comando `convert-own-fixture` só serve para a fixture própria. Não sobrescreve destinos existentes.
 
 `test-stream.cjs` acrescenta 11 casos, comparação byte a byte e 60 consultas de referência. `benchmark-stream.cjs` mede conversão sob limite V8 e reabre o pacote em outro processo, até 400.098 entradas artificiais. O conversor anterior permanece como referência independente. Esta ferramenta Node é de construção; nenhum novo requisito chega ao aparelho do escritor. Orçamentos de disco, memória observada, falhas e limitações estão no relatório.
+
+## Ponte de armazenamento (A02 parcial)
+
+`store-reader.js` abre recursos por tickets fixados de uma instância dedicada do store, serializa leituras e entrega payload UTF-8 estrito ao lookup. `utf8.js` não exige TextDecoder. [Contrato e evidências](../../../docs/jornada/ENTREGA-A02-PONTE-2026-09-29.md); executar `node packages/experiments/lexical-index/test-store-reader.cjs`. Os dois módulos continuam fora do bundle; catálogo plano e reabertura física offline ainda pendentes.
