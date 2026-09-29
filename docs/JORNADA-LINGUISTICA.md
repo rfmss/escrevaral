@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 29/09/2026. Base do produto auditada: `fac34c665080bbc42dca7d91a697389ef88a2590`.
+Atualizado em 29/09/2026. Base do produto auditada: `2521956ba78d802a9d13c8320b19a0a189000c2c`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** Produto v6-32 preservado; A01 ampliada publicada. A2 implementou e testou a ponte experimental entre store de pacotes e consulta lexical paginada: tickets fixados, UTF-8 estrito, fila limitada e cancelamento com conclusão física. 15 casos novos aprovados; integração instalador/store/ponte/lookup com reabertura lógica em IndexedDB simulado. Incremento publicado na main fac34c6, com CI e Pages aprovados; as quatro suítes lexicais totalizam 57 casos no CI. A02 continua parcial: envelope plano, catálogo/interface e reabertura física offline pendentes. A03 não implementada.
+**Estado:** Produto v6-32 preservado; A01 ampliada e ponte A02 publicadas. Novo store experimental com cabeçalhos compactos e descritores por chave implementado/testado, ligado à ponte por modo explícito. Abertura e leitura não carregam catálogo integral nesse modo; 15 casos novos e 15 da ponte aprovados. Publicação deste incremento aguardando confirmação. Store publicado v1 permanece intacto. A02 continua parcial: produtor de catálogo em arquivo, coordenador sequencial, interface e persistência física offline pendentes; A03 não implementada.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,8 +16,8 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A02: decidir formato/versionamento para endereçamento limitado dos descritores; comparar catálogo paginado e registros separados, preservando integridade, retomada e versão anterior. Consultar bloco sem carregar lista integral; não aumentar metadataChars para esconder retenção.
-- Depois: ampliar piloto e integrar catálogo, seleção/instalação explícita, falhas recuperáveis e reabertura física offline com alternativa para APIs ausentes. Ponte textual já verificada como experimento, sem consumidor no aplicativo; nenhuma fonte externa aprovada para importação.
+- A02: ampliar o conversor externo para produzir catálogo sequencial de descritores, hash final e raiz lexical transportável, sob limites de memória/disco. Implementar coordenador por unidades com retomada no store endereçado, sem reconstruir lista integral.
+- Depois provar o caminho de arquivos ao store, cancelar/retomar e reabrir; integrar catálogo e controles explícitos, alternativa para APIs ausentes e persistência física offline. Store endereçado e ponte já verificados como experimentos; nenhuma fonte externa aprovada para importação.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.

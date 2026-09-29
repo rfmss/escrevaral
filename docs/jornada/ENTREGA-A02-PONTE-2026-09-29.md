@@ -55,3 +55,7 @@ Próximo A02: decidir e implementar endereçamento limitado dos descritores de i
 Plano v3: 10/24 DONE | entrega +0 (avanço parcial A02: ponte) | próximo A02 (metadados limitados) | publicação: main fac34c6, CI/Pages success | limite: catálogo plano, integração do produto e persistência física. Fundação 5/5; compatibilidade 4/4; acervo 1/3; motores 0/8; experiência 0/2; revisão 0/2.
 
 O gerador do Plano Mestre agora apresenta o campo opcional de progresso parcial de cada marco. Assim, o avanço aparece na árvore sem converter TODO em DONE; a geração foi conferida como determinística.
+
+## Avanço posterior no mesmo dia
+
+O endereçamento de metadados indicado acima foi implementado/testado em banco experimental separado; veja a [entrega de metadados](ENTREGA-A02-METADADOS-2026-09-29.md). O modo v1 desta entrega mantém seu limite histórico. Fila atual: catálogo em arquivo e coordenador sequencial.

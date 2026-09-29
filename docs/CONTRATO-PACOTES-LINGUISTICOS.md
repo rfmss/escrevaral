@@ -95,3 +95,7 @@ A ponte A02 deve fixar tickets por versão, preservar os limites antes da decodi
 ## Ponte A02 verificada — 29/09/2026
 
 A ponte experimental de tickets/UTF-8 e fila está implementada e testada conforme a [entrega parcial](jornada/ENTREGA-A02-PONTE-2026-09-29.md). Não exige mudança da API do cofre nem do store; não foi ativada no aplicativo. Próximo limite: endereçamento de metadados sem catálogo integral por consulta. A02 permanece TODO.
+
+## Descritores por chave — 29/09/2026
+
+A [prova do store endereçado](jornada/ENTREGA-A02-METADADOS-2026-09-29.md) implementa envelope experimental v2 sem lista integral, registros por chave, retomada por ordinal e ativação atômica com contadores. Banco separado, sem migração/integração automática. A assinatura v1 permanece intacta. Próxima entrega: produzir catálogo em arquivo e coordenar instalação por unidades; A02 permanece TODO.

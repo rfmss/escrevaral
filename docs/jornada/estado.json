@@ -1,13 +1,13 @@
 {
-  "version": 20,
+  "version": 21,
   "updated": "29/09/2026",
-  "baseline": "fac34c665080bbc42dca7d91a697389ef88a2590",
+  "baseline": "2521956ba78d802a9d13c8320b19a0a189000c2c",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "Produto v6-32 preservado; A01 ampliada publicada. A2 implementou e testou a ponte experimental entre store de pacotes e consulta lexical paginada: tickets fixados, UTF-8 estrito, fila limitada e cancelamento com conclusão física. 15 casos novos aprovados; integração instalador/store/ponte/lookup com reabertura lógica em IndexedDB simulado. Incremento publicado na main fac34c6, com CI e Pages aprovados; as quatro suítes lexicais totalizam 57 casos no CI. A02 continua parcial: envelope plano, catálogo/interface e reabertura física offline pendentes. A03 não implementada.",
+  "current": "Produto v6-32 preservado; A01 ampliada e ponte A02 publicadas. Novo store experimental com cabeçalhos compactos e descritores por chave implementado/testado, ligado à ponte por modo explícito. Abertura e leitura não carregam catálogo integral nesse modo; 15 casos novos e 15 da ponte aprovados. Publicação deste incremento aguardando confirmação. Store publicado v1 permanece intacto. A02 continua parcial: produtor de catálogo em arquivo, coordenador sequencial, interface e persistência física offline pendentes; A03 não implementada.",
   "next": [
-    "A02: decidir formato/versionamento para endereçamento limitado dos descritores; comparar catálogo paginado e registros separados, preservando integridade, retomada e versão anterior. Consultar bloco sem carregar lista integral; não aumentar metadataChars para esconder retenção.",
-    "Depois: ampliar piloto e integrar catálogo, seleção/instalação explícita, falhas recuperáveis e reabertura física offline com alternativa para APIs ausentes. Ponte textual já verificada como experimento, sem consumidor no aplicativo; nenhuma fonte externa aprovada para importação.",
+    "A02: ampliar o conversor externo para produzir catálogo sequencial de descritores, hash final e raiz lexical transportável, sob limites de memória/disco. Implementar coordenador por unidades com retomada no store endereçado, sem reconstruir lista integral.",
+    "Depois provar o caminho de arquivos ao store, cancelar/retomar e reabrir; integrar catálogo e controles explícitos, alternativa para APIs ausentes e persistência física offline. Store endereçado e ponte já verificados como experimentos; nenhuma fonte externa aprovada para importação.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
     "Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.",
     "Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.",
@@ -667,7 +667,7 @@
     "date": "28/09/2026",
     "request": "Rafael: vou passar a bola pra vc, consegue retomar o projeto?",
     "decision": "A2 assume continuidade, coordenação, integração e publicação na main no escopo aprovado; substitui exclusividade anterior do A1. Conferir a main antes de qualquer retomada concorrente. Mantidos cofre síncrono, manuscrito imutável e análise explícita.",
-    "nextDeliverable": "A02: metadados de instalação endereçados com limites, após a ponte textual experimental verificada."
+    "nextDeliverable": "A02: catálogo em arquivo no conversor externo e coordenador de instalação sequencial sobre o store endereçado."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -693,7 +693,7 @@
   "resourceDirection": {
     "date": "27/09/2026",
     "contract": "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
-    "status": "A02 parcial: persistência, coordenador e transporte local publicados na v6-32; ponte textual experimental implementada/testada em 29/09/2026. Envelope plano, integração de produto, pacotes reais, reabertura física offline e preparação incremental pendentes.",
+    "status": "A02 parcial: infraestrutura v1 publicada; ponte e store endereçado experimentais implementados/testados. No novo modo, abertura e leitura usam registros pontuais. Faltam produtor/coordenador de arquivos, integração de produto, pacotes reais, persistência física e preparação incremental.",
     "deadline": "Sem prazo de calendário; entregas delimitadas.",
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."

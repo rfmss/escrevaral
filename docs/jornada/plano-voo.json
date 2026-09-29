@@ -146,9 +146,12 @@
             "tests/leitor-pacotes.cjs",
             "docs/jornada/ENTREGA-A02-PONTE-2026-09-29.md",
             "packages/experiments/lexical-index/store-reader.js",
-            "packages/experiments/lexical-index/test-store-reader.cjs"
+            "packages/experiments/lexical-index/test-store-reader.cjs",
+            "docs/jornada/ENTREGA-A02-METADADOS-2026-09-29.md",
+            "packages/experiments/lexical-index/addressed-store.js",
+            "packages/experiments/lexical-index/test-addressed-store.cjs"
           ],
-          "progress": "Ponte textual experimental implementada/testada: tickets fixados, UTF-8 estrito, fila e cancelamento; falta substituir retenção do envelope plano antes de escalar e integrar no produto."
+          "progress": "Store experimental com cabeçalho compacto e descritores por chave, ligado à ponte: leitura/abertura sem catálogo integral; testes de retomada, concorrência, quota e cancelamento passaram. Seguem catálogo em arquivo, coordenador sequencial e integração no produto."
         },
         {
           "id": "A03",
@@ -294,8 +297,8 @@
     "version": "6.32.0",
     "completed": [],
     "baselineDone": 10,
-    "publication": "Ponte experimental A02 publicada na main fac34c665080bbc42dca7d91a697389ef88a2590; CI 36559880501 e Pages 36559879277 concluídos com sucesso. A02 permanece TODO, avanço parcial registrado.",
-    "evidence": "docs/jornada/ENTREGA-A02-PONTE-2026-09-29.md"
+    "publication": "Metadados endereçados testados localmente; publicação/CI/Pages aguardando confirmação. A02 continua TODO.",
+    "evidence": "docs/jornada/ENTREGA-A02-METADADOS-2026-09-29.md"
   },
   "scopeChanges": [
     {

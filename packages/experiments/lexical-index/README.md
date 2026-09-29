@@ -94,3 +94,7 @@ No caminho v2, configure `limits:{maxIndexDecodedBytes:8192}` para limitar a som
 ## Ponte de armazenamento (A02 parcial)
 
 `store-reader.js` abre recursos por tickets fixados de uma instância dedicada do store, serializa leituras e entrega payload UTF-8 estrito ao lookup. `utf8.js` não exige TextDecoder. [Contrato e evidências](../../../docs/jornada/ENTREGA-A02-PONTE-2026-09-29.md); executar `node packages/experiments/lexical-index/test-store-reader.cjs`. Os dois módulos continuam fora do bundle; catálogo plano e reabertura física offline ainda pendentes.
+
+## Metadados por chave (A02 parcial)
+
+`addressed-store.js` e modo `addressed:true` da ponte usam cabeçalho compacto e descritores pontuais num banco experimental separado. [Contrato, limites e reprodução](../../../docs/jornada/ENTREGA-A02-METADADOS-2026-09-29.md). Teste: `node packages/experiments/lexical-index/test-addressed-store.cjs`. Ainda faltam produtor/coordenador de catálogo em arquivo, integração e persistência física offline; o banco v1 publicado permanece intacto.

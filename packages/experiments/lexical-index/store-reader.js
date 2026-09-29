@@ -56,10 +56,11 @@ function serialQueue(limit) {
 
 exports.open = function (options, done) {
   options = options || {};
-  var store = options.store, limits = {}, resources = [], bindings = Object.create(null), index = 0;
+  var store = options.store, addressed = options.addressed === true, limits = {}, resources = [], bindings = Object.create(null), index = 0;
   var descriptors = 0, metadata = 0, cancelled = false, finished = false, pending = null, closed = false;
   if (typeof done !== 'function') { throw error('CALLBACK_REQUIRED'); }
-  if (!store || typeof store.inspect !== 'function' || typeof store.read !== 'function') { throw error('STORE_REQUIRED'); }
+  if (!store || (addressed ? typeof store.snapshot !== 'function' || typeof store.readVerified !== 'function' :
+      typeof store.inspect !== 'function' || typeof store.read !== 'function')) { throw error('STORE_REQUIRED'); }
   Object.keys(defaults).forEach(function (k) { limits[k] = defaults[k]; });
   Object.keys(options.limits || {}).forEach(function (k) {
     if (!Object.prototype.hasOwnProperty.call(limits,k) || !integer(options.limits[k]) || !options.limits[k]) { throw error('INVALID_LIMIT'); }
@@ -90,23 +91,26 @@ exports.open = function (options, done) {
       return;
     }
     var r = resources[index++];
-    pending = queue.run(function (cb) { return store.inspect(ticket(r.ticket),cb); }, function (e, state) {
+    pending = queue.run(function (cb) { return store[addressed ? 'snapshot' : 'inspect'](ticket(r.ticket),cb); }, function (e, state) {
       pending = null;
       if (cancelled) { fail(error('CANCELLED')); return; }
       if (e) { fail(e); return; }
       try {
         var m = state && state.manifest;
         if (!state || state.state !== 'ready' || !m || m.id !== r.packageId || m.version !== r.version ||
-            m.schema !== 'scrvrl.package-stage' || m.schemaVersion !== 1 || !Array.isArray(m.blocks) || !Array.isArray(m.dependencies)) { throw error('INVALID_BINDING'); }
+            m.schema !== 'scrvrl.package-stage' || m.schemaVersion !== (addressed ? 2 : 1) ||
+            (!addressed && !Array.isArray(m.blocks)) || !Array.isArray(m.dependencies)) { throw error('INVALID_BINDING'); }
+        if (addressed && (m.blocks !== undefined || !integer(m.blockCount) || !m.blockCount || !integer(m.totalBytes) ||
+            typeof m.catalogHash !== 'string' || !/^[a-f0-9]{64}$/.test(m.catalogHash))) { throw error('INVALID_BINDING'); }
         // inspect já materializou o envelope: limitação conhecida do store v1.
-        if (m.blocks.length > limits.maxDescriptors - descriptors || m.dependencies.length > limits.maxPackages) { throw error('DESCRIPTOR_LIMIT'); }
+        if ((!addressed && m.blocks.length > limits.maxDescriptors - descriptors) || m.dependencies.length > limits.maxPackages) { throw error('DESCRIPTOR_LIMIT'); }
         metadata += JSON.stringify(m).length;
         if (metadata > limits.maxMetadataChars) { throw error('METADATA_LIMIT'); }
-        m.blocks.forEach(function (b) {
+        if (!addressed) { m.blocks.forEach(function (b) {
           if (!b || !id(b.id) || r.blocks[b.id] || !integer(b.bytes) || b.bytes > limits.maxBlockEncodedBytes ||
               typeof b.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(b.sha256)) { throw error('INVALID_DESCRIPTOR'); }
           r.blocks[b.id] = {bytes:b.bytes,sha256:b.sha256}; descriptors += 1;
-        });
+        }); }
         r.dependencies = m.dependencies.map(function (d) {
           if (!d || !id(d.id) || !id(d.version)) { throw error('INVALID_DEPENDENCY'); } return {id:d.id,version:d.version};
         });
@@ -117,13 +121,19 @@ exports.open = function (options, done) {
   function readBlock(packageId, version, blockId, callback, expected) {
     if (typeof callback !== 'function') { throw error('CALLBACK_REQUIRED'); }
     var r = bindings[packageId+'/'+version], b = r && r.blocks[blockId], decodedBytes, failure = null;
+    if (addressed && expected && integer(expected.encodedBytes) && expected.encodedBytes <= limits.maxBlockEncodedBytes &&
+        typeof expected.sha256 === 'string' && /^[a-f0-9]{64}$/.test(expected.sha256)) { b = {bytes:expected.encodedBytes,sha256:expected.sha256}; }
     if (closed) { failure = error('CLOSED'); }
     else if (!id(packageId) || !id(version) || !id(blockId) || !r || !b) { failure = error('BLOCK_UNAVAILABLE'); }
     else if (!expected || expected.id !== blockId || expected.encodedBytes !== b.bytes || expected.sha256 !== b.sha256 ||
         !integer(expected.decodedBytes) || expected.decodedBytes > limits.maxBlockDecodedBytes) { failure = error('DESCRIPTOR_MISMATCH'); }
     if (failure) { setTimeout(function () { callback(failure); }, 0); return {cancel:function () { return false; }}; }
     decodedBytes = expected.decodedBytes;
-    return queue.run(function (cb) { return store.read(ticket(r.ticket),blockId,cb); }, function (e, buffer) {
+    // No modo endereçado, o próprio store confronta o descritor por chave antes
+    // de ler/verificar o payload; a ponte não retém uma lista de descritores.
+    return queue.run(function (cb) {
+      return addressed ? store.readVerified(ticket(r.ticket),blockId,{bytes:b.bytes,sha256:b.sha256},cb) : store.read(ticket(r.ticket),blockId,cb);
+    }, function (e, buffer) {
       var text, payload;
       if (!e) {
         try {

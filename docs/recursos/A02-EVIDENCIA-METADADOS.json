@@ -1,0 +1,28 @@
+{
+  "capturedAt": "2026-09-29T11:38:34.348434+00:00",
+  "method": "IndexedDB simulado em memória. getAll/openCursor proibidos durante o ensaio. Metadados contados por get; tamanhos em caracteres JSON de registros retornados. Sem medição de heap/RSS ou benchmark de aparelho; compilador de catálogo da fixture somente no teste.",
+  "result": "passed",
+  "cases": 15,
+  "measurements": [
+    {
+      "entries": 138,
+      "descriptors": 6,
+      "openingMetadataReads": 1,
+      "queryMetadataReads": 8,
+      "queryPayloadReads": 4,
+      "maxMetadataRecordChars": 436,
+      "retainedHeaderChars": 227,
+      "retainedDescriptors": 0
+    },
+    {
+      "entries": 5098,
+      "descriptors": 170,
+      "openingMetadataReads": 1,
+      "queryMetadataReads": 10,
+      "queryPayloadReads": 5,
+      "maxMetadataRecordChars": 445,
+      "retainedHeaderChars": 230,
+      "retainedDescriptors": 0
+    }
+  ]
+}

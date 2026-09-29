@@ -99,3 +99,7 @@ Outros erros: `BUSY`, `CLOSED`, `INVALID_BLOCK_REQUEST`, `BLOCK_LIMIT`, `FILE_RA
 ## Ponte textual experimental — 29/09/2026
 
 `packages/experiments/lexical-index/store-reader.js` liga uma instância dedicada deste store à consulta lexical paginada, com tickets fixados e UTF-8 estrito. Ver [contrato, verificações e limites](jornada/ENTREGA-A02-PONTE-2026-09-29.md). O store e seu esquema não mudaram. `inspect`/`read` ainda materializam o envelope plano: próximo incremento deve resolver esse custo antes da escala. A fábrica experimental não entra no bundle nem oferece instalação na interface.
+
+## Store endereçado experimental — 29/09/2026
+
+`addressed-store.js` usa banco separado, cabeçalhos compactos, descritores/recibos por chave e catálogo confirmado por cadeia de hashes. A ponte aceita `addressed:true`; não migra o store v1 nem muda o aplicativo. [Contrato, decisão, evidências e próximos passos](jornada/ENTREGA-A02-METADADOS-2026-09-29.md). No novo modo a consulta dispensa catálogo integral; produtor/coordenador de arquivos e integração seguem pendentes.
