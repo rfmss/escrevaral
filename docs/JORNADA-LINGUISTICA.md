@@ -6,7 +6,7 @@ Atualizado em 30/09/2026. Base do produto auditada: `72fa5989952a413cdea090a412d
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-35 publicada: Classes de palavras usa candidatos PortiLexicon e formas finitas explícitas no contexto. Tu casas/As casas eram brancas recebem leituras diferentes; casos sem apoio preservam alternativas. Fonte e versão registradas, nenhuma ampliação automática de sintaxe/relativas. M02-candidatos-1 cumprida, M02 geral parcial. Main 72fa598, CI e Pages concluídos com sucesso.
+**Estado:** v6-36 implementada e verificada localmente: Classes de palavras reconhece grupos curtos com artigo, nome e adjetivo nas duas ordens. Traços de gênero/número apoiam a hipótese; duas ordens possíveis mantêm abstenção explícita. M02-nominal-1 cumprida, M02 geral parcial. Push/CI/Pages aguardando confirmação.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02: grupos nominais curtos com artigo + nome + adjetivo, usando gênero/número como apoio e casos contrastantes; preservar abstenção e não propagar automaticamente para sintaxe/relativas.
+- M02-complemento-1: delimitar artigo + nome + complemento com de/do/da, começando por O filho da vizinha chegou e contraexemplos; preservar abstenção e isolamento de sintaxe/relativas.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -86,7 +86,7 @@ Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md
 
 ### P04 — Reconhecer classes no contexto
 
-Estado: **Candidatos lexicais reais publicados na lente; avaliação reservada pendente**. Depende de: P02, P03.
+Estado: **Grupos nominais integrados/testados; publicação e avaliação reservada pendentes**. Depende de: P02, P03.
 
 Ir das classes possíveis à leitura sustentada pela frase.
 
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-candidatos-1/v6-35: PortiLexicon amplia candidatos e formas finitas na lente de classes, com fonte/versão e abstenção. 26 contrastes e 63 casos contextuais aprovados; duas expectativas anteriores mudaram por homógrafos revelados, com justificativa. Sintaxe/relativas mantêm inventário anterior. Publicado na main 72fa598, CI e Pages aprovados.
+**Condição de conclusão:** M02-candidatos-1/v6-35 publicada. M02-nominal-1/v6-36 integra artigo/nome/adjetivo nas duas ordens, com traços e abstenção. 17 contrastes novos e regressões contextuais aprovados; publicação ainda pendente.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`.
 
 ### P05 — Construir as relações da oração
 

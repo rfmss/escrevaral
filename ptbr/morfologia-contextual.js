@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-2-portilexicon', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-3-nominal', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -17,6 +17,8 @@
   };
   var subjects = { '$eu': [1, 'singular'], '$tu': [2, 'singular'], '$ele': [3, 'singular'], '$ela': [3, 'singular'], '$você': [3, 'singular'], '$nós': [1, 'plural'], '$vós': [2, 'plural'], '$eles': [3, 'plural'], '$elas': [3, 'plural'], '$vocês': [3, 'plural'] };
   var articles = ['o', 'a', 'os', 'as'];
+  var articleFeatures={o:['Masc','Sing'],a:['Fem','Sing'],os:['Masc','Plur'],as:['Fem','Plur']};
+  var featurePatterns={Gender:/(?:^|\|)Gender=([^|]+)(?:\||$)/,Number:/(?:^|\|)Number=([^|]+)(?:\||$)/};
   function has(list, word) { return list.indexOf(word) >= 0; }
   function readings(word) {
     var w = E.reading.canonical(word), r = E.grammar.readings(w), more = extraForms['$' + w] || [];
@@ -57,6 +59,20 @@
       return /^(indicativo|subjuntivo):/.test(v[1]) && (!agreement || v[2] === agreement[0] && v[3] === agreement[1]);
     }).concat(externalFinite(r,agreement));
   }
+  function nominalAgreement(noun, adjective, article) {
+    var expected=articleFeatures[article];
+    var ns=noun.portilexicon||[],adjs=adjective.portilexicon||[],i,j,n,a,g;
+    function feature(row,name){var m=featurePatterns[name].exec(row.features);return m?m[1].split(','):[];}
+    for(i=0;i<ns.length;i++){
+      n=ns[i];if(n.pos!=='NOUN'||!has(feature(n,'Gender'),expected[0])||!has(feature(n,'Number'),expected[1])){continue;}
+      for(j=0;j<adjs.length;j++){
+        a=adjs[j];if(a.pos!=='ADJ'||!has(feature(a,'Number'),expected[1])){continue;}
+        g=feature(a,'Gender');if(g.length&&!has(g,expected[0])){continue;}
+        return {gender:expected[0],number:expected[1],adjectiveGenderMarked:!!g.length};
+      }
+    }
+    return null;
+  }
   function inspect(text) {
     if (typeof text !== 'string') { throw new Error('A análise precisa receber texto.'); }
     var cut = text.slice(0, maxChars), clean = E.protectedText(cut), ts = E.reading.tokens(clean), i, j, k, r, forms, clitic, agreement;
@@ -66,7 +82,7 @@
     }
     if (ts.length > maxTokens) { ts = ts.slice(0, maxTokens); cut = cut.slice(0, ts[ts.length - 1].end); clean = clean.slice(0, cut.length); }
     function linked(a, b) { return a >= 0 && b < ts.length && b === a + 1 && /^[ \t\u00a0]+$/.test(text.slice(ts[a].end, ts[b].start)); }
-    var items = ts.map(function (t) {
+    var blockedNominal = {}, items = ts.map(function (t) {
       var possible = lexicalReadings(t.value);
       return { start: t.start, end: t.end, snippet: text.slice(t.start, t.end), candidates: possible,
         status: possible.classes.length > 1 ? 'ambiguo' : possible.classes.length ? 'lexical' : 'desconhecido',
@@ -89,9 +105,28 @@
       choose(j, 'verbo', 'PTBR-CTX-001', [i, j], forms);
       if (clitic >= 0) { choose(clitic, 'pronome', 'PTBR-CTX-003', [i, clitic, j]); }
     }
+    /* Grupo de três palavras: artigo + nome/adjetivo, nas duas ordens.
+     * As duas ordens possíveis ou verbo finito no lugar do adjetivo impedem decisão. */
+    for(i=0;i+2<ts.length;i++){
+      if(!has(articles,ts[i].value)||!linked(i,i+1)||!linked(i+1,i+2)){continue;}
+      if(items[i].status==='contextual'||items[i+1].status==='contextual'||items[i+2].status==='contextual'){continue;}
+      var left=items[i+1].candidates,right=items[i+2].candidates;
+      var post=has(left.classes,'substantivo')&&has(right.classes,'adjetivo');
+      var pre=has(left.classes,'adjetivo')&&has(right.classes,'substantivo');
+      if(!post&&!pre){continue;}
+      if(post&&pre){blockedNominal[i]=true;items[i].nominalAmbiguity=true;items[i+1].nominalAmbiguity=true;items[i+2].nominalAmbiguity=true;continue;}
+      var nounAt=post?i+1:i+2,adjAt=post?i+2:i+1;
+      if(finite(items[adjAt].candidates).length){continue;}
+      var match=nominalAgreement(items[nounAt].candidates,items[adjAt].candidates,ts[i].value);
+      if(!match){continue;}
+      choose(i,'artigo','PTBR-CTX-006',[i,nounAt,adjAt]);
+      choose(nounAt,'substantivo','PTBR-CTX-006',[i,nounAt,adjAt]);
+      choose(adjAt,'adjetivo','PTBR-CTX-006',[i,nounAt,adjAt]);
+      items[i].nominalAgreement=match;items[nounAt].nominalAgreement=match;items[adjAt].nominalAgreement=match;
+    }
     /* Artigo definido + nome conhecido. Homógrafo verbal requer contexto à direita. */
     for (i = 0; i + 1 < ts.length; i += 1) {
-      if (!has(articles, ts[i].value) || items[i].status === 'contextual' || !linked(i, i + 1)) { continue; }
+      if (blockedNominal[i] || !has(articles, ts[i].value) || items[i].status === 'contextual' || !linked(i, i + 1)) { continue; }
       j = i + 1; r = items[j].candidates;
       if (!has(r.classes, 'substantivo') || has(E.grammarData.nonFinite, ts[j].value) || items[j].status === 'contextual') { continue; }
       if (finite(r).length) {
@@ -114,16 +149,19 @@
   }
   function analyze(text, cap) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource;
-    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
+    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo/nome/adjetivo e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';
       message = contextual ? 'Leitura contextual: ' + item.selected + '.' : item.status === 'desconhecido' ? 'Sem classificação neste inventário.' : 'Possibilidades lexicais: ' + r.classes.join(', ') + '.';
       reason = item.rule === 'PTBR-CTX-001' ? 'Pronome sujeito próximo e forma verbal finita compatível em pessoa e número.' :
         item.rule === 'PTBR-CTX-002' ? 'Artigo definido antes de nome registrado; homógrafos verbais exigem também uma forma finita à direita.' :
         item.rule === 'PTBR-CTX-003' ? 'A forma aparece entre pronome sujeito (com não opcional) e verbo finito compatível.' :
+        item.rule === 'PTBR-CTX-006' ? 'Artigo, nome e adjetivo contíguos com número compatível; gênero do nome compatível com o artigo.'+(item.nominalAgreement.adjectiveGenderMarked?' O gênero do adjetivo também está registrado e é compatível.':' A fonte não informa gênero para este adjetivo; isso não foi tratado como prova de concordância.') :
         item.rule === 'PTBR-CTX-005' ? 'Lema conhecido e preposição contígua, com pronome sujeito opcional: leitura de infinitivo preservada do motor anterior.' :
+        item.nominalAmbiguity ? 'Neste grupo, o léxico admite nome + adjetivo e adjetivo + nome. O recorte não escolhe entre as duas distribuições.' :
         r.classes.length ? 'Consulta ao léxico local; nenhuma regra contextual deste incremento decidiu a ocorrência.' : 'A forma não consta do recorte lexical. Nenhuma classe foi deduzida por sufixo.';
       occurrenceSource=contextual&&item.rule!=='PTBR-CTX-005'?source:E.grammarData.source;
+      if(item.rule==='PTBR-CTX-006'){occurrenceSource={title:'Regra computacional local de hipótese nominal. Universal Dependencies: amod em português, Gender e Number; consulta em 30/09/2026. Não é regra geral de desambiguação ou concordância.',url:'https://universaldependencies.org/pt/dep/amod.html'};}
       if(r.portilexicon.length){occurrenceSource={title:(typeof occurrenceSource==='string'?occurrenceSource:occurrenceSource.title)+' Dados lexicais: PortiLexicon-UD, Lopes, Duran, Fernandes e Pardo (2022), recorte '+E.portiLexicon.version+'. Classes UD são candidatos; não equivalem automaticamente à função na frase.',url:'https://github.com/LuceleneL/PortiLexicon-UD/tree/315e063da1f89c89e2097c6e72428ebefb9ab1d1'};}
       out.push(E.instruments.finding('morfologia', item.rule || 'PTBR-CTX-004', text, item.start, item.end, message,
         reason + (item.evidence.length ? ' Apoios no original: ' + item.evidence.map(function (s) { return '“' + s.snippet + '”'; }).join(', ') + '.' : ''),
@@ -131,7 +169,7 @@
         'Possibilidades lexicais registradas: ' + (r.classes.join(', ') || 'nenhuma') + '. A regra é uma hipótese local. Elipse, nomes próprios, usos literários e outras construções podem exigir leitura diferente. Um inventário com uma só classe não prova unicidade na língua.',
         limit, occurrenceSource,
         { confidence: contextual ? 'moderada' : 'insuficiente', feature: item.selected || item.status, candidates: r,
-          analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
+          nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
     }
     out.coverageInfo = { scope: report.scope, work: report.work, version: version, lexiconVersion: E.portiLexicon?E.portiLexicon.version:null,
       summary: 'Classes em contexto: recorte ' + report.scope.start + '–' + report.scope.end + ' de ' + text.length + ' unidades UTF-16; ' + report.work.tokens + ' tokens.' + (report.scope.partial ? ' Análise parcial: selecione o restante para continuar.' : '') };

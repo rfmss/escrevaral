@@ -6,7 +6,7 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 30/09/2026, horário de Brasília:** produto v6-35 na main `72fa5989952a413cdea090a412db0c8ce20a8407`, com candidatos PortiLexicon na lente Classes de palavras; CI e Pages aprovados. Consultas lexicais/flexões v6-33/v6-34 preservadas. Próximo M02: grupos nominais curtos. Consulte a HEAD antes de agir.
+**Retrato conferido em 30/09/2026, horário de Brasília:** v6-36 integrada/testada, grupos nominais curtos na lente Classes de palavras. Publicação em confirmação; última versão publicada v6-35, main 72fa598. Próximo M02-complemento-1. Consulte a HEAD antes de agir.
 
 
 ## Prioridade vigente — 29/09/2026, entrega v6-33
@@ -17,9 +17,13 @@ Rafael aprovou acelerar com motores úteis no editor. **M01 passa à frente de A
 
 [M01-flexoes-1](jornada/ENTREGA-V6-34.md) cumprida: 3.009 formas e 5.286 leituras reais PortiLexicon, ligadas aos lemas e sentidos na consulta existente. Homógrafos preservados; fonte/atribuição/limites registrados. M01 continua parcial, sem alterar contagem de marcos. Próximo **M02: candidatos lexicais na lente Classes de palavras**, com contexto e abstenção. Main b3969c2, CI 36674620940 e Pages 36674620305 confirmados.
 
-## Incremento atual — v6-35, 30/09/2026
+## Histórico recente — v6-35, 30/09/2026
 
 [M02-candidatos-1](jornada/ENTREGA-V6-35.md) cumprida: Classes de palavras recebe o léxico PortiLexicon, formas finitas e ambiguidades, com fontes e limites. 26 contrastes novos aprovados; sintaxe/relativas conservam o inventário anterior. Próximo M02: grupos nominais curtos, artigo + nome + adjetivo. M02 geral permanece parcial. Main 72fa598, CI 36710110853 e Pages 36710109625 confirmados.
+
+## Incremento atual — v6-36, 30/09/2026
+
+[M02-nominal-1](jornada/ENTREGA-V6-36.md) cumprida: artigo/nome/adjetivo nas duas ordens, gênero/número como apoio e ambiguidade explícita. 17 contrastes novos, 63 contextuais, 26 PortiLexicon e painel aprovados; build reproduzível. Publicação em confirmação. Próximo M02-complemento-1: complemento curto com de/do/da. Plano permanece 11/25 DONE.
 
 ## Coordenação e nova direção — 27/09/2026
 
@@ -68,7 +72,7 @@ Marcos da primeira versão; não são porcentagem da língua, esforço ou precis
 - [ ] **M00 — Decidir reaproveitamento de motor brasileiro** — TODO. Protocolo e ambiente isolados; resultado real ou bloqueio documentado; decisão de viabilidade contra o piso antes de integrar. Evidência: [packages/connectors/portparser/README.md](../packages/connectors/portparser/README.md).
 - [x] **M01a — Consulta lexical real por palavra no editor** — DONE. Recorte explícito de fonte licenciada; seleção ou entrada manual, consulta local no site/portátil, sentidos e lacunas visíveis, autoria preservada e verificações essenciais. Não inclui flexões nem dicionário geral. Evidência: [docs/jornada/ENTREGA-V6-33.md](jornada/ENTREGA-V6-33.md), [tests/lexico-own-pt.cjs](../tests/lexico-own-pt.cjs), [resources/pt-BR/own-pt/ORIGEM.json](../resources/pt-BR/own-pt/ORIGEM.json).
 - [ ] **M01 — Léxico e flexões da primeira versão** — TODO. Fechar inventário/recorte da versão, fontes/licenças e casos reservados; entregar consulta e integração com limites. P03. Evidência: [ptbr/REGENCIA-1.md](../ptbr/REGENCIA-1.md), [docs/jornada/ENTREGA-V6-33.md](jornada/ENTREGA-V6-33.md), [docs/jornada/ENTREGA-V6-34.md](jornada/ENTREGA-V6-34.md), [tests/portilexicon.cjs](../tests/portilexicon.cjs), [resources/pt-BR/portilexicon/ORIGEM.json](../resources/pt-BR/portilexicon/ORIGEM.json). Progresso parcial: Concluída M01-flexoes-1: 3.009 formas e 5.286 leituras PortiLexicon ligadas a lemas/sentidos no editor e portátil; homógrafos preservados. 179 lemas OWN-PT continuam. Expansão/revisão e avaliação reservada pendentes.
-- [ ] **M02 — Classes em contexto da primeira versão** — TODO. Fechar cobertura das dez classes/locuções; implementar recortes com ambiguidades, abstenções e avaliação por classe. P04. Evidência: [ptbr/CONTEXTO-1.md](../ptbr/CONTEXTO-1.md), [docs/jornada/ENTREGA-V6-35.md](jornada/ENTREGA-V6-35.md), [tests/contexto-portilexicon.cjs](../tests/contexto-portilexicon.cjs). Progresso parcial: M02-candidatos-1 cumprida: léxico PortiLexicon alimenta Classes de palavras; formas finitas, fonte, ambiguidades e limites preservados. Próximo: artigo + nome + adjetivo, com gênero/número e contraexemplos. M02 geral permanece parcial.
+- [ ] **M02 — Classes em contexto da primeira versão** — TODO. Fechar cobertura das dez classes/locuções; implementar recortes com ambiguidades, abstenções e avaliação por classe. P04. Evidência: [ptbr/CONTEXTO-1.md](../ptbr/CONTEXTO-1.md), [docs/jornada/ENTREGA-V6-35.md](jornada/ENTREGA-V6-35.md), [tests/contexto-portilexicon.cjs](../tests/contexto-portilexicon.cjs), [docs/jornada/ENTREGA-V6-36.md](jornada/ENTREGA-V6-36.md), [tests/contexto-nominal.cjs](../tests/contexto-nominal.cjs). Progresso parcial: M02-candidatos-1 e M02-nominal-1 cumpridas: léxico real e grupos de artigo/nome/adjetivo, com gênero/número, fontes, abstenções e limites. Próximo: M02-complemento-1, complemento nominal curto com de/do/da. M02 geral parcial.
 - [ ] **M03 — Relações da oração da primeira versão** — TODO. Fechar construções, núcleos, locuções e exclusões; avaliar relações/limites e integrar. P05. Evidência: [ptbr/SINTAXE-1.md](../ptbr/SINTAXE-1.md), [ptbr/LOCUCOES-1.md](../ptbr/LOCUCOES-1.md).
 - [ ] **M04 — Subordinação da primeira versão** — TODO. Fechar recortes de substantivas/adjetivas/adverbiais/reduzidas; começar por contrastes de que; ampliar somente com fontes e evidência. P06. Evidência: [ptbr/RELATIVAS-1.md](../ptbr/RELATIVAS-1.md).
 - [ ] **M05 — Convenções da primeira versão** — TODO. Fechar regras de ortografia, pontuação, concordância, regência/crase/pronomes; demonstrar alcance e exceções. P07. Evidência: [docs/JORNADA-LINGUISTICA.md](JORNADA-LINGUISTICA.md).

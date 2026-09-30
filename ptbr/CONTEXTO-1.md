@@ -73,3 +73,7 @@ Próxima ação: executar `tests/ptbr-browser.cjs` em Chromium e WebKit com runt
 ## Evolução v6-35 — 30/09/2026
 
 [Entrega M02-candidatos-1](../docs/jornada/ENTREGA-V6-35.md): o léxico PortiLexicon alimenta esta lente; condições finitas usam traços explícitos, candidatos e origem preservados. A condição nominal exige contexto à direita para homógrafos finitos, não para qualquer segunda classe. CTX-022/047 passam a ambíguos por filhar/casar; expectativas antigas preservadas. Sintaxe/relativas continuam com readings() legado. Sem nova leitura bibliográfica ou alegação de avaliação independente. Testes visuais/aparelhos citados nas seções históricas deixaram de ser gate por decisão posterior do autor.
+
+## Evolução v6-36 — grupo nominal curto
+
+PTBR-CTX-006 usa artigo definido, nome e adjetivo contíguos, nas duas ordens. Traços do PortiLexicon sustentam compatibilidade limitada; ambas as ordens possíveis impedem decisão. ADJ sem gênero explícito mantém a lacuna declarada. Sem propagação para sintaxe/relativas. Fonte técnica UD, contrastes, perdas e limites em [ENTREGA-V6-36](../docs/jornada/ENTREGA-V6-36.md); 17 contrastes e 63 casos anteriores aprovados sem nova mudança de expectativa. Não representa novo estudo de livros ou avaliação reservada.
