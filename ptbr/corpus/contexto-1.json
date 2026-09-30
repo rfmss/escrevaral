@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "kind": "desenvolvimento-e-regressao",
   "review": "Exemplos próprios e expectativas anotadas pela IA implementadora; sem revisão linguística independente. Não é avaliação cega nem certificação geral.",
   "cases": [
@@ -219,6 +219,10 @@
       "target": "filho",
       "occurrence": 0,
       "expected": {
+        "status": "ambiguo",
+        "selected": null
+      },
+      "previousExpected": {
         "status": "contextual",
         "selected": "substantivo"
       }
@@ -469,6 +473,10 @@
       "target": "casa",
       "occurrence": 0,
       "expected": {
+        "status": "ambiguo",
+        "selected": null
+      },
+      "previousExpected": {
         "status": "lexical",
         "selected": null
       }
@@ -633,5 +641,6 @@
         "selected": "verbo"
       }
     }
-  ]
+  ],
+  "evolution": "v6-35: CTX-022 e CTX-047 passam a ambíguos porque o novo inventário revela filho/filhar e casa/casar; expectativas antigas preservadas em previousExpected. Demais casos preservados."
 }

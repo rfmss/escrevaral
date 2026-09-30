@@ -1,12 +1,12 @@
 {
-  "version": 23,
+  "version": 24,
   "updated": "30/09/2026",
-  "baseline": "b3969c259b68564ac9955fa1fdccc0e580553cc4",
+  "baseline": "136a41ec24a75ef4f6712efb5b6598a6cd6367e4",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-34 publicada: 3.009 formas e 5.286 leituras PortiLexicon-UD ligadas aos lemas e sentidos OWN-PT na consulta do editor/portátil. Ambiguidades e lacunas explícitas; manuscrito preservado. M01-flexoes-1 cumprida, M01 permanece parcial. Main b3969c2, CI e Pages concluídos com sucesso. Próximo M02: candidatos lexicais na lente contextual existente; sem confundir léxico com análise da frase.",
+  "current": "v6-35 integrada/testada: Classes de palavras usa candidatos PortiLexicon e formas finitas explícitas no contexto. Tu casas/As casas eram brancas recebem leituras diferentes; casos sem apoio preservam alternativas. Fonte e versão registradas, nenhuma ampliação automática de sintaxe/relativas. M02-candidatos-1 cumprida, M02 geral parcial. Confirmação de main/CI/Pages pendente.",
   "next": [
-    "M02: alimentar a lente Classes de palavras com candidatos do PortiLexicon, preservando contexto, ambiguidade e abstenção; começar por contrastes nominais/verbais de canto e casas.",
+    "M02: grupos nominais curtos com artigo + nome + adjetivo, usando gênero/número como apoio e casos contrastantes; preservar abstenção e não propagar automaticamente para sintaxe/relativas.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -120,7 +120,7 @@
     {
       "id": "P04",
       "title": "Reconhecer classes no contexto",
-      "status": "Incremento contextual publicado; avaliação reservada pendente",
+      "status": "Candidatos lexicais reais integrados à lente; avaliação reservada pendente",
       "depends": [
         "P02",
         "P03"
@@ -131,11 +131,13 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "Conjunto reservado de avaliação separa acertos, falsos alarmes, perdas e abstenções por classe. Casos ambíguos preservam alternativas.",
+      "done": "M02-candidatos-1/v6-35: PortiLexicon amplia candidatos e formas finitas na lente de classes, com fonte/versão e abstenção. 26 contrastes e 63 casos contextuais aprovados; duas expectativas anteriores mudaram por homógrafos revelados, com justificativa. Sintaxe/relativas mantêm inventário anterior.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
-        "ptbr/CONTEXTO-1.md"
+        "ptbr/CONTEXTO-1.md",
+        "docs/jornada/ENTREGA-V6-35.md",
+        "tests/contexto-portilexicon.cjs"
       ]
     },
     {
@@ -673,7 +675,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "M01 passa à frente da instalação sofisticada A02. Entregar recortes reais no editor, preservar textos, consulta explícita e custos limitados. A2 integra/publica autonomamente e atualiza tarefas cumpridas.",
-    "nextDeliverable": "M02: alimentar a lente Classes de palavras com candidatos do PortiLexicon, preservando contexto, ambiguidade e abstenção; começar por contrastes nominais/verbais de canto e casas."
+    "nextDeliverable": "M02: grupos nominais curtos com artigo + nome + adjetivo, usando gênero/número como apoio e casos contrastantes; preservar abstenção e não propagar automaticamente para sintaxe/relativas."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -684,10 +686,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "v6-34 publicada na main b3969c2; CI e GitHub Pages concluídos com sucesso.",
-    "commit": "b3969c259b68564ac9955fa1fdccc0e580553cc4",
-    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36674620305",
-    "verification": "CI 36674620940 e Pages 36674620305: completed/success em 30/09/2026. 8 grupos PortiLexicon e 11 OWN-PT aprovados localmente; demais regressões essenciais passaram no CI. Avaliação linguística reservada pendente."
+    "status": "v6-35 integrada/testada; main/CI/Pages aguardam confirmação.",
+    "commit": null,
+    "deployment": null,
+    "verification": "26 contrastes novos, 63 casos contextuais (duas evoluções documentadas), 78 de sintaxe e 290 equivalências do cofre aprovados; painel e build reproduzível aprovados. Avaliação reservada pendente."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",

@@ -69,3 +69,7 @@ Estudado: seções listadas. Implementado: módulo e alterações do painel. Tes
 O cache foi versionado para `v6-19`; formatos de manuscrito não mudaram. As alterações estão locais, ainda sem commit. Para desfazer este incremento, retirar apenas seu patch de implementação sobre a base registrada, preservando a documentação anterior e os manuscritos. Nunca restaurar uma cópia antiga do HTML sobre mudanças concorrentes.
 
 Próxima ação: executar `tests/ptbr-browser.cjs` em Chromium e WebKit com runtime funcional, verificar a apresentação e o offline; depois avaliar novos casos independentes e preparar a publicação. `QA_BROWSER_EXECUTABLE` permite indicar um navegador de QA já instalado. Não declarar P04, P09 ou P10 integralmente concluídos.
+
+## Evolução v6-35 — 30/09/2026
+
+[Entrega M02-candidatos-1](../docs/jornada/ENTREGA-V6-35.md): o léxico PortiLexicon alimenta esta lente; condições finitas usam traços explícitos, candidatos e origem preservados. A condição nominal exige contexto à direita para homógrafos finitos, não para qualquer segunda classe. CTX-022/047 passam a ambíguos por filhar/casar; expectativas antigas preservadas. Sintaxe/relativas continuam com readings() legado. Sem nova leitura bibliográfica ou alegação de avaliação independente. Testes visuais/aparelhos citados nas seções históricas deixaram de ser gate por decisão posterior do autor.

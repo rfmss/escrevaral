@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 30/09/2026. Base do produto auditada: `b3969c259b68564ac9955fa1fdccc0e580553cc4`.
+Atualizado em 30/09/2026. Base do produto auditada: `136a41ec24a75ef4f6712efb5b6598a6cd6367e4`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-34 publicada: 3.009 formas e 5.286 leituras PortiLexicon-UD ligadas aos lemas e sentidos OWN-PT na consulta do editor/portátil. Ambiguidades e lacunas explícitas; manuscrito preservado. M01-flexoes-1 cumprida, M01 permanece parcial. Main b3969c2, CI e Pages concluídos com sucesso. Próximo M02: candidatos lexicais na lente contextual existente; sem confundir léxico com análise da frase.
+**Estado:** v6-35 integrada/testada: Classes de palavras usa candidatos PortiLexicon e formas finitas explícitas no contexto. Tu casas/As casas eram brancas recebem leituras diferentes; casos sem apoio preservam alternativas. Fonte e versão registradas, nenhuma ampliação automática de sintaxe/relativas. M02-candidatos-1 cumprida, M02 geral parcial. Confirmação de main/CI/Pages pendente.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02: alimentar a lente Classes de palavras com candidatos do PortiLexicon, preservando contexto, ambiguidade e abstenção; começar por contrastes nominais/verbais de canto e casas.
+- M02: grupos nominais curtos com artigo + nome + adjetivo, usando gênero/número como apoio e casos contrastantes; preservar abstenção e não propagar automaticamente para sintaxe/relativas.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -86,7 +86,7 @@ Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md
 
 ### P04 — Reconhecer classes no contexto
 
-Estado: **Incremento contextual publicado; avaliação reservada pendente**. Depende de: P02, P03.
+Estado: **Candidatos lexicais reais integrados à lente; avaliação reservada pendente**. Depende de: P02, P03.
 
 Ir das classes possíveis à leitura sustentada pela frase.
 
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** Conjunto reservado de avaliação separa acertos, falsos alarmes, perdas e abstenções por classe. Casos ambíguos preservam alternativas.
+**Condição de conclusão:** M02-candidatos-1/v6-35: PortiLexicon amplia candidatos e formas finitas na lente de classes, com fonte/versão e abstenção. 26 contrastes e 63 casos contextuais aprovados; duas expectativas anteriores mudaram por homógrafos revelados, com justificativa. Sintaxe/relativas mantêm inventário anterior.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`.
 
 ### P05 — Construir as relações da oração
 

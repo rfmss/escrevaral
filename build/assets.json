@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20260930-scrvrl-flexoes-v6-34",
+  "version": "20260930-scrvrl-contexto-v6-35",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20260930-scrvrl-flexoes-v6-34/cofre.13f28b1381898f49.js",
-      "sha256": "13f28b1381898f494af272e81d994622d3a9d82b53e6e61a42f295915023d9cc",
-      "bytes": 626739
+      "path": "assets/20260930-scrvrl-contexto-v6-35/cofre.21976f0932cc9cdd.js",
+      "sha256": "21976f0932cc9cdd916fd25957287350c2ec57d988a94fe431fc410828aa7041",
+      "bytes": 629316
     },
     {
       "id": "app",
-      "path": "assets/20260930-scrvrl-flexoes-v6-34/app.12f32b398bd0007e.js",
+      "path": "assets/20260930-scrvrl-contexto-v6-35/app.12f32b398bd0007e.js",
       "sha256": "12f32b398bd0007ee66b9b3fe3f027d35f7d84ba328bcdeed96726c263fe673f",
       "bytes": 289896
     },
     {
       "id": "styles",
-      "path": "assets/20260930-scrvrl-flexoes-v6-34/styles.200ed33cf9f86d6b.css",
+      "path": "assets/20260930-scrvrl-contexto-v6-35/styles.200ed33cf9f86d6b.css",
       "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90",
       "bytes": 362011
     }
