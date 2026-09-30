@@ -45,8 +45,16 @@ São verificações de desenvolvimento e integração simulada. Não são avalia
 
 M01a acrescentado como marco delimitado; plano v4 **11/25 DONE**, entrega +1. O denominador aumenta de 24 para 25 para tornar visível a primeira fatia entregue; M01 (léxico/flexões) continua TODO parcial. A02/A03 permanecem pendentes, com seus experimentos preservados. Isso não mede porcentagem da língua.
 
-Estados desta cópia: fonte estudada no recorte, implementado, integrado e testes locais aprovados; publicação/CI/Pages serão confirmados abaixo. Não declarar implantação apenas pelo build local.
+Estados: fonte estudada no recorte, implementado, integrado, testes locais/CI aprovados e publicado. Confirmação abaixo; avaliação linguística reservada continua pendente.
 
 Próximo: M01 — integrar flexões de uma fonte morfológica licenciada ao mesmo fluxo, mostrar lemas/classes possíveis sem escolher classe contextual; priorizar palavras ausentes no uso. Ampliar definições e rever os grupos da fonte por unidades. Não retomar A02 como bloqueio automático desses recortes. Avaliação ampla Q01/Q02 permanece na fila.
 
 Reversão: commit normal retirando os dois módulos do build e o controle lexical, restaurando versão/bundles por montagem; não há migração de dados do usuário a desfazer. Revisão de continuidade solicitada a A1 nos commits, sem gate de espera.
+
+Medição de distribuição: cofre 377.228 → 513.879 bytes (+136.651); aplicação 284.612 → 288.764 (+4.152); CSS sem alteração. Portátil gerado: 1.227.321 bytes. São tamanhos sem compressão em disco, não uso de RAM nem tempo de inicialização. Dados maiores continuam dependentes da estratégia particionada A02; não ampliar indefinidamente este recorte no bundle.
+
+## Confirmação de publicação — 30/09/2026
+
+Main `f1756a910a2976ad1deaf9bffbeddcc2f9b86b01`, árvore `22462e55d4ce7af31836f7d7290a93b1c7f87fc7`, idêntica à testada localmente. [CI](https://github.com/rfmss/escrevaral/actions/runs/36673451109) e [GitHub Pages](https://github.com/rfmss/escrevaral/actions/runs/36673450596) concluídos com sucesso. Atualização sem force push; nenhuma mudança concorrente na main observada.
+
+Plano v4: 11/25 DONE | entrega +1 (M01a) | próximo M01 (flexões e cobertura lexical) | publicação: f1756a9, CI/Pages success | limite: 179 lemas, definições parciais, sem flexões/desambiguação. Fundação 5/5; compatibilidade 4/4; acervo 1/3; motores 1/9; experiência 0/2; revisão 0/2.

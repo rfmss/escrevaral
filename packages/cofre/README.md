@@ -34,3 +34,7 @@ O cofre não gerencia cancelamento de tarefas síncronas nem identidade/revisão
 ## Evolução proposta
 
 Consulta a pacotes particionados e preparação nas pausas são trabalho futuro, descrito em [contrato de pacotes v0](../../docs/CONTRATO-PACOTES-LINGUISTICOS.md). Não alteram a API síncrona 1.0.0 acima. A primeira prova usa leitor de blocos injetado em área experimental, sem integrar dados ou dependências à produção.
+
+## Consulta lexical incorporada — v6-33
+
+A ponte interna `createRuntime().lookupLexeme('banco')` consulta o recorte OWN-PT de 179 lemas sem rede. Retorna `found` com sentidos/fonte/versão, `uncovered` para forma fora do recorte e `invalid` para entrada inadequada. Até 64 unidades UTF-16 de entrada e 24 sentidos apresentados; ausência não indica erro. Não oferece flexões nem escolhe classe/sentido no contexto. É uma função distinta de `vault.analyze()` e mantém a condição de API interna do runtime. Dados incorporados: 135.240 bytes; só o registro solicitado passa por JSON.parse. [Fonte, licença, limites e entrega](../../docs/jornada/ENTREGA-V6-33.md).

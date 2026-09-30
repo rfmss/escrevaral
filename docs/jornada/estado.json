@@ -1,10 +1,10 @@
 {
   "version": 22,
   "updated": "30/09/2026",
-  "baseline": "a5364c348195adb1bb4b7459ce4befd84a922b9c",
+  "baseline": "f1756a910a2976ad1deaf9bffbeddcc2f9b86b01",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-33 implementada: consulta lexical real no painel Examinar, por seleção ou palavra digitada, offline no portátil. Recorte OWN-PT de 179 lemas e 1.090 sentidos, 255 com definição portuguesa; lacunas explícitas e nenhum manuscrito alterado. M01a concluído pelas verificações locais; publicação/CI/Pages aguardam confirmação. As 16 lentes existentes continuam. M01 flexões e expansão, A02 instalação de acervos grandes e A03 preparação permanecem parciais/pendentes.",
+  "current": "v6-33 publicada: consulta lexical real no painel Examinar, por seleção ou palavra digitada, offline no portátil. Recorte OWN-PT de 179 lemas e 1.090 sentidos, 255 com definição portuguesa; lacunas explícitas e nenhum manuscrito alterado. M01a concluído e publicado na main f1756a9; CI e Pages concluídos com sucesso. As 16 lentes existentes continuam. M01 flexões e expansão, A02 instalação de acervos grandes e A03 preparação permanecem parciais/pendentes.",
   "next": [
     "M01: incorporar flexões de fonte licenciada ao fluxo de consulta, exibindo lemas/classes possíveis sem desambiguação inventada. Ampliar cobertura por recortes úteis e revisar grupos/definições da fonte.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
@@ -92,7 +92,7 @@
     {
       "id": "P03",
       "title": "Consolidar o dicionário PTBR",
-      "status": "Consulta lexical delimitada integrada; flexões e ampliação pendentes",
+      "status": "Consulta lexical delimitada publicada; flexões e ampliação pendentes",
       "depends": [
         "P01",
         "P02"
@@ -103,7 +103,7 @@
         "Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.",
         "Carregar dados maiores sob demanda, com índices e sem polyfills globais."
       ],
-      "done": "M01a: consulta OWN-PT por seleção/entrada manual, 179 lemas, 1.090 sentidos, 255 com definição portuguesa. Fonte/atribuição/hashes fixados, ausências explícitas e consulta offline no portátil. Testes locais aprovados; publicação registrada na entrega v6-33.",
+      "done": "M01a: consulta OWN-PT por seleção/entrada manual, 179 lemas, 1.090 sentidos, 255 com definição portuguesa. Fonte/atribuição/hashes fixados, ausências explícitas e consulta offline no portátil. Testes locais e CI aprovados; publicada na main f1756a9 com Pages confirmado.",
       "evidence": [
         "ptbr/auditoria/pacote.json",
         "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
@@ -681,10 +681,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "v6-33 integrada e testada localmente; publicação, CI e Pages aguardam confirmação.",
-    "commit": null,
-    "deployment": null,
-    "verification": "11 grupos lexicais (179 consultas), painel, 290 casos de portabilidade e acesso offline aprovados; build reproduzível. Sem alegação de avaliação reservada ou homologação."
+    "status": "v6-33 publicada na main f1756a9; CI e GitHub Pages concluídos com sucesso.",
+    "commit": "f1756a910a2976ad1deaf9bffbeddcc2f9b86b01",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36673450596",
+    "verification": "CI 36673451109 e Pages 36673450596: completed/success, conferidos em 30/09/2026. Verificações locais: 11 grupos lexicais (179 consultas), painel, 290 casos de portabilidade, acesso offline e montagem reproduzível. Demais regressões essenciais aprovadas no CI. Avaliação linguística reservada permanece pendente."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",

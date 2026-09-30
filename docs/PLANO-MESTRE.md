@@ -6,12 +6,12 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 29/09/2026, horário de Brasília:** produto v6-32, prova A01 ampliada, ponte e store endereçado experimentais na main `44c92d6043163dd45da491a47e22aa6dd6f875de`. Esses SHAs são referências da conferência, não a promessa de que a main continuará neles. Consulte o GitHub antes de agir.
+**Retrato conferido em 30/09/2026, horário de Brasília:** produto v6-33 com consulta lexical OWN-PT na main `f1756a910a2976ad1deaf9bffbeddcc2f9b86b01`; CI e Pages aprovados. A01 e ponte/store A02 preservados como experimentos. Consulte a HEAD atual antes de agir.
 
 
 ## Prioridade vigente — 29/09/2026, entrega v6-33
 
-Rafael aprovou acelerar com motores úteis no editor. **M01 passa à frente de A02**: a instalação sofisticada não bloqueia recortes linguísticos pequenos incorporados. Verificações essenciais de autoria, resultado e custo; avaliação ampla depois. [Entrega v6-33](jornada/ENTREGA-V6-33.md): primeira consulta lexical real por seleção ou entrada manual, 179 lemas OWN-PT, fonte/licença fixadas, sentidos e lacunas explícitos, offline no portátil. M01a concluído; M01 flexões/ampliação continua parcial. Plano v4, 11/25 marcos DONE, sem porcentagem da língua. Publicação/CI/Pages serão confirmados na entrega.
+Rafael aprovou acelerar com motores úteis no editor. **M01 passa à frente de A02**: a instalação sofisticada não bloqueia recortes linguísticos pequenos incorporados. Verificações essenciais de autoria, resultado e custo; avaliação ampla depois. [Entrega v6-33](jornada/ENTREGA-V6-33.md): primeira consulta lexical real por seleção ou entrada manual, 179 lemas OWN-PT, fonte/licença fixadas, sentidos e lacunas explícitos, offline no portátil. M01a concluído; M01 flexões/ampliação continua parcial. Plano v4, 11/25 marcos DONE, sem porcentagem da língua. Publicação na main f1756a9, CI 36673451109 e Pages 36673450596 confirmados.
 
 ## Coordenação e nova direção — 27/09/2026
 
