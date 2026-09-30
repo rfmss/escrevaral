@@ -35,10 +35,14 @@ Uma consulta morfológica por token, até 8.000 unidades UTF-16/1.600 tokens; um
 
 Passaram também os 63 casos contextuais existentes e 26 contrastes PortiLexicon, incluindo isolamento de sintaxe/relativas, ES5 e painel. Nenhuma nova expectativa antiga alterada. `npm run build:check`: 7 arquivos reproduzíveis. Demais regressões ficam no CI. Casos são de desenvolvimento; avaliação linguística reservada continua pendente. Visual/aparelhos não são gates.
 
-Estudado, implementado, testado localmente e integrado. Publicação aguardando push/CI/Pages; registrar confirmação abaixo depois do resultado real. Reversão por commit normal do módulo e remontagem, sem alteração de formato dos textos ou das bases lexicais. Não usar force push.
+Estudado, implementado, testado localmente, integrado e publicado; main/CI/Pages confirmados abaixo. Reversão por commit normal do módulo e remontagem, sem alteração de formato dos textos ou das bases lexicais. Não usar force push.
 
 ## Próximo incremento
 
 M02-complemento-1: delimitar artigo + nome + de/do/da + nome (artigo opcional após de), começando por `O filho da vizinha chegou.` e contraexemplos de verbo, pontuação e vínculo ambíguo. Definir fronteiras e evidência antes de implementar; não propagar a hipótese para sintaxe/relativas. M01 continua parcial; A02 não bloqueia estes recortes pequenos.
 
-Plano v4: 11/25 DONE | entrega +0 marcos (M02-nominal-1 cumprida) | próximo M02-complemento-1 | publicação: aguardando confirmação | limite: três palavras, ambiguidade de ordem e avaliação reservada pendente.
+Plano v4: 11/25 DONE | entrega +0 marcos (M02-nominal-1 cumprida) | próximo M02-complemento-1 | publicação: bd057bd, CI/Pages success | limite: três palavras, ambiguidade de ordem e avaliação reservada pendente.
+
+## Confirmação de publicação — 30/09/2026
+
+Main `bd057bd1e9732c97fc8dbb6a093fa4d412027a49`, árvore `c534882f020675aacdc5e9aa64d1a9e59e4a62cb`, idêntica à testada (commit local `5805c98`). [CI](https://github.com/rfmss/escrevaral/actions/runs/36756967192) e [Pages](https://github.com/rfmss/escrevaral/actions/runs/36756965903) concluídos com sucesso. Produto: https://escrevaral.com/. Publicação confirmada pelo workflow Pages; nenhuma alegação de teste visual. Sem force push ou alteração concorrente observada.

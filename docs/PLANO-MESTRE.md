@@ -6,7 +6,7 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 30/09/2026, horário de Brasília:** v6-36 integrada/testada, grupos nominais curtos na lente Classes de palavras. Publicação em confirmação; última versão publicada v6-35, main 72fa598. Próximo M02-complemento-1. Consulte a HEAD antes de agir.
+**Retrato conferido em 30/09/2026, horário de Brasília:** v6-36 publicada na main bd057bd1e9732c97fc8dbb6a093fa4d412027a49, grupos nominais curtos na lente Classes de palavras; CI e Pages aprovados. Próximo M02-complemento-1. Consulte a HEAD antes de agir.
 
 
 ## Prioridade vigente — 29/09/2026, entrega v6-33
@@ -23,7 +23,7 @@ Rafael aprovou acelerar com motores úteis no editor. **M01 passa à frente de A
 
 ## Incremento atual — v6-36, 30/09/2026
 
-[M02-nominal-1](jornada/ENTREGA-V6-36.md) cumprida: artigo/nome/adjetivo nas duas ordens, gênero/número como apoio e ambiguidade explícita. 17 contrastes novos, 63 contextuais, 26 PortiLexicon e painel aprovados; build reproduzível. Publicação em confirmação. Próximo M02-complemento-1: complemento curto com de/do/da. Plano permanece 11/25 DONE.
+[M02-nominal-1](jornada/ENTREGA-V6-36.md) cumprida: artigo/nome/adjetivo nas duas ordens, gênero/número como apoio e ambiguidade explícita. 17 contrastes novos, 63 contextuais, 26 PortiLexicon e painel aprovados; build reproduzível. Main bd057bd, CI 36756967192 e Pages 36756965903 confirmados. Próximo M02-complemento-1: complemento curto com de/do/da. Plano permanece 11/25 DONE.
 
 ## Coordenação e nova direção — 27/09/2026
 

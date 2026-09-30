@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 30/09/2026. Base do produto auditada: `72fa5989952a413cdea090a412db0c8ce20a8407`.
+Atualizado em 30/09/2026. Base do produto auditada: `bd057bd1e9732c97fc8dbb6a093fa4d412027a49`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-36 implementada e verificada localmente: Classes de palavras reconhece grupos curtos com artigo, nome e adjetivo nas duas ordens. Traços de gênero/número apoiam a hipótese; duas ordens possíveis mantêm abstenção explícita. M02-nominal-1 cumprida, M02 geral parcial. Push/CI/Pages aguardando confirmação.
+**Estado:** v6-36 publicada: Classes de palavras reconhece grupos curtos com artigo, nome e adjetivo nas duas ordens. Traços de gênero/número apoiam a hipótese; duas ordens possíveis mantêm abstenção explícita. M02-nominal-1 cumprida, M02 geral parcial. Main bd057bd, CI e Pages concluídos com sucesso.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -86,7 +86,7 @@ Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md
 
 ### P04 — Reconhecer classes no contexto
 
-Estado: **Grupos nominais integrados/testados; publicação e avaliação reservada pendentes**. Depende de: P02, P03.
+Estado: **Grupos nominais publicados; avaliação reservada pendente**. Depende de: P02, P03.
 
 Ir das classes possíveis à leitura sustentada pela frase.
 
@@ -94,7 +94,7 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-candidatos-1/v6-35 publicada. M02-nominal-1/v6-36 integra artigo/nome/adjetivo nas duas ordens, com traços e abstenção. 17 contrastes novos e regressões contextuais aprovados; publicação ainda pendente.
+**Condição de conclusão:** M02-candidatos-1/v6-35 publicada. M02-nominal-1/v6-36 integra artigo/nome/adjetivo nas duas ordens, com traços e abstenção. 17 contrastes novos e regressões contextuais aprovados; publicada na main bd057bd, CI/Pages success.
 
 Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`.
 
