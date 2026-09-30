@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 29/09/2026. Base do produto auditada: `44c92d6043163dd45da491a47e22aa6dd6f875de`.
+Atualizado em 30/09/2026. Base do produto auditada: `a5364c348195adb1bb4b7459ce4befd84a922b9c`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** Produto v6-32 preservado; A01 ampliada e ponte A02 publicadas. Novo store experimental com cabeçalhos compactos e descritores por chave implementado/testado, ligado à ponte por modo explícito. Abertura e leitura não carregam catálogo integral nesse modo; 15 casos novos e 15 da ponte aprovados. Incremento publicado na main 44c92d6, com CI e Pages aprovados; cinco suítes lexicais totalizam 72 casos no CI. Store publicado v1 permanece intacto. A02 continua parcial: produtor de catálogo em arquivo, coordenador sequencial, interface e persistência física offline pendentes; A03 não implementada.
+**Estado:** v6-33 implementada: consulta lexical real no painel Examinar, por seleção ou palavra digitada, offline no portátil. Recorte OWN-PT de 179 lemas e 1.090 sentidos, 255 com definição portuguesa; lacunas explícitas e nenhum manuscrito alterado. M01a concluído pelas verificações locais; publicação/CI/Pages aguardam confirmação. As 16 lentes existentes continuam. M01 flexões e expansão, A02 instalação de acervos grandes e A03 preparação permanecem parciais/pendentes.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,8 +16,8 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A02: ampliar o conversor externo para produzir catálogo sequencial de descritores, hash final e raiz lexical transportável, sob limites de memória/disco. Implementar coordenador por unidades com retomada no store endereçado, sem reconstruir lista integral.
-- Depois provar o caminho de arquivos ao store, cancelar/retomar e reabrir; integrar catálogo e controles explícitos, alternativa para APIs ausentes e persistência física offline. Store endereçado e ponte já verificados como experimentos; nenhuma fonte externa aprovada para importação.
+- M01: incorporar flexões de fonte licenciada ao fluxo de consulta, exibindo lemas/classes possíveis sem desambiguação inventada. Ampliar cobertura por recortes úteis e revisar grupos/definições da fonte.
+- Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.
@@ -71,7 +71,7 @@ Evidências: `docs/jornada/corpus-inicial.json`, `docs/jornada/regra-modelo.json
 
 ### P03 — Consolidar o dicionário PTBR
 
-Estado: **Inventário sintático separado; dicionário geral parcial**. Depende de: P01, P02.
+Estado: **Consulta lexical delimitada integrada; flexões e ampliação pendentes**. Depende de: P01, P02.
 
 Dar às palavras inventário, flexões e possibilidades coerentes.
 
@@ -79,9 +79,9 @@ Dar às palavras inventário, flexões e possibilidades coerentes.
 - Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.
 - Carregar dados maiores sob demanda, com índices e sem polyfills globais.
 
-**Condição de conclusão:** Dados têm origem rastreável, integridade, casos de cobertura e custo medido. Dicionário não é anunciado como analisador contextual.
+**Condição de conclusão:** M01a: consulta OWN-PT por seleção/entrada manual, 179 lemas, 1.090 sentidos, 255 com definição portuguesa. Fonte/atribuição/hashes fixados, ausências explícitas e consulta offline no portátil. Testes locais aprovados; publicação registrada na entrega v6-33.
 
-Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`.
+Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`.
 
 ### P04 — Reconhecer classes no contexto
 

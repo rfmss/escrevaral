@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "planVersion": 3,
-  "updated": "2026-09-29",
+  "planVersion": 4,
+  "updated": "2026-09-30",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -151,7 +151,7 @@
             "packages/experiments/lexical-index/addressed-store.js",
             "packages/experiments/lexical-index/test-addressed-store.cjs"
           ],
-          "progress": "Store experimental com cabeçalho compacto e descritores por chave, ligado à ponte: leitura/abertura sem catálogo integral; testes de retomada, concorrência, quota e cancelamento passaram. Seguem catálogo em arquivo, coordenador sequencial e integração no produto."
+          "progress": "Store experimental com cabeçalho compacto e descritores por chave, ligado à ponte: leitura/abertura sem catálogo integral; testes de retomada, concorrência, quota e cancelamento passaram. Seguem catálogo em arquivo, coordenador sequencial e integração no produto. Por decisão de 29/09, acervos grandes deixam de bloquear recortes linguísticos pequenos incorporados."
         },
         {
           "id": "A03",
@@ -178,13 +178,26 @@
           ]
         },
         {
+          "id": "M01a",
+          "title": "Consulta lexical real por palavra no editor",
+          "state": "DONE",
+          "acceptance": "Recorte explícito de fonte licenciada; seleção ou entrada manual, consulta local no site/portátil, sentidos e lacunas visíveis, autoria preservada e verificações essenciais. Não inclui flexões nem dicionário geral.",
+          "evidence": [
+            "docs/jornada/ENTREGA-V6-33.md",
+            "tests/lexico-own-pt.cjs",
+            "resources/pt-BR/own-pt/ORIGEM.json"
+          ]
+        },
+        {
           "id": "M01",
           "title": "Léxico e flexões da primeira versão",
           "state": "TODO",
           "acceptance": "Fechar inventário/recorte da versão, fontes/licenças e casos reservados; entregar consulta e integração com limites. P03.",
           "evidence": [
-            "ptbr/REGENCIA-1.md"
-          ]
+            "ptbr/REGENCIA-1.md",
+            "docs/jornada/ENTREGA-V6-33.md"
+          ],
+          "progress": "M01a entregue: 179 lemas OWN-PT, consulta explícita no editor e portátil. Flexões, ampliação e avaliação linguística reservada seguem pendentes."
         },
         {
           "id": "M02",
@@ -292,13 +305,15 @@
       ]
     }
   ],
-  "next": "A02",
+  "next": "M01",
   "lastDelivery": {
-    "version": "6.32.0",
-    "completed": [],
+    "version": "6.33.0",
+    "completed": [
+      "M01a"
+    ],
     "baselineDone": 10,
-    "publication": "Store endereçado experimental A02 publicado na main 44c92d6043163dd45da491a47e22aa6dd6f875de; CI 36646518644 e Pages 36646517577 concluídos com sucesso. A02 permanece TODO, avanço parcial registrado.",
-    "evidence": "docs/jornada/ENTREGA-A02-METADADOS-2026-09-29.md"
+    "publication": "Implementado, integrado e verificações locais aprovadas; publicação, CI e Pages aguardam confirmação.",
+    "evidence": "docs/jornada/ENTREGA-V6-33.md"
   },
   "scopeChanges": [
     {
@@ -308,6 +323,10 @@
     {
       "version": 3,
       "reason": "Direção de Rafael: acervo grande particionado, pacotes persistentes e preparação incremental nas pausas; coordenação ASTRA 1/2, sem prazo de calendário. Acrescentados A01–A03: 21 → 24 marcos; continuam 8 DONE, sem progresso artificial. C03 permanece referente ao núcleo portátil já entregue; offline de pacotes grandes pertence a A02."
+    },
+    {
+      "version": 4,
+      "reason": "Rafael priorizou motores úteis em 29/09. Acrescentado M01a para a consulta lexical explícita delimitada: 24 → 25 marcos, com +1 entrega real. M01 continua parcial; A02 deixa de bloquear pequenos recortes incorporados. Sem nova infraestrutura ou homologação como gate."
     }
   ]
 }

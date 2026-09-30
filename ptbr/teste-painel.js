@@ -70,7 +70,7 @@ function setup(initial, dismissed, realEngine) {
   var board = panel.childNodes[0];
   function child(className) { return board.childNodes.filter(function (n) { return n.className === className; })[0]; }
   return {
-    board: board, panel: panel, manuscript: manuscript, calls: calls, action: child('ptbr-action'),
+    reset: E.ptbrPanelReset, board: board, panel: panel, manuscript: manuscript, calls: calls, action: child('ptbr-action'),
     legacy: child('ptbr-action ptbr-secondary'), wheel: child('ptbr-wheel'),
     flush: function (cap) {
       var n = 0, timer;

@@ -1,0 +1,25 @@
+{
+  "source": "OpenWordNet-PT",
+  "repository": "https://github.com/own-pt/openWordnet-PT",
+  "commit": "264016d5899e6969f6f7cb4f1d75fa06037c1fd7",
+  "license": "CC-BY-4.0",
+  "authors": [
+    "Alexandre Rademaker",
+    "Valeria de Paiva",
+    "Fredson Aguiar",
+    "colaboradores OWN-PT"
+  ],
+  "inputSha256": {
+    "own-pt-synsets.ttl": "e0050a04bb1c43a6c259d7c096a98d6c9f9c0d1343485733c18ddc17fd5e33e8",
+    "own-pt-wordsenses.ttl": "537222fc22c8f116ccb35c375e76d4d0150cb024bf5e6bbcb4724e4e1315f6f1"
+  },
+  "requested": 179,
+  "headwords": 179,
+  "synsets": 1090,
+  "synsetsWithPortugueseDefinition": 255,
+  "missingHeadwords": [],
+  "maxRecordBytes": 2872,
+  "selection": "Lista editorial explícita; todos os sentidos do snapshot associados a cada lema escolhido, sem flexões, desambiguação ou tradução automática.",
+  "outputBytes": 135240,
+  "outputSha256": "2746c5f3bb2a2017a9d603053d8421cca014812ed662d5625b58bea3eec33629"
+}

@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20260928-scrvrl-legado-v6-32",
+  "version": "20260929-scrvrl-lexico-v6-33",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20260928-scrvrl-legado-v6-32/cofre.4668b55c3a49a07d.js",
-      "sha256": "4668b55c3a49a07df52cfaa8574c275dceb554043e8d391dd31b416a21a5f2ea",
-      "bytes": 377228
+      "path": "assets/20260929-scrvrl-lexico-v6-33/cofre.1db7da0ed1375d14.js",
+      "sha256": "1db7da0ed1375d14431c726701e28c9a2b8624b085e4591d4943f4996e3f8f7a",
+      "bytes": 513879
     },
     {
       "id": "app",
-      "path": "assets/20260928-scrvrl-legado-v6-32/app.44d00fc15e39236d.js",
-      "sha256": "44d00fc15e39236d88c625ae899200cf6091c65d98fafaa1969dd351a5abb04f",
-      "bytes": 284612
+      "path": "assets/20260929-scrvrl-lexico-v6-33/app.6a17a626b5b469a4.js",
+      "sha256": "6a17a626b5b469a4d24682826b4366d2810c985fd0882902b24b1d3746b8e894",
+      "bytes": 288764
     },
     {
       "id": "styles",
-      "path": "assets/20260928-scrvrl-legado-v6-32/styles.200ed33cf9f86d6b.css",
+      "path": "assets/20260929-scrvrl-lexico-v6-33/styles.200ed33cf9f86d6b.css",
       "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90",
       "bytes": 362011
     }

@@ -98,3 +98,7 @@ O auditor não modifica o pacote. Executa os motores em subprocessos; aplica em 
 Os sete hashes conferem. O executor original retorna sucesso mesmo com uma falha injetada no corpus; o acumulador corrigido retorna 1. Acorn em ES5 rejeita `classes-morfologia.js`. O motor do pacote não cobre `de vez em quando` e junta indevidamente `No final. Das contas`. Hashes comprovam integridade, não licença nem qualidade linguística.
 
 A etapa 2 precisa revisar a licença e origem de cada inventário, os efeitos sobre protótipos globais, APIs além de ES5, a qualidade das leituras morfológicas, carga sob demanda, HTML portátil e aparelhos antigos. Sinônimos e morfologia permanecem adiados.
+
+## Consulta lexical real — v6-33, 30/09/2026
+
+[Entrega M01a](../docs/jornada/ENTREGA-V6-33.md): selecionar uma palavra, abrir Examinar, clicar Consultar palavra; entrada manual disponível. 179 lemas OWN-PT, todos os sentidos associados no snapshot; definições ausentes identificadas. Consulta explícita, sem rede no portátil, sem flexões/desambiguação ou alteração do manuscrito. `tests/lexico-own-pt.cjs` verifica o fluxo e a fonte.
