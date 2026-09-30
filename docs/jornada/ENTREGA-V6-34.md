@@ -46,6 +46,14 @@ São casos de desenvolvimento e fidelidade à fonte, não prova de acurácia lin
 
 ## Continuidade e publicação
 
-Integrado e testado localmente; publicação/CI/Pages aguardam confirmação abaixo. Nenhuma migração de manuscrito ou banco. Reversão por commit normal retirando os módulos morfológicos do build e restaurando a consulta v6-33, preservando os textos.
+Integrado, testado localmente e publicado, com CI/Pages confirmados abaixo. Nenhuma migração de manuscrito ou banco. Reversão por commit normal retirando os módulos morfológicos do build e restaurando a consulta v6-33, preservando os textos.
 
 Próximo **M02**: alimentar a lente Classes de palavras com essas leituras como candidatos, mantendo regras de contexto, ambiguidades e abstenção. Começar por contrastes nominais/verbais (`canto`, `casas`) sem confundir riqueza do léxico com análise contextual. M01 continua em expansão/revisão; A02 segue para acervos maiores, sem bloquear este recorte. A1 pode revisar a entrega, sem espera obrigatória para A2 continuar.
+
+## Confirmação de publicação e custo — 30/09/2026
+
+Main `b3969c259b68564ac9955fa1fdccc0e580553cc4`, árvore `82370ededa0b437dccf758c41efe5d8006bb085c`, idêntica à testada. [CI](https://github.com/rfmss/escrevaral/actions/runs/36674620940) e [Pages](https://github.com/rfmss/escrevaral/actions/runs/36674620305) concluídos com sucesso. Atualização sem force push e sem alteração concorrente observada.
+
+Cofre: 513.879 → 626.739 bytes (+112.860); aplicação: 288.764 → 289.896 (+1.132); CSS inalterado. Portátil: 1.341.314 bytes. Medidas de distribuição sem compressão, não RAM ou latência.
+
+Plano v4: 11/25 DONE | entrega +0 marcos (M01-flexoes-1 cumprida) | próximo M02 | publicação: b3969c2, CI/Pages success | limite: recorte parcial e sem desambiguação contextual.

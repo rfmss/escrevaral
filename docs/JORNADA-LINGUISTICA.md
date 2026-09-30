@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 30/09/2026. Base do produto auditada: `9fc70321a3d9217d3b3186052aed73c60b5246b8`.
+Atualizado em 30/09/2026. Base do produto auditada: `b3969c259b68564ac9955fa1fdccc0e580553cc4`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-34 integrada/testada: 3.009 formas e 5.286 leituras PortiLexicon-UD ligadas aos lemas e sentidos OWN-PT na consulta do editor/portátil. Ambiguidades e lacunas explícitas; manuscrito preservado. M01-flexoes-1 cumprida, M01 permanece parcial. Publicação/CI/Pages aguardam confirmação. Próximo M02: candidatos lexicais na lente contextual existente; sem confundir léxico com análise da frase.
+**Estado:** v6-34 publicada: 3.009 formas e 5.286 leituras PortiLexicon-UD ligadas aos lemas e sentidos OWN-PT na consulta do editor/portátil. Ambiguidades e lacunas explícitas; manuscrito preservado. M01-flexoes-1 cumprida, M01 permanece parcial. Main b3969c2, CI e Pages concluídos com sucesso. Próximo M02: candidatos lexicais na lente contextual existente; sem confundir léxico com análise da frase.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -72,7 +72,7 @@ Evidências: `docs/jornada/corpus-inicial.json`, `docs/jornada/regra-modelo.json
 
 ### P03 — Consolidar o dicionário PTBR
 
-Estado: **Consulta lexical e flexões delimitadas integradas; expansão e avaliação pendentes**. Depende de: P01, P02.
+Estado: **Consulta lexical e flexões delimitadas publicadas; expansão e avaliação pendentes**. Depende de: P01, P02.
 
 Dar às palavras inventário, flexões e possibilidades coerentes.
 
@@ -80,7 +80,7 @@ Dar às palavras inventário, flexões e possibilidades coerentes.
 - Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.
 - Carregar dados maiores sob demanda, com índices e sem polyfills globais.
 
-**Condição de conclusão:** M01a publicada na v6-33; v6-34 acrescenta 3.009 formas/5.286 leituras PortiLexicon com lemas e traços, homógrafos preservados, ponte para sentidos e ausência explícita. Testes locais aprovados; publicação na entrega.
+**Condição de conclusão:** M01a publicada na v6-33; v6-34 acrescenta 3.009 formas/5.286 leituras PortiLexicon com lemas e traços, homógrafos preservados, ponte para sentidos e ausência explícita. Testes locais/CI aprovados; main b3969c2 e Pages confirmados.
 
 Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`.
 

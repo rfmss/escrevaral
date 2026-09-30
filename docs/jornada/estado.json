@@ -1,10 +1,10 @@
 {
   "version": 23,
   "updated": "30/09/2026",
-  "baseline": "9fc70321a3d9217d3b3186052aed73c60b5246b8",
+  "baseline": "b3969c259b68564ac9955fa1fdccc0e580553cc4",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-34 integrada/testada: 3.009 formas e 5.286 leituras PortiLexicon-UD ligadas aos lemas e sentidos OWN-PT na consulta do editor/portátil. Ambiguidades e lacunas explícitas; manuscrito preservado. M01-flexoes-1 cumprida, M01 permanece parcial. Publicação/CI/Pages aguardam confirmação. Próximo M02: candidatos lexicais na lente contextual existente; sem confundir léxico com análise da frase.",
+  "current": "v6-34 publicada: 3.009 formas e 5.286 leituras PortiLexicon-UD ligadas aos lemas e sentidos OWN-PT na consulta do editor/portátil. Ambiguidades e lacunas explícitas; manuscrito preservado. M01-flexoes-1 cumprida, M01 permanece parcial. Main b3969c2, CI e Pages concluídos com sucesso. Próximo M02: candidatos lexicais na lente contextual existente; sem confundir léxico com análise da frase.",
   "next": [
     "M02: alimentar a lente Classes de palavras com candidatos do PortiLexicon, preservando contexto, ambiguidade e abstenção; começar por contrastes nominais/verbais de canto e casas.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
@@ -93,7 +93,7 @@
     {
       "id": "P03",
       "title": "Consolidar o dicionário PTBR",
-      "status": "Consulta lexical e flexões delimitadas integradas; expansão e avaliação pendentes",
+      "status": "Consulta lexical e flexões delimitadas publicadas; expansão e avaliação pendentes",
       "depends": [
         "P01",
         "P02"
@@ -104,7 +104,7 @@
         "Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.",
         "Carregar dados maiores sob demanda, com índices e sem polyfills globais."
       ],
-      "done": "M01a publicada na v6-33; v6-34 acrescenta 3.009 formas/5.286 leituras PortiLexicon com lemas e traços, homógrafos preservados, ponte para sentidos e ausência explícita. Testes locais aprovados; publicação na entrega.",
+      "done": "M01a publicada na v6-33; v6-34 acrescenta 3.009 formas/5.286 leituras PortiLexicon com lemas e traços, homógrafos preservados, ponte para sentidos e ausência explícita. Testes locais/CI aprovados; main b3969c2 e Pages confirmados.",
       "evidence": [
         "ptbr/auditoria/pacote.json",
         "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
@@ -684,10 +684,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "v6-34 integrada/testada; publicação, CI e Pages aguardam confirmação.",
-    "commit": null,
-    "deployment": null,
-    "verification": "8 grupos PortiLexicon e 11 grupos OWN-PT aprovados; 3.009 formas/5.286 leituras, ambiguidades, limites, autoria, ES5 e integração simulada. Build reproduzível. Avaliação reservada pendente."
+    "status": "v6-34 publicada na main b3969c2; CI e GitHub Pages concluídos com sucesso.",
+    "commit": "b3969c259b68564ac9955fa1fdccc0e580553cc4",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36674620305",
+    "verification": "CI 36674620940 e Pages 36674620305: completed/success em 30/09/2026. 8 grupos PortiLexicon e 11 OWN-PT aprovados localmente; demais regressões essenciais passaram no CI. Avaliação linguística reservada pendente."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",

@@ -6,7 +6,7 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato conferido em 30/09/2026, horário de Brasília:** produto v6-33 com consulta lexical OWN-PT na main `f1756a910a2976ad1deaf9bffbeddcc2f9b86b01`; CI e Pages aprovados. A01 e ponte/store A02 preservados como experimentos. Consulte a HEAD atual antes de agir.
+**Retrato conferido em 30/09/2026, horário de Brasília:** produto v6-34, consulta lexical com 3.009 formas PortiLexicon e sentidos OWN-PT na main `b3969c259b68564ac9955fa1fdccc0e580553cc4`; CI e Pages aprovados. A01 e ponte/store A02 preservados como experimentos. Próximo M02; consulte a HEAD antes de agir.
 
 
 ## Prioridade vigente — 29/09/2026, entrega v6-33
@@ -15,7 +15,7 @@ Rafael aprovou acelerar com motores úteis no editor. **M01 passa à frente de A
 
 ## Incremento atual — v6-34, 30/09/2026
 
-[M01-flexoes-1](jornada/ENTREGA-V6-34.md) cumprida: 3.009 formas e 5.286 leituras reais PortiLexicon, ligadas aos lemas e sentidos na consulta existente. Homógrafos preservados; fonte/atribuição/limites registrados. M01 continua parcial, sem alterar contagem de marcos. Próximo **M02: candidatos lexicais na lente Classes de palavras**, com contexto e abstenção. Publicação/CI/Pages aguardam confirmação na entrega.
+[M01-flexoes-1](jornada/ENTREGA-V6-34.md) cumprida: 3.009 formas e 5.286 leituras reais PortiLexicon, ligadas aos lemas e sentidos na consulta existente. Homógrafos preservados; fonte/atribuição/limites registrados. M01 continua parcial, sem alterar contagem de marcos. Próximo **M02: candidatos lexicais na lente Classes de palavras**, com contexto e abstenção. Main b3969c2, CI 36674620940 e Pages 36674620305 confirmados.
 
 ## Coordenação e nova direção — 27/09/2026
 

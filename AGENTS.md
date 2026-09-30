@@ -85,3 +85,5 @@ A transferência preserva as decisões de produto, o cofre síncrono, os limites
 ## Prioridade vigente — motores no editor, 29/09/2026
 
 Rafael aprovou acelerar por entregas completas pequenas de linguagem, com verificações essenciais e avaliação ampla ao final. M01 passa à frente da instalação sofisticada A02; a frase histórica “novas integrações dependem de A02” deixa de bloquear recortes pequenos incorporados. M01a/v6-33: consulta lexical real OWN-PT no editor, fonte/licença e lacunas explícitas. Continuar por flexões/lemas e cobertura útil; não voltar à infraestrutura automaticamente. Manter autoria, custos limitados e análise explícita. Atualizar o plano a cada entrega, sem declarar M01 inteiro concluído por um recorte.
+
+Em 30/09, v6-34/M01-flexoes-1 integrou 3.009 formas PortiLexicon à consulta lexical, com lemas/traços e homógrafos preservados. Fonte e decisão de licença em `docs/jornada/ENTREGA-V6-34.md`. Não repetir a integração das flexões: próximo M02, candidatos do léxico para a lente contextual existente, com abstenção. M01 geral continua parcial.
