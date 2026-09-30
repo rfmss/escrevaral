@@ -29,3 +29,7 @@ Nenhum tamanho de fonte desta tabela foi convertido em promessa de RAM ou compat
 5. A1 revisa contrato e integra um recurso por vez com A02; atualização não troca metade dos blocos de uma consulta. Abrir avaliação reservada só após congelar regra/limiares; se os casos forem usados para desenvolvimento, retirar seu status de reservados.
 
 Próximo piloto externo proposto: esclarecer a licença dos dados PortiLexicon e escolher uma tabela pequena com casos ambíguos. Antes de converter o conjunto todo, evoluir o índice paginado e a conversão streaming. A01 não aprova instalação dos recursos desta lista.
+
+## Decisão de integração do recorte — 30/09/2026
+
+A pendência operacional PortiLexicon foi decidida para o snapshot fixado: MIT da raiz conservada integralmente no módulo distribuído e atribuição aos quatro autores, sem inventar versão para o anúncio institucional CC-BY. [Decisão, escopo e evidências v6-34](../jornada/ENTREGA-V6-34.md). A comparação acima é histórica; apenas 3.009 formas/5.286 leituras foram incorporadas, sem runtime Python ou aprovação de toda a genealogia dos dados.

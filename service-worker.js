@@ -1,17 +1,17 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-33-f862a129f788";
-const ASSET_VERSION = "20260929-scrvrl-lexico-v6-33";
+const CACHE_NAME = "scrvrl-offline-v6-34-7237f4c26f4d";
+const ASSET_VERSION = "20260930-scrvrl-flexoes-v6-34";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20260929-scrvrl-lexico-v6-33/cofre.1db7da0ed1375d14.js",
-    "sha256": "1db7da0ed1375d14431c726701e28c9a2b8624b085e4591d4943f4996e3f8f7a"
+    "url": "./assets/20260930-scrvrl-flexoes-v6-34/cofre.13f28b1381898f49.js",
+    "sha256": "13f28b1381898f494af272e81d994622d3a9d82b53e6e61a42f295915023d9cc"
   },
   {
-    "url": "./assets/20260929-scrvrl-lexico-v6-33/app.6a17a626b5b469a4.js",
-    "sha256": "6a17a626b5b469a4d24682826b4366d2810c985fd0882902b24b1d3746b8e894"
+    "url": "./assets/20260930-scrvrl-flexoes-v6-34/app.12f32b398bd0007e.js",
+    "sha256": "12f32b398bd0007ee66b9b3fe3f027d35f7d84ba328bcdeed96726c263fe673f"
   },
   {
-    "url": "./assets/20260929-scrvrl-lexico-v6-33/styles.200ed33cf9f86d6b.css",
+    "url": "./assets/20260930-scrvrl-flexoes-v6-34/styles.200ed33cf9f86d6b.css",
     "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90"
   }
 ];
@@ -28,7 +28,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
   const cache=await caches.open(CACHE_NAME);
-  const index=await checkedAsset({url:'./index.html',sha256:'0f06a215f73b1cb0f22be599e1284ae5e99c1db86257664fb8be5d197668da99'});
+  const index=await checkedAsset({url:'./index.html',sha256:'609c9dee763a9ca7c01876be5e06429007b3b65df0902ebeca22d93f1cdb04ea'});
   if(!index.ok||(await index.clone().text()).indexOf('content="'+ASSET_VERSION+'"')<0)throw new Error('Documento de outra versão');
   await Promise.all(REQUIRED_ASSETS.map(async asset=>cache.put(asset.url,await checkedAsset(asset))));
   await cache.put('./index.html',index.clone());await cache.put('./',index);

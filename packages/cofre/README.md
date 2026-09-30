@@ -38,3 +38,7 @@ Consulta a pacotes particionados e preparação nas pausas são trabalho futuro,
 ## Consulta lexical incorporada — v6-33
 
 A ponte interna `createRuntime().lookupLexeme('banco')` consulta o recorte OWN-PT de 179 lemas sem rede. Retorna `found` com sentidos/fonte/versão, `uncovered` para forma fora do recorte e `invalid` para entrada inadequada. Até 64 unidades UTF-16 de entrada e 24 sentidos apresentados; ausência não indica erro. Não oferece flexões nem escolhe classe/sentido no contexto. É uma função distinta de `vault.analyze()` e mantém a condição de API interna do runtime. Dados incorporados: 135.240 bytes; só o registro solicitado passa por JSON.parse. [Fonte, licença, limites e entrega](../../docs/jornada/ENTREGA-V6-33.md).
+
+## Flexões e lemas — v6-34
+
+A consulta interna `lookupLexeme` combina sentidos OWN-PT e leituras PortiLexicon-UD. `morphology` contém lemas, classes UD e traços; `missingSenseLemmas` explicita lemas sem sentidos no recorte. `senses` identifica o lema associado. `lookupMorphology(chaveCanônica)` retorna apenas leituras exatas e `describeMorphology` as apresenta em português. São APIs internas; não mudam `vault.analyze`. Limites: 32 leituras (máximo real 11), oito lemas consultados, 24 sentidos apresentados. Versões das duas fontes acompanham a resposta. [Fonte, licença, evidência e limites](../../docs/jornada/ENTREGA-V6-34.md). A restrição “sem flexões” da seção v6-33 é histórica.

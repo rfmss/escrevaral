@@ -76,7 +76,7 @@
     lexicalLabel.setAttribute('for','ptbr-lexical-word');
     lexicalInput=el('input',lexicalBox,'ptbr-lexical-input');lexicalInput.id='ptbr-lexical-word';
     lexicalInput.type='text';lexicalInput.maxLength=64;lexicalInput.setAttribute('autocomplete','off');
-    lexicalInput.setAttribute('placeholder','Ex.: banco, saudade, carro');
+    lexicalInput.setAttribute('placeholder','Ex.: carros, fui, canto');
     lexicalButton=el('button',lexicalBox,'ptbr-action','Consultar palavra · léxico inicial');lexicalButton.type='button';
     lexicalButton.addEventListener('click',consultLexeme,false);
     lexicalInput.addEventListener('keydown',function(e){if(e.keyCode===13&&!e.isComposing){if(e.preventDefault){e.preventDefault();}consultLexeme();}},false);
@@ -204,23 +204,33 @@
     var card=el('section',results,'ptbr-outcome');
     el('h3',card,'','Léxico · '+(result.query||'consulta'));
     if(result.state!=='found'){el('p',card,'',result.message);status.textContent='Consulta concluída sem leitura lexical.';return;}
+    if(result.morphology&&result.morphology.length){
+      el('h4',card,'','Lemas e flexões possíveis');
+      el('p',card,'','Estas leituras pertencem ao léxico. A consulta não decide qual classe ou função vale na sua frase.');
+      for(i=0;i<result.morphology.length;i++){
+        entry=result.morphology[i];el('p',card,'',entry.lemma+' — '+E.describeMorphology(entry));
+      }
+      el('p',card,'','Fonte das flexões: PortiLexicon-UD · Lopes, Duran, Fernandes e Pardo (2022). Recorte e compactação: Escrevaral.');
+      link=el('a',card,'','Origem e licença das flexões (internet)');link.href='https://github.com/LuceleneL/PortiLexicon-UD/tree/315e063da1f89c89e2097c6e72428ebefb9ab1d1';link.target='_blank';link.rel='noopener noreferrer';
+    }
+    if(result.missingSenseLemmas&&result.missingSenseLemmas.length){el('p',card,'','Sem sentidos/definições neste recorte para: '+result.missingSenseLemmas.join(', ')+'.');}
     el('p',card,'','Sentidos da fonte; a consulta não escolhe qual vale na sua frase. A ordem não indica frequência.');
     var pos={n:'substantivo',v:'verbo',a:'adjetivo',r:'advérbio'};
     for(i=0;i<result.senses.length;i++){
       entry=result.senses[i];row=el('div',card,'ptbr-observation');
-      heading=(i+1)+'. '+(pos[entry.pos]||entry.pos);
+      heading=(i+1)+'. '+entry.lemma+' · '+(pos[entry.pos]||entry.pos);
       el('h4',row,'',heading);
       if(entry.definitions.length){for(j=0;j<entry.definitions.length;j++){el('p',row,'',entry.definitions[j]);}}
       else{el('p',row,'','Definição em português indisponível na fonte para este sentido.');}
       el('p',row,'','Termos agrupados pela fonte: '+entry.terms.join(', ')+'.');
       el('p',row,'ptbr-status','Referência do sentido: '+entry.id);
     }
-    if(result.limited){el('p',card,'','Mostrados 24 de '+result.total+' sentidos do recorte.');}
-    el('p',card,'','Os termos do grupo não são intercambiáveis em qualquer frase. A fonte inclui outras variedades do português; este recorte não é um dicionário geral nem oferece flexões.');
+    if(result.limited){el('p',card,'','Mostrados '+result.senses.length+' de '+result.total+' sentidos consultados. A consulta limita a busca a oito lemas.');}
+    el('p',card,'','Os termos do grupo não são intercambiáveis em qualquer frase. A fonte inclui outras variedades do português; este recorte não é um dicionário geral. As flexões vêm de uma fonte separada e também têm cobertura parcial.');
     el('p',card,'','Fonte: OpenWordNet-PT · Alexandre Rademaker, Valeria de Paiva, Fredson Aguiar e colaboradores · CC BY 4.0. Recorte e organização: Escrevaral.');
     link=el('a',card,'','Consultar origem e licença (internet)');link.href='https://github.com/own-pt/openWordnet-PT/tree/264016d5899e6969f6f7cb4f1d75fa06037c1fd7';link.target='_blank';link.rel='noopener noreferrer';
     link=el('a',card,'ptbr-status',' · Licença CC BY 4.0 (internet)');link.href='https://creativecommons.org/licenses/by/4.0/';link.target='_blank';link.rel='noopener noreferrer';
-    status.textContent='Consulta local concluída: '+result.total+' sentidos no recorte.';
+    status.textContent='Consulta local concluída: '+(result.morphology||[]).length+' leituras morfológicas e '+result.total+' sentidos consultados.';
     note.textContent='Consulta offline. Nenhuma palavra do manuscrito foi alterada.';
   }
   function run(selected) {

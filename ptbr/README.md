@@ -102,3 +102,7 @@ A etapa 2 precisa revisar a licença e origem de cada inventário, os efeitos so
 ## Consulta lexical real — v6-33, 30/09/2026
 
 [Entrega M01a](../docs/jornada/ENTREGA-V6-33.md): selecionar uma palavra, abrir Examinar, clicar Consultar palavra; entrada manual disponível. 179 lemas OWN-PT, todos os sentidos associados no snapshot; definições ausentes identificadas. Consulta explícita, sem rede no portátil, sem flexões/desambiguação ou alteração do manuscrito. `tests/lexico-own-pt.cjs` verifica o fluxo e a fonte.
+
+## Flexões consultáveis — v6-34
+
+A consulta também reconhece 3.009 formas do recorte PortiLexicon e mantém múltiplos lemas/classes possíveis: carros → carro; fui → ir/ser; casas → casa/casar. [Entrega e limites](../docs/jornada/ENTREGA-V6-34.md). Não é desambiguação contextual.

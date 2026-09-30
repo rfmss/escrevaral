@@ -17,9 +17,9 @@ test('acentos compostos e decompostos, sem remoção de diacríticos',()=>{
  assert.equal(E.lookupLexeme('cafe').state,'uncovered');assert.equal(E.lookupLexeme('  saudade ').total,2);
 });
 test('ausência, flexão, palavra longa e frase não inventam leitura',()=>{
- for(const s of ['carros','xpto','constructor','__proto__'])assert.notEqual(E.lookupLexeme(s).state,'found');
+ for(const s of ['zzcarroszz','xpto','constructor','__proto__'])assert.notEqual(E.lookupLexeme(s).state,'found');
  for(const s of ['',null,'a'.repeat(65),'carro azul','<img>','😀'])assert.equal(E.lookupLexeme(s).state,'invalid');
- assert.match(E.lookupLexeme('carros').message,/não indica erro/);
+ assert.match(E.lookupLexeme('zzcarroszz').message,/não indica erro/);
 });
 test('resultado independente dos dados, sem cache mutável',()=>{
  const r=E.lookupLexeme('banco');r.senses[0].terms.push('injetado');assert.ok(!E.lookupLexeme('banco').senses[0].terms.includes('injetado'));
