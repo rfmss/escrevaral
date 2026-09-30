@@ -1,10 +1,10 @@
 {
   "version": 24,
   "updated": "30/09/2026",
-  "baseline": "136a41ec24a75ef4f6712efb5b6598a6cd6367e4",
+  "baseline": "72fa5989952a413cdea090a412db0c8ce20a8407",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6-35 integrada/testada: Classes de palavras usa candidatos PortiLexicon e formas finitas explícitas no contexto. Tu casas/As casas eram brancas recebem leituras diferentes; casos sem apoio preservam alternativas. Fonte e versão registradas, nenhuma ampliação automática de sintaxe/relativas. M02-candidatos-1 cumprida, M02 geral parcial. Confirmação de main/CI/Pages pendente.",
+  "current": "v6-35 publicada: Classes de palavras usa candidatos PortiLexicon e formas finitas explícitas no contexto. Tu casas/As casas eram brancas recebem leituras diferentes; casos sem apoio preservam alternativas. Fonte e versão registradas, nenhuma ampliação automática de sintaxe/relativas. M02-candidatos-1 cumprida, M02 geral parcial. Main 72fa598, CI e Pages concluídos com sucesso.",
   "next": [
     "M02: grupos nominais curtos com artigo + nome + adjetivo, usando gênero/número como apoio e casos contrastantes; preservar abstenção e não propagar automaticamente para sintaxe/relativas.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
@@ -120,7 +120,7 @@
     {
       "id": "P04",
       "title": "Reconhecer classes no contexto",
-      "status": "Candidatos lexicais reais integrados à lente; avaliação reservada pendente",
+      "status": "Candidatos lexicais reais publicados na lente; avaliação reservada pendente",
       "depends": [
         "P02",
         "P03"
@@ -131,7 +131,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-candidatos-1/v6-35: PortiLexicon amplia candidatos e formas finitas na lente de classes, com fonte/versão e abstenção. 26 contrastes e 63 casos contextuais aprovados; duas expectativas anteriores mudaram por homógrafos revelados, com justificativa. Sintaxe/relativas mantêm inventário anterior.",
+      "done": "M02-candidatos-1/v6-35: PortiLexicon amplia candidatos e formas finitas na lente de classes, com fonte/versão e abstenção. 26 contrastes e 63 casos contextuais aprovados; duas expectativas anteriores mudaram por homógrafos revelados, com justificativa. Sintaxe/relativas mantêm inventário anterior. Publicado na main 72fa598, CI e Pages aprovados.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -686,10 +686,10 @@
       "Revisão de simplicidade e acessibilidade no código",
       "Avaliação linguística reservada"
     ],
-    "status": "v6-35 integrada/testada; main/CI/Pages aguardam confirmação.",
-    "commit": null,
-    "deployment": null,
-    "verification": "26 contrastes novos, 63 casos contextuais (duas evoluções documentadas), 78 de sintaxe e 290 equivalências do cofre aprovados; painel e build reproduzível aprovados. Avaliação reservada pendente."
+    "status": "v6-35 publicada na main 72fa598; CI e GitHub Pages concluídos com sucesso.",
+    "commit": "72fa5989952a413cdea090a412db0c8ce20a8407",
+    "deployment": "https://github.com/rfmss/escrevaral/actions/runs/36710109625",
+    "verification": "CI 36710110853 e Pages 36710109625: completed/success em 30/09/2026. Locais: 26 contrastes, 63 casos contextuais com duas evoluções documentadas, 78 de sintaxe e 290 equivalências; painel/build aprovados. Demais regressões essenciais aprovadas no CI. Avaliação linguística reservada pendente."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
   "executionPlan": "docs/jornada/plano-voo.json",

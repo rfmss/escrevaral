@@ -46,6 +46,14 @@ Sem dados adicionais. Até 8.000 unidades UTF-16/1.600 tokens, no máximo uma co
 
 ## Publicação, reversão e próximo passo
 
-Implementado, integrado e verificado localmente; confirmação de main/CI/Pages será registrada abaixo. Não há mudança de formatos do autor. Reverter por commit normal do módulo/expectativas e remontagem; preservar textos e as consultas lexicais v6-33/v6-34.
+Implementado, integrado, verificado localmente e publicado; main/CI/Pages confirmados abaixo. Não há mudança de formatos do autor. Reverter por commit normal do módulo/expectativas e remontagem; preservar textos e as consultas lexicais v6-33/v6-34.
 
 Próximo M02: grupos nominais curtos com artigo, nome e adjetivo, usando gênero/número como apoio e registrando contraexemplos. Começar pelo contraste de adjetivo/substantivo, sem resolver toda a oração nem ampliar silenciosamente sintaxe/relativas. O caso de filho com complemento preposicional fica identificado para tratamento próprio. M01 segue em expansão/revisão; A02 não volta a bloquear a entrega linguística.
+
+## Confirmação de publicação — 30/09/2026
+
+Main `72fa5989952a413cdea090a412db0c8ce20a8407`, árvore `e869905b6d1692b60c9f64f573ed49aeceede123`, idêntica à testada. [CI](https://github.com/rfmss/escrevaral/actions/runs/36710110853) e [Pages](https://github.com/rfmss/escrevaral/actions/runs/36710109625) concluídos com sucesso. Sem force push ou mudança concorrente observada.
+
+Cofre 626.739 → 629.316 bytes (+2.577); app e CSS sem alteração de conteúdo. Portátil 1.343.892 bytes. Nenhum inventário novo incorporado neste incremento; são medidas sem compressão em disco, não RAM ou latência.
+
+Plano v4: 11/25 DONE | entrega +0 marcos (M02-candidatos-1 cumprida) | próximo M02 (artigo + nome + adjetivo) | publicação: 72fa598, CI/Pages success | limite: regras locais, duas abstenções adicionais e avaliação reservada pendente.

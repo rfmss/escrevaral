@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 30/09/2026. Base do produto auditada: `136a41ec24a75ef4f6712efb5b6598a6cd6367e4`.
+Atualizado em 30/09/2026. Base do produto auditada: `72fa5989952a413cdea090a412db0c8ce20a8407`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-35 integrada/testada: Classes de palavras usa candidatos PortiLexicon e formas finitas explícitas no contexto. Tu casas/As casas eram brancas recebem leituras diferentes; casos sem apoio preservam alternativas. Fonte e versão registradas, nenhuma ampliação automática de sintaxe/relativas. M02-candidatos-1 cumprida, M02 geral parcial. Confirmação de main/CI/Pages pendente.
+**Estado:** v6-35 publicada: Classes de palavras usa candidatos PortiLexicon e formas finitas explícitas no contexto. Tu casas/As casas eram brancas recebem leituras diferentes; casos sem apoio preservam alternativas. Fonte e versão registradas, nenhuma ampliação automática de sintaxe/relativas. M02-candidatos-1 cumprida, M02 geral parcial. Main 72fa598, CI e Pages concluídos com sucesso.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -86,7 +86,7 @@ Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md
 
 ### P04 — Reconhecer classes no contexto
 
-Estado: **Candidatos lexicais reais integrados à lente; avaliação reservada pendente**. Depende de: P02, P03.
+Estado: **Candidatos lexicais reais publicados na lente; avaliação reservada pendente**. Depende de: P02, P03.
 
 Ir das classes possíveis à leitura sustentada pela frase.
 
@@ -94,7 +94,7 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-candidatos-1/v6-35: PortiLexicon amplia candidatos e formas finitas na lente de classes, com fonte/versão e abstenção. 26 contrastes e 63 casos contextuais aprovados; duas expectativas anteriores mudaram por homógrafos revelados, com justificativa. Sintaxe/relativas mantêm inventário anterior.
+**Condição de conclusão:** M02-candidatos-1/v6-35: PortiLexicon amplia candidatos e formas finitas na lente de classes, com fonte/versão e abstenção. 26 contrastes e 63 casos contextuais aprovados; duas expectativas anteriores mudaram por homógrafos revelados, com justificativa. Sintaxe/relativas mantêm inventário anterior. Publicado na main 72fa598, CI e Pages aprovados.
 
 Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`.
 
