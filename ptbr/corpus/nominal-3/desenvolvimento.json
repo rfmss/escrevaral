@@ -61,7 +61,8 @@
       "id": "DES10",
       "text": "Esta chegou.",
       "target": "Esta",
-      "expected": null
+      "expected": "pronome",
+      "previousExpected": null
     },
     {
       "id": "DES11",
@@ -92,6 +93,13 @@
       "text": "O meu caiu.",
       "target": "meu",
       "expected": null
+    }
+  ],
+  "evolution": [
+    {
+      "version": "6.40",
+      "case": "DES10",
+      "reason": "Esta chegou passa da exclusão do recorte v6.39 à hipótese pronominal solicitada na v6.40. Expectativa anterior preservada; relatórios da v6.39 não reescritos."
     }
   ]
 }

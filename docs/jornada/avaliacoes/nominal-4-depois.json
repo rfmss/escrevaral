@@ -1,0 +1,171 @@
+{
+  "engine": "contexto-7-sem-nome",
+  "independent": false,
+  "interpretation": "Amostra pequena própria; nenhuma estimativa de precisão geral. Abstenções em alvos úteis contam como lacunas, não como decisões erradas.",
+  "sets": {
+    "desenvolvimento": {
+      "cases": 10,
+      "useful": 4,
+      "wrong": 0,
+      "missed": 0,
+      "expectedAbstentions": 6,
+      "expectedOpenUses": 3,
+      "observedOpenUses": 3,
+      "unexpectedOpenUses": 0,
+      "rows": [
+        {
+          "id": "DES01",
+          "expected": "pronome",
+          "actual": "pronome",
+          "kind": "useful",
+          "openUse": false
+        },
+        {
+          "id": "DES02",
+          "expected": "pronome",
+          "actual": "pronome",
+          "kind": "useful",
+          "openUse": false
+        },
+        {
+          "id": "DES03",
+          "expected": "pronome",
+          "actual": "pronome",
+          "kind": "useful",
+          "openUse": false
+        },
+        {
+          "id": "DES04",
+          "expected": "pronome",
+          "actual": "pronome",
+          "kind": "useful",
+          "openUse": false
+        },
+        {
+          "id": "DES05",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": true
+        },
+        {
+          "id": "DES06",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": true
+        },
+        {
+          "id": "DES07",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": true
+        },
+        {
+          "id": "DES08",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": false
+        },
+        {
+          "id": "DES09",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": false
+        },
+        {
+          "id": "DES10",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": false
+        }
+      ]
+    },
+    "avaliacao": {
+      "cases": 10,
+      "useful": 4,
+      "wrong": 0,
+      "missed": 0,
+      "expectedAbstentions": 6,
+      "expectedOpenUses": 3,
+      "observedOpenUses": 3,
+      "unexpectedOpenUses": 0,
+      "rows": [
+        {
+          "id": "AVA01",
+          "expected": "pronome",
+          "actual": "pronome",
+          "kind": "useful",
+          "openUse": false
+        },
+        {
+          "id": "AVA02",
+          "expected": "pronome",
+          "actual": "pronome",
+          "kind": "useful",
+          "openUse": false
+        },
+        {
+          "id": "AVA03",
+          "expected": "pronome",
+          "actual": "pronome",
+          "kind": "useful",
+          "openUse": false
+        },
+        {
+          "id": "AVA04",
+          "expected": "pronome",
+          "actual": "pronome",
+          "kind": "useful",
+          "openUse": false
+        },
+        {
+          "id": "AVA05",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": true
+        },
+        {
+          "id": "AVA06",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": true
+        },
+        {
+          "id": "AVA07",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": true
+        },
+        {
+          "id": "AVA08",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": false
+        },
+        {
+          "id": "AVA09",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": false
+        },
+        {
+          "id": "AVA10",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions",
+          "openUse": false
+        }
+      ]
+    }
+  }
+}

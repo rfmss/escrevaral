@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20261001-scrvrl-determinantes-v6-39",
+  "version": "20261001-scrvrl-pronominais-v6-40",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20261001-scrvrl-determinantes-v6-39/cofre.2806b0780f0a6905.js",
-      "sha256": "2806b0780f0a6905b0ff64b27ac00b22d35979a94ccb6811ee1fb5262c161e5d",
-      "bytes": 652218
+      "path": "assets/20261001-scrvrl-pronominais-v6-40/cofre.f923e26e46a2e054.js",
+      "sha256": "f923e26e46a2e05442d411af17ee3e2a405e20700779fe0238617bce3f31c43d",
+      "bytes": 655831
     },
     {
       "id": "app",
-      "path": "assets/20261001-scrvrl-determinantes-v6-39/app.12f32b398bd0007e.js",
+      "path": "assets/20261001-scrvrl-pronominais-v6-40/app.12f32b398bd0007e.js",
       "sha256": "12f32b398bd0007ee66b9b3fe3f027d35f7d84ba328bcdeed96726c263fe673f",
       "bytes": 289896
     },
     {
       "id": "styles",
-      "path": "assets/20261001-scrvrl-determinantes-v6-39/styles.200ed33cf9f86d6b.css",
+      "path": "assets/20261001-scrvrl-pronominais-v6-40/styles.200ed33cf9f86d6b.css",
       "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90",
       "bytes": 362011
     }

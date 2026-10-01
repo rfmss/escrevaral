@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261001-scrvrl-determinantes-v6-39">
+  <meta name="asset-version" content="20261001-scrvrl-pronominais-v6-40">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -3986,7 +3986,7 @@ SOFTWARE.
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-6-determinantes', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-7-sem-nome', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -4067,11 +4067,12 @@ SOFTWARE.
     }
     return null;
   }
-  function determinerReadings(r){
+  function pronominalReadings(r,pos){
     return r.portilexicon.filter(function(row){
-      return row.pos==='DET'&&(/(?:^|\|)Poss=Yes(?:\||$)/.test(row.features)||/(?:^|\|)PronType=Dem(?:\||$)/.test(row.features));
+      return row.pos===pos&&(/(?:^|\|)Poss=Yes(?:\||$)/.test(row.features)||/(?:^|\|)PronType=Dem(?:\||$)/.test(row.features));
     });
   }
+  function determinerReadings(r){return pronominalReadings(r,'DET');}
   function determinerAgreement(dets,noun,article){
     var expected=article?articleFeatures[article]:null,rows=noun.portilexicon,i,j,g,n,a,b;
     for(i=0;i<dets.length;i++){
@@ -4140,6 +4141,45 @@ SOFTWARE.
       choose(j,'substantivo','PTBR-CTX-008',detSupport);
       items[i].nominalDeterminer=detMatch;items[j].nominalDeterminer=detMatch;
       if(previousArticle>=0){choose(previousArticle,'artigo','PTBR-CTX-008',detSupport);items[previousArticle].nominalDeterminer=detMatch;}
+    }
+    /* Sem nome expresso: início do recorte ou após .!?;:.
+     * Demonstrativo admite hipótese PRON; artigo + possessivo registra a incerteza. */
+    function unitStart(at){
+      var gap=text.slice(at?ts[at-1].end:0,ts[at].start);
+      return at===0?/^[ \t\r\n\u00a0]*$/.test(gap):/[.!?;:][ \t\r\n\u00a0]*$/.test(gap);
+    }
+    for(i=0;i<ts.length;i++){
+      if(items[i].status==='contextual'){continue;}
+      var pronouns=pronominalReadings(items[i].candidates,'PRON');
+      if(!pronouns.length){continue;}
+      var preceding=i>0&&linked(i-1,i)&&has(articles,ts[i-1].value)?i-1:-1;
+      if(!unitStart(preceding>=0?preceding:i)){continue;}
+      if(preceding>=0&&items[preceding].status==='contextual'){continue;}
+      j=i+1;
+      if(!linked(i,j)){continue;}
+      var negative=ts[j].value==='não';
+      if(negative){j++;if(!linked(j-1,j)){continue;}}
+      if(has(items[j].candidates.classes,'substantivo')||items[j].status==='contextual'){continue;}
+      for(var pi=0;pi<pronouns.length;pi++){
+        var row=pronouns[pi],poss=/(?:^|\|)Poss=Yes(?:\||$)/.test(row.features);
+        if(poss?preceding<0:preceding>=0){continue;}
+        var nums=feature(row,'Number');
+        for(var ni=0;ni<nums.length;ni++){
+          if(nums[ni]!=='Sing'&&nums[ni]!=='Plur'){continue;}
+          if(poss&&(articleFeatures[ts[preceding].value][1]!==nums[ni]||!has(feature(row,'Gender'),articleFeatures[ts[preceding].value][0]))){continue;}
+          forms=finite(items[j].candidates,[3,nums[ni]==='Sing'?'singular':'plural']);
+          if(!forms.length){continue;}
+          var useSupport=preceding>=0?[preceding,i]:[i];
+          if(negative){useSupport.push(i+1);}useSupport.push(j);
+          if(poss){
+            items[i].status='ambiguo';items[i].rule='PTBR-CTX-010';
+            items[i].evidence=useSupport.map(function(at){return {start:ts[at].start,end:ts[at].end,snippet:text.slice(ts[at].start,ts[at].end)};});
+          }else{choose(i,'pronome','PTBR-CTX-009',useSupport);}
+          items[i].standaloneUse={kind:poss?'possessivo':'demonstrativo',resolution:poss?'open':'hypothesis',number:nums[ni],referenceResolved:false};
+          break;
+        }
+        if(items[i].standaloneUse){break;}
+      }
     }
     /* Grupo de três palavras: artigo + nome/adjetivo, nas duas ordens.
      * As duas ordens possíveis ou verbo finito no lugar do adjetivo impedem decisão. */
@@ -4219,14 +4259,18 @@ SOFTWARE.
   }
   function analyze(text, cap) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource;
-    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
+    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';
       message = contextual ? 'Leitura contextual: ' + item.selected + '.' : item.status === 'desconhecido' ? 'Sem classificação neste inventário.' : 'Possibilidades lexicais: ' + r.classes.join(', ') + '.';
       if(item.rule==='PTBR-CTX-008'&&item.selected==='determinante (UD)'){message='Leitura contextual: '+item.nominalDeterminer.kind+' acompanhando um nome.';}
+      if(item.rule==='PTBR-CTX-009'){message='Leitura contextual: demonstrativo sem nome expresso.';}
+      if(item.rule==='PTBR-CTX-010'){message='Possessivo sem nome expresso: leitura em aberto.';}
       reason = item.rule === 'PTBR-CTX-001' ? 'Pronome sujeito próximo e forma verbal finita compatível em pessoa e número.' :
         item.rule === 'PTBR-CTX-002' ? 'Artigo definido antes de nome registrado; homógrafos verbais exigem também uma forma finita à direita.' :
         item.rule === 'PTBR-CTX-003' ? 'A forma aparece entre pronome sujeito (com não opcional) e verbo finito compatível.' :
+        item.rule === 'PTBR-CTX-009' ? 'Candidato pronominal demonstrativo no início do trecho ou após pontuação de limite, seguido de forma finita compatível em terceira pessoa e número, com não opcional. Favorece pronome neste recorte; não identifica referente nem prova função de sujeito.' :
+        item.rule === 'PTBR-CTX-010' ? 'Artigo e possessivo compatíveis antes de forma finita de terceira pessoa e mesmo número, sem nome intermediário. Registra uso sem nome expresso; não decide entre leitura pronominal, elipse de nome ou substantivação. Não reconstrói o nome nem identifica o possuidor.' :
         item.rule === 'PTBR-CTX-008' ? 'A fonte registra determinante '+item.nominalDeterminer.kind+' antes de nome contíguo, com gênero e número compatíveis. Determinante (UD) conserva a categoria da fonte; pronome é outra possibilidade lexical. A hipótese não identifica possuidor, referente nem função sintática do grupo.' :
         item.rule === 'PTBR-CTX-007' ? 'Artigo e nome com traços compatíveis, sequência introduzida por de ou sua contração e forma finita à direita compatível com terceira pessoa e número do primeiro nome. Isso apoia classes, sem provar sujeito, posse ou vínculo do complemento.'+(item.nominalComplement.complementFeaturesChecked?' Os traços do segundo nome também correspondem ao artigo que o precede.':' O segundo nome não teve concordância com artigo verificada; traços ausentes não foram inferidos.') :
         item.rule === 'PTBR-CTX-006' ? 'Artigo, nome e adjetivo contíguos com número compatível; gênero do nome compatível com o artigo.'+(item.nominalAgreement.adjectiveGenderMarked?' O gênero do adjetivo também está registrado e é compatível.':' A fonte não informa gênero para este adjetivo; isso não foi tratado como prova de concordância.') :
@@ -4238,6 +4282,7 @@ SOFTWARE.
       if(item.rule==='PTBR-CTX-006'){occurrenceSource={title:'Regra computacional local de hipótese nominal. Universal Dependencies: amod em português, Gender e Number; consulta em 30/09/2026. Não é regra geral de desambiguação ou concordância.',url:'https://universaldependencies.org/pt/dep/amod.html'};}
       if(item.rule==='PTBR-CTX-007'){occurrenceSource={title:'Hipótese computacional local para classes em sequência nominal preposicionada. UD português: nmod e case, consultados em 30/09/2026; não equivale a análise de dependências. Contrações de + artigo explicitadas localmente; dados lexicais legados preservados.',url:'https://universaldependencies.org/pt/dep/nmod.html'};}
       if(item.rule==='PTBR-CTX-008'){occurrenceSource={title:'Regra computacional local: determinante possessivo/demonstrativo antes de nome. Universal Dependencies v2, Poss e PronType, consultados em 30/09/2026; não identifica referente nem resolve usos sem nome.',url:'https://universaldependencies.org/u/feat/PronType.html'};}
+      if(item.rule==='PTBR-CTX-009'||item.rule==='PTBR-CTX-010'){occurrenceSource={title:'Hipótese/observação computacional local para usos sem nome expresso. UD v2 PRON e Ellipsis in Nominals, consultados em 01/10/2026; distinções entre pronome, determinante e elipse não são decididas só pela ausência do nome.',url:'https://universaldependencies.org/u/pos/PRON.html'};}
       if(r.portilexicon.length){occurrenceSource={title:(typeof occurrenceSource==='string'?occurrenceSource:occurrenceSource.title)+' Dados lexicais: PortiLexicon-UD, Lopes, Duran, Fernandes e Pardo (2022), recorte '+E.portiLexicon.version+'. Classes UD são candidatos; não equivalem automaticamente à função na frase.',url:'https://github.com/LuceleneL/PortiLexicon-UD/tree/315e063da1f89c89e2097c6e72428ebefb9ab1d1'};}
       out.push(E.instruments.finding('morfologia', item.rule || 'PTBR-CTX-004', text, item.start, item.end, message,
         reason + (item.evidence.length ? ' Apoios no original: ' + item.evidence.map(function (s) { return '“' + s.snippet + '”'; }).join(', ') + '.' : ''),
@@ -4245,7 +4290,7 @@ SOFTWARE.
         'Possibilidades lexicais registradas: ' + (r.classes.join(', ') || 'nenhuma') + '. A regra é uma hipótese local. Elipse, nomes próprios, usos literários e outras construções podem exigir leitura diferente. Um inventário com uma só classe não prova unicidade na língua.',
         limit, occurrenceSource,
         { confidence: contextual ? 'moderada' : 'insuficiente', feature: item.selected || item.status, candidates: r,
-          nominalDeterminer: item.nominalDeterminer || null, nominalComplement: item.nominalComplement || null, nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
+          standaloneUse: item.standaloneUse || null, nominalDeterminer: item.nominalDeterminer || null, nominalComplement: item.nominalComplement || null, nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
     }
     out.coverageInfo = { scope: report.scope, work: report.work, version: version, lexiconVersion: E.portiLexicon?E.portiLexicon.version:null,
       summary: 'Classes em contexto: recorte ' + report.scope.start + '–' + report.scope.end + ' de ' + text.length + ' unidades UTF-16; ' + report.work.tokens + ' tokens.' + (report.scope.partial ? ' Análise parcial: selecione o restante para continuar.' : '') };
@@ -4806,7 +4851,7 @@ SOFTWARE.
  };
 }(typeof window!=='undefined'?window:this));
 
-    window.Escr.knowledge.version="local-20261001-contexto-6";
+    window.Escr.knowledge.version="local-20261001-contexto-7";
     return window.Escr;
   }
   return {version:'1.0.0',locale:'pt-BR',createRuntime:createRuntime,

@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 01/10/2026. Base do produto auditada: `aff9c5366e6fc747d778b3a743dcc4b5984f4df3`.
+Atualizado em 01/10/2026. Base do produto auditada: `2041764d2b8975b1c98b00786d5f9bbe3beea524`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.39: Classes de palavras reconhece possessivos/demonstrativos antes de nomes, com artigo definido opcional, traços explícitos e alternativas preservadas. M02-determinantes-1 cumprida; usos sem nome permanecem sem decisão contextual. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.40: Este chegou favorece pronome; O meu caiu recebe observação de leitura em aberto, sem reconstruir nome ou identificar possuidor/referente. M02-sem-nome-1 cumprida; dados lexicais preservados. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02: delimitar usos possessivos/demonstrativos sem nome expresso (este chegou; o meu caiu), contrastando pronome, elipse e substantivação; fixar evidências e abstenções antes da regra, sem inferir referente.
+- M02: delimitar coordenação nominal curta com e/ou (casa e jardim; casa ou apartamento), distinguindo conectivo e constituintes sem inferir estrutura geral da oração ou subordinação. Fixar exemplos, ambiguidades e exclusões antes da regra.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-determinantes-1 cumprida sobre a base nominal v6.38: minha casa/este livro/as minhas casas com origem e gênero/número. Amostra própria pré-fixada de 30 alvos: 16 decisões úteis e 14 abstenções, sem decisões erradas observadas; sem avaliação independente. M02 geral parcial.
+**Condição de conclusão:** M02-sem-nome-1 cumprida após determinantes-1: demonstrativo com apoio finito recebe hipótese pronominal; artigo + possessivo sem nome recebe observação de ambiguidade. Amostra própria de 20 alvos: oito decisões novas e seis observações abertas, métricas separadas; zero decisões erradas observadas. M02 geral parcial.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`.
 
 ### P05 — Construir as relações da oração
 

@@ -217,9 +217,10 @@
             "tests/contexto-nominal.cjs",
             "docs/jornada/ENTREGA-V6-37.md",
             "docs/jornada/ENTREGA-V6-38.md",
-            "docs/jornada/ENTREGA-V6-39.md"
+            "docs/jornada/ENTREGA-V6-39.md",
+            "docs/jornada/ENTREGA-V6-40.md"
           ],
-          "progress": "M02-determinantes-1 cumprida sobre a base nominal v6.38: minha casa/este livro/as minhas casas com origem e gênero/número. Amostra própria pré-fixada de 30 alvos: 16 decisões úteis e 14 abstenções, sem decisões erradas observadas; sem avaliação independente. M02 geral parcial."
+          "progress": "M02-sem-nome-1 cumprida após determinantes-1: demonstrativo com apoio finito recebe hipótese pronominal; artigo + possessivo sem nome recebe observação de ambiguidade. Amostra própria de 20 alvos: oito decisões novas e seis observações abertas, métricas separadas; zero decisões erradas observadas. M02 geral parcial."
         },
         {
           "id": "M03",
@@ -320,12 +321,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.39.0",
+    "version": "6.40.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-39.md",
-    "record": "docs/jornada/entregas/v6-39.json"
+    "evidence": "docs/jornada/ENTREGA-V6-40.md",
+    "record": "docs/jornada/entregas/v6-40.json"
   },
   "scopeChanges": [
     {

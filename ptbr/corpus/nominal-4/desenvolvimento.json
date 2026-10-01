@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria pré-fixada, não independente nem cega. Observação de ambiguidade não conta como classe decidida.",
+  "baseline": "2041764d2b8975b1c98b00786d5f9bbe3beea524",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Este chegou.",
+      "target": "Este",
+      "expected": "pronome",
+      "expectedOpenUse": false
+    },
+    {
+      "id": "DES02",
+      "text": "Aquela caiu.",
+      "target": "Aquela",
+      "expected": "pronome",
+      "expectedOpenUse": false
+    },
+    {
+      "id": "DES03",
+      "text": "Estes chegaram.",
+      "target": "Estes",
+      "expected": "pronome",
+      "expectedOpenUse": false
+    },
+    {
+      "id": "DES04",
+      "text": "Essa não chegou.",
+      "target": "Essa",
+      "expected": "pronome",
+      "expectedOpenUse": false
+    },
+    {
+      "id": "DES05",
+      "text": "O meu caiu.",
+      "target": "meu",
+      "expected": null,
+      "expectedOpenUse": true
+    },
+    {
+      "id": "DES06",
+      "text": "A minha caiu.",
+      "target": "minha",
+      "expected": null,
+      "expectedOpenUse": true
+    },
+    {
+      "id": "DES07",
+      "text": "O teu não caiu.",
+      "target": "teu",
+      "expected": null,
+      "expectedOpenUse": true
+    },
+    {
+      "id": "DES08",
+      "text": "Este chegaram.",
+      "target": "Este",
+      "expected": null,
+      "expectedOpenUse": false
+    },
+    {
+      "id": "DES09",
+      "text": "“Este” chegou.",
+      "target": "Este",
+      "expected": null,
+      "expectedOpenUse": false
+    },
+    {
+      "id": "DES10",
+      "text": "Meu chegou.",
+      "target": "Meu",
+      "expected": null,
+      "expectedOpenUse": false
+    }
+  ]
+}

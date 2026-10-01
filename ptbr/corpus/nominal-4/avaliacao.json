@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria pré-fixada, não independente nem cega. Observação de ambiguidade não conta como classe decidida.",
+  "baseline": "2041764d2b8975b1c98b00786d5f9bbe3beea524",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Essa chegou.",
+      "target": "Essa",
+      "expected": "pronome",
+      "expectedOpenUse": false
+    },
+    {
+      "id": "AVA02",
+      "text": "Aquelas caíram.",
+      "target": "Aquelas",
+      "expected": "pronome",
+      "expectedOpenUse": false
+    },
+    {
+      "id": "AVA03",
+      "text": "Esta não caiu.",
+      "target": "Esta",
+      "expected": "pronome",
+      "expectedOpenUse": false
+    },
+    {
+      "id": "AVA04",
+      "text": "Aquele terminou.",
+      "target": "Aquele",
+      "expected": "pronome",
+      "expectedOpenUse": false
+    },
+    {
+      "id": "AVA05",
+      "text": "Os nossos caíram.",
+      "target": "nossos",
+      "expected": null,
+      "expectedOpenUse": true
+    },
+    {
+      "id": "AVA06",
+      "text": "As minhas não caíram.",
+      "target": "minhas",
+      "expected": null,
+      "expectedOpenUse": true
+    },
+    {
+      "id": "AVA07",
+      "text": "O seu terminou.",
+      "target": "seu",
+      "expected": null,
+      "expectedOpenUse": true
+    },
+    {
+      "id": "AVA08",
+      "text": "Vi este chegou.",
+      "target": "este",
+      "expected": null,
+      "expectedOpenUse": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Este\nchegou.",
+      "target": "Este",
+      "expected": null,
+      "expectedOpenUse": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Isto chegou.",
+      "target": "Isto",
+      "expected": null,
+      "expectedOpenUse": false
+    }
+  ]
+}

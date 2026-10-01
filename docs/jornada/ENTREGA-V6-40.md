@@ -1,0 +1,42 @@
+<!-- Gerado por ferramentas/gerar-entrega.py; editar docs/jornada/entregas/v6-40.json -->
+# Usos sem nome expresso: hipótese pronominal e ambiguidade explicada
+
+v6.40: Este chegou favorece pronome; O meu caiu recebe observação de leitura em aberto, sem reconstruir nome ou identificar possuidor/referente. M02-sem-nome-1 cumprida; dados lexicais preservados.
+
+Base: `2041764d2b8975b1c98b00786d5f9bbe3beea524`. Coordenação solo; data 01/10/2026.
+
+## Entrega e experiência
+
+M02-sem-nome-1 cumprida. Em Examinar → Classes de palavras, Este chegou./Essa não chegou. favorecem leitura pronominal demonstrativa. O meu caiu./As minhas não caíram. recebem uma observação explicada de uso sem nome expresso, mantendo leitura em aberto. A observação não é classe decidida, identificação de pessoa, reconstrução de palavra ou correção. Uma lente por escolha, manuscrito intacto.
+
+## Dois resultados distintos
+
+PTBR-CTX-009 exige candidato PRON demonstrativo e forma finita de terceira pessoa com número compatível; não opcional pode separá-los. A hipótese conserva candidatos DET/NOUN e até verbais, como aquelar. PTBR-CTX-010 exige artigo definido + candidato PRON possessivo com gênero/número compatíveis, seguido do mesmo apoio finito. A pessoa do possuidor não determina a flexão apoiadora: os nossos exige terceira pessoa plural, não primeira. Nesse caso, selected permanece null, status ambiguo e confiança insuficiente. A mensagem distingue leitura pronominal, elipse de nome e substantivação sem escolher uma delas. O verbo apoiador não recebe função sintática ou classificação contextual nova.
+
+## Fronteiras e exclusões
+
+As duas regras valem no início do recorte ou após . ! ? ; : e têm janela máxima de quatro tokens. Pontuação/linha entre componentes e texto protegido interrompem os apoios. Não atravessam advérbios, coordenação, preposições ou nomes intermediários. Palavra à direita com candidato nominal impede tratar sua flexão verbal como apoio; Este canto e O meu livro continuam no recorte com nome expresso. Sem número explícito na leitura PRON, sem apoio verbal conhecido ou sem artigo antes do possessivo, não há decisão nova. Isto/isso não têm leituras externas neste recorte e continuam fora dele. A seleção inicia um novo recorte de análise; isso não prova independência sintática no documento inteiro.
+
+## Fontes e implementação
+
+Reutiliza o recorte PortiLexicon 3, sem novos dados, sementes ou licenças. O filtro de candidatos possessivos/demonstrativos é compartilhado entre DET e PRON, preservando a categoria consultada. Referências técnicas UD v2 consultadas em 01/10/2026: https://universaldependencies.org/u/pos/PRON.html e seção Ellipsis in Nominals de https://universaldependencies.org/u/overview/specific-syntax.html. Elas mostram que pronome/determinante/elipse não são decididos apenas pela ausência de nome; o algoritmo aqui é local e não executa análise de dependências. Nenhuma nova leitura de livros é alegada.
+
+## Amostra e evidência
+
+Nominal-4 contém 20 alvos próprios fixados antes da regra: dez de desenvolvimento e dez de avaliação. Em cada conjunto, 0→4 decisões úteis, quatro lacunas resolvidas, seis abstenções esperadas e zero decisões erradas observadas. Dentro das abstenções, 0→3 observações explicadas de possessivo sem nome; não somar essas observações como classes corretas nem misturar as métricas. Zero observações indevidas nos alvos da amostra. Avaliação própria, não cega nem independente, um alvo por frase. Em nominal-3, DES10 (Esta chegou.) passou explicitamente da exclusão v6.39 para pronome no novo escopo; previousExpected/evolution preservam a decisão anterior, e os relatórios históricos não foram reescritos. Os novos gabaritos nominal-4 não mudaram depois da implementação.
+
+## Custo, publicação e reversão
+
+Cofre 652.218→655.831 bytes (+3.613); portátil 1.370.410 bytes. Dados, app e CSS sem alteração de conteúdo. Até 8.000 unidades UTF-16, 1.600 tokens, 100 achados, uma consulta morfológica por token e janelas curtas. Nenhuma rede, dependência ou cache novo. Tamanhos e limites não são medição de memória/latência ou homologação de aparelhos. Implementado/integrado/verificado; CI/Pages por commit confirmam publicação. Reversão por commit normal e remontagem, preservando documentos e formatos. Sem force push.
+
+## Verificações e publicação
+
+Passaram 20 alvos novos, observações separadas de decisões, pessoa/número, hipóteses preservadas, proteção, seleção UTF-16/NFD, limite de consultas, ES5 e painel; 30 determinantes (uma evolução explícita), 40 preposicionais, 20 indefinidos, 63 contextuais e 26 contrastes PortiLexicon. Build:check conferiu sete saídas. Regressão completa executada pelo CI do commit; consultar resultado em Actions.
+
+CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy. [Execuções da main](https://github.com/rfmss/escrevaral/actions?query=branch%3Amain). O sucesso deve ser conferido no commit correspondente; CI e Pages são estados separados.
+
+## Próxima ação
+
+M02: delimitar coordenação nominal curta com e/ou (casa e jardim; casa ou apartamento), distinguindo conectivo e constituintes sem inferir estrutura geral da oração ou subordinação. Fixar exemplos, ambiguidades e exclusões antes da regra.
+
+Plano v4: 11/25 DONE | entrega +0 marcos | próximo M02 | publicação: Actions por commit | limite: janelas curtas no início de unidade; possessivos sem nome continuam ambíguos; sem resolver referência ou elipse
