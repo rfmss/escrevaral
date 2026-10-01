@@ -212,9 +212,10 @@
             "docs/jornada/ENTREGA-V6-35.md",
             "tests/contexto-portilexicon.cjs",
             "docs/jornada/ENTREGA-V6-36.md",
-            "tests/contexto-nominal.cjs"
+            "tests/contexto-nominal.cjs",
+            "docs/jornada/ENTREGA-V6-37.md"
           ],
-          "progress": "M02-candidatos-1 e M02-nominal-1 cumpridas: léxico real e grupos de artigo/nome/adjetivo, com gênero/número, fontes, abstenções e limites. Próximo: M02-complemento-1, complemento nominal curto com de/do/da. M02 geral parcial."
+          "progress": "M02-candidatos-1, M02-nominal-1 e M02-complemento-1 cumpridas. Na amostra própria pré-fixada de 40 alvos, decisões úteis 11→24, zero decisões erradas observadas e duas lacunas restantes. Sem avaliação independente; limites e gabaritos preservados."
         },
         {
           "id": "M03",
@@ -315,11 +316,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.36.0",
+    "version": "6.37.0",
     "completed": [],
     "baselineDone": 11,
-    "publication": "M02-nominal-1 publicada na main bd057bd1e9732c97fc8dbb6a093fa4d412027a49; CI 36756967192 e Pages 36756965903 concluídos com sucesso. M02 permanece parcial.",
-    "evidence": "docs/jornada/ENTREGA-V6-36.md"
+    "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+    "evidence": "docs/jornada/ENTREGA-V6-37.md",
+    "record": "docs/jornada/entregas/v6-37.json"
   },
   "scopeChanges": [
     {

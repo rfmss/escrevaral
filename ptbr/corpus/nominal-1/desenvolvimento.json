@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "kind": "amostra própria pré-fixada; autor e implementador são o mesmo agente, não é revisão independente",
+  "frozenBefore": "contexto-4-preposicional",
+  "baseline": "bd057bd1e9732c97fc8dbb6a093fa4d412027a49",
+  "policy": "Classe contextual útil ou abstenção; leituras lexicais não contam como decisão. Sem alterar gabarito para acomodar a implementação. Casos fora do recorte podem continuar abstidos.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "O filho da vizinha chegou.",
+      "target": "filho",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES02",
+      "text": "Os filhos das mulheres chegaram.",
+      "target": "filhos",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES03",
+      "text": "O livro do homem chegou.",
+      "target": "livro",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES04",
+      "text": "A casa da mulher caiu.",
+      "target": "casa",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES05",
+      "text": "O livro de papel chegou.",
+      "target": "livro",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES06",
+      "text": "O filho de uma mulher chegou.",
+      "target": "filho",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES07",
+      "text": "O filho de a mulher chegou.",
+      "target": "filho",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES08",
+      "text": "As portas das casas chegaram.",
+      "target": "portas",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES09",
+      "text": "A mulher da casa chegou.",
+      "target": "casa",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES10",
+      "text": "O velho homem chegou.",
+      "target": "velho",
+      "expected": "adjetivo"
+    },
+    {
+      "id": "DES11",
+      "text": "As casas brancas chegaram.",
+      "target": "brancas",
+      "expected": "adjetivo"
+    },
+    {
+      "id": "DES12",
+      "text": "A bela menina chegou.",
+      "target": "bela",
+      "expected": null
+    },
+    {
+      "id": "DES13",
+      "text": "Eu o livro da mulher.",
+      "target": "livro",
+      "expected": "verbo"
+    },
+    {
+      "id": "DES14",
+      "text": "Tu as casas da mulher.",
+      "target": "casas",
+      "expected": "verbo"
+    },
+    {
+      "id": "DES15",
+      "text": "O filho, da vizinha chegou.",
+      "target": "filho",
+      "expected": null
+    },
+    {
+      "id": "DES16",
+      "text": "O filho da\nvizinha chegou.",
+      "target": "filho",
+      "expected": null
+    },
+    {
+      "id": "DES17",
+      "text": "O filho da “vizinha” chegou.",
+      "target": "filho",
+      "expected": null
+    },
+    {
+      "id": "DES18",
+      "text": "O filho da mulher da casa chegou.",
+      "target": "filho",
+      "expected": null
+    },
+    {
+      "id": "DES19",
+      "text": "O filho da mulher.",
+      "target": "filho",
+      "expected": null
+    },
+    {
+      "id": "DES20",
+      "text": "O filho da mulher chegaram.",
+      "target": "filho",
+      "expected": null
+    }
+  ]
+}

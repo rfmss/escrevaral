@@ -80,6 +80,7 @@ function setup(initial, dismissed, realEngine) {
     timers: timers
   };
 }
+function run() {
 var sample = 'A rua excessão,, que é ao longo do tempo', a = setup(sample);
 assert.strictEqual(a.calls.length, 0, 'triagem não executa lentes');
 assert.strictEqual(a.manuscript.value, sample);
@@ -123,7 +124,6 @@ assert.deepStrictEqual(e.calls,['pontuacao'],'trocar lente cancela a fila anteri
 var html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 var portable = fs.readFileSync(path.join(root, 'escrevaral.html'), 'utf8');
 var worker = fs.readFileSync(path.join(root, 'service-worker.js'), 'utf8');
-require('child_process').execFileSync(process.execPath,[path.join(root,'scripts/build.cjs'),'--check']);
 assert.ok(portable.indexOf(source) !== -1, 'a cópia inline do painel diverge da fonte');
 assert.ok(portable.indexOf('E.ptbrPanelChoices=function()') !== -1, 'a ponte não respeita escolhas');
 var version = /name="asset-version" content="([^"]+)"/.exec(html);
@@ -131,4 +131,6 @@ assert.ok(version && worker.indexOf('ASSET_VERSION = "' + version[1] + '"') !== 
   'cache e HTML em versões diferentes');
 console.log('PAINEL OK: escolha explícita, uma lente, troca/cancelamento, escolhas, lente individual, cancelamento, IME, HTML portátil e cache');
 
-if(require.main!==module){module.exports={Node:Node,setup:setup};}
+}
+module.exports={Node:Node,setup:setup,run:run};
+if(require.main===module){run();}

@@ -22,7 +22,7 @@ const cases=[
  ['Nós `cantávamos`.','cantávamos','protegido',null],
  ['Eu floripava.','floripava','desconhecido',null],
  ['Vi a menina.','menina','contextual','substantivo'],
- ['O filho da vizinha chegou.','filho','ambiguo',null],
+ ['O filho da vizinha chegou.','filho','contextual','substantivo'],
  ['casa','casa','ambiguo',null],
  ['As casas, eram brancas.','casas','ambiguo',null],
  ['Eu fui.','fui','contextual','verbo'],

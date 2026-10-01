@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "kind": "amostra própria pré-fixada; autor e implementador são o mesmo agente, não é revisão independente",
+  "frozenBefore": "contexto-4-preposicional",
+  "baseline": "bd057bd1e9732c97fc8dbb6a093fa4d412027a49",
+  "policy": "Classe contextual útil ou abstenção; leituras lexicais não contam como decisão. Sem alterar gabarito para acomodar a implementação. Casos fora do recorte podem continuar abstidos.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "O canto do homem terminou.",
+      "target": "canto",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA02",
+      "text": "A porta da casa chegou.",
+      "target": "porta",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA03",
+      "text": "O sonho da mulher terminou.",
+      "target": "sonho",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA04",
+      "text": "Os livros dos homens chegaram.",
+      "target": "livros",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA05",
+      "text": "A filha da vizinha chegou.",
+      "target": "filha",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA06",
+      "text": "Os filhos de mulheres chegaram.",
+      "target": "filhos",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA07",
+      "text": "O livro de o homem chegou.",
+      "target": "livro",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA08",
+      "text": "A casa de papel chegou.",
+      "target": "casa",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA09",
+      "text": "O homem da casa chegou.",
+      "target": "casa",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA10",
+      "text": "A mulher feliz chegou.",
+      "target": "feliz",
+      "expected": "adjetivo"
+    },
+    {
+      "id": "AVA11",
+      "text": "O grande homem chegou.",
+      "target": "grande",
+      "expected": "adjetivo"
+    },
+    {
+      "id": "AVA12",
+      "text": "Eu o canto do homem.",
+      "target": "canto",
+      "expected": "verbo"
+    },
+    {
+      "id": "AVA13",
+      "text": "Eu não o livro da mulher.",
+      "target": "livro",
+      "expected": "verbo"
+    },
+    {
+      "id": "AVA14",
+      "text": "O canto; do homem terminou.",
+      "target": "canto",
+      "expected": null
+    },
+    {
+      "id": "AVA15",
+      "text": "O canto do homem\nterminou.",
+      "target": "canto",
+      "expected": null
+    },
+    {
+      "id": "AVA16",
+      "text": "O canto do `homem` terminou.",
+      "target": "canto",
+      "expected": null
+    },
+    {
+      "id": "AVA17",
+      "text": "O canto do homem e da mulher terminou.",
+      "target": "canto",
+      "expected": null
+    },
+    {
+      "id": "AVA18",
+      "text": "O canto do homem.",
+      "target": "canto",
+      "expected": null
+    },
+    {
+      "id": "AVA19",
+      "text": "O canto do homem terminaram.",
+      "target": "canto",
+      "expected": null
+    },
+    {
+      "id": "AVA20",
+      "text": "O canto do qwerty terminou.",
+      "target": "canto",
+      "expected": null
+    }
+  ]
+}

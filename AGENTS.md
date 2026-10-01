@@ -91,3 +91,11 @@ Em 30/09, v6-34/M01-flexoes-1 integrou 3.009 formas PortiLexicon à consulta lex
 V6-35/M02-candidatos-1 liga o inventário real à lente Classes de palavras; `lexicalReadings()` ampliada é própria dessa lente, e `readings()` legada continua usada por sintaxe/relativas. Não propagar candidatos para essas lentes sem tarefa delimitada. Próximo M02: grupo nominal curto artigo + nome + adjetivo. Alterações de expectativas CTX-022/047 estão justificadas em `docs/jornada/ENTREGA-V6-35.md`.
 
 V6-36/M02-nominal-1 acrescenta PTBR-CTX-006: artigo/nome/adjetivo nas duas ordens, traços explícitos e abstenção se ambas forem possíveis. Ausência de gênero no ADJ é declarada, não prova concordância. Próximo M02-complemento-1: delimitar complemento curto com de/do/da. Leia ENTREGA-V6-36 e estado.json para publicação; não repetir o recorte nominal.
+
+## Direção vigente — execução solo e entregas por capacidade, 30/09/2026
+
+Rafael informou que o outro Astra não participa mais e aprovou o método deliberado. Esta seção substitui coordenação/espera/revisão obrigatória por A1 e relato duplicado de cada publicação. Não convocar outros agentes por rotina. Um responsável prepara exemplos, implementa, revisa e publica; não alegar avaliação independente feita pela mesma frente.
+
+Fechar uma capacidade útil por lote, com exemplos/contrastes fixados antes do motor; medir decisões úteis, erradas e abstenções separadamente. Reaproveitar a arquitetura existente, extrair apenas repetição concreta, não introduzir DSL/parser geral ou infraestrutura de 1 GB como pré-requisito. Teste local dirigido; regressão completa uma vez no CI; nunca retirar cobertura só para economizar.
+
+Usar uma ficha em `docs/jornada/entregas/` e `python3 ferramentas/gerar-entrega.py caminho-da-ficha.json` para gerar entrega, estado, progresso do plano e Jornada. Não adicionar minirrelatos por versão a AGENTS ou à antiga retomada A2. Atualizar instruções somente quando houver decisão nova. Conferir CI e Pages por commit no GitHub; não exigir novo commit apenas para confirmar o anterior. Nunca chamar implementação de publicação antes dessa conferência. A distribuição continua versionada até piloto explícito preservar URLs/cache/portátil e autorizar mudança de configuração Pages.

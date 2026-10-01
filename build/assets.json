@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20260930-scrvrl-nominal-v6-36",
+  "version": "20260930-scrvrl-nominal-v6-37",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20260930-scrvrl-nominal-v6-36/cofre.9e5850efa3761e9c.js",
-      "sha256": "9e5850efa3761e9c0defbceac7023ebe7fff97e77eac9ff5ee744483454014a0",
-      "bytes": 632629
+      "path": "assets/20260930-scrvrl-nominal-v6-37/cofre.179b1b2edd20510b.js",
+      "sha256": "179b1b2edd20510b5e3a823b1fe7c3b7e758126a6c1c6d626530770c82e7f7da",
+      "bytes": 636317
     },
     {
       "id": "app",
-      "path": "assets/20260930-scrvrl-nominal-v6-36/app.12f32b398bd0007e.js",
+      "path": "assets/20260930-scrvrl-nominal-v6-37/app.12f32b398bd0007e.js",
       "sha256": "12f32b398bd0007ee66b9b3fe3f027d35f7d84ba328bcdeed96726c263fe673f",
       "bytes": 289896
     },
     {
       "id": "styles",
-      "path": "assets/20260930-scrvrl-nominal-v6-36/styles.200ed33cf9f86d6b.css",
+      "path": "assets/20260930-scrvrl-nominal-v6-37/styles.200ed33cf9f86d6b.css",
       "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90",
       "bytes": 362011
     }

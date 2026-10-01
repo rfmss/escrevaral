@@ -6,7 +6,7 @@ Atualizado em 30/09/2026. Base do produto auditada: `bd057bd1e9732c97fc8dbb6a093
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6-36 publicada: Classes de palavras reconhece grupos curtos com artigo, nome e adjetivo nas duas ordens. Traços de gênero/número apoiam a hipótese; duas ordens possíveis mantêm abstenção explícita. M02-nominal-1 cumprida, M02 geral parcial. Main bd057bd, CI e Pages concluídos com sucesso.
+**Estado:** v6.37: Classes de palavras amplia a família nominal para sequências com de/do/da/dos/das e apoio finito. Coordenação solo e entrega por ficha única; M02-complemento-1 cumprida, M02 geral parcial. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02-complemento-1: delimitar artigo + nome + complemento com de/do/da, começando por O filho da vizinha chegou e contraexemplos; preservar abstenção e isolamento de sintaxe/relativas.
+- M02: ampliar a mesma família nominal para artigos indefinidos e apoios verbais frequentes, começando pelas duas lacunas medidas; preparar novos contrastes antes de implementar. Piloto de publicação por artefato separado e sem bloquear motores.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -86,7 +86,7 @@ Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md
 
 ### P04 — Reconhecer classes no contexto
 
-Estado: **Grupos nominais publicados; avaliação reservada pendente**. Depende de: P02, P03.
+Estado: **Incrementos integrados/testados; publicação por commit em Actions e avaliação ampla pendente**. Depende de: P02, P03.
 
 Ir das classes possíveis à leitura sustentada pela frase.
 
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-candidatos-1/v6-35 publicada. M02-nominal-1/v6-36 integra artigo/nome/adjetivo nas duas ordens, com traços e abstenção. 17 contrastes novos e regressões contextuais aprovados; publicada na main bd057bd, CI/Pages success.
+**Condição de conclusão:** M02-candidatos-1, M02-nominal-1 e M02-complemento-1 cumpridas. Na amostra própria pré-fixada de 40 alvos, decisões úteis 11→24, zero decisões erradas observadas e duas lacunas restantes. Sem avaliação independente; limites e gabaritos preservados.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`.
 
 ### P05 — Construir as relações da oração
 

@@ -2,6 +2,10 @@
 
 Antes de continuar: ler `AGENTS.md` e [Plano mestre](../PLANO-MESTRE.md), consultar a main remota, verificar alterações locais e conferir `estado.json`. O mapa descreve compromissos e evidências, não autoriza dizer que uma capacidade planejada existe.
 
+## Método vigente — solo
+
+A partir de 30/09/2026, preencher uma ficha em `docs/jornada/entregas/` (exemplo v6-37.json) e executar `python3 ferramentas/gerar-entrega.py caminho-da-ficha.json`. Ela gera o relatório e atualiza estado/plano/Jornada. Não duplicar resumos manualmente em AGENTS ou na retomada A2. Execuções CI/Pages vinculadas ao commit são a evidência de publicação; conferir ambas, sem segundo commit por rotina. O modelo abaixo orienta o conteúdo da ficha.
+
 ## Modelo de entrega
 
 - **Etapa/objetivo:** ID, escopo e comportamento esperado.

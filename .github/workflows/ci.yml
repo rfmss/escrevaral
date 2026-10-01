@@ -18,8 +18,5 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm run build:check
       - run: npm test
-      - run: npm run build
-      - name: Distribuição reproduzível
-        run: git diff --exit-code -- index.html escrevaral.html service-worker.js build/assets.json assets/
+      - run: npm run build:check
