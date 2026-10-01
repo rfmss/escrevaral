@@ -14,6 +14,7 @@ state_path=ROOT/'docs/jornada/estado.json';state=json.loads(state_path.read_text
 record_id=str(record.relative_to(ROOT))
 if state.get('deliveryRecord')!=record_id: state['version']+=1
 state['deliveryRecord']=record_id
+state['baseline']=d['base']
 state['updated']=d['date'];state['current']=d['summary']+' '+publication
 state['next'][0]=d['next'];state['focusDecision']['nextDeliverable']=d['next']
 state['focusDecision']['decision']='Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.'
@@ -21,11 +22,17 @@ state['publicationDecision'].update(status=publication,commit=None,deployment=wo
 state['publicationDecision']['evidencePolicy']='O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação.'
 phase=next(p for p in state['phases'] if p['id']==d['phase']);phase['status']='Incrementos integrados/testados; publicação por commit em Actions e avaliação ampla pendente';phase['done']=d['progress']
 if evidence not in phase['evidence']:phase['evidence'].append(evidence)
+for related in d.get('related',[]):
+ p=next(p for p in state['phases'] if p['id']==related['phase']);p['done']=related['progress']
+ if evidence not in p['evidence']:p['evidence'].append(evidence)
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
 plan_path=ROOT/'docs/jornada/plano-voo.json';plan=json.loads(plan_path.read_text())
 plan['updated']='-'.join(reversed(d['date'].split('/')))
 item=next(i for t in plan['tracks'] for i in t['items'] if i['id']==d['task']);item['progress']=d['progress']
 if evidence not in item['evidence']:item['evidence'].append(evidence)
+for related in d.get('related',[]):
+ i=next(i for t in plan['tracks'] for i in t['items'] if i['id']==related['task']);i['progress']=related['progress']
+ if evidence not in i['evidence']:i['evidence'].append(evidence)
 plan['next']=d['task'];done=sum(i['state']=='DONE' for t in plan['tracks'] for i in t['items']);total=sum(len(t['items']) for t in plan['tracks'])
 plan['lastDelivery']={'version':d['version']+'.0','completed':[],'baselineDone':done,'publication':publication,'evidence':evidence,'record':str(record.relative_to(ROOT))}
 plan_path.write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n')

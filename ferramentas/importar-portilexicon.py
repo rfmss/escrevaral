@@ -36,7 +36,7 @@ def convert(folder):
     entries={key:compact([[li[a],pi[b],fi[c]] for a,b,c in sorted(data[key])]) for key in sorted(data)}
     maximum=max(len(v.encode()) for v in entries.values());max_readings=max(map(len,data.values()))
     if maximum>4096 or len(entries)>10000 or max_readings>32:raise ValueError('Recorte excedeu orçamento')
-    resource={'version':config['commit'][:12]+'-recorte-1','source':'PortiLexicon-UD','forms':len(data),'lemmas':lemmas,'tags':tags,'features':features,'entries':entries}
+    resource={'version':config['commit'][:12]+'-recorte-'+str(config.get('subsetVersion',1)),'source':'PortiLexicon-UD','forms':len(data),'lemmas':lemmas,'tags':tags,'features':features,'entries':entries}
     license=(DEST/'LICENSE').read_text()
     js='/* PortiLexicon-UD — dados de Lopes, Duran, Fernandes e Pardo (2022).\nRecorte/compactação Escrevaral; origem e hashes em ORIGEM.json.\n'+license+'*/\n(function(root){"use strict";root.Escr.portiLexicon='+compact(resource)+';}(typeof window!=="undefined"?window:this));\n'
     js=js.replace('</','<\\/').replace('\u2028','\\u2028').replace('\u2029','\\u2029')

@@ -1,0 +1,145 @@
+{
+  "engine": "contexto-5-indefinidos",
+  "independent": false,
+  "interpretation": "Amostra pequena própria; nenhuma estimativa de precisão geral. Abstenções em alvos úteis contam como lacunas, não como decisões erradas.",
+  "sets": {
+    "desenvolvimento": {
+      "cases": 10,
+      "useful": 7,
+      "wrong": 0,
+      "missed": 0,
+      "expectedAbstentions": 3,
+      "rows": [
+        {
+          "id": "DES01",
+          "expected": "substantivo",
+          "actual": "substantivo",
+          "kind": "useful"
+        },
+        {
+          "id": "DES02",
+          "expected": "substantivo",
+          "actual": "substantivo",
+          "kind": "useful"
+        },
+        {
+          "id": "DES03",
+          "expected": "artigo",
+          "actual": "artigo",
+          "kind": "useful"
+        },
+        {
+          "id": "DES04",
+          "expected": "adjetivo",
+          "actual": "adjetivo",
+          "kind": "useful"
+        },
+        {
+          "id": "DES05",
+          "expected": "adjetivo",
+          "actual": "adjetivo",
+          "kind": "useful"
+        },
+        {
+          "id": "DES06",
+          "expected": "substantivo",
+          "actual": "substantivo",
+          "kind": "useful"
+        },
+        {
+          "id": "DES07",
+          "expected": "substantivo",
+          "actual": "substantivo",
+          "kind": "useful"
+        },
+        {
+          "id": "DES08",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "DES09",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "DES10",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        }
+      ]
+    },
+    "avaliacao": {
+      "cases": 10,
+      "useful": 6,
+      "wrong": 0,
+      "missed": 0,
+      "expectedAbstentions": 4,
+      "rows": [
+        {
+          "id": "AVA01",
+          "expected": "substantivo",
+          "actual": "substantivo",
+          "kind": "useful"
+        },
+        {
+          "id": "AVA02",
+          "expected": "substantivo",
+          "actual": "substantivo",
+          "kind": "useful"
+        },
+        {
+          "id": "AVA03",
+          "expected": "substantivo",
+          "actual": "substantivo",
+          "kind": "useful"
+        },
+        {
+          "id": "AVA04",
+          "expected": "substantivo",
+          "actual": "substantivo",
+          "kind": "useful"
+        },
+        {
+          "id": "AVA05",
+          "expected": "adjetivo",
+          "actual": "adjetivo",
+          "kind": "useful"
+        },
+        {
+          "id": "AVA06",
+          "expected": "adjetivo",
+          "actual": "adjetivo",
+          "kind": "useful"
+        },
+        {
+          "id": "AVA07",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "AVA08",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "AVA09",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "AVA10",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        }
+      ]
+    }
+  }
+}

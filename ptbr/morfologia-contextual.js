@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-4-preposicional', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-5-indefinidos', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -17,7 +17,8 @@
   };
   var subjects = { '$eu': [1, 'singular'], '$tu': [2, 'singular'], '$ele': [3, 'singular'], '$ela': [3, 'singular'], '$você': [3, 'singular'], '$nós': [1, 'plural'], '$vós': [2, 'plural'], '$eles': [3, 'plural'], '$elas': [3, 'plural'], '$vocês': [3, 'plural'] };
   var articles = ['o', 'a', 'os', 'as'];
-  var articleFeatures={o:['Masc','Sing'],a:['Fem','Sing'],os:['Masc','Plur'],as:['Fem','Plur']};
+  var nominalArticles=articles.concat(['um','uma','uns','umas']);
+  var articleFeatures={um:['Masc','Sing'],uma:['Fem','Sing'],uns:['Masc','Plur'],umas:['Fem','Plur'],o:['Masc','Sing'],a:['Fem','Sing'],os:['Masc','Plur'],as:['Fem','Plur']};
   var contractions={do:'o',da:'a',dos:'os',das:'as'};
   var featurePatterns={Gender:/(?:^|\|)Gender=([^|]+)(?:\||$)/,Number:/(?:^|\|)Number=([^|]+)(?:\||$)/};
   function has(list, word) { return list.indexOf(word) >= 0; }
@@ -117,7 +118,7 @@
     /* Grupo de três palavras: artigo + nome/adjetivo, nas duas ordens.
      * As duas ordens possíveis ou verbo finito no lugar do adjetivo impedem decisão. */
     for(i=0;i+2<ts.length;i++){
-      if(!has(articles,ts[i].value)||!linked(i,i+1)||!linked(i+1,i+2)){continue;}
+      if(!has(nominalArticles,ts[i].value)||!linked(i,i+1)||!linked(i+1,i+2)){continue;}
       if(items[i].status==='contextual'||items[i+1].status==='contextual'||items[i+2].status==='contextual'){continue;}
       var left=items[i+1].candidates,right=items[i+2].candidates;
       var post=has(left.classes,'substantivo')&&has(right.classes,'adjetivo');
@@ -136,11 +137,11 @@
     /* Artigo + nome + de/[artigo] ou contração + nome + apoio finito.
      * Janela de 5/6 tokens; não atravessa modificadores nem escolhe vínculo sintático. */
     for(i=0;i+4<ts.length;i++){
-      if(!has(articles,ts[i].value)||blockedNominal[i]||!nounAgreement(items[i+1].candidates,ts[i].value)){continue;}
+      if(!has(nominalArticles,ts[i].value)||blockedNominal[i]||!nounAgreement(items[i+1].candidates,ts[i].value)){continue;}
       var bridge=i+2,tail=bridge+1,tailArticle=null,articleAt=-1;
       if(own.call(contractions,ts[bridge].value)){tailArticle=contractions[ts[bridge].value];}
       else if(ts[bridge].value==='de'){
-        if(has(articles,ts[tail].value)){articleAt=tail;tailArticle=ts[tail].value;tail++;}
+        if(has(nominalArticles,ts[tail].value)){articleAt=tail;tailArticle=ts[tail].value;tail++;}
       }else{continue;}
       var after=tail+1,connected=true,occupied=false,support=[];
       if(after>=ts.length){continue;}
@@ -192,7 +193,7 @@
   }
   function analyze(text, cap) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource;
-    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
+    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';
       message = contextual ? 'Leitura contextual: ' + item.selected + '.' : item.status === 'desconhecido' ? 'Sem classificação neste inventário.' : 'Possibilidades lexicais: ' + r.classes.join(', ') + '.';
@@ -204,6 +205,7 @@
         item.rule === 'PTBR-CTX-005' ? 'Lema conhecido e preposição contígua, com pronome sujeito opcional: leitura de infinitivo preservada do motor anterior.' :
         item.nominalAmbiguity ? 'Neste grupo, o léxico admite nome + adjetivo e adjetivo + nome. O recorte não escolhe entre as duas distribuições.' :
         r.classes.length ? 'Consulta ao léxico local; nenhuma regra contextual deste incremento decidiu a ocorrência.' : 'A forma não consta do recorte lexical. Nenhuma classe foi deduzida por sufixo.';
+      if(contextual&&item.selected==='artigo'&&has(r.classes,'numeral')){reason+=' A leitura de artigo é uma hipótese local; um/uma também podem expressar quantidade, e o recorte não resolve essa intenção.';}
       occurrenceSource=contextual&&item.rule!=='PTBR-CTX-005'?source:E.grammarData.source;
       if(item.rule==='PTBR-CTX-006'){occurrenceSource={title:'Regra computacional local de hipótese nominal. Universal Dependencies: amod em português, Gender e Number; consulta em 30/09/2026. Não é regra geral de desambiguação ou concordância.',url:'https://universaldependencies.org/pt/dep/amod.html'};}
       if(item.rule==='PTBR-CTX-007'){occurrenceSource={title:'Hipótese computacional local para classes em sequência nominal preposicionada. UD português: nmod e case, consultados em 30/09/2026; não equivale a análise de dependências. Contrações de + artigo explicitadas localmente; dados lexicais legados preservados.',url:'https://universaldependencies.org/pt/dep/nmod.html'};}

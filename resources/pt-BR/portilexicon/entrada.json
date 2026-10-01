@@ -14,5 +14,6 @@
     "PRON.tsv": "788f2878dfd23a53c394104effef008bbe680183d1f6ce9f688030920ebe5369",
     "SCONJ.tsv": "65fae7dd0f352254d56a7819fe55f4f6e3b0e89c52a9023c8b454333d219c9ab",
     "VERB.tsv": "3c3ccbf94e0c6e7a1673722f6adceb36e75fde7a70fd5a1dc0edc5b7bcc69342"
-  }
+  },
+  "subsetVersion": 2
 }

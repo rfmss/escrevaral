@@ -29,11 +29,11 @@ test('todo recorte cabe nos limites; triplas únicas e isoladas',()=>{
   assert.equal(new Set(rs.map(r=>JSON.stringify(r))).size,rs.length);
   assert.ok(Buffer.byteLength(E.portiLexicon.entries[key])<=4096);
  }
- assert.equal(n,5286);assert.equal(Object.keys(E.portiLexicon.entries).length,3009);
+ assert.equal(n,meta.readings);assert.equal(Object.keys(E.portiLexicon.entries).length,meta.forms);
  const r=E.lookupMorphology('fui');r[0].lemma='injetado';assert.equal(E.lookupMorphology('fui')[0].lemma,'ir');
 });
 test('tamanho, hash, ES5 e licença no artefato portátil',()=>{
- const data=fs.readFileSync(path.join(root,'resources/pt-BR/portilexicon/flexoes.js'),'utf8');assert.equal(Buffer.byteLength(data),109924);
+ const data=fs.readFileSync(path.join(root,'resources/pt-BR/portilexicon/flexoes.js'),'utf8');assert.equal(Buffer.byteLength(data),meta.outputBytes);
  assert.equal(crypto.createHash('sha256').update(data).digest('hex'),meta.outputSha256);assert.ok(Buffer.byteLength(data)<=256*1024);
  for(const p of ['resources/pt-BR/portilexicon/flexoes.js','packages/cofre/src/consulta-morfologica.js','packages/cofre/src/consulta-lexical.js','ptbr/painel.js'])acorn.parse(fs.readFileSync(path.join(root,p),'utf8'),{ecmaVersion:5});
  assert.ok(data.includes('Copyright (c) 2023 Lucelene Lopes'));assert.ok(fs.readFileSync(path.join(root,'escrevaral.html'),'utf8').includes(data));
@@ -54,4 +54,4 @@ test('painel mostra flexão, lacuna e autoria intacta',()=>{
  const result=field(a,'ptbr-results').textContent;assert.match(result,/ir —/);assert.match(result,/ser —/);assert.match(result,/Sem sentidos\/definições/);assert.equal(a.manuscript.value,'😀 fui de carro');assert.deepEqual(a.calls,[]);
  a.reset();assert.equal(field(a,'ptbr-results').textContent,'');
 });
-console.log('PORTILEXICON OK: '+count+' grupos; 3.009 formas/5.286 leituras, ambiguidades, limites, ES5 e painel.');
+console.log('PORTILEXICON OK: '+count+' grupos; '+meta.forms+' formas/'+meta.readings+' leituras, ambiguidades, limites, ES5 e painel.');

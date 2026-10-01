@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes de ampliar artigos/verbos; autor e implementador são o mesmo agente, sem revisão independente.",
+  "baseline": "92a143ea9c673508705562e46888af4488074c1d",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "O filho de uma mulher chegou.",
+      "target": "filho",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES02",
+      "text": "A casa da mulher caiu.",
+      "target": "casa",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES03",
+      "text": "Uma mulher feliz chegou.",
+      "target": "Uma",
+      "expected": "artigo"
+    },
+    {
+      "id": "DES04",
+      "text": "Uns carros vermelhos chegaram.",
+      "target": "vermelhos",
+      "expected": "adjetivo"
+    },
+    {
+      "id": "DES05",
+      "text": "Um grande homem chegou.",
+      "target": "grande",
+      "expected": "adjetivo"
+    },
+    {
+      "id": "DES06",
+      "text": "Uma filha de uma mulher chegou.",
+      "target": "filha",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES07",
+      "text": "Umas casas da mulher caíram.",
+      "target": "casas",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES08",
+      "text": "Um homem, feliz chegou.",
+      "target": "feliz",
+      "expected": null
+    },
+    {
+      "id": "DES09",
+      "text": "Uma carros vermelhos chegaram.",
+      "target": "vermelhos",
+      "expected": null
+    },
+    {
+      "id": "DES10",
+      "text": "Comprei um, não dois.",
+      "target": "um",
+      "expected": null
+    }
+  ]
+}

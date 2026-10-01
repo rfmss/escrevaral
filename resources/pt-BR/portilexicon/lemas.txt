@@ -202,3 +202,6 @@ vender
 partir
 abrir
 publicar
+cair
+chegar
+terminar

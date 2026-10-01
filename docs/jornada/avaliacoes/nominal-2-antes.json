@@ -1,0 +1,145 @@
+{
+  "engine": "contexto-4-preposicional",
+  "independent": false,
+  "interpretation": "Amostra pequena própria; nenhuma estimativa de precisão geral. Abstenções em alvos úteis contam como lacunas, não como decisões erradas.",
+  "sets": {
+    "desenvolvimento": {
+      "cases": 10,
+      "useful": 0,
+      "wrong": 0,
+      "missed": 7,
+      "expectedAbstentions": 3,
+      "rows": [
+        {
+          "id": "DES01",
+          "expected": "substantivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "DES02",
+          "expected": "substantivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "DES03",
+          "expected": "artigo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "DES04",
+          "expected": "adjetivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "DES05",
+          "expected": "adjetivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "DES06",
+          "expected": "substantivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "DES07",
+          "expected": "substantivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "DES08",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "DES09",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "DES10",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        }
+      ]
+    },
+    "avaliacao": {
+      "cases": 10,
+      "useful": 0,
+      "wrong": 0,
+      "missed": 6,
+      "expectedAbstentions": 4,
+      "rows": [
+        {
+          "id": "AVA01",
+          "expected": "substantivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "AVA02",
+          "expected": "substantivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "AVA03",
+          "expected": "substantivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "AVA04",
+          "expected": "substantivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "AVA05",
+          "expected": "adjetivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "AVA06",
+          "expected": "adjetivo",
+          "actual": null,
+          "kind": "missed"
+        },
+        {
+          "id": "AVA07",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "AVA08",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "AVA09",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        },
+        {
+          "id": "AVA10",
+          "expected": null,
+          "actual": null,
+          "kind": "expectedAbstentions"
+        }
+      ]
+    }
+  }
+}

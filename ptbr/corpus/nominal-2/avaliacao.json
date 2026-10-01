@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes de ampliar artigos/verbos; autor e implementador são o mesmo agente, sem revisão independente.",
+  "baseline": "92a143ea9c673508705562e46888af4488074c1d",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Um livro de papel caiu.",
+      "target": "livro",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA02",
+      "text": "Umas portas das casas caíram.",
+      "target": "portas",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA03",
+      "text": "Uns filhos de umas mulheres chegaram.",
+      "target": "filhos",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA04",
+      "text": "O canto de um homem terminou.",
+      "target": "canto",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA05",
+      "text": "Uma casa branca caiu.",
+      "target": "branca",
+      "expected": "adjetivo"
+    },
+    {
+      "id": "AVA06",
+      "text": "Um velho homem chegou.",
+      "target": "velho",
+      "expected": "adjetivo"
+    },
+    {
+      "id": "AVA07",
+      "text": "Uma bela menina chegou.",
+      "target": "bela",
+      "expected": null
+    },
+    {
+      "id": "AVA08",
+      "text": "Um livro de uma mulher, caiu.",
+      "target": "livro",
+      "expected": null
+    },
+    {
+      "id": "AVA09",
+      "text": "Um livro de uma mulher caíram.",
+      "target": "livro",
+      "expected": null
+    },
+    {
+      "id": "AVA10",
+      "text": "Umas casas “brancas” chegaram.",
+      "target": "brancas",
+      "expected": null
+    }
+  ]
+}
