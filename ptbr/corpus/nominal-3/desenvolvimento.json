@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria pré-fixada; sem avaliação independente ou cega.",
+  "baseline": "aff9c5366e6fc747d778b3a743dcc4b5984f4df3",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Minha casa.",
+      "target": "Minha",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "DES02",
+      "text": "Este livro.",
+      "target": "Este",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "DES03",
+      "text": "As minhas casas.",
+      "target": "minhas",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "DES04",
+      "text": "Aquela menina chegou.",
+      "target": "menina",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES05",
+      "text": "Nosso filho chegou.",
+      "target": "Nosso",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "DES06",
+      "text": "A sua casa caiu.",
+      "target": "sua",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "DES07",
+      "text": "Teus livros chegaram.",
+      "target": "livros",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES08",
+      "text": "Vossa casa.",
+      "target": "Vossa",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "DES09",
+      "text": "Meu.",
+      "target": "Meu",
+      "expected": null
+    },
+    {
+      "id": "DES10",
+      "text": "Esta chegou.",
+      "target": "Esta",
+      "expected": null
+    },
+    {
+      "id": "DES11",
+      "text": "Isto chegou.",
+      "target": "Isto",
+      "expected": null
+    },
+    {
+      "id": "DES12",
+      "text": "Minha carros.",
+      "target": "Minha",
+      "expected": null
+    },
+    {
+      "id": "DES13",
+      "text": "Minha, casa.",
+      "target": "Minha",
+      "expected": null
+    },
+    {
+      "id": "DES14",
+      "text": "Minha velha casa.",
+      "target": "velha",
+      "expected": null
+    },
+    {
+      "id": "DES15",
+      "text": "O meu caiu.",
+      "target": "meu",
+      "expected": null
+    }
+  ]
+}

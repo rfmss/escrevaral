@@ -10,6 +10,6 @@ const r=vault.analyze('morfologia','Uma mulher feliz chegou.').findings.find(f=>
 for(const text of ['Eu um canto.','Eu uma canto.','Eu uns canto.','Eu umas canto.'])assert.ok(!engine.inspect(text).items.some(x=>x.rule==='PTBR-CTX-003'),'indefinido não é clítico: '+text);
 assert.equal(engine.inspect('Eu o canto.').items[1].selected,'pronome');
 for(const [word,lemma]of [['caiu','cair'],['caíram','cair'],['chegávamos','chegar'],['terminavam','terminar']]){const readings=E.lookupLexeme(word).morphology;assert.ok(readings.some(r=>r.lemma===lemma&&r.pos==='VERB'));}
-assert.equal(E.portiLexicon.version,'315e063da1f8-recorte-2');
+const source=require('../resources/pt-BR/portilexicon/ORIGEM.json');assert.equal(E.portiLexicon.version,source.commit.slice(0,12)+'-recorte-'+source.subsetVersion);
 const {setup}=require('../ptbr/teste-painel.js'),a=setup('Uma filha de uma mulher chegou.',[],E);a.panel.hidden=false;a.panel.focus();a.wheel.childNodes.find(b=>b.getAttribute('data-ptbr-lens')==='morfologia').click();a.flush();assert.deepEqual(a.calls,['morfologia']);assert.equal(a.manuscript.value,'Uma filha de uma mulher chegou.');
 console.log('INDEFINIDOS OK: 20 alvos, numeral preservado, clíticos separados, novas flexões e painel.');

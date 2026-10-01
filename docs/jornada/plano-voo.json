@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 4,
-  "updated": "2026-09-30",
+  "updated": "2026-10-01",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -199,9 +199,10 @@
             "docs/jornada/ENTREGA-V6-34.md",
             "tests/portilexicon.cjs",
             "resources/pt-BR/portilexicon/ORIGEM.json",
-            "docs/jornada/ENTREGA-V6-38.md"
+            "docs/jornada/ENTREGA-V6-38.md",
+            "docs/jornada/ENTREGA-V6-39.md"
           ],
-          "progress": "M01-flexoes-1 e M01-apoios-1 cumpridas: recorte PortiLexicon 2 com 3.165 formas/5.534 leituras, incluindo cair/chegar/terminar; lemas/sentidos e homógrafos preservados. 179 lemas OWN-PT mantidos. Expansão e avaliação reservada independentes continuam pendentes."
+          "progress": "Recorte PortiLexicon 3: 3.197 formas/5.629 leituras, com oito famílias possessivas/demonstrativas, homógrafos e lemas preservados. 179 lemas OWN-PT mantidos. M01 parcial; expansão e avaliação reservada independentes pendentes."
         },
         {
           "id": "M02",
@@ -215,9 +216,10 @@
             "docs/jornada/ENTREGA-V6-36.md",
             "tests/contexto-nominal.cjs",
             "docs/jornada/ENTREGA-V6-37.md",
-            "docs/jornada/ENTREGA-V6-38.md"
+            "docs/jornada/ENTREGA-V6-38.md",
+            "docs/jornada/ENTREGA-V6-39.md"
           ],
-          "progress": "M02-candidatos-1, nominal-1, complemento-1 e indefinidos-1 cumpridas. Família nominal básica delimitada a três palavras ou sequência preposicionada de cinco/seis tokens; 20 novos alvos com 13 decisões úteis e sete abstenções, sem decisões erradas observadas. Duas lacunas anteriores resolvidas; avaliação própria não independente."
+          "progress": "M02-determinantes-1 cumprida sobre a base nominal v6.38: minha casa/este livro/as minhas casas com origem e gênero/número. Amostra própria pré-fixada de 30 alvos: 16 decisões úteis e 14 abstenções, sem decisões erradas observadas; sem avaliação independente. M02 geral parcial."
         },
         {
           "id": "M03",
@@ -318,12 +320,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.38.0",
+    "version": "6.39.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-38.md",
-    "record": "docs/jornada/entregas/v6-38.json"
+    "evidence": "docs/jornada/ENTREGA-V6-39.md",
+    "record": "docs/jornada/entregas/v6-39.json"
   },
   "scopeChanges": [
     {

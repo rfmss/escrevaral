@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria pré-fixada; sem avaliação independente ou cega.",
+  "baseline": "aff9c5366e6fc747d778b3a743dcc4b5984f4df3",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Essas mulheres chegaram.",
+      "target": "Essas",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "AVA02",
+      "text": "Aquelas casas.",
+      "target": "casas",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA03",
+      "text": "Nossa filha chegou.",
+      "target": "Nossa",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "AVA04",
+      "text": "Os seus livros.",
+      "target": "seus",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "AVA05",
+      "text": "Essa casa caiu.",
+      "target": "Essa",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "AVA06",
+      "text": "Meu canto terminou.",
+      "target": "canto",
+      "expected": "substantivo"
+    },
+    {
+      "id": "AVA07",
+      "text": "A nossa mulher chegou.",
+      "target": "nossa",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "AVA08",
+      "text": "Estes homens chegaram.",
+      "target": "Estes",
+      "expected": "determinante (UD)"
+    },
+    {
+      "id": "AVA09",
+      "text": "Seu chegou.",
+      "target": "Seu",
+      "expected": null
+    },
+    {
+      "id": "AVA10",
+      "text": "A minha.",
+      "target": "minha",
+      "expected": null
+    },
+    {
+      "id": "AVA11",
+      "text": "Meu\nlivro.",
+      "target": "Meu",
+      "expected": null
+    },
+    {
+      "id": "AVA12",
+      "text": "Esse “livro”.",
+      "target": "Esse",
+      "expected": null
+    },
+    {
+      "id": "AVA13",
+      "text": "Nossas homem.",
+      "target": "Nossas",
+      "expected": null
+    },
+    {
+      "id": "AVA14",
+      "text": "O meu velho livro.",
+      "target": "meu",
+      "expected": null
+    },
+    {
+      "id": "AVA15",
+      "text": "Aquele.",
+      "target": "Aquele",
+      "expected": null
+    }
+  ]
+}

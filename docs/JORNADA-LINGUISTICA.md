@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 30/09/2026. Base do produto auditada: `92a143ea9c673508705562e46888af4488074c1d`.
+Atualizado em 01/10/2026. Base do produto auditada: `aff9c5366e6fc747d778b3a743dcc4b5984f4df3`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.38: família nominal ampliada para um/uma/uns/umas e flexões reais de cair, chegar e terminar. As duas lacunas medidas na v6.37 foram resolvidas; M02-indefinidos-1 e M01-apoios-1 cumpridas, marcos gerais parciais. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.39: Classes de palavras reconhece possessivos/demonstrativos antes de nomes, com artigo definido opcional, traços explícitos e alternativas preservadas. M02-determinantes-1 cumprida; usos sem nome permanecem sem decisão contextual. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02: preparar o próximo conjunto de determinantes possessivos/demonstrativos (minha casa, esta casa), distinguindo categoria da fonte, função na frase e usos sem nome; fixar exemplos/abstenções antes de implementar. A família nominal básica fica delimitada, sem ampliar indefinidamente seus encaixes.
+- M02: delimitar usos possessivos/demonstrativos sem nome expresso (este chegou; o meu caiu), contrastando pronome, elipse e substantivação; fixar evidências e abstenções antes da regra, sem inferir referente.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -80,9 +80,9 @@ Dar às palavras inventário, flexões e possibilidades coerentes.
 - Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.
 - Carregar dados maiores sob demanda, com índices e sem polyfills globais.
 
-**Condição de conclusão:** M01-flexoes-1 e M01-apoios-1 cumpridas: recorte PortiLexicon 2 com 3.165 formas/5.534 leituras, incluindo cair/chegar/terminar; lemas/sentidos e homógrafos preservados. 179 lemas OWN-PT mantidos. Expansão e avaliação reservada independentes continuam pendentes.
+**Condição de conclusão:** Recorte PortiLexicon 3: 3.197 formas/5.629 leituras, com oito famílias possessivas/demonstrativas, homógrafos e lemas preservados. 179 lemas OWN-PT mantidos. M01 parcial; expansão e avaliação reservada independentes pendentes.
 
-Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`, `docs/jornada/ENTREGA-V6-38.md`.
+Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`.
 
 ### P04 — Reconhecer classes no contexto
 
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-candidatos-1, nominal-1, complemento-1 e indefinidos-1 cumpridas. Família nominal básica delimitada a três palavras ou sequência preposicionada de cinco/seis tokens; 20 novos alvos com 13 decisões úteis e sete abstenções, sem decisões erradas observadas. Duas lacunas anteriores resolvidas; avaliação própria não independente.
+**Condição de conclusão:** M02-determinantes-1 cumprida sobre a base nominal v6.38: minha casa/este livro/as minhas casas com origem e gênero/número. Amostra própria pré-fixada de 30 alvos: 16 decisões úteis e 14 abstenções, sem decisões erradas observadas; sem avaliação independente. M02 geral parcial.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`.
 
 ### P05 — Construir as relações da oração
 
