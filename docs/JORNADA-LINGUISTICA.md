@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 01/10/2026. Base do produto auditada: `2041764d2b8975b1c98b00786d5f9bbe3beea524`.
+Atualizado em 01/10/2026. Base do produto auditada: `e96d06350c6584bc1eaee8594e5d058148a89a33`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.40: Este chegou favorece pronome; O meu caiu recebe observação de leitura em aberto, sem reconstruir nome ou identificar possuidor/referente. M02-sem-nome-1 cumprida; dados lexicais preservados. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.41: Casa e jardim / Casa ou apartamento recebem hipótese de coordenação nominal, com conectivo e constituintes distintos. M02-coordenacao-1 cumprida; consulta lexical ganha apartamento/apartamentos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02: delimitar coordenação nominal curta com e/ou (casa e jardim; casa ou apartamento), distinguindo conectivo e constituintes sem inferir estrutura geral da oração ou subordinação. Fixar exemplos, ambiguidades e exclusões antes da regra.
+- M02: ampliar a coordenação nominal curta para artigo + nome em cada constituinte (a casa e o jardim; um livro ou uma revista), fixando contrastes com clíticos, homógrafos verbais e traços incompatíveis antes da regra. Preservar os pares sem artigo e não expandir para coordenação de orações.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -80,9 +80,9 @@ Dar às palavras inventário, flexões e possibilidades coerentes.
 - Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.
 - Carregar dados maiores sob demanda, com índices e sem polyfills globais.
 
-**Condição de conclusão:** Recorte PortiLexicon 3: 3.197 formas/5.629 leituras, com oito famílias possessivas/demonstrativas, homógrafos e lemas preservados. 179 lemas OWN-PT mantidos. M01 parcial; expansão e avaliação reservada independentes pendentes.
+**Condição de conclusão:** PortiLexicon recorte 4: 216 sementes, 3.199 formas e 5.631 leituras, com apartamento/apartamentos adicionados do snapshot fixo e todas as leituras anteriores preservadas. OWN-PT inalterado; M01 geral parcial.
 
-Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`.
+Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-41.md`.
 
 ### P04 — Reconhecer classes no contexto
 
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-sem-nome-1 cumprida após determinantes-1: demonstrativo com apoio finito recebe hipótese pronominal; artigo + possessivo sem nome recebe observação de ambiguidade. Amostra própria de 20 alvos: oito decisões novas e seis observações abertas, métricas separadas; zero decisões erradas observadas. M02 geral parcial.
+**Condição de conclusão:** M02-coordenacao-1 cumprida: pares nominais sem modificadores ligados por e/ou entre limites explícitos. Amostra própria de 28 alvos: 12 decisões úteis e 16 abstenções esperadas; zero decisões erradas observadas. M02 geral parcial.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`, `docs/jornada/ENTREGA-V6-41.md`.
 
 ### P05 — Construir as relações da oração
 

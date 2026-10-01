@@ -200,9 +200,10 @@
             "tests/portilexicon.cjs",
             "resources/pt-BR/portilexicon/ORIGEM.json",
             "docs/jornada/ENTREGA-V6-38.md",
-            "docs/jornada/ENTREGA-V6-39.md"
+            "docs/jornada/ENTREGA-V6-39.md",
+            "docs/jornada/ENTREGA-V6-41.md"
           ],
-          "progress": "Recorte PortiLexicon 3: 3.197 formas/5.629 leituras, com oito famílias possessivas/demonstrativas, homógrafos e lemas preservados. 179 lemas OWN-PT mantidos. M01 parcial; expansão e avaliação reservada independentes pendentes."
+          "progress": "PortiLexicon recorte 4: 216 sementes, 3.199 formas e 5.631 leituras, com apartamento/apartamentos adicionados do snapshot fixo e todas as leituras anteriores preservadas. OWN-PT inalterado; M01 geral parcial."
         },
         {
           "id": "M02",
@@ -218,9 +219,10 @@
             "docs/jornada/ENTREGA-V6-37.md",
             "docs/jornada/ENTREGA-V6-38.md",
             "docs/jornada/ENTREGA-V6-39.md",
-            "docs/jornada/ENTREGA-V6-40.md"
+            "docs/jornada/ENTREGA-V6-40.md",
+            "docs/jornada/ENTREGA-V6-41.md"
           ],
-          "progress": "M02-sem-nome-1 cumprida após determinantes-1: demonstrativo com apoio finito recebe hipótese pronominal; artigo + possessivo sem nome recebe observação de ambiguidade. Amostra própria de 20 alvos: oito decisões novas e seis observações abertas, métricas separadas; zero decisões erradas observadas. M02 geral parcial."
+          "progress": "M02-coordenacao-1 cumprida: pares nominais sem modificadores ligados por e/ou entre limites explícitos. Amostra própria de 28 alvos: 12 decisões úteis e 16 abstenções esperadas; zero decisões erradas observadas. M02 geral parcial."
         },
         {
           "id": "M03",
@@ -321,12 +323,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.40.0",
+    "version": "6.41.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-40.md",
-    "record": "docs/jornada/entregas/v6-40.json"
+    "evidence": "docs/jornada/ENTREGA-V6-41.md",
+    "record": "docs/jornada/entregas/v6-41.json"
   },
   "scopeChanges": [
     {

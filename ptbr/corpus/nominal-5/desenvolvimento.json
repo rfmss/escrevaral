@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes da implementação; não independente nem cega. Um alvo por frase.",
+  "baseline": "e96d06350c6584bc1eaee8594e5d058148a89a33",
+  "scope": "Dois núcleos nominais sem modificadores, e/ou, início e fim de unidade explícitos. Ambos com NOUN externo; ao menos um sem outras classes no inventário. Sem inferência de papel sintático ou sentido de ou.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Casa e jardim.",
+      "target": "Casa",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES02",
+      "text": "Casa ou apartamento.",
+      "target": "ou",
+      "expected": "conjunção"
+    },
+    {
+      "id": "DES03",
+      "text": "Jardim e casa.",
+      "target": "casa",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES04",
+      "text": "Homem e mulher.",
+      "target": "e",
+      "expected": "conjunção"
+    },
+    {
+      "id": "DES05",
+      "text": "Livro ou mesa.",
+      "target": "Livro",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES06",
+      "text": "Rio e mar.",
+      "target": "Rio",
+      "expected": "substantivo"
+    },
+    {
+      "id": "DES07",
+      "text": "Eu canto e trabalho.",
+      "target": "e",
+      "expected": null
+    },
+    {
+      "id": "DES08",
+      "text": "Canto e trabalho.",
+      "target": "e",
+      "expected": null
+    },
+    {
+      "id": "DES09",
+      "text": "Casa, e jardim.",
+      "target": "e",
+      "expected": null
+    },
+    {
+      "id": "DES10",
+      "text": "Casa e\njardim.",
+      "target": "e",
+      "expected": null
+    },
+    {
+      "id": "DES11",
+      "text": "Casa e zorbex.",
+      "target": "e",
+      "expected": null
+    },
+    {
+      "id": "DES12",
+      "text": "Casa e jardim e mesa.",
+      "target": "e",
+      "expected": null
+    },
+    {
+      "id": "DES13",
+      "text": "A casa e jardim.",
+      "target": "e",
+      "expected": null
+    },
+    {
+      "id": "DES14",
+      "text": "Casa e jardim chegaram.",
+      "target": "e",
+      "expected": null
+    }
+  ]
+}
