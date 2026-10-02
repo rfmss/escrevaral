@@ -1,0 +1,48 @@
+[data-action="open-inspector"],
+[data-action="close-inspector"] { display: none; }
+body.mn-focus [data-action="open-inspector"] { display: none !important; }
+
+@media (max-width: 1199px) {
+  .mn-app { grid-template-columns: var(--mn-sidebar) minmax(0, 1fr); }
+  .mn-inspector { position: fixed; z-index: 60; top: 0; right: 0; bottom: 0; width: min(var(--mn-inspector), calc(100vw - 28px)); box-shadow: var(--mn-shadow); transform: translateX(105%); transition: transform .18s ease; }
+  body.mn-inspector-open .mn-inspector { transform: translateX(0); }
+  [data-action="open-inspector"],
+  [data-action="close-inspector"] { display: inline-flex; }
+}
+
+@media (max-width: 820px) {
+  .mn-app { width: 100%; max-width: 100%; grid-template-columns: minmax(0, 1fr); }
+  .mn-main { min-width: 0; max-width: 100%; overflow: hidden; }
+  .mn-library { position: fixed; z-index: 60; top: 0; left: 0; bottom: 0; width: min(var(--mn-sidebar), calc(100vw - 28px)); box-shadow: var(--mn-shadow); transform: translateX(-105%); transition: transform .18s ease; }
+  body.mn-library-open .mn-library { transform: translateX(0); }
+  .mn-mobile-only { display: inline-flex; }
+  .mn-desktop-only { display: none; }
+  .mn-topbar { min-width: 0; max-width: 100%; overflow: hidden; padding: 0 8px; }
+  .mn-title-input { width: 0; min-width: 0; }
+  .mn-toolbar { width: 100%; max-width: 100%; }
+  .mn-save-state { display: none; }
+  .mn-editor-scroll { padding: 0; background: var(--mn-surface); }
+  .mn-document { width: 100%; min-height: 100%; padding: 28px 20px 70px; border: 0; box-shadow: none; }
+  .mn-editor { min-height: 65vh; font-size: 16px; }
+  .mn-statusbar { width: 100%; max-width: 100%; min-width: 0; overflow: hidden; white-space: nowrap; gap: 8px; padding: 0 8px; }
+}
+
+@media (max-width: 520px) {
+  .mn-title-input { font-size: 15px; }
+  .mn-toolbar { padding-inline: 6px; }
+  .mn-toolbar-button, .mn-icon-button { min-width: 44px; min-height: 44px; }
+  .mn-toolbar select { min-height: 44px; }
+  .mn-main { grid-template-rows: var(--mn-topbar) 54px minmax(0, 1fr) var(--mn-statusbar); }
+  .mn-document { padding-inline: 16px; }
+  .mn-statusbar { gap: 6px; font-size: 10px; }
+  .mn-statusbar > span:last-child { display: none; }
+  .mn-status-hide-small { display: none; }
+}
+
+@media (max-width: 350px) {
+  .mn-brand-copy small { display: none; }
+  .mn-title-input { padding-inline: 4px; }
+  .mn-document { padding-inline: 13px; }
+  #mn-character-count { display: none; }
+  [data-action="toggle-theme"] { display: none; }
+}
