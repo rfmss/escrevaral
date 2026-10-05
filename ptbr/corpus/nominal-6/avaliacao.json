@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria pré-fixada, não cega nem independente. Alvo: conectivo da hipótese de coordenação com artigos.",
+  "baseline": "3f88abe795f7134a7aa62e4c528d1f1ba555799b",
+  "scope": "Artigo + NOUN com traços compatíveis em cada lado, e/ou, fronteiras completas. Duas leituras verbais com artigos definidos permanecem ambíguas se ambos os núcleos tiverem classes alternativas. Um artigo indefinido ou núcleo sem outra classe fornece apoio adicional.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Um canto e um trabalho.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Uma revista ou um livro.",
+      "target": "ou",
+      "coordination": true
+    },
+    {
+      "id": "AVA03",
+      "text": "O mar e o rio.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "AVA04",
+      "text": "A água e a flor.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "AVA05",
+      "text": "As flores e o homem.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Um homem ou uma mulher.",
+      "target": "ou",
+      "coordination": true
+    },
+    {
+      "id": "AVA07",
+      "text": "As revistas e os livros.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "AVA08",
+      "text": "O rio e o canto.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Tu as casas e as plantas.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "AVA10",
+      "text": "As casa ou o jardim.",
+      "target": "ou",
+      "coordination": false
+    },
+    {
+      "id": "AVA11",
+      "text": "A mulher e os homem.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "AVA12",
+      "text": "A casa e\no jardim.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "AVA13",
+      "text": "A casa e o jardim cantam.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "AVA14",
+      "text": "Casa e o jardim.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "AVA15",
+      "text": "O zorbex e uma mesa.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "AVA16",
+      "text": "A casa e o jardim ou a mesa.",
+      "target": "e",
+      "coordination": false
+    }
+  ]
+}

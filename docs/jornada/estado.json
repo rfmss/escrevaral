@@ -1,12 +1,12 @@
 {
-  "version": 30,
-  "updated": "01/10/2026",
-  "baseline": "e96d06350c6584bc1eaee8594e5d058148a89a33",
+  "version": 31,
+  "updated": "04/10/2026",
+  "baseline": "3f88abe795f7134a7aa62e4c528d1f1ba555799b",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.41: Casa e jardim / Casa ou apartamento recebem hipótese de coordenação nominal, com conectivo e constituintes distintos. M02-coordenacao-1 cumprida; consulta lexical ganha apartamento/apartamentos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.42: A casa e o jardim / Um livro ou uma revista recebem hipótese de coordenação nominal com artigos e cinco apoios localizáveis. M02-coordenacao-artigos-1 cumprida; revista/revistas entram no inventário real com todos os homógrafos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M02: ampliar a coordenação nominal curta para artigo + nome em cada constituinte (a casa e o jardim; um livro ou uma revista), fixando contrastes com clíticos, homógrafos verbais e traços incompatíveis antes da regra. Preservar os pares sem artigo e não expandir para coordenação de orações.",
+    "M02: delimitar coordenação de dois grupos artigo + nome + adjetivo (a casa branca e o jardim bonito), com gabaritos antes da regra, traços explícitos e abstenção para adjetivos homógrafos verbais; preservar recortes anteriores sem ampliar para orações.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -104,7 +104,7 @@
         "Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.",
         "Carregar dados maiores sob demanda, com índices e sem polyfills globais."
       ],
-      "done": "PortiLexicon recorte 4: 216 sementes, 3.199 formas e 5.631 leituras, com apartamento/apartamentos adicionados do snapshot fixo e todas as leituras anteriores preservadas. OWN-PT inalterado; M01 geral parcial.",
+      "done": "PortiLexicon recorte 5: 217 sementes, 3.201 formas e 5.644 leituras; revista/revistas acrescentadas pelo snapshot fixo, preservando integralmente as 3.199 formas/5.631 leituras anteriores. OWN-PT inalterado; M01 geral parcial.",
       "evidence": [
         "ptbr/auditoria/pacote.json",
         "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
@@ -117,7 +117,8 @@
         "tests/portilexicon.cjs",
         "docs/jornada/ENTREGA-V6-38.md",
         "docs/jornada/ENTREGA-V6-39.md",
-        "docs/jornada/ENTREGA-V6-41.md"
+        "docs/jornada/ENTREGA-V6-41.md",
+        "docs/jornada/ENTREGA-V6-42.md"
       ]
     },
     {
@@ -134,7 +135,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-coordenacao-1 cumprida: pares nominais sem modificadores ligados por e/ou entre limites explícitos. Amostra própria de 28 alvos: 12 decisões úteis e 16 abstenções esperadas; zero decisões erradas observadas. M02 geral parcial.",
+      "done": "M02-coordenacao-artigos-1 cumprida: artigo + nome em cada lado de e/ou, limites de unidade e traços explícitos. Amostra própria de 32 alvos: 14 decisões úteis, 18 abstenções esperadas, zero decisões erradas observadas. M02 geral parcial.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -147,7 +148,8 @@
         "docs/jornada/ENTREGA-V6-38.md",
         "docs/jornada/ENTREGA-V6-39.md",
         "docs/jornada/ENTREGA-V6-40.md",
-        "docs/jornada/ENTREGA-V6-41.md"
+        "docs/jornada/ENTREGA-V6-41.md",
+        "docs/jornada/ENTREGA-V6-42.md"
       ]
     },
     {
@@ -685,7 +687,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M02: ampliar a coordenação nominal curta para artigo + nome em cada constituinte (a casa e o jardim; um livro ou uma revista), fixando contrastes com clíticos, homógrafos verbais e traços incompatíveis antes da regra. Preservar os pares sem artigo e não expandir para coordenação de orações."
+    "nextDeliverable": "M02: delimitar coordenação de dois grupos artigo + nome + adjetivo (a casa branca e o jardim bonito), com gabaritos antes da regra, traços explícitos e abstenção para adjetivos homógrafos verbais; preservar recortes anteriores sem ampliar para orações."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -699,7 +701,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Passaram 28 alvos novos, papéis do par, fronteiras/proteção, homógrafos, truncamento, seleção UTF-16/NFD, limite de consultas, ES5 e painel. Também passaram 20 usos sem nome, 30 determinantes, 63 contextuais e os oito grupos PortiLexicon. Comparação das triplas decodificadas preservou todas as 3.197 formas/5.629 leituras anteriores. Build:check confere sete saídas; CI executa regressão completa e Pages publica por commit, resultados em Actions.",
+    "verification": "Passaram 32 alvos novos, papéis dos cinco tokens, traços ausentes, homógrafos/clíticos, fronteiras/protegidos, seleção UTF-16/NFD, truncamento e teto de uma consulta por token, ES5 e painel. Passaram também 28 alvos de coordenação sem artigos, 17 contrastes nominais, 30 determinantes, 26 PortiLexicon/contexto, 63 contextuais e oito grupos do inventário. Comparação das triplas decodificadas preservou todas as 3.199 formas/5.631 leituras anteriores. Build:check confere sete saídas; regressão completa fica no CI. CI e Pages devem ser conferidos no SHA desta entrega.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -717,5 +719,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-41.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-42.json"
 }

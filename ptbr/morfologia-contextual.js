@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-8-coordenacao', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-9-coordenacao-artigos', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -250,6 +250,26 @@
       choose(tail,'substantivo','PTBR-CTX-007',support);
       for(k=i;k<=tail;k++){items[k].nominalComplement=details;}
     }
+    /* Dois constituintes artigo + nome, separados por e/ou. Janela de cinco
+     * tokens, completa e sem modificadores. Traços conferidos em cada par,
+     * nunca entre os dois núcleos. Não decide concordância do conjunto.
+     * Dois artigos definidos com duas classes nominais não exclusivas ficam
+     * em aberto (o canto e o trabalho também admite leitura com clíticos). */
+    for(i=0;i+4<ts.length;i++){
+      if(!has(nominalArticles,ts[i].value)||!has(['e','ou'],ts[i+2].value)||!has(nominalArticles,ts[i+3].value)||!unitStart(i)||!unitEnd(i+4)){continue;}
+      var coordSupport=[],coordBlocked=false;
+      for(k=i;k<=i+4;k++){
+        coordSupport.push(k);
+        if(items[k].status==='contextual'||blockedNominal[k]||k>i&&!linked(k-1,k)){coordBlocked=true;}
+      }
+      if(coordBlocked||!nounAgreement(items[i+1].candidates,ts[i].value)||!nounAgreement(items[i+4].candidates,ts[i+3].value)){continue;}
+      if(has(articles,ts[i].value)&&has(articles,ts[i+3].value)&&items[i+1].candidates.classes.length!==1&&items[i+4].candidates.classes.length!==1){continue;}
+      for(k=i;k<=i+4;k++){
+        var coordRole=k===i+2?'conectivo':k===i||k===i+3?'artigo':'constituinte';
+        choose(k,coordRole==='conectivo'?'conjunção':coordRole==='artigo'?'artigo':'substantivo','PTBR-CTX-012',coordSupport);
+        items[k].nominalCoordination={connector:ts[i+2].value,role:coordRole,articles:true,featuresChecked:true,resolution:'hypothesis',syntaxResolved:false};
+      }
+    }
     /* Artigo definido + nome conhecido. Homógrafo verbal requer contexto à direita. */
     for (i = 0; i + 1 < ts.length; i += 1) {
       if (blockedNominal[i] || !has(articles, ts[i].value) || items[i].status === 'contextual' || !linked(i, i + 1)) { continue; }
@@ -294,7 +314,7 @@
   }
   function analyze(text, cap) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource;
-    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
+    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';
       message = contextual ? 'Leitura contextual: ' + item.selected + '.' : item.status === 'desconhecido' ? 'Sem classificação neste inventário.' : 'Possibilidades lexicais: ' + r.classes.join(', ') + '.';
@@ -302,9 +322,11 @@
       if(item.rule==='PTBR-CTX-009'){message='Leitura contextual: demonstrativo sem nome expresso.';}
       if(item.rule==='PTBR-CTX-010'){message='Possessivo sem nome expresso: leitura em aberto.';}
       if(item.rule==='PTBR-CTX-011'){message=item.nominalCoordination.role==='conectivo'?'Hipótese de coordenação nominal: conectivo '+item.nominalCoordination.connector+'.':'Hipótese de coordenação nominal: substantivo.';}
+      if(item.rule==='PTBR-CTX-012'){message='Hipótese de coordenação nominal com artigos: '+(item.nominalCoordination.role==='conectivo'?'conectivo '+item.nominalCoordination.connector:item.selected)+'.';}
       reason = item.rule === 'PTBR-CTX-001' ? 'Pronome sujeito próximo e forma verbal finita compatível em pessoa e número.' :
         item.rule === 'PTBR-CTX-002' ? 'Artigo definido antes de nome registrado; homógrafos verbais exigem também uma forma finita à direita.' :
         item.rule === 'PTBR-CTX-003' ? 'A forma aparece entre pronome sujeito (com não opcional) e verbo finito compatível.' :
+        item.rule === 'PTBR-CTX-012' ? 'Dois pares artigo + nome ligados por e/ou, entre limites explícitos, com gênero e número registrados e compatíveis em cada par. Artigo indefinido ou ao menos um nome sem outra classe no inventário dá apoio adicional. A leitura de artigo não elimina usos quantitativos de um/uma. Não determina sujeito, objeto, concordância do conjunto ou sentido de ou; diferenças de gênero e número entre os núcleos são preservadas.' :
         item.rule === 'PTBR-CTX-011' ? 'Dois candidatos nominais ligados por e/ou formam um recorte curto sem modificadores, entre limites explícitos. Ao menos um tem só a classe substantivo no inventário; isso apoia a hipótese, sem provar unicidade na língua. Conectivo e constituintes são distinguidos, sem atribuir sujeito, objeto, concordância do conjunto, sentido exclusivo de ou ou estrutura de oração.' :
         item.rule === 'PTBR-CTX-009' ? 'Candidato pronominal demonstrativo no início do trecho ou após pontuação de limite, seguido de forma finita compatível em terceira pessoa e número, com não opcional. Favorece pronome neste recorte; não identifica referente nem prova função de sujeito.' :
         item.rule === 'PTBR-CTX-010' ? 'Artigo e possessivo compatíveis antes de forma finita de terceira pessoa e mesmo número, sem nome intermediário. Registra uso sem nome expresso; não decide entre leitura pronominal, elipse de nome ou substantivação. Não reconstrói o nome nem identifica o possuidor.' :
@@ -321,6 +343,7 @@
       if(item.rule==='PTBR-CTX-008'){occurrenceSource={title:'Regra computacional local: determinante possessivo/demonstrativo antes de nome. Universal Dependencies v2, Poss e PronType, consultados em 30/09/2026; não identifica referente nem resolve usos sem nome.',url:'https://universaldependencies.org/u/feat/PronType.html'};}
       if(item.rule==='PTBR-CTX-009'||item.rule==='PTBR-CTX-010'){occurrenceSource={title:'Hipótese/observação computacional local para usos sem nome expresso. UD v2 PRON e Ellipsis in Nominals, consultados em 01/10/2026; distinções entre pronome, determinante e elipse não são decididas só pela ausência do nome.',url:'https://universaldependencies.org/u/pos/PRON.html'};}
       if(item.rule==='PTBR-CTX-011'){occurrenceSource={title:'Hipótese computacional local de coordenação nominal curta. UD v2: conj e cc, consultados em 01/10/2026. Distingue conectivo e constituintes; não implementa árvore de dependências.',url:'https://universaldependencies.org/u/dep/conj.html'};}
+      if(item.rule==='PTBR-CTX-012'){occurrenceSource={title:'Hipótese computacional local para coordenação com artigos. UD v2: conj e det em português, consultados em 04/10/2026. Referências de anotação; não são algoritmo de desambiguação nem prova de função sintática.',url:'https://universaldependencies.org/pt/dep/det.html'};}
       if(r.portilexicon.length){occurrenceSource={title:(typeof occurrenceSource==='string'?occurrenceSource:occurrenceSource.title)+' Dados lexicais: PortiLexicon-UD, Lopes, Duran, Fernandes e Pardo (2022), recorte '+E.portiLexicon.version+'. Classes UD são candidatos; não equivalem automaticamente à função na frase.',url:'https://github.com/LuceleneL/PortiLexicon-UD/tree/315e063da1f89c89e2097c6e72428ebefb9ab1d1'};}
       out.push(E.instruments.finding('morfologia', item.rule || 'PTBR-CTX-004', text, item.start, item.end, message,
         reason + (item.evidence.length ? ' Apoios no original: ' + item.evidence.map(function (s) { return '“' + s.snippet + '”'; }).join(', ') + '.' : ''),

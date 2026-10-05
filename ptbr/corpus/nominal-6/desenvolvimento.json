@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria pré-fixada, não cega nem independente. Alvo: conectivo da hipótese de coordenação com artigos.",
+  "baseline": "3f88abe795f7134a7aa62e4c528d1f1ba555799b",
+  "scope": "Artigo + NOUN com traços compatíveis em cada lado, e/ou, fronteiras completas. Duas leituras verbais com artigos definidos permanecem ambíguas se ambos os núcleos tiverem classes alternativas. Um artigo indefinido ou núcleo sem outra classe fornece apoio adicional.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "A casa e o jardim.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES02",
+      "text": "Um livro ou uma revista.",
+      "target": "ou",
+      "coordination": true
+    },
+    {
+      "id": "DES03",
+      "text": "As casas e os jardins.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES04",
+      "text": "O homem e a mulher.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES05",
+      "text": "O jardim e a casa.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES06",
+      "text": "Uma casa ou um apartamento.",
+      "target": "ou",
+      "coordination": true
+    },
+    {
+      "id": "DES07",
+      "text": "Uns livros e umas mesas.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES08",
+      "text": "O canto e o trabalho.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES09",
+      "text": "Eu o canto e o trabalho.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES10",
+      "text": "Os casa e o jardim.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES11",
+      "text": "A casa e a jardim.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES12",
+      "text": "A casa, e o jardim.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES13",
+      "text": "A casa e o jardim chegaram.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES14",
+      "text": "A casa e jardim.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES15",
+      "text": "A casa e o zorbex.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES16",
+      "text": "A casa e o jardim e a mesa.",
+      "target": "e",
+      "coordination": false
+    }
+  ]
+}

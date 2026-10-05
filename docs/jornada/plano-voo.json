@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 4,
-  "updated": "2026-10-01",
+  "updated": "2026-10-04",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -201,9 +201,10 @@
             "resources/pt-BR/portilexicon/ORIGEM.json",
             "docs/jornada/ENTREGA-V6-38.md",
             "docs/jornada/ENTREGA-V6-39.md",
-            "docs/jornada/ENTREGA-V6-41.md"
+            "docs/jornada/ENTREGA-V6-41.md",
+            "docs/jornada/ENTREGA-V6-42.md"
           ],
-          "progress": "PortiLexicon recorte 4: 216 sementes, 3.199 formas e 5.631 leituras, com apartamento/apartamentos adicionados do snapshot fixo e todas as leituras anteriores preservadas. OWN-PT inalterado; M01 geral parcial."
+          "progress": "PortiLexicon recorte 5: 217 sementes, 3.201 formas e 5.644 leituras; revista/revistas acrescentadas pelo snapshot fixo, preservando integralmente as 3.199 formas/5.631 leituras anteriores. OWN-PT inalterado; M01 geral parcial."
         },
         {
           "id": "M02",
@@ -220,9 +221,10 @@
             "docs/jornada/ENTREGA-V6-38.md",
             "docs/jornada/ENTREGA-V6-39.md",
             "docs/jornada/ENTREGA-V6-40.md",
-            "docs/jornada/ENTREGA-V6-41.md"
+            "docs/jornada/ENTREGA-V6-41.md",
+            "docs/jornada/ENTREGA-V6-42.md"
           ],
-          "progress": "M02-coordenacao-1 cumprida: pares nominais sem modificadores ligados por e/ou entre limites explícitos. Amostra própria de 28 alvos: 12 decisões úteis e 16 abstenções esperadas; zero decisões erradas observadas. M02 geral parcial."
+          "progress": "M02-coordenacao-artigos-1 cumprida: artigo + nome em cada lado de e/ou, limites de unidade e traços explícitos. Amostra própria de 32 alvos: 14 decisões úteis, 18 abstenções esperadas, zero decisões erradas observadas. M02 geral parcial."
         },
         {
           "id": "M03",
@@ -323,12 +325,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.41.0",
+    "version": "6.42.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-41.md",
-    "record": "docs/jornada/entregas/v6-41.json"
+    "evidence": "docs/jornada/ENTREGA-V6-42.md",
+    "record": "docs/jornada/entregas/v6-42.json"
   },
   "scopeChanges": [
     {
