@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20261004-scrvrl-coordenacao-artigos-v6-42",
+  "version": "20261005-scrvrl-coordenacao-adjetivos-v6-43",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20261004-scrvrl-coordenacao-artigos-v6-42/cofre.4fb56b60f65e9e62.js",
-      "sha256": "4fb56b60f65e9e62596c7b008e1c1f428e2eaeb98f1e06a342911925d33d20bc",
-      "bytes": 661265
+      "path": "assets/20261005-scrvrl-coordenacao-adjetivos-v6-43/cofre.3ce676babbd41e76.js",
+      "sha256": "3ce676babbd41e7692f545505d7e9f7be7bcbb770879b1643020f3683f1321ba",
+      "bytes": 664035
     },
     {
       "id": "app",
-      "path": "assets/20261004-scrvrl-coordenacao-artigos-v6-42/app.12f32b398bd0007e.js",
+      "path": "assets/20261005-scrvrl-coordenacao-adjetivos-v6-43/app.12f32b398bd0007e.js",
       "sha256": "12f32b398bd0007ee66b9b3fe3f027d35f7d84ba328bcdeed96726c263fe673f",
       "bytes": 289896
     },
     {
       "id": "styles",
-      "path": "assets/20261004-scrvrl-coordenacao-artigos-v6-42/styles.200ed33cf9f86d6b.css",
+      "path": "assets/20261005-scrvrl-coordenacao-adjetivos-v6-43/styles.200ed33cf9f86d6b.css",
       "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90",
       "bytes": 362011
     }

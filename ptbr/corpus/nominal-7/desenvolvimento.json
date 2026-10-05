@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria pré-fixada, não cega nem independente. Alvo: conectivo da coordenação com adjetivos pospostos.",
+  "baseline": "891d98690de750ec81f11c182aee224128be0b44",
+  "scope": "Dois grupos artigo + nome + adjetivo posposto, separados por e/ou, unidade completa. Traços Gender/Number explícitos em nomes e adjetivos, sem alternativas verbais no adjetivo nem troca ambígua de núcleo/modificador.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "A casa branca e o jardim bonito.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES02",
+      "text": "Uma casa branca ou um livro bonito.",
+      "target": "ou",
+      "coordination": true
+    },
+    {
+      "id": "DES03",
+      "text": "As casas brancas e os jardins bonitos.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES04",
+      "text": "O homem velho e a mulher bonita.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES05",
+      "text": "A mesa pequena e o livro branco.",
+      "target": "e",
+      "coordination": true
+    },
+    {
+      "id": "DES06",
+      "text": "Um jardim pequeno ou uma casa bonita.",
+      "target": "ou",
+      "coordination": true
+    },
+    {
+      "id": "DES07",
+      "text": "A casa branca e o jardim bonito chegaram.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES08",
+      "text": "A casa branca, e o jardim bonito.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES09",
+      "text": "A casa branca e\no jardim bonito.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES10",
+      "text": "A casa branco e o jardim bonito.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES11",
+      "text": "A casa branca e os jardim bonito.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES12",
+      "text": "A casa grande e o jardim bonito.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES13",
+      "text": "A casa aberta e o jardim bonito.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES14",
+      "text": "A casa branca e o jardim novo.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES15",
+      "text": "A branca casa e o jardim bonito.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES16",
+      "text": "A casa branca e o jardim.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES17",
+      "text": "A casa branca e o zorbex bonito.",
+      "target": "e",
+      "coordination": false
+    },
+    {
+      "id": "DES18",
+      "text": "A casa branca e o jardim bonito e a mesa branca.",
+      "target": "e",
+      "coordination": false
+    }
+  ]
+}

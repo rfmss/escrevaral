@@ -1,0 +1,42 @@
+<!-- Gerado por ferramentas/gerar-entrega.py; editar docs/jornada/entregas/v6-43.json -->
+# Coordenação nominal com adjetivos pospostos
+
+v6.43: A casa branca e o jardim bonito recebe hipótese de coordenação de dois grupos artigo + nome + adjetivo. Sete apoios originais, homógrafos preservados e duas lacunas de avaliação explícitas. M02 segue parcial.
+
+Base: `891d98690de750ec81f11c182aee224128be0b44`. Coordenação solo; data 05/10/2026.
+
+## Decisão de implementação e estados
+
+Base main conferida sem mudanças concorrentes. Corpus nominal-7 fixado e medido na v6.42 antes de alterar motor/dados. Implementação PTBR-CTX-013 compõe dois resultados da PTBR-CTX-006 existente; evita duplicar checagens morfológicas ou introduzir parser/DSL. A nova hipótese aceita somente a ordem artigo + nome + adjetivo posposto em ambos os grupos, ligados por e/ou e cercados por limites completos. Estudado: referência UD indicada abaixo. Implementado/testado: código, corpus, contrato e painel. Integrado: distribuição gerada. Publicado: somente após conferir CI e Pages no commit; aprovação prévia continua vigente.
+
+## Comportamento e limites
+
+Cada grupo já precisa ter artigo, substantivo e adjetivo selecionados por 006, sem ambiguidade entre as duas ordens. A nova regra exige também gênero explícito no ADJ; a ausência que 006 declara como lacuna não é elevada a concordância comprovada. Number/Gender são conferidos dentro de cada grupo, nunca entre os dois. Adjetivo com qualquer candidato verbal, inclusive particípio não finito, impede a coordenação. A abstenção de 013 conserva leituras locais de 006 e candidatos lexicais, sem acusar erro no manuscrito. Cada achado tem um dos papéis artigo/constituinte/modificador/conectivo, sete apoios originais, confiança moderada e syntaxResolved false. Não decide sujeito, objeto, intenção quantitativa de um/uma, sentido de ou, concordância coletiva ou classes fora do inventário. Não cobre ordem anteposta, grupos mistos, listas maiores, continuação oracional, modificadores extras ou trechos protegidos.
+
+## Fontes e inventário
+
+UD v2 amod em português (https://universaldependencies.org/pt/dep/amod.html), consultado em 05/10/2026, distingue modificador adjetival e núcleo nominal. Conj/det são referências já lidas na v6.42. São convenções de anotação, não algoritmos de desambiguação nem certificação linguística da regra. Nenhuma leitura nova de livro é alegada. Bonito tinha apenas classificação legada sem traços externos: acrescentado o lema ao importador existente, usando PortiLexicon-UD 315e063da1f89c89e2097c6e72428ebefb9ab1d1 com os 12 hashes conferidos. Quatro formas, oito leituras ADJ/NOUN adicionadas sem excluir homógrafos. Recorte 6 tem 218 sementes, 3.205 formas, 5.652 leituras e 504 lemas incluindo homógrafos. Comparação de triplas decodificadas preservou integralmente as 3.201 formas/5.644 leituras anteriores. Licença/atribuição mantidas; OWN-PT inalterado.
+
+## Amostra e duas lacunas preservadas
+
+nominal-7/desenvolvimento.json e avaliacao.json têm 18 alvos cada: seis hipóteses desejadas e 12 abstenções. Base por conjunto: zero úteis/erradas, seis lacunas e 12 abstenções. Depois, desenvolvimento: seis úteis, zero erradas, zero lacunas e 12 abstenções; avaliação: quatro úteis, zero erradas, duas lacunas e 12 abstenções. AVA04 (As revistas bonitas ou os livros pequenos) e AVA06 (Um livro pequeno e uma revista branca) continuam como metas positivas no gabarito, mas o teste registra sua ausência explicitamente. Revista/revistas e seus adjetivos têm candidatos NOUN e ADJ; 006 não escolhe a distribuição e 013 respeita essa abstenção. Não alteramos o gabarito para esconder perdas nem removemos leituras reais. Amostra própria, não cega ou independente; os números não estimam acurácia geral. Regressão automática pode passar com essas duas limitações conhecidas, declaradas separadamente.
+
+## Custo, compatibilidade e autoria
+
+Dados PortiLexicon: 122.347→122.490 bytes (+143). Cofre independente: 661.265→664.035 (+2.770). Portátil: 1.375.852→1.378.624 (+2.772). App/CSS sem alteração de conteúdo; sem nova dependência ou rede em execução. Janela constante de sete tokens, reutilização dos candidatos e dos resultados de 006; limites de 8.000 unidades UTF-16, 1.600 tokens e 100 achados mantidos. Teste confirmou uma consulta lexical por token, código ES5, posições de seleção/contexto inclusive emoji/NFD e manuscrito intacto. Custo em bytes e operações delimitadas não representa medição de RAM/latência nem certificação de aparelhos. Uma lente por escolha explícita continua no painel.
+
+## Fechamento do plano e reversão
+
+Plano v4 permanece em 11/25 marcos DONE: M02 exige cobertura das dez classes/locuções e avaliação por classe, não apenas mais padrões nominais. A próxima entrega deve mapear esse critério para evitar prolongar a família de coordenações por rotina. As duas lacunas com revista continuam visíveis e não obrigam expansão imediata de ambiguidade sem critério. Reverter por commit normal sobre a main e remontagem; não há migração de dados de manuscrito. Publicação autorizada sem force, com checagem de concorrência e confirmação de CI/Pages por commit.
+
+## Verificações e publicação
+
+Passaram 36 alvos com duas lacunas explicitamente esperadas no teste, sete papéis/apoios, traços ausentes em cada nome/adjetivo, homógrafos verbais inclusive particípio, fronteiras/protegidos, Unicode/NFD, seleção, truncamento e teto de uma consulta por token, ES5 e painel de lente única. Passaram também 32 alvos de coordenação com artigos, 17 contrastes nominais, 63 contextuais e oito grupos do inventário. Todas as 3.201 formas/5.644 leituras anteriores foram comparadas e preservadas. Build:check confirma sete saídas. Regressão completa no CI; CI e Pages precisam ser conferidos pelo SHA da entrega.
+
+CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy. [Execuções da main](https://github.com/rfmss/escrevaral/actions?query=branch%3Amain). O sucesso deve ser conferido no commit correspondente; CI e Pages são estados separados.
+
+## Próxima ação
+
+M02: construir uma matriz de cobertura das dez classes e locuções com evidências existentes, critérios observáveis de fechamento e lacunas; fixar o próximo recorte ausente de maior utilidade antes de ampliar novamente coordenação nominal. Não contar novo padrão nominal como conclusão do marco.
+
+Plano v4: 11/25 DONE | entrega +0 marcos | próximo M02 | publicação: Actions por commit | limite: sete tokens, dois adjetivos pospostos, gênero/número explícitos, sem alternativa verbal no adjetivo; duas lacunas com revista/revistas, sem parser geral
