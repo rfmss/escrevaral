@@ -225,3 +225,5 @@ de
 vez
 em
 quando
+assim
+que

@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-16-prepositiva', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-17-conjuntiva', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -21,6 +21,45 @@
   var articleFeatures={um:['Masc','Sing'],uma:['Fem','Sing'],uns:['Masc','Plur'],umas:['Fem','Plur'],o:['Masc','Sing'],a:['Fem','Sing'],os:['Masc','Plur'],as:['Fem','Plur']};
   var contractions={do:'o',da:'a',dos:'os',das:'as'};
   var featurePatterns={Gender:/(?:^|\|)Gender=([^|]+)(?:\||$)/,Number:/(?:^|\|)Number=([^|]+)(?:\||$)/,NumType:/(?:^|\|)NumType=([^|]+)(?:\||$)/};
+  /* Textos fixos, compartilhados; não configuram nem executam regras. */
+  var locutionDescriptions={
+  "adverbial": {
+    "id": "PTBR-CTX-017",
+    "feature": "locução adverbial",
+    "observation": "Quatro componentes lexicais reais e pronome pessoal com indicativo compatível em unidade curta completa. A classe proposta pertence ao grupo, não a cada palavra.",
+    "interpretation": "Neste recorte, de vez em quando favorece uma locução adverbial. Não mede frequência nem produz árvore de dependências.",
+    "ambiguity": "Citações, grupos sem apoio verbal, continuações e outros usos permanecem abertos. As leituras de de/vez/em/quando são preservadas separadamente.",
+    "sourceTitle": "Regra local de locução adverbial. Priberam, verbete vez, e UD v2 fixed, consultados em 06/10/2026; fonte lexical não é parser.",
+    "url": "https://dicionario.priberam.org/vez"
+  },
+  "verbal": {
+    "id": "PTBR-CTX-018",
+    "feature": "locução verbal",
+    "observation": "Pronome pessoal, forma finita de lema poder com Mood=Ind/Cnd e pessoa/número explícitos compatíveis e infinitivo impessoal VERB real, em unidade completa. A classe proposta pertence ao grupo.",
+    "interpretation": "Poder + infinitivo favorece uma locução verbal neste recorte. Não decide capacidade, permissão, probabilidade ou verdade da frase.",
+    "ambiguity": "Candidatos e homógrafos preservados, incluindo poder/podar/possar. Não converte VERB em AUX, não atribui função auxiliar geral, não cobre cadeias, clíticos, negação ou principal pessoal.",
+    "sourceTitle": "Hipótese local para poder + infinitivo. UD v2 aux em português e AUX, consultados em 06/10/2026; anotação lexical não decide função contextual.",
+    "url": "https://universaldependencies.org/pt/dep/aux_.html"
+  },
+  "prepositional": {
+    "id": "PTBR-CTX-019",
+    "feature": "locução prepositiva",
+    "observation": "Perto com ADV real, de com ADP real e nome candidato NOUN em unidade completa. A locução ocupa perto de; o complemento e as classes lexicais dos componentes permanecem separados.",
+    "interpretation": "Perto de favorece uma locução prepositiva neste recorte. Não mede distância ou aproximação, não escolhe sentido espacial/figurado nem resolve vínculo sintático.",
+    "ambiguity": "NOUN/ADJ/ADV de perto e demais candidatos preservados. NUM/ADV/ADP/conjunção no complemento, contrações, citações, modificadores e unidades incompletas ficam fora deste recorte. O nome não recebe classe contextual por propagação.",
+    "sourceTitle": "Hipótese local para perto de + nome. Priberam, verbete perto, e UD v2 case em português, consultados em 06/10/2026. Anotação lexical não é árvore sintática.",
+    "url": "https://dicionario.priberam.org/perto"
+  },
+  "conjunctive": {
+    "id": "PTBR-CTX-020",
+    "feature": "locução conjuntiva",
+    "observation": "Assim/ADV e que/SCONJ reais entre dois pares de pronome pessoal e indicativo com pessoa/número compatíveis, em unidade completa de seis palavras. A hipótese pertence ao grupo assim que.",
+    "interpretation": "Neste recorte, assim que favorece locução conjuntiva. Não determina eventos, ordem temporal, verdade ou dependências sintáticas.",
+    "ambiguity": "Que conserva PRON/DET/ADV/ADP/CCONJ/SCONJ/INTJ. A presença isolada de que não decide subordinação ou classe contextual. Outras posições, subjuntivo, clíticos, negação, complementos, citações e unidades incompletas ficam fora deste recorte.",
+    "sourceTitle": "Hipótese local para assim que. Priberam, verbete assim, e UD v2 mark em português, consultados em 06/10/2026; referências não constituem parser.",
+    "url": "https://dicionario.priberam.org/assim"
+  }
+};
   function has(list, word) { return list.indexOf(word) >= 0; }
   function readings(word) {
     var w = E.reading.canonical(word), r = E.grammar.readings(w), more = extraForms['$' + w] || [];
@@ -408,6 +447,22 @@
           locutions.push({at:i,start:ts[i].start,end:ts[i+1].end,kind:'prepositional',components:nearComponents,context:nearEvidence,order:'before-noun',complement:{snippet:items[i+2].snippet,readings:complementRows,contextIndex:2}});
         }
       }
+      if(i+5<ts.length&&ts[i+2].value==='assim'&&ts[i+3].value==='que'&&unitStart(i)&&unitEnd(i+5)&&own.call(subjects,'$'+ts[i].value)&&own.call(subjects,'$'+ts[i+4].value)){
+        var conjunctionLinked=true;
+        for(k=i+1;k<=i+5;k++){if(!linked(k-1,k)){conjunctionLinked=false;}}
+        var assimSupport=items[i+2].candidates.portilexicon.some(function(row){return row.pos==='ADV';});
+        var queSupport=items[i+3].candidates.portilexicon.some(function(row){return row.pos==='SCONJ';});
+        var leftSupport=externalFinite(items[i+1].candidates,subjects['$'+ts[i].value]).some(function(v){return /^indicativo:/.test(v[1]);});
+        var rightSupport=externalFinite(items[i+5].candidates,subjects['$'+ts[i+4].value]).some(function(v){return /^indicativo:/.test(v[1]);});
+        if(conjunctionLinked&&assimSupport&&queSupport&&leftSupport&&rightSupport){
+          var conjunctionEvidence=[],conjunctionComponents=[];
+          for(k=i;k<=i+5;k++){
+            conjunctionEvidence.push({start:ts[k].start,end:ts[k].end,snippet:text.slice(ts[k].start,ts[k].end)});
+            if(k===i+2||k===i+3){conjunctionComponents.push({snippet:items[k].snippet,readings:items[k].candidates.portilexicon});}
+          }
+          locutions.push({at:i+2,start:ts[i+2].start,end:ts[i+3].end,kind:'conjunctive',components:conjunctionComponents,context:conjunctionEvidence,order:'between-verbal-pairs'});
+        }
+      }
       if(i+3>=ts.length||ts[i].value!=='de'||ts[i+1].value!=='vez'||ts[i+2].value!=='em'||ts[i+3].value!=='quando'){continue;}
       var locutionPos=['ADP','NOUN','ADP','ADV'],locutionSupported=true,locutionComponents=[];
       for(k=0;k<4;k++){
@@ -435,17 +490,15 @@
   }
   function analyze(text, cap) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource,locutionIndex=0;
-    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a perto de + candidato nominal real em unidade completa de três palavras, com ADV/ADP reais e sem NUM/ADV/ADP/conjunção no complemento, pronome pessoal + poder com Mood=Ind/Cnd e traços reais compatíveis + infinitivo impessoal real em unidade completa de três palavras, de vez em quando antes (com vírgula) ou depois de pronome + indicativo compatível em unidade completa de seis palavras, ah/oh isolados com INTJ real e fronteira !/?, artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
+    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a assim que entre dois pares pronome pessoal + indicativo real compatível em unidade completa de seis palavras, perto de + candidato nominal real em unidade completa de três palavras, com ADV/ADP reais e sem NUM/ADV/ADP/conjunção no complemento, pronome pessoal + poder com Mood=Ind/Cnd e traços reais compatíveis + infinitivo impessoal real em unidade completa de três palavras, de vez em quando antes (com vírgula) ou depois de pronome + indicativo compatível em unidade completa de seis palavras, ah/oh isolados com INTJ real e fronteira !/?, artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       if(locutionIndex<report.locutions.length&&report.locutions[locutionIndex].at===i){
         var group=report.locutions[locutionIndex++];
-        var verbalGroup=group.kind==='verbal',prepositionalGroup=group.kind==='prepositional',groupClass=prepositionalGroup?'locução prepositiva':verbalGroup?'locução verbal':'locução adverbial';
-        out.push(E.instruments.finding('morfologia',prepositionalGroup?'PTBR-CTX-019':verbalGroup?'PTBR-CTX-018':'PTBR-CTX-017',text,group.start,group.end,'Hipótese contextual: '+groupClass+'.',
-          prepositionalGroup?'Perto com ADV real, de com ADP real e nome candidato NOUN em unidade completa. A locução ocupa perto de; o complemento e as classes lexicais dos componentes permanecem separados.':verbalGroup?'Pronome pessoal, forma finita de lema poder com Mood=Ind/Cnd e pessoa/número explícitos compatíveis e infinitivo impessoal VERB real, em unidade completa. A classe proposta pertence ao grupo.':'Quatro componentes lexicais reais e pronome pessoal com indicativo compatível em unidade curta completa. A classe proposta pertence ao grupo, não a cada palavra.',
-          prepositionalGroup?'Perto de favorece uma locução prepositiva neste recorte. Não mede distância ou aproximação, não escolhe sentido espacial/figurado nem resolve vínculo sintático.':verbalGroup?'Poder + infinitivo favorece uma locução verbal neste recorte. Não decide capacidade, permissão, probabilidade ou verdade da frase.':'Neste recorte, de vez em quando favorece uma locução adverbial. Não mede frequência nem produz árvore de dependências.',
-          prepositionalGroup?'NOUN/ADJ/ADV de perto e demais candidatos preservados. NUM/ADV/ADP/conjunção no complemento, contrações, citações, modificadores e unidades incompletas ficam fora deste recorte. O nome não recebe classe contextual por propagação.':verbalGroup?'Candidatos e homógrafos preservados, incluindo poder/podar/possar. Não converte VERB em AUX, não atribui função auxiliar geral, não cobre cadeias, clíticos, negação ou principal pessoal.':'Citações, grupos sem apoio verbal, continuações e outros usos permanecem abertos. As leituras de de/vez/em/quando são preservadas separadamente.',limit,
-          prepositionalGroup?{title:'Hipótese local para perto de + nome. Priberam, verbete perto, e UD v2 case em português, consultados em 06/10/2026. Anotação lexical não é árvore sintática. PortiLexicon '+E.portiLexicon.version+'.',url:'https://dicionario.priberam.org/perto'}:verbalGroup?{title:'Hipótese local para poder + infinitivo. UD v2 aux em português e AUX, consultados em 06/10/2026; anotação lexical não decide função contextual. PortiLexicon '+E.portiLexicon.version+'.',url:'https://universaldependencies.org/pt/dep/aux_.html'}:{title:'Regra local de locução adverbial. Priberam, verbete vez, e UD v2 fixed, consultados em 06/10/2026; fonte lexical não é parser. Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:'https://dicionario.priberam.org/vez'},
-          {confidence:'moderada',feature:groupClass,analysisStatus:'contextual',context:group.context,candidates:{classes:[groupClass],components:group.components,complement:group.complement||null},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,distanceResolved:false,syntaxResolved:false}}));
+        var description=locutionDescriptions[group.kind];
+        out.push(E.instruments.finding('morfologia',description.id,text,group.start,group.end,'Hipótese contextual: '+description.feature+'.',
+          description.observation,description.interpretation,description.ambiguity,limit,
+          {title:description.sourceTitle+' Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:description.url},
+          {confidence:'moderada',feature:description.feature,analysisStatus:'contextual',context:group.context,candidates:{classes:[description.feature],components:group.components,complement:group.complement||null},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,distanceResolved:false,temporalRelationResolved:false,syntaxResolved:false}}));
         if(out.length>=cap){break;}
       }
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';

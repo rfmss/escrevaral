@@ -26,7 +26,7 @@ O determinante (UD) de CTX-008 conserva a categoria da fonte: não é décima pr
 | Verbais | CTX-018: poder + infinitivo impessoal com sujeito e dados reais em Classes; Sintaxe mantém seus quatro padrões | Outros auxiliares/cadeias e construções; modalidade e função auxiliar geral abertas |
 | Adverbiais | CTX-017: de vez em quando com apoio indicativo em unidade completa; grupo separado dos componentes | Outras expressões e construções; frequência/dependências não resolvidas; catálogo em Expressões continua distinto |
 | Prepositivas | CTX-019: perto de + candidato nominal em unidade completa; grupo/componentes/complemento separados | Outras expressões, contrações e construções; distância/sentido/vínculo sintático abertos |
-| Conjuntivas | Palavras simples e candidatos | Assim que entre dois pares pronome/verbo: dados, apoios e exclusões antes da implementação |
+| Conjuntivas | CTX-020: assim que entre dois pares pronome/indicativo real em unidade completa | Outros itens/posições; que sozinho e sintaxe/tempo abertos |
 | Adjetivas e demais grupos pluriverbais | Complementos curtos em CTX-007 | Complemento não vira automaticamente locução adjetiva; delimitar decisão e alcance da primeira versão |
 
 A matriz não elimina famílias prometidas por falta de implementação. Expressões estilísticas, grupos sintáticos e classes permanecem resultados distintos.
@@ -55,7 +55,7 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: assim que entre dois pares pronome pessoal + forma finita compatível, grupo separado; fonte/corpus antes do código. [Entrega v6.49](ENTREGA-V6-49.md).
+Próxima ação concreta: matriz de contrastes que/se/como com candidatos reais, antes de escolher uma primeira regra apoiada. Consolidar por classe/família e declarar escopo de locuções adjetivas/demais grupos antes do fechamento. [Entrega v6.50](ENTREGA-V6-50.md).
 
 ## Incremento v6.45 — numerais
 
@@ -76,3 +76,7 @@ CTX-018: pronome pessoal + poder finito (Mood=Ind/Cnd, pessoa/número reais comp
 ## Incremento v6.49 — locução prepositiva
 
 CTX-019: perto de + NOUN real em unidade completa de três tokens. ADV/ADP reais exigidos; NUM/ADV/ADP/conjunção no complemento excluídos. Grupo separado de palavras/complemento, sem distância/sentido/vínculo. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. Próximo grupo conjuntivo; M02 geral TODO.
+
+## Incremento v6.50 — locução conjuntiva
+
+CTX-020: assim que entre dois pares pronome/indicativo real, unidade completa de seis palavras; ADV/SCONJ reais, grupo separado dos componentes, tempo/sintaxe abertos. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas; três famílias antigas mantidas. Quatro famílias possuem recortes em Classes; falta matriz que/se/como e consolidação com demais grupos para M02. Sondas continuam doze desejadas/oito abertas.

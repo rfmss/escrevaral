@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento/independência.",
+  "baseline": "a50b8a7379180933409b21e6341661c503513039",
+  "scope": "Assim que entre dois pares pronome pessoal + indicativo real compatível, unidade completa de seis tokens. Componentes ADV/SCONJ reais, grupo separado dos componentes; não resolve sintaxe geral, evento/ordem temporal ou que sozinho.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Eu saio assim que ela chega.",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Ela sai assim que eu chego.",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Nós saímos assim que eles chegam.",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Eles saem assim que nós chegamos.",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Você canta assim que ela canta.",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Eu canto assim que você canta.",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "Assim que ela chega.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Eu saio que ela chega.",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Eu saio assim que ela chegar.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Eu sai assim que ela chega.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Eu saio assim que ela chegam.",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Eu saio assim, que ela chega.",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Eu saio assim\nque ela chega.",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Eu saio “assim que” ela chega.",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "Eu saio assim que ela chega hoje.",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Eu não saio assim que ela chega.",
+      "expected": false
+    }
+  ]
+}

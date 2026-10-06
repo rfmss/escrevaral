@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento/independência.",
+  "baseline": "a50b8a7379180933409b21e6341661c503513039",
+  "scope": "Assim que entre dois pares pronome pessoal + indicativo real compatível, unidade completa de seis tokens. Componentes ADV/SCONJ reais, grupo separado dos componentes; não resolve sintaxe geral, evento/ordem temporal ou que sozinho.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Eu saí assim que ela chegou.",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Ela chegou assim que eu cantei.",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Nós cantamos assim que eles chegaram!",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "Eles chegaram assim que você cantou?",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Eu saio assim\tque ela chega",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Vocês saem assim que elas cantam;",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "Eu saio assim que chegar.",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "Eu saio assim que casa chega.",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Eu saio assim como ela chega.",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Eu saio assim que ela cantar.",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Eu saio assim que ela “chega”.",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "Eu saio `assim que` ela chega.",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "Ontem eu saio assim que ela chega.",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "Eu saio assim que ela palavaxyz.",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "Eu saio assim que ela chega e canta.",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Eu saio assim que ela chega,",
+      "expected": false
+    }
+  ]
+}

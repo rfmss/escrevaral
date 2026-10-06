@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20261006-scrvrl-prepositiva-v6-49",
+  "version": "20261006-scrvrl-conjuntiva-v6-50",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20261006-scrvrl-prepositiva-v6-49/cofre.a7c3da34f153f2ea.js",
-      "sha256": "a7c3da34f153f2eaf4e60f71b6d6a5130fc794a6f7db75073479b95e06c211b5",
-      "bytes": 680096
+      "path": "assets/20261006-scrvrl-conjuntiva-v6-50/cofre.faeb0b8cdae660ef.js",
+      "sha256": "faeb0b8cdae660efdc125e06b83b5a7dffe639ca91bc1f972ac74e2ddb561734",
+      "bytes": 683128
     },
     {
       "id": "app",
-      "path": "assets/20261006-scrvrl-prepositiva-v6-49/app.25fab6c7650f4623.js",
+      "path": "assets/20261006-scrvrl-conjuntiva-v6-50/app.25fab6c7650f4623.js",
       "sha256": "25fab6c7650f46235643a848742cb8126b9b8238477579f8a9e3dc6232446a63",
       "bytes": 290313
     },
     {
       "id": "styles",
-      "path": "assets/20261006-scrvrl-prepositiva-v6-49/styles.200ed33cf9f86d6b.css",
+      "path": "assets/20261006-scrvrl-conjuntiva-v6-50/styles.200ed33cf9f86d6b.css",
       "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90",
       "bytes": 362011
     }
