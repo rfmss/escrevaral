@@ -11,6 +11,8 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Continuidade do M02 — 05/10/2026:** [Matriz das dez classes e locuções](jornada/COBERTURA-M02.md) concluída; sondas e 32 contrastes de advérbio preservados. Próximo: finalizar a regra de não pré-verbal, montar e validar a v6.44 quando o ambiente de execução estiver disponível. [Estado técnico e limites da retomada](jornada/RETOMADA-M02-2026-10-05.md). Distribuição permanece v6.43; plano 11/25 DONE.
 
+**Preparação testável — 05/10/2026:** [Não pré-verbal](jornada/NEGACAO-PREVERBAL-RASCUNHO.md): PTBR-CTX-014 isolada, 32 contrastes e 63 expectativas preservadas com fixture explícita. Próximo: importação real, integração, montagem e validação da v6.44. Distribuição permanece v6.43; M02 não foi concluído.
+
 ## Método vigente — solo, 30/09/2026
 
 Rafael encerrou a coordenação com outro Astra. Uma frente prepara, implementa e integra lotes por capacidade útil; amostra pré-fixada e avaliação com limitações explícitas. A ficha em `docs/jornada/entregas/` gera estado e relato por `ferramentas/gerar-entrega.py`. Histórico anterior não cria dependência de A1 nem obrigação de segundo commit para confirmar publicação. CI/Pages registram resultados por commit.
