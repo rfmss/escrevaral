@@ -216,7 +216,7 @@
         {
           "id": "M02",
           "title": "Classes em contexto da primeira versão",
-          "state": "TODO",
+          "state": "DONE",
           "acceptance": "Fechar cobertura das dez classes/locuções; implementar recortes com ambiguidades, abstenções e avaliação por classe. P04.",
           "evidence": [
             "ptbr/CONTEXTO-1.md",
@@ -241,9 +241,10 @@
             "docs/jornada/ENTREGA-V6-51.md",
             "docs/jornada/ENTREGA-V6-52.md",
             "docs/jornada/ENTREGA-V6-53.md",
-            "docs/jornada/ENTREGA-V6-54.md"
+            "docs/jornada/ENTREGA-V6-54.md",
+            "docs/jornada/ENTREGA-V6-55.md"
           ],
-          "progress": "M02-consolidacao-1 concluída: 589 alvos de35 arquivos,258 úteis/0 erradas/323 abstenções/2 lacunas/6 observações;20 sondas separadas. Escopo dos grupos declarado. Recorte adjetival ainda pendente,11/25 DONE."
+          "progress": "M02 DONE: dez classes e cinco famílias com recortes declarados;621 alvos,270 úteis/343 abstenções/2 lacunas/6 observações/zero erradas nos controles. Lacunas e demais grupos explicitados;Q02 separado."
         },
         {
           "id": "M03",
@@ -342,14 +343,16 @@
       ]
     }
   ],
-  "next": "M02",
+  "next": "M03",
   "lastDelivery": {
-    "version": "6.54.0",
-    "completed": [],
+    "version": "6.55.0",
+    "completed": [
+      "M02"
+    ],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-54.md",
-    "record": "docs/jornada/entregas/v6-54.json"
+    "evidence": "docs/jornada/ENTREGA-V6-55.md",
+    "record": "docs/jornada/entregas/v6-55.json"
   },
   "scopeChanges": [
     {

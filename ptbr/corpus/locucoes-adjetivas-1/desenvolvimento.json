@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio fixado antes do motor, sem cegamento/independência.",
+  "baseline": "37eb318272706c462c9a597a0a9fd4f86c0c2f60",
+  "scope": "Artigo + nome + de + madeira/papel em quatro tokens completos. Pares por lema: mesa/madeira,casa/madeira,barco/madeira,barco/papel. Gender/Number do NOUN compatíveis com artigo; de ADP e material NOUN singular reais. Cabeça/material em minúsculas; sem decisão de material literal ou sintaxe geral.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "A mesa de madeira.",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "O barco de papel.",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Uma casa de madeira.",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "As mesas de madeira.",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Os barcos de papel.",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Um barco de madeira.",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "O medo de madeira.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "A falta de papel.",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "A casa da mulher.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "A casa de Madeira.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "A mesa de papel.",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "A mesa, de madeira.",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "A mesa de\nmadeira.",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "A mesa de “madeira”.",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "A mesa de madeira chegou.",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "A mesa de madeiras.",
+      "expected": false
+    }
+  ]
+}

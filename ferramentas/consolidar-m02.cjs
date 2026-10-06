@@ -13,6 +13,7 @@ const definitions=[
  ['locucoes-adverbiais-1','locuções adverbiais',null,'locução adverbial','adverbial'],
  ['locucoes-verbais-classes-1','locuções verbais',null,'locução verbal','verbal'],
  ['locucoes-prepositivas-1','locuções prepositivas',null,'locução prepositiva','prepositional'],
+ ['locucoes-adjetivas-1','locuções adjetivas',null,'locução adjetiva','adjectival'],
  ['locucoes-conjuntivas-1','locuções conjuntivas',null,'locução conjuntiva','conjunctive'],
  ['contrastes-1','como interrogativo','PTBR-CTX-021','advérbio'],
  ['se-pronominal-1','se pronominal','PTBR-CTX-022','pronome'],

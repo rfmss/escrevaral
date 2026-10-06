@@ -21,6 +21,7 @@ state['focusDecision']['decision']='Coordenação solo aprovada em 30/09/2026. E
 state['publicationDecision'].update(status=publication,commit=None,deployment=workflow,verification=d['verification'])
 state['publicationDecision']['evidencePolicy']='O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação.'
 phase=next(p for p in state['phases'] if p['id']==d['phase']);phase['status']='Incrementos integrados/testados; publicação por commit em Actions e avaliação ampla pendente';phase['done']=d['progress']
+if d.get('completeTask',False): phase['status']='Recortes da primeira versão concluídos; publicação por commit em Actions; avaliação reservada em Q02'
 if evidence not in phase['evidence']:phase['evidence'].append(evidence)
 for related in d.get('related',[]):
  p=next(p for p in state['phases'] if p['id']==related['phase']);p['done']=related['progress']
@@ -33,12 +34,15 @@ if evidence not in item['evidence']:item['evidence'].append(evidence)
 for related in d.get('related',[]):
  i=next(i for t in plan['tracks'] for i in t['items'] if i['id']==related['task']);i['progress']=related['progress']
  if evidence not in i['evidence']:i['evidence'].append(evidence)
-plan['next']=d['task'];done=sum(i['state']=='DONE' for t in plan['tracks'] for i in t['items']);total=sum(len(t['items']) for t in plan['tracks'])
-plan['lastDelivery']={'version':d['version']+'.0','completed':[],'baselineDone':done,'publication':publication,'evidence':evidence,'record':str(record.relative_to(ROOT))}
+if d.get('completeTask',False): item['state']='DONE'
+plan['next']=d.get('nextTask',d['task']);assert any(i['id']==plan['next'] for t in plan['tracks'] for i in t['items']), 'Próximo marco inexistente'
+completed=[d['task']] if d.get('completeTask',False) else []
+done=sum(i['state']=='DONE' for t in plan['tracks'] for i in t['items']);total=sum(len(t['items']) for t in plan['tracks'])
+plan['lastDelivery']={'version':d['version']+'.0','completed':completed,'baselineDone':done-len(completed),'publication':publication,'evidence':evidence,'record':str(record.relative_to(ROOT))}
 plan_path.write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n')
 md=['<!-- Gerado por ferramentas/gerar-entrega.py; editar '+str(record.relative_to(ROOT))+' -->','# '+d['title'],'',d['summary'],'','Base: `'+d['base']+'`. Coordenação solo; data '+d['date']+'.','']
 for section in d['sections']:md+=['## '+section['title'],'',section['text'],'']
-md+=['## Verificações e publicação','',d['verification'],'',publication+' [Execuções da main]('+workflow+'). O sucesso deve ser conferido no commit correspondente; CI e Pages são estados separados.','', '## Próxima ação','',d['next'],'',f"Plano v{plan['planVersion']}: {done}/{total} DONE | entrega +0 marcos | próximo {d['task']} | publicação: Actions por commit | limite: {d['limits']}",'']
+md+=['## Verificações e publicação','',d['verification'],'',publication+' [Execuções da main]('+workflow+'). O sucesso deve ser conferido no commit correspondente; CI e Pages são estados separados.','', '## Próxima ação','',d['next'],'',f"Plano v{plan['planVersion']}: {done}/{total} DONE | entrega +{len(completed)} marcos ({', '.join(completed) or 'nenhum'}) | próximo {plan['next']} | publicação: Actions por commit | limite: {d['limits']}",'']
 (ROOT/evidence).write_text('\n'.join(md))
 p=ROOT/'docs/PLANO-MESTRE.md';s=p.read_text();portrait='**Retrato vigente — '+d['date']+':** '+d['summary']+' [Entrega e limites](jornada/'+name+'). '+publication
 s=re.sub(r'^\*\*Retrato conferido[^\n]*|^\*\*Retrato vigente[^\n]*',lambda m:portrait,s,count=1,flags=re.M)

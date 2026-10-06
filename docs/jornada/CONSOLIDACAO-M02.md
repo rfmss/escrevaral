@@ -4,7 +4,7 @@ Consolidação de corpus próprio; sem cegamento, independência ou estimativa d
 
 Um registro por alvo original. Repetições entre corpora preservadas; totais não contam frases únicas. Controles booleanos avaliam somente a regra/família indicada. Abstenções sem classe desejada não são atribuídas artificialmente a uma classe. Observações esperadas não contam como decisões.
 
-Motor: `contexto-20-que-integrante`; léxico: `315e063da1f8-recorte-12`.
+Motor: `contexto-21-adjetiva`; léxico: `315e063da1f8-recorte-12`.
 
 ## Famílias dos gabaritos
 
@@ -24,6 +24,7 @@ Motor: `contexto-20-que-integrante`; léxico: `315e063da1f8-recorte-12`.
 | locuções adverbiais | 12 | 0 | 20 | 0 | 0 |
 | locuções verbais | 12 | 0 | 20 | 0 | 0 |
 | locuções prepositivas | 12 | 0 | 20 | 0 | 0 |
+| locuções adjetivas | 12 | 0 | 20 | 0 | 0 |
 | locuções conjuntivas | 12 | 0 | 20 | 0 | 0 |
 | como interrogativo | 12 | 0 | 20 | 0 | 0 |
 | se pronominal | 12 | 0 | 20 | 0 | 0 |
@@ -50,6 +51,7 @@ Abstenções sem classe-alvo ficam em linha própria. Grupos não são contados 
 | locução adverbial | 12 | 0 | 20 | 0 | 0 |
 | locução verbal | 12 | 0 | 20 | 0 | 0 |
 | locução prepositiva | 12 | 0 | 20 | 0 | 0 |
+| locução adjetiva | 12 | 0 | 20 | 0 | 0 |
 | locução conjuntiva | 12 | 0 | 20 | 0 | 0 |
 
 ## Sondas diagnósticas por classe

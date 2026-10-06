@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20261006-scrvrl-consolidacao-v6-54",
+  "version": "20261006-scrvrl-adjetiva-v6-55",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20261006-scrvrl-consolidacao-v6-54/cofre.5f31b693725f8309.js",
-      "sha256": "5f31b693725f830952d25665e0ae889438176593f171dc643bc267180cf0665f",
-      "bytes": 689343
+      "path": "assets/20261006-scrvrl-adjetiva-v6-55/cofre.f25fa6db171c5e9e.js",
+      "sha256": "f25fa6db171c5e9eee1bee5bb3d99c9392caf3ffa6f29503aad0f52b4f768d08",
+      "bytes": 692427
     },
     {
       "id": "app",
-      "path": "assets/20261006-scrvrl-consolidacao-v6-54/app.25fab6c7650f4623.js",
+      "path": "assets/20261006-scrvrl-adjetiva-v6-55/app.25fab6c7650f4623.js",
       "sha256": "25fab6c7650f46235643a848742cb8126b9b8238477579f8a9e3dc6232446a63",
       "bytes": 290313
     },
     {
       "id": "styles",
-      "path": "assets/20261006-scrvrl-consolidacao-v6-54/styles.200ed33cf9f86d6b.css",
+      "path": "assets/20261006-scrvrl-adjetiva-v6-55/styles.200ed33cf9f86d6b.css",
       "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90",
       "bytes": 362011
     }

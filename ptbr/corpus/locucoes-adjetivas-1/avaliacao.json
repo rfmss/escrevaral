@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio fixado antes do motor, sem cegamento/independência.",
+  "baseline": "37eb318272706c462c9a597a0a9fd4f86c0c2f60",
+  "scope": "Artigo + nome + de + madeira/papel em quatro tokens completos. Pares por lema: mesa/madeira,casa/madeira,barco/madeira,barco/papel. Gender/Number do NOUN compatíveis com artigo; de ADP e material NOUN singular reais. Cabeça/material em minúsculas; sem decisão de material literal ou sintaxe geral.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Uma mesa de madeira.",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Uns barcos de papel.",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Umas casas de madeira.",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "O barco de madeira.",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "As casas de madeira.",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Os barcos de madeira.",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "A casa é de madeira.",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "A casa de papel.",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Os barco de papel.",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "A barco de madeira.",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "A Casa de madeira.",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "O zzobjeto de papel.",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "`A mesa de madeira.`",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "A mesa de madeira bonita.",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "De madeira.",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Eu preciso de papel.",
+      "expected": false
+    }
+  ]
+}

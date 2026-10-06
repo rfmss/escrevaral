@@ -13,13 +13,15 @@
 
 Cada família mantém componentes, candidatos, apoios e trechos originais. Os corpora próprios aparecem separadamente na consolidação; quatro grupos não são quatro classes adicionais.
 
-## Adjetivas — próxima capacidade obrigatória antes do fechamento
+## Adjetivas — CTX-024 integrada na v6.55
 
-CTX-007 reconhece classes em complemento preposicionado; não prova que todo complemento seja locução adjetiva. A primeira versão precisa de um recorte adjetival próprio, sem converter automaticamente posse, origem, destino ou argumento nominal em adjetivo.
+Inventário: de madeira após mesa/casa/barco; de papel após barco. Artigo definido/indefinido + nome + grupo, unidade completa de quatro tokens; gênero/número do nome reais compatíveis com artigo. Material com NOUN singular e de com ADP reais; nomes internos em minúsculas. Plural só no núcleo; gênero ausente de madeira não é inventado. Os quatro pares são escolhas locais de alcance; não um inventário semântico geral.
 
-Inventário inicial a estudar: de madeira / de papel, após artigo + nome de objeto. Construção candidata: unidade completa artigo + nome + de + material, com nomes/traços reais e pares explicitamente delimitados. Classe pretendida do grupo: hipótese de locução adjetiva; material literal, sentido figurado e função sintática permanecem abertos. Não implementar por mera presença de de ou substantivo.
+Resultado: hipótese de locução adjetiva apenas no grupo de + nome, componentes/apoios preservados. Material literal, figura e sintaxe permanecem abertos. Posse, regência, predicação, nomes próprios grafados com maiúscula interna, outros pares, modificadores, continuações, citações e quebras de linha ficam fora. Não converte CTX-007 automaticamente.
 
-Antes do motor: conferir fonte de uso e dados licenciados; fixar pares positivos, complementos ambíguos, regência, predicação, nomes próprios, citações/proteção, ausência de traços, modificadores e fronteiras. Se a fonte não sustentar o inventário, registrar a alternativa com evidência, preservando as metas. Esta decisão escolhe a próxima investigação; ainda não é corpus pré-fixado nem aprovação linguística dos exemplos. M02 permanece TODO até resolver este item.
+Referências consultadas: Fundação CECIERJ/CEJA, Língua Portuguesa, fascículo 2, unidade 4, páginas impressas 14 e 21 (páginas PDF 14 e 21, índices13/20): construção preposição + nome com valor adjetivo e exemplo de papel caracterizando jornal. Título/entidade conferidos; edição/ano não certificados nesta leitura parcial. Texto extraído legível nos trechos usados; sem leitura integral ou importação de material didático. URL: https://cejarj.cecierj.edu.br/ava_arquivos/material_impresso/fundamental/lingua_portuguesa/ceja_fundamental_lingua_portuguesa_fasciculo_2.pdf . Priberam de (https://dicionario.priberam.org/de) registra relações diversas, incluindo matéria; UD v2 nmod (https://universaldependencies.org/pt/dep/nmod.html) trata modificadores nominais, não equivale automaticamente à categoria tradicional locução adjetiva. Consulta06/10/2026. Síntese/regra/exemplos próprios; não copiar definições nem generalizar que todo de + nome seja adjetival.
+
+Corpus locucoes-adjetivas-1 pré-fixado:32 alvos,12 metas/20 exclusões; base12 lacunas, depois12 úteis/20 abstenções/zero erradas ou lacunas. Fontes estudadas → hipótese formalizada → corpus → motor → testes dirigidos → publicação por SHA. Coordenação/revisão solo; sem avaliação independente.
 
 ## Demais grupos — fronteira explícita
 

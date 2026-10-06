@@ -27,7 +27,8 @@ O determinante (UD) de CTX-008 conserva a categoria da fonte: não é décima pr
 | Adverbiais | CTX-017: de vez em quando com apoio indicativo em unidade completa; grupo separado dos componentes | Outras expressões e construções; frequência/dependências não resolvidas; catálogo em Expressões continua distinto |
 | Prepositivas | CTX-019: perto de + candidato nominal em unidade completa; grupo/componentes/complemento separados | Outras expressões, contrações e construções; distância/sentido/vínculo sintático abertos |
 | Conjuntivas | CTX-020: assim que entre dois pares pronome/indicativo real em unidade completa | Outros itens/posições; que sozinho e sintaxe/tempo abertos |
-| Adjetivas e demais grupos pluriverbais | Complementos curtos em CTX-007 | Complemento não vira automaticamente locução adjetiva; delimitar decisão e alcance da primeira versão |
+| Adjetivas | CTX-024: mesa/casa/barco de madeira e barco de papel, com artigo e traços reais | Outros pares, material literal e sintaxe abertos |
+| Demais grupos pluriverbais | Inventário ativo vazio declarado em ESCOPO-LOCUCOES-M02 | Reavaliação em M03/M06; sem classificação genérica |
 
 A matriz não elimina famílias prometidas por falta de implementação. Expressões estilísticas, grupos sintáticos e classes permanecem resultados distintos.
 
@@ -43,7 +44,7 @@ A primeira lacuna escolhida é não pré-verbal: reutiliza o reconhecimento de s
 
 ## Critério operacional para concluir M02
 
-O marco permanece TODO até que estes pontos tenham evidência:
+Critérios conferidos no [fechamento v6.55](FECHAMENTO-M02.md); histórico do checklist:
 
 1. Cada uma das dez classes possui recorte contextual declarado e acessível em Classes. Inventário lexical e observação aberta não contam como decisão. Locuções têm inventário, construção, classe resultante e exclusões definidos, com implementação correspondente ou decisão explícita de escopo registrada.
 2. Cada padrão tem exemplos positivos, negativos, ambíguos, fronteiras/proteção e ausência de traços quando aplicável, fixados antes do código. Que/se/como constam dos contrastes; reconhecer como apenas como verbo não fecha esse item.
@@ -55,7 +56,7 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: estudar e fixar o recorte de locução adjetiva de madeira/de papel, conforme [decisão de escopo](ESCOPO-LOCUCOES-M02.md). A [consolidação reproduzível](CONSOLIDACAO-M02.md) reúne 589 alvos de 35 arquivos: 258 úteis, zero erradas, 323 abstenções, duas lacunas e seis observações; vinte sondas separadas. M02 continua TODO até resolver o recorte adjetival e conferir os critérios.
+Próxima ação concreta: M03, inventariar relações da oração já existentes e fixar a primeira construção com candidatos reais antes de alterar Sintaxe. M02 concluída no escopo documentado em FECHAMENTO-M02; Q02 e lacunas explicitadas permanecem.
 
 ## Incremento v6.45 — numerais
 
@@ -96,3 +97,7 @@ CTX-023: dois pares pronome pessoal + indicativo real compatível, com que SCONJ
 ## Consolidação v6.54
 
 Relatório JSON/Markdown reproduzível por família e classe, com hashes dos 35 gabaritos e das sondas. Contagens não somam frases únicas nem estimam acurácia geral; controles booleanos medem somente a regra/família declarada. As classes sem negativos explicitamente atribuídos mantêm controles em linha separada; preposição tem evidência nas sondas e nos testes de CTX-007, sem fabricar corpus por classe. Duas metas revista/revistas permanecem lacunas e seis possessivos são observações. Dados/motor/app/CSS não mudaram. Recorte adjetival continua obrigatório antes do fechamento; demais grupos têm exclusão explícita e destino de reavaliação em M03/M06.
+
+## Fechamento v6.55
+
+CTX-024 adiciona32 alvos adjetivais e cinco famílias de locuções integradas. Consolidado:621 alvos,270 úteis/343 abstenções/2 lacunas/6 observações/zero erradas nos controles. M02 DONE no escopo da primeira versão, conforme FECHAMENTO-M02; plano12/25 DONE, próximoM03. Histórico acima preserva estados anteriores.

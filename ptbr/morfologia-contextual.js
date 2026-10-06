@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-20-que-integrante', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-21-adjetiva', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -23,6 +23,15 @@
   var featurePatterns={Gender:/(?:^|\|)Gender=([^|]+)(?:\||$)/,Number:/(?:^|\|)Number=([^|]+)(?:\||$)/,NumType:/(?:^|\|)NumType=([^|]+)(?:\||$)/};
   /* Textos fixos, compartilhados; não configuram nem executam regras. */
   var locutionDescriptions={
+  "adjectival": {
+    "id": "PTBR-CTX-024",
+    "feature": "locução adjetiva",
+    "observation": "Artigo e nome com gênero/número reais compatíveis, de/ADP e madeira/papel com NOUN singular real, em unidade completa de quatro palavras. Pares delimitados: mesa/casa/barco de madeira e barco de papel. A hipótese pertence ao grupo de + nome.",
+    "interpretation": "A sequência favorece caracterização nominal por locução adjetiva neste recorte. Não identifica material literal, uso figurado, referente ou estrutura sintática geral.",
+    "ambiguity": "Componentes e homógrafos preservados; madeira não tem gênero nominal na fonte e nenhum gênero foi inventado. Outros pares, nomes grafados com maiúscula interna, posse, regência, predicação, modificadores e continuações ficam fora.",
+    "sourceTitle": "Hipótese computacional local. Fundação CECIERJ, CEJA, Língua Portuguesa, fascículo 2, unidade 4, pp. impressas 14 e 21; Priberam de e UD v2 nmod português, consultados em 06/10/2026. Pares e limites são decisões locais, não algoritmo das fontes.",
+    "url": "https://cejarj.cecierj.edu.br/ava_arquivos/material_impresso/fundamental/lingua_portuguesa/ceja_fundamental_lingua_portuguesa_fasciculo_2.pdf"
+},
   "adverbial": {
     "id": "PTBR-CTX-017",
     "feature": "locução adverbial",
@@ -451,6 +460,21 @@
     /* Grupos separados dos componentes, emitidos na ordem do original.
      * Não chama Sintaxe nem transforma POS lexical em função auxiliar. */
     for(i=0;i<ts.length;i++){
+      if(i+3<ts.length&&has(nominalArticles,ts[i].value)&&ts[i+2].value==='de'&&has(['madeira','papel'],ts[i+3].value)&&unitStart(i)&&unitEnd(i+3)&&linked(i,i+1)&&linked(i+1,i+2)&&linked(i+2,i+3)){
+        var material=ts[i+3].value,headRows=items[i+1].candidates.portilexicon,expectedHead=articleFeatures[ts[i].value];
+        var lowerNames=items[i+1].snippet===items[i+1].snippet.toLowerCase()&&items[i+3].snippet===items[i+3].snippet.toLowerCase();
+        var objectSupport=headRows.some(function(row){return row.pos==='NOUN'&&has(material==='madeira'?['mesa','casa','barco']:['barco'],row.lemma)&&has(feature(row,'Gender'),expectedHead[0])&&has(feature(row,'Number'),expectedHead[1]);});
+        var materialSupport=items[i+3].candidates.portilexicon.some(function(row){return row.pos==='NOUN'&&row.lemma===material&&has(feature(row,'Number'),'Sing');});
+        var materialDe=items[i+2].candidates.portilexicon.some(function(row){return row.pos==='ADP';});
+        if(lowerNames&&objectSupport&&materialSupport&&materialDe){
+          var materialEvidence=[],materialComponents=[];
+          for(k=i;k<=i+3;k++){
+            materialEvidence.push({start:ts[k].start,end:ts[k].end,snippet:text.slice(ts[k].start,ts[k].end)});
+            if(k>=i+2){materialComponents.push({snippet:items[k].snippet,readings:items[k].candidates.portilexicon});}
+          }
+          locutions.push({at:i+2,start:ts[i+2].start,end:ts[i+3].end,kind:'adjectival',components:materialComponents,context:materialEvidence,order:'after-noun'});
+        }
+      }
       if(i+2<ts.length&&own.call(subjects,'$'+ts[i].value)&&unitStart(i)&&unitEnd(i+2)&&linked(i,i+1)&&linked(i+1,i+2)){
         var modalSubject=subjects['$'+ts[i].value];
         var modalSupport=items[i+1].candidates.portilexicon.some(function(row){
@@ -524,7 +548,7 @@
   }
   function analyze(text, cap) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource,locutionIndex=0;
-    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a assim que entre dois pares pronome pessoal + indicativo real compatível em unidade completa de seis palavras, perto de + candidato nominal real em unidade completa de três palavras, com ADV/ADP reais e sem NUM/ADV/ADP/conjunção no complemento, pronome pessoal + poder com Mood=Ind/Cnd e traços reais compatíveis + infinitivo impessoal real em unidade completa de três palavras, de vez em quando antes (com vírgula) ou depois de pronome + indicativo compatível em unidade completa de seis palavras, ah/oh isolados com INTJ real e fronteira !/?, artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
+    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo + mesa/casa/barco de madeira ou barco de papel, com nome compatível em gênero/número e material singular reais, unidade completa de quatro palavras; como interrogativo direto, se pronominal de terceira pessoa e que integrante com saber/dizer nos recortes declarados; assim que entre dois pares pronome pessoal + indicativo real compatível em unidade completa de seis palavras, perto de + candidato nominal real em unidade completa de três palavras, com ADV/ADP reais e sem NUM/ADV/ADP/conjunção no complemento, pronome pessoal + poder com Mood=Ind/Cnd e traços reais compatíveis + infinitivo impessoal real em unidade completa de três palavras, de vez em quando antes (com vírgula) ou depois de pronome + indicativo compatível em unidade completa de seis palavras, ah/oh isolados com INTJ real e fronteira !/?, artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       if(locutionIndex<report.locutions.length&&report.locutions[locutionIndex].at===i){
         var group=report.locutions[locutionIndex++];
@@ -532,7 +556,7 @@
         out.push(E.instruments.finding('morfologia',description.id,text,group.start,group.end,'Hipótese contextual: '+description.feature+'.',
           description.observation,description.interpretation,description.ambiguity,limit,
           {title:description.sourceTitle+' Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:description.url},
-          {confidence:'moderada',feature:description.feature,analysisStatus:'contextual',context:group.context,candidates:{classes:[description.feature],components:group.components,complement:group.complement||null},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,distanceResolved:false,temporalRelationResolved:false,syntaxResolved:false}}));
+          {confidence:'moderada',feature:description.feature,analysisStatus:'contextual',context:group.context,candidates:{classes:[description.feature],components:group.components,complement:group.complement||null},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,distanceResolved:false,temporalRelationResolved:false,materialResolved:false,syntaxResolved:false}}));
         if(out.length>=cap){break;}
       }
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';

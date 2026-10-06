@@ -1,0 +1,17 @@
+{
+  "version": "contexto-21-adjetiva",
+  "sets": {
+    "desenvolvimento": {
+      "useful": 6,
+      "wrong": 0,
+      "abstentions": 10,
+      "missing": 0
+    },
+    "avaliacao": {
+      "useful": 6,
+      "wrong": 0,
+      "abstentions": 10,
+      "missing": 0
+    }
+  }
+}
