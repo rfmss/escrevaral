@@ -8,8 +8,8 @@ Base v6.50, cb50d7ab11156ddcacf5b8e9289bc1e53edc52bb; 06/10/2026. Exemplos próp
 | como verbo | Eu como. | Preservar CTX-001 | comer real; não sobrescrever |
 | como comparação/conjunção | Eu canto como ela canta. | Abstenção nova | ADV/ADP/CCONJ/SCONJ/comer conservados |
 | como indireto/exclamação | Ela sabe como eu canto. / Como eu canto! | Abstenção nova | Construções maiores/intensidade fora do recorte |
-| se pronome | Ela se viu. | Pendente de próximo lote | Fonte se: PRON Case Acc/Dat/Nom Person=3 PronType=Prs; ainda não importada. Sem Reflex ou Number; não resolver reflexividade/passiva/reciprocidade |
-| se conjunção | Se ela chegou, eu saio. | Abstenção nova | SCONJ no snapshot; ainda não importada; condição não inferida |
+| se pronome | Ela se viu. | CTX-022 v6.52 em unidade completa de três tokens | Fonte se: PRON Case Acc/Dat/Nom Person=3 PronType=Prs; importada na v6.52. Sem Reflex ou Number; não resolver reflexividade/passiva/reciprocidade |
+| se conjunção | Se ela chegou, eu saio. | Abstenção nova | SCONJ no snapshot; preservada na v6.52; condição não inferida |
 | que integrante | Eu sei que ela chegou. | Pendente de próximo lote | SCONJ real; exigir construção apoiada, nunca só presença de que |
 | que relativo | O livro que eu li. | Abstenção nova | PRON Rel real; lente Relativas separada |
 | que interrogativo | Que você viu? | Abstenção nova | PRON Int real; outras construções abertas |
@@ -21,3 +21,5 @@ Base v6.50, cb50d7ab11156ddcacf5b8e9289bc1e53edc52bb; 06/10/2026. Exemplos próp
 Priberam, como (https://dicionario.priberam.org/como); UD v2 PronType (https://universaldependencies.org/u/feat/PronType.html), Reflex (https://universaldependencies.org/u/feat/Reflex.html), advmod e mark em português, consultados em 06/10/2026. Referências de uso/anotação, não algoritmos da obra. ADV de como não tem PronType=Int na fonte: interrogativo será interpretação local, sem adicionar traço lexical. Reflex lexical não demonstra função reflexiva contextual.
 
 Corpus fixado em ptbr/corpus/contrastes-1 antes do motor: seis metas e dez exclusões em cada conjunto; gabaritos preservados. Se/que têm decisões futuras explicitamente pendentes; não contar sua simples presença nesta matriz como implementação.
+
+V6.52: corpus se-pronominal-1 fixado antes da importação/motor; CTX-022 decide só pronome, mantendo Case/Reflex/voz/sintaxe abertos. Que permanece pendente de regra própria.

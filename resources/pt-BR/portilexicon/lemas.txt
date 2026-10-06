@@ -227,3 +227,4 @@ em
 quando
 assim
 que
+se

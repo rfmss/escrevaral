@@ -208,9 +208,10 @@
             "docs/jornada/ENTREGA-V6-45.md",
             "docs/jornada/ENTREGA-V6-46.md",
             "docs/jornada/ENTREGA-V6-47.md",
-            "docs/jornada/ENTREGA-V6-50.md"
+            "docs/jornada/ENTREGA-V6-50.md",
+            "docs/jornada/ENTREGA-V6-52.md"
           ],
-          "progress": "PortiLexicon recorte 11: 229 sementes, 3.219 formas/5.679 leituras, assim e que com nove análises novas; todos os dados anteriores preservados. M01 geral parcial."
+          "progress": "PortiLexicon recorte 12: 230 sementes,3220 formas,5683 leituras; se com PRON Acc/Dat/Nom e SCONJ. Todas leituras anteriores preservadas; M01 geral parcial."
         },
         {
           "id": "M02",
@@ -237,9 +238,10 @@
             "docs/jornada/ENTREGA-V6-48.md",
             "docs/jornada/ENTREGA-V6-49.md",
             "docs/jornada/ENTREGA-V6-50.md",
-            "docs/jornada/ENTREGA-V6-51.md"
+            "docs/jornada/ENTREGA-V6-51.md",
+            "docs/jornada/ENTREGA-V6-52.md"
           ],
-          "progress": "M02-contrastes-1: matriz fixada e primeiro recorte apoiado integrado. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. Se/que e consolidação permanecem; plano 11/25 DONE."
+          "progress": "M02-contrastes-2 cumprida no recorte de se pronominal: 32 alvos, doze úteis/vinte abstenções, zero erradas/lacunas. Que integrante, consolidação e escopo adjetival permanecem; plano 11/25 DONE."
         },
         {
           "id": "M03",
@@ -340,12 +342,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.51.0",
+    "version": "6.52.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-51.md",
-    "record": "docs/jornada/entregas/v6-51.json"
+    "evidence": "docs/jornada/ENTREGA-V6-52.md",
+    "record": "docs/jornada/entregas/v6-52.json"
   },
   "scopeChanges": [
     {

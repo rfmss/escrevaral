@@ -1,0 +1,332 @@
+{
+  "schemaVersion": 1,
+  "kind": "Sondas diagnósticas próprias: duas por classe, escolhidas antes da regra nova; não são avaliação reservada nem estimativa de cobertura da língua. A classe desejada não obriga decidir um caso ambíguo.",
+  "runtimeVersion": "contexto-19-se-pronominal",
+  "lexiconVersion": "315e063da1f8-recorte-12",
+  "classes": {
+    "substantivo": {
+      "useful": 1,
+      "different": 0,
+      "open": 1
+    },
+    "artigo": {
+      "useful": 1,
+      "different": 0,
+      "open": 1
+    },
+    "adjetivo": {
+      "useful": 1,
+      "different": 0,
+      "open": 1
+    },
+    "pronome": {
+      "useful": 1,
+      "different": 0,
+      "open": 1
+    },
+    "verbo": {
+      "useful": 1,
+      "different": 0,
+      "open": 1
+    },
+    "advérbio": {
+      "useful": 1,
+      "different": 0,
+      "open": 1
+    },
+    "numeral": {
+      "useful": 2,
+      "different": 0,
+      "open": 0
+    },
+    "preposição": {
+      "useful": 1,
+      "different": 0,
+      "open": 1
+    },
+    "conjunção": {
+      "useful": 1,
+      "different": 0,
+      "open": 1
+    },
+    "interjeição": {
+      "useful": 2,
+      "different": 0,
+      "open": 0
+    }
+  },
+  "cases": [
+    {
+      "id": "M02-01",
+      "class": "substantivo",
+      "text": "A casa branca.",
+      "target": "casa",
+      "status": "contextual",
+      "selected": "substantivo",
+      "rule": "PTBR-CTX-006",
+      "outcome": "useful",
+      "candidates": [
+        "substantivo",
+        "verbo"
+      ]
+    },
+    {
+      "id": "M02-02",
+      "class": "substantivo",
+      "text": "Casa caiu.",
+      "target": "Casa",
+      "status": "ambiguo",
+      "selected": null,
+      "rule": null,
+      "outcome": "open",
+      "candidates": [
+        "substantivo",
+        "verbo"
+      ]
+    },
+    {
+      "id": "M02-03",
+      "class": "artigo",
+      "text": "O jardim.",
+      "target": "O",
+      "status": "contextual",
+      "selected": "artigo",
+      "rule": "PTBR-CTX-002",
+      "outcome": "useful",
+      "candidates": [
+        "artigo",
+        "pronome"
+      ]
+    },
+    {
+      "id": "M02-04",
+      "class": "artigo",
+      "text": "Uma casa.",
+      "target": "Uma",
+      "status": "ambiguo",
+      "selected": null,
+      "rule": null,
+      "outcome": "open",
+      "candidates": [
+        "artigo",
+        "numeral"
+      ]
+    },
+    {
+      "id": "M02-05",
+      "class": "adjetivo",
+      "text": "A casa branca.",
+      "target": "branca",
+      "status": "contextual",
+      "selected": "adjetivo",
+      "rule": "PTBR-CTX-006",
+      "outcome": "useful",
+      "candidates": [
+        "adjetivo",
+        "substantivo"
+      ]
+    },
+    {
+      "id": "M02-06",
+      "class": "adjetivo",
+      "text": "A casa é bonita.",
+      "target": "bonita",
+      "status": "ambiguo",
+      "selected": null,
+      "rule": null,
+      "outcome": "open",
+      "candidates": [
+        "adjetivo",
+        "substantivo"
+      ]
+    },
+    {
+      "id": "M02-07",
+      "class": "pronome",
+      "text": "Eu o canto.",
+      "target": "o",
+      "status": "contextual",
+      "selected": "pronome",
+      "rule": "PTBR-CTX-003",
+      "outcome": "useful",
+      "candidates": [
+        "artigo",
+        "pronome"
+      ]
+    },
+    {
+      "id": "M02-08",
+      "class": "pronome",
+      "text": "Eu canto.",
+      "target": "Eu",
+      "status": "lexical",
+      "selected": null,
+      "rule": null,
+      "outcome": "open",
+      "candidates": [
+        "pronome"
+      ]
+    },
+    {
+      "id": "M02-09",
+      "class": "verbo",
+      "text": "Eu canto.",
+      "target": "canto",
+      "status": "contextual",
+      "selected": "verbo",
+      "rule": "PTBR-CTX-001",
+      "outcome": "useful",
+      "candidates": [
+        "substantivo",
+        "verbo"
+      ]
+    },
+    {
+      "id": "M02-10",
+      "class": "verbo",
+      "text": "Canto.",
+      "target": "Canto",
+      "status": "ambiguo",
+      "selected": null,
+      "rule": null,
+      "outcome": "open",
+      "candidates": [
+        "substantivo",
+        "verbo"
+      ]
+    },
+    {
+      "id": "M02-11",
+      "class": "advérbio",
+      "text": "Eu não canto.",
+      "target": "não",
+      "status": "contextual",
+      "selected": "advérbio",
+      "rule": "PTBR-CTX-014",
+      "outcome": "useful",
+      "candidates": [
+        "advérbio",
+        "substantivo"
+      ]
+    },
+    {
+      "id": "M02-12",
+      "class": "advérbio",
+      "text": "Ela nunca chegou.",
+      "target": "nunca",
+      "status": "lexical",
+      "selected": null,
+      "rule": null,
+      "outcome": "open",
+      "candidates": [
+        "advérbio"
+      ]
+    },
+    {
+      "id": "M02-13",
+      "class": "numeral",
+      "text": "Dois livros.",
+      "target": "Dois",
+      "status": "contextual",
+      "selected": "numeral",
+      "rule": "PTBR-CTX-015",
+      "outcome": "useful",
+      "candidates": [
+        "numeral",
+        "substantivo"
+      ]
+    },
+    {
+      "id": "M02-14",
+      "class": "numeral",
+      "text": "Três casas.",
+      "target": "Três",
+      "status": "contextual",
+      "selected": "numeral",
+      "rule": "PTBR-CTX-015",
+      "outcome": "useful",
+      "candidates": [
+        "numeral",
+        "substantivo"
+      ]
+    },
+    {
+      "id": "M02-15",
+      "class": "preposição",
+      "text": "O livro de poesia chegou.",
+      "target": "de",
+      "status": "contextual",
+      "selected": "preposição",
+      "rule": "PTBR-CTX-007",
+      "outcome": "useful",
+      "candidates": [
+        "preposição"
+      ]
+    },
+    {
+      "id": "M02-16",
+      "class": "preposição",
+      "text": "Para cantar.",
+      "target": "Para",
+      "status": "lexical",
+      "selected": null,
+      "rule": null,
+      "outcome": "open",
+      "candidates": [
+        "preposição"
+      ]
+    },
+    {
+      "id": "M02-17",
+      "class": "conjunção",
+      "text": "Casa e jardim.",
+      "target": "e",
+      "status": "contextual",
+      "selected": "conjunção",
+      "rule": "PTBR-CTX-011",
+      "outcome": "useful",
+      "candidates": [
+        "conjunção"
+      ]
+    },
+    {
+      "id": "M02-18",
+      "class": "conjunção",
+      "text": "Eu canto mas ela dança.",
+      "target": "mas",
+      "status": "lexical",
+      "selected": null,
+      "rule": null,
+      "outcome": "open",
+      "candidates": [
+        "conjunção"
+      ]
+    },
+    {
+      "id": "M02-19",
+      "class": "interjeição",
+      "text": "Ah!",
+      "target": "Ah",
+      "status": "contextual",
+      "selected": "interjeição",
+      "rule": "PTBR-CTX-016",
+      "outcome": "useful",
+      "candidates": [
+        "interjeição"
+      ]
+    },
+    {
+      "id": "M02-20",
+      "class": "interjeição",
+      "text": "Oh!",
+      "target": "Oh",
+      "status": "contextual",
+      "selected": "interjeição",
+      "rule": "PTBR-CTX-016",
+      "outcome": "useful",
+      "candidates": [
+        "interjeição"
+      ]
+    }
+  ]
+}

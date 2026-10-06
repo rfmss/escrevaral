@@ -1,0 +1,17 @@
+{
+  "version": "contexto-18-contrastes",
+  "sets": {
+    "desenvolvimento": {
+      "useful": 0,
+      "wrong": 0,
+      "abstentions": 10,
+      "missing": 6
+    },
+    "avaliacao": {
+      "useful": 0,
+      "wrong": 0,
+      "abstentions": 10,
+      "missing": 6
+    }
+  }
+}

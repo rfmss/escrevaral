@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento/independência.",
+  "baseline": "15d4fed9f44240d89364fe9e9eeb3446cc10d923",
+  "scope": "Pronome pessoal terceira pessoa + se + indicativo real compatível em unidade completa de três tokens. Pronome sem resolver Case, reflexividade/passiva/reciprocidade.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Ela se viu.",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Eles se viram.",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Você se olha.",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Ele se vê.",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Elas se viram.",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Vocês se olham.",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "Se ela chegou, eu saio.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Ela se ver.",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Eu se vi.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Tu se viste.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Ela se viram.",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Ela, se viu.",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Ela\nse viu.",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Ela “se” viu.",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "Ela se viu hoje.",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Ela não se viu.",
+      "expected": false
+    }
+  ]
+}

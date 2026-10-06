@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento/independência.",
+  "baseline": "15d4fed9f44240d89364fe9e9eeb3446cc10d923",
+  "scope": "Pronome pessoal terceira pessoa + se + indicativo real compatível em unidade completa de três tokens. Pronome sem resolver Case, reflexividade/passiva/reciprocidade.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Ele se viu.",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Elas se veem.",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Você se vê.",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "Vocês se viram.",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Ela se olha.",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Eles se olham.",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "Se eles chegam, eu canto.",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "Nós se vimos.",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Vós se vistes.",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Eles se viu.",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Ela se zzverbo.",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "Ela se veria.",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "Ela se visse.",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "`Ela se viu.`",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "A mulher se viu.",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Ela se.",
+      "expected": false
+    }
+  ]
+}

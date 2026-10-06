@@ -1,12 +1,12 @@
 {
-  "version": 40,
+  "version": 41,
   "updated": "06/10/2026",
-  "baseline": "cb50d7ab11156ddcacf5b8e9289bc1e53edc52bb",
+  "baseline": "15d4fed9f44240d89364fe9e9eeb3446cc10d923",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.51: como em pergunta direta de três palavras recebe hipótese de advérbio com fonte real e indicativo compatível. Matriz que/se/como pré-fixada; alternativas lexicais preservadas. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.52: se entre pronome pessoal de terceira pessoa e indicativo real compatível recebe hipótese de pronome em unidade completa de três palavras; casos lexicais e SCONJ preservados, sem decidir reflexividade ou voz. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M02-contrastes-2: importar se preservando PRON/SCONJ e traços reais; delimitar pronome junto a sujeito de terceira pessoa e indicativo compatível, sem resolver reflexividade/passiva/reciprocidade. Depois que integrante com apoio de saber/dizer, relatório por classe/família e escopo de locuções adjetivas/demais grupos antes de fechar M02.",
+    "M02-contrastes-3: que integrante com dois pares pronome/indicativo real e apoio lexical delimitado de saber/dizer; exemplos e exclusões antes do código. Depois consolidar relatório por classe/família e delimitar locuções adjetivas/demais grupos antes de fechar M02.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -104,7 +104,7 @@
         "Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.",
         "Carregar dados maiores sob demanda, com índices e sem polyfills globais."
       ],
-      "done": "PortiLexicon recorte 11: 229 sementes, 3.219 formas/5.679 leituras, assim e que com nove análises novas; todos os dados anteriores preservados. M01 geral parcial.",
+      "done": "PortiLexicon recorte 12: 230 sementes,3220 formas,5683 leituras; se com PRON Acc/Dat/Nom e SCONJ. Todas leituras anteriores preservadas; M01 geral parcial.",
       "evidence": [
         "ptbr/auditoria/pacote.json",
         "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
@@ -124,7 +124,8 @@
         "docs/jornada/ENTREGA-V6-45.md",
         "docs/jornada/ENTREGA-V6-46.md",
         "docs/jornada/ENTREGA-V6-47.md",
-        "docs/jornada/ENTREGA-V6-50.md"
+        "docs/jornada/ENTREGA-V6-50.md",
+        "docs/jornada/ENTREGA-V6-52.md"
       ]
     },
     {
@@ -141,7 +142,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-contrastes-1: matriz fixada e primeiro recorte apoiado integrado. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. Se/que e consolidação permanecem; plano 11/25 DONE.",
+      "done": "M02-contrastes-2 cumprida no recorte de se pronominal: 32 alvos, doze úteis/vinte abstenções, zero erradas/lacunas. Que integrante, consolidação e escopo adjetival permanecem; plano 11/25 DONE.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -164,7 +165,8 @@
         "docs/jornada/ENTREGA-V6-48.md",
         "docs/jornada/ENTREGA-V6-49.md",
         "docs/jornada/ENTREGA-V6-50.md",
-        "docs/jornada/ENTREGA-V6-51.md"
+        "docs/jornada/ENTREGA-V6-51.md",
+        "docs/jornada/ENTREGA-V6-52.md"
       ]
     },
     {
@@ -702,7 +704,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M02-contrastes-2: importar se preservando PRON/SCONJ e traços reais; delimitar pronome junto a sujeito de terceira pessoa e indicativo compatível, sem resolver reflexividade/passiva/reciprocidade. Depois que integrante com apoio de saber/dizer, relatório por classe/família e escopo de locuções adjetivas/demais grupos antes de fechar M02."
+    "nextDeliverable": "M02-contrastes-3: que integrante com dois pares pronome/indicativo real e apoio lexical delimitado de saber/dizer; exemplos e exclusões antes do código. Depois consolidar relatório por classe/família e delimitar locuções adjetivas/demais grupos antes de fechar M02."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -716,7 +718,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "32 alvos pré-fixados passaram; seis perturbações de fonte/traços, candidatos preservados, como verbal e assim que antigos, seleção/emoji/NFD, autoria, truncamentos de caracteres/tokens, uma consulta por token, cap/ES5 e painel explícito. Conjuntiva 32 alvos e negação 32/63 regressões passaram. Vinte sondas mantêm doze desejadas/oito abertas/zero diferentes. Build:check; regressão completa CI e Pages por SHA.",
+    "verification": "32 alvos pré-fixados e oito perturbações de fonte/traços passaram; Case/SCONJ conservados, seleção/autoria, proteção, truncamentos, custo limitado, ES5 e painel. Como 32 alvos, negação 32/63 regressões e conjuntivas 32 passaram com dados novos. Todas 3219 formas/5679 leituras anteriores conservadas por comparação decodificada. Vinte sondas permanecem doze desejadas/oito abertas/zero diferentes. Build:check; regressão completa CI e Pages por SHA.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -734,5 +736,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-51.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-52.json"
 }

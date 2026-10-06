@@ -55,7 +55,7 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: integrar se pronominal e que integrante conforme a [matriz pré-fixada](CONTRASTES-M02.md); como interrogativo direto agora tem CTX-021. Consolidar por classe/família e declarar escopo de locuções adjetivas/demais grupos antes do fechamento. [Entrega v6.50](ENTREGA-V6-50.md).
+Próxima ação concreta: integrar que integrante conforme a [matriz pré-fixada](CONTRASTES-M02.md); como interrogativo direto tem CTX-021 e se pronominal tem CTX-022. Consolidar por classe/família e declarar escopo de locuções adjetivas/demais grupos antes do fechamento. [Entrega v6.50](ENTREGA-V6-50.md).
 
 ## Incremento v6.45 — numerais
 
@@ -84,3 +84,7 @@ CTX-020: assim que entre dois pares pronome/indicativo real, unidade completa de
 ## Incremento v6.51 — contrastes de como
 
 Matriz que/se/como registrada antes do motor em CONTRASTES-M02.md. CTX-021: como + pronome pessoal + indicativo real compatível, unidade interrogativa direta de três tokens com ? explícito. ADV sem PronType=Int na fonte; interpretação contextual não inventa traço lexical. Comer/ADP/CCONJ/SCONJ permanecem candidatos. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. Se/que continuam pendentes de decisões próprias; locuções adjetivas/demais grupos e consolidação seguem necessárias para M02. Sondas mantêm doze desejadas/oito abertas/zero diferentes.
+
+## Incremento v6.52 — se pronominal
+
+CTX-022: sujeito pessoal de terceira pessoa + se + indicativo real compatível, unidade completa de três tokens. PRON Person=3/PronType=Prs obrigatório; Case Acc/Dat/Nom e SCONJ preservados. Não infere Reflex/Number, voz ou função. Recorte 12 adiciona uma forma/quatro leituras, conserva todas 3219 formas/5679 leituras antigas. Corpus próprio: doze úteis/vinte abstenções/zero erradas ou lacunas. Que integrante, consolidação e escopo adjetival continuam antes de concluir M02.

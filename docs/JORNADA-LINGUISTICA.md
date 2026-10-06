@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 06/10/2026. Base do produto auditada: `cb50d7ab11156ddcacf5b8e9289bc1e53edc52bb`.
+Atualizado em 06/10/2026. Base do produto auditada: `15d4fed9f44240d89364fe9e9eeb3446cc10d923`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.51: como em pergunta direta de três palavras recebe hipótese de advérbio com fonte real e indicativo compatível. Matriz que/se/como pré-fixada; alternativas lexicais preservadas. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.52: se entre pronome pessoal de terceira pessoa e indicativo real compatível recebe hipótese de pronome em unidade completa de três palavras; casos lexicais e SCONJ preservados, sem decidir reflexividade ou voz. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02-contrastes-2: importar se preservando PRON/SCONJ e traços reais; delimitar pronome junto a sujeito de terceira pessoa e indicativo compatível, sem resolver reflexividade/passiva/reciprocidade. Depois que integrante com apoio de saber/dizer, relatório por classe/família e escopo de locuções adjetivas/demais grupos antes de fechar M02.
+- M02-contrastes-3: que integrante com dois pares pronome/indicativo real e apoio lexical delimitado de saber/dizer; exemplos e exclusões antes do código. Depois consolidar relatório por classe/família e delimitar locuções adjetivas/demais grupos antes de fechar M02.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -80,9 +80,9 @@ Dar às palavras inventário, flexões e possibilidades coerentes.
 - Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.
 - Carregar dados maiores sob demanda, com índices e sem polyfills globais.
 
-**Condição de conclusão:** PortiLexicon recorte 11: 229 sementes, 3.219 formas/5.679 leituras, assim e que com nove análises novas; todos os dados anteriores preservados. M01 geral parcial.
+**Condição de conclusão:** PortiLexicon recorte 12: 230 sementes,3220 formas,5683 leituras; se com PRON Acc/Dat/Nom e SCONJ. Todas leituras anteriores preservadas; M01 geral parcial.
 
-Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`, `docs/jornada/ENTREGA-V6-44.md`, `docs/jornada/ENTREGA-V6-45.md`, `docs/jornada/ENTREGA-V6-46.md`, `docs/jornada/ENTREGA-V6-47.md`, `docs/jornada/ENTREGA-V6-50.md`.
+Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`, `docs/jornada/ENTREGA-V6-44.md`, `docs/jornada/ENTREGA-V6-45.md`, `docs/jornada/ENTREGA-V6-46.md`, `docs/jornada/ENTREGA-V6-47.md`, `docs/jornada/ENTREGA-V6-50.md`, `docs/jornada/ENTREGA-V6-52.md`.
 
 ### P04 — Reconhecer classes no contexto
 
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-contrastes-1: matriz fixada e primeiro recorte apoiado integrado. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. Se/que e consolidação permanecem; plano 11/25 DONE.
+**Condição de conclusão:** M02-contrastes-2 cumprida no recorte de se pronominal: 32 alvos, doze úteis/vinte abstenções, zero erradas/lacunas. Que integrante, consolidação e escopo adjetival permanecem; plano 11/25 DONE.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`, `docs/jornada/ENTREGA-V6-44.md`, `docs/jornada/ENTREGA-V6-45.md`, `docs/jornada/ENTREGA-V6-46.md`, `docs/jornada/ENTREGA-V6-47.md`, `docs/jornada/ENTREGA-V6-48.md`, `docs/jornada/ENTREGA-V6-49.md`, `docs/jornada/ENTREGA-V6-50.md`, `docs/jornada/ENTREGA-V6-51.md`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`, `docs/jornada/ENTREGA-V6-44.md`, `docs/jornada/ENTREGA-V6-45.md`, `docs/jornada/ENTREGA-V6-46.md`, `docs/jornada/ENTREGA-V6-47.md`, `docs/jornada/ENTREGA-V6-48.md`, `docs/jornada/ENTREGA-V6-49.md`, `docs/jornada/ENTREGA-V6-50.md`, `docs/jornada/ENTREGA-V6-51.md`, `docs/jornada/ENTREGA-V6-52.md`.
 
 ### P05 — Construir as relações da oração
 
