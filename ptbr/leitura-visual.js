@@ -84,11 +84,17 @@
   E.renderReadingMap = function (parent, options) {
     if(options.lens==='sintaxe'){return syntaxMap(parent,options);}
     var snapshot = options.snapshot, arr = options.findings.filter(function (f) { return valid(snapshot, f); }).slice(0, 100);
+    /* Uma locução ocupa um cartão; leituras dos componentes seguem no achado.
+     * Evita repetir as palavras no original reconstruído da anotação. */
+    if(options.lens==='morfologia'){
+      var compoundGroups=arr.filter(function(f){return !!f.locution;});
+      arr=arr.filter(function(f){return f.locution||!compoundGroups.some(function(g){return f.start>=g.start&&f.end<=g.end;});});
+    }
     var morph = options.lens === 'morfologia', active = -1, dead = false, timer = null;
     var uid = 'ptbr-reading-' + (++serial), buttons = [], rows = [], rowFor = [], diagrams = [];
     var box = el('div', parent, 'ptbr-reading'), main = el('div', box, 'ptbr-reading-paper');
     el('p', main, 'ptbr-overline', 'LEITURA ANOTADA');
-    el('p', main, 'ptbr-reading-help', morph ? 'Toque em uma palavra para entender sua leitura. Os arcos mostram os apoios da hipótese selecionada.' : 'Escolha um trecho para ver a observação e seus limites.');
+    el('p', main, 'ptbr-reading-help', morph ? 'Toque em uma palavra ou locução para entender sua leitura. Os arcos mostram os apoios da hipótese selecionada.' : 'Escolha um trecho para ver a observação e seus limites.');
     var canvas = el('div', main, 'ptbr-reading-canvas');
     var aside = el('aside', box, 'ptbr-reading-aside'); aside.id = uid; aside.setAttribute('aria-label', 'Explicação da leitura selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');

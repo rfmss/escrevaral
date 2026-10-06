@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento ou independência.",
+  "baseline": "49da806752bbba87fee5cf14f84c1a05f4a44a62",
+  "scope": "De vez em quando, quatro componentes reais ADP/NOUN/ADP/ADV; antes (com vírgula) ou depois de pronome pessoal + indicativo compatível em unidade completa de seis palavras. Classe do grupo separada das classes lexicais dos componentes; sem medir frequência ou inferir dependências.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Eu canto de vez em quando.",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Ela chegou de vez em quando.",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Nós cantamos de vez em quando.",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "De vez em quando, eu canto.",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "De vez em quando, ela chegou.",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "De vez em quando, nós cantamos.",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "De vez em quando.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Eu cantar de vez em quando.",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Eu cantas de vez em quando.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Eu canto de outra vez em quando.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Eu canto de vez, em quando.",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Eu canto de vez\nem quando.",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Eu canto “de vez em quando”.",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Eu canto `de vez em quando`.",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "Eu canto de vez em quando e danço.",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Eu não canto de vez em quando.",
+      "expected": false
+    }
+  ]
+}

@@ -221,3 +221,7 @@ dois
 três
 ah
 oh
+de
+vez
+em
+quando

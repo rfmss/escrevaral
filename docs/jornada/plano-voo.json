@@ -206,9 +206,10 @@
             "docs/jornada/ENTREGA-V6-43.md",
             "docs/jornada/ENTREGA-V6-44.md",
             "docs/jornada/ENTREGA-V6-45.md",
-            "docs/jornada/ENTREGA-V6-46.md"
+            "docs/jornada/ENTREGA-V6-46.md",
+            "docs/jornada/ENTREGA-V6-47.md"
           ],
-          "progress": "PortiLexicon recorte 9: 223 sementes, 3.212 formas e 5.662 leituras; ah/oh INTJ/_ importados do snapshot com todos os dados anteriores conservados. M01 geral parcial."
+          "progress": "PortiLexicon recorte 10: 227 sementes, 3.217 formas/5.670 leituras; de/vez/em/quando reais, todas as alternativas das formas conservadas. M01 geral parcial."
         },
         {
           "id": "M02",
@@ -230,9 +231,10 @@
             "docs/jornada/ENTREGA-V6-43.md",
             "docs/jornada/ENTREGA-V6-44.md",
             "docs/jornada/ENTREGA-V6-45.md",
-            "docs/jornada/ENTREGA-V6-46.md"
+            "docs/jornada/ENTREGA-V6-46.md",
+            "docs/jornada/ENTREGA-V6-47.md"
           ],
-          "progress": "M02-interjeicoes-1 cumprida no recorte ah/oh isolados. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas observadas. As dez classes têm agora algum padrão delimitado, sem concluir M02: locuções, contrastes e consolidação por classe continuam necessários. Plano 11/25 DONE."
+          "progress": "M02-locucoes-adverbiais-1 cumprida no recorte de seis palavras, duas ordens. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas. M02 geral continua parcial; outras locuções, que/se/como e consolidação por classe permanecem. Plano 11/25 DONE."
         },
         {
           "id": "M03",
@@ -333,12 +335,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.46.0",
+    "version": "6.47.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-46.md",
-    "record": "docs/jornada/entregas/v6-46.json"
+    "evidence": "docs/jornada/ENTREGA-V6-47.md",
+    "record": "docs/jornada/entregas/v6-47.json"
   },
   "scopeChanges": [
     {

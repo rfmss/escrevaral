@@ -24,7 +24,7 @@ O determinante (UD) de CTX-008 conserva a categoria da fonte: não é décima pr
 | Família | Presente | Falta para M02 |
 |---|---|---|
 | Verbais | ptbr/grupos-verbais.js: quatro padrões na lente Sintaxe; corpus locucoes-1 com 65 casos | Delimitar reaproveitamento dos componentes em Classes, sem executar Sintaxe em fila ou propagar seu inventário automaticamente |
-| Adverbiais | Expressões encontra literalmente de vez em quando | Contexto e função ainda não decididos; correspondência de catálogo não é classificação morfológica |
+| Adverbiais | CTX-017: de vez em quando com apoio indicativo em unidade completa; grupo separado dos componentes | Outras expressões e construções; frequência/dependências não resolvidas; catálogo em Expressões continua distinto |
 | Prepositivas/conjuntivas | Palavras simples e candidatos | Inventário pequeno, apoios e exclusões antes da implementação |
 | Adjetivas e demais grupos pluriverbais | Complementos curtos em CTX-007 | Complemento não vira automaticamente locução adjetiva; delimitar decisão e alcance da primeira versão |
 
@@ -54,7 +54,7 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: primeira locução adverbial de vez em quando em Classes; referência/componentes reais, construção, classe resultante, positivos/contrastes e exclusões antes do código. As [entregas v6.45](ENTREGA-V6-45.md) e [v6.46](ENTREGA-V6-46.md) integram numerais e interjeições.
+Próxima ação concreta: poder + infinitivo com sujeito pessoal em Classes; revisar motor verbal existente, fontes/dados reais e corpus antes do código. Não executar Sintaxe em fila nem decidir função auxiliar pelo POS da fonte. [Entrega v6.47](ENTREGA-V6-47.md).
 
 ## Incremento v6.45 — numerais
 
@@ -63,3 +63,7 @@ CTX-015: dois/duas/três + plural de livro/casa/jardim/flor/mesa/mulher/homem em
 ## Incremento v6.46 — interjeições
 
 CTX-016: ah/oh isolados com leitura INTJ real e !/? explícito. Não decide emoção/intenção nem classifica toda exclamação. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas. Sondas depois-v6-46: doze desejadas, oito abertas, nenhuma classe diferente. Há algum padrão delimitado nas dez classes; ainda faltam locuções, que/se/como e consolidação por classe para M02. Próximo de vez em quando, conforme entrega; avaliação reservada segue Q02.
+
+## Incremento v6.47 — locução adverbial
+
+CTX-017: de vez em quando com pronome + indicativo compatível, antes com vírgula ou depois, unidade completa de seis palavras. Classe do grupo separada de cada componente; leituras reais de de/vez/em/quando preservadas. 32 alvos próprios: doze úteis, vinte abstenções, zero erradas/lacunas. Sondas inalteradas (doze desejadas/oito abertas); não contar grupo como quatro advérbios. Próximo recorte verbal; outras famílias e contrastes continuam abertos.

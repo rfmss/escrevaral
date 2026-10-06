@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento ou independência.",
+  "baseline": "49da806752bbba87fee5cf14f84c1a05f4a44a62",
+  "scope": "De vez em quando, quatro componentes reais ADP/NOUN/ADP/ADV; antes (com vírgula) ou depois de pronome pessoal + indicativo compatível em unidade completa de seis palavras. Classe do grupo separada das classes lexicais dos componentes; sem medir frequência ou inferir dependências.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Eles chegaram de vez em quando!",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Você canta de vez em quando?",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "De vez em quando, eles chegaram!",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "De vez em quando, você canta?",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Eu canto de\tvez em quando",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "De vez em quando, elas cantam;",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "De vez em quando",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "De vez em quando eu canto.",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "De vez em quando, eu cantar.",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "De vez em quando, ela cantas.",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Eu canto de vez em quando feliz.",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "Eu canto às vezes.",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "Meu de vez em quando.",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "Eu digo: “de vez em quando”.",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "Eu palavo de vez em quando.",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Eu canto de vez em quando,",
+      "expected": false
+    }
+  ]
+}
