@@ -23,7 +23,7 @@ O determinante (UD) de CTX-008 conserva a categoria da fonte: não é décima pr
 
 | Família | Presente | Falta para M02 |
 |---|---|---|
-| Verbais | ptbr/grupos-verbais.js: quatro padrões na lente Sintaxe; corpus locucoes-1 com 65 casos | Delimitar reaproveitamento dos componentes em Classes, sem executar Sintaxe em fila ou propagar seu inventário automaticamente |
+| Verbais | CTX-018: poder + infinitivo impessoal com sujeito e dados reais em Classes; Sintaxe mantém seus quatro padrões | Outros auxiliares/cadeias e construções; modalidade e função auxiliar geral abertas |
 | Adverbiais | CTX-017: de vez em quando com apoio indicativo em unidade completa; grupo separado dos componentes | Outras expressões e construções; frequência/dependências não resolvidas; catálogo em Expressões continua distinto |
 | Prepositivas/conjuntivas | Palavras simples e candidatos | Inventário pequeno, apoios e exclusões antes da implementação |
 | Adjetivas e demais grupos pluriverbais | Complementos curtos em CTX-007 | Complemento não vira automaticamente locução adjetiva; delimitar decisão e alcance da primeira versão |
@@ -54,7 +54,7 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: poder + infinitivo com sujeito pessoal em Classes; revisar motor verbal existente, fontes/dados reais e corpus antes do código. Não executar Sintaxe em fila nem decidir função auxiliar pelo POS da fonte. [Entrega v6.47](ENTREGA-V6-47.md).
+Próxima ação concreta: perto de + nome em unidade curta, grupo prepositivo e complemento separados, referências/dados/corpus antes do código. [Entrega v6.48](ENTREGA-V6-48.md).
 
 ## Incremento v6.45 — numerais
 
@@ -67,3 +67,7 @@ CTX-016: ah/oh isolados com leitura INTJ real e !/? explícito. Não decide emo�
 ## Incremento v6.47 — locução adverbial
 
 CTX-017: de vez em quando com pronome + indicativo compatível, antes com vírgula ou depois, unidade completa de seis palavras. Classe do grupo separada de cada componente; leituras reais de de/vez/em/quando preservadas. 32 alvos próprios: doze úteis, vinte abstenções, zero erradas/lacunas. Sondas inalteradas (doze desejadas/oito abertas); não contar grupo como quatro advérbios. Próximo recorte verbal; outras famílias e contrastes continuam abertos.
+
+## Incremento v6.48 — locução verbal
+
+CTX-018: pronome pessoal + poder finito (Mood=Ind/Cnd, pessoa/número reais compatíveis) + infinitivo impessoal real. Classe do grupo separada; candidatos preservados, função auxiliar geral/modalidade abertas. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. M02 continua TODO; próximo perto de + nome, depois família conjuntiva e que/se/como.

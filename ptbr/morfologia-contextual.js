@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-14-locucoes', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-15-modal', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -375,10 +375,26 @@
       items[i].evidence.push({start:punctuationStart,end:punctuationStart+1,snippet:text.slice(punctuationStart,punctuationStart+1)});
       items[i].interjection={kind:'isolated',resolution:'hypothesis',emotionResolved:false,intentionResolved:false};
     }
-    /* O grupo recebe classe própria; os componentes mantêm seus candidatos.
-     * Seis tokens: pronome + indicativo + locução, ou locução + vírgula + par. */
-    for(i=0;i+3<ts.length;i++){
-      if(ts[i].value!=='de'||ts[i+1].value!=='vez'||ts[i+2].value!=='em'||ts[i+3].value!=='quando'){continue;}
+    /* Grupos separados dos componentes, emitidos na ordem do original.
+     * Não chama Sintaxe nem transforma POS lexical em função auxiliar. */
+    for(i=0;i<ts.length;i++){
+      if(i+2<ts.length&&own.call(subjects,'$'+ts[i].value)&&unitStart(i)&&unitEnd(i+2)&&linked(i,i+1)&&linked(i+1,i+2)){
+        var modalSubject=subjects['$'+ts[i].value];
+        var modalSupport=items[i+1].candidates.portilexicon.some(function(row){
+          var f='|'+row.features+'|';
+          return row.lemma==='poder'&&(row.pos==='VERB'||row.pos==='AUX')&&/\|Mood=(Ind|Cnd)\|/.test(f)&&f.indexOf('|VerbForm=Fin|')>=0&&f.indexOf('|Person='+modalSubject[0]+'|')>=0&&f.indexOf('|Number='+(modalSubject[1]==='singular'?'Sing':'Plur')+'|')>=0;
+        });
+        var mainSupport=items[i+2].candidates.portilexicon.some(function(row){return row.pos==='VERB'&&row.features==='VerbForm=Inf'&&!has(['poder','dever','ter','haver','ser','estar','ir'],row.lemma);});
+        if(modalSupport&&mainSupport){
+          var modalEvidence=[],modalComponents=[];
+          for(k=i;k<=i+2;k++){
+            modalEvidence.push({start:ts[k].start,end:ts[k].end,snippet:text.slice(ts[k].start,ts[k].end)});
+            if(k>i){modalComponents.push({snippet:items[k].snippet,readings:items[k].candidates.portilexicon});}
+          }
+          locutions.push({at:i+1,start:ts[i+1].start,end:ts[i+2].end,kind:'verbal',components:modalComponents,context:modalEvidence,order:'modal-infinitive'});
+        }
+      }
+      if(i+3>=ts.length||ts[i].value!=='de'||ts[i+1].value!=='vez'||ts[i+2].value!=='em'||ts[i+3].value!=='quando'){continue;}
       var locutionPos=['ADP','NOUN','ADP','ADV'],locutionSupported=true,locutionComponents=[];
       for(k=0;k<4;k++){
         if(k&&!linked(i+k-1,i+k)){locutionSupported=false;}
@@ -392,7 +408,7 @@
       if(headAt<0||!own.call(subjects,'$'+ts[headAt].value)||!finite(items[headAt+1].candidates,subjects['$'+ts[headAt].value]).some(function(form){return /^indicativo:/.test(form[1]);})){continue;}
       var supportAt=locutionOrder==='after'?headAt:i,locutionEvidence=[];
       for(k=supportAt;k<supportAt+6;k++){locutionEvidence.push({start:ts[k].start,end:ts[k].end,snippet:text.slice(ts[k].start,ts[k].end)});}
-      locutions.push({at:i,start:ts[i].start,end:ts[i+3].end,components:locutionComponents,context:locutionEvidence,order:locutionOrder});
+      locutions.push({at:i,start:ts[i].start,end:ts[i+3].end,kind:'adverbial',components:locutionComponents,context:locutionEvidence,order:locutionOrder});
     }
     /* Preserva a regra de infinitivos já existente, com sua fonte histórica. */
     for (i = 0; i < ts.length; i += 1) {
@@ -405,16 +421,17 @@
   }
   function analyze(text, cap) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource,locutionIndex=0;
-    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a de vez em quando antes (com vírgula) ou depois de pronome + indicativo compatível em unidade completa de seis palavras, ah/oh isolados com INTJ real e fronteira !/?, artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
+    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a pronome pessoal + poder com Mood=Ind/Cnd e traços reais compatíveis + infinitivo impessoal real em unidade completa de três palavras, de vez em quando antes (com vírgula) ou depois de pronome + indicativo compatível em unidade completa de seis palavras, ah/oh isolados com INTJ real e fronteira !/?, artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       if(locutionIndex<report.locutions.length&&report.locutions[locutionIndex].at===i){
         var group=report.locutions[locutionIndex++];
-        out.push(E.instruments.finding('morfologia','PTBR-CTX-017',text,group.start,group.end,'Hipótese contextual: locução adverbial.',
-          'Quatro componentes lexicais reais e pronome pessoal com indicativo compatível em unidade curta completa. A classe proposta pertence ao grupo, não a cada palavra.',
-          'Neste recorte, de vez em quando favorece uma locução adverbial. Não mede frequência nem produz árvore de dependências.',
-          'Citações, grupos sem apoio verbal, continuações e outros usos permanecem abertos. As leituras de de/vez/em/quando são preservadas separadamente.',limit,
-          {title:'Regra local de locução adverbial. Priberam, verbete vez, e UD v2 fixed, consultados em 06/10/2026; fonte lexical não é parser. Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:'https://dicionario.priberam.org/vez'},
-          {confidence:'moderada',feature:'locução adverbial',analysisStatus:'contextual',context:group.context,candidates:{classes:['locução adverbial'],components:group.components},locution:{kind:'adverbial',order:group.order,resolution:'hypothesis',frequencyResolved:false,syntaxResolved:false}}));
+        var verbalGroup=group.kind==='verbal',groupClass=verbalGroup?'locução verbal':'locução adverbial';
+        out.push(E.instruments.finding('morfologia',verbalGroup?'PTBR-CTX-018':'PTBR-CTX-017',text,group.start,group.end,'Hipótese contextual: '+groupClass+'.',
+          verbalGroup?'Pronome pessoal, forma finita de lema poder com Mood=Ind/Cnd e pessoa/número explícitos compatíveis e infinitivo impessoal VERB real, em unidade completa. A classe proposta pertence ao grupo.':'Quatro componentes lexicais reais e pronome pessoal com indicativo compatível em unidade curta completa. A classe proposta pertence ao grupo, não a cada palavra.',
+          verbalGroup?'Poder + infinitivo favorece uma locução verbal neste recorte. Não decide capacidade, permissão, probabilidade ou verdade da frase.':'Neste recorte, de vez em quando favorece uma locução adverbial. Não mede frequência nem produz árvore de dependências.',
+          verbalGroup?'Candidatos e homógrafos preservados, incluindo poder/podar/possar. Não converte VERB em AUX, não atribui função auxiliar geral, não cobre cadeias, clíticos, negação ou principal pessoal.':'Citações, grupos sem apoio verbal, continuações e outros usos permanecem abertos. As leituras de de/vez/em/quando são preservadas separadamente.',limit,
+          verbalGroup?{title:'Hipótese local para poder + infinitivo. UD v2 aux em português e AUX, consultados em 06/10/2026; anotação lexical não decide função contextual. PortiLexicon '+E.portiLexicon.version+'.',url:'https://universaldependencies.org/pt/dep/aux_.html'}:{title:'Regra local de locução adverbial. Priberam, verbete vez, e UD v2 fixed, consultados em 06/10/2026; fonte lexical não é parser. Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:'https://dicionario.priberam.org/vez'},
+          {confidence:'moderada',feature:groupClass,analysisStatus:'contextual',context:group.context,candidates:{classes:[groupClass],components:group.components},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,syntaxResolved:false}}));
         if(out.length>=cap){break;}
       }
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';

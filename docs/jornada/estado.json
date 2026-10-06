@@ -1,12 +1,12 @@
 {
-  "version": 36,
+  "version": 37,
   "updated": "06/10/2026",
-  "baseline": "49da806752bbba87fee5cf14f84c1a05f4a44a62",
+  "baseline": "7b3c850af39998ff0d079588c0d65430732ab9f7",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.47: de vez em quando recebe hipótese de locução adverbial em unidade curta com pronome e indicativo compatível. Classe do grupo separada dos componentes, com leituras reais preservadas e anotação sem repetir palavras. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.48: pronome pessoal + poder finito compatível + infinitivo impessoal real recebem hipótese de locução verbal em unidade completa. Grupo e candidatos dos componentes separados, sem decidir modalidade ou função auxiliar geral. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M02-locucoes-verbais-1: revisar o grupo verbal já existente e delimitar poder + infinitivo com sujeito pessoal, dados AUX/VERB reais, fontes/gabaritos/contrastes antes da implementação em Classes. Classe do grupo separada dos componentes; não executar Sintaxe em fila nem tratar AUX lexical como função contextual automaticamente. Outras locuções e que/se/como seguem na matriz.",
+    "M02-locucoes-prepositivas-1: fixar referências/gabaritos para perto de + nome em unidade nominal curta completa; candidato ADV de perto, ADP de de e NOUN real, classe do grupo separada dos componentes e do complemento. Excluir usos citados, verbo perto inexistente, fronteiras partidas e unidade incompleta; regência/sintaxe geral abertas. Depois locuções conjuntivas e que/se/como.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -140,7 +140,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-locucoes-adverbiais-1 cumprida no recorte de seis palavras, duas ordens. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas. M02 geral continua parcial; outras locuções, que/se/como e consolidação por classe permanecem. Plano 11/25 DONE.",
+      "done": "M02-locucoes-verbais-1 cumprida no recorte modal de três palavras, com dados reais já incorporados. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas. M02 geral parcial; plano 11/25 DONE.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -159,7 +159,8 @@
         "docs/jornada/ENTREGA-V6-44.md",
         "docs/jornada/ENTREGA-V6-45.md",
         "docs/jornada/ENTREGA-V6-46.md",
-        "docs/jornada/ENTREGA-V6-47.md"
+        "docs/jornada/ENTREGA-V6-47.md",
+        "docs/jornada/ENTREGA-V6-48.md"
       ]
     },
     {
@@ -697,7 +698,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M02-locucoes-verbais-1: revisar o grupo verbal já existente e delimitar poder + infinitivo com sujeito pessoal, dados AUX/VERB reais, fontes/gabaritos/contrastes antes da implementação em Classes. Classe do grupo separada dos componentes; não executar Sintaxe em fila nem tratar AUX lexical como função contextual automaticamente. Outras locuções e que/se/como seguem na matriz."
+    "nextDeliverable": "M02-locucoes-prepositivas-1: fixar referências/gabaritos para perto de + nome em unidade nominal curta completa; candidato ADV de perto, ADP de de e NOUN real, classe do grupo separada dos componentes e do complemento. Excluir usos citados, verbo perto inexistente, fronteiras partidas e unidade incompleta; regência/sintaxe geral abertas. Depois locuções conjuntivas e que/se/como."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -711,7 +712,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Passaram 32 alvos de locução (seis úteis/dez abstenções por conjunto), retirada de cada componente real, indicativo/compatibilidade e unidade completa, proteção/truncamento, seleção com emoji/NFD, apoios exatos, autoria/custo/100 achados/ES5. Painel de uma lente e anotação sem duplicar palavras passaram nas duas ordens. Passaram 32 contrastes de negação, 63 regressões contextuais e 32 contrastes de interjeição. Todas as 3.212 formas/5.662 leituras anteriores preservadas. Vinte sondas M02 continuam doze desejadas/oito abertas/zero classes diferentes; grupo não é contado como palavra. Build:check sete saídas; regressão completa no CI e Pages por SHA.",
+    "verification": "32 alvos próprios passaram, com retirada/incompatibilidade de dados reais, homógrafos, grupo/componentes, ordem mista de locuções, seleção/emoji/NFD, posições exatas, proteção, tetos/custo/cap, ES5 e painel de uma lente sem repetição do original. Locução adverbial: 32 alvos e controles passaram; negação: 32 contrastes e 63 expectativas antigas passaram. Dados lexicais inalterados; build:check sete saídas. Regressão completa uma vez no CI e Pages por SHA.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -729,5 +730,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-47.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-48.json"
 }

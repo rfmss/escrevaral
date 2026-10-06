@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado antes da implementação, sem cegamento/independência.",
+  "baseline": "7b3c850af39998ff0d079588c0d65430732ab9f7",
+  "scope": "Pronome pessoal + indicativo de lema poder com traços reais de pessoa/número compatíveis + infinitivo impessoal VERB real, unidade completa de três tokens. Grupo separado dos componentes; modalidades/permissão/capacidade/verdade e função auxiliar geral abertas. Principal não pode ser poder/dever/ter/haver/ser/estar/ir neste recorte.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Nós podíamos cantar.",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Ela pôde sair.",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Eu poderia ler.",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "Vocês poderão trabalhar!",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Eles puderam escrever?",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Eu posso\tabrir",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "Ela puder cantar.",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "Eu poder cantar.",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Eu posso cantando.",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Eu posso cantado.",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Eu posso palavarxyz.",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "Eu posso poder.",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "Meu poder cantar.",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "Eu posso, cantar.",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "Eu posso `cantar`.",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Eu posso cantar hoje.",
+      "expected": false
+    }
+  ]
+}

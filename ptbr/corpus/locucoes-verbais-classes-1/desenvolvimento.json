@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado antes da implementação, sem cegamento/independência.",
+  "baseline": "7b3c850af39998ff0d079588c0d65430732ab9f7",
+  "scope": "Pronome pessoal + indicativo de lema poder com traços reais de pessoa/número compatíveis + infinitivo impessoal VERB real, unidade completa de três tokens. Grupo separado dos componentes; modalidades/permissão/capacidade/verdade e função auxiliar geral abertas. Principal não pode ser poder/dever/ter/haver/ser/estar/ir neste recorte.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Eu posso cantar.",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Ela pode ler.",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Nós podemos escrever.",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Eles podem sair.",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Tu podes trabalhar.",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Você pode abrir.",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "Posso cantar.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Eu posso.",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Eu pode cantar.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Eu posso cantas.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Nós podemos cantarmos.",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Eu posso ter.",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Eu posso cantar e dançar.",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Eu não posso cantar.",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "Eu posso “cantar”.",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Eu posso\ncantar.",
+      "expected": false
+    }
+  ]
+}
