@@ -1,12 +1,12 @@
 {
-  "version": 37,
+  "version": 38,
   "updated": "06/10/2026",
-  "baseline": "7b3c850af39998ff0d079588c0d65430732ab9f7",
+  "baseline": "3b553be0399af29a83bbad0fc0b8224da895cb92",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.48: pronome pessoal + poder finito compatível + infinitivo impessoal real recebem hipótese de locução verbal em unidade completa. Grupo e candidatos dos componentes separados, sem decidir modalidade ou função auxiliar geral. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.49: perto de + candidato nominal em unidade completa recebe hipótese de locução prepositiva. Grupo, palavras e complemento separados; distância, sentido e vínculo sintático abertos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M02-locucoes-prepositivas-1: fixar referências/gabaritos para perto de + nome em unidade nominal curta completa; candidato ADV de perto, ADP de de e NOUN real, classe do grupo separada dos componentes e do complemento. Excluir usos citados, verbo perto inexistente, fronteiras partidas e unidade incompleta; regência/sintaxe geral abertas. Depois locuções conjuntivas e que/se/como.",
+    "M02-locucoes-conjuntivas-1: delimitar assim que entre dois pares pronome pessoal + forma finita compatível em unidade completa; referências, dados ADV/SCONJ reais e contrastes antes do código. Grupo separado dos componentes, sem executar Sintaxe/Relativas nem deduzir subordinação pela presença de que. Depois contrastes que/se/como e consolidação por classe.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -140,7 +140,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-locucoes-verbais-1 cumprida no recorte modal de três palavras, com dados reais já incorporados. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas. M02 geral parcial; plano 11/25 DONE.",
+      "done": "M02-locucoes-prepositivas-1 cumprida no recorte de três palavras com dados reais já disponíveis. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. M02 geral parcial; plano 11/25 DONE.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -160,7 +160,8 @@
         "docs/jornada/ENTREGA-V6-45.md",
         "docs/jornada/ENTREGA-V6-46.md",
         "docs/jornada/ENTREGA-V6-47.md",
-        "docs/jornada/ENTREGA-V6-48.md"
+        "docs/jornada/ENTREGA-V6-48.md",
+        "docs/jornada/ENTREGA-V6-49.md"
       ]
     },
     {
@@ -698,7 +699,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M02-locucoes-prepositivas-1: fixar referências/gabaritos para perto de + nome em unidade nominal curta completa; candidato ADV de perto, ADP de de e NOUN real, classe do grupo separada dos componentes e do complemento. Excluir usos citados, verbo perto inexistente, fronteiras partidas e unidade incompleta; regência/sintaxe geral abertas. Depois locuções conjuntivas e que/se/como."
+    "nextDeliverable": "M02-locucoes-conjuntivas-1: delimitar assim que entre dois pares pronome pessoal + forma finita compatível em unidade completa; referências, dados ADV/SCONJ reais e contrastes antes do código. Grupo separado dos componentes, sem executar Sintaxe/Relativas nem deduzir subordinação pela presença de que. Depois contrastes que/se/como e consolidação por classe."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -712,7 +713,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "32 alvos próprios passaram, com retirada/incompatibilidade de dados reais, homógrafos, grupo/componentes, ordem mista de locuções, seleção/emoji/NFD, posições exatas, proteção, tetos/custo/cap, ES5 e painel de uma lente sem repetição do original. Locução adverbial: 32 alvos e controles passaram; negação: 32 contrastes e 63 expectativas antigas passaram. Dados lexicais inalterados; build:check sete saídas. Regressão completa uma vez no CI e Pages por SHA.",
+    "verification": "Passaram 32 alvos de locução prepositiva, retirada de ADV/ADP/NOUN reais e cinco alternativas excludentes, candidatos/componentes/complemento, ordem mista dos três tipos, seleção/emoji/NFD, autoria, proteção/truncamento, uma consulta por token, tetos/100 achados/ES5 e painel sem repetição. Passaram 32 alvos verbais e 32 adverbiais e seus controles. Recursos lexicais inalterados; build:check sete saídas. Regressão completa no CI e Pages por SHA.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -730,5 +731,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-48.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-49.json"
 }

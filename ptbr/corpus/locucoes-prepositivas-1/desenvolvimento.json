@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado antes do motor, sem cegamento/independência.",
+  "baseline": "3b553be0399af29a83bbad0fc0b8224da895cb92",
+  "scope": "Perto de + NOUN real em unidade completa de três tokens contíguos, ADV real perto e ADP real de. Grupo prepositivo ocupa duas palavras; nome/alternativas mantidos separados. Complemento com NUM/ADV/ADP/CCONJ/SCONJ não apoia este recorte. Sem distância, sentido ou sintaxe geral.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Perto de casa.",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Perto de casas.",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Perto de jardim.",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Perto de mesa.",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Perto de praia.",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Perto de livro.",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "Perto.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Perto de.",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Perto de ler.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Perto de dois.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Perto de palavaxyz.",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Perto, de casa.",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Perto de\ncasa.",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "“Perto de casa.”",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "O perto de casa.",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Perto de casa branca.",
+      "expected": false
+    }
+  ]
+}

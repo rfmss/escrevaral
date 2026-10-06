@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado antes do motor, sem cegamento/independência.",
+  "baseline": "3b553be0399af29a83bbad0fc0b8224da895cb92",
+  "scope": "Perto de + NOUN real em unidade completa de três tokens contíguos, ADV real perto e ADP real de. Grupo prepositivo ocupa duas palavras; nome/alternativas mantidos separados. Complemento com NUM/ADV/ADP/CCONJ/SCONJ não apoia este recorte. Sem distância, sentido ou sintaxe geral.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Perto de jardins!",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Perto de mesas?",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Perto de livros",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "Perto de mulheres;",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Perto de canto.",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Perto\tde casas.",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "Perto de cantar.",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "Perto de três.",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Perto do jardim.",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Muito perto de casa.",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Ela chegou perto de casa.",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "Perto de casa e mesa.",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "Perto de casa,",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "Perto de `casa`.",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "Perto de https://casa.com.",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Perto de casa chegou.",
+      "expected": false
+    }
+  ]
+}

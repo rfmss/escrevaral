@@ -233,9 +233,10 @@
             "docs/jornada/ENTREGA-V6-45.md",
             "docs/jornada/ENTREGA-V6-46.md",
             "docs/jornada/ENTREGA-V6-47.md",
-            "docs/jornada/ENTREGA-V6-48.md"
+            "docs/jornada/ENTREGA-V6-48.md",
+            "docs/jornada/ENTREGA-V6-49.md"
           ],
-          "progress": "M02-locucoes-verbais-1 cumprida no recorte modal de três palavras, com dados reais já incorporados. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas. M02 geral parcial; plano 11/25 DONE."
+          "progress": "M02-locucoes-prepositivas-1 cumprida no recorte de três palavras com dados reais já disponíveis. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. M02 geral parcial; plano 11/25 DONE."
         },
         {
           "id": "M03",
@@ -336,12 +337,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.48.0",
+    "version": "6.49.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-48.md",
-    "record": "docs/jornada/entregas/v6-48.json"
+    "evidence": "docs/jornada/ENTREGA-V6-49.md",
+    "record": "docs/jornada/entregas/v6-49.json"
   },
   "scopeChanges": [
     {

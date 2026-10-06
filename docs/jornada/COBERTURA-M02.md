@@ -25,7 +25,8 @@ O determinante (UD) de CTX-008 conserva a categoria da fonte: não é décima pr
 |---|---|---|
 | Verbais | CTX-018: poder + infinitivo impessoal com sujeito e dados reais em Classes; Sintaxe mantém seus quatro padrões | Outros auxiliares/cadeias e construções; modalidade e função auxiliar geral abertas |
 | Adverbiais | CTX-017: de vez em quando com apoio indicativo em unidade completa; grupo separado dos componentes | Outras expressões e construções; frequência/dependências não resolvidas; catálogo em Expressões continua distinto |
-| Prepositivas/conjuntivas | Palavras simples e candidatos | Inventário pequeno, apoios e exclusões antes da implementação |
+| Prepositivas | CTX-019: perto de + candidato nominal em unidade completa; grupo/componentes/complemento separados | Outras expressões, contrações e construções; distância/sentido/vínculo sintático abertos |
+| Conjuntivas | Palavras simples e candidatos | Assim que entre dois pares pronome/verbo: dados, apoios e exclusões antes da implementação |
 | Adjetivas e demais grupos pluriverbais | Complementos curtos em CTX-007 | Complemento não vira automaticamente locução adjetiva; delimitar decisão e alcance da primeira versão |
 
 A matriz não elimina famílias prometidas por falta de implementação. Expressões estilísticas, grupos sintáticos e classes permanecem resultados distintos.
@@ -54,7 +55,7 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: perto de + nome em unidade curta, grupo prepositivo e complemento separados, referências/dados/corpus antes do código. [Entrega v6.48](ENTREGA-V6-48.md).
+Próxima ação concreta: assim que entre dois pares pronome pessoal + forma finita compatível, grupo separado; fonte/corpus antes do código. [Entrega v6.49](ENTREGA-V6-49.md).
 
 ## Incremento v6.45 — numerais
 
@@ -71,3 +72,7 @@ CTX-017: de vez em quando com pronome + indicativo compatível, antes com vírgu
 ## Incremento v6.48 — locução verbal
 
 CTX-018: pronome pessoal + poder finito (Mood=Ind/Cnd, pessoa/número reais compatíveis) + infinitivo impessoal real. Classe do grupo separada; candidatos preservados, função auxiliar geral/modalidade abertas. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. M02 continua TODO; próximo perto de + nome, depois família conjuntiva e que/se/como.
+
+## Incremento v6.49 — locução prepositiva
+
+CTX-019: perto de + NOUN real em unidade completa de três tokens. ADV/ADP reais exigidos; NUM/ADV/ADP/conjunção no complemento excluídos. Grupo separado de palavras/complemento, sem distância/sentido/vínculo. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. Próximo grupo conjuntivo; M02 geral TODO.
