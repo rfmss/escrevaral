@@ -204,9 +204,10 @@
             "docs/jornada/ENTREGA-V6-41.md",
             "docs/jornada/ENTREGA-V6-42.md",
             "docs/jornada/ENTREGA-V6-43.md",
-            "docs/jornada/ENTREGA-V6-44.md"
+            "docs/jornada/ENTREGA-V6-44.md",
+            "docs/jornada/ENTREGA-V6-45.md"
           ],
-          "progress": "PortiLexicon recorte 7: 219 sementes, 3.207 formas/5.655 leituras. Não/nãos adicionados pelo snapshot fixo, incluindo ADV e NOUN; todas as triplas antigas preservadas. M01 geral parcial."
+          "progress": "PortiLexicon recorte 8: 221 sementes, 3.210 formas e 5.660 leituras; dois/duas/três acrescentados com todas as alternativas e dados anteriores conservados. M01 geral parcial."
         },
         {
           "id": "M02",
@@ -226,9 +227,10 @@
             "docs/jornada/ENTREGA-V6-41.md",
             "docs/jornada/ENTREGA-V6-42.md",
             "docs/jornada/ENTREGA-V6-43.md",
-            "docs/jornada/ENTREGA-V6-44.md"
+            "docs/jornada/ENTREGA-V6-44.md",
+            "docs/jornada/ENTREGA-V6-45.md"
           ],
-          "progress": "M02-adverbios-negacao-1 cumprida no recorte pré-verbal com sujeito explícito e indicativo compatível. 32 alvos próprios: doze decisões úteis, vinte abstenções esperadas, zero erradas/lacunas observadas. Prioridade de determinantes corrigida para preservar usos negativos e possessivos sem nome. M02 geral continua parcial; plano 11/25 DONE."
+          "progress": "M02-numerais-1 cumprida no recorte de sete lemas nominais. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero decisões erradas/lacunas observadas. M02 geral parcial; plano 11/25 DONE."
         },
         {
           "id": "M03",
@@ -329,12 +331,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.44.0",
+    "version": "6.45.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-44.md",
-    "record": "docs/jornada/entregas/v6-44.json"
+    "evidence": "docs/jornada/ENTREGA-V6-45.md",
+    "record": "docs/jornada/entregas/v6-45.json"
   },
   "scopeChanges": [
     {

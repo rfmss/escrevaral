@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes da implementação, sem independência ou cegamento.",
+  "baseline": "b9f3e80c6d970c7fec00eefc29993e9116e8e3a8",
+  "scope": "Dois/duas/três com NUM NumType=Card real + NOUN Number=Plur de livro/casa/jardim/flor/mesa/mulher/homem; dois/duas exigem Gender compatível. Unidade completa de dois tokens contíguos. Nenhum Number do NUM inventado, contagem, função sintática, medida, data ou um/uma resolvido.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Dois livros.",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Duas casas.",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Três casas.",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Dois jardins.",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Três flores.",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Duas mesas.",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "Um livro.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Dois livro.",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Duas livros.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Dois casas.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Três.",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Dois desconhecidosxyz.",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Dois livros novos.",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Eu vi dois livros.",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "Dois metros.",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Três anos.",
+      "expected": false
+    }
+  ]
+}

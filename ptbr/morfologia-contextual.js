@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-11-negacao', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-12-numerais', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -20,7 +20,7 @@
   var nominalArticles=articles.concat(['um','uma','uns','umas']);
   var articleFeatures={um:['Masc','Sing'],uma:['Fem','Sing'],uns:['Masc','Plur'],umas:['Fem','Plur'],o:['Masc','Sing'],a:['Fem','Sing'],os:['Masc','Plur'],as:['Fem','Plur']};
   var contractions={do:'o',da:'a',dos:'os',das:'as'};
-  var featurePatterns={Gender:/(?:^|\|)Gender=([^|]+)(?:\||$)/,Number:/(?:^|\|)Number=([^|]+)(?:\||$)/};
+  var featurePatterns={Gender:/(?:^|\|)Gender=([^|]+)(?:\||$)/,Number:/(?:^|\|)Number=([^|]+)(?:\||$)/,NumType:/(?:^|\|)NumType=([^|]+)(?:\||$)/};
   function has(list, word) { return list.indexOf(word) >= 0; }
   function readings(word) {
     var w = E.reading.canonical(word), r = E.grammar.readings(w), more = extraForms['$' + w] || [];
@@ -304,6 +304,30 @@
         items[k].nominalCoordination={connector:ts[i+2].value,role:coordRole,articles:true,featuresChecked:true,resolution:'hypothesis',syntaxResolved:false};
       }
     }
+    /* Cardinal + nome plural: unidade completa, inventário nominal delimitado.
+     * NumType não é Number: a pluralidade vem apenas do NOUN da fonte.
+     * Homógrafos ficam no resultado; nenhum valor ou função sintática é atribuído. */
+    for(i=0;i+1<ts.length;i++){
+      if(!has(['dois','duas','três'],ts[i].value)||!linked(i,i+1)||!unitStart(i)||!unitEnd(i+1)){continue;}
+      if(items[i].status==='contextual'||items[i+1].status==='contextual'||blockedNominal[i]||blockedNominal[i+1]){continue;}
+      var numeralRows=items[i].candidates.portilexicon,numberNouns=items[i+1].candidates.portilexicon,numeralMatch=null,ni,nj;
+      for(ni=0;ni<numeralRows.length;ni++){
+        if(numeralRows[ni].pos!=='NUM'||!has(feature(numeralRows[ni],'NumType'),'Card')){continue;}
+        var numeralGender=feature(numeralRows[ni],'Gender');
+        for(nj=0;nj<numberNouns.length;nj++){
+          var numberNoun=numberNouns[nj];
+          if(numberNoun.pos!=='NOUN'||!has(['livro','casa','jardim','flor','mesa','mulher','homem'],numberNoun.lemma)||!has(feature(numberNoun,'Number'),'Plur')){continue;}
+          if(numeralGender.length&&!numeralGender.some(function(g){return has(feature(numberNoun,'Gender'),g);})){continue;}
+          numeralMatch={numType:'Card',nounNumber:'Plur',numeralGenderMarked:!!numeralGender.length,resolution:'hypothesis',syntaxResolved:false,quantityResolved:false};
+          break;
+        }
+        if(numeralMatch){break;}
+      }
+      if(!numeralMatch){continue;}
+      choose(i,'numeral','PTBR-CTX-015',[i,i+1]);
+      choose(i+1,'substantivo','PTBR-CTX-015',[i,i+1]);
+      items[i].nominalNumeral=numeralMatch;items[i+1].nominalNumeral=numeralMatch;
+    }
     /* Artigo definido + nome conhecido. Homógrafo verbal requer contexto à direita. */
     for (i = 0; i + 1 < ts.length; i += 1) {
       if (blockedNominal[i] || !has(articles, ts[i].value) || items[i].status === 'contextual' || !linked(i, i + 1)) { continue; }
@@ -348,7 +372,7 @@
   }
   function analyze(text, cap) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource;
-    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
+    var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';
       message = contextual ? 'Leitura contextual: ' + item.selected + '.' : item.status === 'desconhecido' ? 'Sem classificação neste inventário.' : 'Possibilidades lexicais: ' + r.classes.join(', ') + '.';
@@ -356,12 +380,14 @@
       if(item.rule==='PTBR-CTX-009'){message='Leitura contextual: demonstrativo sem nome expresso.';}
       if(item.rule==='PTBR-CTX-010'){message='Possessivo sem nome expresso: leitura em aberto.';}
       if(item.rule==='PTBR-CTX-011'){message=item.nominalCoordination.role==='conectivo'?'Hipótese de coordenação nominal: conectivo '+item.nominalCoordination.connector+'.':'Hipótese de coordenação nominal: substantivo.';}
+      if(item.rule==='PTBR-CTX-015'){message='Hipótese de grupo nominal com cardinal: '+item.selected+'.';}
       if(item.rule==='PTBR-CTX-014'){message='Leitura contextual: advérbio de negação antes de verbo.';}
       if(item.rule==='PTBR-CTX-013'){message='Hipótese de coordenação nominal com adjetivos: '+(item.nominalCoordination.role==='conectivo'?'conectivo '+item.nominalCoordination.connector:item.selected)+'.';}
       if(item.rule==='PTBR-CTX-012'){message='Hipótese de coordenação nominal com artigos: '+(item.nominalCoordination.role==='conectivo'?'conectivo '+item.nominalCoordination.connector:item.selected)+'.';}
       reason = item.rule === 'PTBR-CTX-001' ? 'Pronome sujeito próximo e forma verbal finita compatível em pessoa e número.' :
         item.rule === 'PTBR-CTX-002' ? 'Artigo definido antes de nome registrado; homógrafos verbais exigem também uma forma finita à direita.' :
         item.rule === 'PTBR-CTX-003' ? 'A forma aparece entre pronome sujeito (com não opcional) e verbo finito compatível.' :
+        item.rule === 'PTBR-CTX-015' ? 'Dois/duas/três com candidato NUM cardinal seguido de nome com Number=Plur em unidade completa de duas palavras. O nome pertence ao recorte livro/casa/jardim/flor/mesa/mulher/homem. NumType=Card não informa Number do numeral; a pluralidade é registrada só no nome.'+(item.nominalNumeral.numeralGenderMarked?' Gênero do numeral marcado e compatível com o nome.':' Gênero do numeral ausente na fonte, sem inferência de concordância.')+' Não resolve quantidade, função sintática, medidas, datas, um/uma ou grupos com modificadores. Homógrafos preservados.' :
         item.rule === 'PTBR-CTX-014' ? 'A forma “não” tem candidato ADV e aparece entre pronome pessoal sujeito no início de unidade e forma indicativa compatível, com clítico opcional. Favorece advérbio de negação neste recorte; não decide alcance semântico, intenção, verdade da frase ou dupla negação. A leitura nominal permanece no inventário.' :
         item.rule === 'PTBR-CTX-013' ? 'Dois grupos artigo + nome + adjetivo posposto já reconhecidos, ligados por e/ou em unidade completa. Gênero e número explícitos e compatíveis dentro de cada grupo; adjetivos sem alternativa verbal no inventário. Não compara os traços entre os grupos, não escolhe sentido e não atribui sujeito, objeto ou concordância do conjunto. Um/uma conservam alternativas quantitativas.' :
         item.rule === 'PTBR-CTX-012' ? 'Dois pares artigo + nome ligados por e/ou, entre limites explícitos, com gênero e número registrados e compatíveis em cada par. Artigo indefinido ou ao menos um nome sem outra classe no inventário dá apoio adicional. A leitura de artigo não elimina usos quantitativos de um/uma. Não determina sujeito, objeto, concordância do conjunto ou sentido de ou; diferenças de gênero e número entre os núcleos são preservadas.' :
@@ -381,6 +407,7 @@
       if(item.rule==='PTBR-CTX-008'){occurrenceSource={title:'Regra computacional local: determinante possessivo/demonstrativo antes de nome. Universal Dependencies v2, Poss e PronType, consultados em 30/09/2026; não identifica referente nem resolve usos sem nome.',url:'https://universaldependencies.org/u/feat/PronType.html'};}
       if(item.rule==='PTBR-CTX-009'||item.rule==='PTBR-CTX-010'){occurrenceSource={title:'Hipótese/observação computacional local para usos sem nome expresso. UD v2 PRON e Ellipsis in Nominals, consultados em 01/10/2026; distinções entre pronome, determinante e elipse não são decididas só pela ausência do nome.',url:'https://universaldependencies.org/u/pos/PRON.html'};}
       if(item.rule==='PTBR-CTX-011'){occurrenceSource={title:'Hipótese computacional local de coordenação nominal curta. UD v2: conj e cc, consultados em 01/10/2026. Distingue conectivo e constituintes; não implementa árvore de dependências.',url:'https://universaldependencies.org/u/dep/conj.html'};}
+      if(item.rule==='PTBR-CTX-015'){occurrenceSource={title:'Hipótese computacional local de cardinal + nome plural. UD v2: nummod em português e NumType, consultados em 06/10/2026; anotação lexical não é algoritmo de desambiguação. Number explícito é do nome, não do numeral.',url:'https://universaldependencies.org/pt/dep/nummod.html'};}
       if(item.rule==='PTBR-CTX-014'){occurrenceSource={title:'Hipótese computacional local para não pré-verbal. UD v2: advmod em português e Polarity, consultados em 05/10/2026; referências de anotação, sem resolver alcance. O dado ADV do PortiLexicon não informa Polarity; negação é a interpretação delimitada da regra.',url:'https://universaldependencies.org/pt/dep/advmod.html'};}
       if(item.rule==='PTBR-CTX-013'){occurrenceSource={title:'Hipótese computacional local de coordenação com adjetivos pospostos. UD v2: amod em português, consultado em 05/10/2026; conj e det retomados da v6.42. Referências de anotação, sem implementar árvore de dependências ou desambiguação geral.',url:'https://universaldependencies.org/pt/dep/amod.html'};}
       if(item.rule==='PTBR-CTX-012'){occurrenceSource={title:'Hipótese computacional local para coordenação com artigos. UD v2: conj e det em português, consultados em 04/10/2026. Referências de anotação; não são algoritmo de desambiguação nem prova de função sintática.',url:'https://universaldependencies.org/pt/dep/det.html'};}
@@ -391,7 +418,7 @@
         'Possibilidades lexicais registradas: ' + (r.classes.join(', ') || 'nenhuma') + '. A regra é uma hipótese local. Elipse, nomes próprios, usos literários e outras construções podem exigir leitura diferente. Um inventário com uma só classe não prova unicidade na língua.',
         limit, occurrenceSource,
         { confidence: contextual ? 'moderada' : 'insuficiente', feature: item.selected || item.status, candidates: r,
-          negation: item.negation || null, nominalCoordination: item.nominalCoordination || null, standaloneUse: item.standaloneUse || null, nominalDeterminer: item.nominalDeterminer || null, nominalComplement: item.nominalComplement || null, nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
+          nominalNumeral: item.nominalNumeral || null, negation: item.negation || null, nominalCoordination: item.nominalCoordination || null, standaloneUse: item.standaloneUse || null, nominalDeterminer: item.nominalDeterminer || null, nominalComplement: item.nominalComplement || null, nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
     }
     out.coverageInfo = { scope: report.scope, work: report.work, version: version, lexiconVersion: E.portiLexicon?E.portiLexicon.version:null,
       summary: 'Classes em contexto: recorte ' + report.scope.start + '–' + report.scope.end + ' de ' + text.length + ' unidades UTF-16; ' + report.work.tokens + ' tokens.' + (report.scope.partial ? ' Análise parcial: selecione o restante para continuar.' : '') };

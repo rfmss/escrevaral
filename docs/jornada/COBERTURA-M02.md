@@ -12,7 +12,7 @@ Base do diagnóstico inicial: `017b4ecb7d4277c08afcb66cb42f7776a1a59a95` (v6.43)
 | Pronome | Clítico junto ao verbo e demonstrativo sem nome; possessivo sem nome permanece aberto | CTX-003/009/010; tests/ptbr-contexto.cjs e contexto-sem-nome.cjs | Pronome pessoal sujeito é apoio sem decisão sobre sua própria ocorrência; contrastes de se/que |
 | Verbo | Forma finita compatível com sujeito explícito e infinitivo apoiado | CTX-001/005; tests/ptbr-contexto.cjs e contexto-portilexicon.cjs | Formas isoladas, sujeito não expresso e função auxiliar |
 | Advérbio | CTX-014 na v6.44: não pré-verbal com leitura ADV real e apoio indicativo | Sondas M02-11/12; tests/contexto-negacao.cjs | Outros advérbios e não sem sujeito explícito permanecem fora do recorte |
-| Numeral | Apenas candidato lexical; um/uma podem receber hipótese de artigo | Sondas M02-13/14; alternativas preservadas no painel | Dois/três + nome plural em unidade curta |
+| Numeral | Cardinal + nome plural de sete lemas em unidade completa | CTX-015; numerais-1, candidatos NUM/NOUN reais | Outros nomes/cardinais, um/uma, grupos maiores; quantidade aberta |
 | Preposição | De e contrações no complemento nominal apoiado | CTX-007; tests/contexto-preposicional.cjs | CTX-005 seleciona o infinitivo, não a preposição; regência geral também pertence a M03/M05 |
 | Conjunção | E/ou na coordenação nominal delimitada | CTX-011/012/013; testes de coordenação | Mas e subordinativas, contrastes de que/se/como |
 | Interjeição | Apenas candidato lexical | Sondas M02-19/20; inventário legado | Interjeição isolada com fronteira explícita; usos citados/substantivados abertos |
@@ -36,7 +36,7 @@ A matriz não elimina famílias prometidas por falta de implementação. Express
 
 `node ferramentas/medir-cobertura-contexto.cjs caminho-do-relatorio.json` registra status, candidatos, seleção e regra por alvo. O relatório `antes-v6-44.json` é da v6.43; seu nome identifica a comparação prevista, não uma v6.44 publicada.
 
-Na base: sete decisões da classe desejada, treze casos abertos, nenhuma seleção de classe diferente. Sete classes têm ao menos um caso decidido nestas sondas; isso não mede completude dessas classes. O código dessa base também não tinha seleção contextual para advérbio, numeral ou interjeição. Na v6.44, oito decisões desejadas e doze casos abertos: uma decisão nova de advérbio. Numeral/interjeição continuam sem seleção; esses números são apenas as vinte sondas.
+Na base: sete decisões da classe desejada, treze casos abertos, nenhuma seleção de classe diferente. Sete classes têm ao menos um caso decidido nestas sondas; isso não mede completude dessas classes. O código dessa base também não tinha seleção contextual para advérbio, numeral ou interjeição. Na v6.44, oito decisões desejadas e doze casos abertos: uma decisão nova de advérbio. Numeral/interjeição continuavam sem seleção na v6.44; esses números são apenas as vinte sondas.
 
 A primeira lacuna escolhida é não pré-verbal: reutiliza o reconhecimento de sujeito/forma finita, sem nova infraestrutura. Corpus separado `adverbios-1`: dezesseis alvos por conjunto, seis metas positivas e dez abstenções. Baseline de cada conjunto: zero decisões úteis/erradas, seis lacunas e dez abstenções esperadas. Depois da integração com o inventário real, cada conjunto teve seis decisões úteis, zero erradas, zero lacunas e dez abstenções esperadas. Gabaritos preservados; não é avaliação independente.
 
@@ -54,4 +54,8 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: numeral cardinal dois/três seguido de nome plural, com leitura NUM e Number explícitos, unidade curta completa, gabaritos antes do código e abstenção para unidade monetária/data ou nome sem traços. Não resolver um/uma. A [entrega v6.44](ENTREGA-V6-44.md) supera a preparação histórica da [retomada técnica](RETOMADA-M02-2026-10-05.md).
+Próxima ação concreta: ah/oh isolados com fronteira explícita, candidato INTJ real, corpus pré-fixado e abstenção para citações/substantivações/continuações. A [entrega v6.45](ENTREGA-V6-45.md) acrescenta numerais; a v6.44 integrou negação.
+
+## Incremento v6.45 — numerais
+
+CTX-015: dois/duas/três + plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa. NumType cardinal e Number do NOUN explícitos; NUM não tem Number na fonte. Gênero conferido quando marcado; homógrafos preservados. 32 alvos próprios: doze úteis e vinte abstenções esperadas, zero erradas/lacunas. Sondas depois-v6-45: dez desejadas, dez abertas, nenhuma classe diferente. Próximo interjeição isolada; M02 geral permanece TODO. [Entrega](ENTREGA-V6-45.md).

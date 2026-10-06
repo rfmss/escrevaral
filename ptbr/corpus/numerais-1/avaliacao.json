@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes da implementação, sem independência ou cegamento.",
+  "baseline": "b9f3e80c6d970c7fec00eefc29993e9116e8e3a8",
+  "scope": "Dois/duas/três com NUM NumType=Card real + NOUN Number=Plur de livro/casa/jardim/flor/mesa/mulher/homem; dois/duas exigem Gender compatível. Unidade completa de dois tokens contíguos. Nenhum Number do NUM inventado, contagem, função sintática, medida, data ou um/uma resolvido.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Dois homens!",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Duas mulheres?",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Três livros",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "Três jardins;",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Duas flores.",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Três mesas.",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "Uma casa.",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "Três casa.",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Dois mulheres.",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Duas homens.",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Dois.",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "Três palavrasxyz.",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "Dois de maio.",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "Dois livros chegaram.",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "Dois, livros.",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Duas\ncasas.",
+      "expected": false
+    }
+  ]
+}
