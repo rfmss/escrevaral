@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 06/10/2026. Base do produto auditada: `f27c340ebc2ca3cbac40020ffabeda459637f8a9`.
+Atualizado em 06/10/2026. Base do produto auditada: `23cc5374f5c91fab7a2c443d2d512c84f0a42ebf`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.53: que entre dois pares pronome/indicativo real, com saber/dizer à esquerda, recebe hipótese de conjunção integrante em unidade completa de cinco palavras. Três recortes de como/se/que integrados, alternativas e abstenções preservadas. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.54: cobertura de M02 consolidada por família e classe, com alvos, hashes, abstenções, observações e lacunas preservados. Escopo de locuções registrado; recorte adjetival permanece como próximo requisito de fechamento. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02-consolidacao-1: reunir relatório reproduzível por classe/família, separando decisões úteis, erradas, abstenções, lacunas e observações; manter revista/revistas. Delimitar inventário/construção/exclusões de locuções adjetivas/demais grupos com implementação ou decisão explícita de escopo. Conferir critérios da COBERTURA-M02 antes de concluir M02 e iniciar M03.
+- M02-locucoes-adjetivas-1: conferir referência e dados reais para de madeira/de papel após artigo + nome de objeto; fixar pares e exclusões antes do motor. Não converter automaticamente CTX-007 em locução adjetiva. Depois conferir COBERTURA-M02 e concluir M02 somente com evidências.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-contrastes-3 cumprida no recorte de que integrante: 32 alvos, doze úteis/vinte abstenções, zero erradas/lacunas. Três recortes somam96 alvos,36 úteis/60 abstenções, zero indevidas nos controles declarados; não é acurácia geral. Consolidação e escopo adjetival faltam;11/25 DONE.
+**Condição de conclusão:** M02-consolidacao-1 concluída: 589 alvos de35 arquivos,258 úteis/0 erradas/323 abstenções/2 lacunas/6 observações;20 sondas separadas. Escopo dos grupos declarado. Recorte adjetival ainda pendente,11/25 DONE.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`, `docs/jornada/ENTREGA-V6-44.md`, `docs/jornada/ENTREGA-V6-45.md`, `docs/jornada/ENTREGA-V6-46.md`, `docs/jornada/ENTREGA-V6-47.md`, `docs/jornada/ENTREGA-V6-48.md`, `docs/jornada/ENTREGA-V6-49.md`, `docs/jornada/ENTREGA-V6-50.md`, `docs/jornada/ENTREGA-V6-51.md`, `docs/jornada/ENTREGA-V6-52.md`, `docs/jornada/ENTREGA-V6-53.md`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`, `docs/jornada/ENTREGA-V6-44.md`, `docs/jornada/ENTREGA-V6-45.md`, `docs/jornada/ENTREGA-V6-46.md`, `docs/jornada/ENTREGA-V6-47.md`, `docs/jornada/ENTREGA-V6-48.md`, `docs/jornada/ENTREGA-V6-49.md`, `docs/jornada/ENTREGA-V6-50.md`, `docs/jornada/ENTREGA-V6-51.md`, `docs/jornada/ENTREGA-V6-52.md`, `docs/jornada/ENTREGA-V6-53.md`, `docs/jornada/ENTREGA-V6-54.md`.
 
 ### P05 — Construir as relações da oração
 

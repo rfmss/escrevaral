@@ -9,12 +9,12 @@ Base do diagnóstico inicial: `017b4ecb7d4277c08afcb66cb42f7776a1a59a95` (v6.43)
 | Substantivo | Artigo/nome, grupos nominais, complementos e coordenações | CTX-002/006/007/008/011/012/013; tests/contexto-nominal.cjs e testes de coordenação | Núcleos sem artigo; duas metas com revista/revistas em nominal-7 continuam abertas |
 | Artigo | Definidos/indefinidos em grupos; alternativa numeral de um/uma preservada | CTX-002/006/007/012/013; tests/contexto-indefinidos.cjs | Par indefinido + nome isolado; hipótese de artigo não decide quantidade |
 | Adjetivo | Grupos de três palavras; coordenação com adjetivo posposto | CTX-006/013; tests/contexto-nominal.cjs e contexto-coordenacao-adjetivos.cjs | Predicativo, homógrafos verbais e gênero ausente |
-| Pronome | Clítico junto ao verbo e demonstrativo sem nome; possessivo sem nome permanece aberto | CTX-003/009/010; tests/ptbr-contexto.cjs e contexto-sem-nome.cjs | Pronome pessoal sujeito é apoio sem decisão sobre sua própria ocorrência; contrastes de se/que |
+| Pronome | Clítico, demonstrativo sem nome e se pronominal CTX-022; possessivo sem nome permanece aberto | CTX-003/009/010; tests/ptbr-contexto.cjs e contexto-sem-nome.cjs | Pronome pessoal sujeito é apoio sem decisão sobre sua própria ocorrência; contrastes de se/que |
 | Verbo | Forma finita compatível com sujeito explícito e infinitivo apoiado | CTX-001/005; tests/ptbr-contexto.cjs e contexto-portilexicon.cjs | Formas isoladas, sujeito não expresso e função auxiliar |
-| Advérbio | CTX-014 na v6.44: não pré-verbal com leitura ADV real e apoio indicativo | Sondas M02-11/12; tests/contexto-negacao.cjs | Outros advérbios e não sem sujeito explícito permanecem fora do recorte |
+| Advérbio | CTX-014 não pré-verbal e CTX-021 como interrogativo direto | Sondas M02-11/12; tests/contexto-negacao.cjs | Outros advérbios e não sem sujeito explícito permanecem fora do recorte |
 | Numeral | Cardinal + nome plural de sete lemas em unidade completa | CTX-015; numerais-1, candidatos NUM/NOUN reais | Outros nomes/cardinais, um/uma, grupos maiores; quantidade aberta |
 | Preposição | De e contrações no complemento nominal apoiado | CTX-007; tests/contexto-preposicional.cjs | CTX-005 seleciona o infinitivo, não a preposição; regência geral também pertence a M03/M05 |
-| Conjunção | E/ou na coordenação nominal delimitada | CTX-011/012/013; testes de coordenação | Mas e subordinativas, contrastes de que/se/como |
+| Conjunção | E/ou na coordenação nominal e que integrante com saber/dizer CTX-023 | CTX-011/012/013; testes de coordenação | Mas e subordinativas, contrastes de que/se/como |
 | Interjeição | Ah/oh isolados com fronteira !/? e INTJ real | CTX-016; interjeicoes-1, sondas M02-19/20 | Outros itens/locuções; emoção/intenção e usos citados/substantivados abertos |
 
 O determinante (UD) de CTX-008 conserva a categoria da fonte: não é décima primeira classe nem pronome contextual automaticamente. CTX-004 é o estado sem decisão; CTX-010 é observação de ambiguidade, não classe decidida. As evidências de testes apontam arquivos existentes, sem alegar nova execução de todas as suítes nesta retomada.
@@ -55,7 +55,7 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: consolidar relatório por classe/família, com lacunas/observações separadas, e declarar escopo de locuções adjetivas/demais grupos antes de fechar M02. Contrastes como/se/que têm CTX-021/022/023 e corpus próprios; demais usos continuam abertos. [Entrega v6.53](ENTREGA-V6-53.md).
+Próxima ação concreta: estudar e fixar o recorte de locução adjetiva de madeira/de papel, conforme [decisão de escopo](ESCOPO-LOCUCOES-M02.md). A [consolidação reproduzível](CONSOLIDACAO-M02.md) reúne 589 alvos de 35 arquivos: 258 úteis, zero erradas, 323 abstenções, duas lacunas e seis observações; vinte sondas separadas. M02 continua TODO até resolver o recorte adjetival e conferir os critérios.
 
 ## Incremento v6.45 — numerais
 
@@ -92,3 +92,7 @@ CTX-022: sujeito pessoal de terceira pessoa + se + indicativo real compatível, 
 ## Incremento v6.53 — que integrante
 
 CTX-023: dois pares pronome pessoal + indicativo real compatível, com que SCONJ e saber/dizer à esquerda, unidade completa de cinco tokens. Seleção conjunção; oito leituras reais preservadas, sem inferir verdade ou sintaxe geral. Corpus próprio doze úteis/vinte abstenções/zero erradas ou lacunas; como/se anteriores preservados. Matriz de contrastes e três recortes implementados; consolidação por classe/família e escopo adjetival ainda impedem fechar M02.
+
+## Consolidação v6.54
+
+Relatório JSON/Markdown reproduzível por família e classe, com hashes dos 35 gabaritos e das sondas. Contagens não somam frases únicas nem estimam acurácia geral; controles booleanos medem somente a regra/família declarada. As classes sem negativos explicitamente atribuídos mantêm controles em linha separada; preposição tem evidência nas sondas e nos testes de CTX-007, sem fabricar corpus por classe. Duas metas revista/revistas permanecem lacunas e seis possessivos são observações. Dados/motor/app/CSS não mudaram. Recorte adjetival continua obrigatório antes do fechamento; demais grupos têm exclusão explícita e destino de reavaliação em M03/M06.

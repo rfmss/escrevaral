@@ -1,12 +1,12 @@
 {
-  "version": 42,
+  "version": 43,
   "updated": "06/10/2026",
-  "baseline": "f27c340ebc2ca3cbac40020ffabeda459637f8a9",
+  "baseline": "23cc5374f5c91fab7a2c443d2d512c84f0a42ebf",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.53: que entre dois pares pronome/indicativo real, com saber/dizer à esquerda, recebe hipótese de conjunção integrante em unidade completa de cinco palavras. Três recortes de como/se/que integrados, alternativas e abstenções preservadas. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.54: cobertura de M02 consolidada por família e classe, com alvos, hashes, abstenções, observações e lacunas preservados. Escopo de locuções registrado; recorte adjetival permanece como próximo requisito de fechamento. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M02-consolidacao-1: reunir relatório reproduzível por classe/família, separando decisões úteis, erradas, abstenções, lacunas e observações; manter revista/revistas. Delimitar inventário/construção/exclusões de locuções adjetivas/demais grupos com implementação ou decisão explícita de escopo. Conferir critérios da COBERTURA-M02 antes de concluir M02 e iniciar M03.",
+    "M02-locucoes-adjetivas-1: conferir referência e dados reais para de madeira/de papel após artigo + nome de objeto; fixar pares e exclusões antes do motor. Não converter automaticamente CTX-007 em locução adjetiva. Depois conferir COBERTURA-M02 e concluir M02 somente com evidências.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -142,7 +142,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-contrastes-3 cumprida no recorte de que integrante: 32 alvos, doze úteis/vinte abstenções, zero erradas/lacunas. Três recortes somam96 alvos,36 úteis/60 abstenções, zero indevidas nos controles declarados; não é acurácia geral. Consolidação e escopo adjetival faltam;11/25 DONE.",
+      "done": "M02-consolidacao-1 concluída: 589 alvos de35 arquivos,258 úteis/0 erradas/323 abstenções/2 lacunas/6 observações;20 sondas separadas. Escopo dos grupos declarado. Recorte adjetival ainda pendente,11/25 DONE.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -167,7 +167,8 @@
         "docs/jornada/ENTREGA-V6-50.md",
         "docs/jornada/ENTREGA-V6-51.md",
         "docs/jornada/ENTREGA-V6-52.md",
-        "docs/jornada/ENTREGA-V6-53.md"
+        "docs/jornada/ENTREGA-V6-53.md",
+        "docs/jornada/ENTREGA-V6-54.md"
       ]
     },
     {
@@ -705,7 +706,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M02-consolidacao-1: reunir relatório reproduzível por classe/família, separando decisões úteis, erradas, abstenções, lacunas e observações; manter revista/revistas. Delimitar inventário/construção/exclusões de locuções adjetivas/demais grupos com implementação ou decisão explícita de escopo. Conferir critérios da COBERTURA-M02 antes de concluir M02 e iniciar M03."
+    "nextDeliverable": "M02-locucoes-adjetivas-1: conferir referência e dados reais para de madeira/de papel após artigo + nome de objeto; fixar pares e exclusões antes do motor. Não converter automaticamente CTX-007 em locução adjetiva. Depois conferir COBERTURA-M02 e concluir M02 somente com evidências."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -719,7 +720,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "32 alvos pré-fixados e doze perturbações de fonte/traços/lema passaram; candidatos reais, dois apoios obrigatórios, fonte removida sem fallback. Como/se 32 alvos cada, conjuntivas32, negação32/63 regressões passaram. Seleção/emoji/NFD, autoria, proteção, truncamentos, uma consulta/token, teto100, ES5 e painel. Vinte sondas permanecem12 desejadas/8 abertas/zero diferentes. Build:check; regressão completa CI e Pages por SHA.",
+    "verification": "Consolidado executado no runtime publicado:35 gabaritos/589 alvos; contagens por família/classe conciliadas;20 sondas12 desejadas/8 abertas/zero diferentes separadas. Teste do classificador de resultados, ausência de observação, tipos de locução, duas lacunas e reprodução JSON/Markdown passou. Build:check e diff limpo; regressão completa CI e Pages por commit.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -737,5 +738,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-53.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-54.json"
 }
