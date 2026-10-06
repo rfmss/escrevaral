@@ -26,6 +26,7 @@ for(const altered of [
  (k,rows)=>rows.filter(r=>r.pos!=='NUM'),
  (k,rows)=>rows.map(r=>r.pos==='NUM'?{...r,features:r.features.replace('NumType=Card','NumType=Ord')}:r),
  (k,rows)=>rows.map(r=>r.pos==='NOUN'?{...r,features:r.features.replace('Number=Plur','Number=Sing')}:r),
+ (k,rows)=>rows.map(r=>r.pos==='NUM'?{...r,features:r.features.replace('Gender=Fem|','')}:r),
  (k,rows)=>rows.map(r=>r.pos==='NOUN'?{...r,features:r.features.replace('Gender=Fem|','')}:r)
 ]){E.lookupMorphology=k=>altered(k,lookup(k));assert.ok(!engine.inspect('Duas casas.').items.some(x=>x.rule==='PTBR-CTX-015'));}
 E.lookupMorphology=lookup;

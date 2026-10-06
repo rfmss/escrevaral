@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes da implementação, sem cegamento ou avaliação independente.",
+  "baseline": "4beb300eed4faa3ac658f096ba237d48139ae777",
+  "scope": "Ah/oh com candidato INTJ real, isolados em unidade iniciada no trecho ou após .!?;: e terminada explicitamente por !/?. Sem emoção/intenção/função discursiva; citações, substantivações e continuações fora do recorte.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "OH!",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "ah?!",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Oh !",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "Eu cheguei. Ah!",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Ela chegou; Oh?",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Oh\t!",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "Oh",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "Oh.",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Oh, querida!",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Um oh!",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Eu disse ah!",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "“Oh?”",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "`Oh?`",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "Três!",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "Oh chegou?",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Oh\n?",
+      "expected": false
+    }
+  ]
+}

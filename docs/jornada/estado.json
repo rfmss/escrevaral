@@ -1,12 +1,12 @@
 {
-  "version": 34,
+  "version": 35,
   "updated": "06/10/2026",
-  "baseline": "b9f3e80c6d970c7fec00eefc29993e9116e8e3a8",
+  "baseline": "4beb300eed4faa3ac658f096ba237d48139ae777",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.45: dois/duas/três + nome plural em unidade curta completa recebem hipótese de numeral e substantivo, usando NUM cardinal e NOUN plural reais. Traços ausentes e homógrafos preservados; medidas, datas e um/uma fora do recorte. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.46: ah/oh isolados recebem hipótese contextual de interjeição, com candidato INTJ real e fronteira !/?. Trecho e pontuação preservados como apoios; emoção e intenção permanecem abertas. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M02-interjeicoes-1: fixar exemplos e contrastes de ah/oh isolados com fronteira explícita, importar INTJ real do snapshot e decidir somente a classe, sem inferir emoção ou intenção; citações, substantivações e usos continuados abertos. Depois, locuções e contrastes que/se/como da matriz.",
+    "M02-locucoes-1: antes do código, delimitar uma primeira locução adverbial (de vez em quando), referência e componentes lexicais reais, exemplos positivos/contrastes, fronteiras e classe resultante na própria lente Classes. Não confundir catálogo literal de Expressões com hipótese contextual nem executar outra lente em fila. Manter locuções verbais/prepositivas/conjuntivas e que/se/como na matriz.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -104,7 +104,7 @@
         "Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.",
         "Carregar dados maiores sob demanda, com índices e sem polyfills globais."
       ],
-      "done": "PortiLexicon recorte 8: 221 sementes, 3.210 formas e 5.660 leituras; dois/duas/três acrescentados com todas as alternativas e dados anteriores conservados. M01 geral parcial.",
+      "done": "PortiLexicon recorte 9: 223 sementes, 3.212 formas e 5.662 leituras; ah/oh INTJ/_ importados do snapshot com todos os dados anteriores conservados. M01 geral parcial.",
       "evidence": [
         "ptbr/auditoria/pacote.json",
         "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
@@ -121,7 +121,8 @@
         "docs/jornada/ENTREGA-V6-42.md",
         "docs/jornada/ENTREGA-V6-43.md",
         "docs/jornada/ENTREGA-V6-44.md",
-        "docs/jornada/ENTREGA-V6-45.md"
+        "docs/jornada/ENTREGA-V6-45.md",
+        "docs/jornada/ENTREGA-V6-46.md"
       ]
     },
     {
@@ -138,7 +139,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-numerais-1 cumprida no recorte de sete lemas nominais. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero decisões erradas/lacunas observadas. M02 geral parcial; plano 11/25 DONE.",
+      "done": "M02-interjeicoes-1 cumprida no recorte ah/oh isolados. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas observadas. As dez classes têm agora algum padrão delimitado, sem concluir M02: locuções, contrastes e consolidação por classe continuam necessários. Plano 11/25 DONE.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -155,7 +156,8 @@
         "docs/jornada/ENTREGA-V6-42.md",
         "docs/jornada/ENTREGA-V6-43.md",
         "docs/jornada/ENTREGA-V6-44.md",
-        "docs/jornada/ENTREGA-V6-45.md"
+        "docs/jornada/ENTREGA-V6-45.md",
+        "docs/jornada/ENTREGA-V6-46.md"
       ]
     },
     {
@@ -693,7 +695,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M02-interjeicoes-1: fixar exemplos e contrastes de ah/oh isolados com fronteira explícita, importar INTJ real do snapshot e decidir somente a classe, sem inferir emoção ou intenção; citações, substantivações e usos continuados abertos. Depois, locuções e contrastes que/se/como da matriz."
+    "nextDeliverable": "M02-locucoes-1: antes do código, delimitar uma primeira locução adverbial (de vez em quando), referência e componentes lexicais reais, exemplos positivos/contrastes, fronteiras e classe resultante na própria lente Classes. Não confundir catálogo literal de Expressões com hipótese contextual nem executar outra lente em fila. Manter locuções verbais/prepositivas/conjuntivas e que/se/como na matriz."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -707,7 +709,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Passaram 32 alvos de numerais com dados reais, retirada de NUM/NumType/Number/Gender, alternativas verbais, proteção, posições UTF-16/NFD, seleção e autoria, teto de caracteres/tokens, uma consulta por token, ES5 e painel explícito. Passaram 32 contrastes de negação e 63 expectativas contextuais antigas. Todas as 3.207 formas/5.655 leituras anteriores preservadas. Vinte sondas passam de oito para dez seleções desejadas, sem classe diferente. Build:check confirma sete saídas. Regressão completa uma vez no CI; publicação por SHA de CI/Pages.",
+    "verification": "Passaram 32 alvos próprios com INTJ real e ausente, exclusões de citação/uso nominal, pontuação interna, fronteiras e apoios exatos, seleção com emoji/NFD, autoria, truncamento de caracteres/tokens, uma consulta por token, teto de 100 achados, ES5 e painel de uma lente por escolha. Numerais: 32 alvos e controles passaram, incluindo remoção do Gender do NUM de duas. Todas as 3.210 formas/5.660 leituras anteriores preservadas. Vinte sondas M02 passam de dez para doze seleções desejadas, sem classe diferente. Build:check confirma sete saídas; regressão completa no CI e Pages por SHA.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -725,5 +727,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-45.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-46.json"
 }

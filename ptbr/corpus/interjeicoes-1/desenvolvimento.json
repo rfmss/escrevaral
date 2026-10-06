@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes da implementação, sem cegamento ou avaliação independente.",
+  "baseline": "4beb300eed4faa3ac658f096ba237d48139ae777",
+  "scope": "Ah/oh com candidato INTJ real, isolados em unidade iniciada no trecho ou após .!?;: e terminada explicitamente por !/?. Sem emoção/intenção/função discursiva; citações, substantivações e continuações fora do recorte.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Ah!",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Oh!",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Ah?",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Oh?",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Ah!!",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Ah !",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "Ah",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Ah.",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Ah, entendi.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "O ah!",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Meu ah!",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "“Ah!”",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "`Ah!`",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Casa!",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "Ah chegou!",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Ah\n!",
+      "expected": false
+    }
+  ]
+}

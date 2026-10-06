@@ -15,7 +15,7 @@ Base do diagnóstico inicial: `017b4ecb7d4277c08afcb66cb42f7776a1a59a95` (v6.43)
 | Numeral | Cardinal + nome plural de sete lemas em unidade completa | CTX-015; numerais-1, candidatos NUM/NOUN reais | Outros nomes/cardinais, um/uma, grupos maiores; quantidade aberta |
 | Preposição | De e contrações no complemento nominal apoiado | CTX-007; tests/contexto-preposicional.cjs | CTX-005 seleciona o infinitivo, não a preposição; regência geral também pertence a M03/M05 |
 | Conjunção | E/ou na coordenação nominal delimitada | CTX-011/012/013; testes de coordenação | Mas e subordinativas, contrastes de que/se/como |
-| Interjeição | Apenas candidato lexical | Sondas M02-19/20; inventário legado | Interjeição isolada com fronteira explícita; usos citados/substantivados abertos |
+| Interjeição | Ah/oh isolados com fronteira !/? e INTJ real | CTX-016; interjeicoes-1, sondas M02-19/20 | Outros itens/locuções; emoção/intenção e usos citados/substantivados abertos |
 
 O determinante (UD) de CTX-008 conserva a categoria da fonte: não é décima primeira classe nem pronome contextual automaticamente. CTX-004 é o estado sem decisão; CTX-010 é observação de ambiguidade, não classe decidida. As evidências de testes apontam arquivos existentes, sem alegar nova execução de todas as suítes nesta retomada.
 
@@ -54,8 +54,12 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: ah/oh isolados com fronteira explícita, candidato INTJ real, corpus pré-fixado e abstenção para citações/substantivações/continuações. A [entrega v6.45](ENTREGA-V6-45.md) acrescenta numerais; a v6.44 integrou negação.
+Próxima ação concreta: primeira locução adverbial de vez em quando em Classes; referência/componentes reais, construção, classe resultante, positivos/contrastes e exclusões antes do código. As [entregas v6.45](ENTREGA-V6-45.md) e [v6.46](ENTREGA-V6-46.md) integram numerais e interjeições.
 
 ## Incremento v6.45 — numerais
 
 CTX-015: dois/duas/três + plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa. NumType cardinal e Number do NOUN explícitos; NUM não tem Number na fonte. Gênero conferido quando marcado; homógrafos preservados. 32 alvos próprios: doze úteis e vinte abstenções esperadas, zero erradas/lacunas. Sondas depois-v6-45: dez desejadas, dez abertas, nenhuma classe diferente. Próximo interjeição isolada; M02 geral permanece TODO. [Entrega](ENTREGA-V6-45.md).
+
+## Incremento v6.46 — interjeições
+
+CTX-016: ah/oh isolados com leitura INTJ real e !/? explícito. Não decide emoção/intenção nem classifica toda exclamação. 32 alvos próprios: doze úteis, vinte abstenções esperadas, zero erradas/lacunas. Sondas depois-v6-46: doze desejadas, oito abertas, nenhuma classe diferente. Há algum padrão delimitado nas dez classes; ainda faltam locuções, que/se/como e consolidação por classe para M02. Próximo de vez em quando, conforme entrega; avaliação reservada segue Q02.
