@@ -1,12 +1,12 @@
 {
-  "version": 39,
+  "version": 40,
   "updated": "06/10/2026",
-  "baseline": "a50b8a7379180933409b21e6341661c503513039",
+  "baseline": "cb50d7ab11156ddcacf5b8e9289bc1e53edc52bb",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.50: assim que entre dois pares pronome/indicativo recebe hipótese de locução conjuntiva em unidade completa. Leituras reais dos componentes preservadas; que isolado e relações sintáticas/temporais permanecem abertos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.51: como em pergunta direta de três palavras recebe hipótese de advérbio com fonte real e indicativo compatível. Matriz que/se/como pré-fixada; alternativas lexicais preservadas. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M02-contrastes-1: fixar matriz própria de que/se/como antes do código. Separar que integrante/relativo/interrogativo/exclamativo, se clítico/conjuntivo e como verbal/interrogativo/comparativo; conferir candidatos reais, escolher uma primeira decisão apoiada e abstenções explícitas. Não reutilizar Sintaxe/Relativas automaticamente. Consolidar depois relatório por classe/família e escopo de locuções adjetivas/demais grupos antes de fechar M02.",
+    "M02-contrastes-2: importar se preservando PRON/SCONJ e traços reais; delimitar pronome junto a sujeito de terceira pessoa e indicativo compatível, sem resolver reflexividade/passiva/reciprocidade. Depois que integrante com apoio de saber/dizer, relatório por classe/família e escopo de locuções adjetivas/demais grupos antes de fechar M02.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -141,7 +141,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-locucoes-conjuntivas-1 cumprida no recorte de seis palavras. 32 alvos próprios: doze úteis, vinte abstenções, zero erradas/lacunas. Quatro famílias de locuções têm recortes próprios em Classes; M02 geral parcial, plano 11/25 DONE.",
+      "done": "M02-contrastes-1: matriz fixada e primeiro recorte apoiado integrado. 32 alvos: doze úteis, vinte abstenções, zero erradas/lacunas. Se/que e consolidação permanecem; plano 11/25 DONE.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -163,7 +163,8 @@
         "docs/jornada/ENTREGA-V6-47.md",
         "docs/jornada/ENTREGA-V6-48.md",
         "docs/jornada/ENTREGA-V6-49.md",
-        "docs/jornada/ENTREGA-V6-50.md"
+        "docs/jornada/ENTREGA-V6-50.md",
+        "docs/jornada/ENTREGA-V6-51.md"
       ]
     },
     {
@@ -701,7 +702,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M02-contrastes-1: fixar matriz própria de que/se/como antes do código. Separar que integrante/relativo/interrogativo/exclamativo, se clítico/conjuntivo e como verbal/interrogativo/comparativo; conferir candidatos reais, escolher uma primeira decisão apoiada e abstenções explícitas. Não reutilizar Sintaxe/Relativas automaticamente. Consolidar depois relatório por classe/família e escopo de locuções adjetivas/demais grupos antes de fechar M02."
+    "nextDeliverable": "M02-contrastes-2: importar se preservando PRON/SCONJ e traços reais; delimitar pronome junto a sujeito de terceira pessoa e indicativo compatível, sem resolver reflexividade/passiva/reciprocidade. Depois que integrante com apoio de saber/dizer, relatório por classe/família e escopo de locuções adjetivas/demais grupos antes de fechar M02."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -715,7 +716,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "32 alvos conjuntivos e oito perturbações de fonte/traços passaram; fonte real obrigatória, que sozinho sem decisão, quatro grupos em ordem, proteção/truncamento, seleção/emoji/NFD, autoria, uma consulta por token, cap/ES5 e painel sem duplicação. 32 alvos de cada família verbal/prepositiva/adverbial passaram; negação 32 contrastes e 63 expectativas antigas passaram. Todas as 3.217 formas/5.670 leituras antigas preservadas. Vinte sondas permanecem doze desejadas/oito abertas/zero classes diferentes. Build:check sete saídas; regressão completa no CI e Pages por SHA.",
+    "verification": "32 alvos pré-fixados passaram; seis perturbações de fonte/traços, candidatos preservados, como verbal e assim que antigos, seleção/emoji/NFD, autoria, truncamentos de caracteres/tokens, uma consulta por token, cap/ES5 e painel explícito. Conjuntiva 32 alvos e negação 32/63 regressões passaram. Vinte sondas mantêm doze desejadas/oito abertas/zero diferentes. Build:check; regressão completa CI e Pages por SHA.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -733,5 +734,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-50.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-51.json"
 }

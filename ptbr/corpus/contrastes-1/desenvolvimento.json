@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento/independência.",
+  "baseline": "cb50d7ab11156ddcacf5b8e9289bc1e53edc52bb",
+  "scope": "Como + pronome pessoal + indicativo real compatível; unidade interrogativa direta de três tokens, ? explícito. ADV real sem traço interrogativo inventado. Demais usos ficam abertos.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Como você chegou?",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Como eles cantam?",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Como eu canto?",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Como nós chegamos?",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Como ela chega?",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Como vocês chegam?",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "Como eu canto.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Como eu canto!",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Eu como.",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Eu canto como ela canta.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Como chegou?",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Como eu canta?",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Como você chegar?",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Como\nvocê chegou?",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "“Como você chegou?”",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Como você chegou hoje?",
+      "expected": false
+    }
+  ]
+}

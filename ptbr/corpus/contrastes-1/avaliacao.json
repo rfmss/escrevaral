@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento/independência.",
+  "baseline": "cb50d7ab11156ddcacf5b8e9289bc1e53edc52bb",
+  "scope": "Como + pronome pessoal + indicativo real compatível; unidade interrogativa direta de três tokens, ? explícito. ADV real sem traço interrogativo inventado. Demais usos ficam abertos.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Como ele chegou?",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Como elas cantam?",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Como tu cantas?",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "Como nós cantamos?",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Como vocês cantam?",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Como eu chego?",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "Como ela chega",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "Como ela chega!",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Ela sabe como eu canto.",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Como você zzverbo?",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Como eles canta?",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "Como eu cantaria?",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "Como, ela chega?",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "`Como ela chega?`",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "Como ela não chega?",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Como a casa chegou?",
+      "expected": false
+    }
+  ]
+}

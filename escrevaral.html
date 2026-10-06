@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261006-scrvrl-conjuntiva-v6-50">
+  <meta name="asset-version" content="20261006-scrvrl-contrastes-v6-51">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -3986,7 +3986,7 @@ SOFTWARE.
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-17-conjuntiva', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-18-contrastes', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -4373,6 +4373,17 @@ SOFTWARE.
       var gap=text.slice(ts[at].end,at+1<ts.length?ts[at+1].start:cut.length);
       return /^[ \t\u00a0]*[.!?;:]/.test(gap)||at===ts.length-1&&cut.length===text.length&&/^[ \t\r\n\u00a0]*$/.test(gap);
     }
+    /* Como interrogativo direto: três tokens e fronteira ? explícita. */
+    for(i=0;i+2<ts.length;i++){
+      if(ts[i].value!=='como'||items[i].status==='contextual'||!unitStart(i)||!linked(i,i+1)||!linked(i+1,i+2)){continue;}
+      agreement=subjects['$'+ts[i+1].value];if(!agreement){continue;}
+      if(!/^[ \t\u00a0]*\?/.test(text.slice(ts[i+2].end,i+3<ts.length?ts[i+3].start:cut.length))){continue;}
+      if(!items[i].candidates.portilexicon.some(function(row){return row.pos==='ADV';})){continue;}
+      forms=externalFinite(items[i+2].candidates,agreement).filter(function(form){return /^indicativo:/.test(form[1]);});
+      if(!forms.length){continue;}
+      choose(i,'advérbio','PTBR-CTX-021',[i,i+1,i+2]);
+      items[i].interrogative={kind:'modo em pergunta direta',sourcePronTypeMarked:false,intentionResolved:false,syntaxResolved:false};
+    }
     for(i=0;i+2<ts.length;i++){
       if(!has(['e','ou'],ts[i+1].value)||!linked(i,i+1)||!linked(i+1,i+2)||!unitStart(i)||!unitEnd(i+2)){continue;}
       if(items[i].status==='contextual'||items[i+1].status==='contextual'||items[i+2].status==='contextual'){continue;}
@@ -4491,6 +4502,7 @@ SOFTWARE.
       if(item.rule==='PTBR-CTX-009'){message='Leitura contextual: demonstrativo sem nome expresso.';}
       if(item.rule==='PTBR-CTX-010'){message='Possessivo sem nome expresso: leitura em aberto.';}
       if(item.rule==='PTBR-CTX-011'){message=item.nominalCoordination.role==='conectivo'?'Hipótese de coordenação nominal: conectivo '+item.nominalCoordination.connector+'.':'Hipótese de coordenação nominal: substantivo.';}
+      if(item.rule==='PTBR-CTX-021'){message='Hipótese contextual: como interrogativo, advérbio.';}
       if(item.rule==='PTBR-CTX-016'){message='Leitura contextual: interjeição isolada.';}
       if(item.rule==='PTBR-CTX-015'){message='Hipótese de grupo nominal com cardinal: '+item.selected+'.';}
       if(item.rule==='PTBR-CTX-014'){message='Leitura contextual: advérbio de negação antes de verbo.';}
@@ -4499,6 +4511,7 @@ SOFTWARE.
       reason = item.rule === 'PTBR-CTX-001' ? 'Pronome sujeito próximo e forma verbal finita compatível em pessoa e número.' :
         item.rule === 'PTBR-CTX-002' ? 'Artigo definido antes de nome registrado; homógrafos verbais exigem também uma forma finita à direita.' :
         item.rule === 'PTBR-CTX-003' ? 'A forma aparece entre pronome sujeito (com não opcional) e verbo finito compatível.' :
+        item.rule === 'PTBR-CTX-021' ? 'Como tem leitura ADV real e inicia unidade de três tokens com pronome pessoal explícito, indicativo real compatível e ? como fronteira. Favorece advérbio interrogativo neste recorte; PronType=Int não consta do ADV na fonte e não foi adicionado. Não identifica intenção, intensidade, comparação ou estrutura sintática geral. Perguntas indiretas, exclamações, sujeito omitido e continuações ficam fora; comer e demais candidatos permanecem no inventário.' :
         item.rule === 'PTBR-CTX-016' ? 'Ah/oh têm leitura INTJ na fonte e aparecem isolados, no início da unidade, com ! ou ? como fronteira explícita. A pontuação sozinha não torna uma palavra interjeição. Não identifica emoção, intensidade, intenção, ironia ou função discursiva. Citações, substantivações, continuações e ocorrências sem essa fronteira ficam fora deste recorte; as possibilidades lexicais são preservadas.' :
         item.rule === 'PTBR-CTX-015' ? 'Dois/duas/três com candidato NUM cardinal seguido de nome com Number=Plur em unidade completa de duas palavras. O nome pertence ao recorte livro/casa/jardim/flor/mesa/mulher/homem. NumType=Card não informa Number do numeral; a pluralidade é registrada só no nome.'+(item.nominalNumeral.numeralGenderMarked?' Gênero do numeral marcado e compatível com o nome.':' Gênero do numeral ausente na fonte, sem inferência de concordância.')+' Não resolve quantidade, função sintática, medidas, datas, um/uma ou grupos com modificadores. Homógrafos preservados.' :
         item.rule === 'PTBR-CTX-014' ? 'A forma “não” tem candidato ADV e aparece entre pronome pessoal sujeito no início de unidade e forma indicativa compatível, com clítico opcional. Favorece advérbio de negação neste recorte; não decide alcance semântico, intenção, verdade da frase ou dupla negação. A leitura nominal permanece no inventário.' :
@@ -4520,6 +4533,7 @@ SOFTWARE.
       if(item.rule==='PTBR-CTX-008'){occurrenceSource={title:'Regra computacional local: determinante possessivo/demonstrativo antes de nome. Universal Dependencies v2, Poss e PronType, consultados em 30/09/2026; não identifica referente nem resolve usos sem nome.',url:'https://universaldependencies.org/u/feat/PronType.html'};}
       if(item.rule==='PTBR-CTX-009'||item.rule==='PTBR-CTX-010'){occurrenceSource={title:'Hipótese/observação computacional local para usos sem nome expresso. UD v2 PRON e Ellipsis in Nominals, consultados em 01/10/2026; distinções entre pronome, determinante e elipse não são decididas só pela ausência do nome.',url:'https://universaldependencies.org/u/pos/PRON.html'};}
       if(item.rule==='PTBR-CTX-011'){occurrenceSource={title:'Hipótese computacional local de coordenação nominal curta. UD v2: conj e cc, consultados em 01/10/2026. Distingue conectivo e constituintes; não implementa árvore de dependências.',url:'https://universaldependencies.org/u/dep/conj.html'};}
+      if(item.rule==='PTBR-CTX-021'){occurrenceSource={title:'Hipótese computacional local: como em pergunta direta delimitada. Priberam, como, e UD v2 PronType/advmod em português, consultados em 06/10/2026. Interrogação é interpretação da construção, sem traço lexical inventado ou parser geral.',url:'https://dicionario.priberam.org/como'};}
       if(item.rule==='PTBR-CTX-016'){occurrenceSource={title:'Hipótese computacional local para ah/oh isolados. UD v2 INTJ, consultado em 06/10/2026: uso exclamativo sozinho não define a classe; leitura lexical real e fronteiras são exigidas, sem resolver emoção ou intenção.',url:'https://universaldependencies.org/u/pos/INTJ.html'};}
       if(item.rule==='PTBR-CTX-015'){occurrenceSource={title:'Hipótese computacional local de cardinal + nome plural. UD v2: nummod em português e NumType, consultados em 06/10/2026; anotação lexical não é algoritmo de desambiguação. Number explícito é do nome, não do numeral.',url:'https://universaldependencies.org/pt/dep/nummod.html'};}
       if(item.rule==='PTBR-CTX-014'){occurrenceSource={title:'Hipótese computacional local para não pré-verbal. UD v2: advmod em português e Polarity, consultados em 05/10/2026; referências de anotação, sem resolver alcance. O dado ADV do PortiLexicon não informa Polarity; negação é a interpretação delimitada da regra.',url:'https://universaldependencies.org/pt/dep/advmod.html'};}
@@ -4532,7 +4546,7 @@ SOFTWARE.
         'Possibilidades lexicais registradas: ' + (r.classes.join(', ') || 'nenhuma') + '. A regra é uma hipótese local. Elipse, nomes próprios, usos literários e outras construções podem exigir leitura diferente. Um inventário com uma só classe não prova unicidade na língua.',
         limit, occurrenceSource,
         { confidence: contextual ? 'moderada' : 'insuficiente', feature: item.selected || item.status, candidates: r,
-          interjection: item.interjection || null, nominalNumeral: item.nominalNumeral || null, negation: item.negation || null, nominalCoordination: item.nominalCoordination || null, standaloneUse: item.standaloneUse || null, nominalDeterminer: item.nominalDeterminer || null, nominalComplement: item.nominalComplement || null, nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
+          interrogative: item.interrogative || null, interjection: item.interjection || null, nominalNumeral: item.nominalNumeral || null, negation: item.negation || null, nominalCoordination: item.nominalCoordination || null, standaloneUse: item.standaloneUse || null, nominalDeterminer: item.nominalDeterminer || null, nominalComplement: item.nominalComplement || null, nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
     }
     out.coverageInfo = { scope: report.scope, work: report.work, version: version, lexiconVersion: E.portiLexicon?E.portiLexicon.version:null,
       summary: 'Classes em contexto: recorte ' + report.scope.start + '–' + report.scope.end + ' de ' + text.length + ' unidades UTF-16; ' + report.work.tokens + ' tokens.' + (report.scope.partial ? ' Análise parcial: selecione o restante para continuar.' : '') };
@@ -5093,7 +5107,7 @@ SOFTWARE.
  };
 }(typeof window!=='undefined'?window:this));
 
-    window.Escr.knowledge.version="local-20261006-contexto-17";
+    window.Escr.knowledge.version="local-20261006-contexto-18";
     return window.Escr;
   }
   return {version:'1.0.0',locale:'pt-BR',createRuntime:createRuntime,
