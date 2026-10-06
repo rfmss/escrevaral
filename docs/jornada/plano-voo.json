@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 4,
-  "updated": "2026-10-05",
+  "updated": "2026-10-06",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -203,9 +203,10 @@
             "docs/jornada/ENTREGA-V6-39.md",
             "docs/jornada/ENTREGA-V6-41.md",
             "docs/jornada/ENTREGA-V6-42.md",
-            "docs/jornada/ENTREGA-V6-43.md"
+            "docs/jornada/ENTREGA-V6-43.md",
+            "docs/jornada/ENTREGA-V6-44.md"
           ],
-          "progress": "PortiLexicon recorte 6: 218 sementes, 3.205 formas e 5.652 leituras. Bonito/bonita/bonitos/bonitas entram pelo snapshot fixo com oito leituras ADJ/NOUN; todas as triplas anteriores preservadas. M01 geral parcial."
+          "progress": "PortiLexicon recorte 7: 219 sementes, 3.207 formas/5.655 leituras. Não/nãos adicionados pelo snapshot fixo, incluindo ADV e NOUN; todas as triplas antigas preservadas. M01 geral parcial."
         },
         {
           "id": "M02",
@@ -224,9 +225,10 @@
             "docs/jornada/ENTREGA-V6-40.md",
             "docs/jornada/ENTREGA-V6-41.md",
             "docs/jornada/ENTREGA-V6-42.md",
-            "docs/jornada/ENTREGA-V6-43.md"
+            "docs/jornada/ENTREGA-V6-43.md",
+            "docs/jornada/ENTREGA-V6-44.md"
           ],
-          "progress": "M02-coordenacao-adjetivos-1 entregue no recorte: dois grupos com adjetivo posposto e traços explícitos. Amostra própria de 36 alvos: dez decisões úteis, zero erradas observadas, 24 abstenções esperadas e duas lacunas preservadas. Cobertura geral das dez classes/locuções e avaliação por classe ainda não fechadas."
+          "progress": "M02-adverbios-negacao-1 cumprida no recorte pré-verbal com sujeito explícito e indicativo compatível. 32 alvos próprios: doze decisões úteis, vinte abstenções esperadas, zero erradas/lacunas observadas. Prioridade de determinantes corrigida para preservar usos negativos e possessivos sem nome. M02 geral continua parcial; plano 11/25 DONE."
         },
         {
           "id": "M03",
@@ -327,12 +329,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.43.0",
+    "version": "6.44.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-43.md",
-    "record": "docs/jornada/entregas/v6-43.json"
+    "evidence": "docs/jornada/ENTREGA-V6-44.md",
+    "record": "docs/jornada/entregas/v6-44.json"
   },
   "scopeChanges": [
     {

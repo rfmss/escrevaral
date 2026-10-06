@@ -1,12 +1,12 @@
 {
-  "version": 32,
-  "updated": "05/10/2026",
-  "baseline": "891d98690de750ec81f11c182aee224128be0b44",
+  "version": 33,
+  "updated": "06/10/2026",
+  "baseline": "27c439454d0c6c29c0696aedfa05e0ff8a60737e",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.43: A casa branca e o jardim bonito recebe hipótese de coordenação de dois grupos artigo + nome + adjetivo. Sete apoios originais, homógrafos preservados e duas lacunas de avaliação explícitas. M02 segue parcial. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.44: não em Eu não canto / Ela não a viu recebe hipótese contextual de advérbio de negação, com candidato ADV real, apoio indicativo e alcance aberto. Rascunho/fixture substituídos por integração real; leitura nominal e demais candidatos preservados. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M02: construir uma matriz de cobertura das dez classes e locuções com evidências existentes, critérios observáveis de fechamento e lacunas; fixar o próximo recorte ausente de maior utilidade antes de ampliar novamente coordenação nominal. Não contar novo padrão nominal como conclusão do marco.",
+    "M02-numerais-1: delimitar dois/três + nome plural em unidade curta completa, com leituras NUM/NOUN reais, Number explícito, gabaritos positivos/ambiguidades/exclusões antes do código. Não resolver um/uma, datas, medidas ou valor quantitativo geral; seguir a matriz COBERTURA-M02.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -104,7 +104,7 @@
         "Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.",
         "Carregar dados maiores sob demanda, com índices e sem polyfills globais."
       ],
-      "done": "PortiLexicon recorte 6: 218 sementes, 3.205 formas e 5.652 leituras. Bonito/bonita/bonitos/bonitas entram pelo snapshot fixo com oito leituras ADJ/NOUN; todas as triplas anteriores preservadas. M01 geral parcial.",
+      "done": "PortiLexicon recorte 7: 219 sementes, 3.207 formas/5.655 leituras. Não/nãos adicionados pelo snapshot fixo, incluindo ADV e NOUN; todas as triplas antigas preservadas. M01 geral parcial.",
       "evidence": [
         "ptbr/auditoria/pacote.json",
         "ptbr/auditoria/DEVOLUCAO-GEMINI-1.md",
@@ -119,7 +119,8 @@
         "docs/jornada/ENTREGA-V6-39.md",
         "docs/jornada/ENTREGA-V6-41.md",
         "docs/jornada/ENTREGA-V6-42.md",
-        "docs/jornada/ENTREGA-V6-43.md"
+        "docs/jornada/ENTREGA-V6-43.md",
+        "docs/jornada/ENTREGA-V6-44.md"
       ]
     },
     {
@@ -136,7 +137,7 @@
         "Distinguir flexão, classe e função sintática.",
         "Começar por a, o, que, se, como, canto e palavras com múltiplas leituras."
       ],
-      "done": "M02-coordenacao-adjetivos-1 entregue no recorte: dois grupos com adjetivo posposto e traços explícitos. Amostra própria de 36 alvos: dez decisões úteis, zero erradas observadas, 24 abstenções esperadas e duas lacunas preservadas. Cobertura geral das dez classes/locuções e avaliação por classe ainda não fechadas.",
+      "done": "M02-adverbios-negacao-1 cumprida no recorte pré-verbal com sujeito explícito e indicativo compatível. 32 alvos próprios: doze decisões úteis, vinte abstenções esperadas, zero erradas/lacunas observadas. Prioridade de determinantes corrigida para preservar usos negativos e possessivos sem nome. M02 geral continua parcial; plano 11/25 DONE.",
       "evidence": [
         "ptbr/morfologia-contextual.js",
         "tests/ptbr-contexto.cjs",
@@ -151,7 +152,8 @@
         "docs/jornada/ENTREGA-V6-40.md",
         "docs/jornada/ENTREGA-V6-41.md",
         "docs/jornada/ENTREGA-V6-42.md",
-        "docs/jornada/ENTREGA-V6-43.md"
+        "docs/jornada/ENTREGA-V6-43.md",
+        "docs/jornada/ENTREGA-V6-44.md"
       ]
     },
     {
@@ -689,7 +691,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M02: construir uma matriz de cobertura das dez classes e locuções com evidências existentes, critérios observáveis de fechamento e lacunas; fixar o próximo recorte ausente de maior utilidade antes de ampliar novamente coordenação nominal. Não contar novo padrão nominal como conclusão do marco."
+    "nextDeliverable": "M02-numerais-1: delimitar dois/três + nome plural em unidade curta completa, com leituras NUM/NOUN reais, Number explícito, gabaritos positivos/ambiguidades/exclusões antes do código. Não resolver um/uma, datas, medidas ou valor quantitativo geral; seguir a matriz COBERTURA-M02."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -703,7 +705,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Passaram 36 alvos com duas lacunas explicitamente esperadas no teste, sete papéis/apoios, traços ausentes em cada nome/adjetivo, homógrafos verbais inclusive particípio, fronteiras/protegidos, Unicode/NFD, seleção, truncamento e teto de uma consulta por token, ES5 e painel de lente única. Passaram também 32 alvos de coordenação com artigos, 17 contrastes nominais, 63 contextuais e oito grupos do inventário. Todas as 3.201 formas/5.644 leituras anteriores foram comparadas e preservadas. Build:check confirma sete saídas. Regressão completa no CI; CI e Pages precisam ser conferidos pelo SHA da entrega.",
+    "verification": "Passaram 32 contrastes com inventário importado, 63 expectativas contextuais, apoio indicativo/ADV ausente, prioridade negativa, clíticos, proteção, UTF-16/NFD, manuscrito intacto, teto de caracteres/tokens, uma consulta por token, ES5 e painel de lente única. Passaram 20 usos sem nome, 30 determinantes e oito grupos do inventário. As 3.205 formas/5.652 leituras antigas e os 32 gabaritos foram comparados e preservados. Diagnóstico das vinte sondas: sete→oito seleções desejadas, treze→doze abertas, zero classes diferentes; não é cobertura geral. Build:check confirma sete saídas. Regressão completa uma vez no CI e Pages por commit.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -721,5 +723,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-43.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-44.json"
 }

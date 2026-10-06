@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 05/10/2026. Base do produto auditada: `891d98690de750ec81f11c182aee224128be0b44`.
+Atualizado em 06/10/2026. Base do produto auditada: `27c439454d0c6c29c0696aedfa05e0ff8a60737e`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.43: A casa branca e o jardim bonito recebe hipótese de coordenação de dois grupos artigo + nome + adjetivo. Sete apoios originais, homógrafos preservados e duas lacunas de avaliação explícitas. M02 segue parcial. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.44: não em Eu não canto / Ela não a viu recebe hipótese contextual de advérbio de negação, com candidato ADV real, apoio indicativo e alcance aberto. Rascunho/fixture substituídos por integração real; leitura nominal e demais candidatos preservados. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M02: construir uma matriz de cobertura das dez classes e locuções com evidências existentes, critérios observáveis de fechamento e lacunas; fixar o próximo recorte ausente de maior utilidade antes de ampliar novamente coordenação nominal. Não contar novo padrão nominal como conclusão do marco.
+- M02-numerais-1: delimitar dois/três + nome plural em unidade curta completa, com leituras NUM/NOUN reais, Number explícito, gabaritos positivos/ambiguidades/exclusões antes do código. Não resolver um/uma, datas, medidas ou valor quantitativo geral; seguir a matriz COBERTURA-M02.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -80,9 +80,9 @@ Dar às palavras inventário, flexões e possibilidades coerentes.
 - Revisar sinônimos por sentido e registro; revisar flexões e homógrafos.
 - Carregar dados maiores sob demanda, com índices e sem polyfills globais.
 
-**Condição de conclusão:** PortiLexicon recorte 6: 218 sementes, 3.205 formas e 5.652 leituras. Bonito/bonita/bonitos/bonitas entram pelo snapshot fixo com oito leituras ADJ/NOUN; todas as triplas anteriores preservadas. M01 geral parcial.
+**Condição de conclusão:** PortiLexicon recorte 7: 219 sementes, 3.207 formas/5.655 leituras. Não/nãos adicionados pelo snapshot fixo, incluindo ADV e NOUN; todas as triplas antigas preservadas. M01 geral parcial.
 
-Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`.
+Evidências: `ptbr/auditoria/pacote.json`, `ptbr/auditoria/DEVOLUCAO-GEMINI-1.md`, `ptbr/lexico-sintatico.js`, `ptbr/REGENCIA-1.md`, `docs/jornada/ENTREGA-V6-33.md`, `resources/pt-BR/own-pt/ORIGEM.json`, `tests/lexico-own-pt.cjs`, `docs/jornada/ENTREGA-V6-34.md`, `tests/portilexicon.cjs`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`, `docs/jornada/ENTREGA-V6-44.md`.
 
 ### P04 — Reconhecer classes no contexto
 
@@ -94,9 +94,9 @@ Ir das classes possíveis à leitura sustentada pela frase.
 - Distinguir flexão, classe e função sintática.
 - Começar por a, o, que, se, como, canto e palavras com múltiplas leituras.
 
-**Condição de conclusão:** M02-coordenacao-adjetivos-1 entregue no recorte: dois grupos com adjetivo posposto e traços explícitos. Amostra própria de 36 alvos: dez decisões úteis, zero erradas observadas, 24 abstenções esperadas e duas lacunas preservadas. Cobertura geral das dez classes/locuções e avaliação por classe ainda não fechadas.
+**Condição de conclusão:** M02-adverbios-negacao-1 cumprida no recorte pré-verbal com sujeito explícito e indicativo compatível. 32 alvos próprios: doze decisões úteis, vinte abstenções esperadas, zero erradas/lacunas observadas. Prioridade de determinantes corrigida para preservar usos negativos e possessivos sem nome. M02 geral continua parcial; plano 11/25 DONE.
 
-Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`.
+Evidências: `ptbr/morfologia-contextual.js`, `tests/ptbr-contexto.cjs`, `ptbr/CONTEXTO-1.md`, `docs/jornada/ENTREGA-V6-35.md`, `tests/contexto-portilexicon.cjs`, `docs/jornada/ENTREGA-V6-36.md`, `tests/contexto-nominal.cjs`, `docs/jornada/ENTREGA-V6-37.md`, `docs/jornada/ENTREGA-V6-38.md`, `docs/jornada/ENTREGA-V6-39.md`, `docs/jornada/ENTREGA-V6-40.md`, `docs/jornada/ENTREGA-V6-41.md`, `docs/jornada/ENTREGA-V6-42.md`, `docs/jornada/ENTREGA-V6-43.md`, `docs/jornada/ENTREGA-V6-44.md`.
 
 ### P05 — Construir as relações da oração
 

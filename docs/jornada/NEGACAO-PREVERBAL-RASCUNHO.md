@@ -1,5 +1,6 @@
 # Não pré-verbal — regra testável, integração pendente
 
+**Registro histórico:** preparação de 05/10/2026, superada pela [integração v6.44](ENTREGA-V6-44.md). O rascunho e o teste com fixture foram retirados após a integração; permanecem no histórico Git.
 Base: `900ef4b7fa4c993d17314524aca68f3e6a54abe5`, 05/10/2026. PTBR-CTX-014 está isolada em `ptbr/experiments/negacao-preverbal/morfologia-contextual.js`. Não integra build/modules.json e não muda a distribuição v6.43.
 
 ## Decisão e correção encontrada

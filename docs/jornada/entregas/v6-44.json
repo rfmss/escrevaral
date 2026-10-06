@@ -1,0 +1,50 @@
+{
+  "version": "6.44",
+  "date": "06/10/2026",
+  "title": "Negação pré-verbal integrada com léxico real",
+  "base": "27c439454d0c6c29c0696aedfa05e0ff8a60737e",
+  "summary": "v6.44: não em Eu não canto / Ela não a viu recebe hipótese contextual de advérbio de negação, com candidato ADV real, apoio indicativo e alcance aberto. Rascunho/fixture substituídos por integração real; leitura nominal e demais candidatos preservados.",
+  "task": "M02",
+  "phase": "P04",
+  "progress": "M02-adverbios-negacao-1 cumprida no recorte pré-verbal com sujeito explícito e indicativo compatível. 32 alvos próprios: doze decisões úteis, vinte abstenções esperadas, zero erradas/lacunas observadas. Prioridade de determinantes corrigida para preservar usos negativos e possessivos sem nome. M02 geral continua parcial; plano 11/25 DONE.",
+  "next": "M02-numerais-1: delimitar dois/três + nome plural em unidade curta completa, com leituras NUM/NOUN reais, Number explícito, gabaritos positivos/ambiguidades/exclusões antes do código. Não resolver um/uma, datas, medidas ou valor quantitativo geral; seguir a matriz COBERTURA-M02.",
+  "verification": "Passaram 32 contrastes com inventário importado, 63 expectativas contextuais, apoio indicativo/ADV ausente, prioridade negativa, clíticos, proteção, UTF-16/NFD, manuscrito intacto, teto de caracteres/tokens, uma consulta por token, ES5 e painel de lente única. Passaram 20 usos sem nome, 30 determinantes e oito grupos do inventário. As 3.205 formas/5.652 leituras antigas e os 32 gabaritos foram comparados e preservados. Diagnóstico das vinte sondas: sete→oito seleções desejadas, treze→doze abertas, zero classes diferentes; não é cobertura geral. Build:check confirma sete saídas. Regressão completa uma vez no CI e Pages por commit.",
+  "limits": "não pré-verbal com pronome sujeito no início de unidade, clítico opcional, ADV externo e indicativo compatível; alcance/dupla negação/subjuntivo não resolvidos",
+  "related": [
+    {
+      "task": "M01",
+      "phase": "P03",
+      "progress": "PortiLexicon recorte 7: 219 sementes, 3.207 formas/5.655 leituras. Não/nãos adicionados pelo snapshot fixo, incluindo ADV e NOUN; todas as triplas antigas preservadas. M01 geral parcial."
+    }
+  ],
+  "sections": [
+    {
+      "title": "Retomada e integração",
+      "text": "Ambiente Node/Python recuperado. Alterações locais anteriores preservadas em stash antes de sincronizar a main 27c4394, incluindo documentos pré-interrupção. Fonte testada do experimento revista e incorporada ao motor produtivo; cópia experimental e teste com fixture removidos, disponíveis no histórico Git. Teste agora usa o cofre gerado e inventário real. A integração não ativa infraestrutura experimental, triagem, filas ou outra lente. Estados: referência de anotação lida; regra implementada; importação/verificações executadas; distribuição gerada. Publicação depende de CI/Pages do commit, não da existência deste relato."
+    },
+    {
+      "title": "Regra e decisões",
+      "text": "PTBR-CTX-014 compõe o apoio já reconhecido por CTX-001: pronome pessoal sujeito no início de unidade, não, clítico o/a/os/as opcional e forma indicativa compatível em pessoa/número. A forma “não” precisa de leitura ADV no PortiLexicon; classificação legada sozinha não basta. Três/quatro apoios no original, candidatos preservados, confiança moderada, negation.scopeResolved false. Não infere alcance semântico, intenção, verdade, dupla negação, auxiliar ou sintaxe geral. A correção descoberta no rascunho é mantida: cantar também admite futuro do subjuntivo, então uma forma apenas subjuntiva não apoia a nova regra. CTX-001 continua com seu escopo anterior; nova regra não redefine tempos verbais."
+    },
+    {
+      "title": "Regressão encontrada e estabilizada",
+      "text": "A importação real também contém não/NOUN. Isso fez o determinante tratar Este não chegou e O meu não caiu como DET + nome, bloqueando as leituras anteriores de demonstrativo/possessivo. Em vez de apagar a leitura nominal, a prioridade de CTX-008 agora abstém de tomar não por nome quando há candidato ADV e verbo finito contíguo, com clítico opcional. Este não chegou conserva CTX-009; O meu não caiu conserva observação aberta CTX-010; Este não o viu não recebe falso grupo DET + nome; Meu não continua possível como uso nominal sem esse apoio. Gabaritos antigos não foram alterados. Essa condição não implementa negação geral nem resolve qual leitura é única na língua."
+    },
+    {
+      "title": "Fonte, importação e conservação",
+      "text": "Referências UD advmod em português (https://universaldependencies.org/pt/dep/advmod.html) e Polarity (https://universaldependencies.org/u/feat/Polarity.html), lidas em 05/10/2026 e retomadas; são anotações, não algoritmo de desambiguação. Nenhuma leitura nova de livro é alegada. Importador Python existente executado no snapshot PortiLexicon-UD 315e063da1f89c89e2097c6e72428ebefb9ab1d1 com os 12 hashes conferidos; lema não acrescentado. Formas não/nãos têm três leituras novas: ADV/_ e NOUN com Gender/Number; nenhum Polarity=Neg foi inventado nos dados. Recorte 7: 219 sementes, 3.207 formas, 5.655 leituras e 505 lemas incluindo homógrafos. Comparação decodificada preservou todas as 3.205 formas/5.652 leituras anteriores. Licença e atribuição mantidas; OWN-PT inalterado."
+    },
+    {
+      "title": "Amostra e matriz",
+      "text": "Adverbios-1 preserva os 32 gabaritos pré-fixados: dezesseis por conjunto, seis metas positivas e dez abstenções. Base por conjunto: zero úteis, seis lacunas, dez abstenções, zero erradas. Depois: seis úteis, zero lacunas, dez abstenções, zero erradas. Corpus próprio, sem cegamento ou avaliação independente. As vinte sondas COBERTURA-M02 agora têm oito seleções desejadas e doze abertas; só o alvo de não mudou. Isso é diagnóstico, não porcentagem de completude de classes ou da língua. M02 exige dez classes, locuções e avaliação por classe; numeral e interjeição continuam sem seleção contextual. Duas lacunas de revista/revistas em nominal-7 e demais limites da matriz continuam visíveis."
+    },
+    {
+      "title": "Custo e autoria",
+      "text": "Dados 122.490→122.554 bytes (+64). Cofre 664.035→666.145 (+2.110); portátil 1.378.624→1.380.720 (+2.096). App/CSS sem mudança de conteúdo. Uma consulta lexical por token e janela de três/quatro tokens, com prioridade negativa limitada para o determinante. Limites 8.000 unidades UTF-16, 1.600 tokens e 100 achados preservados, sem rede/dependência nova em execução. Seleção NFD/emoji e apoios no original, documento intacto e painel por escolha passaram. Bytes/operações não equivalem a medição de RAM/latência nem certificação de aparelhos. Cancelamento/IME permanecem nos contratos existentes e na regressão do CI."
+    },
+    {
+      "title": "Plano e reversão",
+      "text": "Registros preparatórios marcados como históricos, matriz atualizada e cópias de código/teste retiradas após integração. Plano v4 permanece 11/25 DONE; nenhum marco global fechado por este recorte. Próximo numeral cardinal com nome plural, segundo a matriz. Publicação autorizada na main, checando concorrência e sem force. Reverter por commit normal e remontagem; sem migração de manuscritos. Stash local preserva trabalho interrompido e não deve ser reaplicado cegamente sobre a versão integrada."
+    }
+  ]
+}

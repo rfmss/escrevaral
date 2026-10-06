@@ -15,7 +15,7 @@
     "SCONJ.tsv": "65fae7dd0f352254d56a7819fe55f4f6e3b0e89c52a9023c8b454333d219c9ab",
     "VERB.tsv": "3c3ccbf94e0c6e7a1673722f6adceb36e75fde7a70fd5a1dc0edc5b7bcc69342"
   },
-  "subsetVersion": 6,
+  "subsetVersion": 7,
   "authors": [
     "Lucelene Lopes",
     "Magali S. Duran",
@@ -27,14 +27,14 @@
     "institutional": "POeTiSA anuncia dados CC-BY sem especificar versão, com link para este repositório.",
     "institutionalUrl": "https://sites.google.com/icmc.usp.br/poetisa/resources-and-tools"
   },
-  "seedLemmas": 218,
-  "forms": 3205,
-  "readings": 5652,
-  "lemmasIncludingHomographs": 504,
+  "seedLemmas": 219,
+  "forms": 3207,
+  "readings": 5655,
+  "lemmasIncludingHomographs": 505,
   "maxReadingsPerForm": 11,
   "maxRecordBytes": 128,
-  "outputBytes": 122490,
-  "outputSha256": "92cd1bade53b5e8c6ed79ced06457f115640af0e9ee0724efa03f6fe8b9f5901",
+  "outputBytes": 122554,
+  "outputSha256": "45d76dd4863888f9a11598376c8747bec153a98a66d7e385e5c0557d0f160d77",
   "excludedForms": [
     "tinhas:",
     "vens:",
