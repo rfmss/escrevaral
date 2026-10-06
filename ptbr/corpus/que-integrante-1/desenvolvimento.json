@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "Corpus próprio pré-fixado, sem cegamento/independência.",
+  "baseline": "f27c340ebc2ca3cbac40020ffabeda459637f8a9",
+  "scope": "Pronome + indicativo real de saber/dizer + que + pronome + indicativo real compatível; unidade completa de cinco tokens. SCONJ real; sem sintaxe geral ou verdade inferida.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Eu sei que ela chegou.",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Ela disse que eu canto.",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Nós sabemos que eles chegam.",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Eles disseram que nós chegamos.",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Você sabe que ela canta.",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Eu digo que você chegou.",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "O livro que eu li.",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "Que você viu?",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Que belo!",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Eu canto que ela chegou.",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Eu sei que ela chegar.",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Eu sabe que ela chegou.",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Eu sei que ela chegam.",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Eu sei, que ela chegou.",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "Eu sei\nque ela chegou.",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "Eu sei “que” ela chegou.",
+      "expected": false
+    }
+  ]
+}

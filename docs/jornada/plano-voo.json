@@ -239,9 +239,10 @@
             "docs/jornada/ENTREGA-V6-49.md",
             "docs/jornada/ENTREGA-V6-50.md",
             "docs/jornada/ENTREGA-V6-51.md",
-            "docs/jornada/ENTREGA-V6-52.md"
+            "docs/jornada/ENTREGA-V6-52.md",
+            "docs/jornada/ENTREGA-V6-53.md"
           ],
-          "progress": "M02-contrastes-2 cumprida no recorte de se pronominal: 32 alvos, doze úteis/vinte abstenções, zero erradas/lacunas. Que integrante, consolidação e escopo adjetival permanecem; plano 11/25 DONE."
+          "progress": "M02-contrastes-3 cumprida no recorte de que integrante: 32 alvos, doze úteis/vinte abstenções, zero erradas/lacunas. Três recortes somam96 alvos,36 úteis/60 abstenções, zero indevidas nos controles declarados; não é acurácia geral. Consolidação e escopo adjetival faltam;11/25 DONE."
         },
         {
           "id": "M03",
@@ -342,12 +343,12 @@
   ],
   "next": "M02",
   "lastDelivery": {
-    "version": "6.52.0",
+    "version": "6.53.0",
     "completed": [],
     "baselineDone": 11,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-52.md",
-    "record": "docs/jornada/entregas/v6-52.json"
+    "evidence": "docs/jornada/ENTREGA-V6-53.md",
+    "record": "docs/jornada/entregas/v6-53.json"
   },
   "scopeChanges": [
     {

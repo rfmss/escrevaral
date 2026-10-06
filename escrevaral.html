@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261006-scrvrl-se-v6-52">
+  <meta name="asset-version" content="20261006-scrvrl-que-v6-53">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -3986,7 +3986,7 @@ SOFTWARE.
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var version = 'contexto-19-se-pronominal', maxChars = 8000, maxTokens = 1600;
+  var version = 'contexto-20-que-integrante', maxChars = 8000, maxTokens = 1600;
   var source = { title: 'Cunha e Cintra, Nova gramática do português contemporâneo, 7ª ed., 2ª impressão, 2017: pp. 191, 219, 289, 314 e 394. Regras computacionais locais de alcance restrito; não são algoritmos da obra.', url: null };
   var extraNouns = ['cobra', 'cobras', 'jogo', 'jogos', 'sonho', 'sonhos', 'trabalho', 'trabalhos', 'olho', 'olhos', 'filho', 'filhos', 'vizinha', 'vizinhas', 'pagamento', 'caminho'];
   var extraForms = {
@@ -4373,6 +4373,19 @@ SOFTWARE.
       var gap=text.slice(ts[at].end,at+1<ts.length?ts[at+1].start:cut.length);
       return /^[ \t\u00a0]*[.!?;:]/.test(gap)||at===ts.length-1&&cut.length===text.length&&/^[ \t\r\n\u00a0]*$/.test(gap);
     }
+    /* Que integrante com saber/dizer: dois apoios indicativos reais. */
+    for(i=0;i+4<ts.length;i++){
+      if(ts[i+2].value!=='que'||items[i+2].status==='contextual'||!unitStart(i)||!unitEnd(i+4)){continue;}
+      agreement=subjects['$'+ts[i].value];var rightAgreement=subjects['$'+ts[i+3].value];
+      if(!agreement||!rightAgreement){continue;}
+      var queLinked=true;for(j=i;j<i+4;j++){if(!linked(j,j+1)){queLinked=false;break;}}
+      if(!queLinked||!items[i+2].candidates.portilexicon.some(function(row){return row.pos==='SCONJ';})){continue;}
+      forms=externalFinite(items[i+1].candidates,agreement).filter(function(form){return /^indicativo:/.test(form[1])&&has(['saber','dizer'],form[0]);});
+      var rightForms=externalFinite(items[i+4].candidates,rightAgreement).filter(function(form){return /^indicativo:/.test(form[1]);});
+      if(!forms.length||!rightForms.length){continue;}
+      choose(i+2,'conjunção','PTBR-CTX-023',[i,i+1,i+2,i+3,i+4]);
+      items[i+2].integratingQue={kind:'integrante com saber/dizer',truthResolved:false,syntaxResolved:false};
+    }
     /* Se pronominal: terceira pessoa explícita e indicativo real. */
     for(i=0;i+2<ts.length;i++){
       agreement=subjects['$'+ts[i].value];
@@ -4512,6 +4525,7 @@ SOFTWARE.
       if(item.rule==='PTBR-CTX-009'){message='Leitura contextual: demonstrativo sem nome expresso.';}
       if(item.rule==='PTBR-CTX-010'){message='Possessivo sem nome expresso: leitura em aberto.';}
       if(item.rule==='PTBR-CTX-011'){message=item.nominalCoordination.role==='conectivo'?'Hipótese de coordenação nominal: conectivo '+item.nominalCoordination.connector+'.':'Hipótese de coordenação nominal: substantivo.';}
+      if(item.rule==='PTBR-CTX-023'){message='Hipótese contextual: que como conjunção integrante.';}
       if(item.rule==='PTBR-CTX-022'){message='Hipótese contextual: se pronominal.';}
       if(item.rule==='PTBR-CTX-021'){message='Hipótese contextual: como interrogativo, advérbio.';}
       if(item.rule==='PTBR-CTX-016'){message='Leitura contextual: interjeição isolada.';}
@@ -4522,6 +4536,7 @@ SOFTWARE.
       reason = item.rule === 'PTBR-CTX-001' ? 'Pronome sujeito próximo e forma verbal finita compatível em pessoa e número.' :
         item.rule === 'PTBR-CTX-002' ? 'Artigo definido antes de nome registrado; homógrafos verbais exigem também uma forma finita à direita.' :
         item.rule === 'PTBR-CTX-003' ? 'A forma aparece entre pronome sujeito (com não opcional) e verbo finito compatível.' :
+        item.rule === 'PTBR-CTX-023' ? 'Que tem leitura SCONJ real entre dois pares pronome pessoal + indicativo real compatível, em unidade completa de cinco tokens; o verbo à esquerda pertence a saber/dizer. Favorece conjunção integrante neste recorte, sem decidir verdade, evento, função sintática ou subordinação geral. Não basta a presença de que; relativos, interrogativos, exclamações, outros verbos e construções ficam fora. Todas as leituras lexicais permanecem.' :
         item.rule === 'PTBR-CTX-022' ? 'Se tem PRON com Person=3 e PronType=Prs na fonte e aparece entre pronome pessoal de terceira pessoa e indicativo real compatível, em unidade completa de três tokens. Favorece pronome sem escolher Case=Acc/Dat/Nom, reflexividade, reciprocidade, passiva, impessoalidade ou função sintática. A fonte não registra Reflex/Number de se; nenhum traço foi inventado. SCONJ e todas as leituras pronominais são preservadas; condição e demais construções ficam abertas.' :
         item.rule === 'PTBR-CTX-021' ? 'Como tem leitura ADV real e inicia unidade de três tokens com pronome pessoal explícito, indicativo real compatível e ? como fronteira. Favorece advérbio interrogativo neste recorte; PronType=Int não consta do ADV na fonte e não foi adicionado. Não identifica intenção, intensidade, comparação ou estrutura sintática geral. Perguntas indiretas, exclamações, sujeito omitido e continuações ficam fora; comer e demais candidatos permanecem no inventário.' :
         item.rule === 'PTBR-CTX-016' ? 'Ah/oh têm leitura INTJ na fonte e aparecem isolados, no início da unidade, com ! ou ? como fronteira explícita. A pontuação sozinha não torna uma palavra interjeição. Não identifica emoção, intensidade, intenção, ironia ou função discursiva. Citações, substantivações, continuações e ocorrências sem essa fronteira ficam fora deste recorte; as possibilidades lexicais são preservadas.' :
@@ -4545,6 +4560,7 @@ SOFTWARE.
       if(item.rule==='PTBR-CTX-008'){occurrenceSource={title:'Regra computacional local: determinante possessivo/demonstrativo antes de nome. Universal Dependencies v2, Poss e PronType, consultados em 30/09/2026; não identifica referente nem resolve usos sem nome.',url:'https://universaldependencies.org/u/feat/PronType.html'};}
       if(item.rule==='PTBR-CTX-009'||item.rule==='PTBR-CTX-010'){occurrenceSource={title:'Hipótese/observação computacional local para usos sem nome expresso. UD v2 PRON e Ellipsis in Nominals, consultados em 01/10/2026; distinções entre pronome, determinante e elipse não são decididas só pela ausência do nome.',url:'https://universaldependencies.org/u/pos/PRON.html'};}
       if(item.rule==='PTBR-CTX-011'){occurrenceSource={title:'Hipótese computacional local de coordenação nominal curta. UD v2: conj e cc, consultados em 01/10/2026. Distingue conectivo e constituintes; não implementa árvore de dependências.',url:'https://universaldependencies.org/u/dep/conj.html'};}
+      if(item.rule==='PTBR-CTX-023'){occurrenceSource={title:'Hipótese computacional local para que com saber/dizer e dois apoios indicativos explícitos. UD v2 mark em português, consultado em 06/10/2026, distingue marcadores de pronomes relativos; referência de anotação, sem parser ou inferência geral só pela presença de que.',url:'https://universaldependencies.org/pt/dep/mark.html'};}
       if(item.rule==='PTBR-CTX-022'){occurrenceSource={title:'Hipótese computacional local para se pronominal com apoio explícito de terceira pessoa e indicativo. UD v2 PronType e Reflex, consultados em 06/10/2026; pronome lexical não determina reflexividade, voz ou função sintática.',url:'https://universaldependencies.org/u/feat/Reflex.html'};}
       if(item.rule==='PTBR-CTX-021'){occurrenceSource={title:'Hipótese computacional local: como em pergunta direta delimitada. Priberam, como, e UD v2 PronType/advmod em português, consultados em 06/10/2026. Interrogação é interpretação da construção, sem traço lexical inventado ou parser geral.',url:'https://dicionario.priberam.org/como'};}
       if(item.rule==='PTBR-CTX-016'){occurrenceSource={title:'Hipótese computacional local para ah/oh isolados. UD v2 INTJ, consultado em 06/10/2026: uso exclamativo sozinho não define a classe; leitura lexical real e fronteiras são exigidas, sem resolver emoção ou intenção.',url:'https://universaldependencies.org/u/pos/INTJ.html'};}
@@ -4559,7 +4575,7 @@ SOFTWARE.
         'Possibilidades lexicais registradas: ' + (r.classes.join(', ') || 'nenhuma') + '. A regra é uma hipótese local. Elipse, nomes próprios, usos literários e outras construções podem exigir leitura diferente. Um inventário com uma só classe não prova unicidade na língua.',
         limit, occurrenceSource,
         { confidence: contextual ? 'moderada' : 'insuficiente', feature: item.selected || item.status, candidates: r,
-          pronominalSe: item.pronominalSe || null, interrogative: item.interrogative || null, interjection: item.interjection || null, nominalNumeral: item.nominalNumeral || null, negation: item.negation || null, nominalCoordination: item.nominalCoordination || null, standaloneUse: item.standaloneUse || null, nominalDeterminer: item.nominalDeterminer || null, nominalComplement: item.nominalComplement || null, nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
+          integratingQue: item.integratingQue || null, pronominalSe: item.pronominalSe || null, interrogative: item.interrogative || null, interjection: item.interjection || null, nominalNumeral: item.nominalNumeral || null, negation: item.negation || null, nominalCoordination: item.nominalCoordination || null, standaloneUse: item.standaloneUse || null, nominalDeterminer: item.nominalDeterminer || null, nominalComplement: item.nominalComplement || null, nominalAgreement: item.nominalAgreement || null, nominalAmbiguity: !!item.nominalAmbiguity, analysisStatus: item.status, context: item.evidence, compatibleVerbs: item.compatibleVerbs || [] }));
     }
     out.coverageInfo = { scope: report.scope, work: report.work, version: version, lexiconVersion: E.portiLexicon?E.portiLexicon.version:null,
       summary: 'Classes em contexto: recorte ' + report.scope.start + '–' + report.scope.end + ' de ' + text.length + ' unidades UTF-16; ' + report.work.tokens + ' tokens.' + (report.scope.partial ? ' Análise parcial: selecione o restante para continuar.' : '') };
@@ -5120,7 +5136,7 @@ SOFTWARE.
  };
 }(typeof window!=='undefined'?window:this));
 
-    window.Escr.knowledge.version="local-20261006-contexto-19";
+    window.Escr.knowledge.version="local-20261006-contexto-20";
     return window.Escr;
   }
   return {version:'1.0.0',locale:'pt-BR',createRuntime:createRuntime,

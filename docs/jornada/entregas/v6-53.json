@@ -1,0 +1,31 @@
+{
+  "version": "6.53",
+  "date": "06/10/2026",
+  "title": "Que integrante apoiado por saber e dizer",
+  "base": "f27c340ebc2ca3cbac40020ffabeda459637f8a9",
+  "summary": "v6.53: que entre dois pares pronome/indicativo real, com saber/dizer à esquerda, recebe hipótese de conjunção integrante em unidade completa de cinco palavras. Três recortes de como/se/que integrados, alternativas e abstenções preservadas.",
+  "task": "M02",
+  "phase": "P04",
+  "progress": "M02-contrastes-3 cumprida no recorte de que integrante: 32 alvos, doze úteis/vinte abstenções, zero erradas/lacunas. Três recortes somam96 alvos,36 úteis/60 abstenções, zero indevidas nos controles declarados; não é acurácia geral. Consolidação e escopo adjetival faltam;11/25 DONE.",
+  "next": "M02-consolidacao-1: reunir relatório reproduzível por classe/família, separando decisões úteis, erradas, abstenções, lacunas e observações; manter revista/revistas. Delimitar inventário/construção/exclusões de locuções adjetivas/demais grupos com implementação ou decisão explícita de escopo. Conferir critérios da COBERTURA-M02 antes de concluir M02 e iniciar M03.",
+  "verification": "32 alvos pré-fixados e doze perturbações de fonte/traços/lema passaram; candidatos reais, dois apoios obrigatórios, fonte removida sem fallback. Como/se 32 alvos cada, conjuntivas32, negação32/63 regressões passaram. Seleção/emoji/NFD, autoria, proteção, truncamentos, uma consulta/token, teto100, ES5 e painel. Vinte sondas permanecem12 desejadas/8 abertas/zero diferentes. Build:check; regressão completa CI e Pages por SHA.",
+  "limits": "Cinco tokens completos, dois sujeitos pessoais e dois indicativos reais compatíveis; saber/dizer à esquerda e que SCONJ. Não decide sintaxe geral, verdade, relativo/interrogativo/exclamativo ou outras construções.",
+  "sections": [
+    {
+      "title": "Fonte, regra e exclusões",
+      "text": "Matriz CONTRASTES-M02 prévia e corpus que-integrante-1 pré-fixado. UD v2 mark em português, consultado em06/10/2026: marcador e pronome relativo têm papéis diferentes; referência de anotação, não algoritmo geral. CTX-023 exige dois pares pronome pessoal/indicativo real compatível, que SCONJ real, primeiro verbo de saber/dizer, contiguidade e unidade completa de cinco tokens. Seleciona apenas que como conjunção integrante, confiança moderada; truthResolved/syntaxResolved false. Sem propagação a Sintaxe/Relativas ou inferência só por que. Relativo/interrogativo/exclamativo, outros lemas, condicional/subjuntivo, sujeito nominal/omitido, negação/clítico/modificador e pontuação interna/proteção ficam fora."
+    },
+    {
+      "title": "Conservação e evidência",
+      "text": "Sem importação: PortiLexicon recorte12 mantido. Que conserva oito análises, incluindo PRON Int/Rel, DET,ADV,ADP,CCONJ,SCONJ,INTJ. Dois conjuntos de dezesseis: seis metas/dez exclusões cada; antes zero úteis/seis lacunas/dez abstenções; depois seis úteis/zero erradas ou lacunas/dez abstenções. Gabaritos íntegros, corpus próprio sem cegamento/independência. Doze perturbações retiram SCONJ/VERB dos dois apoios, Mood/Person/Number/VerbForm de ambos, ou trocam lema saber por cantar. Seleção emoji/NFD mantém trechos/apoios UTF-16 exatos e autoria. Como/se antigos passaram32 alvos cada; três recortes somam96 alvos/36 úteis/60 abstenções sem indevidas nos controles. Conjuntivas antigas32 e negação32/63 expectativas passaram; grupo assim que não virou que integrante. Sondas12 desejadas/8 abertas/zero diferentes não medem completude."
+    },
+    {
+      "title": "Custo e apresentação",
+      "text": "Cofre687220→689343 bytes (+2123); portátil1402207→1404331 (+2124); dados/app/CSS iguais. Janela de cinco tokens com no máximo quatro verificações de contiguidade e uma consulta lexical/token existente. Tetos8000 UTF-16/1600 tokens/100 achados, ES5 e painel explícito passaram. Somente lente Classes executada; manuscrito intacto. Bytes/operações não medem RAM/latência ou certificam aparelhos."
+    },
+    {
+      "title": "Estados e plano",
+      "text": "Três decisões próprias para como/se/que integradas, com exclusões e candidatos; demais usos permanecem abertos. M02 geral continua TODO e plano11/25 DONE até relatório por classe/família e decisão explícita de escopo adjetival/demais grupos. Metas revista/revistas conservadas como lacunas; não apagar para fechar marco. Avaliação reservada separada emQ02. Referências/regra/testes/distribuição registrados; CI/Pages por commit conferidos ao publicar. Reversão por commit normal/build, sem migração de textos."
+    }
+  ]
+}

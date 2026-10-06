@@ -55,7 +55,7 @@ O marco permanece TODO até que estes pontos tenham evidência:
 
 Não pré-verbal; numeral cardinal com nome; interjeições delimitadas; inventário e integração de locuções; contrastes restantes de que/se/como e apoios pronominais/preposicionais; consolidação por classe. Só reabrir coordenação nominal por erro reproduzível ou necessidade do fechamento. A ordem não promete número de versões ou prazo e não altera os 25 marcos.
 
-Próxima ação concreta: integrar que integrante conforme a [matriz pré-fixada](CONTRASTES-M02.md); como interrogativo direto tem CTX-021 e se pronominal tem CTX-022. Consolidar por classe/família e declarar escopo de locuções adjetivas/demais grupos antes do fechamento. [Entrega v6.50](ENTREGA-V6-50.md).
+Próxima ação concreta: consolidar relatório por classe/família, com lacunas/observações separadas, e declarar escopo de locuções adjetivas/demais grupos antes de fechar M02. Contrastes como/se/que têm CTX-021/022/023 e corpus próprios; demais usos continuam abertos. [Entrega v6.53](ENTREGA-V6-53.md).
 
 ## Incremento v6.45 — numerais
 
@@ -88,3 +88,7 @@ Matriz que/se/como registrada antes do motor em CONTRASTES-M02.md. CTX-021: como
 ## Incremento v6.52 — se pronominal
 
 CTX-022: sujeito pessoal de terceira pessoa + se + indicativo real compatível, unidade completa de três tokens. PRON Person=3/PronType=Prs obrigatório; Case Acc/Dat/Nom e SCONJ preservados. Não infere Reflex/Number, voz ou função. Recorte 12 adiciona uma forma/quatro leituras, conserva todas 3219 formas/5679 leituras antigas. Corpus próprio: doze úteis/vinte abstenções/zero erradas ou lacunas. Que integrante, consolidação e escopo adjetival continuam antes de concluir M02.
+
+## Incremento v6.53 — que integrante
+
+CTX-023: dois pares pronome pessoal + indicativo real compatível, com que SCONJ e saber/dizer à esquerda, unidade completa de cinco tokens. Seleção conjunção; oito leituras reais preservadas, sem inferir verdade ou sintaxe geral. Corpus próprio doze úteis/vinte abstenções/zero erradas ou lacunas; como/se anteriores preservados. Matriz de contrastes e três recortes implementados; consolidação por classe/família e escopo adjetival ainda impedem fechar M02.

@@ -1,17 +1,17 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-52-02c870ceacc8";
-const ASSET_VERSION = "20261006-scrvrl-se-v6-52";
+const CACHE_NAME = "scrvrl-offline-v6-53-9f5c2617678c";
+const ASSET_VERSION = "20261006-scrvrl-que-v6-53";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20261006-scrvrl-se-v6-52/cofre.28c891426c96aab8.js",
-    "sha256": "28c891426c96aab88c2e0fcbfd6d7f9890538cf2d2367e4e943583ef39cab498"
+    "url": "./assets/20261006-scrvrl-que-v6-53/cofre.5f31b693725f8309.js",
+    "sha256": "5f31b693725f830952d25665e0ae889438176593f171dc643bc267180cf0665f"
   },
   {
-    "url": "./assets/20261006-scrvrl-se-v6-52/app.25fab6c7650f4623.js",
+    "url": "./assets/20261006-scrvrl-que-v6-53/app.25fab6c7650f4623.js",
     "sha256": "25fab6c7650f46235643a848742cb8126b9b8238477579f8a9e3dc6232446a63"
   },
   {
-    "url": "./assets/20261006-scrvrl-se-v6-52/styles.200ed33cf9f86d6b.css",
+    "url": "./assets/20261006-scrvrl-que-v6-53/styles.200ed33cf9f86d6b.css",
     "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90"
   }
 ];
@@ -28,7 +28,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
   const cache=await caches.open(CACHE_NAME);
-  const index=await checkedAsset({url:'./index.html',sha256:'30c36c41c7be7318a8897abaae2c1e94dff91fb383ca9c9c2f784d30fff5b6c9'});
+  const index=await checkedAsset({url:'./index.html',sha256:'0cef30c7a04a8a6ca15300056a8c1995b9f3b54d2171a7cff68a34cf0e450969'});
   if(!index.ok||(await index.clone().text()).indexOf('content="'+ASSET_VERSION+'"')<0)throw new Error('Documento de outra versão');
   await Promise.all(REQUIRED_ASSETS.map(async asset=>cache.put(asset.url,await checkedAsset(asset))));
   await cache.put('./index.html',index.clone());await cache.put('./',index);
