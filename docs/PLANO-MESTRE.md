@@ -9,6 +9,8 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 **Retrato vigente — 05/10/2026:** v6.43: A casa branca e o jardim bonito recebe hipótese de coordenação de dois grupos artigo + nome + adjetivo. Sete apoios originais, homógrafos preservados e duas lacunas de avaliação explícitas. M02 segue parcial. [Entrega e limites](jornada/ENTREGA-V6-43.md). CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 
+**Continuidade do M02 — 05/10/2026:** [Matriz das dez classes e locuções](jornada/COBERTURA-M02.md) concluída; sondas e 32 contrastes de advérbio preservados. Próximo: finalizar a regra de não pré-verbal, montar e validar a v6.44 quando o ambiente de execução estiver disponível. [Estado técnico e limites da retomada](jornada/RETOMADA-M02-2026-10-05.md). Distribuição permanece v6.43; plano 11/25 DONE.
+
 ## Método vigente — solo, 30/09/2026
 
 Rafael encerrou a coordenação com outro Astra. Uma frente prepara, implementa e integra lotes por capacidade útil; amostra pré-fixada e avaliação com limitações explícitas. A ficha em `docs/jornada/entregas/` gera estado e relato por `ferramentas/gerar-entrega.py`. Histórico anterior não cria dependência de A1 nem obrigação de segundo commit para confirmar publicação. CI/Pages registram resultados por commit.

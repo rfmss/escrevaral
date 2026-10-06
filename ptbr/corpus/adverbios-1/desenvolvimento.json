@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes da implementação, não independente ou cega.",
+  "baseline": "017b4ecb7d4277c08afcb66cb42f7776a1a59a95",
+  "scope": "Não entre pronome pessoal sujeito no início de unidade e forma finita compatível já reconhecida por 001; clítico o/a/os/as opcional. A forma “não” exige candidato ADV externo; nenhuma decisão sobre alcance semântico, intenção ou verdade.",
+  "cases": [
+    {
+      "id": "DES01",
+      "text": "Eu não canto.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "DES02",
+      "text": "Eu não o canto.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "DES03",
+      "text": "Ela não chegou.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "DES04",
+      "text": "Nós não cantamos.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "DES05",
+      "text": "Eles não chegaram.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "DES06",
+      "text": "Você não canta.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "DES07",
+      "text": "Não!",
+      "target": "Não",
+      "expected": false
+    },
+    {
+      "id": "DES08",
+      "text": "O não.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "DES09",
+      "text": "Eu não só canto.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "DES10",
+      "text": "Eu não, canto.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "DES11",
+      "text": "Eu não\ncanto.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "DES12",
+      "text": "Eu “não” canto.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "DES13",
+      "text": "Eu não cantar.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "DES14",
+      "text": "Eu não cantas.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "DES15",
+      "text": "Não canto.",
+      "target": "Não",
+      "expected": false
+    },
+    {
+      "id": "DES16",
+      "text": "O meu não caiu.",
+      "target": "não",
+      "expected": false
+    }
+  ]
+}

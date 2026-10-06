@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "kind": "Amostra própria fixada antes da implementação, não independente ou cega.",
+  "baseline": "017b4ecb7d4277c08afcb66cb42f7776a1a59a95",
+  "scope": "Não entre pronome pessoal sujeito no início de unidade e forma finita compatível já reconhecida por 001; clítico o/a/os/as opcional. A forma “não” exige candidato ADV externo; nenhuma decisão sobre alcance semântico, intenção ou verdade.",
+  "cases": [
+    {
+      "id": "AVA01",
+      "text": "Tu não cantas.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "AVA02",
+      "text": "Ela não a viu.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "AVA03",
+      "text": "Vocês não cantam.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "AVA04",
+      "text": "Eu não como.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "AVA05",
+      "text": "Ele não chegou ontem.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "AVA06",
+      "text": "Elas não os viram.",
+      "target": "não",
+      "expected": true
+    },
+    {
+      "id": "AVA07",
+      "text": "Eu não zorbex.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA08",
+      "text": "Eu não ontem canto.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA09",
+      "text": "Eu não o cantar.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA10",
+      "text": "Eu não `canto`.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA11",
+      "text": "Eu não e canto.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA12",
+      "text": "Ele disse não.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA13",
+      "text": "Eu não canta.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA14",
+      "text": "Ela não a vi.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA15",
+      "text": "Eu não só canto mas danço.",
+      "target": "não",
+      "expected": false
+    },
+    {
+      "id": "AVA16",
+      "text": "Ontem eu não canto.",
+      "target": "não",
+      "expected": false
+    }
+  ]
+}
