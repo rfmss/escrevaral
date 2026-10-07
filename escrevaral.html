@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261007-scrvrl-reserva-v6-58">
+  <meta name="asset-version" content="20261007-scrvrl-filtro-v6-59">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -8522,6 +8522,7 @@ SOFTWARE.
     '.ptbr-action{display:block;width:100%;margin:12px 0 8px;min-height:38px;padding:7px 12px;border:1px solid currentColor;background:transparent;color:inherit;font:inherit;font-weight:700;cursor:pointer}' +
     '.ptbr-action:disabled{opacity:.45;cursor:default}' +
     '.ptbr-lexical label{display:block}.ptbr-lexical-input{display:block;box-sizing:border-box;width:100%;padding:7px;border:1px solid currentColor;background:transparent;color:inherit;font:inherit}' +
+    '.ptbr-reserve-filter label{display:block}.ptbr-reserve-filter select{display:block;width:100%;max-width:100%;box-sizing:border-box;font:inherit;color:inherit;background:transparent}' +
     '.ptbr-lens-description,.ptbr-signal{display:block;white-space:normal;font-size:12px;line-height:1.5;margin-top:5px}.ptbr-signal{font-style:italic;opacity:.8}' +
     '.ptbr-status{font-size:12px;line-height:1.5;opacity:.8;min-height:20px}' +
     '.ptbr-outcome{padding:10px 0;border-top:1px dotted currentColor}' +
@@ -8622,9 +8623,32 @@ SOFTWARE.
     el('p',results,'ptbr-status','Estas palavras estão no acervo. As classes abaixo são possibilidades do léxico, inclusive em citações; não classificam a sua frase.');
     if(reservation.lexicalLimited){el('p',results,'ptbr-status','Limite de preparação atingido. Há outras palavras que ainda não foram verificadas.');}
     function current(item){return prepared===reservation&&documentKey()===reservation.document&&manuscript.value.slice(item.start,item.end)===item.snippet;}
+    var filterBox=el('div',results,'ptbr-reserve-filter'),filterLabel=el('label',filterBox,'ptbr-status','Filtrar por classe possível no léxico');
+    filterLabel.setAttribute('for','ptbr-reserve-class');
+    var filter=el('select',filterBox,'');filter.id='ptbr-reserve-class';
+    var all=el('option',filter,'','Todas as ocorrências ('+reservation.occurrences.length+')');all.value='';
+    var classes=[],counts={},rows=[],ci,ri,cls;
+    for(ri=0;ri<reservation.occurrences.length;ri++){
+      for(ci=0;ci<reservation.occurrences[ri].classes.length;ci++){
+        cls=reservation.occurrences[ri].classes[ci];
+        if(classes.indexOf(cls)===-1){classes.push(cls);counts['$'+cls]=0;}counts['$'+cls]++;
+      }
+    }
+    classes.sort();
+    for(ci=0;ci<classes.length;ci++){cls=classes[ci];var option=el('option',filter,'',cls+' ('+counts['$'+cls]+')');option.value=cls;}
+    el('p',filterBox,'ptbr-status','Contagens apenas desta reserva. Uma palavra pode aparecer em mais de uma classe; a frase ainda precisa ser examinada.');
+    filter.addEventListener('change',function(){
+      if(prepared!==reservation||documentKey()!==reservation.document){return;}
+      var visible=0;
+      for(var at=0;at<rows.length;at++){
+        rows[at].hidden=!!filter.value&&reservation.occurrences[at].classes.indexOf(filter.value)===-1;
+        if(!rows[at].hidden){visible++;}
+      }
+      status.textContent='Mostrando '+visible+' de '+rows.length+' ocorrências reservadas'+(filter.value?' com possibilidade de '+filter.value:': todas as classes')+'. Nenhuma nova análise foi executada.';
+    },false);
     for(var i=0;i<reservation.occurrences.length;i++){
       (function(item){
-        var row=el('section',results,'ptbr-outcome');el('h3',row,'',item.snippet);
+        var row=el('section',results,'ptbr-outcome');rows.push(row);el('h3',row,'',item.snippet);
         el('p',row,'','Possibilidades no léxico: '+item.classes.join(', ')+'.');
         var locate=el('button',row,'','Ver no texto');locate.type='button';
         locate.addEventListener('click',function(){

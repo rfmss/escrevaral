@@ -1,5 +1,9 @@
 # Contrato da cortina Escrevaral
 
+## Filtro lexical — 07/10/2026
+
+V6.59 permite filtrar a reserva pelas classes possíveis presentes nela. Todas as ocorrências restaura a lista. Homógrafos permanecem em cada categoria possível, com alternativas visíveis; contagens são locais, não do texto inteiro. Filtrar não executa nem solicita nova análise. O pedido de classificação contextual do trecho reservado é a próxima integração, separado do filtro.
+
 ## Reserva lexical — 07/10/2026
 
 V6.58 prepara uma janela limitada junto ao cursor. Em Entender uma frase, Ver palavras reconhecidas mostra até24 ocorrências com classes possíveis do léxico; Ver no texto seleciona a ocorrência exata e Consultar palavra abre fontes/flexões/sentidos. A preparação não decide função sintática nem classe no contexto. Janela fora do início não roda heurísticas de frase; palavras de citações só são consultadas como formas lexicais. Limites2000 caracteres/400 visitas totais e pausa700ms preservados. Reserva geral/filtro por pertinência continuam parciais em A03.

@@ -161,9 +161,10 @@
           "evidence": [
             "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
             "docs/jornada/ENTREGA-V6-57.md",
-            "docs/jornada/ENTREGA-V6-58.md"
+            "docs/jornada/ENTREGA-V6-58.md",
+            "docs/jornada/ENTREGA-V6-59.md"
           ],
-          "progress": "Reserva lexical local implementada: janela2000 junto ao cursor, teto24, ocorrências distintas, Unicode/offsets, alternativas do léxico, seleção/consulta a pedido. Fora do início não infere contexto. Filtro por classes e preparação contextual geral pendentes."
+          "progress": "Filtro lexical entregue sobre a reserva de até24 ocorrências: classes presentes/contagens locais, Todas, ambiguidade preservada e seleção exata. Preparação contextual geral e pertinência da folha continuam parciais."
         }
       ]
     },
@@ -350,12 +351,12 @@
   ],
   "next": "A03",
   "lastDelivery": {
-    "version": "6.58.0",
+    "version": "6.59.0",
     "completed": [],
     "baselineDone": 12,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-58.md",
-    "record": "docs/jornada/entregas/v6-58.json"
+    "evidence": "docs/jornada/ENTREGA-V6-59.md",
+    "record": "docs/jornada/entregas/v6-59.json"
   },
   "scopeChanges": [
     {

@@ -21,6 +21,16 @@ const unicode='😀 cafe\u0301 canto';({out}=prepare(unicode,3000));const accent
 // Integração da reserva: nenhuma lente, seleção exata e invalidação ao editar.
 const panel=require('../ptbr/teste-painel').setup('Eu canto. O canto terminou.',[],E);panel.manuscript.selectionStart=20;panel.panel.hidden=false;panel.panel.focus();panel.flush();panel.goals.childNodes[1].click();panel.flush();
 const reserveButton=panel.board.childNodes.find(n=>n.className==='ptbr-reserved-button');assert.equal(reserveButton.hidden,false);reserveButton.click();assert.deepEqual(panel.calls,[]);
+const filterBox=panel.results.childNodes.find(n=>n.className==='ptbr-reserve-filter'),filter=filterBox.childNodes.find(n=>n.tagName==='select');
+assert(filter);const reservedRows=panel.results.childNodes.filter(n=>n.className==='ptbr-outcome');
+const countByClass=wordClass=>reservedRows.filter(row=>row.textContent.includes('Possibilidades no léxico:')&&row.childNodes[1].textContent.includes(wordClass)).length;
+assert.equal(filter.childNodes.find(n=>n.value==='substantivo').textContent,'substantivo ('+countByClass('substantivo')+')');
+assert(!filter.childNodes.some(n=>n.value==='classe inexistente'),'não inventa categorias sem ocorrências na reserva');
+filter.value='substantivo';filter.emit('change');assert(reservedRows.filter(n=>!n.hidden).every(n=>n.childNodes[1].textContent.includes('substantivo')));
+assert.equal(reservedRows.filter(n=>!n.hidden&&n.childNodes[0].textContent==='canto').length,2,'repetidas continuam distintas');
+filter.value='verbo';filter.emit('change');assert.equal(reservedRows.filter(n=>!n.hidden&&n.childNodes[0].textContent==='canto').length,2,'homógrafo aparece nos dois filtros sem escolher classe contextual');
+filter.value='';filter.emit('change');assert(reservedRows.every(n=>!n.hidden));assert.deepEqual(panel.calls,[],'filtrar não executa lente');
+assert.deepEqual(panel.results.childNodes.filter(n=>n.className==='ptbr-outcome'),reservedRows,'filtrar reutiliza os mesmos nós');
 const rows=panel.results.childNodes.filter(n=>n.className==='ptbr-outcome'),second=rows.filter(n=>n.childNodes[0].textContent==='canto')[1];assert(second);second.childNodes.find(n=>n.tagName==='button').click();assert.equal(panel.manuscript.selectionStart,12);assert.equal(panel.manuscript.selectionEnd,17);assert.equal(panel.manuscript.value,'Eu canto. O canto terminou.');
 panel.manuscript.value='Texto novo';panel.manuscript.emit('input');panel.manuscript.setSelectionRange(0,0);second.childNodes.find(n=>n.tagName==='button').click();assert.equal(panel.manuscript.selectionEnd,0,'botão antigo não seleciona resultado obsoleto');
 require('acorn').parse(fs.readFileSync('ptbr/preparacao.js','utf8'),{ecmaVersion:5});

@@ -2,6 +2,14 @@
 
 Decisão recebida de Rafael por intermédio da frente ASTRA 2 em 27/09/2026. Base conferida: main `019e9105b2730476644bfb9c6644f9be2738ea11`, produto v6-28. **Direção registrada; contratos abaixo são proposta para a prova isolada, não API publicada.** O cofre continua síncrono; a primeira preparação limitada do painel foi integrada na v6.57, conforme seção vigente abaixo.
 
+## Filtro da reserva — 07/10/2026, v6.59
+
+A lista solicitada de palavras reconhecidas oferece um seletor rotulado **Filtrar por classe possível no léxico**. Opção inicial Todas as ocorrências; demais opções são somente classes presentes na reserva, com contagem de ocorrências por classe. Repetidas em posições distintas contam separadamente. Uma ocorrência ambígua participa de mais de uma classe e preserva todas as alternativas no cartão; as contagens não são uma partição nem contagem do livro.
+
+Filtrar só altera visibilidade dos até24 cartões existentes. Não consulta léxico, não roda lente, não cria nova reserva, não persiste filtro e não agenda timers. Contagens e opções são construídas uma vez ao abrir a lista; selecionar Todos restaura a mesma ordem e os mesmos nós. Seletor com label, teclado nativo e anúncio do número visível no status. Uma nova reserva começa mostrando todas as ocorrências. Identidade, cancelamento e seleção literal permanecem vigentes.
+
+A03 continua parcial: filtro lexical entregue; contexto sintático geral e pertinência automática da folha não estão implementados. Próximo: especificar a ligação entre uma ocorrência reservada e um exame contextual explícito do seu trecho, com offsets originais e fronteiras seguras, sem examinar silenciosamente outra região da folha.
+
 ## Reserva lexical junto ao cursor — 07/10/2026, v6.58
 
 A janela começa até 1.000 unidades UTF-16 antes do cursor e recebe até 2.001 unidades (incluindo a fronteira direita). Não procura o início de parágrafos por varredura do livro. Um indicador de continuação à esquerda permite descartar palavras cortadas; também são descartados tokens cortados à direita e formas acima de64 unidades. O original nunca é normalizado; a chave de consulta usa a canonicalização existente, preservando offsets de emoji e acentos decompostos.

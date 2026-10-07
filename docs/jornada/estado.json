@@ -1,12 +1,12 @@
 {
-  "version": 47,
+  "version": 48,
   "updated": "07/10/2026",
-  "baseline": "01eafaf6a7c769e2b64055572131c6e36a9a2f30",
+  "baseline": "8521fef6f51f48ba620379c9f8f3da03d507797d",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.58: janela junto ao cursor reserva até24 palavras reconhecidas, preserva classes possíveis e permite consultar/selecionar ocorrências exatas a pedido. Pausa700ms e limite total400 visitas preservados. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.59: reserva filtrável por classes possíveis, contagens locais e retorno a todas as ocorrências. Homógrafos preservados; filtro sem novas consultas, análises ou aumento dos tetos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "A03-filtro: oferecer filtro por classes possíveis nas ocorrências reservadas, com contagens locais e acesso a todas; distinguir classes do léxico, hipóteses contextuais e regiões não verificadas. Não elevar teto ou converter que em relativa.",
+    "A03-contexto: delimitar e conectar pedido explícito de classes em contexto ao trecho reservado, com identidade, fronteiras protegidas e offsets originais. Evitar examinar outra região da folha sem indicação; manter abstenções e limites existentes.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -271,7 +271,7 @@
         "Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.",
         "Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar."
       ],
-      "done": "Reserva lexical local implementada: janela2000 junto ao cursor, teto24, ocorrências distintas, Unicode/offsets, alternativas do léxico, seleção/consulta a pedido. Fora do início não infere contexto. Filtro por classes e preparação contextual geral pendentes.",
+      "done": "Filtro lexical entregue sobre a reserva de até24 ocorrências: classes presentes/contagens locais, Todas, ambiguidade preservada e seleção exata. Preparação contextual geral e pertinência da folha continuam parciais.",
       "evidence": [
         "docs/jornada/CONTRATO-ANALISE.md",
         "ptbr/CONTEXTO-1.md",
@@ -287,7 +287,8 @@
         "tests/ptbr-relativas.cjs",
         "docs/jornada/ENTREGA-V6-56.md",
         "docs/jornada/ENTREGA-V6-57.md",
-        "docs/jornada/ENTREGA-V6-58.md"
+        "docs/jornada/ENTREGA-V6-58.md",
+        "docs/jornada/ENTREGA-V6-59.md"
       ]
     },
     {
@@ -710,7 +711,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "A03-filtro: oferecer filtro por classes possíveis nas ocorrências reservadas, com contagens locais e acesso a todas; distinguir classes do léxico, hipóteses contextuais e regiões não verificadas. Não elevar teto ou converter que em relativa."
+    "nextDeliverable": "A03-contexto: delimitar e conectar pedido explícito de classes em contexto ao trecho reservado, com identidade, fronteiras protegidas e offsets originais. Evitar examinar outra região da folha sem indicação; manter abstenções e limites existentes."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -724,7 +725,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Preparação: relógio700ms, reinício, cancelamento/ocultação/IME, identidade e teto. Reserva: dados reais, homógrafos/repetidas, fronteiras cortadas, emoji/NFD, citações, contexto anterior desconhecido, limite24/400, seleção literal sem alteração e botão antigo invalidado. Painel, léxico/flexões e ES5 aprovados; build reproduzível. CI/Pages por commit. Chromium real: preparação sem exame completo, abertura da reserva, retorno por seleção, análise contextual e consulta preservados, sem erros. Controle denso com mais de24 candidatas confirma prioridade da palavra no cursor.",
+    "verification": "Testes dirigidos: categorias presentes, contagens por ocorrência, canto simultaneamente substantivo/verbo, repetidas distintas, retorno a Todas, mesmos nós, zero lentes novas, seleção original e invalidação de botão antigo. Preparação/reserva real e painel passaram; ES5 e build reproduzível. Cenário do navegador atualizado para os filtros; regressão completa e publicação conferidas por commit.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -742,5 +743,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-58.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-59.json"
 }
