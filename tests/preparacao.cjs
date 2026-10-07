@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('fs'),create=require('../ptbr/preparacao');
 let time=0,next=0,timers=[],active=true,document='a',head='Eu canto.',length=head.length,scans=0,delivered=[];
-const E={createSignalTriage(_E,limits){assert.deepEqual(limits,{maxChars:2000,maxTokens:400});return{scan(text){scans++;assert.ok(text.length<=2001);return{signals:{morfologia:true,'que-contextual':true},read:Math.min(text.length,2000),work:{characters:Math.min(text.length,2000),tokens:2}};}}}};
+const E={createSignalTriage(_E,limits){assert.deepEqual(limits,{maxChars:2000,maxTokens:200});return{scan(text){scans++;assert.ok(text.length<=2001);return{signals:{morfologia:true,'que-contextual':true},read:Math.min(text.length,2000),work:{characters:Math.min(text.length,2000),tokens:2}};}}}};
 const p=create(E,{active:()=>active,read:limit=>({head:head.slice(0,limit),length,document}),deliver:r=>delivered.push(r),setTimeout(fn,ms){const t={id:++next,at:time+ms,fn};timers.push(t);return t.id;},clearTimeout(id){timers=timers.filter(t=>t.id!==id);}});
 function tick(ms){time+=ms;const ready=timers.filter(t=>t.at<=time);timers=timers.filter(t=>t.at>time);ready.forEach(t=>t.fn());}
 p.request();tick(699);assert.equal(scans,0);p.request();tick(699);assert.equal(scans,0);tick(1);assert.equal(scans,1);assert.equal(p.state(delivered[0],'morfologia'),'encontrado');assert.equal(p.state(delivered[0],'sintaxe'),'nao-verificado');assert.equal(p.state(delivered[0],'relativas'),'nao-verificado','que não prova relativa');assert.equal(p.state(delivered[0],'pontuacao'),'nao-encontrado-no-recorte');assert.equal(delivered[0].text,undefined,'não retém snapshot da triagem');

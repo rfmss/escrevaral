@@ -2,7 +2,19 @@
 
 Decisão recebida de Rafael por intermédio da frente ASTRA 2 em 27/09/2026. Base conferida: main `019e9105b2730476644bfb9c6644f9be2738ea11`, produto v6-28. **Direção registrada; contratos abaixo são proposta para a prova isolada, não API publicada.** O cofre continua síncrono; a primeira preparação limitada do painel foi integrada na v6.57, conforme seção vigente abaixo.
 
-## Preparação limitada vigente — 07/10/2026, v6.57
+## Reserva lexical junto ao cursor — 07/10/2026, v6.58
+
+A janela começa até 1.000 unidades UTF-16 antes do cursor e recebe até 2.001 unidades (incluindo a fronteira direita). Não procura o início de parágrafos por varredura do livro. Um indicador de continuação à esquerda permite descartar palavras cortadas; também são descartados tokens cortados à direita e formas acima de64 unidades. O original nunca é normalizado; a chave de consulta usa a canonicalização existente, preservando offsets de emoji e acentos decompostos.
+
+No máximo200 tokens para sinais e200 para consulta lexical por pausa: o orçamento total de400 visitas não aumenta. Fora do início da folha, a triagem de frases não roda, porque pode faltar contexto de citações/código. Só se consultam formas no léxico; palavras dentro de citações podem aparecer como possibilidades lexicais, nunca como classificação contextual. Sintaxe/relativas continuam não verificadas. O restante da folha não é varrido em fila.
+
+A consulta lexical começa até256 unidades antes do cursor dentro da janela, descarta a primeira palavra se cortada e visita até200 tokens. Retém as24 ocorrências mais próximas do cursor entre as visitadas e apresenta-as na ordem do original; isso evita gastar a reserva só com o começo da janela. Reserva máxima de24 ocorrências, cada trecho com até64 unidades, posições distintas e classes possíveis deduplicadas das leituras da fonte (até32 leituras por consulta, teto já existente). Não retém todas as flexões nem sentidos, não elimina homógrafos e não deduplica ocorrências repetidas. Um recorte substitui o anterior; mesmo texto em outra posição/folha tem identidade diferente. Edição/IME/fechamento invalidam a reserva. Sem persistência ou novos pacotes.
+
+Em Entender uma frase, **Ver palavras reconhecidas** abre a reserva somente a pedido. Cada ocorrência oferece Ver no texto e Consultar palavra. Antes da ação: reserva ainda ativa, mesma folha e trecho literal nas posições originais. Fontes e detalhes ficam na consulta lexical existente. Nenhuma lente completa é chamada ao preparar/abrir a reserva. O trabalho é limitado, mas não foi medida RAM total de um aparelho antigo.
+
+A03 continua parcial: esta é reserva lexical local, não inventário gramatical do livro. Próximo: filtro por classes possíveis dentro da reserva, com todos os termos não verificados acessíveis e sem transformar ausência de cobertura em ausência linguística. Contexto sintático de regiões arbitrárias exige contrato próprio antes de novos sinais automáticos.
+
+## Primeira preparação limitada — 07/10/2026, v6.57
 
 O autor aprovou preservar o novo painel, retomar debounce e priorizar aparelhos antigos. Primeira etapa de A03 usa somente recursos já embutidos; A02 não é pré-requisito para este recorte. Não instala pacotes nem ativa um analisador contextual em segundo plano.
 

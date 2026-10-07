@@ -1,5 +1,9 @@
 # Contrato da cortina Escrevaral
 
+## Reserva lexical — 07/10/2026
+
+V6.58 prepara uma janela limitada junto ao cursor. Em Entender uma frase, Ver palavras reconhecidas mostra até24 ocorrências com classes possíveis do léxico; Ver no texto seleciona a ocorrência exata e Consultar palavra abre fontes/flexões/sentidos. A preparação não decide função sintática nem classe no contexto. Janela fora do início não roda heurísticas de frase; palavras de citações só são consultadas como formas lexicais. Limites2000 caracteres/400 visitas totais e pausa700ms preservados. Reserva geral/filtro por pertinência continuam parciais em A03.
+
 ## Organização do painel — 06/10/2026
 
 Prioridade do autor: orientar quem escreve antes de ampliar regras. V6.56 organiza as análises por tarefa, separa consulta lexical e recolhe opções durante o resultado. Fontes e explicações técnicas permanecem acessíveis sob demanda. O painel antigo fica somente como fallback de inicialização. A navegação v6.56 não implica preparação; v6.57 acrescenta somente a pausa com prefixo limitado. Reserva e filtro por pertinência permanecem em A03. O inventário da entrega e a próxima ação estão na ficha v6-56; U01/U02 permanecem parciais.

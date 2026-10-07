@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261007-scrvrl-preparacao-v6-57">
+  <meta name="asset-version" content="20261007-scrvrl-reserva-v6-58">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -8376,16 +8376,42 @@ SOFTWARE.
 
 ;
 /* Fonte: ptbr/preparacao.js */
-/* Preparação leve: um recorte inicial, uma pausa, nenhum exame completo. ES5.
+/* Preparação leve: um recorte junto ao cursor, uma pausa, nenhum exame completo. ES5.
  * O hospedeiro fornece somente até 2.001 unidades UTF-16, nunca a folha inteira.
  * Sem fila, persistência, rede ou cache cumulativo. */
 (function(root){
   'use strict';
   function create(E,host){
     var timer=null,generation=0,cached=null,scanner=null;
-    var limits={delay:700,characters:2000,tokens:400,snapshotCharacters:2001,cacheEntries:1};
+    var limits={delay:700,characters:2000,tokens:400,snapshotCharacters:2001,cacheEntries:1,occurrences:24,lexicalTokens:200,signalTokens:200};
     var supported={ortografia:true,acentuacao:true,pontuacao:true,crase:true,concordancia:true,
       morfologia:true,expressoes:true,repeticao:true,adverbios:true,dialogo:true,ritmo:true,rima:true,metrica:true};
+    function reserve(input){
+      var check=input.head.slice(0,limits.characters),items=[],visited=0,matched=0,m,rows,classes,j,label,item,worst;
+      var anchor=typeof input.anchor==='number'?input.anchor:(input.start||0),lexStart=Math.max(0,anchor-(input.start||0)-256);
+      var word=/[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+(?:[-'’][A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+)*|[0-9]+/g;
+      var continuation=/[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f0-9'’\-]/;
+      if(!E.lookupMorphology||!E.reading||!E.reading.canonical){return{items:items,visited:0,available:false,limited:false};}
+      word.lastIndex=lexStart;
+      while(visited<limits.lexicalTokens&&(m=word.exec(check))){
+        visited++;
+        if(m[0].length>64||m.index===lexStart&&(lexStart?continuation.test(check.charAt(lexStart-1)):input.leftContinues)||word.lastIndex===check.length&&continuation.test(input.head.charAt(check.length))){continue;}
+        rows=E.lookupMorphology(E.reading.canonical(m[0]));classes=[];
+        for(j=0;j<rows.length&&j<32;j++){
+          label=E.describeMorphology?E.describeMorphology(rows[j]).split(' · ')[0]:rows[j].pos;
+          if(classes.indexOf(label)===-1){classes.push(label);}
+        }
+        if(classes.length){
+          matched++;item={start:(input.start||0)+m.index,end:(input.start||0)+word.lastIndex,snippet:m[0],classes:classes};
+          if(items.length<limits.occurrences){items.push(item);}else{
+            worst=0;for(j=1;j<items.length;j++){if(Math.abs(items[j].start-anchor)>Math.abs(items[worst].start-anchor)){worst=j;}}
+            if(Math.abs(item.start-anchor)<Math.abs(items[worst].start-anchor)){items[worst]=item;}
+          }
+        }
+      }
+      items.sort(function(a,b){return a.start-b.start;});
+      return{items:items,visited:visited,available:true,limited:matched>limits.occurrences||visited===limits.lexicalTokens||lexStart>0};
+    }
     function cancel(clear){generation++;if(timer!==null){host.clearTimeout(timer);timer=null;}if(clear){cached=null;}}
     function request(){
       cancel(false);if(!host.active()){return;}
@@ -8394,19 +8420,27 @@ SOFTWARE.
         timer=null;if(ticket!==generation||!host.active()){return;}
         var input=host.read(limits.snapshotCharacters),result;
         if(!input||typeof input.head!=='string'||input.head.length>limits.snapshotCharacters){host.deliver(null);return;}
-        if(cached&&cached.document===input.document&&cached.head===input.head&&cached.length===input.length){host.deliver(cached.result);return;}
+        if(cached&&cached.document===input.document&&cached.head===input.head&&cached.length===input.length&&cached.start===(input.start||0)&&cached.leftContinues===!!input.leftContinues&&cached.anchor===input.anchor){host.deliver(cached.result);return;}
         try{
-          if(!scanner){scanner=E.createSignalTriage(E,{maxChars:limits.characters,maxTokens:limits.tokens});}
-          result=scanner.scan(input.head);
-          /* Não reter a cópia interna da triagem nem inferir cobertura da folha. */
-          result={signals:result.signals,read:result.read,partial:result.read<input.length,work:result.work};
+          var lexical=reserve(input),start=input.start||0;
+          /* Contexto anterior desconhecido: não rodar heurísticas de frase no meio da folha. */
+          if(start===0){
+            if(!scanner){scanner=E.createSignalTriage(E,{maxChars:limits.characters,maxTokens:limits.signalTokens});}
+            result=scanner.scan(input.head);
+          }else{result={signals:{},read:Math.min(input.head.length,limits.characters),work:{characters:Math.min(input.head.length,limits.characters),tokens:0}};}
+          result={signals:result.signals,signalsVerified:start===0,read:result.read,scope:{start:start,end:start+Math.min(input.head.length,limits.characters)},
+            partial:start>0||result.read<input.length||lexical.limited,work:{characters:Math.min(input.head.length,limits.characters),tokens:result.work.tokens+lexical.visited},
+            document:input.document,occurrences:lexical.items,lexicalAvailable:lexical.available,lexicalLimited:lexical.limited};
+
         }catch(error){cached=null;host.deliver(null);return;}
         if(ticket!==generation||!host.active()){return;}
-        cached={document:input.document,head:input.head,length:input.length,result:result};host.deliver(result);
+        cached={document:input.document,head:input.head,length:input.length,start:input.start||0,leftContinues:!!input.leftContinues,anchor:input.anchor,result:result};host.deliver(result);
       },limits.delay);
     }
     function state(result,lens){
       if(!result||!supported[lens]){return 'nao-verificado';}
+      if(lens==='morfologia'&&result.occurrences&&result.occurrences.length){return 'encontrado';}
+      if(!result.signalsVerified){return 'nao-verificado';}
       return result.signals[lens]?'encontrado':'nao-encontrado-no-recorte';
     }
     return{request:request,cancel:cancel,state:state,limits:limits};
@@ -8518,7 +8552,8 @@ SOFTWARE.
     el('strong',lookupGoal,'','Consultar uma palavra');el('span',lookupGoal,'','Ver significados e flexões no acervo local.');
     lookupGoal.addEventListener('click',function(){showScreen('lexical',null,true);},false);
   }
-  var prepStatus=el('p',view,'ptbr-status','');prepStatus.setAttribute('role','status');
+  var prepStatus=el('p',view,'ptbr-status','');prepStatus.setAttribute('aria-live','polite');
+  var reservedButton=el('button',view,'ptbr-reserved-button','Ver palavras reconhecidas');reservedButton.type='button';reservedButton.hidden=true;
   var wheel=el('div',view,'ptbr-wheel');
   var preparation=null,prepared=null,signalLabels={};
   var lexicalInput=null, lexicalButton=null;
@@ -8538,7 +8573,7 @@ SOFTWARE.
   var action=el('button',view,'ptbr-action','Examinar novamente');action.type='button';
   var cancel=el('button',view,'ptbr-cancel','Cancelar análise');cancel.type='button';cancel.hidden=true;
   backMenu.addEventListener('click',function(){
-    var target=screen==='result'?'group':'home';
+    var target=screen==='result'||screen==='reserved'?'group':'home';
     E.ptbrPanelReset();showScreen(target,currentGroup,true);
   },false);
   var status=el('p',view,'ptbr-status','A análise começa somente quando você pedir.');status.setAttribute('role','status');
@@ -8547,38 +8582,63 @@ SOFTWARE.
   var empty=el('div',results,'ptbr-empty','Seu texto, por dentro. Escolha uma lente para abrir a leitura anotada.');
   var note=el('p',view,'ptbr-status','O silêncio de uma lente não certifica o texto. A escrita permanece sua.');
   function paintPreparation(result){
-    prepared=result;
+    prepared=result;reservedButton.hidden=screen!=='group'||currentGroup!==1||!result||!result.lexicalAvailable;reservedButton.disabled=!result||!result.occurrences||!result.occurrences.length;
+    reservedButton.textContent=result&&result.occurrences?'Ver palavras reconhecidas ('+result.occurrences.length+')':'Ver palavras reconhecidas';
     for(var id in signalLabels){if(own.call(signalLabels,id)){
       var state=preparation?preparation.state(result,id):'nao-verificado';
       signalLabels[id].textContent=state==='encontrado'?(id==='morfologia'?'Há palavras no léxico; classe contextual a examinar.':'Há indícios para examinar.'):
         state==='nao-encontrado-no-recorte'?'Sem indícios neste recorte; análise disponível.':'Pertinência ainda não verificada.';
       signalLabels[id].setAttribute('data-signal-state',state);
     }}
-    prepStatus.textContent=result?'Preparação leve: '+result.read+' caracteres iniciais observados'+(result.partial?'; o restante não foi verificado.':'.')+' Indícios não são classificações nem erros.':'A preparação aguarda uma pausa na escrita. Nenhuma análise completa é automática.';
+    prepStatus.textContent=result?'Preparação leve: trecho entre as posições '+(result.scope.start+1)+' e '+result.scope.end+(result.partial?'; o restante não foi verificado.':'.')+' Indícios não são classificações nem erros.':'A preparação aguarda uma pausa na escrita. Nenhuma análise completa é automática.';
   }
   if(E.createPreparation&&E.createSignalTriage){preparation=E.createPreparation(E,{
     setTimeout:function(fn,ms){return root.setTimeout(fn,ms);},clearTimeout:function(id){root.clearTimeout(id);},
     active:function(){return !panel.hidden&&!D.hidden&&!composing&&!busy&&(screen==='home'||screen==='group')&&!!manuscript.value;},
-    read:function(limit){return{head:manuscript.value.slice(0,limit),length:manuscript.value.length,document:documentKey()};},
+    read:function(limit){var s=manuscript.value,caret=typeof manuscript.selectionStart==='number'?manuscript.selectionStart:0,start=Math.max(0,Math.min(caret,s.length)-1000);return{head:s.slice(start,start+limit),start:start,anchor:caret,leftContinues:start>0&&/[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f0-9'’\-]/.test(s.charAt(start-1)),length:s.length,document:documentKey()};},
     deliver:function(result){paintPreparation(result);if(!result){prepStatus.textContent='Preparação indisponível. Você pode escolher qualquer análise.';}}
   });}
   function showScreen(next,group,focus){
     screen=next;prepStatus.hidden=next!=='group';if(typeof group==='number'){currentGroup=group;}
     goals.hidden=next!=='home';wheel.hidden=next!=='group';
     if(lexicalBox){lexicalBox.hidden=next!=='lexical';}
-    results.hidden=next!=='result'&&next!=='lexical';
+    results.hidden=next!=='result'&&next!=='lexical'&&next!=='reserved';
     action.hidden=next!=='result';note.hidden=next==='home'||next==='group';
     backMenu.hidden=next==='home';
-    backMenu.textContent=next==='result'?'Escolher outra análise':'Voltar às opções';
-    title.textContent=next==='home'?'O que você quer observar?':next==='lexical'?'Consultar uma palavra':next==='result'?(labels[lastLens]||'Resultado'):groups[currentGroup||0].title;
-    intro.hidden=next==='result';
+    backMenu.textContent=next==='result'||next==='reserved'?'Escolher outra análise':'Voltar às opções';
+    title.textContent=next==='home'?'O que você quer observar?':next==='lexical'?'Consultar uma palavra':next==='result'?(labels[lastLens]||'Resultado'):next==='reserved'?'Palavras reconhecidas':groups[currentGroup||0].title;
+    intro.hidden=next==='result'||next==='reserved';
     intro.textContent=next==='home'?'Escolha uma tarefa para olhar seu texto. Você decide o que examinar e o que manter.':next==='lexical'?'Digite uma palavra ou selecione-a no texto antes de abrir este painel. A consulta mostra possibilidades; o sentido depende da frase.':'Escolha um aspecto abaixo para examinar a folha atual. Seu texto permanece intacto.';
     var buttons=wheel.querySelectorAll('button');
     for(var at=0;at<buttons.length;at++){buttons[at].hidden=groups[currentGroup||0].lenses.indexOf(buttons[at].getAttribute('data-ptbr-lens'))===-1;}
     if(next==='home'||next==='group'){status.textContent=manuscript.value.length>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.':manuscript.value?'A análise completa começa quando você escolhe um aspecto.':'Escreva na folha para começar. Você pode consultar uma palavra mesmo com a folha vazia.';}
+    reservedButton.hidden=next!=='group'||currentGroup!==1||!prepared||!prepared.lexicalAvailable;
     if(preparation){if(next==='home'||next==='group'){preparation.request();}else{preparation.cancel(false);}}
     if(focus){if(next==='lexical'&&lexicalInput){lexicalInput.focus();}else{title.focus();}panel.scrollTop=0;}
   }
+  reservedButton.addEventListener('click',function(){
+    if(!prepared||!prepared.occurrences.length||panel.hidden){return;}
+    var reservation=prepared;clearResults();showScreen('reserved',1,true);
+    el('p',results,'ptbr-status','Estas palavras estão no acervo. As classes abaixo são possibilidades do léxico, inclusive em citações; não classificam a sua frase.');
+    if(reservation.lexicalLimited){el('p',results,'ptbr-status','Limite de preparação atingido. Há outras palavras que ainda não foram verificadas.');}
+    function current(item){return prepared===reservation&&documentKey()===reservation.document&&manuscript.value.slice(item.start,item.end)===item.snippet;}
+    for(var i=0;i<reservation.occurrences.length;i++){
+      (function(item){
+        var row=el('section',results,'ptbr-outcome');el('h3',row,'',item.snippet);
+        el('p',row,'','Possibilidades no léxico: '+item.classes.join(', ')+'.');
+        var locate=el('button',row,'','Ver no texto');locate.type='button';
+        locate.addEventListener('click',function(){
+          if(!current(item)){E.ptbrPanelReset();status.textContent='O texto mudou. Abra as opções para preparar novamente.';return;}
+          var back=D.getElementById('back-writing');if(back){back.click();}manuscript.focus();
+          if(!E.transfer.selectRange(manuscript,item.start,item.end)){status.textContent='Selecione a palavra manualmente no manuscrito.';}
+        },false);
+        if(lexicalInput){var consult=el('button',row,'','Consultar palavra');consult.type='button';consult.addEventListener('click',function(){
+          if(!current(item)){E.ptbrPanelReset();return;}lexicalInput.value=item.snippet;consultLexeme();
+        },false);}
+      }(reservation.occurrences[i]));
+    }
+    status.textContent=reservation.occurrences.length+' ocorrências reservadas neste trecho. Nenhum exame completo foi executado.';
+  },false);
   function details(parent,label){
     var wrap=el('div',parent,'ptbr-details'),button=el('button',wrap,'',label),content=el('div',wrap,'ptbr-details-content');
     button.type='button';button.setAttribute('aria-expanded','false');content.hidden=true;

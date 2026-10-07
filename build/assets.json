@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20261007-scrvrl-preparacao-v6-57",
+  "version": "20261007-scrvrl-reserva-v6-58",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20261007-scrvrl-preparacao-v6-57/cofre.f25fa6db171c5e9e.js",
+      "path": "assets/20261007-scrvrl-reserva-v6-58/cofre.f25fa6db171c5e9e.js",
       "sha256": "f25fa6db171c5e9eee1bee5bb3d99c9392caf3ffa6f29503aad0f52b4f768d08",
       "bytes": 692427
     },
     {
       "id": "app",
-      "path": "assets/20261007-scrvrl-preparacao-v6-57/app.682e35b93937ddd6.js",
-      "sha256": "682e35b93937ddd6186892e8aba599788938110b68761ed9d394e84b50deeeea",
-      "bytes": 300456
+      "path": "assets/20261007-scrvrl-reserva-v6-58/app.84d9238d9afd413d.js",
+      "sha256": "84d9238d9afd413d267b6575edf6bfbd1d32ffe99dbd9ad4fc8b25f24eb0ee64",
+      "bytes": 306244
     },
     {
       "id": "styles",
-      "path": "assets/20261007-scrvrl-preparacao-v6-57/styles.79d88716e7951271.css",
+      "path": "assets/20261007-scrvrl-reserva-v6-58/styles.79d88716e7951271.css",
       "sha256": "79d88716e79512714f35c93d75498a0f1f336e4af8be2cfdb941c8e875ca0352",
       "bytes": 361944
     }

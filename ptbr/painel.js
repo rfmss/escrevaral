@@ -99,7 +99,8 @@
     el('strong',lookupGoal,'','Consultar uma palavra');el('span',lookupGoal,'','Ver significados e flexões no acervo local.');
     lookupGoal.addEventListener('click',function(){showScreen('lexical',null,true);},false);
   }
-  var prepStatus=el('p',view,'ptbr-status','');prepStatus.setAttribute('role','status');
+  var prepStatus=el('p',view,'ptbr-status','');prepStatus.setAttribute('aria-live','polite');
+  var reservedButton=el('button',view,'ptbr-reserved-button','Ver palavras reconhecidas');reservedButton.type='button';reservedButton.hidden=true;
   var wheel=el('div',view,'ptbr-wheel');
   var preparation=null,prepared=null,signalLabels={};
   var lexicalInput=null, lexicalButton=null;
@@ -119,7 +120,7 @@
   var action=el('button',view,'ptbr-action','Examinar novamente');action.type='button';
   var cancel=el('button',view,'ptbr-cancel','Cancelar análise');cancel.type='button';cancel.hidden=true;
   backMenu.addEventListener('click',function(){
-    var target=screen==='result'?'group':'home';
+    var target=screen==='result'||screen==='reserved'?'group':'home';
     E.ptbrPanelReset();showScreen(target,currentGroup,true);
   },false);
   var status=el('p',view,'ptbr-status','A análise começa somente quando você pedir.');status.setAttribute('role','status');
@@ -128,38 +129,63 @@
   var empty=el('div',results,'ptbr-empty','Seu texto, por dentro. Escolha uma lente para abrir a leitura anotada.');
   var note=el('p',view,'ptbr-status','O silêncio de uma lente não certifica o texto. A escrita permanece sua.');
   function paintPreparation(result){
-    prepared=result;
+    prepared=result;reservedButton.hidden=screen!=='group'||currentGroup!==1||!result||!result.lexicalAvailable;reservedButton.disabled=!result||!result.occurrences||!result.occurrences.length;
+    reservedButton.textContent=result&&result.occurrences?'Ver palavras reconhecidas ('+result.occurrences.length+')':'Ver palavras reconhecidas';
     for(var id in signalLabels){if(own.call(signalLabels,id)){
       var state=preparation?preparation.state(result,id):'nao-verificado';
       signalLabels[id].textContent=state==='encontrado'?(id==='morfologia'?'Há palavras no léxico; classe contextual a examinar.':'Há indícios para examinar.'):
         state==='nao-encontrado-no-recorte'?'Sem indícios neste recorte; análise disponível.':'Pertinência ainda não verificada.';
       signalLabels[id].setAttribute('data-signal-state',state);
     }}
-    prepStatus.textContent=result?'Preparação leve: '+result.read+' caracteres iniciais observados'+(result.partial?'; o restante não foi verificado.':'.')+' Indícios não são classificações nem erros.':'A preparação aguarda uma pausa na escrita. Nenhuma análise completa é automática.';
+    prepStatus.textContent=result?'Preparação leve: trecho entre as posições '+(result.scope.start+1)+' e '+result.scope.end+(result.partial?'; o restante não foi verificado.':'.')+' Indícios não são classificações nem erros.':'A preparação aguarda uma pausa na escrita. Nenhuma análise completa é automática.';
   }
   if(E.createPreparation&&E.createSignalTriage){preparation=E.createPreparation(E,{
     setTimeout:function(fn,ms){return root.setTimeout(fn,ms);},clearTimeout:function(id){root.clearTimeout(id);},
     active:function(){return !panel.hidden&&!D.hidden&&!composing&&!busy&&(screen==='home'||screen==='group')&&!!manuscript.value;},
-    read:function(limit){return{head:manuscript.value.slice(0,limit),length:manuscript.value.length,document:documentKey()};},
+    read:function(limit){var s=manuscript.value,caret=typeof manuscript.selectionStart==='number'?manuscript.selectionStart:0,start=Math.max(0,Math.min(caret,s.length)-1000);return{head:s.slice(start,start+limit),start:start,anchor:caret,leftContinues:start>0&&/[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f0-9'’\-]/.test(s.charAt(start-1)),length:s.length,document:documentKey()};},
     deliver:function(result){paintPreparation(result);if(!result){prepStatus.textContent='Preparação indisponível. Você pode escolher qualquer análise.';}}
   });}
   function showScreen(next,group,focus){
     screen=next;prepStatus.hidden=next!=='group';if(typeof group==='number'){currentGroup=group;}
     goals.hidden=next!=='home';wheel.hidden=next!=='group';
     if(lexicalBox){lexicalBox.hidden=next!=='lexical';}
-    results.hidden=next!=='result'&&next!=='lexical';
+    results.hidden=next!=='result'&&next!=='lexical'&&next!=='reserved';
     action.hidden=next!=='result';note.hidden=next==='home'||next==='group';
     backMenu.hidden=next==='home';
-    backMenu.textContent=next==='result'?'Escolher outra análise':'Voltar às opções';
-    title.textContent=next==='home'?'O que você quer observar?':next==='lexical'?'Consultar uma palavra':next==='result'?(labels[lastLens]||'Resultado'):groups[currentGroup||0].title;
-    intro.hidden=next==='result';
+    backMenu.textContent=next==='result'||next==='reserved'?'Escolher outra análise':'Voltar às opções';
+    title.textContent=next==='home'?'O que você quer observar?':next==='lexical'?'Consultar uma palavra':next==='result'?(labels[lastLens]||'Resultado'):next==='reserved'?'Palavras reconhecidas':groups[currentGroup||0].title;
+    intro.hidden=next==='result'||next==='reserved';
     intro.textContent=next==='home'?'Escolha uma tarefa para olhar seu texto. Você decide o que examinar e o que manter.':next==='lexical'?'Digite uma palavra ou selecione-a no texto antes de abrir este painel. A consulta mostra possibilidades; o sentido depende da frase.':'Escolha um aspecto abaixo para examinar a folha atual. Seu texto permanece intacto.';
     var buttons=wheel.querySelectorAll('button');
     for(var at=0;at<buttons.length;at++){buttons[at].hidden=groups[currentGroup||0].lenses.indexOf(buttons[at].getAttribute('data-ptbr-lens'))===-1;}
     if(next==='home'||next==='group'){status.textContent=manuscript.value.length>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.':manuscript.value?'A análise completa começa quando você escolhe um aspecto.':'Escreva na folha para começar. Você pode consultar uma palavra mesmo com a folha vazia.';}
+    reservedButton.hidden=next!=='group'||currentGroup!==1||!prepared||!prepared.lexicalAvailable;
     if(preparation){if(next==='home'||next==='group'){preparation.request();}else{preparation.cancel(false);}}
     if(focus){if(next==='lexical'&&lexicalInput){lexicalInput.focus();}else{title.focus();}panel.scrollTop=0;}
   }
+  reservedButton.addEventListener('click',function(){
+    if(!prepared||!prepared.occurrences.length||panel.hidden){return;}
+    var reservation=prepared;clearResults();showScreen('reserved',1,true);
+    el('p',results,'ptbr-status','Estas palavras estão no acervo. As classes abaixo são possibilidades do léxico, inclusive em citações; não classificam a sua frase.');
+    if(reservation.lexicalLimited){el('p',results,'ptbr-status','Limite de preparação atingido. Há outras palavras que ainda não foram verificadas.');}
+    function current(item){return prepared===reservation&&documentKey()===reservation.document&&manuscript.value.slice(item.start,item.end)===item.snippet;}
+    for(var i=0;i<reservation.occurrences.length;i++){
+      (function(item){
+        var row=el('section',results,'ptbr-outcome');el('h3',row,'',item.snippet);
+        el('p',row,'','Possibilidades no léxico: '+item.classes.join(', ')+'.');
+        var locate=el('button',row,'','Ver no texto');locate.type='button';
+        locate.addEventListener('click',function(){
+          if(!current(item)){E.ptbrPanelReset();status.textContent='O texto mudou. Abra as opções para preparar novamente.';return;}
+          var back=D.getElementById('back-writing');if(back){back.click();}manuscript.focus();
+          if(!E.transfer.selectRange(manuscript,item.start,item.end)){status.textContent='Selecione a palavra manualmente no manuscrito.';}
+        },false);
+        if(lexicalInput){var consult=el('button',row,'','Consultar palavra');consult.type='button';consult.addEventListener('click',function(){
+          if(!current(item)){E.ptbrPanelReset();return;}lexicalInput.value=item.snippet;consultLexeme();
+        },false);}
+      }(reservation.occurrences[i]));
+    }
+    status.textContent=reservation.occurrences.length+' ocorrências reservadas neste trecho. Nenhum exame completo foi executado.';
+  },false);
   function details(parent,label){
     var wrap=el('div',parent,'ptbr-details'),button=el('button',wrap,'',label),content=el('div',wrap,'ptbr-details-content');
     button.type='button';button.setAttribute('aria-expanded','false');content.hidden=true;

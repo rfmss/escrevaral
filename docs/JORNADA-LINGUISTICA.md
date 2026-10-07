@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 07/10/2026. Base do produto auditada: `4e5763ec03132da3282f4f438141ae2c67565dcd`.
+Atualizado em 07/10/2026. Base do produto auditada: `01eafaf6a7c769e2b64055572131c6e36a9a2f30`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.57: preparação após 700 ms com prefixo de até 2.000 caracteres/400 tokens, cancelamento e três estados de pertinência. As 16 análises explicam o que identificam e seus limites. A03 continua parcial. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.58: janela junto ao cursor reserva até24 palavras reconhecidas, preserva classes possíveis e permite consultar/selecionar ocorrências exatas a pedido. Pausa700ms e limite total400 visitas preservados. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A03-regioes: fixar fronteiras e estados para trechos alterados, incluindo citações e Unicode; reservar ocorrências exatas com identidade de folha/revisão antes de filtrar análises. Preservar tetos, suspensão e acesso manual.
+- A03-filtro: oferecer filtro por classes possíveis nas ocorrências reservadas, com contagens locais e acesso a todas; distinguir classes do léxico, hipóteses contextuais e regiões não verificadas. Não elevar teto ou converter que em relativa.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -160,9 +160,9 @@ Uma entrada simples para estudar o próprio texto.
 - Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.
 - Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar.
 
-**Condição de conclusão:** Preparação leve do prefixo no painel: pausa700ms, um timer/cache, 2000 caracteres/400 tokens, sem motores completos. Estados e terminologia integrados; faltam regiões alteradas/contexto, reserva de offsets por revisão e filtro por pertinência.
+**Condição de conclusão:** Reserva lexical local implementada: janela2000 junto ao cursor, teto24, ocorrências distintas, Unicode/offsets, alternativas do léxico, seleção/consulta a pedido. Fora do início não infere contexto. Filtro por classes e preparação contextual geral pendentes.
 
-Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`, `docs/jornada/ENTREGA-V6-57.md`.
+Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`, `docs/jornada/ENTREGA-V6-57.md`, `docs/jornada/ENTREGA-V6-58.md`.
 
 ### P10 — Integrar e comprovar cada módulo
 
