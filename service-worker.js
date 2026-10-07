@@ -1,18 +1,18 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-55-36495d0bfc60";
-const ASSET_VERSION = "20261006-scrvrl-adjetiva-v6-55";
+const CACHE_NAME = "scrvrl-offline-v6-56-6948631a6608";
+const ASSET_VERSION = "20261006-scrvrl-painel-v6-56";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20261006-scrvrl-adjetiva-v6-55/cofre.f25fa6db171c5e9e.js",
+    "url": "./assets/20261006-scrvrl-painel-v6-56/cofre.f25fa6db171c5e9e.js",
     "sha256": "f25fa6db171c5e9eee1bee5bb3d99c9392caf3ffa6f29503aad0f52b4f768d08"
   },
   {
-    "url": "./assets/20261006-scrvrl-adjetiva-v6-55/app.25fab6c7650f4623.js",
-    "sha256": "25fab6c7650f46235643a848742cb8126b9b8238477579f8a9e3dc6232446a63"
+    "url": "./assets/20261006-scrvrl-painel-v6-56/app.e7ccb72e032fc6e8.js",
+    "sha256": "e7ccb72e032fc6e809a2238517198de9d82f5cfc8a8b71562165f658089ae71d"
   },
   {
-    "url": "./assets/20261006-scrvrl-adjetiva-v6-55/styles.200ed33cf9f86d6b.css",
-    "sha256": "200ed33cf9f86d6b6d9e0658e99e16d74439c38d499693bcdcfe3c77494cbb90"
+    "url": "./assets/20261006-scrvrl-painel-v6-56/styles.79d88716e7951271.css",
+    "sha256": "79d88716e79512714f35c93d75498a0f1f336e4af8be2cfdb941c8e875ca0352"
   }
 ];
 const scopeURL = new URL('./', self.registration.scope);
@@ -28,7 +28,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
   const cache=await caches.open(CACHE_NAME);
-  const index=await checkedAsset({url:'./index.html',sha256:'ecf3b165891b6f12b81b41c3a870e7ea535076c65551b8abc1b15425ffede3d6'});
+  const index=await checkedAsset({url:'./index.html',sha256:'824f25eca15ce65d3283742749dbec58ccde9750f9d24481d569db90070bb639'});
   if(!index.ok||(await index.clone().text()).indexOf('content="'+ASSET_VERSION+'"')<0)throw new Error('Documento de outra versão');
   await Promise.all(REQUIRED_ASSETS.map(async asset=>cache.put(asset.url,await checkedAsset(asset))));
   await cache.put('./index.html',index.clone());await cache.put('./',index);

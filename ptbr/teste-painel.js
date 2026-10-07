@@ -71,7 +71,7 @@ function setup(initial, dismissed, realEngine) {
   function child(className) { return board.childNodes.filter(function (n) { return n.className === className; })[0]; }
   return {
     reset: E.ptbrPanelReset, board: board, panel: panel, manuscript: manuscript, calls: calls, action: child('ptbr-action'),
-    legacy: child('ptbr-action ptbr-secondary'), wheel: child('ptbr-wheel'),
+    back: child('ptbr-back'), goals: child('ptbr-goals'), results: child('ptbr-results'), wheel: child('ptbr-wheel'),
     flush: function (cap) {
       var n = 0, timer;
       while (timers.length && n++ < (cap || 100)) { timer = timers.shift(); if (!timer.cancelled) { timer.fn(); } }
@@ -94,10 +94,20 @@ assert.deepStrictEqual(a.calls, ['ortografia'], 'uma lente por escolha');
 assert.ok(a.board.textContent.indexOf('Grafia para conferir') !== -1);
 assert.ok(a.board.textContent.indexOf('Análise concluída') !== -1);
 assert.strictEqual(a.manuscript.value, sample, 'análise não modifica o original');
-a.legacy.click();
-assert.strictEqual(a.panel.getAttribute('data-ptbr-legacy'), 'true', 'revisão individual preservada');
-a.legacy.click();
-assert.strictEqual(a.panel.getAttribute('data-ptbr-legacy'), 'false');
+assert.strictEqual(a.goals.hidden,true,'resultado concentra a atenção');
+assert.strictEqual(a.wheel.hidden,true,'lista de análises recolhida no resultado');
+a.back.click();
+assert.strictEqual(a.wheel.hidden,false,'volta à escolha no mesmo grupo');
+assert.strictEqual(a.wheel.childNodes.filter(n=>!n.hidden).length,5);
+a.back.click();
+assert.strictEqual(a.goals.hidden,false,'volta às tarefas');
+assert.strictEqual(a.results.hidden,true);
+assert.strictEqual(a.panel.getAttribute('data-ptbr-legacy'),null,'não reabre interface duplicada');
+a.goals.childNodes[1].click();
+assert.deepStrictEqual(a.wheel.childNodes.filter(n=>!n.hidden).map(n=>n.getAttribute('data-ptbr-lens')),['morfologia','sintaxe','relativas']);
+assert.deepStrictEqual(a.calls,['ortografia'],'navegar não executa motores');
+a.wheel.childNodes.find(n=>n.getAttribute('data-ptbr-lens')==='morfologia').click();
+a.back.click();a.flush();assert.deepStrictEqual(a.calls,['ortografia'],'voltar cancela análise pendente');
 var b = setup(sample, ['PTBR-ORT-001|excessão']);
 b.panel.hidden = false; b.panel.focus(); b.wheel.childNodes[0].click(); b.flush();
 assert.deepStrictEqual(b.calls, ['ortografia']);
@@ -129,7 +139,7 @@ assert.ok(portable.indexOf('E.ptbrPanelChoices=function()') !== -1, 'a ponte nã
 var version = /name="asset-version" content="([^"]+)"/.exec(html);
 assert.ok(version && worker.indexOf('ASSET_VERSION = "' + version[1] + '"') !== -1,
   'cache e HTML em versões diferentes');
-console.log('PAINEL OK: escolha explícita, uma lente, troca/cancelamento, escolhas, lente individual, cancelamento, IME, HTML portátil e cache');
+console.log('PAINEL OK: escolha explícita, uma lente, troca/cancelamento, escolhas, navegação por tarefa, cancelamento, IME, HTML portátil e cache');
 
 }
 module.exports={Node:Node,setup:setup,run:run};

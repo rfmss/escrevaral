@@ -1,0 +1,28 @@
+{
+  "version": "6.56",
+  "date": "06/10/2026",
+  "title": "Análise organizada pela tarefa de quem escreve",
+  "base": "4df6da68f9baf7cac98e5bcbccaeac8003a83f1c",
+  "summary": "v6.56: painel organizado por tarefas, consulta de palavras separada e uma tela de resultado com retorno explícito à escrita. Prioridade U01/U02 pelo retorno do autor; preparação automática A03 continua pendente.",
+  "task": "U01",
+  "phase": "P09",
+  "nextTask": "U01",
+  "progress": "Navegação por cinco tarefas, grupos de análises, resultado isolado, retorno e consulta lexical separada. Interface legada apenas como fallback; explicações técnicas recolhidas. U01 parcial: controle final e preparação A03 ainda não entregues.",
+  "next": "Concluir o inventário da experiência U01/U02 e delimitar a primeira preparação A03: estados sem sinal/sem cobertura/não verificado, reserva de ocorrências por revisão e apresentação somente a pedido. Não retomar expansão de regras M03 antes desse fluxo de produto.",
+  "verification": "Testes dirigidos de painel, léxico, flexões e apresentação: navegação sem motor, cancelamento ao voltar/trocar/editar, IME, autoria e consulta independente. Build reproduzível e sintaxe ES5. CI e Pages a conferir por SHA. Chromium real: tarefas, análise, seleção exata e manuscrito intacto, consulta, fontes expansíveis, painel sem duplicação; largura 390 sem overflow, leitura com largura útil no desktop e zero erros de página. Capturas inspecionadas revelaram colunas estreitas; corrigidas para leitura e explicação empilhadas.",
+  "limits": "Reorganização do painel; não implementa preparação nas pausas, filtro por ocorrências presentes ou cobertura linguística geral.",
+  "sections": [
+    {
+      "title": "Problema observado e inventário",
+      "text": "As capturas do autor mostram uma parede de 16 lentes, consulta lexical misturada, fontes extensas antes das ações e duas interfaces de análise abertas juntas. Este lote trata esses quatro problemas. Retira os contadores técnicos da apresentação. Pendências de produto: controle Escrevaral final; preparação incremental limitada e reserva de ocorrências (A03); distinção entre ausência de sinal e falta de cobertura; revisão dos demais menus/oficina (U02). A prioridade muda pelo retorno do autor, preservando o histórico M02 e sem contar uma mudança de interface como motor novo."
+    },
+    {
+      "title": "Fluxo entregue",
+      "text": "Examinar abre cinco tarefas: Revisar a escrita, Entender uma frase, Observar o estilo, Ler como poesia e Consultar uma palavra. As quatro primeiras mostram apenas seu grupo de análises; escolher um aspecto executa somente esse motor. Resultado recolhe as opções e oferece Escolher outra análise, Examinar novamente e Voltar à escrita. Fontes/limites continuam acessíveis por botão expansível; trechos e explicações continuam ligados ao original. Voltar cancela trabalho pendente. O painel antigo só aparece se a inicialização do novo falhar; não existe botão para duplicá-lo. A consulta de uma palavra tem tela própria e preserva atribuições, alternativas e limitações."
+    },
+    {
+      "title": "Critérios e estados",
+      "text": "Abrir e navegar não analisam. Folha vazia/desmedida tem orientação e botões de análise desabilitados; consulta lexical permanece possível. Digitação, IME, troca de folha, fechamento e retorno invalidam trabalhos antigos. Uma análise explicita alcance e ausência de resultados sem certificar o texto. O autor continua dono do manuscrito; nenhum botão reescreve ou apaga. Sem dependência nova de produção, dados/cofre inalterados. Publicação e implementação continuam estados separados."
+    }
+  ]
+}

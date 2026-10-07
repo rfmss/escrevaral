@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 06/10/2026. Base do produto auditada: `37eb318272706c462c9a597a0a9fd4f86c0c2f60`.
+Atualizado em 06/10/2026. Base do produto auditada: `4df6da68f9baf7cac98e5bcbccaeac8003a83f1c`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.55: locuções adjetivas delimitadas integradas com fonte real, candidatos e abstenções. M02 concluída no escopo da primeira versão; plano12/25 DONE, próximoM03. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.56: painel organizado por tarefas, consulta de palavras separada e uma tela de resultado com retorno explícito à escrita. Prioridade U01/U02 pelo retorno do autor; preparação automática A03 continua pendente. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- M03-relacoes-1: inventariar Sintaxe/Locuções e fixar contraste de sujeito pessoal explícito + verbo finito com dados reais de pessoa/número. Medir a base antes do motor; não propagar Classes automaticamente para Sintaxe/Relativas.
+- Concluir o inventário da experiência U01/U02 e delimitar a primeira preparação A03: estados sem sinal/sem cobertura/não verificado, reserva de ocorrências por revisão e apresentação somente a pedido. Não retomar expansão de regras M03 antes desse fluxo de produto.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -152,7 +152,7 @@ Observar relações além de uma palavra isolada.
 
 ### P09 — Construir a cortina Escrevaral
 
-Estado: **Leitura anotada publicada; apresentação final em evolução pelo retorno do autor**. Depende de: P00.
+Estado: **Incrementos integrados/testados; publicação por commit em Actions e avaliação ampla pendente**. Depende de: P00.
 
 Uma entrada simples para estudar o próprio texto.
 
@@ -160,9 +160,9 @@ Uma entrada simples para estudar o próprio texto.
 - Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.
 - Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar.
 
-**Condição de conclusão:** Uma lente por escolha e cancelamento verificados por simulação; apresentação final e acessibilidade evoluem pelo código e pelo retorno do autor. Teste visual/aparelhos dispensado.
+**Condição de conclusão:** Navegação por cinco tarefas, grupos de análises, resultado isolado, retorno e consulta lexical separada. Interface legada apenas como fallback; explicações técnicas recolhidas. U01 parcial: controle final e preparação A03 ainda não entregues.
 
-Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`.
+Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`.
 
 ### P10 — Integrar e comprovar cada módulo
 

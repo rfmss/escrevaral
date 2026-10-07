@@ -1,5 +1,9 @@
 # Contrato da cortina Escrevaral
 
+## Organização do painel — 06/10/2026
+
+Prioridade do autor: orientar quem escreve antes de ampliar regras. V6.56 organiza as análises por tarefa, separa consulta lexical e recolhe opções durante o resultado. Fontes e explicações técnicas permanecem acessíveis sob demanda. O painel antigo fica somente como fallback de inicialização. Preparação nas pausas, reserva e filtro por pertinência permanecem em A03; não são inferidos desta navegação. O inventário da entrega e a próxima ação estão na ficha v6-56; U01/U02 permanecem parciais.
+
 ## Evolução vigente — 27/09/2026
 
 Rafael passou a permitir preparação leve e incremental nas pausas, ainda **não implementada**. Isso substitui a proibição abrangente de preparação automática das decisões históricas abaixo; exames completos continuam explícitos, um por escolha, sem fila de lentes. Suspender na digitação, IME, página oculta e controle desligado. Folha, geração do rascunho, contexto e versões vinculam cada resposta. Falta de sinal, falta de verificação e falta de cobertura são estados diferentes; manter “Todas as análises”.
@@ -16,7 +20,7 @@ A página `/jornada/` demonstra esse percurso com anotações manuais do parágr
 
 Ligar apenas abre opções. Escolher uma lente inicia somente aquele exame. Não há “analisar tudo”, fila automática de outras lentes ou reanálise ao digitar. Trocar a lente cancela o trabalho anterior e substitui a área de resultados ativos. As abas organizam trechos e explicações da lente escolhida; não disparam motores simultâneos. Editar exige nova solicitação explícita.
 
-O painel atualmente publicado ainda oferece execução serial de sinais; esta jornada especifica a próxima interação e não altera esse comportamento agora.
+Registro histórico: a execução serial de sinais foi substituída na v6-23 por uma análise explícita por escolha.
 
 ## Estados do controle
 

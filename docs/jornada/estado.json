@@ -1,12 +1,12 @@
 {
-  "version": 44,
+  "version": 45,
   "updated": "06/10/2026",
-  "baseline": "37eb318272706c462c9a597a0a9fd4f86c0c2f60",
+  "baseline": "4df6da68f9baf7cac98e5bcbccaeac8003a83f1c",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.55: locuções adjetivas delimitadas integradas com fonte real, candidatos e abstenções. M02 concluída no escopo da primeira versão; plano12/25 DONE, próximoM03. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.56: painel organizado por tarefas, consulta de palavras separada e uma tela de resultado com retorno explícito à escrita. Prioridade U01/U02 pelo retorno do autor; preparação automática A03 continua pendente. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "M03-relacoes-1: inventariar Sintaxe/Locuções e fixar contraste de sujeito pessoal explícito + verbo finito com dados reais de pessoa/número. Medir a base antes do motor; não propagar Classes automaticamente para Sintaxe/Relativas.",
+    "Concluir o inventário da experiência U01/U02 e delimitar a primeira preparação A03: estados sem sinal/sem cobertura/não verificado, reserva de ocorrências por revisão e apresentação somente a pedido. Não retomar expansão de regras M03 antes desse fluxo de produto.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -261,7 +261,7 @@
     {
       "id": "P09",
       "title": "Construir a cortina Escrevaral",
-      "status": "Leitura anotada publicada; apresentação final em evolução pelo retorno do autor",
+      "status": "Incrementos integrados/testados; publicação por commit em Actions e avaliação ampla pendente",
       "depends": [
         "P00"
       ],
@@ -271,7 +271,7 @@
         "Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.",
         "Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar."
       ],
-      "done": "Uma lente por escolha e cancelamento verificados por simulação; apresentação final e acessibilidade evoluem pelo código e pelo retorno do autor. Teste visual/aparelhos dispensado.",
+      "done": "Navegação por cinco tarefas, grupos de análises, resultado isolado, retorno e consulta lexical separada. Interface legada apenas como fallback; explicações técnicas recolhidas. U01 parcial: controle final e preparação A03 ainda não entregues.",
       "evidence": [
         "docs/jornada/CONTRATO-ANALISE.md",
         "ptbr/CONTEXTO-1.md",
@@ -284,7 +284,8 @@
         "tests/ptbr-locucoes.cjs",
         "ptbr/auditoria/GEMINI-SET26.md",
         "ptbr/RELATIVAS-1.md",
-        "tests/ptbr-relativas.cjs"
+        "tests/ptbr-relativas.cjs",
+        "docs/jornada/ENTREGA-V6-56.md"
       ]
     },
     {
@@ -707,7 +708,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "M03-relacoes-1: inventariar Sintaxe/Locuções e fixar contraste de sujeito pessoal explícito + verbo finito com dados reais de pessoa/número. Medir a base antes do motor; não propagar Classes automaticamente para Sintaxe/Relativas."
+    "nextDeliverable": "Concluir o inventário da experiência U01/U02 e delimitar a primeira preparação A03: estados sem sinal/sem cobertura/não verificado, reserva de ocorrências por revisão e apresentação somente a pedido. Não retomar expansão de regras M03 antes desse fluxo de produto."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -721,7 +722,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Adjetivas32 alvos:12 úteis/20 abstenções/zero erradas ou lacunas. Sete perturbações de fonte/traços/lema, cinco famílias em ordem, CTX-007 conservada, seleção/emoji/NFD, autoria, truncamentos, uma consulta/token, cap100, ES5 e painel sem duplicação passaram. Preposicional40 alvos passou. Consolidação621 alvos/37 arquivos reproduzível e contagens conciliadas. Geração de entrega idempotente com fechamento explícito; build:check/diff. Regressão completa CI e Pages por SHA.",
+    "verification": "Testes dirigidos de painel, léxico, flexões e apresentação: navegação sem motor, cancelamento ao voltar/trocar/editar, IME, autoria e consulta independente. Build reproduzível e sintaxe ES5. CI e Pages a conferir por SHA. Chromium real: tarefas, análise, seleção exata e manuscrito intacto, consulta, fontes expansíveis, painel sem duplicação; largura 390 sem overflow, leitura com largura útil no desktop e zero erros de página. Capturas inspecionadas revelaram colunas estreitas; corrigidas para leitura e explicação empilhadas.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -739,5 +740,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-55.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-56.json"
 }

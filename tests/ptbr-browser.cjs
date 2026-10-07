@@ -5,7 +5,7 @@ fs.mkdirSync(out,{recursive:true});let browser;const errors=[],evidence={engine,
 const server=http.createServer(require('../scripts/static-handler.cjs')(root));
 async function start(p,url){p.on('pageerror',e=>errors.push(e.message));await p.goto(url);await p.click('#first-run-write');}
 async function open(p){if(await p.locator('#oficina').isHidden())await p.click('#examinar-toggle');await p.waitForFunction(()=>document.querySelector('#ptbr-dashboard .ptbr-wheel button'));}
-async function lens(p,id){await open(p);await p.click('[data-ptbr-lens="'+id+'"]');await p.waitForFunction(()=>/Análise concluída/.test(document.querySelector('#ptbr-dashboard [role=status]').textContent));}
+async function lens(p,id){await open(p);await p.evaluate(id=>{const b=document.querySelector('.ptbr-back');while(b&&!b.hidden){b.click();}const groups=[['ortografia','acentuacao','pontuacao','crase','concordancia'],['morfologia','sintaxe','relativas'],['expressoes','repeticao','adverbios','dialogo','decolonial'],['ritmo','rima','metrica']];document.querySelectorAll('.ptbr-goals button')[groups.findIndex(g=>g.includes(id))].click();},id);await p.click('[data-ptbr-lens="'+id+'"]');await p.waitForFunction(()=>/Análise concluída/.test(document.querySelector('#ptbr-dashboard [role=status]').textContent));}
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
  browser=await(engine==='webkit'?webkit:chromium).launch({headless:true,executablePath:process.env.QA_BROWSER_EXECUTABLE||undefined,args:engine==='chromium'?['--no-sandbox']:[]});

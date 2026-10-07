@@ -6,7 +6,7 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato vigente — 06/10/2026:** v6.55: locuções adjetivas delimitadas integradas com fonte real, candidatos e abstenções. M02 concluída no escopo da primeira versão; plano12/25 DONE, próximoM03. [Entrega e limites](jornada/ENTREGA-V6-55.md). CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Retrato vigente — 06/10/2026:** v6.56: painel organizado por tarefas, consulta de palavras separada e uma tela de resultado com retorno explícito à escrita. Prioridade U01/U02 pelo retorno do autor; preparação automática A03 continua pendente. [Entrega e limites](jornada/ENTREGA-V6-56.md). CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 
 
@@ -46,7 +46,7 @@ A árvore abaixo é gerada de [plano-voo.json](jornada/plano-voo.json). Atualize
 <!-- PLANO-VOO:INICIO -->
 ## Árvore de execução — plano v4
 
-**12/25 marcos DONE · nesta entrega +1 (M02) · próximo M03**
+**12/25 marcos DONE · nesta entrega +0 (nenhum marco concluído) · próximo U01**
 
 Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.
 
@@ -87,7 +87,7 @@ Marcos da primeira versão; não são porcentagem da língua, esforço ou precis
 
 ### Experiência do autor — 0/2
 
-- [ ] **U01 — Controle Escrevaral final** — TODO. Uma lente por escolha; explicar/localizar/copiar sem editar; foco/teclado, invalidação e cancelamento verificados. P09. Evidência: [docs/jornada/CONTRATO-ANALISE.md](jornada/CONTRATO-ANALISE.md).
+- [ ] **U01 — Controle Escrevaral final** — TODO. Uma lente por escolha; explicar/localizar/copiar sem editar; foco/teclado, invalidação e cancelamento verificados. P09. Evidência: [docs/jornada/CONTRATO-ANALISE.md](jornada/CONTRATO-ANALISE.md), [docs/jornada/ENTREGA-V6-56.md](jornada/ENTREGA-V6-56.md). Progresso parcial: Navegação por cinco tarefas, grupos de análises, resultado isolado, retorno e consulta lexical separada. Interface legada apenas como fallback; explicações técnicas recolhidas. U01 parcial: controle final e preparação A03 ainda não entregues.
 - [ ] **U02 — Coerência visual e oficina** — TODO. Inventariar discrepâncias com a filosofia; fechar componentes/menu/guias desta versão e revisar sem reconstruir os fluxos aprovados. Evidência: [docs/FILOSOFIA-E-COMPATIBILIDADE.md](FILOSOFIA-E-COMPATIBILIDADE.md).
 
 ### Validação e encerramento — 0/2

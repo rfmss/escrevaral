@@ -1,4 +1,4 @@
-/* Colunas com tabela CSS; faixas sem quebra com inline-block e margens.
+/* Leitura e explicação empilhadas na cortina estreita; faixas com inline-block.
  * A geometria dos arcos continua relativa à faixa, sem depender de Grid/Flex/gap. */
 /* Roupa do Escrevaral: papel, tipos existentes, etiquetas e linhas de caderno. */
 #oficina[data-ptbr-dashboard="true"] { width:1080px; max-width:100%; padding:28px 32px; }
@@ -15,10 +15,10 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] { left:50%; righ
 #ptbr-dashboard .ptbr-wheel button[aria-current="true"] span { color:inherit; }
 #ptbr-dashboard .ptbr-action { display:inline-block; width:auto; margin-right:12px; font-size:12px; font-weight:400; border:0; border-bottom:1px dotted currentColor; }
 #ptbr-dashboard .ptbr-status { font-size:12px; }
-#ptbr-dashboard .ptbr-reading { display:table; table-layout:fixed; width:100%; border-spacing:0; border:1px solid #a0ac99; margin-top:18px; min-width:0; }
-#ptbr-dashboard .ptbr-reading-paper { display:table-cell; vertical-align:top; padding:24px; min-width:0; background:rgba(255,255,255,.16); }
+#ptbr-dashboard .ptbr-reading { display:block; width:100%; border-spacing:0; border:1px solid #a0ac99; margin-top:18px; min-width:0; }
+#ptbr-dashboard .ptbr-reading-paper { display:block; padding:16px; min-width:0; background:rgba(255,255,255,.16); }
 #ptbr-dashboard .ptbr-reading-help { max-width:60ch; font-size:13px; line-height:1.65; margin:0 0 24px; }
-#ptbr-dashboard .ptbr-reading-aside { display:table-cell; vertical-align:top; width:290px; min-width:0; padding:24px 20px; border-left:1px dotted #86927f; background:rgba(53,76,61,.045); word-wrap:break-word; overflow-wrap:break-word; }
+#ptbr-dashboard .ptbr-reading-aside { display:block; width:auto; min-width:0; padding:16px; border-top:1px dotted #86927f; background:rgba(53,76,61,.045); word-wrap:break-word; overflow-wrap:break-word; }
 #ptbr-dashboard .ptbr-reading-selection { font:20px/1.5 'Courier Prime','Courier New',monospace; margin:18px 0; }
 #ptbr-dashboard .ptbr-reading-aside .ptbr-observation { border-top:1px dotted #86927f; padding-top:16px; }
 #ptbr-dashboard .ptbr-reading-aside p { font-size:13px; line-height:1.65; }
