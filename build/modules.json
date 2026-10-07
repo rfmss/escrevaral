@@ -55,6 +55,7 @@
     "src/ui/transferencia.js",
     "src/editor/controlador.js",
     "ptbr/leitura-visual.js",
+    "ptbr/preparacao.js",
     "ptbr/painel.js",
     "src/app/offline.js"
   ],
@@ -115,6 +116,7 @@
     "src/ui/transferencia.js",
     "src/editor/controlador.js",
     "ptbr/leitura-visual.js",
+    "ptbr/preparacao.js",
     "ptbr/painel.js",
     "src/app/offline.js"
   ],

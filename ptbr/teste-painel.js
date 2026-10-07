@@ -66,11 +66,12 @@ function setup(initial, dismissed, realEngine) {
   E.createSignalTriage=require('./triagem');
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'leitura-visual.js'),'utf8'),{window:window});
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../src/ui/transferencia.js'),'utf8'),{window:window});
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'preparacao.js'),'utf8'),{window:window});
   vm.runInNewContext(source, { window: window, document: document });
   var board = panel.childNodes[0];
   function child(className) { return board.childNodes.filter(function (n) { return n.className === className; })[0]; }
   return {
-    reset: E.ptbrPanelReset, board: board, panel: panel, manuscript: manuscript, calls: calls, action: child('ptbr-action'),
+    document:document, reset: E.ptbrPanelReset, board: board, panel: panel, manuscript: manuscript, calls: calls, action: child('ptbr-action'),
     back: child('ptbr-back'), goals: child('ptbr-goals'), results: child('ptbr-results'), wheel: child('ptbr-wheel'),
     flush: function (cap) {
       var n = 0, timer;
@@ -82,7 +83,7 @@ function setup(initial, dismissed, realEngine) {
 }
 function run() {
 var sample = 'A rua excessão,, que é ao longo do tempo', a = setup(sample);
-assert.strictEqual(a.calls.length, 0, 'triagem não executa lentes');
+assert.strictEqual(a.calls.length, 0, 'preparação não executa lentes');
 assert.strictEqual(a.manuscript.value, sample);
 a.panel.hidden = false; a.panel.focus();
 assert.ok(a.wheel.childNodes.length >= 15, 'todas as lentes disponíveis sem triagem');
@@ -131,6 +132,13 @@ assert.strictEqual(d.calls.length, 0);
 var e = setup(sample); e.panel.hidden=false; e.panel.focus();
 e.wheel.childNodes[0].click(); e.wheel.childNodes[2].click(); e.flush();
 assert.deepStrictEqual(e.calls,['pontuacao'],'trocar lente cancela a fila anterior');
+var prep = setup(sample);prep.panel.hidden=false;prep.panel.focus();
+assert.equal(prep.timers.filter(t=>!t.cancelled&&t.delay===700).length,1,'pausa única ao abrir');
+prep.manuscript.emit('compositionstart');assert.equal(prep.timers.filter(t=>!t.cancelled&&t.delay===700).length,0);
+prep.manuscript.emit('compositionend');assert.equal(prep.timers.filter(t=>!t.cancelled&&t.delay===700).length,1);
+prep.document.hidden=true;prep.document.emit('visibilitychange');prep.flush();assert.deepEqual(prep.calls,[]);
+prep.document.hidden=false;prep.document.emit('visibilitychange');prep.flush();assert.deepEqual(prep.calls,[],'preparação não chama lente');
+prep.reset();assert.equal(prep.timers.filter(t=>!t.cancelled).length,0);
 var html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 var portable = fs.readFileSync(path.join(root, 'escrevaral.html'), 'utf8');
 var worker = fs.readFileSync(path.join(root, 'service-worker.js'), 'utf8');

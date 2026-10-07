@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 4,
-  "updated": "2026-10-06",
+  "updated": "2026-10-07",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -159,8 +159,10 @@
           "state": "TODO",
           "acceptance": "Coordenação A2, após A01/A02: trabalho limitado por trecho/contexto nas pausas; suspender na digitação, IME, página oculta e análise desligada; descartar revisões antigas, limitar cache e distinguir os três estados de sinal. Exame completo explícito e acesso a todas as análises.",
           "evidence": [
-            "docs/CONTRATO-PACOTES-LINGUISTICOS.md"
-          ]
+            "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
+            "docs/jornada/ENTREGA-V6-57.md"
+          ],
+          "progress": "Preparação leve do prefixo no painel: pausa700ms, um timer/cache, 2000 caracteres/400 tokens, sem motores completos. Estados e terminologia integrados; faltam regiões alteradas/contexto, reserva de offsets por revisão e filtro por pertinência."
         }
       ]
     },
@@ -345,14 +347,14 @@
       ]
     }
   ],
-  "next": "U01",
+  "next": "A03",
   "lastDelivery": {
-    "version": "6.56.0",
+    "version": "6.57.0",
     "completed": [],
     "baselineDone": 12,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-56.md",
-    "record": "docs/jornada/entregas/v6-56.json"
+    "evidence": "docs/jornada/ENTREGA-V6-57.md",
+    "record": "docs/jornada/entregas/v6-57.json"
   },
   "scopeChanges": [
     {

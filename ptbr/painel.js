@@ -1,6 +1,6 @@
 /* Painel de análise da main. ES5, sem rede, sem alterar manuscritos nem o cofre.
  * O editor existente permanece a origem da escrita e das escolhas persistidas.
- * Uma lente por escolha explícita; sem triagem enquanto o escritor digita.
+ * Uma lente por escolha; preparação limitada após pausa, suspensa na digitação.
  */
 (function (root) {
   'use strict';
@@ -16,6 +16,24 @@
     expressoes:'Expressões', repeticao:'Repetição próxima', adverbios:'Formas em -mente',
     dialogo:'Linhas de diálogo', ritmo:'Ritmo', rima:'Rimas', metrica:'Métrica',
     sintaxe:'Relações da oração', relativas:'Orações relativas · recorte inicial', decolonial:'Vocabulário decolonial'
+  };
+  var descriptions={
+    ortografia:'Grafias previstas no acervo local; palavra desconhecida não significa erro.',
+    acentuacao:'Acentos nos casos cobertos pelas regras locais.',
+    pontuacao:'Sinais e sequências de pontuação previstos nas regras.',
+    crase:'Uso do acento grave nos casos cobertos; não é uma revisão geral de regência.',
+    concordancia:'Casos delimitados de haver, existir e fazer.',
+    morfologia:'Classes gramaticais: possibilidades do léxico e hipóteses no contexto.',
+    sintaxe:'Funções e vínculos entre termos em construções cobertas.',
+    relativas:'Orações adjetivas relativas: hipóteses de vínculo com um antecedente.',
+    expressoes:'Expressões do acervo, com leitura de uso e estilo.',
+    repeticao:'Palavras repetidas perto umas das outras; podem ser uma escolha de estilo.',
+    adverbios:'Formas em -mente do acervo; a terminação não decide sozinha a função.',
+    dialogo:'Linhas com marcas de diálogo; não identifica toda fala narrativa.',
+    ritmo:'Medidas da extensão das frases; não atribui qualidade à escrita.',
+    rima:'Aproximações sonoras entre finais de versos.',
+    metrica:'Estimativa de sílabas poéticas; a leitura em voz alta pode variar.',
+    decolonial:'Vocabulário do acervo para reflexão sobre o uso; não infere intenção.'
   };
   function el(tag, parent, cls, value) {
     var n = D.createElement(tag);
@@ -51,6 +69,7 @@
     '.ptbr-action{display:block;width:100%;margin:12px 0 8px;min-height:38px;padding:7px 12px;border:1px solid currentColor;background:transparent;color:inherit;font:inherit;font-weight:700;cursor:pointer}' +
     '.ptbr-action:disabled{opacity:.45;cursor:default}' +
     '.ptbr-lexical label{display:block}.ptbr-lexical-input{display:block;box-sizing:border-box;width:100%;padding:7px;border:1px solid currentColor;background:transparent;color:inherit;font:inherit}' +
+    '.ptbr-lens-description,.ptbr-signal{display:block;white-space:normal;font-size:12px;line-height:1.5;margin-top:5px}.ptbr-signal{font-style:italic;opacity:.8}' +
     '.ptbr-status{font-size:12px;line-height:1.5;opacity:.8;min-height:20px}' +
     '.ptbr-outcome{padding:10px 0;border-top:1px dotted currentColor}' +
     '.ptbr-outcome h3{font:inherit;font-weight:700;margin:0 0 5px}' +
@@ -80,7 +99,9 @@
     el('strong',lookupGoal,'','Consultar uma palavra');el('span',lookupGoal,'','Ver significados e flexões no acervo local.');
     lookupGoal.addEventListener('click',function(){showScreen('lexical',null,true);},false);
   }
+  var prepStatus=el('p',view,'ptbr-status','');prepStatus.setAttribute('role','status');
   var wheel=el('div',view,'ptbr-wheel');
+  var preparation=null,prepared=null,signalLabels={};
   var lexicalInput=null, lexicalButton=null;
   if(E.lookupLexeme){
     var lexicalBox=el('div',view,'ptbr-lexical');
@@ -106,8 +127,24 @@
   var results=el('div',view,'ptbr-results');
   var empty=el('div',results,'ptbr-empty','Seu texto, por dentro. Escolha uma lente para abrir a leitura anotada.');
   var note=el('p',view,'ptbr-status','O silêncio de uma lente não certifica o texto. A escrita permanece sua.');
+  function paintPreparation(result){
+    prepared=result;
+    for(var id in signalLabels){if(own.call(signalLabels,id)){
+      var state=preparation?preparation.state(result,id):'nao-verificado';
+      signalLabels[id].textContent=state==='encontrado'?(id==='morfologia'?'Há palavras no léxico; classe contextual a examinar.':'Há indícios para examinar.'):
+        state==='nao-encontrado-no-recorte'?'Sem indícios neste recorte; análise disponível.':'Pertinência ainda não verificada.';
+      signalLabels[id].setAttribute('data-signal-state',state);
+    }}
+    prepStatus.textContent=result?'Preparação leve: '+result.read+' caracteres iniciais observados'+(result.partial?'; o restante não foi verificado.':'.')+' Indícios não são classificações nem erros.':'A preparação aguarda uma pausa na escrita. Nenhuma análise completa é automática.';
+  }
+  if(E.createPreparation&&E.createSignalTriage){preparation=E.createPreparation(E,{
+    setTimeout:function(fn,ms){return root.setTimeout(fn,ms);},clearTimeout:function(id){root.clearTimeout(id);},
+    active:function(){return !panel.hidden&&!D.hidden&&!composing&&!busy&&(screen==='home'||screen==='group')&&!!manuscript.value;},
+    read:function(limit){return{head:manuscript.value.slice(0,limit),length:manuscript.value.length,document:documentKey()};},
+    deliver:function(result){paintPreparation(result);if(!result){prepStatus.textContent='Preparação indisponível. Você pode escolher qualquer análise.';}}
+  });}
   function showScreen(next,group,focus){
-    screen=next;if(typeof group==='number'){currentGroup=group;}
+    screen=next;prepStatus.hidden=next!=='group';if(typeof group==='number'){currentGroup=group;}
     goals.hidden=next!=='home';wheel.hidden=next!=='group';
     if(lexicalBox){lexicalBox.hidden=next!=='lexical';}
     results.hidden=next!=='result'&&next!=='lexical';
@@ -119,7 +156,8 @@
     intro.textContent=next==='home'?'Escolha uma tarefa para olhar seu texto. Você decide o que examinar e o que manter.':next==='lexical'?'Digite uma palavra ou selecione-a no texto antes de abrir este painel. A consulta mostra possibilidades; o sentido depende da frase.':'Escolha um aspecto abaixo para examinar a folha atual. Seu texto permanece intacto.';
     var buttons=wheel.querySelectorAll('button');
     for(var at=0;at<buttons.length;at++){buttons[at].hidden=groups[currentGroup||0].lenses.indexOf(buttons[at].getAttribute('data-ptbr-lens'))===-1;}
-    if(next==='home'||next==='group'){status.textContent=manuscript.value.length>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.':manuscript.value?'Nada é analisado até você escolher um aspecto.':'Escreva na folha para começar. Você pode consultar uma palavra mesmo com a folha vazia.';}
+    if(next==='home'||next==='group'){status.textContent=manuscript.value.length>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.':manuscript.value?'A análise completa começa quando você escolhe um aspecto.':'Escreva na folha para começar. Você pode consultar uma palavra mesmo com a folha vazia.';}
+    if(preparation){if(next==='home'||next==='group'){preparation.request();}else{preparation.cancel(false);}}
     if(focus){if(next==='lexical'&&lexicalInput){lexicalInput.focus();}else{title.focus();}panel.scrollTop=0;}
   }
   function details(parent,label){
@@ -131,6 +169,7 @@
   function refresh(force) {
     if(composing||busy||panel.hidden&&!force){return;}
     if(!force&&draft&&draft.text===manuscript.value&&draft.document===documentKey()){return;}
+    if(preparation){preparation.cancel(true);}prepared=null;
     epoch++;root.clearTimeout(debounce);busy=false;clearResults();
     el('div',results,'ptbr-empty','Seu texto, por dentro. Escolha uma lente para abrir a leitura anotada.');
     var s=manuscript.value;draft={text:s,document:documentKey()};
@@ -138,14 +177,15 @@
       var selectionStart=manuscript.selectionStart,selectionEnd=manuscript.selectionEnd;
       lexicalInput.value=typeof selectionStart==='number'&&selectionEnd>selectionStart&&selectionEnd-selectionStart<=64?s.slice(selectionStart,selectionEnd):'';
     }
-    wheel.textContent='';var chosen=[],id,btn,k;
+    wheel.textContent='';signalLabels={};var chosen=[],id,btn,k;
     for(k in labels){if(own.call(labels,k)){chosen.push(k);}}
     for(var i=0;i<chosen.length;i++){id=chosen[i];
       btn=el('button',wheel,'',null);btn.type='button';el('span',btn,'',labels[id]);btn.setAttribute('data-ptbr-lens',id);
+      el('small',btn,'ptbr-lens-description',descriptions[id]);signalLabels[id]=el('small',btn,'ptbr-signal','Pertinência ainda não verificada.');
       btn.setAttribute('aria-label','Examinar '+labels[id]);btn.disabled=!s.length||s.length>fullScope;
       btn.addEventListener('click',function(){run(this.getAttribute('data-ptbr-lens'));},false);}
     action.disabled=!lastLens||!s.length||s.length>fullScope;
-    showScreen('home',null,false);
+    paintPreparation(prepared);showScreen('home',null,false);
     note.textContent='A análise tem cobertura parcial. Ausência de apontamentos não garante ausência de problemas.';
 
   }
@@ -294,18 +334,21 @@
   action.addEventListener('click',function(){run(lastLens);},false);
   cancel.addEventListener('click',function(){E.ptbrPanelReset();status.textContent='Análise cancelada. Escolha uma lente para recomeçar.';},false);
   manuscript.addEventListener('input',function(){
+    if(preparation){preparation.cancel(true);}paintPreparation(null);
     epoch++;busy=false;root.clearTimeout(debounce);action.disabled=true;clearResults();
     status.textContent='O texto mudou. Os resultados anteriores foram retirados.';
     cancel.hidden=true;draft=null;action.disabled=composing||!lastLens||!manuscript.value||manuscript.value.length>fullScope;
     var buttons=wheel.querySelectorAll('button');for(var j=0;j<buttons.length;j++){buttons[j].disabled=composing||!manuscript.value||manuscript.value.length>fullScope;}
+    if(preparation){preparation.request();}
   },false);
-  manuscript.addEventListener('compositionstart',function(){composing=true;root.clearTimeout(debounce);epoch++;busy=false;draft=null;action.disabled=true;cancel.hidden=true;clearResults();},false);
-  manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);action.disabled=!lastLens||!manuscript.value||manuscript.value.length>fullScope;var buttons=wheel.querySelectorAll('button');for(var j=0;j<buttons.length;j++){buttons[j].disabled=!manuscript.value||manuscript.value.length>fullScope;}},false);
+  manuscript.addEventListener('compositionstart',function(){composing=true;if(preparation){preparation.cancel(true);}paintPreparation(null);root.clearTimeout(debounce);epoch++;busy=false;draft=null;action.disabled=true;cancel.hidden=true;clearResults();},false);
+  manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);action.disabled=!lastLens||!manuscript.value||manuscript.value.length>fullScope;var buttons=wheel.querySelectorAll('button');for(var j=0;j<buttons.length;j++){buttons[j].disabled=!manuscript.value||manuscript.value.length>fullScope;}if(preparation){preparation.request();}},false);
   panel.addEventListener('focus',function(){if(!panel.hidden){refresh(true);}},false);
   var openers=['examinar-toggle','cabinet-examine'];
   for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);},false);}}
   D.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.keyCode===13){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);}},false);
-  E.ptbrPanelReset=function(){epoch++;busy=false;draft=null;root.clearTimeout(debounce);clearResults();action.disabled=true;cancel.hidden=true;};
+  E.ptbrPanelReset=function(){if(preparation){preparation.cancel(true);}paintPreparation(null);epoch++;busy=false;draft=null;root.clearTimeout(debounce);clearResults();action.disabled=true;cancel.hidden=true;};
+  D.addEventListener('visibilitychange',function(){if(preparation){if(D.hidden){preparation.cancel(true);paintPreparation(null);}else{preparation.request();}}},false);
   E.ptbrPanelFocus=function(){title.focus();};
   /* Reutiliza o painel nativo, mantendo os botões originais se a inicialização falhar. */
   panel.setAttribute('data-ptbr-dashboard','true');

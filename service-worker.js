@@ -1,17 +1,17 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-56-6948631a6608";
-const ASSET_VERSION = "20261006-scrvrl-painel-v6-56";
+const CACHE_NAME = "scrvrl-offline-v6-57-dfa054947ba5";
+const ASSET_VERSION = "20261007-scrvrl-preparacao-v6-57";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20261006-scrvrl-painel-v6-56/cofre.f25fa6db171c5e9e.js",
+    "url": "./assets/20261007-scrvrl-preparacao-v6-57/cofre.f25fa6db171c5e9e.js",
     "sha256": "f25fa6db171c5e9eee1bee5bb3d99c9392caf3ffa6f29503aad0f52b4f768d08"
   },
   {
-    "url": "./assets/20261006-scrvrl-painel-v6-56/app.e7ccb72e032fc6e8.js",
-    "sha256": "e7ccb72e032fc6e809a2238517198de9d82f5cfc8a8b71562165f658089ae71d"
+    "url": "./assets/20261007-scrvrl-preparacao-v6-57/app.682e35b93937ddd6.js",
+    "sha256": "682e35b93937ddd6186892e8aba599788938110b68761ed9d394e84b50deeeea"
   },
   {
-    "url": "./assets/20261006-scrvrl-painel-v6-56/styles.79d88716e7951271.css",
+    "url": "./assets/20261007-scrvrl-preparacao-v6-57/styles.79d88716e7951271.css",
     "sha256": "79d88716e79512714f35c93d75498a0f1f336e4af8be2cfdb941c8e875ca0352"
   }
 ];
@@ -28,7 +28,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
   const cache=await caches.open(CACHE_NAME);
-  const index=await checkedAsset({url:'./index.html',sha256:'824f25eca15ce65d3283742749dbec58ccde9750f9d24481d569db90070bb639'});
+  const index=await checkedAsset({url:'./index.html',sha256:'c9a55e07d0e3f5d2dcf9db061182067db4c7d2a7e7437a1528f2df8c597a4774'});
   if(!index.ok||(await index.clone().text()).indexOf('content="'+ASSET_VERSION+'"')<0)throw new Error('Documento de outra versão');
   await Promise.all(REQUIRED_ASSETS.map(async asset=>cache.put(asset.url,await checkedAsset(asset))));
   await cache.put('./index.html',index.clone());await cache.put('./',index);

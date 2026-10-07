@@ -2,11 +2,11 @@
 
 ## Organização do painel — 06/10/2026
 
-Prioridade do autor: orientar quem escreve antes de ampliar regras. V6.56 organiza as análises por tarefa, separa consulta lexical e recolhe opções durante o resultado. Fontes e explicações técnicas permanecem acessíveis sob demanda. O painel antigo fica somente como fallback de inicialização. Preparação nas pausas, reserva e filtro por pertinência permanecem em A03; não são inferidos desta navegação. O inventário da entrega e a próxima ação estão na ficha v6-56; U01/U02 permanecem parciais.
+Prioridade do autor: orientar quem escreve antes de ampliar regras. V6.56 organiza as análises por tarefa, separa consulta lexical e recolhe opções durante o resultado. Fontes e explicações técnicas permanecem acessíveis sob demanda. O painel antigo fica somente como fallback de inicialização. A navegação v6.56 não implica preparação; v6.57 acrescenta somente a pausa com prefixo limitado. Reserva e filtro por pertinência permanecem em A03. O inventário da entrega e a próxima ação estão na ficha v6-56; U01/U02 permanecem parciais.
 
 ## Evolução vigente — 27/09/2026
 
-Rafael passou a permitir preparação leve e incremental nas pausas, ainda **não implementada**. Isso substitui a proibição abrangente de preparação automática das decisões históricas abaixo; exames completos continuam explícitos, um por escolha, sem fila de lentes. Suspender na digitação, IME, página oculta e controle desligado. Folha, geração do rascunho, contexto e versões vinculam cada resposta. Falta de sinal, falta de verificação e falta de cobertura são estados diferentes; manter “Todas as análises”.
+Rafael passou a permitir preparação leve e incremental nas pausas, implementada parcialmente na v6.57 para um prefixo limitado; preparação incremental geral ainda pendente. Isso substitui a proibição abrangente de preparação automática das decisões históricas abaixo; exames completos continuam explícitos, um por escolha, sem fila de lentes. Suspender na digitação, IME, página oculta e controle desligado. Folha, geração do rascunho, contexto e versões vinculam cada resposta. Falta de sinal, falta de verificação e falta de cobertura são estados diferentes; manter “Todas as análises”.
 
 [Contrato proposto e divisão de trabalho](../CONTRATO-PACOTES-LINGUISTICOS.md). Orçamentos históricos de sinais não são limites aprovados para a nova preparação; fixá-los pela prova. A v6-28 permanece sem triagem automática. Teste visual/aparelhos não é gate, conforme decisão posterior já vigente.
 
@@ -65,7 +65,7 @@ A análise linguística não escreve no armazenamento do manuscrito. Preferênci
 
 ## Custo e disponibilidade
 
-O modelo atual usa 700 ms, 8.000 caracteres e até 1.600 tokens para sinais. O novo controle deverá suspender essa triagem quando desligado; isso ainda não está integrado. O orçamento de subordinação precisa de benchmark próprio, porque uma pausa não torna um analisador pesado leve.
+V6.57 retoma 700 ms com tetos menores no painel: 2.000 caracteres iniciais e 400 tokens. Suspende quando desligado/oculto, em IME e durante análise completa. Os tetos históricos de 8.000/1.600 continuam sendo o máximo da triagem isolada, não o orçamento ativo do painel. O orçamento de subordinação precisa de benchmark próprio, porque uma pausa não torna um analisador pesado leve.
 
 Preferir exame de seleção, parágrafo ou documento explicitamente escolhido. Exibir alcance parcial; manter acesso manual; processar em blocos canceláveis e carregar dados sob demanda. Sem rede por padrão. Qualquer serviço externo ou modelo remoto exige decisão específica e informação clara sobre os dados enviados. O manuscrito não é corpus de treinamento automático.
 

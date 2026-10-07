@@ -1,12 +1,12 @@
 {
-  "version": 45,
-  "updated": "06/10/2026",
-  "baseline": "4df6da68f9baf7cac98e5bcbccaeac8003a83f1c",
+  "version": 46,
+  "updated": "07/10/2026",
+  "baseline": "4e5763ec03132da3282f4f438141ae2c67565dcd",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.56: painel organizado por tarefas, consulta de palavras separada e uma tela de resultado com retorno explícito à escrita. Prioridade U01/U02 pelo retorno do autor; preparação automática A03 continua pendente. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.57: preparação após 700 ms com prefixo de até 2.000 caracteres/400 tokens, cancelamento e três estados de pertinência. As 16 análises explicam o que identificam e seus limites. A03 continua parcial. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "Concluir o inventário da experiência U01/U02 e delimitar a primeira preparação A03: estados sem sinal/sem cobertura/não verificado, reserva de ocorrências por revisão e apresentação somente a pedido. Não retomar expansão de regras M03 antes desse fluxo de produto.",
+    "A03-regioes: fixar fronteiras e estados para trechos alterados, incluindo citações e Unicode; reservar ocorrências exatas com identidade de folha/revisão antes de filtrar análises. Preservar tetos, suspensão e acesso manual.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -271,7 +271,7 @@
         "Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.",
         "Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar."
       ],
-      "done": "Navegação por cinco tarefas, grupos de análises, resultado isolado, retorno e consulta lexical separada. Interface legada apenas como fallback; explicações técnicas recolhidas. U01 parcial: controle final e preparação A03 ainda não entregues.",
+      "done": "Preparação leve do prefixo no painel: pausa700ms, um timer/cache, 2000 caracteres/400 tokens, sem motores completos. Estados e terminologia integrados; faltam regiões alteradas/contexto, reserva de offsets por revisão e filtro por pertinência.",
       "evidence": [
         "docs/jornada/CONTRATO-ANALISE.md",
         "ptbr/CONTEXTO-1.md",
@@ -285,7 +285,8 @@
         "ptbr/auditoria/GEMINI-SET26.md",
         "ptbr/RELATIVAS-1.md",
         "tests/ptbr-relativas.cjs",
-        "docs/jornada/ENTREGA-V6-56.md"
+        "docs/jornada/ENTREGA-V6-56.md",
+        "docs/jornada/ENTREGA-V6-57.md"
       ]
     },
     {
@@ -708,7 +709,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "Concluir o inventário da experiência U01/U02 e delimitar a primeira preparação A03: estados sem sinal/sem cobertura/não verificado, reserva de ocorrências por revisão e apresentação somente a pedido. Não retomar expansão de regras M03 antes desse fluxo de produto."
+    "nextDeliverable": "A03-regioes: fixar fronteiras e estados para trechos alterados, incluindo citações e Unicode; reservar ocorrências exatas com identidade de folha/revisão antes de filtrar análises. Preservar tetos, suspensão e acesso manual."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -722,7 +723,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Testes dirigidos de painel, léxico, flexões e apresentação: navegação sem motor, cancelamento ao voltar/trocar/editar, IME, autoria e consulta independente. Build reproduzível e sintaxe ES5. CI e Pages a conferir por SHA. Chromium real: tarefas, análise, seleção exata e manuscrito intacto, consulta, fontes expansíveis, painel sem duplicação; largura 390 sem overflow, leitura com largura útil no desktop e zero erros de página. Capturas inspecionadas revelaram colunas estreitas; corrigidas para leitura e explicação empilhadas.",
+    "verification": "Preparador com relógio simulado: antes/depois de700ms, reinício em rajada, um timer, cache de uma entrada, folha diferente, ocultação/cancelamento/falha. Triagem real: limites2000/400, truncamento, citações abertas, Unicode decomposto. Painel, consulta lexical e flexões aprovados; ES5 e montagem reproduzível. CI/Pages a conferir por commit. Chromium real: zero exames completos na preparação, indício lexical e relativas não verificadas, fluxo de análise/seleção/consulta preservado e zero erros de página.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -740,5 +741,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-56.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-57.json"
 }

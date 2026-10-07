@@ -1,6 +1,18 @@
 # Pacotes linguísticos e preparação incremental — proposta v0
 
-Decisão recebida de Rafael por intermédio da frente ASTRA 2 em 27/09/2026. Base conferida: main `019e9105b2730476644bfb9c6644f9be2738ea11`, produto v6-28. **Direção registrada; contratos abaixo são proposta para a prova isolada, não API publicada.** A implementação atual permanece síncrona e sem preparação automática.
+Decisão recebida de Rafael por intermédio da frente ASTRA 2 em 27/09/2026. Base conferida: main `019e9105b2730476644bfb9c6644f9be2738ea11`, produto v6-28. **Direção registrada; contratos abaixo são proposta para a prova isolada, não API publicada.** O cofre continua síncrono; a primeira preparação limitada do painel foi integrada na v6.57, conforme seção vigente abaixo.
+
+## Preparação limitada vigente — 07/10/2026, v6.57
+
+O autor aprovou preservar o novo painel, retomar debounce e priorizar aparelhos antigos. Primeira etapa de A03 usa somente recursos já embutidos; A02 não é pré-requisito para este recorte. Não instala pacotes nem ativa um analisador contextual em segundo plano.
+
+Contrato implementado: 700 ms após a última solicitação; um timer; no máximo 2.001 unidades UTF-16 recebidas pelo preparador (um caractere de fronteira), 2.000 examinadas e 400 tokens visitados. Uma única entrada de cache de recorte; sem snapshots da folha inteira, histórico acumulado ou varredura encadeada. Esses números são tetos de trabalho/payload, não medição da RAM total ou garantia de latência de aparelho antigo. Índice local da triagem é criado sob demanda e reaproveitado; não há download nem dependência nova.
+
+Só prepara com o painel aberto na escolha de tarefas/análises. Edição reinicia a pausa e invalida indícios; IME, página oculta, fechamento, escolha de exame completo ou consulta lexical cancelam a preparação pendente. Retomar visibilidade/composição agenda uma nova pausa se ainda elegível. Troca de folha invalida a identidade. Navegar entre grupos pode reutilizar o mesmo recorte. Nenhum `vault.analyze` é chamado pelo preparador.
+
+Estados: indício encontrado, nenhum indício no recorte, pertinência não verificada. Sintaxe, relativas e vocabulário decolonial não possuem preparação neste lote; `que-contextual` não vira sinal de oração relativa. Morfologia só informa palavra presente no léxico; classe em contexto exige exame explícito. Todas as análises permanecem acessíveis. O trecho além do teto aparece como não verificado, nunca como ausência comprovada.
+
+**Limite deliberado:** observa o prefixo, não regiões arbitrárias editadas. Não é ainda a preparação incremental completa, não reserva ocorrências exatas nem filtra automaticamente as opções. A03 permanece parcial. Próximo lote precisa delimitar contexto de regiões alteradas, proteger citações/fronteiras e guardar offsets por revisão antes de oferecer seleção de ocorrências reservadas. Não ampliar o teto como atalho.
 
 ## Direção e escopo
 

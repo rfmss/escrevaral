@@ -11,10 +11,10 @@ async function lens(p,id){await open(p);await p.evaluate(id=>{const b=document.q
  browser=await(engine==='webkit'?webkit:chromium).launch({headless:true,executablePath:process.env.QA_BROWSER_EXECUTABLE||undefined,args:engine==='chromium'?['--no-sandbox']:[]});
  const context=await browser.newContext({viewport:{width:1366,height:768},serviceWorkers:'allow'}),p=await context.newPage();p.setDefaultTimeout(15000);await start(p,url);
  await p.evaluate(()=>{window.lensCalls=0;const make=Escr.createVault;Escr.createVault=function(k){const v=make(k),analyze=v.analyze;v.analyze=function(){window.lensCalls++;return analyze.apply(v,arguments);};return v;};});
- // Abrir/editar/desligar não dispara lentes nem triagem linguística.
+ // Abrir prepara um recorte após a pausa; nenhum exame completo automático.
  await p.evaluate(()=>{window.triageCalls=0;const make=Escr.createSignalTriage;Escr.createSignalTriage=function(){const t=make.apply(this,arguments),scan=t.scan;t.scan=function(){window.triageCalls++;return scan.apply(t,arguments);};return t;};});
  await p.fill('#manuscrito','Eu canto. O canto terminou.');await open(p);await p.waitForTimeout(800);
- assert.equal(await p.evaluate(()=>window.lensCalls),0);assert.equal(await p.evaluate(()=>window.triageCalls),0);
+ assert.equal(await p.evaluate(()=>window.lensCalls),0);assert.equal(await p.evaluate(()=>window.triageCalls),1);
  await lens(p,'morfologia');
  assert.equal(await p.locator('.ptbr-observation').filter({hasText:'Leitura contextual: verbo.'}).locator('blockquote').first().textContent(),'canto');
  assert.equal(await p.locator('.ptbr-observation').filter({hasText:'Leitura contextual: substantivo.'}).locator('blockquote').first().textContent(),'canto');
