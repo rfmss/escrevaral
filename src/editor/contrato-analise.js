@@ -34,8 +34,8 @@
   }
   /* Pedido explícito da reserva. Nunca tratar a borda da janela como frase.
    * A linha inteira deve caber na janela. Proteções herdadas exigem prefixo
-   * conhecido; 8.000 é o teto já existente da lente, não trabalho por pausa. */
-  function reservedScope(text, scope, item) {
+   * conhecido; acima de 8.000 a prova é retomável, somente sob comando. */
+  function reservedScope(text, scope, item, boundary) {
     var start=item.start,end=item.end,part,clean;
     if(start<scope.start||end>scope.end||text.slice(start,end)!==item.snippet){return {reason:'A ocorrência não pertence mais a este trecho.'};}
     while(start>scope.start&&!/[\r\n]/.test(text.charAt(start-1))){start--;}
@@ -43,12 +43,47 @@
     if(start>0&&!/[\r\n]/.test(text.charAt(start-1))||end<text.length&&!/[\r\n]/.test(text.charAt(end))){
       return {reason:'Contexto cortado pela janela de preparação. A linha inteira precisa caber no trecho reservado; a classe permanece em aberto.'};
     }
-    if(end-start>2000||end>8000){return {reason:'Contexto não verificado: não foi possível conferir as proteções anteriores dentro do limite de 8.000 caracteres. As possibilidades lexicais continuam disponíveis.'};}
-    part=text.slice(start,end);clean=E.protectedText(text.slice(0,end)).slice(start,end);
+    if(end-start>2000||end>200000){return {reason:'Contexto não verificado: a linha não cabe na janela ou está além do limite de 200 mil caracteres do exame. As possibilidades lexicais continuam disponíveis.'};}
+    if(end>8000&&!boundary){return {start:start,end:end,needsBoundary:true};}
+    if(boundary&&(!boundary.done||boundary.offset!==start||boundary.reason||boundary.closer)){
+      return {reason:boundary.reason||'Proteção iniciada antes desta linha (citação ou código). Nenhuma classe contextual foi atribuída.'};
+    }
+    part=text.slice(start,end);clean=boundary?E.protectedText(part):E.protectedText(text.slice(0,end)).slice(start,end);
     if(clean.slice(item.start-start,item.end-start)!==item.snippet||clean!==E.protectedText(part)){
       return {reason:'Trecho protegido ou proteção iniciada antes desta linha (citação, código ou endereço). Nenhuma classe contextual foi atribuída.'};
     }
     return {start:start,end:end};
   }
-  E.analysisContract = { version: 1, request: request, current: current, analyze: analyze, reservedScope: reservedScope };
+  /* Um estado e até 2.000 unidades por passo explícito. Nenhum cache do livro.
+   * Usa exatamente a gramática de proteção do cofre, sem classificá-lo.
+   * Fatias terminam em LF real: marcadores não se partem entre passos.
+   * O sentinela impede que $ invente o fechamento de aspas/código inline. */
+  function createBoundaryScan(text, end) {
+    var offset=0,closer=null,reason=null;
+    if(typeof text!=='string'||typeof end!=='number'||!isFinite(end)||end%1||end<0||end>text.length||end>200000){throw new Error('Fronteira inválida para conferência.');}
+    if(end>0&&text.charAt(end-1)!=='\n'){reason='A fronteira anterior usa uma quebra de linha ainda não coberta por esta conferência. Contexto não verificado.';}
+    function state(){return {done:!!reason||offset===end,offset:offset,closer:closer,reason:reason};}
+    function step(){
+      if(reason||offset===end){return state();}
+      var stop=Math.min(end,offset+2000),part=text.slice(offset,stop),last,from=0,at,re,m,body,close,scan;
+      if(stop<end){
+        last=part.lastIndexOf('\n');
+        if(last<0){reason='Uma linha anterior ultrapassa a fatia de 2.000 caracteres. Sua proteção ainda não foi verificada; nenhuma classe contextual foi atribuída.';return state();}
+        part=part.slice(0,last+1);stop=offset+part.length;
+      }
+      if(closer){
+        at=part.indexOf(closer);
+        if(at<0){offset=stop;return state();}
+        from=at+closer.length;closer=null;
+      }
+      scan=part+'\u0000';re=E.protectionPattern();re.lastIndex=from;
+      while((m=re.exec(scan))){
+        body=m[0];close=body.slice(0,3)==='```'?'```':body.charAt(0)==='“'?'”':body.charAt(0)==='‘'?'’':body.charAt(0)==='«'?'»':null;
+        if(close&&(body.length<close.length*2||body.slice(-close.length)!==close)){closer=close;break;}
+      }
+      offset=stop;return state();
+    }
+    return {step:step};
+  }
+  E.analysisContract = { version: 1, request: request, current: current, analyze: analyze, reservedScope: reservedScope, createBoundaryScan: createBoundaryScan };
 }(typeof window !== 'undefined' ? window : this));

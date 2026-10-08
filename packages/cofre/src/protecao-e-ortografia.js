@@ -1,9 +1,12 @@
 (function (root) {
   'use strict';
   var own = Object.prototype.hasOwnProperty;
+  function protectionPattern() {
+    return /```[\s\S]*?(?:```|$)|`[^`\n]*(?:`|$)|https?:\/\/[^\s]+|www\.[^\s]+|[\w.+-]+@[\w.-]+|"[^"\n]*(?:"|$)|“[^”]*(?:”|$)|‘[^’]*(?:’|$)|«[^»]*(?:»|$)/g;
+  }
   function protectedText(text) {
     /* Substituição de igual comprimento: índices continuam sendo UTF-16 do original. */
-    return text.replace(/```[\s\S]*?(?:```|$)|`[^`\n]*(?:`|$)|https?:\/\/[^\s]+|www\.[^\s]+|[\w.+-]+@[\w.-]+|"[^"\n]*(?:"|$)|“[^”]*(?:”|$)|‘[^’]*(?:’|$)|«[^»]*(?:»|$)/g, function (s) { return s.replace(/[^\n]/g, ' '); });
+    return text.replace(protectionPattern(), function (s) { return s.replace(/[^\n]/g, ' '); });
   }
   function makeFinding(rule, text, start, end, reference, sources) {
     var snippet = text.slice(start, end);
@@ -17,6 +20,7 @@
     };
   }
   root.Escr.protectedText = protectedText;
+  root.Escr.protectionPattern = protectionPattern;
   (root.Escr.extensions = root.Escr.extensions || []).push(function (register, knowledge) {
     function builtin(id) {
       var full=function (text, cap) {

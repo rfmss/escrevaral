@@ -81,5 +81,27 @@ assert.equal(p.manuscript.value.slice(p.manuscript.selectionStart,p.manuscript.s
 // Ambiguidade não vira classe contextual; limite de apresentação não vira ausência.
 p=opened('Canto.',1);examine(p,row(p,'Canto'));p.flush();assert(p.results.textContent.includes('Possibilidades lexicais:'));assert(!p.results.textContent.includes('Leitura contextual:'));
 const dense='a '.repeat(120)+'Eu canto.';p=opened(dense,243);examine(p,row(p,'canto'));p.flush();assert(p.results.textContent.includes('além do limite de resultados'));assert.equal(nodes(p.results,n=>n.className==='ptbr-word'&&n.getAttribute('aria-pressed')==='true').length,0,'não abre outra ocorrência como substituto');
-for(const file of ['ptbr/painel.js','ptbr/preparacao.js','ptbr/leitura-visual.js','src/editor/contrato-analise.js','src/editor/controlador.js'])require('acorn').parse(fs.readFileSync(file,'utf8'),{ecmaVersion:5});
+// A03-fronteiras: passos limitados sob comando, inclusive proteção herdada distante.
+const farPrefix='Introdução.\n'.repeat(1200),farText=farPrefix+'Eu canto.';
+p=opened(farText,farPrefix.length+3);examine(p,row(p,'canto'));assert.deepEqual(p.calls,[]);p.flush();
+assert.deepEqual(p.calls,['morfologia']);button(p.results,'Ver ocorrência no texto').click();assert.equal(p.manuscript.selectionStart,farPrefix.length+3);
+for(const open of ['“','‘','«','```\n','"texto “\n','`texto “\n']){
+  const source=open+farPrefix+'Eu canto.';p=opened(source,source.lastIndexOf('canto'));examine(p,row(p,'canto'));p.flush();
+  assert.deepEqual(p.calls,[],'proteção distante: '+open);assert(p.results.textContent.includes('Proteção iniciada antes'));
+}
+for(const safe of ['“texto”\n','```\ncódigo\n```\n','https://exemplo/“\n','a@www.exemplo “texto”\n','"“"\n','`“`\n']){
+  const source=safe+farPrefix+'Eu canto.';p=opened(source,source.lastIndexOf('canto'));examine(p,row(p,'canto'));p.flush();assert.deepEqual(p.calls,['morfologia'],'delimitadores protegidos não abrem citação: '+safe);
+}
+const scanner=E.analysisContract.createBoundaryScan(farText,farPrefix.length);let boundary,previous=0,steps=0;
+do{boundary=scanner.step();assert(boundary.offset-previous<=2000);assert(boundary.offset>previous);previous=boundary.offset;steps++;}while(!boundary.done);
+assert(steps>1);assert.equal(boundary.closer,null);
+// Interromper depois do primeiro passo também invalida todo o progresso.
+for(const event of ['input','compositionstart','visibilitychange','back']){
+  p=opened(farText,farPrefix.length+3);examine(p,row(p,'canto'));
+  const pending=p.timers.find(t=>!t.cancelled);assert(pending);pending.fn();pending.cancelled=true;
+  assert(p.board.textContent.includes('Conferindo as proteções anteriores'));
+  if(event==='visibilitychange'){p.document.hidden=true;p.document.emit(event);}else if(event==='back'){p.back.click();}else{p.manuscript.emit(event);}
+  p.flush();assert.deepEqual(p.calls,[],event+' cancela entre fatias');assert.equal(p.manuscript.value,farText);
+}
+for(const file of ['ptbr/painel.js','ptbr/preparacao.js','ptbr/leitura-visual.js','src/editor/contrato-analise.js','src/editor/controlador.js','packages/cofre/src/protecao-e-ortografia.js'])require('acorn').parse(fs.readFileSync(file,'utf8'),{ecmaVersion:5});
 console.log('CONTEXTO DA RESERVA OK: lente real, origem/apoios UTF-16, repetidas, NFD, fronteiras, proteções herdadas, limites e oito transições de invalidação; ES5.');

@@ -374,9 +374,16 @@
     el('p',header,'ptbr-context-scope','Contexto escolhido: posições '+(scope.start+1)+' a '+scope.end+' do original. Somente esta linha será examinada.');
     el('blockquote',header,'ptbr-context-original',snapshot.slice(scope.start,scope.end));
     busy=true;cancel.hidden=false;status.textContent='Examinando as classes neste contexto…';
-    root.setTimeout(function(){
+    var boundaryScan=scope.needsBoundary?E.analysisContract.createBoundaryScan(snapshot,scope.start):null;
+    function step(){
       if(!current()){if(token===epoch){E.ptbrPanelReset();status.textContent='O pedido perdeu a validade. Abra as opções para preparar novamente.';}return;}
       try{
+        if(boundaryScan){
+          var boundary=boundaryScan.step();
+          if(!boundary.done){status.textContent='Conferindo as proteções anteriores: '+boundary.offset+' de '+scope.start+' caracteres. Você pode cancelar.';debounce=root.setTimeout(step,0);return;}
+          scope=E.analysisContract.reservedScope(snapshot,reservation.scope,item,boundary);boundaryScan=null;
+          if(scope.reason){el('p',header,'ptbr-context-limit',scope.reason);status.textContent='Contexto não verificado. Nenhuma lente foi executada.';busy=false;cancel.hidden=true;return;}
+        }
         var result=E.analysisContract.analyze(E.createVault(E.knowledge),'morfologia',request),found=false;
         if(!current()){return;}
         for(var at=0;at<result.findings.length;at++){
@@ -387,7 +394,8 @@
         status.textContent='Exame do contexto concluído. As possibilidades lexicais e os limites permanecem visíveis.';
       }catch(error){el('p',header,'ptbr-context-limit','Esta lente não concluiu o exame: '+error.message);status.textContent='Não foi possível concluir este contexto.';}
       busy=false;cancel.hidden=true;
-    },0);
+    }
+    debounce=root.setTimeout(step,0);
   }
   function run(selected) {
     if(composing||panel.hidden||!selected||!own.call(labels,selected)){return;}

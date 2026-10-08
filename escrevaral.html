@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261008-scrvrl-contexto-v6-60">
+  <meta name="asset-version" content="20261008-scrvrl-fronteiras-v6-61">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -3228,9 +3228,12 @@ SOFTWARE.
 (function (root) {
   'use strict';
   var own = Object.prototype.hasOwnProperty;
+  function protectionPattern() {
+    return /```[\s\S]*?(?:```|$)|`[^`\n]*(?:`|$)|https?:\/\/[^\s]+|www\.[^\s]+|[\w.+-]+@[\w.-]+|"[^"\n]*(?:"|$)|“[^”]*(?:”|$)|‘[^’]*(?:’|$)|«[^»]*(?:»|$)/g;
+  }
   function protectedText(text) {
     /* Substituição de igual comprimento: índices continuam sendo UTF-16 do original. */
-    return text.replace(/```[\s\S]*?(?:```|$)|`[^`\n]*(?:`|$)|https?:\/\/[^\s]+|www\.[^\s]+|[\w.+-]+@[\w.-]+|"[^"\n]*(?:"|$)|“[^”]*(?:”|$)|‘[^’]*(?:’|$)|«[^»]*(?:»|$)/g, function (s) { return s.replace(/[^\n]/g, ' '); });
+    return text.replace(protectionPattern(), function (s) { return s.replace(/[^\n]/g, ' '); });
   }
   function makeFinding(rule, text, start, end, reference, sources) {
     var snippet = text.slice(start, end);
@@ -3244,6 +3247,7 @@ SOFTWARE.
     };
   }
   root.Escr.protectedText = protectedText;
+  root.Escr.protectionPattern = protectionPattern;
   (root.Escr.extensions = root.Escr.extensions || []).push(function (register, knowledge) {
     function builtin(id) {
       var full=function (text, cap) {
@@ -5289,8 +5293,8 @@ SOFTWARE.
   }
   /* Pedido explícito da reserva. Nunca tratar a borda da janela como frase.
    * A linha inteira deve caber na janela. Proteções herdadas exigem prefixo
-   * conhecido; 8.000 é o teto já existente da lente, não trabalho por pausa. */
-  function reservedScope(text, scope, item) {
+   * conhecido; acima de 8.000 a prova é retomável, somente sob comando. */
+  function reservedScope(text, scope, item, boundary) {
     var start=item.start,end=item.end,part,clean;
     if(start<scope.start||end>scope.end||text.slice(start,end)!==item.snippet){return {reason:'A ocorrência não pertence mais a este trecho.'};}
     while(start>scope.start&&!/[\r\n]/.test(text.charAt(start-1))){start--;}
@@ -5298,14 +5302,49 @@ SOFTWARE.
     if(start>0&&!/[\r\n]/.test(text.charAt(start-1))||end<text.length&&!/[\r\n]/.test(text.charAt(end))){
       return {reason:'Contexto cortado pela janela de preparação. A linha inteira precisa caber no trecho reservado; a classe permanece em aberto.'};
     }
-    if(end-start>2000||end>8000){return {reason:'Contexto não verificado: não foi possível conferir as proteções anteriores dentro do limite de 8.000 caracteres. As possibilidades lexicais continuam disponíveis.'};}
-    part=text.slice(start,end);clean=E.protectedText(text.slice(0,end)).slice(start,end);
+    if(end-start>2000||end>200000){return {reason:'Contexto não verificado: a linha não cabe na janela ou está além do limite de 200 mil caracteres do exame. As possibilidades lexicais continuam disponíveis.'};}
+    if(end>8000&&!boundary){return {start:start,end:end,needsBoundary:true};}
+    if(boundary&&(!boundary.done||boundary.offset!==start||boundary.reason||boundary.closer)){
+      return {reason:boundary.reason||'Proteção iniciada antes desta linha (citação ou código). Nenhuma classe contextual foi atribuída.'};
+    }
+    part=text.slice(start,end);clean=boundary?E.protectedText(part):E.protectedText(text.slice(0,end)).slice(start,end);
     if(clean.slice(item.start-start,item.end-start)!==item.snippet||clean!==E.protectedText(part)){
       return {reason:'Trecho protegido ou proteção iniciada antes desta linha (citação, código ou endereço). Nenhuma classe contextual foi atribuída.'};
     }
     return {start:start,end:end};
   }
-  E.analysisContract = { version: 1, request: request, current: current, analyze: analyze, reservedScope: reservedScope };
+  /* Um estado e até 2.000 unidades por passo explícito. Nenhum cache do livro.
+   * Usa exatamente a gramática de proteção do cofre, sem classificá-lo.
+   * Fatias terminam em LF real: marcadores não se partem entre passos.
+   * O sentinela impede que $ invente o fechamento de aspas/código inline. */
+  function createBoundaryScan(text, end) {
+    var offset=0,closer=null,reason=null;
+    if(typeof text!=='string'||typeof end!=='number'||!isFinite(end)||end%1||end<0||end>text.length||end>200000){throw new Error('Fronteira inválida para conferência.');}
+    if(end>0&&text.charAt(end-1)!=='\n'){reason='A fronteira anterior usa uma quebra de linha ainda não coberta por esta conferência. Contexto não verificado.';}
+    function state(){return {done:!!reason||offset===end,offset:offset,closer:closer,reason:reason};}
+    function step(){
+      if(reason||offset===end){return state();}
+      var stop=Math.min(end,offset+2000),part=text.slice(offset,stop),last,from=0,at,re,m,body,close,scan;
+      if(stop<end){
+        last=part.lastIndexOf('\n');
+        if(last<0){reason='Uma linha anterior ultrapassa a fatia de 2.000 caracteres. Sua proteção ainda não foi verificada; nenhuma classe contextual foi atribuída.';return state();}
+        part=part.slice(0,last+1);stop=offset+part.length;
+      }
+      if(closer){
+        at=part.indexOf(closer);
+        if(at<0){offset=stop;return state();}
+        from=at+closer.length;closer=null;
+      }
+      scan=part+'\u0000';re=E.protectionPattern();re.lastIndex=from;
+      while((m=re.exec(scan))){
+        body=m[0];close=body.slice(0,3)==='```'?'```':body.charAt(0)==='“'?'”':body.charAt(0)==='‘'?'’':body.charAt(0)==='«'?'»':null;
+        if(close&&(body.length<close.length*2||body.slice(-close.length)!==close)){closer=close;break;}
+      }
+      offset=stop;return state();
+    }
+    return {step:step};
+  }
+  E.analysisContract = { version: 1, request: request, current: current, analyze: analyze, reservedScope: reservedScope, createBoundaryScan: createBoundaryScan };
 }(typeof window !== 'undefined' ? window : this));
 
 ;
@@ -8854,9 +8893,16 @@ SOFTWARE.
     el('p',header,'ptbr-context-scope','Contexto escolhido: posições '+(scope.start+1)+' a '+scope.end+' do original. Somente esta linha será examinada.');
     el('blockquote',header,'ptbr-context-original',snapshot.slice(scope.start,scope.end));
     busy=true;cancel.hidden=false;status.textContent='Examinando as classes neste contexto…';
-    root.setTimeout(function(){
+    var boundaryScan=scope.needsBoundary?E.analysisContract.createBoundaryScan(snapshot,scope.start):null;
+    function step(){
       if(!current()){if(token===epoch){E.ptbrPanelReset();status.textContent='O pedido perdeu a validade. Abra as opções para preparar novamente.';}return;}
       try{
+        if(boundaryScan){
+          var boundary=boundaryScan.step();
+          if(!boundary.done){status.textContent='Conferindo as proteções anteriores: '+boundary.offset+' de '+scope.start+' caracteres. Você pode cancelar.';debounce=root.setTimeout(step,0);return;}
+          scope=E.analysisContract.reservedScope(snapshot,reservation.scope,item,boundary);boundaryScan=null;
+          if(scope.reason){el('p',header,'ptbr-context-limit',scope.reason);status.textContent='Contexto não verificado. Nenhuma lente foi executada.';busy=false;cancel.hidden=true;return;}
+        }
         var result=E.analysisContract.analyze(E.createVault(E.knowledge),'morfologia',request),found=false;
         if(!current()){return;}
         for(var at=0;at<result.findings.length;at++){
@@ -8867,7 +8913,8 @@ SOFTWARE.
         status.textContent='Exame do contexto concluído. As possibilidades lexicais e os limites permanecem visíveis.';
       }catch(error){el('p',header,'ptbr-context-limit','Esta lente não concluiu o exame: '+error.message);status.textContent='Não foi possível concluir este contexto.';}
       busy=false;cancel.hidden=true;
-    },0);
+    }
+    debounce=root.setTimeout(step,0);
   }
   function run(selected) {
     if(composing||panel.hidden||!selected||!own.call(labels,selected)){return;}

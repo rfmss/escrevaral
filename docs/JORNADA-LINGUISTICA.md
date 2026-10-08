@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 08/10/2026. Base do produto auditada: `3207156e6dad6868e74ef8265c6f1012b978e642`.
+Atualizado em 08/10/2026. Base do produto auditada: `82fa01b4b5edaaa4f732cb0d969775e2d4986fdd`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.60 / A03-contexto: cada ocorrência reservada oferece exame explícito da sua linha, com possibilidades lexicais separadas da leitura contextual, apoios e seleção exata no original. Fronteiras cortadas, proteção desconhecida e teto de saída geram limites explícitos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.61 / A03-fronteiras: o exame explícito alcança linhas depois das primeiras 8.000 unidades. As proteções anteriores são conferidas em fatias de até2.000 unidades, com progresso, cancelamento e estado limitado; só depois executa a lente no contexto escolhido. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,7 +16,7 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A03-fronteiras: permitir contexto protegido em regiões além das primeiras 8.000 unidades por estado de proteção limitado e invalidável, sem varrer o livro por pausa nem elevar tetos; manter abstenção até haver fronteira comprovada. Reusar o percurso A03-contexto já entregue.
+- A03-linhas-longas: permitir que a conferência explícita atravesse linhas anteriores maiores que a fatia, conservando delimitadores partidos e limites de memória/trabalho. Não ampliar a janela contextual nem antecipar análise por pausa. Depois, tratar ocorrência além do teto100 de resultados sem mudar silenciosamente o alvo.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
 - Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
@@ -160,9 +160,9 @@ Uma entrada simples para estudar o próprio texto.
 - Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.
 - Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar.
 
-**Condição de conclusão:** Percurso reserva → comando → contexto da linha → explicação → seleção entregue no recorte: linha inteira dentro da janela de 2.000 unidades, proteção verificável no prefixo de até 8.000 unidades. Mantidos preparação 700ms/400 visitas/24 ocorrências e uma lente por escolha. A03 geral segue parcial.
+**Condição de conclusão:** A reserva continua700ms/2000/400/24. A03-contexto integrado; A03-fronteiras acrescenta prova de proteção distante sob comando, com um estado transitório, fatias de até2.000 unidades, invalidação e teto total de200mil do exame existente. Linhas anteriores extensas ou fronteiras não cobertas produzem abstenção. A03 geral parcial.
 
-Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`, `docs/jornada/ENTREGA-V6-57.md`, `docs/jornada/ENTREGA-V6-58.md`, `docs/jornada/ENTREGA-V6-59.md`, `docs/jornada/ENTREGA-V6-60.md`.
+Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`, `docs/jornada/ENTREGA-V6-57.md`, `docs/jornada/ENTREGA-V6-58.md`, `docs/jornada/ENTREGA-V6-59.md`, `docs/jornada/ENTREGA-V6-60.md`, `docs/jornada/ENTREGA-V6-61.md`.
 
 ### P10 — Integrar e comprovar cada módulo
 
