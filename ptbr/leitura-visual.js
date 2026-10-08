@@ -160,7 +160,13 @@
     if (D.fonts && D.fonts.ready) { D.fonts.ready.then(resize); }
     var first = 0;
     for (var i = 0; i < arr.length; i++) { if (arr[i].analysisStatus === 'contextual') { first = i; break; } }
-    if (arr.length) { select(first, false); }
+    if(options.initialTarget){
+      first=-1;
+      for(var targetAt=0;targetAt<arr.length;targetAt++){
+        if(arr[targetAt].start<=options.initialTarget.start&&arr[targetAt].end>=options.initialTarget.end){first=targetAt;break;}
+      }
+    }
+    if (first>=0&&arr.length) { select(first, false); }
     return { select: select, destroy: function () { dead = true; root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } } };
   };
 }(typeof window !== 'undefined' ? window : this));

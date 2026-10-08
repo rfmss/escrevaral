@@ -1,12 +1,12 @@
 {
-  "version": 48,
-  "updated": "07/10/2026",
-  "baseline": "8521fef6f51f48ba620379c9f8f3da03d507797d",
+  "version": 49,
+  "updated": "08/10/2026",
+  "baseline": "3207156e6dad6868e74ef8265c6f1012b978e642",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.59: reserva filtrável por classes possíveis, contagens locais e retorno a todas as ocorrências. Homógrafos preservados; filtro sem novas consultas, análises ou aumento dos tetos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.60 / A03-contexto: cada ocorrência reservada oferece exame explícito da sua linha, com possibilidades lexicais separadas da leitura contextual, apoios e seleção exata no original. Fronteiras cortadas, proteção desconhecida e teto de saída geram limites explícitos. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "A03-contexto: delimitar e conectar pedido explícito de classes em contexto ao trecho reservado, com identidade, fronteiras protegidas e offsets originais. Evitar examinar outra região da folha sem indicação; manter abstenções e limites existentes.",
+    "A03-fronteiras: permitir contexto protegido em regiões além das primeiras 8.000 unidades por estado de proteção limitado e invalidável, sem varrer o livro por pausa nem elevar tetos; manter abstenção até haver fronteira comprovada. Reusar o percurso A03-contexto já entregue.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -271,7 +271,7 @@
         "Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.",
         "Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar."
       ],
-      "done": "Filtro lexical entregue sobre a reserva de até24 ocorrências: classes presentes/contagens locais, Todas, ambiguidade preservada e seleção exata. Preparação contextual geral e pertinência da folha continuam parciais.",
+      "done": "Percurso reserva → comando → contexto da linha → explicação → seleção entregue no recorte: linha inteira dentro da janela de 2.000 unidades, proteção verificável no prefixo de até 8.000 unidades. Mantidos preparação 700ms/400 visitas/24 ocorrências e uma lente por escolha. A03 geral segue parcial.",
       "evidence": [
         "docs/jornada/CONTRATO-ANALISE.md",
         "ptbr/CONTEXTO-1.md",
@@ -288,7 +288,8 @@
         "docs/jornada/ENTREGA-V6-56.md",
         "docs/jornada/ENTREGA-V6-57.md",
         "docs/jornada/ENTREGA-V6-58.md",
-        "docs/jornada/ENTREGA-V6-59.md"
+        "docs/jornada/ENTREGA-V6-59.md",
+        "docs/jornada/ENTREGA-V6-60.md"
       ]
     },
     {
@@ -711,7 +712,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "A03-contexto: delimitar e conectar pedido explícito de classes em contexto ao trecho reservado, com identidade, fronteiras protegidas e offsets originais. Evitar examinar outra região da folha sem indicação; manter abstenções e limites existentes."
+    "nextDeliverable": "A03-fronteiras: permitir contexto protegido em regiões além das primeiras 8.000 unidades por estado de proteção limitado e invalidável, sem varrer o livro por pausa nem elevar tetos; manter abstenção até haver fronteira comprovada. Reusar o percurso A03-contexto já entregue."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -725,7 +726,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Testes dirigidos: categorias presentes, contagens por ocorrência, canto simultaneamente substantivo/verbo, repetidas distintas, retorno a Todas, mesmos nós, zero lentes novas, seleção original e invalidação de botão antigo. Preparação/reserva real e painel passaram; ES5 e build reproduzível. Cenário do navegador atualizado para os filtros; regressão completa e publicação conferidas por commit.",
+    "verification": "Passaram node tests/preparacao-contexto.cjs, node tests/preparacao.cjs, node tests/preparacao-reserva.cjs, node ptbr/teste-painel.js e npm run build:check. O novo teste usa cofre/lente/contrato reais e DOM simulado: ocorrência após 5.000 unidades, duas leituras de canto, apoios rebased, UTF-16/NFD/emoji, proteções iniciadas antes da janela, cortes da linha, ambiguidade, teto100 e invalidação em edição, IME, voltar, cancelar, ocultar, desligar, trocar folha e mudar revisão. Acorn ES5 nos cinco módulos de produção alterados. Regressão integral fica para o CI; sucesso de CI/Pages deve ser conferido no SHA correspondente.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -743,5 +744,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-59.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-60.json"
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 4,
-  "updated": "2026-10-07",
+  "updated": "2026-10-08",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -162,9 +162,10 @@
             "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
             "docs/jornada/ENTREGA-V6-57.md",
             "docs/jornada/ENTREGA-V6-58.md",
-            "docs/jornada/ENTREGA-V6-59.md"
+            "docs/jornada/ENTREGA-V6-59.md",
+            "docs/jornada/ENTREGA-V6-60.md"
           ],
-          "progress": "Filtro lexical entregue sobre a reserva de até24 ocorrências: classes presentes/contagens locais, Todas, ambiguidade preservada e seleção exata. Preparação contextual geral e pertinência da folha continuam parciais."
+          "progress": "Percurso reserva → comando → contexto da linha → explicação → seleção entregue no recorte: linha inteira dentro da janela de 2.000 unidades, proteção verificável no prefixo de até 8.000 unidades. Mantidos preparação 700ms/400 visitas/24 ocorrências e uma lente por escolha. A03 geral segue parcial."
         }
       ]
     },
@@ -351,12 +352,12 @@
   ],
   "next": "A03",
   "lastDelivery": {
-    "version": "6.59.0",
+    "version": "6.60.0",
     "completed": [],
     "baselineDone": 12,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-59.md",
-    "record": "docs/jornada/entregas/v6-59.json"
+    "evidence": "docs/jornada/ENTREGA-V6-60.md",
+    "record": "docs/jornada/entregas/v6-60.json"
   },
   "scopeChanges": [
     {

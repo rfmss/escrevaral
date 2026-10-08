@@ -58,6 +58,14 @@ function setup(initial, dismissed, realEngine) {
     E={};Object.keys(realEngine).forEach(function(k){E[k]=realEngine[k];});E.ptbrPanelChoices=choices;
     E.createVault=function(){var v=realEngine.createVault.apply(realEngine,arguments),analyze=v.analyze;v.analyze=function(lens,text){calls.push(lens);return analyze.call(v,lens,text);};return v;};
   }
+  var record=realEngine&&E.freshDocument?E.freshDocument():null;
+  if(record){
+    record.text=initial;
+    E.ptbrPanelDocument=function(){return record.noteId||record.id;};
+    E.ptbrPanelRevision=function(){return record.id+'|'+record.revision;};
+    E.ptbrPanelRequest=function(snapshot,start,end){return E.analysisContract.request(record,snapshot,start,end);};
+    E.ptbrPanelCurrent=function(request){return E.analysisContract.current(request,record,manuscript.value);};
+  }
   var window = { document: document, Escr: E,
     setTimeout: function (fn, delay) { var timer = { id: ++next, fn: fn, delay: delay, cancelled: false }; timers.push(timer); return timer.id; },
     clearTimeout: function (id) { timers.forEach(function (timer) { if (timer.id === id) { timer.cancelled = true; } }); }
@@ -71,7 +79,7 @@ function setup(initial, dismissed, realEngine) {
   var board = panel.childNodes[0];
   function child(className) { return board.childNodes.filter(function (n) { return n.className === className; })[0]; }
   return {
-    document:document, reset: E.ptbrPanelReset, board: board, panel: panel, manuscript: manuscript, calls: calls, action: child('ptbr-action'),
+    record:record,engine:E,document:document, reset: E.ptbrPanelReset, board: board, panel: panel, manuscript: manuscript, calls: calls, action: child('ptbr-action'),
     back: child('ptbr-back'), goals: child('ptbr-goals'), results: child('ptbr-results'), wheel: child('ptbr-wheel'),
     flush: function (cap) {
       var n = 0, timer;

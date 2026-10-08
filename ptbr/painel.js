@@ -143,7 +143,7 @@
   if(E.createPreparation&&E.createSignalTriage){preparation=E.createPreparation(E,{
     setTimeout:function(fn,ms){return root.setTimeout(fn,ms);},clearTimeout:function(id){root.clearTimeout(id);},
     active:function(){return !panel.hidden&&!D.hidden&&!composing&&!busy&&(screen==='home'||screen==='group')&&!!manuscript.value;},
-    read:function(limit){var s=manuscript.value,caret=typeof manuscript.selectionStart==='number'?manuscript.selectionStart:0,start=Math.max(0,Math.min(caret,s.length)-1000);return{head:s.slice(start,start+limit),start:start,anchor:caret,leftContinues:start>0&&/[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f0-9'’\-]/.test(s.charAt(start-1)),length:s.length,document:documentKey()};},
+    read:function(limit){var s=manuscript.value,caret=typeof manuscript.selectionStart==='number'?manuscript.selectionStart:0,start=Math.max(0,Math.min(caret,s.length)-1000);return{head:s.slice(start,start+limit),start:start,anchor:caret,leftContinues:start>0&&/[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f0-9'’\-]/.test(s.charAt(start-1)),length:s.length,document:documentKey(),revision:E.ptbrPanelRevision?E.ptbrPanelRevision():null};},
     deliver:function(result){paintPreparation(result);if(!result){prepStatus.textContent='Preparação indisponível. Você pode escolher qualquer análise.';}}
   });}
   function showScreen(next,group,focus){
@@ -166,10 +166,10 @@
   }
   reservedButton.addEventListener('click',function(){
     if(!prepared||!prepared.occurrences.length||panel.hidden){return;}
-    var reservation=prepared;clearResults();showScreen('reserved',1,true);
+    var reservation=prepared,reservationEpoch=epoch;clearResults();showScreen('reserved',1,true);
     el('p',results,'ptbr-status','Estas palavras estão no acervo. As classes abaixo são possibilidades do léxico, inclusive em citações; não classificam a sua frase.');
     if(reservation.lexicalLimited){el('p',results,'ptbr-status','Limite de preparação atingido. Há outras palavras que ainda não foram verificadas.');}
-    function current(item){return prepared===reservation&&documentKey()===reservation.document&&manuscript.value.slice(item.start,item.end)===item.snippet;}
+    function current(item){return epoch===reservationEpoch&&!panel.hidden&&!D.hidden&&!composing&&screen==='reserved'&&prepared===reservation&&documentKey()===reservation.document&&(!E.ptbrPanelRevision||E.ptbrPanelRevision()===reservation.revision)&&manuscript.value.slice(item.start,item.end)===item.snippet;}
     var filterBox=el('div',results,'ptbr-reserve-filter'),filterLabel=el('label',filterBox,'ptbr-status','Filtrar por classe possível no léxico');
     filterLabel.setAttribute('for','ptbr-reserve-class');
     var filter=el('select',filterBox,'');filter.id='ptbr-reserve-class';
@@ -185,7 +185,7 @@
     for(ci=0;ci<classes.length;ci++){cls=classes[ci];var option=el('option',filter,'',cls+' ('+counts['$'+cls]+')');option.value=cls;}
     el('p',filterBox,'ptbr-status','Contagens apenas desta reserva. Uma palavra pode aparecer em mais de uma classe; a frase ainda precisa ser examinada.');
     filter.addEventListener('change',function(){
-      if(prepared!==reservation||documentKey()!==reservation.document){return;}
+      if(!reservation.occurrences.length||!current(reservation.occurrences[0])){return;}
       var visible=0;
       for(var at=0;at<rows.length;at++){
         rows[at].hidden=!!filter.value&&reservation.occurrences[at].classes.indexOf(filter.value)===-1;
@@ -203,6 +203,10 @@
           var back=D.getElementById('back-writing');if(back){back.click();}manuscript.focus();
           if(!E.transfer.selectRange(manuscript,item.start,item.end)){status.textContent='Selecione a palavra manualmente no manuscrito.';}
         },false);
+        if(E.analysisContract&&E.ptbrPanelRequest&&E.ptbrPanelCurrent){
+          var examine=el('button',row,'ptbr-reserve-examine','Examinar este contexto');examine.type='button';
+          examine.addEventListener('click',function(){if(current(item)){runReserved(reservation,item);}},false);
+        }
         if(lexicalInput){var consult=el('button',row,'','Consultar palavra');consult.type='button';consult.addEventListener('click',function(){
           if(!current(item)){E.ptbrPanelReset();return;}lexicalInput.value=item.snippet;consultLexeme();
         },false);}
@@ -239,15 +243,17 @@
     note.textContent='A análise tem cobertura parcial. Ausência de apontamentos não garante ausência de problemas.';
 
   }
-  function resultCard(lens, result, snapshot) {
+  function resultCard(lens, result, snapshot, request, target) {
     var card=el('section',results,'ptbr-outcome'), h=el('h3',card,'',labels[lens]||lens);
-    var documentAtResult=documentKey();
+    var documentAtResult=documentKey(),resultEpoch=epoch;
+    function currentResult(){return epoch===resultEpoch&&!panel.hidden&&!D.hidden&&!composing&&manuscript.value===snapshot&&documentKey()===documentAtResult&&(!request||E.ptbrPanelCurrent(request));}
     var arr=result.findings||[],i,f,entry,b,detail,ignored=E.ptbrPanelChoices?E.ptbrPanelChoices():[],visible=0;
-    for(i=0;i<arr.length;i++){if(ignored.indexOf(arr[i].id+'|'+arr[i].snippet)===-1){visible+=1;}}
+    function suppressed(f){return ignored.indexOf(f.id+'|'+f.snippet)!==-1&&!(target&&f.start<=target.start&&f.end>=target.end);}
+    for(i=0;i<arr.length;i++){if(!suppressed(arr[i])){visible++;}}
     var accepted=[],observations=[],stash=el('div',card,'ptbr-observation-list');
     var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'observação nova':'observações novas')+' neste recorte.':'Nenhuma observação nova neste recorte.');
     for(i=0;i<arr.length&&i<maxFindings;i++){
-      f=arr[i];if(ignored.indexOf(f.id+'|'+f.snippet)!==-1){continue;}
+      f=arr[i];if(suppressed(f)){continue;}
       entry=el('div',stash,'ptbr-observation');accepted.push(f);observations.push(entry);
       el('p',entry,'',f.message);
       el('blockquote',entry,'',f.snippet);
@@ -269,19 +275,19 @@
       },false);}(detail,b));
       b=el('button',entry,'','Ver no texto');b.type='button';
       (function(start,end,textAtRun){b.addEventListener('click',function(){
-        if(manuscript.value!==textAtRun||documentKey()!==documentAtResult){refresh(true);return;}
+        if(!currentResult()){return;}
         var back=D.getElementById('back-writing');if(back){back.click();}
         manuscript.focus();
         if(!E.transfer.selectRange(manuscript,start,end)){
           var notice=D.getElementById('save-status')||status;notice.textContent='Selecione o trecho manualmente no manuscrito.';
         }
       },false);}(f.start,f.end,snapshot));
-      if(E.ptbrPanelKeep){
+      if(E.ptbrPanelKeep&&!request){
         b=el('button',entry,'','Manter minha escolha');b.type='button';
         (function(finding,row,button){button.addEventListener('click',function(){
-          if(manuscript.value!==snapshot||documentKey()!==documentAtResult){refresh(true);return;}
+          if(!currentResult()){return;}
           if(E.ptbrPanelKeep(finding,snapshot,documentAtResult)){
-            clearResults();resultCard(lens,result,snapshot);status.textContent='Escolha mantida nesta folha.';
+            clearResults();resultCard(lens,result,snapshot,request,target);status.textContent='Escolha mantida nesta folha.';
             var reset=D.getElementById('reset-dismissed');if(reset){reset.focus();}
           }else{status.textContent='Não foi possível guardar a escolha. Tente novamente.';}
         },false);}(f,entry,b));
@@ -290,7 +296,7 @@
     if(E.renderReadingMap){
       stash.hidden=true;
       readingView=E.renderReadingMap(card,{lens:lens,snapshot:snapshot,findings:accepted,
-        isCurrent:function(){return !panel.hidden&&manuscript.value===snapshot&&documentKey()===documentAtResult;},
+        initialTarget:target,isCurrent:currentResult,
         onSelect:function(finding,target,user){
           for(var at=0;at<observations.length;at++){stash.appendChild(observations[at]);}
           target.textContent='';var at=accepted.indexOf(finding);
@@ -348,6 +354,41 @@
     status.textContent='Consulta local concluída: '+(result.morphology||[]).length+' leituras morfológicas e '+result.total+' sentidos consultados.';
     note.textContent='Consulta offline. Nenhuma palavra do manuscrito foi alterada.';
   }
+  function runReserved(reservation,item){
+    if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
+    var snapshot=manuscript.value,scope=E.analysisContract.reservedScope(snapshot,reservation.scope,item),request=null;
+    E.ptbrPanelReset();lastLens='morfologia';showScreen('result',1,true);action.hidden=true;
+    var token=epoch,documentAtRun=documentKey(),revisionAtRun=E.ptbrPanelRevision?E.ptbrPanelRevision():null;
+    function current(){return token===epoch&&!panel.hidden&&!D.hidden&&!composing&&manuscript.value===snapshot&&documentKey()===documentAtRun&&(!E.ptbrPanelRevision||E.ptbrPanelRevision()===revisionAtRun)&&(!request||E.ptbrPanelCurrent(request));}
+    var header=el('section',results,'ptbr-outcome');
+    el('h3',header,'','Ocorrência escolhida: '+item.snippet);
+    el('p',header,'','Possibilidades no léxico: '+item.classes.join(', ')+'. Elas não são uma decisão contextual.');
+    var locate=el('button',header,'','Ver ocorrência no texto');locate.type='button';
+    locate.addEventListener('click',function(){
+      if(!current()){return;}
+      var back=D.getElementById('back-writing');if(back){back.click();}manuscript.focus();
+      if(!E.transfer.selectRange(manuscript,item.start,item.end)){status.textContent='Selecione a ocorrência manualmente no manuscrito.';}
+    },false);
+    if(scope.reason){el('p',header,'ptbr-context-limit',scope.reason);status.textContent='Contexto não verificado. Nenhuma lente foi executada.';return;}
+    try{request=E.ptbrPanelRequest(snapshot,scope.start,scope.end);}catch(error){status.textContent='O pedido não pôde ser vinculado à folha atual.';return;}
+    el('p',header,'ptbr-context-scope','Contexto escolhido: posições '+(scope.start+1)+' a '+scope.end+' do original. Somente esta linha será examinada.');
+    el('blockquote',header,'ptbr-context-original',snapshot.slice(scope.start,scope.end));
+    busy=true;cancel.hidden=false;status.textContent='Examinando as classes neste contexto…';
+    root.setTimeout(function(){
+      if(!current()){if(token===epoch){E.ptbrPanelReset();status.textContent='O pedido perdeu a validade. Abra as opções para preparar novamente.';}return;}
+      try{
+        var result=E.analysisContract.analyze(E.createVault(E.knowledge),'morfologia',request),found=false;
+        if(!current()){return;}
+        for(var at=0;at<result.findings.length;at++){
+          var f=result.findings[at];if(f.start<=item.start&&f.end>=item.end){found=true;break;}
+        }
+        resultCard('morfologia',result,snapshot,request,item);
+        if(!found){el('p',header,'ptbr-context-limit',result.limited?'A ocorrência escolhida ficou além do limite de resultados desta lente. Sua classe contextual não foi verificada.':'A lente não devolveu leitura para a ocorrência escolhida. Isso não significa erro no texto.');}
+        status.textContent='Exame do contexto concluído. As possibilidades lexicais e os limites permanecem visíveis.';
+      }catch(error){el('p',header,'ptbr-context-limit','Esta lente não concluiu o exame: '+error.message);status.textContent='Não foi possível concluir este contexto.';}
+      busy=false;cancel.hidden=true;
+    },0);
+  }
   function run(selected) {
     if(composing||panel.hidden||!selected||!own.call(labels,selected)){return;}
     if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
@@ -398,7 +439,7 @@
   for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);},false);}}
   D.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.keyCode===13){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);}},false);
   E.ptbrPanelReset=function(){if(preparation){preparation.cancel(true);}paintPreparation(null);epoch++;busy=false;draft=null;root.clearTimeout(debounce);clearResults();action.disabled=true;cancel.hidden=true;};
-  D.addEventListener('visibilitychange',function(){if(preparation){if(D.hidden){preparation.cancel(true);paintPreparation(null);}else{preparation.request();}}},false);
+  D.addEventListener('visibilitychange',function(){if(D.hidden){E.ptbrPanelReset();}else if(preparation){preparation.request();}},false);
   E.ptbrPanelFocus=function(){title.focus();};
   /* Reutiliza o painel nativo, mantendo os botões originais se a inicialização falhar. */
   panel.setAttribute('data-ptbr-dashboard','true');

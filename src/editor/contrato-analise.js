@@ -32,5 +32,23 @@
     result.dataVersions = { base: E.knowledge.version, maturation: E.maturationData.version, studio: E.studioData.version };
     return result;
   }
-  E.analysisContract = { version: 1, request: request, current: current, analyze: analyze };
+  /* Pedido explícito da reserva. Nunca tratar a borda da janela como frase.
+   * A linha inteira deve caber na janela. Proteções herdadas exigem prefixo
+   * conhecido; 8.000 é o teto já existente da lente, não trabalho por pausa. */
+  function reservedScope(text, scope, item) {
+    var start=item.start,end=item.end,part,clean;
+    if(start<scope.start||end>scope.end||text.slice(start,end)!==item.snippet){return {reason:'A ocorrência não pertence mais a este trecho.'};}
+    while(start>scope.start&&!/[\r\n]/.test(text.charAt(start-1))){start--;}
+    while(end<scope.end&&!/[\r\n]/.test(text.charAt(end))){end++;}
+    if(start>0&&!/[\r\n]/.test(text.charAt(start-1))||end<text.length&&!/[\r\n]/.test(text.charAt(end))){
+      return {reason:'Contexto cortado pela janela de preparação. A linha inteira precisa caber no trecho reservado; a classe permanece em aberto.'};
+    }
+    if(end-start>2000||end>8000){return {reason:'Contexto não verificado: não foi possível conferir as proteções anteriores dentro do limite de 8.000 caracteres. As possibilidades lexicais continuam disponíveis.'};}
+    part=text.slice(start,end);clean=E.protectedText(text.slice(0,end)).slice(start,end);
+    if(clean.slice(item.start-start,item.end-start)!==item.snippet||clean!==E.protectedText(part)){
+      return {reason:'Trecho protegido ou proteção iniciada antes desta linha (citação, código ou endereço). Nenhuma classe contextual foi atribuída.'};
+    }
+    return {start:start,end:end};
+  }
+  E.analysisContract = { version: 1, request: request, current: current, analyze: analyze, reservedScope: reservedScope };
 }(typeof window !== 'undefined' ? window : this));

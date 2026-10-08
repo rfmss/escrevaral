@@ -859,6 +859,9 @@
   function findingKey(f) { return f.id + '|' + f.snippet; }
   /* A revisão progressiva respeita as escolhas já mantidas no caderno. */
   E.ptbrPanelDocument=function(){return doc.noteId||doc.id;};
+  E.ptbrPanelRevision=function(){return doc.id+'|'+doc.revision;};
+  E.ptbrPanelRequest=function(snapshot,start,end){return E.analysisContract.request(doc,snapshot,start,end);};
+  E.ptbrPanelCurrent=function(request){return E.analysisContract.current(request,doc,manuscript.value);};
   E.ptbrPanelKeep=function(f,source,key){
     if(source!==manuscript.value||key!==(doc.noteId||doc.id)){return false;}
     var choice=findingKey(f),added=doc.dismissed.indexOf(choice)<0,wasDirty=dirty;if(added){doc.dismissed.push(choice);dirty=true;}

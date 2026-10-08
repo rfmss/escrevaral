@@ -2,6 +2,10 @@
 
 Decisão recebida de Rafael por intermédio da frente ASTRA 2 em 27/09/2026. Base conferida: main `019e9105b2730476644bfb9c6644f9be2738ea11`, produto v6-28. **Direção registrada; contratos abaixo são proposta para a prova isolada, não API publicada.** O cofre continua síncrono; a primeira preparação limitada do painel foi integrada na v6.57, conforme seção vigente abaixo.
 
+## Exame contextual da reserva — 08/10/2026, v6.60
+
+[Contrato e evidências A03-contexto](jornada/ENTREGA-V6-60.md): comando por ocorrência, linha inteira dentro da mesma janela, proteção herdada conferida sob pedido até8.000 unidades do original, abstenção explícita além do orçamento. O prefixo só verifica proteção; a lente examina a linha escolhida e recebe offsets originais pelo adaptador. Preparação mantém700ms/2000/400/24, com registro+revisão no cache. Nenhum exame ao abrir/filtrar; A03 geral continua parcial.
+
 ## Filtro da reserva — 07/10/2026, v6.59
 
 A lista solicitada de palavras reconhecidas oferece um seletor rotulado **Filtrar por classe possível no léxico**. Opção inicial Todas as ocorrências; demais opções são somente classes presentes na reserva, com contagem de ocorrências por classe. Repetidas em posições distintas contam separadamente. Uma ocorrência ambígua participa de mais de uma classe e preserva todas as alternativas no cartão; as contagens não são uma partição nem contagem do livro.

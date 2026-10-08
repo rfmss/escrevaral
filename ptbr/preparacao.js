@@ -42,7 +42,7 @@
         timer=null;if(ticket!==generation||!host.active()){return;}
         var input=host.read(limits.snapshotCharacters),result;
         if(!input||typeof input.head!=='string'||input.head.length>limits.snapshotCharacters){host.deliver(null);return;}
-        if(cached&&cached.document===input.document&&cached.head===input.head&&cached.length===input.length&&cached.start===(input.start||0)&&cached.leftContinues===!!input.leftContinues&&cached.anchor===input.anchor){host.deliver(cached.result);return;}
+        if(cached&&cached.document===input.document&&cached.revision===input.revision&&cached.head===input.head&&cached.length===input.length&&cached.start===(input.start||0)&&cached.leftContinues===!!input.leftContinues&&cached.anchor===input.anchor){host.deliver(cached.result);return;}
         try{
           var lexical=reserve(input),start=input.start||0;
           /* Contexto anterior desconhecido: não rodar heurísticas de frase no meio da folha. */
@@ -52,11 +52,11 @@
           }else{result={signals:{},read:Math.min(input.head.length,limits.characters),work:{characters:Math.min(input.head.length,limits.characters),tokens:0}};}
           result={signals:result.signals,signalsVerified:start===0,read:result.read,scope:{start:start,end:start+Math.min(input.head.length,limits.characters)},
             partial:start>0||result.read<input.length||lexical.limited,work:{characters:Math.min(input.head.length,limits.characters),tokens:result.work.tokens+lexical.visited},
-            document:input.document,occurrences:lexical.items,lexicalAvailable:lexical.available,lexicalLimited:lexical.limited};
+            document:input.document,revision:input.revision,occurrences:lexical.items,lexicalAvailable:lexical.available,lexicalLimited:lexical.limited};
 
         }catch(error){cached=null;host.deliver(null);return;}
         if(ticket!==generation||!host.active()){return;}
-        cached={document:input.document,head:input.head,length:input.length,start:input.start||0,leftContinues:!!input.leftContinues,anchor:input.anchor,result:result};host.deliver(result);
+        cached={document:input.document,revision:input.revision,head:input.head,length:input.length,start:input.start||0,leftContinues:!!input.leftContinues,anchor:input.anchor,result:result};host.deliver(result);
       },limits.delay);
     }
     function state(result,lens){
