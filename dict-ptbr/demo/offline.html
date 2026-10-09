@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="pt-BR" manifest="offline.manifest">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dict-ptbr — ensaio offline</title></head>
+<body>
+<h1>dict-ptbr — ensaio de AppCache</h1>
+<p>Fixture café/cafés. Aguarde o cache concluir; depois desconecte e reabra esta URL.</p>
+<form id="lookup"><label for="word">Palavra exata</label>
+<input id="word" name="word" value="café" maxlength="128"><button type="submit">Consultar</button></form>
+<pre id="result" role="status" aria-live="polite">Aguardando teste.</pre>
+<p id="cache-status" role="status">Cache ainda não confirmado.</p>
+<button id="run-test" type="button">Executar prova café</button>
+<textarea id="evidence" rows="10" cols="50" aria-label="Registro copiável do teste" readonly></textarea>
+<noscript>JavaScript precisa estar habilitado para consultar.</noscript>
+<script src="../runtime/dict.js"></script><script src="../dist/manifest.js"></script>
+<script src="demo.js"></script>
+</body></html>
