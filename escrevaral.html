@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261008-scrvrl-fronteiras-v6-61">
+  <meta name="asset-version" content="20261009-scrvrl-linhas-v6-62">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -5313,34 +5313,72 @@ SOFTWARE.
     }
     return {start:start,end:end};
   }
-  /* Um estado e até 2.000 unidades por passo explícito. Nenhum cache do livro.
-   * Usa exatamente a gramática de proteção do cofre, sem classificá-lo.
-   * Fatias terminam em LF real: marcadores não se partem entre passos.
-   * O sentinela impede que $ invente o fechamento de aspas/código inline. */
+  /* Cursor de proteção, não análise linguística. Até 2.000 visitas por passo;
+   * guarda apenas índices/modo. Marcadores podem atravessar qualquer fatia.
+   * A precedência replica protectionPattern: URL antes de email no mesmo início;
+   * email mais à esquerda antes de URL embutida; aspas inline exigem fechamento
+   * antes de LF. Falha inline retoma após o abridor, sem perder marcas internas. */
   function createBoundaryScan(text, end) {
-    var offset=0,closer=null,reason=null;
+    var offset=0,high=0,mode='search',closer=null,inline=false,opener=0,urlAt=-1,reason=null;
+    var totalVisits=0,stepVisits=0;
     if(typeof text!=='string'||typeof end!=='number'||!isFinite(end)||end%1||end<0||end>text.length||end>200000){throw new Error('Fronteira inválida para conferência.');}
     if(end>0&&text.charAt(end-1)!=='\n'){reason='A fronteira anterior usa uma quebra de linha ainda não coberta por esta conferência. Contexto não verificado.';}
-    function state(){return {done:!!reason||offset===end,offset:offset,closer:closer,reason:reason};}
+    function state(){return {done:!!reason||offset===end,offset:high,closer:mode==='span'?closer:null,reason:reason,work:stepVisits,totalVisits:totalVisits};}
+    function urlSize(at){
+      var look=text.slice(at,Math.min(end,at+8));
+      return look.slice(0,8)==='https://'?8:look.slice(0,7)==='http://'?7:look.slice(0,4)==='www.'?4:0;
+    }
+    function move(n){offset+=n;if(offset>high){high=offset;}}
     function step(){
-      if(reason||offset===end){return state();}
-      var stop=Math.min(end,offset+2000),part=text.slice(offset,stop),last,from=0,at,re,m,body,close,scan;
-      if(stop<end){
-        last=part.lastIndexOf('\n');
-        if(last<0){reason='Uma linha anterior ultrapassa a fatia de 2.000 caracteres. Sua proteção ainda não foi verificada; nenhuma classe contextual foi atribuída.';return state();}
-        part=part.slice(0,last+1);stop=offset+part.length;
+      stepVisits=0;
+      while(!reason&&offset<end&&stepVisits<2000){
+        var ch=text.charAt(offset),size;
+        stepVisits++;totalVisits++;
+        if(mode==='span'){
+          if(ch===closer.charAt(0)&&text.slice(offset,Math.min(end,offset+closer.length))===closer){
+            /* Não avançar mais posições que o orçamento restante deste passo. */
+            if(stepVisits+closer.length-1>2000){break;}
+            stepVisits+=closer.length-1;totalVisits+=closer.length-1;move(closer.length);mode='search';closer=null;continue;
+          }
+          if(inline&&ch==='\n'){
+            /* O regex integral não mascara uma aspa ou marca de código inline sem fechamento
+             * antes de LF. Reexaminar o interior recupera “/``` antes ignorados.
+             * Sem o próprio fechamento nesse intervalo, só o outro tipo inline
+             * pode causar nova retomada: não há pilha de tamanho do manuscrito. */
+            offset=opener+1;mode='search';closer=null;continue;
+          }
+          move(1);continue;
+        }
+        if(mode==='url'){
+          if(/\s/.test(ch)){mode='search';}else{move(1);}continue;
+        }
+        if(mode==='email'){
+          if(/[\w.-]/.test(ch)){move(1);}else{mode='search';}continue;
+        }
+        if(mode==='word'){
+          if(/[\w.+-]/.test(ch)){
+            if(urlAt<0&&(ch==='h'||ch==='w')&&urlSize(offset)){urlAt=offset;}move(1);continue;
+          }
+          if(ch==='@'&&offset+1<end&&/[\w.-]/.test(text.charAt(offset+1))){mode='email';move(1);continue;}
+          /* Sem email, a primeira URL possível no interior volta a competir. */
+          if(urlAt>=0){offset=urlAt;}mode='search';urlAt=-1;continue;
+        }
+        if(ch==='`'||ch==='"'||ch==='“'||ch==='‘'||ch==='«'){
+          size=ch==='`'&&text.slice(offset,Math.min(end,offset+3))==='```'?3:1;
+          if(stepVisits+size-1>2000){break;}
+          closer=size===3?'```':ch==='“'?'”':ch==='‘'?'’':ch==='«'?'»':ch;
+          inline=size===1&&(ch==='`'||ch==='"');opener=offset;mode='span';
+          stepVisits+=size-1;totalVisits+=size-1;move(size);continue;
+        }
+        size=ch==='h'||ch==='w'?urlSize(offset):0;
+        if(size){
+          if(stepVisits+size-1>2000){break;}
+          stepVisits+=size-1;totalVisits+=size-1;move(size);mode='url';continue;
+        }
+        if(/[\w.+-]/.test(ch)){mode='word';urlAt=-1;move(1);continue;}
+        move(1);
       }
-      if(closer){
-        at=part.indexOf(closer);
-        if(at<0){offset=stop;return state();}
-        from=at+closer.length;closer=null;
-      }
-      scan=part+'\u0000';re=E.protectionPattern();re.lastIndex=from;
-      while((m=re.exec(scan))){
-        body=m[0];close=body.slice(0,3)==='```'?'```':body.charAt(0)==='“'?'”':body.charAt(0)==='‘'?'’':body.charAt(0)==='«'?'»':null;
-        if(close&&(body.length<close.length*2||body.slice(-close.length)!==close)){closer=close;break;}
-      }
-      offset=stop;return state();
+      return state();
     }
     return {step:step};
   }

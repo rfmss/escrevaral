@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "version": "20261008-scrvrl-fronteiras-v6-61",
+  "version": "20261009-scrvrl-linhas-v6-62",
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20261008-scrvrl-fronteiras-v6-61/cofre.edcdc57ded3a6725.js",
+      "path": "assets/20261009-scrvrl-linhas-v6-62/cofre.edcdc57ded3a6725.js",
       "sha256": "edcdc57ded3a67258796d87b47d481d2b46c04c0c0acdc574bbcb6d697025294",
       "bytes": 692547
     },
     {
       "id": "app",
-      "path": "assets/20261008-scrvrl-fronteiras-v6-61/app.73df650fe9a87073.js",
-      "sha256": "73df650fe9a87073dcca7555181a5a2e0c9d863d47d8e51054b6009b3678a8b4",
-      "bytes": 317055
+      "path": "assets/20261009-scrvrl-linhas-v6-62/app.6b05e0efb4087220.js",
+      "sha256": "6b05e0efb40872204db58730cbd9b64faaf5ab36166685df754a17b2b56c89cb",
+      "bytes": 319000
     },
     {
       "id": "styles",
-      "path": "assets/20261008-scrvrl-fronteiras-v6-61/styles.79d88716e7951271.css",
+      "path": "assets/20261009-scrvrl-linhas-v6-62/styles.79d88716e7951271.css",
       "sha256": "79d88716e79512714f35c93d75498a0f1f336e4af8be2cfdb941c8e875ca0352",
       "bytes": 361944
     }

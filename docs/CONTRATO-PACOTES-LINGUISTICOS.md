@@ -2,6 +2,10 @@
 
 Decisão recebida de Rafael por intermédio da frente ASTRA 2 em 27/09/2026. Base conferida: main `019e9105b2730476644bfb9c6644f9be2738ea11`, produto v6-28. **Direção registrada; contratos abaixo são proposta para a prova isolada, não API publicada.** O cofre continua síncrono; a primeira preparação limitada do painel foi integrada na v6.57, conforme seção vigente abaixo.
 
+## Linhas anteriores extensas — 09/10/2026, v6.62
+
+[A03-linhas-longas](jornada/ENTREGA-V6-62.md) retira a exigência de caber uma linha anterior inteira na fatia: cursor com estado fixo, até2.000 visitas por passo e antecipação limitada a8 unidades para marcadores. URL/email, citações e inline conservam precedência e atravessam passos; retomadas de inline inválido não perdem proteção interna. A linha alvo ainda precisa caber inteira na reserva; preparação e teto200mil permanecem. A03 geral parcial; próximo: alvo além do teto100 de apresentação.
+
 ## Proteções distantes sob comando — 08/10/2026, v6.61
 
 [A03-fronteiras](jornada/ENTREGA-V6-61.md) amplia o pedido de contexto além de8.000 unidades: prova de proteção por fatias de até2.000, um estado transitório e cancelamento a cada passo, somente após comando. O padrão é compartilhado com protectedText. Linhas anteriores maiores que a fatia sem LF e fronteiras somente CR continuam com abstenção explícita. Preparação700ms/2000/400/24 e limite200mil do exame preservados; não cria cache do livro. A03 geral permanece parcial.

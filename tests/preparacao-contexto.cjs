@@ -49,7 +49,6 @@ p.manuscript.setSelectionRange(0,0);stale.click();exact.click();assert.equal(p.m
 for(const [sample,target] of [
   ['x'.repeat(1200)+' eu canto.',1204],
   ['Eu canto '+'x'.repeat(2200),3],
-  ['texto '.repeat(1500)+'\nEu canto.',9004],
   ['“'+prefix+'Eu canto.”',prefix.length+4],
   ['```\n'+prefix+'Eu canto.\n```',prefix.length+7],
   ['“Eu canto.”',4],
@@ -103,5 +102,48 @@ for(const event of ['input','compositionstart','visibilitychange','back']){
   if(event==='visibilitychange'){p.document.hidden=true;p.document.emit(event);}else if(event==='back'){p.back.click();}else{p.manuscript.emit(event);}
   p.flush();assert.deepEqual(p.calls,[],event+' cancela entre fatias');assert.equal(p.manuscript.value,farText);
 }
+// Linhas anteriores longas agora atravessam fatias sem reter a linha.
+const longPlain='texto '.repeat(1500)+'\nEu canto.';
+p=opened(longPlain,longPlain.lastIndexOf('canto'));examine(p,row(p,'canto'));p.flush();
+assert.deepEqual(p.calls,['morfologia']);button(p.results,'Ver ocorrência no texto').click();
+assert.equal(p.manuscript.selectionStart,longPlain.lastIndexOf('canto'));assert.equal(p.manuscript.value,longPlain);
+// Contrato técnico: estado do cursor concorda com a proteção integral existente.
+// Sem executar lentes; esta matriz não é avaliação linguística independente.
+const boundaryFixtures=[
+  'a'.repeat(16000)+'\n',
+  '“'+'a'.repeat(9000)+'”\n',
+  '“'+'a'.repeat(9000)+'\n',
+  '«'+'a'.repeat(9000)+'»\n',
+  '‘'+'a'.repeat(9000)+'\n',
+  '"'+'a'.repeat(3000)+'“'+'b'.repeat(3000)+'"\n',
+  '"'+'a'.repeat(3000)+'“'+'b'.repeat(3000)+'\n',
+  '"'+'a'.repeat(2100)+'`'+'b'.repeat(2100)+'“'+'c'.repeat(2100)+'\n',
+  '`'+'a'.repeat(3000)+'“'+'b'.repeat(3000)+'`\n',
+  'a'.repeat(9000)+'@www.exemplo“\n',
+  'a'.repeat(9000)+'@www.exemplo “fechada”\n',
+  'a'.repeat(4000)+'https://host/“'+'b'.repeat(6000)+'\n',
+  'a'.repeat(4000)+'www.exemplo/“'+'b'.repeat(6000)+'\n',
+  '"aberta\r'+'x'.repeat(4000)+'“\n',
+  '````'+'a'.repeat(9000)+'\n'
+];
+for(let split=1992;split<=2002;split++){
+  boundaryFixtures.push(' '.repeat(split)+'```'+'a'.repeat(4010)+'```\n');
+  boundaryFixtures.push(' '.repeat(split)+'https://host/“'+'a'.repeat(4010)+'\n');
+  boundaryFixtures.push(' '.repeat(split)+'www.host/“'+'a'.repeat(4010)+'\n');
+}
+for(const before of boundaryFixtures){
+  const target='Eu canto.',original=before+target,cursor=E.analysisContract.createBoundaryScan(original,before.length);
+  let state,previous=0,steps=0;
+  do{
+    state=cursor.step();assert(state.work<=2000);assert(state.offset>=previous);assert(state.offset-previous<=2000);
+    previous=state.offset;assert(++steps<200,'progresso finito, inclusive retomada inline');
+  }while(!state.done);
+  assert.equal(state.reason,null);
+  assert.equal(!!state.closer,E.protectedText(original).slice(before.length)!==target,'mesma proteção para prefixo '+before.slice(0,12));
+}
+// Cancelamento com estado mantido no meio de uma linha longa.
+p=opened(longPlain,longPlain.lastIndexOf('canto'));examine(p,row(p,'canto'));
+const longPending=p.timers.find(t=>!t.cancelled);longPending.fn();longPending.cancelled=true;
+p.manuscript.emit('compositionstart');p.flush();assert.deepEqual(p.calls,[]);
 for(const file of ['ptbr/painel.js','ptbr/preparacao.js','ptbr/leitura-visual.js','src/editor/contrato-analise.js','src/editor/controlador.js','packages/cofre/src/protecao-e-ortografia.js'])require('acorn').parse(fs.readFileSync(file,'utf8'),{ecmaVersion:5});
 console.log('CONTEXTO DA RESERVA OK: lente real, origem/apoios UTF-16, repetidas, NFD, fronteiras, proteções herdadas, limites e oito transições de invalidação; ES5.');

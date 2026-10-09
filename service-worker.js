@@ -1,17 +1,17 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-61-fa2e45a5f14f";
-const ASSET_VERSION = "20261008-scrvrl-fronteiras-v6-61";
+const CACHE_NAME = "scrvrl-offline-v6-62-d4355710c61f";
+const ASSET_VERSION = "20261009-scrvrl-linhas-v6-62";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20261008-scrvrl-fronteiras-v6-61/cofre.edcdc57ded3a6725.js",
+    "url": "./assets/20261009-scrvrl-linhas-v6-62/cofre.edcdc57ded3a6725.js",
     "sha256": "edcdc57ded3a67258796d87b47d481d2b46c04c0c0acdc574bbcb6d697025294"
   },
   {
-    "url": "./assets/20261008-scrvrl-fronteiras-v6-61/app.73df650fe9a87073.js",
-    "sha256": "73df650fe9a87073dcca7555181a5a2e0c9d863d47d8e51054b6009b3678a8b4"
+    "url": "./assets/20261009-scrvrl-linhas-v6-62/app.6b05e0efb4087220.js",
+    "sha256": "6b05e0efb40872204db58730cbd9b64faaf5ab36166685df754a17b2b56c89cb"
   },
   {
-    "url": "./assets/20261008-scrvrl-fronteiras-v6-61/styles.79d88716e7951271.css",
+    "url": "./assets/20261009-scrvrl-linhas-v6-62/styles.79d88716e7951271.css",
     "sha256": "79d88716e79512714f35c93d75498a0f1f336e4af8be2cfdb941c8e875ca0352"
   }
 ];
@@ -28,7 +28,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
   const cache=await caches.open(CACHE_NAME);
-  const index=await checkedAsset({url:'./index.html',sha256:'ae56b578533e5e0ffc9750e0221397d93eeb22374573b98fd9006f9fad63e7ab'});
+  const index=await checkedAsset({url:'./index.html',sha256:'4d773da3abe38518e8ad080bf9774f1d9488582d35e1a98ef788849e14052770'});
   if(!index.ok||(await index.clone().text()).indexOf('content="'+ASSET_VERSION+'"')<0)throw new Error('Documento de outra versão');
   await Promise.all(REQUIRED_ASSETS.map(async asset=>cache.put(asset.url,await checkedAsset(asset))));
   await cache.put('./index.html',index.clone());await cache.put('./',index);

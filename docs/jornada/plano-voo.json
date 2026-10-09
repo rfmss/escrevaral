@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 4,
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -164,9 +164,10 @@
             "docs/jornada/ENTREGA-V6-58.md",
             "docs/jornada/ENTREGA-V6-59.md",
             "docs/jornada/ENTREGA-V6-60.md",
-            "docs/jornada/ENTREGA-V6-61.md"
+            "docs/jornada/ENTREGA-V6-61.md",
+            "docs/jornada/ENTREGA-V6-62.md"
           ],
-          "progress": "A reserva continua700ms/2000/400/24. A03-contexto integrado; A03-fronteiras acrescenta prova de proteção distante sob comando, com um estado transitório, fatias de até2.000 unidades, invalidação e teto total de200mil do exame existente. Linhas anteriores extensas ou fronteiras não cobertas produzem abstenção. A03 geral parcial."
+          "progress": "A03-contexto e fronteiras integrados. A prova distante agora usa cursor de proteção com estado fixo, até2.000 visitas por passo e leitura antecipada de até8 unidades por marcador; atravessa linhas anteriores longas e mantém identidade/cancelamento. A linha alvo permanece inteira dentro da reserva2000; preparação700ms/400 visitas/24 ocorrências inalterada. A03 geral continua parcial."
         }
       ]
     },
@@ -353,12 +354,12 @@
   ],
   "next": "A03",
   "lastDelivery": {
-    "version": "6.61.0",
+    "version": "6.62.0",
     "completed": [],
     "baselineDone": 12,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-61.md",
-    "record": "docs/jornada/entregas/v6-61.json"
+    "evidence": "docs/jornada/ENTREGA-V6-62.md",
+    "record": "docs/jornada/entregas/v6-62.json"
   },
   "scopeChanges": [
     {
