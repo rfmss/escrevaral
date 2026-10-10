@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dict-ptbr — Fase 0</title></head>
+<body>
+<h1>dict-ptbr — prova de contrato</h1>
+<p>Somente duas formas de teste: café e cafés. Não é um dicionário de produção.</p>
+<form id="lookup"><label for="word">Palavra exata</label>
+<input id="word" name="word" value="café" maxlength="128"><button type="submit">Consultar</button></form>
+<pre id="result" role="status" aria-live="polite">Aguardando teste.</pre>
+<p id="cache-status">Esta página não instala cache offline.</p>
+<button id="run-test" type="button">Executar prova café</button>
+<textarea id="evidence" rows="10" cols="50" aria-label="Registro copiável do teste" readonly></textarea>
+<p><a href="offline.html">Ensaio separado de AppCache</a></p>
+<noscript>JavaScript precisa estar habilitado para consultar.</noscript>
+<script src="../runtime/dict.js"></script><script src="../dist/manifest.js"></script>
+<script src="demo.js"></script>
+</body></html>
