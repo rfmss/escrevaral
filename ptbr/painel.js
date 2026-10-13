@@ -371,7 +371,7 @@
     },false);
     if(scope.reason){el('p',header,'ptbr-context-limit',scope.reason);status.textContent='Contexto não verificado. Nenhuma lente foi executada.';return;}
     try{request=E.ptbrPanelRequest(snapshot,scope.start,scope.end);}catch(error){status.textContent='O pedido não pôde ser vinculado à folha atual.';return;}
-    el('p',header,'ptbr-context-scope','Contexto escolhido: posições '+(scope.start+1)+' a '+scope.end+' do original. Somente esta linha será examinada.');
+    el('p',header,'ptbr-context-scope','Contexto escolhido: posições '+(scope.start+1)+' a '+scope.end+' do original. A leitura destaca a ocorrência escolhida e seus apoios nesta linha.');
     el('blockquote',header,'ptbr-context-original',snapshot.slice(scope.start,scope.end));
     busy=true;cancel.hidden=false;status.textContent='Examinando as classes neste contexto…';
     var boundaryScan=scope.needsBoundary?E.analysisContract.createBoundaryScan(snapshot,scope.start):null;
@@ -384,7 +384,7 @@
           scope=E.analysisContract.reservedScope(snapshot,reservation.scope,item,boundary);boundaryScan=null;
           if(scope.reason){el('p',header,'ptbr-context-limit',scope.reason);status.textContent='Contexto não verificado. Nenhuma lente foi executada.';busy=false;cancel.hidden=true;return;}
         }
-        var result=E.analysisContract.analyze(E.createVault(E.knowledge),'morfologia',request),found=false;
+        var result=E.analysisContract.analyze(E.createVault(E.knowledge),'morfologia',request,item),found=false;
         if(!current()){return;}
         for(var at=0;at<result.findings.length;at++){
           var f=result.findings[at];if(f.start<=item.start&&f.end>=item.end){found=true;break;}

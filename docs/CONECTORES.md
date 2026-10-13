@@ -20,6 +20,10 @@ A integração existente é `src/editor/contrato-analise.js`:
 
 A análise acrescenta `schema: scrvrl.analysis-result`, `version: 1`, origem, versão do motor e versões dos dados. Desloca ocorrências, apoios e componentes do recorte para posições no original. Não reutilizar resultados de outra revisão só porque trechos coincidem.
 
+## Pedido de ocorrência — v6.63
+
+`E.analysisContract.analyze(vault, 'morfologia', request, {start, end, snippet})` recebe o alvo nas posições do original. O adaptador converte para o recorte já escolhido e rebaseia achados, apoios e `coverageInfo.target` para o original. O cofre rejeita alvo inválido ou fora do pedido. O contexto e as regras permanecem os mesmos; só muda quais achados são materializados. Preservar as guardas de revisão e cancelamento do pedido. O painel usa essa opção somente em **Examinar este contexto**; abrir ou filtrar a reserva não executa a lente.
+
 ## Adicionar uma lente síncrona
 
 Registrar um `id` único e um `analyze(text, limit)` no cofre. A função retorna achados com todos os campos exigidos pelo registro, preservando o texto original. Usar exemplos próprios, positivos, negativos, ambiguidade e abstenção. Definir política/limite explicitamente antes de integrar a lente ao catálogo da interface.

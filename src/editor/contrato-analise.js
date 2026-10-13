@@ -11,8 +11,13 @@
   function current(req, doc, text) {
     return !!req && !!doc && req.source.documentId === (doc.noteId || doc.id) && req.source.recordId === doc.id && req.source.revision === doc.revision && req.text === text;
   }
-  function analyze(vault, lens, req) {
-    var s = req.source, result = vault.analyze(lens, req.text.slice(s.start, s.end));
+  function analyze(vault, lens, req, target) {
+    var s = req.source, localTarget;
+    if (typeof target !== 'undefined') {
+      if (!target || typeof target.start !== 'number' || typeof target.end !== 'number') { throw new Error('Ocorrência inválida para análise.'); }
+      localTarget = {start:target.start-s.start,end:target.end-s.start,snippet:target.snippet};
+    }
+    var result = vault.analyze(lens, req.text.slice(s.start, s.end), localTarget);
     /* O cofre usa posições no trecho; consumidores recebem posições no original. */
     result.findings.forEach(function (f) {
       f.start += s.start; f.end += s.start;
@@ -26,6 +31,9 @@
       if (req.text.slice(f.start, f.end) !== f.snippet) { throw new Error('A posição do resultado não corresponde ao original.'); }
     });
     if (result.coverageInfo) { result.coverageInfo.scope.start += s.start; result.coverageInfo.scope.end += s.start; result.coverageInfo.scope.total = req.text.length; }
+    if (result.coverageInfo && result.coverageInfo.target) {
+      result.coverageInfo.target.start += s.start; result.coverageInfo.target.end += s.start;
+    }
     result.schema = 'scrvrl.analysis-result'; result.version = 1;
     result.source = { documentId: s.documentId, recordId: s.recordId, revision: s.revision, projectLabel: s.projectLabel, start: s.start, end: s.end, draft: s.draft };
     result.engineVersion = '5.0.0';

@@ -79,7 +79,46 @@ p=opened(prefix+'😀 cafe\u0301.',prefix.length+4);examine(p,row(p,'cafe\u0301'
 assert.equal(p.manuscript.value.slice(p.manuscript.selectionStart,p.manuscript.selectionEnd),'cafe\u0301');E.lookupMorphology=lookup;
 // Ambiguidade não vira classe contextual; limite de apresentação não vira ausência.
 p=opened('Canto.',1);examine(p,row(p,'Canto'));p.flush();assert(p.results.textContent.includes('Possibilidades lexicais:'));assert(!p.results.textContent.includes('Leitura contextual:'));
-const dense='a '.repeat(120)+'Eu canto.';p=opened(dense,243);examine(p,row(p,'canto'));p.flush();assert(p.results.textContent.includes('além do limite de resultados'));assert.equal(nodes(p.results,n=>n.className==='ptbr-word'&&n.getAttribute('aria-pressed')==='true').length,0,'não abre outra ocorrência como substituto');
+const dense='a '.repeat(120)+'Eu canto.';p=opened(dense,243);examine(p,row(p,'canto'));p.flush();
+assert.deepEqual(p.calls,['morfologia']);assert(!p.results.textContent.includes('além do limite de resultados'));
+assert(nodes(p.results,n=>n.className==='ptbr-word'&&n.getAttribute('aria-pressed')==='true')[0].textContent.includes('canto'));
+button(p.results,'Ver ocorrência no texto').click();assert.equal(p.manuscript.selectionStart,243);assert.equal(p.manuscript.value,dense);
+// A03-alvo: as decisões são idênticas às da mesma linha completa, não de uma janela artificial.
+const vault=E.createVault(E.knowledge);
+for(const [sample,word] of [
+  [dense,'canto'],['Eu canto. '.repeat(65)+'O canto terminou.','canto'],
+  ['a. '.repeat(120)+'Eu posso cantar.','posso'],['a. '.repeat(120)+'Eu posso cantar.','cantar'],
+  ['a. '.repeat(120)+'Canto.','Canto'],['a. '.repeat(120)+'xyzabc.','xyzabc']
+]){
+  const start=sample.lastIndexOf(word),target={start,end:start+word.length,snippet:word};
+  const full=E.contextualMorphology.analyze(sample,2000),focused=vault.analyze('morfologia',sample,target);
+  assert(focused.findings.length<=100);assert(focused.coverageInfo.target.found);
+  assert(focused.findings.some(f=>f.start===start&&f.end===target.end));
+  assert.deepEqual(focused.coverageInfo.work,full.coverageInfo.work,'mesmo custo de inspeção');
+  for(const f of focused.findings){
+    assert.deepEqual(f,full.find(x=>x.id===f.id&&x.start===f.start&&x.end===f.end),'candidatos, fonte, apoios e leitura preservados');
+  }
+  const ordinary=vault.analyze('morfologia',sample);assert.equal(ordinary.findings.length,100);assert(ordinary.limited);
+  assert(!ordinary.findings.some(f=>f.start===start),'modo comum conserva os primeiros 100');
+}
+// Alvo protegido, parcial ou além do escopo não é substituído por outra palavra.
+for(const [sample,start,end] of [['Eu “canto”.',4,9],['Eu canto.',4,8],['a '.repeat(4100)+'Eu canto.',8203,8208]]){
+  const target={start,end,snippet:sample.slice(start,end)},r=vault.analyze('morfologia',sample,target);
+  assert.equal(r.findings.length,0);assert.equal(r.coverageInfo.target.found,false);
+}
+for(const target of [null,{start:'3',end:8,snippet:'canto'},{start:3.5,end:8,snippet:'anto'},{start:3,end:8,snippet:'outro'},{start:-1,end:8,snippet:'Eu canto'}]){
+  assert.throws(()=>vault.analyze('morfologia','Eu canto.',target),/Ocorrência inválida/);
+}
+assert.throws(()=>vault.analyze('sintaxe','Eu canto.',{start:3,end:8,snippet:'canto'}),/não aceita/);
+const targetRequest=E.analysisContract.request(E.freshDocument(),text,scope.start,scope.end);
+const targeted=E.analysisContract.analyze(vault,'morfologia',targetRequest,{start:at,end:at+5,snippet:'canto'});
+assert.equal(targeted.coverageInfo.target.start,at);assert(targeted.coverageInfo.target.found);
+for(const f of targeted.findings){for(const span of [f,...(f.context||[])])assert.equal(text.slice(span.start,span.end),span.snippet);}
+assert.throws(()=>E.analysisContract.analyze(vault,'morfologia',targetRequest,{start:0,end:10,snippet:text.slice(0,10)}),/Ocorrência inválida/);
+const lateLocution='a. '.repeat(120)+'Eu posso cantar.';
+p=opened(lateLocution,lateLocution.indexOf('cantar'));examine(p,row(p,'cantar'));p.flush();
+assert.deepEqual(p.calls,['morfologia']);assert(nodes(p.results,n=>n.className==='ptbr-word'&&n.getAttribute('aria-pressed')==='true')[0].textContent.includes('locução verbal'));
+button(p.results,'Ver ocorrência no texto').click();assert.equal(p.manuscript.selectionStart,lateLocution.indexOf('cantar'));
 // A03-fronteiras: passos limitados sob comando, inclusive proteção herdada distante.
 const farPrefix='Introdução.\n'.repeat(1200),farText=farPrefix+'Eu canto.';
 p=opened(farText,farPrefix.length+3);examine(p,row(p,'canto'));assert.deepEqual(p.calls,[]);p.flush();
@@ -145,5 +184,5 @@ for(const before of boundaryFixtures){
 p=opened(longPlain,longPlain.lastIndexOf('canto'));examine(p,row(p,'canto'));
 const longPending=p.timers.find(t=>!t.cancelled);longPending.fn();longPending.cancelled=true;
 p.manuscript.emit('compositionstart');p.flush();assert.deepEqual(p.calls,[]);
-for(const file of ['ptbr/painel.js','ptbr/preparacao.js','ptbr/leitura-visual.js','src/editor/contrato-analise.js','src/editor/controlador.js','packages/cofre/src/protecao-e-ortografia.js'])require('acorn').parse(fs.readFileSync(file,'utf8'),{ecmaVersion:5});
+for(const file of ['packages/cofre/src/registro.js','packages/cofre/src/lentes/gramatica.js','ptbr/morfologia-contextual.js','ptbr/painel.js','ptbr/preparacao.js','ptbr/leitura-visual.js','src/editor/contrato-analise.js','src/editor/controlador.js','packages/cofre/src/protecao-e-ortografia.js'])require('acorn').parse(fs.readFileSync(file,'utf8'),{ecmaVersion:5});
 console.log('CONTEXTO DA RESERVA OK: lente real, origem/apoios UTF-16, repetidas, NFD, fronteiras, proteções herdadas, limites e oito transições de invalidação; ES5.');

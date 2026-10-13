@@ -56,7 +56,7 @@ function setup(initial, dismissed, realEngine) {
   if(realEngine){
     var choices=E.ptbrPanelChoices;
     E={};Object.keys(realEngine).forEach(function(k){E[k]=realEngine[k];});E.ptbrPanelChoices=choices;
-    E.createVault=function(){var v=realEngine.createVault.apply(realEngine,arguments),analyze=v.analyze;v.analyze=function(lens,text){calls.push(lens);return analyze.call(v,lens,text);};return v;};
+    E.createVault=function(){var v=realEngine.createVault.apply(realEngine,arguments),analyze=v.analyze;v.analyze=function(lens,text,target){calls.push(lens);return analyze.call(v,lens,text,target);};return v;};
   }
   var record=realEngine&&E.freshDocument?E.freshDocument():null;
   if(record){

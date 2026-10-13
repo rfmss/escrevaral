@@ -14,8 +14,9 @@
     var key = '$' + word.toLowerCase();
     return { classes: (lexicon[key] || []).slice(), verbs: (V.forms[key] || []).map(function (r) { return r.slice(); }) };
   }
-  function morphology(text, cap) {
-    if (E.contextualMorphology) { return E.contextualMorphology.analyze(text, cap); }
+  function morphology(text, cap, target) {
+    if (E.contextualMorphology) { return E.contextualMorphology.analyze(text, cap, target); }
+    if (target) { throw new Error('O exame da ocorrência precisa do motor contextual.'); }
     var ts = E.reading.tokens(E.protectedText(text)), out = [], i, r, ambiguous, contextual;
     for (i = 0; i < ts.length && out.length < cap; i += 1) {
       r = readings(ts[i].value); contextual = E.infinitiveCandidates(ts, i, text);
@@ -103,6 +104,6 @@
   }
   E.grammar = { readings: readings };
   (E.extensions = E.extensions || []).push(function (register) {
-    register({ id: 'morfologia', analyze: morphology }); register({ id: 'sintaxe', analyze: syntax });
+    register({ id: 'morfologia', analyze: morphology, targeted: true }); register({ id: 'sintaxe', analyze: syntax });
   });
 }(typeof window !== 'undefined' ? window : this));

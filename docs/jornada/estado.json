@@ -1,12 +1,12 @@
 {
-  "version": 51,
-  "updated": "09/10/2026",
-  "baseline": "620d0134be55eb18f64fbfb927dbc9f992edcb65",
+  "version": 52,
+  "updated": "13/10/2026",
+  "baseline": "ff63d24523e1996b4e03fd9e4af51e0fc79e0007",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.62 / A03-linhas-longas: a conferência explícita atravessa parágrafos anteriores extensos e marcadores partidos entre passos, sem armazenar a linha inteira. Mantém progresso, cancelamento, contexto original e todos os limites da preparação. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.63 / A03-alvo: Examinar este contexto preserva a ocorrência escolhida mesmo depois dos100 resultados iniciais. Apresenta o alvo, sua eventual locução e apoios diretos, com o mesmo contexto, candidatos e teto de saída. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "A03-alvo: preservar o exame da ocorrência escolhida quando ela fica além dos100 resultados iniciais da lente, sem aumentar o teto de apresentação, cortar contexto silenciosamente ou substituir por outra ocorrência. Manter limites, candidatos, apoios e offsets originais.",
+    "A03-pertinencia: oferecer filtro explícito das análises com indícios no recorte preparado, distinguindo nenhum indício de pertinência não verificada e preservando Todas as análises. Sem nova varredura, sem fila de lentes e sem esconder falta de cobertura.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
     "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
@@ -271,7 +271,7 @@
         "Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.",
         "Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar."
       ],
-      "done": "A03-contexto e fronteiras integrados. A prova distante agora usa cursor de proteção com estado fixo, até2.000 visitas por passo e leitura antecipada de até8 unidades por marcador; atravessa linhas anteriores longas e mantém identidade/cancelamento. A linha alvo permanece inteira dentro da reserva2000; preparação700ms/400 visitas/24 ocorrências inalterada. A03 geral continua parcial.",
+      "done": "A03-alvo integrado ao pedido explícito: inspeção contextual preservada, saída restrita à ocorrência/locução/apoios, até100 achados. Não corta a linha nem desloca o contexto para obter uma leitura. Preparação700ms/2000/400/24, prova distante por passos e identidade/cancelamento mantidos. Falta o filtro de pertinência das lentes; A03 geral continua parcial.",
       "evidence": [
         "docs/jornada/CONTRATO-ANALISE.md",
         "ptbr/CONTEXTO-1.md",
@@ -291,7 +291,8 @@
         "docs/jornada/ENTREGA-V6-59.md",
         "docs/jornada/ENTREGA-V6-60.md",
         "docs/jornada/ENTREGA-V6-61.md",
-        "docs/jornada/ENTREGA-V6-62.md"
+        "docs/jornada/ENTREGA-V6-62.md",
+        "docs/jornada/ENTREGA-V6-63.md"
       ]
     },
     {
@@ -714,7 +715,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "A03-alvo: preservar o exame da ocorrência escolhida quando ela fica além dos100 resultados iniciais da lente, sem aumentar o teto de apresentação, cortar contexto silenciosamente ou substituir por outra ocorrência. Manter limites, candidatos, apoios e offsets originais."
+    "nextDeliverable": "A03-pertinencia: oferecer filtro explícito das análises com indícios no recorte preparado, distinguindo nenhum indício de pertinência não verificada e preservando Todas as análises. Sem nova varredura, sem fila de lentes e sem esconder falta de cobertura."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -728,7 +729,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Diff revisado e montagem reproduzível com npm run build:check. Sem nova bateria local, conforme decisão do autor de08/10; cobertura acrescentada ao teste existente para execução no CI automático. São48 prefixos comparados à proteção integral existente (contrato técnico, não avaliação linguística), incluindo marcadores ao redor das posições1992–2002, URLs/email, inline sem fechamento e proteção de9mil unidades; inclui percurso real após linha longa, limites de visitas/progresso e cancelamento no meio da linha. CI/Pages desta entrega devem ser conferidos por SHA. Base v6.61 confirmada: CI37861003430 e Pages37861003475, ambos success no commit620d0134be55eb18f64fbfb927dbc9f992edcb65.",
+    "verification": "Diff revisado; montagem e integridade verificadas com npm run build e npm run build:check. Sem bateria local repetida. Casos acrescentados ao CI: ocorrência após100 achados, homógrafos repetidos, locuções por ambos os componentes, ambiguidades/desconhecidos, igualdade dos achados com a inspeção contextual original, alvo protegido/parcial/fora do escopo, argumentos inválidos, rebasing e ES5. CI/Pages desta entrega devem ser conferidos pelo SHA. Base v6.62 confirmada: CI37996303854 e Pages37996303237 success no commitff63d24523e1996b4e03fd9e4af51e0fc79e0007.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -746,5 +747,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-62.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-63.json"
 }

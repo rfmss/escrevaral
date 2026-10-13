@@ -2,6 +2,10 @@
 
 Decisão recebida de Rafael por intermédio da frente ASTRA 2 em 27/09/2026. Base conferida: main `019e9105b2730476644bfb9c6644f9be2738ea11`, produto v6-28. **Direção registrada; contratos abaixo são proposta para a prova isolada, não API publicada.** O cofre continua síncrono; a primeira preparação limitada do painel foi integrada na v6.57, conforme seção vigente abaixo.
 
+## Ocorrência além dos primeiros100 resultados — 13/10/2026, v6.63
+
+[A03-alvo](jornada/ENTREGA-V6-63.md) liga a ocorrência explícita ao cofre: mesma inspeção do contexto, materialização do alvo, eventual locução e apoios diretos. O teto100 permanece e a ocorrência não depende da posição na lista geral. Fonte, candidatos, ambiguidades e posições originais são preservados. Alvo protegido/fora da cobertura não é substituído por outro. Linha inteira na reserva e prova anterior continuam obrigatórias. Próximo: filtro de pertinência das análises com três estados explícitos e acesso manual completo; A03 geral permanece parcial.
+
 ## Linhas anteriores extensas — 09/10/2026, v6.62
 
 [A03-linhas-longas](jornada/ENTREGA-V6-62.md) retira a exigência de caber uma linha anterior inteira na fatia: cursor com estado fixo, até2.000 visitas por passo e antecipação limitada a8 unidades para marcadores. URL/email, citações e inline conservam precedência e atravessam passos; retomadas de inline inválido não perdem proteção interna. A linha alvo ainda precisa caber inteira na reserva; preparação e teto200mil permanecem. A03 geral parcial; próximo: alvo além do teto100 de apresentação.

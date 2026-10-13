@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261009-scrvrl-linhas-v6-62">
+  <meta name="asset-version" content="20261013-scrvrl-alvo-v6-63">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -3200,17 +3200,21 @@ SOFTWARE.
       if (!lens || !/^[a-z][a-z0-9-]*$/.test(lens.id) || typeof lens.analyze !== 'function' || own.call(registry, lens.id)) { throw new Error('Lente inválida ou já registrada.'); }
       registry[lens.id] = lens;
     }
-    function analyze(lensId, text) {
+    function analyze(lensId, text, target) {
       if (busy) { throw new Error('Já existe uma lente em uso.'); }
       if (typeof text !== 'string') { throw new Error('A lente precisa receber texto.'); }
       if (text.length > maxLength) { throw new Error('Examine até 200 mil caracteres por vez. O manuscrito continua inteiro na folha.'); }
       if (!own.call(registry, lensId)) { throw new Error('Esta lente não está disponível.'); }
+      if (typeof target !== 'undefined') {
+        if (!target || typeof target.start !== 'number' || typeof target.end !== 'number' || !isFinite(target.start) || !isFinite(target.end) || target.start % 1 || target.end % 1 || target.start < 0 || target.end <= target.start || target.end > text.length || text.slice(target.start,target.end) !== target.snippet) { throw new Error('Ocorrência inválida para análise.'); }
+        if (!registry[lensId].targeted) { throw new Error('Esta lente não aceita uma ocorrência como alvo.'); }
+      }
       busy = true;
       try {
         var policy = root.Escr.lensPolicies && root.Escr.lensPolicies[lensId];
         var assessment = policy ? policy(text) : { eligible: true, scope: 'Lente registrada sem política de recorte.' };
         if (!assessment.eligible) { return { lens: lensId, knowledgeVersion: knowledge.version, findings: [], limited: false, status: 'insuficiente', assessment: assessment, coverage: assessment.scope }; }
-        var entry=registry[lensId], incremental=entry.incremental&&!(options&&options.incremental===false), result=(incremental?entry.incremental.analyze:entry.analyze)(text,maxFindings+1), i;
+        var entry=registry[lensId], incremental=!target&&entry.incremental&&!(options&&options.incremental===false), result=(incremental?entry.incremental.analyze:entry.analyze)(text,target?maxFindings:maxFindings+1,target), i;
         if (Object.prototype.toString.call(result) !== '[object Array]') { throw new Error('Resposta inválida da lente.'); }
         for (i = 0; i < result.length; i += 1) { validate(result[i], text, lensId); }
         result.sort(function (a, b) { return a.start - b.start || a.end - b.end || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0); });
@@ -3821,8 +3825,9 @@ SOFTWARE.
     var key = '$' + word.toLowerCase();
     return { classes: (lexicon[key] || []).slice(), verbs: (V.forms[key] || []).map(function (r) { return r.slice(); }) };
   }
-  function morphology(text, cap) {
-    if (E.contextualMorphology) { return E.contextualMorphology.analyze(text, cap); }
+  function morphology(text, cap, target) {
+    if (E.contextualMorphology) { return E.contextualMorphology.analyze(text, cap, target); }
+    if (target) { throw new Error('O exame da ocorrência precisa do motor contextual.'); }
     var ts = E.reading.tokens(E.protectedText(text)), out = [], i, r, ambiguous, contextual;
     for (i = 0; i < ts.length && out.length < cap; i += 1) {
       r = readings(ts[i].value); contextual = E.infinitiveCandidates(ts, i, text);
@@ -3910,7 +3915,7 @@ SOFTWARE.
   }
   E.grammar = { readings: readings };
   (E.extensions = E.extensions || []).push(function (register) {
-    register({ id: 'morfologia', analyze: morphology }); register({ id: 'sintaxe', analyze: syntax });
+    register({ id: 'morfologia', analyze: morphology, targeted: true }); register({ id: 'sintaxe', analyze: syntax });
   });
 }(typeof window !== 'undefined' ? window : this));
 
@@ -4534,19 +4539,49 @@ SOFTWARE.
     return { version: version, items: items, locutions:locutions, scope: { start: 0, end: cut.length, total: text.length, partial: cut.length < text.length },
       work: { characters: cut.length, tokens: ts.length, maxCharacters: maxChars, maxTokens: maxTokens } };
   }
-  function analyze(text, cap) {
+  function analyze(text, cap, target) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource,locutionIndex=0;
+    /* Inspecionar o mesmo contexto; materializar somente alvo, locução e apoios.
+     * Reservar o alvo antes dos apoios evita perdê-lo no teto de apresentação. */
+    var selected={},targetIndex=-1,targetGroup=null,selectedCount=0,supports=[],supportLimited=false,j,k;
+    if(target){
+      for(i=0;i<report.items.length;i++){
+        item=report.items[i];
+        if(item.start===target.start&&item.end===target.end&&item.snippet===target.snippet){targetIndex=i;break;}
+      }
+      if(targetIndex>=0){
+        selected[targetIndex]=true;selectedCount=1;supports=report.items[targetIndex].evidence.slice();
+        for(i=0;i<report.locutions.length;i++){
+          var candidate=report.locutions[i];
+          if(candidate.start<=target.start&&candidate.end>=target.end&&selectedCount<cap){
+            targetGroup=candidate;selectedCount++;supports=supports.concat(candidate.context);break;
+          }
+        }
+        for(j=0;j<report.items.length;j++){
+          item=report.items[j];if(selected[j]){continue;}
+          for(k=0;k<supports.length;k++){
+            if(item.start>=supports[k].start&&item.end<=supports[k].end){
+              if(selectedCount<cap){selected[j]=true;selectedCount++;}else{supportLimited=true;}
+              break;
+            }
+          }
+        }
+      }
+    }
     var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo + mesa/casa/barco de madeira ou barco de papel, com nome compatível em gênero/número e material singular reais, unidade completa de quatro palavras; como interrogativo direto, se pronominal de terceira pessoa e que integrante com saber/dizer nos recortes declarados; assim que entre dois pares pronome pessoal + indicativo real compatível em unidade completa de seis palavras, perto de + candidato nominal real em unidade completa de três palavras, com ADV/ADP reais e sem NUM/ADV/ADP/conjunção no complemento, pronome pessoal + poder com Mood=Ind/Cnd e traços reais compatíveis + infinitivo impessoal real em unidade completa de três palavras, de vez em quando antes (com vírgula) ou depois de pronome + indicativo compatível em unidade completa de seis palavras, ah/oh isolados com INTJ real e fronteira !/?, artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       if(locutionIndex<report.locutions.length&&report.locutions[locutionIndex].at===i){
         var group=report.locutions[locutionIndex++];
-        var description=locutionDescriptions[group.kind];
-        out.push(E.instruments.finding('morfologia',description.id,text,group.start,group.end,'Hipótese contextual: '+description.feature+'.',
-          description.observation,description.interpretation,description.ambiguity,limit,
-          {title:description.sourceTitle+' Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:description.url},
-          {confidence:'moderada',feature:description.feature,analysisStatus:'contextual',context:group.context,candidates:{classes:[description.feature],components:group.components,complement:group.complement||null},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,distanceResolved:false,temporalRelationResolved:false,materialResolved:false,syntaxResolved:false}}));
-        if(out.length>=cap){break;}
+        if(!target||group===targetGroup){
+          var description=locutionDescriptions[group.kind];
+          out.push(E.instruments.finding('morfologia',description.id,text,group.start,group.end,'Hipótese contextual: '+description.feature+'.',
+            description.observation,description.interpretation,description.ambiguity,limit,
+            {title:description.sourceTitle+' Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:description.url},
+            {confidence:'moderada',feature:description.feature,analysisStatus:'contextual',context:group.context,candidates:{classes:[description.feature],components:group.components,complement:group.complement||null},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,distanceResolved:false,temporalRelationResolved:false,materialResolved:false,syntaxResolved:false}}));
+          if(out.length>=cap){break;}
+        }
       }
+      if(target&&!selected[i]){continue;}
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';
       message = contextual ? 'Leitura contextual: ' + item.selected + '.' : item.status === 'desconhecido' ? 'Sem classificação neste inventário.' : 'Possibilidades lexicais: ' + r.classes.join(', ') + '.';
       if(item.rule==='PTBR-CTX-008'&&item.selected==='determinante (UD)'){message='Leitura contextual: '+item.nominalDeterminer.kind+' acompanhando um nome.';}
@@ -4607,6 +4642,10 @@ SOFTWARE.
     }
     out.coverageInfo = { scope: report.scope, work: report.work, version: version, lexiconVersion: E.portiLexicon?E.portiLexicon.version:null,
       summary: 'Classes em contexto: recorte ' + report.scope.start + '–' + report.scope.end + ' de ' + text.length + ' unidades UTF-16; ' + report.work.tokens + ' tokens.' + (report.scope.partial ? ' Análise parcial: selecione o restante para continuar.' : '') };
+    if(target){
+      out.coverageInfo.target={start:target.start,end:target.end,snippet:target.snippet,found:targetIndex>=0,supportLimited:supportLimited};
+      out.coverageInfo.summary+=' Exibição da ocorrência escolhida, eventual locução e apoios diretos; não é uma lista de todas as palavras da linha.'+(supportLimited?' Nem todos os apoios cabem na apresentação; a evidência escrita permanece completa.':'');
+    }
     return out;
   }
   E.contextualMorphology = { version: version, readings: readings, lexicalReadings: lexicalReadings, inspect: inspect, analyze: analyze };
@@ -5270,8 +5309,13 @@ SOFTWARE.
   function current(req, doc, text) {
     return !!req && !!doc && req.source.documentId === (doc.noteId || doc.id) && req.source.recordId === doc.id && req.source.revision === doc.revision && req.text === text;
   }
-  function analyze(vault, lens, req) {
-    var s = req.source, result = vault.analyze(lens, req.text.slice(s.start, s.end));
+  function analyze(vault, lens, req, target) {
+    var s = req.source, localTarget;
+    if (typeof target !== 'undefined') {
+      if (!target || typeof target.start !== 'number' || typeof target.end !== 'number') { throw new Error('Ocorrência inválida para análise.'); }
+      localTarget = {start:target.start-s.start,end:target.end-s.start,snippet:target.snippet};
+    }
+    var result = vault.analyze(lens, req.text.slice(s.start, s.end), localTarget);
     /* O cofre usa posições no trecho; consumidores recebem posições no original. */
     result.findings.forEach(function (f) {
       f.start += s.start; f.end += s.start;
@@ -5285,6 +5329,9 @@ SOFTWARE.
       if (req.text.slice(f.start, f.end) !== f.snippet) { throw new Error('A posição do resultado não corresponde ao original.'); }
     });
     if (result.coverageInfo) { result.coverageInfo.scope.start += s.start; result.coverageInfo.scope.end += s.start; result.coverageInfo.scope.total = req.text.length; }
+    if (result.coverageInfo && result.coverageInfo.target) {
+      result.coverageInfo.target.start += s.start; result.coverageInfo.target.end += s.start;
+    }
     result.schema = 'scrvrl.analysis-result'; result.version = 1;
     result.source = { documentId: s.documentId, recordId: s.recordId, revision: s.revision, projectLabel: s.projectLabel, start: s.start, end: s.end, draft: s.draft };
     result.engineVersion = '5.0.0';
@@ -8928,7 +8975,7 @@ SOFTWARE.
     },false);
     if(scope.reason){el('p',header,'ptbr-context-limit',scope.reason);status.textContent='Contexto não verificado. Nenhuma lente foi executada.';return;}
     try{request=E.ptbrPanelRequest(snapshot,scope.start,scope.end);}catch(error){status.textContent='O pedido não pôde ser vinculado à folha atual.';return;}
-    el('p',header,'ptbr-context-scope','Contexto escolhido: posições '+(scope.start+1)+' a '+scope.end+' do original. Somente esta linha será examinada.');
+    el('p',header,'ptbr-context-scope','Contexto escolhido: posições '+(scope.start+1)+' a '+scope.end+' do original. A leitura destaca a ocorrência escolhida e seus apoios nesta linha.');
     el('blockquote',header,'ptbr-context-original',snapshot.slice(scope.start,scope.end));
     busy=true;cancel.hidden=false;status.textContent='Examinando as classes neste contexto…';
     var boundaryScan=scope.needsBoundary?E.analysisContract.createBoundaryScan(snapshot,scope.start):null;
@@ -8941,7 +8988,7 @@ SOFTWARE.
           scope=E.analysisContract.reservedScope(snapshot,reservation.scope,item,boundary);boundaryScan=null;
           if(scope.reason){el('p',header,'ptbr-context-limit',scope.reason);status.textContent='Contexto não verificado. Nenhuma lente foi executada.';busy=false;cancel.hidden=true;return;}
         }
-        var result=E.analysisContract.analyze(E.createVault(E.knowledge),'morfologia',request),found=false;
+        var result=E.analysisContract.analyze(E.createVault(E.knowledge),'morfologia',request,item),found=false;
         if(!current()){return;}
         for(var at=0;at<result.findings.length;at++){
           var f=result.findings[at];if(f.start<=item.start&&f.end>=item.end){found=true;break;}

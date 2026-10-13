@@ -31,6 +31,12 @@ Cada achado informa `id`, `lens`, `feature`, `severity`, `confidence`, `message`
 
 O cofre não gerencia cancelamento de tarefas síncronas nem identidade/revisão de documentos. O hospedeiro deve descartar resultados antigos. Para trabalho pesado, planejar Worker/processo e cancelamento no conector; não prometer interrupção de uma chamada síncrona. Veja [manual dos conectores](../../docs/CONECTORES.md).
 
+## Ocorrência explícita — v6.63
+
+`vault.analyze('morfologia', text, {start, end, snippet})` aceita opcionalmente uma ocorrência exata, com posições UTF-16 relativas à string recebida. Valida inteiros, limites e trecho literal; outras lentes precisam declarar `targeted: true` para aceitar o argumento. A lente contextual mantém a inspeção original limitada a8.000 unidades/1.600 tokens e materializa somente a ocorrência, sua eventual locução e os apoios diretos, até100 achados. Nenhum novo recorte é criado para favorecer uma classificação.
+
+`coverageInfo.target` traz posições, trecho, `found` (token exato encontrado no escopo, não certeza linguística) e `supportLimited` (apoios excedentes omitidos da apresentação, mantendo a evidência escrita). Alvo protegido, fragmento de token ou fora do escopo produz zero achados; não escolhe outra ocorrência. Desconhecidos e ambíguos conservam seus estados. A avaliação de elegibilidade pode devolver `status: insuficiente` antes de inspecionar o alvo; nesse caso não há `coverageInfo`. Sem terceiro argumento, a API conserva os primeiros100 achados e a sinalização de limite.
+
 ## Evolução proposta
 
 Consulta a pacotes particionados e preparação nas pausas são trabalho futuro, descrito em [contrato de pacotes v0](../../docs/CONTRATO-PACOTES-LINGUISTICOS.md). Não alteram a API síncrona 1.0.0 acima. A primeira prova usa leitor de blocos injetado em área experimental, sem integrar dados ou dependências à produção.

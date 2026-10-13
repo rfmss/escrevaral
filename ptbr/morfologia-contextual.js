@@ -546,19 +546,49 @@
     return { version: version, items: items, locutions:locutions, scope: { start: 0, end: cut.length, total: text.length, partial: cut.length < text.length },
       work: { characters: cut.length, tokens: ts.length, maxCharacters: maxChars, maxTokens: maxTokens } };
   }
-  function analyze(text, cap) {
+  function analyze(text, cap, target) {
     var report = inspect(text), out = [], i, item, r, contextual, message, reason, occurrenceSource,locutionIndex=0;
+    /* Inspecionar o mesmo contexto; materializar somente alvo, locução e apoios.
+     * Reservar o alvo antes dos apoios evita perdê-lo no teto de apresentação. */
+    var selected={},targetIndex=-1,targetGroup=null,selectedCount=0,supports=[],supportLimited=false,j,k;
+    if(target){
+      for(i=0;i<report.items.length;i++){
+        item=report.items[i];
+        if(item.start===target.start&&item.end===target.end&&item.snippet===target.snippet){targetIndex=i;break;}
+      }
+      if(targetIndex>=0){
+        selected[targetIndex]=true;selectedCount=1;supports=report.items[targetIndex].evidence.slice();
+        for(i=0;i<report.locutions.length;i++){
+          var candidate=report.locutions[i];
+          if(candidate.start<=target.start&&candidate.end>=target.end&&selectedCount<cap){
+            targetGroup=candidate;selectedCount++;supports=supports.concat(candidate.context);break;
+          }
+        }
+        for(j=0;j<report.items.length;j++){
+          item=report.items[j];if(selected[j]){continue;}
+          for(k=0;k<supports.length;k++){
+            if(item.start>=supports[k].start&&item.end<=supports[k].end){
+              if(selectedCount<cap){selected[j]=true;selectedCount++;}else{supportLimited=true;}
+              break;
+            }
+          }
+        }
+      }
+    }
     var limit = 'Recorte de até 8.000 unidades UTF-16 e 1.600 tokens. Contexto restrito a artigo + mesa/casa/barco de madeira ou barco de papel, com nome compatível em gênero/número e material singular reais, unidade completa de quatro palavras; como interrogativo direto, se pronominal de terceira pessoa e que integrante com saber/dizer nos recortes declarados; assim que entre dois pares pronome pessoal + indicativo real compatível em unidade completa de seis palavras, perto de + candidato nominal real em unidade completa de três palavras, com ADV/ADP reais e sem NUM/ADV/ADP/conjunção no complemento, pronome pessoal + poder com Mood=Ind/Cnd e traços reais compatíveis + infinitivo impessoal real em unidade completa de três palavras, de vez em quando antes (com vírgula) ou depois de pronome + indicativo compatível em unidade completa de seis palavras, ah/oh isolados com INTJ real e fronteira !/?, artigo definido + nome, grupos de três palavras com artigo definido ou indefinido/nome/adjetivo, sequências nominais com de/do/da/dos/das e apoio verbal finito, possessivo/demonstrativo antes de nome com artigo definido opcional, usos sem nome no início de unidade com apoio finito e não opcional, pares nominais completos com e/ou, sem modificadores e com ao menos um nome sem outra classe no inventário, ou com artigo em cada constituinte e traços explícitos compatíveis (duas alternativas verbais com artigos definidos ficam em aberto), dois grupos artigo + nome + adjetivo posposto unidos por e/ou, com gênero/número explícitos e sem alternativa verbal no adjetivo, dois/duas/três + nome plural de livro/casa/jardim/flor/mesa/mulher/homem em unidade completa, NUM cardinal e Number do nome explícitos, gênero do numeral conferido quando marcado, não pré-verbal entre pronome sujeito no início de unidade e forma indicativa compatível, com clítico opcional, e pronome sujeito + forma finita, com não e clítico opcionais. Pontuação, quebras de linha e trechos protegidos interrompem relações. Não resolve sintaxe geral, regência, sentido ou concordância; formas fora do inventário permanecem desconhecidas. PortiLexicon amplia candidatos, sem escolher sentido ou função auxiliar. Determinante (UD) conserva a categoria da fonte sem convertê-la automaticamente em artigo ou pronome.';
     for (i = 0; i < report.items.length && out.length < cap; i += 1) {
       if(locutionIndex<report.locutions.length&&report.locutions[locutionIndex].at===i){
         var group=report.locutions[locutionIndex++];
-        var description=locutionDescriptions[group.kind];
-        out.push(E.instruments.finding('morfologia',description.id,text,group.start,group.end,'Hipótese contextual: '+description.feature+'.',
-          description.observation,description.interpretation,description.ambiguity,limit,
-          {title:description.sourceTitle+' Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:description.url},
-          {confidence:'moderada',feature:description.feature,analysisStatus:'contextual',context:group.context,candidates:{classes:[description.feature],components:group.components,complement:group.complement||null},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,distanceResolved:false,temporalRelationResolved:false,materialResolved:false,syntaxResolved:false}}));
-        if(out.length>=cap){break;}
+        if(!target||group===targetGroup){
+          var description=locutionDescriptions[group.kind];
+          out.push(E.instruments.finding('morfologia',description.id,text,group.start,group.end,'Hipótese contextual: '+description.feature+'.',
+            description.observation,description.interpretation,description.ambiguity,limit,
+            {title:description.sourceTitle+' Componentes: PortiLexicon '+E.portiLexicon.version+'.',url:description.url},
+            {confidence:'moderada',feature:description.feature,analysisStatus:'contextual',context:group.context,candidates:{classes:[description.feature],components:group.components,complement:group.complement||null},locution:{kind:group.kind,order:group.order,resolution:'hypothesis',frequencyResolved:false,modalityResolved:false,auxiliaryFunctionResolved:false,distanceResolved:false,temporalRelationResolved:false,materialResolved:false,syntaxResolved:false}}));
+          if(out.length>=cap){break;}
+        }
       }
+      if(target&&!selected[i]){continue;}
       item = report.items[i]; r = item.candidates; contextual = item.status === 'contextual';
       message = contextual ? 'Leitura contextual: ' + item.selected + '.' : item.status === 'desconhecido' ? 'Sem classificação neste inventário.' : 'Possibilidades lexicais: ' + r.classes.join(', ') + '.';
       if(item.rule==='PTBR-CTX-008'&&item.selected==='determinante (UD)'){message='Leitura contextual: '+item.nominalDeterminer.kind+' acompanhando um nome.';}
@@ -619,6 +649,10 @@
     }
     out.coverageInfo = { scope: report.scope, work: report.work, version: version, lexiconVersion: E.portiLexicon?E.portiLexicon.version:null,
       summary: 'Classes em contexto: recorte ' + report.scope.start + '–' + report.scope.end + ' de ' + text.length + ' unidades UTF-16; ' + report.work.tokens + ' tokens.' + (report.scope.partial ? ' Análise parcial: selecione o restante para continuar.' : '') };
+    if(target){
+      out.coverageInfo.target={start:target.start,end:target.end,snippet:target.snippet,found:targetIndex>=0,supportLimited:supportLimited};
+      out.coverageInfo.summary+=' Exibição da ocorrência escolhida, eventual locução e apoios diretos; não é uma lista de todas as palavras da linha.'+(supportLimited?' Nem todos os apoios cabem na apresentação; a evidência escrita permanece completa.':'');
+    }
     return out;
   }
   E.contextualMorphology = { version: version, readings: readings, lexicalReadings: lexicalReadings, inspect: inspect, analyze: analyze };
