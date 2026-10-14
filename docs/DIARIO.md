@@ -21,3 +21,11 @@ Cada entrada informa contexto, decisão, mudança, evidência, limite e próxima
 **Publicação.** O commit desta entrada é enviado a reconstrucao. Conferir GitHub Actions pelo SHA remoto para o resultado do CI e download do artefato; a entrada não antecipa esse resultado. A referência vaultOUT26 permanece imutável.
 
 **Resultado local final.** `npm test`: passou, com as verificações de fronteira/ES5 e os sete cenários descritos. `npm run build`: passou. JavaScript: 16.677 bytes; CSS: 6.800; index: 3.771; portátil: 27.200 bytes. Valores sem compressão; não são RAM ou latência. Uma repetição dirigida ocorreu após a correção de recuperação de origem corrompida. Sem instalação de navegador ou bateria de outras funcionalidades.
+
+## 14/10/2026 — Endereço de teste da Mesa
+
+Rafa pediu um link direto, sem baixar o artefato. Publicado um espelho privado da Mesa 0.1 em [https://escrevaral-mesa-reconstrucao.rafamass975189.chatgpt.site](https://escrevaral-mesa-reconstrucao.rafamass975189.chatgpt.site). A fonte canônica permanece na branch reconstrucao, commit de aplicativo cf21e1d0ade7d49ffc8a2b3b6f89ceef302f3e92. Escrevaral.com e vaultOUT26 não foram alterados.
+
+O hospedador recebeu os mesmos três arquivos do site, conferidos byte a byte. Foi necessário adaptar apenas o diretório da saída para dist no espelho de hospedagem; nenhum comportamento do aplicativo mudou. Não houve nova bateria de testes. Publicação retornou succeeded. Acesso privado do proprietário; o endereço pode pedir sua sessão. O armazenamento pertence a esta origem e não acessa o acervo de escrevaral.com.
+
+Continuidade da hospedagem: projeto appgprj_6acf88e2b7e48191bd98a0d99794e717; fonte hospedada 22accf6155afa902c9375d7ba9a5786d51ccc070; versão appgprj_6acf88e2b7e48191bd98a0d99794e717~appgver_ccde605553c4819181c028e9e9205a43; deploy appgdep_6acf896359a4819187c17d0b02e96a29. Reutilizar esse projeto em atualizações, sem criar outro link. Abrir a fonte hospedada pelo fluxo Sites, transportar a próxima versão do GitHub e preservar a audiência. Próxima implementação continua em ESTADO.md: R02-Acervo mínimo.
