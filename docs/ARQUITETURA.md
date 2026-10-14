@@ -1,74 +1,37 @@
-# Arquitetura — v6-25
+# Arquitetura da primeira Mesa
 
-## Decisão e limites
+## Fronteiras que já existem
 
-A index publicada contém marcação da interface e referências a três recursos: CSS, cofre e aplicação. Não contém motores, listas linguísticas nem código executável inline. A versão de arquivo único continua disponível como artefato portátil gerado.
+`index.html` contém estrutura semântica e referências locais. `src/app/iniciar.js` cria e conecta as peças. Não tem lógica de gravação, eventos de edição ou desenho.
 
-O objetivo desta etapa é permitir manutenção e transporte sem reescrever o comportamento existente. Não se promete uma estrutura imune a mudanças futuras. O modelo de documentos e as chaves de armazenamento não foram migrados.
+`src/editor/documento.js` define o registro mínimo. `sessao.js` mantém um rascunho, sua base persistida e estado de edição/IME. `coordenador.js` agenda a gravação e liga comandos da Mesa à sessão: é exclusivo do fluxo de escrita. Não receberá cadernos, ferramentas, análise, efeitos ou navegação geral.
 
-## Fronteiras
+`src/storage/rascunho.js` lê, valida, grava e lista recuperações através de um objeto de armazenamento injetado. Só `src/plataforma/navegador.js` busca a API localStorage do navegador. Nenhuma camada de interface acessa essa API.
 
-1. **Dados locais:** `resources/pt-BR/local/` e inventários já existentes em `ptbr/`. Registrar fonte, versão e cobertura antes de ampliar listas. Livros recebidos são referências, não dados automaticamente redistribuíveis.
-2. **Cofre:** `packages/cofre/src/` e módulos puros indicados em `build/modules.json`. Recebe string e lente, devolve ocorrências com posições e limites. Não conhece cadernos, DOM, armazenamento ou rede.
-3. **Integração do editor:** `src/editor/contrato-analise.js` associa folha/revisão e converte offsets do recorte para o original. A aplicação invalida resultados após edição, IME ou troca de folha.
-4. **Interface e persistência:** `src/ui/` e `src/storage/`. Apenas esta camada apresenta resultados e mantém as escolhas do autor.
-5. **Conectores experimentais:** `packages/connectors/`. Fora da montagem de produção; nenhuma dependência Python ou peso neural vai para o navegador.
+`src/interface/mesa.js` mantém referências ao DOM, apresenta estados e converte eventos em comandos. `src/transferencia/exportar.js` solicita download ou devolve a necessidade de cópia manual. Não existe clipboard silencioso ou rede nesta entrega.
 
-## Ordem e isolamento
+Cada fonte é uma única fábrica, sem autoexecução. `modules.json` define a ordem e as dependências. A montagem encapsula todas as instâncias em um único escopo privado. Motores futuros entrarão por uma porta de análise, sem acesso ao repositório ou campo editável.
 
-`build/modules.json` declara a ordem de estilos e módulos, separando `cofre` e `app`. `sourceOrder` conserva a ordem anterior para os testes de regressão. O build confere a partição. Mudar a ordem exige justificar dependências e executar as verificações.
+## Contratos concretos
 
-O pacote cofre encapsula um namespace por instância. A aplicação cria sua instância e a disponibiliza ao código legado como `window.Escr`. Essa ponte é uma dívida de compatibilidade deliberada. A API pública está em `packages/cofre/README.md`; acesso direto a campos internos não é contrato estável.
+Documento: `{schema:1, title:string, text:string, revision:inteiro, updated:timestamp}`. O corpo do texto não é normalizado. O título não faz parte do corpo exportado. Ainda não é o formato final `.scrvrl`.
 
-Os testes do cofre copiam seu arquivo para uma pasta temporária e o executam fora do repositório, sem navegador. Comparam também a montagem isolada com a ordem anterior em 290 casos. Isso verifica portabilidade e equivalência, não a qualidade linguística geral.
+Repositório: `read()` informa registro, representação esperada e falha; `save(record, expected)` grava cópia de sessão antes de disputar a folha atual, verifica conflito e confirma a leitura de volta; `recoveries()` oferece revisão anterior e sessões divergentes. JSON ilegível é preservado; não é substituído automaticamente por folha vazia.
 
-## Montagem e publicação
+Sessão: `change`, `save`, `snapshot`, `restore`, `compose`. Snapshot é uma cópia com texto literal; exportação não exige uma gravação bem-sucedida. Restaurar troca o rascunho por ação explícita. Uma origem ilegível permite resgatar outra cópia para exportação, mas continua bloqueando overwrite da origem.
 
-`build/release.json` centraliza versões. `scripts/build.cjs` monta recursos com SHA-256 no nome, index, portátil e service worker. `build/assets.json` registra caminhos, tamanho e hash. `build/extraction-v6-24.json` registra a base e os hashes no momento da extração; é histórico, não lista para impedir evolução das fontes.
+Salvamento: pausa de 900 ms e prazo de 3 s durante edição contínua, suspenso durante composição IME. Blur, ocultação e saída solicitam gravação como complemento; não são o mecanismo principal. Em conflito, a base esperada não é atualizada silenciosamente. O texto divergente permanece em cópia própria quando o armazenamento permite.
 
-O site e o arquivo portátil recebem exatamente os mesmos bundles e CSS. Substituições do template usam funções para não interpretar sequências `$` existentes em código ou estilos. A montagem falha quando há marcadores não resolvidos.
+## Custos e limites
 
-A raiz gerada é mantida por compatibilidade com GitHub Pages. Para outro hospedador, publicar **todo** `dist/site/`, nunca apenas a index. Atualizações futuras devem manter os recursos de versões anteriores durante a transição de abas abertas; a limpeza de assets antigos é uma tarefa separada. Para mudar os motores, editar fontes, incrementar versão quando couber, gerar, conferir e publicar. Não fazer force push.
+Não existem animações, loops contínuos, motores nem métricas linguísticas nesta fatia. O marcador de escrita muda em tempo constante. Serialização e escrita de um documento são síncronas no adaptador inicial; grandes manuscritos exigem medição e avaliação de outro adaptador no R02 antes da migração real.
 
-## Offline e endurecimento nesta etapa
+O núcleo usa ES5. O CSS usa blocos, posicionamento e media queries; `calc()` participa do dimensionamento do campo. Não foram homologados aparelhos antigos, viewport com teclado virtual ou leitores de tela. Falta de APIs de download usa cópia selecionável. `file:` pode negar persistência; o texto continua editável/exportável.
 
-- CSP da index aceita scripts locais externos, sem `unsafe-inline` para JavaScript. O portátil requer scripts inline e conserva essa permissão.
-- O service worker só ativa depois de conferir por hash a index, o cofre, o aplicativo e o CSS. Um download parcial ou de outra geração falha sem substituir o worker ativo.
-- A navegação do editor usa a geração completa em cache; `/jornada/` e outras páginas não são substituídas pelo editor.
-- A simulação de cache cobre falha de integridade, ativação e leitura offline. Não há exigência de teste visual ou em dispositivos; a referência tecnológica orienta o código.
-- O servidor de desenvolvimento restringe arquivos à sua raiz, resolve links e informa MIME correto. É local, não um servidor de produção.
-- `package-lock.json` fixa as ferramentas. CI roda na `main` e em PRs: montagem reproduzível, contratos e regressões essenciais.
+LocalStorage não oferece compare-and-swap transacional entre abas. Conferência da base e eventos detectam conflitos usuais; a cópia por sessão reduz o risco na corrida entre gravações. Não há garantia de exclusão mútua. Recuperações podem crescer com o número de sessões e atingir quota; não há limpeza destrutiva automática. Antes de acervos reais, definir retenção explícita e avaliar transação no adaptador principal.
 
-## Acesso offline e recuperação — C03 / v6-28
+## Expansão sem um novo monólito
 
-| Caminho | Dependências e estado | Recuperação |
-| --- | --- | --- |
-| Site | HTML + três recursos locais. Tenta cache opcional apenas com APIs disponíveis e contexto permitido. Informa preparação, ativação ou alternativa portátil; registrar um worker não basta para anunciar prontidão. | Voltar ao site conectado; trazer cópia do acervo pelos controles existentes. |
-| Site instalado / PWA | Mesma aplicação e mesmo cache; instalação não substitui cópia dos textos. Cache pode ser removido pelo navegador. | Guardar mesa portátil e exportar acervo separadamente. |
-| Arquivo portátil | CSS, fontes, cofre e aplicativo incorporados. Identificado pelo build, inclusive se servido por HTTP. Não registra worker nem depende de Promise, Cache API ou Web Crypto para inicializar seu caminho offline. | Abrir o HTML num navegador que aceite arquivos locais e usar “Trazer arquivo”. Não presumir que o acervo do domínio aparece na origem do arquivo. |
+O próximo fluxo nasce como módulo próprio. A aplicação não expõe `window.Escr`. O coordenador da Mesa não vira orquestrador de toda a oficina. Contratos mudam junto das verificações de fronteira. Não criar uma infraestrutura de plugins para receber o primeiro motor; usar um adaptador concreto.
 
-A seção “Escrever sem internet” oferece link de download e link comum para abrir a mesa; este último permite salvar a página onde o navegador disponibilizar essa opção. As instruções são HTML estático e não dependem do sucesso do registro/cache. Exportar tudo continua sendo uma ação explícita. Importar a cópia acrescenta textos; não substitui o acervo existente. Não há migração silenciosa entre origens.
-
-O worker moderno permanece isolado em seu próprio arquivo. Falha de registro/instalação e ausência de APIs levam à orientação portátil. `tests/offline-access.cjs` verifica essa decisão, a ativação efetiva e a incorporação dos recursos essenciais; `tests/offline-cache.cjs` verifica geração/cache por simulação. Estes testes não certificam navegadores específicos. C04 revisará os mecanismos de download, importação, exportação e seleção; C03 não declara essa revisão concluída.
-
-## Dívidas explícitas
-
-`src/editor/controlador.js` ainda concentra coordenação de fluxos antigos. Os estilos mantêm a ordem histórica da cascata. Os módulos puros de `ptbr/` ainda compartilham espaço com corpus e documentação. A decomposição seguinte deve tratar um fluxo por vez, com contratos próprios, sem trocar armazenamento ou UX por conveniência.
-
-Continuam revisão de acessibilidade e custo no código, avaliação linguística reservada e decisão sobre modelos grandes. Testes visuais e em dispositivos foram dispensados por Rafael; não são pendência de entrega. O bundle do cofre inclui os inventários atuais; carregamento por lente e execução em Worker são evoluções possíveis, não capacidades entregues.
-
-## Transporte e seleção — C04 / v6-29
-
-`src/ui/transferencia.js` isola capacidades do navegador; o controlador mantém a política e validação dos pacotes. Download indisponível apresenta cópia literal nos Ajustes; conteúdo colado e FileReader convergem para a mesma importação confirmada. Seleção tem alternativa e falha recuperável, sem editar o manuscrito. Exportação do rascunho não exige nova gravação. Ver [entrega e limites](jornada/ENTREGA-V6-29.md). Formatos e transações existentes foram preservados; pacotes linguísticos grandes continuam em A02.
-
-## Pacotes opcionais — A02 parcial / v6-30
-
-`src/storage/pacotes.js` declara uma fábrica transacional de versões/blocos; não abre banco automaticamente nem inicia downloads. Detalhes, envelope experimental, testes e pendências em [Persistência de pacotes](PERSISTENCIA-PACOTES.md). O módulo não interpreta léxico nem integra o conteúdo de A01. A02 continua TODO; o pacote de teste IndexedDB só pertence ao desenvolvimento.
-
-## Instalação coordenada — v6-31, A02 parcial
-
-`src/storage/instalador-pacotes.js` consome a persistência v6-30 e um leitor limitado fornecido pelo hospedeiro. Coordena uma instalação e um bloco por vez, com progresso confirmado e retomada; não conhece rede, léxico ou manuscritos. Incluído no bundle como fábrica opcional, sem inicialização ou consumidor na interface. Contrato, cancelamento e pendências em [Persistência de pacotes](PERSISTENCIA-PACOTES.md).
-
-## Transporte local — v6-32, A02 parcial
-
-`src/storage/leitor-pacotes.js` adapta arquivos já escolhidos pelo hospedeiro para o contrato de leitura do coordenador. Valida a faixa e o limite antes de `FileReader.readAsArrayBuffer`, usando apenas o recorte necessário. Não resolve nomes/URLs nem interpreta índices. Cancelamento/timeout abortam; se a interrupção não puder ser confirmada, a instância recusa novas leituras. Fábrica opcional na montagem, sem novo controle na interface. Veja [Persistência de pacotes](PERSISTENCIA-PACOTES.md).
+Os diretórios previstos para acervo, estudo e cofre só serão criados com código real. Os fontes antigos ficam no vault; a nova árvore não carrega sua cascata, bundles ou experimentos. Não copiar textos privados do autor como fixtures.

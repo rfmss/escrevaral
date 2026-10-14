@@ -1,0 +1,80 @@
+/* Paleta sage/nanquim. Fonte nativa; nenhum recurso de rede. */
+* { box-sizing: border-box; }
+html { height: 100%; background: #ccd5c7; color: #1e2320; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: transparent; border: 1px solid #657367; border-radius: 0; padding: 9px 12px; min-height: 42px; }
+button:hover { background: #bbc8b7; }
+button:disabled { cursor: default; opacity: .55; }
+a { color: inherit; }
+a:focus, button:focus, input:focus, textarea:focus { outline: 2px solid #1e2320; outline-offset: 3px; }
+textarea:focus, input.titulo:focus { outline-offset: -2px; }
+[hidden] { display: none !important; }
+.pular { position: absolute; top: -100px; left: 16px; background: #1e2320; color: #ccd5c7; padding: 12px; z-index: 10; }
+.pular:focus { top: 8px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); }
+.cabecalho { position: relative; height: 76px; border-bottom: 1px solid #657367; padding: 20px 32px; }
+.marca { font-size: 22px; letter-spacing: -1px; text-decoration: none; font-weight: bold; }
+.marca span { border: 1px solid #1e2320; padding: 4px 3px 3px; margin-left: 2px; font-weight: normal; }
+.edicao { position: absolute; right: 32px; top: 30px; font-family: "Courier New", monospace; font-size: 10px; letter-spacing: 1.5px; }
+.oficina { position: absolute; top: 76px; bottom: 47px; left: 0; right: 0; }
+.lateral { position: absolute; top: 0; left: 0; bottom: 0; width: 245px; padding: 32px 24px; border-right: 1px solid #657367; overflow: auto; }
+.rotulo { font-family: "Courier New", monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #435347; }
+.mesa-ativa { border-top: 1px solid #8b9b8c; border-bottom: 1px solid #8b9b8c; padding: 13px 0; margin: 16px 0; }
+.mesa-ativa span { margin-right: 9px; font-size: 9px; }
+.lateral-nota { font-family: Georgia, "Times New Roman", serif; font-size: 20px; line-height: 1.5; margin: 28px 0 34px; }
+.ferramentas button { display: block; width: 100%; text-align: left; margin: 8px 0; border-color: #8b9b8c; font-size: 13px; }
+.atalho { float: right; font-family: "Courier New", monospace; font-size: 10px; padding-top: 3px; }
+.nota-custodia { font-size: 12px; color: #435347; line-height: 1.7; margin-top: 26px; }
+.construcao { margin-top: 36px; font-family: "Courier New", monospace; font-size: 10px; color: #435347; letter-spacing: .6px; }
+.folha { position: absolute; top: 0; bottom: 0; left: 245px; right: 0; background: #dbe1d6; }
+.regua { position: absolute; top: 0; left: 0; right: 0; height: 52px; border-bottom: 1px solid #8b9b8c; padding: 15px 6%; }
+.regua h1 { display: inline; font-size: 12px; font-weight: normal; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
+.regua > span { float: right; font-family: "Courier New", monospace; font-size: 10px; color: #435347; padding-top: 2px; }
+.campo-titulo { position: absolute; top: 77px; left: 6%; }
+.titulo { position: absolute; top: 101px; left: 6%; width: 88%; height: 53px; padding: 4px 0; border: 0; border-bottom: 1px solid #8b9b8c; background: transparent; font-family: Georgia, "Times New Roman", serif; font-size: 30px; }
+#manuscrito { position: absolute; top: 177px; bottom: 45px; left: 6%; width: 88%; height: calc(100% - 222px); background: transparent; border: 0; resize: none; padding: 8px 14px 40px 0; font-family: Georgia, "Times New Roman", serif; font-size: 20px; line-height: 1.8; overflow-y: auto; }
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: #647064; opacity: 1; }
+input::placeholder, textarea::placeholder { color: #647064; opacity: 1; }
+::selection { color: #dbe1d6; background: #354a3b; }
+.rodape-folha { position: absolute; bottom: 0; left: 0; right: 0; height: 35px; border-top: 1px solid #8b9b8c; padding: 9px 6%; font-family: "Courier New", monospace; font-size: 10px; color: #435347; }
+.rodape-folha > span + span { float: right; }
+.estado-barra { position: absolute; left: 0; right: 0; bottom: 0; min-height: 47px; border-top: 1px solid #657367; padding: 13px 24px; background: #ccd5c7; }
+#estado { margin: 0; font-size: 12px; padding-right: 130px; }
+#estado[data-kind="error"] { font-weight: bold; color: #542c21; }
+#estado[data-kind="saved"]::before { content: '✓ '; }
+.local { position: absolute; right: 24px; top: 16px; font-family: "Courier New", monospace; font-size: 10px; }
+.painel { position: fixed; top: 12%; bottom: 12%; left: 15%; right: 15%; z-index: 20; padding: 24px; border: 2px solid #1e2320; background: #ccd5c7; overflow-y: auto; }
+.painel-cabecalho { position: relative; border-bottom: 1px solid #657367; padding: 0 75px 20px 0; }
+.painel-cabecalho h2 { font-family: Georgia, serif; font-size: 27px; font-weight: normal; margin: 0; }
+.painel-cabecalho button { position: absolute; top: 0; right: 0; }
+.painel p { max-width: 55em; }
+.versoes { list-style: none; padding: 0; }
+.versoes li { margin: 18px 0; border-bottom: 1px solid #8b9b8c; padding-bottom: 16px; }
+.versoes li > span { display: block; margin-top: 8px; white-space: pre-wrap; overflow-wrap: break-word; word-wrap: break-word; }
+#copia { display: block; width: 100%; height: 190px; margin: 10px 0 16px; background: #dbe1d6; border: 1px solid #657367; padding: 14px; font-family: Georgia, serif; }
+.falha-inicial { position: fixed; bottom: 0; left: 0; right: 0; padding: 12px; background: #ccd5c7; z-index: 30; }
+@media (max-width: 700px) {
+  .cabecalho { height: 60px; padding: 15px 18px; }
+  .marca { font-size: 19px; }
+  .edicao { right: 18px; top: 24px; font-size: 9px; }
+  .edicao-detalhe { display: none; }
+  .oficina { top: 60px; bottom: 65px; }
+  .lateral { height: 67px; width: 100%; border-right: 0; border-bottom: 1px solid #657367; padding: 12px 3%; overflow: visible; }
+  .lateral > p, .ferramentas > p, .atalho { display: none; }
+  .ferramentas button { display: inline-block; width: 31%; margin: 0 1% 0 0; font-size: 11px; padding: 4px; min-height: 42px; text-align: center; vertical-align: top; }
+  .folha { left: 0; top: 67px; }
+  .regua { height: 39px; padding-top: 10px; }
+  .campo-titulo { top: 49px; }
+  .titulo { top: 70px; font-size: 25px; height: 41px; }
+  #manuscrito { top: 124px; bottom: 35px; height: calc(100% - 159px); font-size: 18px; }
+  .rodape-folha > span + span, .local { display: none; }
+  .estado-barra { min-height: 65px; padding: 11px 18px; }
+  #estado { padding: 0; font-size: 11px; }
+  .painel { top: 5%; bottom: 5%; left: 3%; right: 3%; padding: 18px; }
+}
+@media (max-height: 500px) {
+  .campo-titulo { display: none; }
+  .titulo { top: 44px; height: 38px; font-size: 23px; }
+  #manuscrito { top: 92px; height: calc(100% - 132px); }
+}

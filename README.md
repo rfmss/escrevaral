@@ -1,59 +1,34 @@
 # Escrevaral
 
-Editor local para escrever e examinar textos em português brasileiro. As lentes explicam ocorrências e seus limites; nunca modificam o manuscrito. Cadernos, autoria e exportações permanecem no dispositivo.
+Uma oficina local para escrever em português brasileiro, construída com HTML, CSS e JavaScript ES5. A aparência usa papel sage, tinta nanquim e tipografia nativa. A manutenção depende de módulos pequenos, contratos explícitos e decisões registradas.
 
-**Site:** https://escrevaral.com · **Plano e pendências:** [Jornada](docs/JORNADA-LINGUISTICA.md)
+**Esta branch é a reconstrução, versão 0.1.** A produção continua em [escrevaral.com](https://escrevaral.com). A referência anterior está em [vaultOUT26](https://github.com/rfmss/escrevaral/tree/vaultOUT26), fixada no commit `53c4afe5090f3bcdc3a5fac9bd920c4783a2acae`. O código desta árvore foi escrito para a base nova; ainda não contém o cofre linguístico.
 
-**Vai continuar o projeto? Leia primeiro o [Plano mestre e guia de retomada](docs/PLANO-MESTRE.md).** Ele reúne decisões, estado dos motores, sequência de trabalho e como conferir a evolução real na main.
+## O que já funciona
 
-**Filosofia e progresso:** [engenharia para aparelhos antigos](docs/FILOSOFIA-E-COMPATIBILIDADE.md) · [árvore TODO/DONE](docs/PLANO-MESTRE.md#árvore-de-execução--plano-v3). A época KitKat/iPad 2012 é referência de engenharia, sem exigência de teste nesses aparelhos.
+Uma Mesa de texto simples com título, gravação após pausa, cópia de recuperação por sessão, revisão anterior e exportação `.txt`. Ctrl/Cmd+S solicita gravação. Uma falha de armazenamento mantém o rascunho disponível para copiar ou baixar. Seleção e composição de acentos permanecem com o campo nativo; a interface não reescreve o texto durante a digitação.
 
-## Desenvolver
+Dados desta frente usam `escrevaral.next.mesa.v1.`. Ela não migra nem altera as chaves do site antigo. O modo portátil funciona com arquivos incorporados; a persistência de arquivos locais depende do navegador, e a interface informa falhas. A cópia baixada deve ser mantida pelo autor.
 
-Node.js 22 ou superior. As dependências npm são ferramentas de desenvolvimento; o aplicativo não carrega bibliotecas de CDN.
+Ainda faltam cadernos, migração, importação, motores, formatação, impressão e instalação PWA. Há detecção de conflitos e cópias independentes por sessão; não há transação atômica entre abas em localStorage. Recuperações não têm limpeza automática neste primeiro lote. Esta fatia não substitui o produto em uso.
+
+## Rodar e conferir
+
+Node 22+ apenas no desenvolvimento. O aplicativo entregue não usa npm, CDN ou framework.
 
 ```sh
 npm ci --ignore-scripts
+npm test
 npm run build
 npm start
 ```
 
-Abra `http://127.0.0.1:8080`. Edite as fontes e execute novamente a montagem para atualizar a distribuição. Não há observador automático de arquivos.
+Abra `http://127.0.0.1:8080`. `dist/site/` contém o site estático; `dist/escrevaral-portatil.html` contém os mesmos fontes incorporados para abertura local. O CI disponibiliza os dois como artefato de download, sem mudar o domínio de produção.
 
-```sh
-npm run build:check  # fontes e distribuição conferem, sem regravar
-npm test            # integridade, corpus de regressão, contratos e cache simulado
-npm run cofre:example
-```
+`index.html` é a entrada legível. `modules.json` declara a composição privada; o gerador apenas reúne fábricas ES5 e injeta dependências explícitas. Não há carregador genérico ou namespace global do aplicativo. `assets/mesa.js` e `dist/` são gerados e ficam fora do Git. Uma mudança de fonte requer nova montagem.
 
-Ferramentas opcionais de navegador, fora do fluxo obrigatório de entrega: `npx playwright install chromium` e `npm run test:browser`. O workflow **Controles e responsividade** também pode ser disparado manualmente. Regressão local não equivale a certificação linguística nem a teste em aparelho físico.
+## Como continuar
 
-## Onde trabalhar
+Leia [estado](docs/ESTADO.md), [diário de bordo](docs/DIARIO.md) e [arquitetura](docs/ARQUITETURA.md). A [matriz de continuidade](docs/CONTINUIDADE.json) separa funções antigas de funções novas. A [decisão de fundação](docs/decisoes/001-fundacao.md) registra o que está aprovado e o que ainda é hipótese.
 
-| Caminho | Responsabilidade |
-| --- | --- |
-| `src/index.template.html` | Estrutura HTML da interface, sem motores ou dados inline |
-| `src/app/`, `src/editor/` | Inicialização, integração com o editor e contrato de revisão |
-| `src/ui/`, `src/storage/` | Interface, estilos e persistência local |
-| `packages/cofre/` | Núcleo linguístico reutilizável e exemplo independente |
-| `resources/pt-BR/local/` | Inventários linguísticos locais extraídos da aplicação |
-| `ptbr/` | Módulos PT-BR existentes, corpus, estudos e histórico; caminhos preservados |
-| `packages/connectors/portparser/` | Avaliação isolada, adaptador CoNLL-U e snapshot atribuído do projeto externo |
-| `build/`, `scripts/` | Manifestos, versão, montagem determinística e comandos |
-| `tests/`, `docs/` | Verificações e documentação de manutenção |
-
-## Distribuições
-
-`npm run build` gera três saídas das mesmas fontes:
-
-- **Site:** `dist/site/`, com CSS e JavaScript externos, nomes por hash e service worker.
-- **Portátil:** `escrevaral.html`, arquivo único para abrir sem instalação. É uma distribuição gerada, não o código-fonte de desenvolvimento.
-- **Cofre:** `packages/cofre/dist/cofre.cjs`, copiável para outro projeto, sem DOM ou armazenamento.
-
-A publicação atual do GitHub Pages usa a raiz da `main`. Por isso `index.html`, `escrevaral.html`, `service-worker.js` e `assets/` gerados também são versionados. Não os edite manualmente. `dist/` e `node_modules/` não entram no Git.
-
-## Manutenção
-
-Leia [Arquitetura](docs/ARQUITETURA.md), [Conectores](docs/CONECTORES.md), [Cofre](packages/cofre/README.md) e [avaliação do Portparser](packages/connectors/portparser/README.md). Os avisos de terceiros estão em [THIRD_PARTY.md](THIRD_PARTY.md).
-
-A reorganização v6-25 separa montagem, aplicação e cofre. O controlador legado do editor e partes da cascata CSS ainda precisam de decomposição gradual. O modelo Portparser não está instalado nem integrado ao site. As pendências técnicas e linguísticas continuam explícitas na Jornada.
+O projeto é desenvolvido por Rafa Mass com assistência de modelos de linguagem, decisões explícitas e revisão orientada ao risco. Nenhum teste é apresentado como prova de qualidade literária ou compatibilidade universal. O README descreve o que existe; planos ficam identificados como planos.

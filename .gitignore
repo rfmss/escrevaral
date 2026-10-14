@@ -1,7 +1,4 @@
 node_modules/
 dist/
-packages/*/dist/
+assets/mesa.js
 qa-output/
-.external/
-*.tgz
-__pycache__/

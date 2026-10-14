@@ -1,0 +1,10 @@
+[
+  { "id": "documento", "source": "src/editor/documento.js", "deps": [] },
+  { "id": "repositorio", "source": "src/storage/rascunho.js", "deps": ["documento"] },
+  { "id": "sessao", "source": "src/editor/sessao.js", "deps": ["documento"] },
+  { "id": "plataforma", "source": "src/plataforma/navegador.js", "deps": [] },
+  { "id": "transferencia", "source": "src/transferencia/exportar.js", "deps": [] },
+  { "id": "mesa", "source": "src/interface/mesa.js", "deps": [] },
+  { "id": "coordenador", "source": "src/editor/coordenador.js", "deps": [] },
+  { "id": "iniciar", "source": "src/app/iniciar.js", "deps": ["repositorio", "sessao", "plataforma", "transferencia", "mesa", "coordenador"] }
+]

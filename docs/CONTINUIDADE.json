@@ -1,0 +1,236 @@
+{
+  "versao": 1,
+  "data": "2026-10-14",
+  "referencia": {
+    "repo": "rfmss/escrevaral",
+    "branch": "vaultOUT26",
+    "sha": "53c4afe5090f3bcdc3a5fac9bd920c4783a2acae"
+  },
+  "escopo": "Inventário inicial; não confundir fonte localizada com paridade comprovada. R00 ainda parcial.",
+  "capacidades": [
+    {
+      "id": "C01",
+      "capacidade": "Escrever, selecionar, compor acentos",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "implementado nesta fatia",
+      "aceite": "Reabrir preserva texto; IME não dispara salvamento intermediário."
+    },
+    {
+      "id": "C02",
+      "capacidade": "Gravar, recuperar e exportar rascunho",
+      "fonte_legada": "src/storage/documentos.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "parcial",
+      "aceite": "Quota, conflito e texto corrompido não apagam a origem; exportação simples disponível."
+    },
+    {
+      "id": "C03",
+      "capacidade": "Gavetas e cadernos",
+      "fonte_legada": "src/storage/cadernos.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Criar, abrir e trocar projeto sem perder texto."
+    },
+    {
+      "id": "C04",
+      "capacidade": "Importação e exportação por caderno/acervo",
+      "fonte_legada": "src/storage/cadernos.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Preservar IDs e vínculos, tratar colisões e interrupção."
+    },
+    {
+      "id": "C05",
+      "capacidade": "Lixeira e restauração",
+      "fonte_legada": "src/storage/cadernos.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Excluir e restaurar sem perder vínculo ou conteúdo."
+    },
+    {
+      "id": "C06",
+      "capacidade": "Navegação por data e busca",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Encontrar a folha e manter orientação."
+    },
+    {
+      "id": "C07",
+      "capacidade": "Retomada de seleção e rolagem",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Retomar posição na revisão correta sem saltar durante acentos."
+    },
+    {
+      "id": "C08",
+      "capacidade": "Fichas e universo do caderno",
+      "fonte_legada": "src/ui/universo.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Relações estáveis entre ficha, cena e caderno."
+    },
+    {
+      "id": "C09",
+      "capacidade": "Quadro responsivo",
+      "fonte_legada": "src/ui/quadro.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Exibir as mesmas cenas, com layout legível no espaço disponível."
+    },
+    {
+      "id": "C10",
+      "capacidade": "Varal, timeline e manuscrito reunido",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Uma única fonte do texto em todas as visões; inventariar escopo existente."
+    },
+    {
+      "id": "C11",
+      "capacidade": "Pesquisa e planejamento",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Inventariar ações realmente existentes antes de reconstruir."
+    },
+    {
+      "id": "C12",
+      "capacidade": "Notas rápidas e post-its",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Persistência, recuperação e exclusão explícita."
+    },
+    {
+      "id": "C13",
+      "capacidade": "Menu, breadcrumb e diálogos",
+      "fonte_legada": "src/index.template.html",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "parcial",
+      "aceite": "A Mesa tem controles e diálogos; navegação geral ainda não existe."
+    },
+    {
+      "id": "C14",
+      "capacidade": "Foco, linha central e impressão",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Preservar edição, seleção e composição; efeito não pode dirigir o manuscrito."
+    },
+    {
+      "id": "C15",
+      "capacidade": "Pomodoro, calculadora e calendário",
+      "fonte_legada": "src/ui/utilitarios.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Instâncias isoladas e sem trabalho oculto desnecessário."
+    },
+    {
+      "id": "C16",
+      "capacidade": "Sage, nanquim, temas e iconografia",
+      "fonte_legada": "src/ui/styles",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "parcial",
+      "aceite": "Paleta e estrutura inicial presentes; referências visuais completas ainda pendentes."
+    },
+    {
+      "id": "C17",
+      "capacidade": "Máquina, carimbo e chaveiro",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Inventariar implementação e reduzir efeitos a estados discretos; chaveiro não é criptografia."
+    },
+    {
+      "id": "C18",
+      "capacidade": "Consulta lexical e flexões",
+      "fonte_legada": "packages/cofre/README.md",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Transportar dados com licença, contrato e limites."
+    },
+    {
+      "id": "C19",
+      "capacidade": "Lentes de análise",
+      "fonte_legada": "packages/cofre/src",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Uma lente explícita por vez; manuscrito imutável; limites por capacidade."
+    },
+    {
+      "id": "C20",
+      "capacidade": "Preparação e reserva lexical",
+      "fonte_legada": "ptbr/preparacao.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Preservar teto, abstenção e cancelamento."
+    },
+    {
+      "id": "C21",
+      "capacidade": "Contexto distante e alvo exato",
+      "fonte_legada": "src/editor/contrato-analise.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Portar casos A03 com Unicode, proteção e seleção além de 100 resultados."
+    },
+    {
+      "id": "C22",
+      "capacidade": "Filtro de pertinência",
+      "fonte_legada": "docs/jornada/ENTREGA-V6-63.md",
+      "estado_legado": "Pendente na v6.63.",
+      "estado_novo": "pendente",
+      "aceite": "Era pendência na origem: distinguir não verificado e sem indício."
+    },
+    {
+      "id": "C23",
+      "capacidade": "Formatação e marcação",
+      "fonte_legada": "docs/FILOSOFIA-E-COMPATIBILIDADE.md",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "decisão aberta",
+      "aceite": "Deliberar texto marcado versus edição rica; não tratar texto simples como decisão final."
+    },
+    {
+      "id": "C24",
+      "capacidade": "Clipboard e política de colagem",
+      "fonte_legada": "src/editor/controlador.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Inventariar política existente; nenhuma restrição nova nesta fatia."
+    },
+    {
+      "id": "C25",
+      "capacidade": "Linhagem e integridade",
+      "fonte_legada": "src/storage/linhagem.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Preservar limites; hash local não comprova autoria humana ou anterioridade externa."
+    },
+    {
+      "id": "C26",
+      "capacidade": "Pacotes linguísticos opcionais",
+      "fonte_legada": "docs/CONTRATO-PACOTES-LINGUISTICOS.md",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "fora da primeira fatia",
+      "aceite": "Reusar somente com custo, licença e necessidade concreta."
+    },
+    {
+      "id": "C27",
+      "capacidade": "Portátil e instalação offline",
+      "fonte_legada": "src/app/offline.js",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "parcial",
+      "aceite": "Portátil gerado; sem service worker ou instalação; file storage depende do ambiente."
+    },
+    {
+      "id": "C28",
+      "capacidade": "Guias e Anatomia do Livro",
+      "fonte_legada": "src/index.template.html",
+      "estado_legado": "Referência localizada; comportamento completo não reavaliado neste lote.",
+      "estado_novo": "pendente",
+      "aceite": "Inventariar conteúdos e licenças antes de transportar."
+    }
+  ]
+}

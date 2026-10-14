@@ -1,22 +1,13 @@
 {
-  "name": "escrevaral",
-  "version": "6.63.0",
+  "name": "escrevaral-reconstrucao",
+  "version": "0.1.0",
   "private": true,
-  "description": "Editor local e cofre linguístico para português brasileiro",
-  "engines": {
-    "node": ">=22"
-  },
+  "description": "Oficina local de escrita — reconstrução em ES5",
   "scripts": {
     "build": "node scripts/build.cjs",
-    "build:check": "node scripts/build.cjs --check",
-    "test": "node scripts/test.cjs",
-    "test:browser": "node tests/ptbr-browser.cjs",
-    "start": "node scripts/serve.cjs",
-    "cofre:example": "node packages/cofre/examples/analisar.cjs"
+    "test": "node scripts/check.cjs && node tests/persistencia.cjs",
+    "start": "node scripts/serve.cjs"
   },
-  "devDependencies": {
-    "acorn": "8.15.0",
-    "fake-indexeddb": "6.2.5",
-    "playwright": "1.55.0"
-  }
+  "engines": { "node": ">=22" },
+  "devDependencies": { "acorn": "8.15.0" }
 }
