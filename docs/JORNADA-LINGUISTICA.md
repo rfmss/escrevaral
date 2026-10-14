@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 13/10/2026. Base do produto auditada: `ff63d24523e1996b4e03fd9e4af51e0fc79e0007`.
+Atualizado em 14/10/2026. Base do produto auditada: `53c4afe5090f3bcdc3a5fac9bd920c4783a2acae`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.63 / A03-alvo: Examinar este contexto preserva a ocorrência escolhida mesmo depois dos100 resultados iniciais. Apresenta o alvo, sua eventual locução e apoios diretos, com o mesmo contexto, candidatos e teto de saída. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.64 / A03-pertinencia: filtro explícito das análises com indícios já preparados, com acesso a Todas as análises e distinção entre ausência de indício e pertinência não verificada. Retomada da main; reconstrução convertida em adendo de engenharia. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -16,9 +16,9 @@ O autor escreve; liga Escrevaral; escolhe uma única lente; recebe trechos exato
 
 ## Fila atual
 
-- A03-pertinencia: oferecer filtro explícito das análises com indícios no recorte preparado, distinguindo nenhum indício de pertinência não verificada e preservando Todas as análises. Sem nova varredura, sem fila de lentes e sem esconder falta de cobertura.
+- A03-regioes: delimitar o primeiro recorte de preparação de sinais fora do início da folha, reutilizando a prova cancelável de proteções anteriores. Fixar casos de citação/código abertos, revisão e troca de folha antes de ativar sinais; manter não verificado quando a prova não couber nos limites existentes.
 - M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.
-- Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.
+- Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece parcial.
 - Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.
 - Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.
 - Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.
@@ -160,9 +160,9 @@ Uma entrada simples para estudar o próprio texto.
 - Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.
 - Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar.
 
-**Condição de conclusão:** A03-alvo integrado ao pedido explícito: inspeção contextual preservada, saída restrita à ocorrência/locução/apoios, até100 achados. Não corta a linha nem desloca o contexto para obter uma leitura. Preparação700ms/2000/400/24, prova distante por passos e identidade/cancelamento mantidos. Falta o filtro de pertinência das lentes; A03 geral continua parcial.
+**Condição de conclusão:** Filtro de pertinência integrado por tarefa; padrão Todas as análises. Política separada em ptbr/pertinencia.js, sem manuscrito, DOM ou motores. Mostra contagens dos três estados; filtrar não agenda preparação nem exames. Limites 700 ms/2000 unidades/400 visitas/24 ocorrências e invalidação existentes preservados. A03 continua parcial: sinais fora do início dependem de contexto de proteção comprovado; preparação incremental geral pendente.
 
-Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`, `docs/jornada/ENTREGA-V6-57.md`, `docs/jornada/ENTREGA-V6-58.md`, `docs/jornada/ENTREGA-V6-59.md`, `docs/jornada/ENTREGA-V6-60.md`, `docs/jornada/ENTREGA-V6-61.md`, `docs/jornada/ENTREGA-V6-62.md`, `docs/jornada/ENTREGA-V6-63.md`.
+Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`, `docs/jornada/ENTREGA-V6-57.md`, `docs/jornada/ENTREGA-V6-58.md`, `docs/jornada/ENTREGA-V6-59.md`, `docs/jornada/ENTREGA-V6-60.md`, `docs/jornada/ENTREGA-V6-61.md`, `docs/jornada/ENTREGA-V6-62.md`, `docs/jornada/ENTREGA-V6-63.md`, `docs/jornada/ENTREGA-V6-64.md`.
 
 ### P10 — Integrar e comprovar cada módulo
 

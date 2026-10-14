@@ -56,6 +56,7 @@
     "src/editor/controlador.js",
     "ptbr/leitura-visual.js",
     "ptbr/preparacao.js",
+    "ptbr/pertinencia.js",
     "ptbr/painel.js",
     "src/app/offline.js"
   ],
@@ -117,6 +118,7 @@
     "src/editor/controlador.js",
     "ptbr/leitura-visual.js",
     "ptbr/preparacao.js",
+    "ptbr/pertinencia.js",
     "ptbr/painel.js",
     "src/app/offline.js"
   ],

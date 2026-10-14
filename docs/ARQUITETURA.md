@@ -53,6 +53,8 @@ O worker moderno permanece isolado em seu próprio arquivo. Falha de registro/in
 
 ## Dívidas explícitas
 
+Direção de 14/10/2026: [evolução incremental da main](ADENDO-EVOLUCAO-2026-10-14.md). A proposta de reconstrução contribui com critérios; não substitui esta arquitetura. Em v6.64, `ptbr/pertinencia.js` separa a seleção de lentes do DOM: recebe estados preparados, devolve IDs e contagens. `ptbr/preparacao.js` mantém obtenção/validade dos sinais; `ptbr/painel.js` apresenta o filtro. Sem persistência ou nova análise nessa política.
+
 `src/editor/controlador.js` ainda concentra coordenação de fluxos antigos. Os estilos mantêm a ordem histórica da cascata. Os módulos puros de `ptbr/` ainda compartilham espaço com corpus e documentação. A decomposição seguinte deve tratar um fluxo por vez, com contratos próprios, sem trocar armazenamento ou UX por conveniência.
 
 Continuam revisão de acessibilidade e custo no código, avaliação linguística reservada e decisão sobre modelos grandes. Testes visuais e em dispositivos foram dispensados por Rafael; não são pendência de entrega. O bundle do cofre inclui os inventários atuais; carregamento por lente e execução em Worker são evoluções possíveis, não capacidades entregues.

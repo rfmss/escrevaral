@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
-  <meta name="asset-version" content="20261013-scrvrl-alvo-v6-63">
+  <meta name="asset-version" content="20261014-scrvrl-pertinencia-v6-64">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
 
@@ -8601,6 +8601,26 @@ SOFTWARE.
 }(typeof window!=='undefined'?window:this));
 
 ;
+/* Fonte: ptbr/pertinencia.js */
+/* Seleção de lentes pelos estados já preparados. ES5; sem texto, DOM ou motores. */
+(function(root){
+  'use strict';
+  function select(lenses,states,onlySignals){
+    var visible=[],found=0,absent=0,unknown=0,i,id,state;
+    for(i=0;i<lenses.length;i++){
+      id=lenses[i];state=states[id];
+      if(state==='encontrado'){found++;}
+      else if(state==='nao-encontrado-no-recorte'){absent++;}
+      else{unknown++;}
+      if(!onlySignals||state==='encontrado'){visible.push(id);}
+    }
+    return{visible:visible,found:found,absent:absent,unknown:unknown};
+  }
+  root.Escr=root.Escr||{};root.Escr.selectPreparedLenses=select;
+  if(typeof module!=='undefined'&&module.exports){module.exports=select;}
+}(typeof window!=='undefined'?window:this));
+
+;
 /* Fonte: ptbr/painel.js */
 /* Painel de análise da main. ES5, sem rede, sem alterar manuscritos nem o cofre.
  * O editor existente permanece a origem da escrita e das escolhas persistidas.
@@ -8706,8 +8726,16 @@ SOFTWARE.
   }
   var prepStatus=el('p',view,'ptbr-status','');prepStatus.setAttribute('aria-live','polite');
   var reservedButton=el('button',view,'ptbr-reserved-button','Ver palavras reconhecidas');reservedButton.type='button';reservedButton.hidden=true;
+  var lensFilterBox=el('div',view,'ptbr-reserve-filter');lensFilterBox.hidden=true;
+  var lensFilterLabel=el('label',lensFilterBox,'ptbr-status','Mostrar análises desta tarefa');lensFilterLabel.setAttribute('for','ptbr-lens-filter');
+  var lensFilter=el('select',lensFilterBox,'');lensFilter.id='ptbr-lens-filter';lensFilter.setAttribute('aria-controls','ptbr-lens-list');
+  el('option',lensFilter,'','Todas as análises').value='all';
+  el('option',lensFilter,'','Com indícios neste recorte').value='signals';lensFilter.value='all';
+  var lensFilterStatus=el('p',lensFilterBox,'ptbr-status','');lensFilterStatus.setAttribute('role','status');
   var wheel=el('div',view,'ptbr-wheel');
+  wheel.id='ptbr-lens-list';
   var preparation=null,prepared=null,signalLabels={};
+  lensFilter.addEventListener('change',paintLensFilter,false);
   var lexicalInput=null, lexicalButton=null;
   if(E.lookupLexeme){
     var lexicalBox=el('div',view,'ptbr-lexical');
@@ -8733,6 +8761,17 @@ SOFTWARE.
   var results=el('div',view,'ptbr-results');
   var empty=el('div',results,'ptbr-empty','Seu texto, por dentro. Escolha uma lente para abrir a leitura anotada.');
   var note=el('p',view,'ptbr-status','O silêncio de uma lente não certifica o texto. A escrita permanece sua.');
+  function paintLensFilter(){
+    var lenses=groups[currentGroup||0].lenses,states={},id,at,selection,buttons=wheel.querySelectorAll('button');
+    lensFilterBox.hidden=screen!=='group'||!E.selectPreparedLenses;
+    for(at=0;at<lenses.length;at++){id=lenses[at];states[id]=preparation?preparation.state(prepared,id):'nao-verificado';}
+    selection=E.selectPreparedLenses?E.selectPreparedLenses(lenses,states,lensFilter.value==='signals'):{visible:lenses};
+    for(at=0;at<buttons.length;at++){buttons[at].hidden=selection.visible.indexOf(buttons[at].getAttribute('data-ptbr-lens'))===-1;}
+    if(!E.selectPreparedLenses){return;}
+    lensFilterStatus.textContent='Nesta tarefa: '+selection.found+' com indícios; '+selection.absent+' sem indícios no recorte; '+selection.unknown+' com pertinência não verificada.'+
+      (lensFilter.value==='signals'?(selection.visible.length?'':' Nenhuma análise com indícios neste recorte.')+' Use Todas as análises para acessar as demais.':'')+
+      ' Filtrar não executa análises.';
+  }
   function paintPreparation(result){
     prepared=result;reservedButton.hidden=screen!=='group'||currentGroup!==1||!result||!result.lexicalAvailable;reservedButton.disabled=!result||!result.occurrences||!result.occurrences.length;
     reservedButton.textContent=result&&result.occurrences?'Ver palavras reconhecidas ('+result.occurrences.length+')':'Ver palavras reconhecidas';
@@ -8743,6 +8782,7 @@ SOFTWARE.
       signalLabels[id].setAttribute('data-signal-state',state);
     }}
     prepStatus.textContent=result?'Preparação leve: trecho entre as posições '+(result.scope.start+1)+' e '+result.scope.end+(result.partial?'; o restante não foi verificado.':'.')+' Indícios não são classificações nem erros.':'A preparação aguarda uma pausa na escrita. Nenhuma análise completa é automática.';
+    paintLensFilter();
   }
   if(E.createPreparation&&E.createSignalTriage){preparation=E.createPreparation(E,{
     setTimeout:function(fn,ms){return root.setTimeout(fn,ms);},clearTimeout:function(id){root.clearTimeout(id);},
@@ -8761,8 +8801,7 @@ SOFTWARE.
     title.textContent=next==='home'?'O que você quer observar?':next==='lexical'?'Consultar uma palavra':next==='result'?(labels[lastLens]||'Resultado'):next==='reserved'?'Palavras reconhecidas':groups[currentGroup||0].title;
     intro.hidden=next==='result'||next==='reserved';
     intro.textContent=next==='home'?'Escolha uma tarefa para olhar seu texto. Você decide o que examinar e o que manter.':next==='lexical'?'Digite uma palavra ou selecione-a no texto antes de abrir este painel. A consulta mostra possibilidades; o sentido depende da frase.':'Escolha um aspecto abaixo para examinar a folha atual. Seu texto permanece intacto.';
-    var buttons=wheel.querySelectorAll('button');
-    for(var at=0;at<buttons.length;at++){buttons[at].hidden=groups[currentGroup||0].lenses.indexOf(buttons[at].getAttribute('data-ptbr-lens'))===-1;}
+    paintLensFilter();
     if(next==='home'||next==='group'){status.textContent=manuscript.value.length>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.':manuscript.value?'A análise completa começa quando você escolhe um aspecto.':'Escreva na folha para começar. Você pode consultar uma palavra mesmo com a folha vazia.';}
     reservedButton.hidden=next!=='group'||currentGroup!==1||!prepared||!prepared.lexicalAvailable;
     if(preparation){if(next==='home'||next==='group'){preparation.request();}else{preparation.cancel(false);}}
@@ -8835,7 +8874,7 @@ SOFTWARE.
       var selectionStart=manuscript.selectionStart,selectionEnd=manuscript.selectionEnd;
       lexicalInput.value=typeof selectionStart==='number'&&selectionEnd>selectionStart&&selectionEnd-selectionStart<=64?s.slice(selectionStart,selectionEnd):'';
     }
-    wheel.textContent='';signalLabels={};var chosen=[],id,btn,k;
+    wheel.textContent='';signalLabels={};lensFilter.value='all';var chosen=[],id,btn,k;
     for(k in labels){if(own.call(labels,k)){chosen.push(k);}}
     for(var i=0;i<chosen.length;i++){id=chosen[i];
       btn=el('button',wheel,'',null);btn.type='button';el('span',btn,'',labels[id]);btn.setAttribute('data-ptbr-lens',id);

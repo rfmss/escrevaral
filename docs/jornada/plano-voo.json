@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "planVersion": 4,
-  "updated": "2026-10-13",
+  "updated": "2026-10-14",
   "scope": "Marcos da primeira versão; não são porcentagem da língua, esforço ou precisão. Recortes linguísticos ainda devem ser fechados antes de implementados.",
   "doneDefinition": "Entrega delimitada implementada/documentada e verificada por integridade conforme seu critério. Testes em dispositivos e teste visual não são requisitos de conclusão ou publicação.",
   "tracks": [
@@ -166,9 +166,10 @@
             "docs/jornada/ENTREGA-V6-60.md",
             "docs/jornada/ENTREGA-V6-61.md",
             "docs/jornada/ENTREGA-V6-62.md",
-            "docs/jornada/ENTREGA-V6-63.md"
+            "docs/jornada/ENTREGA-V6-63.md",
+            "docs/jornada/ENTREGA-V6-64.md"
           ],
-          "progress": "A03-alvo integrado ao pedido explícito: inspeção contextual preservada, saída restrita à ocorrência/locução/apoios, até100 achados. Não corta a linha nem desloca o contexto para obter uma leitura. Preparação700ms/2000/400/24, prova distante por passos e identidade/cancelamento mantidos. Falta o filtro de pertinência das lentes; A03 geral continua parcial."
+          "progress": "Filtro de pertinência integrado por tarefa; padrão Todas as análises. Política separada em ptbr/pertinencia.js, sem manuscrito, DOM ou motores. Mostra contagens dos três estados; filtrar não agenda preparação nem exames. Limites 700 ms/2000 unidades/400 visitas/24 ocorrências e invalidação existentes preservados. A03 continua parcial: sinais fora do início dependem de contexto de proteção comprovado; preparação incremental geral pendente."
         }
       ]
     },
@@ -355,12 +356,12 @@
   ],
   "next": "A03",
   "lastDelivery": {
-    "version": "6.63.0",
+    "version": "6.64.0",
     "completed": [],
     "baselineDone": 12,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-63.md",
-    "record": "docs/jornada/entregas/v6-63.json"
+    "evidence": "docs/jornada/ENTREGA-V6-64.md",
+    "record": "docs/jornada/entregas/v6-64.json"
   },
   "scopeChanges": [
     {

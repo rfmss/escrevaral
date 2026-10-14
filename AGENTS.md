@@ -4,6 +4,8 @@ Este arquivo orienta IAs que trabalham neste repositório. Instruções atuais d
 
 ## Leia antes de alterar
 
+**Decisão vigente — 14/10/2026:** continuar a `main` e o produto publicado. A reconstrução foi encerrada como direção; aproveitar somente as melhorias coerentes do [adendo de evolução](docs/ADENDO-EVOLUCAO-2026-10-14.md). `vaultOUT26` e `reconstrucao` são referências, não fontes para um merge integral. O plano original e as fichas de entrega continuam sendo a fila e o diário de bordo. Preservar o design e os fluxos atuais enquanto as responsabilidades são separadas por incrementos pequenos.
+
 1. `docs/PLANO-MESTRE.md`: ponto de entrada completo, decisões, sequência e procedimento para conferir evolução na main.
 2. `docs/JORNADA-LINGUISTICA.md`: visão, etapas e critérios.
 3. `docs/jornada/estado.json`: estado atual e fonte da página pública `/jornada/`.

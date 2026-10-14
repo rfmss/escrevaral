@@ -1,17 +1,17 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-63-1cc7bf19cf9e";
-const ASSET_VERSION = "20261013-scrvrl-alvo-v6-63";
+const CACHE_NAME = "scrvrl-offline-v6-64-b9f5b9d17574";
+const ASSET_VERSION = "20261014-scrvrl-pertinencia-v6-64";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20261013-scrvrl-alvo-v6-63/cofre.e7e1b3b5699d1a02.js",
+    "url": "./assets/20261014-scrvrl-pertinencia-v6-64/cofre.e7e1b3b5699d1a02.js",
     "sha256": "e7e1b3b5699d1a022171a8abb4bc4655cc70aa64e4fedeca9f4f9697a32b65dc"
   },
   {
-    "url": "./assets/20261013-scrvrl-alvo-v6-63/app.a778bccb312acf78.js",
-    "sha256": "a778bccb312acf78fd26488a3002c226749abcaa33b2b012994d31f7b65966fe"
+    "url": "./assets/20261014-scrvrl-pertinencia-v6-64/app.9c6af9c84a9630d3.js",
+    "sha256": "9c6af9c84a9630d3a1b4541c06da766c5247420723bdf05517308a3f19918b52"
   },
   {
-    "url": "./assets/20261013-scrvrl-alvo-v6-63/styles.79d88716e7951271.css",
+    "url": "./assets/20261014-scrvrl-pertinencia-v6-64/styles.79d88716e7951271.css",
     "sha256": "79d88716e79512714f35c93d75498a0f1f336e4af8be2cfdb941c8e875ca0352"
   }
 ];
@@ -28,7 +28,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
   const cache=await caches.open(CACHE_NAME);
-  const index=await checkedAsset({url:'./index.html',sha256:'4eedb7f06eee3fbf261c7330265964783e08db0aee646cb94476d32749f6be63'});
+  const index=await checkedAsset({url:'./index.html',sha256:'b1017c6d54b49b7bcf5df7ce3fcc6fd0a34ab9816a43295e244df21f2232acd2'});
   if(!index.ok||(await index.clone().text()).indexOf('content="'+ASSET_VERSION+'"')<0)throw new Error('Documento de outra versão');
   await Promise.all(REQUIRED_ASSETS.map(async asset=>cache.put(asset.url,await checkedAsset(asset))));
   await cache.put('./index.html',index.clone());await cache.put('./',index);

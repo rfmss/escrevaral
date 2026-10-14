@@ -1,14 +1,14 @@
 {
-  "version": 52,
-  "updated": "13/10/2026",
-  "baseline": "ff63d24523e1996b4e03fd9e4af51e0fc79e0007",
+  "version": 53,
+  "updated": "14/10/2026",
+  "baseline": "53c4afe5090f3bcdc3a5fac9bd920c4783a2acae",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.63 / A03-alvo: Examinar este contexto preserva a ocorrência escolhida mesmo depois dos100 resultados iniciais. Apresenta o alvo, sua eventual locução e apoios diretos, com o mesmo contexto, candidatos e teto de saída. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.64 / A03-pertinencia: filtro explícito das análises com indícios já preparados, com acesso a Todas as análises e distinção entre ausência de indício e pertinência não verificada. Retomada da main; reconstrução convertida em adendo de engenharia. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
-    "A03-pertinencia: oferecer filtro explícito das análises com indícios no recorte preparado, distinguindo nenhum indício de pertinência não verificada e preservando Todas as análises. Sem nova varredura, sem fila de lentes e sem esconder falta de cobertura.",
+    "A03-regioes: delimitar o primeiro recorte de preparação de sinais fora do início da folha, reutilizando a prova cancelável de proteções anteriores. Fixar casos de citação/código abertos, revisão e troca de folha antes de ativar sinais; manter não verificado quando a prova não couber nos limites existentes.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
-    "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece planejada.",
+    "Manter A02 em fila: catálogo sequencial em arquivo e instalação com retomada sobre store endereçado; não bloquear consultas pequenas incorporadas. A03 permanece parcial.",
     "Avaliar Portparser em ambiente local isolado: primeiro fixar dependências, licenças e corpus reservado; depois medir inferência, alinhamento e custo antes de propor integração.",
     "Decompor gradualmente o controlador legado por fluxo, preservando armazenamento e experiência de escrita.",
     "Ampliar P06 a partir da base lexical separada: estudar contrastes entre que-sujeito, que-objeto, sujeito posposto e integrante; definir sinais de decisão e abstenção antes de implementar.",
@@ -271,7 +271,7 @@
         "Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.",
         "Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar."
       ],
-      "done": "A03-alvo integrado ao pedido explícito: inspeção contextual preservada, saída restrita à ocorrência/locução/apoios, até100 achados. Não corta a linha nem desloca o contexto para obter uma leitura. Preparação700ms/2000/400/24, prova distante por passos e identidade/cancelamento mantidos. Falta o filtro de pertinência das lentes; A03 geral continua parcial.",
+      "done": "Filtro de pertinência integrado por tarefa; padrão Todas as análises. Política separada em ptbr/pertinencia.js, sem manuscrito, DOM ou motores. Mostra contagens dos três estados; filtrar não agenda preparação nem exames. Limites 700 ms/2000 unidades/400 visitas/24 ocorrências e invalidação existentes preservados. A03 continua parcial: sinais fora do início dependem de contexto de proteção comprovado; preparação incremental geral pendente.",
       "evidence": [
         "docs/jornada/CONTRATO-ANALISE.md",
         "ptbr/CONTEXTO-1.md",
@@ -292,7 +292,8 @@
         "docs/jornada/ENTREGA-V6-60.md",
         "docs/jornada/ENTREGA-V6-61.md",
         "docs/jornada/ENTREGA-V6-62.md",
-        "docs/jornada/ENTREGA-V6-63.md"
+        "docs/jornada/ENTREGA-V6-63.md",
+        "docs/jornada/ENTREGA-V6-64.md"
       ]
     },
     {
@@ -715,7 +716,7 @@
     "date": "29/09/2026",
     "request": "Rafael aprovou acelerar por motores funcionando e entregas completas, com verificações essenciais e auditoria ampla depois.",
     "decision": "Coordenação solo aprovada em 30/09/2026. Entregas por capacidades úteis, amostra pré-fixada, fonte única de relato e verificações sem repetição. A02 não bloqueia motores pequenos.",
-    "nextDeliverable": "A03-pertinencia: oferecer filtro explícito das análises com indícios no recorte preparado, distinguindo nenhum indício de pertinência não verificada e preservando Todas as análises. Sem nova varredura, sem fila de lentes e sem esconder falta de cobertura."
+    "nextDeliverable": "A03-regioes: delimitar o primeiro recorte de preparação de sinais fora do início da folha, reutilizando a prova cancelável de proteções anteriores. Fixar casos de citação/código abertos, revisão e troca de folha antes de ativar sinais; manter não verificado quando a prova não couber nos limites existentes."
   },
   "publicationDecision": {
     "authorizedBy": "Rafael",
@@ -729,7 +730,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Diff revisado; montagem e integridade verificadas com npm run build e npm run build:check. Sem bateria local repetida. Casos acrescentados ao CI: ocorrência após100 achados, homógrafos repetidos, locuções por ambos os componentes, ambiguidades/desconhecidos, igualdade dos achados com a inspeção contextual original, alvo protegido/parcial/fora do escopo, argumentos inválidos, rebasing e ES5. CI/Pages desta entrega devem ser conferidos pelo SHA. Base v6.62 confirmada: CI37996303854 e Pages37996303237 success no commitff63d24523e1996b4e03fd9e4af51e0fc79e0007.",
+    "verification": "Diff revisado; node tests/pertinencia.cjs e node ptbr/teste-painel.js aprovados. npm run build e npm run build:check aprovados. Casos dirigidos: três estados, restauração manual, janela distante, invalidação em edição/IME/página oculta, manuscrito intacto e nenhum motor ou timer acionado pelo filtro; sintaxe ES5 do módulo verificada. Regressão completa preservada no CI, sem bateria ampla local. Base v6.63: CI38413159130 e Pages38413158668 success no SHA53c4afe5090f3bcdc3a5fac9bd920c4783a2acae. CI/Pages desta entrega devem ser conferidos pelo SHA.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -747,5 +748,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-63.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-64.json"
 }

@@ -1,5 +1,9 @@
 # Contrato da cortina Escrevaral
 
+## Filtro de pertinência — 14/10/2026
+
+V6.64 mantém Todas as análises como padrão em cada tarefa e oferece Com indícios neste recorte. A seleção usa exclusivamente estados já preparados; mudar o filtro não agenda nem executa análises. O painel informa quantas lentes têm indícios, quantas não apresentaram indícios no recorte e quantas não tiveram pertinência verificada. Nenhum desses estados certifica o documento inteiro. Sem indícios, o acesso manual permanece no mesmo seletor. Edição, IME, página oculta e troca de folha invalidam os indícios pelos eventos existentes. Preparação geral fora do início continua pendente; a reserva lexical não prova sintaxe ou relativa.
+
 ## Filtro lexical — 07/10/2026
 
 V6.59 permite filtrar a reserva pelas classes possíveis presentes nela. Todas as ocorrências restaura a lista. Homógrafos permanecem em cada categoria possível, com alternativas visíveis; contagens são locais, não do texto inteiro. Filtrar não executa nem solicita nova análise. O pedido de classificação contextual do trecho reservado é a próxima integração, separado do filtro.
