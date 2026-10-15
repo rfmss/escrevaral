@@ -1,0 +1,8 @@
+CACHE MANIFEST
+# dict-ptbr phase0 05c8fa6a1d388f528738136306468142814c16f380e134f50bcc376c2e2c18c0
+CACHE:
+../demo/offline.html
+../demo/demo.js
+../runtime/dict.js
+../dist/manifest.js
+../dist/f/ca.js

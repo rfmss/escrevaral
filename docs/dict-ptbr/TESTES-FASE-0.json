@@ -1,0 +1,56 @@
+{
+  "phase": 0,
+  "date": "2026-10-09T03:30:21.585Z",
+  "base": "620d0134be55eb18f64fbfb927dbc9f992edcb65",
+  "environment": {
+    "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "node": "24.19.0",
+    "acorn": "8.15.0",
+    "playwright": "1.55.0"
+  },
+  "contract": {
+    "command": "node dict-ptbr/tests/contract.cjs",
+    "passed": 23,
+    "failed": 0,
+    "transport": "simulated DOM"
+  },
+  "productionBuild": {
+    "command": "npm run build:check",
+    "passed": true,
+    "files": 7
+  },
+  "browser": {
+    "command": "node dict-ptbr/tests/browser.cjs (local executable paths supplied)",
+    "exitCode": 1,
+    "chromium": {
+      "status": "launch-failed",
+      "reason": "SIGSEGV before navigation",
+      "lookupExecuted": false
+    },
+    "webkit": {
+      "status": "launch-failed",
+      "reason": "Missing libgstreamer-1.0.so.0 before navigation",
+      "lookupExecuted": false
+    }
+  },
+  "targets": {
+    "Android 4.4 / Chromium 30": "not-run: target unavailable",
+    "iPad 2 / iOS 9.3.5": "not-run: target unavailable"
+  },
+  "appCache": "not-run",
+  "memoryOnTarget": "not-measured",
+  "acceptance": "pending",
+  "nextPhaseAuthorized": false,
+  "counts": {
+    "fixtureForms": 2,
+    "dataFragments": 1,
+    "externalSourcesImported": 0,
+    "productionEntries": 0,
+    "pendingReviewRows": 0
+  },
+  "sizes": {
+    "dict-ptbr/runtime/dict.js": 12303,
+    "dict-ptbr/dist/f/ca.js": 47,
+    "dict-ptbr/dist/manifest.js": 783
+  }
+}
