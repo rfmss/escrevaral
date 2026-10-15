@@ -314,9 +314,10 @@
           "acceptance": "Uma lente por escolha; explicar/localizar/copiar sem editar; foco/teclado, invalidação e cancelamento verificados. P09.",
           "evidence": [
             "docs/jornada/CONTRATO-ANALISE.md",
-            "docs/jornada/ENTREGA-V6-56.md"
+            "docs/jornada/ENTREGA-V6-56.md",
+            "docs/jornada/ENTREGA-V6-65.md"
           ],
-          "progress": "Navegação por cinco tarefas, grupos de análises, resultado isolado, retorno e consulta lexical separada. Interface legada apenas como fallback; explicações técnicas recolhidas. U01 parcial: controle final e preparação A03 ainda não entregues."
+          "progress": "Navegação por tarefa, consulta lexical e filtro de pertinência preservados. Exame da folha simplificado para um pedido/um timer/uma lente, com validade de texto, folha, registro, revisão, geração, IME e visibilidade. Falhas permitem tentativa explícita; ações de resultados antigos são recusadas. U01 segue parcial pelo controle final; A03 permanece parcial pela preparação de regiões."
         },
         {
           "id": "U02",
@@ -356,12 +357,12 @@
   ],
   "next": "A03",
   "lastDelivery": {
-    "version": "6.64.0",
+    "version": "6.65.0",
     "completed": [],
     "baselineDone": 12,
     "publication": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
-    "evidence": "docs/jornada/ENTREGA-V6-64.md",
-    "record": "docs/jornada/entregas/v6-64.json"
+    "evidence": "docs/jornada/ENTREGA-V6-65.md",
+    "record": "docs/jornada/entregas/v6-65.json"
   },
   "scopeChanges": [
     {

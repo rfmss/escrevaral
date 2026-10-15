@@ -2,11 +2,11 @@
 
 Página permanente: https://escrevaral.com/jornada/
 
-Atualizado em 14/10/2026. Base do produto auditada: `53c4afe5090f3bcdc3a5fac9bd920c4783a2acae`.
+Atualizado em 14/10/2026. Base do produto auditada: `90aa8cc4111ae9c5ab5eb91d453ddfec9fb5ca67`.
 
 **Propósito:** Escrever com liberdade. Examinar com clareza. Preservar cada palavra.
 
-**Estado:** v6.64 / A03-pertinencia: filtro explícito das análises com indícios já preparados, com acesso a Todas as análises e distinção entre ausência de indício e pertinência não verificada. Retomada da main; reconstrução convertida em adendo de engenharia. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Estado:** v6.65 / U01-estabilidade: exame da folha confere registro/revisão, cancela o timer pendente e distingue falha do motor de conclusão. Resultado antigo não localiza trechos nem guarda escolhas em outra revisão. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 Fonte desta página e do mapa: `docs/jornada/estado.json`. Gerar com `python3 ferramentas/gerar-jornada.py`. Não editar as cópias geradas.
 
@@ -160,9 +160,9 @@ Uma entrada simples para estudar o próprio texto.
 - Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.
 - Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar.
 
-**Condição de conclusão:** Filtro de pertinência integrado por tarefa; padrão Todas as análises. Política separada em ptbr/pertinencia.js, sem manuscrito, DOM ou motores. Mostra contagens dos três estados; filtrar não agenda preparação nem exames. Limites 700 ms/2000 unidades/400 visitas/24 ocorrências e invalidação existentes preservados. A03 continua parcial: sinais fora do início dependem de contexto de proteção comprovado; preparação incremental geral pendente.
+**Condição de conclusão:** Navegação por tarefa, consulta lexical e filtro de pertinência preservados. Exame da folha simplificado para um pedido/um timer/uma lente, com validade de texto, folha, registro, revisão, geração, IME e visibilidade. Falhas permitem tentativa explícita; ações de resultados antigos são recusadas. U01 segue parcial pelo controle final; A03 permanece parcial pela preparação de regiões.
 
-Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`, `docs/jornada/ENTREGA-V6-57.md`, `docs/jornada/ENTREGA-V6-58.md`, `docs/jornada/ENTREGA-V6-59.md`, `docs/jornada/ENTREGA-V6-60.md`, `docs/jornada/ENTREGA-V6-61.md`, `docs/jornada/ENTREGA-V6-62.md`, `docs/jornada/ENTREGA-V6-63.md`, `docs/jornada/ENTREGA-V6-64.md`.
+Evidências: `docs/jornada/CONTRATO-ANALISE.md`, `ptbr/CONTEXTO-1.md`, `ptbr/leitura-visual.js`, `ptbr/leitura-visual.css`, `ptbr/LEITURA-VISUAL.md`, `ptbr/SINTAXE-1.md`, `tests/ptbr-sintaxe.cjs`, `ptbr/LOCUCOES-1.md`, `tests/ptbr-locucoes.cjs`, `ptbr/auditoria/GEMINI-SET26.md`, `ptbr/RELATIVAS-1.md`, `tests/ptbr-relativas.cjs`, `docs/jornada/ENTREGA-V6-56.md`, `docs/jornada/ENTREGA-V6-57.md`, `docs/jornada/ENTREGA-V6-58.md`, `docs/jornada/ENTREGA-V6-59.md`, `docs/jornada/ENTREGA-V6-60.md`, `docs/jornada/ENTREGA-V6-61.md`, `docs/jornada/ENTREGA-V6-62.md`, `docs/jornada/ENTREGA-V6-63.md`, `docs/jornada/ENTREGA-V6-64.md`, `docs/jornada/ENTREGA-V6-65.md`.
 
 ### P10 — Integrar e comprovar cada módulo
 

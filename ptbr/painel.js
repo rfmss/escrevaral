@@ -264,8 +264,8 @@
   }
   function resultCard(lens, result, snapshot, request, target) {
     var card=el('section',results,'ptbr-outcome'), h=el('h3',card,'',labels[lens]||lens);
-    var documentAtResult=documentKey(),resultEpoch=epoch;
-    function currentResult(){return epoch===resultEpoch&&!panel.hidden&&!D.hidden&&!composing&&manuscript.value===snapshot&&documentKey()===documentAtResult&&(!request||E.ptbrPanelCurrent(request));}
+    var documentAtResult=documentKey(),resultEpoch=epoch,revisionAtResult=E.ptbrPanelRevision?E.ptbrPanelRevision():null;
+    function currentResult(){return epoch===resultEpoch&&!panel.hidden&&!D.hidden&&!composing&&manuscript.value===snapshot&&documentKey()===documentAtResult&&(!E.ptbrPanelRevision||E.ptbrPanelRevision()===revisionAtResult)&&(!request||E.ptbrPanelCurrent(request));}
     var arr=result.findings||[],i,f,entry,b,detail,ignored=E.ptbrPanelChoices?E.ptbrPanelChoices():[],visible=0;
     function suppressed(f){return ignored.indexOf(f.id+'|'+f.snippet)!==-1&&!(target&&f.start<=target.start&&f.end>=target.end);}
     for(i=0;i<arr.length;i++){if(!suppressed(arr[i])){visible++;}}
@@ -417,37 +417,36 @@
     debounce=root.setTimeout(step,0);
   }
   function run(selected) {
-    if(composing||panel.hidden||!selected||!own.call(labels,selected)){return;}
+    if(composing||panel.hidden||D.hidden||!selected||!own.call(labels,selected)){return;}
     if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
     epoch++;busy=false;lastLens=selected;refresh(true);if(!draft||!draft.text||draft.text.length>fullScope){status.textContent=draft&&draft.text.length>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise.':'Escreva na folha antes de examinar.';return;}
     for(var g=0;g<groups.length;g++){if(groups[g].lenses.indexOf(selected)!==-1){currentGroup=g;}}
     showScreen('result',currentGroup,true);
-    var snapshot=draft.text, documentAtRun=documentKey(), candidates=[],k,token=++epoch,vault;
-    candidates.push(selected);
-    if(!candidates.length){return;}
+    var snapshot=draft.text,documentAtRun=documentKey(),revisionAtRun=E.ptbrPanelRevision?E.ptbrPanelRevision():null,token=++epoch,vault;
+    function current(){return token===epoch&&!panel.hidden&&!D.hidden&&!composing&&manuscript.value===snapshot&&documentKey()===documentAtRun&&(!E.ptbrPanelRevision||E.ptbrPanelRevision()===revisionAtRun);}
+    function discard(){if(token===epoch){E.ptbrPanelReset();status.textContent='O pedido perdeu a validade. Escolha outra análise para recomeçar.';}}
+    clearResults();
     try{vault=E.createVault(E.knowledge);}catch(e){status.textContent='O cofre não pôde iniciar: '+e.message;return;}
-    busy=true;action.disabled=true;cancel.hidden=false;clearResults();var cursor=0;
-    function step(){
-      if(token!==epoch){return;}
-      if(manuscript.value!==snapshot||panel.hidden||documentKey()!==documentAtRun){
-        busy=false;action.disabled=composing;
-        if(manuscript.value!==snapshot){refresh(true);}return;
+    busy=true;action.disabled=true;cancel.hidden=false;
+    var buttons=wheel.querySelectorAll('button');
+    for(var i=0;i<buttons.length;i++){buttons[i].setAttribute('aria-current',buttons[i].getAttribute('data-ptbr-lens')===selected?'true':'false');}
+    status.textContent='Examinando '+labels[selected]+'…';
+    /* Um pedido, um timer cancelável, uma lente. Sem a antiga fila unitária. */
+    debounce=root.setTimeout(function(){
+      if(!current()){discard();return;}debounce=null;
+      try{
+        var result=vault.analyze(selected,snapshot);
+        if(!current()){discard();return;}
+        resultCard(selected,result,snapshot);
+        status.textContent='Análise concluída. Uma lente examinada: '+labels[selected]+'.';
+      }catch(e){
+        if(!current()){discard();return;}
+        clearResults();var box=el('section',results,'ptbr-outcome');el('h3',box,'',labels[selected]);
+        el('p',box,'','Esta lente não concluiu o exame: '+e.message);
+        status.textContent='Não foi possível concluir esta análise. Você pode tentar novamente.';
       }
-      if(cursor>=candidates.length){
-        busy=false;cancel.hidden=true;action.disabled=false;status.textContent='Análise concluída. Uma lente examinada: '+labels[selected]+'.';return;
-      }
-      var lens=candidates[cursor++],buttons=wheel.querySelectorAll('button'),i;
-      for(i=0;i<buttons.length;i++){buttons[i].setAttribute('aria-current',buttons[i].getAttribute('data-ptbr-lens')===lens?'true':'false');}
-      status.textContent='Examinando '+(labels[lens]||lens)+' · '+cursor+' de '+candidates.length+'.';
-      root.setTimeout(function(){
-        if(token!==epoch){return;}
-        if(manuscript.value!==snapshot||panel.hidden||documentKey()!==documentAtRun){busy=false;return;}
-        try{resultCard(lens,vault.analyze(lens,snapshot),snapshot);}
-        catch(e){var box=el('section',results,'ptbr-outcome');el('h3',box,'',labels[lens]||lens);el('p',box,'','Esta lente não concluiu o exame: '+e.message);}
-        root.setTimeout(step,0);
-      },0);
-    }
-    step();
+      busy=false;cancel.hidden=true;action.disabled=false;
+    },0);
   }
   action.addEventListener('click',function(){run(lastLens);},false);
   cancel.addEventListener('click',function(){E.ptbrPanelReset();status.textContent='Análise cancelada. Escolha uma lente para recomeçar.';},false);

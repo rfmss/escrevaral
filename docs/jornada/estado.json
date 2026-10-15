@@ -1,10 +1,10 @@
 {
-  "version": 53,
+  "version": 54,
   "updated": "14/10/2026",
-  "baseline": "53c4afe5090f3bcdc3a5fac9bd920c4783a2acae",
+  "baseline": "90aa8cc4111ae9c5ab5eb91d453ddfec9fb5ca67",
   "purpose": "Escrever com liberdade. Examinar com clareza. Preservar cada palavra.",
   "bookCount": 17,
-  "current": "v6.64 / A03-pertinencia: filtro explícito das análises com indícios já preparados, com acesso a Todas as análises e distinção entre ausência de indício e pertinência não verificada. Retomada da main; reconstrução convertida em adendo de engenharia. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
+  "current": "v6.65 / U01-estabilidade: exame da folha confere registro/revisão, cancela o timer pendente e distingue falha do motor de conclusão. Resultado antigo não localiza trechos nem guarda escolhas em outra revisão. CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
   "next": [
     "A03-regioes: delimitar o primeiro recorte de preparação de sinais fora do início da folha, reutilizando a prova cancelável de proteções anteriores. Fixar casos de citação/código abertos, revisão e troca de folha antes de ativar sinais; manter não verificado quando a prova não couber nos limites existentes.",
     "M01: ampliar/revisar formas e definições por recortes úteis; definir avaliação reservada sem tratar fidelidade ao léxico como acurácia linguística.",
@@ -271,7 +271,7 @@
         "Ligado: mostra opções sem executar análises. Uma única lente por vez, escolhida explicitamente pelo escritor.",
         "Trocar de lente cancela a anterior; não existe varredura geral, fila automática de lentes ou reanálise ao digitar."
       ],
-      "done": "Filtro de pertinência integrado por tarefa; padrão Todas as análises. Política separada em ptbr/pertinencia.js, sem manuscrito, DOM ou motores. Mostra contagens dos três estados; filtrar não agenda preparação nem exames. Limites 700 ms/2000 unidades/400 visitas/24 ocorrências e invalidação existentes preservados. A03 continua parcial: sinais fora do início dependem de contexto de proteção comprovado; preparação incremental geral pendente.",
+      "done": "Navegação por tarefa, consulta lexical e filtro de pertinência preservados. Exame da folha simplificado para um pedido/um timer/uma lente, com validade de texto, folha, registro, revisão, geração, IME e visibilidade. Falhas permitem tentativa explícita; ações de resultados antigos são recusadas. U01 segue parcial pelo controle final; A03 permanece parcial pela preparação de regiões.",
       "evidence": [
         "docs/jornada/CONTRATO-ANALISE.md",
         "ptbr/CONTEXTO-1.md",
@@ -293,7 +293,8 @@
         "docs/jornada/ENTREGA-V6-61.md",
         "docs/jornada/ENTREGA-V6-62.md",
         "docs/jornada/ENTREGA-V6-63.md",
-        "docs/jornada/ENTREGA-V6-64.md"
+        "docs/jornada/ENTREGA-V6-64.md",
+        "docs/jornada/ENTREGA-V6-65.md"
       ]
     },
     {
@@ -730,7 +731,7 @@
     "status": "CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.",
     "commit": null,
     "deployment": "https://github.com/rfmss/escrevaral/actions?query=branch%3Amain",
-    "verification": "Diff revisado; node tests/pertinencia.cjs e node ptbr/teste-painel.js aprovados. npm run build e npm run build:check aprovados. Casos dirigidos: três estados, restauração manual, janela distante, invalidação em edição/IME/página oculta, manuscrito intacto e nenhum motor ou timer acionado pelo filtro; sintaxe ES5 do módulo verificada. Regressão completa preservada no CI, sem bateria ampla local. Base v6.63: CI38413159130 e Pages38413158668 success no SHA53c4afe5090f3bcdc3a5fac9bd920c4783a2acae. CI/Pages desta entrega devem ser conferidos pelo SHA.",
+    "verification": "Falhas reproduzidas na base: após mudar só a revisão, a lente ainda executava; exceção simulada do motor terminava com Análise concluída. Após o patch, node tests/exame-validade.cjs passou: nove invalidações de pedido, três mudanças de identidade em ações de resultado, falha/retentativa, dispensa que salva nova revisão, remoção efetiva do timer e manuscrito intacto. ES5 do painel conferido. node ptbr/teste-painel.js, npm run build e npm run build:check aprovados. Sem bateria ampla local; regressão completa mantida no CI. Base v6.64: CI38654247534 e Pages38654247231 success no SHA90aa8cc4111ae9c5ab5eb91d453ddfec9fb5ca67. Consultar CI/Pages desta entrega pelo SHA.",
     "evidencePolicy": "O baseline é a última referência confirmada antes desta ficha. O estado remoto por commit está em Actions; este documento não infere sucesso a partir de implementação."
   },
   "continuityGuide": "docs/PLANO-MESTRE.md",
@@ -748,5 +749,5 @@
     "storage": "Acervo local pode aproximar-se de 1 GB; consultas pequenas e limites independentes de memória/inicialização/processamento.",
     "analysis": "Preparação incremental nas pausas; exames completos por escolha explícita, uma lente por vez."
   },
-  "deliveryRecord": "docs/jornada/entregas/v6-64.json"
+  "deliveryRecord": "docs/jornada/entregas/v6-65.json"
 }

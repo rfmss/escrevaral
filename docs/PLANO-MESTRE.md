@@ -6,7 +6,7 @@ Este documento explica o destino, as decisões, o que já existe, o que falta e 
 
 **Repositório:** https://github.com/rfmss/escrevaral · **Branch de trabalho:** `main` · **Produto:** https://escrevaral.com · **Mapa público:** https://escrevaral.com/jornada/
 
-**Retrato vigente — 14/10/2026:** v6.64 / A03-pertinencia: filtro explícito das análises com indícios já preparados, com acesso a Todas as análises e distinção entre ausência de indício e pertinência não verificada. Retomada da main; reconstrução convertida em adendo de engenharia. [Entrega e limites](jornada/ENTREGA-V6-64.md). CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
+**Retrato vigente — 14/10/2026:** v6.65 / U01-estabilidade: exame da folha confere registro/revisão, cancela o timer pendente e distingue falha do motor de conclusão. Resultado antigo não localiza trechos nem guarda escolhas em outra revisão. [Entrega e limites](jornada/ENTREGA-V6-65.md). CI e publicação: consultar as execuções vinculadas ao commit desta entrega; sem segundo commit apenas para confirmar deploy.
 
 
 
@@ -93,7 +93,7 @@ Marcos da primeira versão; não são porcentagem da língua, esforço ou precis
 
 ### Experiência do autor — 0/2
 
-- [ ] **U01 — Controle Escrevaral final** — TODO. Uma lente por escolha; explicar/localizar/copiar sem editar; foco/teclado, invalidação e cancelamento verificados. P09. Evidência: [docs/jornada/CONTRATO-ANALISE.md](jornada/CONTRATO-ANALISE.md), [docs/jornada/ENTREGA-V6-56.md](jornada/ENTREGA-V6-56.md). Progresso parcial: Navegação por cinco tarefas, grupos de análises, resultado isolado, retorno e consulta lexical separada. Interface legada apenas como fallback; explicações técnicas recolhidas. U01 parcial: controle final e preparação A03 ainda não entregues.
+- [ ] **U01 — Controle Escrevaral final** — TODO. Uma lente por escolha; explicar/localizar/copiar sem editar; foco/teclado, invalidação e cancelamento verificados. P09. Evidência: [docs/jornada/CONTRATO-ANALISE.md](jornada/CONTRATO-ANALISE.md), [docs/jornada/ENTREGA-V6-56.md](jornada/ENTREGA-V6-56.md), [docs/jornada/ENTREGA-V6-65.md](jornada/ENTREGA-V6-65.md). Progresso parcial: Navegação por tarefa, consulta lexical e filtro de pertinência preservados. Exame da folha simplificado para um pedido/um timer/uma lente, com validade de texto, folha, registro, revisão, geração, IME e visibilidade. Falhas permitem tentativa explícita; ações de resultados antigos são recusadas. U01 segue parcial pelo controle final; A03 permanece parcial pela preparação de regiões.
 - [ ] **U02 — Coerência visual e oficina** — TODO. Inventariar discrepâncias com a filosofia; fechar componentes/menu/guias desta versão e revisar sem reconstruir os fluxos aprovados. Evidência: [docs/FILOSOFIA-E-COMPATIBILIDADE.md](FILOSOFIA-E-COMPATIBILIDADE.md).
 
 ### Validação e encerramento — 0/2
