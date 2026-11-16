@@ -43,6 +43,12 @@
     return n;
   }
   function documentKey(){return E.ptbrPanelDocument?E.ptbrPanelDocument():null;}
+  function currentSelection(snapshot){
+    var sel=E.ptbrPanelSelection?E.ptbrPanelSelection():null;
+    if(!sel||sel.text!==snapshot||typeof sel.start!=='number'||typeof sel.end!=='number'||sel.start<0||sel.end<=sel.start||sel.end>snapshot.length){return null;}
+    return sel;
+  }
+  function activeScopeLength(s){var sel=currentSelection(s);return sel?(sel.end-sel.start):s.length;}
   var style=el('style',D.head,null,
     '#oficina #back-writing{width:auto;min-width:110px;flex-basis:auto;font-size:12px;padding:8px;line-height:1.4}#oficina .sheet-heading{margin-bottom:18px}' +
     '#ptbr-dashboard{font-family:inherit;color:inherit;margin:12px 0 22px;min-width:0}' +
@@ -178,13 +184,20 @@
     intro.hidden=next==='result'||next==='reserved';
     intro.textContent=next==='home'?'Escolha uma tarefa para olhar seu texto. Você decide o que examinar e o que manter.':next==='lexical'?'Digite uma palavra ou selecione-a no texto antes de abrir este painel. A consulta mostra possibilidades; o sentido depende da frase.':'Escolha um aspecto abaixo para examinar a folha atual. Seu texto permanece intacto.';
     paintLensFilter();
-    if(next==='home'||next==='group'){status.textContent=manuscript.value.length>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.':manuscript.value?'A análise completa começa quando você escolhe um aspecto.':'Escreva na folha para começar. Você pode consultar uma palavra mesmo com a folha vazia.';}
+    if(next==='home'||next==='group'){
+      var sel=currentSelection(manuscript.value),scopeLen=activeScopeLength(manuscript.value);
+      status.textContent=scopeLen>fullScope?(sel?'O trecho selecionado ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.':'Esta folha ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.'):!manuscript.value?'Escreva na folha para começar. Você pode consultar uma palavra mesmo com a folha vazia.':sel?'Trecho selecionado para análise ('+scopeLen+' caracteres). A análise completa começa quando você escolhe um aspecto.':'A análise completa começa quando você escolhe um aspecto.';
+    }
     reservedButton.hidden=next!=='group'||currentGroup!==1||!prepared||!prepared.lexicalAvailable;
     if(preparation){if(next==='home'||next==='group'){preparation.request();}else{preparation.cancel(false);}}
     if(focus){if(next==='lexical'&&lexicalInput){lexicalInput.focus();}else{title.focus();}panel.scrollTop=0;}
   }
   reservedButton.addEventListener('click',function(){
     if(!prepared||!prepared.occurrences.length||panel.hidden){return;}
+    if(E.ptbrPanelRevision&&prepared.revision!==E.ptbrPanelRevision()){
+      prepared=null;paintPreparation(null);if(preparation){preparation.request();}
+      status.textContent='O texto foi guardado; aguarde preparar as ocorrências novamente.';return;
+    }
     var reservation=prepared,reservationEpoch=epoch;clearResults();showScreen('reserved',1,true);
     el('p',results,'ptbr-status','Estas palavras estão no acervo. As classes abaixo são possibilidades do léxico, inclusive em citações; não classificam a sua frase.');
     if(reservation.lexicalLimited){el('p',results,'ptbr-status','Limite de preparação atingido. Há outras palavras que ainda não foram verificadas.');}
@@ -204,7 +217,7 @@
     for(ci=0;ci<classes.length;ci++){cls=classes[ci];var option=el('option',filter,'',cls+' ('+counts['$'+cls]+')');option.value=cls;}
     el('p',filterBox,'ptbr-status','Contagens apenas desta reserva. Uma palavra pode aparecer em mais de uma classe; a frase ainda precisa ser examinada.');
     filter.addEventListener('change',function(){
-      if(!reservation.occurrences.length||!current(reservation.occurrences[0])){return;}
+      if(!reservation.occurrences.length||!current(reservation.occurrences[0])){staleReset('O texto mudou. Abra as opções para preparar novamente.');return;}
       var visible=0;
       for(var at=0;at<rows.length;at++){
         rows[at].hidden=!!filter.value&&reservation.occurrences[at].classes.indexOf(filter.value)===-1;
@@ -218,16 +231,15 @@
         el('p',row,'','Possibilidades no léxico: '+item.classes.join(', ')+'.');
         var locate=el('button',row,'','Ver no texto');locate.type='button';
         locate.addEventListener('click',function(){
-          if(!current(item)){E.ptbrPanelReset();status.textContent='O texto mudou. Abra as opções para preparar novamente.';return;}
-          var back=D.getElementById('back-writing');if(back){back.click();}manuscript.focus();
-          if(!E.transfer.selectRange(manuscript,item.start,item.end)){status.textContent='Selecione a palavra manualmente no manuscrito.';}
+          if(!current(item)){staleReset('O texto mudou. Abra as opções para preparar novamente.');return;}
+          locateInText(item.start,item.end,'Selecione a palavra manualmente no manuscrito.');
         },false);
         if(E.analysisContract&&E.ptbrPanelRequest&&E.ptbrPanelCurrent){
           var examine=el('button',row,'ptbr-reserve-examine','Examinar este contexto');examine.type='button';
-          examine.addEventListener('click',function(){if(current(item)){runReserved(reservation,item);}},false);
+          examine.addEventListener('click',function(){if(current(item)){runReserved(reservation,item);}else{staleReset('O texto mudou. Abra as opções para preparar novamente.');}},false);
         }
         if(lexicalInput){var consult=el('button',row,'','Consultar palavra');consult.type='button';consult.addEventListener('click',function(){
-          if(!current(item)){E.ptbrPanelReset();return;}lexicalInput.value=item.snippet;consultLexeme();
+          if(!current(item)){staleReset('O texto mudou. Abra as opções para preparar novamente.');return;}lexicalInput.value=item.snippet;consultLexeme();
         },false);}
       }(reservation.occurrences[i]));
     }
@@ -239,13 +251,24 @@
     button.addEventListener('click',function(){content.hidden=!content.hidden;button.setAttribute('aria-expanded',content.hidden?'false':'true');},false);return content;
   }
   function clearResults(){if(readingView){readingView.destroy();readingView=null;}results.textContent='';}
+  function locateInText(start,end,fallback){
+    if(E.ptbrPanelReveal){if(!E.ptbrPanelReveal(start,end,fallback)){status.textContent=fallback;}return;}
+    var back=D.getElementById('back-writing');if(back){back.click();}manuscript.focus();
+    if(!E.transfer.selectRange(manuscript,start,end)){var notice=D.getElementById('save-status')||status;notice.textContent=fallback;}
+  }
+  function staleReset(msg){
+    E.ptbrPanelReset();
+    if(screen==='result'||screen==='reserved'){showScreen('group',currentGroup||0,false);}
+    status.textContent=msg||'O texto mudou. Escolha ou prepare novamente.';
+  }
   function refresh(force) {
     if(composing||busy||panel.hidden&&!force){return;}
-    if(!force&&draft&&draft.text===manuscript.value&&draft.document===documentKey()){return;}
+    var selKey=currentSelection(manuscript.value),selTag=selKey?selKey.start+':'+selKey.end:'';
+    if(!force&&draft&&draft.text===manuscript.value&&draft.document===documentKey()&&draft.selection===selTag){return;}
     if(preparation){preparation.cancel(true);}prepared=null;
     epoch++;root.clearTimeout(debounce);busy=false;clearResults();
     el('div',results,'ptbr-empty','Seu texto, por dentro. Escolha uma lente para abrir a leitura anotada.');
-    var s=manuscript.value;draft={text:s,document:documentKey()};
+    var s=manuscript.value,scopeLen=activeScopeLength(s);draft={text:s,document:documentKey(),selection:selTag};
     if(lexicalInput){
       var selectionStart=manuscript.selectionStart,selectionEnd=manuscript.selectionEnd;
       lexicalInput.value=typeof selectionStart==='number'&&selectionEnd>selectionStart&&selectionEnd-selectionStart<=64?s.slice(selectionStart,selectionEnd):'';
@@ -255,9 +278,9 @@
     for(var i=0;i<chosen.length;i++){id=chosen[i];
       btn=el('button',wheel,'',null);btn.type='button';el('span',btn,'',labels[id]);btn.setAttribute('data-ptbr-lens',id);
       el('small',btn,'ptbr-lens-description',descriptions[id]);signalLabels[id]=el('small',btn,'ptbr-signal','Pertinência ainda não verificada.');
-      btn.setAttribute('aria-label','Examinar '+labels[id]);btn.disabled=!s.length||s.length>fullScope;
+      btn.setAttribute('aria-label','Examinar '+labels[id]);btn.disabled=!s.length||scopeLen>fullScope;
       btn.addEventListener('click',function(){run(this.getAttribute('data-ptbr-lens'));},false);}
-    action.disabled=!lastLens||!s.length||s.length>fullScope;
+    action.disabled=!lastLens||!s.length||scopeLen>fullScope;
     paintPreparation(prepared);showScreen('home',null,false);
     note.textContent='A análise tem cobertura parcial. Ausência de apontamentos não garante ausência de problemas.';
 
@@ -271,7 +294,7 @@
     for(i=0;i<arr.length;i++){if(!suppressed(arr[i])){visible++;}}
     var accepted=[],observations=[],stash=el('div',card,'ptbr-observation-list');
     var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'observação nova':'observações novas')+' neste recorte.':'Nenhuma observação nova neste recorte.');
-    for(i=0;i<arr.length&&i<maxFindings;i++){
+    for(i=0;i<arr.length&&accepted.length<maxFindings;i++){
       f=arr[i];if(suppressed(f)){continue;}
       entry=el('div',stash,'ptbr-observation');accepted.push(f);observations.push(entry);
       el('p',entry,'',f.message);
@@ -293,23 +316,19 @@
         button.setAttribute('aria-expanded',target.hidden?'false':'true');
       },false);}(detail,b));
       b=el('button',entry,'','Ver no texto');b.type='button';
-      (function(start,end,textAtRun){b.addEventListener('click',function(){
-        if(!currentResult()){return;}
-        var back=D.getElementById('back-writing');if(back){back.click();}
-        manuscript.focus();
-        if(!E.transfer.selectRange(manuscript,start,end)){
-          var notice=D.getElementById('save-status')||status;notice.textContent='Selecione o trecho manualmente no manuscrito.';
-        }
-      },false);}(f.start,f.end,snapshot));
+      (function(start,end){b.addEventListener('click',function(){
+        if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
+        locateInText(start,end,'Selecione o trecho manualmente no manuscrito.');
+      },false);}(f.start,f.end));
       if(E.ptbrPanelKeep&&!request){
         b=el('button',entry,'','Manter minha escolha');b.type='button';
-        (function(finding,row,button){button.addEventListener('click',function(){
-          if(!currentResult()){return;}
+        (function(finding,button){button.addEventListener('click',function(){
+          if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
           if(E.ptbrPanelKeep(finding,snapshot,documentAtResult)){
             clearResults();resultCard(lens,result,snapshot,request,target);status.textContent='Escolha mantida nesta folha.';
             var reset=D.getElementById('reset-dismissed');if(reset){reset.focus();}
           }else{status.textContent='Não foi possível guardar a escolha. Tente novamente.';}
-        },false);}(f,entry,b));
+        },false);}(f,b));
       }
     }
     if(E.renderReadingMap){
@@ -375,6 +394,7 @@
   }
   function runReserved(reservation,item){
     if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
+    if(E.ptbrPanelFlush){E.ptbrPanelFlush();}
     var snapshot=manuscript.value,scope=E.analysisContract.reservedScope(snapshot,reservation.scope,item),request=null;
     E.ptbrPanelReset();lastLens='morfologia';showScreen('result',1,true);action.hidden=true;
     var token=epoch,documentAtRun=documentKey(),revisionAtRun=E.ptbrPanelRevision?E.ptbrPanelRevision():null;
@@ -384,9 +404,8 @@
     el('p',header,'','Possibilidades no léxico: '+item.classes.join(', ')+'. Elas não são uma decisão contextual.');
     var locate=el('button',header,'','Ver ocorrência no texto');locate.type='button';
     locate.addEventListener('click',function(){
-      if(!current()){return;}
-      var back=D.getElementById('back-writing');if(back){back.click();}manuscript.focus();
-      if(!E.transfer.selectRange(manuscript,item.start,item.end)){status.textContent='Selecione a ocorrência manualmente no manuscrito.';}
+      if(!current()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
+      locateInText(item.start,item.end,'Selecione a ocorrência manualmente no manuscrito.');
     },false);
     if(scope.reason){el('p',header,'ptbr-context-limit',scope.reason);status.textContent='Contexto não verificado. Nenhuma lente foi executada.';return;}
     try{request=E.ptbrPanelRequest(snapshot,scope.start,scope.end);}catch(error){status.textContent='O pedido não pôde ser vinculado à folha atual.';return;}
@@ -419,10 +438,13 @@
   function run(selected) {
     if(composing||panel.hidden||D.hidden||!selected||!own.call(labels,selected)){return;}
     if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
-    epoch++;busy=false;lastLens=selected;refresh(true);if(!draft||!draft.text||draft.text.length>fullScope){status.textContent=draft&&draft.text.length>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise.':'Escreva na folha antes de examinar.';return;}
+    if(E.ptbrPanelFlush){E.ptbrPanelFlush();}
+    epoch++;busy=false;lastLens=selected;refresh(true);
+    var activeSel=draft?currentSelection(draft.text):null,scopeLen=activeSel?(activeSel.end-activeSel.start):(draft&&draft.text?draft.text.length:0);
+    if(!draft||!draft.text||scopeLen<=0||scopeLen>fullScope){status.textContent=scopeLen>fullScope?'Esta folha ultrapassa o limite de 200 mil caracteres para análise.':'Escreva na folha antes de examinar.';return;}
     for(var g=0;g<groups.length;g++){if(groups[g].lenses.indexOf(selected)!==-1){currentGroup=g;}}
     showScreen('result',currentGroup,true);
-    var snapshot=draft.text,documentAtRun=documentKey(),revisionAtRun=E.ptbrPanelRevision?E.ptbrPanelRevision():null,token=++epoch,vault;
+    var snapshot=draft.text,selAtRun=currentSelection(snapshot),documentAtRun=documentKey(),revisionAtRun=E.ptbrPanelRevision?E.ptbrPanelRevision():null,token=++epoch,vault;
     function current(){return token===epoch&&!panel.hidden&&!D.hidden&&!composing&&manuscript.value===snapshot&&documentKey()===documentAtRun&&(!E.ptbrPanelRevision||E.ptbrPanelRevision()===revisionAtRun);}
     function discard(){if(token===epoch){E.ptbrPanelReset();status.textContent='O pedido perdeu a validade. Escolha outra análise para recomeçar.';}}
     clearResults();
@@ -435,10 +457,10 @@
     debounce=root.setTimeout(function(){
       if(!current()){discard();return;}debounce=null;
       try{
-        var result=vault.analyze(selected,snapshot);
+        var result=selAtRun&&E.ptbrPanelRequest&&E.analysisContract?E.analysisContract.analyze(vault,selected,E.ptbrPanelRequest(snapshot,selAtRun.start,selAtRun.end)):vault.analyze(selected,snapshot);
         if(!current()){discard();return;}
         resultCard(selected,result,snapshot);
-        status.textContent='Análise concluída. Uma lente examinada: '+labels[selected]+'.';
+        status.textContent='Análise concluída. Uma lente examinada: '+labels[selected]+(selAtRun?' (trecho selecionado).':'.');
       }catch(e){
         if(!current()){discard();return;}
         clearResults();var box=el('section',results,'ptbr-outcome');el('h3',box,'',labels[selected]);
@@ -449,7 +471,11 @@
     },0);
   }
   action.addEventListener('click',function(){run(lastLens);},false);
-  cancel.addEventListener('click',function(){E.ptbrPanelReset();status.textContent='Análise cancelada. Escolha uma lente para recomeçar.';},false);
+  cancel.addEventListener('click',function(){
+    E.ptbrPanelReset();
+    action.disabled=composing||!lastLens||!manuscript.value||activeScopeLength(manuscript.value)>fullScope;
+    status.textContent='Análise cancelada. Escolha outra análise ou clique em Examinar novamente.';
+  },false);
   manuscript.addEventListener('input',function(){
     if(preparation){preparation.cancel(true);}paintPreparation(null);
     epoch++;busy=false;root.clearTimeout(debounce);action.disabled=true;clearResults();
@@ -462,10 +488,42 @@
   manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);action.disabled=!lastLens||!manuscript.value||manuscript.value.length>fullScope;var buttons=wheel.querySelectorAll('button');for(var j=0;j<buttons.length;j++){buttons[j].disabled=!manuscript.value||manuscript.value.length>fullScope;}if(preparation){preparation.request();}},false);
   panel.addEventListener('focus',function(){if(!panel.hidden){refresh(true);}},false);
   var openers=['examinar-toggle','cabinet-examine'];
-  for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);},false);}}
-  D.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.keyCode===13){root.setTimeout(function(){if(!panel.hidden){refresh(true);}},0);}},false);
+  for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden&&!busy&&screen==='home'){refresh(false);}},0);},false);}}
+  D.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.keyCode===13){root.setTimeout(function(){if(!panel.hidden&&!busy&&screen==='home'){refresh(false);}},0);}},false);
   E.ptbrPanelReset=function(){if(preparation){preparation.cancel(true);}paintPreparation(null);epoch++;busy=false;draft=null;root.clearTimeout(debounce);clearResults();action.disabled=true;cancel.hidden=true;};
-  D.addEventListener('visibilitychange',function(){if(D.hidden){E.ptbrPanelReset();}else if(preparation){preparation.request();}},false);
+  E.ptbrPanelSaved=function(conflict){
+    if(conflict){
+      E.ptbrPanelReset();
+      if(!panel.hidden){refresh(true);status.textContent='Outra versão foi preservada no acervo. Prepare ou examine novamente.';}
+      return;
+    }
+    if((screen==='home'||screen==='group')&&prepared&&E.ptbrPanelRevision&&prepared.revision!==E.ptbrPanelRevision()){
+      prepared=null;paintPreparation(null);
+      if(!panel.hidden&&preparation){preparation.request();}
+    }
+  };
+  E.ptbrPanelLiberate=function(msg){
+    E.ptbrPanelReset();
+    if(!panel.hidden){
+      if(screen==='result'||screen==='reserved'){showScreen('group',currentGroup||0,true);}
+      else{title.focus();}
+      if(msg){status.textContent=msg;}
+    }
+  };
+  E.ptbrPanelOpen=function(options){
+    options=options||{};
+    if(!panel.hidden){refresh(false);}
+    if(options.lens&&own.call(labels,options.lens)){run(options.lens);return;}
+    if(typeof options.group==='number'&&groups[options.group]){showScreen('group',options.group,true);return;}
+    title.focus();
+  };
+  D.addEventListener('visibilitychange',function(){
+    if(D.hidden){
+      var wasResult=screen==='result'||screen==='reserved';
+      E.ptbrPanelReset();
+      if(wasResult){showScreen('group',currentGroup||0,false);status.textContent='Os resultados foram recolhidos ao ocultar a aba. Escolha uma análise quando voltar.';}
+    }else if(preparation){preparation.request();}
+  },false);
   E.ptbrPanelFocus=function(){title.focus();};
   /* Reutiliza o painel nativo, mantendo os botões originais se a inicialização falhar. */
   panel.setAttribute('data-ptbr-dashboard','true');

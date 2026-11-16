@@ -30,4 +30,14 @@ var tail=tr.scan(new Array(8001).join(' ')+ 'de vez em quando');assert.strictEqu
 var quote=tr.scan('“'+new Array(7901).join(' ')+'de vez em quando'+new Array(101).join(' ')+'”');assert.strictEqual(!!quote.signals.expressoes,false,'corte no meio de citação permanece protegido');
 var repeatedNFD=tr.scan('café cafe\u0301');assert.strictEqual(repeatedNFD.signals.repeticao,true);
 var accents=tr.scan('pode pôde');assert.strictEqual(!!accents.signals.repeticao,false);
+// Linha longa de prosa cortada pelo limite de caracteres ou tokens nao vira verso curto (metrica/rima).
+var tr2000=E.createSignalTriage(E,{maxChars:2000,maxTokens:200});
+var heading='Capitulo\n',filler='';while(filler.length<1930){filler+='extraordinariamente ';}
+var longTail='Primeiro paragrafo extenso que ultrapassa noventa caracteres facilmente e continua escrevendo aqui.';
+var cutProse=heading+filler+'\n'+longTail;
+var resCut=tr2000.scan(cutProse);
+assert.strictEqual(!!resCut.signals.metrica,false,'linha longa cortada por maxChars nao dispara metrica');
+assert.strictEqual(!!resCut.signals.rima,false);
+var poem=heading+filler.slice(0,1800)+'\nverso curto um\nverso curto dois\n';
+assert.strictEqual(!!tr2000.scan(poem).signals.metrica,true,'versos curtos completos continuam detectados');
 console.log('TRIAGEM OK: '+cases.length+' casos; acentos e posições; limite de 8.000 caracteres/1.600 tokens; sem Findings; citações cortadas protegidas.');

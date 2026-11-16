@@ -37,7 +37,9 @@
         if(closed>=3)signals.ritmo=true;
       }
       var parts=clean.split(/\r\n|\n|\r/),shortLines=0,ends={},lineWords,end,suffix;
+      var trailingCut=check.length<s.length&&!/[\r\n]$/.test(check);
       for(i=0;i<parts.length;i++){
+        if(trailingCut&&i===parts.length-1){continue;}
         if(!parts[i].replace(/\s/g,'')||parts[i].length>90)continue;
         shortLines++;lineWords=E.reading.tokens(parts[i]);
         if(!lineWords.length)continue;end=lineWords[lineWords.length-1].value;suffix='$'+end.slice(-2);
