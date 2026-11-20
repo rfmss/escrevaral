@@ -233,7 +233,9 @@
       }
       if (modeBtn) {
         modeBtn.setAttribute('aria-pressed', richActive ? 'true' : 'false');
-        modeBtn.textContent = richActive ? 'Formatado' : 'Texto simples';
+        var lbl = modeBtn.querySelector ? modeBtn.querySelector('.esc-btn-label') : null;
+        if (lbl) { lbl.textContent = richActive ? 'Formatado' : 'Texto simples'; }
+        else { modeBtn.textContent = richActive ? 'Formatado' : 'Texto simples'; }
       }
       if (toolbarEl) { toolbarEl.hidden = !richActive || readOnly; }
       if (richEl) {

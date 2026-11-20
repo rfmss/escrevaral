@@ -679,7 +679,7 @@
   }
 
   function updatePath() {
-    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Colaboração' };
+    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Versões' };
     var orig = activeOriginal();
     if (!orig && activeNotebook() && activeNotebook().originalId && originals) {
       orig = originals.get(activeNotebook().originalId);
@@ -1278,7 +1278,8 @@
     document.body.setAttribute('data-letter', style);
     byId('font-literary').setAttribute('aria-pressed', style === 'literaria' ? 'true' : 'false');
     byId('font-typewriter').setAttribute('aria-pressed', style === 'maquina' ? 'true' : 'false');
-    text(byId('desk-font'), style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
+    var dfBtn = byId('desk-font'), dfLbl = dfBtn && dfBtn.querySelector ? dfBtn.querySelector('.esc-btn-label') : null;
+    text(dfLbl || dfBtn, style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
     focusMeasure = null; typewriterInsets(); growManuscript();
     if (typeof start === 'number') { E.transfer.selectRange(manuscript, start, end); }
     try { if (storage) { storage.setItem('escrevaral.astra.letter', style); } } catch (ignore) { /* Préférence facultativa. */ }
@@ -2085,7 +2086,7 @@
   }
   if (byId("esc-open-lineage")) {
     listen(byId("esc-open-lineage"), "click", function () {
-      ensureNotebookForTool('os Marcos de versão', 'Os Marcos de versão acompanham um projeto.', true, function () {
+      ensureNotebookForTool('as Versões do texto', 'O histórico de versões acompanha um projeto.', true, function () {
         if (byId("start-lineage")) { byId("start-lineage").click(); }
       });
     });

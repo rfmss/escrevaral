@@ -31,9 +31,9 @@
    if(!active()){return;}var v=root.visualViewport,viewHeight=v?v.height:root.innerHeight;
    panel.style.top=(v?v.offsetTop:0)+'px';panel.style.bottom='auto';panel.style.height=viewHeight+'px';panel.setAttribute('data-short',viewHeight<=450?'true':'false');
    var slate=frame.parentNode,style=root.getComputedStyle(slate),spaceW=slate.clientWidth-(parseFloat(style.paddingLeft)||0)-(parseFloat(style.paddingRight)||0),spaceH=slate.clientHeight-(parseFloat(style.paddingTop)||0)-(parseFloat(style.paddingBottom)||0);
-   var displayWidth=Math.max(1,Math.floor(Math.min(spaceW-2,(spaceH-2)/.6))),displayHeight=Math.max(1,Math.floor(displayWidth*.6));
+   var displayWidth=Math.max(1,Math.floor(spaceW-2)),displayHeight=Math.max(1,Math.floor(spaceH-2));
    frame.style.width=(displayWidth+2)+'px';frame.style.height=(displayHeight+2)+'px';canvas.style.width=displayWidth+'px';canvas.style.height=displayHeight+'px';
-   var width=Math.min(1000,displayWidth),height=Math.max(1,Math.round(width*.6));
+   var width=Math.min(1600,displayWidth),height=Math.max(1,Math.round(width*(displayHeight/displayWidth)));
    if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;redraw();}
   }
   function save(){

@@ -5982,6 +5982,337 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"], body[
     background: #b2bfb0 !important;
   }
 
+  /* =========================================================================
+     SISTEMA DE ÍCONES, HIERARQUIA EDITORIAL (ACADEMIA + OFICINA) E
+     QUADRO DE GIZ WIDESCREEN RESPONSIVO — FUTUREPROOF DESIGN TOKENS
+     ========================================================================= */
+  :root,
+  body,
+  body[data-esc-theme="eink"] {
+    --esc-elevated: #bcc8ba;
+    --esc-elevated-hover: #b2bfb0;
+    --esc-line-soft: rgba(33, 41, 33, 0.22);
+    --esc-line-strong: rgba(33, 41, 33, 0.36);
+    --esc-radius-sm: 2px;
+    --esc-radius-md: 4px;
+  }
+
+  /* Família única de ícones SVG lineares (14-15px, traço geométrico 1.75px) */
+  .esc-ui-ico {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    opacity: 0.78;
+    transition: opacity 110ms ease;
+  }
+  button:hover .esc-ui-ico,
+  button[aria-pressed="true"] .esc-ui-ico,
+  button[aria-expanded="true"] .esc-ui-ico,
+  label:hover .esc-ui-ico {
+    opacity: 1;
+  }
+
+  /* Alinhamento óptico de ícones nas barras do editor (.masthead e .writing-toolbar) */
+  body[data-view="workspace"] #writing-space .desk-tools button {
+    gap: 5px;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools .esc-ui-ico {
+    width: 14px;
+    height: 14px;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 2px !important;
+    padding: 6px 20px !important;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar #desk-documents {
+    display: none !important;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 29px !important;
+    height: 29px;
+    padding: 0 6px !important;
+    border: 1px solid transparent;
+    border-radius: var(--esc-radius-sm);
+    font: 500 12.5px/1 Arial, Helvetica, sans-serif !important;
+    white-space: nowrap;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .esc-tool-sep {
+    margin: 0 3px;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .esc-ui-ico {
+    width: 14px;
+    height: 14px;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .size-control {
+    border-left: 0 !important;
+    padding-left: 2px !important;
+    gap: 1px;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .size-control button {
+    min-width: 24px !important;
+    padding: 0 6px !important;
+    justify-content: center;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .esc-sep-end {
+    margin-left: auto;
+  }
+
+  /* Rodapé Editorial da Coluna 1: Card Academia + Seção Oficina com ícones limpos */
+  body[data-view="workspace"] .esc-nav-footer {
+    padding: 10px 10px 12px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  body[data-view="workspace"] .esc-academy-card-btn {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px !important;
+    margin: 0 !important;
+    background: var(--esc-elevated) !important;
+    border: 1px solid var(--esc-line-soft) !important;
+    border-radius: var(--esc-radius-md) !important;
+    color: #111511 !important;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 110ms ease, border-color 110ms ease;
+  }
+  body[data-view="workspace"] .esc-academy-card-btn:hover {
+    background: var(--esc-elevated-hover) !important;
+    border-color: var(--esc-line-strong) !important;
+  }
+  .esc-academy-ico {
+    width: 18px !important;
+    height: 18px !important;
+    opacity: 0.9 !important;
+  }
+  .esc-academy-card-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .esc-academy-card-text strong {
+    font: 600 12.5px/1.25 Arial, Helvetica, sans-serif;
+    color: #111511;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .esc-academy-card-text small {
+    font: 400 11px/1.25 Arial, Helvetica, sans-serif;
+    color: #455241;
+    margin-top: 2px;
+  }
+  .esc-academy-chevron {
+    font: 600 16px/1 Arial, sans-serif;
+    color: #455241;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+  .esc-oficina-label {
+    margin: 4px 2px 0 !important;
+    padding: 0 !important;
+  }
+  body[data-view="workspace"] .esc-nav-tools-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 4px;
+    margin: 0 !important;
+  }
+  body[data-view="workspace"] .esc-nav-tool-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    margin: 0 !important;
+    padding: 6px 7px !important;
+    border: 0 !important;
+    border-radius: var(--esc-radius-sm) !important;
+    background: transparent !important;
+    color: #212921 !important;
+    font: 500 12px/1.25 Arial, Helvetica, sans-serif !important;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 110ms ease;
+  }
+  body[data-view="workspace"] .esc-nav-tool-btn:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+  }
+  body[data-view="workspace"] .esc-nav-tool-btn .esc-ui-ico {
+    width: 14px;
+    height: 14px;
+  }
+  body[data-view="workspace"] .esc-nav-tool-btn span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Categorias da Academia com ícones alinhados */
+  .esc-academy-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .esc-academy-group .esc-ui-ico {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Quadro de Giz Widescreen Responsivo: lousa expansiva ocupando 100% do quadro */
+  #chalkboard {
+    padding: 12px 16px !important;
+  }
+  #chalkboard .chalk-paper {
+    padding: 12px 16px !important;
+    gap: 8px;
+  }
+  #chalkboard .chalk-heading {
+    padding: 0 0 8px !important;
+    align-items: center !important;
+  }
+  #chalkboard .chalk-heading h2 {
+    margin: 0 !important;
+    font-size: 21px !important;
+  }
+  .chalk-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    flex-shrink: 0;
+  }
+  #chalkboard .chalk-tools {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 !important;
+  }
+  #chalkboard .chalk-tools button,
+  #chalkboard .chalk-actions button,
+  #chalkboard .chalk-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 !important;
+    padding: 5px 10px !important;
+    min-height: 32px !important;
+    height: 32px;
+    border: 1px solid var(--esc-line-strong) !important;
+    border-radius: var(--esc-radius-sm) !important;
+    background: transparent !important;
+    color: #212921 !important;
+    font: 500 12.5px/1 Arial, Helvetica, sans-serif !important;
+    box-sizing: border-box;
+  }
+  #chalkboard .chalk-tools button[hidden],
+  #chalkboard .chalk-actions button[hidden] {
+    display: none !important;
+  }
+  #chalkboard .chalk-tools button:hover,
+  #chalkboard .chalk-actions button:hover,
+  #chalkboard .chalk-upload:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+  }
+  #chalkboard .chalk-tools button[aria-pressed="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border-color: #242d23 !important;
+  }
+  #chalkboard #chalk-help {
+    margin: 0 !important;
+    font: 400 12.5px/1.3 Arial, Helvetica, sans-serif !important;
+    color: #455241;
+  }
+  #chalkboard .chalk-slate {
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    padding: 6px 6px 22px !important;
+    border-radius: var(--esc-radius-sm);
+  }
+  #chalkboard #chalk-frame {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .chalk-footer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    flex-shrink: 0;
+  }
+  .chalk-meta-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    min-width: 0;
+  }
+  #chalkboard .chalk-bottom {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    font: 500 12px/1.3 Arial, Helvetica, sans-serif !important;
+    color: #455241;
+  }
+  #chalkboard #chalk-status {
+    margin: 0 !important;
+    min-height: 0 !important;
+    font: 400 12px/1.3 Arial, Helvetica, sans-serif !important;
+    color: #212921;
+  }
+  #chalkboard .chalk-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 0 !important;
+  }
+  @media (max-width: 760px) {
+    #chalkboard {
+      padding: 6px !important;
+    }
+    #chalkboard .chalk-paper {
+      padding: 8px !important;
+      gap: 5px;
+    }
+    #chalkboard #chalk-help {
+      font-size: 11.5px !important;
+    }
+    #chalkboard .chalk-tools button span {
+      display: none;
+    }
+    #chalkboard .chalk-tools button {
+      padding: 5px 8px !important;
+    }
+  }
+  @media (max-width: 600px) {
+    #chalkboard #chalk-fino,
+    #chalkboard #chalk-giz,
+    #chalkboard #chalk-grosso {
+      display: none !important;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sheet:not(#focus-pause),
     #gabinete,

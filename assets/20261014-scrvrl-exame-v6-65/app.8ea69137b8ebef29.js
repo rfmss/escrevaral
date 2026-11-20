@@ -661,9 +661,9 @@
    if(!active()){return;}var v=root.visualViewport,viewHeight=v?v.height:root.innerHeight;
    panel.style.top=(v?v.offsetTop:0)+'px';panel.style.bottom='auto';panel.style.height=viewHeight+'px';panel.setAttribute('data-short',viewHeight<=450?'true':'false');
    var slate=frame.parentNode,style=root.getComputedStyle(slate),spaceW=slate.clientWidth-(parseFloat(style.paddingLeft)||0)-(parseFloat(style.paddingRight)||0),spaceH=slate.clientHeight-(parseFloat(style.paddingTop)||0)-(parseFloat(style.paddingBottom)||0);
-   var displayWidth=Math.max(1,Math.floor(Math.min(spaceW-2,(spaceH-2)/.6))),displayHeight=Math.max(1,Math.floor(displayWidth*.6));
+   var displayWidth=Math.max(1,Math.floor(spaceW-2)),displayHeight=Math.max(1,Math.floor(spaceH-2));
    frame.style.width=(displayWidth+2)+'px';frame.style.height=(displayHeight+2)+'px';canvas.style.width=displayWidth+'px';canvas.style.height=displayHeight+'px';
-   var width=Math.min(1000,displayWidth),height=Math.max(1,Math.round(width*.6));
+   var width=Math.min(1600,displayWidth),height=Math.max(1,Math.round(width*(displayHeight/displayWidth)));
    if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;redraw();}
   }
   function save(){
@@ -3454,7 +3454,9 @@
       }
       if (modeBtn) {
         modeBtn.setAttribute('aria-pressed', richActive ? 'true' : 'false');
-        modeBtn.textContent = richActive ? 'Formatado' : 'Texto simples';
+        var lbl = modeBtn.querySelector ? modeBtn.querySelector('.esc-btn-label') : null;
+        if (lbl) { lbl.textContent = richActive ? 'Formatado' : 'Texto simples'; }
+        else { modeBtn.textContent = richActive ? 'Formatado' : 'Texto simples'; }
       }
       if (toolbarEl) { toolbarEl.hidden = !richActive || readOnly; }
       if (richEl) {
@@ -5975,6 +5977,35 @@
     { id: 'publicar-kdp', title: 'Publicar no Amazon KDP', group: 'Publicação e carreira', description: 'Guia para publicar seu livro no Kindle Direct Publishing, do título à precificação.', file: 'publicar-kdp.html' }
   ];
 
+  var GROUP_ICONS = {
+    'Objeto livro': 'M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20',
+    'Literatura': 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z',
+    'Escrita e revisão': 'M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z',
+    'Publicação e carreira': 'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5'
+  };
+
+  function makeGroupIcon(groupName) {
+    var ns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS ? document.createElementNS(ns, 'svg') : document.createElement('svg');
+    svg.setAttribute('class', 'esc-ui-ico');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '1.75');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    svg.setAttribute('aria-hidden', 'true');
+    var d = GROUP_ICONS[groupName] || GROUP_ICONS['Objeto livro'];
+    var parts = d.split(' M');
+    var i;
+    for (i = 0; i < parts.length; i += 1) {
+      var p = document.createElementNS ? document.createElementNS(ns, 'path') : document.createElement('path');
+      p.setAttribute('d', (i === 0 ? '' : 'M') + parts[i]);
+      svg.appendChild(p);
+    }
+    return svg;
+  }
+
   function byId(id) { return document.getElementById(id); }
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
 
@@ -6045,7 +6076,7 @@
       var closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.className = 'esc-academy-close';
-      closeBtn.textContent = 'Fechar · Esc';
+      closeBtn.textContent = '← Voltar · Esc';
       on(closeBtn, 'click', close);
       head.appendChild(h2);
       head.appendChild(closeBtn);
@@ -6064,7 +6095,10 @@
           lastGroup = entry.group;
           var gh = document.createElement('h3');
           gh.className = 'esc-academy-group';
-          gh.textContent = lastGroup;
+          gh.appendChild(makeGroupIcon(lastGroup));
+          var gt = document.createElement('span');
+          gt.textContent = lastGroup;
+          gh.appendChild(gt);
           body.appendChild(gh);
           ul = document.createElement('ul');
           ul.className = 'esc-academy-list';
@@ -8228,7 +8262,7 @@
   }
 
   function updatePath() {
-    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Colaboração' };
+    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Versões' };
     var orig = activeOriginal();
     if (!orig && activeNotebook() && activeNotebook().originalId && originals) {
       orig = originals.get(activeNotebook().originalId);
@@ -8827,7 +8861,8 @@
     document.body.setAttribute('data-letter', style);
     byId('font-literary').setAttribute('aria-pressed', style === 'literaria' ? 'true' : 'false');
     byId('font-typewriter').setAttribute('aria-pressed', style === 'maquina' ? 'true' : 'false');
-    text(byId('desk-font'), style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
+    var dfBtn = byId('desk-font'), dfLbl = dfBtn && dfBtn.querySelector ? dfBtn.querySelector('.esc-btn-label') : null;
+    text(dfLbl || dfBtn, style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
     focusMeasure = null; typewriterInsets(); growManuscript();
     if (typeof start === 'number') { E.transfer.selectRange(manuscript, start, end); }
     try { if (storage) { storage.setItem('escrevaral.astra.letter', style); } } catch (ignore) { /* Préférence facultativa. */ }
@@ -9634,7 +9669,7 @@
   }
   if (byId("esc-open-lineage")) {
     listen(byId("esc-open-lineage"), "click", function () {
-      ensureNotebookForTool('os Marcos de versão', 'Os Marcos de versão acompanham um projeto.', true, function () {
+      ensureNotebookForTool('as Versões do texto', 'O histórico de versões acompanha um projeto.', true, function () {
         if (byId("start-lineage")) { byId("start-lineage").click(); }
       });
     });

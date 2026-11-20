@@ -6008,6 +6008,337 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"], body[
     background: #b2bfb0 !important;
   }
 
+  /* =========================================================================
+     SISTEMA DE ÍCONES, HIERARQUIA EDITORIAL (ACADEMIA + OFICINA) E
+     QUADRO DE GIZ WIDESCREEN RESPONSIVO — FUTUREPROOF DESIGN TOKENS
+     ========================================================================= */
+  :root,
+  body,
+  body[data-esc-theme="eink"] {
+    --esc-elevated: #bcc8ba;
+    --esc-elevated-hover: #b2bfb0;
+    --esc-line-soft: rgba(33, 41, 33, 0.22);
+    --esc-line-strong: rgba(33, 41, 33, 0.36);
+    --esc-radius-sm: 2px;
+    --esc-radius-md: 4px;
+  }
+
+  /* Família única de ícones SVG lineares (14-15px, traço geométrico 1.75px) */
+  .esc-ui-ico {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    opacity: 0.78;
+    transition: opacity 110ms ease;
+  }
+  button:hover .esc-ui-ico,
+  button[aria-pressed="true"] .esc-ui-ico,
+  button[aria-expanded="true"] .esc-ui-ico,
+  label:hover .esc-ui-ico {
+    opacity: 1;
+  }
+
+  /* Alinhamento óptico de ícones nas barras do editor (.masthead e .writing-toolbar) */
+  body[data-view="workspace"] #writing-space .desk-tools button {
+    gap: 5px;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools .esc-ui-ico {
+    width: 14px;
+    height: 14px;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 2px !important;
+    padding: 6px 20px !important;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar #desk-documents {
+    display: none !important;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 29px !important;
+    height: 29px;
+    padding: 0 6px !important;
+    border: 1px solid transparent;
+    border-radius: var(--esc-radius-sm);
+    font: 500 12.5px/1 Arial, Helvetica, sans-serif !important;
+    white-space: nowrap;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .esc-tool-sep {
+    margin: 0 3px;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .esc-ui-ico {
+    width: 14px;
+    height: 14px;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .size-control {
+    border-left: 0 !important;
+    padding-left: 2px !important;
+    gap: 1px;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .size-control button {
+    min-width: 24px !important;
+    padding: 0 6px !important;
+    justify-content: center;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar .esc-sep-end {
+    margin-left: auto;
+  }
+
+  /* Rodapé Editorial da Coluna 1: Card Academia + Seção Oficina com ícones limpos */
+  body[data-view="workspace"] .esc-nav-footer {
+    padding: 10px 10px 12px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  body[data-view="workspace"] .esc-academy-card-btn {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px !important;
+    margin: 0 !important;
+    background: var(--esc-elevated) !important;
+    border: 1px solid var(--esc-line-soft) !important;
+    border-radius: var(--esc-radius-md) !important;
+    color: #111511 !important;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 110ms ease, border-color 110ms ease;
+  }
+  body[data-view="workspace"] .esc-academy-card-btn:hover {
+    background: var(--esc-elevated-hover) !important;
+    border-color: var(--esc-line-strong) !important;
+  }
+  .esc-academy-ico {
+    width: 18px !important;
+    height: 18px !important;
+    opacity: 0.9 !important;
+  }
+  .esc-academy-card-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .esc-academy-card-text strong {
+    font: 600 12.5px/1.25 Arial, Helvetica, sans-serif;
+    color: #111511;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .esc-academy-card-text small {
+    font: 400 11px/1.25 Arial, Helvetica, sans-serif;
+    color: #455241;
+    margin-top: 2px;
+  }
+  .esc-academy-chevron {
+    font: 600 16px/1 Arial, sans-serif;
+    color: #455241;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+  .esc-oficina-label {
+    margin: 4px 2px 0 !important;
+    padding: 0 !important;
+  }
+  body[data-view="workspace"] .esc-nav-tools-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 4px;
+    margin: 0 !important;
+  }
+  body[data-view="workspace"] .esc-nav-tool-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    margin: 0 !important;
+    padding: 6px 7px !important;
+    border: 0 !important;
+    border-radius: var(--esc-radius-sm) !important;
+    background: transparent !important;
+    color: #212921 !important;
+    font: 500 12px/1.25 Arial, Helvetica, sans-serif !important;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 110ms ease;
+  }
+  body[data-view="workspace"] .esc-nav-tool-btn:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+  }
+  body[data-view="workspace"] .esc-nav-tool-btn .esc-ui-ico {
+    width: 14px;
+    height: 14px;
+  }
+  body[data-view="workspace"] .esc-nav-tool-btn span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Categorias da Academia com ícones alinhados */
+  .esc-academy-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .esc-academy-group .esc-ui-ico {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Quadro de Giz Widescreen Responsivo: lousa expansiva ocupando 100% do quadro */
+  #chalkboard {
+    padding: 12px 16px !important;
+  }
+  #chalkboard .chalk-paper {
+    padding: 12px 16px !important;
+    gap: 8px;
+  }
+  #chalkboard .chalk-heading {
+    padding: 0 0 8px !important;
+    align-items: center !important;
+  }
+  #chalkboard .chalk-heading h2 {
+    margin: 0 !important;
+    font-size: 21px !important;
+  }
+  .chalk-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    flex-shrink: 0;
+  }
+  #chalkboard .chalk-tools {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 !important;
+  }
+  #chalkboard .chalk-tools button,
+  #chalkboard .chalk-actions button,
+  #chalkboard .chalk-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 !important;
+    padding: 5px 10px !important;
+    min-height: 32px !important;
+    height: 32px;
+    border: 1px solid var(--esc-line-strong) !important;
+    border-radius: var(--esc-radius-sm) !important;
+    background: transparent !important;
+    color: #212921 !important;
+    font: 500 12.5px/1 Arial, Helvetica, sans-serif !important;
+    box-sizing: border-box;
+  }
+  #chalkboard .chalk-tools button[hidden],
+  #chalkboard .chalk-actions button[hidden] {
+    display: none !important;
+  }
+  #chalkboard .chalk-tools button:hover,
+  #chalkboard .chalk-actions button:hover,
+  #chalkboard .chalk-upload:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+  }
+  #chalkboard .chalk-tools button[aria-pressed="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border-color: #242d23 !important;
+  }
+  #chalkboard #chalk-help {
+    margin: 0 !important;
+    font: 400 12.5px/1.3 Arial, Helvetica, sans-serif !important;
+    color: #455241;
+  }
+  #chalkboard .chalk-slate {
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    padding: 6px 6px 22px !important;
+    border-radius: var(--esc-radius-sm);
+  }
+  #chalkboard #chalk-frame {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .chalk-footer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    flex-shrink: 0;
+  }
+  .chalk-meta-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    min-width: 0;
+  }
+  #chalkboard .chalk-bottom {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    font: 500 12px/1.3 Arial, Helvetica, sans-serif !important;
+    color: #455241;
+  }
+  #chalkboard #chalk-status {
+    margin: 0 !important;
+    min-height: 0 !important;
+    font: 400 12px/1.3 Arial, Helvetica, sans-serif !important;
+    color: #212921;
+  }
+  #chalkboard .chalk-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 0 !important;
+  }
+  @media (max-width: 760px) {
+    #chalkboard {
+      padding: 6px !important;
+    }
+    #chalkboard .chalk-paper {
+      padding: 8px !important;
+      gap: 5px;
+    }
+    #chalkboard #chalk-help {
+      font-size: 11.5px !important;
+    }
+    #chalkboard .chalk-tools button span {
+      display: none;
+    }
+    #chalkboard .chalk-tools button {
+      padding: 5px 8px !important;
+    }
+  }
+  @media (max-width: 600px) {
+    #chalkboard #chalk-fino,
+    #chalkboard #chalk-giz,
+    #chalkboard #chalk-grosso {
+      display: none !important;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sheet:not(#focus-pause),
     #gabinete,
@@ -6639,10 +6970,10 @@ SOFTWARE.
 </head>
 <body data-theme="claro" data-esc-theme="eink" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="workspace" data-nav-collapsed="false" data-lists-collapsed="false" data-mobile-pane="editor">
 <section id="lineage-panel" class="sheet" role="dialog" aria-labelledby="lineage-heading" tabindex="-1" hidden>
- <header class="sheet-heading"><div><small>COLABORAÇÃO · LINHAGEM DO TEXTO</small><h2 id="lineage-heading"></h2></div><button id="lineage-close" class="material-key" aria-label="Fechar linhagem">×</button></header>
+ <header class="sheet-heading"><div><small>HISTÓRICO LOCAL · VERSÕES DO TEXTO</small><h2 id="lineage-heading"></h2></div><button id="lineage-close" class="material-key" aria-label="Fechar versões">×</button></header>
  <p id="lineage-book"></p><p id="lineage-status" role="status"></p>
- <button id="lineage-mark">Guardar marco agora</button>
- <p class="quiet">Até 20 versões recentes, limitadas a 400 mil caracteres no total. Exporte o caderno para conservar seus marcos. Este histórico local não certifica autoria nem data externa.</p>
+ <button id="lineage-mark">Salvar versão agora</button>
+ <p class="quiet">Até 20 versões recentes (linhagem local), limitadas a 400 mil caracteres no total. Exporte o projeto para conservar o histórico completo. Este registro local não certifica autoria nem data externa.</p>
  <ol id="lineage-list"></ol><h3 id="lineage-preview-title"></h3><p id="lineage-diff"></p><textarea id="lineage-preview" readonly aria-label="Texto da versão selecionada"></textarea>
  <div id="lineage-changes" hidden><p>Trechos alterados (até 3 mil caracteres de cada lado):</p><h4>Removido</h4><pre id="lineage-removed"></pre><h4>Inserido</h4><pre id="lineage-added"></pre></div>
  <button id="lineage-restore" hidden>Restaurar esta versão</button>
@@ -6652,15 +6983,22 @@ SOFTWARE.
  <div class="chalk-paper">
   <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span>
   <header class="finish-heading chalk-heading"><div><small>ESCREVARAL · QUADRO DE GIZ</small><h2 id="chalk-heading"></h2></div><button id="chalk-close" class="material-key esc-back-chip" aria-label="Fechar quadro de giz">← Voltar</button></header>
-  <div class="chalk-tools" role="group" aria-label="Ferramentas do quadro">
-   <select id="chalk-pen" aria-label="Tipo de giz"><option value="fino">Fino</option><option value="giz" selected>Giz</option><option value="grosso">Grosso</option></select>
-   <button id="chalk-fino" aria-pressed="false">Fino</button><button id="chalk-giz" aria-pressed="true">Giz</button><button id="chalk-grosso" aria-pressed="false">Grosso</button><button id="chalk-borracha" aria-pressed="false">Borracha</button><button id="chalk-grid" aria-pressed="false">Grade</button><button id="chalk-undo">Desfazer</button><button id="chalk-clear">Limpar</button>
+  <div class="chalk-topbar">
+   <div class="chalk-tools" role="group" aria-label="Ferramentas do quadro">
+    <select id="chalk-pen" aria-label="Tipo de giz"><option value="fino">Fino</option><option value="giz" selected>Giz</option><option value="grosso">Grosso</option></select>
+    <button id="chalk-fino" aria-pressed="false"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg><span>Fino</span></button><button id="chalk-giz" aria-pressed="true"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Giz</span></button><button id="chalk-grosso" aria-pressed="false"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"/></svg><span>Grosso</span></button><button id="chalk-borracha" aria-pressed="false"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg><span>Borracha</span></button><button id="chalk-grid" aria-pressed="false"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg><span>Grade</span></button><button id="chalk-undo"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg><span>Desfazer</span></button><button id="chalk-clear"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg><span>Limpar</span></button>
+   </div>
+   <p id="chalk-help">Rabisque ideias, tramas e conexões visuais do seu projeto.</p>
   </div>
-  <p id="chalk-help">Rabisque ideias e enxergue as conexões da sua história.</p><p id="chalk-keyboard-help" class="sr-only">Desenhe com o dedo, mouse ou caneta. No quadro: setas movem o cursor; Espaço começa ou termina o traço.</p>
-  <div class="chalk-slate"><textarea id="chalk-copy" readonly aria-label="Cópia do desenho em texto" hidden></textarea><button id="chalk-copy-close" hidden>Voltar ao desenho</button><div id="chalk-frame"><canvas id="chalk-canvas" width="1" height="1" tabindex="0" role="img" aria-label="Desenho do caderno" aria-describedby="chalk-help chalk-keyboard-help">Este navegador não exibe o desenho.</canvas><span id="chalk-cursor" aria-hidden="true" hidden></span></div><div class="chalk-rail" aria-hidden="true"><i></i><i></i><span>ESCREVA<b>RAL</b></span><em></em></div></div>
-  <div class="chalk-bottom"><span id="chalk-count">0 traços</span><span>O desenho acompanha este caderno.</span></div>
-  <p id="chalk-status" role="status"></p>
-  <div class="chalk-actions"><button id="chalk-download" title="Baixar desenho">Baixar</button><button id="chalk-copy-show" title="Copiar desenho">Copiar</button><label class="chalk-upload" for="chalk-import" title="Trazer desenho">Trazer<input id="chalk-import" type="file" accept=".txt,.json,.giz" /></label><button id="chalk-retry" hidden>Guardar novamente</button><button id="chalk-discard" hidden>Descartar alterações</button></div>
+  <p id="chalk-keyboard-help" class="sr-only">Desenhe com o dedo, mouse ou caneta. No quadro: setas movem o cursor; Espaço começa ou termina o traço.</p>
+  <div class="chalk-slate"><textarea id="chalk-copy" readonly aria-label="Cópia do desenho em texto" hidden></textarea><button id="chalk-copy-close" hidden>Voltar ao desenho</button><div id="chalk-frame"><canvas id="chalk-canvas" width="1" height="1" tabindex="0" role="img" aria-label="Desenho do caderno" aria-describedby="chalk-help chalk-keyboard-help">Este navegador não exibe o desenho.</canvas><span id="chalk-cursor" aria-hidden="true" hidden></span></div><div class="chalk-rail" aria-hidden="true"><i></i><i></i><span>ESCREVARAL</span><em></em></div></div>
+  <div class="chalk-footer-bar">
+   <div class="chalk-meta-group">
+    <div class="chalk-bottom"><span id="chalk-count">0 traços</span><span>Salvo neste projeto.</span></div>
+    <p id="chalk-status" role="status"></p>
+   </div>
+   <div class="chalk-actions"><button id="chalk-download" title="Baixar desenho"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg><span>Baixar</span></button><button id="chalk-copy-show" title="Copiar desenho"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button><label class="chalk-upload" for="chalk-import" title="Trazer desenho"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg><span>Trazer</span><input id="chalk-import" type="file" accept=".txt,.json,.giz" /></label><button id="chalk-retry" hidden>Guardar novamente</button><button id="chalk-discard" hidden>Descartar alterações</button></div>
+  </div>
  </div>
 </section>
 
@@ -6843,14 +7181,19 @@ SOFTWARE.
     </div>
     <div id="esc-pomodoro-dock" aria-label="Pomodoro de escrita"></div>
     <footer class="esc-nav-footer">
-      <button id="esc-open-academy" type="button" class="esc-nav-footer-btn">Academia e Literatura</button>
+      <button id="esc-open-academy" type="button" class="esc-nav-footer-btn esc-academy-card-btn">
+        <svg class="esc-ui-ico esc-academy-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span class="esc-academy-card-text"><strong>Academia e Literatura</strong><small>Guias editoriais e obras</small></span>
+        <span class="esc-academy-chevron" aria-hidden="true">›</span>
+      </button>
+      <p class="esc-nav-section-label esc-oficina-label">Oficina</p>
       <div class="esc-nav-tools-grid" role="group" aria-label="Ferramentas do escritor">
-        <button id="esc-open-calculator" type="button" class="esc-nav-tool-btn">Calculadora</button>
-        <button id="esc-open-calendar" type="button" class="esc-nav-tool-btn">Calendário</button>
-        <button id="esc-open-chalk" type="button" class="esc-nav-tool-btn">Quadro de giz</button>
-        <button id="esc-open-lineage" type="button" class="esc-nav-tool-btn">Marcos</button>
-        <button id="esc-open-universe" type="button" class="esc-nav-tool-btn">Universo</button>
-        <button id="esc-open-packages" type="button" class="esc-nav-tool-btn">Ajustes</button>
+        <button id="esc-open-chalk" type="button" class="esc-nav-tool-btn" title="Rabisque ideias e tramas do projeto"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="1.5"/><path d="M7 12c1.5-2.5 3.5-2.5 5 0s3.5 2.5 5 0"/><path d="M8 21h8"/></svg><span>Quadro de giz</span></button>
+        <button id="esc-open-universe" type="button" class="esc-nav-tool-btn" title="Capítulos, cenas, personagens e cenários"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Universo</span></button>
+        <button id="esc-open-lineage" type="button" class="esc-nav-tool-btn" title="Histórico e versões salvas deste texto"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg><span>Versões</span></button>
+        <button id="esc-open-calculator" type="button" class="esc-nav-tool-btn" title="Calculadora editorial de laudas, tempo e orçamento"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg><span>Calculadora</span></button>
+        <button id="esc-open-calendar" type="button" class="esc-nav-tool-btn" title="Agenda e planejamento diário de escrita"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Calendário</span></button>
+        <button id="esc-open-packages" type="button" class="esc-nav-tool-btn" title="Preferências, exportação e modo offline"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Ajustes</span></button>
       </div>
     </footer>
   </aside>
@@ -6883,11 +7226,11 @@ SOFTWARE.
       <button id="back-cabinet" class="brand-signature" aria-label="Escrevaral — voltar aos textos do caderno"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar neste caderno</label><input id="note-search" type="search" placeholder="Buscar neste caderno" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden="">×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
-        <button id="esc-nav-toggle" type="button" aria-pressed="false" title="Recolher ou abrir coluna de projetos">Barra</button><button id="esc-lists-toggle" type="button" aria-pressed="false" title="Recolher ou abrir lista de notas">Lista</button><button id="desk-minimize" title="Abrir estante visual de cadernos, gavetas e post-its" aria-label="Estante de cadernos">Estante</button><span class="esc-tool-sep" aria-hidden="true"></span><button id="immersion-toggle" aria-pressed="false" title="Abrir Superfoco (Esc volta ao aplicativo)">Superfoco</button><button id="esc-superfocus-auto-toggle" type="button" role="switch" aria-checked="true" title="ON: abre na segunda palavra e sai após 30 s sem atividade. OFF: entrada e saída manuais.">Auto<span class="esc-switch-track" aria-hidden="true"><span class="esc-switch-thumb"></span></span><span class="esc-switch-state">ON</span></button><span class="esc-tool-sep" aria-hidden="true"></span>
-        <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
-        <button id="desk-export" title="Baixar este texto">Baixar</button>
-        <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
-        <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
+        <button id="esc-nav-toggle" type="button" aria-pressed="false" title="Recolher ou abrir coluna de projetos"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg><span>Barra</span></button><button id="esc-lists-toggle" type="button" aria-pressed="false" title="Recolher ou abrir lista de notas"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>Lista</span></button><button id="desk-minimize" title="Abrir estante visual de cadernos, gavetas e post-its" aria-label="Estante de cadernos"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg><span>Estante</span></button><span class="esc-tool-sep" aria-hidden="true"></span><button id="immersion-toggle" aria-pressed="false" title="Abrir Superfoco (Esc volta ao aplicativo)"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg><span>Superfoco</span></button><button id="esc-superfocus-auto-toggle" type="button" role="switch" aria-checked="true" title="ON: abre na segunda palavra e sai após 30 s sem atividade. OFF: entrada e saída manuais.">Auto<span class="esc-switch-track" aria-hidden="true"><span class="esc-switch-thumb"></span></span><span class="esc-switch-state">ON</span></button><span class="esc-tool-sep" aria-hidden="true"></span>
+        <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina" title="Revisar gramática, estilo, ritmo e poesia"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span>Examinar</span></button>
+        <button id="desk-export" title="Baixar este texto"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg><span>Baixar</span></button>
+        <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo" title="Abrir acervo e lixeira"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/></svg><span>Acervo</span></button>
+        <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa" title="Ajustes do espaço e cópias de segurança"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"/></svg><span>Ajustes</span></button>
       </nav>
     </header>
     <div class="desk">
@@ -6901,15 +7244,18 @@ SOFTWARE.
         </div>
         <div class="writing-toolbar" role="group" aria-label="Apresentação do manuscrito">
           <button id="desk-documents" aria-controls="note-browser" aria-expanded="false">Textos</button>
-          <button id="esc-format-toggle" type="button" aria-pressed="false" title="Alternar entre texto simples e formatado leve">Texto simples</button>
-          <button id="esc-reader-toggle" type="button" title="Abrir em modo leitura editorial">Leitura</button>
-          <button id="esc-synonyms-btn" type="button" title="Consultar sinônimos e definições (P01)">Sinônimos</button>
-          <button id="esc-sound-btn" type="button" class="esc-sound-btn" aria-pressed="false" title="Som mecânico da máquina">Som</button>
-          <button id="desk-font" title="Alternar entre letra literária e máquina">Courier Prime</button>
+          <button id="esc-format-toggle" type="button" aria-pressed="false" title="Alternar entre texto simples e formatado leve"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 4v16M17 4v16M19 4H9.5a4.5 4.5 0 0 0 0 9H13"/></svg><span class="esc-btn-label">Texto simples</span></button>
+          <button id="esc-reader-toggle" type="button" title="Abrir em modo leitura editorial"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Leitura</span></button>
+          <span class="esc-tool-sep" aria-hidden="true"></span>
+          <button id="esc-synonyms-btn" type="button" title="Consultar sinônimos e definições (P01)"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M9 8h6M9 12h4"/></svg><span>Sinônimos</span></button>
+          <button id="esc-sound-btn" type="button" class="esc-sound-btn" aria-pressed="false" title="Som mecânico da máquina"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg><span>Som</span></button>
+          <span class="esc-tool-sep" aria-hidden="true"></span>
+          <button id="desk-font" title="Alternar entre letra literária e máquina"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg><span class="esc-btn-label">Courier Prime</span></button>
           <div class="size-control"><button id="type-smaller" aria-label="Diminuir letra">−</button><output id="type-size" aria-label="Tamanho da letra">21</output><button id="type-larger" aria-label="Aumentar letra">+</button></div>
-          <button id="desk-paragraph" aria-pressed="true">Parágrafo</button>
-          <button id="desk-counts" aria-controls="desk-inspector" aria-expanded="false">Contagem</button>
-          <button id="desk-print">Imprimir</button>
+          <button id="desk-paragraph" aria-pressed="true" title="Destacar apenas o parágrafo em escrita"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h12"/></svg><span>Parágrafo</span></button>
+          <span class="esc-tool-sep esc-sep-end" aria-hidden="true"></span>
+          <button id="desk-counts" aria-controls="desk-inspector" aria-expanded="false" title="Ver palavras, caracteres e parágrafos"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg><span>Contagem</span></button>
+          <button id="desk-print" title="Imprimir este texto"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span>Imprimir</span></button>
         </div>
         <div id="esc-rich-toolbar" class="esc-rich-toolbar" role="toolbar" aria-label="Formatação leve" hidden>
           <button type="button" data-rich-cmd="bold" title="Negrito"><strong>N</strong></button>
@@ -9830,9 +10176,9 @@ SOFTWARE.
    if(!active()){return;}var v=root.visualViewport,viewHeight=v?v.height:root.innerHeight;
    panel.style.top=(v?v.offsetTop:0)+'px';panel.style.bottom='auto';panel.style.height=viewHeight+'px';panel.setAttribute('data-short',viewHeight<=450?'true':'false');
    var slate=frame.parentNode,style=root.getComputedStyle(slate),spaceW=slate.clientWidth-(parseFloat(style.paddingLeft)||0)-(parseFloat(style.paddingRight)||0),spaceH=slate.clientHeight-(parseFloat(style.paddingTop)||0)-(parseFloat(style.paddingBottom)||0);
-   var displayWidth=Math.max(1,Math.floor(Math.min(spaceW-2,(spaceH-2)/.6))),displayHeight=Math.max(1,Math.floor(displayWidth*.6));
+   var displayWidth=Math.max(1,Math.floor(spaceW-2)),displayHeight=Math.max(1,Math.floor(spaceH-2));
    frame.style.width=(displayWidth+2)+'px';frame.style.height=(displayHeight+2)+'px';canvas.style.width=displayWidth+'px';canvas.style.height=displayHeight+'px';
-   var width=Math.min(1000,displayWidth),height=Math.max(1,Math.round(width*.6));
+   var width=Math.min(1600,displayWidth),height=Math.max(1,Math.round(width*(displayHeight/displayWidth)));
    if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;redraw();}
   }
   function save(){
@@ -12623,7 +12969,9 @@ SOFTWARE.
       }
       if (modeBtn) {
         modeBtn.setAttribute('aria-pressed', richActive ? 'true' : 'false');
-        modeBtn.textContent = richActive ? 'Formatado' : 'Texto simples';
+        var lbl = modeBtn.querySelector ? modeBtn.querySelector('.esc-btn-label') : null;
+        if (lbl) { lbl.textContent = richActive ? 'Formatado' : 'Texto simples'; }
+        else { modeBtn.textContent = richActive ? 'Formatado' : 'Texto simples'; }
       }
       if (toolbarEl) { toolbarEl.hidden = !richActive || readOnly; }
       if (richEl) {
@@ -15144,6 +15492,35 @@ SOFTWARE.
     { id: 'publicar-kdp', title: 'Publicar no Amazon KDP', group: 'Publicação e carreira', description: 'Guia para publicar seu livro no Kindle Direct Publishing, do título à precificação.', file: 'publicar-kdp.html' }
   ];
 
+  var GROUP_ICONS = {
+    'Objeto livro': 'M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20',
+    'Literatura': 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z',
+    'Escrita e revisão': 'M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z',
+    'Publicação e carreira': 'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5'
+  };
+
+  function makeGroupIcon(groupName) {
+    var ns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS ? document.createElementNS(ns, 'svg') : document.createElement('svg');
+    svg.setAttribute('class', 'esc-ui-ico');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '1.75');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    svg.setAttribute('aria-hidden', 'true');
+    var d = GROUP_ICONS[groupName] || GROUP_ICONS['Objeto livro'];
+    var parts = d.split(' M');
+    var i;
+    for (i = 0; i < parts.length; i += 1) {
+      var p = document.createElementNS ? document.createElementNS(ns, 'path') : document.createElement('path');
+      p.setAttribute('d', (i === 0 ? '' : 'M') + parts[i]);
+      svg.appendChild(p);
+    }
+    return svg;
+  }
+
   function byId(id) { return document.getElementById(id); }
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
 
@@ -15214,7 +15591,7 @@ SOFTWARE.
       var closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.className = 'esc-academy-close';
-      closeBtn.textContent = 'Fechar · Esc';
+      closeBtn.textContent = '← Voltar · Esc';
       on(closeBtn, 'click', close);
       head.appendChild(h2);
       head.appendChild(closeBtn);
@@ -15233,7 +15610,10 @@ SOFTWARE.
           lastGroup = entry.group;
           var gh = document.createElement('h3');
           gh.className = 'esc-academy-group';
-          gh.textContent = lastGroup;
+          gh.appendChild(makeGroupIcon(lastGroup));
+          var gt = document.createElement('span');
+          gt.textContent = lastGroup;
+          gh.appendChild(gt);
           body.appendChild(gh);
           ul = document.createElement('ul');
           ul.className = 'esc-academy-list';
@@ -17397,7 +17777,7 @@ SOFTWARE.
   }
 
   function updatePath() {
-    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Colaboração' };
+    var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Versões' };
     var orig = activeOriginal();
     if (!orig && activeNotebook() && activeNotebook().originalId && originals) {
       orig = originals.get(activeNotebook().originalId);
@@ -17996,7 +18376,8 @@ SOFTWARE.
     document.body.setAttribute('data-letter', style);
     byId('font-literary').setAttribute('aria-pressed', style === 'literaria' ? 'true' : 'false');
     byId('font-typewriter').setAttribute('aria-pressed', style === 'maquina' ? 'true' : 'false');
-    text(byId('desk-font'), style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
+    var dfBtn = byId('desk-font'), dfLbl = dfBtn && dfBtn.querySelector ? dfBtn.querySelector('.esc-btn-label') : null;
+    text(dfLbl || dfBtn, style === 'maquina' ? 'Courier Prime' : 'Noto Serif');
     focusMeasure = null; typewriterInsets(); growManuscript();
     if (typeof start === 'number') { E.transfer.selectRange(manuscript, start, end); }
     try { if (storage) { storage.setItem('escrevaral.astra.letter', style); } } catch (ignore) { /* Préférence facultativa. */ }
@@ -18803,7 +19184,7 @@ SOFTWARE.
   }
   if (byId("esc-open-lineage")) {
     listen(byId("esc-open-lineage"), "click", function () {
-      ensureNotebookForTool('os Marcos de versão', 'Os Marcos de versão acompanham um projeto.', true, function () {
+      ensureNotebookForTool('as Versões do texto', 'O histórico de versões acompanha um projeto.', true, function () {
         if (byId("start-lineage")) { byId("start-lineage").click(); }
       });
     });
