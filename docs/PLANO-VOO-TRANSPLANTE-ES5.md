@@ -67,3 +67,37 @@
   3. `npm run build && npm run build:check && npm test` = **100% OK**.
   4. Testes reais em **Chromium** (`QA_BROWSER_EXECUTABLE=/usr/bin/google-chrome`): `tests/ptbr-browser.cjs` corrigido + nova suíte E2E cobrindo **todas** as features do App Linux e da Web, 0 erros de console, 0 `SecurityError`, 0 requests falhos.
   5. Conferência do modo portátil `escrevaral.html` e do cache offline no Service Worker.
+
+
+---
+
+## Próximas Fases do Plano de Voo (Pós-Fusão / Evolução & Handoff Hydrogen)
+
+### [x] Refino Visual E-Ink + Máquina de Escrever Mecânica Realista (20/11/2026)
+- **Entregas concluídas:**
+  - Tema único calibrado **Papel digital (E-Ink Sálvia `#c4cfc2`)** em folha contínua nas 3 colunas, Superfoco, Parágrafo e Modo Leitor (zero manchas claras/creme, zero quadrados clareando no hover).
+  - Barra de rolagem oculta no Superfoco e `2px` quase imperceptível na mesa.
+  - **Máquina de escrever técnica fotorrealista** (`assets/typewriter/*.{webp,png}`, `1222×296`, aço escovado, roletes de borracha fosca, régua milimetrada, carretéis perfurados e cesto de hastes): removidas todas as explosões/estalos cartoon; ilusão baseada apenas em **haste metálica real (typebar)** + micro-elevação da fita + recuo físico ponderado + retorno lateral real do carro no `Enter` + som mecânico.
+
+### [ ] Fase 7 — Papel Paginado no Superfoco com Máquina Habilitada (Padrão Word / Laudas)
+- **Objetivo:** Quando o autor entra no Superfoco com a máquina habilitada, exibir uma folha de papel física (com margens e proporção de página/lauda padrão Word) deslizando por trás da barra prensa-papel da máquina.
+- **Comportamento:** À medida que o texto completa uma lauda/página (padrão Word/ABNT), o papel avança e troca para a nova folha seguinte, reforçando a ilusão real de datilografia página por página sem quebrar a rolagem nem os offsets UTF-16 do Cofre.
+- **Compatibilidade:** ES5 estrito no núcleo (`src/ui/superfoco.js`, `src/ui/styles/maquina-superfoco.css`).
+
+### [ ] Fase 8 — Revisão de Salvamento e Exportação Seletiva por Escopo
+- **Objetivo:** Tornar o salvamento e a exportação 100% claros, explícitos e sem ambiguidade para o escritor:
+  - **Salvar / exportar só este projeto (ex.: "só este romance")** — gera arquivo/pacote contendo todas as pastas e textos daquele projeto específico.
+  - **Salvar / exportar só esta pasta / capítulo** — exporta o subconjunto selecionado.
+  - **Salvar / exportar só esta nota** — exportação rápida individual (`.txt`, `.md`, `.html`).
+  - **Backup completo do acervo** — claramente separado das exportações individuais/por projeto.
+- **Fluxos a revisar:** `src/ui/transferencia.js`, `src/storage/cadernos.js`, `src/editor/controlador.js`, menu da pasta em `src/ui/tres-colunas.js` e diálogo `Baixar` / `Ajustes`.
+
+### [ ] Fase 9 — Revisão de Impressão Editorial (Nota, Pasta e Projeto Completo)
+- **Objetivo:** Permitir imprimir com acabamento tipográfico limpo (papel branco + tinta preta pura em `@media print`, sem elementos de interface):
+  - **Imprimir nota atual** (documento individual).
+  - **Imprimir pasta / parte selecionada** (todas as notas da pasta em ordem, com cabeçalhos limpos).
+  - **Imprimir projeto / obra inteira** (folha de rosto com título do projeto, divisão por pastas/capítulos e quebras de página coerentes).
+- **Fluxos a revisar:** `#print-sheet`, `src/ui/styles/base.css` (`@media print`), `src/editor/controlador.js` (`desk-print`) e menu da pasta/projeto em `src/ui/tres-colunas.js`.
+
+### [ ] Fase 10 — Novos Temas Derivados do E-Ink Calibrado (Futuro)
+- **Objetivo:** Somente após o tema único **Papel digital (E-Ink Sálvia)** estar 100% validado em uso real, criar temas adicionais (Papel creme, Escuro Carbon, Claro neutro) herdando a mesma disciplina de folha contínua, contraste AAA e hover sem quadrados.
