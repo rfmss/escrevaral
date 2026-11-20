@@ -14,7 +14,7 @@
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   /* A capa é a entrada do projeto; o editor continua compartilhado. */
   var notebooks = null, activeNotebookId = null, notebookEditing = null, notebookReturn = null, notebookReady = false, showingAbout = false, deferredInstallPrompt = null;
-  var originals = null, activeOriginalId = null, formTarget = 'volume';
+  var originals = null, activeOriginalId = null, formTarget = 'volume', workspaceUI = null, templatesUI = null, sonnetUI = null, richUI = null, readerUI = null, visualMachine = null, superfocoUI = null, themeChromeUI = null, wordCardUI = null, academyUI = null;
   function availableBook(b) { var o = b && b.originalId && originals ? originals.get(b.originalId) : null; return b && !b.trashed && (!b.originalId || (o && !o.trashed)); }
   function activeNotebook() { var b = notebooks && activeNotebookId ? notebooks.get(activeNotebookId) : null; return availableBook(b) ? b : null; }
   function activeOriginal() { return originals && activeOriginalId ? originals.get(activeOriginalId) : null; }
@@ -192,9 +192,11 @@
           if (doc.projectId === book.id) { doc.project = book.name; }
           if (activeNotebookId === book.id) { cabinetProject = book.name; }
           hideNotebookForm(); renderNotebooks(); renderCabinet(); updatePath(); renderTimeline(false, null, true);
+          if (workspaceUI) { workspaceUI.render(); }
         } else {
           book = notebooks.add(value, activeOriginalId || null);
           hideNotebookForm(); renderNotebooks(); openNotebook(book.id);
+          if (workspaceUI) { workspaceUI.selectProject(book.id, ''); }
         }
       }
     } catch (e) { text(byId('project-error'), e.message || 'Não foi possível guardar.'); }
@@ -400,6 +402,7 @@
       try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Só a preferência de abertura falhou. */ }
       if (!byId('acervo').hidden) { renderArchive(); }
       renderTimeline(false, previousId); refreshCounts(); saveSession();
+      if (workspaceUI) { workspaceUI.render(); }
       checkPostWritePwa();
       if (E.ptbrPanelSaved) { E.ptbrPanelSaved(saved.conflict); }
       return true;
@@ -491,7 +494,16 @@
     window.clearTimeout(focusTimer); focusTimer = window.setTimeout(updateFocus, 40);
   }
   function cancelTypewriter() { window.clearTimeout(typewriterTimer); typewriterTimer = null; }
-  function typingLineTarget() { return manuscript.clientHeight * 0.42; }
+  function typingLineTarget() {
+    if (immersion && visualMachine && visualMachine.anchorY() !== null && manuscript.getBoundingClientRect) {
+      var rect = manuscript.getBoundingClientRect();
+      var anchorOffset = visualMachine.anchorY() - rect.top;
+      if (isFinite(anchorOffset) && anchorOffset > 40 && anchorOffset < manuscript.clientHeight) {
+        return anchorOffset;
+      }
+    }
+    return manuscript.clientHeight * 0.42;
+  }
   function typewriterInsets() {
     if (!window.getComputedStyle || !manuscript.style || !manuscript.clientHeight) { return; }
     var style = window.getComputedStyle(manuscript), line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
@@ -632,11 +644,14 @@
   }
   function trashEntry(entry) {
     if (!archive || !persist()) { return; }
+    if (entry && entry.locked) { message('Esta folha de referência está protegida contra exclusão.'); return; }
     var isCurrent = entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id);
     try {
       archive.trash(isCurrent ? doc : entry);
       if (isCurrent) { var next = archive.list().documents[0] || E.freshDocument(); loadDocument(next); cabinetSelection = null; }
-      renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); saveSession(); message('Movido para a lixeira. Você pode restaurar pelo menu Início.');
+      renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); saveSession();
+      if (workspaceUI) { workspaceUI.render(); }
+      message('Movido para a lixeira. Você pode restaurar pela Biblioteca.');
     } catch (e) { message('Não foi possível mover para a lixeira. A folha foi preservada.'); }
   }
   function askDelete(entry) {
@@ -665,6 +680,7 @@
     byId('path-project').hidden = byId('path-project-separator').hidden = project === null;
     text(byId('path-project'), project || 'Textos avulsos');
     byId('path-project').setAttribute('title', project || 'Textos avulsos');
+    if (byId('path-folder')) { var hasFolder = !cabinetOpen && !!(doc.folder && doc.folder.length); byId('path-folder').hidden = byId('path-folder-separator').hidden = !hasFolder; text(byId('path-folder'), doc.folder || ''); }
     byId('path-document').hidden = byId('path-document-separator').hidden = cabinetOpen;
     text(byId('path-document'), title.value || 'Sem título');
     byId('path-document').setAttribute('title', title.value || 'Sem título');
@@ -677,10 +693,17 @@
     });
   }
   function pathToProjects(all) {
-    var selected = cabinetOpen ? cabinetProject : projectName(doc.project);
-    if (!openCabinet(false)) { return; }
-    if (all) { closeOriginal(); return; }
-    cabinetProject = selected; byId('cabinet-search').value = ''; renderCabinet();
+    if (cabinetOpen) {
+      if (all) { closeOriginal(); return; }
+      var selected = cabinetProject;
+      cabinetProject = selected; byId('cabinet-search').value = ''; renderCabinet();
+      return;
+    }
+    if (workspaceUI) {
+      if (all) { workspaceUI.selectLibrary('all'); }
+      else if (doc.projectId) { workspaceUI.selectProject(doc.projectId, doc.folder || ''); }
+      else { workspaceUI.selectLibrary('all'); }
+    }
   }
   function sizeWorkspace() {
     var area = byId('writing-space');
@@ -704,7 +727,12 @@
     });
   }
   function revealSelection(start, end, fallbackMessage) {
-    returnToWriting(); if (!E.transfer.selectRange(manuscript, start, end)) { message(fallbackMessage || 'Selecione o trecho manualmente no manuscrito.'); return false; }
+    returnToWriting();
+    if (typeof richUI !== 'undefined' && richUI && richUI.isRich()) {
+      if (!richUI.revealRange(start, end)) { message(fallbackMessage || 'Selecione o trecho manualmente no manuscrito.'); return false; }
+      return true;
+    }
+    if (!E.transfer.selectRange(manuscript, start, end)) { message(fallbackMessage || 'Selecione o trecho manualmente no manuscrito.'); return false; }
     if (!window.getComputedStyle) { return true; }
     manuscript.scrollTop = Math.max(0, textPosition(start).top - manuscript.clientHeight / 3); updateFocus(); return true;
   }
@@ -750,7 +778,7 @@
     }
     if (E.ptbrPanelFocus) { E.ptbrPanelFocus(); } else { lensButtons[0].focus(); }
   }
-  function setImmersion(enabled) {
+  function setImmersion(enabled, reason) {
     var start = manuscript.selectionStart, end = manuscript.selectionEnd, scroll = manuscript.scrollTop;
     var oldInset = manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0;
     cancelTypewriter(); closePanels(false); collapseTimeline();
@@ -758,9 +786,18 @@
     immersion = enabled; document.body.setAttribute('data-immersion', enabled ? 'true' : 'false');
     byId('immersion-toggle').setAttribute('aria-pressed', enabled ? 'true' : 'false');
     byId('leave-focus').hidden = !enabled;
-    manuscript.focus(); sizeWorkspace();
-    if (typeof start === 'number') { E.transfer.selectRange(manuscript, start, end); }
-    manuscript.scrollTop = Math.max(0, scroll + (manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0) - oldInset);
+    if (visualMachine) { visualMachine.setFocusActive(enabled); }
+    if (superfocoUI) { superfocoUI.notifyState(enabled, reason || (enabled ? 'manual' : 'manual')); }
+    if (richUI && richUI.isRich() && byId('esc-rich-editor')) {
+      byId('esc-rich-editor').focus();
+    } else {
+      manuscript.focus();
+    }
+    sizeWorkspace();
+    if (!(richUI && richUI.isRich())) {
+      if (typeof start === 'number') { E.transfer.selectRange(manuscript, start, end); }
+      manuscript.scrollTop = Math.max(0, scroll + (manuscript.style ? parseFloat(manuscript.style.paddingTop) || 0 : 0) - oldInset);
+    }
     growManuscript();
   }
   function stopMachineStrike() {
@@ -809,6 +846,13 @@
     machineStrike();
   }
   function setMachine(enabled) {
+    if (visualMachine) {
+      visualMachine.setEnabled(enabled);
+      byId('machine-toggle').setAttribute('aria-pressed', enabled ? 'true' : 'false');
+      text(byId('machine-toggle'), enabled ? 'Desativar' : 'Ativar');
+      sizeWorkspace();
+      return;
+    }
     if (enabled === machineEnabled) { return; }
     if (enabled) { machinePreviousFocus = immersion; }
     machineEnabled = enabled; stopMachineStrike(); machineCarriage = 0; machineLastLength = manuscript.value.length; finishMachineFeed();
@@ -839,8 +883,28 @@
     doc = next; if (doc.projectId) { activeNotebookId = doc.projectId; cabinetProject = doc.project || ''; var loadedBook = notebooks && notebooks.get(doc.projectId); activeOriginalId = loadedBook ? loadedBook.originalId || null : null; } navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; E.transfer.selectRange(manuscript, 0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
+    var isLockedRef = !!(doc.locked || doc.category === 'reference');
+    title.readOnly = isLockedRef;
+    manuscript.readOnly = isLockedRef;
+    if (byId('esc-reference-banner')) { byId('esc-reference-banner').hidden = !isLockedRef; }
+    var refView = byId('esc-reference-view');
+    if (refView) {
+      if (isLockedRef && E.renderReferenceView) {
+        refView.hidden = false;
+        if (byId('editor-viewport')) { byId('editor-viewport').hidden = true; }
+        E.renderReferenceView(refView, doc.title, doc.text, function () { trashEntry(doc); });
+      } else {
+        refView.hidden = true;
+        if (byId('editor-viewport')) { byId('editor-viewport').hidden = false; }
+      }
+    }
+    if (richUI) { richUI.loadDoc(doc); }
+    if (wordCardUI) { wordCardUI.hide(false); }
+    if (sonnetUI) { sonnetUI.sync(doc); }
+    if (superfocoUI) { superfocoUI.resetDocument(); }
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.'); updatePath();
     renderTimeline(true, null, true); refreshCounts();
+    if (workspaceUI) { workspaceUI.render(); }
   }
   function renderArchive() {
     var list = byId('document-list'); list.textContent = '';
@@ -1018,21 +1082,13 @@
     } catch (e) { importError(e); }
   }
   function stopSound() {
+    if (E.machineSound) { E.machineSound.setEnabled(false, storage, true); }
     byId('som').checked = false;
     text(byId('sound-status'), 'Som desligado.');
-    if (audio) { try { if (audio.close) { audio.close(); } else if (audio.suspend) { audio.suspend(); } } catch (ignore) { /* Áudio opcional. */ } audio = null; }
+    if (audio) { try { if (audio.close) { audio.close(); } else if (audio.suspend) { audio.suspend(); } } catch (ignore) {} audio = null; }
   }
   function playKey(event) {
-    if (!audio || !byId('som').checked || event.ctrlKey || event.metaKey || event.altKey || composing || event.isComposing || event.repeat) { return; }
-    var key = event.key || '', code = event.keyCode;
-    if (!(key.length === 1 || code === 8 || code === 13 || (!key && code >= 32 && code <= 222))) { return; }
-    try {
-      var oscillator = audio.createOscillator(), gain = audio.createGain(), now = audio.currentTime;
-      oscillator.type = 'triangle'; oscillator.frequency.value = code === 13 ? 420 : code === 8 ? 160 : 850;
-      gain.gain.setValueAtTime(0.018, now); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
-      oscillator.connect(gain); gain.connect(audio.destination); oscillator.start(now); oscillator.stop(now + 0.04);
-      oscillator.onended = function () { oscillator.disconnect(); gain.disconnect(); };
-    } catch (e) { stopSound(); text(byId('sound-status'), 'O som não está disponível neste navegador.'); }
+    if (E.machineSound) { E.machineSound.handleKey(event); }
   }
   /* Gabinete: apresentação do acervo real; o editor e as engines permanecem os mesmos. */
   var cabinetOpen = false, cabinetProject = null, cabinetLimit = 40, cabinetTimer = null, cabinetSelection = null;
@@ -1156,16 +1212,17 @@
     if (result.unreadable) { message('Algumas folhas não puderam ser lidas. Os registros originais permanecem.'); }
   }
   function enterDesk(focusEditor) {
-    if (notebookReady && !activeNotebookId) { if (doc.projectId && notebooks && availableBook(notebooks.get(doc.projectId))) { if (!openNotebook(doc.projectId)) { return false; } } else { showNotebookForm(); return false; } }
+    if (notebookReady && !activeNotebookId && doc.projectId && notebooks && availableBook(notebooks.get(doc.projectId))) { openNotebook(doc.projectId); }
     toggleStart(false);
     closePanels(false); collapseTimeline(); desktopDrag = null; cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
-    document.body.setAttribute('data-view', 'mesa'); updatePath(); refreshCounts();
+    document.body.setAttribute('data-view', 'workspace'); updatePath(); refreshCounts();
     sizeWorkspace(); cancelTypewriter();
     if (focusEditor !== false) { manuscript.focus(); }
     if (cabinetSelection && cabinetSelection.noteId === (doc.noteId || doc.id)) {
       E.transfer.selectRange(manuscript, cabinetSelection.start, cabinetSelection.end); manuscript.scrollTop = cabinetSelection.scroll;
     }
     growManuscript();
+    if (workspaceUI) { workspaceUI.render(); }
     queueSession();
     try { if (storage && doc.revision) { storage.setItem('escrevaral.astra.current', doc.id); } } catch (ignore) { /* Preferência facultativa. */ }
   }
@@ -1252,7 +1309,7 @@
   listen(document, 'selectionchange', function () { if (document.activeElement === manuscript) { growManuscript(); } });
   listen(byId('immersion-toggle'), 'click', function () { setImmersion(!immersion); });
   listen(byId('leave-focus'), 'click', leaveImmersion);
-  listen(byId('machine-toggle'), 'click', function () { setMachine(!machineEnabled); });
+  listen(byId('machine-toggle'), 'click', function () { setMachine(visualMachine ? !visualMachine.isEnabled() : !machineEnabled); });
   listen(manuscript, 'input', machineInput);
   listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); byId('desk-paragraph').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
@@ -1267,7 +1324,24 @@
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; if (open) { openExaminePanel({ toggle: 'examinar-toggle' }); } else { showPanel('oficina', 'examinar-toggle', false); } });
   listen(byId('back-writing'), 'click', returnToWriting);
-  function newDocument() { if (!activeNotebook()) { showNotebookForm(); return; } if (!persist()) { return; } var next = E.freshDocument(); next.projectId = activeNotebookId; next.project = activeNotebook().name; loadDocument(next); dirty = true; if (!persist()) { enterDesk(true); return; } renderTimeline(false, null, true); cabinetSelection = null; enterDesk(false); byId('path-document').focus(); }
+  function createNewNote(opts) {
+    opts = opts || {};
+    if (!persist()) { return; }
+    var targetId = typeof opts.projectId === 'string' && opts.projectId ? opts.projectId : (opts.projectId === null ? '' : (activeNotebook() ? activeNotebookId : ''));
+    var book = targetId && notebooks ? notebooks.get(targetId) : null;
+    if (book && !availableBook(book)) { book = null; }
+    var next = E.freshDocument();
+    if (book) { next.projectId = book.id; next.project = book.name; activeNotebookId = book.id; }
+    if (opts.folder) { next.folder = String(opts.folder).slice(0, 120); }
+    loadDocument(next);
+    dirty = true;
+    persist();
+    cabinetSelection = null;
+    enterDesk(false);
+    if (workspaceUI) { workspaceUI.flashEink(); workspaceUI.render(); }
+    manuscript.focus();
+  }
+  function newDocument() { createNewNote(); }
   function startFirstText() {
     showingAbout = false;
     if (!notebooks || !originals || !archive) { text(byId('first-run-status'), 'O armazenamento não está disponível. Verifique as permissões do navegador.'); return; }
@@ -1294,10 +1368,15 @@
     byId('theme-dark').setAttribute('aria-pressed', theme === 'escuro' ? 'true' : 'false');
   }
   function chooseTheme(value) { applyTheme(value); try { if (storage) { storage.setItem('escrevaral.astra.theme', byId('tema').value); } } catch (ignore) { /* Tema não bloqueia a escrita. */ } }
-  listen(byId('theme-light'), 'click', function () { chooseTheme('claro'); });
-  listen(byId('theme-dark'), 'click', function () { chooseTheme('escuro'); });
+  listen(byId('theme-light'), 'click', function () { chooseTheme('claro'); if (themeChromeUI) { themeChromeUI.setTheme('eink'); } });
+  listen(byId('theme-dark'), 'click', function () { chooseTheme('escuro'); if (themeChromeUI) { themeChromeUI.setTheme('escuro'); } });
   listen(byId('tema'), 'change', function () { chooseTheme(this.value); });
   listen(byId('som'), 'change', function () {
+    if (E.machineSound) {
+      E.machineSound.setEnabled(this.checked, storage, false);
+      text(byId('sound-status'), this.checked ? 'Som mecânico ligado.' : 'Som desligado.');
+      return;
+    }
     if (!this.checked) { stopSound(); return; }
     try { var Audio = window.AudioContext || window.webkitAudioContext; audio = new Audio(); if (audio.resume) { audio.resume(); } text(byId('sound-status'), 'Som ligado, em volume discreto.'); } catch (e) { stopSound(); text(byId('sound-status'), 'O som não está disponível neste navegador.'); }
   });
@@ -1348,7 +1427,22 @@
     else if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); if (cabinetOpen) { enterDesk(); } openExaminePanel({ toggle: 'examinar-toggle' }); panelTrigger = manuscript; }
     else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
     else if (code === 27 && document.body.getAttribute('data-counts') === 'true') { byId('desk-counts-close').click(); }
-    else if (code === 27) { if (activePanel) { if (activePanel === 'oficina') { analysisRange = null; } closePanels(true); } else if (immersion) { leaveImmersion(); } else if (!cabinetOpen) { if (byId('timeline-toggle').getAttribute('aria-expanded') === 'true') { collapseTimeline(); } else { openCabinet(false); } } else if (!byId('project-form').hidden) { byId('project-cancel').click(); } }
+    else if (code === 27) {
+      var hasOverlay = (byId('esc-word-card') && !byId('esc-word-card').hidden) ||
+        (byId('esc-academy-overlay') && !byId('esc-academy-overlay').hidden) ||
+        (byId('esc-calculator') && !byId('esc-calculator').hidden) ||
+        (byId('esc-template-modal') && !byId('esc-template-modal').hidden) ||
+        (byId('esc-inline-modal') && !byId('esc-inline-modal').hidden) ||
+        (byId('esc-reader-overlay') && !byId('esc-reader-overlay').hidden) ||
+        (byId('esc-items-filters-panel') && !byId('esc-items-filters-panel').hidden) ||
+        (byId('esc-folder-menu') && !byId('esc-folder-menu').hidden) ||
+        (byId('esc-color-popover') && !byId('esc-color-popover').hidden);
+      if (hasOverlay) { return; }
+      if (activePanel) { if (activePanel === 'oficina') { analysisRange = null; } closePanels(true); }
+      else if (immersion) { leaveImmersion(); }
+      else if (!cabinetOpen) { if (byId('timeline-toggle').getAttribute('aria-expanded') === 'true') { collapseTimeline(); } else if (document.body.getAttribute('data-view') !== 'workspace') { openCabinet(false); } }
+      else if (!byId('project-form').hidden) { byId('project-cancel').click(); }
+    }
   });
 
   listen(byId('os-files'), 'click', function () { desktopWindow('open'); renderCabinet(); });
@@ -1511,7 +1605,9 @@
   }
   function resizeLetter(value) {
     readingSize = Math.max(16, Math.min(30, Number(value) || 21));
-    manuscript.style.fontSize = readingSize + 'px'; text(byId('type-size'), readingSize);
+    manuscript.style.fontSize = readingSize + 'px';
+    if (byId('esc-rich-editor')) { byId('esc-rich-editor').style.fontSize = readingSize + 'px'; }
+    text(byId('type-size'), readingSize);
     byId('type-smaller').disabled = readingSize <= 16; byId('type-larger').disabled = readingSize >= 30;
     focusMeasure = null; typewriterInsets(); growManuscript();
     try { if (storage) { storage.setItem('escrevaral.astra.font-size', String(readingSize)); } } catch (ignore) {}
@@ -1547,6 +1643,377 @@
   if (!notebookSession || !notebookSession.notebookId || (notebookSession.view === 'gabinete' && notebookSession.windowHidden)) { activeNotebookId = null; closeNotebook(); }
   else if (!activeNotebookId) { closeNotebook(); }
   notebookLabels();
+
+  if (E.mountWorkspace) {
+    workspaceUI = E.mountWorkspace({
+      storage: storage,
+      archive: archive,
+      notebooks: notebooks,
+      originals: originals,
+      currentDoc: function () { return doc; },
+      activeNotebookId: function () { return activeNotebookId; },
+      checkpoint: checkpoint,
+      openDoc: function (entry) {
+        if (!entry || composing || !persist()) { return; }
+        var isCurrent = entry.id === doc.id;
+        if (!isCurrent) {
+          try {
+            var next = archive && archive.get(entry.id);
+            if (!next) { workspaceUI.render(); message('Esta folha não foi encontrada.'); return; }
+            loadDocument(next);
+          } catch (e) { message('Não foi possível abrir esta folha.'); return; }
+        }
+        cabinetSelection = null;
+        enterDesk(false);
+        workspaceUI.flashEink();
+      },
+      newNote: function (noteOpts) { createNewNote(noteOpts); },
+      newProject: function () { if (templatesUI) { templatesUI.open(); } else { showNotebookForm(null, 'volume'); } },
+      onProjectSelect: function (bookId) {
+        if (bookId && notebooks && availableBook(notebooks.get(bookId))) { openNotebook(bookId); }
+      },
+      onOpenNotebookTable: function () { openCabinet(false); },
+      trashDoc: function (entry) { trashEntry(entry); },
+      restoreDoc: function (entry) {
+        if (!archive) { return; }
+        try {
+          archive.trash(entry, false);
+          renderArchive(); renderCabinet(); renderTimeline(false);
+          workspaceUI.render();
+          message('Folha restaurada da lixeira.');
+        } catch (e) { message('Não foi possível restaurar esta folha.'); }
+      },
+      purgeDoc: function (entry) {
+        if (!archive) { return; }
+        askDelete(entry);
+      },
+      emptyTrash: function () {
+        if (!archive) { return; }
+        var trashed = archive.list(true).documents.filter(function (d) { return !!d.trashed; });
+        var trashedProjects = notebooks ? notebooks.list().filter(function (b) { return !!b.trashed; }) : [];
+        if (!trashed.length && !trashedProjects.length) { return; }
+        E.dialog.ask({
+          title: 'Esvaziar lixeira?',
+          message: 'Remover definitivamente ' + trashed.length + (trashed.length === 1 ? ' item da lixeira?' : ' itens da lixeira?') + ' Não será possível restaurar.',
+          accept: 'Esvaziar lixeira'
+        }, function (ok) {
+          if (!ok) { return; }
+          trashedProjects.forEach(function (bk) { try { notebooks.purge(bk.id); } catch (ignore) {} });
+          trashed.forEach(function (entry) {
+            try { archive.purge(entry); linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/'); } catch (ignore) {}
+          });
+          renderArchive(); renderCabinet(); renderTimeline(false);
+          workspaceUI.render();
+          message('Lixeira esvaziada.');
+        });
+      },
+      updateDocMeta: function (entry, patch) {
+        if (!archive || !entry || !patch) { return; }
+        var isCurrent = entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id);
+        var key;
+        if (isCurrent) {
+          for (key in patch) { if (Object.prototype.hasOwnProperty.call(patch, key)) { doc[key] = patch[key]; } }
+          dirty = true;
+          persist();
+        } else {
+          try {
+            var target = archive.get(entry.id);
+            if (!target) { return; }
+            for (key in patch) { if (Object.prototype.hasOwnProperty.call(patch, key)) { target[key] = patch[key]; } }
+            archive.save(target, false);
+          } catch (e) { message('Não foi possível atualizar a nota.'); return; }
+        }
+        renderArchive(); renderCabinet(); renderTimeline(false);
+        workspaceUI.render();
+      },
+      createBlankFolder: function (name) {
+        if (!notebooks) { return; }
+        var created = notebooks.add(name);
+        activeNotebookId = created.id;
+        renderNotebooks(); renderCabinet();
+        if (workspaceUI) { workspaceUI.selectProject(created.id, ''); }
+        message('Pasta “' + created.name + '” criada.');
+      },
+      renameProject: function (book, nextName) {
+        if (!notebooks || !book) { return; }
+        var updated = notebooks.update(book.id, { name: nextName });
+        if (archive) {
+          (archive.list(true).documents || []).forEach(function (d) {
+            if (d.projectId === book.id) {
+              d.project = updated.name;
+              if (d.id === doc.id) { doc.project = updated.name; dirty = true; persist(); }
+              else { try { archive.save(d, false); } catch (ignore) {} }
+            }
+          });
+        }
+        renderNotebooks(); renderCabinet(); renderTimeline(false); updatePath();
+        if (workspaceUI) { workspaceUI.render(); }
+        message('Pasta renomeada para “' + updated.name + '”.');
+      },
+      openProjectBoard: function (book) {
+        if (!book) { return; }
+        activeNotebookId = book.id;
+        if (chalkUI && chalkUI.open) { chalkUI.open(); }
+        else if (byId('start-chalk')) { byId('start-chalk').click(); }
+      },
+      trashProjectDocs: function (book) {
+        if (!archive || !book) { return; }
+        var list = (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; });
+        if (!list.length) { message('Não há textos ativos nesta pasta.'); return; }
+        list.forEach(function (d) { try { archive.trash(d, true); } catch (ignore) {} });
+        renderArchive(); renderCabinet(); renderTimeline(false);
+        if (workspaceUI) { workspaceUI.render(); }
+        message(list.length + (list.length === 1 ? ' texto movido' : ' textos movidos') + ' para a lixeira.');
+      },
+      trashProject: function (book) {
+        if (!notebooks || !book) { return; }
+        var inside = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; }) : [];
+        notebooks.update(book.id, { trashed: true });
+        inside.forEach(function (d) { try { archive.trash(d, true); } catch (ignore) {} });
+        if (activeNotebookId === book.id) { activeNotebookId = null; }
+        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath();
+        if (workspaceUI) { workspaceUI.selectLibrary('all'); }
+        message('Pasta “' + book.name + '” e ' + inside.length + ' texto(s) movidos para a lixeira.');
+      },
+      restoreProject: function (book) {
+        if (!notebooks || !book) { return; }
+        notebooks.update(book.id, { trashed: false });
+        var inside = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !!d.trashed; }) : [];
+        inside.forEach(function (d) { try { archive.trash(d, false); } catch (ignore) {} });
+        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false);
+        if (workspaceUI) { workspaceUI.render(); }
+        message('Pasta “' + book.name + '” restaurada com ' + inside.length + ' texto(s).');
+      },
+      purgeProject: function (book, insideCount) {
+        if (!notebooks || !book) { return; }
+        E.dialog.ask({
+          title: 'Excluir pasta definitivamente?',
+          message: 'A pasta “' + book.name + '” e ' + insideCount + (insideCount === 1 ? ' texto associado serão removidos' : ' textos associados serão removidos') + ' definitivamente deste aparelho. Não será possível restaurar.',
+          accept: 'Excluir definitivamente'
+        }, function (ok) {
+          if (!ok) { return; }
+          if (archive) {
+            (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }).forEach(function (d) {
+              try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
+            });
+          }
+          notebooks.purge(book.id);
+          renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false);
+          if (workspaceUI) { workspaceUI.render(); }
+          message('Pasta excluída definitivamente.');
+        });
+      },
+      refreshParent: function () { renderNotebooks(); renderCabinet(); renderTimeline(false); updatePath(); }
+    });
+    enterDesk(false);
+    workspaceUI.render();
+  }
+
+  if (E.mountTemplatesModal) {
+    templatesUI = E.mountTemplatesModal({
+      notebooks: notebooks,
+      archive: archive,
+      manuscriptEl: manuscript,
+      originalId: function () { return activeOriginalId; },
+      onBlankProject: function () { showNotebookForm(null, 'volume'); },
+      onCreated: function (created) {
+        if (created && created.book) {
+          openNotebook(created.book.id);
+          if (created.firstNote) { loadDocument(created.firstNote); }
+          enterDesk(false);
+          if (workspaceUI) { workspaceUI.selectProject(created.book.id, created.firstNote && created.firstNote.folder || ''); workspaceUI.flashEink(); }
+          renderNotebooks(); renderCabinet();
+          message('Projeto “' + created.book.name + '” criado.');
+        }
+      }
+    });
+  }
+
+  if (E.mountSonnetAssistant) {
+    sonnetUI = E.mountSonnetAssistant({
+      containerId: 'esc-sonnet-panel',
+      manuscriptEl: manuscript,
+      onSaveSettings: function (nextSettings) {
+        doc.sonnetSettings = nextSettings;
+        dirty = true;
+        persist();
+      }
+    });
+    sonnetUI.sync(doc);
+  }
+
+  if (E.mountRichEditor) {
+    richUI = E.mountRichEditor({
+      manuscriptEl: manuscript,
+      onSync: function (plainText, safeHtml) {
+        doc.text = plainText;
+        doc.format = 'rich';
+        doc.richHtml = safeHtml;
+        if (sonnetUI && sonnetUI.isSonnetDoc(doc)) { sonnetUI.refresh(); }
+        changed();
+      },
+      onFormatChange: function (fmt, html) {
+        doc.format = fmt;
+        doc.richHtml = fmt === 'rich' ? html : undefined;
+        changed();
+      }
+    });
+    richUI.loadDoc(doc);
+    if (byId('esc-format-toggle')) {
+      listen(byId('esc-format-toggle'), 'click', function () {
+        if (richUI) { richUI.toggleMode(); }
+      });
+    }
+  }
+
+  if (E.mountReaderMode) {
+    readerUI = E.mountReaderMode({ storage: storage });
+    if (byId('esc-reader-toggle')) {
+      listen(byId('esc-reader-toggle'), 'click', function () {
+        if (readerUI) {
+          doc.title = title.value;
+          doc.text = manuscript.value;
+          if (richUI && richUI.isRich()) { doc.richHtml = richUI.html(); }
+          readerUI.open(doc);
+        }
+      });
+    }
+  }
+
+  if (E.mountVisualMachine) {
+    visualMachine = E.mountVisualMachine({
+      storage: storage,
+      columnEl: byId('writing-paper') || manuscript
+    });
+    if (byId('machine-toggle')) {
+      var mOn = visualMachine.isEnabled();
+      byId('machine-toggle').setAttribute('aria-pressed', mOn ? 'true' : 'false');
+      text(byId('machine-toggle'), mOn ? 'Desativar' : 'Ativar');
+    }
+  }
+
+  if (E.machineSound) {
+    E.machineSound.syncPreference(storage);
+    var syncSoundUI = function (enabled) {
+      if (byId('som')) { byId('som').checked = !!enabled; }
+      if (byId('esc-sound-btn')) { byId('esc-sound-btn').setAttribute('aria-pressed', enabled ? 'true' : 'false'); }
+      text(byId('sound-status'), enabled ? 'Som mecânico ligado.' : 'Som desligado.');
+    };
+    syncSoundUI(E.machineSound.isEnabled());
+    E.machineSound.subscribe(syncSoundUI);
+    if (byId('esc-sound-btn')) {
+      listen(byId('esc-sound-btn'), 'click', function () {
+        E.machineSound.setEnabled(!E.machineSound.isEnabled(), storage, false);
+      });
+    }
+    if (byId('esc-rich-editor')) {
+      listen(byId('esc-rich-editor'), 'keydown', playKey);
+    }
+  }
+
+  
+  if (E.mountSuperfoco) {
+    superfocoUI = E.mountSuperfoco({
+      storage: storage,
+      manuscriptEl: manuscript,
+      richEl: byId('esc-rich-editor'),
+      isActive: function () { return immersion; },
+      onOpen: function (info) { setImmersion(true, info && info.automatic ? 'automatic' : 'manual'); },
+      onClose: function (why) { setImmersion(false, why || 'manual'); },
+      getFace: function () { return document.body.getAttribute('data-letter') || 'maquina'; },
+      onToggleFace: function () {
+        var cur = document.body.getAttribute('data-letter') || 'maquina';
+        chooseFont(cur === 'maquina' ? 'literaria' : 'maquina');
+      },
+      getMachineEnabled: function () { return visualMachine ? visualMachine.isEnabled() : false; },
+      onToggleMachine: function () { setMachine(visualMachine ? !visualMachine.isEnabled() : !machineEnabled); },
+      getMachineAnchor: function () { return visualMachine ? visualMachine.anchorY() : null; },
+      isSonnetActive: function () { return !!(sonnetUI && sonnetUI.isSonnetDoc && sonnetUI.isSonnetDoc(doc)); },
+      isEditable: function () { return !(doc && (doc.locked || doc.category === 'reference')); }
+    });
+  }
+
+  if (E.mountThemeChrome) {
+    themeChromeUI = E.mountThemeChrome({
+      storage: storage,
+      onNewNote: function () { createNewNote(); }
+    });
+  }
+
+  if (byId('path-folder')) {
+    listen(byId('path-folder'), 'click', function () {
+      if (workspaceUI && doc.projectId) {
+        workspaceUI.selectProject(doc.projectId, doc.folder || '');
+      }
+    });
+  }
+
+  if (E.mountWordCard) {
+    wordCardUI = E.mountWordCard({
+      manuscriptEl: manuscript,
+      richEl: byId('esc-rich-editor'),
+      onRichSync: function () {
+        if (richUI) { richUI.sync(); }
+      },
+      onReplace: function (start, end, replacement) {
+        if (manuscript.readOnly || manuscript.disabled) { return; }
+        manuscript.value = manuscript.value.slice(0, start) + replacement + manuscript.value.slice(end);
+        E.transfer.selectRange(manuscript, start, start + replacement.length);
+        changed();
+      }
+    });
+  }
+
+  if (byId('esc-synonyms-btn') && wordCardUI && wordCardUI.openManual) {
+    listen(byId('esc-synonyms-btn'), 'click', function () { wordCardUI.openManual(''); });
+  }
+
+  var pomodoroDockUI = null, calcUI = null;
+  if (E.mountPomodoroDock) {
+    pomodoroDockUI = E.mountPomodoroDock({
+      storage: storage,
+      onBreakStart: function () { message("Tempo de escrita concluído. Pausa iniciada."); }
+    });
+  }
+  if (E.mountCalculator) {
+    calcUI = E.mountCalculator({
+      getCounts: function () {
+        var c = E.countManuscript ? E.countManuscript(manuscript.value || "") : { words: 0, characters: (manuscript.value || "").length };
+        return { words: c.words || 0, characters: c.characters || (manuscript.value || "").length };
+      }
+    });
+    if (byId("esc-open-calculator")) {
+      listen(byId("esc-open-calculator"), "click", function () { calcUI.toggle(); });
+    }
+  }
+  if (byId("esc-open-calendar")) {
+    listen(byId("esc-open-calendar"), "click", function () { if (byId("start-calendar")) { byId("start-calendar").click(); } });
+  }
+  if (byId("esc-open-chalk")) {
+    listen(byId("esc-open-chalk"), "click", function () {
+      if (chalkUI && chalkUI.open) { chalkUI.open(); }
+      else if (byId("start-chalk")) { byId("start-chalk").click(); }
+    });
+  }
+  if (byId("esc-open-lineage")) {
+    listen(byId("esc-open-lineage"), "click", function () { if (byId("start-lineage")) { byId("start-lineage").click(); } });
+  }
+  if (byId("esc-open-universe")) {
+    listen(byId("esc-open-universe"), "click", function () { if (byId("start-universe")) { byId("start-universe").click(); } });
+  }
+  if (byId("esc-open-packages")) {
+    listen(byId("esc-open-packages"), "click", function () { showPanel("mesa", "mesa-toggle", true); });
+  }
+
+    if (E.mountAcademy) {
+    academyUI = E.mountAcademy();
+    if (byId('esc-open-academy')) {
+      listen(byId('esc-open-academy'), 'click', function () { academyUI.openList(); });
+    }
+    if (byId('start-academy')) {
+      listen(byId('start-academy'), 'click', function () { toggleStart(false); academyUI.openList(); });
+    }
+  }
 
   ['window-close','window-minimize','window-maximize','desk-minimize','mesa-close','acervo-close','utility-close','desk-counts-close'].forEach(function(id){byId(id).classList.add('material-key');});
   E.mountFinish({

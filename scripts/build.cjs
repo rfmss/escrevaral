@@ -61,11 +61,12 @@ if(check){
  if(bad.length)throw Error('Distribuição desatualizada: '+bad.join(', '));
  console.log('Build reproduzível: '+outputs.size+' arquivos conferidos.');
 }else{
+ const assetDirAbs=path.join(root,dir);if(fs.existsSync(assetDirAbs)){const keep=new Set(assets.map(a=>path.basename(a.path)));for(const f of fs.readdirSync(assetDirAbs))if(!keep.has(f))fs.rmSync(path.join(assetDirAbs,f),{force:true});}
  for(const[p,s]of outputs){fs.mkdirSync(path.dirname(path.join(root,p)),{recursive:true});fs.writeFileSync(path.join(root,p),s);}
  // dist é exclusivamente gerado. A publicação na raiz preserva o GitHub Pages atual.
  const dist=path.join(root,'dist');fs.rmSync(dist,{recursive:true,force:true});
  for(const[p,s]of outputs){if(p.startsWith('build/'))continue;const target=path.join(dist,'site',p);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,s);}
- for(const p of ['manifest.webmanifest','icons','jornada','404.html','CNAME','robots.txt','sitemap.xml','.nojekyll'])fs.cpSync(path.join(root,p),path.join(dist,'site',p),{recursive:true});
+ for(const p of ['manifest.webmanifest','icons','jornada','academia','resources/pt-BR/lexico-ptbr','assets/typewriter','assets/study','404.html','CNAME','robots.txt','sitemap.xml','.nojekyll'])if(fs.existsSync(path.join(root,p)))fs.cpSync(path.join(root,p),path.join(dist,'site',p),{recursive:true});
  fs.mkdirSync(path.join(root,'packages/cofre/dist'),{recursive:true});fs.writeFileSync(path.join(root,'packages/cofre/dist/cofre.cjs'),cofre);
  console.log('Build: index '+Buffer.byteLength(site)+' bytes; portátil '+Buffer.byteLength(portable)+'; cofre independente '+Buffer.byteLength(cofre)+'.');
 }

@@ -12,7 +12,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Escrevaral | Gabinete de escrita">
   <meta name="twitter:description" content="Sua mesa de escrita em português brasileiro. Seus manuscritos ficam no seu aparelho.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src {{SCRIPT_POLICY}}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src {{SCRIPT_POLICY}}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>SCRVRL OS — Gabinete de escrita</title>
   <meta name="theme-color" content="#f5f4ef">
   <meta name="asset-version" content="{{ASSET_VERSION}}">
@@ -50,7 +50,7 @@ SOFTWARE.
 -->
 
 </head>
-<body data-theme="claro" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="gabinete">
+<body data-theme="claro" data-esc-theme="eink" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="workspace" data-nav-collapsed="false" data-lists-collapsed="false" data-mobile-pane="editor">
 <section id="lineage-panel" class="sheet" role="dialog" aria-labelledby="lineage-heading" tabindex="-1" hidden>
  <header class="sheet-heading"><div><small>COLABORAÇÃO · LINHAGEM DO TEXTO</small><h2 id="lineage-heading"></h2></div><button id="lineage-close" class="material-key" aria-label="Fechar linhagem">×</button></header>
  <p id="lineage-book"></p><p id="lineage-status" role="status"></p>
@@ -103,7 +103,7 @@ SOFTWARE.
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span>
+    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-theme-cycle" type="button" title="Alternar tema (Papel digital / Papel / Claro / Escuro)">Tema</button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
   </nav>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
     <header class="os-bar">
@@ -207,6 +207,7 @@ SOFTWARE.
           <button id="start-universe" class="os-app" aria-controls="story-screen">Universo da obra</button>
           <button id="start-calendar" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v16H3ZM7 2v6M17 2v6M3 10h18M7 14h2M12 14h2M7 18h2M12 18h2"></path></svg><span>Calendário</span></button>
           <button id="cabinet-examine" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M40,86H74.6a30,30,0,0,0,58.8,0H216a6,6,0,0,0,0-12H133.4a30,30,0,0,0-58.8,0H40a6,6,0,0,0,0,12Zm64-24A18,18,0,1,1,86,80,18,18,0,0,1,104,62ZM216,170H197.4a30,30,0,0,0-58.8,0H40a6,6,0,0,0,0,12h98.6a30,30,0,0,0,58.8,0H216a6,6,0,0,0,0-12Zm-48,24a18,18,0,1,1,18-18A18,18,0,0,1,168,194Z"></path></svg>Examinar</button>
+          <button id="start-academy" class="os-app">Academia e Literatura</button>
           <button id="cabinet-poetry" class="os-app"><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M54,96v64a6,6,0,0,1-12,0V96a6,6,0,0,1,12,0ZM88,26a6,6,0,0,0-6,6V224a6,6,0,0,0,12,0V32A6,6,0,0,0,88,26Zm40,32a6,6,0,0,0-6,6V192a6,6,0,0,0,12,0V64A6,6,0,0,0,128,58Zm40,32a6,6,0,0,0-6,6v64a6,6,0,0,0,12,0V96A6,6,0,0,0,168,90Zm40-16a6,6,0,0,0-6,6v96a6,6,0,0,0,12,0V80A6,6,0,0,0,208,74Z"></path></svg>Rimas e métrica</button>
           <button id="start-pomodoro" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 2h6M12 2v3M19 5l2 2M12 9v5l3 2M20 14a8 8 0 1 1-16 0 8 8 0 0 1 16 0"></path></svg><span>Pomodoro</span></button>
           <button id="start-calculator" class="os-app" aria-expanded="false" aria-controls="utilidades"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 2h14v20H5ZM8 5h8v4H8ZM8 13h1M12 13h1M16 13h1M8 17h1M12 17h1M16 17h1"></path></svg><span>Calculadora</span></button>
@@ -223,13 +224,78 @@ SOFTWARE.
       </nav>
     <footer id="system-bar" class="os-footer"><button id="screen-lock" class="material-key" aria-label="Fechar gabinete com cadeado" title="Fechar gabinete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5ZM12 14v3"/></svg></button><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="os-rocker" aria-hidden="true"></span><span class="start-key">Menu</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
   <div id="notebook-dialog" class="notebook-dialog" hidden><div class="notebook-dialog-card" role="dialog" aria-modal="true" aria-labelledby="notebook-form-heading"><h2 id="notebook-form-heading">Nova gaveta</h2><form id="project-form" class="project-form" hidden=""><label for="project-name">Nome da obra ou projeto</label><div><input id="project-name" maxlength="120" autocomplete="off" placeholder="Nome do seu livro ou projeto"><button id="project-create" type="submit">Criar</button><button id="project-cancel" type="button">Cancelar</button></div><p id="project-error" role="status"></p></form></div></div>
-  <div id="writing-space" style="height: 570px;" hidden="">
+  <div id="esc-color-popover" hidden></div>
+  <nav class="esc-mobile-bar" aria-label="Alternar colunas">
+    <button id="esc-mobile-nav" type="button">Projetos</button>
+    <button id="esc-mobile-items" type="button">Notas</button>
+    <button id="esc-mobile-editor" type="button">Escrita</button>
+  </nav>
+  <div id="esc-workspace" class="esc-workspace">
+  <aside id="navigation" aria-label="Biblioteca e projetos">
+    <header class="esc-nav-brand">
+      <button id="esc-open-mesa" type="button" class="esc-brand-btn" title="Abrir mesa de cadernos">
+        <svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg>
+        <span>ESCREVARAL</span>
+      </button>
+    </header>
+    <div class="esc-new-project-wrap">
+      <button id="esc-new-project" type="button">+ Novo projeto</button>
+    </div>
+    <div class="esc-nav-scroll">
+      <p class="esc-nav-section-label">Biblioteca</p>
+      <div id="esc-library-filters"></div>
+      <div id="esc-shortcuts-section" class="esc-shortcuts-section">
+        <div class="esc-section-row"><p class="esc-nav-section-label">Atalhos salvos</p><button id="esc-new-shortcut" type="button" class="esc-mini-add" title="Criar atalho salvo">+ Atalho</button></div>
+        <div id="esc-shortcuts-list"></div>
+      </div>
+      <div id="esc-starred-folders" hidden></div>
+      <div class="esc-section-row"><p class="esc-nav-section-label">Projetos e pastas</p><button id="esc-new-folder-btn" type="button" class="esc-mini-add" title="Criar nova pasta avulsa">+ Pasta</button></div>
+      <div class="esc-folder-search-wrap"><label class="sr-only" for="esc-folder-search">Buscar pastas</label><input id="esc-folder-search" type="search" placeholder="Buscar pastas e projetos" autocomplete="off" spellcheck="false"></div>
+      <div id="esc-project-tree"></div>
+    </div>
+    <div id="esc-pomodoro-dock" aria-label="Pomodoro de escrita"></div>
+    <footer class="esc-nav-footer">
+      <button id="esc-open-academy" type="button" class="esc-nav-footer-btn">Academia e Literatura</button>
+      <div class="esc-nav-tools-grid" role="group" aria-label="Ferramentas do escritor">
+        <button id="esc-open-calculator" type="button" class="esc-nav-tool-btn">Calculadora</button>
+        <button id="esc-open-calendar" type="button" class="esc-nav-tool-btn">Calendário</button>
+        <button id="esc-open-chalk" type="button" class="esc-nav-tool-btn">Quadro de giz</button>
+        <button id="esc-open-lineage" type="button" class="esc-nav-tool-btn">Marcos</button>
+        <button id="esc-open-universe" type="button" class="esc-nav-tool-btn">Universo</button>
+        <button id="esc-open-packages" type="button" class="esc-nav-tool-btn">Ajustes</button>
+      </div>
+    </footer>
+  </aside>
+  <section id="items-column" aria-label="Notas do escopo selecionado">
+    <header id="esc-items-header">
+      <div class="esc-items-top">
+        <h2 id="esc-items-title">Todos os textos</h2>
+        <span id="esc-items-count">0 notas</span>
+      </div>
+      <div class="esc-items-actions">
+        <button id="esc-new-note" type="button">+ Nova nota</button>
+        <button id="esc-empty-trash" type="button" hidden>Esvaziar lixeira</button>
+      </div>
+    </header>
+    <div class="esc-search-wrap">
+      <div class="esc-search-pill">
+        <label class="sr-only" for="esc-items-search">Buscar textos</label>
+        <input id="esc-items-search" type="search" placeholder="Buscar textos…" autocomplete="off" spellcheck="false">
+        <button id="esc-items-search-clear" type="button" aria-label="Limpar busca" hidden>×</button>
+        <button id="esc-items-filter-btn" type="button" class="esc-filter-toggle" aria-expanded="false" aria-controls="esc-items-filters-panel" title="Filtros de busca">Filtros<span id="esc-items-filter-badge" class="esc-filter-badge" hidden>0</span></button>
+      </div>
+      <div id="esc-items-filters-panel" class="esc-items-filters-panel" hidden></div>
+    </div>
+    <div id="esc-items-list" role="region" aria-label="Lista de notas"></div>
+    <section id="esc-sonnet-panel" hidden></section>
+  </section>
+  <div id="writing-space" style="height: 570px;">
     <div id="selection-tools" class="selection-tools" role="group" aria-label="Trecho selecionado" hidden><span id="clipboard-status" role="status">Trecho selecionado</span><button id="selection-copy" title="Guardar este trecho na cópia interna">Copiar</button><button id="selection-cut">Recortar</button><button id="selection-paste" disabled>Colar</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
     <header class="masthead">
       <button id="back-cabinet" class="brand-signature" aria-label="Escrevaral — voltar aos textos do caderno"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar neste caderno</label><input id="note-search" type="search" placeholder="Buscar neste caderno" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden="">×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
-        <button id="desk-minimize" title="Fechar o caderno e voltar" aria-label="Minimizar caderno">−</button><button id="immersion-toggle" aria-pressed="false" title="Escrever com a interface recolhida">Foco</button>
+        <button id="esc-nav-toggle" type="button" aria-pressed="false" title="Recolher ou abrir coluna de projetos">Barra</button><button id="esc-lists-toggle" type="button" aria-pressed="false" title="Recolher ou abrir lista de notas">Lista</button><button id="desk-minimize" title="Abrir mesa de cadernos" aria-label="Mesa de cadernos">Mesa</button><button id="immersion-toggle" aria-pressed="false" title="Abrir Superfoco (Esc volta ao aplicativo)">Superfoco</button><button id="esc-superfocus-auto-toggle" type="button" role="switch" aria-checked="true" title="ON: abre na segunda palavra e sai após 30 s sem atividade. OFF: entrada e saída manuais.">Auto<span class="esc-switch-track" aria-hidden="true"><span class="esc-switch-thumb"></span></span><span class="esc-switch-state">ON</span></button>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
         <button id="desk-export" title="Baixar este texto">Baixar</button>
         <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
@@ -238,6 +304,8 @@ SOFTWARE.
     </header>
     <div class="desk">
       <main class="paper" id="writing-paper" style="transform: translate(0px);">
+        <div id="esc-reference-banner" class="esc-reference-banner" hidden>Referência · texto protegido para consulta.</div>
+        <article id="esc-reference-view" class="esc-reference" hidden></article>
         <div class="note-heading"><span class="eyebrow">DOCUMENTO</span>
           <label class="sr-only" for="titulo">Título do manuscrito</label>
           <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false" value="">
@@ -245,15 +313,37 @@ SOFTWARE.
         </div>
         <div class="writing-toolbar" role="group" aria-label="Apresentação do manuscrito">
           <button id="desk-documents" aria-controls="note-browser" aria-expanded="false">Textos</button>
+          <button id="esc-format-toggle" type="button" aria-pressed="false" title="Alternar entre texto simples e formatado leve">Texto simples</button>
+          <button id="esc-reader-toggle" type="button" title="Abrir em modo leitura editorial">Leitura</button>
+          <button id="esc-synonyms-btn" type="button" title="Consultar sinônimos e definições (P01)">Sinônimos</button>
+          <button id="esc-sound-btn" type="button" class="esc-sound-btn" aria-pressed="false" title="Som mecânico da máquina">Som</button>
           <button id="desk-font" title="Alternar entre letra literária e máquina">Courier Prime</button>
           <div class="size-control"><button id="type-smaller" aria-label="Diminuir letra">−</button><output id="type-size" aria-label="Tamanho da letra">21</output><button id="type-larger" aria-label="Aumentar letra">+</button></div>
           <button id="desk-paragraph" aria-pressed="true">Parágrafo</button>
           <button id="desk-counts" aria-controls="desk-inspector" aria-expanded="false">Contagem</button>
           <button id="desk-print">Imprimir</button>
         </div>
+        <div id="esc-rich-toolbar" class="esc-rich-toolbar" role="toolbar" aria-label="Formatação leve" hidden>
+          <button type="button" data-rich-cmd="bold" title="Negrito"><strong>N</strong></button>
+          <button type="button" data-rich-cmd="italic" title="Itálico"><em>I</em></button>
+          <button type="button" data-rich-cmd="underline" title="Sublinhado"><u>S</u></button>
+          <button type="button" data-rich-cmd="strikeThrough" title="Tachado"><s>T</s></button>
+          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H1">H1</button>
+          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H2">H2</button>
+          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H3">H3</button>
+          <button type="button" data-rich-cmd="insertUnorderedList" title="Lista com marcadores">• Lista</button>
+          <button type="button" data-rich-cmd="insertOrderedList" title="Lista numerada">1. Lista</button>
+          <button type="button" data-rich-cmd="checklist" title="Inserir caixa de tarefa">☐ Tarefa</button>
+          <button type="button" data-rich-cmd="formatBlock" data-rich-val="BLOCKQUOTE" title="Citação">“ ”</button>
+          <button type="button" data-rich-cmd="code" title="Bloco de código">&lt;/&gt;</button>
+          <button type="button" data-rich-cmd="hr" title="Linha divisória">―</button>
+          <button type="button" data-rich-cmd="removeFormat" title="Limpar formatação">Limpar</button>
+        </div>
         <label class="sr-only" for="manuscrito">Manuscrito</label>
+        <p id="esc-sonnet-editor-hint" class="esc-sonnet-editor-hint" hidden>Escreva seu primeiro verso. Enter começa o próximo.</p>
         <div class="editor-viewport" id="editor-viewport">
         <textarea id="manuscrito" placeholder="O texto é seu." spellcheck="false" autocorrect="off" autocapitalize="off" style="padding-top: 137.655px; padding-bottom: 197.495px; font-size: 21px;"></textarea>
+        <div id="esc-rich-editor" class="esc-rich-editor" contenteditable="true" hidden aria-label="Manuscrito formatado"></div>
         <div id="focus-before" class="focus-mask" aria-hidden="true" style="height: 138px;"></div><div id="focus-after" class="focus-mask" aria-hidden="true" style="top: 176.85px;"></div>
         </div>
         <footer class="paper-footer"><button id="desk-paste" title="Colar o trecho guardado no Escrevaral" hidden>Colar</button>
@@ -281,6 +371,7 @@ SOFTWARE.
       </aside>
     </div>
   </div>
+  </div>
   <div id="machine-shell" class="machine-shell" aria-hidden="true" hidden="" style="height: 654px;">
     <div id="machine-platen" class="machine-stamp" style="transform: translateX(0px);" data-feed="false"></div>
     <div id="machine-hammer" class="machine-hammer" data-strike="false"></div>
@@ -291,8 +382,10 @@ SOFTWARE.
   <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="mesa-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
     <div class="setting-section"><h3>Ambiente</h3>
+      <div class="setting-row"><span>Aparência (4 temas)</span><div class="esc-theme-grid" role="group" aria-label="Temas do Escrevaral"><button type="button" data-esc-theme-choice="eink" aria-pressed="true">Papel digital</button><button type="button" data-esc-theme-choice="papel" aria-pressed="false">Papel</button><button type="button" data-esc-theme-choice="claro" aria-pressed="false">Claro</button><button type="button" data-esc-theme-choice="escuro" aria-pressed="false">Escuro</button></div></div>
+      <div class="setting-row"><span>Leitura confortável</span><button id="esc-reading-toggle" type="button" aria-pressed="false">Ativar</button></div>
       <div class="setting-row"><span>Tema</span><div class="theme-choice" role="group" aria-label="Tema"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
-      <div class="setting-row" hidden=""><span>Máquina antiga</span><button id="machine-toggle" aria-pressed="false">Ativar</button></div>
+      <div class="setting-row"><span>Máquina antiga (no Superfoco)</span><button id="machine-toggle" aria-pressed="true">Desativar</button></div>
       <div class="setting-row"><span>Destaque de parágrafo</span><button id="focus-toggle" aria-pressed="true">Destacar</button></div>
       <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"><span class="switch-off">Não</span><span class="switch-on">Sim</span></span></label>
       <p id="sound-status" class="quiet" role="status">Som desligado.</p><p class="quiet">O som desliga ao sair desta página.</p>

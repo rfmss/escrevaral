@@ -1,0 +1,564 @@
+/* Modelos de projeto e assistente do soneto — ESCREVARAL */
+@media screen {
+  #esc-template-modal {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 2600;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(30, 35, 32, 0.42);
+    color: var(--esc-ink, #1e2320);
+    font: 14px/1.5 Arial, Helvetica, sans-serif;
+  }
+
+  #esc-template-modal[hidden] {
+    display: none !important;
+  }
+
+  .esc-template-dialog {
+    width: 100%;
+    max-width: 720px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--esc-paper, #ccd5c7);
+    border: 1px solid var(--esc-muted, #4a544c);
+    border-radius: 3px;
+  }
+
+  .esc-template-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--esc-border, #8b9b8c);
+  }
+
+  .esc-template-eyebrow {
+    margin: 0 0 3px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  #esc-tpl-heading {
+    margin: 0;
+    font: 600 19px/1.25 'Oswald', Arial, sans-serif;
+  }
+
+  #esc-tpl-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .esc-template-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 16px 20px;
+  }
+
+  #esc-tpl-intro {
+    margin: 0 0 14px;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-tpl-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .esc-tpl-card {
+    flex: 1 1 200px;
+    padding: 10px 12px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    background: var(--esc-surface, #becab9);
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  .esc-tpl-card[aria-checked="true"] {
+    background: var(--esc-selected, #b3c2ae);
+    border-color: var(--esc-ink, #1e2320);
+    box-shadow: inset 3px 0 0 var(--esc-ink, #1e2320);
+  }
+
+  .esc-tpl-card strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .esc-tpl-card span {
+    display: block;
+    font-size: 12px;
+    color: var(--esc-muted, #4a544c);
+    line-height: 1.35;
+  }
+
+  .esc-tpl-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+  }
+
+  .esc-tpl-fields label {
+    flex: 1 1 240px;
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .esc-tpl-fields input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+    padding: 8px 10px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    background: var(--esc-bg, #c4cfc2);
+    color: inherit;
+    font: inherit;
+  }
+
+  .esc-tpl-palette-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .esc-tpl-error {
+    margin: 10px 0 0;
+    color: #6b2222;
+    font-size: 13px;
+  }
+
+  .esc-template-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px 20px;
+    border-top: 1px solid var(--esc-border, #8b9b8c);
+  }
+
+  .esc-template-footer button {
+    min-height: 36px;
+    padding: 7px 14px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .esc-tpl-quiet {
+    margin-right: auto;
+    border-color: transparent !important;
+    text-decoration: underline;
+  }
+
+  .esc-tpl-primary {
+    background: var(--esc-ink, #1e2320) !important;
+    color: var(--esc-paper, #ccd5c7) !important;
+    border-color: var(--esc-ink, #1e2320) !important;
+    font-weight: 600;
+  }
+
+  /* Referência protegida */
+  .esc-reference-banner {
+    padding: 8px 32px;
+    background: var(--esc-surface, #becab9);
+    border-bottom: 1px solid var(--esc-border, #8b9b8c);
+    font: 12px/1.4 Arial, sans-serif;
+    color: var(--esc-ink, #1e2320);
+  }
+
+  /* Assistente do Soneto na Coluna 2 */
+  .esc-sonnet {
+    font: 13px/1.45 Arial, Helvetica, sans-serif;
+    color: var(--esc-ink, #1e2320);
+  }
+
+  .esc-sonnet-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-bottom: 1px dotted var(--esc-border, #8b9b8c);
+  }
+
+  .esc-sonnet-top strong {
+    display: block;
+    font-size: 15px;
+  }
+
+  .esc-sonnet-progress {
+    display: block;
+    font-size: 11px;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-sonnet-quiet {
+    border: 0;
+    background: transparent;
+    color: var(--esc-muted, #4a544c);
+    text-decoration: underline;
+    padding: 2px 4px;
+    font: 12px/1.3 Arial, sans-serif;
+    cursor: pointer;
+  }
+
+  .esc-sonnet-body {
+    padding: 10px 12px 14px;
+  }
+
+  .esc-sonnet-intro,
+  .esc-sonnet-caption {
+    margin: 0 0 8px;
+    font-size: 12px;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-sonnet h3 {
+    margin: 8px 0 4px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-sonnet-current-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .esc-sonnet-excerpt {
+    margin: 4px 0 8px;
+    font: italic 13px/1.4 'Noto Serif', Georgia, serif;
+  }
+
+  .esc-sonnet-prompt {
+    margin: 4px 0 8px;
+    font-style: italic;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-sonnet-measure strong {
+    display: block;
+    font-size: 20px;
+  }
+
+  .esc-sonnet-measure small {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .esc-sonnet-syllables {
+    margin: 4px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    word-wrap: break-word;
+  }
+
+  .esc-sonnet-after-tonic {
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-sonnet-stanzas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0;
+  }
+
+  .esc-sonnet-stanza {
+    flex: 1 1 110px;
+  }
+
+  .esc-sonnet-stanza small {
+    display: block;
+    font-size: 11px;
+    color: var(--esc-muted, #4a544c);
+    margin-bottom: 3px;
+  }
+
+  .esc-sonnet-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .esc-sonnet-slots button,
+  .esc-sonnet-empty-slot {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    background: var(--esc-bg, #c4cfc2);
+    color: inherit;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .esc-sonnet-slots button[aria-pressed="true"] {
+    background: var(--esc-ink, #1e2320);
+    color: var(--esc-paper, #ccd5c7);
+    font-weight: 700;
+  }
+
+  .esc-sonnet-empty-slot {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .esc-sonnet-suggestions,
+  .esc-sonnet-settings {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dotted var(--esc-border, #8b9b8c);
+  }
+
+  .esc-sonnet summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  .esc-sonnet-controls label,
+  .esc-sonnet-search label {
+    display: block;
+    margin: 6px 0;
+    font-size: 12px;
+  }
+
+  .esc-sonnet-controls select,
+  .esc-sonnet-controls input,
+  .esc-sonnet-search input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 3px;
+    padding: 5px 6px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    background: var(--esc-bg, #c4cfc2);
+    color: inherit;
+    font: inherit;
+  }
+}
+
+/* Fase 3: Modal Novo projeto fiel + Logo ENEM + .esc-reference + Dica vazia do Soneto */
+@media screen {
+  .esc-tpl-fieldset {
+    border: 1px dashed #7c8b78;
+    padding: 10px 12px;
+    margin: 10px 0 12px;
+  }
+  .esc-tpl-fieldset legend {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 6px;
+  }
+  .esc-tpl-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .esc-template-option {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border: 1px solid #8b9b8c;
+    cursor: pointer;
+    background: transparent;
+  }
+  .esc-template-option.is-selected {
+    background: #b3c2ae;
+    background: var(--esc-selected, #b3c2ae);
+    border-color: #242d23;
+  }
+  .esc-template-option input[type="radio"] {
+    margin: 3px 10px 0 0;
+  }
+  .esc-tpl-option-body {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .esc-tpl-option-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .esc-template-enem-logo {
+    height: 22px;
+    width: auto;
+    margin-left: 8px;
+    object-fit: contain;
+  }
+  .esc-tpl-option-desc {
+    display: block;
+    font-size: 12px;
+    color: #455241;
+    color: var(--esc-muted, #455241);
+    margin-top: 2px;
+  }
+  .esc-tpl-format-row {
+    margin: 10px 0;
+    font-size: 12px;
+  }
+  .esc-tpl-format-options {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .esc-tpl-format-choice {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+  .esc-tpl-format-choice input {
+    margin-right: 5px;
+  }
+
+  /* Visualização formatada e protegida da Referência Nota 1000 (.esc-reference) */
+  .esc-reference {
+    margin: 12px auto 24px;
+    max-width: 68ch;
+    padding: 18px 22px;
+    border: 1px dashed #7c8b78;
+    background: #ccd5c7;
+    background: var(--esc-paper, #ccd5c7);
+    color: #111511;
+    color: var(--esc-manuscript, #111511);
+    line-height: 1.75;
+  }
+  .esc-reference[hidden] { display: none !important; }
+  .esc-reference-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed #7c8b78;
+  }
+  .esc-reference-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    background: #242d23;
+    color: #d8e4d6;
+  }
+  .esc-reference-delete {
+    border: 1px solid #8b1e1e;
+    background: transparent;
+    color: #8b1e1e;
+    font-size: 11px;
+    padding: 3px 9px;
+    cursor: pointer;
+  }
+  .esc-reference-body h1 { font-size: 20px; margin: 0 0 12px; }
+  .esc-reference-body h2 { font-size: 16px; margin: 16px 0 8px; }
+  .esc-reference-body p { margin: 0 0 10px; }
+  .esc-reference-body blockquote {
+    margin: 10px 0;
+    padding: 6px 12px;
+    border-left: 3px solid #242d23;
+    font-style: italic;
+  }
+  .esc-sonnet-editor-hint {
+    margin: 4px 0 8px;
+    font-size: 13px;
+    font-style: italic;
+    color: #455241;
+    color: var(--esc-muted, #455241);
+  }
+  .esc-sonnet-editor-hint[hidden] { display: none !important; }
+}
+
+@media screen {
+  .esc-template-option input[type="radio"],
+  .esc-tpl-format-choice input[type="radio"],
+  .esc-filter-check input[type="checkbox"] {
+    -webkit-appearance: auto !important;
+    appearance: auto !important;
+    width: 15px !important;
+    height: 15px !important;
+    min-width: 15px !important;
+    flex-shrink: 0;
+    accent-color: #242d23;
+  }
+}
+
+/* Polish visual QA modelos e soneto */
+@media screen {
+  .esc-template-close,
+  .esc-sonnet button,
+  .esc-reference-delete {
+    min-height: 0 !important;
+  }
+  .esc-template-close {
+    width: 32px;
+    height: 32px;
+    padding: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .esc-template-option {
+    padding: 7px 10px;
+  }
+  .esc-tpl-fields .esc-tpl-format-row {
+    flex: 1 1 240px;
+    margin: 0;
+  }
+  .esc-tpl-fields .esc-tpl-format-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-top: 6px;
+  }
+  .esc-tpl-fields .esc-tpl-format-choice {
+    flex: 0 0 auto !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    margin: 0 !important;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .esc-tpl-fields .esc-tpl-format-choice input[type="radio"] {
+    display: inline-block !important;
+    width: 15px !important;
+    height: 15px !important;
+    margin: 0 !important;
+  }
+  .esc-sonnet-editor-hint {
+    padding: 8px 32px 0;
+    margin: 0;
+  }
+}

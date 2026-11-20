@@ -3,9 +3,9 @@ const {chromium,webkit}=require('playwright'),fs=require('fs'),path=require('pat
 const root=path.resolve(__dirname,'..'),out=process.env.QA_OUTPUT||path.join(root,'../qa-output'),engine=process.env.BROWSER_ENGINE||'chromium';
 fs.mkdirSync(out,{recursive:true});let browser;const errors=[],evidence={engine,viewports:[],performance:[]};
 const server=http.createServer(require('../scripts/static-handler.cjs')(root));
-async function start(p,url){p.on('pageerror',e=>errors.push(e.message));await p.goto(url);await p.click('#first-run-write');}
+async function start(p,url){p.on('pageerror',e=>errors.push(e.message));await p.goto(url);const fr = p.locator('#first-run-write'); if (await fr.isVisible().catch(() => false)) { await fr.click(); }}
 async function open(p){if(await p.locator('#oficina').isHidden())await p.click('#examinar-toggle');await p.waitForFunction(()=>document.querySelector('#ptbr-dashboard .ptbr-wheel button'));}
-async function lens(p,id){await open(p);await p.evaluate(id=>{const b=document.querySelector('.ptbr-back');while(b&&!b.hidden){b.click();}const groups=[['ortografia','acentuacao','pontuacao','crase','concordancia'],['morfologia','sintaxe','relativas'],['expressoes','repeticao','adverbios','dialogo','decolonial'],['ritmo','rima','metrica']];document.querySelectorAll('.ptbr-goals button')[groups.findIndex(g=>g.includes(id))].click();},id);await p.click('[data-ptbr-lens="'+id+'"]');await p.waitForFunction(()=>/Análise concluída/.test(document.querySelector('#ptbr-dashboard [role=status]').textContent));}
+async function lens(p,id){await open(p);await p.evaluate(id=>{const b=document.querySelector('.ptbr-back');while(b&&!b.hidden){b.click();}const groups=[['ortografia','acentuacao','pontuacao','crase','concordancia'],['morfologia','sintaxe','relativas'],['expressoes','repeticao','adverbios','dialogo','decolonial'],['ritmo','rima','metrica']];document.querySelectorAll('.ptbr-goals button')[groups.findIndex(g=>g.includes(id))].click();},id);await p.click('[data-ptbr-lens="'+id+'"]');await p.waitForFunction(()=>Array.from(document.querySelectorAll('#ptbr-dashboard [role=status]')).some(n=>/Análise concluída/.test(n.textContent)));}
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
  browser=await(engine==='webkit'?webkit:chromium).launch({headless:true,executablePath:process.env.QA_BROWSER_EXECUTABLE||undefined,args:engine==='chromium'?['--no-sandbox']:[]});
@@ -53,7 +53,7 @@ async function lens(p,id){await open(p);await p.evaluate(id=>{const b=document.q
  assert.equal(await p.locator('#manuscrito').evaluate(n=>n.value.slice(n.selectionStart,n.selectionEnd)),'que está cantando');
  assert.equal(await p.locator('#manuscrito').inputValue(),'A menina que está cantando trabalha.');await open(p);
  await p.evaluate(()=>{window.lensCalls=0;document.querySelector('[data-ptbr-lens="morfologia"]').click();document.querySelector('[data-ptbr-lens="repeticao"]').click();});
- await p.waitForFunction(()=>/Análise concluída/.test(document.querySelector('#ptbr-dashboard [role=status]').textContent));
+ await p.waitForFunction(()=>Array.from(document.querySelectorAll('#ptbr-dashboard [role=status]')).some(n=>/Análise concluída/.test(n.textContent)));
  assert.equal(await p.evaluate(()=>window.lensCalls),1,'troca cancela a lente anterior');
  await p.evaluate(()=>{window.lensCalls=0;document.querySelector('[data-ptbr-lens="morfologia"]').click();document.querySelector('.ptbr-cancel').click();});
  await p.waitForTimeout(100);assert.equal(await p.evaluate(()=>window.lensCalls),0,'cancelamento explícito');

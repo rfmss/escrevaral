@@ -1,0 +1,368 @@
+{
+  "version": "ptbr-20261106-3",
+  "locale": "pt-BR",
+  "headwords": 7661,
+  "lookupKeys": 92148,
+  "dictionaryHeadwords": 7504,
+  "synonymHeadwords": 2643,
+  "synonymGroups": 2062,
+  "counts": {
+    "reviewedCommonSenses": 5242,
+    "withheldSenses": 133959,
+    "brazilMarkedSenses": 4405,
+    "synonymMemberships": 4781,
+    "tableFormLinks": 23370,
+    "formLinks": 86070
+  },
+  "files": [
+    {
+      "path": "partes/00.js",
+      "bytes": 182100,
+      "sha256": "4c8275f5b7a43241cad2ee08c68cffef68d9dba618b0554623951d5d69981b60"
+    },
+    {
+      "path": "partes/01.js",
+      "bytes": 186521,
+      "sha256": "5e701d6bf7b657f40edc491ad6066fc401393485e3f277c24d6b934bf99904a7"
+    },
+    {
+      "path": "partes/02.js",
+      "bytes": 190202,
+      "sha256": "30362b9b1a2f5e7cdce789e2b402894ff86144c69932b11a88125106a79dfb68"
+    },
+    {
+      "path": "partes/03.js",
+      "bytes": 186271,
+      "sha256": "da88b5824eb1620ba72e7103f8f95442748f36a81af5c39498b4dad777720518"
+    },
+    {
+      "path": "partes/04.js",
+      "bytes": 176607,
+      "sha256": "77a0ba984e85dd44d3fe769d55ab48cfe64a311048bf8b186b17091e7b2310c4"
+    },
+    {
+      "path": "partes/05.js",
+      "bytes": 175781,
+      "sha256": "2d74bcc2833c8554d677b6b1c293509b2e0e8967f17ad18dea401e35c25b31d4"
+    },
+    {
+      "path": "partes/06.js",
+      "bytes": 174718,
+      "sha256": "c25ac8b577f3c8fa4a9ba2fc4fb31996ad640cbc5b86cbaaaa052055a1ceea68"
+    },
+    {
+      "path": "partes/07.js",
+      "bytes": 191208,
+      "sha256": "aabbe55ed3379b6277847330a9e3816163514a1cb71712b2d5421201cfae02de"
+    },
+    {
+      "path": "partes/08.js",
+      "bytes": 159546,
+      "sha256": "dffea39ae08b3caf00addb9ecbf254207a0299680daca18a112159814779f223"
+    },
+    {
+      "path": "partes/09.js",
+      "bytes": 174089,
+      "sha256": "81c4c79551aad2c0b88659168e9083455222d81565743925107d355feb62859e"
+    },
+    {
+      "path": "partes/0a.js",
+      "bytes": 178566,
+      "sha256": "7bdc29ec844eae6afbde93529338858198752980b3f6ce070fc6ab315a540720"
+    },
+    {
+      "path": "partes/0b.js",
+      "bytes": 167962,
+      "sha256": "96362a736c512784d4743bb8949feb3ba3661735180aa2090365ec1422ed52b7"
+    },
+    {
+      "path": "partes/0c.js",
+      "bytes": 165549,
+      "sha256": "d24aa72a8eda1e18b54c81544bfa8aa58fd636e61f016a810a9fd413fe93efbf"
+    },
+    {
+      "path": "partes/0d.js",
+      "bytes": 177507,
+      "sha256": "b739a74b69e769beaa4a0823374ccc2dd04e5033c181b18ee1a390aa899b14df"
+    },
+    {
+      "path": "partes/0e.js",
+      "bytes": 164716,
+      "sha256": "a0ac41e1d0a1bec2d1dde9e4454f80613e10fd2b819dedb872ffb7c6d5fc9fad"
+    },
+    {
+      "path": "partes/0f.js",
+      "bytes": 176702,
+      "sha256": "4af2303e1fd8157f461e4b5b5a135d7564a3716cf9cc062c7cf5fd4a2f0cdcdc"
+    },
+    {
+      "path": "partes/10.js",
+      "bytes": 170280,
+      "sha256": "c24f8c5aba2aff7aacc064bce4df34b7b5f2ef02bd4bb6b307d588573a83e3b8"
+    },
+    {
+      "path": "partes/11.js",
+      "bytes": 163455,
+      "sha256": "b1fa2bed34a751c0d7301d1655f8129aad498baecb1467341855f00d52b043ce"
+    },
+    {
+      "path": "partes/12.js",
+      "bytes": 164046,
+      "sha256": "720f62efd2b8eef8c8d9d22836c4edb4d91a2f5286c022e51795f559464e1f68"
+    },
+    {
+      "path": "partes/13.js",
+      "bytes": 159797,
+      "sha256": "c9964b30dbbcdc310ac996d1cea1641b2d7a5d3338c69f1be5a406ead933887e"
+    },
+    {
+      "path": "partes/14.js",
+      "bytes": 167402,
+      "sha256": "522f8b415a0c5e8ce77b4f01881d36f776a7644e5fd7fb86bb318d493448a3ca"
+    },
+    {
+      "path": "partes/15.js",
+      "bytes": 174513,
+      "sha256": "312001ce6ed032df4fe652545d1d2b4bbb23c0faeb6afb6ed498b835c1ddb92e"
+    },
+    {
+      "path": "partes/16.js",
+      "bytes": 171716,
+      "sha256": "e4ce764840948fafcc8f8b5f1efe853fdaae4c9621a0c4d744a2978b107d910a"
+    },
+    {
+      "path": "partes/17.js",
+      "bytes": 165535,
+      "sha256": "e637f3ad4d0e0acd9df4877bf846c2445173dde297295dd36ed18f95f8b2c1d8"
+    },
+    {
+      "path": "partes/18.js",
+      "bytes": 167124,
+      "sha256": "788e6b8fa75b33ef323c0ef99c5297aff2f9f804aa8df0a2b9f5658b5b7026bd"
+    },
+    {
+      "path": "partes/19.js",
+      "bytes": 173480,
+      "sha256": "f51381729ee98d470c8025aee2c2478e15fc2a7c35931535f2bf07d5fa7c9f56"
+    },
+    {
+      "path": "partes/1a.js",
+      "bytes": 179188,
+      "sha256": "46c184857c7ebaa9053205f8c3d227b2354c73e5ef9c95f906d8f5bfb89b33a6"
+    },
+    {
+      "path": "partes/1b.js",
+      "bytes": 180966,
+      "sha256": "cad66d4fabfdd00a3bc336511f7a4b8a87e4fd62ca9a22c3da4d1d5ac02a2298"
+    },
+    {
+      "path": "partes/1c.js",
+      "bytes": 173350,
+      "sha256": "7a0b30b116e279e5da651eed0221a5faef7223695472eccc5e64707e8e3cb7e3"
+    },
+    {
+      "path": "partes/1d.js",
+      "bytes": 181101,
+      "sha256": "cce03e207ef6d4f0772d1ce74fd05d40196f0f463e1eece62f2dc15c7750411f"
+    },
+    {
+      "path": "partes/1e.js",
+      "bytes": 159829,
+      "sha256": "2d31e4760a8dbd2786522a3a60ba9d2645647640a0ec1fbb6e012de5f23f3acc"
+    },
+    {
+      "path": "partes/1f.js",
+      "bytes": 184315,
+      "sha256": "32c8b9490717206fcdd0fbe980c17826fd1679c5649117e62fde3d0716981da5"
+    },
+    {
+      "path": "partes/20.js",
+      "bytes": 176856,
+      "sha256": "f96b586f5c85a9b6f6cc5dfb8fd76e87715b82a043313d76385e524a134fac78"
+    },
+    {
+      "path": "partes/21.js",
+      "bytes": 176613,
+      "sha256": "09892fcd8ab0c464aaadf05488e903c33670124d236572d5416c5e1c5d100007"
+    },
+    {
+      "path": "partes/22.js",
+      "bytes": 165363,
+      "sha256": "4c28c9785b1f5d311d631147a1ef9c8d7ff1c10b4e35c681dbfa278c3c444e65"
+    },
+    {
+      "path": "partes/23.js",
+      "bytes": 171314,
+      "sha256": "8142f8e430791352d8a23d36b7f0a2dc065ff7ca599792931eba27d25c5230e1"
+    },
+    {
+      "path": "partes/24.js",
+      "bytes": 165295,
+      "sha256": "003db6b8db527178d096ac0ffd2e2f0790abeb5a4405bba8e98fd25d5bffeb9d"
+    },
+    {
+      "path": "partes/25.js",
+      "bytes": 189393,
+      "sha256": "ba8399477853cee9a34b1725c0b3a5cb37ce6606a90d79c9a9e2af5d91d63565"
+    },
+    {
+      "path": "partes/26.js",
+      "bytes": 174038,
+      "sha256": "a831b0ae9723d84a07a02725ae6c7e229a8ab521ff5ba0f29c1fbf17feb9679a"
+    },
+    {
+      "path": "partes/27.js",
+      "bytes": 176844,
+      "sha256": "b2b164dfa2dd883fda3de0272981b2db0937ff9039604c9a098012582330fc3a"
+    },
+    {
+      "path": "partes/28.js",
+      "bytes": 182759,
+      "sha256": "d4eb879015437fe469b72d515b48a415f74cefc8a6d41de04ae00c3e5cf36dfd"
+    },
+    {
+      "path": "partes/29.js",
+      "bytes": 184607,
+      "sha256": "e09e7b1b1c77ce0f3a09ca422e5913ce3c6ca530965a4d76eeccf4bafb735390"
+    },
+    {
+      "path": "partes/2a.js",
+      "bytes": 158963,
+      "sha256": "e5ee82e4b49f4124d5372fa689e3cb09d64aabeabf783ad956f8f15c3c85a350"
+    },
+    {
+      "path": "partes/2b.js",
+      "bytes": 167759,
+      "sha256": "1f0916c844b8a279e066faa6298513934d211b9c6954ada1d0db55cae00cdbae"
+    },
+    {
+      "path": "partes/2c.js",
+      "bytes": 172845,
+      "sha256": "e84b7909f550217ec2caa69852caab365f671fd5910deca0a95313353879fe3c"
+    },
+    {
+      "path": "partes/2d.js",
+      "bytes": 178604,
+      "sha256": "ba18d35f2b8223338cae918d0020600a54ec13b1ed7832db0f8cd930677144ef"
+    },
+    {
+      "path": "partes/2e.js",
+      "bytes": 168594,
+      "sha256": "6186768cddb5ead53d57d44c18b1e57f4693264ea45c392737a8b961492fdfbb"
+    },
+    {
+      "path": "partes/2f.js",
+      "bytes": 161369,
+      "sha256": "6685cb4ef1525b6aa24d6810261fb337d5cdab99d7485e4fd6f09d6b918c1f25"
+    },
+    {
+      "path": "partes/30.js",
+      "bytes": 168815,
+      "sha256": "da6cc75d845fe8cb5b59354a53f37723239910a8712e08ff194b06ac6145f069"
+    },
+    {
+      "path": "partes/31.js",
+      "bytes": 166242,
+      "sha256": "72d094f94917ad304f50e19ba04906737be3d0c5939b7acaf75c49e4d1681e90"
+    },
+    {
+      "path": "partes/32.js",
+      "bytes": 169745,
+      "sha256": "4329e7872f6a3410ee399ba6bd92e63516f32af2f91abbb8f821625c02de66b1"
+    },
+    {
+      "path": "partes/33.js",
+      "bytes": 171171,
+      "sha256": "c0923ffd1ca48d1b9a1f05ef46e048b22dfd486f8c8af1511b8ff0963b5ff496"
+    },
+    {
+      "path": "partes/34.js",
+      "bytes": 187901,
+      "sha256": "539dce6890ad5f0d4ad2ac0108a25a7beba5b8d5f2e112ef35f66d1b1a322cdc"
+    },
+    {
+      "path": "partes/35.js",
+      "bytes": 175172,
+      "sha256": "3da7c77767e8a18a92bfd1bcf1b219080a44792da57ee689caf3cdcfe488b8f0"
+    },
+    {
+      "path": "partes/36.js",
+      "bytes": 168222,
+      "sha256": "41d427c1dab921fc197293f2e0d4b0a4e4e0c68a2e98cae14b4e09dfcc9861d4"
+    },
+    {
+      "path": "partes/37.js",
+      "bytes": 166310,
+      "sha256": "f0c085bf848c1c8c294852dae0b43f5cc7badac278ff707a7f7f41c0d68f7ab9"
+    },
+    {
+      "path": "partes/38.js",
+      "bytes": 178539,
+      "sha256": "8567efabab96bf15568e203f9a107b4ac021d05f1812509fde192baf3101c49a"
+    },
+    {
+      "path": "partes/39.js",
+      "bytes": 167959,
+      "sha256": "6e15a5c3fa4c7944f28f4deaeb28e2415d96f97e45fd51de82a66fdab4d51cc7"
+    },
+    {
+      "path": "partes/3a.js",
+      "bytes": 175861,
+      "sha256": "06cefa2857d24e0a07939d3abd57995b217d3d55107257d69c5ab7c5b1c97df0"
+    },
+    {
+      "path": "partes/3b.js",
+      "bytes": 183161,
+      "sha256": "820de42c36c88cc9446d17175ba2096b219969d6f591ac9a564f7a8bbf6be286"
+    },
+    {
+      "path": "partes/3c.js",
+      "bytes": 176199,
+      "sha256": "654ae498e350454e8c7729b0a7764ca474705f0abb716044f17e1919f8b4095c"
+    },
+    {
+      "path": "partes/3d.js",
+      "bytes": 179809,
+      "sha256": "7066c7d073b1d78bec5ff8211ea39154d1eeb68d747f1cd421ca5245d80414c6"
+    },
+    {
+      "path": "partes/3e.js",
+      "bytes": 171450,
+      "sha256": "a11e714ae665e74332ed0c8c409652231e015f57fbbd7854d4dc35cc18026b07"
+    },
+    {
+      "path": "partes/3f.js",
+      "bytes": 182044,
+      "sha256": "e006760b9a9eed64869b5b3bcfed09145a37fcfde929e42ca542fbd4eef99d18"
+    }
+  ],
+  "sources": [
+    {
+      "file": "OWN-PT-README.md",
+      "sha256": "dec92d5a271ec9dabba900896eae8a57bf9357aec55361371d629305ea3c08db",
+      "bytes": 3658
+    },
+    {
+      "file": "own-pt-synsets.ttl",
+      "sha256": "e0050a04bb1c43a6c259d7c096a98d6c9f9c0d1343485733c18ddc17fd5e33e8",
+      "bytes": 17429266
+    },
+    {
+      "file": "own-pt-words.ttl",
+      "sha256": "8aad718f57f041511eee31a33d96c289a6d7ac5f1e52980069b7075b71784ad4",
+      "bytes": 11299630
+    },
+    {
+      "file": "own-pt-wordsenses.ttl",
+      "sha256": "537222fc22c8f116ccb35c375e76d4d0150cb024bf5e6bbcb4724e4e1315f6f1",
+      "bytes": 14625571
+    },
+    {
+      "file": "pt-extract.jsonl.gz",
+      "sha256": "26b244e5b25629e9a88cf926813e6987289fa61e8b8a2faa68aef78ed6efaaa6",
+      "bytes": 37273123
+    }
+  ],
+  "reviewSha256": "d49917a8fcac9d7a5f638ffb11c6f222b11146480501f628e4ea1925585ca3d9",
+  "selection": "Sentidos com marca brasileira e sentidos comuns fixados por revisão editorial assistida. OWN-PT: somente grupos/alternativas explicitamente revisados. Sem união entre fontes, sem inferência de sentido. Não é revisão linguística independente nem dicionário completo."
+}

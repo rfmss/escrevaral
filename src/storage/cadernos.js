@@ -120,6 +120,13 @@
       if (duplicate(next, book.name, book.originalId, book.id)) { throw new Error('Já existe um caderno com esse nome nesta gaveta ou mesa.'); }
       if (!validBook(book)) { throw new Error('Dados do caderno inválidos.'); } commit(next); return book;
     }
+    function purge(bookId) {
+      reload();
+      var next = books.filter(function (b) { return b.id !== bookId; });
+      if (next.length === books.length) { return false; }
+      commit(next);
+      return true;
+    }
     function pack(documents, bookId, origId) {
       reload(); var selected = bookId ? books.filter(function (b) { return b.id === bookId; }) : origId ? books.filter(function (b) { return b.originalId === origId; }) : books;
       if (origId && !original(origId)) { throw new Error('Gaveta não encontrada.'); }
@@ -189,7 +196,7 @@
     }
     recover(); repairExperiment(); reload();
     var originalModel = { list: function () { reload(); return clone(originals); }, get: function (origId) { reload(); var o = original(origId); return o ? clone(o) : null; }, add: addOriginal, update: updateOriginal };
-    return { originals: originalModel, list: function () { return clone(reload()); }, get: function (bookId) { reload(); var b = find(bookId); return b ? clone(b) : null; }, add: add, update: update, resolve: resolve, decorate: decorate, migrate: migrate, pack: pack, validate: validate, bring: bring };
+    return { originals: originalModel, list: function () { return clone(reload()); }, get: function (bookId) { reload(); var b = find(bookId); return b ? clone(b) : null; }, add: add, update: update, purge: purge, resolve: resolve, decorate: decorate, migrate: migrate, pack: pack, validate: validate, bring: bring };
   }
   E.createNotebooks = create;
   E.createOriginals = function (storage) { return create(storage).originals; };

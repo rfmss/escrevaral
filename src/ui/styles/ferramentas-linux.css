@@ -1,0 +1,258 @@
+/* Pomodoro Dock (base da Coluna 1), Menu de Ferramentas Unificado e Calculadora Editorial — ESCREVARAL */
+@media screen {
+  /* Pomodoro Dock fixo na base da Coluna 1 */
+  #esc-pomodoro-dock {
+    padding: 8px 10px;
+    border-top: 1px dashed #7c8b78;
+    border-top: 1px dashed var(--esc-border, #7c8b78);
+    background: #b8c5b6;
+    background: var(--esc-surface, #b8c5b6);
+    color: #212921;
+    color: var(--esc-ink, #212921);
+  }
+  .esc-pomo-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .esc-pomo-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .esc-pomo-phase {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #455241;
+    color: var(--esc-muted, #455241);
+  }
+  .esc-pomo-time {
+    font-family: "Courier Prime", "Courier New", monospace;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  .esc-pomo-btns {
+    display: flex;
+    align-items: center;
+  }
+  .esc-pomo-btn {
+    margin-left: 4px;
+    padding: 3px 7px;
+    border: 1px solid #7c8b78;
+    background: transparent;
+    color: inherit;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .esc-pomo-btn[aria-pressed="true"] {
+    background: #242d23;
+    color: #d8e4d6;
+  }
+  .esc-pomo-config {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px dotted #7c8b78;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .esc-pomo-config label {
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    margin-right: 8px;
+    width: 72px;
+  }
+  .esc-pomo-config input {
+    margin-top: 2px;
+    padding: 3px 5px;
+    border: 1px solid #7c8b78;
+    background: #d8e2d6;
+    color: #111511;
+    font-size: 12px;
+  }
+  .esc-pomo-save {
+    padding: 4px 8px;
+    border: 1px solid #242d23;
+    background: #242d23;
+    color: #d8e4d6;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  /* Menu rápido de ferramentas unificado na base da Coluna 1 */
+  .esc-nav-tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .esc-nav-tool-btn {
+    flex: 1 1 46%;
+    margin: 2px;
+    padding: 5px 6px;
+    border: 1px dotted #7c8b78;
+    border: 1px dotted var(--esc-border, #7c8b78);
+    background: transparent;
+    color: inherit;
+    font-size: 11px;
+    text-align: left;
+    cursor: pointer;
+  }
+  .esc-nav-tool-btn:hover {
+    background: #b3c2ae;
+    background: var(--esc-selected, #b3c2ae);
+  }
+
+  /* Calculadora Editorial flutuante arrastável */
+  .esc-calculator {
+    position: fixed;
+    top: 72px;
+    right: 28px;
+    width: 320px;
+    max-width: 94vw;
+    z-index: 2400;
+    background: #c4cfc2;
+    background: var(--esc-paper, #c4cfc2);
+    color: #212921;
+    color: var(--esc-ink, #212921);
+    border: 2px solid #242d23;
+    box-shadow: 3px 4px 0 rgba(24, 32, 24, 0.25);
+    box-sizing: border-box;
+  }
+  .esc-calculator[hidden] { display: none !important; }
+  .esc-calc-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: #242d23;
+    background: var(--esc-weave-bg, #242d23);
+    color: #d8e4d6;
+    color: var(--esc-weave-ink, #d8e4d6);
+    cursor: move;
+    font-size: 13px;
+  }
+  .esc-calc-close {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+  }
+  .esc-calc-tabs {
+    display: flex;
+    border-bottom: 1px dashed #7c8b78;
+  }
+  .esc-calc-tab {
+    flex: 1 1 25%;
+    padding: 6px 4px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .esc-calc-tab[aria-selected="true"] {
+    background: #b3c2ae;
+    background: var(--esc-selected, #b3c2ae);
+    font-weight: 700;
+  }
+  .esc-calc-body {
+    padding: 10px 12px 12px;
+  }
+  .esc-calc-field {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+  .esc-calc-field span {
+    display: block;
+    margin-bottom: 3px;
+  }
+  .esc-calc-field input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    border: 1px solid #7c8b78;
+    background: #d8e2d6;
+    color: #111511;
+    font-size: 13px;
+  }
+  .esc-calc-pad {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 4px 0 8px;
+  }
+  .esc-calc-key {
+    width: 23%;
+    margin: 1%;
+    padding: 7px 0;
+    border: 1px solid #7c8b78;
+    background: #b8c5b6;
+    color: #111511;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .esc-calc-key:hover {
+    background: #a3b5a0;
+  }
+  .esc-calc-unit-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .esc-calc-submit {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #242d23;
+    background: #242d23;
+    color: #d8e4d6;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+  .esc-calc-result {
+    margin-top: 10px;
+    padding: 8px 10px;
+    border: 1px dashed #242d23;
+    background: #d8e2d6;
+    color: #111511;
+  }
+  .esc-calc-result strong {
+    display: block;
+    font-size: 15px;
+  }
+  .esc-calc-result p {
+    margin: 4px 0 0;
+    font-size: 11px;
+  }
+}
+
+/* Polish visual QA ferramentas */
+@media screen {
+  #esc-pomodoro-dock {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+  }
+  .esc-pomo-btn,
+  .esc-pomo-save,
+  .esc-nav-tool-btn,
+  .esc-calc-close,
+  .esc-calc-tab,
+  .esc-calc-key,
+  .esc-calc-submit {
+    min-height: 0 !important;
+  }
+  .esc-pomo-btn {
+    padding: 3px 7px !important;
+    line-height: 1.25;
+  }
+  .esc-nav-tool-btn {
+    padding: 4px 6px !important;
+    line-height: 1.25;
+  }
+}

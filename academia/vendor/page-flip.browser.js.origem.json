@@ -1,0 +1,95 @@
+{
+  "name": "page-flip",
+  "version": "2.0.7",
+  "url": "https://github.com/Nodlik/StPageFlip/tree/ab30ecc1d9f6d98de1a99b8e296469382f41c120",
+  "commit": "ab30ecc1d9f6d98de1a99b8e296469382f41c120",
+  "license": "MIT",
+  "build": "../build-vendor.cjs — Amaro do Node 22.14.0, imports locais empacotados; fontes com newline final normalizado",
+  "sha256": "e85a1e9c890764d55f8a8d8117ec42d7f24d39691621cccfc3f591da4d529128",
+  "files": [
+    {
+      "path": "upstream/package.json",
+      "sha256": "51c61c7f59e18ed583e791d44e2e7827dadc7abb251a2fd3f0be8bb8acad03af"
+    },
+    {
+      "path": "upstream/src/BasicTypes.ts",
+      "sha256": "9a4ccb66d87125625d12cae96c6f8c019bc9bd1545c25e3ed461da7a013f3714"
+    },
+    {
+      "path": "upstream/src/Collection/HTMLPageCollection.ts",
+      "sha256": "ead887f53f1ecc88064c268442391ba3493888c48e43e7234bc70806f79b019b"
+    },
+    {
+      "path": "upstream/src/Collection/ImagePageCollection.ts",
+      "sha256": "6b7ea19b6a23b5d7f46bec904ff137b01c4bc7a184308ab39bdb4701b558e4fe"
+    },
+    {
+      "path": "upstream/src/Collection/PageCollection.ts",
+      "sha256": "dfcb09bff51779bd6bb01d220f328b979f0878b8c6eb87a5de498bf72b088326"
+    },
+    {
+      "path": "upstream/src/Event/EventObject.ts",
+      "sha256": "29142f0a22e268c3315e2425dfc94b868ad527ce3543105a3eaf08901e00a9ae"
+    },
+    {
+      "path": "upstream/src/Flip/Flip.ts",
+      "sha256": "b693959a204a457e4440b8988d6340d45b56d2a7cfc5ba6118d267afdc95d63f"
+    },
+    {
+      "path": "upstream/src/Flip/FlipCalculation.ts",
+      "sha256": "0f910941124f6d79a0ebc439219beeb2f9af0cc054bf41be15ee82f8799fdbb1"
+    },
+    {
+      "path": "upstream/src/Helper.ts",
+      "sha256": "3bff04d1162c3701190009c1caf48904b4d2395926b8827a633ae6d242db7a25"
+    },
+    {
+      "path": "upstream/src/Page/HTMLPage.ts",
+      "sha256": "9b511e38dc153f4a21eac3af84c7c4c475e6f44bbeba40d7f6d7972dd466f0d0"
+    },
+    {
+      "path": "upstream/src/Page/ImagePage.ts",
+      "sha256": "2bb8a860338e01394bada072876cb406d860dd6bc90971f1872599d840e2c894"
+    },
+    {
+      "path": "upstream/src/Page/Page.ts",
+      "sha256": "f0f64baf2e1d56222f6e94ec5d602d797a91fa0310d189c4f15bd0e9d928176e"
+    },
+    {
+      "path": "upstream/src/PageFlip.ts",
+      "sha256": "e7757fad296bc0f3c650bd25688e63c9a433600b3f4c773619b70023e8a9e96b"
+    },
+    {
+      "path": "upstream/src/Render/CanvasRender.ts",
+      "sha256": "19de20d103fed64c9c4384df2de77a9ea9de1c2c62a9ba4222745c6c9ab78e3d"
+    },
+    {
+      "path": "upstream/src/Render/HTMLRender.ts",
+      "sha256": "8c3fe4488c929e19465cddf8492548d006372d1ab9327ab2553c8e62aa3bbdf0"
+    },
+    {
+      "path": "upstream/src/Render/Render.ts",
+      "sha256": "1b243f65efd1ac84adceacb0db70445a9cd03752b46a2e8e8c50d089a6a6a3ee"
+    },
+    {
+      "path": "upstream/src/Settings.ts",
+      "sha256": "f7863916ca5400ef6b27f8148738c45aa1e280e11191c85accdf8088a065c44f"
+    },
+    {
+      "path": "upstream/src/Style/stPageFlip.css",
+      "sha256": "0a1ea4dcfcb4b62b6070dac045fc0c9125e5804239299919b96ce51813b128ee"
+    },
+    {
+      "path": "upstream/src/UI/CanvasUI.ts",
+      "sha256": "3316edd498947eacf719320249d00e428ab1fe0e780759eb4c1f661f5074baf7"
+    },
+    {
+      "path": "upstream/src/UI/HTMLUI.ts",
+      "sha256": "b566581a23206b8c5cbae078a23c19cd17143f78d51a13eae55aee8ceffccee2"
+    },
+    {
+      "path": "upstream/src/UI/UI.ts",
+      "sha256": "dc8da67e6a1a77fb5391c8b77d1485bc45cf53e0d14cbc83b5f65fcf03a66fe9"
+    }
+  ]
+}

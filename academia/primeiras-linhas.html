@@ -1,0 +1,1036 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-lST/e8eUQG60lSX/Tndx8CQlWkUBonACMMwwXWp9du8=' 'sha256-jWWMeQp1YNTUl2G+GO0bNwZKD+PBXLuifk8NSA19tWE=' 'sha256-jcRklkjon4vsvRhSy/k2c2oJwzvlv1upiQEe+W6J928=' 'sha256-3fewmK/gLk+wweYDqccN1bp/d5FlJBRyQGjVd+7GcI4='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Começar um livro</title><style>:root {
+  --paper:#fafbfc; --ink:#202733; --accent:#2463a8;
+  --card:color-mix(in srgb,var(--paper) 97%,var(--ink));
+  --soft:color-mix(in srgb,var(--paper) 94%,var(--ink));
+  --muted:color-mix(in srgb,var(--ink) 72%,var(--paper));
+  --line:color-mix(in srgb,var(--ink) 17%,var(--paper));
+  --tint:color-mix(in srgb,var(--accent) 8%,var(--paper));
+  --focus:color-mix(in srgb,var(--accent) 18%,var(--paper));
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  color:var(--ink); background:var(--paper); font-size:16px;
+}
+* { box-sizing:border-box; }
+body { margin:0; line-height:1.55; overflow-wrap:anywhere; }
+html { scroll-behavior:smooth; scroll-padding-top:24px; }
+::selection { background:var(--focus); color:var(--ink); }
+h1,h2,h3,p { margin:0; }
+a { color:inherit; text-underline-offset:4px; }
+a,summary { -webkit-tap-highlight-color:transparent; }
+a:focus-visible,summary:focus-visible,pre:focus-visible { outline:none; background:var(--focus) !important; box-shadow:none; }
+a:focus-visible,summary:focus-visible { text-decoration:underline; text-decoration-thickness:2px; }
+.wrap { width:min(1120px,calc(100% - 80px)); margin-inline:auto; }
+.skip { position:absolute; top:8px; left:8px; padding:12px; background:var(--paper); z-index:5; transform:translateY(-180%); }
+.skip:focus { transform:none; }
+.eyebrow,.label { display:block; font-size:.68rem; font-weight:650; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.small { font-size:.75rem; color:var(--muted); }
+.hero { display:grid; grid-template-columns:1.4fr 1fr; gap:48px; position:relative; isolation:isolate; padding-block:46px 40px; }
+.hero-depth { position:absolute; inset:0 -24px; overflow:hidden; pointer-events:none; z-index:-1; }
+.hero-depth:before { content:''; position:absolute; width:440px; height:220px; right:0; top:0; background:radial-gradient(ellipse,var(--tint),transparent 72%); }
+.hero-depth span { position:absolute; right:16px; top:20px; font-size:clamp(70px,11vw,144px); font-weight:300; letter-spacing:-.08em; color:color-mix(in srgb,var(--ink) 5%,var(--paper)); transform:translate3d(0,var(--drift,0px),0); }
+.hero-copy { position:relative; }
+.subject { margin-top:24px; font-size:.8rem; font-weight:600; color:var(--muted); }
+h1 { font-size:clamp(1.9rem,3.6vw,3rem); letter-spacing:-.045em; line-height:1.12; font-weight:650; margin:10px 0 16px; }
+.intro { max-width:44ch; color:var(--muted); font-size:.95rem; }
+.hero-note { align-self:end; padding:20px 0 4px 28px; border-left:1px solid var(--line); max-width:310px; justify-self:end; }
+.hero-note>p { font:400 clamp(1.2rem,2.2vw,1.65rem)/1.5 Georgia,serif; letter-spacing:-.02em; margin:14px 0; }
+.section-heading { display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:16px; }
+.section-heading h2 { font-size:1rem; font-weight:650; }
+.section-heading p,.map-note { font-size:.75rem; color:var(--muted); }
+.route { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); list-style:none; padding:0; margin:0; gap:12px; }
+.route li { position:relative; min-width:0; }
+.route li:not(:last-child):after { content:''; position:absolute; right:-12px; top:40px; width:12px; height:1px; background:var(--line); }
+.route a { height:100%; display:flex; flex-direction:column; gap:12px; padding:18px 16px; background:var(--card); border:1px solid var(--line); border-radius:8px; text-decoration:none; transition:background .18s,border-color .18s; }
+.route a:hover { background:var(--tint); border-color:var(--accent); }
+.step-no { font-size:.75rem; font-weight:650; color:var(--accent); font-variant-numeric:tabular-nums; }
+.step-no { display:flex; align-items:center; gap:10px; }
+.academy-phosphor { display:inline-block; flex-shrink:0; width:22px; height:22px; fill:currentColor; }
+.hero-depth span { color:color-mix(in srgb,var(--ink) 32%,var(--paper)); }
+.route strong { font-size:1.12rem; line-height:1.2; letter-spacing:-.02em; font-weight:650; }
+.route a>span:not(.step-no) { font-size:.75rem; color:var(--muted); }
+.route small { font-size:.65rem; margin-top:auto; padding-top:12px; border-top:1px solid var(--line); color:var(--muted); }
+.map-note { margin-top:14px; max-width:86ch; }
+.chapters { padding-top:24px; }
+.chapter { padding-block:40px; border-top:1px solid var(--line); scroll-margin-top:24px; }
+.chapter-head { display:flex; gap:20px; margin-bottom:24px; align-items:flex-start; }
+.chapter-no { font:400 2.5rem/1 Georgia,serif; color:var(--muted); min-width:48px; }
+.chapter-head h2,.closing h2 { font-size:clamp(1.3rem,2.2vw,1.8rem); letter-spacing:-.03em; line-height:1.25; font-weight:600; margin:6px 0 8px; }
+.chapter-head p:not(.eyebrow),.closing p:not(.eyebrow) { font-size:.85rem; color:var(--muted); }
+.chapter-head h2, .chapter-head .chapter-no { cursor:pointer; }
+.chapter-head h2:hover, .chapter-head .chapter-no:hover { opacity:.75; }
+.chapter-head h2:focus-visible, .chapter-head .chapter-no:focus-visible { outline:none; background:var(--focus); text-decoration:underline; }
+.back-map { margin-left:auto; flex-shrink:0; font-size:.72rem; padding:8px; border-radius:4px; }
+.blocks { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.formats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.block { border:1px solid var(--line); border-radius:10px; padding:24px; background:var(--card); min-width:0; }
+.block h3 { font-size:1.15rem; letter-spacing:-.025em; font-weight:600; line-height:1.3; margin:10px 0; }
+.block p { font-size:.86rem; }
+.block>p { color:var(--muted); }
+.example { margin-top:20px; padding:16px; background:var(--paper); border-radius:5px; border-left:2px solid var(--line); }
+.example>.label { font-size:.62rem; margin-bottom:8px; }
+.example p+p { margin-top:10px; }
+.example ul { margin:0; padding-left:18px; font-size:.86rem; }
+.example li+li { margin-top:6px; }
+.depth { border:1px solid var(--line); border-radius:6px; margin-top:16px; font-size:.84rem; }
+.depth summary { cursor:pointer; padding:15px 18px; border-radius:5px; font-weight:550; }
+.depth summary:hover { background:var(--soft); }
+.depth[open] summary { background:var(--soft); }
+.depth>div { padding:18px; max-width:84ch; }
+.depth p+p { margin-top:12px; }
+.takeaway { display:flex; gap:18px; align-items:baseline; padding:18px 4px 0; font-size:.82rem; }
+.takeaway span { flex-shrink:0; font-weight:650; }
+.cover-example { display:grid; grid-template-columns:128px 1fr; gap:24px; margin-top:18px; align-items:center; }
+.book-cover { aspect-ratio:2/3; display:flex; flex-direction:column; align-items:flex-start; padding:17px 13px; background:var(--ink); color:var(--paper); border-left:5px solid color-mix(in srgb,var(--ink) 70%,var(--paper)); box-shadow:5px 6px 0 var(--line); }
+.book-cover>span { font-size:7px; letter-spacing:.16em; }
+.book-cover strong { font:400 25px/1.05 Georgia,serif; letter-spacing:-.04em; margin-top:18px; }
+.book-cover small { font-size:6px; letter-spacing:.13em; margin-top:auto; }
+.cover-example .small { display:block; margin-top:12px; }
+.plain-list { list-style:none; padding:0; margin:16px 0 0; font-size:.78rem; }
+.plain-list li { display:flex; gap:18px; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); }
+.plain-list span { color:var(--muted); }
+.plain-list strong { font-weight:550; text-align:right; }
+.timeline { list-style:none; padding:0 0 0 15px; margin:20px 0 0; border-left:1px solid var(--line); font-size:.82rem; }
+.timeline li { position:relative; margin-bottom:17px; }
+.timeline li:last-child { margin-bottom:0; }
+.timeline li:before { content:''; position:absolute; width:5px; height:5px; border-radius:50%; background:var(--muted); top:7px; left:-18px; }
+.timeline strong,.timeline span { display:block; }
+.timeline strong { font-weight:600; }
+.timeline span { color:var(--muted); margin-top:3px; }
+.check { margin-top:18px; font-size:.75rem !important; }
+.source { font-size:.75rem; overflow-wrap:anywhere; }
+.source span { user-select:all; }
+.closing { padding:28px; border:1px solid var(--line); border-radius:10px; background:var(--tint); margin-block:12px 36px; }
+.closing .depth { background:var(--paper); }
+pre { white-space:pre-wrap; overflow-wrap:anywhere; font: .8rem/1.8 ui-monospace,monospace; padding:16px; background:var(--soft); border-radius:4px; }
+.footer { display:flex; justify-content:space-between; gap:16px; padding-block:24px 36px; border-top:1px solid var(--line); font-size:.72rem; color:var(--muted); }
+html[data-comfortable="true"] { font-size:18px; }
+@media(prefers-color-scheme:dark) { :root { --paper:#202226; --ink:#ebedf0; --accent:#86baff; } }
+@media(max-width:900px) { .wrap { width:calc(100% - 40px); } .hero { gap:24px; } .route { gap:8px; } .route a { padding:15px 10px; } .route li:not(:last-child):after { width:8px; right:-8px; } .route strong { font-size:1rem; } .cover-example { grid-template-columns:100px 1fr; gap:20px; } .book-cover strong { font-size:20px; } }
+@media(max-width:680px) {
+  .wrap { width:calc(100% - 32px); } .hero { grid-template-columns:1fr; padding-block:28px; gap:20px; } .hero-note { justify-self:stretch; max-width:none; padding:12px 16px; } .hero-note>p { font:inherit; margin:8px 0; } .hero-note br { display:none; } .hero-note br:after { content:' '; }
+  .route { grid-template-columns:1fr; gap:8px; } .route a { display:grid; grid-template-columns:26px 1fr; gap:4px 12px; padding:12px 16px; } .step-no { grid-row:1/4; padding-top:3px; flex-direction:column; gap:6px; } .route br { display:none; } .route strong { font-size:1rem; } .route strong br:after { content:' '; } .route a>span:not(.step-no),.route small { grid-column:2; } .route small { border:0; margin:0; padding:0; } .route li:not(:last-child):after { left:29px; top:100%; width:1px; height:8px; }
+  .blocks,.formats { grid-template-columns:1fr; } .block { padding:20px; } .chapter { padding-block:28px; } .chapter-head { flex-wrap:wrap; gap:12px; } .chapter-head>div { flex:1; } .chapter-no { min-width:32px; font-size:2rem; } .back-map { margin-left:44px; } .takeaway { display:block; } .takeaway span { display:block; margin-bottom:6px; } .section-heading { align-items:flex-start; flex-direction:column; gap:4px; } .footer { flex-direction:column; } .closing { padding:20px; }
+}
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none !important; animation:none !important; } .hero-depth span { transform:none !important; } }
+@media(forced-colors:active) { .hero-depth { display:none; } .route a,.block,.depth,.closing { border-color:CanvasText; } a:focus-visible,summary:focus-visible { color:Highlight; text-decoration:underline; } .book-cover { background:Canvas; color:CanvasText; border:1px solid CanvasText; } }
+@media print { .hero-depth,.back-map,.skip,.footer { display:none; } .wrap { width:100%; } .blocks,.formats { display:block; } .block { break-inside:avoid; margin-block:12px; } .chapter { break-before:auto; } }
+
+/* Uma composição para todos os assuntos. Nenhuma folha visual legada é carregada. */
+.compact-hero { display:block; padding-block:28px 24px; }
+.compact-hero h1 { font-size:clamp(1.65rem,3vw,2.3rem); margin:12px 0; }
+.compact-hero .intro { max-width:76ch; font-size:.88rem; }
+.compact-hero .hero-depth span { font-size:100px; top:4px; }
+.visual-guide .route { grid-template-columns:repeat(auto-fit,minmax(135px,1fr)); }
+.visual-guide .route strong { font-size:1rem; }
+.visual-guide .route a { gap:10px; padding:16px; }
+.visual-guide .route a>span:not(.step-no) { font-size:.75rem; }
+.visual-guide .chapter { padding-block:28px; }
+.visual-guide .chapter-head { margin-bottom:20px; }
+.visual-guide .chapter-head h2 { font-size:clamp(1.2rem,2.1vw,1.6rem); }
+.legacy-content { font-size:.9rem; }
+.legacy-content .wrap,.legacy-content .wrap-lg,.legacy-content .secao,.legacy-content .secao-ampla { width:100%; max-width:none; padding:0; margin:0; }
+.legacy-content p { margin:0 0 14px; max-width:86ch; line-height:1.65; }
+.legacy-content h3,.legacy-content h4 { margin:0 0 12px; font-size:1rem; line-height:1.4; font-weight:600; letter-spacing:-.01em; }
+.legacy-content h2 { font-size:1.4rem; margin:12px 0; line-height:1.3; }
+.legacy-content h2 br { display:none; }
+.legacy-content h2 em { font-style:normal; }
+.legacy-content blockquote { margin:18px 0; padding:16px 20px; border-left:2px solid var(--line); background:var(--soft); font:1rem/1.6 Georgia,serif; }
+.legacy-content :is(.ed-quote,.aviso-voz,.manifesto-bloco,.note-box) { padding:18px; border:1px solid var(--line); border-radius:6px; background:var(--card); margin:16px 0; }
+.legacy-content :is(.linhas-grid,.para-grid,.funcoes-lista,.principios,.arranque-lista,.filtro-titulo-grid,.casos-grid,.mito-lista,.processo-etapas,.trilha-exercicios,.ed-causes,.ed-steps,.about-grid,.book-grid,.dim-grid,.legend-grid) { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-block:18px; align-items:start; }
+.legacy-content :is(.linha-item,.para-card,.funcao-item,.principio,.arranque-item,.filtro-item,.caso-card,.mito-item,.etapa,.exercicio,.ed-cause,.ed-step,.ed-exercise,.about-card,.book-row) { padding:20px; border:1px solid var(--line); border-radius:8px; background:var(--card); min-width:0; }
+.legacy-content :is(.ed-step,.principio,.mito-item) { display:flex; gap:14px; }
+.legacy-content :is(.ed-step-num,.prin-num,.mito-num,.linha-num,.caso-numero,.book-num) { flex-shrink:0; color:var(--muted); font-size:.75rem; font-variant-numeric:tabular-nums; }
+.legacy-content :is(.linha-item,.caso-card) { cursor:pointer; }
+.legacy-content :is(.linha-item,.caso-card):hover { background:var(--soft); }
+.legacy-content :is(.linha-item,.caso-card):focus-visible { outline:0; background:var(--focus); }
+.linha-header { display:flex; gap:10px; flex-wrap:wrap; }
+.linha-texto-preview { flex:1; font:1rem/1.5 Georgia,serif; min-width:0; }
+.linha-origem { flex-basis:100%; margin-top:8px; }
+.legacy-content :is(.linha-origem,.caso-autor,.linha-mecanismo,.caso-tag,.ed-eyebrow,.estrutura-barra-label,.titulo-tipo) { display:block; font-size:.72rem; color:var(--muted); }
+.linha-expandida,.caso-detalhe { display:none; padding-top:16px; margin-top:16px; border-top:1px solid var(--line); }
+.linha-item.aberta .linha-expandida,.caso-card.expandido .caso-detalhe { display:block; }
+.linha-citacao-completa,.para-texto,.descida-cita { font:1rem/1.65 Georgia,serif; padding:14px; background:var(--paper); border-left:2px solid var(--line); margin-bottom:16px; }
+.caso-titulo-livro { font-size:1.15rem; margin:12px 0; }
+.caso-texto { margin-top:12px !important; }
+.legacy-content :is(.para-analise,.linha-analise,.descida-analise) { font-size:.85rem; }
+.legacy-content :is(.ed-list,.ed-checklist) { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); list-style:none; gap:12px; padding:0; margin:18px 0; }
+.legacy-content :is(.ed-list,.ed-checklist)>li { padding:18px; border:1px solid var(--line); border-radius:6px; background:var(--card); line-height:1.6; }
+.legacy-content .ed-list strong,.legacy-content .ed-cause strong { display:block; font-size:.9rem; margin-bottom:8px; }
+.legacy-content .ed-exercise { margin-block:14px; }
+.legacy-content textarea,.legacy-content input:not([type="checkbox"]),.legacy-content select { display:block; width:100%; min-width:0; padding:12px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); font:inherit; margin-top:10px; }
+.legacy-content textarea { min-height:104px; resize:vertical; }
+.legacy-content :is(input,textarea)::placeholder { color:var(--muted); opacity:1; }
+.legacy-content :is(input,textarea,select):focus-visible { outline:none; background:var(--focus); }
+.legacy-content button,.related a { padding:10px 14px; font:inherit; font-size:.82rem; color:var(--ink); background:var(--paper); border:1px solid var(--line); border-radius:5px; cursor:pointer; }
+.legacy-content button:hover,.related a:hover { background:var(--soft); }
+.legacy-content button:focus-visible { outline:0; background:var(--focus); text-decoration:underline; }
+.legacy-content :is(.btn-arranque,.btn-exercicio,.btn-gerar) { margin-block:12px; }
+.legacy-content :is(.estruturas-tabs,.processo-tabs,.teste-resposta) { display:flex; gap:8px; flex-wrap:wrap; margin:16px 0; }
+.legacy-content :is(.estrutura-tab,.processo-tab).ativo { background:var(--focus); font-weight:650; }
+.estrutura-painel,.processo-painel { display:none; padding:18px; background:var(--card); border:1px solid var(--line); border-radius:6px; }
+.estrutura-painel.ativo,.processo-painel.ativo { display:block; }
+.estrutura-visual { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+.estrutura-barra { flex:1; min-width:90px; padding:16px 12px; background:var(--soft); border:1px solid var(--line); border-radius:5px; text-align:center; font-size:.8rem; }
+.descida-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.descida-lado { padding:18px; background:var(--card); border:1px solid var(--line); border-radius:6px; }
+.arranque-feedback,.exercicio-resultado,.placar-titulo { display:none; padding:16px; background:var(--soft); border-radius:6px; margin-top:12px; }
+.arranque-feedback.visivel,.exercicio-resultado.visivel,.placar-titulo.visivel { display:block; }
+.gerador,.teste-titulo { padding:22px; background:var(--card); border:1px solid var(--line); border-radius:8px; margin-top:20px; }
+.gerador-campos { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.titulos-gerados { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.titulo-gerado-item { padding:14px; background:var(--paper); border:1px solid var(--line); border-radius:4px; }
+.titulo-texto { display:block; font:1.15rem/1.5 Georgia,serif; }
+.teste-item { padding:18px 0; border-bottom:1px solid var(--line); }
+.teste-btn.ativo-sim,.teste-btn.ativo-nao { background:var(--focus); font-weight:700; text-decoration:underline; }
+.placar-numero { font-size:1.5rem; color:var(--ink) !important; }
+.related { display:flex; flex-wrap:wrap; gap:12px; padding-block:0 24px; }
+.related a { text-decoration:none; }
+.library-route { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
+.library-route .tab-btn { display:flex; flex-direction:column; gap:12px; width:100%; height:100%; border:1px solid var(--line); border-radius:8px; padding:18px; text-align:left; background:var(--card); color:var(--ink); font:inherit; cursor:pointer; }
+.library-route .tab-btn>span:last-child { font-size:.8rem; color:var(--muted); }
+.library-route .tab-btn.active { background:var(--focus); }
+.library-route .tab-btn:focus-visible { outline:0; background:var(--focus); text-decoration:underline; }
+.library-content .page { display:none; }
+.library-content .page.visible { display:block; }
+.library-intro { margin:8px 0 24px; }
+.library-content .section-head { display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin:24px 0 12px; font-size:.9rem; }
+.book-col { display:grid; gap:14px; min-width:0; }
+.book-row { display:flex; gap:14px; }
+.book-title { font-weight:650; margin-bottom:4px !important; }
+.book-author { color:var(--muted); font-size:.8rem; }
+.book-desc { font-size:.85rem; margin-bottom:0 !important; }
+.book-tags { display:flex; gap:6px; flex-wrap:wrap; margin:10px 0; }
+.book-tag,.src-pill { display:inline-block; padding:3px 6px; font-size:.65rem; color:var(--ink); background:var(--soft); border-radius:3px; }
+.dim-grid { grid-template-columns:repeat(4,minmax(0,1fr)) !important; }
+.dim-btn { display:flex; flex-direction:column; gap:8px; text-align:left; }
+.dim-btn.active { background:var(--focus); }
+.dim-label { font-weight:650; }
+.dim-sub { font-size:.75rem; }
+.dim-icon,.dim-icon-sm,.panel-icon-lg { display:none; }
+.detail-panel { max-width:100%; overflow-x:auto; padding:20px; border:1px solid var(--line); border-radius:6px; }
+.panel-title { font-weight:650; }
+.crit-table { border-collapse:collapse; width:100%; font-size:.8rem; }
+.crit-table td,.crit-table th { padding:12px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+.crit-table th { font-size:.7rem; }
+.legend-item { display:flex; gap:12px; align-items:baseline; font-size:.8rem; }
+.dim-row { display:flex; gap:12px; padding:8px; border-bottom:1px solid var(--line); font-size:.8rem; }
+@media(max-width:760px) { .visual-guide .route { grid-template-columns:repeat(3,minmax(0,1fr)); } .visual-guide .route li:after { display:none; } }
+@media(max-width:600px) {
+  .compact-hero { padding-block:22px; }
+  .visual-guide .route { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .visual-guide .route a { display:flex; padding:12px; gap:8px; }
+  .legacy-content :is(.linhas-grid,.para-grid,.funcoes-lista,.principios,.arranque-lista,.filtro-titulo-grid,.casos-grid,.mito-lista,.processo-etapas,.trilha-exercicios,.ed-causes,.ed-steps,.about-grid,.book-grid,.ed-list,.ed-checklist,.descida-grid,.gerador-campos,.titulos-gerados,.legend-grid) { grid-template-columns:1fr; }
+  .dim-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  .library-route { grid-template-columns:1fr !important; }
+  .legacy-content .crit-table { min-width:500px; }
+}
+@media(prefers-reduced-motion:reduce) { .legacy-content * { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+@media(forced-colors:active) { .legacy-content button,.legacy-content [role="button"],.library-route .tab-btn { border-color:CanvasText; } .legacy-content :focus-visible,.library-route .tab-btn:focus-visible { text-decoration:underline; } }
+</style></head><body class="visual-guide legacy-guide"><a class="skip" href="#mapa">Ir para o mapa</a><main><header class="hero wrap compact-hero" id="inicio"><div class="hero-depth" aria-hidden="true"><span>Academia</span></div><div class="hero-copy"><p class="eyebrow">Academia / Escrita e revisão</p><h1>Começar um livro</h1><p class="intro">Da primeira linha ao primeiro capítulo.</p></div></header><span id="progresso" hidden></span><span id="barraProgresso" hidden></span><nav class="map wrap" id="mapa" aria-label="Mapa do assunto"><div class="section-heading"><h2>Entenda de relance</h2><p>Escolha por onde começar.</p></div><ol class="route"><li><a href="#linhas"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="pencil-simple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"/></svg>01</span><strong>Primeira linha</strong><span>Um convite para continuar.</span></a></li><li><a href="#paragrafos"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="paragraph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M208,40H96a64,64,0,0,0,0,128h40v40a8,8,0,0,0,16,0V56h24V208a8,8,0,0,0,16,0V56h16a8,8,0,0,0,0-16ZM136,152H96a48,48,0,0,1,0-96h40Z"/></svg>02</span><strong>Primeiro parágrafo</strong><span>Voz, situação e curiosidade.</span></a></li><li><a href="#capitulo"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="article" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM184,96a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,96Zm0,32a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,128Zm0,32a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,160Z"/></svg>03</span><strong>Primeiro capítulo</strong><span>Algo precisa se mover.</span></a></li><li><a href="#partes"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="list-bullets" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"/></svg>04</span><strong>Estrutura</strong><span>Organize o percurso da leitura.</span></a></li><li><a href="#final"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="check-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>05</span><strong>Encerramento</strong><span>O que muda ao chegar ao fim?</span></a></li><li><a href="#arranque"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="pencil-simple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"/></svg>06</span><strong>Na prática</strong><span>Experimente cinco aberturas.</span></a></li></ol></nav><div class="chapters wrap"><section class="chapter" id="linhas"><header class="chapter-head"><span class="chapter-no">01</span><div><h2>Primeira linha</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="legacy-content">
+  <div class="wrap">
+    
+    
+    <p class="texto-intro rev rev-d2">Uma frase. Às vezes três palavras. Às vezes cinquenta. A primeira linha não precisa ser perfeita — precisa ser necessária. Ela existe para que a segunda possa existir.</p>
+
+    
+
+    
+
+    <p class="rev">Clique em cada linha para ver a anatomia de como funciona.</p>
+
+    <div class="linhas-grid rev">
+
+      <div class="linha-item" data-academia-event-0="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">01</span>
+          <span class="linha-texto-preview">Chame-me Ismael.</span>
+          <span class="linha-origem">Melville · Moby Dick</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Chame-me Ismael.</div>
+          <p class="linha-analise">Três palavras. Um imperativo. Um pseudônimo. A linha mais famosa da ficção em língua inglesa funciona porque abre três questões imediatas: Por que "chame-me" e não "meu nome é"? O nome é falso? Por que ele nos diz isso — quem é o leitor nessa equação? A brevidade não é modéstia: é uma armadilha. Você já está dentro do livro antes de perceber que entrou.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> Uma linha pode ser curta o suficiente para caber num segundo e longa o suficiente para durar um século. A questão que ela abre importa mais do que a informação que ela fornece.</p>
+          <span class="linha-mecanismo">Mecanismo: Imperativo + Identidade Suspeita</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-1="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">02</span>
+          <span class="linha-texto-preview">Toda família feliz se parece entre si; cada família infeliz é infeliz à sua maneira.</span>
+          <span class="linha-origem">Tolstói · Anna Karênina</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Toda família feliz se parece entre si; cada família infeliz é infeliz à sua maneira.</div>
+          <p class="linha-analise">Uma sentença que parece aforismo filosófico antes de ser ficção. Tolstói anuncia o tema antes do enredo — e faz isso com tamanha autoridade que o leitor não questiona. O ponto-e-vírgula é o centro de gravidade: a primeira metade é o mundo que não existe no livro; a segunda metade é o livro inteiro. É uma estrutura em espelho que antecipa a própria arquitetura da tragédia que virá.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> A primeira linha pode ser uma declaração filosófica — se você tiver autoridade para sustentá-la. Mas isso só funciona quando o livro inteiro a justifica.</p>
+          <span class="linha-mecanismo">Mecanismo: Aforismo que Cria Mundo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-2="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">03</span>
+          <span class="linha-texto-preview">Hoje mamãe morreu. Ou talvez ontem, não sei.</span>
+          <span class="linha-origem">Camus · O Estrangeiro</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Hoje mamãe morreu. Ou talvez ontem, não sei.</div>
+          <p class="linha-analise">A morte da mãe comunicada com total indiferença temporal. "Ou talvez ontem" não é distração — é o retrato completo de um personagem. Camus entrega o narrador inteiro em duas frases: a frieza afetiva, a ausência de luto, a relação perturbada com o tempo. O leitor não precisa que nos digam que Meursault é diferente — já sente na virada da primeira frase. A linha é ao mesmo tempo informação e caráter.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> A voz do narrador pode revelar o personagem inteiro antes que qualquer descrição o faça. O como ele diz é quem ele é.</p>
+          <span class="linha-mecanismo">Mecanismo: Voz como Retrato</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-3="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">04</span>
+          <span class="linha-texto-preview">Muitos anos depois, diante do pelotão de fuzilamento, o coronel Aureliano Buendía havia de recordar aquela tarde remota em que seu pai o levou para conhecer o gelo.</span>
+          <span class="linha-origem">García Márquez · Cem Anos de Solidão</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Muitos anos depois, diante do pelotão de fuzilamento, o coronel Aureliano Buendía havia de recordar aquela tarde remota em que seu pai o levou para conhecer o gelo.</div>
+          <p class="linha-analise">Esta linha contém três camadas de tempo em uma única frase: o passado remoto (a tarde com o pai), o presente narrativo implícito, e o futuro já acontecido (o pelotão). É uma linha que dobra o tempo. A morte é anunciada como fato antes de o personagem existir como criança — e o leitor já sabe que sobreviverá, porque está vivo para recordar. O gelo, no final, é o detalhe que ancora a maravilha: no mundo de Macondo, gelo é um milagre.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> Uma única frase pode conter toda a estrutura temporal do livro. O detalhe concreto no final de uma linha longa é o que a salva do excesso.</p>
+          <span class="linha-mecanismo">Mecanismo: Dobra Temporal + Detalhe Âncora</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-4="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">05</span>
+          <span class="linha-texto-preview">Foi o melhor dos tempos, foi o pior dos tempos.</span>
+          <span class="linha-origem">Dickens · Um Conto de Duas Cidades</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Foi o melhor dos tempos, foi o pior dos tempos, a era da sabedoria, a era da loucura, a época da crença, a época da incredulidade...</div>
+          <p class="linha-analise">O antítese mais famosa da literatura. Dickens usa a contradição não como paradoxo filosófico mas como retrato de uma época que se define pelo conflito. A linha funciona porque a repetição da estrutura ("foi o... foi o...") cria um ritmo hipnótico que puxa o leitor para dentro antes que ele entenda o que está lendo. É uma linha que se parece com um discurso — e é exatamente isso que Dickens pretendia.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> A antítese como estrutura rítmica. O paralelismo não é ornamento — é o argumento. A primeira linha pode ter a cadência de uma oração ou de um manifesto.</p>
+          <span class="linha-mecanismo">Mecanismo: Antítese Rítmica</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-5="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">06</span>
+          <span class="linha-texto-preview">Ao despertar certa manhã de sonhos intranquilos, Gregor Samsa encontrou-se em sua cama metamorfoseado num inseto monstruoso.</span>
+          <span class="linha-origem">Kafka · A Metamorfose</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Ao despertar certa manhã de sonhos intranquilos, Gregor Samsa encontrou-se em sua cama metamorfoseado num inseto monstruoso.</div>
+          <p class="linha-analise">O maior impossível da ficção moderna entregue com a frieza de um relatório de incidente. Kafka não explica, não justifica, não hesita. A transformação é um fato antes de ser um problema. O que permite que a linha funcione é exatamente o que ela não faz: não diz "de alguma forma" ou "surpreendentemente" — apenas registra. O absurdo depende da objetividade para sobreviver.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> O sobrenatural ou o impossível em ficção só funciona quando o narrador o trata como rotina. A espanto do leitor é diretamente proporcional à calma do narrador.</p>
+          <span class="linha-mecanismo">Mecanismo: Absurdo com Frieza Documental</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-6="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">07</span>
+          <span class="linha-texto-preview">Nonada. Tiros que o senhor ouviu foram de briga de homem não, Deus esteja.</span>
+          <span class="linha-origem">Guimarães Rosa · Grande Sertão: Veredas</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Nonada. Tiros que o senhor ouviu foram de briga de homem não, Deus esteja.</div>
+          <p class="linha-analise">"Nonada" — palavra arcaica para "nada de importância" — abre um dos livros mais importantes da literatura brasileira. É uma ironia absoluta: a abertura nega a si mesma, dizendo que o que virá não tem importância, quando terá toda a importância do mundo. Já na segunda frase, Riobaldo fala diretamente ao "senhor" — o leitor está imediatamente dentro de uma conversa, não de uma narrativa. A língua já é reinventada antes da terceira palavra.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> A voz pode ser o gênero. Uma única linha pode estabelecer que o leitor está num mundo de linguagem própria — e que terá de aprender essa língua para entender o que vem.</p>
+          <span class="linha-mecanismo">Mecanismo: Língua como Mundo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-7="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">08</span>
+          <span class="linha-texto-preview">Ao verme que primeiro roeu as frias carnes do meu cadáver dedico como saudosa lembrança estas memórias póstumas.</span>
+          <span class="linha-origem">Machado de Assis · Memórias Póstumas</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Ao verme que primeiro roeu as frias carnes do meu cadáver dedico como saudosa lembrança estas memórias póstumas.</div>
+          <p class="linha-analise">Antes mesmo do primeiro capítulo, na dedicatória. Machado começa com um gesto literário — a dedicatória — mas a direciona ao verme. É ironia pura, e já nos diz tudo: o narrador está morto e escreve do outro lado da vida, com humor e com distância. A "saudosa lembrança" dedicada a um verme é o tom do livro inteiro em uma frase. Machado entendeu que a dedicatória é a primeira linha real.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> O paratexto — dedicatória, epígrafe, título — é parte do livro. A primeira linha pode não estar na página 1 do capítulo 1.</p>
+          <span class="linha-mecanismo">Mecanismo: Ironia Sepulcral / Paratexto Ativo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-8="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">09</span>
+          <span class="linha-texto-preview">Lolita, luz de minha vida, fogo de minhas entranhas. Minha culpa, minha alma.</span>
+          <span class="linha-origem">Nabokov · Lolita</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Lolita, luz de minha vida, fogo de minhas entranhas. Minha culpa, minha alma. Lo-li-ta.</div>
+          <p class="linha-analise">Uma das aberturas mais musicalmente elaboradas da ficção do século XX. Nabokov era poeta antes de prosador, e essa linha é poesia disfarçada de prosa. A aliteração em "L" (Lolita, luz, Lo-li-ta), a sílaba do nome decomposta em seu passo final — o som está fazendo o trabalho de criar obsessão antes do enredo. O narrador também confessa imediatamente: "minha culpa, minha alma" é uma paródia do Mea Culpa da liturgia cristã.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> A primeira linha pode ser uma partitura. O som das palavras cria emoção antes que o sentido as alcance.</p>
+          <span class="linha-mecanismo">Mecanismo: Aliteração + Confissão + Ritmo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-9="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">10</span>
+          <span class="linha-texto-preview">Estou procurando, estou procurando. Estou tentando entender.</span>
+          <span class="linha-origem">Clarice Lispector · A Paixão Segundo G.H.</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Estou procurando, estou procurando. Estou tentando entender.</div>
+          <p class="linha-analise">Clarice começa com o método antes do objeto. Não diz o que procura — diz que procura. A repetição do verbo não é gagueira: é o estado mental do personagem transferido para a sintaxe. O livro inteiro é essa busca sem nome. A primeira linha é já o livro inteiro em miniatura. E a frase "estou tentando entender" convida o leitor a uma cumplicidade rara: o narrador não sabe mais do que você.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> A abertura pode ser um estado, não um evento. Quando o narrador não sabe, o leitor avança. A incerteza compartilhada é um vínculo poderoso.</p>
+          <span class="linha-mecanismo">Mecanismo: Processo sem Objeto + Cumplicidade</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-10="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">11</span>
+          <span class="linha-texto-preview">Por muito tempo me deitei cedo.</span>
+          <span class="linha-origem">Proust · Em Busca do Tempo Perdido</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Por muito tempo me deitei cedo.</div>
+          <p class="linha-analise">Sete palavras que abrem o maior romance do século XX. A linha é aparentemente banal — um hábito de sono. Mas "por muito tempo" situa o narrador no presente olhando para um passado que vai ser escavado durante seis volumes. É a abertura de uma arqueologia. Proust não começa com drama — começa com o ritmo do cotidiano, que é onde a memória vive. A primeira linha do romance mais longo da literatura é também uma das mais quietas.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> A grandiosidade de uma obra não exige uma abertura grandiosa. A linha certa pode ser pequena, íntima, quase sussurada — e ainda assim ser o ponto de partida de um universo.</p>
+          <span class="linha-mecanismo">Mecanismo: Banalidade que Contém o Tempo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" data-academia-event-11="" data-academia-click>
+        <div class="linha-header">
+          <span class="linha-num">12</span>
+          <span class="linha-texto-preview">É uma verdade universalmente reconhecida que um homem solteiro em boa situação financeira necessita de uma esposa.</span>
+          <span class="linha-origem">Jane Austen · Orgulho e Preconceito</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">É uma verdade universalmente reconhecida que um homem solteiro em boa situação financeira necessita de uma esposa.</div>
+          <p class="linha-analise">Austen usa a linguagem das verdades absolutas para dizer exatamente o oposto do que parece. "É uma verdade universalmente reconhecida" é irônico — é o que a sociedade diz, não o que Austen acredita. A linha critica antes de narrar: ela já posiciona o narrador como alguém que vê o absurdo nas convenções que vai descrever. O livro inteiro está nessa primeira frase — incluindo o ponto de vista.</p>
+          <p class="linha-analise"><strong>O que ensina:</strong> A ironia pode ser uma abertura — quando o narrador finge concordar com o que vai criticar. Mas exige controle absoluto: ironia mal executada parece ingenuidade.</p>
+          <span class="linha-mecanismo">Mecanismo: Ironia Social + Ponto de Vista Implícito</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="aviso-voz rev">
+      <p>Você acabou de ler doze aberturas dos maiores. <strong>Agora esqueça os mecanismos e lembre apenas de uma coisa:</strong> cada uma dessas linhas existiu porque aquele escritor específico tinha algo específico a dizer, naquele mundo específico que criou. Nenhuma dessas linhas funcionaria num livro diferente. A sua primeira linha não precisa imitar nenhuma dessas — precisa ser necessária para <em>o seu</em> livro.</p>
+    </div>
+
+  </div>
+</div></section><section class="chapter" id="paragrafos"><header class="chapter-head"><span class="chapter-no">02</span><div><h2>Primeiro parágrafo</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="legacy-content">
+  <div class="wrap">
+    
+    
+    <p class="texto-intro rev rev-d2">Se a primeira linha é a faísca, o primeiro parágrafo é a chama. Ele tem de sustentar o que a linha prometeu e transformar curiosidade em comprometimento.</p>
+
+    
+
+    <p class="rev">O parágrafo faz o que a linha não pode fazer sozinha: ele instala o leitor dentro de um mundo, de um tempo, de uma voz. Veja como os grandes expandem a primeira linha.</p>
+
+    <div class="para-grid rev">
+
+      <div class="para-card">
+        <div class="para-texto">
+          <blockquote>
+            "Nonada. Tiros que o senhor ouviu foram de briga de homem não, Deus esteja. Alvejei mira em árvore, em pedra de ribeirão, açoite no oco do pau, no boi prêto, que sempre esbarra nas porteiras — essas tolices. E éramos um, dois, apenas..."
+          </blockquote>
+          <cite>Guimarães Rosa · Grande Sertão: Veredas</cite>
+        </div>
+        <div class="para-analise">
+          <h4>Como o parágrafo trabalha</h4>
+          <p>Após o "Nonada" inicial, Riobaldo imediatamente começa a se justificar — os tiros não eram o que pareciam. O parágrafo instala a conversa (há um interlocutor), a voz (sintaxe própria, ritmo de fala oral), e o caráter (um homem que precisa explicar, que tem coisas a esconder). Tudo isso antes de qualquer enredo. O mundo de Rosa é a língua de Rosa.</p>
+        </div>
+      </div>
+
+      <div class="para-card">
+        <div class="para-texto">
+          <blockquote>
+            "Hoje mamãe morreu. Ou talvez ontem, não sei. Recebi um telegrama do asilo: 'Sua mãe falecida. Enterro amanhã. Sentidos pêsames.' Isso não esclarece nada. Talvez tenha sido ontem."
+          </blockquote>
+          <cite>Camus · O Estrangeiro</cite>
+        </div>
+        <div class="para-analise">
+          <h4>Como o parágrafo trabalha</h4>
+          <p>Camus expande a indiferença da linha inicial para o grotesco: o telegrama do asilo é relatado com a mesma neutralidade emocional. O "isso não esclarece nada" — referindo-se à data, não à morte — é perturbador. O parágrafo inteiro é um retrato de alguém para quem a morte da mãe é uma questão logística. Meursault está completo antes de qualquer cena narrativa.</p>
+        </div>
+      </div>
+
+      <div class="para-card">
+        <div class="para-texto">
+          <blockquote>
+            "Ao verme que primeiro roeu as frias carnes do meu cadáver dedico como saudosa lembrança estas memórias póstumas. [...] Não adotei o processo de Augusto que, segundo dizem, expôs o manuscrito à aprovação de seus amigos."
+          </blockquote>
+          <cite>Machado de Assis · Memórias Póstumas</cite>
+        </div>
+        <div class="para-analise">
+          <h4>Como o parágrafo trabalha</h4>
+          <p>Após a dedicatória ao verme, Machado usa o prólogo para instalar a ironia como modo de existência do narrador. Brás Cubas compara-se a Augusto — o imperador romano — com total naturalidade. É um morto que se acha importante e engraçado ao mesmo tempo. O parágrafo instaura a distância irônica que sustentará todo o romance.</p>
+        </div>
+      </div>
+
+      <div class="para-card">
+        <div class="para-texto">
+          <blockquote>
+            "Por muito tempo me deitei cedo. Às vezes, mal apagada a vela, meus olhos se fechavam tão depressa que eu mal tinha tempo de pensar: 'Estou adormecendo.' E meia hora depois acordava..."
+          </blockquote>
+          <cite>Proust · Em Busca do Tempo Perdido</cite>
+        </div>
+        <div class="para-analise">
+          <h4>Como o parágrafo trabalha</h4>
+          <p>Proust expande o hábito em fenomenologia. O ato de adormecer se torna um objeto de análise minuciosa — e já estamos dentro do projeto de Proust: examinar a experiência subjetiva com precisão quase científica. O parágrafo ensina que o ritmo Proust não é lento — é outro tipo de velocidade: a velocidade da atenção ao interior.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="aviso-voz rev">
+      <p>Esses parágrafos só funcionam porque cada um é fiel à voz que a primeira linha anunciou. <strong>O maior erro do primeiro parágrafo é mudar de registro:</strong> começar seco e tornar-se poético, ou começar lírico e tornar-se jornalístico. O leitor percebe a traição antes de nomear o desconforto. Sua voz é sua voz — mantenha-a.</p>
+    </div>
+
+  </div>
+</div></section><section class="chapter" id="capitulo"><header class="chapter-head"><span class="chapter-no">03</span><div><h2>Primeiro capítulo</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="legacy-content">
+  <div class="wrap-lg">
+    <div class="wrap">
+      
+      
+      <p class="texto-intro rev rev-d2">O primeiro capítulo não é uma introdução. É o livro inteiro em miniatura. Cada elemento que o livro vai precisar precisa estar presente — talvez em semente, mas presente.</p>
+      
+    </div>
+
+    
+    
+
+    <div class="wrap">
+      <p class="rev">O primeiro capítulo é o contrato entre quem escreve e quem lê. Quando a pessoa fecha o primeiro capítulo e continua, assinou esse contrato. Para isso, seis coisas precisam acontecer — não necessariamente nessa ordem, não necessariamente de forma explícita.</p>
+
+      <div class="funcoes-lista rev">
+
+        <div class="funcao-item">
+          
+          <div>
+            <h4>Instalar a Voz</h4>
+            <p>O leitor precisa saber com quem vai passar os próximos horas ou dias. Não importa se a voz é simpática — precisa ser interessante. Fascinante, perturbadora, ou estranhamente familiar. Uma voz entediante no primeiro capítulo é uma promessa quebrada.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          
+          <div>
+            <h4>Estabelecer o Mundo</h4>
+            <p>Não a descrição do cenário — o regime de realidade. O leitor precisa saber que tipo de mundo habita: realista, fantástico, histórico, interior. Isso não precisa ser explícito. Deve ser sentido. A linguagem do capítulo já é o mundo.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          
+          <div>
+            <h4>Abrir uma Questão</h4>
+            <p>Todo primeiro capítulo precisa plantar uma pergunta que o leitor não saberá responder antes de continuar. Não necessariamente um mistério de enredo — pode ser uma questão de personagem, moral, ou existencial. Sem questão, não há razão para virar a página.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          
+          <div>
+            <h4>Estabelecer o Tom</h4>
+            <p>Irônico, lírico, seco, exuberante, melancólico — o tom do primeiro capítulo é uma promessa sobre o tom do livro inteiro. Uma virada radical de tom no capítulo 3 é quase sempre sentida como traição, não como surpresa.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          
+          <div>
+            <h4>Introduzir a Pressão</h4>
+            <p>Algo está em jogo desde o início — mesmo que discretamente. Não precisa ser conflito explícito. Pode ser uma ausência, uma tensão latente, um desequilíbrio que o leitor sente mas não consegue nomear. Onde não há pressão, não há movimento.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          
+          <div>
+            <h4>Criar um Ritmo Próprio</h4>
+            <p>A velocidade das frases, dos parágrafos, das pausas — é o batimento cardíaco do livro. Um livro de contemplação tem frases longas. Um livro de ação tem frases curtas. O ritmo do primeiro capítulo instrui o corpo do leitor sobre como ler o que vem.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="aviso-voz rev">
+        <p>Quem está começando frequentemente tenta fazer o primeiro capítulo fazer <em>tudo</em> de forma <em>explícita</em>. O resultado é um capítulo afogado em exposição, descrição e apresentação. <strong>Os melhores primeiros capítulos fazem tudo isso implicitamente, pelo que mostram — nunca pelo que explicam.</strong> Confie na cena. Confie na linguagem. Quem lê é inteligente.</p>
+      </div>
+
+    </div>
+  </div>
+</div></section><section class="chapter" id="partes"><header class="chapter-head"><span class="chapter-no">04</span><div><h2>Estrutura</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="legacy-content">
+  <div class="wrap">
+    
+    
+    <p class="texto-intro rev rev-d2">Quando um livro é grande demais para um único arco, divide-se em partes. Cada parte é um livro dentro do livro — com sua própria curva, seu próprio tom, sua própria abertura.</p>
+
+    
+
+    <div class="rev">
+      <div class="estruturas-tabs">
+        <button class="estrutura-tab ativo" data-academia-event-12="" data-academia-click>Dois Movimentos</button>
+        <button class="estrutura-tab" data-academia-event-13="" data-academia-click>Três Atos</button>
+        <button class="estrutura-tab" data-academia-event-14="" data-academia-click>Quatro Partes</button>
+        <button class="estrutura-tab" data-academia-event-15="" data-academia-click>Parte + Capítulo</button>
+        <button class="estrutura-tab" data-academia-event-16="" data-academia-click>Fragmentos</button>
+      </div>
+
+      <div id="est-dois" class="estrutura-painel ativo">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra"><span class="estrutura-barra-label">ANTES</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">DEPOIS</span></div>
+        </div>
+        <h4>A estrutura díptica: Antes / Depois</h4>
+        <p>Um evento central — uma morte, uma descoberta, uma separação — divide o livro em dois mundos. A Parte I é o mundo antes. A Parte II é o mundo que o evento criou. É a estrutura mais honesta de livros sobre transformação irreversível.</p>
+        <p><strong>Exemplos:</strong> <em>O Som e a Fúria</em> (Faulkner) divide perspectivas radicalmente. <em>Atonement</em> (Ian McEwan) usa o antes e o depois como acusação moral. <em>Vidas Secas</em> (Graciliano Ramos) tem a estrutura de uma jornada em dois tempos.</p>
+      </div>
+
+      <div id="est-tres" class="estrutura-painel">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra"><span class="estrutura-barra-label">ASCENSÃO</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">CONFLITO</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">RESOLUÇÃO</span></div>
+        </div>
+        <h4>Os três atos: a estrutura dramática clássica</h4>
+        <p>A divisão aristotélica em começo, meio e fim — mas raramente com pesos iguais. O ato II é invariavelmente o maior e o mais difícil de escrever. É onde a maioria dos livros se perde: o meio sem direção, a saga sem urgência.</p>
+        <p><strong>O problema do Ato II:</strong> Sem uma questão clara que o Ato I plantou e o Ato III irá responder, o meio é apenas uma série de cenas. A solução é subdividir o Ato II internamente — cada subcapítulo com seu próprio micro-arco.</p>
+      </div>
+
+      <div id="est-quatro" class="estrutura-painel">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra"><span class="estrutura-barra-label">I</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">II</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">III</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">IV</span></div>
+        </div>
+        <h4>Quatro partes: a sonata narrativa</h4>
+        <p>Quatro partes permitem uma estrutura que tem muito em comum com a sonata musical: exposição, desenvolvimento, recapitulação, coda. Anna Karênina usa algo próximo disso — com a quarta parte funcionando quase como epílogo emocional às três anteriores.</p>
+        <p><strong>Vantagem:</strong> A quarta parte pode ter tom completamente diferente — um respiro, uma ironia, ou um golpe final. É uma estrutura que dá a você um espaço de liberdade após o clímax.</p>
+      </div>
+
+      <div id="est-parte-cap" class="estrutura-painel">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra"><span class="estrutura-barra-label">PARTE I · 8 CAPs</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">PARTE II · 12 CAPs</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">PARTE III · 3 CAPs</span></div>
+        </div>
+        <h4>Partes com capítulos numerados ou nomeados</h4>
+        <p>A estrutura mais comum nos romances longos. Partes funcionam como capítulos grandes; capítulos como cenas ou sequências. A assimetria de tamanho entre as partes é intencional — a segunda parte maior indica que é onde o livro vive de fato.</p>
+        <p><strong>Sobre nomear partes vs. numerá-las:</strong> Nomes funcionam como títulos-em-miniatura, adiantam tom; números criam expectativa de objetividade e escala. Nem sempre o mais dramático é o melhor.</p>
+      </div>
+
+      <div id="est-fragmento" class="estrutura-painel">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra"><span class="estrutura-barra-label">·</span></div>
+        </div>
+        <h4>Estrutura fragmentada: a montagem</h4>
+        <p>Sem partes convencionais — o livro existe em fragmentos, seções curtas, vozes alternadas, ou capítulos sem numeração linear. A coerência não é estrutural mas temática: o leitor monta o sentido. É a forma mais próxima do funcionamento real da memória e da experiência.</p>
+        <p><strong>Risco real:</strong> A estrutura fragmentada não é mais fácil — é mais difícil. Exige que cada fragmento funcione como uma peça de mosaico precisa: sem ela, o quadro some. Muita gente usa o fragmento para esconder falta de estrutura. Não esconde.</p>
+      </div>
+    </div>
+
+    <div class="aviso-voz rev">
+      <p>A estrutura ideal é a que nasce do material, não a que é imposta a ele. <strong>Antes de decidir em quantas partes seu livro se divide, pergunte: onde está a fratura natural?</strong> Todo livro longo tem um momento onde a realidade do personagem muda de forma irreversível. Essa fratura é onde a próxima parte começa. Não invente estrutura — descubra-a.</p>
+    </div>
+
+  </div>
+</div></section><section class="chapter" id="final"><header class="chapter-head"><span class="chapter-no">05</span><div><h2>Encerramento</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="legacy-content">
+  <div class="wrap">
+    
+    
+    <p class="texto-intro rev rev-d2">Na montanha russa, a descida é o momento de maior velocidade e menor controle. O final de um livro deveria ter algo disso: a sensação de que as coisas se resolvem com uma inevitabilidade que parece ter sido sempre a única possibilidade.</p>
+
+    
+
+    <p class="rev">As últimas linhas de um livro ecoam as primeiras. Os melhores finais parecem responder, inverter, ou completar a promessa da abertura.</p>
+
+    <div class="descida-grid rev">
+
+      <div class="descida-lado">
+        <h4 class="lima">ABERTURA</h4>
+        <p class="descida-cita">"Chame-me Ismael."</p>
+        <p class="descida-analise">A vida antes. O homem que parte. A identidade declarada.</p>
+      </div>
+      <div class="descida-lado escuro">
+        <h4 class="cinza">ENCERRAMENTO</h4>
+        <p class="descida-cita">"E eu sou o único que escapou para te contar."</p>
+        <p class="descida-analise">O sobrevivente. A morte de tudo ao redor. A identidade que restou é a do testemunho. Moby Dick termina onde começou: com Ismael, agora diferente.</p>
+      </div>
+
+      <div class="descida-lado">
+        <h4 class="lima">ABERTURA</h4>
+        <p class="descida-cita">"Muitos anos depois, diante do pelotão de fuzilamento..."</p>
+        <p class="descida-analise">O futuro já sabido. A morte anunciada desde a primeira linha.</p>
+      </div>
+      <div class="descida-lado escuro">
+        <h4 class="cinza">ENCERRAMENTO</h4>
+        <p class="descida-cita">"...pois a estirpe condenada a cem anos de solidão não tinha uma segunda oportunidade sobre a terra."</p>
+        <p class="descida-analise">A abertura prometeu o fim; o fim cumpre a promessa. Cem anos depois, o destino da primeira linha chega. É um círculo perfeito — ou uma espiral.</p>
+      </div>
+
+      <div class="descida-lado">
+        <h4 class="lima">ABERTURA</h4>
+        <p class="descida-cita">"Nonada."</p>
+        <p class="descida-analise">Nada de importância. A negação do que virá.</p>
+      </div>
+      <div class="descida-lado escuro">
+        <h4 class="cinza">ENCERRAMENTO</h4>
+        <p class="descida-cita">"O senhor... Mire veja: o mais importante e bonito, do mundo, é isto: que as pessoas não estão sempre iguais, ainda não foram terminadas — mas que elas vão sempre mudando."</p>
+        <p class="descida-analise">Do "nonada" ao mais importante do mundo: o arco completo. O que era nada se revela a metamorfose humana. O encerramento inverte a abertura.</p>
+      </div>
+
+    </div>
+
+    <div class="principios rev">
+
+      <div class="principio">
+        <div class="prin-num">01</div>
+        <div class="prin-corpo">
+          <h4>O final não resolve — ressoa</h4>
+          <p>Os finais mais poderosos não fecham todas as questões: fecham a questão certa, aquela que importava desde o início, e deixam as demais em aberto com elegância. Resolução total é satisfação momentânea. Ressonância é o que dura.</p>
+        </div>
+      </div>
+
+      <div class="principio">
+        <div class="prin-num">02</div>
+        <div class="prin-corpo">
+          <h4>A última linha é a primeira linha do silêncio</h4>
+          <p>Depois da última linha, o leitor fecha o livro e está em silêncio. O que você quer que exista nesse silêncio? Uma pergunta? Uma imagem? Uma emoção sem nome? A última linha não encerra — ela abre o silêncio que vem depois.</p>
+        </div>
+      </div>
+
+      <div class="principio">
+        <div class="prin-num">03</div>
+        <div class="prin-corpo">
+          <h4>Finais anticlimáticos são escolhas, não falhas</h4>
+          <p>Nem todo livro precisa de um final dramático. Chékhov, Carver, Lispector — terminam em gestos pequenos, em silêncios, em não-eventos que parecem banais e são devastadores. O anticlimax é uma técnica, não uma desistência.</p>
+        </div>
+      </div>
+
+      <div class="principio">
+        <div class="prin-num">04</div>
+        <div class="prin-corpo">
+          <h4>Não confunda o fim da narrativa com o fim do livro</h4>
+          <p>O enredo pode terminar antes do livro. Os últimos parágrafos podem ser o personagem depois da história — ou o narrador refletindo sobre ela — ou uma imagem que existe fora do enredo. Livros que terminam quando o enredo termina frequentemente perdem a nota mais importante.</p>
+        </div>
+      </div>
+
+      <div class="principio">
+        <div class="prin-num">05</div>
+        <div class="prin-corpo">
+          <h4>A última palavra importa</h4>
+          <p>Escritores como Joyce, Woolf e Saramago escolheram a última palavra de seus livros com a mesma atenção que a primeira. A última palavra é o que ecoa. "Sim" fecha o Ulisses. "Sim" é a última coisa que existe do livro mais difícil da literatura.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="aviso-voz rev">
+      <p>Você vai reescrever o final. Provavelmente mais de uma vez. <strong>O final correto do seu livro não é o final que você planejou — é o final que o próprio livro pede.</strong> Quando você termina de escrever o rascunho, releia apenas a primeira e a última linha. Se elas parecem pertencer ao mesmo livro, você chegou perto. Se parecem pertencer a livros diferentes, o trabalho continua.</p>
+    </div>
+
+  </div>
+</div></section><section class="chapter" id="arranque"><header class="chapter-head"><span class="chapter-no">06</span><div><h2>Na prática</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="legacy-content">
+  <div class="wrap">
+    
+    
+    <p class="texto-intro rev rev-d2">Cinco exercícios para encontrar a sua abertura — não a abertura de um livro genérico, mas a do livro que só você pode escrever.</p>
+
+    
+
+    <div class="arranque-lista rev">
+
+      <div class="arranque-item">
+        <h4>O Método Kafka: Entregue o impossível como rotina</h4>
+        <p>Escreva uma primeira linha que anuncia algo sobrenatural, absurdo ou impossível — mas com o tom factual de um boletim de ocorrências. Sem surpresa, sem explicação. Apenas o fato insólito.</p>
+        <textarea class="arranque-campo" id="ex1" rows="3" placeholder="[Personagem] [verbo passado] [evento impossível]."></textarea>
+        <button class="btn-arranque" data-academia-event-17="" data-academia-click>Ver dicas para esta linha</button>
+        <div class="arranque-feedback" id="fb1">
+          <strong>O que observar:</strong> A linha funciona quando a objetividade cria o estranhamento — não o vocabulário dramático. Se você usou palavras como "surpreendentemente", "de repente" ou "inacreditavelmente", tire. O impossível se fortalece na frieza. Releia sem nenhum advérbio de intensidade.
+        </div>
+      </div>
+
+      <div class="arranque-item">
+        <h4>O Método Camus: Deixe a voz revelar o personagem</h4>
+        <p>Escreva três frases de abertura onde a voz do narrador — a sintaxe, o vocabulário, o que ele nota e o que ignora — já nos diga quem ele é, sem que você o descreva diretamente.</p>
+        <textarea class="arranque-campo" id="ex2" rows="4" placeholder="Três frases. Sem descrição direta do personagem. Só o que ele diz — e como diz."></textarea>
+        <button class="btn-arranque" data-academia-event-18="" data-academia-click>Ver dicas para esta abertura</button>
+        <div class="arranque-feedback" id="fb2">
+          <strong>Teste de voz:</strong> Cubra o texto e pergunte a alguém de confiança: "Quem é essa pessoa?" Se a resposta for coerente com quem você imaginou — a voz funcionou. Se a resposta for "não sei" ou descrever alguém completamente diferente, a voz ainda não chegou. O personagem não precisa se apresentar; precisa se revelar.
+        </div>
+      </div>
+
+      <div class="arranque-item">
+        <h4>O Método Proust: Comece no banal para chegar ao essencial</h4>
+        <p>Escolha um hábito cotidiano do seu personagem — algo que ele faz todo dia, sem pensar. Escreva duas frases sobre esse hábito, com precisão. Deixe que a terceira frase vaze para o que esse hábito esconde.</p>
+        <textarea class="arranque-campo" id="ex3" rows="4" placeholder="Todo dia, [personagem] fazia [hábito]. [Detalhe preciso]. [Terceira frase: a fissura]."></textarea>
+        <button class="btn-arranque" data-academia-event-19="" data-academia-click>Ver dicas para esta abertura</button>
+        <div class="arranque-feedback" id="fb3">
+          <strong>A terceira frase é o livro:</strong> As duas primeiras constroem rotina. A terceira precisa quebrá-la — não dramaticamente, mas com uma fissura fina: um detalhe que não deveria estar ali, uma hesitação, uma memória inoportuna. Se a terceira frase é tão banal quanto as duas primeiras, ainda não chegou ao que importa.
+        </div>
+      </div>
+
+      <div class="arranque-item">
+        <h4>O Método Guimarães Rosa: Invente a língua</h4>
+        <p>Escreva uma primeira linha em que uma palavra seja inventada ou deslocada de sua função habitual. A sintaxe pode ser estranha. A ordem pode ser invertida. O leitor não deve entender tudo — mas deve sentir tudo.</p>
+        <textarea class="arranque-campo" id="ex4" rows="3" placeholder="Uma frase onde a língua faz o que a língua não costuma fazer."></textarea>
+        <button class="btn-arranque" data-academia-event-20="" data-academia-click>Ver dicas para esta linha</button>
+        <div class="arranque-feedback" id="fb4">
+          <strong>Cuidado com a afetação:</strong> A língua inventada só funciona quando emerge de uma necessidade real — quando o português convencional é pequeno demais para o que precisa ser dito. Se a sua linha parece difícil por escolha estética sem conteúdo por baixo, é afetação. Releia e pergunte: essa estranheza vem de dentro do mundo do livro ou de fora dele?
+        </div>
+      </div>
+
+      <div class="arranque-item">
+        <h4>O Método Austen: Mente para revelar a verdade</h4>
+        <p>Escreva uma primeira linha que afirma algo que parece verdade absoluta — mas que o livro vai contradizer. Use o tom de uma "verdade universal" para introduzir exatamente o que o livro vai questionar.</p>
+        <textarea class="arranque-campo" id="ex5" rows="3" placeholder="É uma verdade [adjetivo] que [afirmação que o livro vai contradizer]."></textarea>
+        <button class="btn-arranque" data-academia-event-21="" data-academia-click>Ver dicas para esta linha</button>
+        <div class="arranque-feedback" id="fb5">
+          <strong>O teste da ironia:</strong> A linha funciona quando é possível lê-la em dois registros: um sério (para um leitor desavisado) e um irônico (para o leitor que percebe o jogo). Se só funciona em um registro, ou a ironia é óbvia demais ou não existe. A zona certa é aquela onde o leitor sorri — mas não tem certeza se deveria.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="aviso-voz rev">
+      <p>Nenhum desses métodos é uma fórmula. São lentes — maneiras de olhar para o começo do seu livro a partir de ângulos diferentes. <strong>O seu começo real não virá de nenhum exercício: virá do momento em que você esquecer os exercícios e escrever o que precisa ser escrito.</strong> Mas às vezes, para chegar ao que precisa ser escrito, é necessário escrever muitas coisas que não precisam.</p>
+    </div>
+
+  </div>
+</div></section></div><nav class="wrap related" aria-label="Continue aprendendo"><a href="#" data-academia-open="revisao-manuscrito">Revisar o manuscrito</a><a href="#" data-academia-open="titulo-do-livro">Escolher o título</a></nav></main><footer class="footer wrap"><span>Academia Escrevaral</span><a href="#" data-academia-back>Voltar à Academia</a></footer><script>
+// ── PROGRESSO ──────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progresso').style.width = ((window.scrollY / h) * 100) + '%';
+});
+
+// ── REVEAL ─────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+// ── NAV ATIVO ──────────────────────────────────────────
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-estagio');
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navAs.forEach(a => a.classList.toggle('ativo', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, { threshold: 0.25 });
+secs.forEach(s => navObs.observe(s));
+
+// ── LINHAS TOGGLE ──────────────────────────────────────
+function toggleLinha(el) {
+  const era = el.classList.contains('aberta');
+  document.querySelectorAll('.linha-item').forEach(i => i.classList.remove('aberta'));
+  if (!era) el.classList.add('aberta');
+}
+
+// ── ESTRUTURAS TABS ────────────────────────────────────
+function mudarEstrutura(btn, id) {
+  document.querySelectorAll('.estrutura-tab').forEach(t => t.classList.remove('ativo'));
+  document.querySelectorAll('.estrutura-painel').forEach(p => p.classList.remove('ativo'));
+  btn.classList.add('ativo');
+  document.getElementById(id).classList.add('ativo');
+}
+
+// ── FEEDBACK EXERCÍCIOS ────────────────────────────────
+function mostrarFeedback(id) {
+  document.getElementById(id).classList.add('visivel');
+}
+</script><script>/* Página autossuficiente: só apresentação e navegação. */
+(function () {
+  'use strict';
+  const root = document.documentElement;
+  window.addEventListener('message', event => {
+    if (event.source !== window.parent || !event.data || event.data.channel !== 'escrevaral-academia-theme') return;
+    for (const name of ['paper', 'ink', 'accent']) {
+      const value = event.data.colors ? event.data.colors[name] : undefined;
+      // Apenas cores literais vindas da janela hospedeira; nunca regras CSS.
+      if (typeof value === 'string' && /^(#[\da-f]{3,8}|rgba?\([\d.,%\s]+\))$/i.test(value) && CSS.supports('color', value)) {
+        root.style.setProperty('--' + name, value);
+      }
+    }
+    root.dataset.comfortable = String(event.data.comfortable === true);
+  });
+  if (window.parent !== window) window.parent.postMessage({channel:'escrevaral-academia', action:'theme'}, '*');
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function scrollToTarget(target) {
+    if (!target) return;
+    target.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  if (typeof document.addEventListener === 'function') {
+    document.addEventListener('click', event => {
+      const link = event.target && event.target.closest ? event.target.closest('a[href^="#"]') : null;
+      if (link) {
+        const hash = link.getAttribute('href');
+        if (hash && hash.length > 1) {
+          const target = document.querySelector(hash);
+          if (target) {
+            event.preventDefault();
+            scrollToTarget(target);
+            return;
+          }
+        }
+      }
+      const chapterHeader = (event.target && event.target.closest ? event.target.closest('.chapter-head h2, .chapter-head .chapter-no') : null);
+      if (chapterHeader) {
+        const target = document.querySelector('#mapa') || document.querySelector('#inicio');
+        if (target) {
+          event.preventDefault();
+          scrollToTarget(target);
+        }
+      }
+    });
+  }
+
+  if (typeof document.querySelectorAll === 'function') {
+    for (const el of document.querySelectorAll('.chapter-head h2, .chapter-head .chapter-no')) {
+      el.tabIndex = 0;
+      el.setAttribute('role', 'button');
+      el.setAttribute('title', 'Voltar ao início');
+      el.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          const target = document.querySelector('#mapa') || document.querySelector('#inicio');
+          scrollToTarget(target);
+        }
+      });
+    }
+  }
+
+  const hero = document.querySelector('.hero');
+  const depth = document.querySelector('.hero-depth');
+  if (!hero || !depth) return;
+  let frame = 0;
+  function paint() {
+    frame = 0;
+    const amount = reduced.matches ? 0 : Math.min(48, Math.max(0, -hero.getBoundingClientRect().top * .16));
+    depth.style.setProperty('--drift', amount + 'px');
+  }
+  function schedule() { if (!frame) frame = window.requestAnimationFrame(paint); }
+  window.addEventListener('scroll', schedule, {passive:true});
+  reduced.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    window.removeEventListener('scroll', schedule);
+    reduced.removeEventListener('change', schedule);
+    if (frame) window.cancelAnimationFrame(frame);
+  }, {once:true});
+  paint();
+}());
+</script><script>document.querySelector('[data-academia-event-0]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-1]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-2]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-3]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-4]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-5]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-6]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-7]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-8]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-9]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-10]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-11]').addEventListener("click", function(event){
+toggleLinha(this)
+});
+document.querySelector('[data-academia-event-12]').addEventListener("click", function(event){
+mudarEstrutura(this,'est-dois')
+});
+document.querySelector('[data-academia-event-13]').addEventListener("click", function(event){
+mudarEstrutura(this,'est-tres')
+});
+document.querySelector('[data-academia-event-14]').addEventListener("click", function(event){
+mudarEstrutura(this,'est-quatro')
+});
+document.querySelector('[data-academia-event-15]').addEventListener("click", function(event){
+mudarEstrutura(this,'est-parte-cap')
+});
+document.querySelector('[data-academia-event-16]').addEventListener("click", function(event){
+mudarEstrutura(this,'est-fragmento')
+});
+document.querySelector('[data-academia-event-17]').addEventListener("click", function(event){
+mostrarFeedback('fb1')
+});
+document.querySelector('[data-academia-event-18]').addEventListener("click", function(event){
+mostrarFeedback('fb2')
+});
+document.querySelector('[data-academia-event-19]').addEventListener("click", function(event){
+mostrarFeedback('fb3')
+});
+document.querySelector('[data-academia-event-20]').addEventListener("click", function(event){
+mostrarFeedback('fb4')
+});
+document.querySelector('[data-academia-event-21]').addEventListener("click", function(event){
+mostrarFeedback('fb5')
+});
+for (const node of document.querySelectorAll('[data-academia-click]')) {
+      if (!node.matches('button,a,input,select,textarea')) {
+        node.tabIndex = 0; node.setAttribute('role','button');
+        node.addEventListener('keydown', event => {
+          if (event.target !== node || !['Enter',' '].includes(event.key)) return;
+          event.preventDefault(); node.click();
+        });
+      }
+    }</script>
+<script>/* Comunicação limitada à navegação; o livro não acessa o documento do editor. */
+(function () {
+  'use strict';
+  const send = action => window.parent.postMessage({ channel: 'escrevaral-academia', action }, '*');
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !event.isComposing && event.keyCode !== 229) {
+      event.preventDefault(); event.stopImmediatePropagation(); send('close');
+    }
+  }, true);
+  for (const link of document.querySelectorAll('a[data-academia-back]')) {
+    link.addEventListener('click', event => { event.preventDefault(); send('back'); });
+  }
+  for (const link of document.querySelectorAll('a[data-academia-open]')) {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      window.parent.postMessage({ channel: 'escrevaral-academia', action: 'open', id: link.getAttribute('data-academia-open') }, '*');
+    });
+  }
+  for (const link of document.querySelectorAll('a[data-academia-close]')) {
+    link.addEventListener('click', event => { event.preventDefault(); send('close'); });
+  }
+}());
+</script>
+</body></html>

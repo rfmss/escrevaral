@@ -1,0 +1,168 @@
+/* Cartão flutuante de definição e sinônimos P01 — ESCREVARAL */
+@media screen {
+  .esc-palavra {
+    position: fixed;
+    right: 24px;
+    bottom: 58px;
+    z-index: 2100;
+    width: 310px;
+    max-width: calc(100vw - 32px);
+    padding: 12px 14px;
+    background: var(--esc-paper, #ccd5c7);
+    color: var(--esc-ink, #1e2320);
+    border: 1px solid var(--esc-muted, #4a544c);
+    border-radius: 3px;
+    box-shadow: 2px 4px 0 rgba(30, 35, 32, 0.22);
+    font: 13px/1.45 Arial, Helvetica, sans-serif;
+    overflow-wrap: break-word;
+  }
+
+  .esc-palavra[hidden] {
+    display: none !important;
+  }
+
+  .esc-palavra p {
+    margin: 0;
+  }
+
+  .esc-palavra-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px dotted var(--esc-border, #8b9b8c);
+  }
+
+  .esc-palavra-title {
+    font: 600 16px/1.25 'Noto Serif', Georgia, serif;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .esc-palavra-icon {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .esc-palavra-content {
+    margin-top: 6px;
+  }
+
+  .esc-palavra-class {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-palavra-definition {
+    margin-top: 4px !important;
+    font: 13px/1.45 'Noto Serif', Georgia, serif;
+  }
+
+  .esc-palavra-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .esc-palavra-words button {
+    padding: 4px 10px;
+    min-height: 28px;
+    border: 1px solid var(--esc-muted, #4a544c);
+    background: var(--esc-bg, #c4cfc2);
+    color: inherit;
+    font: inherit;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .esc-palavra-words button:hover {
+    background: var(--esc-selected, #b3c2ae);
+  }
+
+  .esc-palavra-words button.esc-palavra-undo {
+    background: var(--esc-ink, #1e2320);
+    color: var(--esc-paper, #ccd5c7);
+    border-color: var(--esc-ink, #1e2320);
+    font-weight: 600;
+  }
+
+  .esc-palavra-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-palavra-nav button {
+    padding: 2px 8px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .esc-palavra-status {
+    margin-top: 4px !important;
+    font-size: 12px;
+    color: var(--esc-muted, #4a544c);
+  }
+}
+
+@media screen {
+  .esc-palavra-tools {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #7c8b78;
+  }
+  .esc-palavra-search-form {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .esc-palavra-search-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 4px 7px;
+    border: 1px solid #7c8b78;
+    background: #d8e2d6;
+    color: #111511;
+    font-size: 12px;
+  }
+  .esc-palavra-search-btn,
+  .esc-palavra-info-btn {
+    margin-left: 5px;
+    padding: 4px 8px;
+    border: 1px solid #455241;
+    background: transparent;
+    color: inherit;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .esc-palavra-info-btn[aria-pressed="true"] {
+    background: #242d23;
+    color: #d8e4d6;
+  }
+  .esc-palavra-sources {
+    margin: 6px 0 0;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #455241;
+    color: var(--esc-muted, #455241);
+  }
+}

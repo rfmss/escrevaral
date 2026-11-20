@@ -1,0 +1,246 @@
+/* Superfoco Mecânico + Barra Dedicada + Fluxo de Parágrafo + Soneto Acoplado — ESCREVARAL */
+@media screen {
+  .esc-machine {
+    display: none;
+  }
+
+  body[data-immersion="true"][data-esc-machine="on"] > .esc-machine {
+    display: block !important;
+    position: fixed;
+    z-index: 1120 !important;
+    pointer-events: none;
+    user-select: none;
+    line-height: 0;
+    will-change: transform;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .esc-machine .esc-machine-frame {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  .esc-machine .esc-machine-frame.esc-machine-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Switch Superfoco automático ON/OFF no cabeçalho */
+  #esc-superfocus-auto-toggle {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border: 1px solid #7c8b78;
+    border: 1px solid var(--esc-border, #7c8b78);
+    background: transparent;
+    color: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+  .esc-switch-track {
+    display: inline-block;
+    position: relative;
+    width: 26px;
+    height: 14px;
+    border-radius: 10px;
+    background: #9aa796;
+    margin: 0 5px;
+    vertical-align: middle;
+  }
+  #esc-superfocus-auto-toggle[aria-checked="true"] .esc-switch-track {
+    background: #242d23;
+    background: var(--esc-weave-bg, #242d23);
+  }
+  .esc-switch-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #f2f7f0;
+  }
+  #esc-superfocus-auto-toggle[aria-checked="true"] .esc-switch-thumb {
+    left: 14px;
+  }
+  .esc-switch-state {
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.4px;
+  }
+
+  /* Barra superior dedicada do Superfoco (.esc-writing-bar) */
+  .esc-writing-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 1260 !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    background: #c4cfc2;
+    background: var(--esc-bg, #c4cfc2);
+    border-bottom: 1px dashed #7c8b78;
+    border-bottom: 1px dashed var(--esc-border, #7c8b78);
+    color: #212921;
+    color: var(--esc-ink, #212921);
+    opacity: 0.72;
+    transition: opacity 140ms ease;
+  }
+  .esc-writing-bar:hover,
+  .esc-writing-bar:focus-within {
+    opacity: 1;
+  }
+  .esc-writing-bar[hidden] {
+    display: none !important;
+  }
+  .esc-writing-bar-group {
+    display: flex;
+    align-items: center;
+  }
+  .esc-writing-btn,
+  .esc-writing-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 9px;
+    margin: 0 4px;
+    border: 1px solid #7c8b78;
+    border: 1px solid var(--esc-border, #7c8b78);
+    background: transparent;
+    color: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    height: 28px;
+    box-sizing: border-box;
+  }
+  .esc-writing-btn svg {
+    margin-right: 5px;
+  }
+  .esc-writing-icon-btn {
+    padding: 4px 7px;
+  }
+  .esc-writing-btn[aria-pressed="true"],
+  .esc-writing-icon-btn[aria-pressed="true"] {
+    background: #242d23;
+    background: var(--esc-weave-bg, #242d23);
+    color: #d8e4d6;
+    color: var(--esc-weave-ink, #d8e4d6);
+  }
+  .esc-writing-idle-note {
+    font-size: 11px;
+    color: #455241;
+    color: var(--esc-muted, #455241);
+    margin-right: 8px;
+  }
+
+  /* Em Superfoco: esconder chrome normal e usar a barra .esc-writing-bar */
+  body[data-immersion="true"] #location-path,
+  body[data-immersion="true"] #leave-focus,
+  body[data-immersion="true"] #writing-space .masthead,
+  body[data-immersion="true"] #writing-space .writing-toolbar,
+  body[data-immersion="true"] #writing-space .esc-rich-toolbar,
+  body[data-immersion="true"] #writing-space .paper-footer,
+  body[data-immersion="true"] #writing-space .note-heading,
+  body[data-immersion="true"] #writing-space .esc-reference-banner {
+    display: none !important;
+  }
+
+  body[data-immersion="true"] #esc-workspace {
+    top: 40px !important;
+    bottom: 0 !important;
+  }
+
+  body[data-immersion="true"] #writing-space .desk {
+    top: 0;
+    bottom: 0;
+  }
+
+  body[data-immersion="true"][data-esc-machine="on"] #manuscrito,
+  body[data-immersion="true"][data-esc-machine="on"] #esc-rich-editor {
+    padding-top: var(--esc-machine-top, 42vh) !important;
+    padding-bottom: 58vh !important;
+  }
+
+  /* Esmaecimento dos outros parágrafos no editor formatado durante o Superfoco */
+  body[data-immersion="true"] #esc-rich-editor > * {
+    opacity: 0.42;
+    transition: opacity 120ms ease;
+  }
+  body[data-immersion="true"] #esc-rich-editor > [data-esc-active-para="true"],
+  body[data-immersion="true"] #esc-rich-editor > *:only-child {
+    opacity: 1;
+  }
+
+  /* Soneto acoplado à direita dentro do Superfoco */
+  body[data-immersion="true"][data-esc-writing-sonnet="true"] #writing-space {
+    padding-right: 300px;
+    box-sizing: border-box;
+  }
+  body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-sonnet-panel {
+    display: block !important;
+    position: fixed;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    width: 296px;
+    z-index: 1210 !important;
+    overflow-y: auto;
+    border-left: 1px dashed #7c8b78;
+    border-left: 1px dashed var(--esc-border, #7c8b78);
+    background: #c4cfc2;
+    background: var(--esc-bg, #c4cfc2);
+  }
+
+  .esc-sound-btn[aria-pressed="true"],
+  #machine-toggle[aria-pressed="true"] {
+    background: #b3c2ae;
+    background: var(--esc-selected, #b3c2ae);
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .esc-machine,
+    .esc-writing-bar,
+    #esc-rich-editor > * {
+      transition: none !important;
+    }
+  }
+}
+
+/* Polish visual QA Superfoco */
+@media screen {
+  #esc-superfocus-auto-toggle,
+  .esc-writing-btn,
+  .esc-writing-icon-btn {
+    min-height: 0 !important;
+  }
+  body[data-view="workspace"][data-immersion="true"] #writing-space .desk {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    justify-content: center;
+  }
+  body[data-view="workspace"][data-immersion="true"] #writing-space .desk-inspector {
+    display: none !important;
+  }
+  body[data-view="workspace"][data-immersion="true"] #writing-space .paper {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto !important;
+  }
+  body[data-immersion="true"] .esc-sonnet-editor-hint {
+    display: none !important;
+  }
+}

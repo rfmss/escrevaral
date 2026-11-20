@@ -1,0 +1,218 @@
+/* Temas oficiais do Escrevaral Linux (Papel digital Sálvia, Papel, Claro, Escuro Carbon) + Leitura confortável + Piscar E-Ink */
+@media screen {
+  /* Tema padrão: Papel digital (E-Ink Sálvia #c4cfc2) */
+  body[data-esc-theme="eink"] {
+    --esc-bg: #c4cfc2;
+    --esc-surface: #b8c5b6;
+    --esc-paper: #c4cfc2;
+    --esc-pill: #b8c5b6;
+    --esc-ink: #212921;
+    --esc-manuscript: #111511;
+    --esc-muted: #455241;
+    --esc-border: #7c8b78;
+    --esc-selected: #b3c2ae;
+    --esc-weave-bg: #242d23;
+    --esc-weave-ink: #d8e4d6;
+    --esc-scroll-thumb: #9fad9b;
+    --esc-scroll-hover: #859681;
+    background-color: #c4cfc2;
+    color: #212921;
+  }
+
+  /* Tema 2: Papel creme editorial */
+  body[data-esc-theme="papel"] {
+    --esc-bg: #f4efe6;
+    --esc-surface: #eae2d4;
+    --esc-paper: #f7f3eb;
+    --esc-pill: #e7dfd0;
+    --esc-ink: #231f1a;
+    --esc-manuscript: #171410;
+    --esc-muted: #655d52;
+    --esc-border: #c6bcb0;
+    --esc-selected: #e3d9c8;
+    --esc-weave-bg: #2e2923;
+    --esc-weave-ink: #f4efe6;
+    --esc-scroll-thumb: #c4b8a6;
+    --esc-scroll-hover: #a69884;
+    background-color: #f4efe6;
+    color: #231f1a;
+  }
+
+  /* Tema 3: Claro neutro */
+  body[data-esc-theme="claro"] {
+    --esc-bg: #f8f8f6;
+    --esc-surface: #eeeeea;
+    --esc-paper: #ffffff;
+    --esc-pill: #e9e9e5;
+    --esc-ink: #1b1b18;
+    --esc-manuscript: #111110;
+    --esc-muted: #5b5b56;
+    --esc-border: #d0d0ca;
+    --esc-selected: #e4e4de;
+    --esc-weave-bg: #1f2220;
+    --esc-weave-ink: #f4f4f0;
+    --esc-scroll-thumb: #c6c6bf;
+    --esc-scroll-hover: #a5a59d;
+    background-color: #f8f8f6;
+    color: #1b1b18;
+  }
+
+  /* Tema 4: Escuro Carbon */
+  body[data-esc-theme="escuro"] {
+    --esc-bg: #1f2420;
+    --esc-surface: #272e28;
+    --esc-paper: #232a24;
+    --esc-pill: #2f3830;
+    --esc-ink: #d8e4d6;
+    --esc-manuscript: #e6efe4;
+    --esc-muted: #9eb09b;
+    --esc-border: #4e5e4c;
+    --esc-selected: #334031;
+    --esc-weave-bg: #141914;
+    --esc-weave-ink: #e4efe2;
+    --esc-scroll-thumb: #4f5f4d;
+    --esc-scroll-hover: #677a64;
+    background-color: #1f2420;
+    color: #d8e4d6;
+  }
+
+  /* Seleção AAA em Papel digital (12.8:1) */
+  body[data-esc-theme="eink"] ::selection,
+  body[data-esc-theme="eink"] *::selection {
+    background: #242d23 !important;
+    color: #f2f7f0 !important;
+  }
+  body[data-esc-theme="papel"] ::selection {
+    background: #2e2923 !important;
+    color: #f7f3eb !important;
+  }
+  body[data-esc-theme="escuro"] ::selection {
+    background: #d8e4d6 !important;
+    color: #1a2119 !important;
+  }
+
+  /* Divisórias técnicas 1px dashed no tema E-Ink Sálvia */
+  body[data-esc-theme="eink"] #navigation,
+  body[data-esc-theme="eink"] #items-column {
+    border-right: 1px dashed #7c8b78;
+  }
+  body[data-esc-theme="eink"] #esc-new-project {
+    background: #242d23;
+    color: #d8e4d6;
+    border: 1px dashed #d8e4d6;
+    outline: 2px solid #242d23;
+  }
+  body[data-esc-theme="eink"] #esc-new-project:hover {
+    background: #2e382c;
+  }
+  body[data-esc-theme="eink"] #manuscrito,
+  body[data-esc-theme="eink"] #esc-rich-editor {
+    color: #111511;
+    background: #c4cfc2;
+  }
+  body[data-esc-theme="eink"] #writing-space,
+  body[data-esc-theme="eink"] #writing-paper,
+  body[data-esc-theme="eink"] .desk {
+    background: #c4cfc2;
+  }
+  body[data-esc-theme="papel"] #writing-space,
+  body[data-esc-theme="papel"] #writing-paper,
+  body[data-esc-theme="papel"] #manuscrito,
+  body[data-esc-theme="papel"] #esc-rich-editor {
+    background: #f7f3eb;
+    color: #171410;
+  }
+  body[data-esc-theme="escuro"] #writing-space,
+  body[data-esc-theme="escuro"] #writing-paper,
+  body[data-esc-theme="escuro"] #manuscrito,
+  body[data-esc-theme="escuro"] #esc-rich-editor {
+    background: #232a24;
+    color: #e6efe4;
+  }
+
+  /* Barra de rolagem minimalista ultraesbelta 4px (TEMA-EINK-SCROLLBAR-02) */
+  *::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #9fad9b;
+    background: var(--esc-scroll-thumb, #9fad9b);
+    border-radius: 999px;
+    border: none;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: #859681;
+    background: var(--esc-scroll-hover, #859681);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #9fad9b transparent;
+  }
+
+  /* Leitura confortável */
+  body[data-esc-reading="comfortable"] #manuscrito,
+  body[data-esc-reading="comfortable"] #esc-rich-editor {
+    line-height: 1.95 !important;
+    letter-spacing: 0.012em;
+  }
+  body[data-esc-reading="comfortable"] #navigation,
+  body[data-esc-reading="comfortable"] #items-column {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Piscar E-Ink 150ms restrito à folha do editor (criação / troca de nota) */
+  [data-eink-flash="true"] {
+    -webkit-filter: invert(1) contrast(1.1);
+    filter: invert(1) contrast(1.1);
+    opacity: 0.92;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-eink-flash="true"] {
+      -webkit-filter: none !important;
+      filter: none !important;
+      opacity: 1 !important;
+    }
+  }
+
+  /* Seletor dos 4 temas no painel Ajustes */
+  .esc-theme-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 6px 0 10px;
+  }
+  .esc-theme-grid button {
+    margin: 0 6px 6px 0;
+    padding: 6px 10px;
+    border: 1px solid #7c8b78;
+    border: 1px solid var(--esc-border, #7c8b78);
+    background: transparent;
+    color: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .esc-theme-grid button[aria-pressed="true"] {
+    background: #242d23;
+    background: var(--esc-weave-bg, #242d23);
+    color: #d8e4d6;
+    color: var(--esc-weave-ink, #d8e4d6);
+    font-weight: 600;
+  }
+
+  /* Breadcrumb clicável */
+  #location-path button {
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    padding: 2px 5px;
+    font: inherit;
+  }
+  #location-path button:hover {
+    text-decoration: underline;
+  }
+}
