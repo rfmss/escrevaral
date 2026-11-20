@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="Escrevaral | Gabinete de escrita">
   <meta name="twitter:description" content="Sua mesa de escrita em português brasileiro. Seus manuscritos ficam no seu aparelho.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src {{SCRIPT_POLICY}}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
-  <title>SCRVRL OS — Gabinete de escrita</title>
+  <title>ESCREVARAL</title>
   <meta name="theme-color" content="#f5f4ef">
   <meta name="asset-version" content="{{ASSET_VERSION}}">
   <meta name="distribution-mode" content="{{DISTRIBUTION_MODE}}">
@@ -103,7 +103,7 @@ SOFTWARE.
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-theme-cycle" type="button" title="Alternar tema (Papel digital / Papel / Claro / Escuro)">Tema</button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
+    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-theme-cycle" type="button" hidden aria-hidden="true">Tema</button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
   </nav>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
     <header class="os-bar">
@@ -382,9 +382,9 @@ SOFTWARE.
   <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="mesa-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
     <div class="setting-section"><h3>Ambiente</h3>
-      <div class="setting-row"><span>Aparência (4 temas)</span><div class="esc-theme-grid" role="group" aria-label="Temas do Escrevaral"><button type="button" data-esc-theme-choice="eink" aria-pressed="true">Papel digital</button><button type="button" data-esc-theme-choice="papel" aria-pressed="false">Papel</button><button type="button" data-esc-theme-choice="claro" aria-pressed="false">Claro</button><button type="button" data-esc-theme-choice="escuro" aria-pressed="false">Escuro</button></div></div>
+      <div class="setting-row"><span>Aparência</span><span class="quiet">Papel digital (E-Ink Sálvia · tema único)</span></div>
       <div class="setting-row"><span>Leitura confortável</span><button id="esc-reading-toggle" type="button" aria-pressed="false">Ativar</button></div>
-      <div class="setting-row"><span>Tema</span><div class="theme-choice" role="group" aria-label="Tema"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
+      <div class="setting-row" hidden aria-hidden="true"><div class="theme-choice"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
       <div class="setting-row"><span>Máquina antiga (no Superfoco)</span><button id="machine-toggle" aria-pressed="true">Desativar</button></div>
       <div class="setting-row"><span>Destaque de parágrafo</span><button id="focus-toggle" aria-pressed="true">Destacar</button></div>
       <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"><span class="switch-off">Não</span><span class="switch-on">Sim</span></span></label>

@@ -14,7 +14,7 @@
   <meta name="twitter:title" content="Escrevaral | Gabinete de escrita">
   <meta name="twitter:description" content="Sua mesa de escrita em português brasileiro. Seus manuscritos ficam no seu aparelho.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
-  <title>SCRVRL OS — Gabinete de escrita</title>
+  <title>ESCREVARAL</title>
   <meta name="theme-color" content="#f5f4ef">
   <meta name="asset-version" content="20261014-scrvrl-exame-v6-65">
   <meta name="distribution-mode" content="portable">
@@ -5070,136 +5070,241 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"], body[
 }
 
 /* Fonte: src/ui/styles/temas-linux.css */
-/* Temas oficiais do Escrevaral Linux (Papel digital Sálvia, Papel, Claro, Escuro Carbon) + Leitura confortável + Piscar E-Ink */
+/* Tema único soberano: Papel digital (E-Ink Sálvia #c4cfc2 · Paper Spec do App Linux)
+   Folha contínua única nas 3 colunas, zero áreas brancas/creme misturadas, zero quadrados acendendo no hover. */
 @media screen {
-  /* Tema padrão: Papel digital (E-Ink Sálvia #c4cfc2) */
+  :root,
+  body,
   body[data-esc-theme="eink"] {
     --esc-bg: #c4cfc2;
-    --esc-surface: #b8c5b6;
+    --esc-surface: #c4cfc2;
     --esc-paper: #c4cfc2;
     --esc-pill: #b8c5b6;
     --esc-ink: #212921;
     --esc-manuscript: #111511;
     --esc-muted: #455241;
     --esc-border: #7c8b78;
-    --esc-selected: #b3c2ae;
+    --esc-dash: rgba(33, 41, 33, 0.26);
+    --esc-hover: rgba(33, 41, 33, 0.048);
+    --esc-selected: rgba(33, 41, 33, 0.082);
     --esc-weave-bg: #242d23;
+    --esc-weave-hover: #2e382c;
     --esc-weave-ink: #d8e4d6;
     --esc-scroll-thumb: #9fad9b;
     --esc-scroll-hover: #859681;
-    background-color: #c4cfc2;
-    color: #212921;
   }
 
-  /* Tema 2: Papel creme editorial */
-  body[data-esc-theme="papel"] {
-    --esc-bg: #f4efe6;
-    --esc-surface: #eae2d4;
-    --esc-paper: #f7f3eb;
-    --esc-pill: #e7dfd0;
-    --esc-ink: #231f1a;
-    --esc-manuscript: #171410;
-    --esc-muted: #655d52;
-    --esc-border: #c6bcb0;
-    --esc-selected: #e3d9c8;
-    --esc-weave-bg: #2e2923;
-    --esc-weave-ink: #f4efe6;
-    --esc-scroll-thumb: #c4b8a6;
-    --esc-scroll-hover: #a69884;
-    background-color: #f4efe6;
-    color: #231f1a;
-  }
-
-  /* Tema 3: Claro neutro */
-  body[data-esc-theme="claro"] {
-    --esc-bg: #f8f8f6;
-    --esc-surface: #eeeeea;
-    --esc-paper: #ffffff;
-    --esc-pill: #e9e9e5;
-    --esc-ink: #1b1b18;
-    --esc-manuscript: #111110;
-    --esc-muted: #5b5b56;
-    --esc-border: #d0d0ca;
-    --esc-selected: #e4e4de;
-    --esc-weave-bg: #1f2220;
-    --esc-weave-ink: #f4f4f0;
-    --esc-scroll-thumb: #c6c6bf;
-    --esc-scroll-hover: #a5a59d;
-    background-color: #f8f8f6;
-    color: #1b1b18;
-  }
-
-  /* Tema 4: Escuro Carbon */
-  body[data-esc-theme="escuro"] {
-    --esc-bg: #1f2420;
-    --esc-surface: #272e28;
-    --esc-paper: #232a24;
-    --esc-pill: #2f3830;
-    --esc-ink: #d8e4d6;
-    --esc-manuscript: #e6efe4;
-    --esc-muted: #9eb09b;
-    --esc-border: #4e5e4c;
-    --esc-selected: #334031;
-    --esc-weave-bg: #141914;
-    --esc-weave-ink: #e4efe2;
-    --esc-scroll-thumb: #4f5f4d;
-    --esc-scroll-hover: #677a64;
-    background-color: #1f2420;
-    color: #d8e4d6;
+  html,
+  body,
+  body[data-esc-theme="eink"] {
+    background: #c4cfc2 !important;
+    background-color: #c4cfc2 !important;
+    color: #212921 !important;
   }
 
   /* Seleção AAA em Papel digital (12.8:1) */
-  body[data-esc-theme="eink"] ::selection,
-  body[data-esc-theme="eink"] *::selection {
+  ::selection,
+  *::selection {
     background: #242d23 !important;
     color: #f2f7f0 !important;
   }
-  body[data-esc-theme="papel"] ::selection {
-    background: #2e2923 !important;
-    color: #f7f3eb !important;
-  }
-  body[data-esc-theme="escuro"] ::selection {
-    background: #d8e4d6 !important;
-    color: #1a2119 !important;
+
+  /* Superfície contínua única #c4cfc2 — mata qualquer #f7f4eb / #f5f2e5 / #e8eddf / #fff herdado */
+  body[data-view="workspace"] #location-path,
+  body[data-view="workspace"] #esc-workspace,
+  body[data-view="workspace"] #navigation,
+  body[data-view="workspace"] #items-column,
+  body[data-view="workspace"] #esc-items-header,
+  body[data-view="workspace"] #esc-items-list,
+  body[data-view="workspace"] #esc-sonnet-panel,
+  body[data-view="workspace"] #writing-space,
+  body[data-view="workspace"]:not([data-machine="true"]) #writing-space,
+  body[data-view="workspace"][data-machine="true"] #writing-space,
+  body[data-view="workspace"] #writing-space .masthead,
+  body[data-view="workspace"] #writing-space .desk,
+  body[data-view="workspace"] #writing-space .paper,
+  body[data-view="workspace"]:not([data-machine="true"]) #writing-space .paper,
+  body[data-view="workspace"][data-machine="true"] #writing-space .paper,
+  body[data-view="workspace"] #writing-space .focus-mask,
+  body[data-view="workspace"]:not([data-machine="true"]) #writing-space .focus-mask,
+  body[data-view="workspace"][data-machine="true"] #writing-space .focus-mask,
+  body[data-view="workspace"] #writing-space .note-heading,
+  body[data-view="workspace"] #writing-space .writing-toolbar,
+  body[data-view="workspace"] #writing-space .esc-rich-toolbar,
+  body[data-view="workspace"] #writing-space .paper-footer,
+  body[data-view="workspace"] #writing-space .desk-inspector,
+  body[data-view="workspace"] #manuscrito,
+  body[data-view="workspace"] #esc-rich-editor,
+  body[data-view="workspace"] #esc-reference-view,
+  body[data-view="workspace"] .esc-search-wrap,
+  body[data-view="workspace"] #esc-pomodoro-dock,
+  body[data-view="workspace"] .esc-nav-footer,
+  body[data-view="workspace"] .sheet {
+    background: #c4cfc2 !important;
+    background-color: #c4cfc2 !important;
+    box-shadow: none !important;
   }
 
-  /* Divisórias técnicas 1px dashed no tema E-Ink Sálvia */
-  body[data-esc-theme="eink"] #navigation,
-  body[data-esc-theme="eink"] #items-column {
-    border-right: 1px dashed #7c8b78;
+  /* Tinta de leitura AAA no manuscrito e títulos */
+  body[data-view="workspace"] #manuscrito,
+  body[data-view="workspace"] #esc-rich-editor,
+  body[data-view="workspace"] #writing-space .title {
+    color: #111511 !important;
+    caret-color: #212921;
   }
-  body[data-esc-theme="eink"] #esc-new-project {
-    background: #242d23;
-    color: #d8e4d6;
-    border: 1px dashed #d8e4d6;
+
+  body[data-view="workspace"] #writing-space .paper {
+    border: 0 !important;
+  }
+
+  /* Divisórias técnicas 1px dashed consistentes em todo o aplicativo */
+  body[data-view="workspace"] #location-path {
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    color: #344231 !important;
+  }
+  body[data-view="workspace"] #navigation,
+  body[data-view="workspace"] #items-column {
+    border-right: 1px dashed rgba(33, 41, 33, 0.28) !important;
+  }
+  body[data-view="workspace"] .esc-nav-brand,
+  body[data-view="workspace"] .esc-new-project-wrap,
+  body[data-view="workspace"] #esc-items-header,
+  body[data-view="workspace"] .esc-search-wrap,
+  body[data-view="workspace"] #writing-space .masthead,
+  body[data-view="workspace"] #writing-space .writing-toolbar,
+  body[data-view="workspace"] #writing-space .esc-rich-toolbar {
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.26) !important;
+  }
+  body[data-view="workspace"] #esc-pomodoro-dock,
+  body[data-view="workspace"] .esc-nav-footer,
+  body[data-view="workspace"] #writing-space .paper-footer {
+    border-top: 1px dashed rgba(33, 41, 33, 0.26) !important;
+  }
+
+  /* Cor do projeto discreta: apenas filete vertical esquerdo (sem chapar rosa/bege no cabeçalho todo) */
+  body[data-view="workspace"] #esc-items-header {
+    border-left: 4px solid var(--esc-project-color, #7c8b78);
+    color: #212921 !important;
+  }
+
+  /* Superfícies de entrada / ação secundária em tom Sálvia calmo #b8c5b6 (zero branco!) */
+  body[data-view="workspace"] #esc-new-note {
+    background: #b8c5b6 !important;
+    color: #212921 !important;
+    border: 1px solid #7c8b78 !important;
+    border-radius: 2px;
+  }
+  body[data-view="workspace"] #esc-new-note:hover {
+    background: #aebcae !important;
+  }
+
+  body[data-view="workspace"] .esc-search-pill,
+  body[data-view="workspace"] #esc-folder-search {
+    background: #b8c5b6 !important;
+    border: 1px solid #7c8b78 !important;
+    color: #212921 !important;
+  }
+
+  /* Botão principal carvão-botânico (+ Novo projeto) */
+  body[data-view="workspace"] #esc-new-project {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border: 1px dashed #d8e4d6 !important;
     outline: 2px solid #242d23;
+    border-radius: 2px;
   }
-  body[data-esc-theme="eink"] #esc-new-project:hover {
-    background: #2e382c;
+  body[data-view="workspace"] #esc-new-project:hover {
+    background: #2e382c !important;
+    color: #f0f2e7 !important;
   }
-  body[data-esc-theme="eink"] #manuscrito,
-  body[data-esc-theme="eink"] #esc-rich-editor {
-    color: #111511;
-    background: #c4cfc2;
+
+  /* Botões das barras de ferramentas e ações: planos sobre o papel, zero fundo cinza/branco misturado */
+  body[data-view="workspace"] #writing-space .masthead button,
+  body[data-view="workspace"] #writing-space .writing-toolbar button,
+  body[data-view="workspace"] #writing-space .esc-rich-toolbar button,
+  body[data-view="workspace"] .esc-nav-tool-btn,
+  body[data-view="workspace"] .esc-nav-footer-btn,
+  body[data-view="workspace"] .esc-pomo-btn,
+  body[data-view="workspace"] .esc-mini-add,
+  body[data-view="workspace"] .esc-item-act {
+    background: transparent;
+    color: #212921;
+    border-radius: 2px;
   }
-  body[data-esc-theme="eink"] #writing-space,
-  body[data-esc-theme="eink"] #writing-paper,
-  body[data-esc-theme="eink"] .desk {
-    background: #c4cfc2;
+
+  body[data-view="workspace"] #writing-space .esc-rich-toolbar button {
+    border: 1px solid rgba(33, 41, 33, 0.26);
   }
-  body[data-esc-theme="papel"] #writing-space,
-  body[data-esc-theme="papel"] #writing-paper,
-  body[data-esc-theme="papel"] #manuscrito,
-  body[data-esc-theme="papel"] #esc-rich-editor {
-    background: #f7f3eb;
-    color: #171410;
+
+  /* Estados ativos / pressionados: chapado carvão-botânico fosco (igual App Linux) */
+  body[data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"],
+  body[data-view="workspace"] #writing-space .masthead button[aria-pressed="true"],
+  body[data-view="workspace"] #writing-space .masthead button[aria-expanded="true"],
+  body[data-view="workspace"] .esc-pomo-btn[aria-pressed="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border-color: #242d23 !important;
   }
-  body[data-esc-theme="escuro"] #writing-space,
-  body[data-esc-theme="escuro"] #writing-paper,
-  body[data-esc-theme="escuro"] #manuscrito,
-  body[data-esc-theme="escuro"] #esc-rich-editor {
-    background: #232a24;
-    color: #e6efe4;
+
+  /* =========================================================================
+     FIM DEFINITIVO DO "QUADRADO QUE ILUMINA NO HOVER"
+     No papel digital E-Ink, hover NUNCA clareia (#c1ccc0).
+     Ele aplica um véu grafite sutil (rgba 0.048) na LINHA INTEIRA.
+     ========================================================================= */
+  body[data-view="workspace"] button:hover,
+  body[data-view="workspace"] .file-label:hover {
+    background: rgba(33, 41, 33, 0.055);
+    color: inherit;
+  }
+
+  /* Botões internos de linhas compostas NUNCA acendem quadrado próprio */
+  body[data-view="workspace"] .esc-project-select:hover,
+  body[data-view="workspace"] .esc-tree-expand:hover,
+  body[data-view="workspace"] .esc-project-color-btn:hover,
+  body[data-view="workspace"] .esc-tree-toggle:hover,
+  body[data-view="workspace"] .esc-tree-open:hover,
+  body[data-view="workspace"] .esc-tree-menu:hover,
+  body[data-view="workspace"] .esc-item-open:hover,
+  body[data-view="workspace"] .esc-brand-btn:hover,
+  body[data-view="workspace"] #location-path button:hover,
+  body[data-view="workspace"] .esc-filter-toggle:hover,
+  body[data-view="workspace"] #esc-items-search-clear:hover {
+    background: transparent !important;
+  }
+
+  /* Véu contínuo de borda a borda na linha inteira ao passar o mouse */
+  body[data-view="workspace"] .esc-project-row:hover,
+  body[data-view="workspace"] .esc-folder-item:hover,
+  body[data-view="workspace"] .esc-tree-note:hover,
+  body[data-view="workspace"] .esc-nav-item:hover,
+  body[data-view="workspace"] .esc-item-card:hover {
+    background: rgba(33, 41, 33, 0.048) !important;
+  }
+
+  /* Item selecionado: véu grafite um passo mais firme + filete esquerdo */
+  body[data-view="workspace"] .esc-project-row.is-active,
+  body[data-view="workspace"] .esc-folder-item[aria-current="true"],
+  body[data-view="workspace"] .esc-tree-note.is-selected,
+  body[data-view="workspace"] .esc-nav-item[aria-current="true"],
+  body[data-view="workspace"] .esc-item-card.is-selected {
+    background: rgba(33, 41, 33, 0.085) !important;
+  }
+
+  /* Zero halo/contorno preto no clique do mouse; foco discreto apenas via teclado */
+  body[data-view="workspace"] button:focus:not(:focus-visible) {
+    outline: none !important;
+  }
+  body[data-view="workspace"] button:focus-visible {
+    outline: 1px dashed #242d23 !important;
+    outline-offset: -2px;
+  }
+
+  /* Modo Leitor em harmonia com Papel digital E-Ink Sálvia por padrão */
+  .esc-reader:not([data-palette="white"]):not([data-palette="night"]) {
+    --reader-paper: #c4cfc2;
+    --reader-ink: #111511;
+    --reader-muted: #455241;
+    --reader-line: #7c8b78;
   }
 
   /* Barra de rolagem minimalista ultraesbelta 4px (TEMA-EINK-SCROLLBAR-02) */
@@ -5212,13 +5317,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"], body[
   }
   *::-webkit-scrollbar-thumb {
     background: #9fad9b;
-    background: var(--esc-scroll-thumb, #9fad9b);
     border-radius: 999px;
     border: none;
   }
   *::-webkit-scrollbar-thumb:hover {
     background: #859681;
-    background: var(--esc-scroll-hover, #859681);
   }
   * {
     scrollbar-width: thin;
@@ -5249,30 +5352,6 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"], body[
       filter: none !important;
       opacity: 1 !important;
     }
-  }
-
-  /* Seletor dos 4 temas no painel Ajustes */
-  .esc-theme-grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 6px 0 10px;
-  }
-  .esc-theme-grid button {
-    margin: 0 6px 6px 0;
-    padding: 6px 10px;
-    border: 1px solid #7c8b78;
-    border: 1px solid var(--esc-border, #7c8b78);
-    background: transparent;
-    color: inherit;
-    font-size: 12px;
-    cursor: pointer;
-  }
-  .esc-theme-grid button[aria-pressed="true"] {
-    background: #242d23;
-    background: var(--esc-weave-bg, #242d23);
-    color: #d8e4d6;
-    color: var(--esc-weave-ink, #d8e4d6);
-    font-weight: 600;
   }
 
   /* Breadcrumb clicável */
@@ -5959,7 +6038,7 @@ SOFTWARE.
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-theme-cycle" type="button" title="Alternar tema (Papel digital / Papel / Claro / Escuro)">Tema</button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
+    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-theme-cycle" type="button" hidden aria-hidden="true">Tema</button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
   </nav>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
     <header class="os-bar">
@@ -6238,9 +6317,9 @@ SOFTWARE.
   <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="mesa-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
     <div class="setting-section"><h3>Ambiente</h3>
-      <div class="setting-row"><span>Aparência (4 temas)</span><div class="esc-theme-grid" role="group" aria-label="Temas do Escrevaral"><button type="button" data-esc-theme-choice="eink" aria-pressed="true">Papel digital</button><button type="button" data-esc-theme-choice="papel" aria-pressed="false">Papel</button><button type="button" data-esc-theme-choice="claro" aria-pressed="false">Claro</button><button type="button" data-esc-theme-choice="escuro" aria-pressed="false">Escuro</button></div></div>
+      <div class="setting-row"><span>Aparência</span><span class="quiet">Papel digital (E-Ink Sálvia · tema único)</span></div>
       <div class="setting-row"><span>Leitura confortável</span><button id="esc-reading-toggle" type="button" aria-pressed="false">Ativar</button></div>
-      <div class="setting-row"><span>Tema</span><div class="theme-choice" role="group" aria-label="Tema"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
+      <div class="setting-row" hidden aria-hidden="true"><div class="theme-choice"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
       <div class="setting-row"><span>Máquina antiga (no Superfoco)</span><button id="machine-toggle" aria-pressed="true">Desativar</button></div>
       <div class="setting-row"><span>Destaque de parágrafo</span><button id="focus-toggle" aria-pressed="true">Destacar</button></div>
       <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"><span class="switch-off">Não</span><span class="switch-on">Sim</span></span></label>
@@ -13313,19 +13392,16 @@ SOFTWARE.
 
 ;
 /* Fonte: src/ui/temas-e-chrome.js */
-/* Temas oficiais (Papel digital E-Ink Sálvia, Papel, Claro, Escuro Carbon), Leitura confortável, Piscar E-Ink e Tela cheia — ES5 */
+/* Tema único calibrado (Papel digital E-Ink Sálvia #c4cfc2), Leitura confortável, Piscar E-Ink e Tela cheia — ES5 */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
 
   var THEME_KEY = 'escrevaral.theme.v2';
   var READING_KEY = 'escrevaral.reading.comfortable.v1';
-  var VALID_THEMES = { eink: 1, papel: 1, claro: 1, escuro: 1 };
+  var LOCKED_THEME = 'eink';
   var LABELS = {
-    eink: 'Papel digital (Sálvia)',
-    papel: 'Papel',
-    claro: 'Claro',
-    escuro: 'Escuro (Carbon)'
+    eink: 'Papel digital (E-Ink S\u00E1lvia)'
   };
 
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
@@ -13354,56 +13430,37 @@ SOFTWARE.
     opts = opts || {};
     var storage = opts.storage || null;
     var onNewNote = opts.onNewNote || function () {};
-    var currentTheme = 'eink';
+    var currentTheme = LOCKED_THEME;
     var comfortable = false;
 
     try {
       if (storage) {
-        var saved = storage.getItem(THEME_KEY);
-        if (saved && VALID_THEMES[saved]) {
-          currentTheme = saved;
-        } else {
-          var legacy = storage.getItem('escrevaral.astra.theme');
-          if (legacy === 'escuro') { currentTheme = 'escuro'; }
-        }
         comfortable = storage.getItem(READING_KEY) === 'true';
       }
     } catch (ignore) {}
 
     function applyTheme(name, persistPref) {
-      if (!VALID_THEMES[name]) { name = 'eink'; }
-      currentTheme = name;
-      var legacyTheme = name === 'escuro' ? 'escuro' : 'claro';
+      currentTheme = LOCKED_THEME;
       if (document.body) {
-        document.body.setAttribute('data-esc-theme', name);
-        document.body.setAttribute('data-theme', legacyTheme);
+        document.body.setAttribute('data-esc-theme', LOCKED_THEME);
+        document.body.setAttribute('data-theme', 'claro');
       }
       var meta = document.querySelector ? document.querySelector('meta[name="theme-color"]') : null;
-      if (meta) {
-        meta.setAttribute('content', name === 'escuro' ? '#1f2420' : (name === 'eink' ? '#c4cfc2' : (name === 'papel' ? '#f4efe6' : '#f8f8f6')));
-      }
-      var btns = document.querySelectorAll ? document.querySelectorAll('[data-esc-theme-choice]') : [];
-      var i;
-      for (i = 0; i < btns.length; i += 1) {
-        var val = btns[i].getAttribute('data-esc-theme-choice');
-        btns[i].setAttribute('aria-pressed', val === name ? 'true' : 'false');
-      }
+      if (meta) { meta.setAttribute('content', '#c4cfc2'); }
       var lightBtn = document.getElementById && document.getElementById('theme-light');
       var darkBtn = document.getElementById && document.getElementById('theme-dark');
-      if (lightBtn) { lightBtn.setAttribute('aria-pressed', legacyTheme === 'claro' ? 'true' : 'false'); }
-      if (darkBtn) { darkBtn.setAttribute('aria-pressed', legacyTheme === 'escuro' ? 'true' : 'false'); }
-
+      if (lightBtn) { lightBtn.setAttribute('aria-pressed', 'true'); }
+      if (darkBtn) { darkBtn.setAttribute('aria-pressed', 'false'); }
       if (persistPref !== false && storage) {
         try {
-          storage.setItem(THEME_KEY, name);
-          storage.setItem('escrevaral.astra.theme', legacyTheme);
+          storage.setItem(THEME_KEY, LOCKED_THEME);
+          storage.setItem('escrevaral.astra.theme', 'claro');
         } catch (ignore) {}
       }
-      // Sincroniza tema com iframe da Academia se aberto
       try {
         var frame = document.querySelector && document.querySelector('iframe.esc-academy-frame');
         if (frame && frame.contentWindow && frame.contentWindow.postMessage) {
-          frame.contentWindow.postMessage({ channel: 'escrevaral-theme', theme: name, dark: name === 'escuro' }, '*');
+          frame.contentWindow.postMessage({ channel: 'escrevaral-theme', theme: LOCKED_THEME, dark: false }, '*');
         }
       } catch (ignore) {}
     }
@@ -13422,15 +13479,6 @@ SOFTWARE.
     }
 
     function bindControls() {
-      var btns = document.querySelectorAll ? document.querySelectorAll('[data-esc-theme-choice]') : [];
-      var i;
-      for (i = 0; i < btns.length; i += 1) {
-        (function (b) {
-          on(b, 'click', function () {
-            applyTheme(b.getAttribute('data-esc-theme-choice'), true);
-          });
-        }(btns[i]));
-      }
       var readBtn = document.getElementById && document.getElementById('esc-reading-toggle');
       if (readBtn) {
         on(readBtn, 'click', function () { applyReading(!comfortable, true); });
@@ -13441,18 +13489,7 @@ SOFTWARE.
           if (root.Escr.superfocoCore) { root.Escr.superfocoCore.toggleFullscreen(); }
         });
       }
-      var themeCycle = document.getElementById && document.getElementById('esc-theme-cycle');
-      if (themeCycle) {
-        on(themeCycle, 'click', function () {
-          var order = ['eink', 'papel', 'claro', 'escuro'];
-          var idx = order.indexOf(currentTheme);
-          var next = order[(idx + 1) % order.length];
-          applyTheme(next, true);
-          themeCycle.title = 'Tema atual: ' + LABELS[next] + ' (clique para alternar)';
-        });
-      }
       on(document, 'keydown', function (ev) {
-        // Alt+Shift+N: nova nota com piscar E-Ink
         if (ev.altKey && ev.shiftKey && !ev.ctrlKey && !ev.metaKey && ev.keyCode === 78) {
           ev.preventDefault();
           onNewNote();
@@ -13460,7 +13497,7 @@ SOFTWARE.
       });
     }
 
-    applyTheme(currentTheme, false);
+    applyTheme(LOCKED_THEME, true);
     applyReading(comfortable, false);
     bindControls();
 

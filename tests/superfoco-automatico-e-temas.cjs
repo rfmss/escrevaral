@@ -123,20 +123,18 @@ for (const ch of 'outra frase') {
 }
 assert.equal(openCount, 1, 'não abre com switch OFF');
 
-// 6. 4 temas oficiais + Leitura confortável + Piscar E-Ink
+// 6. Tema único calibrado E-Ink Sálvia + Leitura confortável + Piscar E-Ink
 const tc = ctx.Escr.mountThemeChrome({ storage });
 assert.equal(tc.getTheme(), 'eink');
 assert.equal(body.getAttribute('data-esc-theme'), 'eink');
 tc.setTheme('papel');
-assert.equal(body.getAttribute('data-esc-theme'), 'papel');
+assert.equal(tc.getTheme(), 'eink', 'tema permanece travado em E-Ink Sálvia');
+assert.equal(body.getAttribute('data-esc-theme'), 'eink');
 assert.equal(body.getAttribute('data-theme'), 'claro');
-tc.setTheme('escuro');
-assert.equal(body.getAttribute('data-esc-theme'), 'escuro');
-assert.equal(body.getAttribute('data-theme'), 'escuro');
 tc.setComfortable(true);
 assert.equal(body.getAttribute('data-esc-reading'), 'comfortable');
 const targetEl = makeEl('div');
 tc.flash(targetEl);
 assert.equal(targetEl.getAttribute('data-eink-flash'), 'true');
 
-console.log('OK: Superfoco automático (2 palavras + 30s + P01 guard + barra + Soneto acoplado) e 4 temas/E-Ink verificados.');
+console.log('OK: Superfoco automático (2 palavras + 30s + P01 guard + barra + Soneto acoplado) e tema único E-Ink verificados.');

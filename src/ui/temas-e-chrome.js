@@ -1,16 +1,13 @@
-/* Temas oficiais (Papel digital E-Ink Sálvia, Papel, Claro, Escuro Carbon), Leitura confortável, Piscar E-Ink e Tela cheia — ES5 */
+/* Tema único calibrado (Papel digital E-Ink Sálvia #c4cfc2), Leitura confortável, Piscar E-Ink e Tela cheia — ES5 */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
 
   var THEME_KEY = 'escrevaral.theme.v2';
   var READING_KEY = 'escrevaral.reading.comfortable.v1';
-  var VALID_THEMES = { eink: 1, papel: 1, claro: 1, escuro: 1 };
+  var LOCKED_THEME = 'eink';
   var LABELS = {
-    eink: 'Papel digital (Sálvia)',
-    papel: 'Papel',
-    claro: 'Claro',
-    escuro: 'Escuro (Carbon)'
+    eink: 'Papel digital (E-Ink S\u00E1lvia)'
   };
 
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
@@ -39,56 +36,37 @@
     opts = opts || {};
     var storage = opts.storage || null;
     var onNewNote = opts.onNewNote || function () {};
-    var currentTheme = 'eink';
+    var currentTheme = LOCKED_THEME;
     var comfortable = false;
 
     try {
       if (storage) {
-        var saved = storage.getItem(THEME_KEY);
-        if (saved && VALID_THEMES[saved]) {
-          currentTheme = saved;
-        } else {
-          var legacy = storage.getItem('escrevaral.astra.theme');
-          if (legacy === 'escuro') { currentTheme = 'escuro'; }
-        }
         comfortable = storage.getItem(READING_KEY) === 'true';
       }
     } catch (ignore) {}
 
     function applyTheme(name, persistPref) {
-      if (!VALID_THEMES[name]) { name = 'eink'; }
-      currentTheme = name;
-      var legacyTheme = name === 'escuro' ? 'escuro' : 'claro';
+      currentTheme = LOCKED_THEME;
       if (document.body) {
-        document.body.setAttribute('data-esc-theme', name);
-        document.body.setAttribute('data-theme', legacyTheme);
+        document.body.setAttribute('data-esc-theme', LOCKED_THEME);
+        document.body.setAttribute('data-theme', 'claro');
       }
       var meta = document.querySelector ? document.querySelector('meta[name="theme-color"]') : null;
-      if (meta) {
-        meta.setAttribute('content', name === 'escuro' ? '#1f2420' : (name === 'eink' ? '#c4cfc2' : (name === 'papel' ? '#f4efe6' : '#f8f8f6')));
-      }
-      var btns = document.querySelectorAll ? document.querySelectorAll('[data-esc-theme-choice]') : [];
-      var i;
-      for (i = 0; i < btns.length; i += 1) {
-        var val = btns[i].getAttribute('data-esc-theme-choice');
-        btns[i].setAttribute('aria-pressed', val === name ? 'true' : 'false');
-      }
+      if (meta) { meta.setAttribute('content', '#c4cfc2'); }
       var lightBtn = document.getElementById && document.getElementById('theme-light');
       var darkBtn = document.getElementById && document.getElementById('theme-dark');
-      if (lightBtn) { lightBtn.setAttribute('aria-pressed', legacyTheme === 'claro' ? 'true' : 'false'); }
-      if (darkBtn) { darkBtn.setAttribute('aria-pressed', legacyTheme === 'escuro' ? 'true' : 'false'); }
-
+      if (lightBtn) { lightBtn.setAttribute('aria-pressed', 'true'); }
+      if (darkBtn) { darkBtn.setAttribute('aria-pressed', 'false'); }
       if (persistPref !== false && storage) {
         try {
-          storage.setItem(THEME_KEY, name);
-          storage.setItem('escrevaral.astra.theme', legacyTheme);
+          storage.setItem(THEME_KEY, LOCKED_THEME);
+          storage.setItem('escrevaral.astra.theme', 'claro');
         } catch (ignore) {}
       }
-      // Sincroniza tema com iframe da Academia se aberto
       try {
         var frame = document.querySelector && document.querySelector('iframe.esc-academy-frame');
         if (frame && frame.contentWindow && frame.contentWindow.postMessage) {
-          frame.contentWindow.postMessage({ channel: 'escrevaral-theme', theme: name, dark: name === 'escuro' }, '*');
+          frame.contentWindow.postMessage({ channel: 'escrevaral-theme', theme: LOCKED_THEME, dark: false }, '*');
         }
       } catch (ignore) {}
     }
@@ -107,15 +85,6 @@
     }
 
     function bindControls() {
-      var btns = document.querySelectorAll ? document.querySelectorAll('[data-esc-theme-choice]') : [];
-      var i;
-      for (i = 0; i < btns.length; i += 1) {
-        (function (b) {
-          on(b, 'click', function () {
-            applyTheme(b.getAttribute('data-esc-theme-choice'), true);
-          });
-        }(btns[i]));
-      }
       var readBtn = document.getElementById && document.getElementById('esc-reading-toggle');
       if (readBtn) {
         on(readBtn, 'click', function () { applyReading(!comfortable, true); });
@@ -126,18 +95,7 @@
           if (root.Escr.superfocoCore) { root.Escr.superfocoCore.toggleFullscreen(); }
         });
       }
-      var themeCycle = document.getElementById && document.getElementById('esc-theme-cycle');
-      if (themeCycle) {
-        on(themeCycle, 'click', function () {
-          var order = ['eink', 'papel', 'claro', 'escuro'];
-          var idx = order.indexOf(currentTheme);
-          var next = order[(idx + 1) % order.length];
-          applyTheme(next, true);
-          themeCycle.title = 'Tema atual: ' + LABELS[next] + ' (clique para alternar)';
-        });
-      }
       on(document, 'keydown', function (ev) {
-        // Alt+Shift+N: nova nota com piscar E-Ink
         if (ev.altKey && ev.shiftKey && !ev.ctrlKey && !ev.metaKey && ev.keyCode === 78) {
           ev.preventDefault();
           onNewNote();
@@ -145,7 +103,7 @@
       });
     }
 
-    applyTheme(currentTheme, false);
+    applyTheme(LOCKED_THEME, true);
     applyReading(comfortable, false);
     bindControls();
 
