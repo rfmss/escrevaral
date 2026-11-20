@@ -460,9 +460,11 @@
   function textPosition(offset) {
     var mirror = document.createElement('div'), marker = document.createElement('span'), style = window.getComputedStyle(manuscript);
     mirror.className = 'editor-measure'; mirror.style.width = manuscript.clientWidth + 'px';
+    mirror.style.boxSizing = style.boxSizing || 'border-box';
     mirror.style.font = style.font; mirror.style.fontFamily = style.fontFamily; mirror.style.fontSize = style.fontSize;
     mirror.style.lineHeight = style.lineHeight; mirror.style.letterSpacing = style.letterSpacing;
-    mirror.style.paddingTop = style.paddingTop; mirror.style.paddingBottom = style.paddingBottom;
+    mirror.style.paddingTop = style.paddingTop; mirror.style.paddingRight = style.paddingRight;
+    mirror.style.paddingBottom = style.paddingBottom; mirror.style.paddingLeft = style.paddingLeft;
     var line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
     marker.style.display = 'inline-block'; marker.style.width = '0'; marker.style.height = line + 'px'; marker.style.verticalAlign = 'top';
     text(mirror, manuscript.value.slice(0, offset)); text(marker, '\u200b');
@@ -516,7 +518,10 @@
     typewriterTimer = null;
     if (!window.getComputedStyle || composing || document.activeElement !== manuscript || manuscript.selectionStart !== manuscript.selectionEnd) { return; }
     var position = textPosition(manuscript.selectionStart);
-    manuscript.scrollTop = Math.max(0, position.top + position.line / 2 - typingLineTarget());
+    var nextScroll = Math.max(0, Math.round(position.top + position.line / 2 - typingLineTarget()));
+    if (Math.abs(manuscript.scrollTop - nextScroll) > 1) {
+      manuscript.scrollTop = nextScroll;
+    }
     updateFocus();
     if (machineEnabled) { aimMachineStrike(position); }
   }

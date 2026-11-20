@@ -12778,7 +12778,9 @@ SOFTWARE.
       visible = true;
       document.body.setAttribute('data-esc-machine', 'on');
       if (document.body.style && document.body.style.setProperty) {
-        document.body.style.setProperty('--esc-machine-top', geom.topInset.toFixed(1) + 'px');
+        var colTop = typeof rect.top === 'number' && isFinite(rect.top) ? rect.top : 0;
+        var topInset = Math.max(0, geom.anchorY - colTop - line / 2);
+        document.body.style.setProperty('--esc-machine-top', topInset.toFixed(1) + 'px');
       }
       return anchorY;
     }
@@ -13108,17 +13110,25 @@ SOFTWARE.
       if (!richEl || richEl.hidden || !getActive()) { return; }
       var children = richEl.children || [];
       var activeBlock = null;
+      var caretRect = null;
+      var collapsed = false;
       try {
         if (window.getSelection) {
           var sel = window.getSelection();
           if (sel && sel.rangeCount) {
-            var node = sel.getRangeAt(0).startContainer;
+            collapsed = !!sel.isCollapsed;
+            var range = sel.getRangeAt(0);
+            var node = range.startContainer;
             while (node && node !== richEl) {
               if (node.parentNode === richEl && node.nodeType === 1) {
                 activeBlock = node;
                 break;
               }
               node = node.parentNode;
+            }
+            if (collapsed && range.getBoundingClientRect) {
+              var r = range.getBoundingClientRect();
+              if (r && r.height > 0) { caretRect = r; }
             }
           }
         }
@@ -13131,31 +13141,15 @@ SOFTWARE.
           children[i].removeAttribute('data-esc-active-para');
         }
       }
-      if (activeBlock && activeBlock.getBoundingClientRect) {
+      if (collapsed && activeBlock && activeBlock.getBoundingClientRect) {
         var anchor = getMachineAnchor();
         if (typeof anchor === 'number' && anchor > 60) {
-          var rect = activeBlock.getBoundingClientRect();
+          var rect = caretRect || activeBlock.getBoundingClientRect();
           var diff = (rect.top + rect.height / 2) - anchor;
-          if (Math.abs(diff) > 12 && richEl.scrollTop !== undefined) {
-            richEl.scrollTop = Math.max(0, richEl.scrollTop + diff);
+          if (Math.abs(diff) > 6 && richEl.scrollTop !== undefined) {
+            richEl.scrollTop = Math.max(0, Math.round(richEl.scrollTop + diff));
           }
         }
-      }
-    }
-
-    function updatePlainAnchor() {
-      if (!manuscriptEl || manuscriptEl.hidden || !getActive()) { return; }
-      var anchor = getMachineAnchor();
-      if (typeof anchor !== 'number' || anchor <= 60) { return; }
-      var pos = typeof manuscriptEl.selectionEnd === 'number' ? manuscriptEl.selectionEnd : 0;
-      var before = manuscriptEl.value.slice(0, pos);
-      var lineCount = before.split('\n').length - 1;
-      var cs = window.getComputedStyle ? window.getComputedStyle(manuscriptEl) : null;
-      var lh = cs ? (parseFloat(cs.lineHeight) || 35) : 35;
-      var padTop = cs ? (parseFloat(cs.paddingTop) || 0) : 0;
-      var targetTop = padTop + lineCount * lh - (anchor - 40);
-      if (isFinite(targetTop) && targetTop >= 0) {
-        manuscriptEl.scrollTop = targetTop;
       }
     }
 
@@ -13170,7 +13164,6 @@ SOFTWARE.
         return;
       }
       if (richEl && !richEl.hidden) { updateRichParagraphFocus(); }
-      else { updatePlainAnchor(); }
     }
 
     function syncSwitch() {
@@ -16557,9 +16550,11 @@ SOFTWARE.
   function textPosition(offset) {
     var mirror = document.createElement('div'), marker = document.createElement('span'), style = window.getComputedStyle(manuscript);
     mirror.className = 'editor-measure'; mirror.style.width = manuscript.clientWidth + 'px';
+    mirror.style.boxSizing = style.boxSizing || 'border-box';
     mirror.style.font = style.font; mirror.style.fontFamily = style.fontFamily; mirror.style.fontSize = style.fontSize;
     mirror.style.lineHeight = style.lineHeight; mirror.style.letterSpacing = style.letterSpacing;
-    mirror.style.paddingTop = style.paddingTop; mirror.style.paddingBottom = style.paddingBottom;
+    mirror.style.paddingTop = style.paddingTop; mirror.style.paddingRight = style.paddingRight;
+    mirror.style.paddingBottom = style.paddingBottom; mirror.style.paddingLeft = style.paddingLeft;
     var line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.7;
     marker.style.display = 'inline-block'; marker.style.width = '0'; marker.style.height = line + 'px'; marker.style.verticalAlign = 'top';
     text(mirror, manuscript.value.slice(0, offset)); text(marker, '\u200b');
@@ -16613,7 +16608,10 @@ SOFTWARE.
     typewriterTimer = null;
     if (!window.getComputedStyle || composing || document.activeElement !== manuscript || manuscript.selectionStart !== manuscript.selectionEnd) { return; }
     var position = textPosition(manuscript.selectionStart);
-    manuscript.scrollTop = Math.max(0, position.top + position.line / 2 - typingLineTarget());
+    var nextScroll = Math.max(0, Math.round(position.top + position.line / 2 - typingLineTarget()));
+    if (Math.abs(manuscript.scrollTop - nextScroll) > 1) {
+      manuscript.scrollTop = nextScroll;
+    }
     updateFocus();
     if (machineEnabled) { aimMachineStrike(position); }
   }

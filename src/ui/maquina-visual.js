@@ -231,7 +231,9 @@
       visible = true;
       document.body.setAttribute('data-esc-machine', 'on');
       if (document.body.style && document.body.style.setProperty) {
-        document.body.style.setProperty('--esc-machine-top', geom.topInset.toFixed(1) + 'px');
+        var colTop = typeof rect.top === 'number' && isFinite(rect.top) ? rect.top : 0;
+        var topInset = Math.max(0, geom.anchorY - colTop - line / 2);
+        document.body.style.setProperty('--esc-machine-top', topInset.toFixed(1) + 'px');
       }
       return anchorY;
     }

@@ -237,17 +237,25 @@
       if (!richEl || richEl.hidden || !getActive()) { return; }
       var children = richEl.children || [];
       var activeBlock = null;
+      var caretRect = null;
+      var collapsed = false;
       try {
         if (window.getSelection) {
           var sel = window.getSelection();
           if (sel && sel.rangeCount) {
-            var node = sel.getRangeAt(0).startContainer;
+            collapsed = !!sel.isCollapsed;
+            var range = sel.getRangeAt(0);
+            var node = range.startContainer;
             while (node && node !== richEl) {
               if (node.parentNode === richEl && node.nodeType === 1) {
                 activeBlock = node;
                 break;
               }
               node = node.parentNode;
+            }
+            if (collapsed && range.getBoundingClientRect) {
+              var r = range.getBoundingClientRect();
+              if (r && r.height > 0) { caretRect = r; }
             }
           }
         }
@@ -260,31 +268,15 @@
           children[i].removeAttribute('data-esc-active-para');
         }
       }
-      if (activeBlock && activeBlock.getBoundingClientRect) {
+      if (collapsed && activeBlock && activeBlock.getBoundingClientRect) {
         var anchor = getMachineAnchor();
         if (typeof anchor === 'number' && anchor > 60) {
-          var rect = activeBlock.getBoundingClientRect();
+          var rect = caretRect || activeBlock.getBoundingClientRect();
           var diff = (rect.top + rect.height / 2) - anchor;
-          if (Math.abs(diff) > 12 && richEl.scrollTop !== undefined) {
-            richEl.scrollTop = Math.max(0, richEl.scrollTop + diff);
+          if (Math.abs(diff) > 6 && richEl.scrollTop !== undefined) {
+            richEl.scrollTop = Math.max(0, Math.round(richEl.scrollTop + diff));
           }
         }
-      }
-    }
-
-    function updatePlainAnchor() {
-      if (!manuscriptEl || manuscriptEl.hidden || !getActive()) { return; }
-      var anchor = getMachineAnchor();
-      if (typeof anchor !== 'number' || anchor <= 60) { return; }
-      var pos = typeof manuscriptEl.selectionEnd === 'number' ? manuscriptEl.selectionEnd : 0;
-      var before = manuscriptEl.value.slice(0, pos);
-      var lineCount = before.split('\n').length - 1;
-      var cs = window.getComputedStyle ? window.getComputedStyle(manuscriptEl) : null;
-      var lh = cs ? (parseFloat(cs.lineHeight) || 35) : 35;
-      var padTop = cs ? (parseFloat(cs.paddingTop) || 0) : 0;
-      var targetTop = padTop + lineCount * lh - (anchor - 40);
-      if (isFinite(targetTop) && targetTop >= 0) {
-        manuscriptEl.scrollTop = targetTop;
       }
     }
 
@@ -299,7 +291,6 @@
         return;
       }
       if (richEl && !richEl.hidden) { updateRichParagraphFocus(); }
-      else { updatePlainAnchor(); }
     }
 
     function syncSwitch() {

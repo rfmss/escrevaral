@@ -99,6 +99,14 @@ assert.equal(sf.isAutomaticOpen(), true);
 assert.equal(body.getAttribute('data-esc-writing-sonnet'), 'true');
 assert.ok(body.children.some(c => c.id === 'esc-writing-bar' && !c.hidden));
 
+// 2b. Digitação em texto simples no Superfoco não disputa scrollTop com o controlador
+manuscript.value = 'linha longa que quebra visualmente sem enter\nsegunda linha';
+manuscript.selectionEnd = manuscript.value.length;
+manuscript.scrollTop = 148;
+doc.emit('input', { target: manuscript, inputType: 'insertText', data: 'x' });
+doc.emit('selectionchange', { target: doc });
+assert.equal(manuscript.scrollTop, 148, 'superfoco.js não deve sobrescrever scrollTop do textarea com estimativa grosseira');
+
 // 3. Enquanto cartão P01 estiver aberto, o timer de 30s NÃO fecha o Superfoco (rearma!)
 body.setAttribute('data-esc-consulta-open', 'true');
 const idleT1 = timers.filter(t => !t.cleared && t.ms === 30000).pop();
