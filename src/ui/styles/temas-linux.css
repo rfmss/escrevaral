@@ -235,25 +235,50 @@
     --reader-line: #7c8b78;
   }
 
-  /* Barra de rolagem minimalista ultraesbelta 4px (TEMA-EINK-SCROLLBAR-02) */
+  /* Barra de rolagem ultradiscreta (2px, quase imperceptível) + totalmente oculta no Superfoco */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
   *::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 2px !important;
+    height: 2px !important;
+    background: transparent !important;
+  }
+  *::-webkit-scrollbar-button,
+  *::-webkit-scrollbar-corner {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
   *::-webkit-scrollbar-track {
-    background: transparent;
+    background: transparent !important;
+    border: none !important;
   }
   *::-webkit-scrollbar-thumb {
-    background: #9fad9b;
-    border-radius: 999px;
-    border: none;
+    background: rgba(33, 41, 33, 0.13) !important;
+    border-radius: 999px !important;
+    border: none !important;
   }
   *::-webkit-scrollbar-thumb:hover {
-    background: #859681;
+    background: rgba(33, 41, 33, 0.28) !important;
   }
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #9fad9b transparent;
+
+  /* No Superfoco: barra 100% invisível para não cortar a ilusão da folha na máquina (scroll segue ativo) */
+  body[data-immersion="true"] #manuscrito,
+  body[data-immersion="true"] #esc-rich-editor,
+  body[data-immersion="true"] .editor-viewport,
+  body[data-immersion="true"] .paper {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  body[data-immersion="true"] #manuscrito::-webkit-scrollbar,
+  body[data-immersion="true"] #esc-rich-editor::-webkit-scrollbar,
+  body[data-immersion="true"] .editor-viewport::-webkit-scrollbar,
+  body[data-immersion="true"] .paper::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
   }
 
   /* Leitura confortável */
