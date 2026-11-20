@@ -13,6 +13,25 @@
     show('portable', 'Você está na mesa portátil. Este arquivo contém o editor e as lentes para abrir sem internet. Guarde seus textos separadamente em “Exportar tudo”.');
     return;
   }
+  /* Analíticas sem cookies e sem JS externo (GoatCounter pixel, respeitando Do Not Track). */
+  (function countVisit() {
+    try {
+      var host = root.location && root.location.hostname ? String(root.location.hostname).toLowerCase() : '';
+      if (host !== 'escrevaral.com' && host !== 'www.escrevaral.com') { return; }
+      if ((root.navigator && root.navigator.doNotTrack === '1') || root.doNotTrack === '1') { return; }
+      if (root.navigator && root.navigator.onLine === false) { return; }
+      var p = (root.location.pathname || '/') + (root.location.search || '');
+      var ref = D.referrer || '';
+      var s = root.screen ? (root.screen.width + ',' + root.screen.height + ',' + (root.devicePixelRatio || 1)) : '';
+      var q = 'p=' + encodeURIComponent(p.slice(0, 240)) +
+        '&t=' + encodeURIComponent(D.title || 'ESCREVARAL') +
+        (ref ? '&r=' + encodeURIComponent(ref.slice(0, 240)) : '') +
+        (s ? '&s=' + encodeURIComponent(s) : '') +
+        '&rnd=' + Math.random().toString(36).slice(2, 8);
+      var img = new root.Image();
+      img.src = 'https://escrevaral.goatcounter.com/count?' + q;
+    } catch (ignore) {}
+  }());
   var N = root.navigator, sw = N && N.serviceWorker;
   if (!/^https?:$/.test(root.location.protocol) || root.isSecureContext === false || !sw || !sw.register ||
       !root.Promise || !root.caches || !root.crypto || !root.crypto.subtle || !root.crypto.subtle.digest) {

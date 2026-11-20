@@ -10,15 +10,15 @@
     },
     {
       "id": "app",
-      "path": "assets/20261014-scrvrl-exame-v6-65/app.8ea69137b8ebef29.js",
-      "sha256": "8ea69137b8ebef292c970abb3b0f5057b17d7b00dbb75fe1c389cc282f009cd2",
-      "bytes": 632457
+      "path": "assets/20261014-scrvrl-exame-v6-65/app.be1b1d5e46d79e97.js",
+      "sha256": "be1b1d5e46d79e9746bf445f6b7d005663b92654cea9a9398b9145244b9d6d88",
+      "bytes": 634185
     },
     {
       "id": "styles",
-      "path": "assets/20261014-scrvrl-exame-v6-65/styles.0b65bab6c610f693.css",
-      "sha256": "0b65bab6c610f69394411a9b92e6ede173386d77ce3d842387140ce559c58384",
-      "bytes": 466198
+      "path": "assets/20261014-scrvrl-exame-v6-65/styles.5a487e416b08de70.css",
+      "sha256": "5a487e416b08de70cb53a341a32c56565423413d4a64a8ce40a184419f4ed2e4",
+      "bytes": 467083
     }
   ]
 }

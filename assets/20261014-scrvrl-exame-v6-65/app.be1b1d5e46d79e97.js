@@ -576,9 +576,14 @@
   });
   ['chapters','events','records'].forEach(function(k){on(byId('story-'+k),'click',function(){try{reload();mode=k;page=0;render();}catch(e){text(byId('story-status'),e.message);}});});
   on(byId('story-close'),'click',close);on(byId('start-universe'),'click',open);on(byId('notebook-universe'),'click',open);
-  function lock(){if(!bridge.checkpoint()){return;}lockFocus=D.activeElement;bridge.prepareLock();locked=true;D.body.setAttribute('data-locked','true');text(byId('keychain-name'),(bridge.book()||{}).name||'ESCREVA[RAL]');byId('lock-password').value='';text(byId('lock-message'),'');curtain.hidden=false;hiddenNodes=[];for(var i=0;i<D.body.children.length;i+=1){var n=D.body.children[i];if(n!==curtain&&n.tagName!=='SCRIPT'){hiddenNodes.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');}}try{root.sessionStorage.setItem('escrevaral.curtain','on');}catch(ignore){}byId('keychain-ring').focus();}
+  var LOCK_HINT_KEY = 'escrevaral.lock.hintHidden';
+  function isHintHidden(){try{return root.localStorage&&root.localStorage.getItem(LOCK_HINT_KEY)==='1';}catch(ignore){return false;}}
+  function syncLockHint(){var w=byId('lock-hint-wrap');if(w){w.hidden=isHintHidden();}}
+  function lock(){if(!bridge.checkpoint()){return;}lockFocus=D.activeElement;bridge.prepareLock();locked=true;D.body.setAttribute('data-locked','true');text(byId('keychain-name'),(bridge.book()||{}).name||'ESCREVARAL');byId('lock-password').value='';text(byId('lock-message'),'');syncLockHint();curtain.hidden=false;hiddenNodes=[];for(var i=0;i<D.body.children.length;i+=1){var n=D.body.children[i];if(n!==curtain&&n.tagName!=='SCRIPT'){hiddenNodes.push([n,n.getAttribute('aria-hidden')]);n.setAttribute('aria-hidden','true');}}try{root.sessionStorage.setItem('escrevaral.curtain','on');}catch(ignore){}byId('keychain-ring').focus();}
   function unlock(){locked=false;curtain.hidden=true;D.body.removeAttribute('data-locked');hiddenNodes.forEach(function(p){if(p[1]===null){p[0].removeAttribute('aria-hidden');}else{p[0].setAttribute('aria-hidden',p[1]);}});hiddenNodes=[];byId('lock-password').value='';try{root.sessionStorage.removeItem('escrevaral.curtain');}catch(ignore){}if(lockFocus&&D.documentElement.contains(lockFocus)){lockFocus.focus();}}
-  on(byId('screen-lock'),'click',lock);on(byId('keychain-ring'),'click',unlock);on(byId('lock-form'),'submit',function(e){e.preventDefault();byId('lock-password').value='';text(byId('lock-message'),'Para abrir, toque ou clique na argola do chaveiro.');});
+  on(byId('screen-lock'),'click',lock);on(byId('keychain-ring'),'click',unlock);
+  if(byId('lock-hide-hint')){on(byId('lock-hide-hint'),'click',function(){try{if(root.localStorage){root.localStorage.setItem(LOCK_HINT_KEY,'1');}}catch(ignore){}syncLockHint();text(byId('lock-message'),'');byId('keychain-ring').focus();});}
+  on(byId('lock-form'),'submit',function(e){e.preventDefault();byId('lock-password').value='';text(byId('lock-message'),isHintHidden()?'Senha incorreta.':'Para abrir, toque ou clique na argola do chaveiro.');});
   /* Captura antes dos atalhos existentes; sem inert/dialog obrigatórios. */
   function trap(event){if(E.dialog.isOpen()){return;}var modal=locked?curtain:!panel.hidden?panel:null;if(!modal){return;}var inside=modal.contains(event.target);
    if(!inside){event.preventDefault();event.stopImmediatePropagation();if(event.type==='focusin'){(locked?byId('keychain-ring'):byId('story-close')).focus();}return;}
@@ -10556,6 +10561,25 @@
     show('portable', 'Você está na mesa portátil. Este arquivo contém o editor e as lentes para abrir sem internet. Guarde seus textos separadamente em “Exportar tudo”.');
     return;
   }
+  /* Analíticas sem cookies e sem JS externo (GoatCounter pixel, respeitando Do Not Track). */
+  (function countVisit() {
+    try {
+      var host = root.location && root.location.hostname ? String(root.location.hostname).toLowerCase() : '';
+      if (host !== 'escrevaral.com' && host !== 'www.escrevaral.com') { return; }
+      if ((root.navigator && root.navigator.doNotTrack === '1') || root.doNotTrack === '1') { return; }
+      if (root.navigator && root.navigator.onLine === false) { return; }
+      var p = (root.location.pathname || '/') + (root.location.search || '');
+      var ref = D.referrer || '';
+      var s = root.screen ? (root.screen.width + ',' + root.screen.height + ',' + (root.devicePixelRatio || 1)) : '';
+      var q = 'p=' + encodeURIComponent(p.slice(0, 240)) +
+        '&t=' + encodeURIComponent(D.title || 'ESCREVARAL') +
+        (ref ? '&r=' + encodeURIComponent(ref.slice(0, 240)) : '') +
+        (s ? '&s=' + encodeURIComponent(s) : '') +
+        '&rnd=' + Math.random().toString(36).slice(2, 8);
+      var img = new root.Image();
+      img.src = 'https://escrevaral.goatcounter.com/count?' + q;
+    } catch (ignore) {}
+  }());
   var N = root.navigator, sw = N && N.serviceWorker;
   if (!/^https?:$/.test(root.location.protocol) || root.isSecureContext === false || !sw || !sw.register ||
       !root.Promise || !root.caches || !root.crypto || !root.crypto.subtle || !root.crypto.subtle.digest) {

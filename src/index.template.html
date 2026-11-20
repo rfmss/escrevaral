@@ -12,7 +12,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Escrevaral | Gabinete de escrita">
   <meta name="twitter:description" content="Sua mesa de escrita em português brasileiro. Seus manuscritos ficam no seu aparelho.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src {{SCRIPT_POLICY}}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src {{SCRIPT_POLICY}}; style-src 'self' 'unsafe-inline'; img-src {{IMG_POLICY}}; frame-src 'self'; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>ESCREVARAL</title>
   <meta name="theme-color" content="#f5f4ef">
   <meta name="asset-version" content="{{ASSET_VERSION}}">
@@ -102,8 +102,8 @@ SOFTWARE.
 </div>
 
 <section id="lock-curtain" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="lock-heading" tabindex="-1" hidden>
- <div class="lock-card"><h2 id="lock-heading">Gabinete fechado</h2><p id="lock-help">Toque ou clique na argola do chaveiro para voltar à escrita.</p>
- <div class="author-keychain"><button id="keychain-ring" aria-describedby="lock-help" aria-label="Argola do chaveiro — abrir gabinete"></button><strong id="keychain-name">ESCREVA[RAL]</strong><small>OFICINA AUTORAL · SCRVRL OS</small><div class="grife-barcode" aria-hidden="true"></div><small>ORIGINAIS SOB CUSTÓDIA</small></div>
+ <div class="lock-card"><h2 id="lock-heading">Gabinete fechado</h2><div id="lock-hint-wrap" class="lock-hint-wrap"><p id="lock-help">Toque ou clique na argola do chaveiro para voltar à escrita.</p><button id="lock-hide-hint" type="button" class="lock-hide-hint">Entendi · ocultar dica</button></div>
+ <div class="author-keychain"><button id="keychain-ring" aria-describedby="lock-help" aria-label="Argola do chaveiro — abrir gabinete"></button><strong id="keychain-name">ESCREVARAL</strong><small>OFICINA AUTORAL</small><div class="grife-barcode" aria-hidden="true"></div><small>ORIGINAIS SOB CUSTÓDIA</small></div>
  <form id="lock-form" autocomplete="off"><label for="lock-password">Senha</label><input id="lock-password" type="password" autocomplete="new-password" maxlength="120" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore><button type="submit">Entrar</button></form><p id="lock-message" role="status"></p></div>
 </section>
 
