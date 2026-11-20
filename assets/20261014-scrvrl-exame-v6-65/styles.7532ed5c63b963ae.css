@@ -5365,6 +5365,633 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"], body[
   #location-path button:hover {
     text-decoration: underline;
   }
+
+  /* =========================================================================
+     UNIFICAÇÃO VISUAL TOTAL (DISSOLUÇÃO DO ONLINE/SCRVRL OS NO PAPEL E-INK)
+     Zero chanfro/entalhe 3D, zero faixas verde-musgo #374932, zero marca "+",
+     gavetas acopladas limpas, Estante harmonizada e transições claras.
+     ========================================================================= */
+
+  @keyframes escDrawerIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes escScreenFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* 1. Dissolver completamente button.material-key (fim do chanfro e entalhe 3D) */
+  button.material-key,
+  button.material-key:hover,
+  button.material-key:active {
+    border: 1px solid rgba(33, 41, 33, 0.34) !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  button.material-key:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+    border-color: rgba(33, 41, 33, 0.5) !important;
+  }
+  button.material-key:active {
+    background: rgba(33, 41, 33, 0.12) !important;
+  }
+
+  /* 2. Barra superior do editor (.masthead): ritmo uniforme + separadores de grupo */
+  body[data-view="workspace"] #writing-space .masthead {
+    min-height: 44px;
+    padding: 6px 20px !important;
+    align-items: center;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools {
+    align-items: center;
+    gap: 2px !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools button {
+    min-width: 0 !important;
+    min-height: 30px !important;
+    height: 30px;
+    padding: 0 9px !important;
+    border: 1px solid transparent !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    font: 500 13px/1 Arial, Helvetica, sans-serif !important;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 110ms ease, border-color 110ms ease, color 110ms ease;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools button:hover {
+    background: rgba(33, 41, 33, 0.06) !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools button[aria-pressed="true"],
+  body[data-view="workspace"] #writing-space .desk-tools button[aria-expanded="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border-color: #242d23 !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools #esc-superfocus-auto-toggle {
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+    padding: 0 8px !important;
+    margin-left: 2px;
+    font-size: 11px !important;
+  }
+  .esc-tool-sep {
+    display: inline-block;
+    width: 0;
+    height: 16px;
+    margin: 0 6px;
+    border-left: 1px dashed rgba(33, 41, 33, 0.28);
+    flex-shrink: 0;
+  }
+
+  /* Botão contextual de retorno no breadcrumb (#location-path) */
+  #location-path {
+    background: #c4cfc2 !important;
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    color: #344231 !important;
+    gap: 2px;
+  }
+  #location-path [aria-current="location"] {
+    color: #111511 !important;
+    font-weight: 600;
+  }
+  #location-path #esc-path-return {
+    display: inline-flex;
+    align-items: center;
+    height: 26px;
+    min-height: 26px !important;
+    padding: 0 10px !important;
+    margin-right: 8px;
+    border: 1px solid #242d23 !important;
+    border-radius: 2px;
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    font: 600 12px/1 Arial, Helvetica, sans-serif !important;
+    text-decoration: none !important;
+    transition: background-color 110ms ease;
+  }
+  #location-path #esc-path-return:hover {
+    background: #2e382c !important;
+    text-decoration: none !important;
+  }
+  #location-path #esc-path-return[hidden] {
+    display: none !important;
+  }
+
+  /* Toast discreto flutuante */
+  .esc-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 3600;
+    max-width: min(520px, calc(100vw - 32px));
+    padding: 8px 16px;
+    background: #242d23;
+    color: #d8e4d6;
+    border: 1px dashed rgba(216, 228, 214, 0.45);
+    border-radius: 2px;
+    font: 500 13px/1.4 Arial, Helvetica, sans-serif;
+    pointer-events: none;
+    animation: escScreenFade 140ms ease-out;
+  }
+  .esc-toast[hidden] {
+    display: none !important;
+  }
+
+  /* 3. Gavetas laterais (.sheet): Ajustes, Examinar, Acervo, Marcos, Calendário */
+  .panel-backdrop {
+    background: rgba(24, 32, 24, 0.16) !important;
+    transition: opacity 130ms ease;
+  }
+  .sheet:not(#focus-pause) {
+    background: #c4cfc2 !important;
+    color: #212921 !important;
+    border: 0 !important;
+    border-left: 1px dashed rgba(33, 41, 33, 0.36) !important;
+    border-radius: 0 !important;
+    box-shadow: -8px 0 24px rgba(24, 32, 24, 0.08) !important;
+    padding: 20px 24px 32px !important;
+    animation: escDrawerIn 140ms ease-out;
+  }
+  .sheet:not(#focus-pause):before,
+  .dialog-register {
+    content: none !important;
+    display: none !important;
+  }
+  .sheet .sheet-heading {
+    padding: 0 0 14px !important;
+    margin: 0 0 18px !important;
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .sheet .sheet-heading h2 {
+    font: 600 24px/1.2 'Oswald', 'Arial Narrow', Arial, sans-serif !important;
+    color: #111511 !important;
+    margin: 2px 0 0 !important;
+  }
+  .sheet .sheet-heading .eyebrow,
+  .sheet .sheet-heading small {
+    font: 600 10px/1.4 Arial, Helvetica, sans-serif !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase;
+    color: #455241 !important;
+  }
+  .sheet .close-panel,
+  #mesa-close,
+  #acervo-close,
+  #utility-close,
+  #lineage-close,
+  #back-writing {
+    min-height: 32px !important;
+    height: 32px;
+    padding: 0 10px !important;
+    border: 1px solid rgba(33, 41, 33, 0.3) !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    font: 500 12px/1 Arial, Helvetica, sans-serif !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .sheet .close-panel:hover,
+  #mesa-close:hover,
+  #acervo-close:hover,
+  #utility-close:hover,
+  #lineage-close:hover,
+  #back-writing:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+  }
+
+  /* Fim das faixas verde-musgo #374932 e caixas #d3ddcd em Ajustes e Examinar */
+  .sheet .setting-section {
+    background: transparent !important;
+    border: 0 !important;
+    border-top: 1px dashed rgba(33, 41, 33, 0.24) !important;
+    padding: 16px 0 6px !important;
+    margin: 16px 0 0 !important;
+  }
+  .sheet .sheet-heading + .setting-section {
+    border-top: 0 !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  .sheet .setting-section h3,
+  .sheet .lens-group-label {
+    background: transparent !important;
+    color: #455241 !important;
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+    font: 600 11px/1.4 Arial, Helvetica, sans-serif !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase;
+  }
+  .sheet .setting-row {
+    border-bottom: 1px dotted rgba(33, 41, 33, 0.18) !important;
+    min-height: 46px !important;
+    padding: 6px 0 !important;
+  }
+  .sheet .setting-row > button,
+  .sheet #paste-mode,
+  .sheet #trash-current,
+  .sheet #note-project-save,
+  .sheet #trash-toggle,
+  .sheet .actions button,
+  .sheet .file-label,
+  .sheet .lenses button,
+  .sheet .utility-actions button,
+  .sheet #calendar-form button,
+  .sheet #lineage-mark,
+  .sheet #lineage-restore,
+  .sheet #new-document,
+  .sheet #import-copied {
+    background: #b8c5b6 !important;
+    color: #212921 !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+    min-height: 36px !important;
+    padding: 6px 12px !important;
+    font: 500 13px/1.3 Arial, Helvetica, sans-serif !important;
+  }
+  .sheet .setting-row > button:hover,
+  .sheet .actions button:hover,
+  .sheet .file-label:hover,
+  .sheet .lenses button:hover,
+  .sheet #lineage-mark:hover,
+  .sheet #new-document:hover {
+    background: #aebcae !important;
+  }
+  .sheet textarea,
+  .sheet input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  .sheet select,
+  #lineage-preview {
+    background: #bcc8ba !important;
+    color: #111511 !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  .sheet button[aria-pressed="true"],
+  .sheet .lenses button[aria-pressed="true"],
+  .sheet .theme-choice button[aria-pressed="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border: 1px solid #242d23 !important;
+    box-shadow: none !important;
+  }
+  .sheet .theme-choice {
+    background: #b8c5b6 !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    padding: 2px !important;
+  }
+  .sheet .theme-choice button {
+    border: 0 !important;
+    min-height: 30px !important;
+    padding: 4px 10px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+  }
+  /* Switch calmo em Ajustes (irmão do Auto ON) */
+  .sheet .check .switch-track {
+    width: 68px !important;
+    height: 26px !important;
+    border: 1px solid rgba(33, 41, 33, 0.38) !important;
+    border-radius: 14px !important;
+    background: #a5b4a2 !important;
+    box-shadow: none !important;
+  }
+  .sheet .check .switch-track:after {
+    top: 3px !important;
+    left: 3px !important;
+    width: 18px !important;
+    height: 18px !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: #e6eee4 !important;
+    box-shadow: none !important;
+  }
+  .sheet .check input:checked + .switch-track {
+    background: #242d23 !important;
+    border-color: #242d23 !important;
+    color: #d8e4d6 !important;
+  }
+  .sheet .check input:checked + .switch-track:after {
+    left: 45px !important;
+    background: #e6eee4 !important;
+  }
+  .sheet .switch-off,
+  .sheet .switch-on {
+    top: 2px !important;
+    font: 600 11px/20px Arial, Helvetica, sans-serif !important;
+  }
+  /* Cartões de tarefa em Examinar (.ptbr-goals button) harmonizados */
+  #oficina .ptbr-goals button {
+    background: #bcc9ba !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  #oficina .ptbr-goals button:hover {
+    background: #b1bfb0 !important;
+  }
+
+  /* 4. Dissolução total da Estante de cadernos (#gabinete) no Papel Digital E-Ink */
+  #gabinete {
+    background: #c4cfc2 !important;
+    background-image: none !important;
+    color: #212921 !important;
+    outline: 0 !important;
+    animation: escScreenFade 130ms ease-out;
+  }
+  #gabinete .desktop-imprint {
+    display: none !important;
+  }
+  #gabinete .os-bar {
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    background: #c4cfc2 !important;
+  }
+  #gabinete .os-signature {
+    font: 600 16px/1.2 'Oswald', 'Arial Narrow', Arial, sans-serif !important;
+    letter-spacing: 0.6px !important;
+    color: #212921 !important;
+    gap: 8px;
+  }
+  #gabinete .os-signature .ral-frame {
+    border: 0 !important;
+    padding: 0 !important;
+  }
+  #gabinete .os-signature small {
+    display: none !important;
+  }
+  .esc-cabinet-tag {
+    font: 500 13px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: 0;
+    color: #455241;
+    margin-left: 2px;
+  }
+  .esc-cabinet-bar-actions {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #gabinete .os-menu,
+  #gabinete #project-new,
+  #gabinete #desktop-organize,
+  #gabinete #volume-new,
+  #gabinete #reminder-new,
+  #gabinete #original-back,
+  #gabinete #original-more {
+    min-height: 36px !important;
+    padding: 6px 12px !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    background: #b8c5b6 !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    font: 500 13px/1.2 Arial, Helvetica, sans-serif !important;
+  }
+  #gabinete .os-menu {
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+  #gabinete .os-menu:hover,
+  #gabinete #project-new:hover,
+  #gabinete #desktop-organize:hover,
+  #gabinete #reminder-new:hover {
+    background: rgba(33, 41, 33, 0.08) !important;
+  }
+  .esc-cabinet-return-top,
+  #gabinete #first-run-write {
+    min-height: 36px !important;
+    padding: 7px 14px !important;
+    border: 1px dashed #d8e4d6 !important;
+    outline: 2px solid #242d23;
+    border-radius: 2px !important;
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    box-shadow: none !important;
+    font: 600 13px/1.2 Arial, Helvetica, sans-serif !important;
+    cursor: pointer;
+  }
+  .esc-cabinet-return-top:hover,
+  #gabinete #first-run-write:hover {
+    background: #2e382c !important;
+  }
+  #gabinete .first-run {
+    background: #bcc8ba !important;
+    border: 1px dashed rgba(33, 41, 33, 0.34) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  #gabinete .cabinet-window {
+    background: #c4cfc2 !important;
+    border: 1px dashed rgba(33, 41, 33, 0.34) !important;
+    box-shadow: none !important;
+  }
+  #gabinete .window-bar {
+    background: #bcc8ba !important;
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+  }
+  #gabinete .project-shelf {
+    background: #c4cfc2 !important;
+    border-right: 1px dashed rgba(33, 41, 33, 0.28) !important;
+  }
+  #gabinete .resume-note,
+  #gabinete .desktop-reminder {
+    background: #bcc8ba !important;
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  #gabinete .desktop-reminder::before,
+  #gabinete .desktop-reminder::after {
+    display: none !important;
+  }
+  #system-bar {
+    background: #c4cfc2 !important;
+    border-top: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    color: #455241 !important;
+    height: 44px !important;
+    min-height: 44px !important;
+  }
+  #system-bar #os-start,
+  #system-bar #os-window-task,
+  #system-bar #cabinet-return,
+  #system-bar #screen-lock {
+    min-height: 32px !important;
+    height: 32px !important;
+    padding: 0 10px !important;
+    border: 1px solid rgba(33, 41, 33, 0.3) !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    font: 500 12px/1 Arial, Helvetica, sans-serif !important;
+  }
+  #system-bar #os-start .os-rocker {
+    display: none !important;
+  }
+  #system-bar #cabinet-return {
+    background: transparent !important;
+    color: #212921 !important;
+    border-color: rgba(33, 41, 33, 0.34) !important;
+    font-weight: 600 !important;
+  }
+  #system-bar #cabinet-return:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+  }
+  #start-menu {
+    background: #c4cfc2 !important;
+    border: 1px solid rgba(33, 41, 33, 0.36) !important;
+    box-shadow: 0 -4px 18px rgba(24, 32, 24, 0.1) !important;
+  }
+  #start-menu .start-group-toggle[aria-expanded="true"],
+  #start-menu .start-group-items {
+    background: #b8c5b6 !important;
+    color: #212921 !important;
+  }
+
+  /* 5. Telas cheias harmonizadas: Quadro de giz, Universo, Diálogos, Academia, Calculadora */
+  .finish-screen,
+  #chalkboard,
+  #story-screen {
+    background: #c4cfc2 !important;
+    color: #212921 !important;
+    animation: escScreenFade 130ms ease-out;
+  }
+  .chalk-paper {
+    background: #c4cfc2 !important;
+    border: 1px dashed rgba(33, 41, 33, 0.32) !important;
+    box-shadow: none !important;
+  }
+  .chalk-slate {
+    background: #b4c2b1 !important;
+    border: 1px solid rgba(33, 41, 33, 0.34) !important;
+    box-shadow: none !important;
+  }
+  #chalk-frame {
+    background: #d8e1d5 !important;
+    border-color: rgba(33, 41, 33, 0.3) !important;
+  }
+  .chalk-rail {
+    box-shadow: none !important;
+    border-top: 1px dashed rgba(33, 41, 33, 0.3) !important;
+  }
+  .chalk-rail i,
+  .chalk-rail em {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .esc-back-chip {
+    min-height: 34px !important;
+    padding: 6px 14px !important;
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border: 1px solid #242d23 !important;
+    border-radius: 2px !important;
+    font: 600 13px/1.2 Arial, Helvetica, sans-serif !important;
+    white-space: nowrap;
+  }
+  .esc-back-chip:hover {
+    background: #2e382c !important;
+    color: #f0f2e7 !important;
+  }
+  .polaroid {
+    background: #bcc8ba !important;
+    border: 1px solid rgba(33, 41, 33, 0.3) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  .polaroid:before {
+    display: none !important;
+  }
+  #story-list[data-mode="chapters"] .story-open,
+  #story-list[data-mode="events"] .polaroid > h3 {
+    background: #c4cfc2 !important;
+    border: 1px dashed rgba(33, 41, 33, 0.3) !important;
+  }
+  .story-navigation button[aria-pressed="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border-color: #242d23 !important;
+  }
+
+  /* Diálogos (#app-dialog) planos sem chanfro */
+  .app-dialog-card {
+    background: #c4cfc2 !important;
+    border: 1px solid rgba(33, 41, 33, 0.42) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 10px 30px rgba(20, 27, 20, 0.16) !important;
+  }
+  .app-dialog-brand b {
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  #app-dialog-accept {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border: 1px dashed #d8e4d6 !important;
+    outline: 2px solid #242d23;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  #app-dialog-cancel {
+    background: transparent !important;
+    border: 1px solid rgba(33, 41, 33, 0.34) !important;
+    border-radius: 2px !important;
+  }
+
+  /* Calculadora e Academia em harmonia E-Ink */
+  .esc-calculator {
+    background: #c4cfc2 !important;
+    border: 1px solid rgba(33, 41, 33, 0.45) !important;
+    box-shadow: 0 8px 24px rgba(24, 32, 24, 0.14) !important;
+  }
+  .esc-academy-list-card,
+  .esc-academy-guide-shell {
+    background: #c4cfc2 !important;
+    border: 1px solid rgba(33, 41, 33, 0.42) !important;
+  }
+  .esc-academy-head,
+  .esc-academy-bar {
+    background: #c4cfc2 !important;
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+  }
+  .esc-academy-item {
+    background: #bcc8ba !important;
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+  }
+  .esc-academy-item:hover {
+    background: #b2bfb0 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sheet:not(#focus-pause),
+    #gabinete,
+    .finish-screen,
+    #chalkboard,
+    #story-screen,
+    .esc-toast {
+      animation: none !important;
+    }
+  }
 }
 
 /* Fonte: src/ui/styles/ferramentas-linux.css */

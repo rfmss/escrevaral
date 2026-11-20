@@ -5391,6 +5391,633 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"], body[
   #location-path button:hover {
     text-decoration: underline;
   }
+
+  /* =========================================================================
+     UNIFICAÇÃO VISUAL TOTAL (DISSOLUÇÃO DO ONLINE/SCRVRL OS NO PAPEL E-INK)
+     Zero chanfro/entalhe 3D, zero faixas verde-musgo #374932, zero marca "+",
+     gavetas acopladas limpas, Estante harmonizada e transições claras.
+     ========================================================================= */
+
+  @keyframes escDrawerIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes escScreenFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* 1. Dissolver completamente button.material-key (fim do chanfro e entalhe 3D) */
+  button.material-key,
+  button.material-key:hover,
+  button.material-key:active {
+    border: 1px solid rgba(33, 41, 33, 0.34) !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  button.material-key:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+    border-color: rgba(33, 41, 33, 0.5) !important;
+  }
+  button.material-key:active {
+    background: rgba(33, 41, 33, 0.12) !important;
+  }
+
+  /* 2. Barra superior do editor (.masthead): ritmo uniforme + separadores de grupo */
+  body[data-view="workspace"] #writing-space .masthead {
+    min-height: 44px;
+    padding: 6px 20px !important;
+    align-items: center;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools {
+    align-items: center;
+    gap: 2px !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools button {
+    min-width: 0 !important;
+    min-height: 30px !important;
+    height: 30px;
+    padding: 0 9px !important;
+    border: 1px solid transparent !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    font: 500 13px/1 Arial, Helvetica, sans-serif !important;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 110ms ease, border-color 110ms ease, color 110ms ease;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools button:hover {
+    background: rgba(33, 41, 33, 0.06) !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools button[aria-pressed="true"],
+  body[data-view="workspace"] #writing-space .desk-tools button[aria-expanded="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border-color: #242d23 !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools #esc-superfocus-auto-toggle {
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+    padding: 0 8px !important;
+    margin-left: 2px;
+    font-size: 11px !important;
+  }
+  .esc-tool-sep {
+    display: inline-block;
+    width: 0;
+    height: 16px;
+    margin: 0 6px;
+    border-left: 1px dashed rgba(33, 41, 33, 0.28);
+    flex-shrink: 0;
+  }
+
+  /* Botão contextual de retorno no breadcrumb (#location-path) */
+  #location-path {
+    background: #c4cfc2 !important;
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    color: #344231 !important;
+    gap: 2px;
+  }
+  #location-path [aria-current="location"] {
+    color: #111511 !important;
+    font-weight: 600;
+  }
+  #location-path #esc-path-return {
+    display: inline-flex;
+    align-items: center;
+    height: 26px;
+    min-height: 26px !important;
+    padding: 0 10px !important;
+    margin-right: 8px;
+    border: 1px solid #242d23 !important;
+    border-radius: 2px;
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    font: 600 12px/1 Arial, Helvetica, sans-serif !important;
+    text-decoration: none !important;
+    transition: background-color 110ms ease;
+  }
+  #location-path #esc-path-return:hover {
+    background: #2e382c !important;
+    text-decoration: none !important;
+  }
+  #location-path #esc-path-return[hidden] {
+    display: none !important;
+  }
+
+  /* Toast discreto flutuante */
+  .esc-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 3600;
+    max-width: min(520px, calc(100vw - 32px));
+    padding: 8px 16px;
+    background: #242d23;
+    color: #d8e4d6;
+    border: 1px dashed rgba(216, 228, 214, 0.45);
+    border-radius: 2px;
+    font: 500 13px/1.4 Arial, Helvetica, sans-serif;
+    pointer-events: none;
+    animation: escScreenFade 140ms ease-out;
+  }
+  .esc-toast[hidden] {
+    display: none !important;
+  }
+
+  /* 3. Gavetas laterais (.sheet): Ajustes, Examinar, Acervo, Marcos, Calendário */
+  .panel-backdrop {
+    background: rgba(24, 32, 24, 0.16) !important;
+    transition: opacity 130ms ease;
+  }
+  .sheet:not(#focus-pause) {
+    background: #c4cfc2 !important;
+    color: #212921 !important;
+    border: 0 !important;
+    border-left: 1px dashed rgba(33, 41, 33, 0.36) !important;
+    border-radius: 0 !important;
+    box-shadow: -8px 0 24px rgba(24, 32, 24, 0.08) !important;
+    padding: 20px 24px 32px !important;
+    animation: escDrawerIn 140ms ease-out;
+  }
+  .sheet:not(#focus-pause):before,
+  .dialog-register {
+    content: none !important;
+    display: none !important;
+  }
+  .sheet .sheet-heading {
+    padding: 0 0 14px !important;
+    margin: 0 0 18px !important;
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .sheet .sheet-heading h2 {
+    font: 600 24px/1.2 'Oswald', 'Arial Narrow', Arial, sans-serif !important;
+    color: #111511 !important;
+    margin: 2px 0 0 !important;
+  }
+  .sheet .sheet-heading .eyebrow,
+  .sheet .sheet-heading small {
+    font: 600 10px/1.4 Arial, Helvetica, sans-serif !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase;
+    color: #455241 !important;
+  }
+  .sheet .close-panel,
+  #mesa-close,
+  #acervo-close,
+  #utility-close,
+  #lineage-close,
+  #back-writing {
+    min-height: 32px !important;
+    height: 32px;
+    padding: 0 10px !important;
+    border: 1px solid rgba(33, 41, 33, 0.3) !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    font: 500 12px/1 Arial, Helvetica, sans-serif !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .sheet .close-panel:hover,
+  #mesa-close:hover,
+  #acervo-close:hover,
+  #utility-close:hover,
+  #lineage-close:hover,
+  #back-writing:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+  }
+
+  /* Fim das faixas verde-musgo #374932 e caixas #d3ddcd em Ajustes e Examinar */
+  .sheet .setting-section {
+    background: transparent !important;
+    border: 0 !important;
+    border-top: 1px dashed rgba(33, 41, 33, 0.24) !important;
+    padding: 16px 0 6px !important;
+    margin: 16px 0 0 !important;
+  }
+  .sheet .sheet-heading + .setting-section {
+    border-top: 0 !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  .sheet .setting-section h3,
+  .sheet .lens-group-label {
+    background: transparent !important;
+    color: #455241 !important;
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+    font: 600 11px/1.4 Arial, Helvetica, sans-serif !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase;
+  }
+  .sheet .setting-row {
+    border-bottom: 1px dotted rgba(33, 41, 33, 0.18) !important;
+    min-height: 46px !important;
+    padding: 6px 0 !important;
+  }
+  .sheet .setting-row > button,
+  .sheet #paste-mode,
+  .sheet #trash-current,
+  .sheet #note-project-save,
+  .sheet #trash-toggle,
+  .sheet .actions button,
+  .sheet .file-label,
+  .sheet .lenses button,
+  .sheet .utility-actions button,
+  .sheet #calendar-form button,
+  .sheet #lineage-mark,
+  .sheet #lineage-restore,
+  .sheet #new-document,
+  .sheet #import-copied {
+    background: #b8c5b6 !important;
+    color: #212921 !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+    min-height: 36px !important;
+    padding: 6px 12px !important;
+    font: 500 13px/1.3 Arial, Helvetica, sans-serif !important;
+  }
+  .sheet .setting-row > button:hover,
+  .sheet .actions button:hover,
+  .sheet .file-label:hover,
+  .sheet .lenses button:hover,
+  .sheet #lineage-mark:hover,
+  .sheet #new-document:hover {
+    background: #aebcae !important;
+  }
+  .sheet textarea,
+  .sheet input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  .sheet select,
+  #lineage-preview {
+    background: #bcc8ba !important;
+    color: #111511 !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  .sheet button[aria-pressed="true"],
+  .sheet .lenses button[aria-pressed="true"],
+  .sheet .theme-choice button[aria-pressed="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border: 1px solid #242d23 !important;
+    box-shadow: none !important;
+  }
+  .sheet .theme-choice {
+    background: #b8c5b6 !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    padding: 2px !important;
+  }
+  .sheet .theme-choice button {
+    border: 0 !important;
+    min-height: 30px !important;
+    padding: 4px 10px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+  }
+  /* Switch calmo em Ajustes (irmão do Auto ON) */
+  .sheet .check .switch-track {
+    width: 68px !important;
+    height: 26px !important;
+    border: 1px solid rgba(33, 41, 33, 0.38) !important;
+    border-radius: 14px !important;
+    background: #a5b4a2 !important;
+    box-shadow: none !important;
+  }
+  .sheet .check .switch-track:after {
+    top: 3px !important;
+    left: 3px !important;
+    width: 18px !important;
+    height: 18px !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: #e6eee4 !important;
+    box-shadow: none !important;
+  }
+  .sheet .check input:checked + .switch-track {
+    background: #242d23 !important;
+    border-color: #242d23 !important;
+    color: #d8e4d6 !important;
+  }
+  .sheet .check input:checked + .switch-track:after {
+    left: 45px !important;
+    background: #e6eee4 !important;
+  }
+  .sheet .switch-off,
+  .sheet .switch-on {
+    top: 2px !important;
+    font: 600 11px/20px Arial, Helvetica, sans-serif !important;
+  }
+  /* Cartões de tarefa em Examinar (.ptbr-goals button) harmonizados */
+  #oficina .ptbr-goals button {
+    background: #bcc9ba !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  #oficina .ptbr-goals button:hover {
+    background: #b1bfb0 !important;
+  }
+
+  /* 4. Dissolução total da Estante de cadernos (#gabinete) no Papel Digital E-Ink */
+  #gabinete {
+    background: #c4cfc2 !important;
+    background-image: none !important;
+    color: #212921 !important;
+    outline: 0 !important;
+    animation: escScreenFade 130ms ease-out;
+  }
+  #gabinete .desktop-imprint {
+    display: none !important;
+  }
+  #gabinete .os-bar {
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    background: #c4cfc2 !important;
+  }
+  #gabinete .os-signature {
+    font: 600 16px/1.2 'Oswald', 'Arial Narrow', Arial, sans-serif !important;
+    letter-spacing: 0.6px !important;
+    color: #212921 !important;
+    gap: 8px;
+  }
+  #gabinete .os-signature .ral-frame {
+    border: 0 !important;
+    padding: 0 !important;
+  }
+  #gabinete .os-signature small {
+    display: none !important;
+  }
+  .esc-cabinet-tag {
+    font: 500 13px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: 0;
+    color: #455241;
+    margin-left: 2px;
+  }
+  .esc-cabinet-bar-actions {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #gabinete .os-menu,
+  #gabinete #project-new,
+  #gabinete #desktop-organize,
+  #gabinete #volume-new,
+  #gabinete #reminder-new,
+  #gabinete #original-back,
+  #gabinete #original-more {
+    min-height: 36px !important;
+    padding: 6px 12px !important;
+    border: 1px solid rgba(33, 41, 33, 0.32) !important;
+    border-radius: 2px !important;
+    background: #b8c5b6 !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    font: 500 13px/1.2 Arial, Helvetica, sans-serif !important;
+  }
+  #gabinete .os-menu {
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+  #gabinete .os-menu:hover,
+  #gabinete #project-new:hover,
+  #gabinete #desktop-organize:hover,
+  #gabinete #reminder-new:hover {
+    background: rgba(33, 41, 33, 0.08) !important;
+  }
+  .esc-cabinet-return-top,
+  #gabinete #first-run-write {
+    min-height: 36px !important;
+    padding: 7px 14px !important;
+    border: 1px dashed #d8e4d6 !important;
+    outline: 2px solid #242d23;
+    border-radius: 2px !important;
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    box-shadow: none !important;
+    font: 600 13px/1.2 Arial, Helvetica, sans-serif !important;
+    cursor: pointer;
+  }
+  .esc-cabinet-return-top:hover,
+  #gabinete #first-run-write:hover {
+    background: #2e382c !important;
+  }
+  #gabinete .first-run {
+    background: #bcc8ba !important;
+    border: 1px dashed rgba(33, 41, 33, 0.34) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  #gabinete .cabinet-window {
+    background: #c4cfc2 !important;
+    border: 1px dashed rgba(33, 41, 33, 0.34) !important;
+    box-shadow: none !important;
+  }
+  #gabinete .window-bar {
+    background: #bcc8ba !important;
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+  }
+  #gabinete .project-shelf {
+    background: #c4cfc2 !important;
+    border-right: 1px dashed rgba(33, 41, 33, 0.28) !important;
+  }
+  #gabinete .resume-note,
+  #gabinete .desktop-reminder {
+    background: #bcc8ba !important;
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  #gabinete .desktop-reminder::before,
+  #gabinete .desktop-reminder::after {
+    display: none !important;
+  }
+  #system-bar {
+    background: #c4cfc2 !important;
+    border-top: 1px dashed rgba(33, 41, 33, 0.28) !important;
+    color: #455241 !important;
+    height: 44px !important;
+    min-height: 44px !important;
+  }
+  #system-bar #os-start,
+  #system-bar #os-window-task,
+  #system-bar #cabinet-return,
+  #system-bar #screen-lock {
+    min-height: 32px !important;
+    height: 32px !important;
+    padding: 0 10px !important;
+    border: 1px solid rgba(33, 41, 33, 0.3) !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    color: #212921 !important;
+    box-shadow: none !important;
+    font: 500 12px/1 Arial, Helvetica, sans-serif !important;
+  }
+  #system-bar #os-start .os-rocker {
+    display: none !important;
+  }
+  #system-bar #cabinet-return {
+    background: transparent !important;
+    color: #212921 !important;
+    border-color: rgba(33, 41, 33, 0.34) !important;
+    font-weight: 600 !important;
+  }
+  #system-bar #cabinet-return:hover {
+    background: rgba(33, 41, 33, 0.065) !important;
+  }
+  #start-menu {
+    background: #c4cfc2 !important;
+    border: 1px solid rgba(33, 41, 33, 0.36) !important;
+    box-shadow: 0 -4px 18px rgba(24, 32, 24, 0.1) !important;
+  }
+  #start-menu .start-group-toggle[aria-expanded="true"],
+  #start-menu .start-group-items {
+    background: #b8c5b6 !important;
+    color: #212921 !important;
+  }
+
+  /* 5. Telas cheias harmonizadas: Quadro de giz, Universo, Diálogos, Academia, Calculadora */
+  .finish-screen,
+  #chalkboard,
+  #story-screen {
+    background: #c4cfc2 !important;
+    color: #212921 !important;
+    animation: escScreenFade 130ms ease-out;
+  }
+  .chalk-paper {
+    background: #c4cfc2 !important;
+    border: 1px dashed rgba(33, 41, 33, 0.32) !important;
+    box-shadow: none !important;
+  }
+  .chalk-slate {
+    background: #b4c2b1 !important;
+    border: 1px solid rgba(33, 41, 33, 0.34) !important;
+    box-shadow: none !important;
+  }
+  #chalk-frame {
+    background: #d8e1d5 !important;
+    border-color: rgba(33, 41, 33, 0.3) !important;
+  }
+  .chalk-rail {
+    box-shadow: none !important;
+    border-top: 1px dashed rgba(33, 41, 33, 0.3) !important;
+  }
+  .chalk-rail i,
+  .chalk-rail em {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .esc-back-chip {
+    min-height: 34px !important;
+    padding: 6px 14px !important;
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border: 1px solid #242d23 !important;
+    border-radius: 2px !important;
+    font: 600 13px/1.2 Arial, Helvetica, sans-serif !important;
+    white-space: nowrap;
+  }
+  .esc-back-chip:hover {
+    background: #2e382c !important;
+    color: #f0f2e7 !important;
+  }
+  .polaroid {
+    background: #bcc8ba !important;
+    border: 1px solid rgba(33, 41, 33, 0.3) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  .polaroid:before {
+    display: none !important;
+  }
+  #story-list[data-mode="chapters"] .story-open,
+  #story-list[data-mode="events"] .polaroid > h3 {
+    background: #c4cfc2 !important;
+    border: 1px dashed rgba(33, 41, 33, 0.3) !important;
+  }
+  .story-navigation button[aria-pressed="true"] {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border-color: #242d23 !important;
+  }
+
+  /* Diálogos (#app-dialog) planos sem chanfro */
+  .app-dialog-card {
+    background: #c4cfc2 !important;
+    border: 1px solid rgba(33, 41, 33, 0.42) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 10px 30px rgba(20, 27, 20, 0.16) !important;
+  }
+  .app-dialog-brand b {
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  #app-dialog-accept {
+    background: #242d23 !important;
+    color: #d8e4d6 !important;
+    border: 1px dashed #d8e4d6 !important;
+    outline: 2px solid #242d23;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+  #app-dialog-cancel {
+    background: transparent !important;
+    border: 1px solid rgba(33, 41, 33, 0.34) !important;
+    border-radius: 2px !important;
+  }
+
+  /* Calculadora e Academia em harmonia E-Ink */
+  .esc-calculator {
+    background: #c4cfc2 !important;
+    border: 1px solid rgba(33, 41, 33, 0.45) !important;
+    box-shadow: 0 8px 24px rgba(24, 32, 24, 0.14) !important;
+  }
+  .esc-academy-list-card,
+  .esc-academy-guide-shell {
+    background: #c4cfc2 !important;
+    border: 1px solid rgba(33, 41, 33, 0.42) !important;
+  }
+  .esc-academy-head,
+  .esc-academy-bar {
+    background: #c4cfc2 !important;
+    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
+  }
+  .esc-academy-item {
+    background: #bcc8ba !important;
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+  }
+  .esc-academy-item:hover {
+    background: #b2bfb0 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sheet:not(#focus-pause),
+    #gabinete,
+    .finish-screen,
+    #chalkboard,
+    #story-screen,
+    .esc-toast {
+      animation: none !important;
+    }
+  }
 }
 
 /* Fonte: src/ui/styles/ferramentas-linux.css */
@@ -6024,7 +6651,7 @@ SOFTWARE.
 <section id="chalkboard" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="chalk-heading" tabindex="-1" hidden>
  <div class="chalk-paper">
   <span class="dialog-register tl" aria-hidden="true">+</span><span class="dialog-register tr" aria-hidden="true">+</span>
-  <header class="finish-heading chalk-heading"><div><small>ESCREVA<b>RAL</b> · QUADRO DE GIZ</small><h2 id="chalk-heading"></h2></div><button id="chalk-close" class="material-key" aria-label="Fechar quadro de giz">×</button></header>
+  <header class="finish-heading chalk-heading"><div><small>ESCREVARAL · QUADRO DE GIZ</small><h2 id="chalk-heading"></h2></div><button id="chalk-close" class="material-key esc-back-chip" aria-label="Fechar quadro de giz">← Voltar</button></header>
   <div class="chalk-tools" role="group" aria-label="Ferramentas do quadro">
    <select id="chalk-pen" aria-label="Tipo de giz"><option value="fino">Fino</option><option value="giz" selected>Giz</option><option value="grosso">Grosso</option></select>
    <button id="chalk-fino" aria-pressed="false">Fino</button><button id="chalk-giz" aria-pressed="true">Giz</button><button id="chalk-grosso" aria-pressed="false">Grosso</button><button id="chalk-borracha" aria-pressed="false">Borracha</button><button id="chalk-grid" aria-pressed="false">Grade</button><button id="chalk-undo">Desfazer</button><button id="chalk-clear">Limpar</button>
@@ -6038,7 +6665,7 @@ SOFTWARE.
 </section>
 
 <section id="story-screen" class="finish-screen" role="dialog" aria-modal="true" aria-labelledby="story-heading" tabindex="-1" hidden>
- <header class="finish-heading"><div><small>ESCREVA[RAL] · UNIVERSO DO CADERNO</small><h2 id="story-heading"></h2></div><button id="story-close" class="material-key" aria-label="Fechar universo do caderno">×</button></header>
+ <header class="finish-heading"><div><small>ESCREVARAL · UNIVERSO DO PROJETO</small><h2 id="story-heading"></h2></div><button id="story-close" class="material-key esc-back-chip" aria-label="Fechar universo do caderno">← Voltar</button></header>
  <nav class="story-navigation" aria-label="Consultar o caderno"><button id="story-chapters" aria-pressed="true">Capítulos</button><button id="story-events" aria-pressed="false">Acontecimentos</button><button id="story-records" aria-pressed="false">Fichas</button></nav>
  <p id="story-status" role="status"></p><div id="story-actions" class="story-actions"></div>
  <div id="story-list"></div><div id="story-pagination" class="story-pagination"></div>
@@ -6063,11 +6690,12 @@ SOFTWARE.
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-theme-cycle" type="button" hidden aria-hidden="true">Tema</button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
+    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-path-return" type="button" class="esc-path-return" hidden>← Voltar à escrita</button><button id="esc-theme-cycle" type="button" hidden aria-hidden="true">Tema</button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
   </nav>
+  <div id="esc-toast" class="esc-toast" role="status" aria-live="polite" hidden></div>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
     <header class="os-bar">
-      <span class="os-signature"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span class="ral-frame">RAL</span> <small>OS</small></strong></span>
+      <span class="os-signature"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span class="ral-frame">RAL</span> <small>OS</small></strong><span class="esc-cabinet-tag">· Estante</span></span>
       <nav class="os-menus" aria-label="Sistema"><button id="os-files">Arquivo</button><button id="os-desk">Escrita</button><button id="os-arrange">Exibir</button></nav>
       <div class="cabinet-search"><label class="sr-only" for="cabinet-search">Buscar nos seus textos</label><input id="cabinet-search" type="search" placeholder="Buscar nos seus textos" autocomplete="off"><button id="cabinet-clear" aria-label="Limpar busca" hidden="">×</button></div>
       <button id="cabinet-settings" class="os-menu">Ajustes</button>
@@ -6182,7 +6810,7 @@ SOFTWARE.
           <button id="start-about" class="os-app"><svg class="menu-line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>Sobre a oficina</span></button>
         </div></div>
       </nav>
-    <footer id="system-bar" class="os-footer"><button id="screen-lock" class="material-key" aria-label="Fechar gabinete com cadeado" title="Fechar gabinete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5ZM12 14v3"/></svg></button><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="os-rocker" aria-hidden="true"></span><span class="start-key">Menu</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">Mesa de escrita ↗</button></footer>
+    <footer id="system-bar" class="os-footer"><button id="screen-lock" class="material-key" aria-label="Fechar gabinete com cadeado" title="Fechar gabinete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5ZM12 14v3"/></svg></button><div class="os-tasks"><button id="os-start" aria-controls="start-menu" aria-expanded="false"><span class="os-rocker" aria-hidden="true"></span><span class="start-key">Menu</span></button><button id="os-window-task" aria-controls="cabinet-window" aria-pressed="true">Seus textos</button></div><button id="pomodoro-task" aria-controls="utilidades" aria-expanded="false">Escrita 49:42</button><span id="cabinet-status" role="status" aria-live="polite">Guardado neste aparelho.</span><button id="cabinet-return">← Voltar à escrita</button></footer>
   <div id="notebook-dialog" class="notebook-dialog" hidden><div class="notebook-dialog-card" role="dialog" aria-modal="true" aria-labelledby="notebook-form-heading"><h2 id="notebook-form-heading">Nova gaveta</h2><form id="project-form" class="project-form" hidden=""><label for="project-name">Nome da obra ou projeto</label><div><input id="project-name" maxlength="120" autocomplete="off" placeholder="Nome do seu livro ou projeto"><button id="project-create" type="submit">Criar</button><button id="project-cancel" type="button">Cancelar</button></div><p id="project-error" role="status"></p></form></div></div>
   <div id="esc-color-popover" hidden></div>
   <nav class="esc-mobile-bar" aria-label="Alternar colunas">
@@ -6255,7 +6883,7 @@ SOFTWARE.
       <button id="back-cabinet" class="brand-signature" aria-label="Escrevaral — voltar aos textos do caderno"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar neste caderno</label><input id="note-search" type="search" placeholder="Buscar neste caderno" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden="">×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
-        <button id="esc-nav-toggle" type="button" aria-pressed="false" title="Recolher ou abrir coluna de projetos">Barra</button><button id="esc-lists-toggle" type="button" aria-pressed="false" title="Recolher ou abrir lista de notas">Lista</button><button id="desk-minimize" title="Abrir mesa de cadernos" aria-label="Mesa de cadernos">Mesa</button><button id="immersion-toggle" aria-pressed="false" title="Abrir Superfoco (Esc volta ao aplicativo)">Superfoco</button><button id="esc-superfocus-auto-toggle" type="button" role="switch" aria-checked="true" title="ON: abre na segunda palavra e sai após 30 s sem atividade. OFF: entrada e saída manuais.">Auto<span class="esc-switch-track" aria-hidden="true"><span class="esc-switch-thumb"></span></span><span class="esc-switch-state">ON</span></button>
+        <button id="esc-nav-toggle" type="button" aria-pressed="false" title="Recolher ou abrir coluna de projetos">Barra</button><button id="esc-lists-toggle" type="button" aria-pressed="false" title="Recolher ou abrir lista de notas">Lista</button><button id="desk-minimize" title="Abrir estante visual de cadernos, gavetas e post-its" aria-label="Estante de cadernos">Estante</button><span class="esc-tool-sep" aria-hidden="true"></span><button id="immersion-toggle" aria-pressed="false" title="Abrir Superfoco (Esc volta ao aplicativo)">Superfoco</button><button id="esc-superfocus-auto-toggle" type="button" role="switch" aria-checked="true" title="ON: abre na segunda palavra e sai após 30 s sem atividade. OFF: entrada e saída manuais.">Auto<span class="esc-switch-track" aria-hidden="true"><span class="esc-switch-thumb"></span></span><span class="esc-switch-state">ON</span></button><span class="esc-tool-sep" aria-hidden="true"></span>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
         <button id="desk-export" title="Baixar este texto">Baixar</button>
         <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
@@ -16372,7 +17000,18 @@ SOFTWARE.
   function listen(node, event, fn) { node.addEventListener(event, fn, false); }
   function paragraph(parent, value, className) { var p = document.createElement('p'); if (className) { p.className = className; } text(p, value); parent.appendChild(p); return p; }
   function button(parent, label, fn) { var b = document.createElement('button'); b.type = 'button'; text(b, label); listen(b, 'click', fn); parent.appendChild(b); return b; }
-  function message(value) { text(saveStatus, value); text(byId('cabinet-status'), value); text(byId('panel-status'), value); if (activePanel === 'acervo') { text(byId('archive-status'), value); } }
+  var toastTimer = null;
+  function showToast(value) {
+    var toast = byId('esc-toast');
+    if (!toast || !value) { return; }
+    var v = String(value);
+    if (v === 'Guardado neste aparelho.' || v === 'A folha é sua.' || v === 'Folha aberta.') { return; }
+    text(toast, v);
+    toast.hidden = false;
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function () { toast.hidden = true; }, 2800);
+  }
+  function message(value) { text(saveStatus, value); text(byId('cabinet-status'), value); text(byId('panel-status'), value); if (activePanel === 'acervo') { text(byId('archive-status'), value); } showToast(value); }
   function pad(n) { return n < 10 ? '0' + n : String(n); }
   function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
   function noteDate(entry) { return entry.created || entry.updated; }
@@ -16779,9 +17418,18 @@ SOFTWARE.
     byId('path-document').hidden = byId('path-document-separator').hidden = cabinetOpen;
     text(byId('path-document'), title.value || 'Sem título');
     byId('path-document').setAttribute('title', title.value || 'Sem título');
-    byId('path-panel').hidden = byId('path-panel-separator').hidden = !activePanel;
-    text(byId('path-panel'), activePanel === 'utilidades' ? byId('utility-heading').textContent : activePanel === 'focus-pause' ? 'Pausa' : names[activePanel] || '');
-    currentId = activePanel ? 'path-panel' : !cabinetOpen ? 'path-document' : project !== null ? 'path-project' : activeOriginalId ? 'path-original' : 'path-projects';
+    var showEstanteCrumb = cabinetOpen && !activePanel && project === null && !activeOriginalId;
+    byId('path-panel').hidden = byId('path-panel-separator').hidden = !activePanel && !showEstanteCrumb;
+    text(byId('path-panel'), activePanel ? (activePanel === 'utilidades' ? byId('utility-heading').textContent : activePanel === 'focus-pause' ? 'Pausa' : names[activePanel] || '') : showEstanteCrumb ? 'Estante de cadernos' : '');
+    var pathRet = byId('esc-path-return');
+    if (pathRet) {
+      var showReturn = !!(cabinetOpen || activePanel);
+      pathRet.hidden = !showReturn;
+      if (showReturn) {
+        text(pathRet, activePanel ? '← Fechar painel' : '← Voltar à escrita');
+      }
+    }
+    currentId = activePanel || showEstanteCrumb ? 'path-panel' : !cabinetOpen ? 'path-document' : project !== null ? 'path-project' : activeOriginalId ? 'path-original' : 'path-projects';
     ['path-home', 'path-projects', 'path-original', 'path-project', 'path-document', 'path-panel'].forEach(function (id) {
       var el = byId(id);
       if (el) { el.removeAttribute('aria-current'); if (id === currentId) { el.setAttribute('aria-current', 'location'); } }
@@ -16815,10 +17463,14 @@ SOFTWARE.
     typewriterInsets(); growManuscript(); followTyping(); renderTimeline(false, null, true);
   }
   function sizePanels(height,topBar,bottomBar) {
-    panelIds.forEach(function(id){var p=byId(id),margin=window.innerWidth<=760?8:16,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?620:440;
+    var desktop = window.innerWidth > 760;
+    panelIds.forEach(function(id){var p=byId(id),margin=desktop?0:8,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?560:440;
       p.style.bottom='auto';p.style.top=(topBar+(id==='focus-pause'?0:margin))+'px';
       if(id==='focus-pause'){p.style.height=Math.max(0,height-topBar-bottomBar)+'px';p.style.maxHeight='none';return;}
-      p.style.width=(window.innerWidth<=760?Math.max(0,window.innerWidth-margin*2):Math.min(width,Math.max(0,window.innerWidth-margin*2)))+'px';p.style.right=margin+'px';p.style.height='auto';p.style.maxHeight=available+'px';
+      p.style.width=(!desktop?Math.max(0,window.innerWidth-margin*2):Math.min(width,Math.max(0,window.innerWidth-margin*2)))+'px';
+      p.style.right=margin+'px';
+      p.style.height=desktop?available+'px':'auto';
+      p.style.maxHeight=available+'px';
     });
   }
   function revealSelection(start, end, fallbackMessage) {
@@ -17537,6 +18189,7 @@ SOFTWARE.
       else if (immersion) { leaveImmersion(); }
       else if (!cabinetOpen) { if (byId('timeline-toggle').getAttribute('aria-expanded') === 'true') { collapseTimeline(); } else if (document.body.getAttribute('data-view') !== 'workspace') { openCabinet(false); } }
       else if (!byId('project-form').hidden) { byId('project-cancel').click(); }
+      else if (cabinetOpen && byId('start-menu').hidden) { enterDesk(true); }
     }
   });
 
@@ -17585,6 +18238,13 @@ SOFTWARE.
   listen(byId('skip-writing'), 'click', function (event) { event.preventDefault(); enterDesk(); });
   listen(byId('back-cabinet'), 'click', function () { openCabinet(false); });
   listen(byId('cabinet-return'), 'click', enterDesk);
+  if (byId('gabinete-back-write')) { listen(byId('gabinete-back-write'), 'click', function () { enterDesk(true); }); }
+  if (byId('esc-path-return')) {
+    listen(byId('esc-path-return'), 'click', function () {
+      if (activePanel) { if (activePanel === 'oficina') { analysisRange = null; } closePanels(true); }
+      else if (cabinetOpen) { enterDesk(true); }
+    });
+  }
   listen(byId('cabinet-resume'), 'click', enterDesk);
   listen(byId('cabinet-write'), 'click', enterDesk);
   listen(byId('cabinet-new'), 'click', newDocument);
@@ -18084,17 +18744,76 @@ SOFTWARE.
   if (byId("esc-open-calendar")) {
     listen(byId("esc-open-calendar"), "click", function () { if (byId("start-calendar")) { byId("start-calendar").click(); } });
   }
+  function ensureNotebookForTool(toolTitle, toolSubject, needsDocInBook, onReady) {
+    var book = activeNotebook();
+    if (book && (!needsDocInBook || doc.projectId)) {
+      onReady();
+      return;
+    }
+    var available = notebooks ? notebooks.list().filter(availableBook) : [];
+    if (available.length > 0 && !needsDocInBook) {
+      activeNotebookId = available[0].id;
+      notebookLabels();
+      if (workspaceUI) { workspaceUI.render(); }
+      onReady();
+      return;
+    }
+    var targetBook = book || (available.length > 0 ? available[0] : null);
+    var askTitle = targetBook
+      ? 'Vincular esta folha a "' + targetBook.name + '"?'
+      : 'Criar projeto para abrir ' + toolTitle + '?';
+    var askMsg = targetBook
+      ? toolSubject + ' Podemos vincular a folha atual ao projeto "' + targetBook.name + '" agora e abrir imediatamente.'
+      : toolSubject + ' Podemos criar seu primeiro projeto ("Meu projeto") e vincular esta folha agora para abrir imediatamente.';
+    var askBtn = targetBook ? 'Vincular e abrir' : 'Criar projeto e abrir';
+    if (E.dialog && E.dialog.ask) {
+      E.dialog.ask({ title: askTitle, message: askMsg, accept: askBtn }, function (ok) {
+        if (!ok) { return; }
+        try {
+          var chosen = targetBook;
+          if (!chosen && notebooks) {
+            chosen = notebooks.add('Meu projeto', null);
+          }
+          if (!chosen) { return; }
+          activeNotebookId = chosen.id;
+          doc.projectId = chosen.id;
+          doc.project = chosen.name;
+          dirty = true;
+          persist();
+          notebookLabels();
+          renderNotebooks();
+          if (workspaceUI) { workspaceUI.selectProject(chosen.id, doc.folder || ''); }
+          updatePath();
+          onReady();
+        } catch (e) {
+          message(e && e.message ? e.message : 'Não foi possível preparar o projeto.');
+        }
+      });
+    } else {
+      message('Crie ou selecione um projeto na coluna esquerda para abrir ' + toolTitle + '.');
+    }
+  }
   if (byId("esc-open-chalk")) {
     listen(byId("esc-open-chalk"), "click", function () {
-      if (chalkUI && chalkUI.open) { chalkUI.open(); }
-      else if (byId("start-chalk")) { byId("start-chalk").click(); }
+      ensureNotebookForTool('o Quadro de giz', 'O Quadro de giz acompanha um projeto.', false, function () {
+        if (chalkUI && chalkUI.open) { chalkUI.open(); }
+        else if (byId("start-chalkboard")) { byId("start-chalkboard").click(); }
+      });
     });
   }
   if (byId("esc-open-lineage")) {
-    listen(byId("esc-open-lineage"), "click", function () { if (byId("start-lineage")) { byId("start-lineage").click(); } });
+    listen(byId("esc-open-lineage"), "click", function () {
+      ensureNotebookForTool('os Marcos de versão', 'Os Marcos de versão acompanham um projeto.', true, function () {
+        if (byId("start-lineage")) { byId("start-lineage").click(); }
+      });
+    });
   }
   if (byId("esc-open-universe")) {
-    listen(byId("esc-open-universe"), "click", function () { if (byId("start-universe")) { byId("start-universe").click(); } });
+    listen(byId("esc-open-universe"), "click", function () {
+      ensureNotebookForTool('o Universo do projeto', 'O Universo do projeto acompanha um projeto.', false, function () {
+        if (byId("start-universe")) { byId("start-universe").click(); }
+      });
+    });
   }
   if (byId("esc-open-packages")) {
     listen(byId("esc-open-packages"), "click", function () { showPanel("mesa", "mesa-toggle", true); });
@@ -18110,7 +18829,7 @@ SOFTWARE.
     }
   }
 
-  ['window-close','window-minimize','window-maximize','desk-minimize','mesa-close','acervo-close','utility-close','desk-counts-close'].forEach(function(id){byId(id).classList.add('material-key');});
+  ['window-close','window-minimize','window-maximize','mesa-close','acervo-close','utility-close','desk-counts-close'].forEach(function(id){byId(id).classList.add('material-key');});
   E.mountFinish({
     book: activeNotebook, checkpoint: checkpoint, message: message,
     prepare: function(){closePanels(false);toggleStart(false);},

@@ -7831,7 +7831,18 @@
   function listen(node, event, fn) { node.addEventListener(event, fn, false); }
   function paragraph(parent, value, className) { var p = document.createElement('p'); if (className) { p.className = className; } text(p, value); parent.appendChild(p); return p; }
   function button(parent, label, fn) { var b = document.createElement('button'); b.type = 'button'; text(b, label); listen(b, 'click', fn); parent.appendChild(b); return b; }
-  function message(value) { text(saveStatus, value); text(byId('cabinet-status'), value); text(byId('panel-status'), value); if (activePanel === 'acervo') { text(byId('archive-status'), value); } }
+  var toastTimer = null;
+  function showToast(value) {
+    var toast = byId('esc-toast');
+    if (!toast || !value) { return; }
+    var v = String(value);
+    if (v === 'Guardado neste aparelho.' || v === 'A folha é sua.' || v === 'Folha aberta.') { return; }
+    text(toast, v);
+    toast.hidden = false;
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function () { toast.hidden = true; }, 2800);
+  }
+  function message(value) { text(saveStatus, value); text(byId('cabinet-status'), value); text(byId('panel-status'), value); if (activePanel === 'acervo') { text(byId('archive-status'), value); } showToast(value); }
   function pad(n) { return n < 10 ? '0' + n : String(n); }
   function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
   function noteDate(entry) { return entry.created || entry.updated; }
@@ -8238,9 +8249,18 @@
     byId('path-document').hidden = byId('path-document-separator').hidden = cabinetOpen;
     text(byId('path-document'), title.value || 'Sem título');
     byId('path-document').setAttribute('title', title.value || 'Sem título');
-    byId('path-panel').hidden = byId('path-panel-separator').hidden = !activePanel;
-    text(byId('path-panel'), activePanel === 'utilidades' ? byId('utility-heading').textContent : activePanel === 'focus-pause' ? 'Pausa' : names[activePanel] || '');
-    currentId = activePanel ? 'path-panel' : !cabinetOpen ? 'path-document' : project !== null ? 'path-project' : activeOriginalId ? 'path-original' : 'path-projects';
+    var showEstanteCrumb = cabinetOpen && !activePanel && project === null && !activeOriginalId;
+    byId('path-panel').hidden = byId('path-panel-separator').hidden = !activePanel && !showEstanteCrumb;
+    text(byId('path-panel'), activePanel ? (activePanel === 'utilidades' ? byId('utility-heading').textContent : activePanel === 'focus-pause' ? 'Pausa' : names[activePanel] || '') : showEstanteCrumb ? 'Estante de cadernos' : '');
+    var pathRet = byId('esc-path-return');
+    if (pathRet) {
+      var showReturn = !!(cabinetOpen || activePanel);
+      pathRet.hidden = !showReturn;
+      if (showReturn) {
+        text(pathRet, activePanel ? '← Fechar painel' : '← Voltar à escrita');
+      }
+    }
+    currentId = activePanel || showEstanteCrumb ? 'path-panel' : !cabinetOpen ? 'path-document' : project !== null ? 'path-project' : activeOriginalId ? 'path-original' : 'path-projects';
     ['path-home', 'path-projects', 'path-original', 'path-project', 'path-document', 'path-panel'].forEach(function (id) {
       var el = byId(id);
       if (el) { el.removeAttribute('aria-current'); if (id === currentId) { el.setAttribute('aria-current', 'location'); } }
@@ -8274,10 +8294,14 @@
     typewriterInsets(); growManuscript(); followTyping(); renderTimeline(false, null, true);
   }
   function sizePanels(height,topBar,bottomBar) {
-    panelIds.forEach(function(id){var p=byId(id),margin=window.innerWidth<=760?8:16,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?620:440;
+    var desktop = window.innerWidth > 760;
+    panelIds.forEach(function(id){var p=byId(id),margin=desktop?0:8,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?560:440;
       p.style.bottom='auto';p.style.top=(topBar+(id==='focus-pause'?0:margin))+'px';
       if(id==='focus-pause'){p.style.height=Math.max(0,height-topBar-bottomBar)+'px';p.style.maxHeight='none';return;}
-      p.style.width=(window.innerWidth<=760?Math.max(0,window.innerWidth-margin*2):Math.min(width,Math.max(0,window.innerWidth-margin*2)))+'px';p.style.right=margin+'px';p.style.height='auto';p.style.maxHeight=available+'px';
+      p.style.width=(!desktop?Math.max(0,window.innerWidth-margin*2):Math.min(width,Math.max(0,window.innerWidth-margin*2)))+'px';
+      p.style.right=margin+'px';
+      p.style.height=desktop?available+'px':'auto';
+      p.style.maxHeight=available+'px';
     });
   }
   function revealSelection(start, end, fallbackMessage) {
@@ -8996,6 +9020,7 @@
       else if (immersion) { leaveImmersion(); }
       else if (!cabinetOpen) { if (byId('timeline-toggle').getAttribute('aria-expanded') === 'true') { collapseTimeline(); } else if (document.body.getAttribute('data-view') !== 'workspace') { openCabinet(false); } }
       else if (!byId('project-form').hidden) { byId('project-cancel').click(); }
+      else if (cabinetOpen && byId('start-menu').hidden) { enterDesk(true); }
     }
   });
 
@@ -9044,6 +9069,13 @@
   listen(byId('skip-writing'), 'click', function (event) { event.preventDefault(); enterDesk(); });
   listen(byId('back-cabinet'), 'click', function () { openCabinet(false); });
   listen(byId('cabinet-return'), 'click', enterDesk);
+  if (byId('gabinete-back-write')) { listen(byId('gabinete-back-write'), 'click', function () { enterDesk(true); }); }
+  if (byId('esc-path-return')) {
+    listen(byId('esc-path-return'), 'click', function () {
+      if (activePanel) { if (activePanel === 'oficina') { analysisRange = null; } closePanels(true); }
+      else if (cabinetOpen) { enterDesk(true); }
+    });
+  }
   listen(byId('cabinet-resume'), 'click', enterDesk);
   listen(byId('cabinet-write'), 'click', enterDesk);
   listen(byId('cabinet-new'), 'click', newDocument);
@@ -9543,17 +9575,76 @@
   if (byId("esc-open-calendar")) {
     listen(byId("esc-open-calendar"), "click", function () { if (byId("start-calendar")) { byId("start-calendar").click(); } });
   }
+  function ensureNotebookForTool(toolTitle, toolSubject, needsDocInBook, onReady) {
+    var book = activeNotebook();
+    if (book && (!needsDocInBook || doc.projectId)) {
+      onReady();
+      return;
+    }
+    var available = notebooks ? notebooks.list().filter(availableBook) : [];
+    if (available.length > 0 && !needsDocInBook) {
+      activeNotebookId = available[0].id;
+      notebookLabels();
+      if (workspaceUI) { workspaceUI.render(); }
+      onReady();
+      return;
+    }
+    var targetBook = book || (available.length > 0 ? available[0] : null);
+    var askTitle = targetBook
+      ? 'Vincular esta folha a "' + targetBook.name + '"?'
+      : 'Criar projeto para abrir ' + toolTitle + '?';
+    var askMsg = targetBook
+      ? toolSubject + ' Podemos vincular a folha atual ao projeto "' + targetBook.name + '" agora e abrir imediatamente.'
+      : toolSubject + ' Podemos criar seu primeiro projeto ("Meu projeto") e vincular esta folha agora para abrir imediatamente.';
+    var askBtn = targetBook ? 'Vincular e abrir' : 'Criar projeto e abrir';
+    if (E.dialog && E.dialog.ask) {
+      E.dialog.ask({ title: askTitle, message: askMsg, accept: askBtn }, function (ok) {
+        if (!ok) { return; }
+        try {
+          var chosen = targetBook;
+          if (!chosen && notebooks) {
+            chosen = notebooks.add('Meu projeto', null);
+          }
+          if (!chosen) { return; }
+          activeNotebookId = chosen.id;
+          doc.projectId = chosen.id;
+          doc.project = chosen.name;
+          dirty = true;
+          persist();
+          notebookLabels();
+          renderNotebooks();
+          if (workspaceUI) { workspaceUI.selectProject(chosen.id, doc.folder || ''); }
+          updatePath();
+          onReady();
+        } catch (e) {
+          message(e && e.message ? e.message : 'Não foi possível preparar o projeto.');
+        }
+      });
+    } else {
+      message('Crie ou selecione um projeto na coluna esquerda para abrir ' + toolTitle + '.');
+    }
+  }
   if (byId("esc-open-chalk")) {
     listen(byId("esc-open-chalk"), "click", function () {
-      if (chalkUI && chalkUI.open) { chalkUI.open(); }
-      else if (byId("start-chalk")) { byId("start-chalk").click(); }
+      ensureNotebookForTool('o Quadro de giz', 'O Quadro de giz acompanha um projeto.', false, function () {
+        if (chalkUI && chalkUI.open) { chalkUI.open(); }
+        else if (byId("start-chalkboard")) { byId("start-chalkboard").click(); }
+      });
     });
   }
   if (byId("esc-open-lineage")) {
-    listen(byId("esc-open-lineage"), "click", function () { if (byId("start-lineage")) { byId("start-lineage").click(); } });
+    listen(byId("esc-open-lineage"), "click", function () {
+      ensureNotebookForTool('os Marcos de versão', 'Os Marcos de versão acompanham um projeto.', true, function () {
+        if (byId("start-lineage")) { byId("start-lineage").click(); }
+      });
+    });
   }
   if (byId("esc-open-universe")) {
-    listen(byId("esc-open-universe"), "click", function () { if (byId("start-universe")) { byId("start-universe").click(); } });
+    listen(byId("esc-open-universe"), "click", function () {
+      ensureNotebookForTool('o Universo do projeto', 'O Universo do projeto acompanha um projeto.', false, function () {
+        if (byId("start-universe")) { byId("start-universe").click(); }
+      });
+    });
   }
   if (byId("esc-open-packages")) {
     listen(byId("esc-open-packages"), "click", function () { showPanel("mesa", "mesa-toggle", true); });
@@ -9569,7 +9660,7 @@
     }
   }
 
-  ['window-close','window-minimize','window-maximize','desk-minimize','mesa-close','acervo-close','utility-close','desk-counts-close'].forEach(function(id){byId(id).classList.add('material-key');});
+  ['window-close','window-minimize','window-maximize','mesa-close','acervo-close','utility-close','desk-counts-close'].forEach(function(id){byId(id).classList.add('material-key');});
   E.mountFinish({
     book: activeNotebook, checkpoint: checkpoint, message: message,
     prepare: function(){closePanels(false);toggleStart(false);},
