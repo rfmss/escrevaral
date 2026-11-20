@@ -126,14 +126,35 @@ assert.ok(machine.activeFrame() >= 1);
 E.machineSound.handleKey({ key: 'Enter', keyCode: 13 });
 assert.equal(machine.activeFrame(), 0);
 
-// 4. Som offline com roubo de voz (voice stealing) em digitação rápida
+// 4. Som offline com 5 variações de tecla + roubo de voz (voice stealing) em digitação rápida
+assert.deepEqual(Array.from(E.machineSound.KEY_SAMPLES), ['key', 'key2', 'key3', 'key4', 'key5']);
 E.machineSound.setEnabled(true, null, false);
+for (let i = 0; i < 12; i += 1) {
+  assert.notEqual(E.machineSound.pickKeySample('key3'), 'key3', 'não deve repetir a mesma tecla seguida');
+}
 E.machineSound.handleKey({ key: 'c', keyCode: 67 });
 E.machineSound.handleKey({ key: 'd', keyCode: 68 });
 assert.ok(cancelledCalls >= 1, 'voice stealing deve cancelar voz anterior sem empilhar áudio');
 
-// IME e atalhos não disparam impacto mecânico
+// 5. Deduplicação no desktop: input imediato após keydown não dispara som duplicado
+assert.equal(E.machineSound.handleInput({ inputType: 'insertText', data: 'd' }), null);
+
+// 6. Tablet / Android / teclado virtual (keydown Unidentified/229 -> input dispara som e animação)
+assert.equal(E.machineSound.handleKey({ key: 'Unidentified', keyCode: 229 }), null);
+assert.equal(E.machineSound.handleInput({ inputType: 'insertText', data: 'x' }), 'key');
+assert.equal(E.machineSound.handleInput({ inputType: 'insertText', data: ' ' }), 'space');
+// Composição preditiva (Android Gboard / Samsung Keyboard): 'c' -> 'ca' -> 'c'
+E.machineSound.resetComposition();
+assert.equal(E.machineSound.handleInput({ inputType: 'insertCompositionText', data: 'c' }), 'key');
+assert.equal(E.machineSound.handleInput({ inputType: 'insertCompositionText', data: 'ca' }), 'key');
+assert.equal(E.machineSound.handleInput({ inputType: 'insertCompositionText', data: 'c' }), 'backspace');
+// Colar e desfazer permanecem silenciosos
+assert.equal(E.machineSound.handleInput({ inputType: 'insertFromPaste', data: 'texto colado' }), null);
+assert.equal(E.machineSound.handleInput({ inputType: 'historyUndo', data: null }), null);
+
+// IME e atalhos não disparam impacto mecânico no keydown
 assert.equal(E.machineSound.classifyKey({ ctrlKey: true, key: 's', keyCode: 83 }), null);
 assert.equal(E.machineSound.classifyKey({ isComposing: true, key: 'a', keyCode: 65 }), null);
+assert.equal(E.machineSound.classifyKey({ key: 'Unidentified', keyCode: 229 }), null);
 
-console.log('OK: Superfoco mecânico, 5 quadros WebP offline, recuo amortecido e som com roubo de voz verificados.');
+console.log('OK: Superfoco mecânico, 5 quadros WebP offline, 5 variações MP3, suporte a tablet/IME, recuo amortecido e som com roubo de voz verificados.');

@@ -1119,6 +1119,15 @@
   function playKey(event) {
     if (E.machineSound) { E.machineSound.handleKey(event); }
   }
+  function playInput(event) {
+    if (E.machineSound && E.machineSound.handleInput) { E.machineSound.handleInput(event); }
+  }
+  function resetCompSound() {
+    if (E.machineSound && E.machineSound.resetComposition) { E.machineSound.resetComposition(); }
+  }
+  function unlockAudio() {
+    if (E.machineSound && E.machineSound.unlock) { E.machineSound.unlock(); }
+  }
   /* Gabinete: apresentação do acervo real; o editor e as engines permanecem os mesmos. */
   var cabinetOpen = false, cabinetProject = null, cabinetLimit = 40, cabinetTimer = null, cabinetSelection = null;
   var desktopDrag = null;
@@ -1411,6 +1420,11 @@
     try { var Audio = window.AudioContext || window.webkitAudioContext; audio = new Audio(); if (audio.resume) { audio.resume(); } text(byId('sound-status'), 'Som ligado, em volume discreto.'); } catch (e) { stopSound(); text(byId('sound-status'), 'O som não está disponível neste navegador.'); }
   });
   listen(manuscript, 'keydown', playKey);
+  listen(manuscript, 'input', playInput);
+  listen(manuscript, 'compositionstart', resetCompSound);
+  listen(manuscript, 'compositionend', resetCompSound);
+  listen(manuscript, 'pointerdown', unlockAudio);
+  listen(manuscript, 'touchstart', unlockAudio);
   listen(byId('print-document'), 'click', function () {
     preparePrint();
     if (window.print) { window.print(); } else { message('Use a opção de impressão do navegador.'); }
@@ -1946,6 +1960,11 @@
     }
     if (byId('esc-rich-editor')) {
       listen(byId('esc-rich-editor'), 'keydown', playKey);
+      listen(byId('esc-rich-editor'), 'input', playInput);
+      listen(byId('esc-rich-editor'), 'compositionstart', resetCompSound);
+      listen(byId('esc-rich-editor'), 'compositionend', resetCompSound);
+      listen(byId('esc-rich-editor'), 'pointerdown', unlockAudio);
+      listen(byId('esc-rich-editor'), 'touchstart', unlockAudio);
     }
   }
 
