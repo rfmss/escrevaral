@@ -2,6 +2,16 @@
 
 Este arquivo orienta IAs que trabalham neste repositório. Instruções atuais do usuário prevalecem sobre este guia. Não substitua decisões explícitas por pressupostos.
 
+## Alma do Escrevaral — Diretrizes Permanentes (20/11/2026)
+
+Antes de propor qualquer recurso, lente, fluxo ou mudança de interface, respeite a identidade central do projeto definida pelo autor:
+
+1. **Oficina de criação soberana — não um analisador de texto colado:** o Escrevaral é feito para o escritor começar do zero com autonomia total, da primeira linha à obra pronta. Ele não é um oráculo nem um corretor para despejar textos externos e dar nota. As lentes, o dicionário e os instrumentos existem para acompanhar o autor enquanto cria, estuda e revisa o próprio texto — nunca para substituir, corrigir ou apagar sua escrita.
+2. **Universalidade democrática (dos 15 aos 75 anos):** ferramenta gratuita com acabamento editorial de nível premium, compreensível sem esforço tanto por um jovem de 15 anos dando os primeiros passos quanto por um escritor experiente de 75 anos. Clareza, calma visual e ausência de burocracia acima de tudo.
+3. **Autossuficiência de "bunker" (100% offline após o primeiro acesso):** imagine que o mundo lá fora caiu e só restou o Escrevaral. Depois de baixado no primeiro acesso, o escritor nunca mais precisa de internet nem precisa sair da ferramenta para nada — nem para consultar definição ou sinônimo, nem para estudar o ofício na Academia e Literatura, nem para ensaiar, revisar, ler ou guardar sua obra.
+4. **Origem do texto e Cartório do Escrevaral:** tudo no Escrevaral nasce dentro da oficina. O produto tem como horizonte institucional o **Cartório** embutido: o escritor (ou um editor/editora) pode despejar uma mesa exportada de volta no Escrevaral e obter um certificado verificável de que o manuscrito foi construído dentro da ferramenta sem colagem externa, fortalecendo a confiança entre escritor e editor sobre a origem, a integridade e a anterioridade da obra.
+   - **Honestidade técnica obrigatória:** o Cartório certifica com precisão o que a criptografia e a trilha local provam (cadeia encadeada íntegra de criação, histórico de versões e registro/ausência de colagem externa na oficina), e entrega a impressão digital criptográfica (`SHA-256`) da obra para eventual ancoragem externa de data quando uma editora ou processo jurídico exigir prova independente do relógio local. Nunca forjar selos nem exagerar garantias além do verificável.
+
 ## Leia antes de alterar
 
 **Decisão vigente — 14/10/2026:** continuar a `main` e o produto publicado. A reconstrução foi encerrada como direção; aproveitar somente as melhorias coerentes do [adendo de evolução](docs/ADENDO-EVOLUCAO-2026-10-14.md). `vaultOUT26` e `reconstrucao` são referências, não fontes para um merge integral. O plano original e as fichas de entrega continuam sendo a fila e o diário de bordo. Preservar o design e os fluxos atuais enquanto as responsabilidades são separadas por incrementos pequenos.

@@ -1,6 +1,6 @@
 # Escrevaral
 
-Editor local para escrever e examinar textos em português brasileiro. As lentes explicam ocorrências e seus limites; nunca modificam o manuscrito. Cadernos, autoria e exportações permanecem no dispositivo.
+Oficina de criação literária e editorial 100% local e offline para escrever do zero, estudar o ofício e examinar os próprios textos em português brasileiro. Pensada para qualquer escritor — dos 15 aos 75 anos —, gratuita e com acabamento premium: baixou no primeiro acesso, nunca mais precisa de internet nem precisa sair da ferramenta (dicionário/sinônimos, Academia e Literatura, leitura editorial, lentes linguísticas e trilha verificável de origem convivem offline). As lentes explicam ocorrências e seus limites; nunca modificam o manuscrito. Cadernos, linhagem e exportações permanecem sob controle do autor.
 
 **Site:** https://escrevaral.com · **Plano e pendências:** [Jornada](docs/JORNADA-LINGUISTICA.md)
 

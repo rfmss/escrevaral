@@ -4,6 +4,8 @@ Diretriz de Rafael incorporada em 27/09/2026 a partir de **Escrevaral OS — Doc
 
 ## Princípio orientador
 
+**Propósito central (20/11/2026):** o Escrevaral é uma oficina de criação autossuficiente — não um analisador de textos colados. Foi desenhado para que qualquer pessoa, dos 15 aos 75 anos, comece do zero com autonomia total, gratuitamente e com acabamento editorial premium. Depois do primeiro acesso, o escritor entra num "bunker" completo e nunca mais depende de internet nem precisa sair da ferramenta: léxico, sinônimos, Academia e Literatura, lentes de estudo e revisão, leitura editorial e verificação de origem convivem no mesmo teto offline.
+
 Usar capacidade de engenharia atual para construir um instrumento que exija pouco do aparelho. Criatividade, proporção, tipografia, linhas e estados discretos devem produzir a experiência de oficina e papel eletrônico. A longevidade depende também de formatos documentados, conservação de dados e verificações reproduzíveis.
 
 - Aplicativo entregue: JavaScript clássico, HTML/CSS enxutos, sem frameworks, CDN, telemetria ou serviços obrigatórios.
@@ -34,7 +36,7 @@ A digitação não espera transições nem análises. O limite de 16 ms do anexo
 | `.scrvrl` como YAML + Markdown | Os pacotes existentes são estruturados em JSON legível. Documentar o formato real e conservar importação/exportação; não migrar o acervo apenas para imitar um exemplo do anexo. |
 | OPFS/IndexedDB | Possíveis camadas opcionais futuras, não pré-requisito nem implementação presumida. Preservar o armazenamento atual até uma migração própria. |
 | Copiar, colar e quarentena | Conferir comportamento e decisões de autoria existentes; não acrescentar bloqueios ou mudanças de clipboard nesta frente de compatibilidade. |
-| Hash como prova de autoria humana | Hash registra integridade de conteúdo; não identifica sozinho quem o escreveu. Não prometer autoria humana exclusiva nem anterioridade externa comprovada por registro somente local. |
+| Hash, linhagem e Cartório | O Cartório embutido é frente oficial de confiança entre escritor e editor: ao reimportar uma mesa exportada, verifica a integridade criptográfica da cadeia de criação e os registros de construção dentro do Escrevaral (incluindo regime de colagem restrita / ausência de colagens externas). Mantém-se o rigor científico: o certificado declara exatamente o que a trilha local e os hashes encadeados comprovam, e fornece o `SHA-256` da obra para eventual carimbo de tempo/anterioridade externa quando exigido fora do aparelho, sem prometer prova de relógio externo por registro somente local. |
 | Alegações neurocientíficas | Tratar cadência/materialidade como intenção de design; não anunciar indução de ondas cerebrais ou benefícios clínicos como resultado demonstrado. |
 | Esperar validação a cada passo | Vale a autorização posterior de execução autônoma e publicação na main com verificações essenciais. Testes visuais e em aparelhos não são requisitos; ajustes visuais seguem o retorno do autor. |
 
