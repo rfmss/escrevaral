@@ -2792,12 +2792,40 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-rhythm-bar { display:inline-block; height:8px; border-radius:99px; background:#3c614a; min-width:16px; }
 #ptbr-dashboard .ptbr-rhythm-count { font:700 11px/1.2 'Courier Prime','Courier New',monospace; opacity:.75; white-space:nowrap; }
 
-/* Grupos de cor para repetição próxima */
-#ptbr-dashboard .ptbr-excerpt[data-repeat-group="0"] { border-left:4px solid #8a4b30; background:rgba(238,220,211,.42); }
-#ptbr-dashboard .ptbr-excerpt[data-repeat-group="1"] { border-left:4px solid #306277; background:rgba(212,228,235,.42); }
-#ptbr-dashboard .ptbr-excerpt[data-repeat-group="2"] { border-left:4px solid #6b4e80; background:rgba(228,220,233,.42); }
-#ptbr-dashboard .ptbr-excerpt[data-repeat-group="3"] { border-left:4px solid #7d5b1a; background:rgba(239,229,202,.42); }
-#ptbr-dashboard .ptbr-excerpt[data-repeat-group="4"] { border-left:4px solid #2f6947; background:rgba(212,230,216,.42); }
+/* Grupos de cor para repetição próxima e famílias de rima */
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="0"] { border-left:4px solid #8a4b30; background:rgba(238,220,211,.38); }
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="1"] { border-left:4px solid #306277; background:rgba(212,228,235,.38); }
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="2"] { border-left:4px solid #6b4e80; background:rgba(228,220,233,.38); }
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="3"] { border-left:4px solid #7d5b1a; background:rgba(239,229,202,.38); }
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="4"] { border-left:4px solid #2f6947; background:rgba(212,230,216,.38); }
+
+/* Destaque cirúrgico no contexto da frase (Convenções, Repetições, Rimas) */
+#ptbr-dashboard .ptbr-ctx-line,
+#ptbr-dashboard .ptbr-rhyme-line { display:block; font:17px/1.6 Georgia,'Noto Serif',serif; color:inherit; }
+#ptbr-dashboard .ptbr-ctx-ellipsis { opacity:.5; padding:0 2px; }
+#ptbr-dashboard .ptbr-inline-hit { background:rgba(178,108,80,.22); color:inherit; padding:1px 5px; border-radius:4px; border-bottom:2px solid #9e4b2c; font-weight:600; }
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="1"] .ptbr-inline-hit { background:rgba(48,98,119,.2); border-bottom-color:#306277; }
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="2"] .ptbr-inline-hit { background:rgba(107,78,128,.2); border-bottom-color:#6b4e80; }
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="3"] .ptbr-inline-hit { background:rgba(125,91,26,.2); border-bottom-color:#7d5b1a; }
+#ptbr-dashboard .ptbr-excerpt[data-repeat-group="4"] .ptbr-inline-hit { background:rgba(47,105,71,.2); border-bottom-color:#2f6947; }
+
+/* Escansão silábica (Métrica de versos) */
+#ptbr-dashboard .ptbr-scansion-row { display:flex !important; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 14px; }
+#ptbr-dashboard .ptbr-scansion-verse { font:18px/1.6 Georgia,'Noto Serif',serif; letter-spacing:.01em; }
+#ptbr-dashboard .ptbr-syl-dot { opacity:.42; padding:0 1px; }
+#ptbr-dashboard .ptbr-syl-sep { opacity:.35; font:13px/1 'Courier Prime',monospace; padding:0 3px; }
+#ptbr-dashboard .ptbr-syl-tonic { font-weight:700; color:#6d2d15; background:rgba(238,220,211,.55); padding:0 3px; border-radius:4px; }
+#ptbr-dashboard .ptbr-syl-tail { opacity:.45; font-style:italic; }
+#ptbr-dashboard .ptbr-meter-badge { font:700 11px/1.2 'Courier Prime','Courier New',monospace; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:99px; background:#2f4738; color:#eff2ea; white-space:nowrap; }
+
+/* Esquema de rimas (A / B / C...) */
+#ptbr-dashboard .ptbr-rhyme-head { display:flex !important; align-items:center; gap:10px; margin-bottom:6px; }
+#ptbr-dashboard .ptbr-rhyme-badge { font:700 10.5px/1.2 'Courier Prime','Courier New',monospace; letter-spacing:.08em; padding:3px 9px; border-radius:99px; background:#2f4738; color:#eff2ea; }
+#ptbr-dashboard .ptbr-rhyme-pair { font:600 12.5px/1.3 'Courier Prime','Courier New',monospace; opacity:.78; }
+#ptbr-dashboard .ptbr-rhyme-line + .ptbr-rhyme-line { margin-top:4px !important; }
+#ptbr-dashboard .ptbr-reading[data-reading-lens="rima"] .ptbr-fragment-original,
+#ptbr-dashboard .ptbr-reading[data-reading-lens="metrica"] .ptbr-fragment-original,
+#ptbr-dashboard .ptbr-reading[data-reading-lens="repeticao"] .ptbr-fragment-original { display:none; }
 
 #ptbr-dashboard .ptbr-reading-empty { font-size:14px; line-height:1.7; padding:20px 0; }
 #ptbr-dashboard .ptbr-legend { font:12px/1.6 'Courier Prime','Courier New',monospace; margin-top:12px; }

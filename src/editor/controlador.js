@@ -2030,6 +2030,9 @@
   if (byId('esc-synonyms-btn') && wordCardUI && wordCardUI.openManual) {
     listen(byId('esc-synonyms-btn'), 'click', function () { wordCardUI.openManual(''); });
   }
+  E.ptbrOpenWordCard = function (word) {
+    if (wordCardUI && wordCardUI.openManual) { wordCardUI.openManual(word || ''); }
+  };
 
   var pomodoroDockUI = null, calcUI = null;
   if (E.mountPomodoroDock) {

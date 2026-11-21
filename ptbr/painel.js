@@ -363,6 +363,10 @@
         if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
         locateInText(start,end,'Selecione o trecho manualmente no manuscrito.');
       },false);}(f.start,f.end));
+      if((lens==='repeticao'||lens==='adverbios'||lens==='decolonial')&&E.ptbrOpenWordCard){
+        b=el('button',entry,'','Sinônimos');b.type='button';
+        (function(word){b.addEventListener('click',function(){E.ptbrOpenWordCard(word);},false);}(f.snippet));
+      }
       if(E.ptbrPanelKeep&&!request){
         b=el('button',entry,'','Manter minha escolha');b.type='button';
         (function(finding,button){button.addEventListener('click',function(){
