@@ -1394,13 +1394,19 @@
     border-bottom: 1px solid rgba(33, 41, 33, 0.06) !important;
     border-radius: 8px !important;
   }
-  body[data-view="workspace"] #items-column #esc-items-list button {
+  body[data-view="workspace"] #items-column #esc-items-list .esc-item-open,
+  body[data-view="workspace"] #items-column #esc-items-list .esc-item-open:hover {
+    border: 0 !important;
+    background: transparent !important;
+    opacity: 1 !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list .esc-item-act {
     border: 0 !important;
     border-radius: 6px !important;
     background: transparent !important;
-    opacity: 0.68;
+    opacity: 0.72;
   }
-  body[data-view="workspace"] #items-column #esc-items-list button:hover {
+  body[data-view="workspace"] #items-column #esc-items-list .esc-item-act:hover {
     background: rgba(33, 41, 33, 0.09) !important;
     opacity: 1;
   }

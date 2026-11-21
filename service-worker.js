@@ -1,5 +1,5 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-c3e5860e710a";
+const CACHE_NAME = "scrvrl-offline-v6-65-aeca5e651c6c";
 const RUNTIME_CACHE = "scrvrl-runtime-v1";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
@@ -12,8 +12,8 @@ const REQUIRED_ASSETS = [
     "sha256": "f44fa394b7471b68535cde2ee5bc7ab7f050003d44f8381956b74b6f55da02ca"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.e042e3ec0fbfff4c.css",
-    "sha256": "e042e3ec0fbfff4caa7f7f0cd5b461e1441862cb313ecd9d7e9cb9338b0d8a25"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.d9d27200ca9571db.css",
+    "sha256": "d9d27200ca9571db11218a36121d5ba140dc07fa4273321099cda4e9a5ce46ac"
   }
 ];
 const scopeURL = new URL('./', self.registration.scope);
@@ -41,7 +41,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: '4d344e4552b6c4cc77fd473679188ff733f076dfed2dc99cd2ea8cd59dd2e97a' });
+    const index = await checkedAsset({ url: './index.html', sha256: '7c492202c71223dbed9754fe213937784f045305904be39b0991600f0728ccc5' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);
