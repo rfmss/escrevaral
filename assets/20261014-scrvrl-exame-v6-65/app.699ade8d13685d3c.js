@@ -3581,14 +3581,23 @@
 
   function normalizePrefs(raw) {
     var p = raw && typeof raw === 'object' ? raw : {};
+    var okPalette = p.palette === 'white' || p.palette === 'night' || p.palette === 'linen' || p.palette === 'mist';
     return {
-      palette: p.palette === 'white' || p.palette === 'night' ? p.palette : 'paper',
+      palette: okPalette ? p.palette : 'paper',
       face: p.face === 'sans' ? 'sans' : 'serif',
-      size: clamp(p.size, 17, 28, 22),
-      leading: clamp(p.leading, 1.5, 2.0, 1.7),
+      size: clamp(p.size, 17, 28, 21),
+      leading: clamp(p.leading, 1.5, 2.0, 1.82),
       width: clamp(p.width, 50, 74, 62),
       breakMin: p.breakMin === 15 || p.breakMin === 25 || p.breakMin === 45 ? p.breakMin : 0
     };
+  }
+
+  function formatEditionDate() {
+    try {
+      var d = new Date();
+      var months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+      return d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
+    } catch (e) { return ''; }
   }
 
   function readingMinutes(text) {
@@ -3669,20 +3678,20 @@
         '<header class="esc-reader-bar">' +
           '<button id="esc-reader-close" type="button">← Voltar à escrita</button>' +
           '<span id="esc-reader-stats" class="esc-reader-mode"></span>' +
-          '<button id="esc-reader-prev" type="button" aria-label="Página anterior">▲ Anterior</button>' +
-          '<button id="esc-reader-next" type="button" aria-label="Próxima página">▼ Próxima</button>' +
-          '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Aparência</button>' +
+          '<button id="esc-reader-prev" type="button" aria-label="Página anterior">Anterior</button>' +
+          '<button id="esc-reader-next" type="button" aria-label="Próxima página">Próxima</button>' +
+          '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Papel e letra</button>' +
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
-          '<label>Papel<select id="esc-reader-palette"><option value="paper">Papel sépia</option><option value="white">Branco claro</option><option value="night">Noturno</option></select></label>' +
+          '<label>Papel<select id="esc-reader-palette"><option value="paper">Jornal (Marfim)</option><option value="linen">Creme suave</option><option value="mist">Névoa clara</option><option value="white">Galeria</option><option value="night">Noturno</option></select></label>' +
           '<label>Letra<select id="esc-reader-face"><option value="serif">Literária (Serifada)</option><option value="sans">Sem serifa</option></select></label>' +
-          '<label>Tamanho<select id="esc-reader-size"><option value="18">18 px</option><option value="20">20 px</option><option value="22">22 px</option><option value="25">25 px</option><option value="28">28 px</option></select></label>' +
-          '<label>Entrelinha<select id="esc-reader-leading"><option value="1.5">Compacta</option><option value="1.7">Editorial</option><option value="1.95">Ampla</option></select></label>' +
+          '<label>Tamanho<select id="esc-reader-size"><option value="18">18 px</option><option value="20">20 px</option><option value="21">21 px</option><option value="24">24 px</option><option value="28">28 px</option></select></label>' +
+          '<label>Entrelinha<select id="esc-reader-leading"><option value="1.6">Compacta</option><option value="1.82">Editorial</option><option value="2">Ampla</option></select></label>' +
           '<label>Pausa de leitura<select id="esc-reader-break"><option value="0">Sem pausa</option><option value="15">A cada 15 min</option><option value="25">A cada 25 min</option><option value="45">A cada 45 min</option></select></label>' +
         '</div>' +
         '<div id="esc-reader-viewport" class="esc-reader-viewport" tabindex="0">' +
           '<div id="esc-reader-page" class="esc-reader-page">' +
-            '<div class="esc-reader-masthead"><span>ESCREVARAL · EDIÇÃO DE LEITURA</span><span id="esc-reader-project-tag"></span></div>' +
+            '<div class="esc-reader-masthead"><span id="esc-reader-date"></span><strong class="esc-reader-brand">ESCREVARAL</strong><span id="esc-reader-project-tag"></span></div>' +
             '<article id="esc-reader-article" class="esc-reader-article"></article>' +
           '</div>' +
           '<div id="esc-reader-pause" class="esc-reader-pause" hidden>' +
@@ -3733,8 +3742,10 @@
 
       var text = doc && typeof doc.text === 'string' ? doc.text : '';
       var stats = readingMinutes(text);
-      byId('esc-reader-stats').textContent = stats.words + ' palavras' + (stats.minutes ? ' · ~' + stats.minutes + ' min' : '');
-      byId('esc-reader-project-tag').textContent = doc && doc.project ? doc.project : 'TEXTO AVULSO';
+      var statLine = stats.words + (stats.words === 1 ? ' palavra' : ' palavras') + (stats.minutes ? ' · ' + stats.minutes + ' min de leitura' : '');
+      byId('esc-reader-stats').textContent = '';
+      if (byId('esc-reader-date')) { byId('esc-reader-date').textContent = formatEditionDate(); }
+      byId('esc-reader-project-tag').textContent = doc && doc.project ? doc.project : 'EDIÇÃO DE LEITURA';
 
       var article = byId('esc-reader-article');
       article.textContent = '';
@@ -3743,20 +3754,52 @@
       h1.textContent = doc && doc.title ? doc.title : 'Sem título';
       article.appendChild(h1);
 
+      var byline = document.createElement('p');
+      byline.className = 'esc-reader-byline';
+      byline.textContent = statLine;
+      article.appendChild(byline);
+
       if (doc && doc.format === 'rich' && doc.richHtml && root.Escr.richEditor) {
         var richWrap = document.createElement('div');
+        richWrap.className = 'esc-reader-body';
         richWrap.innerHTML = root.Escr.richEditor.sanitizeHtml(doc.richHtml);
         article.appendChild(richWrap);
       } else {
         var plain = document.createElement('div');
-        plain.className = 'esc-reader-plain';
-        plain.textContent = text;
+        plain.className = 'esc-reader-plain esc-reader-body';
+        var blocks = text.replace(/\r\n?/g, '\n').split(/\n{2,}/);
+        var hasDropCap = text.replace(/\s+/g, '').length >= 80;
+        var pIdx = 0, bi, blockText, pEl;
+        for (bi = 0; bi < blocks.length; bi += 1) {
+          blockText = blocks[bi].replace(/^\n+|\n+$/g, '');
+          if (!blockText) { continue; }
+          pEl = document.createElement('p');
+          if (pIdx === 0 && hasDropCap && /^[A-Za-zÀ-ÖØ-öø-ÿ]/.test(blockText)) {
+            pEl.className = 'esc-reader-dropcap';
+          }
+          pEl.textContent = blockText;
+          plain.appendChild(pEl);
+          pIdx += 1;
+        }
+        if (!pIdx) {
+          pEl = document.createElement('p');
+          pEl.className = 'esc-reader-empty';
+          pEl.textContent = 'Folha em branco.';
+          plain.appendChild(pEl);
+        }
         article.appendChild(plain);
       }
 
       var endMark = document.createElement('footer');
       endMark.className = 'esc-reader-end';
-      endMark.textContent = 'Fim da leitura · Esc para retornar à edição.';
+      var fleuron = document.createElement('span');
+      fleuron.className = 'esc-reader-fleuron';
+      fleuron.setAttribute('aria-hidden', 'true');
+      fleuron.textContent = '— ❦ —';
+      var endText = document.createElement('span');
+      endText.textContent = 'Fim da leitura · Esc para retornar à edição';
+      endMark.appendChild(fleuron);
+      endMark.appendChild(endText);
       article.appendChild(endMark);
 
       overlayEl.hidden = false;

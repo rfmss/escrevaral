@@ -227,13 +227,7 @@
     outline-offset: -2px;
   }
 
-  /* Modo Leitor em harmonia com Papel digital E-Ink Sálvia por padrão */
-  .esc-reader:not([data-palette="white"]):not([data-palette="night"]) {
-    --reader-paper: #c4cfc2;
-    --reader-ink: #111511;
-    --reader-muted: #455241;
-    --reader-line: #7c8b78;
-  }
+  /* Modo Leitor respira fora do verde do editor (paleta própria estilo jornal em modo-leitor.css) */
 
   /* Barra de rolagem ultradiscreta (2px, quase imperceptível) + totalmente oculta no Superfoco */
   * {
@@ -1296,6 +1290,136 @@
   }
   .lock-hide-hint:hover {
     background: #2e382c !important;
+  }
+
+  /* =====================================================================
+   * 8. Minimalismo Editorial: fim de conflitos de menus + redução de bordas
+   * ===================================================================== */
+  /* Quando o Cartão de Sinônimos abre para 1 palavra, esconde a barra duplicada de Trecho selecionado */
+  body[data-esc-consulta-open="true"] #writing-space .selection-tools {
+    display: none !important;
+  }
+
+  /* Barra de Trecho selecionado harmonizada em pílula calma E-Ink (sem caixa branca SaaS) */
+  #writing-space .selection-tools {
+    width: auto !important;
+    max-width: calc(100% - 32px) !important;
+    bottom: 36px !important;
+    padding: 5px 10px !important;
+    background: #d5dfd3 !important;
+    color: #1c241c !important;
+    border: 1px solid rgba(33, 41, 33, 0.14) !important;
+    border-top: 1px solid rgba(33, 41, 33, 0.14) !important;
+    border-radius: 99px !important;
+    box-shadow: 0 8px 24px rgba(24, 34, 24, 0.12) !important;
+    gap: 2px !important;
+    align-items: center !important;
+  }
+  #writing-space .selection-tools #clipboard-status {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+  }
+  #writing-space .selection-tools button {
+    min-height: 32px !important;
+    padding: 5px 11px !important;
+    border: 0 !important;
+    border-radius: 99px !important;
+    background: transparent !important;
+    font: 600 12.5px/1.2 Arial, Helvetica, sans-serif !important;
+    color: #1c241c !important;
+  }
+  #writing-space .selection-tools button:hover:not(:disabled) {
+    background: rgba(33, 41, 33, 0.09) !important;
+  }
+  #writing-space .selection-tools button:disabled {
+    opacity: 0.35 !important;
+  }
+  body[data-theme="escuro"] #writing-space .selection-tools {
+    background: #2b322a !important;
+    color: #e2e8df !important;
+    border-color: rgba(226, 232, 223, 0.14) !important;
+  }
+  body[data-theme="escuro"] #writing-space .selection-tools button {
+    color: #e2e8df !important;
+  }
+
+  /* Menos bordas no workspace: respira por contraste tonal e fios sutis */
+  body[data-view="workspace"] #location-path {
+    border-bottom: 1px solid rgba(33, 41, 33, 0.1) !important;
+  }
+  body[data-view="workspace"] #navigation,
+  body[data-view="workspace"] #items-column {
+    border-right: 1px solid rgba(33, 41, 33, 0.1) !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools,
+  body[data-view="workspace"] #writing-space .writing-toolbar {
+    border-bottom: 1px solid rgba(33, 41, 33, 0.09) !important;
+  }
+  body[data-view="workspace"] #writing-space .paper-footer {
+    border-top: 1px solid rgba(33, 41, 33, 0.09) !important;
+  }
+
+  /* Coluna de notas (#items-column): cartões limpos sem gaiolas nem botões encaixotados */
+  body[data-view="workspace"] #items-column #esc-new-note {
+    border: 0 !important;
+    border-radius: 8px !important;
+    background: rgba(33, 41, 33, 0.075) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-new-note:hover {
+    background: rgba(33, 41, 33, 0.14) !important;
+  }
+  body[data-view="workspace"] #items-column .esc-search-pill {
+    border: 0 !important;
+    border-radius: 99px !important;
+    background: rgba(33, 41, 33, 0.06) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > * {
+    border: 0 !important;
+    border-bottom: 1px solid rgba(33, 41, 33, 0.06) !important;
+    border-radius: 8px !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list button {
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    opacity: 0.68;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list button:hover {
+    background: rgba(33, 41, 33, 0.09) !important;
+    opacity: 1;
+  }
+
+  /* Barra esquerda (#navigation): botões secundários sem caixas pesadas */
+  body[data-view="workspace"] #navigation .esc-mini-add,
+  body[data-view="workspace"] #navigation #esc-pomodoro-dock button {
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: rgba(33, 41, 33, 0.07) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-mini-add:hover,
+  body[data-view="workspace"] #navigation #esc-pomodoro-dock button:hover {
+    background: rgba(33, 41, 33, 0.14) !important;
+  }
+  body[data-view="workspace"] #navigation #esc-pomodoro-dock,
+  body[data-view="workspace"] #navigation .esc-nav-footer {
+    border-top: 1px solid rgba(33, 41, 33, 0.1) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn {
+    border: 0 !important;
+    border-radius: 9px !important;
+    background: rgba(33, 41, 33, 0.07) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover {
+    background: rgba(33, 41, 33, 0.13) !important;
+  }
+  body[data-view="workspace"] #navigation #esc-folder-search {
+    border: 0 !important;
+    border-radius: 7px !important;
+    background: rgba(33, 41, 33, 0.06) !important;
   }
 
   @media (prefers-reduced-motion: reduce) {

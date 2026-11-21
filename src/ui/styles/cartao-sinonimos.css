@@ -1,18 +1,18 @@
-/* Cartão flutuante de definição e sinônimos P01 — ESCREVARAL */
+/* Cartão flutuante minimalista de definição e sinônimos P01 — ESCREVARAL */
 @media screen {
   .esc-palavra {
     position: fixed;
-    right: 24px;
-    bottom: 58px;
+    right: 22px;
+    bottom: 20px;
     z-index: 2100;
-    width: 310px;
+    width: 296px;
     max-width: calc(100vw - 32px);
-    padding: 12px 14px;
-    background: var(--esc-paper, #ccd5c7);
-    color: var(--esc-ink, #1e2320);
-    border: 1px solid var(--esc-muted, #4a544c);
-    border-radius: 3px;
-    box-shadow: 2px 4px 0 rgba(30, 35, 32, 0.22);
+    padding: 14px 16px;
+    background: #d5dfd3;
+    color: #1c241c;
+    border: 1px solid rgba(33, 41, 33, 0.14);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(24, 34, 24, 0.13);
     font: 13px/1.45 Arial, Helvetica, sans-serif;
     overflow-wrap: break-word;
   }
@@ -30,12 +30,12 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px dotted var(--esc-border, #8b9b8c);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(33, 41, 33, 0.1);
   }
 
   .esc-palavra-title {
-    font: 600 16px/1.25 'Noto Serif', Georgia, serif;
+    font: 600 17px/1.2 'Noto Serif', Georgia, serif;
     min-width: 0;
     overflow-wrap: break-word;
   }
@@ -45,28 +45,36 @@
     height: 26px;
     padding: 0;
     border: 0;
+    border-radius: 99px;
     background: transparent;
     color: inherit;
     font-size: 17px;
     line-height: 1;
     cursor: pointer;
     flex-shrink: 0;
+    opacity: 0.65;
+  }
+
+  .esc-palavra-icon:hover {
+    background: rgba(33, 41, 33, 0.08);
+    opacity: 1;
   }
 
   .esc-palavra-content {
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   .esc-palavra-class {
-    font-size: 11px;
+    font-size: 10.5px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--esc-muted, #4a544c);
+    letter-spacing: 0.08em;
+    color: #4b5949;
   }
 
   .esc-palavra-definition {
     margin-top: 4px !important;
-    font: 13px/1.45 'Noto Serif', Georgia, serif;
+    font: 13.5px/1.48 'Noto Serif', Georgia, serif;
   }
 
   .esc-palavra-words {
@@ -77,24 +85,24 @@
   }
 
   .esc-palavra-words button {
-    padding: 4px 10px;
+    padding: 5px 11px;
     min-height: 28px;
-    border: 1px solid var(--esc-muted, #4a544c);
-    background: var(--esc-bg, #c4cfc2);
+    border: 0;
+    background: rgba(33, 41, 33, 0.08);
     color: inherit;
-    font: inherit;
-    border-radius: 3px;
+    font: 500 12.5px/1.2 Arial, Helvetica, sans-serif;
+    border-radius: 99px;
     cursor: pointer;
+    transition: background 120ms ease;
   }
 
   .esc-palavra-words button:hover {
-    background: var(--esc-selected, #b3c2ae);
+    background: rgba(33, 41, 33, 0.16);
   }
 
   .esc-palavra-words button.esc-palavra-undo {
-    background: var(--esc-ink, #1e2320);
-    color: var(--esc-paper, #ccd5c7);
-    border-color: var(--esc-ink, #1e2320);
+    background: #243326;
+    color: #e6eee4;
     font-weight: 600;
   }
 
@@ -102,67 +110,89 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-top: 8px;
+    margin-top: 10px;
     font-size: 12px;
-    color: var(--esc-muted, #4a544c);
+    color: #4b5949;
   }
 
   .esc-palavra-nav button {
     padding: 2px 8px;
-    border: 1px solid var(--esc-border, #8b9b8c);
-    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    background: rgba(33, 41, 33, 0.06);
     color: inherit;
     cursor: pointer;
+  }
+
+  .esc-palavra-nav button:hover:not(:disabled) {
+    background: rgba(33, 41, 33, 0.14);
   }
 
   .esc-palavra-status {
     margin-top: 4px !important;
     font-size: 12px;
-    color: var(--esc-muted, #4a544c);
+    color: #4b5949;
   }
-}
 
-@media screen {
   .esc-palavra-tools {
     display: flex;
     align-items: center;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px dashed #7c8b78;
+    gap: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(33, 41, 33, 0.1);
   }
+
   .esc-palavra-search-form {
     display: flex;
     flex: 1 1 auto;
     min-width: 0;
+    gap: 5px;
   }
+
   .esc-palavra-search-input {
     flex: 1 1 auto;
     min-width: 0;
-    padding: 4px 7px;
-    border: 1px solid #7c8b78;
-    background: #d8e2d6;
+    padding: 5px 9px;
+    border: 1px solid rgba(33, 41, 33, 0.14);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.42);
     color: #111511;
     font-size: 12px;
   }
+
   .esc-palavra-search-btn,
   .esc-palavra-info-btn {
-    margin-left: 5px;
-    padding: 4px 8px;
-    border: 1px solid #455241;
-    background: transparent;
+    padding: 5px 9px;
+    border: 0;
+    border-radius: 7px;
+    background: rgba(33, 41, 33, 0.08);
     color: inherit;
-    font-size: 11px;
+    font-size: 11.5px;
+    font-weight: 600;
     cursor: pointer;
   }
-  .esc-palavra-info-btn[aria-pressed="true"] {
-    background: #242d23;
-    color: #d8e4d6;
+
+  .esc-palavra-search-btn:hover,
+  .esc-palavra-info-btn:hover {
+    background: rgba(33, 41, 33, 0.16);
   }
+
+  .esc-palavra-info-btn[aria-pressed="true"] {
+    background: #243326;
+    color: #e6eee4;
+  }
+
   .esc-palavra-sources {
-    margin: 6px 0 0;
+    margin: 8px 0 0;
     font-size: 11px;
     line-height: 1.45;
-    color: #455241;
-    color: var(--esc-muted, #455241);
+    color: #4b5949;
+  }
+
+  body[data-theme="escuro"] .esc-palavra {
+    background: #2b322a;
+    color: #e2e8df;
+    border-color: rgba(226, 232, 223, 0.14);
   }
 }

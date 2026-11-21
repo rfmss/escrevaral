@@ -2684,17 +2684,17 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 /* Neutraliza regras legadas de .sheet button dentro do novo painel editorial */
 #oficina[data-ptbr-dashboard="true"] #ptbr-dashboard button[aria-pressed="true"] { border-left-width: 1.5px; }
 
-/* Barra de nota ativa + atalhos rápidos de 1 clique */
-#ptbr-dashboard .ptbr-active-note { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:8px 14px; margin:0 0 10px; border:1px solid #9aa795; border-radius:8px; background:rgba(255,255,255,.32); font-size:13px; }
-#ptbr-dashboard .ptbr-active-note-badge { font:700 10px/1.2 'Courier Prime','Courier New',monospace; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:99px; background:#2f4738; color:#eff2ea; }
-#ptbr-dashboard .ptbr-active-note-title { font-weight:700; font-size:14px; }
-#ptbr-dashboard .ptbr-active-note-meta { margin-left:auto; font:12px/1.3 'Courier Prime','Courier New',monospace; opacity:.78; }
+/* Barra de nota ativa + atalhos rápidos de 1 clique (sem caixas aninhadas) */
+#ptbr-dashboard .ptbr-active-note { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:4px 0 10px; margin:0 0 6px; border:0; background:transparent; font-size:13px; }
+#ptbr-dashboard .ptbr-active-note-badge { font:700 10px/1.2 'Courier Prime','Courier New',monospace; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:99px; background:#2f4738; color:#eff2ea; }
+#ptbr-dashboard .ptbr-active-note-title { font-weight:700; font-size:14.5px; }
+#ptbr-dashboard .ptbr-active-note-meta { margin-left:auto; font:12px/1.3 'Courier Prime','Courier New',monospace; opacity:.72; }
 
-#ptbr-dashboard .ptbr-ribbon { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; padding-bottom:12px; border-bottom:1px dotted #9aa795; }
-#ptbr-dashboard .ptbr-ribbon-btn { padding:6px 12px; min-height:34px; border:1px solid #8c9a87; border-radius:99px; background:rgba(255,255,255,.26); color:inherit; font:600 12px/1.2 Arial,Helvetica,sans-serif; cursor:pointer; transition:background .12s ease, border-color .12s ease; }
-#ptbr-dashboard .ptbr-ribbon-btn:hover:not(:disabled) { background:rgba(53,76,61,.12); border-color:#354c3d; }
-#ptbr-dashboard .ptbr-ribbon-btn[aria-current="true"] { background:#2f4738 !important; color:#eff2ea !important; border-color:#2f4738 !important; }
-#ptbr-dashboard .ptbr-ribbon-btn:disabled { opacity:.42; cursor:default; }
+#ptbr-dashboard .ptbr-ribbon { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 14px; padding-bottom:14px; border-bottom:1px solid rgba(33,41,33,.11); }
+#ptbr-dashboard .ptbr-ribbon-btn { padding:6px 13px; min-height:33px; border:0; border-radius:99px; background:rgba(33,41,33,.06); color:inherit; font:600 12px/1.2 Arial,Helvetica,sans-serif; cursor:pointer; transition:background .12s ease; }
+#ptbr-dashboard .ptbr-ribbon-btn:hover:not(:disabled) { background:rgba(53,76,61,.14); }
+#ptbr-dashboard .ptbr-ribbon-btn[aria-current="true"] { background:#2f4738 !important; color:#eff2ea !important; }
+#ptbr-dashboard .ptbr-ribbon-btn:disabled { opacity:.4; cursor:default; }
 
 /* No modo resultado, compacta cabeçalhos redundantes para o texto colorido aparecer logo no topo */
 #ptbr-dashboard[data-ptbr-screen="result"] > .ptbr-title,
@@ -2703,17 +2703,19 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard[data-ptbr-screen="result"] > .ptbr-action {
   display:inline-block;
   width:auto;
-  min-height:30px;
-  margin:0 10px 6px 0;
+  min-height:28px;
+  margin:0 8px 6px 0;
   padding:4px 10px;
   font-size:11.5px;
-  border:1px solid #8c9a87;
+  border:0;
   border-radius:6px;
-  background:rgba(255,255,255,.22);
+  background:rgba(33,41,33,.065);
 }
-#ptbr-dashboard[data-ptbr-screen="result"] > .ptbr-status { display:inline-block; margin:0 0 6px; font-size:11.5px; opacity:.75; }
+#ptbr-dashboard[data-ptbr-screen="result"] > .ptbr-back:hover,
+#ptbr-dashboard[data-ptbr-screen="result"] > .ptbr-action:hover { background:rgba(33,41,33,.13); }
+#ptbr-dashboard[data-ptbr-screen="result"] > .ptbr-status { display:inline-block; margin:0 0 6px; font-size:11.5px; opacity:.72; }
 #ptbr-dashboard[data-ptbr-screen="result"] .ptbr-outcome { border-top:0; padding-top:4px; }
-#ptbr-dashboard[data-ptbr-screen="result"] .ptbr-outcome > p:first-of-type { margin:0 0 8px; font-size:12px; opacity:.76; }
+#ptbr-dashboard[data-ptbr-screen="result"] .ptbr-outcome > p:first-of-type { margin:0 0 8px; font-size:12px; opacity:.72; }
 
 #ptbr-dashboard .ptbr-count { display:block; }
 #ptbr-dashboard .ptbr-stat { display:inline-block; vertical-align:baseline; margin-right:24px; }
@@ -2727,24 +2729,24 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-action { display:inline-block; width:auto; margin-right:12px; font-size:12px; font-weight:600; border:0; border-bottom:1px dotted currentColor; }
 #ptbr-dashboard .ptbr-status { font-size:12px; }
 
-/* Palco de leitura: 2 colunas confortáveis no desktop (palco amplo à esquerda + inspetor fixo à direita) */
-#ptbr-dashboard .ptbr-reading { display:flex; align-items:flex-start; gap:0; width:100%; border:1px solid #9aa795; border-radius:8px; margin-top:8px; min-width:0; overflow:hidden; background:rgba(255,255,255,.18); }
-#ptbr-dashboard .ptbr-reading-paper { flex:1 1 0; min-width:440px; padding:16px 20px; }
-#ptbr-dashboard .ptbr-reading-help { max-width:68ch; font-size:12.5px; line-height:1.55; margin:0 0 12px; opacity:.84; }
-#ptbr-dashboard .ptbr-reading-aside { flex:0 0 300px; width:300px; min-width:0; padding:16px 18px; border-left:1px dotted #8c9a87; background:rgba(53,76,61,.05); word-wrap:break-word; overflow-wrap:break-word; position:sticky; top:8px; }
+/* Palco de leitura: aberto e arejado sem gaiolas aninhadas */
+#ptbr-dashboard .ptbr-reading { display:flex; align-items:flex-start; gap:24px; width:100%; border:0; border-top:1px solid rgba(33,41,33,.11); margin-top:10px; padding-top:14px; min-width:0; background:transparent; }
+#ptbr-dashboard .ptbr-reading-paper { flex:1 1 0; min-width:440px; padding:4px 0 12px; }
+#ptbr-dashboard .ptbr-reading-help { max-width:68ch; font-size:12.5px; line-height:1.55; margin:0 0 14px; opacity:.76; }
+#ptbr-dashboard .ptbr-reading-aside { flex:0 0 296px; width:296px; min-width:0; padding:16px 18px; border:0; border-left:1px solid rgba(33,41,33,.11); border-radius:10px; background:rgba(33,41,33,.04); word-wrap:break-word; overflow-wrap:break-word; position:sticky; top:8px; }
 #ptbr-dashboard .ptbr-reading-selection { font:700 16px/1.45 'Courier Prime','Courier New',monospace; margin:8px 0 12px; }
-#ptbr-dashboard .ptbr-reading-aside .ptbr-observation { border-top:1px dotted #86927f; padding-top:12px; }
+#ptbr-dashboard .ptbr-reading-aside .ptbr-observation { border-top:1px solid rgba(33,41,33,.1); padding-top:12px; }
 #ptbr-dashboard .ptbr-reading-aside p { font-size:12.5px; line-height:1.58; }
 #ptbr-dashboard .ptbr-reading-aside blockquote { font:15px/1.5 'Courier Prime','Courier New',monospace; white-space:pre-wrap; }
-#ptbr-dashboard .ptbr-reading-aside button { min-height:36px; border:1px solid #86927f; border-radius:6px; padding:5px 11px; background:rgba(255,255,255,.26); cursor:pointer; }
-#ptbr-dashboard .ptbr-reading-aside button:hover { background:rgba(53,76,61,.12); }
+#ptbr-dashboard .ptbr-reading-aside button { min-height:34px; border:0; border-radius:7px; padding:5px 11px; background:rgba(33,41,33,.08); cursor:pointer; }
+#ptbr-dashboard .ptbr-reading-aside button:hover { background:rgba(33,41,33,.15); }
 
-/* Barra de filtro de classes + alternador "Só cores" */
+/* Barra de filtro de classes + alternador "Só cores" sem moldura pesada */
 #ptbr-dashboard .ptbr-class-bar,
-#ptbr-dashboard .ptbr-syntax-nav { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0 0 14px; padding:8px 10px; border:1px solid #a4b09f; border-radius:8px; background:rgba(255,255,255,.26); }
+#ptbr-dashboard .ptbr-syntax-nav { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0 0 16px; padding:0; border:0; background:transparent; }
 #ptbr-dashboard .ptbr-class-chip,
 #ptbr-dashboard .ptbr-nav-pill,
-#ptbr-dashboard .ptbr-pill-mode-btn { padding:4px 10px; min-height:30px; border:1px solid #8b9886; border-radius:99px; background:rgba(255,255,255,.4); color:inherit; font:600 11.5px/1.2 'Courier Prime','Courier New',monospace; cursor:pointer; white-space:nowrap; }
+#ptbr-dashboard .ptbr-pill-mode-btn { padding:4px 11px; min-height:30px; border:1px solid rgba(33,41,33,.14); border-radius:99px; background:rgba(255,255,255,.32); color:inherit; font:600 11.5px/1.2 'Courier Prime','Courier New',monospace; cursor:pointer; white-space:nowrap; }
 #ptbr-dashboard .ptbr-class-chip[aria-pressed="true"],
 #ptbr-dashboard .ptbr-nav-pill[aria-pressed="true"],
 #ptbr-dashboard .ptbr-pill-mode-btn[aria-pressed="true"] { background:#2f4738 !important; color:#eff2ea !important; border-color:#2f4738 !important; }
@@ -4760,14 +4762,14 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 }
 
 /* Fonte: src/ui/styles/modo-leitor.css */
-/* Editor formatado leve & Modo Leitura Editorial — ESCREVARAL */
+/* Editor formatado leve & Modo Leitura Editorial (NYT / New Yorker Print Sanctuary) — ESCREVARAL */
 @media screen {
   .esc-rich-toolbar {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
     padding: 6px 24px;
-    border-bottom: 1px dotted var(--esc-border, #8b9b8c);
+    border-bottom: 1px solid rgba(33, 41, 33, 0.12);
     background: var(--esc-surface, #becab9);
   }
 
@@ -4777,17 +4779,17 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   .esc-rich-toolbar button {
     min-height: 30px;
-    padding: 3px 8px;
-    border: 1px solid var(--esc-border, #8b9b8c);
-    background: var(--esc-paper, #ccd5c7);
+    padding: 3px 9px;
+    border: 0;
+    background: rgba(33, 41, 33, 0.06);
     color: var(--esc-ink, #1e2320);
     font: 600 12px/1.2 Arial, sans-serif;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 5px;
   }
 
   .esc-rich-toolbar button:hover {
-    background: var(--esc-selected, #b3c2ae);
+    background: rgba(33, 41, 33, 0.13);
   }
 
   .esc-rich-editor {
@@ -4821,22 +4823,28 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .esc-rich-editor blockquote {
     margin: 0.8em 0;
     padding-left: 14px;
-    border-left: 3px solid var(--esc-border, #8b9b8c);
+    border-left: 2px solid rgba(33, 41, 33, 0.28);
   }
 
   .esc-rich-editor pre {
     padding: 10px 12px;
-    background: var(--esc-surface, #becab9);
+    background: rgba(33, 41, 33, 0.06);
+    border-radius: 6px;
     font: 14px/1.5 monospace;
     white-space: pre-wrap;
   }
 
-  /* Modo leitura */
+  /* =====================================================================
+   * MODO LEITURA — Edição Impressa (New York Times / The New Yorker)
+   * Mudança real de ares: papel pastel marfim minimalista, zero cara de SaaS
+   * ===================================================================== */
   .esc-reader {
-    --reader-paper: #f6f1e7;
-    --reader-ink: #282722;
-    --reader-muted: #625e54;
-    --reader-line: #898174;
+    --reader-paper: #f8f5ef;
+    --reader-surface: #efeae0;
+    --reader-ink: #161513;
+    --reader-muted: #6c665d;
+    --reader-line: #dcd5c8;
+    --reader-rule: #22201d;
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
     z-index: 3200;
@@ -4844,130 +4852,267 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     flex-direction: column;
     background: var(--reader-paper);
     color: var(--reader-ink);
-    font: 16px/1.5 Arial, Helvetica, sans-serif;
+    font: 15px/1.5 Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   .esc-reader[hidden] {
     display: none !important;
   }
 
+  .esc-reader[data-palette="linen"] {
+    --reader-paper: #f4ede1;
+    --reader-surface: #eae0cf;
+    --reader-ink: #241f19;
+    --reader-muted: #706558;
+    --reader-line: #ddd1be;
+    --reader-rule: #2e2720;
+  }
+
+  .esc-reader[data-palette="mist"] {
+    --reader-paper: #f1f4f3;
+    --reader-surface: #e5eae8;
+    --reader-ink: #18201e;
+    --reader-muted: #5d6966;
+    --reader-line: #d4ddda;
+    --reader-rule: #222e2b;
+  }
+
   .esc-reader[data-palette="white"] {
-    --reader-paper: #ffffff;
-    --reader-ink: #242424;
-    --reader-muted: #555555;
-    --reader-line: #777777;
+    --reader-paper: #fcfcfa;
+    --reader-surface: #f2f2ee;
+    --reader-ink: #141414;
+    --reader-muted: #636360;
+    --reader-line: #e2e2dc;
+    --reader-rule: #1a1a1a;
   }
 
   .esc-reader[data-palette="night"] {
-    --reader-paper: #202326;
-    --reader-ink: #e7e4dd;
-    --reader-muted: #c1bcb1;
-    --reader-line: #96918a;
+    --reader-paper: #191b18;
+    --reader-surface: #232622;
+    --reader-ink: #e4e0d7;
+    --reader-muted: #9e9a90;
+    --reader-line: #31352e;
+    --reader-rule: #c5c0b4;
   }
 
+  /* Barra superior sussurrada — sem bordas pesadas nem visual de app */
   .esc-reader-bar {
     display: flex;
     flex: 0 0 auto;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--reader-line);
-    background: var(--reader-paper);
+    gap: 6px 14px;
+    padding: 14px 32px 10px;
+    border-bottom: 0;
+    background: transparent;
+    opacity: 0.48;
+    transition: opacity 180ms ease;
   }
 
-  .esc-reader-bar button,
-  .esc-reader-settings select {
-    min-height: 38px;
-    padding: 6px 12px;
-    border: 1px solid var(--reader-line);
-    background: var(--reader-paper);
-    color: var(--reader-ink);
-    font: inherit;
-    border-radius: 3px;
+  .esc-reader-bar:hover,
+  .esc-reader-bar:focus-within {
+    opacity: 1;
+  }
+
+  .esc-reader-bar button {
+    min-height: 32px;
+    padding: 5px 10px;
+    border: 0;
+    background: transparent;
+    color: var(--reader-muted);
+    font: 500 12.5px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.02em;
+    border-radius: 99px;
     cursor: pointer;
+    transition: background 140ms ease, color 140ms ease;
+  }
+
+  .esc-reader-bar button:hover,
+  .esc-reader-bar button[aria-expanded="true"] {
+    background: var(--reader-surface);
+    color: var(--reader-ink);
+  }
+
+  .esc-reader-bar #esc-reader-close {
+    color: var(--reader-ink);
+    font-weight: 600;
   }
 
   .esc-reader-mode {
     margin-right: auto;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--reader-muted);
   }
 
+  /* Popover minimalista de papel e tipografia (flutuante à direita, não uma faixa SaaS) */
   .esc-reader-settings {
+    position: fixed;
+    top: 56px;
+    right: 32px;
+    z-index: 3210;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--reader-line);
+    gap: 12px 16px;
+    max-width: min(440px, calc(100vw - 32px));
+    padding: 16px 18px;
+    border: 1px solid var(--reader-line);
+    border-radius: 12px;
     background: var(--reader-paper);
+    box-shadow: 0 12px 32px rgba(20, 18, 14, 0.12);
+  }
+
+  .esc-reader-settings[hidden] {
+    display: none !important;
   }
 
   .esc-reader-settings label {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    font-size: 13px;
+    font: 600 11px/1.3 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--reader-muted);
+  }
+
+  .esc-reader-settings select {
+    min-height: 34px;
+    padding: 5px 10px;
+    border: 1px solid var(--reader-line);
+    border-radius: 6px;
+    background: var(--reader-surface);
+    color: var(--reader-ink);
+    font: 13px/1.2 Arial, Helvetica, sans-serif;
+    cursor: pointer;
   }
 
   .esc-reader-viewport {
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
-    padding: 36px 24px 80px;
+    padding: 20px 28px 110px;
   }
 
   .esc-reader-page {
     width: 100%;
     max-width: var(--reader-width, 62ch);
     margin: 0 auto;
-    font-size: var(--reader-size, 22px);
-    font-family: Georgia, 'Noto Serif', serif;
+    font-size: var(--reader-size, 21px);
+    font-family: 'Noto Serif', Georgia, 'Times New Roman', serif;
   }
 
   .esc-reader[data-face="sans"] .esc-reader-page {
     font-family: Arial, Helvetica, sans-serif;
   }
 
+  /* Cabeçalho clássico de jornal literário (linha dupla NYT) */
   .esc-reader-masthead {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 8px 0;
-    margin-bottom: 32px;
-    border-top: 3px solid currentColor;
-    border-bottom: 1px solid currentColor;
-    font: 600 11px/1.4 Arial, sans-serif;
-    letter-spacing: 1px;
-  }
-
-  .esc-reader-article {
-    line-height: var(--reader-leading, 1.7);
-    overflow-wrap: break-word;
-  }
-
-  .esc-reader-title {
-    margin: 0 0 1em;
-    font: 600 1.85em/1.15 Georgia, 'Noto Serif', serif;
-  }
-
-  .esc-reader-plain {
-    white-space: pre-wrap;
-  }
-
-  .esc-reader-end {
-    margin-top: 48px;
-    padding-top: 14px;
-    border-top: 1px solid var(--reader-line);
-    font: 13px/1.5 Arial, sans-serif;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 0;
+    margin-bottom: 42px;
+    border-top: 2px solid var(--reader-rule);
+    border-bottom: 1px solid var(--reader-line);
+    box-shadow: inset 0 3px 0 -2px var(--reader-paper), inset 0 4px 0 -2px var(--reader-rule);
+    font: 500 10.5px/1.4 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--reader-muted);
   }
 
-  .esc-reader-pause {
-    max-width: 36em;
-    margin: 60px auto;
+  .esc-reader-brand {
+    font: 700 13px/1 'Noto Serif', Georgia, serif;
+    letter-spacing: 0.24em;
+    color: var(--reader-ink);
     text-align: center;
+  }
+
+  .esc-reader-masthead #esc-reader-project-tag {
+    text-align: right;
+  }
+
+  .esc-reader-article {
+    line-height: var(--reader-leading, 1.82);
+    overflow-wrap: break-word;
+  }
+
+  /* Manchete editorial */
+  .esc-reader-title {
+    margin: 0 0 16px;
+    font: 700 clamp(32px, 4.4vw, 46px)/1.12 'Noto Serif', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.02em;
+    color: var(--reader-ink);
+  }
+
+  .esc-reader-byline {
+    margin: 0 0 34px;
+    padding-bottom: 22px;
+    font: italic 14px/1.4 'Noto Serif', Georgia, serif;
+    color: var(--reader-muted);
+    position: relative;
+  }
+
+  .esc-reader-byline:after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--reader-line);
+    margin-top: 18px;
+  }
+
+  .esc-reader-body p {
+    margin: 0 0 1.25em;
+    white-space: pre-wrap;
+  }
+
+  /* Capitular clássica de revista literária no primeiro parágrafo */
+  .esc-reader-body p.esc-reader-dropcap:first-letter {
+    float: left;
+    font: 700 3.35em/0.84 'Noto Serif', Georgia, serif;
+    padding: 0.08em 0.16em 0 0;
+    color: var(--reader-ink);
+  }
+
+  .esc-reader-empty {
+    font-style: italic;
+    color: var(--reader-muted);
+  }
+
+  .esc-reader-end {
+    margin-top: 64px;
+    padding-top: 12px;
+    text-align: center;
+    font: 12px/1.6 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.04em;
+    color: var(--reader-muted);
+  }
+
+  .esc-reader-fleuron {
+    display: block;
+    margin-bottom: 10px;
+    font: 16px/1 Georgia, serif;
+    letter-spacing: 0.25em;
+    color: var(--reader-muted);
+    opacity: 0.72;
+  }
+
+  .esc-reader-pause {
+    max-width: 34em;
+    margin: 80px auto;
+    text-align: center;
+  }
+
+  @media (max-width: 680px) {
+    .esc-reader-bar { padding: 10px 16px; opacity: 0.85; }
+    .esc-reader-viewport { padding: 14px 18px 80px; }
+    .esc-reader-masthead { grid-template-columns: 1fr; text-align: center; gap: 4px; margin-bottom: 28px; }
+    .esc-reader-masthead #esc-reader-project-tag { text-align: center; }
+    .esc-reader-settings { right: 16px; left: 16px; max-width: none; }
   }
 }
 
@@ -5449,13 +5594,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     outline-offset: -2px;
   }
 
-  /* Modo Leitor em harmonia com Papel digital E-Ink Sálvia por padrão */
-  .esc-reader:not([data-palette="white"]):not([data-palette="night"]) {
-    --reader-paper: #c4cfc2;
-    --reader-ink: #111511;
-    --reader-muted: #455241;
-    --reader-line: #7c8b78;
-  }
+  /* Modo Leitor respira fora do verde do editor (paleta própria estilo jornal em modo-leitor.css) */
 
   /* Barra de rolagem ultradiscreta (2px, quase imperceptível) + totalmente oculta no Superfoco */
   * {
@@ -6520,6 +6659,136 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     background: #2e382c !important;
   }
 
+  /* =====================================================================
+   * 8. Minimalismo Editorial: fim de conflitos de menus + redução de bordas
+   * ===================================================================== */
+  /* Quando o Cartão de Sinônimos abre para 1 palavra, esconde a barra duplicada de Trecho selecionado */
+  body[data-esc-consulta-open="true"] #writing-space .selection-tools {
+    display: none !important;
+  }
+
+  /* Barra de Trecho selecionado harmonizada em pílula calma E-Ink (sem caixa branca SaaS) */
+  #writing-space .selection-tools {
+    width: auto !important;
+    max-width: calc(100% - 32px) !important;
+    bottom: 36px !important;
+    padding: 5px 10px !important;
+    background: #d5dfd3 !important;
+    color: #1c241c !important;
+    border: 1px solid rgba(33, 41, 33, 0.14) !important;
+    border-top: 1px solid rgba(33, 41, 33, 0.14) !important;
+    border-radius: 99px !important;
+    box-shadow: 0 8px 24px rgba(24, 34, 24, 0.12) !important;
+    gap: 2px !important;
+    align-items: center !important;
+  }
+  #writing-space .selection-tools #clipboard-status {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+  }
+  #writing-space .selection-tools button {
+    min-height: 32px !important;
+    padding: 5px 11px !important;
+    border: 0 !important;
+    border-radius: 99px !important;
+    background: transparent !important;
+    font: 600 12.5px/1.2 Arial, Helvetica, sans-serif !important;
+    color: #1c241c !important;
+  }
+  #writing-space .selection-tools button:hover:not(:disabled) {
+    background: rgba(33, 41, 33, 0.09) !important;
+  }
+  #writing-space .selection-tools button:disabled {
+    opacity: 0.35 !important;
+  }
+  body[data-theme="escuro"] #writing-space .selection-tools {
+    background: #2b322a !important;
+    color: #e2e8df !important;
+    border-color: rgba(226, 232, 223, 0.14) !important;
+  }
+  body[data-theme="escuro"] #writing-space .selection-tools button {
+    color: #e2e8df !important;
+  }
+
+  /* Menos bordas no workspace: respira por contraste tonal e fios sutis */
+  body[data-view="workspace"] #location-path {
+    border-bottom: 1px solid rgba(33, 41, 33, 0.1) !important;
+  }
+  body[data-view="workspace"] #navigation,
+  body[data-view="workspace"] #items-column {
+    border-right: 1px solid rgba(33, 41, 33, 0.1) !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools,
+  body[data-view="workspace"] #writing-space .writing-toolbar {
+    border-bottom: 1px solid rgba(33, 41, 33, 0.09) !important;
+  }
+  body[data-view="workspace"] #writing-space .paper-footer {
+    border-top: 1px solid rgba(33, 41, 33, 0.09) !important;
+  }
+
+  /* Coluna de notas (#items-column): cartões limpos sem gaiolas nem botões encaixotados */
+  body[data-view="workspace"] #items-column #esc-new-note {
+    border: 0 !important;
+    border-radius: 8px !important;
+    background: rgba(33, 41, 33, 0.075) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-new-note:hover {
+    background: rgba(33, 41, 33, 0.14) !important;
+  }
+  body[data-view="workspace"] #items-column .esc-search-pill {
+    border: 0 !important;
+    border-radius: 99px !important;
+    background: rgba(33, 41, 33, 0.06) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > * {
+    border: 0 !important;
+    border-bottom: 1px solid rgba(33, 41, 33, 0.06) !important;
+    border-radius: 8px !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list button {
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    opacity: 0.68;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list button:hover {
+    background: rgba(33, 41, 33, 0.09) !important;
+    opacity: 1;
+  }
+
+  /* Barra esquerda (#navigation): botões secundários sem caixas pesadas */
+  body[data-view="workspace"] #navigation .esc-mini-add,
+  body[data-view="workspace"] #navigation #esc-pomodoro-dock button {
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: rgba(33, 41, 33, 0.07) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-mini-add:hover,
+  body[data-view="workspace"] #navigation #esc-pomodoro-dock button:hover {
+    background: rgba(33, 41, 33, 0.14) !important;
+  }
+  body[data-view="workspace"] #navigation #esc-pomodoro-dock,
+  body[data-view="workspace"] #navigation .esc-nav-footer {
+    border-top: 1px solid rgba(33, 41, 33, 0.1) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn {
+    border: 0 !important;
+    border-radius: 9px !important;
+    background: rgba(33, 41, 33, 0.07) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover {
+    background: rgba(33, 41, 33, 0.13) !important;
+  }
+  body[data-view="workspace"] #navigation #esc-folder-search {
+    border: 0 !important;
+    border-radius: 7px !important;
+    background: rgba(33, 41, 33, 0.06) !important;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sheet:not(#focus-pause),
     #gabinete,
@@ -6793,21 +7062,21 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 }
 
 /* Fonte: src/ui/styles/cartao-sinonimos.css */
-/* Cartão flutuante de definição e sinônimos P01 — ESCREVARAL */
+/* Cartão flutuante minimalista de definição e sinônimos P01 — ESCREVARAL */
 @media screen {
   .esc-palavra {
     position: fixed;
-    right: 24px;
-    bottom: 58px;
+    right: 22px;
+    bottom: 20px;
     z-index: 2100;
-    width: 310px;
+    width: 296px;
     max-width: calc(100vw - 32px);
-    padding: 12px 14px;
-    background: var(--esc-paper, #ccd5c7);
-    color: var(--esc-ink, #1e2320);
-    border: 1px solid var(--esc-muted, #4a544c);
-    border-radius: 3px;
-    box-shadow: 2px 4px 0 rgba(30, 35, 32, 0.22);
+    padding: 14px 16px;
+    background: #d5dfd3;
+    color: #1c241c;
+    border: 1px solid rgba(33, 41, 33, 0.14);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(24, 34, 24, 0.13);
     font: 13px/1.45 Arial, Helvetica, sans-serif;
     overflow-wrap: break-word;
   }
@@ -6825,12 +7094,12 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px dotted var(--esc-border, #8b9b8c);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(33, 41, 33, 0.1);
   }
 
   .esc-palavra-title {
-    font: 600 16px/1.25 'Noto Serif', Georgia, serif;
+    font: 600 17px/1.2 'Noto Serif', Georgia, serif;
     min-width: 0;
     overflow-wrap: break-word;
   }
@@ -6840,28 +7109,36 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     height: 26px;
     padding: 0;
     border: 0;
+    border-radius: 99px;
     background: transparent;
     color: inherit;
     font-size: 17px;
     line-height: 1;
     cursor: pointer;
     flex-shrink: 0;
+    opacity: 0.65;
+  }
+
+  .esc-palavra-icon:hover {
+    background: rgba(33, 41, 33, 0.08);
+    opacity: 1;
   }
 
   .esc-palavra-content {
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   .esc-palavra-class {
-    font-size: 11px;
+    font-size: 10.5px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--esc-muted, #4a544c);
+    letter-spacing: 0.08em;
+    color: #4b5949;
   }
 
   .esc-palavra-definition {
     margin-top: 4px !important;
-    font: 13px/1.45 'Noto Serif', Georgia, serif;
+    font: 13.5px/1.48 'Noto Serif', Georgia, serif;
   }
 
   .esc-palavra-words {
@@ -6872,24 +7149,24 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   .esc-palavra-words button {
-    padding: 4px 10px;
+    padding: 5px 11px;
     min-height: 28px;
-    border: 1px solid var(--esc-muted, #4a544c);
-    background: var(--esc-bg, #c4cfc2);
+    border: 0;
+    background: rgba(33, 41, 33, 0.08);
     color: inherit;
-    font: inherit;
-    border-radius: 3px;
+    font: 500 12.5px/1.2 Arial, Helvetica, sans-serif;
+    border-radius: 99px;
     cursor: pointer;
+    transition: background 120ms ease;
   }
 
   .esc-palavra-words button:hover {
-    background: var(--esc-selected, #b3c2ae);
+    background: rgba(33, 41, 33, 0.16);
   }
 
   .esc-palavra-words button.esc-palavra-undo {
-    background: var(--esc-ink, #1e2320);
-    color: var(--esc-paper, #ccd5c7);
-    border-color: var(--esc-ink, #1e2320);
+    background: #243326;
+    color: #e6eee4;
     font-weight: 600;
   }
 
@@ -6897,68 +7174,90 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-top: 8px;
+    margin-top: 10px;
     font-size: 12px;
-    color: var(--esc-muted, #4a544c);
+    color: #4b5949;
   }
 
   .esc-palavra-nav button {
     padding: 2px 8px;
-    border: 1px solid var(--esc-border, #8b9b8c);
-    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    background: rgba(33, 41, 33, 0.06);
     color: inherit;
     cursor: pointer;
+  }
+
+  .esc-palavra-nav button:hover:not(:disabled) {
+    background: rgba(33, 41, 33, 0.14);
   }
 
   .esc-palavra-status {
     margin-top: 4px !important;
     font-size: 12px;
-    color: var(--esc-muted, #4a544c);
+    color: #4b5949;
   }
-}
 
-@media screen {
   .esc-palavra-tools {
     display: flex;
     align-items: center;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px dashed #7c8b78;
+    gap: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(33, 41, 33, 0.1);
   }
+
   .esc-palavra-search-form {
     display: flex;
     flex: 1 1 auto;
     min-width: 0;
+    gap: 5px;
   }
+
   .esc-palavra-search-input {
     flex: 1 1 auto;
     min-width: 0;
-    padding: 4px 7px;
-    border: 1px solid #7c8b78;
-    background: #d8e2d6;
+    padding: 5px 9px;
+    border: 1px solid rgba(33, 41, 33, 0.14);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.42);
     color: #111511;
     font-size: 12px;
   }
+
   .esc-palavra-search-btn,
   .esc-palavra-info-btn {
-    margin-left: 5px;
-    padding: 4px 8px;
-    border: 1px solid #455241;
-    background: transparent;
+    padding: 5px 9px;
+    border: 0;
+    border-radius: 7px;
+    background: rgba(33, 41, 33, 0.08);
     color: inherit;
-    font-size: 11px;
+    font-size: 11.5px;
+    font-weight: 600;
     cursor: pointer;
   }
-  .esc-palavra-info-btn[aria-pressed="true"] {
-    background: #242d23;
-    color: #d8e4d6;
+
+  .esc-palavra-search-btn:hover,
+  .esc-palavra-info-btn:hover {
+    background: rgba(33, 41, 33, 0.16);
   }
+
+  .esc-palavra-info-btn[aria-pressed="true"] {
+    background: #243326;
+    color: #e6eee4;
+  }
+
   .esc-palavra-sources {
-    margin: 6px 0 0;
+    margin: 8px 0 0;
     font-size: 11px;
     line-height: 1.45;
-    color: #455241;
-    color: var(--esc-muted, #455241);
+    color: #4b5949;
+  }
+
+  body[data-theme="escuro"] .esc-palavra {
+    background: #2b322a;
+    color: #e2e8df;
+    border-color: rgba(226, 232, 223, 0.14);
   }
 }
 
@@ -13277,14 +13576,23 @@ SOFTWARE.
 
   function normalizePrefs(raw) {
     var p = raw && typeof raw === 'object' ? raw : {};
+    var okPalette = p.palette === 'white' || p.palette === 'night' || p.palette === 'linen' || p.palette === 'mist';
     return {
-      palette: p.palette === 'white' || p.palette === 'night' ? p.palette : 'paper',
+      palette: okPalette ? p.palette : 'paper',
       face: p.face === 'sans' ? 'sans' : 'serif',
-      size: clamp(p.size, 17, 28, 22),
-      leading: clamp(p.leading, 1.5, 2.0, 1.7),
+      size: clamp(p.size, 17, 28, 21),
+      leading: clamp(p.leading, 1.5, 2.0, 1.82),
       width: clamp(p.width, 50, 74, 62),
       breakMin: p.breakMin === 15 || p.breakMin === 25 || p.breakMin === 45 ? p.breakMin : 0
     };
+  }
+
+  function formatEditionDate() {
+    try {
+      var d = new Date();
+      var months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+      return d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
+    } catch (e) { return ''; }
   }
 
   function readingMinutes(text) {
@@ -13365,20 +13673,20 @@ SOFTWARE.
         '<header class="esc-reader-bar">' +
           '<button id="esc-reader-close" type="button">← Voltar à escrita</button>' +
           '<span id="esc-reader-stats" class="esc-reader-mode"></span>' +
-          '<button id="esc-reader-prev" type="button" aria-label="Página anterior">▲ Anterior</button>' +
-          '<button id="esc-reader-next" type="button" aria-label="Próxima página">▼ Próxima</button>' +
-          '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Aparência</button>' +
+          '<button id="esc-reader-prev" type="button" aria-label="Página anterior">Anterior</button>' +
+          '<button id="esc-reader-next" type="button" aria-label="Próxima página">Próxima</button>' +
+          '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Papel e letra</button>' +
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
-          '<label>Papel<select id="esc-reader-palette"><option value="paper">Papel sépia</option><option value="white">Branco claro</option><option value="night">Noturno</option></select></label>' +
+          '<label>Papel<select id="esc-reader-palette"><option value="paper">Jornal (Marfim)</option><option value="linen">Creme suave</option><option value="mist">Névoa clara</option><option value="white">Galeria</option><option value="night">Noturno</option></select></label>' +
           '<label>Letra<select id="esc-reader-face"><option value="serif">Literária (Serifada)</option><option value="sans">Sem serifa</option></select></label>' +
-          '<label>Tamanho<select id="esc-reader-size"><option value="18">18 px</option><option value="20">20 px</option><option value="22">22 px</option><option value="25">25 px</option><option value="28">28 px</option></select></label>' +
-          '<label>Entrelinha<select id="esc-reader-leading"><option value="1.5">Compacta</option><option value="1.7">Editorial</option><option value="1.95">Ampla</option></select></label>' +
+          '<label>Tamanho<select id="esc-reader-size"><option value="18">18 px</option><option value="20">20 px</option><option value="21">21 px</option><option value="24">24 px</option><option value="28">28 px</option></select></label>' +
+          '<label>Entrelinha<select id="esc-reader-leading"><option value="1.6">Compacta</option><option value="1.82">Editorial</option><option value="2">Ampla</option></select></label>' +
           '<label>Pausa de leitura<select id="esc-reader-break"><option value="0">Sem pausa</option><option value="15">A cada 15 min</option><option value="25">A cada 25 min</option><option value="45">A cada 45 min</option></select></label>' +
         '</div>' +
         '<div id="esc-reader-viewport" class="esc-reader-viewport" tabindex="0">' +
           '<div id="esc-reader-page" class="esc-reader-page">' +
-            '<div class="esc-reader-masthead"><span>ESCREVARAL · EDIÇÃO DE LEITURA</span><span id="esc-reader-project-tag"></span></div>' +
+            '<div class="esc-reader-masthead"><span id="esc-reader-date"></span><strong class="esc-reader-brand">ESCREVARAL</strong><span id="esc-reader-project-tag"></span></div>' +
             '<article id="esc-reader-article" class="esc-reader-article"></article>' +
           '</div>' +
           '<div id="esc-reader-pause" class="esc-reader-pause" hidden>' +
@@ -13429,8 +13737,10 @@ SOFTWARE.
 
       var text = doc && typeof doc.text === 'string' ? doc.text : '';
       var stats = readingMinutes(text);
-      byId('esc-reader-stats').textContent = stats.words + ' palavras' + (stats.minutes ? ' · ~' + stats.minutes + ' min' : '');
-      byId('esc-reader-project-tag').textContent = doc && doc.project ? doc.project : 'TEXTO AVULSO';
+      var statLine = stats.words + (stats.words === 1 ? ' palavra' : ' palavras') + (stats.minutes ? ' · ' + stats.minutes + ' min de leitura' : '');
+      byId('esc-reader-stats').textContent = '';
+      if (byId('esc-reader-date')) { byId('esc-reader-date').textContent = formatEditionDate(); }
+      byId('esc-reader-project-tag').textContent = doc && doc.project ? doc.project : 'EDIÇÃO DE LEITURA';
 
       var article = byId('esc-reader-article');
       article.textContent = '';
@@ -13439,20 +13749,52 @@ SOFTWARE.
       h1.textContent = doc && doc.title ? doc.title : 'Sem título';
       article.appendChild(h1);
 
+      var byline = document.createElement('p');
+      byline.className = 'esc-reader-byline';
+      byline.textContent = statLine;
+      article.appendChild(byline);
+
       if (doc && doc.format === 'rich' && doc.richHtml && root.Escr.richEditor) {
         var richWrap = document.createElement('div');
+        richWrap.className = 'esc-reader-body';
         richWrap.innerHTML = root.Escr.richEditor.sanitizeHtml(doc.richHtml);
         article.appendChild(richWrap);
       } else {
         var plain = document.createElement('div');
-        plain.className = 'esc-reader-plain';
-        plain.textContent = text;
+        plain.className = 'esc-reader-plain esc-reader-body';
+        var blocks = text.replace(/\r\n?/g, '\n').split(/\n{2,}/);
+        var hasDropCap = text.replace(/\s+/g, '').length >= 80;
+        var pIdx = 0, bi, blockText, pEl;
+        for (bi = 0; bi < blocks.length; bi += 1) {
+          blockText = blocks[bi].replace(/^\n+|\n+$/g, '');
+          if (!blockText) { continue; }
+          pEl = document.createElement('p');
+          if (pIdx === 0 && hasDropCap && /^[A-Za-zÀ-ÖØ-öø-ÿ]/.test(blockText)) {
+            pEl.className = 'esc-reader-dropcap';
+          }
+          pEl.textContent = blockText;
+          plain.appendChild(pEl);
+          pIdx += 1;
+        }
+        if (!pIdx) {
+          pEl = document.createElement('p');
+          pEl.className = 'esc-reader-empty';
+          pEl.textContent = 'Folha em branco.';
+          plain.appendChild(pEl);
+        }
         article.appendChild(plain);
       }
 
       var endMark = document.createElement('footer');
       endMark.className = 'esc-reader-end';
-      endMark.textContent = 'Fim da leitura · Esc para retornar à edição.';
+      var fleuron = document.createElement('span');
+      fleuron.className = 'esc-reader-fleuron';
+      fleuron.setAttribute('aria-hidden', 'true');
+      fleuron.textContent = '— ❦ —';
+      var endText = document.createElement('span');
+      endText.textContent = 'Fim da leitura · Esc para retornar à edição';
+      endMark.appendChild(fleuron);
+      endMark.appendChild(endText);
       article.appendChild(endMark);
 
       overlayEl.hidden = false;
