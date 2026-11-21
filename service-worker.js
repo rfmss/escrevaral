@@ -1,19 +1,19 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-391c370e9f15";
+const CACHE_NAME = "scrvrl-offline-v6-65-873acf34422e";
 const RUNTIME_CACHE = "scrvrl-runtime-v1";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/cofre.0a6bd6191b0a9f7c.js",
-    "sha256": "0a6bd6191b0a9f7caf71349a0d362b88df044fd9e1e834b58a525c1117442887"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/cofre.39ed24c3ae855a87.js",
+    "sha256": "39ed24c3ae855a8707c8d741b1ff56400fd384c0351b8fcd2204304639b26c26"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.eb7cd067bfbd5bac.js",
-    "sha256": "eb7cd067bfbd5bac36efc4d4a14f6fdb4e91ff8b4d414d95a32be953e1629238"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.9ddefa7e0659c967.js",
+    "sha256": "9ddefa7e0659c967a34cf8f3a26844dcc167e80a347c588d5dc13c70ff99c2f5"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.ea64047f81694999.css",
-    "sha256": "ea64047f81694999117f5d62996ddd3d5541614126769e8652fb0423f51053ca"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.8ec83f9751b24ffb.css",
+    "sha256": "8ec83f9751b24ffb2e1a7a6c15372b4f9b6708ad4bda1888ca7c64d403bd514a"
   }
 ];
 const scopeURL = new URL('./', self.registration.scope);
@@ -41,7 +41,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: 'f0cf7cf70b9e6e39a59e1a2ae68fe784d48dc2cfeb9db0acc4a9e7a80a082842' });
+    const index = await checkedAsset({ url: './index.html', sha256: 'a563904644c6ec3890755069f72f04c73a3e23a02dee7c1b01eda90cac7d985d' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);

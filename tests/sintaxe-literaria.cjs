@@ -149,6 +149,73 @@ const positives = [
     text: 'O silêncio da noite chegou suavemente.',
     roles: { Sujeito: 'O silêncio da noite', Verbo: 'chegou', 'Adjunto adverbial': 'suavemente' },
     heads: { Sujeito: 'silêncio' }
+  },
+  /* Sujeito composto (concordância plural, hierarquia de pessoa e gênero, 2 núcleos em components) */
+  {
+    id: 'COMP-01',
+    text: 'A menina e o menino cantam.',
+    roles: { 'Sujeito composto': 'A menina e o menino', Verbo: 'cantam' },
+    components: { 'Sujeito composto': ['menina', 'menino'] }
+  },
+  {
+    id: 'COMP-02',
+    text: 'Eu e Maria lemos o livro.',
+    roles: { 'Sujeito composto': 'Eu e Maria', Verbo: 'lemos', 'Objeto direto': 'o livro' },
+    components: { 'Sujeito composto': ['Eu', 'Maria'] }
+  },
+  {
+    id: 'COMP-03',
+    text: 'O vento e a chuva passaram sobre a cidade.',
+    roles: { 'Sujeito composto': 'O vento e a chuva', Verbo: 'passaram', 'Adjunto adverbial': 'sobre a cidade' },
+    components: { 'Sujeito composto': ['vento', 'chuva'] }
+  },
+  {
+    id: 'COMP-04',
+    text: 'A casa e a rua permaneceram silenciosas.',
+    roles: { 'Sujeito composto': 'A casa e a rua', 'Verbo de ligação': 'permaneceram', 'Predicativo do sujeito': 'silenciosas' },
+    components: { 'Sujeito composto': ['casa', 'rua'] }
+  },
+  {
+    id: 'COMP-05',
+    text: 'João e Maria estão atentos.',
+    roles: { 'Sujeito composto': 'João e Maria', 'Verbo de ligação': 'estão', 'Predicativo do sujeito': 'atentos' },
+    components: { 'Sujeito composto': ['João', 'Maria'] }
+  },
+  /* Orações coordenadas (aditiva, adversativa com vírgula, alternativa, conclusiva, explicativa + sujeito composto) */
+  {
+    id: 'COORD-01',
+    text: 'Eu canto e ela corre.',
+    constructions: 2,
+    coordKind: 'aditiva',
+    roles: { Sujeito: 'Eu', 'Conjunção coordenativa': 'e' }
+  },
+  {
+    id: 'COORD-02',
+    text: 'O dia terminou, mas a escritora permaneceu na janela.',
+    constructions: 2,
+    coordKind: 'adversativa',
+    roles: { Sujeito: 'O dia', 'Conjunção coordenativa': 'mas', 'Adjunto adverbial': 'na janela' }
+  },
+  {
+    id: 'COORD-03',
+    text: 'Ela lê o poema ou ele escreve a crônica.',
+    constructions: 2,
+    coordKind: 'alternativa',
+    roles: { 'Objeto direto': 'o poema', 'Conjunção coordenativa': 'ou' }
+  },
+  {
+    id: 'COORD-04',
+    text: 'A tempestade chegou, portanto o barco voltou.',
+    constructions: 2,
+    coordKind: 'conclusiva',
+    roles: { Sujeito: 'A tempestade', 'Conjunção coordenativa': 'portanto' }
+  },
+  {
+    id: 'COORD-05',
+    text: 'A menina e o menino cantam, porém o vento passou no jardim.',
+    constructions: 2,
+    coordKind: 'adversativa',
+    roles: { 'Sujeito composto': 'A menina e o menino', 'Conjunção coordenativa': 'porém', 'Adjunto adverbial': 'no jardim' }
   }
 ];
 
@@ -156,6 +223,14 @@ for (const c of positives) {
   const res = vault.analyze('sintaxe', c.text);
   validateInvariants(c.text, res.findings);
   assert.ok(res.findings.length > 0, c.id + ' sem leitura: ' + c.text);
+  if (c.constructions) {
+    assert.equal(res.coverageInfo.constructions, c.constructions, c.id + ' contagem de orações');
+  }
+  if (c.coordKind) {
+    const cf = res.findings.find(x => x.feature === 'Conjunção coordenativa');
+    assert.ok(cf, c.id + ' sem conjunção coordenativa');
+    assert.equal(cf.coordKind, c.coordKind, c.id + ' tipo de coordenação');
+  }
   for (const [role, expected] of Object.entries(c.roles)) {
     const f = res.findings.find(x => (role === 'Verbo' ? ['Núcleo verbal', 'Verbo de ligação'].includes(x.feature) : x.feature === role));
     assert.ok(f, c.id + ' papel ausente (' + role + ') em: ' + c.text);
@@ -168,9 +243,16 @@ for (const c of positives) {
       assert.equal(f.head.snippet, expectedHead, c.id + ' núcleo incorreto para ' + role);
     }
   }
+  if (c.components) {
+    for (const [role, expectedComps] of Object.entries(c.components)) {
+      const f = res.findings.find(x => x.feature === role);
+      assert.ok(f && f.components, c.id + ' componentes ausentes para ' + role);
+      assert.deepEqual(Array.from(f.components, x => x.snippet), expectedComps, c.id + ' núcleos do sujeito composto');
+    }
+  }
 }
 
-/* 2. Contrastes e abstenções obrigatórias (discordâncias, ambiguidade posposta no objeto, homógrafos nus) */
+/* 2. Contrastes e abstenções obrigatórias (discordâncias, pontuação imprópria, subordinação, coordenação incompleta) */
 const abstentions = [
   ['CON-01', 'O minha casa brilhou.'],           // artigo + possessivo discordantes em gênero
   ['CON-02', 'Aquele casa caiu.'],                // demonstrativo + nome discordantes
@@ -180,7 +262,13 @@ const abstentions = [
   ['CON-06', 'Eu comprei a casa nova.'],          // adjetivo posposto no objeto (preservar abstenção)
   ['CON-07', 'Eu gosto do livro.'],               // preservação de REL-N46
   ['CON-08', 'Sonho terminou.'],                  // homógrafo verbo/nome sem determinante
-  ['CON-09', 'A escritora escreveu o poema no janela.'] // contração discordante no adjunto
+  ['CON-09', 'A escritora escreveu o poema no janela.'], // contração discordante no adjunto
+  ['CON-10', 'A menina e o menino canta.'],       // sujeito composto com verbo no singular
+  ['CON-11', 'Eu e Maria cantam.'],               // sujeito composto com 1ª pessoa e verbo na 3ª
+  ['CON-12', 'A menina, e o menino cantam.'],     // vírgula indevida dentro de sujeito composto
+  ['CON-13', 'A casa e a rua permaneceram silenciosos.'], // predicativo masculino para sujeito composto feminino
+  ['CON-14', 'Eu canto, mas.'],                   // segunda oração ausente
+  ['CON-15', 'Eu estou lendo e ela canta.']       // preservação de LOC-N34 (primeira oração sem objeto)
 ];
 
 for (const [id, text] of abstentions) {
@@ -188,4 +276,7 @@ for (const [id, text] of abstentions) {
   assert.equal(res.findings.length, 0, id + ' deveria abster em: ' + text);
 }
 
-console.log('OK: Sintaxe literária (' + positives.length + ' construções literárias + ' + abstentions.length + ' contrastes de precisão) verificada.');
+/* 3. Limite de saída nunca divide um período coordenado pela metade */
+assert.equal(E.syntaxRelations.analyze('Eu canto e ela corre.', 5).length, 0, 'não dividir coordenação por limite de saída');
+
+console.log('OK: Sintaxe literária e coordenação (' + positives.length + ' construções + ' + abstentions.length + ' contrastes de precisão) verificada.');

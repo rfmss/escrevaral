@@ -372,12 +372,26 @@
     {
       "id": "REL-N13",
       "text": "A menina e o menino cantam.",
-      "expect": "abstencao"
+      "expect": "leitura",
+      "roles": {
+        "Sujeito composto": "A menina e o menino",
+        "Predicado": "cantam",
+        "Verbo": "cantam"
+      },
+      "note": "Cobertura adicionada por sintaxe-5-coordenacao; expectativa anterior de abstenção preservada neste registro."
     },
     {
       "id": "REL-N14",
       "text": "Eu canto e ela corre.",
-      "expect": "abstencao"
+      "expect": "leitura",
+      "constructions": 2,
+      "roles": {
+        "Sujeito": "Eu",
+        "Predicado": "canto",
+        "Verbo": "canto",
+        "Conjunção coordenativa": "e"
+      },
+      "note": "Cobertura adicionada por sintaxe-5-coordenacao; expectativa anterior de abstenção preservada neste registro."
     },
     {
       "id": "REL-N15",

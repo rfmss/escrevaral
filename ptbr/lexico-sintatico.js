@@ -77,6 +77,19 @@
     entre: { base: 'entre', det: null },
     'até': { base: 'até', det: null }
   };
+  var coordConjs = {
+    e: 'aditiva',
+    mas: 'adversativa',
+    'porém': 'adversativa',
+    contudo: 'adversativa',
+    todavia: 'adversativa',
+    entretanto: 'adversativa',
+    ou: 'alternativa',
+    pois: 'explicativa',
+    logo: 'conclusiva',
+    portanto: 'conclusiva'
+  };
+  var properNames = { ana: 'f', maria: 'f', 'joão': 'm', pedro: 'm' };
   var finalAdverbs = [
     'hoje', 'ontem', 'amanhã', 'aqui', 'ali', 'lá', 'cedo', 'tarde', 'lentamente', 'rapidamente',
     'agora', 'sempre', 'nunca', 'jamais', 'depressa', 'devagar', 'longe', 'perto', 'antes', 'depois', 'ainda',
@@ -298,7 +311,7 @@
   }
 
   E.syntaxLexicon = {
-    version: 'lexico-sintatico-3',
+    version: 'lexico-sintatico-4',
     nounReadings: function (form) { return (nouns['$' + form] || []).map(copy); },
     articleReading: function (form) { return own.call(articles, form) ? articles[form].slice() : null; },
     determinerReading: function (form) { return own.call(determiners, form) ? copy(determiners[form]) : null; },
@@ -308,8 +321,10 @@
       var p = prepositions[form];
       return { base: p.base, det: p.det ? p.det.slice() : null };
     },
+    coordReading: function (form) { return own.call(coordConjs, form) ? coordConjs[form] : null; },
     isFinalAdverb: function (form) { return finalAdverbs.indexOf(form) >= 0; },
-    isProperName: function (form) { return ['ana', 'maria', 'joão', 'pedro'].indexOf(form) >= 0; },
+    isProperName: function (form) { return own.call(properNames, form); },
+    properNameGender: function (form) { return own.call(properNames, form) ? properNames[form] : null; },
     verbReadings: verbReadings,
     framesFor: framesFor,
     frame: function (lemma, kind) {
