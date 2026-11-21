@@ -259,6 +259,19 @@
       legal.appendChild(mk('p', '',
         'Camada 2 (anterioridade jurídica externa): as datas provêm do relógio do aparelho. Quando uma editora ou registro jurídico exigir prova independente de data, utilize o código SHA-256 acima para ancoragem externa (Biblioteca Nacional, carimbo de tempo ou protocolo editorial).'
       ));
+      if (typeof opts.onOpenAcademy === 'function') {
+        var studyRow = mk('div', 'cart-academy-bridge');
+        studyRow.appendChild(mk('span', 'cart-academy-bridge-label', 'Na Academia:'));
+        var subBtn = mk('button', 'cart-academy-link', 'Submissão a editoras →');
+        subBtn.type = 'button';
+        on(subBtn, 'click', function () { close(); opts.onOpenAcademy('submissao-editoras'); });
+        var chkBtn = mk('button', 'cart-academy-link', 'Checklist de lançamento →');
+        chkBtn.type = 'button';
+        on(chkBtn, 'click', function () { close(); opts.onOpenAcademy('checklist-lancamento'); });
+        studyRow.appendChild(subBtn);
+        studyRow.appendChild(chkBtn);
+        legal.appendChild(studyRow);
+      }
       cert.appendChild(legal);
 
       container.appendChild(cert);

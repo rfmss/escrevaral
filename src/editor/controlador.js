@@ -1955,7 +1955,12 @@
   }
 
   if (E.mountReaderMode) {
-    readerUI = E.mountReaderMode({ storage: storage });
+    readerUI = E.mountReaderMode({
+      storage: storage,
+      onOpenAcademy: function (guideId) {
+        if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'objeto-livro'); }
+      }
+    });
     if (byId('esc-reader-toggle')) {
       listen(byId('esc-reader-toggle'), 'click', function () {
         if (readerUI) {
@@ -2161,8 +2166,56 @@
     listen(byId("esc-open-packages"), "click", function () { showPanel("mesa", "mesa-toggle", true); });
   }
 
-    if (E.mountAcademy) {
-    academyUI = E.mountAcademy();
+  if (E.mountAcademy) {
+    academyUI = E.mountAcademy({
+      storage: storage,
+      getContext: function () {
+        var raw = manuscript.value || '';
+        var counts = E.countManuscript ? E.countManuscript(raw) : { words: 0 };
+        var cleanTitle = (title.value || '').replace(/^\s+|\s+$/g, '');
+        return {
+          words: counts.words || 0,
+          hasTitle: !!(cleanTitle && cleanTitle !== 'Sem título'),
+          title: cleanTitle
+        };
+      },
+      onAction: function (action) {
+        if (action === 'reader') {
+          if (readerUI) {
+            doc.title = title.value;
+            doc.text = manuscript.value;
+            if (richUI && richUI.isRich()) { doc.richHtml = richUI.html(); }
+            readerUI.open(doc);
+          }
+        } else if (action === 'superfoco') {
+          if (cabinetOpen) { enterDesk(true); }
+          setImmersion(true, 'manual');
+        } else if (action === 'focus-title') {
+          if (cabinetOpen) { enterDesk(true); }
+          if (title && title.focus) {
+            title.focus();
+            if (title.select) { title.select(); }
+          }
+        } else if (action === 'examine') {
+          if (cabinetOpen) { enterDesk(true); }
+          showPanel('oficina', 'examinar-toggle', true);
+        } else if (action === 'calculator') {
+          if (cabinetOpen) { enterDesk(true); }
+          if (calcUI && calcUI.open) { calcUI.open('paginas', true); }
+        } else if (action === 'cartorio') {
+          if (cartorioUI && cartorioUI.open) { cartorioUI.open('desk'); }
+        } else {
+          if (cabinetOpen) { enterDesk(true); }
+          if (richUI && richUI.isRich() && byId('esc-rich-editor')) { byId('esc-rich-editor').focus(); }
+          else if (manuscript && manuscript.focus) { manuscript.focus(); }
+        }
+      }
+    });
+    E.openAcademyGuide = function (guideId) {
+      if (!academyUI) { return; }
+      if (guideId) { academyUI.openGuide(guideId); }
+      else { academyUI.openList(); }
+    };
     if (byId('esc-open-academy')) {
       listen(byId('esc-open-academy'), 'click', function () { academyUI.openList(); });
     }
@@ -2190,6 +2243,9 @@
         return notebooks.pack(entries, null);
       },
       onExportSealed: function () { exportNotebook(true); },
+      onOpenAcademy: function (guideId) {
+        if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'submissao-editoras'); }
+      },
       onClose: function () { if (!cabinetOpen) { manuscript.focus(); } }
     });
     if (byId('esc-open-cartorio')) {

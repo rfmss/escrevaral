@@ -335,10 +335,25 @@
       el.appendChild(form);
     }
 
-    function open() {
+    function open(tabName, autoFillFromDoc) {
       ensureEl();
       if (!el) { return; }
+      if (tabName === 'conta' || tabName === 'paginas' || tabName === 'orcamento' || tabName === 'tempo') {
+        activeTab = tabName;
+        state.errorText = '';
+        state.resultText = '';
+        state.resultDetail = '';
+      }
       el.hidden = false;
+      if (autoFillFromDoc && activeTab === 'paginas') {
+        var c = getCounts();
+        var countVal = state.unit === 'characters' ? (c.characters || 0) : (c.words || 0);
+        if (countVal > 0) {
+          state.amount = String(countVal);
+          compute();
+          return;
+        }
+      }
       render();
     }
     function close() {

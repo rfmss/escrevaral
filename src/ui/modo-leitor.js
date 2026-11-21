@@ -111,6 +111,7 @@
           '<span id="esc-reader-stats" class="esc-reader-mode"></span>' +
           '<button id="esc-reader-prev" type="button" aria-label="Página anterior">Anterior</button>' +
           '<button id="esc-reader-next" type="button" aria-label="Próxima página">Próxima</button>' +
+          (opts && typeof opts.onOpenAcademy === 'function' ? '<button id="esc-reader-anatomy" type="button" title="Explorar a anatomia do livro na Academia">Objeto livro</button>' : '') +
           '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Papel e letra</button>' +
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
@@ -151,6 +152,12 @@
         var vp = byId('esc-reader-viewport');
         if (vp) { vp.scrollTop += Math.max(120, vp.clientHeight * 0.85); }
       });
+      if (byId('esc-reader-anatomy') && opts && typeof opts.onOpenAcademy === 'function') {
+        on(byId('esc-reader-anatomy'), 'click', function () {
+          close();
+          opts.onOpenAcademy('objeto-livro');
+        });
+      }
       on(byId('esc-reader-resume'), 'click', scheduleBreak);
       on(byId('esc-reader-palette'), 'change', function () { prefs.palette = this.value; applyPrefs(); savePrefs(); });
       on(byId('esc-reader-face'), 'change', function () { prefs.face = this.value; applyPrefs(); savePrefs(); });

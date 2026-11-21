@@ -4508,6 +4508,7 @@
           '<span id="esc-reader-stats" class="esc-reader-mode"></span>' +
           '<button id="esc-reader-prev" type="button" aria-label="Página anterior">Anterior</button>' +
           '<button id="esc-reader-next" type="button" aria-label="Próxima página">Próxima</button>' +
+          (opts && typeof opts.onOpenAcademy === 'function' ? '<button id="esc-reader-anatomy" type="button" title="Explorar a anatomia do livro na Academia">Objeto livro</button>' : '') +
           '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Papel e letra</button>' +
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
@@ -4548,6 +4549,12 @@
         var vp = byId('esc-reader-viewport');
         if (vp) { vp.scrollTop += Math.max(120, vp.clientHeight * 0.85); }
       });
+      if (byId('esc-reader-anatomy') && opts && typeof opts.onOpenAcademy === 'function') {
+        on(byId('esc-reader-anatomy'), 'click', function () {
+          close();
+          opts.onOpenAcademy('objeto-livro');
+        });
+      }
       on(byId('esc-reader-resume'), 'click', scheduleBreak);
       on(byId('esc-reader-palette'), 'change', function () { prefs.palette = this.value; applyPrefs(); savePrefs(); });
       on(byId('esc-reader-face'), 'change', function () { prefs.face = this.value; applyPrefs(); savePrefs(); });
@@ -6648,10 +6655,25 @@
       el.appendChild(form);
     }
 
-    function open() {
+    function open(tabName, autoFillFromDoc) {
       ensureEl();
       if (!el) { return; }
+      if (tabName === 'conta' || tabName === 'paginas' || tabName === 'orcamento' || tabName === 'tempo') {
+        activeTab = tabName;
+        state.errorText = '';
+        state.resultText = '';
+        state.resultDetail = '';
+      }
       el.hidden = false;
+      if (autoFillFromDoc && activeTab === 'paginas') {
+        var c = getCounts();
+        var countVal = state.unit === 'characters' ? (c.characters || 0) : (c.words || 0);
+        if (countVal > 0) {
+          state.amount = String(countVal);
+          compute();
+          return;
+        }
+      }
       render();
     }
     function close() {
@@ -7064,21 +7086,37 @@
   'use strict';
   root.Escr = root.Escr || {};
 
+  var LAST_GUIDE_KEY = 'escrevaral.academy.last.v1';
+
   var CATALOG = [
-    { id: 'objeto-livro', title: 'Objeto livro', group: 'Objeto livro', description: 'Da capa ao colofão, explore cada parte.', file: 'anatomia-do-livro.html' },
-    { id: 'literatura-mundial', title: 'Literatura mundial', group: 'Literatura', description: 'Percorra épocas e leia textos que abrem caminhos para escrever.', file: 'literatura-mundial.html', module: 'literature' },
-    { id: 'primeiras-linhas', title: 'Começar um livro', group: 'Escrita e revisão', description: 'Da primeira linha ao primeiro capítulo.', file: 'primeiras-linhas.html' },
-    { id: 'titulo-do-livro', title: 'Escolher o título', group: 'Escrita e revisão', description: 'Explore caminhos para dar nome à obra.', file: 'titulo-do-livro.html' },
-    { id: 'bloqueio-criativo', title: 'Bloqueio criativo', group: 'Escrita e revisão', description: 'Encontre uma forma de retomar a escrita.', file: 'bloqueio-criativo.html' },
-    { id: 'revisao-manuscrito', title: 'Revisar o manuscrito', group: 'Escrita e revisão', description: 'Revise em camadas, sem perder o fio.', file: 'revisao-manuscrito.html' },
-    { id: 'biblioteca-escrita', title: 'Biblioteca da escrita', group: 'Escrita e revisão', description: 'Conheça referências e critérios de leitura.', file: 'biblioteca-escrita.html' },
-    { id: 'mapa-lancamento-editorial', title: 'Mapa de lançamento', group: 'Publicação e carreira', description: 'Guia para transformar manuscrito em projeto de publicação, com decisão entre caminho independente e editorial.', file: 'mapa-lancamento-editorial.html' },
-    { id: 'autopublicacao-independente', title: 'Autopublicação independente', group: 'Publicação e carreira', description: 'Guia para publicar por conta própria com revisão, capa, distribuição, preço e audiência.', file: 'autopublicacao-independente.html' },
-    { id: 'submissao-editoras', title: 'Submissão a editoras', group: 'Publicação e carreira', description: 'Guia para preparar manuscrito, sinopse, proposta editorial e abordagem a editoras.', file: 'submissao-editoras.html' },
-    { id: 'comparativo-publicacao', title: 'Comparativo de publicação', group: 'Publicação e carreira', description: 'Guia para comparar publicação independente, tradicional e híbrida.', file: 'comparativo-publicacao.html' },
-    { id: 'checklist-lancamento', title: 'Checklist de lançamento', group: 'Publicação e carreira', description: 'Guia para conferir manuscrito, capa, ISBN, sinopse e comunicação.', file: 'checklist-lancamento.html' },
-    { id: 'mentalidade-autor-publicado', title: 'Mentalidade de autor', group: 'Publicação e carreira', description: 'Guia para lidar com perfeccionismo, rejeição e continuidade de carreira.', file: 'mentalidade-autor-publicado.html' },
-    { id: 'publicar-kdp', title: 'Publicar no Amazon KDP', group: 'Publicação e carreira', description: 'Guia para publicar seu livro no Kindle Direct Publishing, do título à precificação.', file: 'publicar-kdp.html' }
+    { id: 'objeto-livro', title: 'Objeto livro', group: 'Objeto livro', description: 'Da capa ao colofão, explore cada parte.', file: 'anatomia-do-livro.html',
+      bridge: { action: 'reader', label: 'Ver folha no Modo Leitura', hint: 'Experimente seu texto como página impressa.' } },
+    { id: 'literatura-mundial', title: 'Literatura mundial', group: 'Literatura', description: 'Percorra épocas e leia textos que abrem caminhos para escrever.', file: 'literatura-mundial.html', module: 'literature',
+      bridge: { action: 'write', label: 'Voltar à folha para escrever', hint: 'Leve o ritmo da leitura de volta para a bancada.' } },
+    { id: 'primeiras-linhas', title: 'Começar um livro', group: 'Escrita e revisão', description: 'Da primeira linha ao primeiro capítulo.', file: 'primeiras-linhas.html',
+      bridge: { action: 'superfoco', label: 'Começar na folha (Superfoco)', hint: 'Limpe a mesa e escreva a primeira linha.' } },
+    { id: 'titulo-do-livro', title: 'Escolher o título', group: 'Escrita e revisão', description: 'Explore caminhos para dar nome à obra.', file: 'titulo-do-livro.html',
+      bridge: { action: 'focus-title', label: 'Editar título da folha', hint: 'Teste títulos direto no cabeçalho do manuscrito.' } },
+    { id: 'bloqueio-criativo', title: 'Bloqueio criativo', group: 'Escrita e revisão', description: 'Encontre uma forma de retomar a escrita.', file: 'bloqueio-criativo.html',
+      bridge: { action: 'superfoco', label: 'Destravar no Superfoco', hint: 'Feche o ruído e deixe a escrita fluir sem censura.' } },
+    { id: 'revisao-manuscrito', title: 'Revisar o manuscrito', group: 'Escrita e revisão', description: 'Revise em camadas, sem perder o fio.', file: 'revisao-manuscrito.html',
+      bridge: { action: 'examine', label: 'Abrir Examinar na Oficina', hint: 'Revise a folha por camadas com as lentes locais.' } },
+    { id: 'biblioteca-escrita', title: 'Biblioteca da escrita', group: 'Escrita e revisão', description: 'Conheça referências e critérios de leitura.', file: 'biblioteca-escrita.html',
+      bridge: { action: 'write', label: 'Voltar à oficina', hint: 'Aplique os critérios de leitura direto no seu rascunho.' } },
+    { id: 'mapa-lancamento-editorial', title: 'Mapa de lançamento', group: 'Publicação e carreira', description: 'Guia para transformar manuscrito em projeto de publicação, com decisão entre caminho independente e editorial.', file: 'mapa-lancamento-editorial.html',
+      bridge: { action: 'calculator', label: 'Estimar páginas e ritmo', hint: 'Calcule páginas, laudas e tempo até o lançamento.' } },
+    { id: 'autopublicacao-independente', title: 'Autopublicação independente', group: 'Publicação e carreira', description: 'Guia para publicar por conta própria com revisão, capa, distribuição, preço e audiência.', file: 'autopublicacao-independente.html',
+      bridge: { action: 'calculator', label: 'Estimar páginas do livro', hint: 'Projete a extensão editorial do manuscrito.' } },
+    { id: 'submissao-editoras', title: 'Submissão a editoras', group: 'Publicação e carreira', description: 'Guia para preparar manuscrito, sinopse, proposta editorial e abordagem a editoras.', file: 'submissao-editoras.html',
+      bridge: { action: 'cartorio', label: 'Abrir Cartório da obra', hint: 'Gere o selo SHA-256 e audite a origem antes de enviar.' } },
+    { id: 'comparativo-publicacao', title: 'Comparativo de publicação', group: 'Publicação e carreira', description: 'Guia para comparar publicação independente, tradicional e híbrida.', file: 'comparativo-publicacao.html',
+      bridge: { action: 'cartorio', label: 'Conferir Cartório da obra', hint: 'Revise a certificação de autoria antes de decidir o caminho.' } },
+    { id: 'checklist-lancamento', title: 'Checklist de lançamento', group: 'Publicação e carreira', description: 'Guia para conferir manuscrito, capa, ISBN, sinopse e comunicação.', file: 'checklist-lancamento.html',
+      bridge: { action: 'cartorio', label: 'Auditar mesa no Cartório', hint: 'Verifique selo e integridade da mesa antes de publicar.' } },
+    { id: 'mentalidade-autor-publicado', title: 'Mentalidade de autor', group: 'Publicação e carreira', description: 'Guia para lidar com perfeccionismo, rejeição e continuidade de carreira.', file: 'mentalidade-autor-publicado.html',
+      bridge: { action: 'write', label: 'Retomar a escrita', hint: 'Volte para a folha no seu próprio ritmo.' } },
+    { id: 'publicar-kdp', title: 'Publicar no Amazon KDP', group: 'Publicação e carreira', description: 'Guia para publicar seu livro no Kindle Direct Publishing, do título à precificação.', file: 'publicar-kdp.html',
+      bridge: { action: 'calculator', label: 'Calcular páginas do livro', hint: 'Estime extensão e páginas para publicação independente.' } }
   ];
 
   var GROUP_ICONS = {
@@ -7121,16 +7159,80 @@
     return null;
   }
 
+  function recommendForContext(ctx) {
+    var info = ctx && typeof ctx === 'object' ? ctx : {};
+    var words = Number(info.words) || 0;
+    var hasTitle = !!info.hasTitle;
+    var stageId, stageLabel, stageNote, ids;
+
+    if (words <= 0) {
+      stageId = 'blank';
+      stageLabel = 'Folha em branco';
+      stageNote = 'A bancada está limpa para começar do zero — escolha um arranque ou aqueça o ritmo.';
+      ids = ['primeiras-linhas', 'bloqueio-criativo'];
+    } else if (words < 600 && !hasTitle) {
+      stageId = 'untitled';
+      stageLabel = 'Primeiras páginas sem título';
+      stageNote = 'Seu texto já nasceu (' + words + (words === 1 ? ' palavra' : ' palavras') + '). Você pode batizar a folha ou aprofundar a abertura.';
+      ids = ['titulo-do-livro', 'primeiras-linhas'];
+    } else if (words < 600) {
+      stageId = 'drafting';
+      stageLabel = 'Rascunho em formação';
+      stageNote = 'Esta folha tem ' + words + (words === 1 ? ' palavra' : ' palavras') + '. Bom momento para sustentar o fôlego ou ler em busca de ressonância.';
+      ids = ['bloqueio-criativo', 'literatura-mundial'];
+    } else if (words < 2500) {
+      stageId = 'revising';
+      stageLabel = 'Texto em desenvolvimento';
+      stageNote = 'Com ' + words + ' palavras na folha, já vale observar estrutura em camadas e o corpo editorial do livro.';
+      ids = ['revisao-manuscrito', 'objeto-livro'];
+    } else {
+      stageId = 'manuscript';
+      stageLabel = 'Manuscrito encorpado';
+      stageNote = 'Esta folha já soma ' + words + ' palavras — hora de lapidar em camadas e planejar o caminho da publicação.';
+      ids = ['revisao-manuscrito', 'mapa-lancamento-editorial'];
+    }
+
+    var guides = [], i, entry;
+    for (i = 0; i < ids.length; i += 1) {
+      entry = findEntry(ids[i]);
+      if (entry) { guides.push(entry); }
+    }
+    return {
+      stageId: stageId,
+      stageLabel: stageLabel,
+      stageNote: stageNote,
+      guides: guides
+    };
+  }
+
   root.Escr.academy = {
     catalog: function () { return CATALOG.slice(); },
-    find: findEntry
+    find: findEntry,
+    recommendForContext: recommendForContext
   };
 
-  root.Escr.mountAcademy = function () {
+  root.Escr.mountAcademy = function (opts) {
+    opts = opts || {};
+    var storage = opts.storage || null;
+    var getContext = typeof opts.getContext === 'function' ? opts.getContext : null;
+    var onAction = typeof opts.onAction === 'function' ? opts.onAction : null;
     var modalEl = null;
     var currentMode = null;
     var activeEntry = null;
     var prevFocus = null;
+
+    function readLastGuideId() {
+      try {
+        var saved = storage ? storage.getItem(LAST_GUIDE_KEY) : null;
+        return saved && findEntry(saved) ? saved : null;
+      } catch (ignore) { return null; }
+    }
+
+    function writeLastGuideId(id) {
+      try {
+        if (storage && id) { storage.setItem(LAST_GUIDE_KEY, String(id)); }
+      } catch (ignore) {}
+    }
 
     function buildModal() {
       if (modalEl) { return modalEl; }
@@ -7196,6 +7298,67 @@
 
       var body = document.createElement('div');
       body.className = 'esc-academy-groups';
+
+      /* Ponte contextual Academia ↔ Oficina (lê apenas resumo métrico local, jamais exposto aos iframes) */
+      var lastId = readLastGuideId();
+      var lastEntry = lastId ? findEntry(lastId) : null;
+      var rec = getContext ? recommendForContext(getContext()) : null;
+      if (rec || lastEntry) {
+        var bridgeBox = document.createElement('section');
+        bridgeBox.className = 'esc-academy-bridge-box';
+        bridgeBox.setAttribute('aria-label', 'Sugestões para o momento da sua oficina');
+
+        var bHead = document.createElement('div');
+        bHead.className = 'esc-academy-bridge-head';
+        var bKicker = document.createElement('span');
+        bKicker.className = 'esc-academy-bridge-kicker';
+        bKicker.textContent = rec ? ('Na sua oficina · ' + rec.stageLabel) : 'Na sua oficina';
+        bHead.appendChild(bKicker);
+        if (lastEntry) {
+          var resumeBtn = document.createElement('button');
+          resumeBtn.type = 'button';
+          resumeBtn.className = 'esc-academy-resume-btn';
+          resumeBtn.setAttribute('data-academy-resume', lastEntry.id);
+          resumeBtn.textContent = 'Continuar: ' + lastEntry.title + ' →';
+          on(resumeBtn, 'click', function () { openGuide(lastEntry.id); });
+          bHead.appendChild(resumeBtn);
+        }
+        bridgeBox.appendChild(bHead);
+
+        if (rec) {
+          var bNote = document.createElement('p');
+          bNote.className = 'esc-academy-bridge-note';
+          bNote.textContent = rec.stageNote;
+          bridgeBox.appendChild(bNote);
+
+          var recRow = document.createElement('div');
+          recRow.className = 'esc-academy-rec-row';
+          var ri;
+          for (ri = 0; ri < rec.guides.length; ri += 1) {
+            (function (g) {
+              var rBtn = document.createElement('button');
+              rBtn.type = 'button';
+              rBtn.className = 'esc-academy-rec-btn';
+              rBtn.setAttribute('data-academy-rec', g.id);
+              var rTitle = document.createElement('strong');
+              rTitle.textContent = g.title;
+              var rHint = document.createElement('span');
+              rHint.textContent = (g.bridge && g.bridge.hint) ? g.bridge.hint : g.description;
+              rBtn.appendChild(rTitle);
+              rBtn.appendChild(rHint);
+              on(rBtn, 'click', function () { openGuide(g.id); });
+              recRow.appendChild(rBtn);
+            }(rec.guides[ri]));
+          }
+          bridgeBox.appendChild(recRow);
+        }
+
+        body.appendChild(bridgeBox);
+        if (root.Escr.ornaments && root.Escr.ornaments.createStairRod) {
+          body.appendChild(root.Escr.ornaments.createStairRod('wide'));
+        }
+      }
+
       var lastGroup = '', ul = null, groupCount = 0;
       CATALOG.forEach(function (entry) {
         if (entry.group !== lastGroup) {
@@ -7243,6 +7406,7 @@
       if (!prevFocus) { prevFocus = document.activeElement; }
       currentMode = 'guide';
       activeEntry = entry;
+      writeLastGuideId(entry.id);
       modalEl.textContent = '';
 
       var shell = document.createElement('div');
@@ -7256,13 +7420,31 @@
       on(backBtn, 'click', openList);
       var titleSpan = document.createElement('strong');
       titleSpan.textContent = entry.title;
+      var actions = document.createElement('div');
+      actions.className = 'esc-academy-bar-actions';
+      if (entry.bridge && onAction) {
+        var actBtn = document.createElement('button');
+        actBtn.type = 'button';
+        actBtn.className = 'esc-academy-bridge-act';
+        actBtn.setAttribute('data-academy-action', entry.bridge.action);
+        actBtn.title = entry.bridge.hint || '';
+        actBtn.textContent = entry.bridge.label + ' →';
+        on(actBtn, 'click', function () {
+          var actionId = entry.bridge.action;
+          var guideEntry = entry;
+          close();
+          onAction(actionId, guideEntry);
+        });
+        actions.appendChild(actBtn);
+      }
       var closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.textContent = 'Fechar · Esc';
       on(closeBtn, 'click', close);
+      actions.appendChild(closeBtn);
       bar.appendChild(backBtn);
       bar.appendChild(titleSpan);
-      bar.appendChild(closeBtn);
+      bar.appendChild(actions);
       shell.appendChild(bar);
 
       var frame = document.createElement('iframe');
@@ -7572,6 +7754,19 @@
       legal.appendChild(mk('p', '',
         'Camada 2 (anterioridade jurídica externa): as datas provêm do relógio do aparelho. Quando uma editora ou registro jurídico exigir prova independente de data, utilize o código SHA-256 acima para ancoragem externa (Biblioteca Nacional, carimbo de tempo ou protocolo editorial).'
       ));
+      if (typeof opts.onOpenAcademy === 'function') {
+        var studyRow = mk('div', 'cart-academy-bridge');
+        studyRow.appendChild(mk('span', 'cart-academy-bridge-label', 'Na Academia:'));
+        var subBtn = mk('button', 'cart-academy-link', 'Submissão a editoras →');
+        subBtn.type = 'button';
+        on(subBtn, 'click', function () { close(); opts.onOpenAcademy('submissao-editoras'); });
+        var chkBtn = mk('button', 'cart-academy-link', 'Checklist de lançamento →');
+        chkBtn.type = 'button';
+        on(chkBtn, 'click', function () { close(); opts.onOpenAcademy('checklist-lancamento'); });
+        studyRow.appendChild(subBtn);
+        studyRow.appendChild(chkBtn);
+        legal.appendChild(studyRow);
+      }
       cert.appendChild(legal);
 
       container.appendChild(cert);
@@ -11168,7 +11363,12 @@
   }
 
   if (E.mountReaderMode) {
-    readerUI = E.mountReaderMode({ storage: storage });
+    readerUI = E.mountReaderMode({
+      storage: storage,
+      onOpenAcademy: function (guideId) {
+        if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'objeto-livro'); }
+      }
+    });
     if (byId('esc-reader-toggle')) {
       listen(byId('esc-reader-toggle'), 'click', function () {
         if (readerUI) {
@@ -11374,8 +11574,56 @@
     listen(byId("esc-open-packages"), "click", function () { showPanel("mesa", "mesa-toggle", true); });
   }
 
-    if (E.mountAcademy) {
-    academyUI = E.mountAcademy();
+  if (E.mountAcademy) {
+    academyUI = E.mountAcademy({
+      storage: storage,
+      getContext: function () {
+        var raw = manuscript.value || '';
+        var counts = E.countManuscript ? E.countManuscript(raw) : { words: 0 };
+        var cleanTitle = (title.value || '').replace(/^\s+|\s+$/g, '');
+        return {
+          words: counts.words || 0,
+          hasTitle: !!(cleanTitle && cleanTitle !== 'Sem título'),
+          title: cleanTitle
+        };
+      },
+      onAction: function (action) {
+        if (action === 'reader') {
+          if (readerUI) {
+            doc.title = title.value;
+            doc.text = manuscript.value;
+            if (richUI && richUI.isRich()) { doc.richHtml = richUI.html(); }
+            readerUI.open(doc);
+          }
+        } else if (action === 'superfoco') {
+          if (cabinetOpen) { enterDesk(true); }
+          setImmersion(true, 'manual');
+        } else if (action === 'focus-title') {
+          if (cabinetOpen) { enterDesk(true); }
+          if (title && title.focus) {
+            title.focus();
+            if (title.select) { title.select(); }
+          }
+        } else if (action === 'examine') {
+          if (cabinetOpen) { enterDesk(true); }
+          showPanel('oficina', 'examinar-toggle', true);
+        } else if (action === 'calculator') {
+          if (cabinetOpen) { enterDesk(true); }
+          if (calcUI && calcUI.open) { calcUI.open('paginas', true); }
+        } else if (action === 'cartorio') {
+          if (cartorioUI && cartorioUI.open) { cartorioUI.open('desk'); }
+        } else {
+          if (cabinetOpen) { enterDesk(true); }
+          if (richUI && richUI.isRich() && byId('esc-rich-editor')) { byId('esc-rich-editor').focus(); }
+          else if (manuscript && manuscript.focus) { manuscript.focus(); }
+        }
+      }
+    });
+    E.openAcademyGuide = function (guideId) {
+      if (!academyUI) { return; }
+      if (guideId) { academyUI.openGuide(guideId); }
+      else { academyUI.openList(); }
+    };
     if (byId('esc-open-academy')) {
       listen(byId('esc-open-academy'), 'click', function () { academyUI.openList(); });
     }
@@ -11403,6 +11651,9 @@
         return notebooks.pack(entries, null);
       },
       onExportSealed: function () { exportNotebook(true); },
+      onOpenAcademy: function (guideId) {
+        if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'submissao-editoras'); }
+      },
       onClose: function () { if (!cabinetOpen) { manuscript.focus(); } }
     });
     if (byId('esc-open-cartorio')) {
@@ -12288,6 +12539,8 @@
     '.ptbr-outcome p{margin:5px 0;font-size:12px;line-height:1.5}' +
     '.ptbr-outcome blockquote{margin:8px 0;padding:4px 8px;border-left:2px solid currentColor;font-size:12px;word-wrap:break-word;overflow-wrap:break-word}' +
     '.ptbr-outcome button{font:inherit;font-size:12px;padding:6px;margin:5px 5px 2px 0}' +
+    '.ptbr-academy-link{margin-left:auto;padding:3px 9px;font:600 11px/1.25 Arial,Helvetica,sans-serif;border:1px solid currentColor;border-radius:2px;background:transparent;color:inherit;opacity:.78;cursor:pointer;white-space:nowrap}' +
+    '.ptbr-academy-link:hover,.ptbr-academy-link:focus-visible{opacity:1;text-decoration:underline}' +
     '@media(max-width:760px){#ptbr-dashboard{padding-bottom:env(safe-area-inset-bottom,0px)}.ptbr-stat-major strong{font-size:36px}}'
   );
   var view=el('div',null,'');view.id='ptbr-dashboard';
@@ -12296,6 +12549,12 @@
   var activeNoteBadge=el('span',activeNoteBar,'ptbr-active-note-badge','Nota ativa');
   var activeNoteName=el('strong',activeNoteBar,'ptbr-active-note-title','Nota sem título');
   var activeNoteMeta=el('span',activeNoteBar,'ptbr-active-note-meta','0 palavras');
+  if(typeof E.openAcademyGuide==='function'){
+    var academyGuideBtn=el('button',activeNoteBar,'ptbr-academy-link','Guia de revisão · Academia');
+    academyGuideBtn.type='button';
+    academyGuideBtn.setAttribute('data-ptbr-academy','revisao-manuscrito');
+    academyGuideBtn.addEventListener('click',function(){E.openAcademyGuide('revisao-manuscrito');},false);
+  }
   var ribbon=el('nav',view,'ptbr-ribbon');ribbon.setAttribute('aria-label','Atalhos rápidos de exame');
   var quickLenses=['morfologia','sintaxe','relativas','ritmo','repeticao','ortografia','crase','rima','metrica'];
   var quickShort={morfologia:'Classes de palavras',sintaxe:'Sintaxe',relativas:'Relativas',ritmo:'Ritmo',repeticao:'Repetição',ortografia:'Ortografia',crase:'Crase',rima:'Rimas',metrica:'Métrica'};

@@ -83,6 +83,8 @@
     '.ptbr-outcome p{margin:5px 0;font-size:12px;line-height:1.5}' +
     '.ptbr-outcome blockquote{margin:8px 0;padding:4px 8px;border-left:2px solid currentColor;font-size:12px;word-wrap:break-word;overflow-wrap:break-word}' +
     '.ptbr-outcome button{font:inherit;font-size:12px;padding:6px;margin:5px 5px 2px 0}' +
+    '.ptbr-academy-link{margin-left:auto;padding:3px 9px;font:600 11px/1.25 Arial,Helvetica,sans-serif;border:1px solid currentColor;border-radius:2px;background:transparent;color:inherit;opacity:.78;cursor:pointer;white-space:nowrap}' +
+    '.ptbr-academy-link:hover,.ptbr-academy-link:focus-visible{opacity:1;text-decoration:underline}' +
     '@media(max-width:760px){#ptbr-dashboard{padding-bottom:env(safe-area-inset-bottom,0px)}.ptbr-stat-major strong{font-size:36px}}'
   );
   var view=el('div',null,'');view.id='ptbr-dashboard';
@@ -91,6 +93,12 @@
   var activeNoteBadge=el('span',activeNoteBar,'ptbr-active-note-badge','Nota ativa');
   var activeNoteName=el('strong',activeNoteBar,'ptbr-active-note-title','Nota sem título');
   var activeNoteMeta=el('span',activeNoteBar,'ptbr-active-note-meta','0 palavras');
+  if(typeof E.openAcademyGuide==='function'){
+    var academyGuideBtn=el('button',activeNoteBar,'ptbr-academy-link','Guia de revisão · Academia');
+    academyGuideBtn.type='button';
+    academyGuideBtn.setAttribute('data-ptbr-academy','revisao-manuscrito');
+    academyGuideBtn.addEventListener('click',function(){E.openAcademyGuide('revisao-manuscrito');},false);
+  }
   var ribbon=el('nav',view,'ptbr-ribbon');ribbon.setAttribute('aria-label','Atalhos rápidos de exame');
   var quickLenses=['morfologia','sintaxe','relativas','ritmo','repeticao','ortografia','crase','rima','metrica'];
   var quickShort={morfologia:'Classes de palavras',sintaxe:'Sintaxe',relativas:'Relativas',ritmo:'Ritmo',repeticao:'Repetição',ortografia:'Ortografia',crase:'Crase',rima:'Rimas',metrica:'Métrica'};

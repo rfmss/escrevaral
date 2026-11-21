@@ -7442,6 +7442,131 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border: 0;
     background: #fff;
   }
+
+  /* Ponte Academia ↔ Oficina (estética Belas Letras, discreta e harmonizada ao E-Ink) */
+  .esc-academy-bridge-box {
+    margin: 2px 0 10px;
+    padding: 13px 15px 14px;
+    background: rgba(248, 245, 236, 0.56);
+    border: 1px solid rgba(132, 99, 46, 0.34);
+    border-left: 3px solid rgba(132, 99, 46, 0.65);
+    border-radius: 3px;
+  }
+
+  .esc-academy-bridge-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .esc-academy-bridge-kicker {
+    font: 700 10.5px/1.3 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-academy-resume-btn {
+    padding: 4px 10px;
+    min-height: 28px;
+    border: 1px solid rgba(132, 99, 46, 0.45);
+    border-radius: 2px;
+    background: rgba(255, 252, 244, 0.72);
+    color: var(--esc-ink, #1e2320);
+    font: 600 11.5px/1.25 Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
+
+  .esc-academy-resume-btn:hover {
+    background: rgba(235, 224, 198, 0.85);
+  }
+
+  .esc-academy-bridge-note {
+    margin: 0 0 10px;
+    font: italic 13px/1.45 Georgia, 'Times New Roman', serif;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-academy-rec-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .esc-academy-rec-btn {
+    flex: 1 1 240px;
+    padding: 9px 11px;
+    text-align: left;
+    border: 1px solid rgba(33, 41, 33, 0.28);
+    border-radius: 3px;
+    background: rgba(255, 253, 248, 0.64);
+    color: var(--esc-ink, #1e2320);
+    cursor: pointer;
+  }
+
+  .esc-academy-rec-btn:hover {
+    background: rgba(244, 237, 224, 0.92);
+    border-color: rgba(132, 99, 46, 0.6);
+  }
+
+  .esc-academy-rec-btn strong {
+    display: block;
+    font: 700 13.5px/1.25 Georgia, 'Times New Roman', serif;
+    margin-bottom: 2px;
+  }
+
+  .esc-academy-rec-btn span {
+    display: block;
+    font: 12px/1.35 Arial, Helvetica, sans-serif;
+    color: var(--esc-muted, #4a544c);
+  }
+
+  .esc-academy-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .esc-academy-bar .esc-academy-bridge-act {
+    background: var(--esc-weave-bg, #242d23);
+    color: #f4f1e6;
+    border-color: var(--esc-weave-bg, #242d23);
+    font-weight: 600;
+  }
+
+  .esc-academy-bar .esc-academy-bridge-act:hover {
+    opacity: 0.9;
+  }
+
+  body[data-theme="escuro"] .esc-academy-bridge-box {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(205, 190, 148, 0.28);
+  }
+  body[data-theme="escuro"] .esc-academy-rec-btn,
+  body[data-theme="escuro"] .esc-academy-resume-btn {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e4ebe2;
+    border-color: rgba(205, 190, 148, 0.34);
+  }
+
+  @media (max-width: 680px) {
+    .esc-academy-bar {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .esc-academy-bar strong {
+      order: -1;
+      flex-basis: 100%;
+    }
+    .esc-academy-bar-actions {
+      margin-left: auto;
+      flex-wrap: wrap;
+    }
+  }
 }
 
 /* Fonte: src/ui/styles/cartorio.css */
@@ -7821,6 +7946,35 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     font-size: 12px;
   }
   .cart-transparency p { margin: 0 0 6px; }
+
+  .cart-academy-bridge {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dotted rgba(30, 35, 32, 0.18);
+  }
+  .cart-academy-bridge-label {
+    font: 600 11px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--esc-muted, #4a544c);
+  }
+  .cart-academy-link {
+    padding: 4px 10px;
+    min-height: 28px;
+    border: 1px solid rgba(132, 99, 46, 0.42);
+    border-radius: 2px;
+    background: rgba(255, 252, 244, 0.78);
+    color: #261d17;
+    font: 600 11.5px/1.2 Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
+  .cart-academy-link:hover {
+    background: rgba(235, 224, 198, 0.85);
+  }
 
   /* Área de despejar arquivo (.scrvrl) */
   .cart-dropzone {
