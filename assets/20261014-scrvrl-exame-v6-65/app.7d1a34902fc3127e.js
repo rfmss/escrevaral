@@ -13021,14 +13021,18 @@
     }
     debounce=root.setTimeout(function(){
       if(!current()){discard();return;}debounce=null;
-      if(selected==='morfologia'&&E.getLexicoP01&&E.contextualMorphology&&root.location&&/^https?:$/i.test(root.location.protocol)){
+      if((selected==='morfologia'||selected==='sintaxe'||selected==='relativas')&&E.getLexicoP01&&E.contextualMorphology&&root.location&&/^https?:$/i.test(root.location.protocol)){
         var scopeText=selAtRun?snapshot.slice(selAtRun.start,selAtRun.end):snapshot.slice(0,8000);
-        var toks=E.reading.tokens(E.protectedText(scopeText)),unknowns=[],seenU={},ti,tv;
+        var toks=E.reading.tokens(E.protectedText(scopeText)),unknowns=[],seenU={},ti,tv,SL=E.syntaxLexicon;
         for(ti=0;ti<toks.length&&unknowns.length<160;ti++){
           tv=toks[ti].value;
           if(seenU[tv]){continue;}
           seenU[tv]=true;
-          if(!E.contextualMorphology.lexicalReadings(tv).classes.length){unknowns.push(tv);}
+          if(selected==='morfologia'){
+            if(!E.contextualMorphology.lexicalReadings(tv).classes.length){unknowns.push(tv);}
+          }else if(SL){
+            if(!SL.nounReadings(tv).length&&!SL.adjectiveReading(tv)&&!SL.determinerReading(tv)&&!SL.prepReading(tv)&&!SL.verbReadings(tv).length){unknowns.push(tv);}
+          }
         }
         if(unknowns.length){
           status.textContent='Consultando léxico offline P01 para '+unknowns.length+' palavra(s)…';
