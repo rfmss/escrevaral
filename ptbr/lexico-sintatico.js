@@ -234,7 +234,7 @@
     addVerb(lemma + 'ão', lemma, 'indicativo:futuro do presente', 3, 'plural');
   }
 
-  'guardar procurar achar criar pintar desenhar contar narrar lembrar levar segurar fechar preparar ensinar mostrar revelar inventar imaginar observar admirar visitar enviar assinar revisar recitar acordar chorar caminhar passear viajar voltar retornar descansar silenciar brilhar escapar entrar parar terminar continuar precisar acreditar confiar sonhar cuidar concordar duvidar navegar passar notar'.split(' ').forEach(function (w) { regAr(w); });
+  'guardar procurar achar criar pintar desenhar contar narrar lembrar levar segurar fechar preparar ensinar mostrar revelar inventar imaginar observar admirar visitar enviar assinar revisar recitar acordar chorar caminhar passear viajar voltar retornar descansar silenciar brilhar escapar entrar parar terminar continuar precisar acreditar confiar sonhar cuidar concordar duvidar navegar passar notar acabar'.split(' ').forEach(function (w) { regAr(w); });
   regAr('dedicar', 'dediquei');
   regAr('explicar', 'expliquei');
   regAr('ficar', 'fiquei');
@@ -355,9 +355,45 @@
     return out;
   }
 
+  var clitics = {
+    me: { person: 1, number: 'singular', roles: ['objeto-direto', 'objeto-indireto'] },
+    te: { person: 2, number: 'singular', roles: ['objeto-direto', 'objeto-indireto'] },
+    nos: { person: 1, number: 'plural', roles: ['objeto-direto', 'objeto-indireto'] },
+    lhe: { person: 3, number: 'singular', roles: ['objeto-indireto'] },
+    lhes: { person: 3, number: 'plural', roles: ['objeto-indireto'] }
+  };
+
+  function p01NounReading(form, reqG, reqN) {
+    if (!reqG || !reqN || !E.getLexicoP01) { return null; }
+    var p01 = E.getLexicoP01().peekPos(form);
+    if (!p01 || !p01.classes || p01.classes.length !== 1 || p01.classes[0] !== 'substantivo') { return null; }
+    var endsS = /s$/.test(form);
+    if (reqN === 'plural' && !endsS) { return null; }
+    if (reqN === 'singular' && endsS && form !== p01.lemma) { return null; }
+    return { form: form, wordClass: 'substantivo', gender: reqG, number: reqN, origin: 'P01 offline (92k formas)' };
+  }
+
+  function p01AdjectiveReading(form) {
+    if (!E.getLexicoP01) { return null; }
+    var p01 = E.getLexicoP01().peekPos(form);
+    if (!p01 || !p01.classes || p01.classes.length !== 1 || p01.classes[0] !== 'adjetivo') { return null; }
+    var gender = 'u';
+    if (/o(?:s)?$/.test(form)) { gender = 'm'; }
+    else if (/a(?:s)?$/.test(form)) { gender = 'f'; }
+    var number = (/s$/.test(form) && form !== p01.lemma) ? 'plural' : 'singular';
+    return { gender: gender, number: number, origin: 'P01 offline (92k formas)' };
+  }
+
   E.syntaxLexicon = {
-    version: 'lexico-sintatico-6',
+    version: 'lexico-sintatico-7',
     nounReadings: function (form) { return (nouns['$' + form] || []).map(copy); },
+    p01NounReading: p01NounReading,
+    p01AdjectiveReading: p01AdjectiveReading,
+    cliticReading: function (form) {
+      if (!own.call(clitics, form)) { return null; }
+      var c = clitics[form];
+      return { person: c.person, number: c.number, roles: c.roles.slice() };
+    },
     articleReading: function (form) { return own.call(articles, form) ? articles[form].slice() : null; },
     determinerReading: function (form) { return own.call(determiners, form) ? copy(determiners[form]) : null; },
     adjectiveReading: function (form) { return own.call(adjectives, '$' + form) ? copy(adjectives['$' + form]) : null; },
