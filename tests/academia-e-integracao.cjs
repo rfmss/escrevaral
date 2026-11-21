@@ -142,6 +142,17 @@ const resumeBtns = findByTag(bridgedModal, 'BUTTON').filter(b => b.getAttribute(
 assert.equal(resumeBtns.length, 1);
 const recBtns = findByTag(bridgedModal, 'BUTTON').filter(b => b.getAttribute('data-academy-rec'));
 assert.deepEqual(recBtns.map(b => b.getAttribute('data-academy-rec')), ['revisao-manuscrito', 'objeto-livro']);
+
+// Validar vitrine Storybook / Parallax: 3 camadas parallax com data-depth + 2 tomos em destaque + 12 capítulos = 14 guias acessíveis
+function findByClass(node, cls) {
+  let out = (node.className && node.className.split(/\s+/).includes(cls)) ? [node] : [];
+  (node.children || []).forEach(c => { out = out.concat(findByClass(c, cls)); });
+  return out;
+}
+assert.equal(findByClass(bridgedModal, 'esc-ac-layer').length, 3, 'hero possui 3 camadas SVG de parallax');
+assert.equal(findByClass(bridgedModal, 'esc-ac-mote').length, 10, 'partículas douradas flutuantes presentes');
+assert.equal(findByClass(bridgedModal, 'esc-academy-tome').length, 2, '2 tomos em destaque (Objeto livro e Literatura mundial)');
+assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 12, '12 guias editoriais com numeração romana');
 bridged.close();
 
-console.log('OK: Academia (14 guias + Literatura Mundial + Kindle Oasis + Ponte Academia <-> Oficina) verificada.');
+console.log('OK: Academia (14 guias + Storybook Parallax 4 camadas + Literatura Mundial + Kindle Oasis + Ponte Academia <-> Oficina) verificada.');

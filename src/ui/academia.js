@@ -47,27 +47,148 @@
     'Publicação e carreira': 'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5'
   };
 
-  function makeGroupIcon(groupName) {
+  function makeSvg(tag, attrs) {
     var ns = 'http://www.w3.org/2000/svg';
-    var svg = document.createElementNS ? document.createElementNS(ns, 'svg') : document.createElement('svg');
-    svg.setAttribute('class', 'esc-ui-ico');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke', 'currentColor');
-    svg.setAttribute('stroke-width', '1.75');
-    svg.setAttribute('stroke-linecap', 'round');
-    svg.setAttribute('stroke-linejoin', 'round');
-    svg.setAttribute('aria-hidden', 'true');
+    var node = document.createElementNS ? document.createElementNS(ns, tag) : document.createElement(tag);
+    if (attrs) {
+      var k;
+      for (k in attrs) {
+        if (Object.prototype.hasOwnProperty.call(attrs, k)) {
+          node.setAttribute(k, String(attrs[k]));
+        }
+      }
+    }
+    return node;
+  }
+
+  function makeGroupIcon(groupName) {
+    var svg = makeSvg('svg', {
+      'class': 'esc-ui-ico', viewBox: '0 0 24 24', fill: 'none',
+      stroke: 'currentColor', 'stroke-width': '1.75', 'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+      'aria-hidden': 'true'
+    });
     var d = GROUP_ICONS[groupName] || GROUP_ICONS['Objeto livro'];
     var parts = d.split(' M');
     var i;
     for (i = 0; i < parts.length; i += 1) {
-      var p = document.createElementNS ? document.createElementNS(ns, 'path') : document.createElement('path');
-      p.setAttribute('d', (i === 0 ? '' : 'M') + parts[i]);
-      svg.appendChild(p);
+      svg.appendChild(makeSvg('path', { d: (i === 0 ? '' : 'M') + parts[i] }));
     }
     return svg;
   }
+
+  /* Brasão ilustrado para o Hero e para os 2 tomos de destaque (SVG puro, offline) */
+  function makeEmblemSvg(kind) {
+    var svg = makeSvg('svg', { viewBox: '0 0 72 48', fill: 'none', 'aria-hidden': 'true', focusable: 'false' });
+    if (kind === 'objeto-livro') {
+      /* Livro aberto em perspectiva com raio dourado central */
+      svg.appendChild(makeSvg('path', { d: 'M10 35 C18 32, 27 32, 36 37 C45 32, 54 32, 62 35 L62 15 C54 12, 45 12, 36 17 C27 12, 18 12, 10 15 Z', stroke: 'currentColor', 'stroke-width': '1.4', fill: 'currentColor', 'fill-opacity': '0.08' }));
+      svg.appendChild(makeSvg('line', { x1: '36', y1: '17', x2: '36', y2: '37', stroke: 'currentColor', 'stroke-width': '1.2' }));
+      svg.appendChild(makeSvg('path', { d: 'M15 20 C21 19, 26 20, 31 22 M15 25 C21 24, 26 25, 31 27 M57 20 C51 19, 46 20, 41 22 M57 25 C51 24, 46 25, 41 27', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.68', 'stroke-linecap': 'round' }));
+      svg.appendChild(makeSvg('path', { d: 'M36 4 L37.8 9 L42.5 10.6 L37.8 12.2 L36 17 L34.2 12.2 L29.5 10.6 L34.2 9 Z', fill: 'currentColor', opacity: '0.88' }));
+    } else if (kind === 'literatura-mundial') {
+      /* Astrolábio literário e constelação de páginas */
+      svg.appendChild(makeSvg('circle', { cx: '36', cy: '24', r: '15', stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.85' }));
+      svg.appendChild(makeSvg('ellipse', { cx: '36', cy: '24', rx: '24', ry: '8.5', stroke: 'currentColor', 'stroke-width': '1', opacity: '0.55', transform: 'rotate(-16 36 24)' }));
+      svg.appendChild(makeSvg('ellipse', { cx: '36', cy: '24', rx: '7.5', ry: '15', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.52' }));
+      svg.appendChild(makeSvg('path', { d: 'M36 15 L38.2 21.8 L45 24 L38.2 26.2 L36 33 L33.8 26.2 L27 24 L33.8 21.8 Z', fill: 'currentColor', opacity: '0.88' }));
+      svg.appendChild(makeSvg('circle', { cx: '56', cy: '14', r: '1.8', fill: 'currentColor', opacity: '0.75' }));
+      svg.appendChild(makeSvg('circle', { cx: '16', cy: '32', r: '1.6', fill: 'currentColor', opacity: '0.75' }));
+    } else {
+      /* Brasão principal da Academia: estrela de 4 pontas + coroa de folhas */
+      svg.appendChild(makeSvg('path', { d: 'M12 24 C20 18, 26 20, 30 24 C26 28, 20 30, 12 24 Z', stroke: 'currentColor', 'stroke-width': '1', fill: 'currentColor', 'fill-opacity': '0.12' }));
+      svg.appendChild(makeSvg('path', { d: 'M60 24 C52 18, 46 20, 42 24 C46 28, 52 30, 60 24 Z', stroke: 'currentColor', 'stroke-width': '1', fill: 'currentColor', 'fill-opacity': '0.12' }));
+      svg.appendChild(makeSvg('path', { d: 'M36 6 L39.5 19.5 L53 24 L39.5 28.5 L36 42 L32.5 28.5 L19 24 L32.5 19.5 Z', stroke: 'currentColor', 'stroke-width': '1.2', fill: 'currentColor', 'fill-opacity': '0.24' }));
+      svg.appendChild(makeSvg('circle', { cx: '36', cy: '24', r: '2.5', fill: 'currentColor' }));
+    }
+    return svg;
+  }
+
+  /* Cena panorâmica em 4 camadas parallax (céu/astrolábio, arcos de biblioteca, folhagem lateral, partículas douradas) */
+  function buildHeroScene() {
+    var stage = document.createElement('div');
+    stage.className = 'esc-ac-scene';
+    stage.setAttribute('aria-hidden', 'true');
+
+    /* Camada 0: Astrolábio celestial e constelações douradas (fundo lento) */
+    var sky = document.createElement('div');
+    sky.className = 'esc-ac-layer esc-ac-layer-sky';
+    sky.setAttribute('data-depth', '0.18');
+    var skySvg = makeSvg('svg', { viewBox: '0 0 1000 260', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
+    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '165', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.22', 'stroke-dasharray': '4 7' }));
+    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '122', stroke: 'currentColor', 'stroke-width': '0.8', opacity: '0.28' }));
+    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '78', stroke: 'currentColor', 'stroke-width': '0.6', opacity: '0.18' }));
+    skySvg.appendChild(makeSvg('path', { d: 'M140 62 L248 96 L310 52 M860 58 L758 92 L696 48', stroke: 'currentColor', 'stroke-width': '0.7', opacity: '0.24' }));
+    var stars = [[140, 62, 2.2], [248, 96, 1.8], [310, 52, 2.4], [860, 58, 2.2], [758, 92, 1.8], [696, 48, 2.4], [210, 152, 1.5], [790, 148, 1.5], [385, 36, 1.6], [615, 36, 1.6]];
+    var si;
+    for (si = 0; si < stars.length; si += 1) {
+      skySvg.appendChild(makeSvg('circle', { cx: stars[si][0], cy: stars[si][1], r: stars[si][2], fill: 'currentColor', opacity: '0.48' }));
+    }
+    sky.appendChild(skySvg);
+    stage.appendChild(sky);
+
+    /* Camada 1: Arcadas clássicas de biblioteca e colinas de livros (plano médio) */
+    var arches = document.createElement('div');
+    arches.className = 'esc-ac-layer esc-ac-layer-arches';
+    arches.setAttribute('data-depth', '0.42');
+    var archSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMax slice', fill: 'none' });
+    archSvg.appendChild(makeSvg('path', {
+      d: 'M0 240 L0 165 Q90 120 185 152 Q285 110 385 148 Q500 94 615 148 Q715 110 815 152 Q910 120 1000 165 L1000 240 Z',
+      fill: 'currentColor', opacity: '0.12'
+    }));
+    archSvg.appendChild(makeSvg('path', {
+      d: 'M72 240 L72 135 Q122 86 172 135 L172 240 M210 240 L210 150 Q255 106 300 150 L300 240 M700 240 L700 150 Q745 106 790 150 L790 240 M828 240 L828 135 Q878 86 928 135 L928 240',
+      stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.26'
+    }));
+    archSvg.appendChild(makeSvg('path', {
+      d: 'M0 240 L0 198 Q180 166 360 194 Q500 176 640 194 Q820 166 1000 198 L1000 240 Z',
+      fill: 'currentColor', opacity: '0.18'
+    }));
+    arches.appendChild(archSvg);
+    stage.appendChild(arches);
+
+    /* Camada 2: Ramos botânicos ilustrados nos cantos (primeiro plano rápido) */
+    var flora = document.createElement('div');
+    flora.className = 'esc-ac-layer esc-ac-layer-flora';
+    flora.setAttribute('data-depth', '0.78');
+    var floraSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
+    /* Ramo esquerdo */
+    floraSvg.appendChild(makeSvg('path', { d: 'M-12 20 C42 42, 86 78, 134 124', stroke: 'currentColor', 'stroke-width': '1.6', opacity: '0.42', 'stroke-linecap': 'round' }));
+    floraSvg.appendChild(makeSvg('path', { d: 'M24 38 C52 24, 74 34, 62 56 C44 58, 28 50, 24 38 Z M66 66 C94 52, 118 66, 102 88 C82 88, 70 78, 66 66 Z M104 98 C128 88, 148 102, 134 120 C116 120, 108 110, 104 98 Z', fill: 'currentColor', opacity: '0.22' }));
+    floraSvg.appendChild(makeSvg('path', { d: 'M18 68 C40 84, 48 108, 26 112 C12 98, 10 82, 18 68 Z M54 102 C78 116, 84 140, 62 142 C48 130, 46 114, 54 102 Z', fill: 'currentColor', opacity: '0.18' }));
+    /* Ramo direito espelhado */
+    floraSvg.appendChild(makeSvg('path', { d: 'M1012 20 C958 42, 914 78, 866 124', stroke: 'currentColor', 'stroke-width': '1.6', opacity: '0.42', 'stroke-linecap': 'round' }));
+    floraSvg.appendChild(makeSvg('path', { d: 'M976 38 C948 24, 926 34, 938 56 C956 58, 972 50, 976 38 Z M934 66 C906 52, 882 66, 898 88 C918 88, 930 78, 934 66 Z M896 98 C872 88, 852 102, 866 120 C884 120, 892 110, 896 98 Z', fill: 'currentColor', opacity: '0.22' }));
+    floraSvg.appendChild(makeSvg('path', { d: 'M982 68 C960 84, 952 108, 974 112 C988 98, 990 82, 982 68 Z M946 102 C922 116, 916 140, 938 142 C952 130, 954 114, 946 102 Z', fill: 'currentColor', opacity: '0.18' }));
+    flora.appendChild(floraSvg);
+    stage.appendChild(flora);
+
+    /* Camada 3: Poeira dourada flutuante (vagalumes de biblioteca) */
+    var motes = document.createElement('div');
+    motes.className = 'esc-ac-motes';
+    var positions = [
+      [12, 72, 4, 0], [22, 34, 3, 1.2], [31, 64, 5, 2.4], [41, 28, 3, 0.7],
+      [56, 76, 4, 1.8], [67, 32, 3, 3.1], [76, 68, 5, 0.4], [88, 42, 4, 2.1],
+      [18, 52, 2.5, 2.9], [82, 58, 2.5, 1.5]
+    ];
+    var mi, mEl;
+    for (mi = 0; mi < positions.length; mi += 1) {
+      mEl = document.createElement('span');
+      mEl.className = 'esc-ac-mote';
+      if (mEl.style) {
+        mEl.style.left = positions[mi][0] + '%';
+        mEl.style.top = positions[mi][1] + '%';
+        mEl.style.width = positions[mi][2] + 'px';
+        mEl.style.height = positions[mi][2] + 'px';
+        mEl.style.animationDelay = positions[mi][3] + 's';
+      }
+      motes.appendChild(mEl);
+    }
+    stage.appendChild(motes);
+
+    return { stage: stage, layers: [sky, arches, flora] };
+  }
+
+  var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
 
   function byId(id) { return document.getElementById(id); }
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
@@ -141,6 +262,20 @@
     var currentMode = null;
     var activeEntry = null;
     var prevFocus = null;
+    var cleanupParallax = null;
+
+    function stopParallax() {
+      if (cleanupParallax) {
+        cleanupParallax();
+        cleanupParallax = null;
+      }
+    }
+
+    function prefersReducedMotion() {
+      try {
+        return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      } catch (ignore) { return false; }
+    }
 
     function readLastGuideId() {
       try {
@@ -188,6 +323,7 @@
 
     function openList() {
       buildModal();
+      stopParallax();
       if (!prevFocus) { prevFocus = document.activeElement; }
       currentMode = 'list';
       activeEntry = null;
@@ -196,29 +332,47 @@
       var card = document.createElement('div');
       card.className = 'esc-academy-list-card';
       if (root.Escr.ornaments && root.Escr.ornaments.attachCorners) {
-        root.Escr.ornaments.attachCorners(card, 'subtle');
+        root.Escr.ornaments.attachCorners(card, 'gilded');
       }
 
-      var head = document.createElement('header');
-      head.className = 'esc-academy-head';
-      var h2 = document.createElement('h2');
-      h2.textContent = 'Academia e Literatura Mundial';
+      var scrollBody = document.createElement('div');
+      scrollBody.className = 'esc-academy-groups';
+
+      /* Hero panorâmico estilo livro ilustrado com 4 camadas parallax */
+      var hero = document.createElement('header');
+      hero.className = 'esc-academy-hero';
+      var sceneInfo = buildHeroScene();
+      hero.appendChild(sceneInfo.stage);
+
       var closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.className = 'esc-academy-close';
       closeBtn.textContent = '← Voltar · Esc';
       on(closeBtn, 'click', close);
-      head.appendChild(h2);
-      head.appendChild(closeBtn);
-      card.appendChild(head);
+      hero.appendChild(closeBtn);
 
+      var heroInner = document.createElement('div');
+      heroInner.className = 'esc-academy-hero-inner';
+      var crest = document.createElement('div');
+      crest.className = 'esc-academy-crest';
+      crest.appendChild(makeEmblemSvg('crest'));
+      heroInner.appendChild(crest);
+      var heroKicker = document.createElement('span');
+      heroKicker.className = 'esc-academy-hero-kicker';
+      heroKicker.textContent = 'Oficina de Belas Letras · Acervo Offline';
+      heroInner.appendChild(heroKicker);
+      var h2 = document.createElement('h2');
+      h2.textContent = 'Academia e Literatura Mundial';
+      heroInner.appendChild(h2);
       var intro = document.createElement('p');
       intro.className = 'esc-academy-intro';
-      intro.textContent = 'Guias editoriais offline, anatomia do livro e acervo de literatura mundial com leitor próprio.';
-      card.appendChild(intro);
+      intro.textContent = 'Anatomia do livro, clássicos da literatura mundial e guias editoriais para cada passo da sua obra.';
+      heroInner.appendChild(intro);
+      hero.appendChild(heroInner);
+      scrollBody.appendChild(hero);
 
-      var body = document.createElement('div');
-      body.className = 'esc-academy-groups';
+      var contentWrap = document.createElement('div');
+      contentWrap.className = 'esc-academy-content';
 
       /* Ponte contextual Academia ↔ Oficina (lê apenas resumo métrico local, jamais exposto aos iframes) */
       var lastId = readLastGuideId();
@@ -274,19 +428,78 @@
           bridgeBox.appendChild(recRow);
         }
 
-        body.appendChild(bridgeBox);
+        contentWrap.appendChild(bridgeBox);
         if (root.Escr.ornaments && root.Escr.ornaments.createStairRod) {
-          body.appendChild(root.Escr.ornaments.createStairRod('wide'));
+          contentWrap.appendChild(root.Escr.ornaments.createStairRod('wide'));
         }
       }
 
-      var lastGroup = '', ul = null, groupCount = 0;
+      /* Vitrine em destaque: os 2 grandes tomos interativos (Objeto livro + Literatura mundial) */
+      var featuredIds = ['objeto-livro', 'literatura-mundial'];
+      var featuredMeta = {
+        'objeto-livro': { seal: 'Exploração visual', cta: 'Abrir anatomia →' },
+        'literatura-mundial': { seal: 'Leitor próprio', cta: 'Entrar na biblioteca →' }
+      };
+      var featWrap = document.createElement('section');
+      featWrap.className = 'esc-academy-featured';
+      featWrap.setAttribute('aria-label', 'Coleções em destaque');
+      var featHead = document.createElement('h3');
+      featHead.className = 'esc-academy-group';
+      featHead.appendChild(makeGroupIcon('Literatura'));
+      var featTitle = document.createElement('span');
+      featTitle.textContent = 'Salão Principal · Livro e Literatura';
+      featHead.appendChild(featTitle);
+      featWrap.appendChild(featHead);
+
+      var featGrid = document.createElement('div');
+      featGrid.className = 'esc-academy-featured-grid';
+      var fi;
+      for (fi = 0; fi < featuredIds.length; fi += 1) {
+        (function (entry) {
+          if (!entry) { return; }
+          var meta = featuredMeta[entry.id] || { seal: 'Guia', cta: 'Abrir →' };
+          var fBtn = document.createElement('button');
+          fBtn.type = 'button';
+          fBtn.className = 'esc-academy-tome';
+          fBtn.setAttribute('data-academy-id', entry.id);
+          fBtn.setAttribute('data-tome', entry.id);
+          var fTop = document.createElement('div');
+          fTop.className = 'esc-academy-tome-top';
+          var fEmb = document.createElement('span');
+          fEmb.className = 'esc-academy-tome-emblem';
+          fEmb.appendChild(makeEmblemSvg(entry.id));
+          fTop.appendChild(fEmb);
+          var fSeal = document.createElement('span');
+          fSeal.className = 'esc-academy-tome-seal';
+          fSeal.textContent = meta.seal;
+          fTop.appendChild(fSeal);
+          fBtn.appendChild(fTop);
+          var fStrong = document.createElement('strong');
+          fStrong.textContent = entry.title;
+          fBtn.appendChild(fStrong);
+          var fDesc = document.createElement('span');
+          fDesc.className = 'esc-academy-tome-desc';
+          fDesc.textContent = entry.description;
+          fBtn.appendChild(fDesc);
+          var fCta = document.createElement('span');
+          fCta.className = 'esc-academy-tome-cta';
+          fCta.textContent = meta.cta;
+          fBtn.appendChild(fCta);
+          on(fBtn, 'click', function () { openGuide(entry.id); });
+          featGrid.appendChild(fBtn);
+        }(findEntry(featuredIds[fi])));
+      }
+      featWrap.appendChild(featGrid);
+      contentWrap.appendChild(featWrap);
+
+      /* Demais guias organizados como capítulos iluminados com numeração romana */
+      var lastGroup = '', ul = null, chapIdx = 0;
       CATALOG.forEach(function (entry) {
+        if (featuredIds.indexOf(entry.id) !== -1) { return; }
         if (entry.group !== lastGroup) {
-          if (groupCount > 0 && root.Escr.ornaments && root.Escr.ornaments.createStairRod) {
-            body.appendChild(root.Escr.ornaments.createStairRod('wide'));
+          if (root.Escr.ornaments && root.Escr.ornaments.createStairRod) {
+            contentWrap.appendChild(root.Escr.ornaments.createStairRod('wide'));
           }
-          groupCount += 1;
           lastGroup = entry.group;
           var gh = document.createElement('h3');
           gh.className = 'esc-academy-group';
@@ -294,16 +507,22 @@
           var gt = document.createElement('span');
           gt.textContent = lastGroup;
           gh.appendChild(gt);
-          body.appendChild(gh);
+          contentWrap.appendChild(gh);
           ul = document.createElement('ul');
           ul.className = 'esc-academy-list';
-          body.appendChild(ul);
+          contentWrap.appendChild(ul);
         }
         var li = document.createElement('li');
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'esc-academy-item';
         btn.setAttribute('data-academy-id', entry.id);
+        var num = document.createElement('em');
+        num.className = 'esc-academy-roman';
+        num.setAttribute('aria-hidden', 'true');
+        num.textContent = ROMAN[chapIdx] || String(chapIdx + 1);
+        chapIdx += 1;
+        btn.appendChild(num);
         var strong = document.createElement('strong');
         strong.textContent = entry.title;
         var desc = document.createElement('span');
@@ -314,9 +533,70 @@
         li.appendChild(btn);
         ul.appendChild(li);
       });
-      card.appendChild(body);
+
+      if (root.Escr.ornaments && root.Escr.ornaments.createColophon) {
+        var foot = document.createElement('footer');
+        foot.className = 'esc-academy-colophon';
+        foot.appendChild(root.Escr.ornaments.createColophon());
+        contentWrap.appendChild(foot);
+      }
+
+      scrollBody.appendChild(contentWrap);
+      card.appendChild(scrollBody);
       modalEl.appendChild(card);
       modalEl.hidden = false;
+
+      /* Motor leve de parallax em mouse + scroll (respeita prefers-reduced-motion e limpa ao fechar) */
+      if (!prefersReducedMotion() && hero.addEventListener && scrollBody.addEventListener) {
+        var targetX = 0, targetY = 0, scrollY = 0, rafId = 0;
+        function paintParallax() {
+          rafId = 0;
+          var li2, layer, depth, tx, ty;
+          for (li2 = 0; li2 < sceneInfo.layers.length; li2 += 1) {
+            layer = sceneInfo.layers[li2];
+            if (!layer.style) { continue; }
+            depth = Number(layer.getAttribute('data-depth')) || 0.25;
+            tx = (targetX * 18 * depth).toFixed(1);
+            ty = (targetY * 12 * depth + Math.min(180, scrollY) * 0.28 * depth).toFixed(1);
+            layer.style.transform = 'translate3d(' + tx + 'px, ' + ty + 'px, 0)';
+          }
+        }
+        function scheduleParallax() {
+          if (rafId) { return; }
+          if (window.requestAnimationFrame) { rafId = window.requestAnimationFrame(paintParallax); }
+          else { paintParallax(); }
+        }
+        function onMouseMove(ev) {
+          if (!hero.getBoundingClientRect) { return; }
+          var r = hero.getBoundingClientRect();
+          if (!r.width || !r.height) { return; }
+          targetX = Math.max(-1, Math.min(1, ((ev.clientX - r.left) / r.width) * 2 - 1));
+          targetY = Math.max(-1, Math.min(1, ((ev.clientY - r.top) / r.height) * 2 - 1));
+          scheduleParallax();
+        }
+        function onMouseLeave() {
+          targetX = 0; targetY = 0;
+          scheduleParallax();
+        }
+        function onScroll() {
+          scrollY = scrollBody.scrollTop || 0;
+          scheduleParallax();
+        }
+        hero.addEventListener('mousemove', onMouseMove, false);
+        hero.addEventListener('mouseleave', onMouseLeave, false);
+        scrollBody.addEventListener('scroll', onScroll, false);
+        cleanupParallax = function () {
+          if (rafId && window.cancelAnimationFrame) { window.cancelAnimationFrame(rafId); rafId = 0; }
+          if (hero.removeEventListener) {
+            hero.removeEventListener('mousemove', onMouseMove, false);
+            hero.removeEventListener('mouseleave', onMouseLeave, false);
+          }
+          if (scrollBody.removeEventListener) {
+            scrollBody.removeEventListener('scroll', onScroll, false);
+          }
+        };
+      }
+
       closeBtn.focus();
     }
 
@@ -324,6 +604,7 @@
       var entry = findEntry(id);
       if (!entry) { return; }
       buildModal();
+      stopParallax();
       if (!prevFocus) { prevFocus = document.activeElement; }
       currentMode = 'guide';
       activeEntry = entry;
@@ -410,6 +691,7 @@
     }
 
     function close() {
+      stopParallax();
       currentMode = null;
       activeEntry = null;
       if (modalEl) {
