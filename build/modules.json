@@ -60,6 +60,7 @@
     "src/ui/modelos.js",
     "src/ui/soneto.js",
     "src/editor/formatado-leve.js",
+    "src/ui/ornamentos.js",
     "src/ui/modo-leitor.js",
     "src/ui/maquina-som.js",
     "src/ui/maquina-visual.js",
@@ -141,6 +142,7 @@
     "src/ui/modelos.js",
     "src/ui/soneto.js",
     "src/editor/formatado-leve.js",
+    "src/ui/ornamentos.js",
     "src/ui/modo-leitor.js",
     "src/ui/maquina-som.js",
     "src/ui/maquina-visual.js",
@@ -184,6 +186,7 @@
     "src/ui/styles/ferramentas-linux.css",
     "src/ui/styles/cartao-sinonimos.css",
     "src/ui/styles/academia.css",
-    "src/ui/styles/cartorio.css"
+    "src/ui/styles/cartorio.css",
+    "src/ui/styles/ornamentos.css"
   ]
 }

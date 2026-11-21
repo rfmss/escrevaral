@@ -20,6 +20,8 @@ Usar capacidade de engenharia atual para construir um instrumento que exija pouc
 
 Papel sage `#CCD5C7`, tinta `#1E2320`, linhas discretas e hierarquia editorial orientam a direção. O estado atual inclui outros tons e componentes históricos; esta diretriz não declara uma revisão visual já realizada.
 
+**Belas Letras e ornamentos periféricos (21/11/2026):** inspirando-se na delicadeza de livros ilustrados (*AFK Journey*), na máquina de escrever antiga e no acabamento vitoriano (o varão torneado de latão em cada degrau), o aplicativo admite poucos e preciosos ornamentos vetoriais (cantoneiras, varões divisores, colofões) em ambientes de contemplação e estudo (Modo de Leitura, Academia e Cartório). Regra inviolável: sempre longe da área de digitação, `pointer-events: none`, contraste sussurrado e custo computacional mínimo.
+
 O movimento deve usar poucos estados e evitar trabalho visual contínuo. Evitar 3D decorativo, blur e recomposição sem necessidade. Medir o custo em vez de prometer “CPU zero”. Respeitar movimento reduzido; não adicionar flashes invertidos por padrão. O pulso visual do anexo é uma proposta a avaliar quanto a conforto/acessibilidade, não uma obrigação de piscar a tela.
 
 A digitação não espera transições nem análises. O limite de 16 ms do anexo é uma meta a medir num cenário definido, não “latência zero” comprovada. Salvamento local precisa informar falhas e oferecer exportação; não prometer risco zero de perda.

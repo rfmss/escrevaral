@@ -132,6 +132,9 @@
           '</div>' +
         '</div>';
       document.body.appendChild(sec);
+      if (root.Escr.ornaments && root.Escr.ornaments.attachCorners) {
+        root.Escr.ornaments.attachCorners(sec, 'viewport');
+      }
       overlayEl = sec;
 
       on(byId('esc-reader-close'), 'click', close);
@@ -189,6 +192,9 @@
       byline.className = 'esc-reader-byline';
       byline.textContent = statLine;
       article.appendChild(byline);
+      if (root.Escr.ornaments && root.Escr.ornaments.createStairRod) {
+        article.appendChild(root.Escr.ornaments.createStairRod('left'));
+      }
 
       if (doc && doc.format === 'rich' && doc.richHtml && root.Escr.richEditor) {
         var richWrap = document.createElement('div');
@@ -223,13 +229,17 @@
 
       var endMark = document.createElement('footer');
       endMark.className = 'esc-reader-end';
-      var fleuron = document.createElement('span');
-      fleuron.className = 'esc-reader-fleuron';
-      fleuron.setAttribute('aria-hidden', 'true');
-      fleuron.textContent = '— ❦ —';
+      if (root.Escr.ornaments && root.Escr.ornaments.createColophon) {
+        endMark.appendChild(root.Escr.ornaments.createColophon());
+      } else {
+        var fleuron = document.createElement('span');
+        fleuron.className = 'esc-reader-fleuron';
+        fleuron.setAttribute('aria-hidden', 'true');
+        fleuron.textContent = '— ❦ —';
+        endMark.appendChild(fleuron);
+      }
       var endText = document.createElement('span');
       endText.textContent = 'Fim da leitura · Esc para retornar à edição';
-      endMark.appendChild(fleuron);
       endMark.appendChild(endText);
       article.appendChild(endMark);
 

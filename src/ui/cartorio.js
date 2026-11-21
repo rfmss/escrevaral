@@ -110,6 +110,9 @@
       var tone = statusTone(report.verdict);
 
       var cert = mk('article', 'cart-cert cart-tone-' + tone);
+      if (E.ornaments && E.ornaments.attachCorners) {
+        E.ornaments.attachCorners(cert, 'subtle');
+      }
       var mast = mk('div', 'cart-cert-mast');
       mast.appendChild(mk('span', '', 'CARTÓRIO DO ESCREVARAL'));
       mast.appendChild(mk('span', '', isLiveDesk ? 'AUDITORIA AO VIVO DA MESA' : 'CONFERÊNCIA DE ARQUIVO'));
@@ -129,6 +132,9 @@
 
       cert.appendChild(mk('h3', 'cart-verdict-title', report.verdictTitle));
       cert.appendChild(mk('p', 'cart-verdict-summary', report.verdictSummary));
+      if (E.ornaments && E.ornaments.createStairRod) {
+        cert.appendChild(E.ornaments.createStairRod('compact'));
+      }
 
       /* Grade de métricas principais */
       var metrics = mk('div', 'cart-metrics');

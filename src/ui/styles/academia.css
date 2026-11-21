@@ -33,8 +33,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--esc-border, #8b9b8c);
+    padding: 20px 30px 14px;
+    border-bottom: 1px solid rgba(30, 35, 32, 0.14);
   }
 
   .esc-academy-head h2 {
@@ -56,17 +56,17 @@
 
   .esc-academy-intro {
     margin: 0;
-    padding: 10px 20px;
+    padding: 10px 30px;
     font-size: 13px;
     color: var(--esc-muted, #4a544c);
-    border-bottom: 1px dotted var(--esc-border, #8b9b8c);
+    border-bottom: 1px dotted rgba(30, 35, 32, 0.18);
   }
 
   .esc-academy-groups {
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
-    padding: 12px 20px 20px;
+    padding: 14px 30px 28px;
   }
 
   .esc-academy-group {

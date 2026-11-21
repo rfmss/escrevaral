@@ -110,6 +110,9 @@
 
       var card = document.createElement('div');
       card.className = 'esc-academy-list-card';
+      if (root.Escr.ornaments && root.Escr.ornaments.attachCorners) {
+        root.Escr.ornaments.attachCorners(card, 'subtle');
+      }
 
       var head = document.createElement('header');
       head.className = 'esc-academy-head';
@@ -131,9 +134,13 @@
 
       var body = document.createElement('div');
       body.className = 'esc-academy-groups';
-      var lastGroup = '', ul = null;
+      var lastGroup = '', ul = null, groupCount = 0;
       CATALOG.forEach(function (entry) {
         if (entry.group !== lastGroup) {
+          if (groupCount > 0 && root.Escr.ornaments && root.Escr.ornaments.createStairRod) {
+            body.appendChild(root.Escr.ornaments.createStairRod('wide'));
+          }
+          groupCount += 1;
           lastGroup = entry.group;
           var gh = document.createElement('h3');
           gh.className = 'esc-academy-group';

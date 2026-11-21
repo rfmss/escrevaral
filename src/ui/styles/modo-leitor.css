@@ -285,20 +285,15 @@
   }
 
   .esc-reader-byline {
-    margin: 0 0 34px;
-    padding-bottom: 22px;
+    margin: 0 0 8px;
+    padding-bottom: 4px;
     font: italic 14px/1.4 'Noto Serif', Georgia, serif;
     color: var(--reader-muted);
     position: relative;
   }
 
-  .esc-reader-byline:after {
-    content: '';
-    display: block;
-    width: 48px;
-    height: 1px;
-    background: var(--reader-line);
-    margin-top: 18px;
+  .esc-reader-article > .esc-bl-rod-left {
+    margin: 10px 0 32px;
   }
 
   .esc-reader-body p {
