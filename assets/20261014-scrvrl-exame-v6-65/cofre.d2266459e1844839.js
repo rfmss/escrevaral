@@ -949,6 +949,15 @@ SOFTWARE.
       cls=external[i].pos==='DET'?(/(?:^|\|)PronType=Art(?:\||$)/.test(external[i].features)?'artigo':'determinante (UD)'):classes[external[i].pos];
       if(cls&&!has(r.classes,cls)){r.classes.push(cls);}
     }
+    if(!r.classes.length&&E.getLexicoP01){
+      var p01=E.getLexicoP01().peekPos(w);
+      if(p01&&p01.classes&&p01.classes.length){
+        r.p01=p01;
+        for(i=0;i<p01.classes.length;i++){
+          if(!has(r.classes,p01.classes[i])){r.classes.push(p01.classes[i]);}
+        }
+      }
+    }
     return r;
   }
   function externalFinite(r, agreement) {
@@ -1485,6 +1494,7 @@ SOFTWARE.
         item.rule === 'PTBR-CTX-006' ? 'Artigo, nome e adjetivo contíguos com número compatível; gênero do nome compatível com o artigo.'+(item.nominalAgreement.adjectiveGenderMarked?' O gênero do adjetivo também está registrado e é compatível.':' A fonte não informa gênero para este adjetivo; isso não foi tratado como prova de concordância.') :
         item.rule === 'PTBR-CTX-005' ? 'Lema conhecido e preposição contígua, com pronome sujeito opcional: leitura de infinitivo preservada do motor anterior.' :
         item.nominalAmbiguity ? 'Neste grupo, o léxico admite nome + adjetivo e adjetivo + nome. O recorte não escolhe entre as duas distribuições.' :
+        r.p01 ? 'Reconhecida no léxico offline P01 (lema: ' + r.p01.lemma + ')' + (r.p01.definition ? ': ' + r.p01.definition + '.' : '.') :
         r.classes.length ? 'Consulta ao léxico local; nenhuma regra contextual deste incremento decidiu a ocorrência.' : 'A forma não consta do recorte lexical. Nenhuma classe foi deduzida por sufixo.';
       if(contextual&&item.selected==='artigo'&&has(r.classes,'numeral')){reason+=' A leitura de artigo é uma hipótese local; um/uma também podem expressar quantidade, e o recorte não resolve essa intenção.';}
       occurrenceSource=contextual&&item.rule!=='PTBR-CTX-005'?source:E.grammarData.source;
@@ -1502,6 +1512,7 @@ SOFTWARE.
       if(item.rule==='PTBR-CTX-013'){occurrenceSource={title:'Hipótese computacional local de coordenação com adjetivos pospostos. UD v2: amod em português, consultado em 05/10/2026; conj e det retomados da v6.42. Referências de anotação, sem implementar árvore de dependências ou desambiguação geral.',url:'https://universaldependencies.org/pt/dep/amod.html'};}
       if(item.rule==='PTBR-CTX-012'){occurrenceSource={title:'Hipótese computacional local para coordenação com artigos. UD v2: conj e det em português, consultados em 04/10/2026. Referências de anotação; não são algoritmo de desambiguação nem prova de função sintática.',url:'https://universaldependencies.org/pt/dep/det.html'};}
       if(r.portilexicon.length){occurrenceSource={title:(typeof occurrenceSource==='string'?occurrenceSource:occurrenceSource.title)+' Dados lexicais: PortiLexicon-UD, Lopes, Duran, Fernandes e Pardo (2022), recorte '+E.portiLexicon.version+'. Classes UD são candidatos; não equivalem automaticamente à função na frase.',url:'https://github.com/LuceleneL/PortiLexicon-UD/tree/315e063da1f89c89e2097c6e72428ebefb9ab1d1'};}
+      else if(r.p01){occurrenceSource={title:'Léxico offline P01 do Escrevaral (Wikcionário / OpenWordNet-PT · acervo local completo). Possibilidades lexicais sem decisão contextual.',url:null};}
       out.push(E.instruments.finding('morfologia', item.rule || 'PTBR-CTX-004', text, item.start, item.end, message,
         reason + (item.evidence.length ? ' Apoios no original: ' + item.evidence.map(function (s) { return '“' + s.snippet + '”'; }).join(', ') + '.' : ''),
         contextual ? 'A construção favorece a leitura de ' + item.selected + '; as possibilidades lexicais são preservadas na análise.' : 'Esta ocorrência permanece ' + item.status + '. Isso não é erro de escrita.',
@@ -1569,10 +1580,10 @@ SOFTWARE.
     });
   }
   /* Formas explícitas; não inferir flexão por sufixo nem sobrescrever candidatos. */
-  nominal('livro menino homem escritor poema canto mar pão silêncio tempo fogo dia vento jogo sonho trabalho olho filho pagamento caminho','m','singular');
-  nominal('livros meninos homens escritores poemas cantos pães silêncios tempos jogos sonhos trabalhos olhos filhos','m','plural');
-  nominal('casa menina mulher escritora carta porta revista opinião rosa flor água mesa vida música notícia família noite cobra vizinha','f','singular');
-  nominal('casas meninas mulheres escritoras cartas portas revistas opiniões rosas flores águas mesas vidas cobras vizinhas','f','plural');
+  nominal('livro menino homem escritor poema canto mar pão silêncio tempo fogo dia vento jogo sonho trabalho olho filho pagamento caminho caderno papel texto verso capítulo conto romance diário autor leitor editor amigo pai irmão avô coração corpo rosto sorriso passo gesto segredo destino caminho rio sol céu jardim muro telhado quarto relógio espelho café trem barco navio porto campo ferro ouro vidro casaco chapéu sapato trovão relâmpago inverno verão outono minuto segundo mês ano século mundo lugar espaço ruído som eco brilho medo plano assunto tema título parágrafo rascunho manuscrito arquivo documento selo certificado','m','singular');
+  nominal('livros meninos homens escritores poemas cantos pães silêncios tempos jogos sonhos trabalhos olhos filhos cadernos papéis textos versos capítulos contos romances diários autores leitores editores amigos pais irmãos avôs corações corpos rostos sorrisos passos gestos segredos destinos rios sóis céus jardins muros telhados quartos relógios espelhos cafés trens barcos navios portos campos casacos chapéus sapatos trovões relâmpagos invernos verões outonos minutos segundos meses anos séculos mundos lugares espaços ruídos sons ecos medos planos assuntos temas títulos parágrafos rascunhos manuscritos arquivos documentos selos certificados','m','plural');
+  nominal('casa menina mulher escritora carta porta revista opinião rosa flor água mesa vida música notícia família noite cobra vizinha chuva cidade rua janela manhã tarde voz história palavra cadeira luz sombra estrada pessoa amiga mãe irmã avó criança mente ideia memória saudade dor alegria esperança estrela lua árvore folha pedra chave página linha frase crônica cama parede sala cozinha praça estação ilha praia floresta terra areia poeira fumaça cinza prata roupa lágrima viagem resposta pergunta biblioteca escola ponte montanha nuvem tempestade hora semana primavera infância juventude velhice oficina mesa folha obra língua escrita leitura revisão','f','singular');
+  nominal('casas meninas mulheres escritoras cartas portas revistas opiniões rosas flores águas mesas vidas cobras vizinhas chuvas cidades ruas janelas manhãs tardes vozes histórias palavras cadeiras luzes sombras estradas pessoas amigas mães irmãs avós crianças mentes ideias memórias saudades dores alegrias esperanças estrelas luas árvores folhas pedras chaves páginas linhas frases crônicas camas paredes salas cozinhas praças estações ilhas praias florestas terras areias roupas lágrimas viagens respostas perguntas bibliotecas escolas pontes montanhas nuvens tempestades horas semanas primaveras oficinas folhas obras línguas escritas leituras revisões','f','plural');
   function pattern(words,kind){
     words.split(' ').forEach(function(lemma){
       var key='$'+lemma;
@@ -1581,14 +1592,14 @@ SOFTWARE.
     });
   }
   /* Usos reconhecidos, nunca classificação permanente do verbo. */
-  pattern('amar comprar ler escrever publicar ver abrir cortar encontrar trazer','objeto-direto');
-  pattern('ser estar','predicativo');
+  pattern('amar comprar ler escrever publicar ver abrir cortar encontrar trazer ouvir sentir guardar procurar perder achar construir criar pintar desenhar contar narrar lembrar esquecer escolher seguir deixar levar pegar segurar fechar beber comer preparar estudar ensinar aprender entender compreender explicar mostrar esconder revelar descobrir inventar imaginar observar admirar visitar conhecer receber enviar entregar assinar revisar corrigir traduzir recitar acender apagar','objeto-direto');
+  pattern('ser estar parecer ficar continuar permanecer','predicativo');
   pattern('dar','direto-e-indireto-a');
-  pattern('cantar andar correr sair partir trabalhar chegar terminar','sem-complemento');
+  pattern('cantar andar correr sair partir trabalhar chegar terminar dormir acordar sorrir chorar rir cair nascer morrer crescer viver esperar caminhar passear viajar voltar retornar descansar silenciar brilhar florescer escapar fugir entrar descer subir parar','sem-complemento');
   function copy(record){var out={};Object.keys(record).forEach(function(k){out[k]=record[k];});return out;}
   function framesFor(lemma){return (frames['$'+lemma]||[]).map(copy);}
   E.syntaxLexicon={
-    version:'lexico-sintatico-1',
+    version:'lexico-sintatico-2',
     nounReadings:function(form){return (nouns['$'+form]||[]).map(copy);},
     articleReading:function(form){return Object.prototype.hasOwnProperty.call(articles,form)?articles[form].slice():null;},
     isProperName:function(form){return ['ana','maria','joão','pedro'].indexOf(form)>=0;},

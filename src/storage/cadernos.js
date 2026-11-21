@@ -139,6 +139,7 @@
       var payload = { format: 'escrevaral-cadernos', version: 2, scope: bookId ? 'notebook' : origId ? 'original' : 'all', originals: clone(selectedOriginals), notebooks: clone(selected), documents: docs, globals: {} };
       if (!bookId && !origId) { globals.forEach(function (k) { var v = storage.getItem(k); if (v !== null) { payload.globals[k] = v; } }); }
       payload.inventory = { originals: selectedOriginals.length, notebooks: selected.length, documents: docs.length };
+      if (E.cartorio && E.cartorio.sealPackage) { payload.cartorio = E.cartorio.sealPackage(payload); }
       return payload;
     }
     function validate(payload) {
@@ -158,6 +159,7 @@
       if (!payload.globals || typeof payload.globals !== 'object' || array(payload.globals) || (payload.scope !== 'all' && Object.keys(payload.globals).length)) { throw new Error('Dados gerais inválidos.'); }
       Object.keys(payload.globals).forEach(function (k) { if (globals.indexOf(k) === -1 || typeof payload.globals[k] !== 'string') { throw new Error('Preferência desconhecida no pacote.'); } });
       if (payload.globals['vrda-planner'] && !E.validPlanner(JSON.parse(payload.globals['vrda-planner']))) { throw new Error('Calendário geral inválido.'); }
+      if (typeof payload.cartorio !== 'undefined' && E.cartorio && E.cartorio.validPackageSeal && !E.cartorio.validPackageSeal(payload.cartorio)) { throw new Error('Selo do Cartório inválido no pacote.'); }
       return payload;
     }
     function bring(payload) {

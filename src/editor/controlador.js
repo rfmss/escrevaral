@@ -565,6 +565,7 @@
     if (composing || !internalClipboard) { return; }
     var start = manuscript.selectionStart || 0, end = manuscript.selectionEnd || start;
     manuscript.value = manuscript.value.slice(0, start) + internalClipboard + manuscript.value.slice(end);
+    if (E.cartorio) { E.cartorio.recordSignal(doc, 'intPaste', internalClipboard.length); }
     E.transfer.selectRange(manuscript, start + internalClipboard.length, start + internalClipboard.length); manuscript.focus();
     copiedSelection = null; byId('selection-tools').hidden = true; changed(); queueSession();
   }
@@ -1059,7 +1060,13 @@
     var result = archive ? archive.list(true) : { documents: [], unreadable: 0 };
     if (result.unreadable) { throw new Error('Há folhas ilegíveis no acervo.'); }
     var entries = result.documents, current = JSON.parse(JSON.stringify(doc)), found = false;
+    var draftChanged = current.title !== title.value || current.text !== manuscript.value;
     current.title = title.value; current.text = manuscript.value;
+    if (draftChanged && E.cartorio && E.cartorio.sealDocument) {
+      current.revision = (current.revision || 0) + 1;
+      current.updated = new Date().toISOString();
+      current.cartorio = E.cartorio.sealDocument(doc, current, null, true);
+    }
     entries = entries.map(function (entry) { if (entry.id === current.id) { found = true; return current; } return entry; });
     if (!found && (current.revision || dirty || current.title || current.text)) { entries.push(current); }
     return entries;
@@ -1085,7 +1092,9 @@
           docs = payload.documents; payload = null;
         }
       } else if (/\.txt$/i.test(name) || type === 'text/plain') {
-        var entry = E.freshDocument(); entry.title = name.replace(/\.txt$/i, ''); entry.text = String(contents); entry.project = activeNotebook() ? activeNotebook().name + ' — importado' : 'Texto importado'; docs = [entry];
+        var entry = E.freshDocument(); entry.title = name.replace(/\.txt$/i, ''); entry.text = String(contents); entry.project = activeNotebook() ? activeNotebook().name + ' — importado' : 'Texto importado';
+        if (E.cartorio) { entry.cartorio = E.cartorio.sealDocument(null, entry, 'imported'); }
+        docs = [entry];
       } else { throw new Error('Traga um caderno .scrvrl, uma cópia .json ou um texto .txt.'); }
       if (docs) {
         docs = JSON.parse(JSON.stringify(docs));
@@ -1596,10 +1605,32 @@
   listen(byId('cabinet-search'), 'input', function () { showingAbout = false; window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; desktopWindow('open', false); renderCabinet(); }, 180); });
   listen(byId('cabinet-clear'), 'click', function () { window.clearTimeout(cabinetTimer); byId('cabinet-search').value = ''; showingAbout = false; renderCabinet(); byId('cabinet-search').focus(); });
   listen(byId('paste-mode'), 'click', function () { restrictedPaste = !restrictedPaste; this.setAttribute('aria-pressed', restrictedPaste ? 'true' : 'false'); try { if (storage) { storage.setItem('escrevaral.astra.restricted-paste', restrictedPaste ? 'on' : 'off'); } } catch (ignore) {} });
-  listen(manuscript, 'paste', function (event) {
-    if (!restrictedPaste) { return; }
-    event.preventDefault(); message('Colagem externa restrita. Use Colar cópia interna ou Trazer arquivo em Ajustes.');
-  });
+  function handleEditorPaste(event) {
+    if (restrictedPaste) {
+      event.preventDefault();
+      if (E.cartorio) { E.cartorio.recordSignal(doc, 'blockedPaste', 1); }
+      message('Colagem externa restrita. Use Colar cópia interna ou Trazer arquivo em Ajustes.');
+      return;
+    }
+    if (E.cartorio) {
+      var pasted = '';
+      try { pasted = (event.clipboardData && event.clipboardData.getData('text/plain')) || ''; } catch (ignore) {}
+      if (pasted && internalClipboard && pasted === internalClipboard) {
+        E.cartorio.recordSignal(doc, 'intPaste', pasted.length);
+      } else if (pasted.length > 0) {
+        E.cartorio.recordSignal(doc, 'extPaste', pasted.length);
+      }
+    }
+  }
+  listen(manuscript, 'paste', handleEditorPaste);
+  if (byId('esc-rich-editor')) { listen(byId('esc-rich-editor'), 'paste', handleEditorPaste); }
+  function recordTypingSignal(event) {
+    if (!E.cartorio) { return; }
+    if (event && event.inputType && String(event.inputType).indexOf('Paste') !== -1) { return; }
+    E.cartorio.recordSignal(doc, 'key', 1);
+  }
+  listen(manuscript, 'input', recordTypingSignal);
+  if (byId('esc-rich-editor')) { listen(byId('esc-rich-editor'), 'input', recordTypingSignal); }
   listen(manuscript, 'mouseup', captureSelection); listen(manuscript, 'keyup', function (event) { if (event.keyCode !== 27) { captureSelection(); } }); listen(manuscript, 'touchend', captureSelection);
   listen(manuscript, 'select', captureSelection);
   listen(byId('selection-close'), 'click', function () { dismissSelection(); manuscript.focus(); });
@@ -2137,6 +2168,35 @@
     }
     if (byId('start-academy')) {
       listen(byId('start-academy'), 'click', function () { toggleStart(false); academyUI.openList(); });
+    }
+  }
+
+  var cartorioUI = null;
+  if (E.mountCartorio) {
+    cartorioUI = E.mountCartorio({
+      checkpoint: checkpoint,
+      download: download,
+      isRestrictedPaste: function () { return !!restrictedPaste; },
+      onToggleRestrictedPaste: function () {
+        restrictedPaste = !restrictedPaste;
+        if (byId('paste-mode')) { byId('paste-mode').setAttribute('aria-pressed', restrictedPaste ? 'true' : 'false'); }
+        try { if (storage) { storage.setItem('escrevaral.astra.restricted-paste', restrictedPaste ? 'on' : 'off'); } } catch (ignore) {}
+        return restrictedPaste;
+      },
+      buildCurrentPackage: function () {
+        if (!notebooks) { return null; }
+        var entries = exportedDocuments();
+        if (!entries.length) { return null; }
+        return notebooks.pack(entries, null);
+      },
+      onExportSealed: function () { exportNotebook(true); },
+      onClose: function () { if (!cabinetOpen) { manuscript.focus(); } }
+    });
+    if (byId('esc-open-cartorio')) {
+      listen(byId('esc-open-cartorio'), 'click', function () { cartorioUI.open('desk'); });
+    }
+    if (byId('start-cartorio')) {
+      listen(byId('start-cartorio'), 'click', function () { toggleStart(false); cartorioUI.open('desk'); });
     }
   }
 

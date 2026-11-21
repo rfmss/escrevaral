@@ -363,8 +363,8 @@
         if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
         locateInText(start,end,'Selecione o trecho manualmente no manuscrito.');
       },false);}(f.start,f.end));
-      if((lens==='repeticao'||lens==='adverbios'||lens==='decolonial')&&E.ptbrOpenWordCard){
-        b=el('button',entry,'','Sinônimos');b.type='button';
+      if((lens==='repeticao'||lens==='adverbios'||lens==='decolonial'||(lens==='morfologia'&&!/\s/.test(f.snippet)))&&E.ptbrOpenWordCard){
+        b=el('button',entry,'',lens==='morfologia'?'Definição e sinônimos':'Sinônimos');b.type='button';
         (function(word){b.addEventListener('click',function(){E.ptbrOpenWordCard(word);},false);}(f.snippet));
       }
       if(E.ptbrPanelKeep&&!request){
@@ -409,7 +409,35 @@
     var card=el('section',results,'ptbr-outcome');
     var sources=details(card,'Fontes e limites da consulta');
     el('h3',card,'','Léxico · '+(result.query||'consulta'));
-    if(result.state!=='found'){el('p',card,'',result.message);status.textContent='Consulta concluída sem leitura lexical.';return;}
+    function loadP01Senses(emptyFallbackMsg){
+      var p01Epoch=++epoch;
+      var p01Wait=el('p',card,'','Consultando o léxico offline completo (P01)…');
+      status.textContent='Consultando o léxico offline completo (P01)…';
+      E.getLexicoP01().lookup(query,function(p01Res){
+        if(p01Epoch!==epoch||panel.hidden){return;}
+        if(p01Wait.parentNode){p01Wait.parentNode.removeChild(p01Wait);}
+        if(!p01Res||p01Res.state!=='found'||!p01Res.entries||!p01Res.entries.length){
+          if(emptyFallbackMsg){el('p',card,'',emptyFallbackMsg);}
+          status.textContent='Consulta concluída sem sentidos no léxico local.';return;
+        }
+        el('p',card,'','Sentidos encontrados no acervo offline completo (P01). A consulta não escolhe qual sentido vale na sua frase.');
+        var pi,pe,prow;
+        for(pi=0;pi<p01Res.entries.length&&pi<12;pi++){
+          pe=p01Res.entries[pi];prow=el('div',card,'ptbr-observation');
+          el('h4',prow,'',(pi+1)+'. '+(pe.lemma||p01Res.query)+(pe.posLabel?' · '+pe.posLabel:''));
+          if(pe.definition){el('p',prow,'',pe.definition);}
+          if(pe.synonyms&&pe.synonyms.length){el('p',prow,'','Sinônimos sugeridos pelo acervo: '+pe.synonyms.join(', ')+'.');}
+        }
+        el('p',sources,'','Fonte: Léxico offline P01 do Escrevaral (Wikcionário / OpenWordNet-PT · 92 mil formas).');
+        status.textContent='Consulta offline (P01) concluída: '+p01Res.entries.length+' sentido(s) encontrado(s).';
+        note.textContent='Consulta 100% offline. Nenhuma palavra do manuscrito foi alterada.';
+      });
+    }
+    var canP01=!!(E.getLexicoP01&&root.location&&/^https?:$/i.test(root.location.protocol));
+    if(result.state!=='found'){
+      if(result.state==='uncovered'&&canP01){loadP01Senses(result.message);return;}
+      el('p',card,'',result.message);status.textContent='Consulta concluída sem leitura lexical.';return;
+    }
     if(result.morphology&&result.morphology.length){
       el('h4',card,'','Lemas e flexões possíveis');
       el('p',card,'','Estas leituras pertencem ao léxico. A consulta não decide qual classe ou função vale na sua frase.');
@@ -419,6 +447,7 @@
       el('p',sources,'','Fonte das flexões: PortiLexicon-UD · Lopes, Duran, Fernandes e Pardo (2022). Recorte e compactação: Escrevaral.');
       link=el('a',sources,'','Origem e licença das flexões (internet)');link.href='https://github.com/LuceleneL/PortiLexicon-UD/tree/315e063da1f89c89e2097c6e72428ebefb9ab1d1';link.target='_blank';link.rel='noopener noreferrer';
     }
+    if(!result.senses.length&&canP01){loadP01Senses('');return;}
     if(result.missingSenseLemmas&&result.missingSenseLemmas.length){el('p',card,'','Sem sentidos/definições neste recorte para: '+result.missingSenseLemmas.join(', ')+'.');}
     el('p',card,'','Sentidos da fonte; a consulta não escolhe qual vale na sua frase. A ordem não indica frequência.');
     var pos={n:'substantivo',v:'verbo',a:'adjetivo',r:'advérbio'};
@@ -501,8 +530,8 @@
     for(var i=0;i<buttons.length;i++){buttons[i].setAttribute('aria-current',buttons[i].getAttribute('data-ptbr-lens')===selected?'true':'false');}
     status.textContent='Examinando '+labels[selected]+'…';
     /* Um pedido, um timer cancelável, uma lente. Sem a antiga fila unitária. */
-    debounce=root.setTimeout(function(){
-      if(!current()){discard();return;}debounce=null;
+    function executeLens(){
+      if(!current()){discard();return;}
       try{
         var result=selAtRun&&E.ptbrPanelRequest&&E.analysisContract?E.analysisContract.analyze(vault,selected,E.ptbrPanelRequest(snapshot,selAtRun.start,selAtRun.end)):vault.analyze(selected,snapshot);
         if(!current()){discard();return;}
@@ -515,6 +544,28 @@
         status.textContent='Não foi possível concluir esta análise. Você pode tentar novamente.';
       }
       busy=false;cancel.hidden=true;action.disabled=false;updateActiveNoteStrip();
+    }
+    debounce=root.setTimeout(function(){
+      if(!current()){discard();return;}debounce=null;
+      if(selected==='morfologia'&&E.getLexicoP01&&E.contextualMorphology&&root.location&&/^https?:$/i.test(root.location.protocol)){
+        var scopeText=selAtRun?snapshot.slice(selAtRun.start,selAtRun.end):snapshot.slice(0,8000);
+        var toks=E.reading.tokens(E.protectedText(scopeText)),unknowns=[],seenU={},ti,tv;
+        for(ti=0;ti<toks.length&&unknowns.length<160;ti++){
+          tv=toks[ti].value;
+          if(seenU[tv]){continue;}
+          seenU[tv]=true;
+          if(!E.contextualMorphology.lexicalReadings(tv).classes.length){unknowns.push(tv);}
+        }
+        if(unknowns.length){
+          status.textContent='Consultando léxico offline P01 para '+unknowns.length+' palavra(s)…';
+          E.getLexicoP01().warmWords(unknowns,function(){
+            if(!current()){discard();return;}
+            executeLens();
+          });
+          return;
+        }
+      }
+      executeLens();
     },0);
   }
   action.addEventListener('click',function(){run(lastLens);},false);
@@ -551,6 +602,7 @@
     }
   };
   E.ptbrPanelLiberate=function(msg){
+    if(E.getLexicoP01){E.getLexicoP01().clearSession();}
     E.ptbrPanelReset();
     if(!panel.hidden){
       if(screen==='result'||screen==='reserved'){showScreen('group',currentGroup||0,true);}

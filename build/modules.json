@@ -49,6 +49,7 @@
     "src/storage/leitor-pacotes.js",
     "src/storage/instalador-pacotes.js",
     "src/storage/analises.js",
+    "src/storage/cartorio.js",
     "src/storage/linhagem.js",
     "src/ui/linhagem.js",
     "src/storage/cadernos.js",
@@ -68,6 +69,7 @@
     "src/ui/calculadora-editorial.js",
     "src/ui/cartao-sinonimos.js",
     "src/ui/academia.js",
+    "src/ui/cartorio.js",
     "src/storage/atalhos.js",
     "src/ui/tres-colunas.js",
     "src/editor/controlador.js",
@@ -128,6 +130,7 @@
     "src/storage/leitor-pacotes.js",
     "src/storage/instalador-pacotes.js",
     "src/storage/analises.js",
+    "src/storage/cartorio.js",
     "src/storage/linhagem.js",
     "src/ui/linhagem.js",
     "src/storage/cadernos.js",
@@ -147,6 +150,7 @@
     "src/ui/calculadora-editorial.js",
     "src/ui/cartao-sinonimos.js",
     "src/ui/academia.js",
+    "src/ui/cartorio.js",
     "src/storage/atalhos.js",
     "src/ui/tres-colunas.js",
     "src/editor/controlador.js",
@@ -179,6 +183,7 @@
     "src/ui/styles/temas-linux.css",
     "src/ui/styles/ferramentas-linux.css",
     "src/ui/styles/cartao-sinonimos.css",
-    "src/ui/styles/academia.css"
+    "src/ui/styles/academia.css",
+    "src/ui/styles/cartorio.css"
   ]
 }

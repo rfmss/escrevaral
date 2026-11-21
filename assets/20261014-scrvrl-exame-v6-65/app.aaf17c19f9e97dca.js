@@ -19,7 +19,7 @@
       (typeof doc.sonnetSettings === 'undefined' || isPlainObject(doc.sonnetSettings));
   }
   function valid(doc) {
-    return doc && validMeta(doc) && (typeof doc.lineage==='undefined'||(root.Escr.lineage&&root.Escr.lineage.valid(doc.lineage))) && (typeof doc.linguistics==='undefined'||(doc.linguistics&&doc.linguistics.version===1&&Object.prototype.toString.call(doc.linguistics.records)==='[object Array]'&&doc.linguistics.records.length<=3&&root.Escr.linguistics&&doc.linguistics.records.every(root.Escr.linguistics.valid))) && (typeof doc.projectId === 'undefined' || (typeof doc.projectId === 'string' && /^[a-z0-9-]+$/.test(doc.projectId))) && (typeof doc.trashed === 'undefined' || typeof doc.trashed === 'boolean') && (typeof doc.kind === 'undefined' || doc.kind === 'reminder') && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
+    return doc && validMeta(doc) && (typeof doc.cartorio==='undefined'||(root.Escr.cartorio&&root.Escr.cartorio.validDocLedger(doc.cartorio))) && (typeof doc.lineage==='undefined'||(root.Escr.lineage&&root.Escr.lineage.valid(doc.lineage))) && (typeof doc.linguistics==='undefined'||(doc.linguistics&&doc.linguistics.version===1&&Object.prototype.toString.call(doc.linguistics.records)==='[object Array]'&&doc.linguistics.records.length<=3&&root.Escr.linguistics&&doc.linguistics.records.every(root.Escr.linguistics.valid))) && (typeof doc.projectId === 'undefined' || (typeof doc.projectId === 'string' && /^[a-z0-9-]+$/.test(doc.projectId))) && (typeof doc.trashed === 'undefined' || typeof doc.trashed === 'boolean') && (typeof doc.kind === 'undefined' || doc.kind === 'reminder') && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
   }
   function fresh() { var now = new Date().toISOString(), id = uid(); return { id: id, noteId: id, title: '', text: '', created: now, updated: now, revision: 0, dismissed: [] }; }
   function dateOf(doc) { return doc.created || doc.updated; }
@@ -46,6 +46,7 @@
       /* Folhas antigas só tinham a última gravação: preservar essa data sem inventar a criação. */
       if (!copy.created) { copy.created = copy.updated; copy.createdApproximate = true; }
       copy.noteId = copy.noteId || copy.id; copy.id = uid(); copy.revision += 1; copy.updated = new Date().toISOString();
+      if (root.Escr.cartorio) { copy.cartorio = root.Escr.cartorio.sealDocument(current, copy); }
       /* Chave nova por gravação: duas abas nunca escrevem sobre a mesma chave. */
       storage.setItem(prefix + copy.id, JSON.stringify(copy));
       /* Só retirar a antecessora depois da nova gravação. Falha aqui deixa uma cópia extra. */
@@ -1262,6 +1263,618 @@
 }(typeof window!=='undefined'?window:this));
 
 ;
+/* Fonte: src/storage/cartorio.js */
+/* Cartório do Escrevaral: SHA-256 puro ES5, cadeia encadeada de criação e verificação de pacotes .scrvrl. */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+  var E = root.Escr;
+
+  var ZERO_HASH = '0000000000000000000000000000000000000000000000000000000000000000';
+  var MAX_TRAIL = 200;
+  var HEX_64 = /^[0-9a-f]{64}$/;
+
+  /* ── SHA-256 puro ES5 (FIPS 180-4) sobre bytes UTF-8 ── */
+  var K = [
+    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+    0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+    0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+  ];
+
+  function utf8Bytes(input) {
+    var str = String(input === undefined || input === null ? '' : input);
+    var out = [], i, len = str.length, c, c2, cp;
+    for (i = 0; i < len; i += 1) {
+      c = str.charCodeAt(i);
+      if (c < 0x80) {
+        out.push(c);
+      } else if (c < 0x800) {
+        out.push(0xc0 | (c >> 6), 0x80 | (c & 0x3f));
+      } else if ((c & 0xfc00) === 0xd800 && i + 1 < len && (str.charCodeAt(i + 1) & 0xfc00) === 0xdc00) {
+        c2 = str.charCodeAt(i + 1);
+        i += 1;
+        cp = 0x10000 + (((c & 0x3ff) << 10) | (c2 & 0x3ff));
+        out.push(
+          0xf0 | (cp >> 18),
+          0x80 | ((cp >> 12) & 0x3f),
+          0x80 | ((cp >> 6) & 0x3f),
+          0x80 | (cp & 0x3f)
+        );
+      } else {
+        out.push(0xe0 | (c >> 12), 0x80 | ((c >> 6) & 0x3f), 0x80 | (c & 0x3f));
+      }
+    }
+    return out;
+  }
+
+  function rotr(x, n) { return (x >>> n) | (x << (32 - n)); }
+
+  function sha256(str) {
+    var bytes = utf8Bytes(str);
+    var bitLen = bytes.length * 8;
+    bytes.push(0x80);
+    while ((bytes.length % 64) !== 56) { bytes.push(0); }
+    var hi = Math.floor(bitLen / 0x100000000);
+    var lo = bitLen >>> 0;
+    bytes.push((hi >>> 24) & 0xff, (hi >>> 16) & 0xff, (hi >>> 8) & 0xff, hi & 0xff);
+    bytes.push((lo >>> 24) & 0xff, (lo >>> 16) & 0xff, (lo >>> 8) & 0xff, lo & 0xff);
+
+    var h0 = 0x6a09e667, h1 = 0xbb67ae85, h2 = 0x3c6ef372, h3 = 0xa54ff53a;
+    var h4 = 0x510e527f, h5 = 0x9b05688c, h6 = 0x1f83d9ab, h7 = 0x5be0cd19;
+    var w = new Array(64);
+    var i, j, a, b, c, d, e, f, g, h, s0, s1, ch, maj, t1, t2;
+
+    for (i = 0; i < bytes.length; i += 64) {
+      for (j = 0; j < 16; j += 1) {
+        w[j] = ((bytes[i + j * 4] << 24) |
+          (bytes[i + j * 4 + 1] << 16) |
+          (bytes[i + j * 4 + 2] << 8) |
+          (bytes[i + j * 4 + 3])) >>> 0;
+      }
+      for (j = 16; j < 64; j += 1) {
+        s0 = (rotr(w[j - 15], 7) ^ rotr(w[j - 15], 18) ^ (w[j - 15] >>> 3)) >>> 0;
+        s1 = (rotr(w[j - 2], 17) ^ rotr(w[j - 2], 19) ^ (w[j - 2] >>> 10)) >>> 0;
+        w[j] = (w[j - 16] + s0 + w[j - 7] + s1) >>> 0;
+      }
+      a = h0; b = h1; c = h2; d = h3; e = h4; f = h5; g = h6; h = h7;
+      for (j = 0; j < 64; j += 1) {
+        s1 = (rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25)) >>> 0;
+        ch = ((e & f) ^ ((~e) & g)) >>> 0;
+        t1 = (h + s1 + ch + K[j] + w[j]) >>> 0;
+        s0 = (rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22)) >>> 0;
+        maj = ((a & b) ^ (a & c) ^ (b & c)) >>> 0;
+        t2 = (s0 + maj) >>> 0;
+        h = g; g = f; f = e; e = (d + t1) >>> 0;
+        d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+      }
+      h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0; h3 = (h3 + d) >>> 0;
+      h4 = (h4 + e) >>> 0; h5 = (h5 + f) >>> 0; h6 = (h6 + g) >>> 0; h7 = (h7 + h) >>> 0;
+    }
+
+    var words = [h0, h1, h2, h3, h4, h5, h6, h7], hex = '';
+    for (i = 0; i < 8; i += 1) {
+      var part = words[i].toString(16);
+      while (part.length < 8) { part = '0' + part; }
+      hex += part;
+    }
+    return hex;
+  }
+
+  function isArray(v) { return Object.prototype.toString.call(v) === '[object Array]'; }
+  function isNonNegInt(v) { return typeof v === 'number' && isFinite(v) && v >= 0 && v % 1 === 0; }
+  function isIsoDate(v) { return typeof v === 'string' && v.length > 0 && isFinite(Date.parse(v)); }
+
+  function canonical(value) {
+    if (value === null || typeof value !== 'object') {
+      return JSON.stringify(value);
+    }
+    if (isArray(value)) {
+      var arrParts = [], i;
+      for (i = 0; i < value.length; i += 1) {
+        arrParts.push(value[i] === undefined ? 'null' : canonical(value[i]));
+      }
+      return '[' + arrParts.join(',') + ']';
+    }
+    var keys = Object.keys(value).sort(), objParts = [], k, v;
+    for (i = 0; i < keys.length; i += 1) {
+      k = keys[i];
+      v = value[k];
+      if (v === undefined) { continue; }
+      objParts.push(JSON.stringify(k) + ':' + canonical(v));
+    }
+    return '{' + objParts.join(',') + '}';
+  }
+
+  function countWords(text) {
+    if (E.countManuscript) { return E.countManuscript(text || '').words || 0; }
+    var m = String(text || '').match(/[A-Za-zÀ-ÿ0-9]+/g);
+    return m ? m.length : 0;
+  }
+
+  function contentHash(doc) {
+    return sha256(String((doc && doc.title) || '') + '\n' + String((doc && doc.text) || ''));
+  }
+
+  function computeLinkHash(prevHash, doc, ledger) {
+    return sha256(canonical({
+      v: 1,
+      prev: prevHash,
+      rev: doc.revision,
+      title: doc.title || '',
+      text: doc.text || '',
+      origin: ledger.origin,
+      keys: ledger.keystrokes,
+      extPastes: ledger.externalPastes,
+      extChars: ledger.externalPasteChars,
+      intPastes: ledger.internalPastes,
+      blockedPastes: ledger.blockedPastes
+    }));
+  }
+
+  /* ── Buffer transitório de telemetria antes da gravação ── */
+  var pendingSignals = Object.create(null);
+
+  function docKey(doc) {
+    if (!doc) { return ''; }
+    return String(doc.noteId || doc.id || '');
+  }
+
+  function ensurePending(key) {
+    if (!pendingSignals[key]) {
+      pendingSignals[key] = { keys: 0, extPastes: 0, extChars: 0, intPastes: 0, blockedPastes: 0 };
+    }
+    return pendingSignals[key];
+  }
+
+  function recordSignal(doc, kind, amount) {
+    var key = docKey(doc);
+    if (!key) { return; }
+    var p = ensurePending(key);
+    var n = typeof amount === 'number' && isFinite(amount) && amount > 0 ? Math.floor(amount) : 1;
+    if (kind === 'key') { p.keys += n; }
+    else if (kind === 'extPaste') { p.extPastes += 1; p.extChars += n; }
+    else if (kind === 'intPaste') { p.intPastes += 1; }
+    else if (kind === 'blockedPaste') { p.blockedPastes += n; }
+  }
+
+  function peekPending(doc) {
+    var key = docKey(doc);
+    return key && pendingSignals[key] ? pendingSignals[key] : { keys: 0, extPastes: 0, extChars: 0, intPastes: 0, blockedPastes: 0 };
+  }
+
+  function consumePending(doc) {
+    var key = docKey(doc);
+    if (!key || !pendingSignals[key]) {
+      return { keys: 0, extPastes: 0, extChars: 0, intPastes: 0, blockedPastes: 0 };
+    }
+    var out = pendingSignals[key];
+    delete pendingSignals[key];
+    return out;
+  }
+
+  function validTrailEntry(item) {
+    return !!item && typeof item === 'object' && !isArray(item) &&
+      isNonNegInt(item.rev) &&
+      typeof item.prev === 'string' && HEX_64.test(item.prev) &&
+      typeof item.hash === 'string' && HEX_64.test(item.hash) &&
+      isNonNegInt(item.len) &&
+      isNonNegInt(item.words) &&
+      isNonNegInt(item.keys) &&
+      isNonNegInt(item.extPastes) &&
+      isNonNegInt(item.extChars) &&
+      isIsoDate(item.at);
+  }
+
+  function validDocLedger(ledger) {
+    if (!ledger || typeof ledger !== 'object' || isArray(ledger)) { return false; }
+    if (ledger.version !== 1) { return false; }
+    if (ledger.origin !== 'escrevaral' && ledger.origin !== 'imported') { return false; }
+    if (typeof ledger.headHash !== 'string' || !HEX_64.test(ledger.headHash)) { return false; }
+    if (!isNonNegInt(ledger.chainLength) || !isNonNegInt(ledger.keystrokes) ||
+        !isNonNegInt(ledger.externalPastes) || !isNonNegInt(ledger.externalPasteChars) ||
+        !isNonNegInt(ledger.internalPastes) || !isNonNegInt(ledger.blockedPastes) ||
+        !isNonNegInt(ledger.sessions)) { return false; }
+    if (!isIsoDate(ledger.createdAt) || !isIsoDate(ledger.lastSealedAt)) { return false; }
+    if (!isArray(ledger.trail) || ledger.trail.length > MAX_TRAIL) { return false; }
+    for (var i = 0; i < ledger.trail.length; i += 1) {
+      if (!validTrailEntry(ledger.trail[i])) { return false; }
+    }
+    return true;
+  }
+
+  function validPackageSeal(seal) {
+    return !!seal && typeof seal === 'object' && !isArray(seal) &&
+      seal.version === 1 &&
+      seal.algorithm === 'SHA-256' &&
+      typeof seal.packageHash === 'string' && HEX_64.test(seal.packageHash) &&
+      isNonNegInt(seal.sealedDocuments) &&
+      isNonNegInt(seal.totalDocuments);
+  }
+
+  function sealDocument(previousDoc, nextDoc, originHint, previewOnly) {
+    var base = (previousDoc && validDocLedger(previousDoc.cartorio)) ? JSON.parse(JSON.stringify(previousDoc.cartorio)) :
+      (nextDoc && validDocLedger(nextDoc.cartorio)) ? JSON.parse(JSON.stringify(nextDoc.cartorio)) : null;
+    var delta = previewOnly ? peekPending(nextDoc) : consumePending(nextDoc);
+    var now = nextDoc.updated || new Date().toISOString();
+    var origin = base ? base.origin : (originHint === 'imported' ? 'imported' : 'escrevaral');
+    var prevHash = base ? base.headHash : ZERO_HASH;
+
+    var ledger = base ? base : {
+      version: 1,
+      origin: origin,
+      headHash: ZERO_HASH,
+      chainLength: 0,
+      keystrokes: 0,
+      externalPastes: 0,
+      externalPasteChars: 0,
+      internalPastes: 0,
+      blockedPastes: 0,
+      sessions: 0,
+      createdAt: nextDoc.created || now,
+      lastSealedAt: now,
+      trail: []
+    };
+
+    ledger.keystrokes += delta.keys;
+    ledger.externalPastes += delta.extPastes;
+    ledger.externalPasteChars += delta.extChars;
+    ledger.internalPastes += delta.intPastes;
+    ledger.blockedPastes += delta.blockedPastes;
+    ledger.sessions += 1;
+    ledger.lastSealedAt = now;
+
+    var hash = computeLinkHash(prevHash, nextDoc, ledger);
+    ledger.headHash = hash;
+    ledger.chainLength += 1;
+    ledger.trail.push({
+      rev: nextDoc.revision,
+      prev: prevHash,
+      hash: hash,
+      len: String(nextDoc.text || '').length,
+      words: countWords(nextDoc.text || ''),
+      keys: ledger.keystrokes,
+      extPastes: ledger.externalPastes,
+      extChars: ledger.externalPasteChars,
+      at: now
+    });
+    while (ledger.trail.length > MAX_TRAIL) {
+      ledger.trail.shift();
+    }
+    return ledger;
+  }
+
+  function packageBodyForHash(payload) {
+    var body = {
+      format: payload.format,
+      version: payload.version,
+      scope: payload.scope,
+      notebooks: payload.notebooks,
+      documents: payload.documents,
+      globals: payload.globals,
+      inventory: payload.inventory
+    };
+    if (typeof payload.originals !== 'undefined') {
+      body.originals = payload.originals;
+    }
+    return body;
+  }
+
+  function sealPackage(payload) {
+    var docs = isArray(payload && payload.documents) ? payload.documents : [];
+    var sealed = 0, total = 0, i;
+    for (i = 0; i < docs.length; i += 1) {
+      if (docs[i] && docs[i].kind === 'reminder') { continue; }
+      total += 1;
+      if (validDocLedger(docs[i] && docs[i].cartorio)) { sealed += 1; }
+    }
+    return {
+      version: 1,
+      algorithm: 'SHA-256',
+      packageHash: sha256(canonical(packageBodyForHash(payload))),
+      sealedDocuments: sealed,
+      totalDocuments: total
+    };
+  }
+
+  function verifyDocument(doc) {
+    var words = countWords(doc && doc.text);
+    var chars = String((doc && doc.text) || '').length;
+    var cHash = contentHash(doc);
+    var base = {
+      id: (doc && (doc.noteId || doc.id)) || '',
+      title: (doc && doc.title) || 'Sem título',
+      project: (doc && doc.project) || 'Textos avulsos',
+      revision: (doc && typeof doc.revision === 'number') ? doc.revision : 0,
+      words: words,
+      chars: chars,
+      contentHash: cHash,
+      createdAt: (doc && (doc.created || doc.updated)) || '',
+      updatedAt: (doc && doc.updated) || '',
+      lineageEntries: (doc && doc.lineage && isArray(doc.lineage.entries)) ? doc.lineage.entries.length : 0
+    };
+
+    if (!doc || typeof doc.cartorio === 'undefined') {
+      base.status = 'unsealed';
+      base.label = 'Sem selo do Cartório';
+      base.detail = 'Documento criado antes do selo do Cartório ou ainda não gravado.';
+      base.origin = 'unknown';
+      base.headHash = '';
+      base.chainLength = 0;
+      base.keystrokes = 0;
+      base.externalPastes = 0;
+      base.externalPasteChars = 0;
+      base.internalPastes = 0;
+      base.blockedPastes = 0;
+      base.trail = [];
+      return base;
+    }
+
+    if (!validDocLedger(doc.cartorio)) {
+      base.status = 'tampered';
+      base.label = 'Registro adulterado ou inválido';
+      base.detail = 'A estrutura criptográfica do Cartório neste documento está corrompida.';
+      base.origin = 'unknown';
+      base.headHash = '';
+      base.chainLength = 0;
+      base.keystrokes = 0;
+      base.externalPastes = 0;
+      base.externalPasteChars = 0;
+      base.internalPastes = 0;
+      base.blockedPastes = 0;
+      base.trail = [];
+      return base;
+    }
+
+    var ledger = doc.cartorio;
+    base.origin = ledger.origin;
+    base.headHash = ledger.headHash;
+    base.chainLength = ledger.chainLength;
+    base.keystrokes = ledger.keystrokes;
+    base.externalPastes = ledger.externalPastes;
+    base.externalPasteChars = ledger.externalPasteChars;
+    base.internalPastes = ledger.internalPastes;
+    base.blockedPastes = ledger.blockedPastes;
+    base.createdAt = ledger.createdAt;
+    base.updatedAt = ledger.lastSealedAt;
+    base.trail = ledger.trail.slice();
+
+    var trail = ledger.trail;
+    if (!trail.length) {
+      base.status = 'tampered';
+      base.label = 'Cadeia incompleta';
+      base.detail = 'O registro declara selo, mas a trilha encadeada está vazia.';
+      return base;
+    }
+
+    var i;
+    for (i = 1; i < trail.length; i += 1) {
+      if (trail[i].prev !== trail[i - 1].hash) {
+        base.status = 'tampered';
+        base.label = 'Quebra na cadeia de hashes';
+        base.detail = 'A revisão ' + trail[i].rev + ' não encadeia com o hash da revisão anterior.';
+        return base;
+      }
+    }
+
+    var last = trail[trail.length - 1];
+    if (last.hash !== ledger.headHash || last.rev !== doc.revision) {
+      base.status = 'tampered';
+      base.label = 'Revisão divergente do selo';
+      base.detail = 'A última revisão da trilha não confere com a cabeça do selo ou com a revisão atual do documento.';
+      return base;
+    }
+
+    var expectedHead = computeLinkHash(last.prev, doc, ledger);
+    if (expectedHead !== ledger.headHash) {
+      base.status = 'tampered';
+      base.label = 'Conteúdo alterado fora do selo';
+      base.detail = 'O texto, título ou contadores de processo foram modificados depois que o Escrevaral selou este documento.';
+      return base;
+    }
+
+    if (ledger.origin === 'imported') {
+      base.status = 'verified_imported';
+      base.label = 'Cadeia íntegra · Origem importada';
+      base.detail = 'O arquivo manteve integridade após a entrada, mas o texto original entrou por importação externa.';
+      return base;
+    }
+
+    if (ledger.externalPastes > 0 || ledger.externalPasteChars > 0) {
+      base.status = 'verified_with_paste';
+      base.label = 'Cadeia íntegra · Com colagem externa';
+      base.detail = 'A cadeia está íntegra, mas houve ' + ledger.externalPastes + ' colagem(ns) externa(s) (' + ledger.externalPasteChars + ' caracteres) durante a escrita.';
+      return base;
+    }
+
+    base.status = 'verified_clean';
+    base.label = 'Cadeia íntegra · Construído no Escrevaral';
+    base.detail = 'Texto, título e histórico conferem com o selo criptográfico, com zero colagens externas registradas.';
+    return base;
+  }
+
+  function verifyPackage(rawOrObject) {
+    var payload;
+    if (typeof rawOrObject === 'string') {
+      try { payload = JSON.parse(rawOrObject); }
+      catch (e) { throw new Error('O arquivo não contém JSON válido do Escrevaral (.scrvrl).'); }
+    } else {
+      payload = rawOrObject;
+    }
+
+    if (!payload || typeof payload !== 'object') {
+      throw new Error('Pacote vazio ou ilegível.');
+    }
+
+    var isDeskPack = payload.format === 'escrevaral-cadernos' && isArray(payload.documents);
+    var isLegacyPack = payload.format === 'escrevaral-astra' && isArray(payload.documents);
+    if (!isDeskPack && !isLegacyPack) {
+      throw new Error('Formato não reconhecido. Envie uma cópia exportada pelo Escrevaral (.scrvrl ou .json).');
+    }
+
+    var packageIntegrity = 'unsealed';
+    var storedPackageHash = '';
+    var computedPackageHash = isDeskPack ? sealPackage(payload).packageHash : sha256(canonical(payload));
+
+    if (isDeskPack && typeof payload.cartorio !== 'undefined') {
+      if (!validPackageSeal(payload.cartorio)) {
+        packageIntegrity = 'tampered';
+      } else {
+        storedPackageHash = payload.cartorio.packageHash;
+        packageIntegrity = (storedPackageHash === computedPackageHash) ? 'intact' : 'tampered';
+      }
+    }
+
+    var reports = [];
+    var totals = {
+      documents: 0,
+      clean: 0,
+      withPaste: 0,
+      imported: 0,
+      tampered: 0,
+      unsealed: 0,
+      words: 0,
+      revisions: 0,
+      keystrokes: 0,
+      externalPastes: 0,
+      externalPasteChars: 0,
+      internalPastes: 0,
+      blockedPastes: 0,
+      earliestAt: '',
+      latestAt: ''
+    };
+
+    var i, doc, r;
+    for (i = 0; i < payload.documents.length; i += 1) {
+      doc = payload.documents[i];
+      if (!doc || doc.kind === 'reminder') { continue; }
+      r = verifyDocument(doc);
+      reports.push(r);
+      totals.documents += 1;
+      totals.words += r.words;
+      totals.revisions += r.chainLength || r.revision || 0;
+      totals.keystrokes += r.keystrokes;
+      totals.externalPastes += r.externalPastes;
+      totals.externalPasteChars += r.externalPasteChars;
+      totals.internalPastes += r.internalPastes;
+      totals.blockedPastes += r.blockedPastes;
+
+      if (r.status === 'verified_clean') { totals.clean += 1; }
+      else if (r.status === 'verified_with_paste') { totals.withPaste += 1; }
+      else if (r.status === 'verified_imported') { totals.imported += 1; }
+      else if (r.status === 'tampered') { totals.tampered += 1; }
+      else { totals.unsealed += 1; }
+
+      if (r.createdAt && (!totals.earliestAt || r.createdAt < totals.earliestAt)) { totals.earliestAt = r.createdAt; }
+      if (r.updatedAt && (!totals.latestAt || r.updatedAt > totals.latestAt)) { totals.latestAt = r.updatedAt; }
+    }
+
+    var verdict, verdictTitle, verdictSummary;
+    if (packageIntegrity === 'tampered' || totals.tampered > 0) {
+      verdict = 'adulterado';
+      verdictTitle = 'Adulteração detectada na verificação';
+      verdictSummary = packageIntegrity === 'tampered'
+        ? 'O selo criptográfico do arquivo não confere com o conteúdo atual. O pacote foi alterado depois de exportado.'
+        : (totals.tampered + ' documento(s) apresentam divergência entre o texto e o selo criptográfico.');
+    } else if (totals.documents === 0) {
+      verdict = 'vazio';
+      verdictTitle = 'Pacote íntegro sem manuscritos';
+      verdictSummary = 'O arquivo está estruturalmente íntegro, mas não contém folhas de texto.';
+    } else if (totals.unsealed === totals.documents) {
+      verdict = 'legado_sem_selo';
+      verdictTitle = 'Arquivo anterior ao Cartório (sem selo encadeado)';
+      verdictSummary = 'Os textos foram lidos normalmente, mas foram exportados antes da ativação do Cartório. A impressão digital SHA-256 atual foi calculada abaixo.';
+    } else if (totals.withPaste > 0 || totals.imported > 0 || totals.unsealed > 0) {
+      verdict = 'integro_com_ressalvas';
+      verdictTitle = 'Pacote íntegro · Com ressalvas de origem registradas';
+      verdictSummary = 'Nenhuma adulteração pós-exportação foi detectada. Confira no livro de folhas abaixo os registros de colagem externa, importação ou folhas sem selo.';
+    } else {
+      verdict = 'integro_sem_colagem';
+      verdictTitle = 'Certificado íntegro · Construído no Escrevaral sem colagem externa';
+      verdictSummary = 'Todos os manuscritos deste pacote apresentam cadeia criptográfica íntegra, origem nativa na oficina e zero colagens externas registradas.';
+    }
+
+    return {
+      verifiedAt: new Date().toISOString(),
+      scope: payload.scope || 'all',
+      notebooksCount: isArray(payload.notebooks) ? payload.notebooks.length : 0,
+      packageIntegrity: packageIntegrity,
+      packageHash: computedPackageHash,
+      storedPackageHash: storedPackageHash,
+      verdict: verdict,
+      verdictTitle: verdictTitle,
+      verdictSummary: verdictSummary,
+      totals: totals,
+      documents: reports
+    };
+  }
+
+  function formatDateBr(iso) {
+    if (!iso) { return '—'; }
+    try { return new Date(iso).toLocaleString('pt-BR'); }
+    catch (e) { return iso; }
+  }
+
+  function formatCertificateText(report, fileName) {
+    var lines = [];
+    lines.push('====================================================================');
+    lines.push('CARTÓRIO DO ESCREVARAL — CERTIFICADO DE ORIGEM E PROCESSO DE ESCRITA');
+    lines.push('====================================================================');
+    if (fileName) { lines.push('Arquivo analisado: ' + fileName); }
+    lines.push('Verificado em (relógio local): ' + formatDateBr(report.verifiedAt));
+    lines.push('Veredito: ' + report.verdictTitle);
+    lines.push('Resumo: ' + report.verdictSummary);
+    lines.push('--------------------------------------------------------------------');
+    lines.push('Impressão digital do pacote (SHA-256): ' + report.packageHash);
+    lines.push('Integridade do pacote: ' + (report.packageIntegrity === 'intact' ? 'ÍNTEGRO' : report.packageIntegrity === 'tampered' ? 'ADULTERADO' : 'SEM SELO DE PACOTE'));
+    lines.push('Folhas analisadas: ' + report.totals.documents + ' | Palavras: ' + report.totals.words);
+    lines.push('Revisões encadeadas: ' + report.totals.revisions + ' | Toques registrados: ' + report.totals.keystrokes);
+    lines.push('Colagens externas: ' + report.totals.externalPastes + ' (' + report.totals.externalPasteChars + ' caracteres) | Bloqueadas: ' + report.totals.blockedPastes);
+    lines.push('Período registrado no aparelho: ' + formatDateBr(report.totals.earliestAt) + ' até ' + formatDateBr(report.totals.latestAt));
+    lines.push('--------------------------------------------------------------------');
+    lines.push('LIVRO DE FOLHAS:');
+    var i, d;
+    for (i = 0; i < report.documents.length; i += 1) {
+      d = report.documents[i];
+      lines.push((i + 1) + '. ' + d.title + ' [' + d.project + ']');
+      lines.push('   Estado: ' + d.label);
+      lines.push('   Palavras: ' + d.words + ' | Revisões: ' + (d.chainLength || d.revision) + ' | Toques: ' + d.keystrokes + ' | Colagens externas: ' + d.externalPastes);
+      lines.push('   SHA-256 do texto: ' + d.contentHash);
+      if (d.headHash) { lines.push('   SHA-256 da cadeia: ' + d.headHash); }
+    }
+    lines.push('--------------------------------------------------------------------');
+    lines.push('ESCOPO E TRANSPARÊNCIA:');
+    lines.push('Camada 1 (offline): comprova integridade criptográfica do pacote e da');
+    lines.push('cadeia de criação registrada dentro do Escrevaral, incluindo a ausência');
+    lines.push('ou ocorrência de colagens externas.');
+    lines.push('Camada 2 (anterioridade jurídica externa): datas locais dependem do');
+    lines.push('relógio do aparelho. Use o código SHA-256 acima para ancoragem externa');
+    lines.push('de data (Biblioteca Nacional, carimbo de tempo ou protocolo editorial).');
+    return lines.join('\n');
+  }
+
+  E.cartorio = {
+    ZERO_HASH: ZERO_HASH,
+    sha256: sha256,
+    canonical: canonical,
+    contentHash: contentHash,
+    recordSignal: recordSignal,
+    peekPending: peekPending,
+    validDocLedger: validDocLedger,
+    validPackageSeal: validPackageSeal,
+    sealDocument: sealDocument,
+    sealPackage: sealPackage,
+    verifyDocument: verifyDocument,
+    verifyPackage: verifyPackage,
+    formatCertificateText: formatCertificateText
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
 /* Fonte: src/storage/linhagem.js */
 /* Linhagem local: versões recentes autocontidas, sem promessa de data externa. */
 (function(root){
@@ -1473,6 +2086,7 @@
       var payload = { format: 'escrevaral-cadernos', version: 2, scope: bookId ? 'notebook' : origId ? 'original' : 'all', originals: clone(selectedOriginals), notebooks: clone(selected), documents: docs, globals: {} };
       if (!bookId && !origId) { globals.forEach(function (k) { var v = storage.getItem(k); if (v !== null) { payload.globals[k] = v; } }); }
       payload.inventory = { originals: selectedOriginals.length, notebooks: selected.length, documents: docs.length };
+      if (E.cartorio && E.cartorio.sealPackage) { payload.cartorio = E.cartorio.sealPackage(payload); }
       return payload;
     }
     function validate(payload) {
@@ -1492,6 +2106,7 @@
       if (!payload.globals || typeof payload.globals !== 'object' || array(payload.globals) || (payload.scope !== 'all' && Object.keys(payload.globals).length)) { throw new Error('Dados gerais inválidos.'); }
       Object.keys(payload.globals).forEach(function (k) { if (globals.indexOf(k) === -1 || typeof payload.globals[k] !== 'string') { throw new Error('Preferência desconhecida no pacote.'); } });
       if (payload.globals['vrda-planner'] && !E.validPlanner(JSON.parse(payload.globals['vrda-planner']))) { throw new Error('Calendário geral inválido.'); }
+      if (typeof payload.cartorio !== 'undefined' && E.cartorio && E.cartorio.validPackageSeal && !E.cartorio.validPackageSeal(payload.cartorio)) { throw new Error('Selo do Cartório inválido no pacote.'); }
       return payload;
     }
     function bring(payload) {
@@ -2021,6 +2636,9 @@
     var cache = {};
     var order = [];
     var inflight = {};
+    var sessionPos = {};
+    var sessionOrder = [];
+    var MAX_SESSION_POS = 256;
     var baseUrl = opts.baseUrl || 'resources/pt-BR/lexico-ptbr/partes/';
 
     function putCache(id, part) {
@@ -2255,15 +2873,115 @@
       });
     }
 
+    function putSessionPos(word, info) {
+      var idx = sessionOrder.indexOf(word);
+      if (idx >= 0) { sessionOrder.splice(idx, 1); }
+      sessionPos[word] = info;
+      sessionOrder.push(word);
+      while (sessionOrder.length > MAX_SESSION_POS) {
+        var oldW = sessionOrder.shift();
+        delete sessionPos[oldW];
+      }
+    }
+
+    function extractPosInfo(word, rec) {
+      if (!rec) { return null; }
+      var classes = [], seen = {}, lemma = word, def = '', i, item, lbl;
+      function addPos(code) {
+        lbl = CLASSES[code];
+        if (lbl && !seen[lbl]) { seen[lbl] = true; classes.push(lbl); }
+      }
+      var sList = rec.s || [];
+      for (i = 0; i < sList.length; i += 1) {
+        item = sList[i];
+        if (item.pos) { addPos(item.pos); }
+        if (!def && item.definitions && item.definitions[0]) { def = item.definitions[0]; }
+        if (lemma === word && item.lemma) { lemma = item.lemma; }
+      }
+      var fList = rec.f || [];
+      for (i = 0; i < fList.length; i += 1) {
+        item = fList[i];
+        if (item.pos) { addPos(item.pos); }
+        if (lemma === word && item.lemma) { lemma = item.lemma; }
+      }
+      if (!classes.length) { return null; }
+      return { classes: classes, lemma: lemma, definition: def };
+    }
+
+    function warmWords(words, done) {
+      var list = words || [], unique = [], seen = {}, buckets = {}, bucketIds = [], i, q, bid;
+      for (i = 0; i < list.length && unique.length < 160; i += 1) {
+        q = canonical(list[i]);
+        if (!isValidWord(q) || seen[q] || Object.prototype.hasOwnProperty.call(sessionPos, q)) { continue; }
+        seen[q] = true;
+        unique.push(q);
+        bid = bucketFor(q);
+        if (!buckets[bid]) { buckets[bid] = []; bucketIds.push(bid); }
+        buckets[bid].push(q);
+      }
+      if (!bucketIds.length) {
+        if (done) { done(0); }
+        return;
+      }
+      var cursor = 0, loaded = 0;
+      function nextBatch() {
+        if (cursor >= bucketIds.length) {
+          if (done) { done(loaded); }
+          return;
+        }
+        var batch = bucketIds.slice(cursor, cursor + 4);
+        cursor += batch.length;
+        var pending = batch.length;
+        var bi;
+        for (bi = 0; bi < batch.length; bi += 1) {
+          (function (id) {
+            fetchPart(id, function (err, part) {
+              if (!err && part) {
+                var ws = buckets[id], wi, w, info;
+                for (wi = 0; wi < ws.length; wi += 1) {
+                  w = ws[wi];
+                  info = Object.prototype.hasOwnProperty.call(part, w) ? extractPosInfo(w, part[w]) : null;
+                  if (info) { putSessionPos(w, info); loaded += 1; }
+                }
+              }
+              pending -= 1;
+              if (pending === 0) { nextBatch(); }
+            });
+          }(batch[bi]));
+        }
+      }
+      nextBatch();
+    }
+
+    function peekPos(rawWord) {
+      var q = canonical(rawWord);
+      if (!q || !Object.prototype.hasOwnProperty.call(sessionPos, q)) { return null; }
+      var info = sessionPos[q];
+      return { classes: info.classes.slice(), lemma: info.lemma, definition: info.definition };
+    }
+
+    function clearSession() {
+      sessionPos = {};
+      sessionOrder = [];
+    }
+
     return {
       canonical: canonical,
       bucketFor: bucketFor,
       isValidWord: isValidWord,
-      lookup: lookup
+      lookup: lookup,
+      warmWords: warmWords,
+      peekPos: peekPos,
+      clearSession: clearSession
     };
   }
 
+  var sharedService = null;
   root.Escr.createLexicoP01 = createService;
+  root.Escr.getLexicoP01 = function () {
+    if (!sharedService) { sharedService = createService(); }
+    return sharedService;
+  };
 }(typeof window !== 'undefined' ? window : this));
 
 ;
@@ -5859,7 +6577,7 @@
   }
 
   root.Escr.mountWordCard = function (opts) {
-    var service = opts.service || (root.Escr.createLexicoP01 ? root.Escr.createLexicoP01() : null);
+    var service = opts.service || (root.Escr.getLexicoP01 ? root.Escr.getLexicoP01() : (root.Escr.createLexicoP01 ? root.Escr.createLexicoP01() : null));
     var manuscript = opts.manuscriptEl;
     var richEl = opts.richEl || null;
     var cardEl = null;
@@ -6460,6 +7178,519 @@
       openGuide: openGuide,
       close: close,
       isOpen: function () { return !!(modalEl && !modalEl.hidden); }
+    };
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
+/* Fonte: src/ui/cartorio.js */
+/* Interface do Cartório do Escrevaral: selo ao vivo da mesa e verificação de arquivos .scrvrl. ES5. */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+  var E = root.Escr;
+
+  function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
+  function mk(tag, cls, txt) {
+    var el = document.createElement(tag);
+    if (cls) { el.className = cls; }
+    if (typeof txt !== 'undefined' && txt !== null) { el.textContent = String(txt); }
+    return el;
+  }
+  function fmtDate(iso) {
+    if (!iso) { return '—'; }
+    try { return new Date(iso).toLocaleString('pt-BR'); }
+    catch (e) { return iso; }
+  }
+  function fmtNum(n) {
+    try { return Number(n || 0).toLocaleString('pt-BR'); }
+    catch (e) { return String(n || 0); }
+  }
+  function shortHash(h) {
+    if (!h || h.length < 16) { return h || '—'; }
+    return h.slice(0, 12) + '…' + h.slice(-12);
+  }
+  function copyText(text, onDone) {
+    var done = false;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { onDone(true); }, function () { fallbackCopy(text, onDone); });
+        done = true;
+      }
+    } catch (ignore) {}
+    if (!done) { fallbackCopy(text, onDone); }
+  }
+  function fallbackCopy(text, onDone) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand && document.execCommand('copy');
+      document.body.removeChild(ta);
+      onDone(!!ok);
+    } catch (e) { onDone(false); }
+  }
+
+  function statusTone(status) {
+    if (status === 'verified_clean' || status === 'integro_sem_colagem') { return 'clean'; }
+    if (status === 'tampered' || status === 'adulterado') { return 'danger'; }
+    if (status === 'verified_with_paste' || status === 'verified_imported' || status === 'integro_com_ressalvas') { return 'warn'; }
+    return 'neutral';
+  }
+
+  E.mountCartorio = function (opts) {
+    opts = opts || {};
+    var overlay = null, activeTab = 'desk', lastReport = null, lastFileName = '';
+    var deskBody = null, verifyBody = null, tabDeskBtn = null, tabVerifyBtn = null, statusBanner = null;
+    var dropZone = null, fileInput = null, pasteBox = null, pasteToggleBtn = null, pasteWrap = null;
+    var verifyOutput = null;
+
+    function announce(msg) {
+      if (statusBanner) { statusBanner.textContent = msg || ''; }
+    }
+
+    function openPrintWindow(report, fileName) {
+      var textCert = E.cartorio.formatCertificateText(report, fileName);
+      var win = null;
+      try { win = root.open('', '_blank', 'width=860,height=920'); } catch (ignore) {}
+      if (!win) {
+        if (opts.download) {
+          opts.download(textCert, 'text/plain', 'certificado-cartorio-escrevaral.txt');
+          announce('Certificado baixado como texto (.txt).');
+        }
+        return;
+      }
+      var doc = win.document;
+      doc.open();
+      doc.write(
+        '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">' +
+        '<title>Certificado do Cartório — Escrevaral</title>' +
+        '<style>' +
+        'body{font-family:Georgia,"Times New Roman",serif;background:#f8f5ef;color:#1e2320;margin:0;padding:36px 24px;}' +
+        '.sheet{max-width:760px;margin:0 auto;background:#fffdf9;border:1px solid #c9c2b2;padding:38px 44px;box-shadow:0 6px 24px rgba(0,0,0,.06);}' +
+        '.masthead{border-top:3px double #1e2320;border-bottom:1px solid #1e2320;padding:10px 0;margin-bottom:22px;display:flex;justify-content:space-between;font:600 11px/1.3 Arial,sans-serif;letter-spacing:1.4px;text-transform:uppercase;}' +
+        'h1{margin:0 0 6px;font:700 24px/1.2 Georgia,serif;}' +
+        '.sub{margin:0 0 20px;color:#4a544c;font-size:14px;}' +
+        'pre{white-space:pre-wrap;word-break:break-word;font:12.5px/1.65 "Courier New",Courier,monospace;background:#f7f4ec;border:1px solid #dcd5c5;padding:18px;border-radius:3px;}' +
+        '.actions{margin-top:18px;text-align:right;}' +
+        '.actions button{padding:8px 16px;font:600 13px Arial,sans-serif;cursor:pointer;background:#1e2320;color:#f8f5ef;border:0;border-radius:3px;}' +
+        '@media print{body{background:#fff;padding:0;}.sheet{border:0;box-shadow:none;padding:0;}.actions{display:none;}}' +
+        '</style></head><body><div class="sheet">' +
+        '<div class="masthead"><span>CARTÓRIO DO ESCREVARAL</span><span>CERTIFICADO DE ORIGEM E PROCESSO</span></div>' +
+        '<h1>Certificado de Verificação</h1>' +
+        '<p class="sub">Emitido offline pela oficina Escrevaral — conferência criptográfica SHA-256.</p>' +
+        '<pre id="cert-pre"></pre>' +
+        '<div class="actions"><button type="button" onclick="window.print()">Imprimir / Salvar em PDF</button></div>' +
+        '</div></body></html>'
+      );
+      doc.close();
+      var pre = doc.getElementById('cert-pre');
+      if (pre) { pre.textContent = textCert; }
+    }
+
+    function renderReportCard(container, report, fileName, isLiveDesk) {
+      container.textContent = '';
+      var tone = statusTone(report.verdict);
+
+      var cert = mk('article', 'cart-cert cart-tone-' + tone);
+      var mast = mk('div', 'cart-cert-mast');
+      mast.appendChild(mk('span', '', 'CARTÓRIO DO ESCREVARAL'));
+      mast.appendChild(mk('span', '', isLiveDesk ? 'AUDITORIA AO VIVO DA MESA' : 'CONFERÊNCIA DE ARQUIVO'));
+      cert.appendChild(mast);
+
+      var badgeRow = mk('div', 'cart-verdict-row');
+      var stamp = mk('span', 'cart-stamp cart-stamp-' + tone,
+        tone === 'clean' ? 'SELO ÍNTEGRO' :
+        tone === 'danger' ? 'ADULTERADO' :
+        tone === 'warn' ? 'ÍNTEGRO · COM RESSALVAS' : 'SEM SELO'
+      );
+      badgeRow.appendChild(stamp);
+      if (fileName) {
+        badgeRow.appendChild(mk('span', 'cart-file-chip', fileName));
+      }
+      cert.appendChild(badgeRow);
+
+      cert.appendChild(mk('h3', 'cart-verdict-title', report.verdictTitle));
+      cert.appendChild(mk('p', 'cart-verdict-summary', report.verdictSummary));
+
+      /* Grade de métricas principais */
+      var metrics = mk('div', 'cart-metrics');
+      var items = [
+        { k: 'Folhas verificadas', v: fmtNum(report.totals.documents) },
+        { k: 'Palavras', v: fmtNum(report.totals.words) },
+        { k: 'Revisões encadeadas', v: fmtNum(report.totals.revisions) },
+        { k: 'Toques registrados', v: fmtNum(report.totals.keystrokes) },
+        { k: 'Colagens externas', v: fmtNum(report.totals.externalPastes) + (report.totals.externalPasteChars ? ' (' + fmtNum(report.totals.externalPasteChars) + ' car.)' : '') },
+        { k: 'Colagens bloqueadas', v: fmtNum(report.totals.blockedPastes) }
+      ];
+      var i;
+      for (i = 0; i < items.length; i += 1) {
+        var box = mk('div', 'cart-metric');
+        box.appendChild(mk('span', 'cart-metric-k', items[i].k));
+        box.appendChild(mk('strong', 'cart-metric-v', items[i].v));
+        metrics.appendChild(box);
+      }
+      cert.appendChild(metrics);
+
+      /* Bloco SHA-256 */
+      var hashBox = mk('div', 'cart-hash-box');
+      var hashTop = mk('div', 'cart-hash-top');
+      hashTop.appendChild(mk('span', 'cart-hash-label', isLiveDesk ? 'IMPRESSÃO DIGITAL DA MESA (SHA-256)' : 'IMPRESSÃO DIGITAL DO PACOTE (SHA-256)'));
+      var copyBtn = mk('button', 'cart-mini-btn', 'Copiar SHA-256');
+      copyBtn.type = 'button';
+      on(copyBtn, 'click', function () {
+        copyText(report.packageHash, function (ok) {
+          announce(ok ? 'Código SHA-256 copiado para a área de transferência.' : 'Selecione o código SHA-256 para copiar.');
+        });
+      });
+      hashTop.appendChild(copyBtn);
+      hashBox.appendChild(hashTop);
+      hashBox.appendChild(mk('code', 'cart-hash-code', report.packageHash));
+      cert.appendChild(hashBox);
+
+      /* Ações do certificado */
+      var actions = mk('div', 'cart-actions');
+      if (isLiveDesk && opts.onExportSealed) {
+        var expBtn = mk('button', 'cart-btn-primary', 'Exportar mesa selada (.scrvrl)');
+        expBtn.type = 'button';
+        on(expBtn, 'click', function () {
+          opts.onExportSealed();
+          announce('Mesa selada exportada (.scrvrl). Ela já pode ser conferida na aba “Verificar arquivo” ou enviada a um editor.');
+        });
+        actions.appendChild(expBtn);
+      }
+      var printBtn = mk('button', 'cart-btn-secondary', 'Imprimir / Guardar certificado');
+      printBtn.type = 'button';
+      on(printBtn, 'click', function () { openPrintWindow(report, fileName); });
+      actions.appendChild(printBtn);
+
+      var copyCertBtn = mk('button', 'cart-btn-secondary', 'Copiar relatório em texto');
+      copyCertBtn.type = 'button';
+      on(copyCertBtn, 'click', function () {
+        copyText(E.cartorio.formatCertificateText(report, fileName), function (ok) {
+          announce(ok ? 'Relatório completo do Cartório copiado.' : 'Não foi possível copiar automaticamente.');
+        });
+      });
+      actions.appendChild(copyCertBtn);
+      cert.appendChild(actions);
+
+      /* Livro de folhas */
+      if (report.documents.length) {
+        var ledgerHead = mk('h4', 'cart-section-h', 'Livro de folhas verificadas (' + report.documents.length + ')');
+        cert.appendChild(ledgerHead);
+
+        var list = mk('div', 'cart-doc-list');
+        for (i = 0; i < report.documents.length; i += 1) {
+          (function (d) {
+            var dTone = statusTone(d.status);
+            var row = mk('div', 'cart-doc-row cart-doc-' + dTone);
+
+            var top = mk('div', 'cart-doc-top');
+            var titleWrap = mk('div', 'cart-doc-title-wrap');
+            titleWrap.appendChild(mk('strong', 'cart-doc-title', d.title));
+            titleWrap.appendChild(mk('span', 'cart-doc-project', d.project));
+            top.appendChild(titleWrap);
+            top.appendChild(mk('span', 'cart-doc-badge cart-stamp-' + dTone, d.label));
+            row.appendChild(top);
+
+            row.appendChild(mk('p', 'cart-doc-detail', d.detail));
+
+            var stats = mk('div', 'cart-doc-stats');
+            stats.appendChild(mk('span', '', fmtNum(d.words) + ' palavras'));
+            stats.appendChild(mk('span', '', fmtNum(d.chainLength || d.revision) + ' revisões'));
+            stats.appendChild(mk('span', '', fmtNum(d.keystrokes) + ' toques'));
+            stats.appendChild(mk('span', '', 'Colagens externas: ' + fmtNum(d.externalPastes)));
+            stats.appendChild(mk('span', '', 'Texto SHA-256: ' + shortHash(d.contentHash)));
+            row.appendChild(stats);
+
+            if (d.trail && d.trail.length) {
+              var details = mk('details', 'cart-trail-details');
+              details.appendChild(mk('summary', '', 'Ver trilha criptográfica (' + d.trail.length + ' elo' + (d.trail.length === 1 ? '' : 's') + ')'));
+              var ol = mk('ol', 'cart-trail-list');
+              var tIdx, item, li;
+              var startIdx = Math.max(0, d.trail.length - 12);
+              for (tIdx = startIdx; tIdx < d.trail.length; tIdx += 1) {
+                item = d.trail[tIdx];
+                li = mk('li', '');
+                li.appendChild(mk('strong', '', 'Rev. ' + item.rev));
+                li.appendChild(mk('span', '', ' · ' + fmtDate(item.at) + ' · ' + fmtNum(item.words) + ' pal. · ' + fmtNum(item.keys) + ' toques · ext: ' + fmtNum(item.extPastes) + ' · '));
+                li.appendChild(mk('code', '', shortHash(item.hash)));
+                ol.appendChild(li);
+              }
+              details.appendChild(ol);
+              row.appendChild(details);
+            }
+
+            list.appendChild(row);
+          }(report.documents[i]));
+        }
+        cert.appendChild(list);
+      }
+
+      /* Nota de transparência jurídica (Camada 1 + Camada 2) */
+      var legal = mk('footer', 'cart-transparency');
+      legal.appendChild(mk('strong', '', 'Transparência e escopo da verificação'));
+      legal.appendChild(mk('p', '',
+        'Camada 1 (100% offline): a cadeia SHA-256 comprova a integridade do arquivo exportado e a trilha de criação registrada dentro do Escrevaral, distinguindo escrita nativa, colagens externas e importações.'
+      ));
+      legal.appendChild(mk('p', '',
+        'Camada 2 (anterioridade jurídica externa): as datas provêm do relógio do aparelho. Quando uma editora ou registro jurídico exigir prova independente de data, utilize o código SHA-256 acima para ancoragem externa (Biblioteca Nacional, carimbo de tempo ou protocolo editorial).'
+      ));
+      cert.appendChild(legal);
+
+      container.appendChild(cert);
+    }
+
+    function refreshDeskTab() {
+      if (!deskBody) { return; }
+      deskBody.textContent = '';
+
+      /* Cartão rápido de proteção da oficina (modo colagem restrita) */
+      var guardBar = mk('div', 'cart-guard-bar');
+      var guardText = mk('div', 'cart-guard-text');
+      guardText.appendChild(mk('strong', '', 'Modo colagem restrita na oficina'));
+      guardText.appendChild(mk('span', '', 'Quando ligado, impede colagens de fora do Escrevaral para manter o manuscrito 100% digitado na oficina.'));
+      guardBar.appendChild(guardText);
+
+      var restrictedOn = opts.isRestrictedPaste ? !!opts.isRestrictedPaste() : false;
+      var guardBtn = mk('button', 'cart-guard-toggle', restrictedOn ? 'Restrição ativa · ON' : 'Permitindo colagem · OFF');
+      guardBtn.type = 'button';
+      guardBtn.setAttribute('aria-pressed', restrictedOn ? 'true' : 'false');
+      on(guardBtn, 'click', function () {
+        if (opts.onToggleRestrictedPaste) {
+          var next = !!opts.onToggleRestrictedPaste();
+          guardBtn.setAttribute('aria-pressed', next ? 'true' : 'false');
+          guardBtn.textContent = next ? 'Restrição ativa · ON' : 'Permitindo colagem · OFF';
+          announce(next ? 'Colagem externa bloqueada. Tudo que você escrever agora fica sob regime puro do Cartório.' : 'Colagem externa permitida (continuará sendo registrada com transparência no Cartório).');
+        }
+      });
+      guardBar.appendChild(guardBtn);
+      deskBody.appendChild(guardBar);
+
+      /* Gera pacote selado em memória (sem modificar nada) e verifica */
+      var reportHost = mk('div', 'cart-report-host');
+      deskBody.appendChild(reportHost);
+      try {
+        if (opts.checkpoint) { opts.checkpoint(); }
+        var pack = opts.buildCurrentPackage ? opts.buildCurrentPackage() : null;
+        if (!pack) {
+          reportHost.appendChild(mk('p', 'cart-empty', 'Escreva e salve uma folha para gerar o primeiro selo criptográfico do Cartório.'));
+          return;
+        }
+        var report = E.cartorio.verifyPackage(pack);
+        lastReport = report;
+        lastFileName = 'Mesa atual do Escrevaral';
+        renderReportCard(reportHost, report, lastFileName, true);
+      } catch (e) {
+        reportHost.appendChild(mk('p', 'cart-error', e && e.message ? e.message : 'Não foi possível auditar a mesa atual.'));
+      }
+    }
+
+    function runFileVerification(rawText, fileName) {
+      if (!verifyOutput) { return; }
+      verifyOutput.textContent = '';
+      try {
+        var report = E.cartorio.verifyPackage(rawText);
+        lastReport = report;
+        lastFileName = fileName || 'Arquivo enviado';
+        renderReportCard(verifyOutput, report, lastFileName, false);
+        announce('Verificação concluída: ' + report.verdictTitle + '.');
+      } catch (e) {
+        verifyOutput.appendChild(mk('p', 'cart-error', e && e.message ? e.message : 'Não foi possível verificar este arquivo.'));
+        announce('O arquivo não pôde ser verificado.');
+      }
+    }
+
+    function handleFile(file) {
+      if (!file) { return; }
+      if (file.size > 50000000) {
+        announce('Envie arquivos de até 50 MB.');
+        return;
+      }
+      E.transfer.read(file, function (err, content) {
+        if (err) {
+          announce(err.message || 'Erro ao ler o arquivo.');
+          return;
+        }
+        runFileVerification(content, file.name);
+      });
+    }
+
+    function setTab(name) {
+      activeTab = name;
+      if (tabDeskBtn) { tabDeskBtn.setAttribute('aria-pressed', name === 'desk' ? 'true' : 'false'); }
+      if (tabVerifyBtn) { tabVerifyBtn.setAttribute('aria-pressed', name === 'verify' ? 'true' : 'false'); }
+      if (deskBody) { deskBody.hidden = name !== 'desk'; }
+      if (verifyBody) { verifyBody.hidden = name !== 'verify'; }
+      announce('');
+      if (name === 'desk') { refreshDeskTab(); }
+    }
+
+    function buildOverlay() {
+      if (overlay) { return overlay; }
+      overlay = mk('div', 'esc-cartorio-overlay');
+      overlay.id = 'esc-cartorio-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', 'cart-heading');
+      overlay.hidden = true;
+
+      var card = mk('div', 'esc-cartorio-card');
+
+      var head = mk('header', 'cart-head');
+      var headText = mk('div', '');
+      headText.appendChild(mk('small', 'cart-eyebrow', 'ESCREVARAL · PROVA DE ORIGEM E PROCESSO'));
+      var h2 = mk('h2', '', 'Cartório');
+      h2.id = 'cart-heading';
+      headText.appendChild(h2);
+      head.appendChild(headText);
+
+      var closeBtn = mk('button', 'cart-close', '← Voltar à escrita');
+      closeBtn.type = 'button';
+      closeBtn.id = 'cartorio-close';
+      on(closeBtn, 'click', close);
+      head.appendChild(closeBtn);
+      card.appendChild(head);
+
+      var nav = mk('nav', 'cart-tabs');
+      nav.setAttribute('aria-label', 'Modos do Cartório');
+      tabDeskBtn = mk('button', 'cart-tab', 'Esta mesa (selo ao vivo)');
+      tabDeskBtn.type = 'button';
+      tabDeskBtn.id = 'cartorio-tab-desk';
+      tabDeskBtn.setAttribute('aria-pressed', 'true');
+      on(tabDeskBtn, 'click', function () { setTab('desk'); });
+
+      tabVerifyBtn = mk('button', 'cart-tab', 'Verificar arquivo (.scrvrl)');
+      tabVerifyBtn.type = 'button';
+      tabVerifyBtn.id = 'cartorio-tab-verify';
+      tabVerifyBtn.setAttribute('aria-pressed', 'false');
+      on(tabVerifyBtn, 'click', function () { setTab('verify'); });
+
+      nav.appendChild(tabDeskBtn);
+      nav.appendChild(tabVerifyBtn);
+      card.appendChild(nav);
+
+      statusBanner = mk('p', 'cart-status', '');
+      statusBanner.id = 'cartorio-status';
+      statusBanner.setAttribute('role', 'status');
+      statusBanner.setAttribute('aria-live', 'polite');
+      card.appendChild(statusBanner);
+
+      var scroll = mk('div', 'cart-scroll');
+
+      deskBody = mk('section', 'cart-pane');
+      deskBody.id = 'cartorio-desk-pane';
+      scroll.appendChild(deskBody);
+
+      verifyBody = mk('section', 'cart-pane');
+      verifyBody.id = 'cartorio-verify-pane';
+      verifyBody.hidden = true;
+
+      /* Drop-zone para despejar arquivo .scrvrl */
+      dropZone = mk('div', 'cart-dropzone');
+      dropZone.id = 'cartorio-dropzone';
+      dropZone.appendChild(mk('strong', 'cart-drop-title', 'Despeje uma mesa exportada (.scrvrl) para verificar'));
+      dropZone.appendChild(mk('p', 'cart-drop-sub', 'Leitura somente de conferência: seus textos atuais não são alterados nem misturados. Ideal para escritores e editores conferirem origem e integridade.'));
+
+      var dropBtns = mk('div', 'cart-drop-actions');
+      var fileLabel = mk('label', 'cart-btn-primary cart-file-btn', 'Escolher arquivo .scrvrl');
+      fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.id = 'cartorio-file-input';
+      fileInput.accept = '.scrvrl,.json,application/json';
+      on(fileInput, 'change', function () {
+        if (fileInput.files && fileInput.files[0]) {
+          handleFile(fileInput.files[0]);
+          fileInput.value = '';
+        }
+      });
+      fileLabel.appendChild(fileInput);
+      dropBtns.appendChild(fileLabel);
+
+      pasteToggleBtn = mk('button', 'cart-btn-secondary', 'Ou colar conteúdo JSON');
+      pasteToggleBtn.type = 'button';
+      on(pasteToggleBtn, 'click', function () {
+        pasteWrap.hidden = !pasteWrap.hidden;
+        if (!pasteWrap.hidden) { pasteBox.focus(); }
+      });
+      dropBtns.appendChild(pasteToggleBtn);
+      dropZone.appendChild(dropBtns);
+
+      on(dropZone, 'dragover', function (ev) {
+        ev.preventDefault();
+        dropZone.classList.add('is-dragover');
+      });
+      on(dropZone, 'dragleave', function () {
+        dropZone.classList.remove('is-dragover');
+      });
+      on(dropZone, 'drop', function (ev) {
+        ev.preventDefault();
+        dropZone.classList.remove('is-dragover');
+        if (ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0]) {
+          handleFile(ev.dataTransfer.files[0]);
+        }
+      });
+
+      verifyBody.appendChild(dropZone);
+
+      pasteWrap = mk('div', 'cart-paste-wrap');
+      pasteWrap.hidden = true;
+      pasteBox = document.createElement('textarea');
+      pasteBox.id = 'cartorio-paste-input';
+      pasteBox.rows = 5;
+      pasteBox.placeholder = 'Cole aqui o conteúdo completo de um arquivo .scrvrl…';
+      pasteBox.spellcheck = false;
+      pasteWrap.appendChild(pasteBox);
+      var runPasteBtn = mk('button', 'cart-btn-primary', 'Conferir conteúdo colado');
+      runPasteBtn.type = 'button';
+      runPasteBtn.id = 'cartorio-paste-run';
+      on(runPasteBtn, 'click', function () {
+        runFileVerification(pasteBox.value || '', 'Conteúdo colado');
+      });
+      pasteWrap.appendChild(runPasteBtn);
+      verifyBody.appendChild(pasteWrap);
+
+      verifyOutput = mk('div', 'cart-verify-output');
+      verifyOutput.id = 'cartorio-verify-output';
+      verifyBody.appendChild(verifyOutput);
+
+      scroll.appendChild(verifyBody);
+      card.appendChild(scroll);
+      overlay.appendChild(card);
+
+      on(overlay, 'click', function (ev) {
+        if (ev.target === overlay) { close(); }
+      });
+      on(document, 'keydown', function (ev) {
+        if (ev.keyCode === 27 && overlay && !overlay.hidden) {
+          ev.preventDefault();
+          close();
+        }
+      });
+
+      document.body.appendChild(overlay);
+      return overlay;
+    }
+
+    function open(initialTab) {
+      buildOverlay();
+      overlay.hidden = false;
+      setTab(initialTab === 'verify' ? 'verify' : 'desk');
+      if (tabDeskBtn) { tabDeskBtn.focus(); }
+    }
+
+    function close() {
+      if (overlay) { overlay.hidden = true; }
+      if (opts.onClose) { opts.onClose(); }
+    }
+
+    return {
+      open: open,
+      close: close,
+      verifyText: function (raw, name) { open('verify'); runFileVerification(raw, name || 'Arquivo'); }
     };
   };
 }(typeof window !== 'undefined' ? window : this));
@@ -8414,6 +9645,7 @@
     if (composing || !internalClipboard) { return; }
     var start = manuscript.selectionStart || 0, end = manuscript.selectionEnd || start;
     manuscript.value = manuscript.value.slice(0, start) + internalClipboard + manuscript.value.slice(end);
+    if (E.cartorio) { E.cartorio.recordSignal(doc, 'intPaste', internalClipboard.length); }
     E.transfer.selectRange(manuscript, start + internalClipboard.length, start + internalClipboard.length); manuscript.focus();
     copiedSelection = null; byId('selection-tools').hidden = true; changed(); queueSession();
   }
@@ -8908,7 +10140,13 @@
     var result = archive ? archive.list(true) : { documents: [], unreadable: 0 };
     if (result.unreadable) { throw new Error('Há folhas ilegíveis no acervo.'); }
     var entries = result.documents, current = JSON.parse(JSON.stringify(doc)), found = false;
+    var draftChanged = current.title !== title.value || current.text !== manuscript.value;
     current.title = title.value; current.text = manuscript.value;
+    if (draftChanged && E.cartorio && E.cartorio.sealDocument) {
+      current.revision = (current.revision || 0) + 1;
+      current.updated = new Date().toISOString();
+      current.cartorio = E.cartorio.sealDocument(doc, current, null, true);
+    }
     entries = entries.map(function (entry) { if (entry.id === current.id) { found = true; return current; } return entry; });
     if (!found && (current.revision || dirty || current.title || current.text)) { entries.push(current); }
     return entries;
@@ -8934,7 +10172,9 @@
           docs = payload.documents; payload = null;
         }
       } else if (/\.txt$/i.test(name) || type === 'text/plain') {
-        var entry = E.freshDocument(); entry.title = name.replace(/\.txt$/i, ''); entry.text = String(contents); entry.project = activeNotebook() ? activeNotebook().name + ' — importado' : 'Texto importado'; docs = [entry];
+        var entry = E.freshDocument(); entry.title = name.replace(/\.txt$/i, ''); entry.text = String(contents); entry.project = activeNotebook() ? activeNotebook().name + ' — importado' : 'Texto importado';
+        if (E.cartorio) { entry.cartorio = E.cartorio.sealDocument(null, entry, 'imported'); }
+        docs = [entry];
       } else { throw new Error('Traga um caderno .scrvrl, uma cópia .json ou um texto .txt.'); }
       if (docs) {
         docs = JSON.parse(JSON.stringify(docs));
@@ -9445,10 +10685,32 @@
   listen(byId('cabinet-search'), 'input', function () { showingAbout = false; window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; desktopWindow('open', false); renderCabinet(); }, 180); });
   listen(byId('cabinet-clear'), 'click', function () { window.clearTimeout(cabinetTimer); byId('cabinet-search').value = ''; showingAbout = false; renderCabinet(); byId('cabinet-search').focus(); });
   listen(byId('paste-mode'), 'click', function () { restrictedPaste = !restrictedPaste; this.setAttribute('aria-pressed', restrictedPaste ? 'true' : 'false'); try { if (storage) { storage.setItem('escrevaral.astra.restricted-paste', restrictedPaste ? 'on' : 'off'); } } catch (ignore) {} });
-  listen(manuscript, 'paste', function (event) {
-    if (!restrictedPaste) { return; }
-    event.preventDefault(); message('Colagem externa restrita. Use Colar cópia interna ou Trazer arquivo em Ajustes.');
-  });
+  function handleEditorPaste(event) {
+    if (restrictedPaste) {
+      event.preventDefault();
+      if (E.cartorio) { E.cartorio.recordSignal(doc, 'blockedPaste', 1); }
+      message('Colagem externa restrita. Use Colar cópia interna ou Trazer arquivo em Ajustes.');
+      return;
+    }
+    if (E.cartorio) {
+      var pasted = '';
+      try { pasted = (event.clipboardData && event.clipboardData.getData('text/plain')) || ''; } catch (ignore) {}
+      if (pasted && internalClipboard && pasted === internalClipboard) {
+        E.cartorio.recordSignal(doc, 'intPaste', pasted.length);
+      } else if (pasted.length > 0) {
+        E.cartorio.recordSignal(doc, 'extPaste', pasted.length);
+      }
+    }
+  }
+  listen(manuscript, 'paste', handleEditorPaste);
+  if (byId('esc-rich-editor')) { listen(byId('esc-rich-editor'), 'paste', handleEditorPaste); }
+  function recordTypingSignal(event) {
+    if (!E.cartorio) { return; }
+    if (event && event.inputType && String(event.inputType).indexOf('Paste') !== -1) { return; }
+    E.cartorio.recordSignal(doc, 'key', 1);
+  }
+  listen(manuscript, 'input', recordTypingSignal);
+  if (byId('esc-rich-editor')) { listen(byId('esc-rich-editor'), 'input', recordTypingSignal); }
   listen(manuscript, 'mouseup', captureSelection); listen(manuscript, 'keyup', function (event) { if (event.keyCode !== 27) { captureSelection(); } }); listen(manuscript, 'touchend', captureSelection);
   listen(manuscript, 'select', captureSelection);
   listen(byId('selection-close'), 'click', function () { dismissSelection(); manuscript.focus(); });
@@ -9986,6 +11248,35 @@
     }
     if (byId('start-academy')) {
       listen(byId('start-academy'), 'click', function () { toggleStart(false); academyUI.openList(); });
+    }
+  }
+
+  var cartorioUI = null;
+  if (E.mountCartorio) {
+    cartorioUI = E.mountCartorio({
+      checkpoint: checkpoint,
+      download: download,
+      isRestrictedPaste: function () { return !!restrictedPaste; },
+      onToggleRestrictedPaste: function () {
+        restrictedPaste = !restrictedPaste;
+        if (byId('paste-mode')) { byId('paste-mode').setAttribute('aria-pressed', restrictedPaste ? 'true' : 'false'); }
+        try { if (storage) { storage.setItem('escrevaral.astra.restricted-paste', restrictedPaste ? 'on' : 'off'); } } catch (ignore) {}
+        return restrictedPaste;
+      },
+      buildCurrentPackage: function () {
+        if (!notebooks) { return null; }
+        var entries = exportedDocuments();
+        if (!entries.length) { return null; }
+        return notebooks.pack(entries, null);
+      },
+      onExportSealed: function () { exportNotebook(true); },
+      onClose: function () { if (!cabinetOpen) { manuscript.focus(); } }
+    });
+    if (byId('esc-open-cartorio')) {
+      listen(byId('esc-open-cartorio'), 'click', function () { cartorioUI.open('desk'); });
+    }
+    if (byId('start-cartorio')) {
+      listen(byId('start-cartorio'), 'click', function () { toggleStart(false); cartorioUI.open('desk'); });
     }
   }
 
@@ -11144,8 +12435,8 @@
         if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
         locateInText(start,end,'Selecione o trecho manualmente no manuscrito.');
       },false);}(f.start,f.end));
-      if((lens==='repeticao'||lens==='adverbios'||lens==='decolonial')&&E.ptbrOpenWordCard){
-        b=el('button',entry,'','Sinônimos');b.type='button';
+      if((lens==='repeticao'||lens==='adverbios'||lens==='decolonial'||(lens==='morfologia'&&!/\s/.test(f.snippet)))&&E.ptbrOpenWordCard){
+        b=el('button',entry,'',lens==='morfologia'?'Definição e sinônimos':'Sinônimos');b.type='button';
         (function(word){b.addEventListener('click',function(){E.ptbrOpenWordCard(word);},false);}(f.snippet));
       }
       if(E.ptbrPanelKeep&&!request){
@@ -11190,7 +12481,35 @@
     var card=el('section',results,'ptbr-outcome');
     var sources=details(card,'Fontes e limites da consulta');
     el('h3',card,'','Léxico · '+(result.query||'consulta'));
-    if(result.state!=='found'){el('p',card,'',result.message);status.textContent='Consulta concluída sem leitura lexical.';return;}
+    function loadP01Senses(emptyFallbackMsg){
+      var p01Epoch=++epoch;
+      var p01Wait=el('p',card,'','Consultando o léxico offline completo (P01)…');
+      status.textContent='Consultando o léxico offline completo (P01)…';
+      E.getLexicoP01().lookup(query,function(p01Res){
+        if(p01Epoch!==epoch||panel.hidden){return;}
+        if(p01Wait.parentNode){p01Wait.parentNode.removeChild(p01Wait);}
+        if(!p01Res||p01Res.state!=='found'||!p01Res.entries||!p01Res.entries.length){
+          if(emptyFallbackMsg){el('p',card,'',emptyFallbackMsg);}
+          status.textContent='Consulta concluída sem sentidos no léxico local.';return;
+        }
+        el('p',card,'','Sentidos encontrados no acervo offline completo (P01). A consulta não escolhe qual sentido vale na sua frase.');
+        var pi,pe,prow;
+        for(pi=0;pi<p01Res.entries.length&&pi<12;pi++){
+          pe=p01Res.entries[pi];prow=el('div',card,'ptbr-observation');
+          el('h4',prow,'',(pi+1)+'. '+(pe.lemma||p01Res.query)+(pe.posLabel?' · '+pe.posLabel:''));
+          if(pe.definition){el('p',prow,'',pe.definition);}
+          if(pe.synonyms&&pe.synonyms.length){el('p',prow,'','Sinônimos sugeridos pelo acervo: '+pe.synonyms.join(', ')+'.');}
+        }
+        el('p',sources,'','Fonte: Léxico offline P01 do Escrevaral (Wikcionário / OpenWordNet-PT · 92 mil formas).');
+        status.textContent='Consulta offline (P01) concluída: '+p01Res.entries.length+' sentido(s) encontrado(s).';
+        note.textContent='Consulta 100% offline. Nenhuma palavra do manuscrito foi alterada.';
+      });
+    }
+    var canP01=!!(E.getLexicoP01&&root.location&&/^https?:$/i.test(root.location.protocol));
+    if(result.state!=='found'){
+      if(result.state==='uncovered'&&canP01){loadP01Senses(result.message);return;}
+      el('p',card,'',result.message);status.textContent='Consulta concluída sem leitura lexical.';return;
+    }
     if(result.morphology&&result.morphology.length){
       el('h4',card,'','Lemas e flexões possíveis');
       el('p',card,'','Estas leituras pertencem ao léxico. A consulta não decide qual classe ou função vale na sua frase.');
@@ -11200,6 +12519,7 @@
       el('p',sources,'','Fonte das flexões: PortiLexicon-UD · Lopes, Duran, Fernandes e Pardo (2022). Recorte e compactação: Escrevaral.');
       link=el('a',sources,'','Origem e licença das flexões (internet)');link.href='https://github.com/LuceleneL/PortiLexicon-UD/tree/315e063da1f89c89e2097c6e72428ebefb9ab1d1';link.target='_blank';link.rel='noopener noreferrer';
     }
+    if(!result.senses.length&&canP01){loadP01Senses('');return;}
     if(result.missingSenseLemmas&&result.missingSenseLemmas.length){el('p',card,'','Sem sentidos/definições neste recorte para: '+result.missingSenseLemmas.join(', ')+'.');}
     el('p',card,'','Sentidos da fonte; a consulta não escolhe qual vale na sua frase. A ordem não indica frequência.');
     var pos={n:'substantivo',v:'verbo',a:'adjetivo',r:'advérbio'};
@@ -11282,8 +12602,8 @@
     for(var i=0;i<buttons.length;i++){buttons[i].setAttribute('aria-current',buttons[i].getAttribute('data-ptbr-lens')===selected?'true':'false');}
     status.textContent='Examinando '+labels[selected]+'…';
     /* Um pedido, um timer cancelável, uma lente. Sem a antiga fila unitária. */
-    debounce=root.setTimeout(function(){
-      if(!current()){discard();return;}debounce=null;
+    function executeLens(){
+      if(!current()){discard();return;}
       try{
         var result=selAtRun&&E.ptbrPanelRequest&&E.analysisContract?E.analysisContract.analyze(vault,selected,E.ptbrPanelRequest(snapshot,selAtRun.start,selAtRun.end)):vault.analyze(selected,snapshot);
         if(!current()){discard();return;}
@@ -11296,6 +12616,28 @@
         status.textContent='Não foi possível concluir esta análise. Você pode tentar novamente.';
       }
       busy=false;cancel.hidden=true;action.disabled=false;updateActiveNoteStrip();
+    }
+    debounce=root.setTimeout(function(){
+      if(!current()){discard();return;}debounce=null;
+      if(selected==='morfologia'&&E.getLexicoP01&&E.contextualMorphology&&root.location&&/^https?:$/i.test(root.location.protocol)){
+        var scopeText=selAtRun?snapshot.slice(selAtRun.start,selAtRun.end):snapshot.slice(0,8000);
+        var toks=E.reading.tokens(E.protectedText(scopeText)),unknowns=[],seenU={},ti,tv;
+        for(ti=0;ti<toks.length&&unknowns.length<160;ti++){
+          tv=toks[ti].value;
+          if(seenU[tv]){continue;}
+          seenU[tv]=true;
+          if(!E.contextualMorphology.lexicalReadings(tv).classes.length){unknowns.push(tv);}
+        }
+        if(unknowns.length){
+          status.textContent='Consultando léxico offline P01 para '+unknowns.length+' palavra(s)…';
+          E.getLexicoP01().warmWords(unknowns,function(){
+            if(!current()){discard();return;}
+            executeLens();
+          });
+          return;
+        }
+      }
+      executeLens();
     },0);
   }
   action.addEventListener('click',function(){run(lastLens);},false);
@@ -11332,6 +12674,7 @@
     }
   };
   E.ptbrPanelLiberate=function(msg){
+    if(E.getLexicoP01){E.getLexicoP01().clearSession();}
     E.ptbrPanelReset();
     if(!panel.hidden){
       if(screen==='result'||screen==='reserved'){showScreen('group',currentGroup||0,true);}

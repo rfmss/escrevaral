@@ -53,6 +53,9 @@
     var cache = {};
     var order = [];
     var inflight = {};
+    var sessionPos = {};
+    var sessionOrder = [];
+    var MAX_SESSION_POS = 256;
     var baseUrl = opts.baseUrl || 'resources/pt-BR/lexico-ptbr/partes/';
 
     function putCache(id, part) {
@@ -287,13 +290,113 @@
       });
     }
 
+    function putSessionPos(word, info) {
+      var idx = sessionOrder.indexOf(word);
+      if (idx >= 0) { sessionOrder.splice(idx, 1); }
+      sessionPos[word] = info;
+      sessionOrder.push(word);
+      while (sessionOrder.length > MAX_SESSION_POS) {
+        var oldW = sessionOrder.shift();
+        delete sessionPos[oldW];
+      }
+    }
+
+    function extractPosInfo(word, rec) {
+      if (!rec) { return null; }
+      var classes = [], seen = {}, lemma = word, def = '', i, item, lbl;
+      function addPos(code) {
+        lbl = CLASSES[code];
+        if (lbl && !seen[lbl]) { seen[lbl] = true; classes.push(lbl); }
+      }
+      var sList = rec.s || [];
+      for (i = 0; i < sList.length; i += 1) {
+        item = sList[i];
+        if (item.pos) { addPos(item.pos); }
+        if (!def && item.definitions && item.definitions[0]) { def = item.definitions[0]; }
+        if (lemma === word && item.lemma) { lemma = item.lemma; }
+      }
+      var fList = rec.f || [];
+      for (i = 0; i < fList.length; i += 1) {
+        item = fList[i];
+        if (item.pos) { addPos(item.pos); }
+        if (lemma === word && item.lemma) { lemma = item.lemma; }
+      }
+      if (!classes.length) { return null; }
+      return { classes: classes, lemma: lemma, definition: def };
+    }
+
+    function warmWords(words, done) {
+      var list = words || [], unique = [], seen = {}, buckets = {}, bucketIds = [], i, q, bid;
+      for (i = 0; i < list.length && unique.length < 160; i += 1) {
+        q = canonical(list[i]);
+        if (!isValidWord(q) || seen[q] || Object.prototype.hasOwnProperty.call(sessionPos, q)) { continue; }
+        seen[q] = true;
+        unique.push(q);
+        bid = bucketFor(q);
+        if (!buckets[bid]) { buckets[bid] = []; bucketIds.push(bid); }
+        buckets[bid].push(q);
+      }
+      if (!bucketIds.length) {
+        if (done) { done(0); }
+        return;
+      }
+      var cursor = 0, loaded = 0;
+      function nextBatch() {
+        if (cursor >= bucketIds.length) {
+          if (done) { done(loaded); }
+          return;
+        }
+        var batch = bucketIds.slice(cursor, cursor + 4);
+        cursor += batch.length;
+        var pending = batch.length;
+        var bi;
+        for (bi = 0; bi < batch.length; bi += 1) {
+          (function (id) {
+            fetchPart(id, function (err, part) {
+              if (!err && part) {
+                var ws = buckets[id], wi, w, info;
+                for (wi = 0; wi < ws.length; wi += 1) {
+                  w = ws[wi];
+                  info = Object.prototype.hasOwnProperty.call(part, w) ? extractPosInfo(w, part[w]) : null;
+                  if (info) { putSessionPos(w, info); loaded += 1; }
+                }
+              }
+              pending -= 1;
+              if (pending === 0) { nextBatch(); }
+            });
+          }(batch[bi]));
+        }
+      }
+      nextBatch();
+    }
+
+    function peekPos(rawWord) {
+      var q = canonical(rawWord);
+      if (!q || !Object.prototype.hasOwnProperty.call(sessionPos, q)) { return null; }
+      var info = sessionPos[q];
+      return { classes: info.classes.slice(), lemma: info.lemma, definition: info.definition };
+    }
+
+    function clearSession() {
+      sessionPos = {};
+      sessionOrder = [];
+    }
+
     return {
       canonical: canonical,
       bucketFor: bucketFor,
       isValidWord: isValidWord,
-      lookup: lookup
+      lookup: lookup,
+      warmWords: warmWords,
+      peekPos: peekPos,
+      clearSession: clearSession
     };
   }
 
+  var sharedService = null;
   root.Escr.createLexicoP01 = createService;
+  root.Escr.getLexicoP01 = function () {
+    if (!sharedService) { sharedService = createService(); }
+    return sharedService;
+  };
 }(typeof window !== 'undefined' ? window : this));

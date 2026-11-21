@@ -26,7 +26,7 @@
   }
 
   root.Escr.mountWordCard = function (opts) {
-    var service = opts.service || (root.Escr.createLexicoP01 ? root.Escr.createLexicoP01() : null);
+    var service = opts.service || (root.Escr.getLexicoP01 ? root.Escr.getLexicoP01() : (root.Escr.createLexicoP01 ? root.Escr.createLexicoP01() : null));
     var manuscript = opts.manuscriptEl;
     var richEl = opts.richEl || null;
     var cardEl = null;

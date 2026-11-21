@@ -86,6 +86,15 @@
       cls=external[i].pos==='DET'?(/(?:^|\|)PronType=Art(?:\||$)/.test(external[i].features)?'artigo':'determinante (UD)'):classes[external[i].pos];
       if(cls&&!has(r.classes,cls)){r.classes.push(cls);}
     }
+    if(!r.classes.length&&E.getLexicoP01){
+      var p01=E.getLexicoP01().peekPos(w);
+      if(p01&&p01.classes&&p01.classes.length){
+        r.p01=p01;
+        for(i=0;i<p01.classes.length;i++){
+          if(!has(r.classes,p01.classes[i])){r.classes.push(p01.classes[i]);}
+        }
+      }
+    }
     return r;
   }
   function externalFinite(r, agreement) {
@@ -622,6 +631,7 @@
         item.rule === 'PTBR-CTX-006' ? 'Artigo, nome e adjetivo contíguos com número compatível; gênero do nome compatível com o artigo.'+(item.nominalAgreement.adjectiveGenderMarked?' O gênero do adjetivo também está registrado e é compatível.':' A fonte não informa gênero para este adjetivo; isso não foi tratado como prova de concordância.') :
         item.rule === 'PTBR-CTX-005' ? 'Lema conhecido e preposição contígua, com pronome sujeito opcional: leitura de infinitivo preservada do motor anterior.' :
         item.nominalAmbiguity ? 'Neste grupo, o léxico admite nome + adjetivo e adjetivo + nome. O recorte não escolhe entre as duas distribuições.' :
+        r.p01 ? 'Reconhecida no léxico offline P01 (lema: ' + r.p01.lemma + ')' + (r.p01.definition ? ': ' + r.p01.definition + '.' : '.') :
         r.classes.length ? 'Consulta ao léxico local; nenhuma regra contextual deste incremento decidiu a ocorrência.' : 'A forma não consta do recorte lexical. Nenhuma classe foi deduzida por sufixo.';
       if(contextual&&item.selected==='artigo'&&has(r.classes,'numeral')){reason+=' A leitura de artigo é uma hipótese local; um/uma também podem expressar quantidade, e o recorte não resolve essa intenção.';}
       occurrenceSource=contextual&&item.rule!=='PTBR-CTX-005'?source:E.grammarData.source;
@@ -639,6 +649,7 @@
       if(item.rule==='PTBR-CTX-013'){occurrenceSource={title:'Hipótese computacional local de coordenação com adjetivos pospostos. UD v2: amod em português, consultado em 05/10/2026; conj e det retomados da v6.42. Referências de anotação, sem implementar árvore de dependências ou desambiguação geral.',url:'https://universaldependencies.org/pt/dep/amod.html'};}
       if(item.rule==='PTBR-CTX-012'){occurrenceSource={title:'Hipótese computacional local para coordenação com artigos. UD v2: conj e det em português, consultados em 04/10/2026. Referências de anotação; não são algoritmo de desambiguação nem prova de função sintática.',url:'https://universaldependencies.org/pt/dep/det.html'};}
       if(r.portilexicon.length){occurrenceSource={title:(typeof occurrenceSource==='string'?occurrenceSource:occurrenceSource.title)+' Dados lexicais: PortiLexicon-UD, Lopes, Duran, Fernandes e Pardo (2022), recorte '+E.portiLexicon.version+'. Classes UD são candidatos; não equivalem automaticamente à função na frase.',url:'https://github.com/LuceleneL/PortiLexicon-UD/tree/315e063da1f89c89e2097c6e72428ebefb9ab1d1'};}
+      else if(r.p01){occurrenceSource={title:'Léxico offline P01 do Escrevaral (Wikcionário / OpenWordNet-PT · acervo local completo). Possibilidades lexicais sem decisão contextual.',url:null};}
       out.push(E.instruments.finding('morfologia', item.rule || 'PTBR-CTX-004', text, item.start, item.end, message,
         reason + (item.evidence.length ? ' Apoios no original: ' + item.evidence.map(function (s) { return '“' + s.snippet + '”'; }).join(', ') + '.' : ''),
         contextual ? 'A construção favorece a leitura de ' + item.selected + '; as possibilidades lexicais são preservadas na análise.' : 'Esta ocorrência permanece ' + item.status + '. Isso não é erro de escrita.',
