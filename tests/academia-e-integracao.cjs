@@ -177,7 +177,13 @@ assert.ok(temasLinuxCss.includes('body[data-view="workspace"][data-immersion="tr
 assert.ok(modoLeitorCss.includes('--reader-paper: #cfc3ae'), 'modo-leitor.css calibrado em pergaminho Real Gabinete #cfc3ae');
 assert.ok(!/#fffdf9|#f8f5ef/i.test(cartorioCss), 'cartorio.css sem caixas brancas estouradas');
 assert.ok(embeddedCss.includes('--paper:#cfc3ae') && !embeddedCss.includes('#fafbfc'), 'academia/embedded.css calibrado em #cfc3ae');
-assert.ok(!litHtml.includes('--oasis-paper:#c4cfc2') && litHtml.includes('--oasis-paper:#cfc3ae'), 'literatura-mundial.html sem restos do tema verde no leitor Oasis');
+assert.ok(litHtml.includes('--paper:#cfc3ae'), 'literatura-mundial.html linha do tempo em pergaminho #cfc3ae');
+assert.ok(litHtml.includes('--oasis-paper:#c4cfc2'), 'literatura-mundial.html preserva leitor Kindle Oasis 100% em E-Ink Sálvia #c4cfc2');
+assert.ok(realGabineteCss.includes('#oficina select'), 'real-gabinete.css estiliza selects/inputs dentro de #oficina em pergaminho (sem verde vazado)');
+const academiaJs = fs.readFileSync(path.join(rootDir, 'src/ui/academia.js'), 'utf8');
+assert.ok(academiaJs.includes("var paper = isDark ? '#20150f' : '#cfc3ae'"), 'academia.js envia paleta Real Gabinete #cfc3ae (e não #c4cfc2) aos iframes da Academia');
+const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');
+assert.ok(autopubHtml.includes('.hero-depth span { display:none; }'), 'autopublicacao-independente.html sem sobreposição 01—05 sobre .hero-note');
 for (const entry of catalog) {
   const html = fs.readFileSync(path.join(rootDir, 'academia', entry.file), 'utf8');
   assert.ok(html.includes('#cfc3ae'), 'academia/' + entry.file + ' calibrado em #cfc3ae');

@@ -807,6 +807,19 @@
     border-radius: 2px !important;
     box-shadow: none !important;
   }
+  #gabinete .original-box .box-label {
+    background: #cfd9cd !important;
+    border-color: #7c8b78 !important;
+    color: #1c241c !important;
+  }
+  #gabinete .original-box .drawer-book-spine {
+    background: #d3ddd0 !important;
+    border-color: #7c8b78 !important;
+    color: #1c241c !important;
+  }
+  #gabinete .original-box .drawer-book-spine:nth-child(2) { background: #c9d4c6 !important; }
+  #gabinete .original-box .drawer-book-spine:nth-child(3) { background: #c0cbbd !important; }
+  #gabinete .original-box .drawer-book-spine:nth-child(4) { background: #b7c3b4 !important; }
   #gabinete .desktop-reminder::before,
   #gabinete .desktop-reminder::after {
     display: none !important;

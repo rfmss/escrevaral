@@ -6368,6 +6368,19 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-radius: 2px !important;
     box-shadow: none !important;
   }
+  #gabinete .original-box .box-label {
+    background: #cfd9cd !important;
+    border-color: #7c8b78 !important;
+    color: #1c241c !important;
+  }
+  #gabinete .original-box .drawer-book-spine {
+    background: #d3ddd0 !important;
+    border-color: #7c8b78 !important;
+    color: #1c241c !important;
+  }
+  #gabinete .original-box .drawer-book-spine:nth-child(2) { background: #c9d4c6 !important; }
+  #gabinete .original-box .drawer-book-spine:nth-child(3) { background: #c0cbbd !important; }
+  #gabinete .original-box .drawer-book-spine:nth-child(4) { background: #b7c3b4 !important; }
   #gabinete .desktop-reminder::before,
   #gabinete .desktop-reminder::after {
     display: none !important;
@@ -9230,6 +9243,75 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     outline: 2px solid #8b5a1e !important;
   }
 
+  /* Campos de seleção e busca dentro de #oficina (vence .sheet select/input verde de temas-linux.css) */
+  #oficina select,
+  #oficina input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  #oficina textarea {
+    background-color: #d8cdb9 !important;
+    color: #1e120a !important;
+    border: 1px solid rgba(126, 88, 36, 0.42) !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+  }
+  #oficina select:hover,
+  #oficina select:focus,
+  #oficina input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
+  #oficina textarea:focus {
+    background-color: #e1d7c4 !important;
+    border-color: #8b5a1e !important;
+    outline: none !important;
+  }
+  #oficina select option {
+    background-color: #d8cdb9;
+    color: #1e120a;
+  }
+  #oficina #ptbr-dashboard .ptbr-academy-link {
+    background-color: #d8cdb9 !important;
+    color: #26150c !important;
+    border: 1px solid rgba(126, 88, 36, 0.48) !important;
+    border-radius: 6px !important;
+    opacity: 1 !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-academy-link:hover,
+  #oficina #ptbr-dashboard .ptbr-academy-link:focus-visible {
+    background-color: #3a2013 !important;
+    color: #f0e4ce !important;
+    border-color: #a67b38 !important;
+    text-decoration: none !important;
+  }
+  #oficina .lens-group-label,
+  #oficina .quiet,
+  #oficina .coverage {
+    color: #4a3321 !important;
+    border-color: rgba(126, 88, 36, 0.3) !important;
+  }
+  #oficina .lenses button,
+  #oficina #reset-dismissed {
+    background-color: #d8cdb9 !important;
+    color: #1e120a !important;
+    border: 1px solid rgba(126, 88, 36, 0.4) !important;
+  }
+  #oficina .lenses button:hover,
+  #oficina #reset-dismissed:hover {
+    background-color: #e1d7c4 !important;
+    border-color: #8b5a1e !important;
+  }
+  #oficina .lenses button[aria-pressed="true"] {
+    background-color: #3a2013 !important;
+    color: #f0e4ce !important;
+    border-color: #a67b38 !important;
+  }
+  #oficina .finding {
+    border-top-color: rgba(126, 88, 36, 0.34) !important;
+  }
+  #oficina .finding h3 {
+    color: #1e120a !important;
+  }
+  #oficina .evidence {
+    background-color: #d8cdb9 !important;
+    color: #24150c !important;
+  }
+
   /* Modo escuro na ala de estudo (#oficina) em nogueira fosca */
   body[data-theme="escuro"] #oficina,
   body[data-theme="escuro"] #oficina[data-ptbr-dashboard="true"] {
@@ -9237,6 +9319,14 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     background-image: var(--esc-rg-chalk-dark) !important;
     color: #efe4cf !important;
     scrollbar-color: #6b5238 #20150f;
+  }
+  body[data-theme="escuro"] #oficina select,
+  body[data-theme="escuro"] #oficina input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  body[data-theme="escuro"] #oficina textarea,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-academy-link {
+    background-color: #2c1e15 !important;
+    border-color: rgba(212, 166, 92, 0.38) !important;
+    color: #efe4cf !important;
   }
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals button,

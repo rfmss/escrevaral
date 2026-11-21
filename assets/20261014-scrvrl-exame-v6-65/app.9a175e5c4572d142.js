@@ -7791,10 +7791,10 @@
       on(frame, 'load', function () {
         try {
           var body = document.body;
-          var cs = window.getComputedStyle && body ? window.getComputedStyle(body) : null;
-          var paper = cs ? (cs.getPropertyValue('--esc-bg') || '#c4cfc2').replace(/^\s+|\s+$/g, '') : '#c4cfc2';
-          var ink = cs ? (cs.getPropertyValue('--esc-ink') || '#212921').replace(/^\s+|\s+$/g, '') : '#212921';
-          var accent = cs ? (cs.getPropertyValue('--esc-weave-bg') || '#242d23').replace(/^\s+|\s+$/g, '') : '#242d23';
+          var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
+          var paper = isDark ? '#20150f' : '#cfc3ae';
+          var ink = isDark ? '#efe4cf' : '#1f130b';
+          var accent = isDark ? '#dfb267' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
           if (frame.contentWindow && frame.contentWindow.postMessage) {
             frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
           }
