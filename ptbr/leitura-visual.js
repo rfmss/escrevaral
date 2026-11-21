@@ -18,6 +18,12 @@
     return n;
   }
   function valid(s, f) { return f && typeof f.start === 'number' && typeof f.end === 'number' && f.start >= 0 && f.end > f.start && f.end <= s.length && s.slice(f.start, f.end) === f.snippet; }
+  var FEATURE_LABELS = {
+    adverbios: 'Advérbio em -mente', ortografia: 'Grafia', acentuacao: 'Acentuação',
+    pontuacao: 'Pontuação', crase: 'Crase', concordancia: 'Concordância',
+    expressoes: 'Expressão', repeticao: 'Repetição', dialogo: 'Diálogo',
+    ritmo: 'Ritmo', rima: 'Rima', metrica: 'Métrica', decolonial: 'Contexto cultural'
+  };
   function cleanClassName(raw) {
     if (!raw) { return ''; }
     return String(raw).replace(/\s*\(UD\)/gi, '').replace(/^\s+|\s+$/g, '');
@@ -28,6 +34,7 @@
     if (f.analysisStatus === 'desconhecido') { return 'fora do acervo'; }
     if (f.analysisStatus === 'ambiguo') { return 'ver contexto'; }
     if (f.analysisStatus === 'lexical') { return cleanClassName(c[0] || 'classe'); }
+    if (f.feature && Object.prototype.hasOwnProperty.call(FEATURE_LABELS, f.feature)) { return FEATURE_LABELS[f.feature]; }
     return f.feature || 'observação';
   }
   function normalizeClassKey(cls) {
@@ -93,7 +100,7 @@
     ],
     adverbios: [
       { theme: 'Direitos humanos', text: 'As comunidades lutaram firmemente e conquistaram lentamente o direito à moradia digna.', note: 'Duas formas em -mente no mesmo parágrafo destacam a cadência para revisão.' },
-      { theme: 'Combate ao preconceito', text: 'Ela respondeu calmamente quando questionaram injustamente a sua capacidade.', note: 'Observe o peso de cada advérbio no tom da narrativa.' },
+      { theme: 'Combate ao preconceito', text: 'Ela respondeu serenamente e explicou atentamente o seu ponto de vista na assembleia.', note: 'Observe o peso de cada advérbio no tom e no ritmo da cena.' },
       { theme: 'Geopolítica e paz', text: 'Os vizinhos trabalharam pacientemente e reconstruíram coletivamente a ponte.', note: 'Concentração de advérbios em -mente sinalizada sem impor cortes.' }
     ],
     rima: [
@@ -142,8 +149,90 @@
       { theme: 'Geopolítica e memória', text: 'Mapas antigos chamavam de terra de ninguém territórios habitados há séculos.', note: 'Convida a situar historicamente a expressão “terra de ninguém” no contexto narrativo.' }
     ]
   };
+  /* Guias rápidos em linguagem direta e contemporânea (recolhidos por padrão: quem já sabe nem abre; quem quer aprender descobre em 3 segundos). */
+  var LENS_GUIDES = {
+    morfologia: { title: 'O que são classes de palavras?', summary: 'Cada palavra cumpre um papel na cena: substantivo dá nome às coisas e pessoas; verbo coloca a cena em movimento; adjetivo pinta características; advérbio ajusta o jeito, o tempo ou a intensidade da ação.' },
+    sintaxe: { title: 'O que é análise sintática?', summary: 'É o mapa de quem faz o quê na frase: o sujeito conduz a ação, o verbo é o motor, os objetos completam o sentido e os adjuntos situam lugar, tempo ou modo. Também mostra quando duas frases se ligam por coordenação (ideias independentes) ou por subordinação (uma ideia que depende da principal para fechar o sentido).' },
+    relativas: { title: 'O que são orações relativas (subordinadas)?', summary: 'São trechos encaixados dentro de uma frase — quase sempre começando com “que” ou “onde” — para especificar melhor de quem ou de que lugar você está falando, sem precisar abrir outro ponto final.' },
+    adverbios: { title: 'O que é um advérbio?', summary: 'É a palavra que dá o tom da ação: mostra como, quando, onde ou com que força algo acontece (como “calmamente”, “ontem”, “muito”). Os terminados em -mente são expressivos, mas vários seguidos no mesmo parágrafo podem pesar no ritmo.' },
+    ritmo: { title: 'O que é ritmo na escrita?', summary: 'É a respiração do texto ao ser lido em voz alta. Alternar frases curtas (impacto, urgência) e frases longas (mergulho, reflexão) cria movimento; frases sempre do mesmo tamanho produzem batida regular.' },
+    repeticao: { title: 'Por que observar repetições?', summary: 'Quando a mesma palavra reaparece perto demais, chama a atenção do ouvido. Às vezes é um efeito intencional de força; em outros momentos, um sinônimo ou um corte deixa a passagem mais limpa.' },
+    dialogo: { title: 'O que mostra a lente de diálogo?', summary: 'Mede quanto do trecho está em falas marcadas (travessão, meia-risca ou hífen) em comparação com o restante da cena — ajuda a sentir se a narrativa está mais falada ou mais descritiva.' },
+    rima: { title: 'O que é rima consoante e toante?', summary: 'Rima é o eco sonoro no final dos versos. Na consoante, tudo coincide a partir da vogal forte (“chão” / “pão”); na toante, só as vogais combinam (“casa” / “estrada”), recurso muito vivo na poesia e na música brasileira.' },
+    metrica: { title: 'O que é métrica de versos?', summary: 'É a contagem das sílabas cantadas de cada verso até a última sílaba forte. Serve para ouvir a batida do poema e testar medidas tradicionais, como a redondilha (7 sílabas) ou o decassílabo (10).' },
+    crase: { title: 'O que é crase?', summary: 'É a fusão de dois “as” (a preposição “a” + o artigo feminino “a”). Em geral não ocorre antes de verbo, pronome pessoal ou palavra masculina — por isso vale conferir cada ocorrência destacada.' },
+    concordancia: { title: 'O que é concordância verbal?', summary: 'É o ajuste entre o verbo e quem conduz a frase. Alguns verbos têm comportamento próprio: “haver” com sentido de existir e “fazer” marcando tempo passado ficam no singular (“havia livros”, “faz dois anos”).' },
+    ortografia: { title: 'O que confere a ortografia?', summary: 'Sinaliza deslizes comuns de grafia na pressa do rascunho (como “exceção”, “privilégio” e “empecilho”), deixando sempre a palavra final com você.' },
+    acentuacao: { title: 'O que confere a acentuação?', summary: 'Aponta palavras frequentes em que um acento faz falta para a leitura ou para a norma (como “ninguém”, “também” e “através”).' },
+    pontuacao: { title: 'O que observa a pontuação?', summary: 'Captura sinais repetidos sem querer durante cortes e revisões (como vírgulas ou pontos e vírgulas duplicados).' },
+    expressoes: { title: 'O que são expressões cristalizadas?', summary: 'São fórmulas prontas muito comuns no dia a dia (“nos dias de hoje”, “por outro lado”). Destacá-las ajuda a decidir se funcionam bem ali ou se vale buscar uma formulação mais pessoal.' },
+    decolonial: { title: 'Por que observar o vocabulário decolonial?', summary: 'Algumas expressões carregam marcas históricas de exclusão que passam despercebidas no automático. A lente apenas ilumina esses trechos para que você escolha com consciência.' }
+  };
+
+  var TERM_GLOSSARY = {
+    substantivo: 'Substantivo: dá nome a pessoas, lugares, objetos, sentimentos ou ideias.',
+    verbo: 'Verbo: move a cena — indica ação, estado ou acontecimento no tempo.',
+    'locucao verbal': 'Locução verbal: dois verbos trabalhando juntos como uma única ação.',
+    adjetivo: 'Adjetivo: dá cor, qualidade ou contorno a um nome.',
+    adverbio: 'Advérbio: ajusta o tom da ação — diz como, quando, onde ou com que força ela acontece.',
+    artigo: 'Artigo: apresenta o nome, mostrando se falamos de algo específico (“o/a”) ou aberto (“um/uma”).',
+    determinante: 'Determinante: acompanha e situa o nome (como “este”, “meu”, “cada”, “toda”).',
+    pronome: 'Pronome: substitui ou acompanha um nome para evitar repetições e costurar a frase.',
+    preposicao: 'Preposição: conecta palavras indicando lugar, direção, posse, causa ou companhia.',
+    conjuncao: 'Conjunção: amarra ideias e orações, marcando soma, contraste, tempo, causa ou condição.',
+    numeral: 'Numeral: indica quantidade, ordem ou proporção.',
+    interjeicao: 'Interjeição: expressa saudação, surpresa ou emoção de forma direta.',
+    sujeito: 'Sujeito: sobre quem ou o que a frase declara a ação ou o estado.',
+    objeto: 'Objeto direto: completa o sentido do verbo de forma direta, sem preposição obrigatória.',
+    indireto: 'Objeto indireto: completa o verbo ligado por uma preposição (“a”, “de”, “em”, “com”) ou por pronome oblíquo (“lhe”, “me”).',
+    predicativo: 'Predicativo: característica atribuída ao sujeito por meio de um verbo de ligação.',
+    adjunto: 'Adjunto adverbial: situa a cena no tempo, no espaço ou no modo, sem ser complemento obrigatório do verbo.',
+    agente: 'Agente da passiva: mostra quem pratica a ação quando a frase está na voz passiva.',
+    aposto: 'Aposto: trecho entre vírgulas que explica ou detalha quem é o termo anterior.',
+    vocativo: 'Vocativo: chamamento direto a alguém na frase, isolado por vírgula.',
+    predicado: 'Predicado: tudo o que a frase declara a respeito do sujeito, organizado em torno do verbo.',
+    subordinada: 'Oração subordinada: ideia que depende da oração principal para completar o sentido (tempo, causa, condição, conteúdo ou especificação).',
+    coordenada: 'Oração coordenada: ideia com estrutura própria ligada a outra por soma, contraste, escolha ou conclusão.',
+    reduzida: 'Oração reduzida: oração subordinada enxuta, sem conjunção, puxada por gerúndio (“abrindo…”) ou “ao + infinitivo” (“ao abrir…”).'
+  };
+
   E.lensExamples = LENS_EXAMPLES;
+  E.lensGuides = LENS_GUIDES;
+  E.termGlossary = TERM_GLOSSARY;
   if (!D) { return; }
+
+  function renderLensGuide(parent, lens) {
+    var g = LENS_GUIDES[lens];
+    if (!g) { return; }
+    var wrap = el('div', parent, 'ptbr-guide-wrap');
+    var btn = el('button', wrap, 'ptbr-guide-toggle', g.title);
+    btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('data-guide-lens', lens);
+    var card = el('p', wrap, 'ptbr-guide-card', g.summary);
+    card.hidden = true;
+    btn.addEventListener('click', function () {
+      var open = card.hidden;
+      card.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }, false);
+  }
+
+  function glossForSyntaxFinding(f) {
+    if (!f) { return ''; }
+    if (f.reducedKind) { return TERM_GLOSSARY.reduzida; }
+    if (f.subordKind) { return TERM_GLOSSARY.subordinada; }
+    if (f.coordKind) { return TERM_GLOSSARY.coordenada; }
+    var rk = syntaxRoleKey(f.feature);
+    return TERM_GLOSSARY[rk] || '';
+  }
+
+  function glossForMorphFinding(f) {
+    if (!f || f.analysisStatus === 'ambiguo' || f.analysisStatus === 'desconhecido') { return ''; }
+    var raw = f.analysisStatus === 'contextual' ? f.feature : (f.candidates && f.candidates.classes && f.candidates.classes[0]);
+    var key = normalizeClassKey(raw);
+    return TERM_GLOSSARY[key] || '';
+  }
 
   function renderExampleBanner(parent, options) {
     if (!options || !options.exampleMode) { return; }
@@ -197,6 +286,7 @@
     renderExampleBanner(main, options);
     el('p', main, 'ptbr-overline', 'RELAÇÕES DA ORAÇÃO · FRASE POR FRASE');
     el('p', main, 'ptbr-reading-help', 'Os termos aparecem na ordem exata da sua frase. Clique em qualquer bloco colorido para ver as setas de relação e a explicação.');
+    renderLensGuide(main, 'sintaxe');
 
     arr.forEach(function (f) {
       var key = '$' + f.clause.start;
@@ -246,7 +336,8 @@
       asidePrev.addEventListener('click', function () { stepSyntax(-1); }, false);
       asideNext.addEventListener('click', function () { stepSyntax(1); }, false);
     }
-    var selected = el('p', aside, 'ptbr-reading-selection'), links = el('p', aside, 'ptbr-syntax-links'), details = el('div', aside, 'ptbr-reading-details');
+    var selected = el('p', aside, 'ptbr-reading-selection'), termGloss = el('p', aside, 'ptbr-term-gloss'), links = el('p', aside, 'ptbr-syntax-links'), details = el('div', aside, 'ptbr-reading-details');
+    termGloss.hidden = true;
     selected.setAttribute('aria-live', 'polite');
 
     function stepSyntax(dir) {
@@ -439,6 +530,9 @@
         buttons[k].button.setAttribute('data-syntax-linked', 'false');
       });
       selected.textContent = f.feature + ' · “' + f.snippet + '”';
+      var sGloss = glossForSyntaxFinding(f);
+      termGloss.textContent = sGloss;
+      termGloss.hidden = !sGloss;
       var descriptions = [];
       (f.relations || []).forEach(function (edge) {
         var a = buttons['$' + edge.from], b = buttons['$' + edge.to];
@@ -517,6 +611,7 @@
     renderExampleBanner(main, options);
     el('p', main, 'ptbr-overline', 'ORAÇÕES RELATIVAS · VÍNCULO COM O ANTECEDENTE');
     el('p', main, 'ptbr-reading-help', 'Cada frase mostra o antecedente, a oração relativa encaixada e o verbo principal na ordem de leitura, com seta indicando o que “que” ou “onde” retoma.');
+    renderLensGuide(main, 'relativas');
     var canvas = el('div', main, 'ptbr-reading-canvas'), aside = el('aside', box, 'ptbr-reading-aside');
     aside.id = uid; aside.setAttribute('aria-label', 'Explicação da relativa selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
@@ -653,6 +748,7 @@
               : isMetrica
                 ? 'Sílabas poéticas estimadas, tônica destacada e medida do verso à direita.'
                 : 'Clique em qualquer trecho para ler a observação ou localizar no texto.');
+    renderLensGuide(main, options.lens);
 
     /* Barra de filtros por classe + alternador "Só cores" para Classes de palavras */
     var filterButtons = [];
@@ -708,6 +804,7 @@
       asideNext.addEventListener('click', function () { stepOccurrence(1); }, false);
     }
     var selected = el('p', aside, 'ptbr-reading-selection'); selected.setAttribute('aria-live', 'polite');
+    var termGloss = el('p', aside, 'ptbr-term-gloss'); termGloss.hidden = true;
     var details = el('div', aside, 'ptbr-reading-details');
     if (!arr.length) {
       el('p', main, 'ptbr-reading-empty', 'Nenhuma ocorrência encontrada neste trecho. Ausência de marcação não indica erro no texto.');
@@ -957,6 +1054,9 @@
       selected.textContent = (morph && (itemStatus === 'ambiguo' || itemStatus === 'desconhecido'))
         ? ('“' + arr[index].snippet + '”')
         : ('“' + arr[index].snippet + '” · ' + label(arr[index]));
+      var mGloss = morph ? glossForMorphFinding(arr[index]) : (options.lens === 'adverbios' ? TERM_GLOSSARY.adverbio : '');
+      termGloss.textContent = mGloss;
+      termGloss.hidden = !mGloss;
       updateAsideStepper();
       options.onSelect(arr[index], details, user);
       root.clearTimeout(timer); timer = root.setTimeout(draw, 0);

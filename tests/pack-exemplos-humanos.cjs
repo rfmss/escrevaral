@@ -50,10 +50,10 @@ panel.panel.focus();
 panel.wheel.childNodes.find(b => b.attrs['data-ptbr-lens'] === 'relativas').click();
 panel.flush();
 
-const cards = all(panel.board, 'ptbr-example-card');
+const cards = all(panel.results, 'ptbr-example-card');
 assert.equal(cards.length, 3, 'Relativas sem ocorrências exibe 3 cards de exemplo');
-assert.equal(all(panel.board, 'ptbr-example-theme').length, 0, 'temas ficam implícitos no conteúdo, sem etiqueta explícita nos cards');
-const simBtn = all(panel.board, 'ptbr-example-btn')[0];
+assert.equal(all(panel.results, 'ptbr-example-theme').length, 0, 'temas ficam implícitos no conteúdo, sem etiqueta explícita nos cards');
+const simBtn = all(panel.results, 'ptbr-example-btn')[0];
 assert.ok(simBtn, 'botão Simular análise presente');
 simBtn.click();
 assert.equal(panel.manuscript.value, originalText, 'simulação de exemplo NUNCA altera o manuscrito');

@@ -2846,10 +2846,23 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-word[data-reading-state="ambiguo"] { background:#e6ede4 !important; border-style:dashed !important; border-color:#5d705a !important; color:#141d14 !important; }
 #ptbr-dashboard .ptbr-word[data-reading-state="desconhecido"] { background:#e3eae1 !important; border-style:dotted !important; border-color:#6c7d69 !important; color:#1c261c !important; opacity:1; }
 
-/* Seleção de pílula: preserva fundo legível com borda de destaque limpa (zero bloco preto!) */
-#ptbr-dashboard .ptbr-word[aria-pressed="true"] { border-color:#1c3324 !important; outline:2.5px solid #1c3324 !important; outline-offset:2px; box-shadow:0 2px 8px rgba(24,44,31,.2) !important; }
-#ptbr-dashboard .ptbr-excerpt[aria-pressed="true"] { background:#d7e5d4 !important; color:#141d14 !important; border-color:#24382b !important; outline:2px solid #24382b; outline-offset:1px; }
+/* Seleção limpa sem borda dupla amadora (outline fica exclusivo para foco via teclado) */
+#ptbr-dashboard .ptbr-word[aria-pressed="true"] { border-width:2px !important; border-color:#1c3324 !important; outline:none !important; box-shadow:0 2px 8px rgba(24,44,31,.16) !important; }
+#ptbr-dashboard .ptbr-excerpt[aria-pressed="true"] { background:#e4ede2 !important; color:#141d14 !important; border:1.5px solid #24382b !important; border-left:4px solid #24382b !important; outline:none !important; box-shadow:0 2px 8px rgba(24,44,31,.1); }
+#ptbr-dashboard .ptbr-word:focus-visible,
+#ptbr-dashboard .ptbr-excerpt:focus-visible,
+#ptbr-dashboard .ptbr-syntax-term:focus-visible,
+#ptbr-dashboard .ptbr-syntax-whole:focus-visible { outline:2px solid #24382b !important; outline-offset:2px; }
 #ptbr-dashboard [data-reading-support="true"] { box-shadow:0 0 0 2px #244b34; }
+
+/* Guia rápido recolhível ("O que é isso?") e micro-definição na lateral */
+#ptbr-dashboard .ptbr-guide-wrap { margin:0 0 14px; }
+#ptbr-dashboard .ptbr-guide-toggle { display:inline-flex; align-items:center; gap:6px; padding:4px 11px; min-height:28px; border:1px solid rgba(36,56,43,.28); border-radius:99px; background:#d5dfd3; color:#1d3324; font:600 var(--esc-text-sm, 12.5px)/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif); cursor:pointer; transition:background .12s ease; }
+#ptbr-dashboard .ptbr-guide-toggle::before { content:'?'; display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:#24382b; color:#eef3ec; font-size:10.5px; font-weight:700; }
+#ptbr-dashboard .ptbr-guide-toggle:hover,
+#ptbr-dashboard .ptbr-guide-toggle[aria-expanded="true"] { background:#e1eae0; border-color:#24382b; }
+#ptbr-dashboard .ptbr-guide-card { margin:8px 0 0; padding:10px 13px; max-width:66ch; border-radius:8px; border:1px solid rgba(36,56,43,.2); border-left:3px solid #24382b; background:#dae4d8; color:#1a261a; font:400 var(--esc-text-sm, 12.5px)/1.55 var(--esc-font-ui, Arial, Helvetica, sans-serif); }
+#ptbr-dashboard .ptbr-term-gloss { margin:0 0 10px; padding:7px 10px; border-radius:6px; background:rgba(36,56,43,.08); color:#1e3023; font:400 var(--esc-text-sm, 12.5px)/1.45 var(--esc-font-ui, Arial, Helvetica, sans-serif); }
 
 #ptbr-dashboard .ptbr-fragment-original { font:400 var(--esc-text-base, 14px)/1.6 var(--esc-font-serif, 'Noto Serif', Georgia, serif); white-space:pre-wrap; word-wrap:break-word; overflow-wrap:break-word; margin:10px 0 0; color:#223022; }
 
@@ -2908,11 +2921,7 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-rhyme-badge { display:inline-block; font:700 var(--esc-text-xs, 11px)/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif); letter-spacing:.05em; padding:3px 9px; border-radius:99px; background:#24382b; color:#eef3ec; }
 #ptbr-dashboard .ptbr-rhyme-pair { font:600 var(--esc-text-sm, 12.5px)/1.3 var(--esc-font-ui, Arial, Helvetica, sans-serif); color:#223022; }
 #ptbr-dashboard .ptbr-rhyme-line + .ptbr-rhyme-line { margin-top:4px !important; }
-#ptbr-dashboard .ptbr-reading[data-reading-lens="rima"] .ptbr-fragment-original,
-#ptbr-dashboard .ptbr-reading[data-reading-lens="metrica"] .ptbr-fragment-original,
-#ptbr-dashboard .ptbr-reading[data-reading-lens="repeticao"] .ptbr-fragment-original,
-#ptbr-dashboard .ptbr-reading[data-reading-lens="dialogo"] .ptbr-fragment-original,
-#ptbr-dashboard .ptbr-reading[data-reading-lens="ritmo"] .ptbr-fragment-original { display:none; }
+#ptbr-dashboard .ptbr-reading[data-reading-lens]:not([data-reading-lens="morfologia"]):not([data-reading-lens="relativas"]) .ptbr-fragment-original { display:none; }
 
 #ptbr-dashboard .ptbr-reading-empty { font:400 var(--esc-text-base, 14px)/1.55 var(--esc-font-ui, Arial, Helvetica, sans-serif); color:#223022; padding:8px 0 12px; margin:0; }
 #ptbr-dashboard .ptbr-examples-box { margin-top:6px; padding-top:12px; border-top:1px solid rgba(33,41,33,.14); }
@@ -2955,7 +2964,7 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-syntax-whole { border-style:dashed !important; background:#dbe4d8 !important; color:#1c291d !important; max-width:46ch; }
 #ptbr-dashboard .ptbr-syntax-whole .ptbr-word-text { font-size:var(--esc-text-base, 14px); word-wrap:break-word; overflow-wrap:break-word; }
 #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"],
-#ptbr-dashboard .ptbr-syntax-whole[aria-pressed="true"] { border-color:#1c3324 !important; outline:2.5px solid #1c3324 !important; outline-offset:2px; }
+#ptbr-dashboard .ptbr-syntax-whole[aria-pressed="true"] { border-width:2px !important; border-color:#1c3324 !important; outline:none !important; box-shadow:0 2px 8px rgba(24,44,31,.16); }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-linked="true"] { box-shadow:0 0 0 2px #244b34; }
 #ptbr-dashboard .ptbr-syntax-head { font:500 var(--esc-text-xs, 11px)/1.35 var(--esc-font-ui, Arial, Helvetica, sans-serif); margin-top:4px; color:inherit; }
 #ptbr-dashboard .ptbr-syntax-links { border-bottom:1px dotted #7c8c78; padding-bottom:10px; font:400 var(--esc-text-sm, 12.5px)/1.45 var(--esc-font-ui, Arial, Helvetica, sans-serif); color:#223022; }
@@ -3049,8 +3058,13 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-example-btn { background:#313f30
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-example-btn:hover { background:#8eb097; color:#141e17; border-color:#8eb097; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-example-banner { background:#28392b; border-color:#7fa387; color:#e2ebe0; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-example-banner-text { color:#e2ebe0; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-guide-toggle { background:#2b362a; border-color:#687d65; color:#dce7da; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-guide-toggle::before { background:#8eb097; color:#141e17; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-guide-card { background:#263126; border-color:#5d725b; border-left-color:#8eb097; color:#dde8db; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-term-gloss { background:rgba(142,176,151,.14); color:#d8e6d7; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-excerpt[aria-pressed="true"] { background:#2d3c2d !important; color:#eef4ed !important; border-color:#8eb097 !important; border-left-color:#8eb097 !important; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"],
-body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"] { border-color:#b8d9c0 !important; outline-color:#b8d9c0 !important; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"] { border-color:#b8d9c0 !important; }
 
 /* Responsivo */
 @media(max-width:1020px) {
@@ -24364,6 +24378,12 @@ SOFTWARE.
     return n;
   }
   function valid(s, f) { return f && typeof f.start === 'number' && typeof f.end === 'number' && f.start >= 0 && f.end > f.start && f.end <= s.length && s.slice(f.start, f.end) === f.snippet; }
+  var FEATURE_LABELS = {
+    adverbios: 'Advérbio em -mente', ortografia: 'Grafia', acentuacao: 'Acentuação',
+    pontuacao: 'Pontuação', crase: 'Crase', concordancia: 'Concordância',
+    expressoes: 'Expressão', repeticao: 'Repetição', dialogo: 'Diálogo',
+    ritmo: 'Ritmo', rima: 'Rima', metrica: 'Métrica', decolonial: 'Contexto cultural'
+  };
   function cleanClassName(raw) {
     if (!raw) { return ''; }
     return String(raw).replace(/\s*\(UD\)/gi, '').replace(/^\s+|\s+$/g, '');
@@ -24374,6 +24394,7 @@ SOFTWARE.
     if (f.analysisStatus === 'desconhecido') { return 'fora do acervo'; }
     if (f.analysisStatus === 'ambiguo') { return 'ver contexto'; }
     if (f.analysisStatus === 'lexical') { return cleanClassName(c[0] || 'classe'); }
+    if (f.feature && Object.prototype.hasOwnProperty.call(FEATURE_LABELS, f.feature)) { return FEATURE_LABELS[f.feature]; }
     return f.feature || 'observação';
   }
   function normalizeClassKey(cls) {
@@ -24439,7 +24460,7 @@ SOFTWARE.
     ],
     adverbios: [
       { theme: 'Direitos humanos', text: 'As comunidades lutaram firmemente e conquistaram lentamente o direito à moradia digna.', note: 'Duas formas em -mente no mesmo parágrafo destacam a cadência para revisão.' },
-      { theme: 'Combate ao preconceito', text: 'Ela respondeu calmamente quando questionaram injustamente a sua capacidade.', note: 'Observe o peso de cada advérbio no tom da narrativa.' },
+      { theme: 'Combate ao preconceito', text: 'Ela respondeu serenamente e explicou atentamente o seu ponto de vista na assembleia.', note: 'Observe o peso de cada advérbio no tom e no ritmo da cena.' },
       { theme: 'Geopolítica e paz', text: 'Os vizinhos trabalharam pacientemente e reconstruíram coletivamente a ponte.', note: 'Concentração de advérbios em -mente sinalizada sem impor cortes.' }
     ],
     rima: [
@@ -24488,8 +24509,90 @@ SOFTWARE.
       { theme: 'Geopolítica e memória', text: 'Mapas antigos chamavam de terra de ninguém territórios habitados há séculos.', note: 'Convida a situar historicamente a expressão “terra de ninguém” no contexto narrativo.' }
     ]
   };
+  /* Guias rápidos em linguagem direta e contemporânea (recolhidos por padrão: quem já sabe nem abre; quem quer aprender descobre em 3 segundos). */
+  var LENS_GUIDES = {
+    morfologia: { title: 'O que são classes de palavras?', summary: 'Cada palavra cumpre um papel na cena: substantivo dá nome às coisas e pessoas; verbo coloca a cena em movimento; adjetivo pinta características; advérbio ajusta o jeito, o tempo ou a intensidade da ação.' },
+    sintaxe: { title: 'O que é análise sintática?', summary: 'É o mapa de quem faz o quê na frase: o sujeito conduz a ação, o verbo é o motor, os objetos completam o sentido e os adjuntos situam lugar, tempo ou modo. Também mostra quando duas frases se ligam por coordenação (ideias independentes) ou por subordinação (uma ideia que depende da principal para fechar o sentido).' },
+    relativas: { title: 'O que são orações relativas (subordinadas)?', summary: 'São trechos encaixados dentro de uma frase — quase sempre começando com “que” ou “onde” — para especificar melhor de quem ou de que lugar você está falando, sem precisar abrir outro ponto final.' },
+    adverbios: { title: 'O que é um advérbio?', summary: 'É a palavra que dá o tom da ação: mostra como, quando, onde ou com que força algo acontece (como “calmamente”, “ontem”, “muito”). Os terminados em -mente são expressivos, mas vários seguidos no mesmo parágrafo podem pesar no ritmo.' },
+    ritmo: { title: 'O que é ritmo na escrita?', summary: 'É a respiração do texto ao ser lido em voz alta. Alternar frases curtas (impacto, urgência) e frases longas (mergulho, reflexão) cria movimento; frases sempre do mesmo tamanho produzem batida regular.' },
+    repeticao: { title: 'Por que observar repetições?', summary: 'Quando a mesma palavra reaparece perto demais, chama a atenção do ouvido. Às vezes é um efeito intencional de força; em outros momentos, um sinônimo ou um corte deixa a passagem mais limpa.' },
+    dialogo: { title: 'O que mostra a lente de diálogo?', summary: 'Mede quanto do trecho está em falas marcadas (travessão, meia-risca ou hífen) em comparação com o restante da cena — ajuda a sentir se a narrativa está mais falada ou mais descritiva.' },
+    rima: { title: 'O que é rima consoante e toante?', summary: 'Rima é o eco sonoro no final dos versos. Na consoante, tudo coincide a partir da vogal forte (“chão” / “pão”); na toante, só as vogais combinam (“casa” / “estrada”), recurso muito vivo na poesia e na música brasileira.' },
+    metrica: { title: 'O que é métrica de versos?', summary: 'É a contagem das sílabas cantadas de cada verso até a última sílaba forte. Serve para ouvir a batida do poema e testar medidas tradicionais, como a redondilha (7 sílabas) ou o decassílabo (10).' },
+    crase: { title: 'O que é crase?', summary: 'É a fusão de dois “as” (a preposição “a” + o artigo feminino “a”). Em geral não ocorre antes de verbo, pronome pessoal ou palavra masculina — por isso vale conferir cada ocorrência destacada.' },
+    concordancia: { title: 'O que é concordância verbal?', summary: 'É o ajuste entre o verbo e quem conduz a frase. Alguns verbos têm comportamento próprio: “haver” com sentido de existir e “fazer” marcando tempo passado ficam no singular (“havia livros”, “faz dois anos”).' },
+    ortografia: { title: 'O que confere a ortografia?', summary: 'Sinaliza deslizes comuns de grafia na pressa do rascunho (como “exceção”, “privilégio” e “empecilho”), deixando sempre a palavra final com você.' },
+    acentuacao: { title: 'O que confere a acentuação?', summary: 'Aponta palavras frequentes em que um acento faz falta para a leitura ou para a norma (como “ninguém”, “também” e “através”).' },
+    pontuacao: { title: 'O que observa a pontuação?', summary: 'Captura sinais repetidos sem querer durante cortes e revisões (como vírgulas ou pontos e vírgulas duplicados).' },
+    expressoes: { title: 'O que são expressões cristalizadas?', summary: 'São fórmulas prontas muito comuns no dia a dia (“nos dias de hoje”, “por outro lado”). Destacá-las ajuda a decidir se funcionam bem ali ou se vale buscar uma formulação mais pessoal.' },
+    decolonial: { title: 'Por que observar o vocabulário decolonial?', summary: 'Algumas expressões carregam marcas históricas de exclusão que passam despercebidas no automático. A lente apenas ilumina esses trechos para que você escolha com consciência.' }
+  };
+
+  var TERM_GLOSSARY = {
+    substantivo: 'Substantivo: dá nome a pessoas, lugares, objetos, sentimentos ou ideias.',
+    verbo: 'Verbo: move a cena — indica ação, estado ou acontecimento no tempo.',
+    'locucao verbal': 'Locução verbal: dois verbos trabalhando juntos como uma única ação.',
+    adjetivo: 'Adjetivo: dá cor, qualidade ou contorno a um nome.',
+    adverbio: 'Advérbio: ajusta o tom da ação — diz como, quando, onde ou com que força ela acontece.',
+    artigo: 'Artigo: apresenta o nome, mostrando se falamos de algo específico (“o/a”) ou aberto (“um/uma”).',
+    determinante: 'Determinante: acompanha e situa o nome (como “este”, “meu”, “cada”, “toda”).',
+    pronome: 'Pronome: substitui ou acompanha um nome para evitar repetições e costurar a frase.',
+    preposicao: 'Preposição: conecta palavras indicando lugar, direção, posse, causa ou companhia.',
+    conjuncao: 'Conjunção: amarra ideias e orações, marcando soma, contraste, tempo, causa ou condição.',
+    numeral: 'Numeral: indica quantidade, ordem ou proporção.',
+    interjeicao: 'Interjeição: expressa saudação, surpresa ou emoção de forma direta.',
+    sujeito: 'Sujeito: sobre quem ou o que a frase declara a ação ou o estado.',
+    objeto: 'Objeto direto: completa o sentido do verbo de forma direta, sem preposição obrigatória.',
+    indireto: 'Objeto indireto: completa o verbo ligado por uma preposição (“a”, “de”, “em”, “com”) ou por pronome oblíquo (“lhe”, “me”).',
+    predicativo: 'Predicativo: característica atribuída ao sujeito por meio de um verbo de ligação.',
+    adjunto: 'Adjunto adverbial: situa a cena no tempo, no espaço ou no modo, sem ser complemento obrigatório do verbo.',
+    agente: 'Agente da passiva: mostra quem pratica a ação quando a frase está na voz passiva.',
+    aposto: 'Aposto: trecho entre vírgulas que explica ou detalha quem é o termo anterior.',
+    vocativo: 'Vocativo: chamamento direto a alguém na frase, isolado por vírgula.',
+    predicado: 'Predicado: tudo o que a frase declara a respeito do sujeito, organizado em torno do verbo.',
+    subordinada: 'Oração subordinada: ideia que depende da oração principal para completar o sentido (tempo, causa, condição, conteúdo ou especificação).',
+    coordenada: 'Oração coordenada: ideia com estrutura própria ligada a outra por soma, contraste, escolha ou conclusão.',
+    reduzida: 'Oração reduzida: oração subordinada enxuta, sem conjunção, puxada por gerúndio (“abrindo…”) ou “ao + infinitivo” (“ao abrir…”).'
+  };
+
   E.lensExamples = LENS_EXAMPLES;
+  E.lensGuides = LENS_GUIDES;
+  E.termGlossary = TERM_GLOSSARY;
   if (!D) { return; }
+
+  function renderLensGuide(parent, lens) {
+    var g = LENS_GUIDES[lens];
+    if (!g) { return; }
+    var wrap = el('div', parent, 'ptbr-guide-wrap');
+    var btn = el('button', wrap, 'ptbr-guide-toggle', g.title);
+    btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('data-guide-lens', lens);
+    var card = el('p', wrap, 'ptbr-guide-card', g.summary);
+    card.hidden = true;
+    btn.addEventListener('click', function () {
+      var open = card.hidden;
+      card.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }, false);
+  }
+
+  function glossForSyntaxFinding(f) {
+    if (!f) { return ''; }
+    if (f.reducedKind) { return TERM_GLOSSARY.reduzida; }
+    if (f.subordKind) { return TERM_GLOSSARY.subordinada; }
+    if (f.coordKind) { return TERM_GLOSSARY.coordenada; }
+    var rk = syntaxRoleKey(f.feature);
+    return TERM_GLOSSARY[rk] || '';
+  }
+
+  function glossForMorphFinding(f) {
+    if (!f || f.analysisStatus === 'ambiguo' || f.analysisStatus === 'desconhecido') { return ''; }
+    var raw = f.analysisStatus === 'contextual' ? f.feature : (f.candidates && f.candidates.classes && f.candidates.classes[0]);
+    var key = normalizeClassKey(raw);
+    return TERM_GLOSSARY[key] || '';
+  }
 
   function renderExampleBanner(parent, options) {
     if (!options || !options.exampleMode) { return; }
@@ -24543,6 +24646,7 @@ SOFTWARE.
     renderExampleBanner(main, options);
     el('p', main, 'ptbr-overline', 'RELAÇÕES DA ORAÇÃO · FRASE POR FRASE');
     el('p', main, 'ptbr-reading-help', 'Os termos aparecem na ordem exata da sua frase. Clique em qualquer bloco colorido para ver as setas de relação e a explicação.');
+    renderLensGuide(main, 'sintaxe');
 
     arr.forEach(function (f) {
       var key = '$' + f.clause.start;
@@ -24592,7 +24696,8 @@ SOFTWARE.
       asidePrev.addEventListener('click', function () { stepSyntax(-1); }, false);
       asideNext.addEventListener('click', function () { stepSyntax(1); }, false);
     }
-    var selected = el('p', aside, 'ptbr-reading-selection'), links = el('p', aside, 'ptbr-syntax-links'), details = el('div', aside, 'ptbr-reading-details');
+    var selected = el('p', aside, 'ptbr-reading-selection'), termGloss = el('p', aside, 'ptbr-term-gloss'), links = el('p', aside, 'ptbr-syntax-links'), details = el('div', aside, 'ptbr-reading-details');
+    termGloss.hidden = true;
     selected.setAttribute('aria-live', 'polite');
 
     function stepSyntax(dir) {
@@ -24785,6 +24890,9 @@ SOFTWARE.
         buttons[k].button.setAttribute('data-syntax-linked', 'false');
       });
       selected.textContent = f.feature + ' · “' + f.snippet + '”';
+      var sGloss = glossForSyntaxFinding(f);
+      termGloss.textContent = sGloss;
+      termGloss.hidden = !sGloss;
       var descriptions = [];
       (f.relations || []).forEach(function (edge) {
         var a = buttons['$' + edge.from], b = buttons['$' + edge.to];
@@ -24863,6 +24971,7 @@ SOFTWARE.
     renderExampleBanner(main, options);
     el('p', main, 'ptbr-overline', 'ORAÇÕES RELATIVAS · VÍNCULO COM O ANTECEDENTE');
     el('p', main, 'ptbr-reading-help', 'Cada frase mostra o antecedente, a oração relativa encaixada e o verbo principal na ordem de leitura, com seta indicando o que “que” ou “onde” retoma.');
+    renderLensGuide(main, 'relativas');
     var canvas = el('div', main, 'ptbr-reading-canvas'), aside = el('aside', box, 'ptbr-reading-aside');
     aside.id = uid; aside.setAttribute('aria-label', 'Explicação da relativa selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
@@ -24999,6 +25108,7 @@ SOFTWARE.
               : isMetrica
                 ? 'Sílabas poéticas estimadas, tônica destacada e medida do verso à direita.'
                 : 'Clique em qualquer trecho para ler a observação ou localizar no texto.');
+    renderLensGuide(main, options.lens);
 
     /* Barra de filtros por classe + alternador "Só cores" para Classes de palavras */
     var filterButtons = [];
@@ -25054,6 +25164,7 @@ SOFTWARE.
       asideNext.addEventListener('click', function () { stepOccurrence(1); }, false);
     }
     var selected = el('p', aside, 'ptbr-reading-selection'); selected.setAttribute('aria-live', 'polite');
+    var termGloss = el('p', aside, 'ptbr-term-gloss'); termGloss.hidden = true;
     var details = el('div', aside, 'ptbr-reading-details');
     if (!arr.length) {
       el('p', main, 'ptbr-reading-empty', 'Nenhuma ocorrência encontrada neste trecho. Ausência de marcação não indica erro no texto.');
@@ -25303,6 +25414,9 @@ SOFTWARE.
       selected.textContent = (morph && (itemStatus === 'ambiguo' || itemStatus === 'desconhecido'))
         ? ('“' + arr[index].snippet + '”')
         : ('“' + arr[index].snippet + '” · ' + label(arr[index]));
+      var mGloss = morph ? glossForMorphFinding(arr[index]) : (options.lens === 'adverbios' ? TERM_GLOSSARY.adverbio : '');
+      termGloss.textContent = mGloss;
+      termGloss.hidden = !mGloss;
       updateAsideStepper();
       options.onSelect(arr[index], details, user);
       root.clearTimeout(timer); timer = root.setTimeout(draw, 0);
@@ -25812,6 +25926,7 @@ SOFTWARE.
   function runExample(lens, ex){
     if(composing||panel.hidden||D.hidden||!lens||!own.call(labels,lens)||!ex||!ex.text){return;}
     if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
+    if(!draft){var curS=manuscript.value||'',curSel=currentSelection(curS);draft={text:curS,document:documentKey(),selection:curSel?curSel.start+':'+curSel.end:''};}
     epoch++;busy=false;lastLens=lens;
     for(var g=0;g<groups.length;g++){if(groups[g].lenses.indexOf(lens)!==-1){currentGroup=g;}}
     showScreen('result',currentGroup,true);
@@ -26106,7 +26221,7 @@ SOFTWARE.
   },false);
   manuscript.addEventListener('compositionstart',function(){composing=true;if(preparation){preparation.cancel(true);}paintPreparation(null);root.clearTimeout(debounce);epoch++;busy=false;draft=null;action.disabled=true;cancel.hidden=true;clearResults();updateActiveNoteStrip();},false);
   manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);action.disabled=!lastLens||!manuscript.value||manuscript.value.length>fullScope;var buttons=wheel.querySelectorAll('button');for(var j=0;j<buttons.length;j++){buttons[j].disabled=!manuscript.value||manuscript.value.length>fullScope;}updateActiveNoteStrip();if(preparation){preparation.request();}},false);
-  panel.addEventListener('focus',function(){if(!panel.hidden){refresh(true);}},false);
+  panel.addEventListener('focus',function(){if(!panel.hidden){refresh(false);}},false);
   var openers=['examinar-toggle','cabinet-examine'];
   for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden&&!busy&&screen==='home'){refresh(false);}},0);},false);}}
   D.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.keyCode===13){root.setTimeout(function(){if(!panel.hidden&&!busy&&screen==='home'){refresh(false);}},0);}},false);
