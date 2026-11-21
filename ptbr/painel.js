@@ -87,6 +87,48 @@
   );
   var view=el('div',null,'');view.id='ptbr-dashboard';
   var heading=panel.querySelector('.sheet-heading');panel.insertBefore(view,heading?heading.nextSibling:panel.firstChild);
+  var activeNoteBar=el('div',view,'ptbr-active-note');
+  var activeNoteBadge=el('span',activeNoteBar,'ptbr-active-note-badge','Nota ativa');
+  var activeNoteName=el('strong',activeNoteBar,'ptbr-active-note-title','Nota sem título');
+  var activeNoteMeta=el('span',activeNoteBar,'ptbr-active-note-meta','0 palavras');
+  var ribbon=el('nav',view,'ptbr-ribbon');ribbon.setAttribute('aria-label','Atalhos rápidos de exame');
+  var quickLenses=['morfologia','sintaxe','relativas','ritmo','repeticao','ortografia','crase','rima','metrica'];
+  var quickShort={morfologia:'Classes de palavras',sintaxe:'Sintaxe',relativas:'Relativas',ritmo:'Ritmo',repeticao:'Repetição',ortografia:'Ortografia',crase:'Crase',rima:'Rimas',metrica:'Métrica'};
+  var ribbonButtons={};
+  for(var qi=0;qi<quickLenses.length;qi++){
+    (function(id){
+      var qb=el('button',ribbon,'ptbr-ribbon-btn',quickShort[id]||labels[id]);
+      qb.type='button';qb.setAttribute('data-ptbr-quick',id);qb.setAttribute('aria-current','false');
+      qb.addEventListener('click',function(){run(id);},false);
+      ribbonButtons[id]=qb;
+    }(quickLenses[qi]));
+  }
+  var ribbonLexBtn=null;
+  if(E.lookupLexeme){
+    ribbonLexBtn=el('button',ribbon,'ptbr-ribbon-btn','Léxico');
+    ribbonLexBtn.type='button';ribbonLexBtn.setAttribute('data-ptbr-quick','lexical');ribbonLexBtn.setAttribute('aria-current','false');
+    ribbonLexBtn.addEventListener('click',function(){showScreen('lexical',null,true);},false);
+  }
+  function updateActiveNoteStrip(){
+    var s=manuscript.value||'',sel=currentSelection(s);
+    var noteTitle=E.ptbrPanelTitle?E.ptbrPanelTitle():'Nota ativa';
+    activeNoteName.textContent=noteTitle;
+    if(sel){
+      activeNoteBadge.textContent='Trecho selecionado';
+      activeNoteMeta.textContent=(sel.end-sel.start)+' caracteres';
+    }else{
+      activeNoteBadge.textContent='Nota ativa';
+      var words=s.replace(/^\s+|\s+$/g,'');
+      var wc=words?words.split(/\s+/).length:0;
+      activeNoteMeta.textContent=wc+(wc===1?' palavra':' palavras');
+    }
+    var dis=composing||!s.length||activeScopeLength(s)>fullScope;
+    for(var id in ribbonButtons){if(own.call(ribbonButtons,id)){
+      ribbonButtons[id].disabled=dis;
+      ribbonButtons[id].setAttribute('aria-current',(screen==='result'&&lastLens===id)?'true':'false');
+    }}
+    if(ribbonLexBtn){ribbonLexBtn.setAttribute('aria-current',screen==='lexical'?'true':'false');}
+  }
   var groups = [
     {title:'Revisar a escrita',hint:'Grafia, acentos, pontuação, crase e concordância.',lenses:['ortografia','acentuacao','pontuacao','crase','concordancia']},
     {title:'Entender uma frase',hint:'Classes de palavras e relações entre partes da oração.',lenses:['morfologia','sintaxe','relativas']},
@@ -173,7 +215,7 @@
     deliver:function(result){paintPreparation(result);if(!result){prepStatus.textContent='Preparação indisponível. Você pode escolher qualquer análise.';}}
   });}
   function showScreen(next,group,focus){
-    screen=next;prepStatus.hidden=next!=='group';if(typeof group==='number'){currentGroup=group;}
+    screen=next;view.setAttribute('data-ptbr-screen',next);prepStatus.hidden=next!=='group';if(typeof group==='number'){currentGroup=group;}
     goals.hidden=next!=='home';wheel.hidden=next!=='group';
     if(lexicalBox){lexicalBox.hidden=next!=='lexical';}
     results.hidden=next!=='result'&&next!=='lexical'&&next!=='reserved';
@@ -189,6 +231,7 @@
       status.textContent=scopeLen>fullScope?(sel?'O trecho selecionado ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.':'Esta folha ultrapassa o limite de 200 mil caracteres para análise. A consulta de palavras continua disponível.'):!manuscript.value?'Escreva na folha para começar. Você pode consultar uma palavra mesmo com a folha vazia.':sel?'Trecho selecionado para análise ('+scopeLen+' caracteres). A análise completa começa quando você escolhe um aspecto.':'A análise completa começa quando você escolhe um aspecto.';
     }
     reservedButton.hidden=next!=='group'||currentGroup!==1||!prepared||!prepared.lexicalAvailable;
+    updateActiveNoteStrip();
     if(preparation){if(next==='home'||next==='group'){preparation.request();}else{preparation.cancel(false);}}
     if(focus){if(next==='lexical'&&lexicalInput){lexicalInput.focus();}else{title.focus();}panel.scrollTop=0;}
   }
@@ -467,7 +510,7 @@
         el('p',box,'','Esta lente não concluiu o exame: '+e.message);
         status.textContent='Não foi possível concluir esta análise. Você pode tentar novamente.';
       }
-      busy=false;cancel.hidden=true;action.disabled=false;
+      busy=false;cancel.hidden=true;action.disabled=false;updateActiveNoteStrip();
     },0);
   }
   action.addEventListener('click',function(){run(lastLens);},false);
@@ -482,15 +525,16 @@
     status.textContent='O texto mudou. Os resultados anteriores foram retirados.';
     cancel.hidden=true;draft=null;action.disabled=composing||!lastLens||!manuscript.value||manuscript.value.length>fullScope;
     var buttons=wheel.querySelectorAll('button');for(var j=0;j<buttons.length;j++){buttons[j].disabled=composing||!manuscript.value||manuscript.value.length>fullScope;}
+    updateActiveNoteStrip();
     if(preparation){preparation.request();}
   },false);
-  manuscript.addEventListener('compositionstart',function(){composing=true;if(preparation){preparation.cancel(true);}paintPreparation(null);root.clearTimeout(debounce);epoch++;busy=false;draft=null;action.disabled=true;cancel.hidden=true;clearResults();},false);
-  manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);action.disabled=!lastLens||!manuscript.value||manuscript.value.length>fullScope;var buttons=wheel.querySelectorAll('button');for(var j=0;j<buttons.length;j++){buttons[j].disabled=!manuscript.value||manuscript.value.length>fullScope;}if(preparation){preparation.request();}},false);
+  manuscript.addEventListener('compositionstart',function(){composing=true;if(preparation){preparation.cancel(true);}paintPreparation(null);root.clearTimeout(debounce);epoch++;busy=false;draft=null;action.disabled=true;cancel.hidden=true;clearResults();updateActiveNoteStrip();},false);
+  manuscript.addEventListener('compositionend',function(){composing=false;root.clearTimeout(debounce);action.disabled=!lastLens||!manuscript.value||manuscript.value.length>fullScope;var buttons=wheel.querySelectorAll('button');for(var j=0;j<buttons.length;j++){buttons[j].disabled=!manuscript.value||manuscript.value.length>fullScope;}updateActiveNoteStrip();if(preparation){preparation.request();}},false);
   panel.addEventListener('focus',function(){if(!panel.hidden){refresh(true);}},false);
   var openers=['examinar-toggle','cabinet-examine'];
   for(var i=0;i<openers.length;i++){var b=D.getElementById(openers[i]);if(b){b.addEventListener('click',function(){root.setTimeout(function(){if(!panel.hidden&&!busy&&screen==='home'){refresh(false);}},0);},false);}}
   D.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.keyCode===13){root.setTimeout(function(){if(!panel.hidden&&!busy&&screen==='home'){refresh(false);}},0);}},false);
-  E.ptbrPanelReset=function(){if(preparation){preparation.cancel(true);}paintPreparation(null);epoch++;busy=false;draft=null;root.clearTimeout(debounce);clearResults();action.disabled=true;cancel.hidden=true;};
+  E.ptbrPanelReset=function(){if(preparation){preparation.cancel(true);}paintPreparation(null);epoch++;busy=false;draft=null;root.clearTimeout(debounce);clearResults();action.disabled=true;cancel.hidden=true;updateActiveNoteStrip();};
   E.ptbrPanelSaved=function(conflict){
     if(conflict){
       E.ptbrPanelReset();

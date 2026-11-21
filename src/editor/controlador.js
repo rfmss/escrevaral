@@ -969,6 +969,7 @@
   function findingKey(f) { return f.id + '|' + f.snippet; }
   /* A revisão progressiva respeita as escolhas já mantidas no caderno. */
   E.ptbrPanelDocument=function(){return doc.noteId||doc.id;};
+  E.ptbrPanelTitle=function(){return (title&&title.value?title.value:(doc.title||''))||'Nota sem título';};
   E.ptbrPanelRevision=function(){return doc.id+'|'+doc.revision;};
   E.ptbrPanelRequest=function(snapshot,start,end){return E.analysisContract.request(doc,snapshot,start,end);};
   E.ptbrPanelCurrent=function(request){return E.analysisContract.current(request,doc,manuscript.value);};
