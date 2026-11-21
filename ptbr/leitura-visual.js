@@ -43,6 +43,7 @@
     var s = String(feature || '').toLowerCase();
     if (s.indexOf('sujeito') !== -1) { return 'sujeito'; }
     if (s.indexOf('verbo') !== -1 || s.indexOf('verbal') !== -1 || s.indexOf('locução') !== -1) { return 'verbo'; }
+    if (s.indexOf('indireto') !== -1) { return 'indireto'; }
     if (s.indexOf('objeto') !== -1 || s.indexOf('complemento') !== -1 || s.indexOf('predicativo') !== -1) { return 'objeto'; }
     if (s.indexOf('adjunto') !== -1 || s.indexOf('advérb') !== -1 || s.indexOf('negaç') !== -1) { return 'adjunto'; }
     if (s.indexOf('predicado') !== -1) { return 'predicado'; }

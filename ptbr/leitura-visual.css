@@ -200,6 +200,7 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="sujeito"] { background:#d4e6d8 !important; border-color:#5a8f6a !important; color:#1b442a !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="verbo"] { background:#eedcd3 !important; border-color:#b26c50 !important; color:#6d2d15 !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="objeto"] { background:#d4e4eb !important; border-color:#5e8da1 !important; color:#1c475a !important; }
+#ptbr-dashboard .ptbr-syntax-term[data-syntax-role="indireto"] { background:#efe5ca !important; border-color:#ab8c45 !important; color:#5e420c !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="adjunto"] { background:#e4dce9 !important; border-color:#8b729c !important; color:#4b355c !important; }
 #ptbr-dashboard .ptbr-syntax-whole { border-style:dashed !important; background:rgba(255,255,255,.18) !important; max-width:46ch; box-shadow:none; }
 #ptbr-dashboard .ptbr-syntax-whole .ptbr-word-text { font-size:14.5px; word-wrap:break-word; overflow-wrap:break-word; }
@@ -229,7 +230,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="su
 body[data-theme="escuro"] #ptbr-dashboard [data-word-class-norm="verbo"],
 body[data-theme="escuro"] #ptbr-dashboard [data-word-class-norm="locucao verbal"],
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="verbo"] { background:rgba(196,115,82,.22) !important; border-color:#d49377 !important; color:#f4d3c3 !important; }
-body[data-theme="escuro"] #ptbr-dashboard [data-word-class-norm="adjetivo"] { background:rgba(191,158,76,.22) !important; border-color:#cfb46d !important; color:#f0e1b6 !important; }
+body[data-theme="escuro"] #ptbr-dashboard [data-word-class-norm="adjetivo"],
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="indireto"] { background:rgba(191,158,76,.22) !important; border-color:#cfb46d !important; color:#f0e1b6 !important; }
 body[data-theme="escuro"] #ptbr-dashboard [data-word-class-norm="adverbio"],
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="adjunto"] { background:rgba(155,126,179,.22) !important; border-color:#b89dce !important; color:#e4d6f0 !important; }
 body[data-theme="escuro"] #ptbr-dashboard [data-word-class-norm="artigo"],

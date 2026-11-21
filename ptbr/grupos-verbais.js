@@ -9,7 +9,22 @@
     ['trazer','trazendo','trazido'],['cantar','cantando','cantado'],['andar','andando','andado'],
     ['correr','correndo','corrido'],['sair','saindo','saído'],['partir','partindo','partido'],
     ['trabalhar','trabalhando','trabalhado'],['chegar','chegando','chegado'],['terminar','terminando','terminado'],
-    ['dar','dando','dado']
+    ['dar','dando','dado'],
+    ['revisar','revisando','revisado'],['dedicar','dedicando','dedicado'],['entregar','entregando','entregado'],
+    ['enviar','enviando','enviado'],['mostrar','mostrando','mostrado'],['contar','contando','contado'],
+    ['narrar','narrando','narrado'],['guardar','guardando','guardado'],['observar','observando','observado'],
+    ['revelar','revelando','revelado'],['esconder','escondendo','escondido'],['escolher','escolhendo','escolhido'],
+    ['ouvir','ouvindo','ouvido'],['sentir','sentindo','sentido'],['sonhar','sonhando','sonhado'],
+    ['pensar','pensando','pensado'],['acreditar','acreditando','acreditado'],['confiar','confiando','confiado'],
+    ['precisar','precisando','precisado'],['cuidar','cuidando','cuidado'],['resistir','resistindo','resistido'],
+    ['caminhar','caminhando','caminhado'],['voltar','voltando','voltado'],['descansar','descansando','descansado'],
+    ['brilhar','brilhando','brilhado'],['florescer','florescendo','florescido'],['dormir','dormindo','dormido'],
+    ['acordar','acordando','acordado'],['chorar','chorando','chorado'],['sorrir','sorrindo','sorrido'],
+    ['cair','caindo','caído'],['viver','vivendo','vivido'],['navegar','navegando','navegado'],
+    ['passar','passando','passado'],['permanecer','permanecendo','permanecido'],['começar','começando','começado'],
+    ['recitar','recitando','recitado'],['traduzir','traduzindo','traduzido'],['oferecer','oferecendo','oferecido'],
+    ['devolver','devolvendo','devolvido'],['prometer','prometendo','prometido'],['ensinar','ensinando','ensinado'],
+    ['aprender','aprendendo','aprendido'],['explicar','explicando','explicado'],['descobrir','descobrindo','descoberto']
   ];
   rows.forEach(function(row){row.forEach(function(word,i){forms['$'+word]={lemma:row[0],kind:['infinitivo','gerúndio','particípio'][i]};});});
   function match(tokens,at,auxiliary){
@@ -26,5 +41,5 @@
     else{return null;}
     return{first:at,last:last,main:last,connector:connector,lemma:form.lemma,form:form.kind,kind:kind,auxiliary:auxiliary};
   }
-  E.verbGroups={version:'locucoes-1',match:match};
+  E.verbGroups={version:'locucoes-2',match:match};
 }(typeof window!=='undefined'?window:this));

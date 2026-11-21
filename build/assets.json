@@ -4,21 +4,21 @@
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20261014-scrvrl-exame-v6-65/cofre.d2266459e1844839.js",
-      "sha256": "d2266459e1844839fbdb53cc9cbc00314424ca9befde2f4ca102536b91ed318e",
-      "bytes": 698658
+      "path": "assets/20261014-scrvrl-exame-v6-65/cofre.0a6bd6191b0a9f7c.js",
+      "sha256": "0a6bd6191b0a9f7caf71349a0d362b88df044fd9e1e834b58a525c1117442887",
+      "bytes": 724505
     },
     {
       "id": "app",
-      "path": "assets/20261014-scrvrl-exame-v6-65/app.0330d7a7400d76df.js",
-      "sha256": "0330d7a7400d76df1928c0c8a41e119f9d4dacc1e4a739060b4252f4a4da024d",
-      "bytes": 731558
+      "path": "assets/20261014-scrvrl-exame-v6-65/app.eb7cd067bfbd5bac.js",
+      "sha256": "eb7cd067bfbd5bac36efc4d4a14f6fdb4e91ff8b4d414d95a32be953e1629238",
+      "bytes": 731619
     },
     {
       "id": "styles",
-      "path": "assets/20261014-scrvrl-exame-v6-65/styles.3fcec760992cf8f0.css",
-      "sha256": "3fcec760992cf8f0cb08c71db6459801692411f5c2b12ed2a3f70d31f659d9c5",
-      "bytes": 510430
+      "path": "assets/20261014-scrvrl-exame-v6-65/styles.ea64047f81694999.css",
+      "sha256": "ea64047f81694999117f5d62996ddd3d5541614126769e8652fb0423f51053ca",
+      "bytes": 510677
     }
   ]
 }
