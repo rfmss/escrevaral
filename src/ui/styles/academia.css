@@ -107,8 +107,19 @@
     height: 100%;
   }
 
+  #esc-academy-overlay .esc-ac-art-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 44%;
+    opacity: 0.92;
+    pointer-events: none;
+    user-select: none;
+  }
+
   #esc-academy-overlay .esc-ac-layer-dome { color: #f2c878; }
-  #esc-academy-overlay .esc-ac-layer-hall { color: #d9a85b; }
+  #esc-academy-overlay .esc-ac-layer-hall { color: #f0c574; }
 
   #esc-academy-overlay .esc-academy-close {
     position: absolute;
@@ -117,9 +128,9 @@
     z-index: 6;
     min-height: 32px;
     padding: 5px 13px;
-    border: 1px solid rgba(238, 198, 126, 0.58) !important;
+    border: 1px solid rgba(238, 198, 126, 0.72) !important;
     border-radius: 99px;
-    background: rgba(34, 18, 11, 0.72) !important;
+    background: rgba(24, 12, 6, 0.84) !important;
     color: #fbf3e2 !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
@@ -131,11 +142,20 @@
     border-color: #f0ca82 !important;
   }
 
+  /* Cartela fosca sobre o centro da pintura para garantir contraste AAA sem esconder a claraboia e as estantes */
   #esc-academy-overlay .esc-academy-hero-inner {
     position: relative;
     z-index: 3;
-    max-width: 620px;
+    max-width: 590px;
     margin: 0 auto;
+    padding: 16px 28px 18px;
+    border-radius: 9px;
+    background-color: rgba(25, 13, 7, 0.76);
+    background-image: var(--esc-ac-chalk-dark);
+    background-repeat: repeat;
+    background-size: 84px 84px;
+    border: 1px solid rgba(235, 194, 114, 0.45);
+    box-shadow: 0 10px 28px rgba(10, 5, 2, 0.48);
   }
 
   #esc-academy-overlay .esc-academy-crest {
@@ -311,12 +331,13 @@
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    min-height: 168px;
     padding: 18px 20px 16px;
     text-align: left;
     border: 1.5px solid #b5853d !important;
-    border-left: 5px solid #b5853d !important;
+    border-left: 5px solid #c99a47 !important;
     border-radius: 9px;
-    background-color: #3a2013 !important;
+    background-color: #2f180e !important;
     background-image: var(--esc-ac-chalk-dark) !important;
     background-repeat: repeat !important;
     background-size: 84px 84px !important;
@@ -324,23 +345,68 @@
     cursor: pointer;
     overflow: hidden;
     box-shadow:
-      0 8px 18px rgba(28, 15, 8, 0.24),
-      inset 0 0 0 3px rgba(238, 198, 126, 0.16);
+      0 8px 18px rgba(28, 15, 8, 0.28),
+      inset 0 0 0 3px rgba(238, 198, 126, 0.18);
     transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  #esc-academy-overlay .esc-academy-tome-art {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    opacity: 0.88;
+    pointer-events: none;
+    transition: transform 240ms ease, opacity 160ms ease;
+  }
+
+  /* Véu fosco em mogno sobre a pintura para leitura AAA do texto sem gradiente */
+  #esc-academy-overlay .esc-academy-tome::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 1;
+    background-color: rgba(24, 12, 6, 0.62);
+    background-image: var(--esc-ac-chalk-dark);
+    background-repeat: repeat;
+    background-size: 84px 84px;
+    pointer-events: none;
+    transition: background-color 160ms ease;
+  }
+
+  #esc-academy-overlay .esc-academy-tome > *:not(.esc-academy-tome-art) {
+    position: relative;
+    z-index: 2;
   }
 
   #esc-academy-overlay .esc-academy-tome:hover {
     transform: translateY(-2px);
-    border-color: #ebc272 !important;
-    border-left-color: #ebc272 !important;
-    background-color: #4b2a19 !important;
-    background-image: var(--esc-ac-chalk-dark) !important;
-    background-repeat: repeat !important;
-    background-size: 84px 84px !important;
+    border-color: #f0ca82 !important;
+    border-left-color: #f0ca82 !important;
+    background-color: #3d2113 !important;
     color: #fff8eb !important;
     box-shadow:
-      0 12px 24px rgba(26, 14, 7, 0.32),
-      inset 0 0 0 3px rgba(242, 202, 124, 0.32);
+      0 12px 24px rgba(26, 14, 7, 0.36),
+      inset 0 0 0 3px rgba(242, 202, 124, 0.34);
+  }
+
+  #esc-academy-overlay .esc-academy-tome:hover::before {
+    background-color: rgba(24, 12, 6, 0.48);
+  }
+
+  #esc-academy-overlay .esc-academy-tome:hover .esc-academy-tome-art {
+    transform: scale(1.03);
+    opacity: 0.96;
+  }
+
+  #esc-academy-overlay .esc-academy-tome strong,
+  #esc-academy-overlay .esc-academy-tome-desc,
+  #esc-academy-overlay .esc-academy-tome-cta {
+    max-width: 78%;
+    text-shadow: 0 1px 6px rgba(12, 6, 3, 0.85);
   }
 
   #esc-academy-overlay .esc-academy-tome-top {

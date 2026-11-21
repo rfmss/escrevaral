@@ -9,7 +9,8 @@ const RUNTIME_PREFIXES = [
   new URL('resources/pt-BR/lexico-ptbr/', scopeURL).pathname,
   new URL('academia/', scopeURL).pathname,
   new URL('assets/typewriter/', scopeURL).pathname,
-  new URL('assets/study/', scopeURL).pathname
+  new URL('assets/study/', scopeURL).pathname,
+  new URL('assets/library/', scopeURL).pathname
 ];
 function isRuntimeCacheable(pathname) {
   for (let i = 0; i < RUNTIME_PREFIXES.length; i += 1) {

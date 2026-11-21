@@ -7227,83 +7227,42 @@
     return svg;
   }
 
-  /* Cena panorâmica leve em 2 camadas (inspirada no Real Gabinete Português de Leitura):
-   * zero partículas animadas em loop e custo mínimo de memória para máquinas modestas. */
+  /* Cena panorâmica leve em 2 camadas (Real Gabinete Português de Leitura · Biblioteca do Liceu):
+   * ilustração pintada em WebP leve (120 KB) + moldura arquitetônica dourada, zero partículas animadas em loop. */
   function buildHeroScene() {
     var stage = document.createElement('div');
     stage.className = 'esc-ac-scene';
     stage.setAttribute('aria-hidden', 'true');
 
-    /* Camada 0: Claraboia octogonal com luz pontilhada/giz (zero gradiente, estilo gravura) */
+    /* Camada 0: Pintura panorâmica do Real Gabinete (guache/giz, claraboia octogonal, galerias e candelabros) */
     var dome = document.createElement('div');
     dome.className = 'esc-ac-layer esc-ac-layer-dome';
     dome.setAttribute('data-depth', '0.22');
-    var domeSvg = makeSvg('svg', { viewBox: '0 0 1000 260', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
-    /* Retícula de giz / pontilhismo para a claraboia (sem linearGradient/radialGradient) */
-    var defs = makeSvg('defs');
-    var pat = makeSvg('pattern', { id: 'esc-ac-chalk-dots', width: '10', height: '10', patternUnits: 'userSpaceOnUse' });
-    pat.appendChild(makeSvg('circle', { cx: '2.5', cy: '2.5', r: '1.1', fill: 'currentColor', opacity: '0.22' }));
-    pat.appendChild(makeSvg('circle', { cx: '7.5', cy: '7.5', r: '0.85', fill: 'currentColor', opacity: '0.16' }));
-    pat.appendChild(makeSvg('circle', { cx: '7.5', cy: '2.2', r: '0.55', fill: 'currentColor', opacity: '0.12' }));
-    defs.appendChild(pat);
-    domeSvg.appendChild(defs);
-    /* Feixes de luz da claraboia preenchidos com granulação pontilhada */
-    domeSvg.appendChild(makeSvg('path', { d: 'M500 -10 L300 260 L452 260 Z M500 -10 L548 260 L700 260 Z', fill: 'url(#esc-ac-chalk-dots)' }));
-    /* Rosácea da claraboia central */
-    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '148', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.22', 'stroke-dasharray': '5 8' }));
-    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '104', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.28' }));
-    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '64', stroke: 'currentColor', 'stroke-width': '0.75', opacity: '0.2' }));
-    /* Estrelas de 4 pontas e pontos de giz estáticos (zero animação em loop) */
-    domeSvg.appendChild(makeSvg('path', {
-      d: 'M324 58 L326.5 63.5 L332 66 L326.5 68.5 L324 74 L321.5 68.5 L316 66 L321.5 63.5 Z' +
-         ' M676 58 L678.5 63.5 L684 66 L678.5 68.5 L676 74 L673.5 68.5 L668 66 L673.5 63.5 Z',
-      fill: 'currentColor', opacity: '0.46'
-    }));
-    var glints = [[192, 54, 1.8], [268, 86, 1.4], [352, 42, 1.6], [648, 42, 1.6], [732, 86, 1.4], [808, 54, 1.8]];
-    var gi;
-    for (gi = 0; gi < glints.length; gi += 1) {
-      domeSvg.appendChild(makeSvg('circle', { cx: glints[gi][0], cy: glints[gi][1], r: glints[gi][2], fill: 'currentColor', opacity: '0.45' }));
-    }
-    dome.appendChild(domeSvg);
+    var heroImg = document.createElement('img');
+    heroImg.className = 'esc-ac-art-img';
+    heroImg.src = 'assets/library/real-gabinete-hero.webp';
+    heroImg.alt = '';
+    heroImg.setAttribute('aria-hidden', 'true');
+    heroImg.setAttribute('decoding', 'async');
+    on(heroImg, 'error', function () { heroImg.hidden = true; });
+    dome.appendChild(heroImg);
     stage.appendChild(dome);
 
-    /* Camada 1: Galerias de madeira em 3 andares, estantes de livros e arcos neomanuelinos */
+    /* Camada 1: Moldura leve em ouro envelhecido com arcos neomanuelinos e estrelas de 4 pontas */
     var hall = document.createElement('div');
     hall.className = 'esc-ac-layer esc-ac-layer-hall';
-    hall.setAttribute('data-depth', '0.58');
-    var hallSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMax slice', fill: 'none' });
-    /* Silhueta das galerias laterais de madeira escura */
-    hallSvg.appendChild(makeSvg('path', { d: 'M0 0 L246 0 L246 240 L0 240 Z M754 0 L1000 0 L1000 240 L754 240 Z', fill: 'currentColor', opacity: '0.16' }));
-    /* Prateleiras horizontais nos 3 pisos (esquerda e direita) */
-    var shelves = [42, 86, 130, 174, 214], si2, sy;
-    for (si2 = 0; si2 < shelves.length; si2 += 1) {
-      sy = shelves[si2];
-      hallSvg.appendChild(makeSvg('line', { x1: '18', y1: sy, x2: '238', y2: sy, stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.32' }));
-      hallSvg.appendChild(makeSvg('line', { x1: '762', y1: sy, x2: '982', y2: sy, stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.32' }));
-    }
-    /* Lombadas rítmicas sugeridas nas estantes (traço único ultraleve) */
+    hall.setAttribute('data-depth', '0.52');
+    var hallSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
     hallSvg.appendChild(makeSvg('path', {
-      d: 'M30 42 V18 M42 42 V22 M54 42 V16 M68 42 V24 M84 42 V19 M102 42 V21 M118 42 V17 M136 42 V23 M154 42 V18 M174 42 V22 M194 42 V17 M214 42 V24' +
-         ' M34 86 V62 M50 86 V66 M66 86 V60 M82 86 V68 M98 86 V63 M116 86 V61 M134 86 V67 M152 86 V62 M172 86 V66 M190 86 V60 M210 86 V65' +
-         ' M28 130 V106 M44 130 V110 M62 130 V104 M78 130 V112 M96 130 V107 M114 130 V105 M132 130 V111 M150 130 V106 M170 130 V110 M188 130 V104 M208 130 V109' +
-         ' M32 174 V150 M48 174 V154 M66 174 V148 M84 174 V156 M102 174 V151 M120 174 V149 M138 174 V155 M156 174 V150 M176 174 V154 M194 174 V148 M212 174 V153' +
-         ' M782 42 V18 M798 42 V22 M814 42 V16 M832 42 V24 M850 42 V19 M868 42 V21 M886 42 V17 M904 42 V23 M922 42 V18 M940 42 V22 M958 42 V17 M974 42 V24' +
-         ' M786 86 V62 M802 86 V66 M820 86 V60 M838 86 V68 M856 86 V63 M874 86 V61 M892 86 V67 M910 86 V62 M928 86 V66 M946 86 V60 M966 86 V65' +
-         ' M780 130 V106 M796 130 V110 M814 130 V104 M832 130 V112 M850 130 V107 M868 130 V105 M886 130 V111 M904 130 V106 M922 130 V110 M940 130 V104 M960 130 V109' +
-         ' M784 174 V150 M800 174 V154 M818 174 V148 M836 174 V156 M854 174 V151 M872 174 V149 M890 174 V155 M908 174 V150 M926 174 V154 M944 174 V148 M964 174 V153',
-      stroke: 'currentColor', 'stroke-width': '3.5', opacity: '0.2'
-    }));
-    /* Grandes arcos ogivais / neomanuelinos emoldurando o salão central */
-    hallSvg.appendChild(makeSvg('path', {
-      d: 'M246 240 L246 72 Q246 18 320 6 Q268 44 268 94 L268 240 M754 240 L754 72 Q754 18 680 6 Q732 44 732 94 L732 240',
-      stroke: 'currentColor', 'stroke-width': '1.4', opacity: '0.38'
+      d: 'M24 232 L24 68 Q24 18 96 10 M976 232 L976 68 Q976 18 904 10',
+      stroke: 'currentColor', 'stroke-width': '1.3', opacity: '0.42'
     }));
     hallSvg.appendChild(makeSvg('path', {
-      d: 'M126 240 L126 120 Q186 72 246 120 M754 120 Q814 72 874 120 L874 240',
-      stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.34'
+      d: 'M184 54 L186.5 59.5 L192 62 L186.5 64.5 L184 70 L181.5 64.5 L176 62 L181.5 59.5 Z' +
+         ' M816 54 L818.5 59.5 L824 62 L818.5 64.5 L816 70 L813.5 64.5 L808 62 L813.5 59.5 Z',
+      fill: 'currentColor', opacity: '0.68'
     }));
-    /* Balaustrada inferior sutil */
-    hallSvg.appendChild(makeSvg('path', { d: 'M0 214 L268 214 M732 214 L1000 214', stroke: 'currentColor', 'stroke-width': '1.8', opacity: '0.42' }));
+    hallSvg.appendChild(makeSvg('path', { d: 'M16 228 L984 228', stroke: 'currentColor', 'stroke-width': '1', opacity: '0.32' }));
     hall.appendChild(hallSvg);
     stage.appendChild(hall);
 
@@ -7559,8 +7518,8 @@
       /* Vitrine em destaque: os 2 grandes tomos interativos (Objeto livro + Literatura mundial) */
       var featuredIds = ['objeto-livro', 'literatura-mundial'];
       var featuredMeta = {
-        'objeto-livro': { seal: 'Exploração visual', cta: 'Abrir anatomia →' },
-        'literatura-mundial': { seal: 'Leitor próprio', cta: 'Entrar na biblioteca →' }
+        'objeto-livro': { seal: 'Exploração visual', cta: 'Abrir anatomia →', art: 'assets/library/tome-objeto-livro.webp' },
+        'literatura-mundial': { seal: 'Leitor próprio', cta: 'Entrar na biblioteca →', art: 'assets/library/tome-literatura-mundial.webp' }
       };
       var featWrap = document.createElement('section');
       featWrap.className = 'esc-academy-featured';
@@ -7579,12 +7538,22 @@
       for (fi = 0; fi < featuredIds.length; fi += 1) {
         (function (entry) {
           if (!entry) { return; }
-          var meta = featuredMeta[entry.id] || { seal: 'Guia', cta: 'Abrir →' };
+          var meta = featuredMeta[entry.id] || { seal: 'Guia', cta: 'Abrir →', art: '' };
           var fBtn = document.createElement('button');
           fBtn.type = 'button';
           fBtn.className = 'esc-academy-tome';
           fBtn.setAttribute('data-academy-id', entry.id);
           fBtn.setAttribute('data-tome', entry.id);
+          if (meta.art) {
+            var fArt = document.createElement('img');
+            fArt.className = 'esc-academy-tome-art';
+            fArt.src = meta.art;
+            fArt.alt = '';
+            fArt.setAttribute('aria-hidden', 'true');
+            fArt.setAttribute('decoding', 'async');
+            on(fArt, 'error', function () { fArt.hidden = true; });
+            fBtn.appendChild(fArt);
+          }
           var fTop = document.createElement('div');
           fTop.className = 'esc-academy-tome-top';
           var fEmb = document.createElement('span');

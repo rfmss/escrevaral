@@ -67,7 +67,7 @@ if(check){
  // dist é exclusivamente gerado. A publicação na raiz preserva o GitHub Pages atual.
  const dist=path.join(root,'dist');fs.rmSync(dist,{recursive:true,force:true});
  for(const[p,s]of outputs){if(p.startsWith('build/'))continue;const target=path.join(dist,'site',p);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,s);}
- for(const p of ['manifest.webmanifest','icons','jornada','academia','resources/pt-BR/lexico-ptbr','assets/typewriter','assets/study','404.html','CNAME','robots.txt','sitemap.xml','.nojekyll'])if(fs.existsSync(path.join(root,p)))fs.cpSync(path.join(root,p),path.join(dist,'site',p),{recursive:true});
+ for(const p of ['manifest.webmanifest','icons','jornada','academia','resources/pt-BR/lexico-ptbr','assets/typewriter','assets/study','assets/library','404.html','CNAME','robots.txt','sitemap.xml','.nojekyll'])if(fs.existsSync(path.join(root,p)))fs.cpSync(path.join(root,p),path.join(dist,'site',p),{recursive:true});
  fs.mkdirSync(path.join(root,'packages/cofre/dist'),{recursive:true});fs.writeFileSync(path.join(root,'packages/cofre/dist/cofre.cjs'),cofre);
  console.log('Build: index '+Buffer.byteLength(site)+' bytes; portátil '+Buffer.byteLength(portable)+'; cofre independente '+Buffer.byteLength(cofre)+'.');
 }

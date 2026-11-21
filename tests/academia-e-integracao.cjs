@@ -151,13 +151,21 @@ function findByClass(node, cls) {
 }
 assert.equal(findByClass(bridgedModal, 'esc-ac-layer').length, 2, 'hero leve com exatamente 2 camadas SVG de parallax');
 assert.equal(findByClass(bridgedModal, 'esc-ac-mote').length, 0, 'zero partículas animadas em loop para economizar RAM/CPU');
+assert.equal(findByClass(bridgedModal, 'esc-ac-art-img').length, 1, 'ilustração panorâmica Real Gabinete no hero');
 assert.equal(findByClass(bridgedModal, 'esc-academy-tome').length, 2, '2 tomos em destaque (Objeto livro e Literatura mundial)');
+assert.equal(findByClass(bridgedModal, 'esc-academy-tome-art').length, 2, '2 ilustrações pintadas nos tomos em destaque');
 assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 12, '12 guias editoriais com numeração romana');
 
-// Garantir estética fosca com granulação de giz/papel (zero gradientes digitais puros em academia.css)
+// Garantir assets da biblioteca Real Gabinete em WebP + inclusão no build + estética fosca sem gradientes puros
+for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp']) {
+  assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', imgName)), 'Faltando assets/library/' + imgName);
+}
+assert.ok(buildSrc.includes("'assets/library'"), 'scripts/build.cjs copia assets/library para dist/site/');
 const academiaCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/academia.css'), 'utf8');
+const realGabineteCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/real-gabinete.css'), 'utf8');
 assert.ok(!/linear-gradient|radial-gradient/i.test(academiaCss), 'academia.css não deve usar gradientes puros');
+assert.ok(!/linear-gradient|radial-gradient/i.test(realGabineteCss), 'real-gabinete.css não deve usar gradientes puros');
 assert.ok(academiaCss.includes('--esc-ac-chalk-light') && academiaCss.includes('--esc-ac-chalk-dark'), 'academia.css deve aplicar textura granulada de giz/papel');
 bridged.close();
 
-console.log('OK: Academia (14 guias + Real Gabinete fosco/giz leve em 2 camadas + Literatura Mundial + Kindle Oasis + Ponte Academia <-> Oficina) verificada.');
+console.log('OK: Academia e Real Gabinete (14 guias + 3 pinturas WebP leves + atmosfera em todas as telas + zero gradientes puros) verificados.');
