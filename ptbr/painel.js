@@ -15,7 +15,7 @@
     crase:'Crase', concordancia:'Concordância', morfologia:'Classes de palavras',
     expressoes:'Expressões', repeticao:'Repetição próxima', adverbios:'Formas em -mente',
     dialogo:'Linhas de diálogo', ritmo:'Ritmo', rima:'Rimas', metrica:'Métrica',
-    sintaxe:'Relações da oração', relativas:'Orações relativas · recorte inicial', decolonial:'Vocabulário decolonial'
+    sintaxe:'Relações da oração', relativas:'Orações relativas', decolonial:'Vocabulário decolonial'
   };
   var descriptions={
     ortografia:'Grafias previstas no acervo local; palavra desconhecida não significa erro.',
@@ -163,6 +163,22 @@
     el('strong',lookupGoal,'','Consultar uma palavra');el('span',lookupGoal,'','Ver significados e flexões no acervo local.');
     lookupGoal.addEventListener('click',function(){showScreen('lexical',null,true);},false);
   }
+  var blankSamples=el('section',view,'ptbr-blank-samples');blankSamples.hidden=true;
+  el('p',blankSamples,'ptbr-overline','SEM TEXTO AINDA? EXPERIMENTE COM UM EXEMPLO');
+  el('p',blankSamples,'ptbr-examples-sub','Veja a Oficina em ação com exemplos sobre direitos humanos, minorias e cooperação — sua folha continua em branco.');
+  var blankSampleRow=el('div',blankSamples,'ptbr-blank-sample-row');
+  [
+    {lens:'sintaxe',label:'Sintaxe · Direitos humanos'},
+    {lens:'relativas',label:'Relativas · Minorias e memória'},
+    {lens:'ritmo',label:'Ritmo · Geopolítica e paz'}
+  ].forEach(function(item){
+    var sb=el('button',blankSampleRow,'ptbr-example-btn',item.label);
+    sb.type='button';sb.setAttribute('data-blank-example',item.lens);
+    sb.addEventListener('click',function(){
+      var list=E.lensExamples&&E.lensExamples[item.lens];
+      if(list&&list.length){runExample(item.lens,list[0]);}
+    },false);
+  });
   var prepStatus=el('p',view,'ptbr-status','');prepStatus.setAttribute('aria-live','polite');
   var reservedButton=el('button',view,'ptbr-reserved-button','Ver palavras reconhecidas');reservedButton.type='button';reservedButton.hidden=true;
   var lensFilterBox=el('div',view,'ptbr-reserve-filter');lensFilterBox.hidden=true;
@@ -231,6 +247,7 @@
   function showScreen(next,group,focus){
     screen=next;view.setAttribute('data-ptbr-screen',next);prepStatus.hidden=next!=='group';if(typeof group==='number'){currentGroup=group;}
     goals.hidden=next!=='home';wheel.hidden=next!=='group';
+    if(blankSamples){blankSamples.hidden=next!=='home'||!!(manuscript.value&&manuscript.value.replace(/\s+/g,'').length);}
     if(lexicalBox){lexicalBox.hidden=next!=='lexical';}
     results.hidden=next!=='result'&&next!=='lexical'&&next!=='reserved';
     action.hidden=next!=='result';note.hidden=next==='home'||next==='group';
@@ -365,15 +382,37 @@
     }
     return 'Palavra fora do acervo local — verifique pelo contexto da frase.';
   }
-  function resultCard(lens, result, snapshot, request, target) {
+  function runExample(lens, ex){
+    if(composing||panel.hidden||D.hidden||!lens||!own.call(labels,lens)||!ex||!ex.text){return;}
+    if(E.ptbrLegacyCancel){E.ptbrLegacyCancel();}
+    epoch++;busy=false;lastLens=lens;
+    for(var g=0;g<groups.length;g++){if(groups[g].lenses.indexOf(lens)!==-1){currentGroup=g;}}
+    showScreen('result',currentGroup,true);
+    clearResults();
+    var vault;
+    try{vault=E.createVault(E.knowledge);}catch(e){status.textContent='O cofre não pôde iniciar: '+e.message;return;}
+    try{
+      var simResult=vault.analyze(lens,ex.text);
+      resultCard(lens,simResult,ex.text,null,null,ex);
+      status.textContent='Exemplo demonstrativo ('+(ex.theme||'Leitura')+'). Seu manuscrito permanece intacto.';
+    }catch(e){
+      status.textContent='Não foi possível exibir este exemplo: '+e.message;
+    }
+    action.disabled=composing||!lastLens||!manuscript.value||activeScopeLength(manuscript.value)>fullScope;
+    updateActiveNoteStrip();
+  }
+  function resultCard(lens, result, snapshot, request, target, exampleMeta) {
     var card=el('section',results,'ptbr-outcome'), h=el('h3',card,'',labels[lens]||lens);
     var documentAtResult=documentKey(),resultEpoch=epoch,revisionAtResult=E.ptbrPanelRevision?E.ptbrPanelRevision():null;
-    function currentResult(){return epoch===resultEpoch&&!panel.hidden&&!D.hidden&&!composing&&manuscript.value===snapshot&&documentKey()===documentAtResult&&(!E.ptbrPanelRevision||E.ptbrPanelRevision()===revisionAtResult)&&(!request||E.ptbrPanelCurrent(request));}
-    var arr=result.findings||[],i,f,entry,b,detail,ignored=E.ptbrPanelChoices?E.ptbrPanelChoices():[],visible=0;
+    function currentResult(){
+      if(exampleMeta){return epoch===resultEpoch&&!panel.hidden&&!D.hidden&&!composing;}
+      return epoch===resultEpoch&&!panel.hidden&&!D.hidden&&!composing&&manuscript.value===snapshot&&documentKey()===documentAtResult&&(!E.ptbrPanelRevision||E.ptbrPanelRevision()===revisionAtResult)&&(!request||E.ptbrPanelCurrent(request));
+    }
+    var arr=result.findings||[],i,f,entry,b,detail,ignored=(!exampleMeta&&E.ptbrPanelChoices)?E.ptbrPanelChoices():[],visible=0;
     function suppressed(f){return ignored.indexOf(f.id+'|'+f.snippet)!==-1&&!(target&&f.start<=target.start&&f.end>=target.end);}
     for(i=0;i<arr.length;i++){if(!suppressed(arr[i])){visible++;}}
     var accepted=[],observations=[],stash=el('div',card,'ptbr-observation-list');
-    var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'ocorrência':'ocorrências')+' neste trecho.':'Nenhuma observação neste trecho.');
+    var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'ocorrência':'ocorrências')+(exampleMeta?' neste exemplo.':' neste trecho.'):'Nenhuma observação nova neste recorte.');
     for(i=0;i<arr.length&&accepted.length<maxFindings;i++){
       f=arr[i];if(suppressed(f)){continue;}
       entry=el('div',stash,'ptbr-observation');accepted.push(f);observations.push(entry);
@@ -395,16 +434,18 @@
         if(f.evidence.source){el('p',detail,'','Fonte: '+(f.evidence.source.title||f.evidence.source));}
       }
       var actRow=el('div',entry,'ptbr-aside-actions');
-      b=el('button',actRow,'ptbr-btn-primary','Ver no texto');b.type='button';
-      (function(start,end){b.addEventListener('click',function(){
-        if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
-        locateInText(start,end,'Selecione o trecho manualmente no manuscrito.');
-      },false);}(f.start,f.end));
+      if(!exampleMeta){
+        b=el('button',actRow,'ptbr-btn-primary','Ver no texto');b.type='button';
+        (function(start,end){b.addEventListener('click',function(){
+          if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
+          locateInText(start,end,'Selecione o trecho manualmente no manuscrito.');
+        },false);}(f.start,f.end));
+      }
       if((lens==='repeticao'||lens==='adverbios'||lens==='decolonial'||(lens==='morfologia'&&!/\s/.test(f.snippet)))&&E.ptbrOpenWordCard){
         b=el('button',actRow,'','Sinônimos');b.type='button';
         (function(word){b.addEventListener('click',function(){E.ptbrOpenWordCard(word);},false);}(f.snippet));
       }
-      if(E.ptbrPanelKeep&&!request){
+      if(!exampleMeta&&E.ptbrPanelKeep&&!request){
         b=el('button',actRow,'ptbr-btn-subtle','Manter minha escolha');b.type='button';
         (function(finding,button){button.addEventListener('click',function(){
           if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
@@ -425,6 +466,12 @@
       stash.hidden=true;
       readingView=E.renderReadingMap(card,{lens:lens,snapshot:snapshot,findings:accepted,
         initialTarget:target,isCurrent:currentResult,
+        exampleMode:exampleMeta||null,
+        onTryExample:function(ex){runExample(lens,ex);},
+        onExitExample:function(){
+          if(manuscript.value&&activeScopeLength(manuscript.value)<=fullScope){run(lens);}
+          else{E.ptbrPanelReset();showScreen('home',null,true);}
+        },
         onSelect:function(finding,target,user){
           for(var at=0;at<observations.length;at++){stash.appendChild(observations[at]);}
           target.textContent='';var at=accepted.indexOf(finding);

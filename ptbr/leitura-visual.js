@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, D = root.document, serial = 0;
-  if (!E || !D) { return; }
+  if (!E) { return; }
   function el(tag, parent, cls, text) {
     var n = D.createElement(tag); n.className = cls || '';
     if (typeof text === 'string') { n.textContent = text; }
@@ -58,6 +58,135 @@
     return 'outro';
   }
 
+  /* Exemplos educativos sobre direitos humanos, minorias, combate ao preconceito e geopolítica cooperativa.
+   * Preenchidos automaticamente quando não há ocorrências no trecho; nunca alteram o manuscrito do autor. */
+  var LENS_EXAMPLES = {
+    relativas: [
+      { theme: 'Direitos humanos', text: 'A mulher que trabalha escreveu a carta.', note: 'Observe “que” retomando “mulher” como sujeito da oração encaixada.' },
+      { theme: 'Minorias e memória', text: 'A cidade onde a menina viveu cresceu.', note: 'Observe “onde” retomando o lugar “cidade” dentro do período.' },
+      { theme: 'Geopolítica e cooperação', text: 'O livro que a escritora leu chegou.', note: 'Observe “que” retomando “livro” como objeto direto do verbo “leu”.' }
+    ],
+    sintaxe: [
+      { theme: 'Direitos humanos', text: 'Na janela, a escritora contou a história às meninas.', note: 'Adjunto adverbial deslocado no início e verbo bitransitivo com dois objetos.' },
+      { theme: 'Geopolítica e memória', text: 'A carta foi escrita pela escritora na cidade.', note: 'Voz passiva analítica com sujeito paciente e agente da passiva explícito.' },
+      { theme: 'Cooperação e paz', text: 'Ao abrir a porta, encontramos a paz.', note: 'Oração reduzida de infinitivo (“ao abrir”) seguida de sujeito oculto (“nós”).' }
+    ],
+    morfologia: [
+      { theme: 'Direitos humanos', text: 'Toda pessoa merece escola, abrigo e voz livre.', note: 'Veja como cada palavra assume sua classe gramatical na frase.' },
+      { theme: 'Geopolítica e paz', text: 'A fronteira fecha o passo, mas o diálogo abre pontes entre povos.', note: 'Observe a alternância entre nomes, verbos e conjunção adversativa.' },
+      { theme: 'Combate ao preconceito', text: 'A escuta devolve respeito a cada rosto.', note: 'Veja como artigo, substantivo, verbo e preposição se organizam.' }
+    ],
+    ritmo: [
+      { theme: 'Direitos humanos', text: 'A cidade calou. O bairro resistiu. A escola abriu as portas. A leitura devolveu futuro a quem sempre esperou na margem e transformou o silêncio antigo das ruas em conversa coletiva, memória compartilhada e coragem para imaginar outra vida possível juntos.', note: 'Contraste entre três frases curtas de impacto e uma frase extensa de fôlego.' },
+      { theme: 'Geopolítica e paz', text: 'O muro divide duas casas. O rio atravessa dois países. O vento cruza toda fronteira.', note: 'Três frases seguidas com extensão muito parecida criam cadência regular.' },
+      { theme: 'Combate ao preconceito', text: 'O olhar julga rápido. A escuta pede tempo. A justiça nasce devagar, quando cada pessoa ocupa seu lugar inteiro na conversa.', note: 'Variação gradual da medida das frases acompanha a abertura do raciocínio.' }
+    ],
+    repeticao: [
+      { theme: 'Direitos humanos', text: 'A dignidade de um povo nasce quando a dignidade das crianças guia o cuidado e protege a dignidade de toda família.', note: 'Repetição próxima de “dignidade” pode ser ênfase intencional ou ponto de revisão.' },
+      { theme: 'Geopolítica e paz', text: 'Nenhuma fronteira apaga a memória de quem atravessa a fronteira em busca de paz além da fronteira.', note: 'O eco de “fronteira” no mesmo período aparece grifado para audição em voz alta.' },
+      { theme: 'Cooperação', text: 'O povo que povo escuta constrói justiça sem apagar ninguém.', note: 'Retorno imediato em torno de “que” destacado dentro do contexto.' }
+    ],
+    dialogo: [
+      { theme: 'Direitos humanos', text: '— Aqui ninguém fica de fora da escola, disse a professora.\n— Toda criança tem direito ao livro, respondeu o avô.\nA turma abriu os cadernos em silêncio.', note: 'Proporção entre linhas iniciadas por travessão (—) e o restante da cena.' },
+      { theme: 'Minorias e memória', text: '– Nossa língua guarda o nome dos rios, explicou a anciã.\n– Vamos escrever cada palavra antes que se perca, prometeu a jovem.', note: 'Reconhecimento de falas marcadas com meia-risca (–).' },
+      { theme: 'Geopolítica e cooperação', text: '— A água deste vale pertence aos dois lados do mapa.\n— Então vamos cuidar da nascente juntos, propôs o mediador.', note: 'Desenho gráfico do diálogo em cenas de mediação e escuta.' }
+    ],
+    adverbios: [
+      { theme: 'Direitos humanos', text: 'As comunidades lutaram firmemente e conquistaram lentamente o direito à moradia digna.', note: 'Duas formas em -mente no mesmo parágrafo destacam a cadência para revisão.' },
+      { theme: 'Combate ao preconceito', text: 'Ela respondeu calmamente quando questionaram injustamente a sua capacidade.', note: 'Observe o peso de cada advérbio no tom da narrativa.' },
+      { theme: 'Geopolítica e paz', text: 'Os vizinhos trabalharam pacientemente e reconstruíram coletivamente a ponte.', note: 'Concentração de advérbios em -mente sinalizada sem impor cortes.' }
+    ],
+    rima: [
+      { theme: 'Direitos humanos', text: 'Cada mão ergue uma ponte sobre o chão\nPara caber toda gente no mesmo pão', note: 'Rima consoante exata entre finais de verso (“chão” ↔ “pão”).' },
+      { theme: 'Minorias e memória', text: 'O vento guarda a fala antiga na casa\nE acende a memória viva na estrada', note: 'Rima toante (assonante) pelas vogais a partir da tônica (“casa” ↔ “estrada”).' },
+      { theme: 'Geopolítica e paz', text: 'Não há muro que detenha a maré\nNem fronteira que cale quem anda a pé', note: 'Aproximação sonora em versos curtos de ritmo firme.' }
+    ],
+    metrica: [
+      { theme: 'Direitos humanos', text: 'A terra é casa de quem nela mora\nE o pão partido vence toda dor', note: 'Escansão silábica com tônica destacada e medida clássica de dez sílabas.' },
+      { theme: 'Minorias e memória', text: 'Na voz antiga do povo\nNasce o canto de amanhã', note: 'Versos de sete sílabas (redondilha maior) muito comuns na lírica brasileira.' },
+      { theme: 'Geopolítica e paz', text: 'Sem muros no horizonte\nA paz atravessa o mar', note: 'Observe elisões vocálicas possíveis e a tônica final de cada verso.' }
+    ],
+    crase: [
+      { theme: 'Direitos humanos', text: 'O projeto começou à falar de justiça com toda a comunidade.', note: 'Antes de verbo no infinitivo (“falar”), a referência convencional não leva crase.' },
+      { theme: 'Combate ao preconceito', text: 'A assembleia deu voz à ela no debate do bairro.', note: 'Antes de pronome pessoal (“ela”), vale conferir o acento grave.' },
+      { theme: 'Geopolítica e paz', text: 'O tratado abriu caminhos à tempo para evitar o conflito.', note: 'Antes de substantivo masculino (“tempo”), a forma de referência é “a tempo”.' }
+    ],
+    concordancia: [
+      { theme: 'Direitos humanos', text: 'Haviam muitos livros na biblioteca.', note: '“Haver” no sentido de existir costuma ficar no singular (“Havia”).' },
+      { theme: 'Minorias e memória', text: 'Existe muitas cartas na mesa.', note: '“Existir” concorda com o sujeito plural (“Existem muitas cartas”).' },
+      { theme: 'Geopolítica e paz', text: 'Fazem dois anos que o acordo começou.', note: '“Fazer” indicando tempo decorrido costuma permanecer no singular (“Faz”).' }
+    ],
+    ortografia: [
+      { theme: 'Combate ao preconceito', text: 'Educação de qualidade é direito de todos, não previlégio de poucos.', note: 'Grafia de referência no acervo: “privilégio”.' },
+      { theme: 'Direitos humanos', text: 'A proteção à infância deve valer para todos, sem excessão.', note: 'Grafia de referência no acervo: “exceção”.' },
+      { theme: 'Justiça social', text: 'A distância não pode ser impecilho para frequentar a escola.', note: 'Grafia de referência no acervo: “empecilho”.' }
+    ],
+    acentuacao: [
+      { theme: 'Direitos humanos', text: 'Em uma sociedade justa, ninguem fica para trás por sua origem.', note: 'Conferência de acento agudo em “ninguém”.' },
+      { theme: 'Minorias e memória', text: 'A cultura de cada povo tambem pertence à memória de todos.', note: 'Conferência de acento agudo em “também”.' },
+      { theme: 'Geopolítica e paz', text: 'A paz se constrói atraves da escuta e da cooperação entre nações.', note: 'Conferência de acento agudo em “através”.' }
+    ],
+    pontuacao: [
+      { theme: 'Direitos humanos', text: 'Saúde,, moradia e educação formam a base da cidadania.', note: 'Sinaliza vírgula duplicada acidentalmente durante a revisão.' },
+      { theme: 'Combate ao preconceito', text: 'Ouvir antes de julgar;; reconhecer a humanidade em cada pessoa.', note: 'Sinaliza ponto e vírgula duplicado.' },
+      { theme: 'Geopolítica e cooperação', text: 'Quando países cooperam na ciência,, toda a humanidade avança.', note: 'Identifica sinais repetidos sem alterar a frase automaticamente.' }
+    ],
+    expressoes: [
+      { theme: 'Direitos humanos', text: 'Nos dias de hoje, garantir acesso à água potável continua sendo urgente.', note: 'Destaca fórmula pronta (“nos dias de hoje”) para avaliar se vale tornar mais precisa.' },
+      { theme: 'Geopolítica e paz', text: 'Por outro lado, a diplomacia cooperativa evita custos humanos irreparáveis.', note: 'Localiza conector recorrente (“por outro lado”) para equilibrar o estilo.' },
+      { theme: 'Minorias e memória', text: 'Ao longo do tempo, os povos indígenas preservaram florestas inteiras.', note: 'Mostra expressão temporal usual para decidir entre manter ou condensar.' }
+    ],
+    decolonial: [
+      { theme: 'Combate ao preconceito', text: 'O antigo catálogo classificava as esculturas africanas como arte primitiva.', note: 'Convida a refletir sobre o peso histórico da expressão “arte primitiva”.' },
+      { theme: 'Inclusão e direitos', text: 'Na revisão do texto oficial, trocamos portador de deficiência por pessoa com deficiência.', note: 'Destaca termos ligados à deficiência para checar o alinhamento com a linguagem atual.' },
+      { theme: 'Geopolítica e memória', text: 'Mapas antigos chamavam de terra de ninguém territórios habitados há séculos.', note: 'Convida a situar historicamente a expressão “terra de ninguém” no contexto narrativo.' }
+    ]
+  };
+  E.lensExamples = LENS_EXAMPLES;
+  if (!D) { return; }
+
+  function renderExampleBanner(parent, options) {
+    if (!options || !options.exampleMode) { return; }
+    var bar = el('div', parent, 'ptbr-example-banner');
+    var info = el('span', bar, 'ptbr-example-banner-text',
+      'Exemplo demonstrativo · ' + (options.exampleMode.theme || 'Leitura') + ' (seu manuscrito permanece intacto)');
+    if (typeof options.onExitExample === 'function') {
+      var back = el('button', bar, 'ptbr-example-exit', '← Voltar ao meu texto');
+      back.type = 'button';
+      back.addEventListener('click', function () { options.onExitExample(); }, false);
+    }
+    return info;
+  }
+
+  function renderExamplesGallery(main, asideSelected, asideDetails, lens, options) {
+    var list = LENS_EXAMPLES[lens] || [];
+    if (asideSelected) { asideSelected.textContent = 'Espaço de exemplos'; }
+    if (asideDetails) {
+      asideDetails.textContent = '';
+      el('p', asideDetails, 'ptbr-reading-summary',
+        'Sem ocorrências neste trecho do seu texto. Clique em qualquer exemplo ao lado para ver esta lente funcionando na prática — seu manuscrito não será alterado.');
+    }
+    if (!list.length) { return; }
+    var wrap = el('section', main, 'ptbr-examples-box');
+    wrap.setAttribute('aria-label', 'Exemplos para observar nesta lente');
+    el('p', wrap, 'ptbr-overline', 'EXEMPLOS PARA OBSERVAR NESTA LENTE');
+    el('p', wrap, 'ptbr-examples-sub', 'Veja como esta análise funciona em frases sobre direitos humanos, minorias, combate ao preconceito e cooperação — sem alterar o seu texto:');
+    var grid = el('div', wrap, 'ptbr-examples-grid');
+    list.forEach(function (ex, idx) {
+      var card = el('article', grid, 'ptbr-example-card');
+      el('span', card, 'ptbr-example-theme', ex.theme);
+      el('p', card, 'ptbr-example-text', ex.text);
+      el('p', card, 'ptbr-example-note', ex.note);
+      if (options && typeof options.onTryExample === 'function') {
+        var btn = el('button', card, 'ptbr-example-btn', 'Simular análise →');
+        btn.type = 'button';
+        btn.setAttribute('data-example-lens', lens);
+        btn.setAttribute('data-example-index', String(idx));
+        btn.addEventListener('click', function () { options.onTryExample(ex); }, false);
+      }
+    });
+  }
+
   /* 1. Análise sintática frase a frase, em ordem natural, com setas SVG rotuladas (estilo displaCy editorial) */
   function syntaxMap(parent, options) {
     var snapshot = options.snapshot;
@@ -66,6 +195,7 @@
     var stepMode = false, stepIndex = 0;
 
     var box = el('div', parent, 'ptbr-reading'), main = el('div', box, 'ptbr-reading-paper');
+    renderExampleBanner(main, options);
     el('p', main, 'ptbr-overline', 'RELAÇÕES DA ORAÇÃO · FRASE POR FRASE');
     el('p', main, 'ptbr-reading-help', 'Os termos aparecem na ordem exata da sua frase. Clique em qualquer bloco colorido para ver as setas de relação e a explicação.');
 
@@ -201,7 +331,8 @@
     });
 
     if (!arr.length) {
-      el('p', main, 'ptbr-reading-empty', 'Nenhuma construção recebeu uma leitura neste recorte. Isso indica o limite desta lente, não um erro no texto.');
+      el('p', main, 'ptbr-reading-empty', 'Nenhuma construção analisada neste trecho. Isso indica apenas o recorte desta lente, não um erro no seu texto.');
+      renderExamplesGallery(main, selected, details, 'sintaxe', options);
     }
 
     function setStepMode(oneByOne, idx) {
@@ -384,14 +515,18 @@
     var uid = 'ptbr-reading-' + (++serial), dead = false, timer = null, active = -1;
     var box = el('div', parent, 'ptbr-reading'), main = el('div', box, 'ptbr-reading-paper');
     box.setAttribute('data-reading-lens', 'relativas');
+    renderExampleBanner(main, options);
     el('p', main, 'ptbr-overline', 'ORAÇÕES RELATIVAS · VÍNCULO COM O ANTECEDENTE');
-    el('p', main, 'ptbr-reading-help', 'Cada frase mostra o antecedente, a oração relativa encaixada e o verbo principal na ordem de leitura, com seta indicando o que “que” retoma.');
+    el('p', main, 'ptbr-reading-help', 'Cada frase mostra o antecedente, a oração relativa encaixada e o verbo principal na ordem de leitura, com seta indicando o que “que” ou “onde” retoma.');
     var canvas = el('div', main, 'ptbr-reading-canvas'), aside = el('aside', box, 'ptbr-reading-aside');
     aside.id = uid; aside.setAttribute('aria-label', 'Explicação da relativa selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
     var selected = el('p', aside, 'ptbr-reading-selection'), details = el('div', aside, 'ptbr-reading-details');
     selected.setAttribute('aria-live', 'polite');
-    if (!arr.length) { el('p', main, 'ptbr-reading-empty', 'Nenhuma relativa restritiva no recorte inicial. Ausência de leitura indica o limite desta lente, não erro no texto.'); }
+    if (!arr.length) {
+      el('p', main, 'ptbr-reading-empty', 'Nenhuma oração relativa identificada neste trecho. Ausência de marcação não indica erro no texto.');
+      renderExamplesGallery(main, selected, details, 'relativas', options);
+    }
 
     var rows = [], rowButtons = [];
     arr.forEach(function (f, index) {
@@ -496,6 +631,7 @@
     var uid = 'ptbr-reading-' + (++serial), buttons = [], rows = [], rowFor = [], diagrams = [], wordClasses = [];
     var box = el('div', parent, 'ptbr-reading'), main = el('div', box, 'ptbr-reading-paper');
     box.setAttribute('data-reading-lens', options.lens || 'geral');
+    renderExampleBanner(main, options);
 
     el('p', main, 'ptbr-overline',
       morph ? 'CLASSES DE PALAVRAS'
@@ -574,7 +710,10 @@
     }
     var selected = el('p', aside, 'ptbr-reading-selection'); selected.setAttribute('aria-live', 'polite');
     var details = el('div', aside, 'ptbr-reading-details');
-    if (!arr.length) { el('p', main, 'ptbr-reading-empty', 'Nenhuma observação nova neste recorte. Isso não certifica ausência de problemas.'); }
+    if (!arr.length) {
+      el('p', main, 'ptbr-reading-empty', 'Nenhuma ocorrência encontrada neste trecho. Ausência de marcação não indica erro no texto.');
+      renderExamplesGallery(main, selected, details, options.lens, options);
+    }
 
     function visibleIndices() {
       var list = [], idx;
