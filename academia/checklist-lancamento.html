@@ -1,5 +1,5 @@
 <!doctype html><html lang="pt-BR"><head>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-3fewmK/gLk+wweYDqccN1bp/d5FlJBRyQGjVd+7GcI4=' 'sha256-jWWMeQp1YNTUl2G+GO0bNwZKD+PBXLuifk8NSA19tWE='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Checklist de lançamento</title><style>:root {
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-3fewmK/gLk+wweYDqccN1bp/d5FlJBRyQGjVd+7GcI4=' 'sha256-jWWMeQp1YNTUl2G+GO0bNwZKD+PBXLuifk8NSA19tWE='; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Checklist de lançamento</title><style>:root {
   --paper:#cfc3ae; --ink:#1f130b; --accent:#8b5a1e;
   --card:color-mix(in srgb,var(--paper) 97%,var(--ink));
   --soft:color-mix(in srgb,var(--paper) 94%,var(--ink));
@@ -232,6 +232,256 @@ html,body { scrollbar-width:thin; scrollbar-color:#9e8664 #cfc3ae; }
 }
 @media(prefers-reduced-motion:reduce) { .legacy-content * { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
 @media(forced-colors:active) { .legacy-content button,.legacy-content [role="button"],.library-route .tab-btn { border-color:CanvasText; } .legacy-content :focus-visible,.library-route .tab-btn:focus-visible { text-decoration:underline; } }
+
+/* === AFK-REAL-GABINETE-ORNAMENTS-START === */
+:root {
+  --afk-wing: #5c3317;
+  --afk-gold: #c99a47;
+  --afk-mahogany: #331b10;
+  --afk-card: #d8cdb9;
+  --afk-card-hover: #e1d7c4;
+  --afk-chalk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23634118' fill-opacity='0.055'%3E%3Ccircle cx='7' cy='11' r='0.9'/%3E%3Ccircle cx='23' cy='6' r='0.7'/%3E%3Ccircle cx='41' cy='15' r='1.0'/%3E%3Ccircle cx='59' cy='8' r='0.8'/%3E%3Ccircle cx='76' cy='19' r='0.9'/%3E%3Ccircle cx='14' cy='29' r='1.0'/%3E%3Ccircle cx='33' cy='25' r='0.7'/%3E%3Ccircle cx='51' cy='32' r='0.9'/%3E%3Ccircle cx='68' cy='28' r='0.9'/%3E%3Ccircle cx='25' cy='43' r='1.0'/%3E%3Ccircle cx='63' cy='46' r='1.0'/%3E%3Ccircle cx='17' cy='64' r='0.9'/%3E%3Ccircle cx='37' cy='69' r='1.0'/%3E%3Ccircle cx='72' cy='71' r='0.9'/%3E%3C/g%3E%3C/svg%3E");
+}
+body {
+  background-color: var(--paper);
+  background-image: var(--afk-chalk);
+  background-repeat: repeat;
+  background-size: 84px 84px;
+}
+
+/* Prancha iluminada de abertura (estilo AFK Journey x Real Gabinete) */
+.hero {
+  margin-top: 22px;
+  margin-bottom: 28px;
+  padding: 36px 38px 34px !important;
+  border-radius: 10px;
+  border: 1.5px solid #a67b38;
+  background-color: var(--afk-mahogany);
+  background-image: url("../assets/library/banner-publicacao.webp");
+  background-size: cover;
+  background-position: right center;
+  color: #f4ead6;
+  box-shadow:
+    0 12px 28px rgba(24, 12, 6, 0.28),
+    inset 0 0 0 4px rgba(240, 212, 152, 0.14),
+    inset 0 0 0 5px rgba(201, 154, 71, 0.36);
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(95deg, rgba(24, 12, 6, 0.90) 0%, rgba(28, 14, 7, 0.78) 46%, rgba(24, 12, 6, 0.34) 76%, rgba(24, 12, 6, 0.16) 100%);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none'%3E%3Cpath d='M2 34 L2 8 Q2 2 8 2 L34 2' stroke='%23e6c67e' stroke-opacity='0.78' stroke-width='1.3'/%3E%3Cpath d='M10 6 L11.5 9.8 L15.3 11.3 L11.5 12.8 L10 16.6 L8.5 12.8 L4.7 11.3 L8.5 9.8 Z' fill='%23e6c67e' fill-opacity='0.88'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none'%3E%3Cpath d='M34 34 L34 8 Q34 2 28 2 L2 2' stroke='%23e6c67e' stroke-opacity='0.78' stroke-width='1.3'/%3E%3Cpath d='M26 6 L27.5 9.8 L31.3 11.3 L27.5 12.8 L26 16.6 L24.5 12.8 L20.7 11.3 L24.5 9.8 Z' fill='%23e6c67e' fill-opacity='0.88'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none'%3E%3Cpath d='M2 2 L2 28 Q2 34 8 34 L34 34' stroke='%23e6c67e' stroke-opacity='0.78' stroke-width='1.3'/%3E%3Cpath d='M10 19.4 L11.5 23.2 L15.3 24.7 L11.5 26.2 L10 30 L8.5 26.2 L4.7 24.7 L8.5 23.2 Z' fill='%23e6c67e' fill-opacity='0.88'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none'%3E%3Cpath d='M34 2 L34 28 Q34 34 28 34 L2 34' stroke='%23e6c67e' stroke-opacity='0.78' stroke-width='1.3'/%3E%3Cpath d='M26 19.4 L27.5 23.2 L31.3 24.7 L27.5 26.2 L26 30 L24.5 26.2 L20.7 24.7 L24.5 23.2 Z' fill='%23e6c67e' fill-opacity='0.88'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: top left, top right, bottom left, bottom right;
+  background-size: 36px 36px;
+}
+.hero-depth { display: none !important; }
+.hero-copy, .hero-note { position: relative; z-index: 2; }
+.hero .eyebrow {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 99px;
+  border: 1px solid rgba(230, 198, 126, 0.55);
+  background: rgba(24, 12, 6, 0.58);
+  color: #f2cf88;
+  letter-spacing: 0.12em;
+}
+.hero .subject { color: #e8c783; margin-top: 14px; letter-spacing: 0.03em; }
+.hero h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #f8eed9;
+  text-shadow: 0 2px 10px rgba(10, 5, 2, 0.78);
+  letter-spacing: -0.02em;
+}
+.hero .intro { color: #e9d9bc; max-width: 46ch; }
+.hero-note {
+  background: rgba(24, 12, 6, 0.74);
+  border: 1px solid rgba(230, 198, 126, 0.45);
+  border-left: 3px solid #d9ae62;
+  border-radius: 8px;
+  padding: 16px 20px !important;
+  color: #f4ead6;
+  box-shadow: 0 6px 18px rgba(10, 5, 2, 0.36);
+}
+.hero-note .label { color: #f0c675; }
+.hero-note > p { color: #f8eed9; margin: 10px 0 !important; }
+.hero-note .small { color: #dfd0b4; }
+
+/* Cabeçalhos de mapa com asas de losangos e estrelas estilo AFK Journey */
+.section-heading {
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(139, 90, 30, 0.28);
+}
+.section-heading h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  color: #2b160b;
+}
+.section-heading h2::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 14' fill='none'%3E%3Cpath d='M3 7 L6.5 3.5 L10 7 L6.5 10.5 Z' stroke='%238b5a1e' stroke-width='1.1'/%3E%3Cpath d='M18 1.2 L19.8 5.4 L24 7 L19.8 8.6 L18 12.8 L16.2 8.6 L12 7 L16.2 5.4 Z' fill='%238b5a1e'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* Cartas cartográficas de percurso (.route a) com borda dupla, selo medalhão e cantoneira */
+.route a {
+  position: relative;
+  background-color: var(--afk-card);
+  border: 1.5px solid rgba(139, 90, 30, 0.45);
+  border-top: 3px solid var(--afk-wing);
+  border-radius: 8px;
+  box-shadow:
+    0 3px 10px rgba(42, 24, 12, 0.08),
+    inset 0 0 0 3px rgba(207, 195, 174, 0.5),
+    inset 0 0 0 4px rgba(139, 90, 30, 0.16);
+  transition: transform 140ms ease, border-color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+}
+.route a::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M9 1.5 L10.7 7.3 L16.5 9 L10.7 10.7 L9 16.5 L7.3 10.7 L1.5 9 L7.3 7.3 Z' fill='%238b5a1e' fill-opacity='0.42'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.route a:hover {
+  transform: translateY(-2px);
+  background-color: var(--afk-card-hover);
+  border-color: var(--afk-wing);
+  box-shadow:
+    0 8px 18px rgba(42, 24, 12, 0.15),
+    inset 0 0 0 3px rgba(207, 195, 174, 0.48),
+    inset 0 0 0 4px rgba(139, 90, 30, 0.36);
+}
+.step-no {
+  align-self: flex-start;
+  padding: 3px 10px 3px 8px;
+  border-radius: 99px;
+  background: var(--afk-mahogany);
+  border: 1px solid var(--afk-gold);
+  color: #f0c675 !important;
+  gap: 6px !important;
+}
+.academy-phosphor { width: 15px !important; height: 15px !important; }
+.route strong { font-family: Georgia, "Times New Roman", serif; color: #24130a; }
+
+/* Capítulos com varão vitoriano torneado + medalhão heráldico no número */
+.chapter {
+  position: relative;
+  border-top: 0 !important;
+  padding-top: 48px;
+}
+.chapter::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  height: 18px;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 18' preserveAspectRatio='xMidYMid meet' fill='none'%3E%3Ccircle cx='12' cy='9' r='2.5' fill='%238b5a1e' fill-opacity='0.78'/%3E%3Cpath d='M18 5 L18 13 M22 6.5 L22 11.5' stroke='%238b5a1e' stroke-opacity='0.72' stroke-width='1.1'/%3E%3Cline x1='22' y1='9' x2='264' y2='9' stroke='%238b5a1e' stroke-opacity='0.48' stroke-width='1'/%3E%3Cpath d='M274 5.5 L278 9 L274 12.5 L270 9 Z' stroke='%238b5a1e' stroke-width='1.1'/%3E%3Cpath d='M300 2 L303 7.2 L309 9 L303 10.8 L300 16 L297 10.8 L291 9 L297 7.2 Z' fill='%238b5a1e' fill-opacity='0.88'/%3E%3Cpath d='M326 5.5 L330 9 L326 12.5 L322 9 Z' stroke='%238b5a1e' stroke-width='1.1'/%3E%3Cline x1='336' y1='9' x2='578' y2='9' stroke='%238b5a1e' stroke-opacity='0.48' stroke-width='1'/%3E%3Cpath d='M578 6.5 L578 11.5 M582 5 L582 13' stroke='%238b5a1e' stroke-opacity='0.72' stroke-width='1.1'/%3E%3Ccircle cx='588' cy='9' r='2.5' fill='%238b5a1e' fill-opacity='0.78'/%3E%3C/svg%3E") center/100% 18px no-repeat;
+}
+.chapter-no {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px !important;
+  height: 52px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: var(--afk-mahogany);
+  border: 1.5px solid var(--afk-gold);
+  color: #f0c675 !important;
+  font: 700 1.45rem/1 Georgia, serif !important;
+  box-shadow: 0 4px 10px rgba(32, 16, 8, 0.2), inset 0 0 0 2px rgba(240, 198, 117, 0.22);
+}
+.chapter-head h2, .closing h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #24130a;
+}
+.back-map {
+  border: 1px solid rgba(139, 90, 30, 0.45);
+  background: var(--afk-card);
+  border-radius: 99px !important;
+  padding: 6px 12px !important;
+  text-decoration: none;
+  font-weight: 600;
+  color: #3a2013 !important;
+}
+.back-map:hover {
+  background: var(--afk-mahogany);
+  border-color: var(--afk-gold);
+  color: #f0e4ce !important;
+}
+
+/* Pranchas de conteúdo (.block), exemplos e encerramento iluminado */
+.block {
+  position: relative;
+  background-color: var(--afk-card) !important;
+  border: 1.5px solid rgba(139, 90, 30, 0.4) !important;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(42, 24, 12, 0.07), inset 0 0 0 3px rgba(207, 195, 174, 0.45);
+}
+.block::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M9 2 L10.5 7.5 L16 9 L10.5 10.5 L9 16 L7.5 10.5 L2 9 L7.5 7.5 Z' fill='%238b5a1e' fill-opacity='0.35'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.block h3 { font-family: Georgia, "Times New Roman", serif; color: #24130a; }
+.example {
+  background: #cfc3ae !important;
+  border: 1px solid rgba(139, 90, 30, 0.28);
+  border-left: 3px solid var(--afk-wing) !important;
+}
+.closing {
+  position: relative;
+  background-color: var(--afk-card) !important;
+  border: 1.5px solid #9c7233 !important;
+  box-shadow:
+    0 6px 18px rgba(42, 24, 12, 0.1),
+    inset 0 0 0 4px rgba(207, 195, 174, 0.65),
+    inset 0 0 0 5px rgba(156, 114, 51, 0.34);
+}
+.footer {
+  position: relative;
+  border-top: 1px dashed rgba(139, 90, 30, 0.45) !important;
+}
+@media(prefers-color-scheme:dark) {
+  :root { --afk-card: #2c1e15; --afk-card-hover: #38261b; }
+  .section-heading h2, .route strong, .chapter-head h2, .closing h2, .block h3 { color: #f4ead6; }
+  .example { background: #20150f !important; }
+  .back-map { color: #f0e4ce !important; }
+}
+/* === AFK-REAL-GABINETE-ORNAMENTS-END === */
 </style></head><body class="visual-guide "><a class="skip" href="#mapa">Ir para o mapa</a><main><header class="hero wrap compact-hero" id="inicio"><div class="hero-depth" aria-hidden="true"><span>Academia</span></div><div class="hero-copy"><p class="eyebrow">Academia / Publicação e carreira</p><h1>Checklist de lançamento</h1><p class="intro">Guia para checar manuscrito, capa, ISBN, sinopse, leitores antecipados, preço e comunicação.</p></div></header><nav class="map wrap" id="mapa" aria-label="Mapa do assunto"><div class="section-heading"><h2>Entenda de relance</h2><p>Escolha por onde começar.</p></div><ol class="route"><li><a href="#passo-0"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="check-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>01</span><strong>Qualidade</strong><span>Faça a última leitura.</span></a></li><li><a href="#passo-1"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="notebook" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M184,112a8,8,0,0,1-8,8H112a8,8,0,0,1,0-16h64A8,8,0,0,1,184,112Zm-8,24H112a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm48-88V208a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32H208A16,16,0,0,1,224,48ZM48,208H72V48H48Zm160,0V48H88V208H208Z"/></svg>02</span><strong>Objeto</strong><span>Confira a apresentação.</span></a></li><li><a href="#passo-2"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="tag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M243.31,136,144,36.69A15.86,15.86,0,0,0,132.69,32H40a8,8,0,0,0-8,8v92.69A15.86,15.86,0,0,0,36.69,144L136,243.31a16,16,0,0,0,22.63,0l84.68-84.68a16,16,0,0,0,0-22.63Zm-96,96L48,132.69V48h84.69L232,147.31ZM96,84A12,12,0,1,1,84,72,12,12,0,0,1,96,84Z"/></svg>03</span><strong>Venda</strong><span>Teste o caminho de compra.</span></a></li><li><a href="#passo-3"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="quotes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M100,56H40A16,16,0,0,0,24,72v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,100,56Zm0,80H40V72h60ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Zm0,80H156V72h60Z"/></svg>04</span><strong>Prova social</strong><span>Use retornos com contexto.</span></a></li><li><a href="#passo-4"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="user-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"/></svg>05</span><strong>Psicologia</strong><span>Defina expectativas possíveis.</span></a></li></ol></nav><div class="chapters wrap"><section class="chapter" id="passo-0"><header class="chapter-head"><span class="chapter-no">01</span><div><h2>Qualidade</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="blocks"><article class="block"><span class="label">O essencial</span><h3>Faça a última leitura.</h3><p>Texto completo, revisão, leitura crítica e última conferência de arquivo.</p></article><article class="block"><span class="label">Na prática</span><h3>O detalhe que escapou</h3><aside class="example"><span class="label">Por exemplo</span><p>A revisão está pronta, mas uma mudança no miolo deixou um título sozinho no fim da página. A prova final ajuda a encontrar esse tipo de problema.</p></aside></article></div><p class="takeaway"><span>Seu próximo passo</span>Confira o arquivo que será publicado, não apenas o rascunho.</p></section><section class="chapter" id="passo-1"><header class="chapter-head"><span class="chapter-no">02</span><div><h2>Objeto</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="blocks"><article class="block"><span class="label">O essencial</span><h3>Confira a apresentação.</h3><p>Capa, miolo, ISBN, ficha quando aplicável e arquivos finais.</p></article><article class="block"><span class="label">Na prática</span><h3>Da miniatura à página</h3><aside class="example"><span class="label">Por exemplo</span><p>O título é legível na capa pequena? O sumário leva ao capítulo certo? O nome do autor coincide nos arquivos?</p></aside></article></div><p class="takeaway"><span>Seu próximo passo</span>Confira capa, miolo e dados da obra juntos.</p></section><section class="chapter" id="passo-2"><header class="chapter-head"><span class="chapter-no">03</span><div><h2>Venda</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="blocks"><article class="block"><span class="label">O essencial</span><h3>Teste o caminho de compra.</h3><p>Sinopse de quarta capa, página de venda, categorias, palavras-chave e preço.</p></article><article class="block"><span class="label">Na prática</span><h3>Um convite com destino</h3><aside class="example"><span class="label">Por exemplo</span><p>A divulgação diz que o livro está disponível, mas o endereço abre outra edição. Confira o destino antes de compartilhar.</p></aside></article></div><p class="takeaway"><span>Seu próximo passo</span>Abra o link e confira edição, formato e descrição.</p></section><section class="chapter" id="passo-3"><header class="chapter-head"><span class="chapter-no">04</span><div><h2>Prova social</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="blocks"><article class="block"><span class="label">O essencial</span><h3>Use retornos com contexto.</h3><p>Leitores antecipados, resenhas honestas e contatos de imprensa ou comunidade.</p></article><article class="block"><span class="label">Na prática</span><h3>Uma impressão sincera</h3><aside class="example"><span class="label">Por exemplo</span><p>Uma leitora autorizou o uso de um comentário sobre o ritmo do romance. Preserve o sentido e identifique de onde veio a fala.</p></aside></article></div><p class="takeaway"><span>Seu próximo passo</span>Peça autorização antes de usar um depoimento.</p></section><section class="chapter" id="passo-4"><header class="chapter-head"><span class="chapter-no">05</span><div><h2>Psicologia</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><div class="blocks"><article class="block"><span class="label">O essencial</span><h3>Defina expectativas possíveis.</h3><p>Preparar-se para crítica, silêncio, ajustes e continuidade.</p></article><article class="block"><span class="label">Na prática</span><h3>Uma meta de ação</h3><aside class="example"><span class="label">Por exemplo</span><p>Em vez de depender de uma quantidade de vendas, planeje apresentar um trecho, conversar com um grupo de leitura e responder aos primeiros leitores.</p></aside></article></div><p class="takeaway"><span>Seu próximo passo</span>Escolha três ações que você consegue realizar.</p></section></div><section class="closing wrap"><h2>Leve para o seu projeto</h2><details class="depth"><summary>Para levar em conta</summary><div><ul><li>Checklist existe para baixar a febre da ansiedade.</li><li>Não lance para compensar cansaço.</li><li>Depois do lançamento ainda existe trabalho.</li></ul></div></details><details class="depth"><summary>Entenda o detalhe</summary><div><p>CHECKLIST DE LANÇAMENTO</p><p>O que precisa estar pronto antes de o livro estar disponível.</p><p>Checklist de lançamento não começa no dia do lançamento — começa 90 dias antes. Cada item tem prazo real: &#x27;em breve&#x27; não é prazo. ISBN, depósito legal e registro de direito autoral têm processos com tempo mínimo. Distribuidoras têm lead time: livro impresso leva semanas para chegar às livrarias.</p></div></details><details class="depth"><summary>Abra um roteiro para copiar</summary><div><p>Selecione o roteiro e copie para uma nota.</p><pre tabindex="0">LIVRO: [TÍTULO]
 LANÇAMENTO: [DATA]
 

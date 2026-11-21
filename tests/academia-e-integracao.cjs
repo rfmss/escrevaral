@@ -157,7 +157,7 @@ assert.equal(findByClass(bridgedModal, 'esc-academy-tome-art').length, 2, '2 ilu
 assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 12, '12 guias editoriais com numeração romana');
 
 // Garantir assets da biblioteca Real Gabinete em WebP + inclusão no build + estética fosca sem gradientes puros
-for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp']) {
+for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp']) {
   assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', imgName)), 'Faltando assets/library/' + imgName);
 }
 assert.ok(buildSrc.includes("'assets/library'"), 'scripts/build.cjs copia assets/library para dist/site/');
@@ -179,15 +179,19 @@ assert.ok(!/#fffdf9|#f8f5ef/i.test(cartorioCss), 'cartorio.css sem caixas branca
 assert.ok(embeddedCss.includes('--paper:#cfc3ae') && !embeddedCss.includes('#fafbfc'), 'academia/embedded.css calibrado em #cfc3ae');
 assert.ok(litHtml.includes('--paper:#cfc3ae'), 'literatura-mundial.html linha do tempo em pergaminho #cfc3ae');
 assert.ok(litHtml.includes('--oasis-paper:#c4cfc2'), 'literatura-mundial.html preserva leitor Kindle Oasis 100% em E-Ink Sálvia #c4cfc2');
+assert.ok(litHtml.includes('button.oasis-key:hover:not(:disabled)'), 'literatura-mundial.html protege destaque hover E-Ink nos botões do Kindle Oasis');
 assert.ok(realGabineteCss.includes('#oficina select'), 'real-gabinete.css estiliza selects/inputs dentro de #oficina em pergaminho (sem verde vazado)');
 const academiaJs = fs.readFileSync(path.join(rootDir, 'src/ui/academia.js'), 'utf8');
 assert.ok(academiaJs.includes("var paper = isDark ? '#20150f' : '#cfc3ae'"), 'academia.js envia paleta Real Gabinete #cfc3ae (e não #c4cfc2) aos iframes da Academia');
 const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');
-assert.ok(autopubHtml.includes('.hero-depth span { display:none; }'), 'autopublicacao-independente.html sem sobreposição 01—05 sobre .hero-note');
+assert.ok(autopubHtml.includes('AFK-REAL-GABINETE-ORNAMENTS-START'), 'autopublicacao-independente.html com ornamentos AFK x Real Gabinete');
 for (const entry of catalog) {
   const html = fs.readFileSync(path.join(rootDir, 'academia', entry.file), 'utf8');
   assert.ok(html.includes('#cfc3ae'), 'academia/' + entry.file + ' calibrado em #cfc3ae');
   assert.ok(!html.includes('--paper:#fafbfc'), 'academia/' + entry.file + ' sem --paper branco antigo');
+  if (entry.id !== 'objeto-livro' && entry.id !== 'literatura-mundial') {
+    assert.ok(html.includes('AFK-REAL-GABINETE-ORNAMENTS-START') && html.includes("img-src 'self' data:;"), 'academia/' + entry.file + ' com ornamentos AFK e banner WebP local');
+  }
 }
 bridged.close();
 

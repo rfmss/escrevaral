@@ -707,7 +707,7 @@ html[data-theme="dark"] .oasis-screen .reader-bar .matrix-stamp{background:#c4cf
 .oasis-screen .reader-bar{padding:12px 22px 10px;border-bottom:1px dashed var(--dash);background:var(--oasis-chrome)}
 .oasis-screen .reader-controls{display:flex;gap:6px}
 .oasis-screen .btn-tech,#versions button{font:600 11px/1 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;min-height:28px;padding:5px 10px;border:1px solid var(--oasis-rule);border-radius:2px;background:var(--oasis-paper);color:var(--oasis-ink);text-decoration:none;box-shadow:none}
-.oasis-screen .btn-tech:hover,.oasis-screen .btn-tech:focus-visible,#versions button:hover,#versions button:focus-visible,#versions button[aria-pressed=true]{background:var(--oasis-ink);color:var(--oasis-paper);border-color:var(--oasis-ink);text-decoration:none}
+.oasis-screen button.btn-tech:hover:not(:disabled),.oasis-screen button.btn-tech:focus-visible,#versions button:hover:not(:disabled),#versions button:focus-visible,#versions button[aria-pressed=true]{background:var(--oasis-ink) !important;color:var(--oasis-paper) !important;border-color:var(--oasis-ink) !important;text-decoration:none}
 .oasis-screen .btn-tech:active,#versions button:active{transform:translateY(1px)}
 .oasis-screen .btn-tech:disabled{opacity:.38;background:transparent;color:var(--oasis-ink);border-color:var(--oasis-rule);transform:none}
 #versions{display:flex;gap:6px;padding:9px 24px;border-bottom:1px dashed var(--dash);background:var(--oasis-chrome);flex-wrap:wrap;flex-shrink:0}
@@ -737,10 +737,10 @@ html[data-theme="dark"] #reading-scroll{scrollbar-color:#465449 #1a211c}
 .oasis-grip::before{content:'';position:absolute;top:22px;bottom:22px;left:13px;width:1px;background:#29302c;pointer-events:none}
 .oasis-key{position:relative;width:32px;height:70px;min-height:70px;padding:0;border:0;border-radius:6px;background:transparent;color:#9aa39d;display:grid;place-items:center;cursor:pointer;box-shadow:none}
 .oasis-key::before{content:'';display:block;width:7px;height:56px;border-radius:3px;background:#282e2b;border:1px solid #454e49;box-shadow:-1px 0 0 #111513,1px 0 0 #343b37}
-.oasis-key:hover,.oasis-key:focus-visible{background:#ffffff0a;text-decoration:none}
-.oasis-key:hover::before,.oasis-key:focus-visible::before{background:#333b37;border-color:#8b968e}
-.oasis-key:focus-visible{outline:1px dashed #9aa39d;outline-offset:-3px}
-.oasis-key:active::before{transform:translateX(-1px);background:#202523;box-shadow:none}
+button.oasis-key:hover:not(:disabled),button.oasis-key:focus-visible{background:rgba(196,207,194,.14) !important;border-color:transparent !important;text-decoration:none}
+button.oasis-key:hover::before,button.oasis-key:focus-visible::before{background:#3d4d40;border-color:#c4cfc2;box-shadow:0 0 0 1px rgba(196,207,194,.35)}
+button.oasis-key:focus-visible{outline:1px dashed #c4cfc2;outline-offset:-3px}
+button.oasis-key:active::before{transform:translateX(-1px);background:#253027;box-shadow:none}
 
 @media(max-width:600px){
   #timeline{padding:12px}
