@@ -18,24 +18,28 @@
     return n;
   }
   function valid(s, f) { return f && typeof f.start === 'number' && typeof f.end === 'number' && f.start >= 0 && f.end > f.start && f.end <= s.length && s.slice(f.start, f.end) === f.snippet; }
+  function cleanClassName(raw) {
+    if (!raw) { return ''; }
+    return String(raw).replace(/\s*\(UD\)/gi, '').replace(/^\s+|\s+$/g, '');
+  }
   function label(f) {
     var c = f.candidates && f.candidates.classes || [];
-    if (f.analysisStatus === 'contextual') { return f.feature; }
-    if (f.analysisStatus === 'desconhecido') { return 'sem leitura'; }
-    if (f.analysisStatus === 'ambiguo') { return 'ambígua'; }
-    if (f.analysisStatus === 'lexical') { return (c[0] || 'classe') + ' · léxico'; }
+    if (f.analysisStatus === 'contextual') { return cleanClassName(f.feature); }
+    if (f.analysisStatus === 'desconhecido') { return 'fora do acervo'; }
+    if (f.analysisStatus === 'ambiguo') { return 'ver contexto'; }
+    if (f.analysisStatus === 'lexical') { return cleanClassName(c[0] || 'classe'); }
     return f.feature || 'observação';
   }
   function normalizeClassKey(cls) {
     if (!cls) { return 'incerta'; }
-    return String(cls).toLowerCase().replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óôõ]/g, 'o').replace(/[ú]/g, 'u').replace(/ç/g, 'c');
+    return String(cls).replace(/\s*\(UD\)/gi, '').toLowerCase().replace(/^\s+|\s+$/g, '').replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óôõ]/g, 'o').replace(/[ú]/g, 'u').replace(/ç/g, 'c');
   }
   function classDisplayName(key) {
     var names = {
       substantivo: 'Substantivo', verbo: 'Verbo', adjetivo: 'Adjetivo', adverbio: 'Advérbio',
       artigo: 'Artigo', pronome: 'Pronome', preposicao: 'Preposição', conjuncao: 'Conjunção',
-      numeral: 'Numeral', interjeicao: 'Interjeição', 'locucao verbal': 'Locução verbal',
-      incerta: 'Ambígua / sem leitura'
+      numeral: 'Numeral', interjeicao: 'Interjeição', determinante: 'Determinante', 'locucao verbal': 'Locução verbal',
+      incerta: 'Depende do contexto'
     };
     return names[key] || (key.charAt(0).toUpperCase() + key.slice(1));
   }
@@ -494,26 +498,26 @@
     box.setAttribute('data-reading-lens', options.lens || 'geral');
 
     el('p', main, 'ptbr-overline',
-      morph ? 'CLASSES NO TEXTO · PÍLULAS COLORIDAS'
-        : isRitmo ? 'PARTITURA RÍTMICA DAS FRASES'
-        : isDialogo ? 'DESENHO GRÁFICO DO DIÁLOGO'
-        : isRepeat ? 'ECOS E REPETIÇÕES NO CONTEXTO'
-        : isRima ? 'ESQUEMA DE RIMAS · FAMÍLIAS SONORAS'
-        : isMetrica ? 'ESCANSÃO SILÁBICA DOS VERSOS'
-        : 'LEITURA ANOTADA NO CONTEXTO');
+      morph ? 'CLASSES DE PALAVRAS'
+        : isRitmo ? 'RITMO DAS FRASES'
+        : isDialogo ? 'LINHAS DE DIÁLOGO'
+        : isRepeat ? 'REPETIÇÕES PRÓXIMAS'
+        : isRima ? 'RIMAS ENTRE VERSOS'
+        : isMetrica ? 'MÉTRICA DOS VERSOS'
+        : 'LEITURA DO TEXTO');
     el('p', main, 'ptbr-reading-help', morph
-      ? 'Cada palavra veste a cor da sua classe. Filtre uma classe acima para acender só ela no texto, ou clique numa pílula para ver sua evidência.'
+      ? 'Filtre por classe acima ou clique em qualquer palavra para ver o contexto.'
       : isRitmo
-        ? 'Panorama estatístico e destaques descritivos de fôlego (frases longas e cadências regulares) para ouvir o desenho das pausas.'
+        ? 'Extensão das frases, fôlego e sequências de cadência parecida.'
         : isDialogo
-          ? 'Proporção de palavras e linhas iniciadas por marcas de fala (travessão —, meia-risca – ou hífen - ) no trecho disponível.'
+          ? 'Proporção de palavras e linhas com travessão (—), meia-risca (–) ou hífen (- ).'
           : isRepeat
-            ? 'As repetições aparecem grifadas dentro da própria passagem, na mesma cor. Clique para conferir ou abrir sinônimos.'
+            ? 'Palavras repetidas perto umas das outras. Clique para localizar ou abrir sinônimos.'
             : isRima
-              ? 'Versos com terminação sonora aproximada (consoante ou toante) compartilham a mesma letra (A, B, C…) e cor.'
+              ? 'Versos com final sonoro próximo compartilham a mesma letra (A, B, C…).'
               : isMetrica
-                ? 'Divisão estimada em sílabas poéticas, com a sílaba tônica em destaque, elisões possíveis e a medida clássica à direita.'
-                : 'Cada ocorrência aparece destacada dentro da sua própria frase. Clique para ver explicação ou localizar no texto.');
+                ? 'Sílabas poéticas estimadas, tônica destacada e medida do verso à direita.'
+                : 'Clique em qualquer trecho para ler a observação ou localizar no texto.');
 
     /* Barra de filtros por classe + alternador "Só cores" para Classes de palavras */
     var filterButtons = [];
@@ -811,7 +815,10 @@
       if (dead || !arr[index] || (options.isCurrent && !options.isCurrent())) { return; }
       active = index;
       buttons.forEach(function (b, j) { b.setAttribute('aria-pressed', j === index ? 'true' : 'false'); b.setAttribute('data-reading-support', 'false'); });
-      selected.textContent = '“' + arr[index].snippet + '” · ' + label(arr[index]);
+      var itemStatus = arr[index].analysisStatus;
+      selected.textContent = (morph && (itemStatus === 'ambiguo' || itemStatus === 'desconhecido'))
+        ? ('“' + arr[index].snippet + '”')
+        : ('“' + arr[index].snippet + '” · ' + label(arr[index]));
       updateAsideStepper();
       options.onSelect(arr[index], details, user);
       root.clearTimeout(timer); timer = root.setTimeout(draw, 0);

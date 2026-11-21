@@ -19,7 +19,7 @@ assert.ok(tags(parent,'path').length>0,'arcos apenas a partir de apoios do motor
 const cantos=words.filter(x=>x.textContent.startsWith('canto'));
 assert.equal(cantos.length,2);cantos[0].click();assert.equal(picked.at(-1).feature,'verbo');cantos[1].click();assert.equal(picked.at(-1).feature,'substantivo');
 assert.notEqual(picked.at(-1).start,picked.at(-2).start,'homógrafos mantêm posições distintas');
-const unknown=words.find(x=>x.textContent.startsWith('qwertyer'));assert.ok(unknown.textContent.includes('sem leitura'));unknown.click();
+const unknown=words.find(x=>x.textContent.startsWith('qwertyer'));assert.ok(unknown.textContent.includes('fora do acervo'));unknown.click();
 while(timers.length)timers.shift()();assert.equal(tags(parent,'path').length,0,'sem arcos inventados para palavra desconhecida');
 current=false;const before=picked.length;cantos[0].click();assert.equal(picked.length,before,'resultado obsoleto não reage');
 renderer.destroy();assert.equal(listeners.resize,undefined,'remove listener ao trocar a lente');

@@ -251,7 +251,7 @@
     border: 1px solid rgba(33, 41, 33, 0.28);
     background: rgba(255, 253, 248, 0.65);
     color: var(--esc-ink, #1e2320);
-    font: 600 11.5px/1.2 'Courier Prime', 'Courier New', monospace;
+    font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
   }
 

@@ -11796,24 +11796,28 @@
     return n;
   }
   function valid(s, f) { return f && typeof f.start === 'number' && typeof f.end === 'number' && f.start >= 0 && f.end > f.start && f.end <= s.length && s.slice(f.start, f.end) === f.snippet; }
+  function cleanClassName(raw) {
+    if (!raw) { return ''; }
+    return String(raw).replace(/\s*\(UD\)/gi, '').replace(/^\s+|\s+$/g, '');
+  }
   function label(f) {
     var c = f.candidates && f.candidates.classes || [];
-    if (f.analysisStatus === 'contextual') { return f.feature; }
-    if (f.analysisStatus === 'desconhecido') { return 'sem leitura'; }
-    if (f.analysisStatus === 'ambiguo') { return 'ambígua'; }
-    if (f.analysisStatus === 'lexical') { return (c[0] || 'classe') + ' · léxico'; }
+    if (f.analysisStatus === 'contextual') { return cleanClassName(f.feature); }
+    if (f.analysisStatus === 'desconhecido') { return 'fora do acervo'; }
+    if (f.analysisStatus === 'ambiguo') { return 'ver contexto'; }
+    if (f.analysisStatus === 'lexical') { return cleanClassName(c[0] || 'classe'); }
     return f.feature || 'observação';
   }
   function normalizeClassKey(cls) {
     if (!cls) { return 'incerta'; }
-    return String(cls).toLowerCase().replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óôõ]/g, 'o').replace(/[ú]/g, 'u').replace(/ç/g, 'c');
+    return String(cls).replace(/\s*\(UD\)/gi, '').toLowerCase().replace(/^\s+|\s+$/g, '').replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óôõ]/g, 'o').replace(/[ú]/g, 'u').replace(/ç/g, 'c');
   }
   function classDisplayName(key) {
     var names = {
       substantivo: 'Substantivo', verbo: 'Verbo', adjetivo: 'Adjetivo', adverbio: 'Advérbio',
       artigo: 'Artigo', pronome: 'Pronome', preposicao: 'Preposição', conjuncao: 'Conjunção',
-      numeral: 'Numeral', interjeicao: 'Interjeição', 'locucao verbal': 'Locução verbal',
-      incerta: 'Ambígua / sem leitura'
+      numeral: 'Numeral', interjeicao: 'Interjeição', determinante: 'Determinante', 'locucao verbal': 'Locução verbal',
+      incerta: 'Depende do contexto'
     };
     return names[key] || (key.charAt(0).toUpperCase() + key.slice(1));
   }
@@ -12272,26 +12276,26 @@
     box.setAttribute('data-reading-lens', options.lens || 'geral');
 
     el('p', main, 'ptbr-overline',
-      morph ? 'CLASSES NO TEXTO · PÍLULAS COLORIDAS'
-        : isRitmo ? 'PARTITURA RÍTMICA DAS FRASES'
-        : isDialogo ? 'DESENHO GRÁFICO DO DIÁLOGO'
-        : isRepeat ? 'ECOS E REPETIÇÕES NO CONTEXTO'
-        : isRima ? 'ESQUEMA DE RIMAS · FAMÍLIAS SONORAS'
-        : isMetrica ? 'ESCANSÃO SILÁBICA DOS VERSOS'
-        : 'LEITURA ANOTADA NO CONTEXTO');
+      morph ? 'CLASSES DE PALAVRAS'
+        : isRitmo ? 'RITMO DAS FRASES'
+        : isDialogo ? 'LINHAS DE DIÁLOGO'
+        : isRepeat ? 'REPETIÇÕES PRÓXIMAS'
+        : isRima ? 'RIMAS ENTRE VERSOS'
+        : isMetrica ? 'MÉTRICA DOS VERSOS'
+        : 'LEITURA DO TEXTO');
     el('p', main, 'ptbr-reading-help', morph
-      ? 'Cada palavra veste a cor da sua classe. Filtre uma classe acima para acender só ela no texto, ou clique numa pílula para ver sua evidência.'
+      ? 'Filtre por classe acima ou clique em qualquer palavra para ver o contexto.'
       : isRitmo
-        ? 'Panorama estatístico e destaques descritivos de fôlego (frases longas e cadências regulares) para ouvir o desenho das pausas.'
+        ? 'Extensão das frases, fôlego e sequências de cadência parecida.'
         : isDialogo
-          ? 'Proporção de palavras e linhas iniciadas por marcas de fala (travessão —, meia-risca – ou hífen - ) no trecho disponível.'
+          ? 'Proporção de palavras e linhas com travessão (—), meia-risca (–) ou hífen (- ).'
           : isRepeat
-            ? 'As repetições aparecem grifadas dentro da própria passagem, na mesma cor. Clique para conferir ou abrir sinônimos.'
+            ? 'Palavras repetidas perto umas das outras. Clique para localizar ou abrir sinônimos.'
             : isRima
-              ? 'Versos com terminação sonora aproximada (consoante ou toante) compartilham a mesma letra (A, B, C…) e cor.'
+              ? 'Versos com final sonoro próximo compartilham a mesma letra (A, B, C…).'
               : isMetrica
-                ? 'Divisão estimada em sílabas poéticas, com a sílaba tônica em destaque, elisões possíveis e a medida clássica à direita.'
-                : 'Cada ocorrência aparece destacada dentro da sua própria frase. Clique para ver explicação ou localizar no texto.');
+                ? 'Sílabas poéticas estimadas, tônica destacada e medida do verso à direita.'
+                : 'Clique em qualquer trecho para ler a observação ou localizar no texto.');
 
     /* Barra de filtros por classe + alternador "Só cores" para Classes de palavras */
     var filterButtons = [];
@@ -12589,7 +12593,10 @@
       if (dead || !arr[index] || (options.isCurrent && !options.isCurrent())) { return; }
       active = index;
       buttons.forEach(function (b, j) { b.setAttribute('aria-pressed', j === index ? 'true' : 'false'); b.setAttribute('data-reading-support', 'false'); });
-      selected.textContent = '“' + arr[index].snippet + '” · ' + label(arr[index]);
+      var itemStatus = arr[index].analysisStatus;
+      selected.textContent = (morph && (itemStatus === 'ambiguo' || itemStatus === 'desconhecido'))
+        ? ('“' + arr[index].snippet + '”')
+        : ('“' + arr[index].snippet + '” · ' + label(arr[index]));
       updateAsideStepper();
       options.onSelect(arr[index], details, user);
       root.clearTimeout(timer); timer = root.setTimeout(draw, 0);
@@ -12930,11 +12937,10 @@
     reservedButton.textContent=result&&result.occurrences?'Ver palavras reconhecidas ('+result.occurrences.length+')':'Ver palavras reconhecidas';
     for(var id in signalLabels){if(own.call(signalLabels,id)){
       var state=preparation?preparation.state(result,id):'nao-verificado';
-      signalLabels[id].textContent=state==='encontrado'?(id==='morfologia'?'Há palavras no léxico; classe contextual a examinar.':'Há indícios para examinar.'):
-        state==='nao-encontrado-no-recorte'?'Sem indícios neste recorte; análise disponível.':'Pertinência ainda não verificada.';
+      signalLabels[id].textContent=state==='encontrado'?'Há pontos para observar':'';
       signalLabels[id].setAttribute('data-signal-state',state);
     }}
-    prepStatus.textContent=result?'Preparação leve: trecho entre as posições '+(result.scope.start+1)+' e '+result.scope.end+(result.partial?'; o restante não foi verificado.':'.')+' Indícios não são classificações nem erros.':'A preparação aguarda uma pausa na escrita. Nenhuma análise completa é automática.';
+    prepStatus.textContent=result?'Trecho pronto para examinar. Escolha o que deseja ver abaixo.':'Escolha uma análise abaixo quando quiser observar o texto.';
     paintLensFilter();
   }
   if(E.createPreparation&&E.createSignalTriage){preparation=E.createPreparation(E,{
@@ -13049,13 +13055,36 @@
     for(k in labels){if(own.call(labels,k)){chosen.push(k);}}
     for(var i=0;i<chosen.length;i++){id=chosen[i];
       btn=el('button',wheel,'',null);btn.type='button';el('span',btn,'',labels[id]);btn.setAttribute('data-ptbr-lens',id);
-      el('small',btn,'ptbr-lens-description',descriptions[id]);signalLabels[id]=el('small',btn,'ptbr-signal','Pertinência ainda não verificada.');
+      el('small',btn,'ptbr-lens-description',descriptions[id]);signalLabels[id]=el('small',btn,'ptbr-signal','');
+      signalLabels[id].setAttribute('data-signal-state','nao-verificado');
       btn.setAttribute('aria-label','Examinar '+labels[id]);btn.disabled=!s.length||scopeLen>fullScope;
       btn.addEventListener('click',function(){run(this.getAttribute('data-ptbr-lens'));},false);}
     action.disabled=!lastLens||!s.length||scopeLen>fullScope;
     paintPreparation(prepared);showScreen('home',null,false);
     note.textContent='A análise tem cobertura parcial. Ausência de apontamentos não garante ausência de problemas.';
 
+  }
+  function cleanClassLabel(raw){
+    return String(raw||'').replace(/\s*\(UD\)/gi,'').replace(/^\s+|\s+$/g,'');
+  }
+  function humanMorphSummary(f){
+    var raw=(f.candidates&&f.candidates.classes)||[],cls=[],seen={},i,c;
+    for(i=0;i<raw.length;i++){
+      c=cleanClassLabel(raw[i]);
+      if(c&&!seen[c]){seen[c]=true;cls.push(c);}
+    }
+    if(f.analysisStatus==='contextual'){
+      return 'Nesta frase, funciona como '+cleanClassLabel(f.feature)+'.';
+    }
+    if(f.analysisStatus==='ambiguo'&&cls.length>=2){
+      if(cls.length===2){return 'Pode ser '+cls[0]+' ou '+cls[1]+' — verifique o contexto da frase.';}
+      if(cls.length===3){return 'Pode ser '+cls[0]+', '+cls[1]+' ou '+cls[2]+' — verifique o contexto da frase.';}
+      return 'Pode ser '+cls.slice(0,3).join(', ')+' ou outra classe — verifique o contexto da frase.';
+    }
+    if(f.analysisStatus==='lexical'&&cls.length){
+      return 'Costuma funcionar como '+cls[0]+' — confirme pelo sentido na frase.';
+    }
+    return 'Palavra fora do acervo local — verifique pelo contexto da frase.';
   }
   function resultCard(lens, result, snapshot, request, target) {
     var card=el('section',results,'ptbr-outcome'), h=el('h3',card,'',labels[lens]||lens);
@@ -13065,39 +13094,39 @@
     function suppressed(f){return ignored.indexOf(f.id+'|'+f.snippet)!==-1&&!(target&&f.start<=target.start&&f.end>=target.end);}
     for(i=0;i<arr.length;i++){if(!suppressed(arr[i])){visible++;}}
     var accepted=[],observations=[],stash=el('div',card,'ptbr-observation-list');
-    var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'observação nova':'observações novas')+' neste recorte.':'Nenhuma observação nova neste recorte.');
+    var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'ocorrência':'ocorrências')+' neste trecho.':'Nenhuma observação neste trecho.');
     for(i=0;i<arr.length&&accepted.length<maxFindings;i++){
       f=arr[i];if(suppressed(f)){continue;}
       entry=el('div',stash,'ptbr-observation');accepted.push(f);observations.push(entry);
-      el('p',entry,'',f.message);
-      el('blockquote',entry,'',f.snippet);
       detail=el('div',entry,'ptbr-evidence');detail.hidden=true;
+      if(lens==='morfologia'){
+        el('p',entry,'ptbr-reading-summary',humanMorphSummary(f));
+        el('p',detail,'',f.message);
+      }else{
+        el('p',entry,'ptbr-obs-title',f.message);
+        if(f.snippet&&f.snippet.length>2){el('blockquote',entry,'',f.snippet);}
+        if(f.evidence){el('p',entry,'ptbr-reading-summary',f.evidence.observation);}
+      }
       el('p',detail,'','Confiança: '+f.confidence);
       if(f.evidence){
-        el('p',entry,'ptbr-reading-summary',f.evidence.observation);
         el('p',detail,'','Observação: '+f.evidence.observation);
         el('p',detail,'','Interpretação: '+f.evidence.interpretation);
         el('p',detail,'','Ambiguidade: '+f.evidence.ambiguity);
         el('p',detail,'','Limite: '+f.evidence.limit);
         if(f.evidence.source){el('p',detail,'','Fonte: '+(f.evidence.source.title||f.evidence.source));}
       }
-      b=el('button',entry,'','Ver evidência');b.type='button';
-      b.setAttribute('aria-expanded','false');
-      (function(target,button){button.addEventListener('click',function(){
-        target.hidden=!target.hidden;button.textContent=target.hidden?'Ver evidência':'Fechar evidência';
-        button.setAttribute('aria-expanded',target.hidden?'false':'true');
-      },false);}(detail,b));
-      b=el('button',entry,'','Ver no texto');b.type='button';
+      var actRow=el('div',entry,'ptbr-aside-actions');
+      b=el('button',actRow,'ptbr-btn-primary','Ver no texto');b.type='button';
       (function(start,end){b.addEventListener('click',function(){
         if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
         locateInText(start,end,'Selecione o trecho manualmente no manuscrito.');
       },false);}(f.start,f.end));
       if((lens==='repeticao'||lens==='adverbios'||lens==='decolonial'||(lens==='morfologia'&&!/\s/.test(f.snippet)))&&E.ptbrOpenWordCard){
-        b=el('button',entry,'',lens==='morfologia'?'Definição e sinônimos':'Sinônimos');b.type='button';
+        b=el('button',actRow,'','Sinônimos');b.type='button';
         (function(word){b.addEventListener('click',function(){E.ptbrOpenWordCard(word);},false);}(f.snippet));
       }
       if(E.ptbrPanelKeep&&!request){
-        b=el('button',entry,'','Manter minha escolha');b.type='button';
+        b=el('button',actRow,'ptbr-btn-subtle','Manter minha escolha');b.type='button';
         (function(finding,button){button.addEventListener('click',function(){
           if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
           if(E.ptbrPanelKeep(finding,snapshot,documentAtResult)){
@@ -13106,6 +13135,12 @@
           }else{status.textContent='Não foi possível guardar a escolha. Tente novamente.';}
         },false);}(f,b));
       }
+      b=el('button',actRow,'ptbr-btn-subtle','Detalhes técnicos');b.type='button';
+      b.setAttribute('aria-expanded','false');
+      (function(target,button){button.addEventListener('click',function(){
+        target.hidden=!target.hidden;button.textContent=target.hidden?'Detalhes técnicos':'Ocultar detalhes';
+        button.setAttribute('aria-expanded',target.hidden?'false':'true');
+      },false);}(detail,b));
     }
     if(E.renderReadingMap){
       stash.hidden=true;

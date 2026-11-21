@@ -216,11 +216,10 @@
     reservedButton.textContent=result&&result.occurrences?'Ver palavras reconhecidas ('+result.occurrences.length+')':'Ver palavras reconhecidas';
     for(var id in signalLabels){if(own.call(signalLabels,id)){
       var state=preparation?preparation.state(result,id):'nao-verificado';
-      signalLabels[id].textContent=state==='encontrado'?(id==='morfologia'?'Há palavras no léxico; classe contextual a examinar.':'Há indícios para examinar.'):
-        state==='nao-encontrado-no-recorte'?'Sem indícios neste recorte; análise disponível.':'Pertinência ainda não verificada.';
+      signalLabels[id].textContent=state==='encontrado'?'Há pontos para observar':'';
       signalLabels[id].setAttribute('data-signal-state',state);
     }}
-    prepStatus.textContent=result?'Preparação leve: trecho entre as posições '+(result.scope.start+1)+' e '+result.scope.end+(result.partial?'; o restante não foi verificado.':'.')+' Indícios não são classificações nem erros.':'A preparação aguarda uma pausa na escrita. Nenhuma análise completa é automática.';
+    prepStatus.textContent=result?'Trecho pronto para examinar. Escolha o que deseja ver abaixo.':'Escolha uma análise abaixo quando quiser observar o texto.';
     paintLensFilter();
   }
   if(E.createPreparation&&E.createSignalTriage){preparation=E.createPreparation(E,{
@@ -335,13 +334,36 @@
     for(k in labels){if(own.call(labels,k)){chosen.push(k);}}
     for(var i=0;i<chosen.length;i++){id=chosen[i];
       btn=el('button',wheel,'',null);btn.type='button';el('span',btn,'',labels[id]);btn.setAttribute('data-ptbr-lens',id);
-      el('small',btn,'ptbr-lens-description',descriptions[id]);signalLabels[id]=el('small',btn,'ptbr-signal','Pertinência ainda não verificada.');
+      el('small',btn,'ptbr-lens-description',descriptions[id]);signalLabels[id]=el('small',btn,'ptbr-signal','');
+      signalLabels[id].setAttribute('data-signal-state','nao-verificado');
       btn.setAttribute('aria-label','Examinar '+labels[id]);btn.disabled=!s.length||scopeLen>fullScope;
       btn.addEventListener('click',function(){run(this.getAttribute('data-ptbr-lens'));},false);}
     action.disabled=!lastLens||!s.length||scopeLen>fullScope;
     paintPreparation(prepared);showScreen('home',null,false);
     note.textContent='A análise tem cobertura parcial. Ausência de apontamentos não garante ausência de problemas.';
 
+  }
+  function cleanClassLabel(raw){
+    return String(raw||'').replace(/\s*\(UD\)/gi,'').replace(/^\s+|\s+$/g,'');
+  }
+  function humanMorphSummary(f){
+    var raw=(f.candidates&&f.candidates.classes)||[],cls=[],seen={},i,c;
+    for(i=0;i<raw.length;i++){
+      c=cleanClassLabel(raw[i]);
+      if(c&&!seen[c]){seen[c]=true;cls.push(c);}
+    }
+    if(f.analysisStatus==='contextual'){
+      return 'Nesta frase, funciona como '+cleanClassLabel(f.feature)+'.';
+    }
+    if(f.analysisStatus==='ambiguo'&&cls.length>=2){
+      if(cls.length===2){return 'Pode ser '+cls[0]+' ou '+cls[1]+' — verifique o contexto da frase.';}
+      if(cls.length===3){return 'Pode ser '+cls[0]+', '+cls[1]+' ou '+cls[2]+' — verifique o contexto da frase.';}
+      return 'Pode ser '+cls.slice(0,3).join(', ')+' ou outra classe — verifique o contexto da frase.';
+    }
+    if(f.analysisStatus==='lexical'&&cls.length){
+      return 'Costuma funcionar como '+cls[0]+' — confirme pelo sentido na frase.';
+    }
+    return 'Palavra fora do acervo local — verifique pelo contexto da frase.';
   }
   function resultCard(lens, result, snapshot, request, target) {
     var card=el('section',results,'ptbr-outcome'), h=el('h3',card,'',labels[lens]||lens);
@@ -351,39 +373,39 @@
     function suppressed(f){return ignored.indexOf(f.id+'|'+f.snippet)!==-1&&!(target&&f.start<=target.start&&f.end>=target.end);}
     for(i=0;i<arr.length;i++){if(!suppressed(arr[i])){visible++;}}
     var accepted=[],observations=[],stash=el('div',card,'ptbr-observation-list');
-    var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'observação nova':'observações novas')+' neste recorte.':'Nenhuma observação nova neste recorte.');
+    var countLabel=el('p',card,'',visible?visible+' '+(visible===1?'ocorrência':'ocorrências')+' neste trecho.':'Nenhuma observação neste trecho.');
     for(i=0;i<arr.length&&accepted.length<maxFindings;i++){
       f=arr[i];if(suppressed(f)){continue;}
       entry=el('div',stash,'ptbr-observation');accepted.push(f);observations.push(entry);
-      el('p',entry,'',f.message);
-      el('blockquote',entry,'',f.snippet);
       detail=el('div',entry,'ptbr-evidence');detail.hidden=true;
+      if(lens==='morfologia'){
+        el('p',entry,'ptbr-reading-summary',humanMorphSummary(f));
+        el('p',detail,'',f.message);
+      }else{
+        el('p',entry,'ptbr-obs-title',f.message);
+        if(f.snippet&&f.snippet.length>2){el('blockquote',entry,'',f.snippet);}
+        if(f.evidence){el('p',entry,'ptbr-reading-summary',f.evidence.observation);}
+      }
       el('p',detail,'','Confiança: '+f.confidence);
       if(f.evidence){
-        el('p',entry,'ptbr-reading-summary',f.evidence.observation);
         el('p',detail,'','Observação: '+f.evidence.observation);
         el('p',detail,'','Interpretação: '+f.evidence.interpretation);
         el('p',detail,'','Ambiguidade: '+f.evidence.ambiguity);
         el('p',detail,'','Limite: '+f.evidence.limit);
         if(f.evidence.source){el('p',detail,'','Fonte: '+(f.evidence.source.title||f.evidence.source));}
       }
-      b=el('button',entry,'','Ver evidência');b.type='button';
-      b.setAttribute('aria-expanded','false');
-      (function(target,button){button.addEventListener('click',function(){
-        target.hidden=!target.hidden;button.textContent=target.hidden?'Ver evidência':'Fechar evidência';
-        button.setAttribute('aria-expanded',target.hidden?'false':'true');
-      },false);}(detail,b));
-      b=el('button',entry,'','Ver no texto');b.type='button';
+      var actRow=el('div',entry,'ptbr-aside-actions');
+      b=el('button',actRow,'ptbr-btn-primary','Ver no texto');b.type='button';
       (function(start,end){b.addEventListener('click',function(){
         if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
         locateInText(start,end,'Selecione o trecho manualmente no manuscrito.');
       },false);}(f.start,f.end));
       if((lens==='repeticao'||lens==='adverbios'||lens==='decolonial'||(lens==='morfologia'&&!/\s/.test(f.snippet)))&&E.ptbrOpenWordCard){
-        b=el('button',entry,'',lens==='morfologia'?'Definição e sinônimos':'Sinônimos');b.type='button';
+        b=el('button',actRow,'','Sinônimos');b.type='button';
         (function(word){b.addEventListener('click',function(){E.ptbrOpenWordCard(word);},false);}(f.snippet));
       }
       if(E.ptbrPanelKeep&&!request){
-        b=el('button',entry,'','Manter minha escolha');b.type='button';
+        b=el('button',actRow,'ptbr-btn-subtle','Manter minha escolha');b.type='button';
         (function(finding,button){button.addEventListener('click',function(){
           if(!currentResult()){staleReset('Os resultados perderam a validade porque o texto ou a revisão mudou.');return;}
           if(E.ptbrPanelKeep(finding,snapshot,documentAtResult)){
@@ -392,6 +414,12 @@
           }else{status.textContent='Não foi possível guardar a escolha. Tente novamente.';}
         },false);}(f,b));
       }
+      b=el('button',actRow,'ptbr-btn-subtle','Detalhes técnicos');b.type='button';
+      b.setAttribute('aria-expanded','false');
+      (function(target,button){button.addEventListener('click',function(){
+        target.hidden=!target.hidden;button.textContent=target.hidden?'Detalhes técnicos':'Ocultar detalhes';
+        button.setAttribute('aria-expanded',target.hidden?'false':'true');
+      },false);}(detail,b));
     }
     if(E.renderReadingMap){
       stash.hidden=true;

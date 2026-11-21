@@ -4,6 +4,15 @@
   :root,
   body,
   body[data-esc-theme="eink"] {
+    --esc-font-ui: Arial, Helvetica, sans-serif;
+    --esc-font-serif: 'Noto Serif', Georgia, 'Times New Roman', serif;
+    --esc-font-mono: 'Courier Prime', 'Courier New', monospace;
+    --esc-text-xs: 11px;
+    --esc-text-sm: 12.5px;
+    --esc-text-base: 14px;
+    --esc-text-md: 16px;
+    --esc-text-lg: 20px;
+    --esc-text-xl: 26px;
     --esc-bg: #c4cfc2;
     --esc-surface: #c4cfc2;
     --esc-paper: #c4cfc2;
@@ -592,7 +601,7 @@
     border-radius: 2px !important;
     box-shadow: none !important;
   }
-  .sheet button[aria-pressed="true"],
+  .sheet:not(#oficina) button[aria-pressed="true"],
   .sheet .lenses button[aria-pressed="true"],
   .sheet .theme-choice button[aria-pressed="true"] {
     background: #242d23 !important;
@@ -647,15 +656,18 @@
     top: 2px !important;
     font: 600 11px/20px Arial, Helvetica, sans-serif !important;
   }
-  /* Cartões de tarefa em Examinar (.ptbr-goals button) harmonizados */
+  /* Cartões de tarefa em Examinar (.ptbr-goals button) harmonizados em grade limpa */
   #oficina .ptbr-goals button {
-    background: #bcc9ba !important;
-    border: 1px solid rgba(33, 41, 33, 0.32) !important;
-    border-radius: 2px !important;
+    background: #d3ddd0 !important;
+    color: #151d15 !important;
+    border: 1px solid rgba(33, 41, 33, 0.24) !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
+    font-family: var(--esc-font-ui, Arial, Helvetica, sans-serif) !important;
   }
   #oficina .ptbr-goals button:hover {
-    background: #b1bfb0 !important;
+    background: #dce5d9 !important;
+    border-color: rgba(33, 41, 33, 0.42) !important;
   }
 
   /* 4. Dissolução total da Estante de cadernos (#gabinete) no Papel Digital E-Ink */
