@@ -93,16 +93,29 @@ for (const marker of [
 
 const E = context.Escr;
 
-// 1. 5 quadros lazy-load com WebP, fallback PNG (Safari antigo/iPad 2012) e fallback SVG no portátil
-assert.equal(E.machineCore.FRAME_FILES.length, 5);
+// 1. 10 quadros lazy-load com WebP, fallback PNG (Safari antigo/iPad 2012) e fallback SVG no portátil
+assert.equal(E.machineCore.FRAME_FILES.length, 10);
 assert.equal(E.machineCore.frameUrl(0, 'webp'), 'assets/typewriter/typewriter-machine-idle.webp');
 assert.equal(E.machineCore.frameUrl(2, 'png'), 'assets/typewriter/typewriter-machine-strike-2.png');
+assert.equal(E.machineCore.frameUrl(9, 'webp'), 'assets/typewriter/typewriter-machine-strike-9.webp');
 assert.ok(E.machineCore.makeFallbackSvg(1).startsWith('data:image/svg+xml'));
 
-// 2. Geometria de ancoragem da máquina antiga
+// 2. Geometria de ancoragem da máquina antiga + shuffle-bag sem padrões repetitivos
 const geom = E.machineCore.computeGeometry(680, 300, 1280, 800, 35.7);
 assert.ok(geom && geom.anchorY > 0 && geom.rollerTop > geom.anchorY);
 assert.notEqual(E.machineCore.pickNextStrike(2), 2);
+const bag = E.machineCore.createStrikeBag(9);
+const cycle1 = new Set();
+let prevBag = 0;
+for (let i = 0; i < 9; i += 1) {
+  const n = bag();
+  assert.ok(n >= 1 && n <= 9);
+  assert.notEqual(n, prevBag);
+  prevBag = n;
+  cycle1.add(n);
+}
+assert.equal(cycle1.size, 9, 'shuffle-bag deve percorrer os 9 quadros de impacto antes de repetir');
+assert.notEqual(bag(), prevBag, 'transição de rodada do shuffle-bag não deve repetir o último quadro');
 
 // 3. Máquina visual + Superfoco + retorno ao repouso em 135ms
 const col = makeEl('div');
@@ -111,10 +124,10 @@ assert.ok(machine.setFocusActive(true) > 0);
 assert.equal(context.document.body.getAttribute('data-esc-machine'), 'on');
 assert.equal(machine.activeFrame(), 0);
 
-// Batida de tecla comum aciona quadro 1..4 e volta a 0 em 135ms
+// Batida de tecla comum aciona quadro 1..9 e volta a 0 em 135ms
 E.machineSound.setEnabled(false, null, true); // Som desligado, máquina visual ainda escuta
 E.machineSound.handleKey({ key: 'a', keyCode: 65 });
-assert.ok(machine.activeFrame() >= 1 && machine.activeFrame() <= 4);
+assert.ok(machine.activeFrame() >= 1 && machine.activeFrame() <= 9);
 const timeout135 = idleCallbacks.find(c => c.ms === 135);
 assert.ok(timeout135);
 timeout135.fn();

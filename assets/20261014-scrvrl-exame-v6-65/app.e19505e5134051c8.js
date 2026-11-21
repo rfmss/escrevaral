@@ -4167,14 +4167,19 @@
     'typewriter-machine-strike-1',
     'typewriter-machine-strike-2',
     'typewriter-machine-strike-3',
-    'typewriter-machine-strike-4'
+    'typewriter-machine-strike-4',
+    'typewriter-machine-strike-5',
+    'typewriter-machine-strike-6',
+    'typewriter-machine-strike-7',
+    'typewriter-machine-strike-8',
+    'typewriter-machine-strike-9'
   ];
   var WEBP_PROBE = 'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=' ;
   var webpSupport = null;
 
   function makeFallbackSvg(idx) {
     var spark = idx > 0
-      ? '<line x1="' + (540 + idx * 28) + '" y1="242" x2="611" y2="96" stroke="#9ea7a3" stroke-width="4" stroke-linecap="round"/><rect x="606" y="88" width="10" height="14" rx="1.5" fill="#4b534f"/>'
+      ? '<line x1="' + (480 + idx * 26) + '" y1="242" x2="611" y2="96" stroke="#9ea7a3" stroke-width="4" stroke-linecap="round"/><rect x="606" y="88" width="10" height="14" rx="1.5" fill="#4b534f"/>'
       : '';
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1222 242">' +
       '<rect x="64" y="61" width="1094" height="58" rx="18" fill="#242d23"/>' +
@@ -4221,8 +4226,42 @@
   }
 
   function pickNextStrike(lastIdx) {
-    var pool = [1, 2, 3, 4].filter(function (i) { return i !== lastIdx; });
+    var count = FRAME_FILES.length - 1;
+    var pool = [];
+    var i;
+    for (i = 1; i <= count; i += 1) {
+      if (i !== lastIdx) { pool.push(i); }
+    }
     return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  function createStrikeBag(count) {
+    var total = count || (FRAME_FILES.length - 1);
+    var bag = [];
+    var last = 0;
+
+    function refill() {
+      var i, j, tmp;
+      bag = [];
+      for (i = 1; i <= total; i += 1) { bag.push(i); }
+      for (i = bag.length - 1; i > 0; i -= 1) {
+        j = Math.floor(Math.random() * (i + 1));
+        tmp = bag[i];
+        bag[i] = bag[j];
+        bag[j] = tmp;
+      }
+      if (bag.length > 1 && bag[bag.length - 1] === last) {
+        tmp = bag[0];
+        bag[0] = bag[bag.length - 1];
+        bag[bag.length - 1] = tmp;
+      }
+    }
+
+    return function next() {
+      if (!bag.length) { refill(); }
+      last = bag.pop();
+      return last;
+    };
   }
 
   function computeGeometry(columnWidth, columnLeft, vw, vh, line) {
@@ -4258,6 +4297,7 @@
     frameUrl: frameUrl,
     makeFallbackSvg: makeFallbackSvg,
     pickNextStrike: pickNextStrike,
+    createStrikeBag: createStrikeBag,
     computeGeometry: computeGeometry
   };
 
@@ -4273,7 +4313,7 @@
     var visible = false;
     var anchorY = null;
     var activeIndex = 0;
-    var lastStrikeIndex = 0;
+    var nextStrike = createStrikeBag(FRAME_FILES.length - 1);
     var idleTimer = null;
     var bounceTimer = null;
     var reflowTimer = null;
@@ -4396,8 +4436,7 @@
         idleTimer = null;
         setActiveFrame(0);
       } else {
-        lastStrikeIndex = pickNextStrike(lastStrikeIndex);
-        setActiveFrame(lastStrikeIndex);
+        setActiveFrame(nextStrike());
         window.clearTimeout(idleTimer);
         idleTimer = window.setTimeout(function () {
           setActiveFrame(0);
