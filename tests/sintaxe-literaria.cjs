@@ -216,6 +216,90 @@ const positives = [
     constructions: 2,
     coordKind: 'adversativa',
     roles: { 'Sujeito composto': 'A menina e o menino', 'Conjunção coordenativa': 'porém', 'Adjunto adverbial': 'no jardim' }
+  },
+  /* Voz passiva analítica com agente da passiva explícito */
+  {
+    id: 'PASS-01',
+    text: 'A carta foi escrita pela escritora.',
+    roles: { 'Sujeito paciente': 'A carta', 'Locução passiva': 'foi escrita', 'Agente da passiva': 'pela escritora' },
+    heads: { 'Sujeito paciente': 'carta', 'Agente da passiva': 'escritora' },
+    components: { 'Locução passiva': ['foi', 'escrita'] }
+  },
+  {
+    id: 'PASS-02',
+    text: 'Os poemas foram lidos pelo menino na biblioteca.',
+    roles: { 'Sujeito paciente': 'Os poemas', 'Locução passiva': 'foram lidos', 'Agente da passiva': 'pelo menino', 'Adjunto adverbial': 'na biblioteca' },
+    heads: { 'Sujeito paciente': 'poemas', 'Agente da passiva': 'menino', 'Adjunto adverbial': 'biblioteca' }
+  },
+  {
+    id: 'PASS-03',
+    text: 'O livro foi publicado por Maria.',
+    roles: { 'Sujeito paciente': 'O livro', 'Locução passiva': 'foi publicado', 'Agente da passiva': 'por Maria' },
+    heads: { 'Agente da passiva': 'Maria' }
+  },
+  {
+    id: 'PASS-04',
+    text: 'A porta e a janela foram abertas pelo vento.',
+    roles: { 'Sujeito paciente composto': 'A porta e a janela', 'Locução passiva': 'foram abertas', 'Agente da passiva': 'pelo vento' },
+    components: { 'Sujeito paciente composto': ['porta', 'janela'], 'Locução passiva': ['foram', 'abertas'] }
+  },
+  /* Orações subordinadas adverbiais (pospostas e antepostas com vírgula obrigatória) */
+  {
+    id: 'SUB-01',
+    text: 'A escritora abriu a janela quando o sol brilhou.',
+    constructions: 2,
+    subordKind: 'temporal',
+    roles: { Sujeito: 'A escritora', 'Conjunção subordinativa': 'quando' }
+  },
+  {
+    id: 'SUB-02',
+    text: 'Quando a chuva terminou, o menino saiu.',
+    constructions: 2,
+    subordKind: 'temporal',
+    roles: { 'Conjunção subordinativa': 'Quando', Sujeito: 'a chuva' }
+  },
+  {
+    id: 'SUB-03',
+    text: 'O barco voltou porque a tempestade chegou.',
+    constructions: 2,
+    subordKind: 'causal',
+    roles: { Sujeito: 'O barco', 'Conjunção subordinativa': 'porque' }
+  },
+  {
+    id: 'SUB-04',
+    text: 'O vento passou no jardim enquanto ela dormia.',
+    constructions: 2,
+    subordKind: 'temporal',
+    roles: { 'Adjunto adverbial': 'no jardim', 'Conjunção subordinativa': 'enquanto' }
+  },
+  {
+    id: 'SUB-05',
+    text: 'Se eu canto, ela corre.',
+    constructions: 2,
+    subordKind: 'condicional',
+    roles: { 'Conjunção subordinativa': 'Se', Sujeito: 'eu' }
+  },
+  /* Orações subordinadas substantivas objetivas diretas (integrantes com "que") */
+  {
+    id: 'INT-01',
+    text: 'A escritora disse que o livro chegou.',
+    constructions: 2,
+    subordKind: 'integrante',
+    roles: { Sujeito: 'A escritora', Verbo: 'disse', 'Conjunção integrante': 'que' }
+  },
+  {
+    id: 'INT-02',
+    text: 'O menino descobriu que o vento abriu a porta.',
+    constructions: 2,
+    subordKind: 'integrante',
+    roles: { Sujeito: 'O menino', 'Conjunção integrante': 'que', 'Objeto direto': 'a porta' }
+  },
+  {
+    id: 'INT-03',
+    text: 'Ela acredita que a esperança permanece.',
+    constructions: 2,
+    subordKind: 'integrante',
+    roles: { Sujeito: 'Ela', Verbo: 'acredita', 'Conjunção integrante': 'que' }
   }
 ];
 
@@ -230,6 +314,11 @@ for (const c of positives) {
     const cf = res.findings.find(x => x.feature === 'Conjunção coordenativa');
     assert.ok(cf, c.id + ' sem conjunção coordenativa');
     assert.equal(cf.coordKind, c.coordKind, c.id + ' tipo de coordenação');
+  }
+  if (c.subordKind) {
+    const sf = res.findings.find(x => x.feature === 'Conjunção subordinativa' || x.feature === 'Conjunção integrante');
+    assert.ok(sf, c.id + ' sem conjunção subordinativa/integrante');
+    assert.equal(sf.subordKind, c.subordKind, c.id + ' tipo de subordinação');
   }
   for (const [role, expected] of Object.entries(c.roles)) {
     const f = res.findings.find(x => (role === 'Verbo' ? ['Núcleo verbal', 'Verbo de ligação'].includes(x.feature) : x.feature === role));
@@ -247,12 +336,12 @@ for (const c of positives) {
     for (const [role, expectedComps] of Object.entries(c.components)) {
       const f = res.findings.find(x => x.feature === role);
       assert.ok(f && f.components, c.id + ' componentes ausentes para ' + role);
-      assert.deepEqual(Array.from(f.components, x => x.snippet), expectedComps, c.id + ' núcleos do sujeito composto');
+      assert.deepEqual(Array.from(f.components, x => x.snippet), expectedComps, c.id + ' componentes de ' + role);
     }
   }
 }
 
-/* 2. Contrastes e abstenções obrigatórias (discordâncias, pontuação imprópria, subordinação, coordenação incompleta) */
+/* 2. Contrastes e abstenções obrigatórias */
 const abstentions = [
   ['CON-01', 'O minha casa brilhou.'],           // artigo + possessivo discordantes em gênero
   ['CON-02', 'Aquele casa caiu.'],                // demonstrativo + nome discordantes
@@ -268,7 +357,13 @@ const abstentions = [
   ['CON-12', 'A menina, e o menino cantam.'],     // vírgula indevida dentro de sujeito composto
   ['CON-13', 'A casa e a rua permaneceram silenciosos.'], // predicativo masculino para sujeito composto feminino
   ['CON-14', 'Eu canto, mas.'],                   // segunda oração ausente
-  ['CON-15', 'Eu estou lendo e ela canta.']       // preservação de LOC-N34 (primeira oração sem objeto)
+  ['CON-15', 'Eu estou lendo e ela canta.'],      // preservação de LOC-N34 (primeira oração sem objeto)
+  ['CON-16', 'A carta foi escrita.'],             // passiva sem agente (preservar LOC-N12)
+  ['CON-17', 'O livro foi escrita pela escritora.'], // particípio discordante em gênero
+  ['CON-18', 'A carta está escrita pela escritora.'], // estar (não ser) com agente
+  ['CON-19', 'Quando a chuva terminou o menino saiu.'], // subordinada anteposta sem vírgula
+  ['CON-20', 'A menina cantou que o livro chegou.'], // verbo sem frame integrante
+  ['CON-21', 'Eu estou lendo o livro que chegou.']   // relativa pós-substantivo (preservar LOC-N33)
 ];
 
 for (const [id, text] of abstentions) {
@@ -276,7 +371,8 @@ for (const [id, text] of abstentions) {
   assert.equal(res.findings.length, 0, id + ' deveria abster em: ' + text);
 }
 
-/* 3. Limite de saída nunca divide um período coordenado pela metade */
+/* 3. Limite de saída nunca divide um período composto pela metade */
 assert.equal(E.syntaxRelations.analyze('Eu canto e ela corre.', 5).length, 0, 'não dividir coordenação por limite de saída');
+assert.equal(E.syntaxRelations.analyze('A escritora disse que o livro chegou.', 5).length, 0, 'não dividir subordinação por limite de saída');
 
-console.log('OK: Sintaxe literária e coordenação (' + positives.length + ' construções + ' + abstentions.length + ' contrastes de precisão) verificada.');
+console.log('OK: Sintaxe literária, passiva, coordenação e subordinação (' + positives.length + ' construções + ' + abstentions.length + ' contrastes de precisão) verificada.');

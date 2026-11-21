@@ -1,8 +1,8 @@
-/* Relações em construções simples, literárias e coordenadas delimitadas. ES5; recebe texto, nunca o editor. */
+/* Relações em construções simples, literárias, passivas, coordenadas e subordinadas delimitadas. ES5; recebe texto, nunca o editor. */
 (function (root) {
   'use strict';
-  var E = root.Escr, D = E.grammarData, version = 'sintaxe-5-coordenacao';
-  var source = { title: 'Cunha e Cintra, 7ª ed., 2ª impressão, 2017, pp. 136–140, 145–152, 154, 510–513 e 593–598; Bechara, Lições de Português pela Análise Sintática, arquivo recebido, páginas PDF 22, 48, 75–76, 94–96 e 103. Terminologia tradicional; critérios computacionais locais, não algoritmos dos autores.', url: null };
+  var E = root.Escr, D = E.grammarData, version = 'sintaxe-6-passiva-subordinadas';
+  var source = { title: 'Cunha e Cintra, 7ª ed., 2ª impressão, 2017, pp. 136–140, 145–152, 154, 394–397, 510–513 e 593–625; Bechara, Lições de Português pela Análise Sintática, arquivo recebido, páginas PDF 22, 48, 75–76, 94–96 e 103. Terminologia tradicional; critérios computacionais locais, não algoritmos dos autores.', url: null };
   var groupSource = { title: source.title + ' Locuções: Cunha/Cintra, pp. 408–411; Bechara, páginas PDF 318, 322 e 340–343. Limites de auxiliaridade preservados.', url: null };
   var L = E.syntaxLexicon;
   var ADJUNCT_PREPS = ['em', 'por', 'com', 'sem', 'sobre', 'sob', 'entre', 'até'];
@@ -28,7 +28,8 @@
     return has(D.classes.adjetivo, word) ? { gender: 'u', number: null } : null;
   }
 
-  function parseSingle(text, ts) {
+  function parseSingle(text, ts, opts) {
+    var expectIntegrante = !!(opts && opts.expectIntegrante);
     var n = ts.length, v, firstVerb, forms, lemma, subject, neg = -1, group, verbEnd;
     if (n < 2 || n > 28) { return null; }
 
@@ -136,7 +137,6 @@
         if (s1.person === 1 || s2.person === 1) {
           person = 1;
         } else if (s1.person === 2 || s2.person === 2) {
-          /* Tu/vós + 3ª pessoa varia entre norma lusitana e brasileira: abstenção honesta. */
           continue;
         } else {
           person = 3;
@@ -159,11 +159,97 @@
       var rawVerbs = L.verbReadings ? L.verbReadings(ts[v].value) : E.contextualMorphology.readings(ts[v].value).verbs;
       forms = rawVerbs.filter(function (f) { return f[1].indexOf('indicativo:') === 0 && f[2] === subject.person && f[3] === subject.number; });
       if (!forms.length) { continue; }
-      lemma = forms[0][0];
-      if (forms.some(function (f) { return f[0] !== lemma; })) { continue; }
+
+      /* Desambiguação pontual de ser/ir (foi, foram, fui) exclusivamente para passiva analítica com particípio + agente */
+      var uniqueLemmas = [], uli;
+      for (uli = 0; uli < forms.length; uli++) {
+        if (!has(uniqueLemmas, forms[uli][0])) { uniqueLemmas.push(forms[uli][0]); }
+      }
+      var passiveOnlySer = false;
+      if (uniqueLemmas.length === 1) {
+        lemma = uniqueLemmas[0];
+      } else if (!expectIntegrante && uniqueLemmas.length === 2 && has(uniqueLemmas, 'ser') && has(uniqueLemmas, 'ir') &&
+          v + 1 < n && L.passiveParticipleReading && L.passiveParticipleReading(ts[v + 1].value)) {
+        lemma = 'ser';
+        forms = forms.filter(function (f) { return f[0] === 'ser'; });
+        passiveOnlySer = true;
+      } else {
+        continue;
+      }
+
+      /* 0. Voz passiva analítica com agente da passiva explícito (ser + particípio concordante + por/pelo/pela + SN) */
+      if (!expectIntegrante && lemma === 'ser' && v + 3 < n && L.passiveParticipleReading && L.prepReading) {
+        var part = L.passiveParticipleReading(ts[v + 1].value);
+        if (part && L.frame(part.lemma, 'objeto-direto') &&
+            agreesGender(part.gender, subject.gender) && part.number === subject.number) {
+          var passEnd = v + 2;
+          var passAdjOpts = [{ end: n, adv: null }];
+          if (n > passEnd + 2 && (L.isFinalAdverb ? L.isFinalAdverb(ts[n - 1].value) : has(D.finalAdverbs, ts[n - 1].value))) {
+            passAdjOpts.push({ end: n - 1, adv: { a: n - 1, b: n, head: n - 1, prep: null } });
+          }
+          var ppi, pap, paNom;
+          for (ppi = passEnd + 2; ppi < n - 1; ppi++) {
+            if (ts[ppi].value === 'por') { continue; }
+            pap = L.prepReading(ts[ppi].value);
+            if (!pap || !has(ADJUNCT_PREPS, pap.base)) { continue; }
+            paNom = nominal(ppi + 1, n, false, pap.det);
+            if (paNom) {
+              passAdjOpts.push({ end: ppi, adv: { a: ppi, b: n, head: paNom.head, prep: ts[ppi].value } });
+            }
+          }
+          var pai;
+          for (pai = 0; pai < passAdjOpts.length; pai++) {
+            var pEnd = passAdjOpts[pai].end;
+            var pAdv = passAdjOpts[pai].adv;
+            if (pEnd <= passEnd + 1) { continue; }
+            var agPrep = L.prepReading(ts[passEnd].value);
+            if (!agPrep || agPrep.base !== 'por') { continue; }
+            var agNom = nominal(passEnd + 1, pEnd, false, agPrep.det);
+            if (!agNom) { continue; }
+            var pSubjRole = subject.compound
+              ? { key: 'sujeito', role: 'Sujeito paciente composto', a: 0, b: firstVerb, head: null, heads: subject.heads, passiveSubject: true }
+              : { key: 'sujeito', role: 'Sujeito paciente', a: 0, b: firstVerb, head: subject.head, passiveSubject: true };
+            var pRoles = [
+              pSubjRole,
+              { key: 'predicado', role: 'Predicado', a: firstVerb, b: n },
+              { key: 'verbo', role: 'Locução passiva', a: v, b: passEnd, head: v + 1 },
+              { key: 'agente', role: 'Agente da passiva', a: passEnd, b: pEnd, head: agNom.head, prep: ts[passEnd].value }
+            ];
+            if (neg >= 0) { pRoles.push({ key: 'negacao', role: 'Negação', a: neg, b: neg + 1, head: neg }); }
+            if (pAdv) { pRoles.push({ key: 'adjunto', role: 'Adjunto adverbial', a: pAdv.a, b: pAdv.b, head: pAdv.head, prep: pAdv.prep || null }); }
+            matches.push({
+              roles: pRoles, verb: v, verbEnd: passEnd, lemma: part.lemma, forms: forms,
+              group: null, passive: { first: v, main: v + 1, lemma: part.lemma },
+              frame: { id: 'PASS-' + part.lemma + '-analitica', lemma: part.lemma, pattern: 'voz-passiva-analitica' }
+            });
+          }
+        }
+      }
+      if (passiveOnlySer) { continue; }
+
       group = E.verbGroups && E.verbGroups.match(ts, v, lemma);
       verbEnd = group ? group.last + 1 : v + 1;
       if (group) { lemma = group.lemma; }
+
+      /* Modo específico para oração principal imediatamente antes de "que" integrante */
+      if (expectIntegrante) {
+        if (verbEnd === n) {
+          var intFrame = L.frame(lemma, 'oracao-objetiva-direta');
+          if (intFrame) {
+            var intSubj = subject.compound
+              ? { key: 'sujeito', role: 'Sujeito composto', a: 0, b: firstVerb, head: null, heads: subject.heads }
+              : { key: 'sujeito', role: 'Sujeito', a: 0, b: firstVerb, head: subject.head };
+            var intRoles = [
+              intSubj,
+              { key: 'predicado', role: 'Predicado', a: firstVerb, b: n },
+              { key: 'verbo', role: group ? 'Locução verbal' : 'Núcleo verbal', a: v, b: verbEnd, head: group ? group.main : v }
+            ];
+            if (neg >= 0) { intRoles.push({ key: 'negacao', role: 'Negação', a: neg, b: neg + 1, head: neg }); }
+            matches.push({ roles: intRoles, verb: v, verbEnd: verbEnd, lemma: lemma, forms: forms, group: group || null, passive: null, frame: intFrame });
+          }
+        }
+        continue;
+      }
 
       var adjOptions = [{ end: n, adv: null }];
       if (n > verbEnd && (L.isFinalAdverb ? L.isFinalAdverb(ts[n - 1].value) : has(D.finalAdverbs, ts[n - 1].value))) {
@@ -172,6 +258,7 @@
       if (L.prepReading) {
         var pi, ap, aNom;
         for (pi = verbEnd; pi < n - 1; pi++) {
+          if (ts[pi].value === 'por') { continue; }
           ap = L.prepReading(ts[pi].value);
           if (!ap || !has(ADJUNCT_PREPS, ap.base)) { continue; }
           if (pi === verbEnd && L.frame(lemma, 'objeto-indireto-' + ap.base)) { continue; }
@@ -201,7 +288,7 @@
           for (ri = 0; ri < extraRoles.length; ri++) { baseRoles.push(extraRoles[ri]); }
           if (neg >= 0) { baseRoles.push({ key: 'negacao', role: 'Negação', a: neg, b: neg + 1, head: neg }); }
           if (advInfo) { baseRoles.push({ key: 'adjunto', role: 'Adjunto adverbial', a: advInfo.a, b: advInfo.b, head: advInfo.head, prep: advInfo.prep || null }); }
-          matches.push({ roles: baseRoles, verb: v, verbEnd: verbEnd, lemma: lemma, forms: forms, group: group || null, frame: usedFrame });
+          matches.push({ roles: baseRoles, verb: v, verbEnd: verbEnd, lemma: lemma, forms: forms, group: group || null, passive: null, frame: usedFrame });
           pushed = true;
         }
 
@@ -266,13 +353,17 @@
     return matches.length === 1 ? matches[0] : null;
   }
 
-  /* Verifica espaços puros, admitindo vírgula opcional somente antes de conjunção coordenativa específica */
-  function gapsValid(cut, ts, commaBeforeIdx) {
+  /* Verifica espaços puros; mode 'optional' permite vírgula opcional em idx; mode 'required' exige vírgula em idx */
+  function gapsValid(cut, ts, commaBeforeIdx, mode) {
     var j, gap;
     for (j = 1; j < ts.length; j++) {
       gap = cut.slice(ts[j - 1].end, ts[j].start);
       if (j === commaBeforeIdx) {
-        if (!/^,?[ \t\u00a0]+$/.test(gap)) { return false; }
+        if (mode === 'required') {
+          if (!/^,[ \t\u00a0]+$/.test(gap)) { return false; }
+        } else {
+          if (!/^,?[ \t\u00a0]+$/.test(gap)) { return false; }
+        }
       } else {
         if (!/^[ \t\u00a0]+$/.test(gap)) { return false; }
       }
@@ -280,31 +371,85 @@
     return true;
   }
 
-  /* Resolve oração simples (inclusive com sujeito composto) OU período composto por duas orações coordenadas */
+  /* Resolve oração simples, passiva, período coordenado ou período subordinado (adverbial / integrante) */
   function parseSegment(cut, ts) {
-    var candidates = [];
-    if (gapsValid(cut, ts, -1)) {
-      var single = parseSingle(cut, ts);
-      if (single) { candidates.push([{ ts: ts, result: single, coord: null }]); }
+    var candidates = [], ci, kind, ts1, ts2, r1, r2;
+
+    /* A. Oração simples (inclui sujeito composto e voz passiva analítica com agente) */
+    if (gapsValid(cut, ts, -1, 'none')) {
+      var single = parseSingle(cut, ts, null);
+      if (single) { candidates.push([{ ts: ts, result: single, link: null }]); }
     }
-    if (L.coordReading && ts.length >= 5 && ts.length <= 44) {
-      var ci, kind, ts1, ts2, r1, r2;
-      for (ci = 2; ci <= ts.length - 3; ci++) {
-        kind = L.coordReading(ts[ci].value);
-        if (!kind) { continue; }
-        if (!gapsValid(cut, ts, ci)) { continue; }
-        ts1 = ts.slice(0, ci);
-        ts2 = ts.slice(ci + 1);
-        r1 = parseSingle(cut, ts1);
-        if (!r1) { continue; }
-        r2 = parseSingle(cut, ts2);
-        if (!r2) { continue; }
-        candidates.push([
-          { ts: ts1, result: r1, coord: null },
-          { ts: ts2, result: r2, coord: { token: ts[ci], kind: kind } }
-        ]);
+
+    if (ts.length >= 5 && ts.length <= 44) {
+      /* B. Orações coordenadas (aditiva, adversativa, alternativa, conclusiva, explicativa) */
+      if (L.coordReading) {
+        for (ci = 2; ci <= ts.length - 3; ci++) {
+          kind = L.coordReading(ts[ci].value);
+          if (!kind || !gapsValid(cut, ts, ci, 'optional')) { continue; }
+          ts1 = ts.slice(0, ci); ts2 = ts.slice(ci + 1);
+          r1 = parseSingle(cut, ts1, null);
+          if (!r1) { continue; }
+          r2 = parseSingle(cut, ts2, null);
+          if (!r2) { continue; }
+          candidates.push([
+            { ts: ts1, result: r1, link: null },
+            { ts: ts2, result: r2, link: { mode: 'coord', role: 'Conjunção coordenativa', ruleId: 'PTBR-REL-009', token: ts[ci], subKind: kind } }
+          ]);
+        }
+      }
+
+      /* C. Oração subordinada adverbial posposta (quando, enquanto, porque, se) */
+      if (L.subordReading) {
+        for (ci = 2; ci <= ts.length - 3; ci++) {
+          kind = L.subordReading(ts[ci].value);
+          if (!kind || !gapsValid(cut, ts, ci, 'optional')) { continue; }
+          ts1 = ts.slice(0, ci); ts2 = ts.slice(ci + 1);
+          r1 = parseSingle(cut, ts1, null);
+          if (!r1) { continue; }
+          r2 = parseSingle(cut, ts2, null);
+          if (!r2) { continue; }
+          candidates.push([
+            { ts: ts1, result: r1, link: null },
+            { ts: ts2, result: r2, link: { mode: 'subord', role: 'Conjunção subordinativa', ruleId: 'PTBR-REL-011', token: ts[ci], subKind: kind } }
+          ]);
+        }
+
+        /* D. Oração subordinada adverbial anteposta com vírgula obrigatória (Quando..., ... / Se..., ...) */
+        var leadSub = L.subordReading(ts[0].value);
+        if (leadSub) {
+          for (ci = 3; ci <= ts.length - 2; ci++) {
+            if (!gapsValid(cut, ts, ci, 'required')) { continue; }
+            ts1 = ts.slice(1, ci); ts2 = ts.slice(ci);
+            r1 = parseSingle(cut, ts1, null);
+            if (!r1) { continue; }
+            r2 = parseSingle(cut, ts2, null);
+            if (!r2) { continue; }
+            candidates.push([
+              { ts: ts1, result: r1, link: { mode: 'subord', role: 'Conjunção subordinativa', ruleId: 'PTBR-REL-011', token: ts[0], subKind: leadSub } },
+              { ts: ts2, result: r2, link: null }
+            ]);
+          }
+        }
+      }
+
+      /* E. Oração subordinada substantiva objetiva direta (integrante com "que" após verbo dicendi/cognitivo) */
+      if (gapsValid(cut, ts, -1, 'none')) {
+        for (ci = 2; ci <= ts.length - 3; ci++) {
+          if (ts[ci].value !== 'que') { continue; }
+          ts1 = ts.slice(0, ci); ts2 = ts.slice(ci + 1);
+          r1 = parseSingle(cut, ts1, { expectIntegrante: true });
+          if (!r1) { continue; }
+          r2 = parseSingle(cut, ts2, null);
+          if (!r2) { continue; }
+          candidates.push([
+            { ts: ts1, result: r1, link: null },
+            { ts: ts2, result: r2, link: { mode: 'integrante', role: 'Conjunção integrante', ruleId: 'PTBR-REL-012', token: ts[ci], subKind: 'integrante' } }
+          ]);
+        }
       }
     }
+
     return candidates.length === 1 ? candidates[0] : null;
   }
 
@@ -314,7 +459,7 @@
     var cut = text.slice(0, 8000), tokens = E.reading.tokens(cut), partial = cut.length < text.length;
     if (tokens.length > 1600) { cut = cut.slice(0, tokens[1600].start); partial = true; }
     var clean = E.protectedText(cut), segments = E.reading.sentences(cut), out = [], analyzed = 0, skipped = 0, truncated = 0, capped = false, groups = 0;
-    var limit = 'Hipótese tradicional para oração simples (sujeito simples ou composto) ou período de duas orações coordenadas (e, mas, porém, contudo, todavia, entretanto, ou, pois, logo, portanto) em ordem direta, sujeito explícito e indicativo compatível, com locuções auxiliares, determinantes, epíteto anteposto, especificador com de/do/da, regências delimitadas e adjunto adverbial circunstancial. Não resolve passiva, cadeias de auxiliares, modais, elipse, inversão, clíticos ou subordinação. Ausência de leitura não indica erro. Até 8.000 unidades UTF-16 e 1.600 tokens; segmentos cortados não são analisados.';
+    var limit = 'Hipótese tradicional para oração simples (sujeito simples ou composto), voz passiva analítica com agente explícito (ser + particípio + por/pelo/pela), períodos de duas orações coordenadas (e, mas, porém, contudo, todavia, entretanto, ou, pois, logo, portanto) e subordinadas adverbiais (quando, enquanto, porque, se) ou integrantes com que após verbos cognitivos/dicendi, em ordem direta e indicativo compatível. Não resolve passiva sem agente, cadeias de auxiliares, modais, elipse, inversão, clíticos ou subjuntivo. Ausência de leitura não indica erro. Até 8.000 unidades UTF-16 e 1.600 tokens; segmentos cortados não são analisados.';
     segments.forEach(function (segment) {
       var raw = cut.slice(segment.start, segment.end), stop = segment.end;
       var tail = cut.slice(segment.end), completeBoundary = /[\r\n]/.test(tail) || /[.!?…;]$/.test(raw) && (segment.end < cut.length || /^[\s.!?…;]/.test(text.charAt(cut.length)));
@@ -331,50 +476,58 @@
 
       var totalRoles = 0, ci;
       for (ci = 0; ci < clauses.length; ci++) {
-        totalRoles += clauses[ci].result.roles.length + (clauses[ci].coord ? 1 : 0);
+        totalRoles += clauses[ci].result.roles.length + (clauses[ci].link ? 1 : 0);
       }
-      /* Nunca entregar metade das relações de uma construção ou período coordenado. */
+      /* Nunca entregar metade das relações de uma construção ou período composto. */
       if (out.length + totalRoles > cap) { capped = true; return; }
 
       for (ci = 0; ci < clauses.length; ci++) {
         var cTs = clauses[ci].ts;
         var result = clauses[ci].result;
-        var coord = clauses[ci].coord;
+        var link = clauses[ci].link;
         analyzed++;
         if (result.group) { groups++; }
 
-        var clauseStart = coord ? coord.token.start : cTs[0].start;
+        var clauseStart = link ? link.token.start : cTs[0].start;
         var clauseEnd = cTs[cTs.length - 1].end;
         var id = 'sin-' + clauseStart;
         var verb = cTs[result.verb];
         var clause = span(text, clauseStart, clauseEnd);
         var verbText = text.slice(verb.start, cTs[result.verbEnd - 1].end);
-        var edges = [{ from: id + '-sujeito', to: id + '-verbo', type: 'sujeito-verbo', label: 'sujeito ↔ verbo' }];
-        if (coord) {
-          edges.push({ from: id + '-conjuncao', to: id + '-verbo', type: 'conjuncao', label: 'conjunção (' + coord.kind + ') ↔ verbo' });
+        var edges = [{ from: id + '-sujeito', to: id + '-verbo', type: 'sujeito-verbo', label: result.passive ? 'sujeito paciente ↔ verbo' : 'sujeito ↔ verbo' }];
+        if (link) {
+          var linkLabel = link.mode === 'integrante' ? 'conjunção integrante ↔ verbo' : ('conjunção (' + link.subKind + ') ↔ verbo');
+          edges.push({ from: id + '-conjuncao', to: id + '-verbo', type: 'conjuncao', label: linkLabel });
         }
         result.roles.forEach(function (p) {
-          if (has(['objeto', 'indireto', 'predicativo', 'adjunto', 'negacao'], p.key)) {
+          if (has(['objeto', 'indireto', 'predicativo', 'agente', 'adjunto', 'negacao'], p.key)) {
             edges.push({ from: id + '-verbo', to: id + '-' + p.key, type: p.key, label: 'verbo ↔ ' + p.role.toLowerCase() });
           }
         });
 
-        if (coord) {
-          var conjText = text.slice(coord.token.start, coord.token.end);
-          out.push(E.instruments.finding('sintaxe', 'PTBR-REL-009', text, coord.token.start, coord.token.end,
-            'Conjunção coordenativa: uma leitura possível.',
-            '“' + conjText + '” introduz esta oração coordenada (' + coord.kind + '), ligando-a à oração anterior dentro do período.',
-            'Duas orações completas foram identificadas no período em torno desta conjunção coordenativa.',
-            'A classificação semântica (' + coord.kind + ') reflete o uso tradicional mais frequente da conjunção; o contexto estilístico pode acrescentar matizes.', limit, source,
-            {
-              feature: 'Conjunção coordenativa', coordKind: coord.kind, analysisStatus: 'contextual',
-              nodeId: id + '-conjuncao', parentId: id,
-              clause: span(text, clause.start, clause.end), head: null,
-              relations: edges.map(function (e) { return { from: e.from, to: e.to, type: e.type, label: e.label }; }),
-              components: [], valencyFrame: { id: result.frame.id, lemma: result.frame.lemma, pattern: result.frame.pattern },
-              groupKind: null, context: [span(text, verb.start, cTs[result.verbEnd - 1].end)],
-              compatibleVerbs: result.forms.map(function (f) { return f.slice(); })
-            }));
+        if (link) {
+          var conjText = text.slice(link.token.start, link.token.end);
+          var linkObs = link.mode === 'coord'
+            ? '“' + conjText + '” introduz esta oração coordenada (' + link.subKind + '), ligando-a à oração anterior dentro do período.'
+            : link.mode === 'integrante'
+              ? '“' + conjText + '” atua como conjunção integrante, introduzindo esta oração subordinada substantiva objetiva direta que completa o verbo da oração principal.'
+              : '“' + conjText + '” introduz esta oração subordinada adverbial (' + link.subKind + '), estabelecendo relação de circunstância com a oração principal.';
+          var linkExtra = {
+            feature: link.role, analysisStatus: 'contextual',
+            nodeId: id + '-conjuncao', parentId: id,
+            clause: span(text, clause.start, clause.end), head: null,
+            relations: edges.map(function (e) { return { from: e.from, to: e.to, type: e.type, label: e.label }; }),
+            components: [], valencyFrame: { id: result.frame.id, lemma: result.frame.lemma, pattern: result.frame.pattern },
+            groupKind: null, context: [span(text, verb.start, cTs[result.verbEnd - 1].end)],
+            compatibleVerbs: result.forms.map(function (f) { return f.slice(); })
+          };
+          if (link.mode === 'coord') { linkExtra.coordKind = link.subKind; }
+          else { linkExtra.subordKind = link.subKind; }
+          out.push(E.instruments.finding('sintaxe', link.ruleId, text, link.token.start, link.token.end,
+            link.role + ': uma leitura possível.', linkObs,
+            'Duas orações completas foram identificadas no período em torno desta conjunção.',
+            'A classificação (' + link.subKind + ') segue o uso tradicional mais frequente; o contexto estilístico pode acrescentar matizes.',
+            limit, source, linkExtra));
         }
 
         result.roles.forEach(function (p) {
@@ -385,24 +538,47 @@
           if (p.key === 'sujeito' && p.heads && p.heads.length === 2) {
             var h1 = text.slice(cTs[p.heads[0]].start, cTs[p.heads[0]].end);
             var h2 = text.slice(cTs[p.heads[1]].start, cTs[p.heads[1]].end);
-            subjExplain = '“' + subjectText + '” forma um sujeito composto com dois núcleos (“' + h1 + '” e “' + h2 + '”), concordando no plural com “' + predText + '”.';
+            subjExplain = p.passiveSubject
+              ? '“' + subjectText + '” forma um sujeito paciente composto (“' + h1 + '” e “' + h2 + '”) na voz passiva analítica, concordando com o auxiliar e o particípio.'
+              : '“' + subjectText + '” forma um sujeito composto com dois núcleos (“' + h1 + '” e “' + h2 + '”), concordando no plural com “' + predText + '”.';
           } else {
             var sHeadTxt = typeof result.roles[0].head === 'number' ? text.slice(cTs[result.roles[0].head].start, cTs[result.roles[0].head].end) : subjectText;
-            subjExplain = '“' + subjectText + '” é o grupo sobre o qual esta construção declara “' + predText + '”. Seu núcleo é “' + sHeadTxt + '”; há uma forma verbal compatível em pessoa e número.';
+            subjExplain = p.passiveSubject
+              ? '“' + subjectText + '” recebe a ação expressa pela locução passiva “' + verbText + '” (sujeito paciente, núcleo “' + sHeadTxt + '”), concordando em gênero e número com o particípio.'
+              : '“' + subjectText + '” é o grupo sobre o qual esta construção declara “' + predText + '”. Seu núcleo é “' + sHeadTxt + '”; há uma forma verbal compatível em pessoa e número.';
           }
+          var verbExplain;
+          if (result.passive) {
+            verbExplain = '“' + verbText + '” forma uma locução verbal na voz passiva analítica: auxiliar “' + text.slice(verb.start, verb.end) + '” (ser) + particípio “' + text.slice(cTs[result.passive.main].start, cTs[result.passive.main].end) + '” (' + result.passive.lemma + '), acompanhada de agente da passiva explícito.';
+          } else if (result.group) {
+            verbExplain = '“' + verbText + '” funciona como um grupo verbal nesta hipótese. “' + text.slice(verb.start, verb.end) + '” é o auxiliar flexionado; “' + text.slice(cTs[result.group.main].start, cTs[result.group.main].end) + '” é o principal no ' + result.group.form + '. As duas formas não são contadas como duas orações.';
+          } else if (p.role === 'Verbo de ligação') {
+            verbExplain = '“' + verb.value + '” liga o sujeito ao predicativo nesta construção; não é apresentado como núcleo de um predicado verbal.';
+          } else {
+            verbExplain = '“' + verb.value + '” organiza o predicado nesta leitura. O sujeito e os complementos são identificados em relação a esse uso.';
+          }
+          var headWord = typeof p.head === 'number' ? text.slice(cTs[p.head].start, cTs[p.head].end) : '';
           var explanations = {
             sujeito: subjExplain,
             predicado: 'O predicado reúne o que esta oração declara a respeito de “' + subjectText + '”, incluindo o verbo e os termos que o acompanham.',
-            verbo: result.group ? '“' + verbText + '” funciona como um grupo verbal nesta hipótese. “' + text.slice(verb.start, verb.end) + '” é o auxiliar flexionado; “' + text.slice(cTs[result.group.main].start, cTs[result.group.main].end) + '” é o principal no ' + result.group.form + '. As duas formas não são contadas como duas orações.' : p.role === 'Verbo de ligação' ? '“' + verb.value + '” liga o sujeito ao predicativo nesta construção; não é apresentado como núcleo de um predicado verbal.' : '“' + verb.value + '” organiza o predicado nesta leitura. O sujeito e os complementos são identificados em relação a esse uso.',
+            verbo: verbExplain,
             objeto: '“' + text.slice(a, b) + '” completa o emprego de “' + verbText + '” sem preposição necessária nesta construção. A leitura não se baseia apenas em vir depois do verbo.',
             indireto: '“' + text.slice(a, b) + '” completa, regido por ' + prepLabel + ', o verbo “' + result.lemma + '” nesta construção.',
             predicativo: '“' + text.slice(a, b) + '” atribui uma característica ao sujeito por meio do verbo de ligação.',
+            agente: '“' + text.slice(a, b) + '” indica quem pratica a ação na voz passiva analítica, introduzido por ' + prepLabel + ' (núcleo “' + headWord + '”).',
             negacao: '“' + text.slice(a, b) + '” nega o predicado; pertence ao grupo do predicado.',
-            adjunto: p.prep ? '“' + text.slice(a, b) + '” acrescenta uma circunstância preposicionada ao predicado (com núcleo “' + text.slice(cTs[p.head].start, cTs[p.head].end) + '”); não recebe o rótulo de objeto.' : '“' + text.slice(a, b) + '” acrescenta uma circunstância ao predicado; não recebe o rótulo de objeto direto.'
+            adjunto: p.prep ? '“' + text.slice(a, b) + '” acrescenta uma circunstância preposicionada ao predicado (com núcleo “' + headWord + '”); não recebe o rótulo de objeto.' : '“' + text.slice(a, b) + '” acrescenta uma circunstância ao predicado; não recebe o rótulo de objeto direto.'
           };
-          var ruleIds = { sujeito: '001', predicado: '002', verbo: '003', objeto: '004', indireto: '005', predicativo: '006', negacao: '007', adjunto: '008' };
+          var ruleIds = { sujeito: '001', predicado: '002', verbo: '003', objeto: '004', indireto: '005', predicativo: '006', negacao: '007', adjunto: '008', agente: '010' };
           var components = [];
-          if (result.group && p.key === 'verbo') {
+          if (result.passive && p.key === 'verbo') {
+            components = [
+              span(text, verb.start, verb.end),
+              span(text, cTs[result.passive.main].start, cTs[result.passive.main].end)
+            ];
+            components[0].role = 'Auxiliar';
+            components[1].role = 'Particípio';
+          } else if (result.group && p.key === 'verbo') {
             components = [span(text, verb.start, verb.end), span(text, cTs[result.group.main].start, cTs[result.group.main].end)];
             components[0].role = 'Auxiliar'; components[1].role = 'Principal';
             if (result.group.connector !== null) { var ct = cTs[result.group.connector], cs = span(text, ct.start, ct.end); cs.role = 'Preposição'; components.splice(1, 0, cs); }
@@ -414,13 +590,17 @@
             components[0].role = '1º núcleo';
             components[1].role = '2º núcleo';
           }
-          out.push(E.instruments.finding('sintaxe', result.group && p.key === 'verbo' ? 'PTBR-LOC-001' : 'PTBR-REL-' + ruleIds[p.key], text, a, b, p.role + ': uma leitura possível.', explanations[p.key],
+          var findingRuleId = (result.group && p.key === 'verbo') ? 'PTBR-LOC-001'
+            : (result.passive && p.key === 'verbo') ? 'PTBR-LOC-002'
+              : 'PTBR-REL-' + ruleIds[p.key];
+          out.push(E.instruments.finding('sintaxe', findingRuleId, text, a, b, p.role + ': uma leitura possível.', explanations[p.key],
             'A construção inteira foi compatível com o recorte. Os vínculos representam esta hipótese, não uma árvore sintática geral.',
-            'O contexto discursivo e outros sentidos podem mudar a leitura. Sujeito não é necessariamente quem pratica uma ação. Auxiliaridade depende da abordagem e do contexto; não se deduz voz passiva da presença de duas formas. A compatibilidade formal não certifica correção nem intenção.', limit, result.group ? groupSource : source,
+            'O contexto discursivo e outros sentidos podem mudar a leitura. Sujeito não é necessariamente quem pratica uma ação. A compatibilidade formal não certifica correção nem intenção.', limit, (result.group || result.passive) ? groupSource : source,
             {
               feature: p.role, analysisStatus: 'contextual', nodeId: id + '-' + p.key, parentId: p.key === 'sujeito' || p.key === 'predicado' ? id : id + '-predicado',
               clause: span(text, clause.start, clause.end), head: head, relations: edges.map(function (e) { return { from: e.from, to: e.to, type: e.type, label: e.label }; }),
-              components: components, valencyFrame: { id: result.frame.id, lemma: result.frame.lemma, pattern: result.frame.pattern }, groupKind: result.group && p.key === 'verbo' ? result.group.kind : null,
+              components: components, valencyFrame: { id: result.frame.id, lemma: result.frame.lemma, pattern: result.frame.pattern },
+              groupKind: result.group && p.key === 'verbo' ? result.group.kind : (result.passive && p.key === 'verbo' ? 'passiva analítica' : null),
               context: [span(text, verb.start, cTs[result.verbEnd - 1].end)], compatibleVerbs: result.forms.map(function (f) { return f.slice(); })
             }));
         });

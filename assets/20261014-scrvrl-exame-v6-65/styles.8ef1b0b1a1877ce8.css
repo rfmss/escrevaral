@@ -2841,6 +2841,7 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="verbo"] { background:#eedcd3 !important; border-color:#b26c50 !important; color:#6d2d15 !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="objeto"] { background:#d4e4eb !important; border-color:#5e8da1 !important; color:#1c475a !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="indireto"] { background:#efe5ca !important; border-color:#ab8c45 !important; color:#5e420c !important; }
+#ptbr-dashboard .ptbr-syntax-term[data-syntax-role="agente"] { background:#f0dfd8 !important; border-color:#9c5347 !important; color:#5e1d16 !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="conjuncao"] { background:#e5e3d8 !important; border-color:#8f8b76 !important; color:#454234 !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="adjunto"] { background:#e4dce9 !important; border-color:#8b729c !important; color:#4b355c !important; }
 #ptbr-dashboard .ptbr-syntax-whole { border-style:dashed !important; background:rgba(255,255,255,.18) !important; max-width:46ch; box-shadow:none; }
@@ -2879,6 +2880,7 @@ body[data-theme="escuro"] #ptbr-dashboard [data-word-class-norm="artigo"],
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="objeto"] { background:rgba(104,158,184,.22) !important; border-color:#8dbcd4 !important; color:#cce6f4 !important; }
 body[data-theme="escuro"] #ptbr-dashboard [data-word-class-norm="pronome"] { background:rgba(92,158,145,.22) !important; border-color:#7fbcb0 !important; color:#c8ebe4 !important; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="conjuncao"] { background:rgba(175,170,145,.18) !important; border-color:#a8a288 !important; color:#e4e0cd !important; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="agente"] { background:rgba(186,104,90,.22) !important; border-color:#d18b7e !important; color:#f4d4ce !important; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-relation-arcs { color:#a9cfb3; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-arc-pill { fill:#1d2820; stroke:#8eb097; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-arc-label { fill:#dbe8dd; }

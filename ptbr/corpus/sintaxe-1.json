@@ -401,7 +401,15 @@
     {
       "id": "REL-N16",
       "text": "Se eu canto, ela corre.",
-      "expect": "abstencao"
+      "expect": "leitura",
+      "constructions": 2,
+      "roles": {
+        "Conjunção subordinativa": "Se",
+        "Sujeito": "eu",
+        "Predicado": "canto",
+        "Verbo": "canto"
+      },
+      "note": "Cobertura adicionada por sintaxe-6-passiva-subordinadas; expectativa anterior de abstenção preservada neste registro."
     },
     {
       "id": "REL-N17",

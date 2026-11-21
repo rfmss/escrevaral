@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   var E = root.Escr, own = Object.prototype.hasOwnProperty;
-  var nouns = {}, frames = {}, extraVerbs = {}, adjectives = {};
+  var nouns = {}, frames = {}, extraVerbs = {}, adjectives = {}, passiveParticiples = {};
   var articles = {
     o: ['m', 'singular'], a: ['f', 'singular'], os: ['m', 'plural'], as: ['f', 'plural'],
     um: ['m', 'singular'], uma: ['f', 'singular'], uns: ['m', 'plural'], umas: ['f', 'plural']
@@ -66,6 +66,7 @@
     numa: { base: 'em', det: ['f', 'singular'] },
     nuns: { base: 'em', det: ['m', 'plural'] },
     numas: { base: 'em', det: ['f', 'plural'] },
+    por: { base: 'por', det: null },
     pelo: { base: 'por', det: ['m', 'singular'] },
     pela: { base: 'por', det: ['f', 'singular'] },
     pelos: { base: 'por', det: ['m', 'plural'] },
@@ -88,6 +89,12 @@
     pois: 'explicativa',
     logo: 'conclusiva',
     portanto: 'conclusiva'
+  };
+  var subordConjs = {
+    quando: 'temporal',
+    enquanto: 'temporal',
+    porque: 'causal',
+    se: 'condicional'
   };
   var properNames = { ana: 'f', maria: 'f', 'joão': 'm', pedro: 'm' };
   var finalAdverbs = [
@@ -216,7 +223,7 @@
     addVerb(lemma + 'ão', lemma, 'indicativo:futuro do presente', 3, 'plural');
   }
 
-  'guardar procurar achar criar pintar desenhar contar narrar lembrar levar segurar fechar preparar ensinar mostrar revelar inventar imaginar observar admirar visitar enviar assinar revisar recitar acordar chorar caminhar passear viajar voltar retornar descansar silenciar brilhar escapar entrar parar terminar continuar precisar acreditar confiar sonhar cuidar concordar duvidar navegar passar'.split(' ').forEach(function (w) { regAr(w); });
+  'guardar procurar achar criar pintar desenhar contar narrar lembrar levar segurar fechar preparar ensinar mostrar revelar inventar imaginar observar admirar visitar enviar assinar revisar recitar acordar chorar caminhar passear viajar voltar retornar descansar silenciar brilhar escapar entrar parar terminar continuar precisar acreditar confiar sonhar cuidar concordar duvidar navegar passar notar'.split(' ').forEach(function (w) { regAr(w); });
   regAr('dedicar', 'dediquei');
   regAr('explicar', 'expliquei');
   regAr('ficar', 'fiquei');
@@ -227,7 +234,7 @@
   regAr('apagar', 'apaguei');
   regAr('começar', 'comecei');
 
-  'escolher aprender entender compreender esconder receber devolver prometer acender viver morrer correr'.split(' ').forEach(function (w) { regEr(w); });
+  'escolher aprender entender compreender esconder receber devolver prometer acender viver morrer correr perceber'.split(' ').forEach(function (w) { regEr(w); });
   regEr('esquecer', 'esqueço');
   regEr('conhecer', 'conheço');
   regEr('oferecer', 'ofereço');
@@ -274,6 +281,32 @@
   addVerb('sorria', 'sorrir', 'indicativo:pretérito imperfeito', 3, 'singular');
   addVerb('sorriam', 'sorrir', 'indicativo:pretérito imperfeito', 3, 'plural');
 
+  /* Particípios explícitos concordantes para voz passiva analítica (sem inferir por sufixo em palavras desconhecidas) */
+  function addPassiveBiform(lemma, stem) {
+    passiveParticiples['$' + stem + 'o'] = { lemma: lemma, gender: 'm', number: 'singular' };
+    passiveParticiples['$' + stem + 'a'] = { lemma: lemma, gender: 'f', number: 'singular' };
+    passiveParticiples['$' + stem + 'os'] = { lemma: lemma, gender: 'm', number: 'plural' };
+    passiveParticiples['$' + stem + 'as'] = { lemma: lemma, gender: 'f', number: 'plural' };
+  }
+  [
+    ['amar', 'amad'], ['comprar', 'comprad'], ['ler', 'lid'], ['escrever', 'escrit'], ['publicar', 'publicad'],
+    ['ver', 'vist'], ['abrir', 'abert'], ['cortar', 'cortad'], ['encontrar', 'encontrad'], ['trazer', 'trazid'],
+    ['ouvir', 'ouvid'], ['sentir', 'sentid'], ['guardar', 'guardad'], ['procurar', 'procurad'], ['perder', 'perdid'],
+    ['achar', 'achad'], ['construir', 'construíd'], ['criar', 'criad'], ['pintar', 'pintad'], ['desenhar', 'desenhad'],
+    ['contar', 'contad'], ['narrar', 'narrad'], ['lembrar', 'lembrad'], ['esquecer', 'esquecid'], ['escolher', 'escolhid'],
+    ['seguir', 'seguid'], ['deixar', 'deixad'], ['levar', 'levad'], ['segurar', 'segurad'], ['fechar', 'fechad'],
+    ['preparar', 'preparad'], ['ensinar', 'ensinad'], ['aprender', 'aprendid'], ['entender', 'entendid'],
+    ['compreender', 'compreendid'], ['explicar', 'explicad'], ['mostrar', 'mostrad'], ['esconder', 'escondid'],
+    ['revelar', 'revelad'], ['descobrir', 'descobert'], ['inventar', 'inventad'], ['imaginar', 'imaginad'],
+    ['observar', 'observad'], ['admirar', 'admirad'], ['visitar', 'visitad'], ['conhecer', 'conhecid'],
+    ['receber', 'recebid'], ['enviar', 'enviad'], ['assinar', 'assinad'], ['revisar', 'revisad'],
+    ['corrigir', 'corrigid'], ['traduzir', 'traduzid'], ['recitar', 'recitad'], ['acender', 'aces'],
+    ['apagar', 'apagad'], ['devolver', 'devolvid'], ['oferecer', 'oferecid'], ['dedicar', 'dedicad'],
+    ['prometer', 'prometid'], ['tocar', 'tocad'], ['cantar', 'cantad'], ['perceber', 'percebid'], ['notar', 'notad']
+  ].forEach(function (pair) { addPassiveBiform(pair[0], pair[1]); });
+  passiveParticiples.$entregue = { lemma: 'entregar', gender: 'u', number: 'singular' };
+  passiveParticiples.$entregues = { lemma: 'entregar', gender: 'u', number: 'plural' };
+
   function pattern(words, kind) {
     words.split(' ').forEach(function (lemma) {
       if (!lemma) { return; }
@@ -283,13 +316,14 @@
     });
   }
   /* Usos reconhecidos, nunca classificação permanente do verbo. */
-  pattern('amar comprar ler escrever publicar ver abrir cortar encontrar trazer ouvir sentir guardar procurar perder achar construir criar pintar desenhar contar narrar lembrar esquecer escolher seguir deixar levar pegar segurar fechar beber comer preparar estudar ensinar aprender entender compreender explicar mostrar esconder revelar descobrir inventar imaginar observar admirar visitar conhecer receber enviar entregar assinar revisar corrigir traduzir recitar acender apagar devolver oferecer dedicar prometer tocar começar', 'objeto-direto');
+  pattern('amar comprar ler escrever publicar ver abrir cortar encontrar trazer ouvir sentir guardar procurar perder achar construir criar pintar desenhar contar narrar lembrar esquecer escolher seguir deixar levar pegar segurar fechar beber comer preparar estudar ensinar aprender entender compreender explicar mostrar esconder revelar descobrir inventar imaginar observar admirar visitar conhecer receber enviar entregar assinar revisar corrigir traduzir recitar acender apagar devolver oferecer dedicar prometer tocar começar perceber notar', 'objeto-direto');
   pattern('ser estar parecer ficar continuar permanecer', 'predicativo');
   pattern('dar entregar enviar mostrar contar escrever trazer devolver oferecer dedicar prometer ensinar explicar revelar', 'direto-e-indireto-a');
   pattern('precisar cuidar duvidar', 'objeto-indireto-de');
   pattern('pensar acreditar confiar insistir', 'objeto-indireto-em');
   pattern('sonhar concordar', 'objeto-indireto-com');
   pattern('pertencer obedecer resistir assistir', 'objeto-indireto-a');
+  pattern('dizer saber ver ouvir sentir pensar acreditar descobrir entender compreender perceber notar lembrar esquecer prometer revelar contar explicar imaginar', 'oracao-objetiva-direta');
   pattern('cantar andar correr sair partir trabalhar chegar terminar dormir acordar sorrir chorar rir cair nascer morrer crescer viver esperar caminhar passear viajar voltar retornar descansar silenciar brilhar florescer escapar fugir entrar descer subir parar navegar passar ficar permanecer', 'sem-complemento');
 
   function copy(record) { var out = {}; Object.keys(record).forEach(function (k) { out[k] = record[k]; }); return out; }
@@ -311,17 +345,19 @@
   }
 
   E.syntaxLexicon = {
-    version: 'lexico-sintatico-4',
+    version: 'lexico-sintatico-5',
     nounReadings: function (form) { return (nouns['$' + form] || []).map(copy); },
     articleReading: function (form) { return own.call(articles, form) ? articles[form].slice() : null; },
     determinerReading: function (form) { return own.call(determiners, form) ? copy(determiners[form]) : null; },
     adjectiveReading: function (form) { return own.call(adjectives, '$' + form) ? copy(adjectives['$' + form]) : null; },
+    passiveParticipleReading: function (form) { return own.call(passiveParticiples, '$' + form) ? copy(passiveParticiples['$' + form]) : null; },
     prepReading: function (form) {
       if (!own.call(prepositions, form)) { return null; }
       var p = prepositions[form];
       return { base: p.base, det: p.det ? p.det.slice() : null };
     },
     coordReading: function (form) { return own.call(coordConjs, form) ? coordConjs[form] : null; },
+    subordReading: function (form) { return own.call(subordConjs, form) ? subordConjs[form] : null; },
     isFinalAdverb: function (form) { return finalAdverbs.indexOf(form) >= 0; },
     isProperName: function (form) { return own.call(properNames, form); },
     properNameGender: function (form) { return own.call(properNames, form) ? properNames[form] : null; },
