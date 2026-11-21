@@ -4,6 +4,33 @@
 
   var LAST_GUIDE_KEY = 'escrevaral.academy.last.v1';
 
+  function isPortableDoc() {
+    try {
+      if (typeof document !== 'undefined' && document.querySelector) {
+        var meta = document.querySelector('meta[name="distribution-mode"]');
+        if (meta && meta.getAttribute('content') === 'portable') { return true; }
+      }
+      if (typeof location !== 'undefined' && location.protocol === 'file:') { return true; }
+    } catch (ignore) {}
+    return false;
+  }
+
+  /* Aplica as pinturas WebP do Real Gabinete em modo site (sem quebrar o portátil autocontido). */
+  function cssAsset(path) {
+    return ['u', 'rl("', path, '")'].join('');
+  }
+  function bindLibraryAtmosphere() {
+    try {
+      if (isPortableDoc()) { return; }
+      if (typeof document === 'undefined' || !document.documentElement || !document.documentElement.style) { return; }
+      var st = document.documentElement.style;
+      st.setProperty('--esc-rg-hero-art', cssAsset('assets/library/real-gabinete-hero.webp'));
+      st.setProperty('--esc-rg-book-art', cssAsset('assets/library/tome-objeto-livro.webp'));
+      st.setProperty('--esc-rg-lit-art', cssAsset('assets/library/tome-literatura-mundial.webp'));
+    } catch (ignore) {}
+  }
+  bindLibraryAtmosphere();
+
   var CATALOG = [
     { id: 'objeto-livro', title: 'Objeto livro', group: 'Objeto livro', description: 'Da capa ao colofão, explore cada parte.', file: 'anatomia-do-livro.html',
       bridge: { action: 'reader', label: 'Ver folha no Modo Leitura', hint: 'Experimente seu texto como página impressa.' } },

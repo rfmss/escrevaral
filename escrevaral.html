@@ -9046,7 +9046,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-left: 4px solid #d4a44e !important;
     border-radius: 7px !important;
     background-color: #331b10 !important;
-    background-image: url("../library/real-gabinete-hero.webp") !important;
+    background-image: var(--esc-rg-hero-art, var(--esc-rg-chalk-dark)) !important;
     background-size: cover !important;
     background-position: center 42% !important;
     color: #fbf3e2 !important;
@@ -9108,7 +9108,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-radius: 8px !important;
     border: 1.5px solid #b5853d !important;
     background-color: #321b10 !important;
-    background-image: url("../library/real-gabinete-hero.webp") !important;
+    background-image: var(--esc-rg-hero-art, var(--esc-rg-chalk-dark)) !important;
     background-size: cover !important;
     background-position: center 42% !important;
     color: #fbf3e2 !important;
@@ -9117,14 +9117,14 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   /* Examinar ganha a mesa de leitura iluminada (livro aberto + pena + velas) */
   #oficina > .sheet-heading {
-    background-image: url("../library/tome-objeto-livro.webp") !important;
+    background-image: var(--esc-rg-book-art, var(--esc-rg-chalk-dark)) !important;
     background-position: right center !important;
   }
 
   /* Universo e Acervo ganham a alcova do globo armilar e pilhas de clássicos */
   #story-screen > .finish-heading,
   #acervo > .sheet-heading {
-    background-image: url("../library/tome-literatura-mundial.webp") !important;
+    background-image: var(--esc-rg-lit-art, var(--esc-rg-chalk-dark)) !important;
     background-position: right center !important;
   }
 
@@ -9270,7 +9270,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #gabinete .cabinet-workspace,
   #lock-curtain {
     background-color: #2b170d !important;
-    background-image: url("../library/real-gabinete-hero.webp") !important;
+    background-image: var(--esc-rg-hero-art, var(--esc-rg-chalk-dark)) !important;
     background-size: cover !important;
     background-position: center center !important;
   }
@@ -20600,6 +20600,33 @@ SOFTWARE.
   root.Escr = root.Escr || {};
 
   var LAST_GUIDE_KEY = 'escrevaral.academy.last.v1';
+
+  function isPortableDoc() {
+    try {
+      if (typeof document !== 'undefined' && document.querySelector) {
+        var meta = document.querySelector('meta[name="distribution-mode"]');
+        if (meta && meta.getAttribute('content') === 'portable') { return true; }
+      }
+      if (typeof location !== 'undefined' && location.protocol === 'file:') { return true; }
+    } catch (ignore) {}
+    return false;
+  }
+
+  /* Aplica as pinturas WebP do Real Gabinete em modo site (sem quebrar o portátil autocontido). */
+  function cssAsset(path) {
+    return ['u', 'rl("', path, '")'].join('');
+  }
+  function bindLibraryAtmosphere() {
+    try {
+      if (isPortableDoc()) { return; }
+      if (typeof document === 'undefined' || !document.documentElement || !document.documentElement.style) { return; }
+      var st = document.documentElement.style;
+      st.setProperty('--esc-rg-hero-art', cssAsset('assets/library/real-gabinete-hero.webp'));
+      st.setProperty('--esc-rg-book-art', cssAsset('assets/library/tome-objeto-livro.webp'));
+      st.setProperty('--esc-rg-lit-art', cssAsset('assets/library/tome-literatura-mundial.webp'));
+    } catch (ignore) {}
+  }
+  bindLibraryAtmosphere();
 
   var CATALOG = [
     { id: 'objeto-livro', title: 'Objeto livro', group: 'Objeto livro', description: 'Da capa ao colofão, explore cada parte.', file: 'anatomia-do-livro.html',
