@@ -7234,18 +7234,31 @@
     stage.className = 'esc-ac-scene';
     stage.setAttribute('aria-hidden', 'true');
 
-    /* Camada 0: Claraboia octogonal e feixes de luz âmbar (plano de fundo) */
+    /* Camada 0: Claraboia octogonal com luz pontilhada/giz (zero gradiente, estilo gravura) */
     var dome = document.createElement('div');
     dome.className = 'esc-ac-layer esc-ac-layer-dome';
     dome.setAttribute('data-depth', '0.22');
     var domeSvg = makeSvg('svg', { viewBox: '0 0 1000 260', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
-    /* Raios suaves descendo da claraboia */
-    domeSvg.appendChild(makeSvg('path', { d: 'M500 -10 L320 260 L440 260 Z M500 -10 L560 260 L680 260 Z', fill: 'currentColor', opacity: '0.07' }));
+    /* Retícula de giz / pontilhismo para a claraboia (sem linearGradient/radialGradient) */
+    var defs = makeSvg('defs');
+    var pat = makeSvg('pattern', { id: 'esc-ac-chalk-dots', width: '10', height: '10', patternUnits: 'userSpaceOnUse' });
+    pat.appendChild(makeSvg('circle', { cx: '2.5', cy: '2.5', r: '1.1', fill: 'currentColor', opacity: '0.22' }));
+    pat.appendChild(makeSvg('circle', { cx: '7.5', cy: '7.5', r: '0.85', fill: 'currentColor', opacity: '0.16' }));
+    pat.appendChild(makeSvg('circle', { cx: '7.5', cy: '2.2', r: '0.55', fill: 'currentColor', opacity: '0.12' }));
+    defs.appendChild(pat);
+    domeSvg.appendChild(defs);
+    /* Feixes de luz da claraboia preenchidos com granulação pontilhada */
+    domeSvg.appendChild(makeSvg('path', { d: 'M500 -10 L300 260 L452 260 Z M500 -10 L548 260 L700 260 Z', fill: 'url(#esc-ac-chalk-dots)' }));
     /* Rosácea da claraboia central */
-    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '148', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.2', 'stroke-dasharray': '5 8' }));
-    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '104', stroke: 'currentColor', 'stroke-width': '0.85', opacity: '0.26' }));
-    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '64', stroke: 'currentColor', 'stroke-width': '0.7', opacity: '0.18' }));
-    /* Brilhos sutis estáticos (sem custo de animação contínua) */
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '148', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.22', 'stroke-dasharray': '5 8' }));
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '104', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.28' }));
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '64', stroke: 'currentColor', 'stroke-width': '0.75', opacity: '0.2' }));
+    /* Estrelas de 4 pontas e pontos de giz estáticos (zero animação em loop) */
+    domeSvg.appendChild(makeSvg('path', {
+      d: 'M324 58 L326.5 63.5 L332 66 L326.5 68.5 L324 74 L321.5 68.5 L316 66 L321.5 63.5 Z' +
+         ' M676 58 L678.5 63.5 L684 66 L678.5 68.5 L676 74 L673.5 68.5 L668 66 L673.5 63.5 Z',
+      fill: 'currentColor', opacity: '0.46'
+    }));
     var glints = [[192, 54, 1.8], [268, 86, 1.4], [352, 42, 1.6], [648, 42, 1.6], [732, 86, 1.4], [808, 54, 1.8]];
     var gi;
     for (gi = 0; gi < glints.length; gi += 1) {

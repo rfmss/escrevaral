@@ -153,6 +153,11 @@ assert.equal(findByClass(bridgedModal, 'esc-ac-layer').length, 2, 'hero leve com
 assert.equal(findByClass(bridgedModal, 'esc-ac-mote').length, 0, 'zero partículas animadas em loop para economizar RAM/CPU');
 assert.equal(findByClass(bridgedModal, 'esc-academy-tome').length, 2, '2 tomos em destaque (Objeto livro e Literatura mundial)');
 assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 12, '12 guias editoriais com numeração romana');
+
+// Garantir estética fosca com granulação de giz/papel (zero gradientes digitais puros em academia.css)
+const academiaCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/academia.css'), 'utf8');
+assert.ok(!/linear-gradient|radial-gradient/i.test(academiaCss), 'academia.css não deve usar gradientes puros');
+assert.ok(academiaCss.includes('--esc-ac-chalk-light') && academiaCss.includes('--esc-ac-chalk-dark'), 'academia.css deve aplicar textura granulada de giz/papel');
 bridged.close();
 
-console.log('OK: Academia (14 guias + Real Gabinete âmbar/mogno leve em 2 camadas + Literatura Mundial + Kindle Oasis + Ponte Academia <-> Oficina) verificada.');
+console.log('OK: Academia (14 guias + Real Gabinete fosco/giz leve em 2 camadas + Literatura Mundial + Kindle Oasis + Ponte Academia <-> Oficina) verificada.');
