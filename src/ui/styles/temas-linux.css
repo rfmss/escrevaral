@@ -940,23 +940,7 @@
     border: 1px solid rgba(33, 41, 33, 0.45) !important;
     box-shadow: 0 8px 24px rgba(24, 32, 24, 0.14) !important;
   }
-  .esc-academy-list-card,
-  .esc-academy-guide-shell {
-    background: #c4cfc2 !important;
-    border: 1px solid rgba(33, 41, 33, 0.42) !important;
-  }
-  .esc-academy-head,
-  .esc-academy-bar {
-    background: #c4cfc2 !important;
-    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
-  }
-  .esc-academy-item {
-    background: #bcc8ba !important;
-    border: 1px solid rgba(33, 41, 33, 0.28) !important;
-  }
-  .esc-academy-item:hover {
-    background: #b2bfb0 !important;
-  }
+  /* A Academia e Literatura Mundial possui paleta própria em academia.css (Real Gabinete: âmbar, mogno e pergaminho). */
 
   /* =========================================================================
      SISTEMA DE ÍCONES, HIERARQUIA EDITORIAL (ACADEMIA + OFICINA) E

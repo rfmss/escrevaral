@@ -7227,89 +7227,74 @@
     return svg;
   }
 
-  /* Cena panorâmica em 4 camadas parallax (céu/astrolábio, arcos de biblioteca, folhagem lateral, partículas douradas) */
+  /* Cena panorâmica leve em 2 camadas (inspirada no Real Gabinete Português de Leitura):
+   * zero partículas animadas em loop e custo mínimo de memória para máquinas modestas. */
   function buildHeroScene() {
     var stage = document.createElement('div');
     stage.className = 'esc-ac-scene';
     stage.setAttribute('aria-hidden', 'true');
 
-    /* Camada 0: Astrolábio celestial e constelações douradas (fundo lento) */
-    var sky = document.createElement('div');
-    sky.className = 'esc-ac-layer esc-ac-layer-sky';
-    sky.setAttribute('data-depth', '0.18');
-    var skySvg = makeSvg('svg', { viewBox: '0 0 1000 260', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
-    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '165', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.22', 'stroke-dasharray': '4 7' }));
-    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '122', stroke: 'currentColor', 'stroke-width': '0.8', opacity: '0.28' }));
-    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '78', stroke: 'currentColor', 'stroke-width': '0.6', opacity: '0.18' }));
-    skySvg.appendChild(makeSvg('path', { d: 'M140 62 L248 96 L310 52 M860 58 L758 92 L696 48', stroke: 'currentColor', 'stroke-width': '0.7', opacity: '0.24' }));
-    var stars = [[140, 62, 2.2], [248, 96, 1.8], [310, 52, 2.4], [860, 58, 2.2], [758, 92, 1.8], [696, 48, 2.4], [210, 152, 1.5], [790, 148, 1.5], [385, 36, 1.6], [615, 36, 1.6]];
-    var si;
-    for (si = 0; si < stars.length; si += 1) {
-      skySvg.appendChild(makeSvg('circle', { cx: stars[si][0], cy: stars[si][1], r: stars[si][2], fill: 'currentColor', opacity: '0.48' }));
+    /* Camada 0: Claraboia octogonal e feixes de luz âmbar (plano de fundo) */
+    var dome = document.createElement('div');
+    dome.className = 'esc-ac-layer esc-ac-layer-dome';
+    dome.setAttribute('data-depth', '0.22');
+    var domeSvg = makeSvg('svg', { viewBox: '0 0 1000 260', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
+    /* Raios suaves descendo da claraboia */
+    domeSvg.appendChild(makeSvg('path', { d: 'M500 -10 L320 260 L440 260 Z M500 -10 L560 260 L680 260 Z', fill: 'currentColor', opacity: '0.07' }));
+    /* Rosácea da claraboia central */
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '148', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.2', 'stroke-dasharray': '5 8' }));
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '104', stroke: 'currentColor', 'stroke-width': '0.85', opacity: '0.26' }));
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '64', stroke: 'currentColor', 'stroke-width': '0.7', opacity: '0.18' }));
+    /* Brilhos sutis estáticos (sem custo de animação contínua) */
+    var glints = [[192, 54, 1.8], [268, 86, 1.4], [352, 42, 1.6], [648, 42, 1.6], [732, 86, 1.4], [808, 54, 1.8]];
+    var gi;
+    for (gi = 0; gi < glints.length; gi += 1) {
+      domeSvg.appendChild(makeSvg('circle', { cx: glints[gi][0], cy: glints[gi][1], r: glints[gi][2], fill: 'currentColor', opacity: '0.45' }));
     }
-    sky.appendChild(skySvg);
-    stage.appendChild(sky);
+    dome.appendChild(domeSvg);
+    stage.appendChild(dome);
 
-    /* Camada 1: Arcadas clássicas de biblioteca e colinas de livros (plano médio) */
-    var arches = document.createElement('div');
-    arches.className = 'esc-ac-layer esc-ac-layer-arches';
-    arches.setAttribute('data-depth', '0.42');
-    var archSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMax slice', fill: 'none' });
-    archSvg.appendChild(makeSvg('path', {
-      d: 'M0 240 L0 165 Q90 120 185 152 Q285 110 385 148 Q500 94 615 148 Q715 110 815 152 Q910 120 1000 165 L1000 240 Z',
-      fill: 'currentColor', opacity: '0.12'
-    }));
-    archSvg.appendChild(makeSvg('path', {
-      d: 'M72 240 L72 135 Q122 86 172 135 L172 240 M210 240 L210 150 Q255 106 300 150 L300 240 M700 240 L700 150 Q745 106 790 150 L790 240 M828 240 L828 135 Q878 86 928 135 L928 240',
-      stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.26'
-    }));
-    archSvg.appendChild(makeSvg('path', {
-      d: 'M0 240 L0 198 Q180 166 360 194 Q500 176 640 194 Q820 166 1000 198 L1000 240 Z',
-      fill: 'currentColor', opacity: '0.18'
-    }));
-    arches.appendChild(archSvg);
-    stage.appendChild(arches);
-
-    /* Camada 2: Ramos botânicos ilustrados nos cantos (primeiro plano rápido) */
-    var flora = document.createElement('div');
-    flora.className = 'esc-ac-layer esc-ac-layer-flora';
-    flora.setAttribute('data-depth', '0.78');
-    var floraSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
-    /* Ramo esquerdo */
-    floraSvg.appendChild(makeSvg('path', { d: 'M-12 20 C42 42, 86 78, 134 124', stroke: 'currentColor', 'stroke-width': '1.6', opacity: '0.42', 'stroke-linecap': 'round' }));
-    floraSvg.appendChild(makeSvg('path', { d: 'M24 38 C52 24, 74 34, 62 56 C44 58, 28 50, 24 38 Z M66 66 C94 52, 118 66, 102 88 C82 88, 70 78, 66 66 Z M104 98 C128 88, 148 102, 134 120 C116 120, 108 110, 104 98 Z', fill: 'currentColor', opacity: '0.22' }));
-    floraSvg.appendChild(makeSvg('path', { d: 'M18 68 C40 84, 48 108, 26 112 C12 98, 10 82, 18 68 Z M54 102 C78 116, 84 140, 62 142 C48 130, 46 114, 54 102 Z', fill: 'currentColor', opacity: '0.18' }));
-    /* Ramo direito espelhado */
-    floraSvg.appendChild(makeSvg('path', { d: 'M1012 20 C958 42, 914 78, 866 124', stroke: 'currentColor', 'stroke-width': '1.6', opacity: '0.42', 'stroke-linecap': 'round' }));
-    floraSvg.appendChild(makeSvg('path', { d: 'M976 38 C948 24, 926 34, 938 56 C956 58, 972 50, 976 38 Z M934 66 C906 52, 882 66, 898 88 C918 88, 930 78, 934 66 Z M896 98 C872 88, 852 102, 866 120 C884 120, 892 110, 896 98 Z', fill: 'currentColor', opacity: '0.22' }));
-    floraSvg.appendChild(makeSvg('path', { d: 'M982 68 C960 84, 952 108, 974 112 C988 98, 990 82, 982 68 Z M946 102 C922 116, 916 140, 938 142 C952 130, 954 114, 946 102 Z', fill: 'currentColor', opacity: '0.18' }));
-    flora.appendChild(floraSvg);
-    stage.appendChild(flora);
-
-    /* Camada 3: Poeira dourada flutuante (vagalumes de biblioteca) */
-    var motes = document.createElement('div');
-    motes.className = 'esc-ac-motes';
-    var positions = [
-      [12, 72, 4, 0], [22, 34, 3, 1.2], [31, 64, 5, 2.4], [41, 28, 3, 0.7],
-      [56, 76, 4, 1.8], [67, 32, 3, 3.1], [76, 68, 5, 0.4], [88, 42, 4, 2.1],
-      [18, 52, 2.5, 2.9], [82, 58, 2.5, 1.5]
-    ];
-    var mi, mEl;
-    for (mi = 0; mi < positions.length; mi += 1) {
-      mEl = document.createElement('span');
-      mEl.className = 'esc-ac-mote';
-      if (mEl.style) {
-        mEl.style.left = positions[mi][0] + '%';
-        mEl.style.top = positions[mi][1] + '%';
-        mEl.style.width = positions[mi][2] + 'px';
-        mEl.style.height = positions[mi][2] + 'px';
-        mEl.style.animationDelay = positions[mi][3] + 's';
-      }
-      motes.appendChild(mEl);
+    /* Camada 1: Galerias de madeira em 3 andares, estantes de livros e arcos neomanuelinos */
+    var hall = document.createElement('div');
+    hall.className = 'esc-ac-layer esc-ac-layer-hall';
+    hall.setAttribute('data-depth', '0.58');
+    var hallSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMax slice', fill: 'none' });
+    /* Silhueta das galerias laterais de madeira escura */
+    hallSvg.appendChild(makeSvg('path', { d: 'M0 0 L246 0 L246 240 L0 240 Z M754 0 L1000 0 L1000 240 L754 240 Z', fill: 'currentColor', opacity: '0.16' }));
+    /* Prateleiras horizontais nos 3 pisos (esquerda e direita) */
+    var shelves = [42, 86, 130, 174, 214], si2, sy;
+    for (si2 = 0; si2 < shelves.length; si2 += 1) {
+      sy = shelves[si2];
+      hallSvg.appendChild(makeSvg('line', { x1: '18', y1: sy, x2: '238', y2: sy, stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.32' }));
+      hallSvg.appendChild(makeSvg('line', { x1: '762', y1: sy, x2: '982', y2: sy, stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.32' }));
     }
-    stage.appendChild(motes);
+    /* Lombadas rítmicas sugeridas nas estantes (traço único ultraleve) */
+    hallSvg.appendChild(makeSvg('path', {
+      d: 'M30 42 V18 M42 42 V22 M54 42 V16 M68 42 V24 M84 42 V19 M102 42 V21 M118 42 V17 M136 42 V23 M154 42 V18 M174 42 V22 M194 42 V17 M214 42 V24' +
+         ' M34 86 V62 M50 86 V66 M66 86 V60 M82 86 V68 M98 86 V63 M116 86 V61 M134 86 V67 M152 86 V62 M172 86 V66 M190 86 V60 M210 86 V65' +
+         ' M28 130 V106 M44 130 V110 M62 130 V104 M78 130 V112 M96 130 V107 M114 130 V105 M132 130 V111 M150 130 V106 M170 130 V110 M188 130 V104 M208 130 V109' +
+         ' M32 174 V150 M48 174 V154 M66 174 V148 M84 174 V156 M102 174 V151 M120 174 V149 M138 174 V155 M156 174 V150 M176 174 V154 M194 174 V148 M212 174 V153' +
+         ' M782 42 V18 M798 42 V22 M814 42 V16 M832 42 V24 M850 42 V19 M868 42 V21 M886 42 V17 M904 42 V23 M922 42 V18 M940 42 V22 M958 42 V17 M974 42 V24' +
+         ' M786 86 V62 M802 86 V66 M820 86 V60 M838 86 V68 M856 86 V63 M874 86 V61 M892 86 V67 M910 86 V62 M928 86 V66 M946 86 V60 M966 86 V65' +
+         ' M780 130 V106 M796 130 V110 M814 130 V104 M832 130 V112 M850 130 V107 M868 130 V105 M886 130 V111 M904 130 V106 M922 130 V110 M940 130 V104 M960 130 V109' +
+         ' M784 174 V150 M800 174 V154 M818 174 V148 M836 174 V156 M854 174 V151 M872 174 V149 M890 174 V155 M908 174 V150 M926 174 V154 M944 174 V148 M964 174 V153',
+      stroke: 'currentColor', 'stroke-width': '3.5', opacity: '0.2'
+    }));
+    /* Grandes arcos ogivais / neomanuelinos emoldurando o salão central */
+    hallSvg.appendChild(makeSvg('path', {
+      d: 'M246 240 L246 72 Q246 18 320 6 Q268 44 268 94 L268 240 M754 240 L754 72 Q754 18 680 6 Q732 44 732 94 L732 240',
+      stroke: 'currentColor', 'stroke-width': '1.4', opacity: '0.38'
+    }));
+    hallSvg.appendChild(makeSvg('path', {
+      d: 'M126 240 L126 120 Q186 72 246 120 M754 120 Q814 72 874 120 L874 240',
+      stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.34'
+    }));
+    /* Balaustrada inferior sutil */
+    hallSvg.appendChild(makeSvg('path', { d: 'M0 214 L268 214 M732 214 L1000 214', stroke: 'currentColor', 'stroke-width': '1.8', opacity: '0.42' }));
+    hall.appendChild(hallSvg);
+    stage.appendChild(hall);
 
-    return { stage: stage, layers: [sky, arches, flora] };
+    return { stage: stage, layers: [dome, hall] };
   }
 
   var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];

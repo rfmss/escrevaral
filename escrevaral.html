@@ -6518,23 +6518,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border: 1px solid rgba(33, 41, 33, 0.45) !important;
     box-shadow: 0 8px 24px rgba(24, 32, 24, 0.14) !important;
   }
-  .esc-academy-list-card,
-  .esc-academy-guide-shell {
-    background: #c4cfc2 !important;
-    border: 1px solid rgba(33, 41, 33, 0.42) !important;
-  }
-  .esc-academy-head,
-  .esc-academy-bar {
-    background: #c4cfc2 !important;
-    border-bottom: 1px dashed rgba(33, 41, 33, 0.28) !important;
-  }
-  .esc-academy-item {
-    background: #bcc8ba !important;
-    border: 1px solid rgba(33, 41, 33, 0.28) !important;
-  }
-  .esc-academy-item:hover {
-    background: #b2bfb0 !important;
-  }
+  /* A Academia e Literatura Mundial possui paleta própria em academia.css (Real Gabinete: âmbar, mogno e pergaminho). */
 
   /* =========================================================================
      SISTEMA DE ÍCONES, HIERARQUIA EDITORIAL (ACADEMIA + OFICINA) E
@@ -7537,21 +7521,10 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 }
 
 /* Fonte: src/ui/styles/academia.css */
-/* Academia e Literatura Mundial — Estética Storybook Iluminado / Belas Letras (Parallax em 4 camadas, filigranas douradas e tomos de coleção). */
+/* Academia e Literatura Mundial — Grandes Bibliotecas (Real Gabinete Português de Leitura).
+ * Tons âmbar, mogno, pergaminho e ouro envelhecido; ultraleve (2 camadas parallax, zero partículas em loop). */
 @media screen {
-  @keyframes escAcMoteFloat {
-    0% { transform: translate3d(0, 10px, 0) scale(0.8); opacity: 0; }
-    25% { opacity: 0.72; }
-    75% { opacity: 0.48; }
-    100% { transform: translate3d(8px, -28px, 0) scale(1.15); opacity: 0; }
-  }
-
-  @keyframes escAcReveal {
-    from { opacity: 0; transform: translateY(10px) scale(0.99); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  .esc-academy-overlay {
+  #esc-academy-overlay.esc-academy-overlay {
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
     z-index: 3100;
@@ -7559,49 +7532,48 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     align-items: center;
     justify-content: center;
     padding: 18px;
-    background: radial-gradient(ellipse at 50% 25%, rgba(34, 48, 37, 0.74) 0%, rgba(15, 22, 17, 0.88) 100%);
-    color: var(--esc-ink, #1c241c);
+    background: rgba(24, 15, 10, 0.78);
+    color: #24160e;
     font: 14px/1.5 var(--esc-font-ui, Arial, Helvetica, sans-serif);
   }
 
-  .esc-academy-overlay[hidden] {
+  #esc-academy-overlay[hidden] {
     display: none !important;
   }
 
-  /* Moldura principal de livro iluminado com dupla borda dourada */
-  .esc-academy-list-card {
+  /* Moldura principal de livro iluminado com dupla borda dourada (mantida!) */
+  #esc-academy-overlay .esc-academy-list-card {
     position: relative;
     width: 100%;
     max-width: 1020px;
     max-height: 92vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, #f3efe2 0%, #eae6d7 38%, #dde3d5 100%);
-    border: 1.5px solid rgba(154, 122, 62, 0.65);
+    background: linear-gradient(180deg, #f6efe0 0%, #efe4cd 55%, #e6d8bc 100%) !important;
+    border: 1.5px solid #a67b38 !important;
     border-radius: 10px;
     box-shadow:
-      0 26px 68px rgba(10, 16, 12, 0.48),
-      inset 0 0 0 4px rgba(247, 243, 232, 0.65),
-      inset 0 0 0 5px rgba(154, 122, 62, 0.3);
+      0 22px 54px rgba(15, 9, 5, 0.55),
+      inset 0 0 0 4px rgba(250, 245, 232, 0.72),
+      inset 0 0 0 5px rgba(166, 123, 56, 0.34);
     overflow: hidden;
-    animation: escAcReveal 220ms ease-out;
-    --esc-ornament: rgba(145, 113, 52, 0.62);
+    --esc-ornament: rgba(152, 108, 44, 0.65);
   }
 
-  .esc-academy-list-card .esc-bl-frame-gilded {
+  #esc-academy-overlay .esc-bl-frame-gilded {
     z-index: 4;
   }
-  .esc-academy-list-card .esc-bl-frame-gilded .esc-bl-corner {
+  #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner {
     width: 44px;
     height: 44px;
-    color: #9b7a3c;
+    color: #a17432;
   }
-  .esc-academy-list-card .esc-bl-frame-gilded .esc-bl-corner-tl { top: 9px; left: 9px; }
-  .esc-academy-list-card .esc-bl-frame-gilded .esc-bl-corner-tr { top: 9px; right: 9px; }
-  .esc-academy-list-card .esc-bl-frame-gilded .esc-bl-corner-bl { bottom: 9px; left: 9px; }
-  .esc-academy-list-card .esc-bl-frame-gilded .esc-bl-corner-br { bottom: 9px; right: 9px; }
+  #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner-tl { top: 9px; left: 9px; }
+  #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner-tr { top: 9px; right: 9px; }
+  #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner-bl { bottom: 9px; left: 9px; }
+  #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner-br { bottom: 9px; right: 9px; }
 
-  .esc-academy-groups {
+  #esc-academy-overlay .esc-academy-groups {
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
@@ -7611,148 +7583,131 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   /* =====================================================================
-   * HERO PANORÂMICO STORYBOOK COM PARALLAX EM 4 CAMADAS
+   * HERO REAL GABINETE: MOGNO, LUZ ÂMBAR E GALERIAS EM 2 CAMADAS LEVES
    * ===================================================================== */
-  .esc-academy-hero {
+  #esc-academy-overlay .esc-academy-hero {
     position: relative;
-    min-height: 242px;
-    padding: 36px 40px 32px;
+    min-height: 232px;
+    padding: 34px 40px 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     overflow: hidden;
     background:
-      radial-gradient(ellipse 68% 72% at 50% 24%, rgba(236, 206, 138, 0.34) 0%, rgba(236, 206, 138, 0) 70%),
-      linear-gradient(180deg, #1b2c22 0%, #24392c 54%, #2f4636 100%);
-    color: #f6f1e2;
-    border-bottom: 2px solid #a88747;
-    box-shadow: inset 0 -18px 34px rgba(13, 21, 16, 0.36);
+      radial-gradient(ellipse 64% 78% at 50% 18%, rgba(232, 174, 84, 0.36) 0%, rgba(232, 174, 84, 0) 68%),
+      linear-gradient(180deg, #27150d 0%, #3a2013 56%, #4a2a19 100%);
+    color: #fbf3e2;
+    border-bottom: 2px solid #b8883c;
+    box-shadow: inset 0 -16px 28px rgba(18, 10, 6, 0.42);
   }
 
-  .esc-ac-scene {
+  #esc-academy-overlay .esc-ac-scene {
     position: absolute;
-    top: -18px; right: -24px; bottom: -18px; left: -24px;
+    top: -14px; right: -20px; bottom: -14px; left: -20px;
     pointer-events: none;
     overflow: hidden;
   }
 
-  .esc-ac-layer {
+  #esc-academy-overlay .esc-ac-layer {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    will-change: transform;
-    transition: transform 90ms linear;
+    transition: transform 80ms linear;
   }
 
-  .esc-ac-layer svg {
+  #esc-academy-overlay .esc-ac-layer svg {
     display: block;
     width: 100%;
     height: 100%;
   }
 
-  .esc-ac-layer-sky { color: #ebd091; }
-  .esc-ac-layer-arches { color: #d8c28c; }
-  .esc-ac-layer-flora { color: #c9ae72; }
+  #esc-academy-overlay .esc-ac-layer-dome { color: #f2c878; }
+  #esc-academy-overlay .esc-ac-layer-hall { color: #d9a85b; }
 
-  .esc-ac-motes {
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    pointer-events: none;
-  }
-
-  .esc-ac-mote {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle, #fff5d6 0%, #dfb866 55%, rgba(223, 184, 102, 0) 100%);
-    box-shadow: 0 0 8px rgba(244, 212, 136, 0.72);
-    animation: escAcMoteFloat 6.2s ease-in-out infinite;
-  }
-
-  .esc-academy-close {
+  #esc-academy-overlay .esc-academy-close {
     position: absolute;
     top: 18px;
     right: 22px;
     z-index: 6;
     min-height: 32px;
     padding: 5px 13px;
-    border: 1px solid rgba(232, 204, 138, 0.5);
+    border: 1px solid rgba(238, 198, 126, 0.58) !important;
     border-radius: 99px;
-    background: rgba(18, 30, 22, 0.62);
-    color: #f6efe0;
+    background: rgba(34, 18, 11, 0.72) !important;
+    color: #fbf3e2 !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
-    transition: background 140ms ease, border-color 140ms ease;
   }
 
-  .esc-academy-close:hover {
-    background: rgba(38, 60, 45, 0.9);
-    border-color: #ecd191;
+  #esc-academy-overlay .esc-academy-close:hover {
+    background: #5b341e !important;
+    color: #fff8eb !important;
+    border-color: #f0ca82 !important;
   }
 
-  .esc-academy-hero-inner {
+  #esc-academy-overlay .esc-academy-hero-inner {
     position: relative;
     z-index: 3;
-    max-width: 640px;
+    max-width: 620px;
     margin: 0 auto;
   }
 
-  .esc-academy-crest {
-    width: 72px;
-    height: 44px;
+  #esc-academy-overlay .esc-academy-crest {
+    width: 68px;
+    height: 42px;
     margin: 0 auto 6px;
-    color: #e9ca82;
-    filter: drop-shadow(0 2px 10px rgba(233, 202, 130, 0.35));
+    color: #f0c574;
   }
-  .esc-academy-crest svg { display: block; width: 100%; height: 100%; }
+  #esc-academy-overlay .esc-academy-crest svg { display: block; width: 100%; height: 100%; }
 
-  .esc-academy-hero-kicker {
+  #esc-academy-overlay .esc-academy-hero-kicker {
     display: inline-block;
     padding: 3px 12px;
     margin-bottom: 10px;
     border-radius: 99px;
-    border: 1px solid rgba(233, 202, 130, 0.45);
-    background: rgba(20, 34, 25, 0.56);
-    color: #ecd192;
+    border: 1px solid rgba(240, 197, 116, 0.5);
+    background: rgba(30, 16, 10, 0.6);
+    color: #f2cf88;
     font: 700 10.5px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
-  .esc-academy-hero h2 {
+  #esc-academy-overlay .esc-academy-hero h2 {
     margin: 0 0 8px;
     font: 700 clamp(24px, 3.2vw, 34px)/1.18 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
     letter-spacing: -0.01em;
-    color: #fbf7ec;
-    text-shadow: 0 2px 14px rgba(11, 19, 14, 0.5);
+    color: #fdf6e7;
+    text-shadow: 0 2px 10px rgba(18, 9, 5, 0.55);
   }
 
-  .esc-academy-intro {
+  #esc-academy-overlay .esc-academy-intro {
     margin: 0 auto;
-    max-width: 54ch;
+    max-width: 52ch;
     font: 400 14px/1.55 var(--esc-font-ui, Arial, Helvetica, sans-serif);
-    color: #dbe4d8;
+    color: #ecdcc0;
   }
 
   /* =====================================================================
-   * CORPO EDITORIAL: PONTE DA OFICINA + VITRINE DOS 2 TOMOS + CAPÍTULOS
+   * CORPO EDITORIAL: PERGAMINHO, MOGNO E CONTRASTE AAA BLINDADO
    * ===================================================================== */
-  .esc-academy-content {
+  #esc-academy-overlay .esc-academy-content {
     padding: 24px 36px 32px;
   }
 
   /* Cartela iluminada: Ponte Academia ↔ Oficina */
-  .esc-academy-bridge-box {
+  #esc-academy-overlay .esc-academy-bridge-box {
     position: relative;
     margin: 0 0 18px;
     padding: 16px 20px 18px;
-    background: linear-gradient(135deg, rgba(255, 252, 243, 0.86) 0%, rgba(243, 237, 221, 0.72) 100%);
-    border: 1px solid rgba(154, 122, 62, 0.44);
-    border-left: 4px solid #9b7a3c;
+    background: #faf4e6;
+    border: 1px solid rgba(158, 114, 48, 0.45);
+    border-left: 4px solid #8f5e24;
     border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(34, 42, 32, 0.06);
+    box-shadow: 0 3px 12px rgba(46, 28, 14, 0.07);
   }
 
-  .esc-academy-bridge-head {
+  #esc-academy-overlay .esc-academy-bridge-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -7761,80 +7716,80 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     margin-bottom: 8px;
   }
 
-  .esc-academy-bridge-kicker {
+  #esc-academy-overlay .esc-academy-bridge-kicker {
     display: inline-block;
     padding: 3px 11px;
     border-radius: 99px;
-    background: #24382b;
-    color: #f3eee0;
+    background: #3d2214;
+    color: #f8eed9;
     font: 700 11px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
-  .esc-academy-resume-btn {
-    padding: 5px 12px;
+  #esc-academy-overlay .esc-academy-resume-btn {
+    padding: 5px 13px;
     min-height: 30px;
-    border: 1px solid rgba(154, 122, 62, 0.55);
+    border: 1px solid #9e7130 !important;
     border-radius: 99px;
-    background: rgba(255, 252, 244, 0.9);
-    color: #243225;
+    background: #fffaf0 !important;
+    color: #2c190e !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
-    transition: background 140ms ease, transform 140ms ease;
   }
 
-  .esc-academy-resume-btn:hover {
-    background: #24382b;
-    color: #f4efe2;
-    border-color: #24382b;
+  #esc-academy-overlay .esc-academy-resume-btn:hover {
+    background: #3d2214 !important;
+    color: #fbf3e2 !important;
+    border-color: #3d2214 !important;
   }
 
-  .esc-academy-bridge-note {
+  #esc-academy-overlay .esc-academy-bridge-note {
     margin: 0 0 12px;
     font: italic 14px/1.5 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #3a4538;
+    color: #4f3623;
   }
 
-  .esc-academy-rec-row {
+  #esc-academy-overlay .esc-academy-rec-row {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
 
-  .esc-academy-rec-btn {
+  #esc-academy-overlay .esc-academy-rec-btn {
     flex: 1 1 250px;
     padding: 11px 14px;
     text-align: left;
-    border: 1px solid rgba(145, 113, 52, 0.38);
+    border: 1px solid rgba(152, 108, 44, 0.38) !important;
     border-radius: 7px;
-    background: rgba(255, 253, 247, 0.85);
-    color: #182118;
+    background: #fffbf2 !important;
+    color: #24160e !important;
     cursor: pointer;
-    transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+    transition: transform 140ms ease, border-color 140ms ease;
   }
 
-  .esc-academy-rec-btn:hover {
+  #esc-academy-overlay .esc-academy-rec-btn:hover {
     transform: translateY(-2px);
-    border-color: #9b7a3c;
-    box-shadow: 0 6px 16px rgba(56, 44, 22, 0.11);
+    background: #f6ead2 !important;
+    color: #1f120a !important;
+    border-color: #8f5e24 !important;
   }
 
-  .esc-academy-rec-btn strong {
+  #esc-academy-overlay .esc-academy-rec-btn strong {
     display: block;
     font: 700 14.5px/1.3 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #19261b;
+    color: #26150c !important;
     margin-bottom: 3px;
   }
 
-  .esc-academy-rec-btn span {
+  #esc-academy-overlay .esc-academy-rec-btn span {
     display: block;
     font: 400 12.5px/1.4 var(--esc-font-ui, Arial, Helvetica, sans-serif);
-    color: #3d4b3c;
+    color: #543b27 !important;
   }
 
-  /* Títulos de seção com medalhão dourado */
-  .esc-academy-group {
+  /* Títulos de seção com medalhão mogno + ouro */
+  #esc-academy-overlay .esc-academy-group {
     display: flex;
     align-items: center;
     gap: 9px;
@@ -7842,29 +7797,29 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     font: 700 12px/1.3 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #2c3e2f;
+    color: #3f2617;
   }
 
-  .esc-academy-group .esc-ui-ico {
+  #esc-academy-overlay .esc-academy-group .esc-ui-ico {
     width: 18px;
     height: 18px;
     padding: 4px;
     box-sizing: content-box;
     border-radius: 50%;
-    background: #24382b;
-    color: #ecd191;
+    background: #3d2214;
+    color: #f0c675;
     flex-shrink: 0;
   }
 
-  /* Vitrine principal: 2 tomos monumentais (Objeto livro + Literatura mundial) */
-  .esc-academy-featured-grid {
+  /* Vitrine principal: 2 tomos encadernados em couro mogno e ouro (contraste AAA blindado no hover!) */
+  #esc-academy-overlay .esc-academy-featured-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
     margin-bottom: 14px;
   }
 
-  .esc-academy-tome {
+  #esc-academy-overlay .esc-academy-tome {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -7872,46 +7827,33 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     width: 100%;
     padding: 18px 20px 16px;
     text-align: left;
-    border: 1.5px solid rgba(154, 122, 62, 0.55);
+    border: 1.5px solid #b5853d !important;
     border-radius: 9px;
     background:
-      radial-gradient(circle at 88% 16%, rgba(232, 200, 124, 0.24) 0%, rgba(232, 200, 124, 0) 56%),
-      linear-gradient(155deg, #213428 0%, #2b4233 65%, #1d2e23 100%);
-    color: #f7f2e4;
+      radial-gradient(circle at 86% 16%, rgba(235, 180, 88, 0.22) 0%, rgba(235, 180, 88, 0) 56%),
+      linear-gradient(155deg, #351d12 0%, #492919 62%, #29160d 100%) !important;
+    color: #fbf3e2 !important;
     cursor: pointer;
     overflow: hidden;
     box-shadow:
-      0 8px 22px rgba(18, 28, 21, 0.22),
-      inset 0 0 0 3px rgba(233, 202, 130, 0.14);
-    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      0 8px 20px rgba(28, 15, 8, 0.26),
+      inset 0 0 0 3px rgba(238, 198, 126, 0.16);
+    transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
   }
 
-  .esc-academy-tome::after {
-    content: '';
-    position: absolute;
-    top: -40%;
-    left: -120%;
-    width: 65%;
-    height: 180%;
-    background: linear-gradient(110deg, transparent 20%, rgba(250, 232, 184, 0.16) 50%, transparent 80%);
-    transform: skewX(-18deg);
-    transition: left 520ms ease;
-    pointer-events: none;
-  }
-
-  .esc-academy-tome:hover {
-    transform: translateY(-3px);
-    border-color: #e4c377;
+  #esc-academy-overlay .esc-academy-tome:hover {
+    transform: translateY(-2px);
+    border-color: #ebc272 !important;
+    background:
+      radial-gradient(circle at 86% 16%, rgba(242, 194, 102, 0.3) 0%, rgba(242, 194, 102, 0) 60%),
+      linear-gradient(155deg, #432517 0%, #59331f 62%, #331b10 100%) !important;
+    color: #fff8eb !important;
     box-shadow:
-      0 14px 30px rgba(16, 26, 19, 0.3),
-      inset 0 0 0 3px rgba(233, 202, 130, 0.3);
+      0 12px 26px rgba(26, 14, 7, 0.34),
+      inset 0 0 0 3px rgba(242, 202, 124, 0.32);
   }
 
-  .esc-academy-tome:hover::after {
-    left: 145%;
-  }
-
-  .esc-academy-tome-top {
+  #esc-academy-overlay .esc-academy-tome-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -7919,48 +7861,48 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     margin-bottom: 10px;
   }
 
-  .esc-academy-tome-emblem {
-    width: 58px;
-    height: 38px;
-    color: #ecd08d;
+  #esc-academy-overlay .esc-academy-tome-emblem {
+    width: 56px;
+    height: 36px;
+    color: #f0c675;
   }
-  .esc-academy-tome-emblem svg { display: block; width: 100%; height: 100%; }
+  #esc-academy-overlay .esc-academy-tome-emblem svg { display: block; width: 100%; height: 100%; }
 
-  .esc-academy-tome-seal {
+  #esc-academy-overlay .esc-academy-tome-seal {
     display: inline-block;
     padding: 3px 10px;
     border-radius: 99px;
-    border: 1px solid rgba(236, 208, 141, 0.52);
-    background: rgba(16, 28, 20, 0.45);
-    color: #f0d79a;
+    border: 1px solid rgba(240, 198, 117, 0.55);
+    background: rgba(24, 13, 8, 0.56);
+    color: #f5d491;
     font: 700 10.5px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
-  .esc-academy-tome strong {
+  #esc-academy-overlay .esc-academy-tome strong {
     display: block;
     font: 700 20px/1.25 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #fbf7ec;
+    color: #fdf6e7 !important;
     margin-bottom: 5px;
   }
 
-  .esc-academy-tome-desc {
+  #esc-academy-overlay .esc-academy-tome-desc {
     display: block;
     font: 400 13px/1.48 var(--esc-font-ui, Arial, Helvetica, sans-serif);
-    color: #d7e2d5;
+    color: #ebd9bd !important;
     margin-bottom: 12px;
   }
 
-  .esc-academy-tome-cta {
+  #esc-academy-overlay .esc-academy-tome-cta {
     margin-top: auto;
     font: 700 12.5px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
-    color: #efd391;
+    color: #f4ca78 !important;
     letter-spacing: 0.02em;
   }
 
-  /* Pranchas dos capítulos (Escrita e revisão + Publicação e carreira) */
-  .esc-academy-list {
+  /* Pranchas dos capítulos I–XII (pergaminho claro + tinta marrom-espresso AAA) */
+  #esc-academy-overlay .esc-academy-list {
     list-style: none;
     margin: 0 0 8px;
     padding: 0;
@@ -7969,112 +7911,113 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     gap: 10px;
   }
 
-  .esc-academy-item {
+  #esc-academy-overlay .esc-academy-item {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 13px 16px 13px 16px;
-    border: 1px solid rgba(132, 108, 62, 0.36);
+    padding: 13px 16px;
+    border: 1px solid rgba(148, 106, 46, 0.4) !important;
     border-radius: 8px;
-    background: linear-gradient(180deg, rgba(255, 253, 247, 0.78) 0%, rgba(238, 241, 232, 0.76) 100%);
-    color: #162017;
+    background: #faf3e4 !important;
+    color: #24160e !important;
     text-align: left;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(24, 34, 24, 0.05);
-    transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease, background 150ms ease;
+    box-shadow: 0 2px 5px rgba(42, 24, 12, 0.05);
+    transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
   }
 
-  .esc-academy-item:hover {
+  #esc-academy-overlay .esc-academy-item:hover {
     transform: translateY(-2px);
-    border-color: #9b7a3c;
-    background: linear-gradient(180deg, rgba(255, 254, 250, 0.96) 0%, rgba(245, 242, 231, 0.94) 100%);
-    box-shadow: 0 8px 18px rgba(42, 34, 18, 0.11);
+    border-color: #9c6a27 !important;
+    background: #fffaf0 !important;
+    color: #1c1009 !important;
+    box-shadow: 0 6px 15px rgba(46, 28, 12, 0.12);
   }
 
-  .esc-academy-roman {
+  #esc-academy-overlay .esc-academy-roman {
     position: absolute;
     top: 10px;
     right: 13px;
     font: 700 11px/1 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
     font-style: normal;
     letter-spacing: 0.08em;
-    color: rgba(138, 106, 48, 0.74);
+    color: #8f6023;
   }
 
-  .esc-academy-item strong {
+  #esc-academy-overlay .esc-academy-item strong {
     display: block;
     padding-right: 26px;
     font: 700 15px/1.3 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #172319;
+    color: #24140c !important;
     margin-bottom: 4px;
   }
 
-  .esc-academy-item span {
+  #esc-academy-overlay .esc-academy-item span {
     display: block;
     font: 400 12.5px/1.45 var(--esc-font-ui, Arial, Helvetica, sans-serif);
-    color: #364436;
+    color: #4f3724 !important;
   }
 
-  .esc-academy-colophon {
+  #esc-academy-overlay .esc-academy-colophon {
     margin-top: 20px;
     padding-top: 8px;
     text-align: center;
   }
 
   /* =====================================================================
-   * MOLDURA DO GUIA ABERTO (IFRAME + BARRA DE AÇÕES)
+   * MOLDURA DO GUIA ABERTO (IFRAME + BARRA DE AÇÕES EM ÂMBAR/MOGNO)
    * ===================================================================== */
-  .esc-academy-guide-shell {
+  #esc-academy-overlay .esc-academy-guide-shell {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--esc-paper, #ccd5c7);
-    border: 1.5px solid rgba(154, 122, 62, 0.6);
+    background: #f5eddc !important;
+    border: 1.5px solid #a67b38 !important;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 24px 60px rgba(10, 16, 12, 0.45);
+    box-shadow: 0 22px 54px rgba(15, 9, 5, 0.5);
   }
 
-  .esc-academy-bar {
+  #esc-academy-overlay .esc-academy-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
     padding: 10px 16px;
-    background: linear-gradient(180deg, #ede9da 0%, #dde3d5 100%);
-    border-bottom: 1px solid rgba(145, 113, 52, 0.42);
+    background: linear-gradient(180deg, #f3e9d4 0%, #e7dac0 100%) !important;
+    border-bottom: 1px solid rgba(152, 108, 44, 0.45) !important;
   }
 
-  .esc-academy-bar button {
+  #esc-academy-overlay .esc-academy-bar button {
     min-height: 32px;
     padding: 5px 12px;
-    border: 1px solid rgba(36, 56, 43, 0.34);
-    background: rgba(255, 253, 247, 0.72);
-    color: #182319;
+    border: 1px solid rgba(132, 92, 38, 0.48) !important;
+    background: #fffaf0 !important;
+    color: #26150c !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
     border-radius: 6px;
   }
 
-  .esc-academy-bar button:hover {
-    background: #fffdf7;
-    border-color: #9b7a3c;
+  #esc-academy-overlay .esc-academy-bar button:hover {
+    background: #f4e6ca !important;
+    border-color: #8f5e24 !important;
   }
 
-  .esc-academy-bar strong {
+  #esc-academy-overlay .esc-academy-bar strong {
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font: 700 15px/1.2 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #182319;
+    color: #26150c;
   }
 
-  .esc-academy-frame {
+  #esc-academy-overlay .esc-academy-frame {
     flex: 1 1 auto;
     min-height: 0;
     width: 100%;
@@ -8082,7 +8025,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     background: #fff;
   }
 
-  .esc-academy-bar-actions {
+  #esc-academy-overlay .esc-academy-bar-actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -8090,81 +8033,98 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     flex-shrink: 0;
   }
 
-  .esc-academy-bar .esc-academy-lens-jump {
+  #esc-academy-overlay .esc-academy-bar .esc-academy-lens-jump {
     padding: 4px 10px;
     min-height: 30px;
     border-radius: 99px;
-    border: 1px solid rgba(145, 113, 52, 0.42);
-    background: rgba(255, 253, 248, 0.72);
-    color: #1b281c;
+    border: 1px solid rgba(145, 102, 42, 0.45) !important;
+    background: #fffaf0 !important;
+    color: #2b180e !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
   }
 
-  .esc-academy-bar .esc-academy-lens-jump:hover {
-    background: #f5edd9;
-    border-color: #9b7a3c;
+  #esc-academy-overlay .esc-academy-bar .esc-academy-lens-jump:hover {
+    background: #f1e1c0 !important;
+    border-color: #8f5e24 !important;
   }
 
-  .esc-academy-bar .esc-academy-bridge-act {
-    background: #24382b;
-    color: #f4efe2;
-    border-color: #24382b;
+  #esc-academy-overlay .esc-academy-bar .esc-academy-bridge-act {
+    background: #3d2214 !important;
+    color: #fbf3e2 !important;
+    border-color: #3d2214 !important;
     font-weight: 600;
   }
 
-  .esc-academy-bar .esc-academy-bridge-act:hover {
-    background: #304a39;
-    border-color: #304a39;
+  #esc-academy-overlay .esc-academy-bar .esc-academy-bridge-act:hover {
+    background: #55301c !important;
+    border-color: #55301c !important;
+    color: #fff8eb !important;
   }
 
-  /* Tema escuro */
-  body[data-theme="escuro"] .esc-academy-list-card {
-    background: linear-gradient(180deg, #1d261e 0%, #19221a 100%);
-    color: #e6ede4;
-    border-color: rgba(212, 184, 118, 0.48);
-    box-shadow: 0 26px 68px rgba(0, 0, 0, 0.65), inset 0 0 0 4px rgba(255, 255, 255, 0.04);
+  /* Tema escuro em nogueira profunda e âmbar */
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-list-card,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-guide-shell {
+    background: linear-gradient(180deg, #211610 0%, #1a110c 100%) !important;
+    color: #f2e7d5;
+    border-color: rgba(212, 166, 92, 0.52) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.68), inset 0 0 0 4px rgba(255, 240, 210, 0.04);
   }
-  body[data-theme="escuro"] .esc-academy-bridge-box {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(212, 184, 118, 0.32);
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-box {
+    background: #2b1c14;
+    border-color: rgba(212, 166, 92, 0.36);
   }
-  body[data-theme="escuro"] .esc-academy-bridge-note { color: #c7d4c4; }
-  body[data-theme="escuro"] .esc-academy-group { color: #d8e5d5; }
-  body[data-theme="escuro"] .esc-academy-rec-btn,
-  body[data-theme="escuro"] .esc-academy-resume-btn,
-  body[data-theme="escuro"] .esc-academy-item {
-    background: rgba(255, 255, 255, 0.06);
-    color: #e8efe6;
-    border-color: rgba(212, 184, 118, 0.28);
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-note { color: #d9c4a4; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-group { color: #e8cfa4; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-resume-btn,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item {
+    background: #2d1e15 !important;
+    color: #f3e8d6 !important;
+    border-color: rgba(212, 166, 92, 0.32) !important;
   }
-  body[data-theme="escuro"] .esc-academy-item strong,
-  body[data-theme="escuro"] .esc-academy-rec-btn strong { color: #f3f7f2; }
-  body[data-theme="escuro"] .esc-academy-item span,
-  body[data-theme="escuro"] .esc-academy-rec-btn span { color: #bdcbb9; }
-  body[data-theme="escuro"] .esc-academy-bar {
-    background: #1f2a21;
-    border-bottom-color: rgba(212, 184, 118, 0.32);
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item:hover,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn:hover,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-resume-btn:hover {
+    background: #3a261b !important;
+    color: #fff8eb !important;
+    border-color: #dfb267 !important;
   }
-  body[data-theme="escuro"] .esc-academy-bar strong { color: #f1f5ef; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item strong,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn strong { color: #fbf2e1 !important; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item span,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn span { color: #d7c3a3 !important; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman { color: #dfb267; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar {
+    background: #261810 !important;
+    border-bottom-color: rgba(212, 166, 92, 0.35) !important;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button {
+    background: #322117 !important;
+    color: #f6ead6 !important;
+    border-color: rgba(212, 166, 92, 0.38) !important;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button:hover {
+    background: #442d1e !important;
+    border-color: #dfb267 !important;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar strong { color: #f6ead6; }
 
   @media (max-width: 760px) {
-    .esc-academy-overlay { padding: 8px; }
-    .esc-academy-hero { padding: 52px 20px 26px; min-height: 210px; }
-    .esc-academy-content { padding: 16px 16px 24px; }
-    .esc-academy-featured-grid,
-    .esc-academy-list { grid-template-columns: 1fr; }
-    .esc-academy-bar { flex-wrap: wrap; gap: 6px; }
-    .esc-academy-bar strong { order: -1; flex-basis: 100%; }
-    .esc-academy-bar-actions { margin-left: auto; flex-wrap: wrap; }
+    #esc-academy-overlay.esc-academy-overlay { padding: 8px; }
+    #esc-academy-overlay .esc-academy-hero { padding: 50px 20px 24px; min-height: 200px; }
+    #esc-academy-overlay .esc-academy-content { padding: 16px 16px 24px; }
+    #esc-academy-overlay .esc-academy-featured-grid,
+    #esc-academy-overlay .esc-academy-list { grid-template-columns: 1fr; }
+    #esc-academy-overlay .esc-academy-bar { flex-wrap: wrap; gap: 6px; }
+    #esc-academy-overlay .esc-academy-bar strong { order: -1; flex-basis: 100%; }
+    #esc-academy-overlay .esc-academy-bar-actions { margin-left: auto; flex-wrap: wrap; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .esc-academy-list-card,
-    .esc-ac-mote,
-    .esc-ac-layer,
-    .esc-academy-tome::after { animation: none !important; transition: none !important; }
-    .esc-ac-mote { display: none; }
+    #esc-academy-overlay .esc-ac-layer,
+    #esc-academy-overlay .esc-academy-tome,
+    #esc-academy-overlay .esc-academy-item { transition: none !important; }
   }
 }
 
@@ -20161,89 +20121,74 @@ SOFTWARE.
     return svg;
   }
 
-  /* Cena panorâmica em 4 camadas parallax (céu/astrolábio, arcos de biblioteca, folhagem lateral, partículas douradas) */
+  /* Cena panorâmica leve em 2 camadas (inspirada no Real Gabinete Português de Leitura):
+   * zero partículas animadas em loop e custo mínimo de memória para máquinas modestas. */
   function buildHeroScene() {
     var stage = document.createElement('div');
     stage.className = 'esc-ac-scene';
     stage.setAttribute('aria-hidden', 'true');
 
-    /* Camada 0: Astrolábio celestial e constelações douradas (fundo lento) */
-    var sky = document.createElement('div');
-    sky.className = 'esc-ac-layer esc-ac-layer-sky';
-    sky.setAttribute('data-depth', '0.18');
-    var skySvg = makeSvg('svg', { viewBox: '0 0 1000 260', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
-    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '165', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.22', 'stroke-dasharray': '4 7' }));
-    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '122', stroke: 'currentColor', 'stroke-width': '0.8', opacity: '0.28' }));
-    skySvg.appendChild(makeSvg('circle', { cx: '500', cy: '132', r: '78', stroke: 'currentColor', 'stroke-width': '0.6', opacity: '0.18' }));
-    skySvg.appendChild(makeSvg('path', { d: 'M140 62 L248 96 L310 52 M860 58 L758 92 L696 48', stroke: 'currentColor', 'stroke-width': '0.7', opacity: '0.24' }));
-    var stars = [[140, 62, 2.2], [248, 96, 1.8], [310, 52, 2.4], [860, 58, 2.2], [758, 92, 1.8], [696, 48, 2.4], [210, 152, 1.5], [790, 148, 1.5], [385, 36, 1.6], [615, 36, 1.6]];
-    var si;
-    for (si = 0; si < stars.length; si += 1) {
-      skySvg.appendChild(makeSvg('circle', { cx: stars[si][0], cy: stars[si][1], r: stars[si][2], fill: 'currentColor', opacity: '0.48' }));
+    /* Camada 0: Claraboia octogonal e feixes de luz âmbar (plano de fundo) */
+    var dome = document.createElement('div');
+    dome.className = 'esc-ac-layer esc-ac-layer-dome';
+    dome.setAttribute('data-depth', '0.22');
+    var domeSvg = makeSvg('svg', { viewBox: '0 0 1000 260', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
+    /* Raios suaves descendo da claraboia */
+    domeSvg.appendChild(makeSvg('path', { d: 'M500 -10 L320 260 L440 260 Z M500 -10 L560 260 L680 260 Z', fill: 'currentColor', opacity: '0.07' }));
+    /* Rosácea da claraboia central */
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '148', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.2', 'stroke-dasharray': '5 8' }));
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '104', stroke: 'currentColor', 'stroke-width': '0.85', opacity: '0.26' }));
+    domeSvg.appendChild(makeSvg('circle', { cx: '500', cy: '112', r: '64', stroke: 'currentColor', 'stroke-width': '0.7', opacity: '0.18' }));
+    /* Brilhos sutis estáticos (sem custo de animação contínua) */
+    var glints = [[192, 54, 1.8], [268, 86, 1.4], [352, 42, 1.6], [648, 42, 1.6], [732, 86, 1.4], [808, 54, 1.8]];
+    var gi;
+    for (gi = 0; gi < glints.length; gi += 1) {
+      domeSvg.appendChild(makeSvg('circle', { cx: glints[gi][0], cy: glints[gi][1], r: glints[gi][2], fill: 'currentColor', opacity: '0.45' }));
     }
-    sky.appendChild(skySvg);
-    stage.appendChild(sky);
+    dome.appendChild(domeSvg);
+    stage.appendChild(dome);
 
-    /* Camada 1: Arcadas clássicas de biblioteca e colinas de livros (plano médio) */
-    var arches = document.createElement('div');
-    arches.className = 'esc-ac-layer esc-ac-layer-arches';
-    arches.setAttribute('data-depth', '0.42');
-    var archSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMax slice', fill: 'none' });
-    archSvg.appendChild(makeSvg('path', {
-      d: 'M0 240 L0 165 Q90 120 185 152 Q285 110 385 148 Q500 94 615 148 Q715 110 815 152 Q910 120 1000 165 L1000 240 Z',
-      fill: 'currentColor', opacity: '0.12'
-    }));
-    archSvg.appendChild(makeSvg('path', {
-      d: 'M72 240 L72 135 Q122 86 172 135 L172 240 M210 240 L210 150 Q255 106 300 150 L300 240 M700 240 L700 150 Q745 106 790 150 L790 240 M828 240 L828 135 Q878 86 928 135 L928 240',
-      stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.26'
-    }));
-    archSvg.appendChild(makeSvg('path', {
-      d: 'M0 240 L0 198 Q180 166 360 194 Q500 176 640 194 Q820 166 1000 198 L1000 240 Z',
-      fill: 'currentColor', opacity: '0.18'
-    }));
-    arches.appendChild(archSvg);
-    stage.appendChild(arches);
-
-    /* Camada 2: Ramos botânicos ilustrados nos cantos (primeiro plano rápido) */
-    var flora = document.createElement('div');
-    flora.className = 'esc-ac-layer esc-ac-layer-flora';
-    flora.setAttribute('data-depth', '0.78');
-    var floraSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMid slice', fill: 'none' });
-    /* Ramo esquerdo */
-    floraSvg.appendChild(makeSvg('path', { d: 'M-12 20 C42 42, 86 78, 134 124', stroke: 'currentColor', 'stroke-width': '1.6', opacity: '0.42', 'stroke-linecap': 'round' }));
-    floraSvg.appendChild(makeSvg('path', { d: 'M24 38 C52 24, 74 34, 62 56 C44 58, 28 50, 24 38 Z M66 66 C94 52, 118 66, 102 88 C82 88, 70 78, 66 66 Z M104 98 C128 88, 148 102, 134 120 C116 120, 108 110, 104 98 Z', fill: 'currentColor', opacity: '0.22' }));
-    floraSvg.appendChild(makeSvg('path', { d: 'M18 68 C40 84, 48 108, 26 112 C12 98, 10 82, 18 68 Z M54 102 C78 116, 84 140, 62 142 C48 130, 46 114, 54 102 Z', fill: 'currentColor', opacity: '0.18' }));
-    /* Ramo direito espelhado */
-    floraSvg.appendChild(makeSvg('path', { d: 'M1012 20 C958 42, 914 78, 866 124', stroke: 'currentColor', 'stroke-width': '1.6', opacity: '0.42', 'stroke-linecap': 'round' }));
-    floraSvg.appendChild(makeSvg('path', { d: 'M976 38 C948 24, 926 34, 938 56 C956 58, 972 50, 976 38 Z M934 66 C906 52, 882 66, 898 88 C918 88, 930 78, 934 66 Z M896 98 C872 88, 852 102, 866 120 C884 120, 892 110, 896 98 Z', fill: 'currentColor', opacity: '0.22' }));
-    floraSvg.appendChild(makeSvg('path', { d: 'M982 68 C960 84, 952 108, 974 112 C988 98, 990 82, 982 68 Z M946 102 C922 116, 916 140, 938 142 C952 130, 954 114, 946 102 Z', fill: 'currentColor', opacity: '0.18' }));
-    flora.appendChild(floraSvg);
-    stage.appendChild(flora);
-
-    /* Camada 3: Poeira dourada flutuante (vagalumes de biblioteca) */
-    var motes = document.createElement('div');
-    motes.className = 'esc-ac-motes';
-    var positions = [
-      [12, 72, 4, 0], [22, 34, 3, 1.2], [31, 64, 5, 2.4], [41, 28, 3, 0.7],
-      [56, 76, 4, 1.8], [67, 32, 3, 3.1], [76, 68, 5, 0.4], [88, 42, 4, 2.1],
-      [18, 52, 2.5, 2.9], [82, 58, 2.5, 1.5]
-    ];
-    var mi, mEl;
-    for (mi = 0; mi < positions.length; mi += 1) {
-      mEl = document.createElement('span');
-      mEl.className = 'esc-ac-mote';
-      if (mEl.style) {
-        mEl.style.left = positions[mi][0] + '%';
-        mEl.style.top = positions[mi][1] + '%';
-        mEl.style.width = positions[mi][2] + 'px';
-        mEl.style.height = positions[mi][2] + 'px';
-        mEl.style.animationDelay = positions[mi][3] + 's';
-      }
-      motes.appendChild(mEl);
+    /* Camada 1: Galerias de madeira em 3 andares, estantes de livros e arcos neomanuelinos */
+    var hall = document.createElement('div');
+    hall.className = 'esc-ac-layer esc-ac-layer-hall';
+    hall.setAttribute('data-depth', '0.58');
+    var hallSvg = makeSvg('svg', { viewBox: '0 0 1000 240', preserveAspectRatio: 'xMidYMax slice', fill: 'none' });
+    /* Silhueta das galerias laterais de madeira escura */
+    hallSvg.appendChild(makeSvg('path', { d: 'M0 0 L246 0 L246 240 L0 240 Z M754 0 L1000 0 L1000 240 L754 240 Z', fill: 'currentColor', opacity: '0.16' }));
+    /* Prateleiras horizontais nos 3 pisos (esquerda e direita) */
+    var shelves = [42, 86, 130, 174, 214], si2, sy;
+    for (si2 = 0; si2 < shelves.length; si2 += 1) {
+      sy = shelves[si2];
+      hallSvg.appendChild(makeSvg('line', { x1: '18', y1: sy, x2: '238', y2: sy, stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.32' }));
+      hallSvg.appendChild(makeSvg('line', { x1: '762', y1: sy, x2: '982', y2: sy, stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.32' }));
     }
-    stage.appendChild(motes);
+    /* Lombadas rítmicas sugeridas nas estantes (traço único ultraleve) */
+    hallSvg.appendChild(makeSvg('path', {
+      d: 'M30 42 V18 M42 42 V22 M54 42 V16 M68 42 V24 M84 42 V19 M102 42 V21 M118 42 V17 M136 42 V23 M154 42 V18 M174 42 V22 M194 42 V17 M214 42 V24' +
+         ' M34 86 V62 M50 86 V66 M66 86 V60 M82 86 V68 M98 86 V63 M116 86 V61 M134 86 V67 M152 86 V62 M172 86 V66 M190 86 V60 M210 86 V65' +
+         ' M28 130 V106 M44 130 V110 M62 130 V104 M78 130 V112 M96 130 V107 M114 130 V105 M132 130 V111 M150 130 V106 M170 130 V110 M188 130 V104 M208 130 V109' +
+         ' M32 174 V150 M48 174 V154 M66 174 V148 M84 174 V156 M102 174 V151 M120 174 V149 M138 174 V155 M156 174 V150 M176 174 V154 M194 174 V148 M212 174 V153' +
+         ' M782 42 V18 M798 42 V22 M814 42 V16 M832 42 V24 M850 42 V19 M868 42 V21 M886 42 V17 M904 42 V23 M922 42 V18 M940 42 V22 M958 42 V17 M974 42 V24' +
+         ' M786 86 V62 M802 86 V66 M820 86 V60 M838 86 V68 M856 86 V63 M874 86 V61 M892 86 V67 M910 86 V62 M928 86 V66 M946 86 V60 M966 86 V65' +
+         ' M780 130 V106 M796 130 V110 M814 130 V104 M832 130 V112 M850 130 V107 M868 130 V105 M886 130 V111 M904 130 V106 M922 130 V110 M940 130 V104 M960 130 V109' +
+         ' M784 174 V150 M800 174 V154 M818 174 V148 M836 174 V156 M854 174 V151 M872 174 V149 M890 174 V155 M908 174 V150 M926 174 V154 M944 174 V148 M964 174 V153',
+      stroke: 'currentColor', 'stroke-width': '3.5', opacity: '0.2'
+    }));
+    /* Grandes arcos ogivais / neomanuelinos emoldurando o salão central */
+    hallSvg.appendChild(makeSvg('path', {
+      d: 'M246 240 L246 72 Q246 18 320 6 Q268 44 268 94 L268 240 M754 240 L754 72 Q754 18 680 6 Q732 44 732 94 L732 240',
+      stroke: 'currentColor', 'stroke-width': '1.4', opacity: '0.38'
+    }));
+    hallSvg.appendChild(makeSvg('path', {
+      d: 'M126 240 L126 120 Q186 72 246 120 M754 120 Q814 72 874 120 L874 240',
+      stroke: 'currentColor', 'stroke-width': '1.2', opacity: '0.34'
+    }));
+    /* Balaustrada inferior sutil */
+    hallSvg.appendChild(makeSvg('path', { d: 'M0 214 L268 214 M732 214 L1000 214', stroke: 'currentColor', 'stroke-width': '1.8', opacity: '0.42' }));
+    hall.appendChild(hallSvg);
+    stage.appendChild(hall);
 
-    return { stage: stage, layers: [sky, arches, flora] };
+    return { stage: stage, layers: [dome, hall] };
   }
 
   var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
