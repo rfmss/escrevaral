@@ -47,14 +47,18 @@
       return cardEl;
     }
 
-    function hide(restoreFocus) {
+    function hide(restoreFocus, keepSelectionBar) {
+      var wasSelection = !!(currentState && currentState.mode !== 'manual');
       requestToken += 1;
       window.clearTimeout(debounceTimer);
       currentState = null;
       if (cardEl) {
         cardEl.hidden = true;
-      if (document.body) { document.body.removeAttribute('data-esc-consulta-open'); }
+        if (document.body) { document.body.removeAttribute('data-esc-consulta-open'); }
         cardEl.textContent = '';
+      }
+      if (wasSelection && !keepSelectionBar && opts.onDismissSelection) {
+        try { opts.onDismissSelection(); } catch (ignore) {}
       }
       if (restoreFocus) {
         if (richEl && !richEl.hidden && richEl.focus) { richEl.focus(); }
@@ -208,6 +212,43 @@
       }
 
       if (!currentState.loading) {
+      /* Quando aberto por seleção no texto, integra Copiar / Recortar / Analisar no mesmo menu único */
+      if (currentState.mode !== 'manual') {
+        var selActions = document.createElement('div');
+        selActions.className = 'esc-palavra-sel-actions';
+        var copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.textContent = 'Copiar';
+        on(copyBtn, 'click', function () {
+          var nativeCopy = byId('selection-copy');
+          if (nativeCopy) { nativeCopy.click(); }
+          copyBtn.textContent = 'Copiado';
+          window.setTimeout(function () { if (copyBtn) { copyBtn.textContent = 'Copiar'; } }, 900);
+        });
+        selActions.appendChild(copyBtn);
+        if (currentState.canReplace) {
+          var cutBtn = document.createElement('button');
+          cutBtn.type = 'button';
+          cutBtn.textContent = 'Recortar';
+          on(cutBtn, 'click', function () {
+            var nativeCut = byId('selection-cut');
+            if (nativeCut) { nativeCut.click(); }
+            hide(true);
+          });
+          selActions.appendChild(cutBtn);
+        }
+        var exBtn = document.createElement('button');
+        exBtn.type = 'button';
+        exBtn.textContent = 'Analisar';
+        on(exBtn, 'click', function () {
+          var nativeEx = byId('selection-examine');
+          hide(false);
+          if (nativeEx) { nativeEx.click(); }
+        });
+        selActions.appendChild(exBtn);
+        content.appendChild(selActions);
+      }
+
       var toolsRow = document.createElement('div');
       toolsRow.className = 'esc-palavra-tools';
       var form = document.createElement('form');
@@ -277,7 +318,7 @@
         return;
       }
       if (!clean) {
-        if (currentState) { hide(false); }
+        if (currentState) { hide(false, true); }
         return;
       }
       if (currentState && currentState.mode === mode && currentState.replaceStart === clean.start && currentState.originalWord === clean.word) {

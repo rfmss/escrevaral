@@ -549,6 +549,10 @@
     if (dismissedSelection && dismissedSelection.documentId === (doc.noteId || doc.id) && dismissedSelection.text === manuscript.value && dismissedSelection.start === start && dismissedSelection.end === end) { return; }
     dismissedSelection = null;
     copiedSelection = { documentId: doc.noteId || doc.id, text: manuscript.value, start: start, end: end };
+    if (wordCardUI && wordCardUI.trimWordSelection && wordCardUI.trimWordSelection(manuscript.value.slice(start, end), start)) {
+      byId('selection-tools').hidden = true;
+      return;
+    }
     byId('selection-tools').hidden = false; text(byId('clipboard-status'), 'Trecho selecionado');
   }
   function copyInternal() {
@@ -2010,6 +2014,7 @@
     wordCardUI = E.mountWordCard({
       manuscriptEl: manuscript,
       richEl: byId('esc-rich-editor'),
+      onDismissSelection: dismissSelection,
       onRichSync: function () {
         if (richUI) { richUI.sync(); }
       },
