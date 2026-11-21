@@ -165,12 +165,12 @@
   }
   var blankSamples=el('section',view,'ptbr-blank-samples');blankSamples.hidden=true;
   el('p',blankSamples,'ptbr-overline','SEM TEXTO AINDA? EXPERIMENTE COM UM EXEMPLO');
-  el('p',blankSamples,'ptbr-examples-sub','Veja a Oficina em ação com exemplos sobre direitos humanos, minorias e cooperação — sua folha continua em branco.');
+  el('p',blankSamples,'ptbr-examples-sub','Veja a Oficina em ação com um exemplo pronto — sua folha continua em branco.');
   var blankSampleRow=el('div',blankSamples,'ptbr-blank-sample-row');
   [
-    {lens:'sintaxe',label:'Sintaxe · Direitos humanos'},
-    {lens:'relativas',label:'Relativas · Minorias e memória'},
-    {lens:'ritmo',label:'Ritmo · Geopolítica e paz'}
+    {lens:'sintaxe',label:'Exemplo de Sintaxe'},
+    {lens:'relativas',label:'Exemplo de Relativas'},
+    {lens:'ritmo',label:'Exemplo de Ritmo'}
   ].forEach(function(item){
     var sb=el('button',blankSampleRow,'ptbr-example-btn',item.label);
     sb.type='button';sb.setAttribute('data-blank-example',item.lens);
@@ -394,7 +394,7 @@
     try{
       var simResult=vault.analyze(lens,ex.text);
       resultCard(lens,simResult,ex.text,null,null,ex);
-      status.textContent='Exemplo demonstrativo ('+(ex.theme||'Leitura')+'). Seu manuscrito permanece intacto.';
+      status.textContent='Exemplo demonstrativo. Seu manuscrito permanece intacto.';
     }catch(e){
       status.textContent='Não foi possível exibir este exemplo: '+e.message;
     }

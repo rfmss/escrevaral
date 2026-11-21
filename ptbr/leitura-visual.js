@@ -149,7 +149,7 @@
     if (!options || !options.exampleMode) { return; }
     var bar = el('div', parent, 'ptbr-example-banner');
     var info = el('span', bar, 'ptbr-example-banner-text',
-      'Exemplo demonstrativo · ' + (options.exampleMode.theme || 'Leitura') + ' (seu manuscrito permanece intacto)');
+      'Exemplo demonstrativo — seu manuscrito permanece intacto');
     if (typeof options.onExitExample === 'function') {
       var back = el('button', bar, 'ptbr-example-exit', '← Voltar ao meu texto');
       back.type = 'button';
@@ -170,11 +170,10 @@
     var wrap = el('section', main, 'ptbr-examples-box');
     wrap.setAttribute('aria-label', 'Exemplos para observar nesta lente');
     el('p', wrap, 'ptbr-overline', 'EXEMPLOS PARA OBSERVAR NESTA LENTE');
-    el('p', wrap, 'ptbr-examples-sub', 'Veja como esta análise funciona em frases sobre direitos humanos, minorias, combate ao preconceito e cooperação — sem alterar o seu texto:');
+    el('p', wrap, 'ptbr-examples-sub', 'Veja como esta análise funciona na prática — clique em qualquer exemplo sem alterar o seu texto:');
     var grid = el('div', wrap, 'ptbr-examples-grid');
     list.forEach(function (ex, idx) {
       var card = el('article', grid, 'ptbr-example-card');
-      el('span', card, 'ptbr-example-theme', ex.theme);
       el('p', card, 'ptbr-example-text', ex.text);
       el('p', card, 'ptbr-example-note', ex.note);
       if (options && typeof options.onTryExample === 'function') {

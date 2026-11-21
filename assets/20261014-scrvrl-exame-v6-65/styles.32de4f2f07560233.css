@@ -2730,6 +2730,7 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-reading-paper { flex:1 1 0; min-width:440px; padding:4px 0 12px; }
 #ptbr-dashboard .ptbr-reading-help { max-width:64ch; font:400 var(--esc-text-sm, 12.5px)/1.5 var(--esc-font-ui, Arial, Helvetica, sans-serif); margin:0 0 14px; color:#2c3a2c; }
 #ptbr-dashboard .ptbr-reading-aside { flex:0 0 308px; width:308px; min-width:0; padding:16px 18px; border:1px solid rgba(33,41,33,.16); border-radius:10px; background:#d5dfd2; color:#151d15; word-wrap:break-word; overflow-wrap:break-word; position:sticky; top:8px; }
+#ptbr-dashboard .ptbr-reading-aside > .ptbr-overline { display:inline-block; padding:3px 10px; margin:0 0 10px; border-radius:99px; background:#24382b; color:#eef3ec; letter-spacing:.05em; }
 #ptbr-dashboard .ptbr-reading-selection { font:700 var(--esc-text-md, 16px)/1.35 var(--esc-font-serif, 'Noto Serif', Georgia, serif); color:#111711; margin:8px 0 10px; }
 #ptbr-dashboard .ptbr-reading-aside .ptbr-observation { border-top:1px solid rgba(33,41,33,.14); padding-top:10px; }
 #ptbr-dashboard .ptbr-reading-aside p { font:400 var(--esc-text-base, 14px)/1.55 var(--esc-font-ui, Arial, Helvetica, sans-serif); color:#1a241a; margin:0 0 8px; }
@@ -2765,8 +2766,9 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-nav-counter { font:600 var(--esc-text-sm, 12.5px)/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif); color:#1e2a1e; padding:0 6px; }
 #ptbr-dashboard .ptbr-nav-pill:disabled { opacity:.52; cursor:default; }
 
-#ptbr-dashboard .ptbr-fragment-head { display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin:0 0 4px; }
-#ptbr-dashboard .ptbr-fragment-number { font:700 var(--esc-text-xs, 11px)/1.3 var(--esc-font-ui, Arial, Helvetica, sans-serif); letter-spacing:.06em; text-transform:uppercase; margin:0; color:#2b3a2b; }
+#ptbr-dashboard .ptbr-fragment-head { display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin:0 0 6px; }
+#ptbr-dashboard .ptbr-fragment-number { display:inline-block; font:700 var(--esc-text-xs, 11px)/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif); letter-spacing:.05em; text-transform:uppercase; margin:0 0 6px; padding:3px 9px; border-radius:99px; background:#24382b; color:#eef3ec; }
+#ptbr-dashboard .ptbr-fragment-head > .ptbr-fragment-number { margin:0; }
 #ptbr-dashboard .ptbr-clause-badge { font:600 var(--esc-text-xs, 11px)/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif); padding:2px 9px; border-radius:99px; border:1px solid rgba(36,56,43,.28); background:#dce5da; color:#1c3224; }
 #ptbr-dashboard .ptbr-reading-fragment { border-bottom:1px solid rgba(33,41,33,.14); padding:12px 0 16px; }
 #ptbr-dashboard .ptbr-reading-fragment:last-child { border-bottom:0; }
@@ -2987,13 +2989,14 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-arc-pill { fill:#1d2820; stroke:
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-arc-label { fill:#dbe8dd; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-active-note-meta,
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-reading-help,
-body[data-theme="escuro"] #ptbr-dashboard .ptbr-fragment-number,
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-fragment-original,
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-rhyme-pair,
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-rhythm-count,
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-aside-counter,
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-goals span,
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-lens-description { color:#bccbb9; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-reading-aside > .ptbr-overline,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-fragment-number { background:#8eb097; color:#141e17; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-reading-aside blockquote { background:rgba(255,255,255,.06); border-left-color:#8eb097; color:#edf3ea; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-excerpt { background:#2a3529; border-color:#5f6f5b; color:#e2ebe0; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-excerpt:hover { background:#334031; border-color:#8aa488; }
@@ -7646,10 +7649,14 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   .esc-academy-bridge-kicker {
-    font: 700 10.5px/1.3 Arial, Helvetica, sans-serif;
-    letter-spacing: 0.11em;
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: #24382b;
+    color: #eef3ec;
+    font: 700 11px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--esc-muted, #4a544c);
   }
 
   .esc-academy-resume-btn {

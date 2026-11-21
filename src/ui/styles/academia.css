@@ -175,10 +175,14 @@
   }
 
   .esc-academy-bridge-kicker {
-    font: 700 10.5px/1.3 Arial, Helvetica, sans-serif;
-    letter-spacing: 0.11em;
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: #24382b;
+    color: #eef3ec;
+    font: 700 11px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--esc-muted, #4a544c);
   }
 
   .esc-academy-resume-btn {

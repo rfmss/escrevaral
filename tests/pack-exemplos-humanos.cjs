@@ -52,6 +52,7 @@ panel.flush();
 
 const cards = all(panel.board, 'ptbr-example-card');
 assert.equal(cards.length, 3, 'Relativas sem ocorrências exibe 3 cards de exemplo');
+assert.equal(all(panel.board, 'ptbr-example-theme').length, 0, 'temas ficam implícitos no conteúdo, sem etiqueta explícita nos cards');
 const simBtn = all(panel.board, 'ptbr-example-btn')[0];
 assert.ok(simBtn, 'botão Simular análise presente');
 simBtn.click();
