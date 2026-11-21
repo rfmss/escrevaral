@@ -11811,6 +11811,11 @@
       var b = el('button', target, cls); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-controls', uid);
       b.setAttribute('data-syntax-node', f.nodeId);
       b.setAttribute('data-syntax-role', syntaxRoleKey(f.feature));
+      var subrole = '';
+      if (f.reducedKind) { subrole = 'reduzida'; }
+      else if (f.nodeId && f.nodeId.indexOf('-adjunto-ini') !== -1) { subrole = 'deslocado'; }
+      else if (f.evidence && f.evidence.observation && f.evidence.observation.indexOf('próclise') !== -1) { subrole = 'clitico'; }
+      if (subrole) { b.setAttribute('data-syntax-subrole', subrole); }
       b.setAttribute('aria-label', f.feature + ': ' + f.snippet + '. Ver explicação.');
       el('span', b, 'ptbr-word-tag', f.feature);
       el('span', b, 'ptbr-word-text', f.snippet);
@@ -11818,6 +11823,15 @@
         f.components.forEach(function (c) { if (valid(snapshot, c)) { el('span', b, 'ptbr-syntax-head', c.role + ': ' + c.snippet); } });
       } else if (f.head && f.head.snippet !== f.snippet) {
         el('span', b, 'ptbr-syntax-head', 'Núcleo: ' + f.head.snippet);
+      }
+      if (f.groupKind) {
+        el('span', b, 'ptbr-syntax-subtag', f.groupKind);
+      } else if (subrole === 'deslocado') {
+        el('span', b, 'ptbr-syntax-subtag', 'deslocado');
+      } else if (subrole === 'clitico') {
+        el('span', b, 'ptbr-syntax-subtag', 'próclise');
+      } else if (subrole === 'reduzida') {
+        el('span', b, 'ptbr-syntax-subtag', 'reduzida · ' + f.reducedKind);
       }
       if (f.implicitSubject && f.implicitSubject.label) {
         el('span', b, 'ptbr-syntax-head', f.implicitSubject.label);
@@ -11829,7 +11843,16 @@
     order.forEach(function (key, index) {
       var g = groups[key], s = el('section', canvas, 'ptbr-reading-fragment');
       g.section = s;
-      el('p', s, 'ptbr-fragment-number', 'FRASE ' + ('0' + (index + 1)).slice(-2) + ' DE ' + ('0' + order.length).slice(-2));
+      var fragHead = el('div', s, 'ptbr-fragment-head');
+      el('p', fragHead, 'ptbr-fragment-number', 'FRASE ' + ('0' + (index + 1)).slice(-2) + ' DE ' + ('0' + order.length).slice(-2));
+      var clauseKind = '';
+      g.items.forEach(function (item) {
+        if (clauseKind) { return; }
+        if (item.reducedKind) { clauseKind = 'Oração reduzida · ' + item.reducedKind; }
+        else if (item.groupKind === 'passiva analítica') { clauseKind = 'Voz passiva analítica'; }
+        else if (item.implicitSubject && item.implicitSubject.pronoun) { clauseKind = 'Sujeito oculto (' + item.implicitSubject.pronoun + ')'; }
+      });
+      if (clauseKind) { el('span', fragHead, 'ptbr-clause-badge', clauseKind); }
       var scroll = el('div', s, 'ptbr-word-scroll'); scroll.setAttribute('tabindex', '0'); scroll.setAttribute('aria-label', 'Grupos da oração; role para ver todas as relações');
       g.row = el('div', scroll, 'ptbr-syntax-row');
       if (D.createElementNS) {
@@ -11882,45 +11905,65 @@
       if (!g || !g.svg || !g.row.getBoundingClientRect) { return; }
       var row = g.row.getBoundingClientRect();
       if (!row.width) { return; }
-      var svgH = 88;
+
+      /* Coleta e ordena vínculos do menor ao maior vão (empilhamento displaCy limpo, até 6 arcos) */
+      var activeEdges = [];
+      (active.relations || []).forEach(function (edge) {
+        if (edge.from !== active.nodeId && edge.to !== active.nodeId) { return; }
+        var a = buttons['$' + edge.from], b = buttons['$' + edge.to];
+        if (!a || !b) { return; }
+        var ar = a.button.getBoundingClientRect(), br = b.button.getBoundingClientRect();
+        var x1 = ar.left - row.left + ar.width / 2;
+        var x2 = br.left - row.left + br.width / 2;
+        activeEdges.push({ edge: edge, x1: x1, x2: x2, span: Math.abs(x2 - x1) });
+      });
+      activeEdges.sort(function (u, v) { return u.span - v.span; });
+      if (activeEdges.length > 6) { activeEdges = activeEdges.slice(0, 6); }
+
+      var svgH = Math.min(176, Math.max(88, 66 + activeEdges.length * 22));
+      if (g.row.style) { g.row.style.paddingTop = (svgH + 6) + 'px'; }
       g.svg.setAttribute('width', row.width);
       g.svg.setAttribute('height', svgH);
       g.svg.setAttribute('viewBox', '0 0 ' + row.width + ' ' + svgH);
 
-      var lane = 0;
-      (active.relations || []).forEach(function (edge) {
-        if (edge.from !== active.nodeId && edge.to !== active.nodeId) { return; }
-        var a = buttons['$' + edge.from], b = buttons['$' + edge.to];
-        if (!a || !b || lane >= 4) { return; }
-        var ar = a.button.getBoundingClientRect(), br = b.button.getBoundingClientRect();
-        var x1 = ar.left - row.left + ar.width / 2;
-        var x2 = br.left - row.left + br.width / 2;
-        var yBase = svgH - 8;
-        var span = Math.abs(x2 - x1);
-        var arch = Math.min(svgH - 22, Math.max(30, span * 0.24) + lane * 14);
+      var yBase = svgH - 8, placedPills = [];
+      activeEdges.forEach(function (item, lane) {
+        var edge = item.edge, x1 = item.x1, x2 = item.x2;
+        var arch = Math.min(svgH - 22, Math.max(30, item.span * 0.22) + lane * 18);
         var cy = Math.max(14, yBase - arch);
         var mx = (x1 + x2) / 2;
 
-        /* 1 <path> por vínculo (preserva contrato de testes) + ponta de seta <polygon> + rótulo <rect>/<text> */
+        /* 1 <path> por vínculo (preserva contrato de testes) + ponta de seta <polygon> + rótulo sem sobreposição */
         svgEl('path', g.svg, {
           d: 'M ' + x1.toFixed(1) + ' ' + yBase + ' Q ' + mx.toFixed(1) + ' ' + cy.toFixed(1) + ' ' + x2.toFixed(1) + ' ' + (yBase - 4),
           fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round'
         });
-        /* Seta apontando para o destino x2 */
         svgEl('polygon', g.svg, {
           points: x2.toFixed(1) + ',' + yBase + ' ' + (x2 - 4.5).toFixed(1) + ',' + (yBase - 8) + ' ' + (x2 + 4.5).toFixed(1) + ',' + (yBase - 8),
           fill: 'currentColor'
         });
-        /* Ponto na origem x1 */
         svgEl('circle', g.svg, { cx: x1.toFixed(1), cy: (yBase - 2).toFixed(1), r: '2.8', fill: 'currentColor' });
 
-        /* Rótulo da relação no topo do arco (estilo displaCy) */
         if (edge.label) {
           var lblText = String(edge.label).slice(0, 26);
           var apexY = 0.25 * yBase + 0.5 * cy + 0.25 * (yBase - 4);
           var pillW = Math.max(46, lblText.length * 6.4 + 14);
           var pillX = Math.max(2, Math.min(row.width - pillW - 2, mx - pillW / 2));
           var pillY = Math.max(2, apexY - 12);
+          var tries = 0;
+          while (tries < 6) {
+            var collides = false, pi;
+            for (pi = 0; pi < placedPills.length; pi++) {
+              var p = placedPills[pi];
+              if (pillX < p.x2 + 4 && pillX + pillW > p.x1 - 4 && Math.abs(pillY - p.y) < 20) {
+                collides = true; break;
+              }
+            }
+            if (!collides) { break; }
+            pillY = Math.max(2, pillY - 20);
+            tries++;
+          }
+          placedPills.push({ x1: pillX, x2: pillX + pillW, y: pillY });
           svgEl('rect', g.svg, {
             x: pillX.toFixed(1), y: pillY.toFixed(1), width: pillW.toFixed(1), height: '18', rx: '9',
             'class': 'ptbr-arc-pill'
@@ -11930,7 +11973,6 @@
             'class': 'ptbr-arc-label'
           }, lblText);
         }
-        lane++;
       });
     }
 
@@ -12114,6 +12156,8 @@
     }
     var morph = options.lens === 'morfologia';
     var isRitmo = options.lens === 'ritmo';
+    var isDialogo = options.lens === 'dialogo';
+    var isAdverbios = options.lens === 'adverbios';
     var isRepeat = options.lens === 'repeticao';
     var isRima = options.lens === 'rima';
     var isMetrica = options.lens === 'metrica';
@@ -12125,6 +12169,7 @@
     el('p', main, 'ptbr-overline',
       morph ? 'CLASSES NO TEXTO · PÍLULAS COLORIDAS'
         : isRitmo ? 'PARTITURA RÍTMICA DAS FRASES'
+        : isDialogo ? 'DESENHO GRÁFICO DO DIÁLOGO'
         : isRepeat ? 'ECOS E REPETIÇÕES NO CONTEXTO'
         : isRima ? 'ESQUEMA DE RIMAS · FAMÍLIAS SONORAS'
         : isMetrica ? 'ESCANSÃO SILÁBICA DOS VERSOS'
@@ -12132,14 +12177,16 @@
     el('p', main, 'ptbr-reading-help', morph
       ? 'Cada palavra veste a cor da sua classe. Filtre uma classe acima para acender só ela no texto, ou clique numa pílula para ver sua evidência.'
       : isRitmo
-        ? 'Cada barra mostra a extensão relativa da frase para enxergar cadência e variação num relance.'
-        : isRepeat
-          ? 'As repetições aparecem grifadas dentro da própria passagem, na mesma cor. Clique para conferir ou abrir sinônimos.'
-          : isRima
-            ? 'Versos com terminação sonora aproximada compartilham a mesma letra (A, B, C…) e cor.'
-            : isMetrica
-              ? 'Divisão estimada em sílabas poéticas, com a sílaba tônica em destaque e a medida clássica à direita.'
-              : 'Cada ocorrência aparece destacada dentro da sua própria frase. Clique para ver explicação ou localizar no texto.');
+        ? 'Panorama estatístico e destaques descritivos de fôlego (frases longas e cadências regulares) para ouvir o desenho das pausas.'
+        : isDialogo
+          ? 'Proporção de palavras e linhas iniciadas por marcas de fala (travessão —, meia-risca – ou hífen - ) no trecho disponível.'
+          : isRepeat
+            ? 'As repetições aparecem grifadas dentro da própria passagem, na mesma cor. Clique para conferir ou abrir sinônimos.'
+            : isRima
+              ? 'Versos com terminação sonora aproximada (consoante ou toante) compartilham a mesma letra (A, B, C…) e cor.'
+              : isMetrica
+                ? 'Divisão estimada em sílabas poéticas, com a sílaba tônica em destaque, elisões possíveis e a medida clássica à direita.'
+                : 'Cada ocorrência aparece destacada dentro da sua própria frase. Clique para ver explicação ou localizar no texto.');
 
     /* Barra de filtros por classe + alternador "Só cores" para Classes de palavras */
     var filterButtons = [];
@@ -12251,7 +12298,11 @@
             el('span', scanVerse, sCls, syl);
           });
         });
-        el('span', scanRow, 'ptbr-meter-badge', meterName(f.measurements.min, f.measurements.max));
+        var meterWrap = el('span', scanRow, 'ptbr-meter-badges');
+        el('span', meterWrap, 'ptbr-meter-badge', meterName(f.measurements.min, f.measurements.max));
+        if (f.measurements.possibleFusions > 0) {
+          el('span', meterWrap, 'ptbr-metric-chip', f.measurements.possibleFusions + (f.measurements.possibleFusions === 1 ? ' elisão possível' : ' elisões possíveis'));
+        }
       } else if (isRima && f.related && valid(snapshot, f.related)) {
         var rk = '$' + f.related.start;
         if (typeof rhymeGroups[rk] !== 'number') { rhymeGroups[rk] = nextRhymeIdx++; }
@@ -12260,6 +12311,9 @@
         b.setAttribute('data-repeat-group', String(rIdx % 5));
         var rHead = el('span', b, 'ptbr-rhyme-head');
         el('span', rHead, 'ptbr-rhyme-badge', 'RIMA ' + rLetter);
+        if (f.rhymeKind) {
+          el('span', rHead, 'ptbr-metric-chip' + (f.rhymeKind === 'toante' ? ' ptbr-chip-dashed' : ''), f.rhymeKind);
+        }
         el('span', rHead, 'ptbr-rhyme-pair', '“' + f.related.snippet + '” ↔ “' + f.snippet + '”');
         var l1 = lineBounds(snapshot, f.related.start), l2 = lineBounds(snapshot, f.start);
         var v1 = el('span', b, 'ptbr-rhyme-line');
@@ -12274,9 +12328,50 @@
         var repCtx = el('span', b, 'ptbr-ctx-line');
         appendMarkedText(repCtx, snapshot, repStart, repEnd, f.occurrences, 'ptbr-inline-hit', repStart > lbRep.start, repEnd < lbRep.end);
         el('span', b, 'ptbr-word-tag', f.occurrences.length + '× “' + f.snippet + '” no trecho');
-      } else if (isRitmo) {
+      } else if (isDialogo && f.metrics) {
+        var dm = f.metrics;
+        var dPct = Math.max(0, Math.min(100, Math.round(dm.markedPercent || 0)));
+        el('span', b, 'ptbr-word-text', f.message);
+        var prop = el('span', b, 'ptbr-proportion-bar');
+        var pFill = el('span', prop, 'ptbr-proportion-fill');
+        if (pFill.style) { pFill.style.width = dPct + '%'; }
+        var dChips = el('span', b, 'ptbr-metric-chips');
+        el('span', dChips, 'ptbr-metric-chip', dm.markedLines + ' de ' + dm.lines + ' linhas');
+        el('span', dChips, 'ptbr-metric-chip', dm.markedLineWords + ' de ' + dm.totalWords + ' palavras');
+        if (dm.markers) {
+          if (dm.markers.emDash) { el('span', dChips, 'ptbr-metric-chip', '— travessão: ' + dm.markers.emDash); }
+          if (dm.markers.enDash) { el('span', dChips, 'ptbr-metric-chip', '– meia-risca: ' + dm.markers.enDash); }
+          if (dm.markers.hyphen) { el('span', dChips, 'ptbr-metric-chip', '- hífen: ' + dm.markers.hyphen); }
+        }
+      } else if (isRitmo && f.id === 'PTBR-RIT-001' && f.metrics) {
+        var rm = f.metrics;
+        el('span', b, 'ptbr-rhyme-badge', 'PANORAMA');
+        el('span', b, 'ptbr-word-text', f.message);
+        var rChips = el('span', b, 'ptbr-metric-chips');
+        el('span', rChips, 'ptbr-metric-chip', rm.sentences + ' frases');
+        el('span', rChips, 'ptbr-metric-chip', 'média ' + rm.mean.toFixed(1) + ' pal.');
+        el('span', rChips, 'ptbr-metric-chip', 'faixa ' + rm.shortest + '–' + rm.longest);
+        el('span', rChips, 'ptbr-metric-chip', 'desvio ' + rm.deviation.toFixed(1));
+      } else if (isRitmo && f.id === 'PTBR-RIT-003' && f.metrics && f.metrics.lengths) {
+        var rHead3 = el('span', b, 'ptbr-rhyme-head');
+        el('span', rHead3, 'ptbr-rhyme-badge', 'CADÊNCIA REGULAR');
+        el('span', rHead3, 'ptbr-rhyme-pair', f.metrics.runLength + ' frases (' + f.metrics.minWords + '–' + f.metrics.maxWords + ' palavras)');
         el('span', b, 'ptbr-word-text', f.snippet);
-        var wc = f.snippet.replace(/^\s+|\s+$/g, '').split(/\s+/).length;
+        var pulse = el('span', b, 'ptbr-pulse-strip');
+        f.metrics.lengths.forEach(function (len) {
+          var chip = el('span', pulse, 'ptbr-pulse-bar', len + ' pal.');
+          if (chip.style) { chip.style.minWidth = Math.max(44, Math.min(120, len * 6)) + 'px'; }
+        });
+      } else if (isRitmo) {
+        if (f.id === 'PTBR-RIT-002') {
+          var rHead2 = el('span', b, 'ptbr-rhyme-head');
+          el('span', rHead2, 'ptbr-rhyme-badge', 'FRASE EXTENSA');
+          if (f.metrics && typeof f.metrics.mean === 'number') {
+            el('span', rHead2, 'ptbr-metric-chip', 'média do trecho: ' + f.metrics.mean.toFixed(1) + ' pal.');
+          }
+        }
+        el('span', b, 'ptbr-word-text', f.snippet);
+        var wc = (f.metrics && typeof f.metrics.words === 'number') ? f.metrics.words : f.snippet.replace(/^\s+|\s+$/g, '').split(/\s+/).length;
         var pct = Math.max(10, Math.round((wc / maxWords) * 100));
         var meter = el('span', b, 'ptbr-rhythm-meter');
         var fill = el('span', meter, 'ptbr-rhythm-bar');
@@ -12287,7 +12382,14 @@
         var win = sentenceWindow(snapshot, f.start, f.end);
         var ctxLine = el('span', b, 'ptbr-ctx-line');
         appendMarkedText(ctxLine, snapshot, win.start, win.end, [f], 'ptbr-inline-hit', win.prefixEllipsis, win.suffixEllipsis);
-        el('span', b, 'ptbr-word-tag', f.message || label(f));
+        var metaRow = el('span', b, 'ptbr-metric-chips');
+        el('span', metaRow, 'ptbr-word-tag', f.message || label(f));
+        if (isAdverbios && f.metrics && f.metrics.paragraphCount >= 2) {
+          el('span', metaRow, 'ptbr-metric-chip', f.metrics.paragraphCount + '× neste parágrafo');
+        }
+        if (f.reference) {
+          el('span', metaRow, 'ptbr-metric-chip ptbr-ref-chip', 'Ref.: “' + f.reference + '”');
+        }
       }
 
       b.addEventListener('click', function () { select(index, true); }, false);
@@ -12862,7 +12964,7 @@
           if(at>=0){target.appendChild(observations[at]);}
         }
       });
-      el('p',details(card,'Como ler esta análise'),'ptbr-legend',lens==='morfologia'?'Etiqueta contínua: hipótese contextual. Tracejada: possibilidade no léxico. Sem leitura: fora da cobertura. Arcos pontilhados: apoios, não uma árvore sintática completa.':lens==='sintaxe'?'Os grupos podem se conter: o predicado inclui verbo e complementos. Os arcos mostram vínculos da hipótese selecionada; as mesmas relações aparecem por escrito.':'Os trechos pertencem à lente escolhida. Selecione um para consultar a explicação.');
+      el('p',details(card,'Como ler esta análise'),'ptbr-legend',lens==='morfologia'?'Etiqueta contínua: hipótese contextual. Tracejada: possibilidade no léxico. Sem leitura: fora da cobertura. Arcos pontilhados: apoios, não uma árvore sintática completa.':lens==='sintaxe'?'Os grupos podem se conter: o predicado inclui verbo, clíticos e complementos; adjuntos deslocados, vocativos, apostos e orações reduzidas (gerúndio e ao + infinitivo) aparecem destacados na ordem da frase. Os arcos mostram vínculos da hipótese selecionada; as mesmas relações aparecem por escrito.':'Os trechos pertencem à lente escolhida. Selecione um para consultar a explicação.');
     }
     if(result.limited){el('p',card,'','O cofre limitou a apresentação aos primeiros 100 apontamentos.');}
     if(result.coverageInfo){

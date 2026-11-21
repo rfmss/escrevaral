@@ -2662,7 +2662,7 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-active-note { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:4px 0 10px; margin:0 0 6px; border:0; background:transparent; font-size:13px; }
 #ptbr-dashboard .ptbr-active-note-badge { font:700 10px/1.2 'Courier Prime','Courier New',monospace; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:99px; background:#2f4738; color:#eff2ea; }
 #ptbr-dashboard .ptbr-active-note-title { font-weight:700; font-size:14.5px; }
-#ptbr-dashboard .ptbr-active-note-meta { margin-left:auto; font:12px/1.3 'Courier Prime','Courier New',monospace; opacity:.72; }
+#ptbr-dashboard .ptbr-active-note-meta { margin-left:auto; font:12px/1.3 'Courier Prime','Courier New',monospace; color:#2e3b2e; }
 
 #ptbr-dashboard .ptbr-ribbon { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 14px; padding-bottom:14px; border-bottom:1px solid rgba(33,41,33,.11); }
 #ptbr-dashboard .ptbr-ribbon-btn { padding:6px 13px; min-height:33px; border:0; border-radius:99px; background:rgba(33,41,33,.06); color:inherit; font:600 12px/1.2 Arial,Helvetica,sans-serif; cursor:pointer; transition:background .12s ease; }
@@ -2706,14 +2706,14 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 /* Palco de leitura: aberto e arejado sem gaiolas aninhadas */
 #ptbr-dashboard .ptbr-reading { display:flex; align-items:flex-start; gap:24px; width:100%; border:0; border-top:1px solid rgba(33,41,33,.11); margin-top:10px; padding-top:14px; min-width:0; background:transparent; }
 #ptbr-dashboard .ptbr-reading-paper { flex:1 1 0; min-width:440px; padding:4px 0 12px; }
-#ptbr-dashboard .ptbr-reading-help { max-width:68ch; font-size:12.5px; line-height:1.55; margin:0 0 14px; opacity:.76; }
-#ptbr-dashboard .ptbr-reading-aside { flex:0 0 296px; width:296px; min-width:0; padding:16px 18px; border:0; border-left:1px solid rgba(33,41,33,.11); border-radius:10px; background:rgba(33,41,33,.04); word-wrap:break-word; overflow-wrap:break-word; position:sticky; top:8px; }
+#ptbr-dashboard .ptbr-reading-help { max-width:68ch; font-size:12.5px; line-height:1.58; margin:0 0 14px; color:#2b382b; }
+#ptbr-dashboard .ptbr-reading-aside { flex:0 0 304px; width:304px; min-width:0; padding:16px 18px; border:0; border-left:1px solid rgba(33,41,33,.14); border-radius:10px; background:rgba(33,41,33,.048); word-wrap:break-word; overflow-wrap:break-word; position:sticky; top:8px; }
 #ptbr-dashboard .ptbr-reading-selection { font:700 16px/1.45 'Courier Prime','Courier New',monospace; margin:8px 0 12px; }
-#ptbr-dashboard .ptbr-reading-aside .ptbr-observation { border-top:1px solid rgba(33,41,33,.1); padding-top:12px; }
-#ptbr-dashboard .ptbr-reading-aside p { font-size:12.5px; line-height:1.58; }
-#ptbr-dashboard .ptbr-reading-aside blockquote { font:15px/1.5 'Courier Prime','Courier New',monospace; white-space:pre-wrap; }
-#ptbr-dashboard .ptbr-reading-aside button { min-height:34px; border:0; border-radius:7px; padding:5px 11px; background:rgba(33,41,33,.08); cursor:pointer; }
-#ptbr-dashboard .ptbr-reading-aside button:hover { background:rgba(33,41,33,.15); }
+#ptbr-dashboard .ptbr-reading-aside .ptbr-observation { border-top:1px solid rgba(33,41,33,.12); padding-top:12px; }
+#ptbr-dashboard .ptbr-reading-aside p { font-size:12.5px; line-height:1.6; }
+#ptbr-dashboard .ptbr-reading-aside blockquote { font:15px/1.55 'Courier Prime','Courier New',monospace; white-space:pre-wrap; margin:8px 0 10px; padding:8px 10px; border-left:2px solid #5a725e; background:rgba(255,255,255,.22); border-radius:0 6px 6px 0; }
+#ptbr-dashboard .ptbr-reading-aside button { min-height:34px; border:0; border-radius:7px; padding:5px 11px; margin:4px 6px 2px 0; background:rgba(33,41,33,.09); cursor:pointer; }
+#ptbr-dashboard .ptbr-reading-aside button:hover { background:rgba(33,41,33,.16); }
 
 /* Barra de filtro de classes + alternador "Só cores" sem moldura pesada */
 #ptbr-dashboard .ptbr-class-bar,
@@ -2728,8 +2728,10 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-nav-counter { font:700 12px/1.2 'Courier Prime','Courier New',monospace; padding:0 6px; }
 #ptbr-dashboard .ptbr-nav-pill:disabled { opacity:.4; cursor:default; }
 
-#ptbr-dashboard .ptbr-fragment-number { font:700 10px/1.4 'Courier Prime','Courier New',monospace; letter-spacing:.1em; margin:0 0 4px; opacity:.7; }
-#ptbr-dashboard .ptbr-reading-fragment { border-bottom:1px dotted #a0ac99; padding:12px 0 16px; }
+#ptbr-dashboard .ptbr-fragment-head { display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin:0 0 4px; }
+#ptbr-dashboard .ptbr-fragment-number { font:700 10.5px/1.4 'Courier Prime','Courier New',monospace; letter-spacing:.1em; margin:0; color:#2e3b2e; }
+#ptbr-dashboard .ptbr-clause-badge { font:700 10px/1.2 'Courier Prime','Courier New',monospace; letter-spacing:.06em; text-transform:uppercase; padding:2px 8px; border-radius:99px; border:1px solid rgba(47,71,56,.28); background:rgba(255,255,255,.32); color:#24382b; }
+#ptbr-dashboard .ptbr-reading-fragment { border-bottom:1px dotted #7f8d7a; padding:12px 0 16px; }
 #ptbr-dashboard .ptbr-reading-fragment:last-child { border-bottom:0; }
 #ptbr-dashboard .ptbr-word-scroll { max-width:100%; overflow-x:auto; padding:2px 0 6px; scrollbar-width:thin; }
 
@@ -2778,19 +2780,30 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-word[aria-pressed="true"] { outline:2.5px solid #22382b !important; outline-offset:2px; }
 #ptbr-dashboard [data-reading-support="true"] { box-shadow:0 0 0 2px #2f5940; }
 
-#ptbr-dashboard .ptbr-fragment-original { font:13px/1.6 Georgia,serif; white-space:pre-wrap; word-wrap:break-word; overflow-wrap:break-word; margin:10px 0 0; opacity:.74; }
+#ptbr-dashboard .ptbr-fragment-original { font:13.5px/1.6 Georgia,serif; white-space:pre-wrap; word-wrap:break-word; overflow-wrap:break-word; margin:10px 0 0; color:#2c382c; }
 
-/* Outras lentes (Ritmo, Repetição, Relativas, Poesia, Convenções) */
+/* Outras lentes (Ritmo, Diálogo, Repetição, Relativas, Poesia, Convenções) */
 #ptbr-dashboard .ptbr-excerpt-row { display:block; }
-#ptbr-dashboard .ptbr-excerpt { display:block; width:100%; white-space:normal; text-align:left; padding:12px 14px; border:1px solid #96a491; border-radius:8px; background:rgba(255,255,255,.28); color:inherit; cursor:pointer; max-width:100%; word-wrap:break-word; overflow-wrap:break-word; }
+#ptbr-dashboard .ptbr-excerpt { display:block; width:100%; white-space:normal; text-align:left; padding:12px 14px; border:1px solid #8a9985; border-radius:8px; background:rgba(255,255,255,.3); color:inherit; cursor:pointer; max-width:100%; word-wrap:break-word; overflow-wrap:break-word; transition:background .12s ease, border-color .12s ease; }
+#ptbr-dashboard .ptbr-excerpt:hover { background:rgba(255,255,255,.44); border-color:#5b6e57; }
 #ptbr-dashboard .ptbr-excerpt > span { display:block; }
 #ptbr-dashboard .ptbr-excerpt > span + span { margin-top:8px; }
 #ptbr-dashboard .ptbr-excerpt .ptbr-word-tag { display:inline-block; white-space:normal; }
 
+/* Chips discretos de métricas, referência e proporção (Diálogo, Ritmo, Poesia, Advérbios, Crase, Concordância) */
+#ptbr-dashboard .ptbr-metric-chips { display:flex !important; flex-wrap:wrap; align-items:center; gap:6px; }
+#ptbr-dashboard .ptbr-metric-chip { display:inline-block; font:700 10.5px/1.25 'Courier Prime','Courier New',monospace; letter-spacing:.03em; padding:3px 8px; border-radius:99px; border:1px solid rgba(33,41,33,.22); background:rgba(255,255,255,.38); color:#223022; white-space:nowrap; }
+#ptbr-dashboard .ptbr-chip-dashed { border-style:dashed; }
+#ptbr-dashboard .ptbr-ref-chip { border-color:#5e8da1; background:rgba(212,228,235,.52); color:#1a4052; }
+#ptbr-dashboard .ptbr-proportion-bar { display:block; width:100%; height:9px; border-radius:99px; background:rgba(33,41,33,.13); overflow:hidden; }
+#ptbr-dashboard .ptbr-proportion-fill { display:block; height:100%; border-radius:99px; background:#2f5940; min-width:4px; }
+#ptbr-dashboard .ptbr-pulse-strip { display:flex !important; flex-wrap:wrap; align-items:center; gap:6px; margin-top:8px !important; }
+#ptbr-dashboard .ptbr-pulse-bar { display:inline-flex; align-items:center; justify-content:center; padding:3px 8px; border-radius:6px; background:rgba(60,97,74,.18); border:1px solid rgba(47,89,64,.35); font:700 10.5px/1.2 'Courier Prime','Courier New',monospace; color:#1f3828; }
+
 /* Partitura rítmica */
 #ptbr-dashboard .ptbr-rhythm-meter { display:flex !important; align-items:center; gap:10px; margin-top:10px !important; }
 #ptbr-dashboard .ptbr-rhythm-bar { display:inline-block; height:8px; border-radius:99px; background:#3c614a; min-width:16px; }
-#ptbr-dashboard .ptbr-rhythm-count { font:700 11px/1.2 'Courier Prime','Courier New',monospace; opacity:.75; white-space:nowrap; }
+#ptbr-dashboard .ptbr-rhythm-count { font:700 11px/1.2 'Courier Prime','Courier New',monospace; color:#2b3a2b; white-space:nowrap; }
 
 /* Grupos de cor para repetição próxima e famílias de rima */
 #ptbr-dashboard .ptbr-excerpt[data-repeat-group="0"] { border-left:4px solid #8a4b30; background:rgba(238,220,211,.38); }
@@ -2816,16 +2829,19 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-syl-sep { opacity:.35; font:13px/1 'Courier Prime',monospace; padding:0 3px; }
 #ptbr-dashboard .ptbr-syl-tonic { font-weight:700; color:#6d2d15; background:rgba(238,220,211,.55); padding:0 3px; border-radius:4px; }
 #ptbr-dashboard .ptbr-syl-tail { opacity:.45; font-style:italic; }
+#ptbr-dashboard .ptbr-meter-badges { display:inline-flex; flex-wrap:wrap; align-items:center; gap:6px; }
 #ptbr-dashboard .ptbr-meter-badge { font:700 11px/1.2 'Courier Prime','Courier New',monospace; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:99px; background:#2f4738; color:#eff2ea; white-space:nowrap; }
 
 /* Esquema de rimas (A / B / C...) */
-#ptbr-dashboard .ptbr-rhyme-head { display:flex !important; align-items:center; gap:10px; margin-bottom:6px; }
-#ptbr-dashboard .ptbr-rhyme-badge { font:700 10.5px/1.2 'Courier Prime','Courier New',monospace; letter-spacing:.08em; padding:3px 9px; border-radius:99px; background:#2f4738; color:#eff2ea; }
-#ptbr-dashboard .ptbr-rhyme-pair { font:600 12.5px/1.3 'Courier Prime','Courier New',monospace; opacity:.78; }
+#ptbr-dashboard .ptbr-rhyme-head { display:flex !important; flex-wrap:wrap; align-items:center; gap:6px 10px; margin-bottom:6px; }
+#ptbr-dashboard .ptbr-rhyme-badge { display:inline-block; font:700 10.5px/1.2 'Courier Prime','Courier New',monospace; letter-spacing:.08em; padding:3px 9px; border-radius:99px; background:#2f4738; color:#eff2ea; }
+#ptbr-dashboard .ptbr-rhyme-pair { font:600 12.5px/1.3 'Courier Prime','Courier New',monospace; color:#2b382b; }
 #ptbr-dashboard .ptbr-rhyme-line + .ptbr-rhyme-line { margin-top:4px !important; }
 #ptbr-dashboard .ptbr-reading[data-reading-lens="rima"] .ptbr-fragment-original,
 #ptbr-dashboard .ptbr-reading[data-reading-lens="metrica"] .ptbr-fragment-original,
-#ptbr-dashboard .ptbr-reading[data-reading-lens="repeticao"] .ptbr-fragment-original { display:none; }
+#ptbr-dashboard .ptbr-reading[data-reading-lens="repeticao"] .ptbr-fragment-original,
+#ptbr-dashboard .ptbr-reading[data-reading-lens="dialogo"] .ptbr-fragment-original,
+#ptbr-dashboard .ptbr-reading[data-reading-lens="ritmo"] .ptbr-fragment-original { display:none; }
 
 #ptbr-dashboard .ptbr-reading-empty { font-size:14px; line-height:1.7; padding:20px 0; }
 #ptbr-dashboard .ptbr-legend { font:12px/1.6 'Courier Prime','Courier New',monospace; margin-top:12px; }
@@ -2846,6 +2862,10 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="vocativo"] { background:#eee0e6 !important; border-color:#9c687c !important; color:#59263a !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="conjuncao"] { background:#e5e3d8 !important; border-color:#8f8b76 !important; color:#454234 !important; }
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="adjunto"] { background:#e4dce9 !important; border-color:#8b729c !important; color:#4b355c !important; }
+#ptbr-dashboard .ptbr-syntax-term[data-syntax-subrole="reduzida"] { border-style:dashed !important; border-left-width:4px !important; }
+#ptbr-dashboard .ptbr-syntax-term[data-syntax-subrole="deslocado"] { border-left-width:4px !important; }
+#ptbr-dashboard .ptbr-syntax-term[data-syntax-subrole="clitico"] { border-style:dotted !important; border-width:1.5px !important; }
+#ptbr-dashboard .ptbr-syntax-subtag { display:inline-block; align-self:flex-start; margin-top:4px; padding:1px 6px; border-radius:99px; font:700 9px/1.3 'Courier Prime','Courier New',monospace; letter-spacing:.05em; text-transform:uppercase; background:rgba(33,41,33,.09); color:inherit; }
 #ptbr-dashboard .ptbr-syntax-whole { border-style:dashed !important; background:rgba(255,255,255,.18) !important; max-width:46ch; box-shadow:none; }
 #ptbr-dashboard .ptbr-syntax-whole .ptbr-word-text { font-size:14.5px; word-wrap:break-word; overflow-wrap:break-word; }
 #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"],
@@ -2888,6 +2908,27 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[data-syntax-role="vo
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-relation-arcs { color:#a9cfb3; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-arc-pill { fill:#1d2820; stroke:#8eb097; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-arc-label { fill:#dbe8dd; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-active-note-meta,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-reading-help,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-fragment-number,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-fragment-original,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-rhyme-pair,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-rhythm-count { color:#b9c8b7; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-reading-aside blockquote { background:rgba(255,255,255,.05); border-left-color:#8eb097; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-excerpt { background:rgba(255,255,255,.045); border-color:#5f6f5b; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-excerpt:hover { background:rgba(255,255,255,.08); border-color:#8aa488; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-clause-badge,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-metric-chip { background:rgba(255,255,255,.08); border-color:#687b65; color:#d7e5d6; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-ref-chip { background:rgba(104,158,184,.22); border-color:#8dbcd4; color:#cce6f4; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-meter-badge,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-rhyme-badge { background:#8eb097; color:#162019; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-syl-tonic { color:#f4d3c3; background:rgba(196,115,82,.32); }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-proportion-bar { background:rgba(255,255,255,.12); }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-proportion-fill,
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-rhythm-bar { background:#8eb097; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-pulse-bar { background:rgba(142,176,151,.2); border-color:#7ea388; color:#d9e8dc; }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-subtag { background:rgba(0,0,0,.26); }
+body[data-theme="escuro"] #ptbr-dashboard .ptbr-inline-hit { background:rgba(196,115,82,.3); border-bottom-color:#d49377; }
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"],
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"] { outline-color:#b8d9c0; }
 
@@ -2895,7 +2936,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 @media(max-width:1020px) {
  #ptbr-dashboard .ptbr-reading { display:block; }
  #ptbr-dashboard .ptbr-reading-paper { min-width:0; }
- #ptbr-dashboard .ptbr-reading-aside { width:auto; border-left:0; border-top:1px dotted #86927f; position:static; }
+ #ptbr-dashboard .ptbr-reading-aside { width:auto; border-left:0; border-top:1px dotted #86927f; position:static; margin-top:14px; }
 }
 @media(max-width:760px) {
  #oficina[data-ptbr-dashboard="true"],
@@ -2910,7 +2951,9 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
  }
  #ptbr-dashboard .ptbr-reading-paper, #ptbr-dashboard .ptbr-reading-aside { padding:14px 12px; }
  #ptbr-dashboard .ptbr-stat { margin-right:16px; }
- #ptbr-dashboard .ptbr-wheel button { min-height:44px; }
+ #ptbr-dashboard .ptbr-wheel button,
+ #ptbr-dashboard .ptbr-nav-pill { min-height:40px; }
+ #ptbr-dashboard .ptbr-syntax-term { padding:7px 10px; }
  body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] { left:0 !important; right:0 !important; top:0 !important; bottom:0 !important; width:100% !important; max-width:100% !important; transform:none !important; }
 }
 @media(forced-colors:active) { #ptbr-dashboard .ptbr-word[aria-pressed="true"] { outline:2px solid Highlight; } }
