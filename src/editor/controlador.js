@@ -1959,6 +1959,10 @@
       storage: storage,
       onOpenAcademy: function (guideId) {
         if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'objeto-livro'); }
+      },
+      onPrint: function () {
+        preparePrint();
+        if (window.print) { window.print(); } else { message('Use a opção de impressão do navegador.'); }
       }
     });
     if (byId('esc-reader-toggle')) {
@@ -2179,7 +2183,7 @@
           title: cleanTitle
         };
       },
-      onAction: function (action) {
+      onAction: function (action, entry, lensId) {
         if (action === 'reader') {
           if (readerUI) {
             doc.title = title.value;
@@ -2196,6 +2200,10 @@
             title.focus();
             if (title.select) { title.select(); }
           }
+        } else if (action === 'examine-lens' && lensId) {
+          if (cabinetOpen) { enterDesk(true); }
+          showPanel('oficina', 'examinar-toggle', true);
+          if (E.ptbrPanelOpen) { E.ptbrPanelOpen({ lens: lensId }); }
         } else if (action === 'examine') {
           if (cabinetOpen) { enterDesk(true); }
           showPanel('oficina', 'examinar-toggle', true);

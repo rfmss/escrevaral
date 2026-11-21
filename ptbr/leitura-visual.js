@@ -96,8 +96,33 @@
     var canvas = el('div', main, 'ptbr-reading-canvas'), aside = el('aside', box, 'ptbr-reading-aside');
     aside.id = uid; aside.setAttribute('aria-label', 'Explicação da relação selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
+    var navList = [];
+    order.forEach(function (key) {
+      var terms = groups[key].items.filter(function (f) { return f.feature !== 'Predicado'; });
+      terms.sort(function (a, b) { return a.start - b.start || a.end - b.end; });
+      terms.forEach(function (f) { navList.push(f); });
+    });
+    var asidePrev = null, asideNext = null, asideCounter = null;
+    if (navList.length > 1) {
+      var asideNav = el('div', aside, 'ptbr-aside-nav');
+      asidePrev = el('button', asideNav, 'ptbr-aside-step', '← Anterior');
+      asidePrev.type = 'button'; asidePrev.setAttribute('data-aside-step', 'prev');
+      asideCounter = el('span', asideNav, 'ptbr-aside-counter', '1 / ' + navList.length);
+      asideNext = el('button', asideNav, 'ptbr-aside-step', 'Próxima →');
+      asideNext.type = 'button'; asideNext.setAttribute('data-aside-step', 'next');
+      asidePrev.addEventListener('click', function () { stepSyntax(-1); }, false);
+      asideNext.addEventListener('click', function () { stepSyntax(1); }, false);
+    }
     var selected = el('p', aside, 'ptbr-reading-selection'), links = el('p', aside, 'ptbr-syntax-links'), details = el('div', aside, 'ptbr-reading-details');
     selected.setAttribute('aria-live', 'polite');
+
+    function stepSyntax(dir) {
+      if (!navList.length) { return; }
+      var cur = navList.indexOf(active);
+      if (cur < 0) { cur = 0; }
+      var nextIdx = Math.max(0, Math.min(navList.length - 1, cur + dir));
+      if (navList[nextIdx]) { select(navList[nextIdx]); }
+    }
 
     function button(f, target, cls) {
       var b = el('button', target, cls); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-controls', uid);
@@ -129,6 +154,10 @@
         el('span', b, 'ptbr-syntax-head', f.implicitSubject.label);
       }
       b.addEventListener('click', function () { select(f); }, false);
+      b.addEventListener('keydown', function (ev) {
+        if (ev.keyCode === 39) { if (ev.preventDefault) { ev.preventDefault(); } stepSyntax(1); }
+        else if (ev.keyCode === 37) { if (ev.preventDefault) { ev.preventDefault(); } stepSyntax(-1); }
+      }, false);
       buttons['$' + f.nodeId] = { button: b, finding: f };
     }
 
@@ -286,6 +315,12 @@
         }
       });
       links.textContent = descriptions.join('. ');
+      if (asideCounter) {
+        var pos = navList.indexOf(f);
+        asideCounter.textContent = (pos >= 0 ? (pos + 1) : 1) + ' / ' + navList.length;
+        if (asidePrev) { asidePrev.disabled = pos <= 0; }
+        if (asideNext) { asideNext.disabled = pos < 0 || pos >= navList.length - 1; }
+      }
       options.onSelect(f, details, true);
       resize();
     }
@@ -522,9 +557,46 @@
     var canvas = el('div', main, 'ptbr-reading-canvas');
     var aside = el('aside', box, 'ptbr-reading-aside'); aside.id = uid; aside.setAttribute('aria-label', 'Explicação da leitura selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
+    var asidePrev = null, asideNext = null, asideCounter = null;
+    if (arr.length > 1) {
+      var asideNav = el('div', aside, 'ptbr-aside-nav');
+      asidePrev = el('button', asideNav, 'ptbr-aside-step', '← Anterior');
+      asidePrev.type = 'button'; asidePrev.setAttribute('data-aside-step', 'prev');
+      asideCounter = el('span', asideNav, 'ptbr-aside-counter', '1 / ' + arr.length);
+      asideNext = el('button', asideNav, 'ptbr-aside-step', 'Próxima →');
+      asideNext.type = 'button'; asideNext.setAttribute('data-aside-step', 'next');
+      asidePrev.addEventListener('click', function () { stepOccurrence(-1); }, false);
+      asideNext.addEventListener('click', function () { stepOccurrence(1); }, false);
+    }
     var selected = el('p', aside, 'ptbr-reading-selection'); selected.setAttribute('aria-live', 'polite');
     var details = el('div', aside, 'ptbr-reading-details');
     if (!arr.length) { el('p', main, 'ptbr-reading-empty', 'Nenhuma observação nova neste recorte. Isso não certifica ausência de problemas.'); }
+
+    function visibleIndices() {
+      var list = [], idx;
+      for (idx = 0; idx < arr.length; idx++) {
+        if (!activeClassFilter || wordClasses[idx] === activeClassFilter) { list.push(idx); }
+      }
+      return list;
+    }
+
+    function updateAsideStepper() {
+      if (!asideCounter) { return; }
+      var vis = visibleIndices();
+      var pos = vis.indexOf(active);
+      asideCounter.textContent = vis.length ? ((pos >= 0 ? pos + 1 : 1) + ' / ' + vis.length) : '0 / 0';
+      if (asidePrev) { asidePrev.disabled = pos <= 0; }
+      if (asideNext) { asideNext.disabled = pos < 0 || pos >= vis.length - 1; }
+    }
+
+    function stepOccurrence(dir) {
+      var vis = visibleIndices();
+      if (!vis.length) { return; }
+      var pos = vis.indexOf(active);
+      if (pos < 0) { select(vis[0], true); return; }
+      var targetPos = Math.max(0, Math.min(vis.length - 1, pos + dir));
+      select(vis[targetPos], true);
+    }
 
     /* Dados auxiliares para Ritmo (maior comprimento), Repetição (grupos de cor) e Rima (letras A/B/C...) */
     var maxWords = 1, repeatGroups = {}, nextRepeatColor = 0, rhymeGroups = {}, nextRhymeIdx = 0;
@@ -697,6 +769,9 @@
         var dim = !!activeClassFilter && wordClasses[idx] !== activeClassFilter;
         b.setAttribute('data-dimmed', dim ? 'true' : 'false');
       });
+      var vis = visibleIndices();
+      if (vis.length && vis.indexOf(active) === -1) { select(vis[0], false); }
+      else { updateAsideStepper(); }
     }
 
     function draw() {
@@ -737,6 +812,7 @@
       active = index;
       buttons.forEach(function (b, j) { b.setAttribute('aria-pressed', j === index ? 'true' : 'false'); b.setAttribute('data-reading-support', 'false'); });
       selected.textContent = '“' + arr[index].snippet + '” · ' + label(arr[index]);
+      updateAsideStepper();
       options.onSelect(arr[index], details, user);
       root.clearTimeout(timer); timer = root.setTimeout(draw, 0);
     }

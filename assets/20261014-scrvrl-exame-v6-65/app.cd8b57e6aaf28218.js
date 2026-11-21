@@ -4409,7 +4409,7 @@
 
   function normalizePrefs(raw) {
     var p = raw && typeof raw === 'object' ? raw : {};
-    var okPalette = p.palette === 'white' || p.palette === 'night' || p.palette === 'linen' || p.palette === 'mist';
+    var okPalette = p.palette === 'white' || p.palette === 'night' || p.palette === 'linen' || p.palette === 'mist' || p.palette === 'sage';
     return {
       palette: okPalette ? p.palette : 'paper',
       face: p.face === 'sans' ? 'sans' : 'serif',
@@ -4418,6 +4418,12 @@
       width: clamp(p.width, 50, 74, 62),
       breakMin: p.breakMin === 15 || p.breakMin === 25 || p.breakMin === 45 ? p.breakMin : 0
     };
+  }
+
+  function scrollProgress(scrollTop, scrollHeight, clientHeight) {
+    var maxScroll = Math.max(0, (Number(scrollHeight) || 0) - (Number(clientHeight) || 0));
+    if (maxScroll <= 0) { return 100; }
+    return Math.max(0, Math.min(100, Math.round(((Number(scrollTop) || 0) / maxScroll) * 100)));
   }
 
   function formatEditionDate() {
@@ -4438,7 +4444,8 @@
 
   root.Escr.readerCore = {
     normalizePrefs: normalizePrefs,
-    readingMinutes: readingMinutes
+    readingMinutes: readingMinutes,
+    scrollProgress: scrollProgress
   };
 
   root.Escr.mountReaderMode = function (opts) {
@@ -4503,16 +4510,18 @@
       sec.setAttribute('aria-label', 'Modo leitura');
       sec.hidden = true;
       sec.innerHTML =
+        '<div class="esc-reader-progress" aria-hidden="true"><span id="esc-reader-progress-fill" class="esc-reader-progress-fill"></span></div>' +
         '<header class="esc-reader-bar">' +
           '<button id="esc-reader-close" type="button">← Voltar à escrita</button>' +
-          '<span id="esc-reader-stats" class="esc-reader-mode"></span>' +
+          '<span id="esc-reader-stats" class="esc-reader-mode" aria-live="polite"></span>' +
           '<button id="esc-reader-prev" type="button" aria-label="Página anterior">Anterior</button>' +
           '<button id="esc-reader-next" type="button" aria-label="Próxima página">Próxima</button>' +
+          (opts && typeof opts.onPrint === 'function' ? '<button id="esc-reader-print" type="button" title="Imprimir ou salvar em PDF">Imprimir</button>' : '') +
           (opts && typeof opts.onOpenAcademy === 'function' ? '<button id="esc-reader-anatomy" type="button" title="Explorar a anatomia do livro na Academia">Objeto livro</button>' : '') +
           '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Papel e letra</button>' +
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
-          '<label>Papel<select id="esc-reader-palette"><option value="paper">Jornal (Marfim)</option><option value="linen">Creme suave</option><option value="mist">Névoa clara</option><option value="white">Galeria</option><option value="night">Noturno</option></select></label>' +
+          '<label>Papel<select id="esc-reader-palette"><option value="paper">Jornal (Marfim)</option><option value="sage">Sálvia E-Ink</option><option value="linen">Creme suave</option><option value="mist">Névoa clara</option><option value="white">Galeria</option><option value="night">Noturno</option></select></label>' +
           '<label>Letra<select id="esc-reader-face"><option value="serif">Literária (Serifada)</option><option value="sans">Sem serifa</option></select></label>' +
           '<label>Tamanho<select id="esc-reader-size"><option value="18">18 px</option><option value="20">20 px</option><option value="21">21 px</option><option value="24">24 px</option><option value="28">28 px</option></select></label>' +
           '<label>Entrelinha<select id="esc-reader-leading"><option value="1.6">Compacta</option><option value="1.82">Editorial</option><option value="2">Ampla</option></select></label>' +
@@ -4535,20 +4544,39 @@
       }
       overlayEl = sec;
 
+      function updateProgress() {
+        var vp = byId('esc-reader-viewport');
+        var fill = byId('esc-reader-progress-fill');
+        var statsEl = byId('esc-reader-stats');
+        if (!vp) { return; }
+        var pct = scrollProgress(vp.scrollTop, vp.scrollHeight, vp.clientHeight);
+        if (fill && fill.style) { fill.style.width = pct + '%'; }
+        if (statsEl) {
+          var base = statsEl.getAttribute('data-base-stat') || '';
+          statsEl.textContent = base ? (base + ' · ' + pct + '%') : (pct + '%');
+        }
+      }
+
+      function stepPage(dir) {
+        var vp = byId('esc-reader-viewport');
+        if (!vp) { return; }
+        var delta = Math.max(120, (vp.clientHeight || 400) * 0.85);
+        vp.scrollTop = Math.max(0, vp.scrollTop + dir * delta);
+        updateProgress();
+      }
+
       on(byId('esc-reader-close'), 'click', close);
       on(byId('esc-reader-settings-btn'), 'click', function () {
         settingsOpen = !settingsOpen;
         byId('esc-reader-settings').hidden = !settingsOpen;
         this.setAttribute('aria-expanded', settingsOpen ? 'true' : 'false');
       });
-      on(byId('esc-reader-prev'), 'click', function () {
-        var vp = byId('esc-reader-viewport');
-        if (vp) { vp.scrollTop = Math.max(0, vp.scrollTop - Math.max(120, vp.clientHeight * 0.85)); }
-      });
-      on(byId('esc-reader-next'), 'click', function () {
-        var vp = byId('esc-reader-viewport');
-        if (vp) { vp.scrollTop += Math.max(120, vp.clientHeight * 0.85); }
-      });
+      on(byId('esc-reader-prev'), 'click', function () { stepPage(-1); });
+      on(byId('esc-reader-next'), 'click', function () { stepPage(1); });
+      on(byId('esc-reader-viewport'), 'scroll', updateProgress);
+      if (byId('esc-reader-print') && opts && typeof opts.onPrint === 'function') {
+        on(byId('esc-reader-print'), 'click', function () { opts.onPrint(); });
+      }
       if (byId('esc-reader-anatomy') && opts && typeof opts.onOpenAcademy === 'function') {
         on(byId('esc-reader-anatomy'), 'click', function () {
           close();
@@ -4562,9 +4590,16 @@
       on(byId('esc-reader-leading'), 'change', function () { prefs.leading = clamp(this.value, 1.5, 2.0, 1.7); applyPrefs(); savePrefs(); });
       on(byId('esc-reader-break'), 'change', function () { prefs.breakMin = Number(this.value) || 0; savePrefs(); scheduleBreak(); });
       on(overlayEl, 'keydown', function (ev) {
-        if (ev.keyCode === 27) { ev.preventDefault(); ev.stopPropagation(); close(); }
+        var tag = ev.target && ev.target.tagName ? String(ev.target.tagName).toUpperCase() : '';
+        if (ev.keyCode === 27) { ev.preventDefault(); ev.stopPropagation(); close(); return; }
+        if (tag === 'SELECT' || tag === 'INPUT' || tag === 'TEXTAREA') { return; }
+        if (ev.keyCode === 34 || ev.keyCode === 39) { ev.preventDefault(); stepPage(1); }
+        else if (ev.keyCode === 33 || ev.keyCode === 37) { ev.preventDefault(); stepPage(-1); }
+        else if (ev.keyCode === 36) { var vpH = byId('esc-reader-viewport'); if (vpH) { ev.preventDefault(); vpH.scrollTop = 0; updateProgress(); } }
+        else if (ev.keyCode === 35) { var vpE = byId('esc-reader-viewport'); if (vpE) { ev.preventDefault(); vpE.scrollTop = vpE.scrollHeight || 0; updateProgress(); } }
       });
 
+      overlayEl._updateProgress = updateProgress;
       return overlayEl;
     }
 
@@ -4581,7 +4616,11 @@
       var text = doc && typeof doc.text === 'string' ? doc.text : '';
       var stats = readingMinutes(text);
       var statLine = stats.words + (stats.words === 1 ? ' palavra' : ' palavras') + (stats.minutes ? ' · ' + stats.minutes + ' min de leitura' : '');
-      byId('esc-reader-stats').textContent = '';
+      var statsNode = byId('esc-reader-stats');
+      if (statsNode) {
+        statsNode.setAttribute('data-base-stat', stats.minutes ? (stats.minutes + ' min') : '');
+        statsNode.textContent = stats.minutes ? (stats.minutes + ' min · 0%') : '0%';
+      }
       if (byId('esc-reader-date')) { byId('esc-reader-date').textContent = formatEditionDate(); }
       byId('esc-reader-project-tag').textContent = doc && doc.project ? doc.project : 'EDIÇÃO DE LEITURA';
 
@@ -4649,6 +4688,7 @@
 
       overlayEl.hidden = false;
       byId('esc-reader-viewport').scrollTop = 0;
+      if (overlayEl._updateProgress) { overlayEl._updateProgress(); }
       scheduleBreak();
       byId('esc-reader-close').focus();
     }
@@ -7100,7 +7140,12 @@
     { id: 'bloqueio-criativo', title: 'Bloqueio criativo', group: 'Escrita e revisão', description: 'Encontre uma forma de retomar a escrita.', file: 'bloqueio-criativo.html',
       bridge: { action: 'superfoco', label: 'Destravar no Superfoco', hint: 'Feche o ruído e deixe a escrita fluir sem censura.' } },
     { id: 'revisao-manuscrito', title: 'Revisar o manuscrito', group: 'Escrita e revisão', description: 'Revise em camadas, sem perder o fio.', file: 'revisao-manuscrito.html',
-      bridge: { action: 'examine', label: 'Abrir Examinar na Oficina', hint: 'Revise a folha por camadas com as lentes locais.' } },
+      bridge: { action: 'examine', label: 'Abrir Examinar na Oficina', hint: 'Revise a folha por camadas com as lentes locais.',
+        lenses: [
+          { id: 'sintaxe', label: 'Sintaxe' },
+          { id: 'ritmo', label: 'Ritmo' },
+          { id: 'repeticao', label: 'Repetição' }
+        ] } },
     { id: 'biblioteca-escrita', title: 'Biblioteca da escrita', group: 'Escrita e revisão', description: 'Conheça referências e critérios de leitura.', file: 'biblioteca-escrita.html',
       bridge: { action: 'write', label: 'Voltar à oficina', hint: 'Aplique os critérios de leitura direto no seu rascunho.' } },
     { id: 'mapa-lancamento-editorial', title: 'Mapa de lançamento', group: 'Publicação e carreira', description: 'Guia para transformar manuscrito em projeto de publicação, com decisão entre caminho independente e editorial.', file: 'mapa-lancamento-editorial.html',
@@ -7423,6 +7468,23 @@
       var actions = document.createElement('div');
       actions.className = 'esc-academy-bar-actions';
       if (entry.bridge && onAction) {
+        if (entry.bridge.lenses && entry.bridge.lenses.length) {
+          entry.bridge.lenses.forEach(function (lensOpt) {
+            var lb = document.createElement('button');
+            lb.type = 'button';
+            lb.className = 'esc-academy-lens-jump';
+            lb.setAttribute('data-academy-lens', lensOpt.id);
+            lb.title = 'Examinar sua folha com a lente ' + lensOpt.label;
+            lb.textContent = lensOpt.label;
+            on(lb, 'click', function () {
+              var guideEntry = entry;
+              var chosenLens = lensOpt.id;
+              close();
+              onAction('examine-lens', guideEntry, chosenLens);
+            });
+            actions.appendChild(lb);
+          });
+        }
         var actBtn = document.createElement('button');
         actBtn.type = 'button';
         actBtn.className = 'esc-academy-bridge-act';
@@ -11367,6 +11429,10 @@
       storage: storage,
       onOpenAcademy: function (guideId) {
         if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'objeto-livro'); }
+      },
+      onPrint: function () {
+        preparePrint();
+        if (window.print) { window.print(); } else { message('Use a opção de impressão do navegador.'); }
       }
     });
     if (byId('esc-reader-toggle')) {
@@ -11587,7 +11653,7 @@
           title: cleanTitle
         };
       },
-      onAction: function (action) {
+      onAction: function (action, entry, lensId) {
         if (action === 'reader') {
           if (readerUI) {
             doc.title = title.value;
@@ -11604,6 +11670,10 @@
             title.focus();
             if (title.select) { title.select(); }
           }
+        } else if (action === 'examine-lens' && lensId) {
+          if (cabinetOpen) { enterDesk(true); }
+          showPanel('oficina', 'examinar-toggle', true);
+          if (E.ptbrPanelOpen) { E.ptbrPanelOpen({ lens: lensId }); }
         } else if (action === 'examine') {
           if (cabinetOpen) { enterDesk(true); }
           showPanel('oficina', 'examinar-toggle', true);
@@ -11804,8 +11874,33 @@
     var canvas = el('div', main, 'ptbr-reading-canvas'), aside = el('aside', box, 'ptbr-reading-aside');
     aside.id = uid; aside.setAttribute('aria-label', 'Explicação da relação selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
+    var navList = [];
+    order.forEach(function (key) {
+      var terms = groups[key].items.filter(function (f) { return f.feature !== 'Predicado'; });
+      terms.sort(function (a, b) { return a.start - b.start || a.end - b.end; });
+      terms.forEach(function (f) { navList.push(f); });
+    });
+    var asidePrev = null, asideNext = null, asideCounter = null;
+    if (navList.length > 1) {
+      var asideNav = el('div', aside, 'ptbr-aside-nav');
+      asidePrev = el('button', asideNav, 'ptbr-aside-step', '← Anterior');
+      asidePrev.type = 'button'; asidePrev.setAttribute('data-aside-step', 'prev');
+      asideCounter = el('span', asideNav, 'ptbr-aside-counter', '1 / ' + navList.length);
+      asideNext = el('button', asideNav, 'ptbr-aside-step', 'Próxima →');
+      asideNext.type = 'button'; asideNext.setAttribute('data-aside-step', 'next');
+      asidePrev.addEventListener('click', function () { stepSyntax(-1); }, false);
+      asideNext.addEventListener('click', function () { stepSyntax(1); }, false);
+    }
     var selected = el('p', aside, 'ptbr-reading-selection'), links = el('p', aside, 'ptbr-syntax-links'), details = el('div', aside, 'ptbr-reading-details');
     selected.setAttribute('aria-live', 'polite');
+
+    function stepSyntax(dir) {
+      if (!navList.length) { return; }
+      var cur = navList.indexOf(active);
+      if (cur < 0) { cur = 0; }
+      var nextIdx = Math.max(0, Math.min(navList.length - 1, cur + dir));
+      if (navList[nextIdx]) { select(navList[nextIdx]); }
+    }
 
     function button(f, target, cls) {
       var b = el('button', target, cls); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-controls', uid);
@@ -11837,6 +11932,10 @@
         el('span', b, 'ptbr-syntax-head', f.implicitSubject.label);
       }
       b.addEventListener('click', function () { select(f); }, false);
+      b.addEventListener('keydown', function (ev) {
+        if (ev.keyCode === 39) { if (ev.preventDefault) { ev.preventDefault(); } stepSyntax(1); }
+        else if (ev.keyCode === 37) { if (ev.preventDefault) { ev.preventDefault(); } stepSyntax(-1); }
+      }, false);
       buttons['$' + f.nodeId] = { button: b, finding: f };
     }
 
@@ -11994,6 +12093,12 @@
         }
       });
       links.textContent = descriptions.join('. ');
+      if (asideCounter) {
+        var pos = navList.indexOf(f);
+        asideCounter.textContent = (pos >= 0 ? (pos + 1) : 1) + ' / ' + navList.length;
+        if (asidePrev) { asidePrev.disabled = pos <= 0; }
+        if (asideNext) { asideNext.disabled = pos < 0 || pos >= navList.length - 1; }
+      }
       options.onSelect(f, details, true);
       resize();
     }
@@ -12230,9 +12335,46 @@
     var canvas = el('div', main, 'ptbr-reading-canvas');
     var aside = el('aside', box, 'ptbr-reading-aside'); aside.id = uid; aside.setAttribute('aria-label', 'Explicação da leitura selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
+    var asidePrev = null, asideNext = null, asideCounter = null;
+    if (arr.length > 1) {
+      var asideNav = el('div', aside, 'ptbr-aside-nav');
+      asidePrev = el('button', asideNav, 'ptbr-aside-step', '← Anterior');
+      asidePrev.type = 'button'; asidePrev.setAttribute('data-aside-step', 'prev');
+      asideCounter = el('span', asideNav, 'ptbr-aside-counter', '1 / ' + arr.length);
+      asideNext = el('button', asideNav, 'ptbr-aside-step', 'Próxima →');
+      asideNext.type = 'button'; asideNext.setAttribute('data-aside-step', 'next');
+      asidePrev.addEventListener('click', function () { stepOccurrence(-1); }, false);
+      asideNext.addEventListener('click', function () { stepOccurrence(1); }, false);
+    }
     var selected = el('p', aside, 'ptbr-reading-selection'); selected.setAttribute('aria-live', 'polite');
     var details = el('div', aside, 'ptbr-reading-details');
     if (!arr.length) { el('p', main, 'ptbr-reading-empty', 'Nenhuma observação nova neste recorte. Isso não certifica ausência de problemas.'); }
+
+    function visibleIndices() {
+      var list = [], idx;
+      for (idx = 0; idx < arr.length; idx++) {
+        if (!activeClassFilter || wordClasses[idx] === activeClassFilter) { list.push(idx); }
+      }
+      return list;
+    }
+
+    function updateAsideStepper() {
+      if (!asideCounter) { return; }
+      var vis = visibleIndices();
+      var pos = vis.indexOf(active);
+      asideCounter.textContent = vis.length ? ((pos >= 0 ? pos + 1 : 1) + ' / ' + vis.length) : '0 / 0';
+      if (asidePrev) { asidePrev.disabled = pos <= 0; }
+      if (asideNext) { asideNext.disabled = pos < 0 || pos >= vis.length - 1; }
+    }
+
+    function stepOccurrence(dir) {
+      var vis = visibleIndices();
+      if (!vis.length) { return; }
+      var pos = vis.indexOf(active);
+      if (pos < 0) { select(vis[0], true); return; }
+      var targetPos = Math.max(0, Math.min(vis.length - 1, pos + dir));
+      select(vis[targetPos], true);
+    }
 
     /* Dados auxiliares para Ritmo (maior comprimento), Repetição (grupos de cor) e Rima (letras A/B/C...) */
     var maxWords = 1, repeatGroups = {}, nextRepeatColor = 0, rhymeGroups = {}, nextRhymeIdx = 0;
@@ -12405,6 +12547,9 @@
         var dim = !!activeClassFilter && wordClasses[idx] !== activeClassFilter;
         b.setAttribute('data-dimmed', dim ? 'true' : 'false');
       });
+      var vis = visibleIndices();
+      if (vis.length && vis.indexOf(active) === -1) { select(vis[0], false); }
+      else { updateAsideStepper(); }
     }
 
     function draw() {
@@ -12445,6 +12590,7 @@
       active = index;
       buttons.forEach(function (b, j) { b.setAttribute('aria-pressed', j === index ? 'true' : 'false'); b.setAttribute('data-reading-support', 'false'); });
       selected.textContent = '“' + arr[index].snippet + '” · ' + label(arr[index]);
+      updateAsideStepper();
       options.onSelect(arr[index], details, user);
       root.clearTimeout(timer); timer = root.setTimeout(draw, 0);
     }
@@ -12661,15 +12807,16 @@
   var activeNoteBadge=el('span',activeNoteBar,'ptbr-active-note-badge','Nota ativa');
   var activeNoteName=el('strong',activeNoteBar,'ptbr-active-note-title','Nota sem título');
   var activeNoteMeta=el('span',activeNoteBar,'ptbr-active-note-meta','0 palavras');
+  var academyGuideBtn=null,academyGuideTarget='revisao-manuscrito';
   if(typeof E.openAcademyGuide==='function'){
-    var academyGuideBtn=el('button',activeNoteBar,'ptbr-academy-link','Guia de revisão · Academia');
+    academyGuideBtn=el('button',activeNoteBar,'ptbr-academy-link','Guia de revisão · Academia');
     academyGuideBtn.type='button';
     academyGuideBtn.setAttribute('data-ptbr-academy','revisao-manuscrito');
-    academyGuideBtn.addEventListener('click',function(){E.openAcademyGuide('revisao-manuscrito');},false);
+    academyGuideBtn.addEventListener('click',function(){E.openAcademyGuide(academyGuideTarget);},false);
   }
   var ribbon=el('nav',view,'ptbr-ribbon');ribbon.setAttribute('aria-label','Atalhos rápidos de exame');
-  var quickLenses=['morfologia','sintaxe','relativas','ritmo','repeticao','ortografia','crase','rima','metrica'];
-  var quickShort={morfologia:'Classes de palavras',sintaxe:'Sintaxe',relativas:'Relativas',ritmo:'Ritmo',repeticao:'Repetição',ortografia:'Ortografia',crase:'Crase',rima:'Rimas',metrica:'Métrica'};
+  var quickLenses=['morfologia','sintaxe','relativas','ritmo','repeticao','dialogo','adverbios','ortografia','crase','rima','metrica'];
+  var quickShort={morfologia:'Classes de palavras',sintaxe:'Sintaxe',relativas:'Relativas',ritmo:'Ritmo',repeticao:'Repetição',dialogo:'Diálogo',adverbios:'Advérbios',ortografia:'Ortografia',crase:'Crase',rima:'Rimas',metrica:'Métrica'};
   var ribbonButtons={};
   for(var qi=0;qi<quickLenses.length;qi++){
     (function(id){
@@ -12704,6 +12851,12 @@
       ribbonButtons[id].setAttribute('aria-current',(screen==='result'&&lastLens===id)?'true':'false');
     }}
     if(ribbonLexBtn){ribbonLexBtn.setAttribute('aria-current',screen==='lexical'?'true':'false');}
+    if(academyGuideBtn){
+      var poetic=screen==='result'&&(lastLens==='rima'||lastLens==='metrica');
+      academyGuideTarget=poetic?'literatura-mundial':'revisao-manuscrito';
+      academyGuideBtn.textContent=poetic?'Literatura mundial · Academia':'Guia de revisão · Academia';
+      academyGuideBtn.setAttribute('data-ptbr-academy',academyGuideTarget);
+    }
   }
   var groups = [
     {title:'Revisar a escrita',hint:'Grafia, acentos, pontuação, crase e concordância.',lenses:['ortografia','acentuacao','pontuacao','crase','concordancia']},

@@ -93,15 +93,16 @@
   var activeNoteBadge=el('span',activeNoteBar,'ptbr-active-note-badge','Nota ativa');
   var activeNoteName=el('strong',activeNoteBar,'ptbr-active-note-title','Nota sem título');
   var activeNoteMeta=el('span',activeNoteBar,'ptbr-active-note-meta','0 palavras');
+  var academyGuideBtn=null,academyGuideTarget='revisao-manuscrito';
   if(typeof E.openAcademyGuide==='function'){
-    var academyGuideBtn=el('button',activeNoteBar,'ptbr-academy-link','Guia de revisão · Academia');
+    academyGuideBtn=el('button',activeNoteBar,'ptbr-academy-link','Guia de revisão · Academia');
     academyGuideBtn.type='button';
     academyGuideBtn.setAttribute('data-ptbr-academy','revisao-manuscrito');
-    academyGuideBtn.addEventListener('click',function(){E.openAcademyGuide('revisao-manuscrito');},false);
+    academyGuideBtn.addEventListener('click',function(){E.openAcademyGuide(academyGuideTarget);},false);
   }
   var ribbon=el('nav',view,'ptbr-ribbon');ribbon.setAttribute('aria-label','Atalhos rápidos de exame');
-  var quickLenses=['morfologia','sintaxe','relativas','ritmo','repeticao','ortografia','crase','rima','metrica'];
-  var quickShort={morfologia:'Classes de palavras',sintaxe:'Sintaxe',relativas:'Relativas',ritmo:'Ritmo',repeticao:'Repetição',ortografia:'Ortografia',crase:'Crase',rima:'Rimas',metrica:'Métrica'};
+  var quickLenses=['morfologia','sintaxe','relativas','ritmo','repeticao','dialogo','adverbios','ortografia','crase','rima','metrica'];
+  var quickShort={morfologia:'Classes de palavras',sintaxe:'Sintaxe',relativas:'Relativas',ritmo:'Ritmo',repeticao:'Repetição',dialogo:'Diálogo',adverbios:'Advérbios',ortografia:'Ortografia',crase:'Crase',rima:'Rimas',metrica:'Métrica'};
   var ribbonButtons={};
   for(var qi=0;qi<quickLenses.length;qi++){
     (function(id){
@@ -136,6 +137,12 @@
       ribbonButtons[id].setAttribute('aria-current',(screen==='result'&&lastLens===id)?'true':'false');
     }}
     if(ribbonLexBtn){ribbonLexBtn.setAttribute('aria-current',screen==='lexical'?'true':'false');}
+    if(academyGuideBtn){
+      var poetic=screen==='result'&&(lastLens==='rima'||lastLens==='metrica');
+      academyGuideTarget=poetic?'literatura-mundial':'revisao-manuscrito';
+      academyGuideBtn.textContent=poetic?'Literatura mundial · Academia':'Guia de revisão · Academia';
+      academyGuideBtn.setAttribute('data-ptbr-academy',academyGuideTarget);
+    }
   }
   var groups = [
     {title:'Revisar a escrita',hint:'Grafia, acentos, pontuação, crase e concordância.',lenses:['ortografia','acentuacao','pontuacao','crase','concordancia']},

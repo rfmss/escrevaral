@@ -12,7 +12,7 @@
 
   function normalizePrefs(raw) {
     var p = raw && typeof raw === 'object' ? raw : {};
-    var okPalette = p.palette === 'white' || p.palette === 'night' || p.palette === 'linen' || p.palette === 'mist';
+    var okPalette = p.palette === 'white' || p.palette === 'night' || p.palette === 'linen' || p.palette === 'mist' || p.palette === 'sage';
     return {
       palette: okPalette ? p.palette : 'paper',
       face: p.face === 'sans' ? 'sans' : 'serif',
@@ -21,6 +21,12 @@
       width: clamp(p.width, 50, 74, 62),
       breakMin: p.breakMin === 15 || p.breakMin === 25 || p.breakMin === 45 ? p.breakMin : 0
     };
+  }
+
+  function scrollProgress(scrollTop, scrollHeight, clientHeight) {
+    var maxScroll = Math.max(0, (Number(scrollHeight) || 0) - (Number(clientHeight) || 0));
+    if (maxScroll <= 0) { return 100; }
+    return Math.max(0, Math.min(100, Math.round(((Number(scrollTop) || 0) / maxScroll) * 100)));
   }
 
   function formatEditionDate() {
@@ -41,7 +47,8 @@
 
   root.Escr.readerCore = {
     normalizePrefs: normalizePrefs,
-    readingMinutes: readingMinutes
+    readingMinutes: readingMinutes,
+    scrollProgress: scrollProgress
   };
 
   root.Escr.mountReaderMode = function (opts) {
@@ -106,16 +113,18 @@
       sec.setAttribute('aria-label', 'Modo leitura');
       sec.hidden = true;
       sec.innerHTML =
+        '<div class="esc-reader-progress" aria-hidden="true"><span id="esc-reader-progress-fill" class="esc-reader-progress-fill"></span></div>' +
         '<header class="esc-reader-bar">' +
           '<button id="esc-reader-close" type="button">← Voltar à escrita</button>' +
-          '<span id="esc-reader-stats" class="esc-reader-mode"></span>' +
+          '<span id="esc-reader-stats" class="esc-reader-mode" aria-live="polite"></span>' +
           '<button id="esc-reader-prev" type="button" aria-label="Página anterior">Anterior</button>' +
           '<button id="esc-reader-next" type="button" aria-label="Próxima página">Próxima</button>' +
+          (opts && typeof opts.onPrint === 'function' ? '<button id="esc-reader-print" type="button" title="Imprimir ou salvar em PDF">Imprimir</button>' : '') +
           (opts && typeof opts.onOpenAcademy === 'function' ? '<button id="esc-reader-anatomy" type="button" title="Explorar a anatomia do livro na Academia">Objeto livro</button>' : '') +
           '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Papel e letra</button>' +
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
-          '<label>Papel<select id="esc-reader-palette"><option value="paper">Jornal (Marfim)</option><option value="linen">Creme suave</option><option value="mist">Névoa clara</option><option value="white">Galeria</option><option value="night">Noturno</option></select></label>' +
+          '<label>Papel<select id="esc-reader-palette"><option value="paper">Jornal (Marfim)</option><option value="sage">Sálvia E-Ink</option><option value="linen">Creme suave</option><option value="mist">Névoa clara</option><option value="white">Galeria</option><option value="night">Noturno</option></select></label>' +
           '<label>Letra<select id="esc-reader-face"><option value="serif">Literária (Serifada)</option><option value="sans">Sem serifa</option></select></label>' +
           '<label>Tamanho<select id="esc-reader-size"><option value="18">18 px</option><option value="20">20 px</option><option value="21">21 px</option><option value="24">24 px</option><option value="28">28 px</option></select></label>' +
           '<label>Entrelinha<select id="esc-reader-leading"><option value="1.6">Compacta</option><option value="1.82">Editorial</option><option value="2">Ampla</option></select></label>' +
@@ -138,20 +147,39 @@
       }
       overlayEl = sec;
 
+      function updateProgress() {
+        var vp = byId('esc-reader-viewport');
+        var fill = byId('esc-reader-progress-fill');
+        var statsEl = byId('esc-reader-stats');
+        if (!vp) { return; }
+        var pct = scrollProgress(vp.scrollTop, vp.scrollHeight, vp.clientHeight);
+        if (fill && fill.style) { fill.style.width = pct + '%'; }
+        if (statsEl) {
+          var base = statsEl.getAttribute('data-base-stat') || '';
+          statsEl.textContent = base ? (base + ' · ' + pct + '%') : (pct + '%');
+        }
+      }
+
+      function stepPage(dir) {
+        var vp = byId('esc-reader-viewport');
+        if (!vp) { return; }
+        var delta = Math.max(120, (vp.clientHeight || 400) * 0.85);
+        vp.scrollTop = Math.max(0, vp.scrollTop + dir * delta);
+        updateProgress();
+      }
+
       on(byId('esc-reader-close'), 'click', close);
       on(byId('esc-reader-settings-btn'), 'click', function () {
         settingsOpen = !settingsOpen;
         byId('esc-reader-settings').hidden = !settingsOpen;
         this.setAttribute('aria-expanded', settingsOpen ? 'true' : 'false');
       });
-      on(byId('esc-reader-prev'), 'click', function () {
-        var vp = byId('esc-reader-viewport');
-        if (vp) { vp.scrollTop = Math.max(0, vp.scrollTop - Math.max(120, vp.clientHeight * 0.85)); }
-      });
-      on(byId('esc-reader-next'), 'click', function () {
-        var vp = byId('esc-reader-viewport');
-        if (vp) { vp.scrollTop += Math.max(120, vp.clientHeight * 0.85); }
-      });
+      on(byId('esc-reader-prev'), 'click', function () { stepPage(-1); });
+      on(byId('esc-reader-next'), 'click', function () { stepPage(1); });
+      on(byId('esc-reader-viewport'), 'scroll', updateProgress);
+      if (byId('esc-reader-print') && opts && typeof opts.onPrint === 'function') {
+        on(byId('esc-reader-print'), 'click', function () { opts.onPrint(); });
+      }
       if (byId('esc-reader-anatomy') && opts && typeof opts.onOpenAcademy === 'function') {
         on(byId('esc-reader-anatomy'), 'click', function () {
           close();
@@ -165,9 +193,16 @@
       on(byId('esc-reader-leading'), 'change', function () { prefs.leading = clamp(this.value, 1.5, 2.0, 1.7); applyPrefs(); savePrefs(); });
       on(byId('esc-reader-break'), 'change', function () { prefs.breakMin = Number(this.value) || 0; savePrefs(); scheduleBreak(); });
       on(overlayEl, 'keydown', function (ev) {
-        if (ev.keyCode === 27) { ev.preventDefault(); ev.stopPropagation(); close(); }
+        var tag = ev.target && ev.target.tagName ? String(ev.target.tagName).toUpperCase() : '';
+        if (ev.keyCode === 27) { ev.preventDefault(); ev.stopPropagation(); close(); return; }
+        if (tag === 'SELECT' || tag === 'INPUT' || tag === 'TEXTAREA') { return; }
+        if (ev.keyCode === 34 || ev.keyCode === 39) { ev.preventDefault(); stepPage(1); }
+        else if (ev.keyCode === 33 || ev.keyCode === 37) { ev.preventDefault(); stepPage(-1); }
+        else if (ev.keyCode === 36) { var vpH = byId('esc-reader-viewport'); if (vpH) { ev.preventDefault(); vpH.scrollTop = 0; updateProgress(); } }
+        else if (ev.keyCode === 35) { var vpE = byId('esc-reader-viewport'); if (vpE) { ev.preventDefault(); vpE.scrollTop = vpE.scrollHeight || 0; updateProgress(); } }
       });
 
+      overlayEl._updateProgress = updateProgress;
       return overlayEl;
     }
 
@@ -184,7 +219,11 @@
       var text = doc && typeof doc.text === 'string' ? doc.text : '';
       var stats = readingMinutes(text);
       var statLine = stats.words + (stats.words === 1 ? ' palavra' : ' palavras') + (stats.minutes ? ' · ' + stats.minutes + ' min de leitura' : '');
-      byId('esc-reader-stats').textContent = '';
+      var statsNode = byId('esc-reader-stats');
+      if (statsNode) {
+        statsNode.setAttribute('data-base-stat', stats.minutes ? (stats.minutes + ' min') : '');
+        statsNode.textContent = stats.minutes ? (stats.minutes + ' min · 0%') : '0%';
+      }
       if (byId('esc-reader-date')) { byId('esc-reader-date').textContent = formatEditionDate(); }
       byId('esc-reader-project-tag').textContent = doc && doc.project ? doc.project : 'EDIÇÃO DE LEITURA';
 
@@ -252,6 +291,7 @@
 
       overlayEl.hidden = false;
       byId('esc-reader-viewport').scrollTop = 0;
+      if (overlayEl._updateProgress) { overlayEl._updateProgress(); }
       scheduleBreak();
       byId('esc-reader-close').focus();
     }

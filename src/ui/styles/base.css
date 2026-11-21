@@ -381,11 +381,12 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
 
 /* Impressão independente do textarea, do tema e do estado de foco. */
 #print-sheet { display: none; }
-@page { size: A4; margin: 25mm; }
+@page { size: A4; margin: 24mm 25mm; }
 @media print {
  html, body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; color: #000 !important; margin: 0 !important; padding: 0 !important; }
  body > * { display: none !important; }
- body > #print-sheet { display: block !important; position: static !important; width: auto !important; height: auto !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; font: 12pt/1.5 'Times New Roman', Times, serif; color: #000 !important; background: #fff !important; text-shadow: none !important; }
- #print-title { font: bold 16pt/1.3 'Times New Roman', Times, serif; margin: 0 0 18pt; page-break-after: avoid; white-space: pre-wrap; word-wrap: break-word; }
+ #esc-reader-overlay, #esc-academy-overlay { display: none !important; }
+ body > #print-sheet { display: block !important; position: static !important; width: auto !important; height: auto !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; font: 11.5pt/1.62 'Noto Serif', Georgia, 'Times New Roman', Times, serif; color: #111 !important; background: #fff !important; text-shadow: none !important; }
+ #print-title { font: 700 17pt/1.28 'Noto Serif', Georgia, 'Times New Roman', Times, serif; margin: 0 0 16pt; padding-bottom: 8pt; border-bottom: 0.75pt solid #888; page-break-after: avoid; white-space: pre-wrap; word-wrap: break-word; }
  #print-text { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; text-align: left; orphans: 3; widows: 3; }
 }

@@ -124,6 +124,15 @@
     --reader-rule: #1a1a1a;
   }
 
+  .esc-reader[data-palette="sage"] {
+    --reader-paper: #c4cfc2;
+    --reader-surface: #b6c4b4;
+    --reader-ink: #141a14;
+    --reader-muted: #344333;
+    --reader-line: #8f9f8d;
+    --reader-rule: #212b21;
+  }
+
   .esc-reader[data-palette="night"] {
     --reader-paper: #191b18;
     --reader-surface: #232622;
@@ -131,6 +140,22 @@
     --reader-muted: #9e9a90;
     --reader-line: #31352e;
     --reader-rule: #c5c0b4;
+  }
+
+  .esc-reader-progress {
+    height: 2px;
+    width: 100%;
+    background: transparent;
+    flex: 0 0 auto;
+  }
+
+  .esc-reader-progress-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--reader-rule);
+    opacity: 0.45;
+    transition: width 120ms ease;
   }
 
   /* Barra superior sussurrada — sem bordas pesadas nem visual de app */

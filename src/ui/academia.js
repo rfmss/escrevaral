@@ -16,7 +16,12 @@
     { id: 'bloqueio-criativo', title: 'Bloqueio criativo', group: 'Escrita e revisão', description: 'Encontre uma forma de retomar a escrita.', file: 'bloqueio-criativo.html',
       bridge: { action: 'superfoco', label: 'Destravar no Superfoco', hint: 'Feche o ruído e deixe a escrita fluir sem censura.' } },
     { id: 'revisao-manuscrito', title: 'Revisar o manuscrito', group: 'Escrita e revisão', description: 'Revise em camadas, sem perder o fio.', file: 'revisao-manuscrito.html',
-      bridge: { action: 'examine', label: 'Abrir Examinar na Oficina', hint: 'Revise a folha por camadas com as lentes locais.' } },
+      bridge: { action: 'examine', label: 'Abrir Examinar na Oficina', hint: 'Revise a folha por camadas com as lentes locais.',
+        lenses: [
+          { id: 'sintaxe', label: 'Sintaxe' },
+          { id: 'ritmo', label: 'Ritmo' },
+          { id: 'repeticao', label: 'Repetição' }
+        ] } },
     { id: 'biblioteca-escrita', title: 'Biblioteca da escrita', group: 'Escrita e revisão', description: 'Conheça referências e critérios de leitura.', file: 'biblioteca-escrita.html',
       bridge: { action: 'write', label: 'Voltar à oficina', hint: 'Aplique os critérios de leitura direto no seu rascunho.' } },
     { id: 'mapa-lancamento-editorial', title: 'Mapa de lançamento', group: 'Publicação e carreira', description: 'Guia para transformar manuscrito em projeto de publicação, com decisão entre caminho independente e editorial.', file: 'mapa-lancamento-editorial.html',
@@ -339,6 +344,23 @@
       var actions = document.createElement('div');
       actions.className = 'esc-academy-bar-actions';
       if (entry.bridge && onAction) {
+        if (entry.bridge.lenses && entry.bridge.lenses.length) {
+          entry.bridge.lenses.forEach(function (lensOpt) {
+            var lb = document.createElement('button');
+            lb.type = 'button';
+            lb.className = 'esc-academy-lens-jump';
+            lb.setAttribute('data-academy-lens', lensOpt.id);
+            lb.title = 'Examinar sua folha com a lente ' + lensOpt.label;
+            lb.textContent = lensOpt.label;
+            on(lb, 'click', function () {
+              var guideEntry = entry;
+              var chosenLens = lensOpt.id;
+              close();
+              onAction('examine-lens', guideEntry, chosenLens);
+            });
+            actions.appendChild(lb);
+          });
+        }
         var actBtn = document.createElement('button');
         actBtn.type = 'button';
         actBtn.className = 'esc-academy-bridge-act';
