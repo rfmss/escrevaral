@@ -300,6 +300,81 @@ const positives = [
     constructions: 2,
     subordKind: 'integrante',
     roles: { Sujeito: 'Ela', Verbo: 'acredita', 'Conjunção integrante': 'que' }
+  },
+  /* Sujeito oculto (desinencial) inequívoco de 1ª/2ª pessoa (inclusive em locuções, coordenação e subordinação) */
+  {
+    id: 'ELIP-01',
+    text: 'Li o livro.',
+    implicitPronoun: 'eu',
+    roles: { Verbo: 'Li', 'Objeto direto': 'o livro' }
+  },
+  {
+    id: 'ELIP-02',
+    text: 'Escrevemos o poema na janela.',
+    implicitPronoun: 'nós',
+    roles: { Verbo: 'Escrevemos', 'Objeto direto': 'o poema', 'Adjunto adverbial': 'na janela' }
+  },
+  {
+    id: 'ELIP-03',
+    text: 'Estou lendo a carta.',
+    implicitPronoun: 'eu',
+    roles: { 'Locução verbal': 'Estou lendo', 'Objeto direto': 'a carta' }
+  },
+  {
+    id: 'ELIP-04',
+    text: 'Abri a janela e li a carta.',
+    constructions: 2,
+    coordKind: 'aditiva',
+    implicitPronoun: 'eu',
+    roles: { Verbo: 'Abri', 'Conjunção coordenativa': 'e', 'Objeto direto': 'a janela' }
+  },
+  {
+    id: 'ELIP-05',
+    text: 'Sei que li o livro.',
+    constructions: 2,
+    subordKind: 'integrante',
+    implicitPronoun: 'eu',
+    roles: { Verbo: 'Sei', 'Conjunção integrante': 'que', 'Objeto direto': 'o livro' }
+  },
+  /* Vocativo (inicial e final, isolado por vírgula) */
+  {
+    id: 'VOC-01',
+    text: 'Maria, escrevi esta carta.',
+    implicitPronoun: 'eu',
+    roles: { Vocativo: 'Maria', Verbo: 'escrevi', 'Objeto direto': 'esta carta' },
+    heads: { Vocativo: 'Maria' }
+  },
+  {
+    id: 'VOC-02',
+    text: 'Meu amigo, a tempestade terminou.',
+    roles: { Vocativo: 'Meu amigo', Sujeito: 'a tempestade', Verbo: 'terminou' },
+    heads: { Vocativo: 'amigo' }
+  },
+  {
+    id: 'VOC-03',
+    text: 'Escrevemos este poema, querida mãe.',
+    implicitPronoun: 'nós',
+    roles: { Vocativo: 'querida mãe', Verbo: 'Escrevemos', 'Objeto direto': 'este poema' },
+    heads: { Vocativo: 'mãe' }
+  },
+  /* Aposto explicativo pós-sujeito entre duas vírgulas */
+  {
+    id: 'APO-01',
+    text: 'Maria, a escritora, leu o poema.',
+    roles: { Sujeito: 'Maria', 'Aposto explicativo': 'a escritora', Verbo: 'leu', 'Objeto direto': 'o poema' },
+    heads: { Sujeito: 'Maria', 'Aposto explicativo': 'escritora' }
+  },
+  {
+    id: 'APO-02',
+    text: 'João, meu amigo, enviou a carta à mãe.',
+    roles: { Sujeito: 'João', 'Aposto explicativo': 'meu amigo', Verbo: 'enviou', 'Objeto direto': 'a carta', 'Objeto indireto': 'à mãe' },
+    heads: { 'Aposto explicativo': 'amigo' }
+  },
+  {
+    id: 'APO-03',
+    text: 'Pedro, o velho leitor, abriu o livro na biblioteca.',
+    roles: { Sujeito: 'Pedro', 'Aposto explicativo': 'o velho leitor', Verbo: 'abriu', 'Objeto direto': 'o livro', 'Adjunto adverbial': 'na biblioteca' },
+    heads: { 'Aposto explicativo': 'leitor' }
   }
 ];
 
@@ -319,6 +394,11 @@ for (const c of positives) {
     const sf = res.findings.find(x => x.feature === 'Conjunção subordinativa' || x.feature === 'Conjunção integrante');
     assert.ok(sf, c.id + ' sem conjunção subordinativa/integrante');
     assert.equal(sf.subordKind, c.subordKind, c.id + ' tipo de subordinação');
+  }
+  if (c.implicitPronoun) {
+    const vf = res.findings.find(x => x.implicitSubject);
+    assert.ok(vf, c.id + ' sem sujeito oculto desinencial');
+    assert.equal(vf.implicitSubject.pronoun, c.implicitPronoun, c.id + ' pronome desinencial');
   }
   for (const [role, expected] of Object.entries(c.roles)) {
     const f = res.findings.find(x => (role === 'Verbo' ? ['Núcleo verbal', 'Verbo de ligação'].includes(x.feature) : x.feature === role));
@@ -343,27 +423,32 @@ for (const c of positives) {
 
 /* 2. Contrastes e abstenções obrigatórias */
 const abstentions = [
-  ['CON-01', 'O minha casa brilhou.'],           // artigo + possessivo discordantes em gênero
-  ['CON-02', 'Aquele casa caiu.'],                // demonstrativo + nome discordantes
-  ['CON-03', 'A luz das estrelas brilharam.'],    // verbo concordando com especificador e não com núcleo
-  ['CON-04', 'A escritora dedicou o livro ao mãe.'], // contração discordante em gênero
-  ['CON-05', 'O menino é serena.'],               // predicativo discordante em gênero
-  ['CON-06', 'Eu comprei a casa nova.'],          // adjetivo posposto no objeto (preservar abstenção)
-  ['CON-07', 'Eu gosto do livro.'],               // preservação de REL-N46
-  ['CON-08', 'Sonho terminou.'],                  // homógrafo verbo/nome sem determinante
-  ['CON-09', 'A escritora escreveu o poema no janela.'], // contração discordante no adjunto
-  ['CON-10', 'A menina e o menino canta.'],       // sujeito composto com verbo no singular
-  ['CON-11', 'Eu e Maria cantam.'],               // sujeito composto com 1ª pessoa e verbo na 3ª
-  ['CON-12', 'A menina, e o menino cantam.'],     // vírgula indevida dentro de sujeito composto
-  ['CON-13', 'A casa e a rua permaneceram silenciosos.'], // predicativo masculino para sujeito composto feminino
-  ['CON-14', 'Eu canto, mas.'],                   // segunda oração ausente
-  ['CON-15', 'Eu estou lendo e ela canta.'],      // preservação de LOC-N34 (primeira oração sem objeto)
-  ['CON-16', 'A carta foi escrita.'],             // passiva sem agente (preservar LOC-N12)
-  ['CON-17', 'O livro foi escrita pela escritora.'], // particípio discordante em gênero
-  ['CON-18', 'A carta está escrita pela escritora.'], // estar (não ser) com agente
-  ['CON-19', 'Quando a chuva terminou o menino saiu.'], // subordinada anteposta sem vírgula
-  ['CON-20', 'A menina cantou que o livro chegou.'], // verbo sem frame integrante
-  ['CON-21', 'Eu estou lendo o livro que chegou.']   // relativa pós-substantivo (preservar LOC-N33)
+  ['CON-01', 'O minha casa brilhou.'],
+  ['CON-02', 'Aquele casa caiu.'],
+  ['CON-03', 'A luz das estrelas brilharam.'],
+  ['CON-04', 'A escritora dedicou o livro ao mãe.'],
+  ['CON-05', 'O menino é serena.'],
+  ['CON-06', 'Eu comprei a casa nova.'],
+  ['CON-07', 'Eu gosto do livro.'],
+  ['CON-08', 'Sonho terminou.'],
+  ['CON-09', 'A escritora escreveu o poema no janela.'],
+  ['CON-10', 'A menina e o menino canta.'],
+  ['CON-11', 'Eu e Maria cantam.'],
+  ['CON-12', 'A menina, e o menino cantam.'],
+  ['CON-13', 'A casa e a rua permaneceram silenciosos.'],
+  ['CON-14', 'Eu canto, mas.'],
+  ['CON-15', 'Eu estou lendo e ela canta.'],
+  ['CON-16', 'A carta foi escrita.'],
+  ['CON-17', 'O livro foi escrita pela escritora.'],
+  ['CON-18', 'A carta está escrita pela escritora.'],
+  ['CON-19', 'Quando a chuva terminou o menino saiu.'],
+  ['CON-20', 'A menina cantou que o livro chegou.'],
+  ['CON-21', 'Eu estou lendo o livro que chegou.'],
+  ['CON-22', 'Canto.'],                            // homógrafo isolado (preservar REL-N10)
+  ['CON-23', 'Escrevia a carta.'],                 // sincretismo 1ª/3ª sg no imperfeito (eu/ele escrevia)
+  ['CON-24', 'Disse que li o livro.'],             // sincretismo 1ª/3ª sg em "disse"
+  ['CON-25', 'Eu, canto.'],                        // pronome pessoal não é vocativo (preservar REL-N37)
+  ['CON-26', 'Maria, os amigos, leu o livro.']     // aposto plural discordante de sujeito singular
 ];
 
 for (const [id, text] of abstentions) {
@@ -375,4 +460,4 @@ for (const [id, text] of abstentions) {
 assert.equal(E.syntaxRelations.analyze('Eu canto e ela corre.', 5).length, 0, 'não dividir coordenação por limite de saída');
 assert.equal(E.syntaxRelations.analyze('A escritora disse que o livro chegou.', 5).length, 0, 'não dividir subordinação por limite de saída');
 
-console.log('OK: Sintaxe literária, passiva, coordenação e subordinação (' + positives.length + ' construções + ' + abstentions.length + ' contrastes de precisão) verificada.');
+console.log('OK: Sintaxe literária, passiva, coordenação, subordinação, elipse, vocativo e aposto (' + positives.length + ' construções + ' + abstentions.length + ' contrastes de precisão) verificada.');

@@ -1681,6 +1681,13 @@ SOFTWARE.
     se: 'condicional'
   };
   var properNames = { ana: 'f', maria: 'f', 'joão': 'm', pedro: 'm' };
+  var vocativeNouns = [
+    'amigo', 'amiga', 'amigos', 'amigas', 'mãe', 'pai', 'irmão', 'irmã', 'avô', 'avó',
+    'filho', 'filha', 'filhos', 'filhas', 'leitor', 'leitora', 'leitores', 'leitoras',
+    'escritor', 'escritora', 'escritores', 'escritoras', 'mestre', 'poeta', 'menina', 'menino',
+    'meninas', 'meninos', 'mulher', 'homem', 'criança', 'senhor', 'senhora', 'amor', 'coração',
+    'vida', 'lua', 'noite', 'sol', 'mar', 'vento'
+  ];
   var finalAdverbs = [
     'hoje', 'ontem', 'amanhã', 'aqui', 'ali', 'lá', 'cedo', 'tarde', 'lentamente', 'rapidamente',
     'agora', 'sempre', 'nunca', 'jamais', 'depressa', 'devagar', 'longe', 'perto', 'antes', 'depois', 'ainda',
@@ -1698,10 +1705,10 @@ SOFTWARE.
     });
   }
   /* Formas explícitas; não inferir flexão por sufixo nem sobrescrever candidatos. */
-  nominal('livro menino homem escritor poema canto mar pão silêncio tempo fogo dia vento jogo sonho trabalho olho filho pagamento caminho caderno papel texto verso capítulo conto romance diário autor leitor editor amigo pai irmão avô coração corpo rosto sorriso passo gesto segredo destino rio sol céu jardim muro telhado quarto relógio espelho café trem barco navio porto campo ferro ouro vidro casaco chapéu sapato trovão relâmpago inverno verão outono minuto segundo mês ano século mundo lugar espaço ruído som eco brilho medo plano assunto tema título parágrafo rascunho manuscrito arquivo documento selo certificado futuro passado presente horizonte abraço', 'm', 'singular');
-  nominal('livros meninos homens escritores poemas cantos pães silêncios tempos jogos sonhos trabalhos olhos filhos caminhos cadernos papéis textos versos capítulos contos romances diários autores leitores editores amigos pais irmãos avôs corações corpos rostos sorrisos passos gestos segredos destinos rios sóis céus jardins muros telhados quartos relógios espelhos cafés trens barcos navios portos campos casacos chapéus sapatos trovões relâmpagos invernos verões outonos minutos segundos meses anos séculos mundos lugares espaços ruídos sons ecos medos planos assuntos temas títulos parágrafos rascunhos manuscritos arquivos documentos selos certificados horizontes abraços', 'm', 'plural');
-  nominal('casa menina mulher escritora carta porta revista opinião rosa flor água mesa vida música notícia família noite cobra vizinha chuva cidade rua janela manhã tarde voz história palavra cadeira luz sombra estrada pessoa amiga mãe irmã avó criança mente ideia memória saudade dor alegria esperança estrela lua árvore folha pedra chave página linha frase crônica cama parede sala cozinha praça estação ilha praia floresta terra areia poeira fumaça cinza prata roupa lágrima viagem resposta pergunta biblioteca escola ponte montanha nuvem tempestade hora semana primavera infância juventude velhice oficina obra língua escrita leitura revisão calma paz brisa neblina', 'f', 'singular');
-  nominal('casas meninas mulheres escritoras cartas portas revistas opiniões rosas flores águas mesas vidas cobras vizinhas chuvas cidades ruas janelas manhãs tardes vozes histórias palavras cadeiras luzes sombras estradas pessoas amigas mães irmãs avós crianças mentes ideias memórias saudades dores alegrias esperanças estrelas luas árvores folhas pedras chaves páginas linhas frases crônicas camas paredes salas cozinhas praças estações ilhas praias florestas terras areias roupas lágrimas viagens respostas perguntas bibliotecas escolas pontes montanhas nuvens tempestades horas semanas primaveras oficinas obras línguas escritas leituras revisões brisas', 'f', 'plural');
+  nominal('livro menino homem escritor poema canto mar pão silêncio tempo fogo dia vento jogo sonho trabalho olho filho pagamento caminho caderno papel texto verso capítulo conto romance diário autor leitor editor amigo pai irmão avô coração corpo rosto sorriso passo gesto segredo destino rio sol céu jardim muro telhado quarto relógio espelho café trem barco navio porto campo ferro ouro vidro casaco chapéu sapato trovão relâmpago inverno verão outono minuto segundo mês ano século mundo lugar espaço ruído som eco brilho medo plano assunto tema título parágrafo rascunho manuscrito arquivo documento selo certificado futuro passado presente horizonte abraço mestre poeta senhor amor', 'm', 'singular');
+  nominal('livros meninos homens escritores poemas cantos pães silêncios tempos jogos sonhos trabalhos olhos filhos caminhos cadernos papéis textos versos capítulos contos romances diários autores leitores editores amigos pais irmãos avôs corações corpos rostos sorrisos passos gestos segredos destinos rios sóis céus jardins muros telhados quartos relógios espelhos cafés trens barcos navios portos campos casacos chapéus sapatos trovões relâmpagos invernos verões outonos minutos segundos meses anos séculos mundos lugares espaços ruídos sons ecos medos planos assuntos temas títulos parágrafos rascunhos manuscritos arquivos documentos selos certificados horizontes abraços mestres poetas senhores amores', 'm', 'plural');
+  nominal('casa menina mulher escritora carta porta revista opinião rosa flor água mesa vida música notícia família noite cobra vizinha chuva cidade rua janela manhã tarde voz história palavra cadeira luz sombra estrada pessoa amiga mãe irmã avó criança mente ideia memória saudade dor alegria esperança estrela lua árvore folha pedra chave página linha frase crônica cama parede sala cozinha praça estação ilha praia floresta terra areia poeira fumaça cinza prata roupa lágrima viagem resposta pergunta biblioteca escola ponte montanha nuvem tempestade hora semana primavera infância juventude velhice oficina obra língua escrita leitura revisão calma paz brisa neblina filha leitora senhora', 'f', 'singular');
+  nominal('casas meninas mulheres escritoras cartas portas revistas opiniões rosas flores águas mesas vidas cobras vizinhas chuvas cidades ruas janelas manhãs tardes vozes histórias palavras cadeiras luzes sombras estradas pessoas amigas mães irmãs avós crianças mentes ideias memórias saudades dores alegrias esperanças estrelas luas árvores folhas pedras chaves páginas linhas frases crônicas camas paredes salas cozinhas praças estações ilhas praias florestas terras areias roupas lágrimas viagens respostas perguntas bibliotecas escolas pontes montanhas nuvens tempestades horas semanas primaveras oficinas obras línguas escritas leituras revisões brisas filhas leitoras senhoras', 'f', 'plural');
 
   /* Adjetivos explícitos com gênero/número (m, f, ou u=uniforme) para concordância estrita */
   function addAdjBiform(stems) {
@@ -1719,7 +1726,11 @@ SOFTWARE.
       adjectives['$' + pair[1]] = { gender: 'u', number: 'plural' };
     });
   }
-  addAdjBiform('bonit velh nov larg públic abert sec clar antig silencios long escur calm seren fri alt baix profund vazi chei lent rápid pequen frac viv mort rar pur solitári dourad pratead branc negr vermelh cansad atent quiet imens etern secret noturn');
+  addAdjBiform('bonit velh nov larg públic abert sec clar antig silencios long escur calm seren fri alt baix profund vazi chei lent rápid pequen frac viv mort rar pur solitári dourad pratead branc negr vermelh cansad atent quiet imens etern secret noturn querid car');
+  adjectives.$bom = { gender: 'm', number: 'singular' };
+  adjectives.$boa = { gender: 'f', number: 'singular' };
+  adjectives.$bons = { gender: 'm', number: 'plural' };
+  adjectives.$boas = { gender: 'f', number: 'plural' };
   addAdjUniform([
     ['feliz', 'felizes'], ['triste', 'tristes'], ['leve', 'leves'], ['breve', 'breves'],
     ['doce', 'doces'], ['suave', 'suaves'], ['grande', 'grandes'], ['forte', 'fortes'],
@@ -1929,7 +1940,7 @@ SOFTWARE.
   }
 
   E.syntaxLexicon = {
-    version: 'lexico-sintatico-5',
+    version: 'lexico-sintatico-6',
     nounReadings: function (form) { return (nouns['$' + form] || []).map(copy); },
     articleReading: function (form) { return own.call(articles, form) ? articles[form].slice() : null; },
     determinerReading: function (form) { return own.call(determiners, form) ? copy(determiners[form]) : null; },
@@ -1945,6 +1956,7 @@ SOFTWARE.
     isFinalAdverb: function (form) { return finalAdverbs.indexOf(form) >= 0; },
     isProperName: function (form) { return own.call(properNames, form); },
     properNameGender: function (form) { return own.call(properNames, form) ? properNames[form] : null; },
+    isVocativeNoun: function (form) { return vocativeNouns.indexOf(form) >= 0; },
     verbReadings: verbReadings,
     framesFor: framesFor,
     frame: function (lemma, kind) {
@@ -1956,11 +1968,11 @@ SOFTWARE.
 
 ;
 /* Fonte: ptbr/relacoes-sintaticas.js */
-/* Relações em construções simples, literárias, passivas, coordenadas e subordinadas delimitadas. ES5; recebe texto, nunca o editor. */
+/* Relações em construções simples, literárias, passivas, coordenadas, subordinadas, elipse, aposto e vocativo. ES5; recebe texto, nunca o editor. */
 (function (root) {
   'use strict';
-  var E = root.Escr, D = E.grammarData, version = 'sintaxe-6-passiva-subordinadas';
-  var source = { title: 'Cunha e Cintra, 7ª ed., 2ª impressão, 2017, pp. 136–140, 145–152, 154, 394–397, 510–513 e 593–625; Bechara, Lições de Português pela Análise Sintática, arquivo recebido, páginas PDF 22, 48, 75–76, 94–96 e 103. Terminologia tradicional; critérios computacionais locais, não algoritmos dos autores.', url: null };
+  var E = root.Escr, D = E.grammarData, version = 'sintaxe-7-elipse-aposto-vocativo';
+  var source = { title: 'Cunha e Cintra, 7ª ed., 2ª impressão, 2017, pp. 136–140, 145–154, 168–173, 394–397, 510–513 e 593–625; Bechara, Lições de Português pela Análise Sintática, arquivo recebido, páginas PDF 22, 48, 75–76, 94–96 e 103. Terminologia tradicional; critérios computacionais locais, não algoritmos dos autores.', url: null };
   var groupSource = { title: source.title + ' Locuções: Cunha/Cintra, pp. 408–411; Bechara, páginas PDF 318, 322 e 340–343. Limites de auxiliaridade preservados.', url: null };
   var L = E.syntaxLexicon;
   var ADJUNCT_PREPS = ['em', 'por', 'com', 'sem', 'sobre', 'sob', 'entre', 'até'];
@@ -1978,6 +1990,12 @@ SOFTWARE.
     if (word === 'ela' || word === 'elas') { return 'f'; }
     return 'u';
   }
+  function implicitPronoun(person, number) {
+    if (person === 1 && number === 'singular') { return 'eu'; }
+    if (person === 2 && number === 'singular') { return 'tu'; }
+    if (person === 1 && number === 'plural') { return 'nós'; }
+    return null;
+  }
   function adjReading(word) {
     if (L.adjectiveReading) {
       var r = L.adjectiveReading(word);
@@ -1986,101 +2004,134 @@ SOFTWARE.
     return has(D.classes.adjetivo, word) ? { gender: 'u', number: null } : null;
   }
 
-  function parseSingle(text, ts, opts) {
-    var expectIntegrante = !!(opts && opts.expectIntegrante);
-    var n = ts.length, v, firstVerb, forms, lemma, subject, neg = -1, group, verbEnd;
-    if (n < 2 || n > 28) { return null; }
-
-    function nominalCore(a, b, isSubject, forcedDet) {
-      var p = a, det = null, det2 = null, noun, candidates, head, pronoun, reqG, reqN, adj;
-      if (b <= a) { return null; }
-      pronoun = E.maturationData.subjects[ts[a].value];
-      if (isSubject && !forcedDet && b === a + 1 && pronoun) {
-        return { head: a, person: pronoun[0], number: pronoun[1], gender: pronounGender(ts[a].value) };
+  /* Núcleo de sintagma nominal reutilizável para sujeito, complementos e aposto explicativo */
+  function matchNominalCore(text, ts, a, b, isSubject, forcedDet) {
+    var p = a, det = null, det2 = null, noun, candidates, head, pronoun, reqG, reqN, adj;
+    if (b <= a) { return null; }
+    pronoun = E.maturationData.subjects[ts[a].value];
+    if (isSubject && !forcedDet && b === a + 1 && pronoun) {
+      return { head: a, person: pronoun[0], number: pronoun[1], gender: pronounGender(ts[a].value) };
+    }
+    if (forcedDet) {
+      reqG = forcedDet[0]; reqN = forcedDet[1];
+    } else {
+      det = L.determinerReading ? L.determinerReading(ts[p].value) : null;
+      if (!det) {
+        var art = L.articleReading(ts[p].value);
+        if (art) { det = { gender: art[0], number: art[1], kind: 'artigo' }; }
       }
-      if (forcedDet) {
-        reqG = forcedDet[0]; reqN = forcedDet[1];
-      } else {
-        det = L.determinerReading ? L.determinerReading(ts[p].value) : null;
-        if (!det) {
-          var art = L.articleReading(ts[p].value);
-          if (art) { det = { gender: art[0], number: art[1], kind: 'artigo' }; }
-        }
-        if (det) {
-          reqG = det.gender; reqN = det.number; p++;
-          /* Combinação brasileira natural: artigo + possessivo (a minha casa, o seu livro) */
-          if (det.kind === 'artigo' && p < b && L.determinerReading) {
-            det2 = L.determinerReading(ts[p].value);
-            if (det2 && det2.kind === 'possessivo' && det2.gender === reqG && det2.number === reqN) {
-              p++;
-            } else {
-              det2 = null;
-            }
+      if (det) {
+        reqG = det.gender; reqN = det.number; p++;
+        if (det.kind === 'artigo' && p < b && L.determinerReading) {
+          det2 = L.determinerReading(ts[p].value);
+          if (det2 && det2.kind === 'possessivo' && det2.gender === reqG && det2.number === reqN) {
+            p++;
+          } else {
+            det2 = null;
           }
         }
       }
-      if (p >= b) { return null; }
+    }
+    if (p >= b) { return null; }
 
-      /* Epíteto literário anteposto ao substantivo (a velha casa, o novo romance), sempre com determinante */
-      if ((det || forcedDet) && p + 1 < b) {
-        var candAdj = adjReading(ts[p].value);
-        var nextNouns = L.nounReadings(ts[p + 1].value);
-        if (candAdj && !has(['aberto', 'aberta', 'abertos', 'abertas'], ts[p].value) && nextNouns.length > 0 &&
-            agreesGender(candAdj.gender, reqG) && (!candAdj.number || candAdj.number === reqN)) {
-          p++;
-        }
+    /* Epíteto literário anteposto ao substantivo, sempre com determinante */
+    if ((det || forcedDet) && p + 1 < b) {
+      var candAdj = adjReading(ts[p].value);
+      var nextNouns = L.nounReadings(ts[p + 1].value);
+      if (candAdj && !has(['aberto', 'aberta', 'abertos', 'abertas'], ts[p].value) && nextNouns.length > 0 &&
+          agreesGender(candAdj.gender, reqG) && (!candAdj.number || candAdj.number === reqN)) {
+        p++;
       }
-
-      head = p;
-      candidates = L.nounReadings(ts[p].value);
-      if (det || forcedDet) {
-        candidates = candidates.filter(function (r) { return r.gender === reqG && r.number === reqN; });
-      }
-      if (candidates.length > 1) { return null; }
-      noun = candidates[0];
-      if (!noun) {
-        if (p === a && !forcedDet && b === a + 1 && L.isProperName(ts[p].value) && /^[A-ZÀ-ÖØ-Þ]/.test(text.charAt(ts[p].start))) {
-          var pg = L.properNameGender ? (L.properNameGender(ts[p].value) || 'u') : 'u';
-          return { head: p, person: 3, number: 'singular', gender: pg };
-        }
-        return null;
-      }
-      /* Um homógrafo sem determinante fica sem decisão neste recorte. */
-      if (!det && !forcedDet) {
-        if (E.contextualMorphology.readings(ts[p].value).classes.length > 1) { return null; }
-        if (L.verbReadings && L.verbReadings(ts[p].value).length > 0) { return null; }
-      }
-      p++;
-      /* Adjetivo posposto no objeto pode ser predicativo do objeto: manter abstenção. */
-      if (!isSubject && p < b) { return null; }
-      if (b - p > 2) { return null; }
-      for (; p < b; p++) {
-        adj = adjReading(ts[p].value);
-        if (!adj || !agreesGender(adj.gender, noun.gender) || (adj.number && adj.number !== noun.number)) { return null; }
-      }
-      return { head: head, person: 3, number: noun.number, gender: noun.gender };
     }
 
-    /* Grupo nominal simples OU com especificador preposicionado de/do/da/dos/das */
+    head = p;
+    candidates = L.nounReadings(ts[p].value);
+    if (det || forcedDet) {
+      candidates = candidates.filter(function (r) { return r.gender === reqG && r.number === reqN; });
+    }
+    if (candidates.length > 1) { return null; }
+    noun = candidates[0];
+    if (!noun) {
+      if (p === a && !forcedDet && b === a + 1 && L.isProperName(ts[p].value) && /^[A-ZÀ-ÖØ-Þ]/.test(text.charAt(ts[p].start))) {
+        var pg = L.properNameGender ? (L.properNameGender(ts[p].value) || 'u') : 'u';
+        return { head: p, person: 3, number: 'singular', gender: pg };
+      }
+      return null;
+    }
+    if (!det && !forcedDet) {
+      if (E.contextualMorphology.readings(ts[p].value).classes.length > 1) { return null; }
+      if (L.verbReadings && L.verbReadings(ts[p].value).length > 0) { return null; }
+    }
+    p++;
+    if (!isSubject && p < b) { return null; }
+    if (b - p > 2) { return null; }
+    for (; p < b; p++) {
+      adj = adjReading(ts[p].value);
+      if (!adj || !agreesGender(adj.gender, noun.gender) || (adj.number && adj.number !== noun.number)) { return null; }
+    }
+    return { head: head, person: 3, number: noun.number, gender: noun.gender };
+  }
+
+  function matchNominal(text, ts, a, b, isSubject, forcedDet) {
+    var simple = matchNominalCore(text, ts, a, b, isSubject, forcedDet);
+    if (simple) { return simple; }
+    if (!L.prepReading || b - a < 3) { return null; }
+    var split, prep, left, right, found = null;
+    for (split = a + 1; split < b - 1; split++) {
+      prep = L.prepReading(ts[split].value);
+      if (!prep || prep.base !== 'de') { continue; }
+      left = matchNominalCore(text, ts, a, split, isSubject, forcedDet);
+      if (!left || left.person !== 3) { continue; }
+      right = matchNominalCore(text, ts, split + 1, b, false, prep.det);
+      if (!right) { continue; }
+      if (found) { return null; }
+      found = left;
+    }
+    return found;
+  }
+
+  /* Vocativo: nome próprio ou interlocutor vocativo (com possessivo/adjetivo opcionais em concordância) */
+  function parseVocative(text, vTs) {
+    var n = vTs.length, p = 0, poss = null, preAdj = null, head, noun, cands;
+    if (n < 1 || n > 3) { return null; }
+    if (E.maturationData.subjects[vTs[0].value]) { return null; }
+    if (p < n - 1 && L.determinerReading) {
+      var d = L.determinerReading(vTs[p].value);
+      if (d && d.kind === 'possessivo') { poss = d; p++; }
+    }
+    if (p < n - 1) {
+      var a = adjReading(vTs[p].value);
+      if (a && (!poss || (agreesGender(a.gender, poss.gender) && (!a.number || a.number === poss.number)))) {
+        preAdj = a; p++;
+      }
+    }
+    if (p !== n - 1) { return null; }
+    head = p;
+    var w = vTs[head].value;
+    if (L.isProperName(w) && /^[A-ZÀ-ÖØ-Þ]/.test(text.charAt(vTs[head].start))) {
+      var pg = L.properNameGender ? (L.properNameGender(w) || 'u') : 'u';
+      if (poss && (!agreesGender(poss.gender, pg) || poss.number !== 'singular')) { return null; }
+      if (preAdj && (!agreesGender(preAdj.gender, pg) || (preAdj.number && preAdj.number !== 'singular'))) { return null; }
+      return { head: head, gender: pg, number: 'singular' };
+    }
+    if (!L.isVocativeNoun || !L.isVocativeNoun(w)) { return null; }
+    cands = L.nounReadings(w);
+    if (poss) { cands = cands.filter(function (r) { return r.gender === poss.gender && r.number === poss.number; }); }
+    if (preAdj) { cands = cands.filter(function (r) { return agreesGender(preAdj.gender, r.gender) && (!preAdj.number || preAdj.number === r.number); }); }
+    if (cands.length !== 1) { return null; }
+    noun = cands[0];
+    return { head: head, gender: noun.gender, number: noun.number };
+  }
+
+  function parseSingle(text, ts, opts) {
+    var expectIntegrante = !!(opts && opts.expectIntegrante);
+    var n = ts.length, v, firstVerb, forms, lemma, subject, neg = -1, group, verbEnd;
+    if (n < 1 || n > 28) { return null; }
+
     function nominal(a, b, isSubject, forcedDet) {
-      var simple = nominalCore(a, b, isSubject, forcedDet);
-      if (simple) { return simple; }
-      if (!L.prepReading || b - a < 3) { return null; }
-      var split, prep, left, right, found = null;
-      for (split = a + 1; split < b - 1; split++) {
-        prep = L.prepReading(ts[split].value);
-        if (!prep || prep.base !== 'de') { continue; }
-        left = nominalCore(a, split, isSubject, forcedDet);
-        if (!left || left.person !== 3) { continue; }
-        right = nominalCore(split + 1, b, false, prep.det);
-        if (!right) { continue; }
-        if (found) { return null; }
-        found = left;
-      }
-      return found;
+      return matchNominal(text, ts, a, b, isSubject, forcedDet);
     }
 
-    /* Sujeito simples OU sujeito composto binário (SN1 e SN2) com concordância canônica */
     function parseSubject(a, b) {
       var simple = nominal(a, b, true, null);
       if (simple) { return simple; }
@@ -2109,14 +2160,38 @@ SOFTWARE.
     }
 
     var matches = [];
-    for (v = 1; v < n; v++) {
-      neg = ts[v - 1].value === 'não' ? v - 1 : -1;
+    for (v = 0; v < n; v++) {
+      neg = (v > 0 && ts[v - 1].value === 'não') ? v - 1 : -1;
       firstVerb = neg < 0 ? v : neg;
-      subject = parseSubject(0, firstVerb);
-      if (!subject) { continue; }
       var rawVerbs = L.verbReadings ? L.verbReadings(ts[v].value) : E.contextualMorphology.readings(ts[v].value).verbs;
-      forms = rawVerbs.filter(function (f) { return f[1].indexOf('indicativo:') === 0 && f[2] === subject.person && f[3] === subject.number; });
-      if (!forms.length) { continue; }
+
+      if (firstVerb === 0) {
+        /* Sujeito oculto (desinencial): apenas 1ª/2ª pessoa inequívoca pela desinência (sem sincretismo 1ª/3ª) */
+        var indForms = rawVerbs.filter(function (f) { return f[1].indexOf('indicativo:') === 0; });
+        if (!indForms.length) { continue; }
+        var pnKeys = [], pni, pnk;
+        for (pni = 0; pni < indForms.length; pni++) {
+          pnk = indForms[pni][2] + ':' + indForms[pni][3];
+          if (!has(pnKeys, pnk)) { pnKeys.push(pnk); }
+        }
+        if (pnKeys.length !== 1) { continue; }
+        var impPerson = indForms[0][2], impNumber = indForms[0][3];
+        var impPron = implicitPronoun(impPerson, impNumber);
+        if (!impPron) { continue; }
+        /* Palavra isolada homógrafa de nome/adjetivo (ex.: "Canto.") permanece em abstenção (REL-N10). */
+        if (n === 1) {
+          var w0 = ts[v].value;
+          var nonVerbCls = E.contextualMorphology.readings(w0).classes.filter(function (c) { return c !== 'verbo'; });
+          if (L.nounReadings(w0).length > 0 || adjReading(w0) || nonVerbCls.length > 0) { continue; }
+        }
+        subject = { implicit: true, pronoun: impPron, person: impPerson, number: impNumber, gender: 'u' };
+        forms = indForms;
+      } else {
+        subject = parseSubject(0, firstVerb);
+        if (!subject) { continue; }
+        forms = rawVerbs.filter(function (f) { return f[1].indexOf('indicativo:') === 0 && f[2] === subject.person && f[3] === subject.number; });
+        if (!forms.length) { continue; }
+      }
 
       /* Desambiguação pontual de ser/ir (foi, foram, fui) exclusivamente para passiva analítica com particípio + agente */
       var uniqueLemmas = [], uli;
@@ -2126,7 +2201,7 @@ SOFTWARE.
       var passiveOnlySer = false;
       if (uniqueLemmas.length === 1) {
         lemma = uniqueLemmas[0];
-      } else if (!expectIntegrante && uniqueLemmas.length === 2 && has(uniqueLemmas, 'ser') && has(uniqueLemmas, 'ir') &&
+      } else if (!expectIntegrante && !subject.implicit && uniqueLemmas.length === 2 && has(uniqueLemmas, 'ser') && has(uniqueLemmas, 'ir') &&
           v + 1 < n && L.passiveParticipleReading && L.passiveParticipleReading(ts[v + 1].value)) {
         lemma = 'ser';
         forms = forms.filter(function (f) { return f[0] === 'ser'; });
@@ -2135,8 +2210,8 @@ SOFTWARE.
         continue;
       }
 
-      /* 0. Voz passiva analítica com agente da passiva explícito (ser + particípio concordante + por/pelo/pela + SN) */
-      if (!expectIntegrante && lemma === 'ser' && v + 3 < n && L.passiveParticipleReading && L.prepReading) {
+      /* 0. Voz passiva analítica com agente da passiva explícito (sujeito explícito) */
+      if (!expectIntegrante && !subject.implicit && lemma === 'ser' && v + 3 < n && L.passiveParticipleReading && L.prepReading) {
         var part = L.passiveParticipleReading(ts[v + 1].value);
         if (part && L.frame(part.lemma, 'objeto-direto') &&
             agreesGender(part.gender, subject.gender) && part.number === subject.number) {
@@ -2178,6 +2253,7 @@ SOFTWARE.
             matches.push({
               roles: pRoles, verb: v, verbEnd: passEnd, lemma: part.lemma, forms: forms,
               group: null, passive: { first: v, main: v + 1, lemma: part.lemma },
+              implicitSubject: null, subjectNumber: subject.number,
               frame: { id: 'PASS-' + part.lemma + '-analitica', lemma: part.lemma, pattern: 'voz-passiva-analitica' }
             });
           }
@@ -2189,21 +2265,26 @@ SOFTWARE.
       verbEnd = group ? group.last + 1 : v + 1;
       if (group) { lemma = group.lemma; }
 
+      var impObj = subject.implicit ? {
+        pronoun: subject.pronoun, person: subject.person, number: subject.number,
+        label: 'Sujeito oculto: (' + subject.pronoun + ')'
+      } : null;
+
       /* Modo específico para oração principal imediatamente antes de "que" integrante */
       if (expectIntegrante) {
         if (verbEnd === n) {
           var intFrame = L.frame(lemma, 'oracao-objetiva-direta');
           if (intFrame) {
-            var intSubj = subject.compound
-              ? { key: 'sujeito', role: 'Sujeito composto', a: 0, b: firstVerb, head: null, heads: subject.heads }
-              : { key: 'sujeito', role: 'Sujeito', a: 0, b: firstVerb, head: subject.head };
-            var intRoles = [
-              intSubj,
-              { key: 'predicado', role: 'Predicado', a: firstVerb, b: n },
-              { key: 'verbo', role: group ? 'Locução verbal' : 'Núcleo verbal', a: v, b: verbEnd, head: group ? group.main : v }
-            ];
+            var intRoles = [];
+            if (!subject.implicit) {
+              intRoles.push(subject.compound
+                ? { key: 'sujeito', role: 'Sujeito composto', a: 0, b: firstVerb, head: null, heads: subject.heads }
+                : { key: 'sujeito', role: 'Sujeito', a: 0, b: firstVerb, head: subject.head });
+            }
+            intRoles.push({ key: 'predicado', role: 'Predicado', a: firstVerb, b: n });
+            intRoles.push({ key: 'verbo', role: group ? 'Locução verbal' : 'Núcleo verbal', a: v, b: verbEnd, head: group ? group.main : v });
             if (neg >= 0) { intRoles.push({ key: 'negacao', role: 'Negação', a: neg, b: neg + 1, head: neg }); }
-            matches.push({ roles: intRoles, verb: v, verbEnd: verbEnd, lemma: lemma, forms: forms, group: group || null, passive: null, frame: intFrame });
+            matches.push({ roles: intRoles, verb: v, verbEnd: verbEnd, lemma: lemma, forms: forms, group: group || null, passive: null, implicitSubject: impObj, subjectNumber: subject.number, frame: intFrame });
           }
         }
         continue;
@@ -2234,19 +2315,19 @@ SOFTWARE.
         var frame, object, prepStart, indNom, pushed = false;
 
         function pushMatch(extraRoles, usedFrame) {
-          var subjRole = subject.compound
-            ? { key: 'sujeito', role: 'Sujeito composto', a: 0, b: firstVerb, head: null, heads: subject.heads }
-            : { key: 'sujeito', role: 'Sujeito', a: 0, b: firstVerb, head: subject.head };
-          var baseRoles = [
-            subjRole,
-            { key: 'predicado', role: 'Predicado', a: firstVerb, b: n },
-            { key: 'verbo', role: group ? 'Locução verbal' : (usedFrame.pattern === 'predicativo' ? 'Verbo de ligação' : 'Núcleo verbal'), a: v, b: verbEnd, head: group ? group.main : v }
-          ];
+          var baseRoles = [];
+          if (!subject.implicit) {
+            baseRoles.push(subject.compound
+              ? { key: 'sujeito', role: 'Sujeito composto', a: 0, b: firstVerb, head: null, heads: subject.heads }
+              : { key: 'sujeito', role: 'Sujeito', a: 0, b: firstVerb, head: subject.head });
+          }
+          baseRoles.push({ key: 'predicado', role: 'Predicado', a: firstVerb, b: n });
+          baseRoles.push({ key: 'verbo', role: group ? 'Locução verbal' : (usedFrame.pattern === 'predicativo' ? 'Verbo de ligação' : 'Núcleo verbal'), a: v, b: verbEnd, head: group ? group.main : v });
           var ri;
           for (ri = 0; ri < extraRoles.length; ri++) { baseRoles.push(extraRoles[ri]); }
           if (neg >= 0) { baseRoles.push({ key: 'negacao', role: 'Negação', a: neg, b: neg + 1, head: neg }); }
           if (advInfo) { baseRoles.push({ key: 'adjunto', role: 'Adjunto adverbial', a: advInfo.a, b: advInfo.b, head: advInfo.head, prep: advInfo.prep || null }); }
-          matches.push({ roles: baseRoles, verb: v, verbEnd: verbEnd, lemma: lemma, forms: forms, group: group || null, passive: null, frame: usedFrame });
+          matches.push({ roles: baseRoles, verb: v, verbEnd: verbEnd, lemma: lemma, forms: forms, group: group || null, passive: null, implicitSubject: impObj, subjectNumber: subject.number, frame: usedFrame });
           pushed = true;
         }
 
@@ -2311,7 +2392,6 @@ SOFTWARE.
     return matches.length === 1 ? matches[0] : null;
   }
 
-  /* Verifica espaços puros; mode 'optional' permite vírgula opcional em idx; mode 'required' exige vírgula em idx */
   function gapsValid(cut, ts, commaBeforeIdx, mode) {
     var j, gap;
     for (j = 1; j < ts.length; j++) {
@@ -2329,20 +2409,75 @@ SOFTWARE.
     return true;
   }
 
-  /* Resolve oração simples, passiva, período coordenado ou período subordinado (adverbial / integrante) */
+  /* Coleta índices exatos de vírgulas entre tokens; retorna null se houver qualquer outra pontuação */
+  function commaPositions(cut, ts) {
+    var pos = [], j, gap;
+    for (j = 1; j < ts.length; j++) {
+      gap = cut.slice(ts[j - 1].end, ts[j].start);
+      if (/^[ \t\u00a0]+$/.test(gap)) { continue; }
+      if (/^,[ \t\u00a0]+$/.test(gap)) { pos.push(j); continue; }
+      return null;
+    }
+    return pos;
+  }
+
+  /* Resolve oração simples (sujeito explícito/composto/oculto, passiva, vocativo, aposto) ou período de 2 orações */
   function parseSegment(cut, ts) {
     var candidates = [], ci, kind, ts1, ts2, r1, r2;
+    var commas = commaPositions(cut, ts);
+    if (!commas) { return null; }
 
-    /* A. Oração simples (inclui sujeito composto e voz passiva analítica com agente) */
-    if (gapsValid(cut, ts, -1, 'none')) {
+    /* A. Oração simples sem vírgulas (sujeito simples, composto, oculto ou voz passiva com agente) */
+    if (commas.length === 0) {
       var single = parseSingle(cut, ts, null);
-      if (single) { candidates.push([{ ts: ts, result: single, link: null }]); }
+      if (single) { candidates.push([{ ts: ts, result: single, link: null, vocative: null, appositive: null }]); }
     }
 
-    if (ts.length >= 5 && ts.length <= 44) {
-      /* B. Orações coordenadas (aditiva, adversativa, alternativa, conclusiva, explicativa) */
+    /* B. Oração simples com Vocativo inicial ou final isolado por 1 vírgula */
+    if (commas.length === 1 && ts.length >= 2) {
+      var split = commas[0];
+      if (split >= 1 && split <= 3 && ts.length - split >= 1) {
+        var vocInit = parseVocative(cut, ts.slice(0, split));
+        if (vocInit) {
+          var rAfter = parseSingle(cut, ts.slice(split), null);
+          if (rAfter) {
+            candidates.push([{ ts: ts.slice(split), result: rAfter, link: null, vocative: { ts: ts.slice(0, split), head: vocInit.head, pos: 'initial' }, appositive: null }]);
+          }
+        }
+      }
+      if (ts.length - split >= 1 && ts.length - split <= 3 && split >= 1) {
+        var vocEnd = parseVocative(cut, ts.slice(split));
+        if (vocEnd) {
+          var rBefore = parseSingle(cut, ts.slice(0, split), null);
+          if (rBefore) {
+            candidates.push([{ ts: ts.slice(0, split), result: rBefore, link: null, vocative: { ts: ts.slice(split), head: vocEnd.head, pos: 'final' }, appositive: null }]);
+          }
+        }
+      }
+    }
+
+    /* C. Oração simples com Aposto explicativo pós-sujeito entre 2 vírgulas: [Sujeito], [Aposto], [Predicado] */
+    if (commas.length === 2 && ts.length >= 4) {
+      var c1 = commas[0], c2 = commas[1];
+      if (c1 >= 1 && c2 > c1 && ts.length > c2) {
+        var subjTs = ts.slice(0, c1), appTs = ts.slice(c1, c2), predTs = ts.slice(c2);
+        var appNom = matchNominal(cut, appTs, 0, appTs.length, true, null);
+        if (appNom && appNom.person === 3) {
+          var combined = subjTs.concat(predTs);
+          var rApp = parseSingle(cut, combined, null);
+          if (rApp && !rApp.implicitSubject && rApp.roles[0].key === 'sujeito' &&
+              rApp.roles[0].b === subjTs.length && appNom.number === rApp.subjectNumber) {
+            candidates.push([{ ts: combined, result: rApp, link: null, vocative: null, appositive: { ts: appTs, head: appNom.head } }]);
+          }
+        }
+      }
+    }
+
+    /* D. Períodos de duas orações (coordenadas, subordinadas adverbiais e integrantes com "que") */
+    if (ts.length >= 3 && ts.length <= 44 && commas.length <= 1) {
+      /* D1. Orações coordenadas */
       if (L.coordReading) {
-        for (ci = 2; ci <= ts.length - 3; ci++) {
+        for (ci = 1; ci <= ts.length - 2; ci++) {
           kind = L.coordReading(ts[ci].value);
           if (!kind || !gapsValid(cut, ts, ci, 'optional')) { continue; }
           ts1 = ts.slice(0, ci); ts2 = ts.slice(ci + 1);
@@ -2351,15 +2486,15 @@ SOFTWARE.
           r2 = parseSingle(cut, ts2, null);
           if (!r2) { continue; }
           candidates.push([
-            { ts: ts1, result: r1, link: null },
-            { ts: ts2, result: r2, link: { mode: 'coord', role: 'Conjunção coordenativa', ruleId: 'PTBR-REL-009', token: ts[ci], subKind: kind } }
+            { ts: ts1, result: r1, link: null, vocative: null, appositive: null },
+            { ts: ts2, result: r2, link: { mode: 'coord', role: 'Conjunção coordenativa', ruleId: 'PTBR-REL-009', token: ts[ci], subKind: kind }, vocative: null, appositive: null }
           ]);
         }
       }
 
-      /* C. Oração subordinada adverbial posposta (quando, enquanto, porque, se) */
+      /* D2. Oração subordinada adverbial posposta */
       if (L.subordReading) {
-        for (ci = 2; ci <= ts.length - 3; ci++) {
+        for (ci = 1; ci <= ts.length - 2; ci++) {
           kind = L.subordReading(ts[ci].value);
           if (!kind || !gapsValid(cut, ts, ci, 'optional')) { continue; }
           ts1 = ts.slice(0, ci); ts2 = ts.slice(ci + 1);
@@ -2368,32 +2503,34 @@ SOFTWARE.
           r2 = parseSingle(cut, ts2, null);
           if (!r2) { continue; }
           candidates.push([
-            { ts: ts1, result: r1, link: null },
-            { ts: ts2, result: r2, link: { mode: 'subord', role: 'Conjunção subordinativa', ruleId: 'PTBR-REL-011', token: ts[ci], subKind: kind } }
+            { ts: ts1, result: r1, link: null, vocative: null, appositive: null },
+            { ts: ts2, result: r2, link: { mode: 'subord', role: 'Conjunção subordinativa', ruleId: 'PTBR-REL-011', token: ts[ci], subKind: kind }, vocative: null, appositive: null }
           ]);
         }
 
-        /* D. Oração subordinada adverbial anteposta com vírgula obrigatória (Quando..., ... / Se..., ...) */
+        /* D3. Oração subordinada adverbial anteposta com vírgula obrigatória */
         var leadSub = L.subordReading(ts[0].value);
-        if (leadSub) {
-          for (ci = 3; ci <= ts.length - 2; ci++) {
-            if (!gapsValid(cut, ts, ci, 'required')) { continue; }
+        if (leadSub && commas.length === 1) {
+          ci = commas[0];
+          if (ci >= 2 && ci <= ts.length - 1 && gapsValid(cut, ts, ci, 'required')) {
             ts1 = ts.slice(1, ci); ts2 = ts.slice(ci);
             r1 = parseSingle(cut, ts1, null);
-            if (!r1) { continue; }
-            r2 = parseSingle(cut, ts2, null);
-            if (!r2) { continue; }
-            candidates.push([
-              { ts: ts1, result: r1, link: { mode: 'subord', role: 'Conjunção subordinativa', ruleId: 'PTBR-REL-011', token: ts[0], subKind: leadSub } },
-              { ts: ts2, result: r2, link: null }
-            ]);
+            if (r1) {
+              r2 = parseSingle(cut, ts2, null);
+              if (r2) {
+                candidates.push([
+                  { ts: ts1, result: r1, link: { mode: 'subord', role: 'Conjunção subordinativa', ruleId: 'PTBR-REL-011', token: ts[0], subKind: leadSub }, vocative: null, appositive: null },
+                  { ts: ts2, result: r2, link: null, vocative: null, appositive: null }
+                ]);
+              }
+            }
           }
         }
       }
 
-      /* E. Oração subordinada substantiva objetiva direta (integrante com "que" após verbo dicendi/cognitivo) */
-      if (gapsValid(cut, ts, -1, 'none')) {
-        for (ci = 2; ci <= ts.length - 3; ci++) {
+      /* D4. Oração subordinada substantiva objetiva direta (integrante com "que") */
+      if (commas.length === 0) {
+        for (ci = 1; ci <= ts.length - 2; ci++) {
           if (ts[ci].value !== 'que') { continue; }
           ts1 = ts.slice(0, ci); ts2 = ts.slice(ci + 1);
           r1 = parseSingle(cut, ts1, { expectIntegrante: true });
@@ -2401,8 +2538,8 @@ SOFTWARE.
           r2 = parseSingle(cut, ts2, null);
           if (!r2) { continue; }
           candidates.push([
-            { ts: ts1, result: r1, link: null },
-            { ts: ts2, result: r2, link: { mode: 'integrante', role: 'Conjunção integrante', ruleId: 'PTBR-REL-012', token: ts[ci], subKind: 'integrante' } }
+            { ts: ts1, result: r1, link: null, vocative: null, appositive: null },
+            { ts: ts2, result: r2, link: { mode: 'integrante', role: 'Conjunção integrante', ruleId: 'PTBR-REL-012', token: ts[ci], subKind: 'integrante' }, vocative: null, appositive: null }
           ]);
         }
       }
@@ -2417,7 +2554,7 @@ SOFTWARE.
     var cut = text.slice(0, 8000), tokens = E.reading.tokens(cut), partial = cut.length < text.length;
     if (tokens.length > 1600) { cut = cut.slice(0, tokens[1600].start); partial = true; }
     var clean = E.protectedText(cut), segments = E.reading.sentences(cut), out = [], analyzed = 0, skipped = 0, truncated = 0, capped = false, groups = 0;
-    var limit = 'Hipótese tradicional para oração simples (sujeito simples ou composto), voz passiva analítica com agente explícito (ser + particípio + por/pelo/pela), períodos de duas orações coordenadas (e, mas, porém, contudo, todavia, entretanto, ou, pois, logo, portanto) e subordinadas adverbiais (quando, enquanto, porque, se) ou integrantes com que após verbos cognitivos/dicendi, em ordem direta e indicativo compatível. Não resolve passiva sem agente, cadeias de auxiliares, modais, elipse, inversão, clíticos ou subjuntivo. Ausência de leitura não indica erro. Até 8.000 unidades UTF-16 e 1.600 tokens; segmentos cortados não são analisados.';
+    var limit = 'Hipótese tradicional para oração simples (sujeito explícito, composto ou oculto desinencial de 1ª/2ª pessoa), vocativo, aposto explicativo pós-sujeito, voz passiva analítica com agente explícito, coordenação (e, mas, porém, contudo, todavia, entretanto, ou, pois, logo, portanto) e subordinação adverbial (quando, enquanto, porque, se) ou integrante com que, em ordem direta e indicativo compatível. Não resolve passiva sem agente, sujeito indeterminado/impessoal, cadeias de auxiliares, modais, inversão, clíticos ou subjuntivo. Ausência de leitura não indica erro. Até 8.000 unidades UTF-16 e 1.600 tokens; segmentos cortados não são analisados.';
     segments.forEach(function (segment) {
       var raw = cut.slice(segment.start, segment.end), stop = segment.end;
       var tail = cut.slice(segment.end), completeBoundary = /[\r\n]/.test(tail) || /[.!?…;]$/.test(raw) && (segment.end < cut.length || /^[\s.!?…;]/.test(text.charAt(cut.length)));
@@ -2434,25 +2571,34 @@ SOFTWARE.
 
       var totalRoles = 0, ci;
       for (ci = 0; ci < clauses.length; ci++) {
-        totalRoles += clauses[ci].result.roles.length + (clauses[ci].link ? 1 : 0);
+        totalRoles += clauses[ci].result.roles.length + (clauses[ci].link ? 1 : 0) + (clauses[ci].vocative ? 1 : 0) + (clauses[ci].appositive ? 1 : 0);
       }
-      /* Nunca entregar metade das relações de uma construção ou período composto. */
       if (out.length + totalRoles > cap) { capped = true; return; }
 
       for (ci = 0; ci < clauses.length; ci++) {
         var cTs = clauses[ci].ts;
         var result = clauses[ci].result;
         var link = clauses[ci].link;
+        var voc = clauses[ci].vocative;
+        var app = clauses[ci].appositive;
         analyzed++;
         if (result.group) { groups++; }
 
         var clauseStart = link ? link.token.start : cTs[0].start;
         var clauseEnd = cTs[cTs.length - 1].end;
+        if (voc && voc.pos === 'initial') { clauseStart = voc.ts[0].start; }
+        if (voc && voc.pos === 'final') { clauseEnd = voc.ts[voc.ts.length - 1].end; }
         var id = 'sin-' + clauseStart;
         var verb = cTs[result.verb];
         var clause = span(text, clauseStart, clauseEnd);
         var verbText = text.slice(verb.start, cTs[result.verbEnd - 1].end);
-        var edges = [{ from: id + '-sujeito', to: id + '-verbo', type: 'sujeito-verbo', label: result.passive ? 'sujeito paciente ↔ verbo' : 'sujeito ↔ verbo' }];
+        var edges = [];
+        if (!result.implicitSubject) {
+          edges.push({ from: id + '-sujeito', to: id + '-verbo', type: 'sujeito-verbo', label: result.passive ? 'sujeito paciente ↔ verbo' : 'sujeito ↔ verbo' });
+        }
+        if (app) {
+          edges.push({ from: id + '-sujeito', to: id + '-aposto', type: 'aposto', label: 'sujeito ↔ aposto' });
+        }
         if (link) {
           var linkLabel = link.mode === 'integrante' ? 'conjunção integrante ↔ verbo' : ('conjunção (' + link.subKind + ') ↔ verbo');
           edges.push({ from: id + '-conjuncao', to: id + '-verbo', type: 'conjuncao', label: linkLabel });
@@ -2462,6 +2608,45 @@ SOFTWARE.
             edges.push({ from: id + '-verbo', to: id + '-' + p.key, type: p.key, label: 'verbo ↔ ' + p.role.toLowerCase() });
           }
         });
+
+        if (voc) {
+          var va = voc.ts[0].start, vb = voc.ts[voc.ts.length - 1].end;
+          var vHead = span(text, voc.ts[voc.head].start, voc.ts[voc.head].end);
+          out.push(E.instruments.finding('sintaxe', 'PTBR-REL-013', text, va, vb,
+            'Vocativo: uma leitura possível.',
+            '“' + text.slice(va, vb) + '” funciona como vocativo, isolado por vírgula para chamar ou interpelar o interlocutor (núcleo “' + vHead.snippet + '”). Não integra o sujeito nem o predicado.',
+            'O sintagma vocativo aparece separado por vírgula na periferia da oração.',
+            'O vocativo é termo independente da estrutura sujeito-predicado; entonação e contexto discursivo confirmam o chamamento.',
+            limit, source,
+            {
+              feature: 'Vocativo', analysisStatus: 'contextual', nodeId: id + '-vocativo', parentId: id,
+              clause: span(text, clause.start, clause.end), head: vHead,
+              relations: edges.map(function (e) { return { from: e.from, to: e.to, type: e.type, label: e.label }; }),
+              components: [], valencyFrame: { id: result.frame.id, lemma: result.frame.lemma, pattern: result.frame.pattern },
+              groupKind: null, context: [span(text, verb.start, cTs[result.verbEnd - 1].end)],
+              compatibleVerbs: result.forms.map(function (f) { return f.slice(); })
+            }));
+        }
+
+        if (app) {
+          var aa = app.ts[0].start, ab = app.ts[app.ts.length - 1].end;
+          var aHead = span(text, app.ts[app.head].start, app.ts[app.head].end);
+          var sText = text.slice(cTs[0].start, cTs[result.roles[0].b - 1].end);
+          out.push(E.instruments.finding('sintaxe', 'PTBR-REL-014', text, aa, ab,
+            'Aposto explicativo: uma leitura possível.',
+            '“' + text.slice(aa, ab) + '” explica ou especifica o sujeito “' + sText + '” entre vírgulas (núcleo “' + aHead.snippet + '”).',
+            'O sintagma nominal aparece intercalado entre duas vírgulas logo após o sujeito, em concordância de número.',
+            'Na tradição gramatical, o aposto explicativo retoma e esclarece o termo antecedente sem exercer função de predicativo verbal.',
+            limit, source,
+            {
+              feature: 'Aposto explicativo', analysisStatus: 'contextual', nodeId: id + '-aposto', parentId: id,
+              clause: span(text, clause.start, clause.end), head: aHead,
+              relations: edges.map(function (e) { return { from: e.from, to: e.to, type: e.type, label: e.label }; }),
+              components: [], valencyFrame: { id: result.frame.id, lemma: result.frame.lemma, pattern: result.frame.pattern },
+              groupKind: null, context: [span(text, verb.start, cTs[result.verbEnd - 1].end)],
+              compatibleVerbs: result.forms.map(function (f) { return f.slice(); })
+            }));
+        }
 
         if (link) {
           var conjText = text.slice(link.token.start, link.token.end);
@@ -2490,20 +2675,26 @@ SOFTWARE.
 
         result.roles.forEach(function (p) {
           var a = cTs[p.a].start, b = cTs[p.b - 1].end, head = typeof p.head === 'number' ? span(text, cTs[p.head].start, cTs[p.head].end) : null;
-          var subjectText = text.slice(cTs[0].start, cTs[result.roles[0].b - 1].end), predText = text.slice(cTs[result.roles[1].a].start, clauseEnd);
+          var hasSubjRole = !result.implicitSubject;
+          var subjectText = hasSubjRole ? text.slice(cTs[0].start, cTs[result.roles[0].b - 1].end) : ('(' + result.implicitSubject.pronoun + ')');
+          var predRole = hasSubjRole ? result.roles[1] : result.roles[0];
+          var predText = text.slice(cTs[predRole.a].start, cTs[predRole.b - 1].end);
           var prepLabel = p.prep ? '“' + p.prep + '”' : 'a';
-          var subjExplain;
-          if (p.key === 'sujeito' && p.heads && p.heads.length === 2) {
-            var h1 = text.slice(cTs[p.heads[0]].start, cTs[p.heads[0]].end);
-            var h2 = text.slice(cTs[p.heads[1]].start, cTs[p.heads[1]].end);
-            subjExplain = p.passiveSubject
-              ? '“' + subjectText + '” forma um sujeito paciente composto (“' + h1 + '” e “' + h2 + '”) na voz passiva analítica, concordando com o auxiliar e o particípio.'
-              : '“' + subjectText + '” forma um sujeito composto com dois núcleos (“' + h1 + '” e “' + h2 + '”), concordando no plural com “' + predText + '”.';
-          } else {
-            var sHeadTxt = typeof result.roles[0].head === 'number' ? text.slice(cTs[result.roles[0].head].start, cTs[result.roles[0].head].end) : subjectText;
-            subjExplain = p.passiveSubject
-              ? '“' + subjectText + '” recebe a ação expressa pela locução passiva “' + verbText + '” (sujeito paciente, núcleo “' + sHeadTxt + '”), concordando em gênero e número com o particípio.'
-              : '“' + subjectText + '” é o grupo sobre o qual esta construção declara “' + predText + '”. Seu núcleo é “' + sHeadTxt + '”; há uma forma verbal compatível em pessoa e número.';
+          var headWord = typeof p.head === 'number' ? text.slice(cTs[p.head].start, cTs[p.head].end) : '';
+          var subjExplain = '';
+          if (hasSubjRole && p.key === 'sujeito') {
+            if (p.heads && p.heads.length === 2) {
+              var h1 = text.slice(cTs[p.heads[0]].start, cTs[p.heads[0]].end);
+              var h2 = text.slice(cTs[p.heads[1]].start, cTs[p.heads[1]].end);
+              subjExplain = p.passiveSubject
+                ? '“' + subjectText + '” forma um sujeito paciente composto (“' + h1 + '” e “' + h2 + '”) na voz passiva analítica, concordando com o auxiliar e o particípio.'
+                : '“' + subjectText + '” forma um sujeito composto com dois núcleos (“' + h1 + '” e “' + h2 + '”), concordando no plural com “' + predText + '”.';
+            } else {
+              var sHeadTxt = typeof result.roles[0].head === 'number' ? text.slice(cTs[result.roles[0].head].start, cTs[result.roles[0].head].end) : subjectText;
+              subjExplain = p.passiveSubject
+                ? '“' + subjectText + '” recebe a ação expressa pela locução passiva “' + verbText + '” (sujeito paciente, núcleo “' + sHeadTxt + '”), concordando em gênero e número com o particípio.'
+                : '“' + subjectText + '” é o grupo sobre o qual esta construção declara “' + predText + '”. Seu núcleo é “' + sHeadTxt + '”; há uma forma verbal compatível em pessoa e número.';
+            }
           }
           var verbExplain;
           if (result.passive) {
@@ -2515,10 +2706,14 @@ SOFTWARE.
           } else {
             verbExplain = '“' + verb.value + '” organiza o predicado nesta leitura. O sujeito e os complementos são identificados em relação a esse uso.';
           }
-          var headWord = typeof p.head === 'number' ? text.slice(cTs[p.head].start, cTs[p.head].end) : '';
+          if (result.implicitSubject && p.key === 'verbo') {
+            verbExplain += ' Sujeito oculto (desinencial): a desinência verbal indica “' + result.implicitSubject.pronoun + '” (' + result.implicitSubject.person + 'ª pessoa do ' + result.implicitSubject.number + ') sem pronome explícito.';
+          }
           var explanations = {
             sujeito: subjExplain,
-            predicado: 'O predicado reúne o que esta oração declara a respeito de “' + subjectText + '”, incluindo o verbo e os termos que o acompanham.',
+            predicado: result.implicitSubject
+              ? 'O predicado reúne toda a declaração desta oração com sujeito oculto (desinencial “' + result.implicitSubject.pronoun + '”).'
+              : 'O predicado reúne o que esta oração declara a respeito de “' + subjectText + '”, incluindo o verbo e os termos que o acompanham.',
             verbo: verbExplain,
             objeto: '“' + text.slice(a, b) + '” completa o emprego de “' + verbText + '” sem preposição necessária nesta construção. A leitura não se baseia apenas em vir depois do verbo.',
             indireto: '“' + text.slice(a, b) + '” completa, regido por ' + prepLabel + ', o verbo “' + result.lemma + '” nesta construção.',
@@ -2551,16 +2746,24 @@ SOFTWARE.
           var findingRuleId = (result.group && p.key === 'verbo') ? 'PTBR-LOC-001'
             : (result.passive && p.key === 'verbo') ? 'PTBR-LOC-002'
               : 'PTBR-REL-' + ruleIds[p.key];
+          var extra = {
+            feature: p.role, analysisStatus: 'contextual', nodeId: id + '-' + p.key, parentId: p.key === 'sujeito' || p.key === 'predicado' ? id : id + '-predicado',
+            clause: span(text, clause.start, clause.end), head: head, relations: edges.map(function (e) { return { from: e.from, to: e.to, type: e.type, label: e.label }; }),
+            components: components, valencyFrame: { id: result.frame.id, lemma: result.frame.lemma, pattern: result.frame.pattern },
+            groupKind: result.group && p.key === 'verbo' ? result.group.kind : (result.passive && p.key === 'verbo' ? 'passiva analítica' : null),
+            context: [span(text, verb.start, cTs[result.verbEnd - 1].end)], compatibleVerbs: result.forms.map(function (f) { return f.slice(); })
+          };
+          if (result.implicitSubject && p.key === 'verbo') {
+            extra.implicitSubject = {
+              pronoun: result.implicitSubject.pronoun,
+              person: result.implicitSubject.person,
+              number: result.implicitSubject.number,
+              label: result.implicitSubject.label
+            };
+          }
           out.push(E.instruments.finding('sintaxe', findingRuleId, text, a, b, p.role + ': uma leitura possível.', explanations[p.key],
             'A construção inteira foi compatível com o recorte. Os vínculos representam esta hipótese, não uma árvore sintática geral.',
-            'O contexto discursivo e outros sentidos podem mudar a leitura. Sujeito não é necessariamente quem pratica uma ação. A compatibilidade formal não certifica correção nem intenção.', limit, (result.group || result.passive) ? groupSource : source,
-            {
-              feature: p.role, analysisStatus: 'contextual', nodeId: id + '-' + p.key, parentId: p.key === 'sujeito' || p.key === 'predicado' ? id : id + '-predicado',
-              clause: span(text, clause.start, clause.end), head: head, relations: edges.map(function (e) { return { from: e.from, to: e.to, type: e.type, label: e.label }; }),
-              components: components, valencyFrame: { id: result.frame.id, lemma: result.frame.lemma, pattern: result.frame.pattern },
-              groupKind: result.group && p.key === 'verbo' ? result.group.kind : (result.passive && p.key === 'verbo' ? 'passiva analítica' : null),
-              context: [span(text, verb.start, cTs[result.verbEnd - 1].end)], compatibleVerbs: result.forms.map(function (f) { return f.slice(); })
-            }));
+            'O contexto discursivo e outros sentidos podem mudar a leitura. Sujeito não é necessariamente quem pratica uma ação. A compatibilidade formal não certifica correção nem intenção.', limit, (result.group || result.passive) ? groupSource : source, extra));
         });
       }
     });

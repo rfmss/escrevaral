@@ -97,6 +97,13 @@
     se: 'condicional'
   };
   var properNames = { ana: 'f', maria: 'f', 'joão': 'm', pedro: 'm' };
+  var vocativeNouns = [
+    'amigo', 'amiga', 'amigos', 'amigas', 'mãe', 'pai', 'irmão', 'irmã', 'avô', 'avó',
+    'filho', 'filha', 'filhos', 'filhas', 'leitor', 'leitora', 'leitores', 'leitoras',
+    'escritor', 'escritora', 'escritores', 'escritoras', 'mestre', 'poeta', 'menina', 'menino',
+    'meninas', 'meninos', 'mulher', 'homem', 'criança', 'senhor', 'senhora', 'amor', 'coração',
+    'vida', 'lua', 'noite', 'sol', 'mar', 'vento'
+  ];
   var finalAdverbs = [
     'hoje', 'ontem', 'amanhã', 'aqui', 'ali', 'lá', 'cedo', 'tarde', 'lentamente', 'rapidamente',
     'agora', 'sempre', 'nunca', 'jamais', 'depressa', 'devagar', 'longe', 'perto', 'antes', 'depois', 'ainda',
@@ -114,10 +121,10 @@
     });
   }
   /* Formas explícitas; não inferir flexão por sufixo nem sobrescrever candidatos. */
-  nominal('livro menino homem escritor poema canto mar pão silêncio tempo fogo dia vento jogo sonho trabalho olho filho pagamento caminho caderno papel texto verso capítulo conto romance diário autor leitor editor amigo pai irmão avô coração corpo rosto sorriso passo gesto segredo destino rio sol céu jardim muro telhado quarto relógio espelho café trem barco navio porto campo ferro ouro vidro casaco chapéu sapato trovão relâmpago inverno verão outono minuto segundo mês ano século mundo lugar espaço ruído som eco brilho medo plano assunto tema título parágrafo rascunho manuscrito arquivo documento selo certificado futuro passado presente horizonte abraço', 'm', 'singular');
-  nominal('livros meninos homens escritores poemas cantos pães silêncios tempos jogos sonhos trabalhos olhos filhos caminhos cadernos papéis textos versos capítulos contos romances diários autores leitores editores amigos pais irmãos avôs corações corpos rostos sorrisos passos gestos segredos destinos rios sóis céus jardins muros telhados quartos relógios espelhos cafés trens barcos navios portos campos casacos chapéus sapatos trovões relâmpagos invernos verões outonos minutos segundos meses anos séculos mundos lugares espaços ruídos sons ecos medos planos assuntos temas títulos parágrafos rascunhos manuscritos arquivos documentos selos certificados horizontes abraços', 'm', 'plural');
-  nominal('casa menina mulher escritora carta porta revista opinião rosa flor água mesa vida música notícia família noite cobra vizinha chuva cidade rua janela manhã tarde voz história palavra cadeira luz sombra estrada pessoa amiga mãe irmã avó criança mente ideia memória saudade dor alegria esperança estrela lua árvore folha pedra chave página linha frase crônica cama parede sala cozinha praça estação ilha praia floresta terra areia poeira fumaça cinza prata roupa lágrima viagem resposta pergunta biblioteca escola ponte montanha nuvem tempestade hora semana primavera infância juventude velhice oficina obra língua escrita leitura revisão calma paz brisa neblina', 'f', 'singular');
-  nominal('casas meninas mulheres escritoras cartas portas revistas opiniões rosas flores águas mesas vidas cobras vizinhas chuvas cidades ruas janelas manhãs tardes vozes histórias palavras cadeiras luzes sombras estradas pessoas amigas mães irmãs avós crianças mentes ideias memórias saudades dores alegrias esperanças estrelas luas árvores folhas pedras chaves páginas linhas frases crônicas camas paredes salas cozinhas praças estações ilhas praias florestas terras areias roupas lágrimas viagens respostas perguntas bibliotecas escolas pontes montanhas nuvens tempestades horas semanas primaveras oficinas obras línguas escritas leituras revisões brisas', 'f', 'plural');
+  nominal('livro menino homem escritor poema canto mar pão silêncio tempo fogo dia vento jogo sonho trabalho olho filho pagamento caminho caderno papel texto verso capítulo conto romance diário autor leitor editor amigo pai irmão avô coração corpo rosto sorriso passo gesto segredo destino rio sol céu jardim muro telhado quarto relógio espelho café trem barco navio porto campo ferro ouro vidro casaco chapéu sapato trovão relâmpago inverno verão outono minuto segundo mês ano século mundo lugar espaço ruído som eco brilho medo plano assunto tema título parágrafo rascunho manuscrito arquivo documento selo certificado futuro passado presente horizonte abraço mestre poeta senhor amor', 'm', 'singular');
+  nominal('livros meninos homens escritores poemas cantos pães silêncios tempos jogos sonhos trabalhos olhos filhos caminhos cadernos papéis textos versos capítulos contos romances diários autores leitores editores amigos pais irmãos avôs corações corpos rostos sorrisos passos gestos segredos destinos rios sóis céus jardins muros telhados quartos relógios espelhos cafés trens barcos navios portos campos casacos chapéus sapatos trovões relâmpagos invernos verões outonos minutos segundos meses anos séculos mundos lugares espaços ruídos sons ecos medos planos assuntos temas títulos parágrafos rascunhos manuscritos arquivos documentos selos certificados horizontes abraços mestres poetas senhores amores', 'm', 'plural');
+  nominal('casa menina mulher escritora carta porta revista opinião rosa flor água mesa vida música notícia família noite cobra vizinha chuva cidade rua janela manhã tarde voz história palavra cadeira luz sombra estrada pessoa amiga mãe irmã avó criança mente ideia memória saudade dor alegria esperança estrela lua árvore folha pedra chave página linha frase crônica cama parede sala cozinha praça estação ilha praia floresta terra areia poeira fumaça cinza prata roupa lágrima viagem resposta pergunta biblioteca escola ponte montanha nuvem tempestade hora semana primavera infância juventude velhice oficina obra língua escrita leitura revisão calma paz brisa neblina filha leitora senhora', 'f', 'singular');
+  nominal('casas meninas mulheres escritoras cartas portas revistas opiniões rosas flores águas mesas vidas cobras vizinhas chuvas cidades ruas janelas manhãs tardes vozes histórias palavras cadeiras luzes sombras estradas pessoas amigas mães irmãs avós crianças mentes ideias memórias saudades dores alegrias esperanças estrelas luas árvores folhas pedras chaves páginas linhas frases crônicas camas paredes salas cozinhas praças estações ilhas praias florestas terras areias roupas lágrimas viagens respostas perguntas bibliotecas escolas pontes montanhas nuvens tempestades horas semanas primaveras oficinas obras línguas escritas leituras revisões brisas filhas leitoras senhoras', 'f', 'plural');
 
   /* Adjetivos explícitos com gênero/número (m, f, ou u=uniforme) para concordância estrita */
   function addAdjBiform(stems) {
@@ -135,7 +142,11 @@
       adjectives['$' + pair[1]] = { gender: 'u', number: 'plural' };
     });
   }
-  addAdjBiform('bonit velh nov larg públic abert sec clar antig silencios long escur calm seren fri alt baix profund vazi chei lent rápid pequen frac viv mort rar pur solitári dourad pratead branc negr vermelh cansad atent quiet imens etern secret noturn');
+  addAdjBiform('bonit velh nov larg públic abert sec clar antig silencios long escur calm seren fri alt baix profund vazi chei lent rápid pequen frac viv mort rar pur solitári dourad pratead branc negr vermelh cansad atent quiet imens etern secret noturn querid car');
+  adjectives.$bom = { gender: 'm', number: 'singular' };
+  adjectives.$boa = { gender: 'f', number: 'singular' };
+  adjectives.$bons = { gender: 'm', number: 'plural' };
+  adjectives.$boas = { gender: 'f', number: 'plural' };
   addAdjUniform([
     ['feliz', 'felizes'], ['triste', 'tristes'], ['leve', 'leves'], ['breve', 'breves'],
     ['doce', 'doces'], ['suave', 'suaves'], ['grande', 'grandes'], ['forte', 'fortes'],
@@ -345,7 +356,7 @@
   }
 
   E.syntaxLexicon = {
-    version: 'lexico-sintatico-5',
+    version: 'lexico-sintatico-6',
     nounReadings: function (form) { return (nouns['$' + form] || []).map(copy); },
     articleReading: function (form) { return own.call(articles, form) ? articles[form].slice() : null; },
     determinerReading: function (form) { return own.call(determiners, form) ? copy(determiners[form]) : null; },
@@ -361,6 +372,7 @@
     isFinalAdverb: function (form) { return finalAdverbs.indexOf(form) >= 0; },
     isProperName: function (form) { return own.call(properNames, form); },
     properNameGender: function (form) { return own.call(properNames, form) ? properNames[form] : null; },
+    isVocativeNoun: function (form) { return vocativeNouns.indexOf(form) >= 0; },
     verbReadings: verbReadings,
     framesFor: framesFor,
     frame: function (lemma, kind) {

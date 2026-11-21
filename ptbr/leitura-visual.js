@@ -45,6 +45,8 @@
     if (s.indexOf('verbo') !== -1 || s.indexOf('verbal') !== -1 || s.indexOf('locução') !== -1) { return 'verbo'; }
     if (s.indexOf('indireto') !== -1) { return 'indireto'; }
     if (s.indexOf('agente') !== -1) { return 'agente'; }
+    if (s.indexOf('aposto') !== -1) { return 'aposto'; }
+    if (s.indexOf('vocativo') !== -1) { return 'vocativo'; }
     if (s.indexOf('objeto') !== -1 || s.indexOf('complemento') !== -1 || s.indexOf('predicativo') !== -1) { return 'objeto'; }
     if (s.indexOf('conjunç') !== -1) { return 'conjuncao'; }
     if (s.indexOf('adjunto') !== -1 || s.indexOf('advérb') !== -1 || s.indexOf('negaç') !== -1) { return 'adjunto'; }
@@ -108,6 +110,9 @@
         f.components.forEach(function (c) { if (valid(snapshot, c)) { el('span', b, 'ptbr-syntax-head', c.role + ': ' + c.snippet); } });
       } else if (f.head && f.head.snippet !== f.snippet) {
         el('span', b, 'ptbr-syntax-head', 'Núcleo: ' + f.head.snippet);
+      }
+      if (f.implicitSubject && f.implicitSubject.label) {
+        el('span', b, 'ptbr-syntax-head', f.implicitSubject.label);
       }
       b.addEventListener('click', function () { select(f); }, false);
       buttons['$' + f.nodeId] = { button: b, finding: f };
