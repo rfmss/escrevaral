@@ -408,14 +408,28 @@
     {
       "id": "ORA-N13",
       "text": "A menina que o menino viu canta.",
-      "expect": "abstencao",
-      "reason": "que-objeto; relativa válida fora do recorte"
+      "expect": "leitura",
+      "relative": "que o menino viu",
+      "antecedent": "A menina",
+      "relativeVerb": "viu",
+      "matrixVerb": "canta",
+      "function": "objeto direto",
+      "type": "restritiva",
+      "head": "que",
+      "note": "Cobertura adicionada por relativas-2; expectativa anterior de abstenção preservada neste registro."
     },
     {
       "id": "ORA-N14",
       "text": "O livro que a menina leu terminou.",
-      "expect": "abstencao",
-      "reason": "que-objeto"
+      "expect": "leitura",
+      "relative": "que a menina leu",
+      "antecedent": "O livro",
+      "relativeVerb": "leu",
+      "matrixVerb": "terminou",
+      "function": "objeto direto",
+      "type": "restritiva",
+      "head": "que",
+      "note": "Cobertura adicionada por relativas-2; expectativa anterior de abstenção preservada neste registro."
     },
     {
       "id": "ORA-N15",
@@ -450,8 +464,15 @@
     {
       "id": "ORA-N20",
       "text": "A casa onde a menina mora é bonita.",
-      "expect": "abstencao",
-      "reason": "relativo onde fora do recorte"
+      "expect": "leitura",
+      "relative": "onde a menina mora",
+      "antecedent": "A casa",
+      "relativeVerb": "mora",
+      "matrixVerb": "é",
+      "function": "adjunto adverbial de lugar",
+      "type": "restritiva",
+      "head": "onde",
+      "note": "Cobertura adicionada por relativas-2; expectativa anterior de abstenção preservada neste registro."
     },
     {
       "id": "ORA-N21",

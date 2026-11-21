@@ -4,15 +4,15 @@
   "assets": [
     {
       "id": "cofre",
-      "path": "assets/20261014-scrvrl-exame-v6-65/cofre.75da97c7d08ec036.js",
-      "sha256": "75da97c7d08ec0363c3c2e963093839f757648cea0528a80f08743b3e087cf2d",
-      "bytes": 755497
+      "path": "assets/20261014-scrvrl-exame-v6-65/cofre.4a1f4918a86955db.js",
+      "sha256": "4a1f4918a86955dbda9f68cb0b77419753f4c98c93115e70949a7970b54f50ca",
+      "bytes": 772598
     },
     {
       "id": "app",
-      "path": "assets/20261014-scrvrl-exame-v6-65/app.34c0bea2efcfdd19.js",
-      "sha256": "34c0bea2efcfdd19c9b7adfbf16b8422515ee0d17a19fb89a4e946ed139cb0cc",
-      "bytes": 731990
+      "path": "assets/20261014-scrvrl-exame-v6-65/app.14b3a37cf96bc103.js",
+      "sha256": "14b3a37cf96bc1032f38a3031d5b8d1d6c09fcd9071feffcbb7d91864144897b",
+      "bytes": 732259
     },
     {
       "id": "styles",

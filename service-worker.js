@@ -1,15 +1,15 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-793fc4331dd1";
+const CACHE_NAME = "scrvrl-offline-v6-65-57cfbe71fd2a";
 const RUNTIME_CACHE = "scrvrl-runtime-v1";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/cofre.75da97c7d08ec036.js",
-    "sha256": "75da97c7d08ec0363c3c2e963093839f757648cea0528a80f08743b3e087cf2d"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/cofre.4a1f4918a86955db.js",
+    "sha256": "4a1f4918a86955dbda9f68cb0b77419753f4c98c93115e70949a7970b54f50ca"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.34c0bea2efcfdd19.js",
-    "sha256": "34c0bea2efcfdd19c9b7adfbf16b8422515ee0d17a19fb89a4e946ed139cb0cc"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.14b3a37cf96bc103.js",
+    "sha256": "14b3a37cf96bc1032f38a3031d5b8d1d6c09fcd9071feffcbb7d91864144897b"
   },
   {
     "url": "./assets/20261014-scrvrl-exame-v6-65/styles.5fc477251c538c75.css",
@@ -41,7 +41,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: '30988e5dd8b6293d6c413baa82bae09bd62aca8f2879ce9018f1c5abdc5c3526' });
+    const index = await checkedAsset({ url: './index.html', sha256: '4ca7a75902382bec5d1d97579806343eb48f05fb60eb0655fee58e14283e6c35' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);

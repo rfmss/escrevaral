@@ -8,7 +8,7 @@ for(const c of corpus.cases){try{
  if(c.expect==='abstencao'){assert.equal(r.findings.length,0,c.reason);continue;}
  assert.equal(r.findings.length,1);const f=r.findings[0];assert.equal(f.snippet,c.relative);assert.equal(f.relativeFunction,c.function);assert.equal(f.relativeType,c.type);
  for(const [role,value] of [['Antecedente',c.antecedent],['Verbo da relativa',c.relativeVerb],['Verbo da principal',c.matrixVerb]])assert.equal(f.context.find(s=>s.role===role).snippet,value);
- assert.equal(f.head.snippet,'que');assert.equal(r.coverageInfo.relatives,1);
+ assert.equal(f.head.snippet,c.head||'que');assert.equal(r.coverageInfo.relatives,1);
 }catch(e){failures.push(c.id+' '+e.message);}}
 assert.deepEqual(failures,[]);
 const sentence='As meninas que te\u0302m sai\u0301do trabalham.',text='🎼 cafe\u0301. '+sentence+' '+sentence,doc=E.freshDocument();doc.text=text;

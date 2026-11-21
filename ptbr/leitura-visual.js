@@ -332,10 +332,12 @@
         anteBtn.addEventListener('click', function () { select(index); }, false);
       }
 
+      var relHead = f.head && f.head.snippet ? f.head.snippet : 'que';
+      var relFn = f.relativeFunction === 'objeto direto' ? 'objeto' : (f.relativeFunction === 'adjunto adverbial de lugar' ? 'lugar' : 'sujeito');
       var relBtn = el('button', strip, 'ptbr-syntax-term'); relBtn.type = 'button';
       relBtn.setAttribute('data-syntax-role', 'objeto'); relBtn.setAttribute('aria-pressed', 'false');
       relBtn.setAttribute('aria-controls', uid);
-      el('span', relBtn, 'ptbr-word-tag', 'Oração relativa · que-sujeito');
+      el('span', relBtn, 'ptbr-word-tag', 'Oração relativa · ' + relHead + '-' + relFn);
       el('span', relBtn, 'ptbr-word-text', f.snippet);
       if (f.components && f.components.length) {
         f.components.forEach(function (c) { if (valid(snapshot, c)) { el('span', relBtn, 'ptbr-syntax-head', c.role + ': ' + c.snippet); } });
@@ -352,7 +354,7 @@
       }
 
       if (f.clause && valid(snapshot, f.clause)) { el('p', s, 'ptbr-fragment-original', f.clause.snippet); }
-      rows.push({ row: row, svg: svg, anteBtn: anteBtn, relBtn: relBtn, mvBtn: mvBtn });
+      rows.push({ row: row, svg: svg, anteBtn: anteBtn, relBtn: relBtn, mvBtn: mvBtn, relHead: relHead });
       rowButtons.push(relBtn);
     });
 
@@ -370,7 +372,7 @@
       svgEl('path', r.svg, { d: 'M ' + xFrom.toFixed(1) + ' ' + yBase + ' Q ' + mx.toFixed(1) + ' ' + cy + ' ' + xTo.toFixed(1) + ' ' + (yBase - 4), fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round' });
       svgEl('polygon', r.svg, { points: xTo.toFixed(1) + ',' + yBase + ' ' + (xTo - 4.5).toFixed(1) + ',' + (yBase - 8) + ' ' + (xTo + 4.5).toFixed(1) + ',' + (yBase - 8), fill: 'currentColor' });
       svgEl('circle', r.svg, { cx: xFrom.toFixed(1), cy: (yBase - 2).toFixed(1), r: '2.8', fill: 'currentColor' });
-      var lbl = 'que retoma antecedente';
+      var lbl = (r.relHead || 'que') + ' retoma antecedente';
       var pillW = lbl.length * 6.4 + 14, pillX = Math.max(2, Math.min(rb.width - pillW - 2, mx - pillW / 2));
       svgEl('rect', r.svg, { x: pillX.toFixed(1), y: '18', width: pillW.toFixed(1), height: '18', rx: '9', 'class': 'ptbr-arc-pill' });
       svgEl('text', r.svg, { x: (pillX + pillW / 2).toFixed(1), y: '30.5', 'text-anchor': 'middle', 'class': 'ptbr-arc-label' }, lbl);

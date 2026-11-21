@@ -335,7 +335,7 @@
   pattern('sonhar concordar', 'objeto-indireto-com');
   pattern('pertencer obedecer resistir assistir', 'objeto-indireto-a');
   pattern('dizer saber ver ouvir sentir pensar acreditar descobrir entender compreender perceber notar lembrar esquecer prometer revelar contar explicar imaginar', 'oracao-objetiva-direta');
-  pattern('cantar andar correr sair partir trabalhar chegar terminar dormir acordar sorrir chorar rir cair nascer morrer crescer viver esperar caminhar passear viajar voltar retornar descansar silenciar brilhar florescer escapar fugir entrar descer subir parar navegar passar ficar permanecer', 'sem-complemento');
+  pattern('cantar andar correr sair partir trabalhar chegar terminar dormir acordar sorrir chorar rir cair nascer morrer crescer viver esperar caminhar passear viajar voltar retornar descansar silenciar brilhar florescer escapar fugir entrar descer subir parar navegar passar ficar permanecer morar', 'sem-complemento');
 
   function copy(record) { var out = {}; Object.keys(record).forEach(function (k) { out[k] = record[k]; }); return out; }
   function framesFor(lemma) { return (frames['$' + lemma] || []).map(copy); }

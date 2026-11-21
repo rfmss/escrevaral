@@ -261,7 +261,7 @@
 (function (root) {
   'use strict';
   root.Escr.poetryData = {
-    version: '2.0.0',
+    version: '2.1.0',
     source: { title: 'RimaLab recebido: contagem até a última tônica. Divisão gráfica: Acordo Ortográfico, Base XX. A escansão é uma hipótese local de leitura.', url: 'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/decreto/d6583.htm' },
     sourceFileSha256: 'abda0addc23fb4baf44f01e8b3e9a179c24b684879d0dfd3723559e7899ff373',
     inseparable: ['br', 'cr', 'dr', 'fr', 'gr', 'pr', 'tr', 'vr', 'bl', 'cl', 'fl', 'gl', 'pl', 'tl', 'ch', 'lh', 'nh', 'qu', 'gu'],
@@ -270,13 +270,29 @@
       'água': ['á', 'gua'], 'águas': ['á', 'guas'], 'mágoa': ['má', 'goa'],
       'pátria': ['pá', 'tria'], 'glória': ['gló', 'ria'], 'série': ['sé', 'rie'],
       'história': ['his', 'tó', 'ria'], 'vitória': ['vi', 'tó', 'ria'], 'memória': ['me', 'mó', 'ria'],
+      'silêncio': ['si', 'lên', 'cio'], 'mistério': ['mis', 'té', 'rio'], 'diário': ['di', 'á', 'rio'],
+      'solitário': ['so', 'li', 'tá', 'rio'], 'solitária': ['so', 'li', 'tá', 'ria'],
+      'poesia': ['po', 'e', 'si', 'a'], 'poeta': ['po', 'e', 'ta'], 'poema': ['po', 'e', 'ma'],
+      'lua': ['lu', 'a'], 'luas': ['lu', 'as'], 'rua': ['ru', 'a'], 'ruas': ['ru', 'as'],
+      'rio': ['ri', 'o'], 'rios': ['ri', 'os'], 'frio': ['fri', 'o'], 'fria': ['fri', 'a'],
+      'país': ['pa', 'ís'], 'países': ['pa', 'í', 'ses'], 'raiz': ['ra', 'iz'], 'raízes': ['ra', 'í', 'zes'],
+      'saída': ['sa', 'í', 'da'], 'caída': ['ca', 'í', 'da'], 'voar': ['vo', 'ar'],
+      'suave': ['su', 'a', 've'], 'viagem': ['vi', 'a', 'gem'], 'ciúme': ['ci', 'ú', 'me'],
+      'mãe': ['mãe'], 'mães': ['mães'], 'pão': ['pão'], 'pães': ['pães'],
+      'coração': ['co', 'ra', 'ção'], 'solidão': ['so', 'li', 'dão'], 'canção': ['can', 'ção'],
+      'noite': ['noi', 'te'], 'noites': ['noi', 'tes'],
       'caiu': ['ca', 'iu'], 'saiu': ['sa', 'iu'], 'ruim': ['ru', 'im'],
       'gratuito': ['gra', 'tui', 'to'], 'saudade': ['sau', 'da', 'de'],
       'muito': ['mui', 'to'], 'muita': ['mui', 'ta'], 'herói': ['he', 'rói'],
       'heróis': ['he', 'róis'], 'ideia': ['i', 'dei', 'a'], 'assembleia': ['as', 'sem', 'blei', 'a'],
       'quaisquer': ['quais', 'quer'], 'quieto': ['qui', 'e', 'to'], 'linguiça': ['lin', 'gui', 'ça']
     },
-    names: { '5': 'redondilha menor', '7': 'redondilha maior', '10': 'decassílabo', '12': 'dodecassílabo' },
+    names: {
+      '1': 'monossílabo', '2': 'dissílabo', '3': 'trissílabo', '4': 'tetrassílabo',
+      '5': 'redondilha menor', '6': 'hexassílabo', '7': 'redondilha maior',
+      '8': 'octossílabo', '9': 'eneassílabo', '10': 'decassílabo',
+      '11': 'hendecassílabo', '12': 'alexandrino'
+    },
     limit: 'A fala pode reunir ou separar vogais de outra maneira. Diérese, sinérese, dialeto e intenção podem levar a medidas fora deste intervalo. Não há reconhecimento fonético.'
   };
 }(typeof window !== 'undefined' ? window : this));
@@ -291,6 +307,15 @@
   function compose(word) {
     var bases = { 'a': { '\u0301': 'á', '\u0300': 'à', '\u0302': 'â', '\u0303': 'ã' }, 'e': { '\u0301': 'é', '\u0302': 'ê' }, 'i': { '\u0301': 'í' }, 'o': { '\u0301': 'ó', '\u0302': 'ô', '\u0303': 'õ' }, 'u': { '\u0301': 'ú', '\u0308': 'ü' }, 'c': { '\u0327': 'ç' } };
     return word.toLowerCase().replace(/([aeiouc])([\u0300-\u036f])/g, function (m, b, a) { return bases[b][a] || m; });
+  }
+  function vowelSkeleton(tail) {
+    var map = { 'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'ã', 'é': 'e', 'ê': 'e', 'í': 'i', 'ó': 'o', 'ô': 'o', 'õ': 'õ', 'ú': 'u', 'ü': 'u' };
+    var out = '', i, ch;
+    for (i = 0; i < tail.length; i += 1) {
+      ch = tail.charAt(i);
+      if (isV(ch)) { out += map[ch] || ch; }
+    }
+    return out;
   }
   function syllables(input) {
     var w = compose(input), nuclei = [], cuts = [], i, last, start, gap;
@@ -320,7 +345,8 @@
     for (i = 0; i < parts.length; i += 1) { if (/[áéíóúâêô]/.test(parts[i])) { tonic = i; break; } }
     if (tonic < 0) { tonic = parts.length > 1 && !/(?:ão|ãos|ãe|ães|õe|ões|ã|ãs)$/.test(w) && /(?:[aeo]s?|am|em|ens)$/.test(w) ? parts.length - 2 : parts.length - 1; }
     var suffix = parts.slice(tonic).join(''), vowel = suffix.search(/[aeiouáàâãéêíóôõúü]/);
-    return { word: w, syllables: parts, tonic: tonic, rhyme: suffix.slice(vowel) };
+    var rhyme = suffix.slice(vowel);
+    return { word: w, syllables: parts, tonic: tonic, rhyme: rhyme, assonance: vowelSkeleton(rhyme) };
   }
   function scan(line) {
     var ts = S.tokens(line), readings = [], raw = 0, fusions = 0, i, r, last;
@@ -332,7 +358,9 @@
     }
     last = readings[readings.length - 1];
     var max = raw - (last.syllables.length - last.tonic - 1);
-    return { min: Math.max(1, max - fusions), max: max, raw: raw, possibleFusions: fusions, words: readings, lastStart: ts[ts.length - 1].start, lastEnd: ts[ts.length - 1].end, rhyme: last.rhyme };
+    var min = Math.max(1, max - fusions);
+    var meterName = (min === max && D.names && own.call(D.names, String(max))) ? D.names[String(max)] : null;
+    return { min: min, max: max, raw: raw, possibleFusions: fusions, meterName: meterName, words: readings, lastStart: ts[ts.length - 1].start, lastEnd: ts[ts.length - 1].end, rhyme: last.rhyme, assonance: last.assonance };
   }
   function lines(text, visitor) {
     var clean = E.protectedText(text), regex = /[^\r\n]+/g, m, proceed;
@@ -351,7 +379,8 @@
           f = S.finding('metrica', 'PTBR-MET-002', text, start, start + line.length, 'Esta linha precisa de uma leitura em voz alta.', 'A linha contém forma fora do recorte ou ultrapassa 2 mil caracteres.', 'A medida não foi estimada.', 'Nomes, grafias inventadas, abreviações e palavras com hífen podem exigir uma leitura específica.', D.limit, D.source, { confidence: 'insuficiente' });
         } else {
           var measure = r.min === r.max ? String(r.max) : r.min + ' a ' + r.max;
-          f = S.finding('metrica', 'PTBR-MET-001', text, start, start + line.length, measure + ' sílabas poéticas nesta hipótese de leitura.',
+          var label = r.meterName ? (' (' + r.meterName + ')') : '';
+          f = S.finding('metrica', 'PTBR-MET-001', text, start, start + line.length, measure + ' sílabas poéticas' + label + ' nesta hipótese de leitura.',
             r.raw + ' sílabas gráficas estimadas; ' + r.possibleFusions + ' encontros vocálicos entre palavras. Divisão: ' + r.words.map(function (w) { return w.syllables.join('·'); }).join(' / '),
             'A contagem termina na tônica da última palavra. O intervalo contempla fusões vocálicas possíveis, sem impor nenhuma delas.',
             'Escansão muda com a voz, as pausas e a intenção. A medida não classifica a qualidade do verso.', D.limit, D.source,
@@ -361,18 +390,32 @@
       }); return out;
     } });
     register({ id: 'rima', analyze: function (text, cap) {
-      var out = [], endings = {};
+      var out = [], endings = {}, assonants = {};
       lines(text, function (line, start) {
         var r = scan(line); if (!r) { return; }
         var key = '$' + r.rhyme, prior = endings[key], a = start + r.lastStart, b = start + r.lastEnd;
+        var aKey = r.assonance && r.assonance.length >= 2 ? ('$' + r.assonance) : null;
         if (prior) {
           out.push(S.finding('rima', 'PTBR-RIM-001', text, a, b, 'Um final aproxima este verso de “' + prior.word + '”.',
-            'As terminações gráficas coincidem a partir da vogal tônica estimada: “' + r.rhyme + '”.',
+            'Rima consoante aproximada: as terminações coincidem a partir da vogal tônica estimada (“' + r.rhyme + '”).',
             'É uma candidata a rima para experimentar em voz alta.',
             'Vogais abertas e fechadas sem acento, s/z, nasalização, dialeto e desempenho oral podem produzir sons diferentes. Repetição da mesma palavra pode ser intencional.',
             'Comparação gráfica aproximada, sem transcrição fonética. Ausência de pares não significa ausência de rima. A primeira ocorrência correspondente é a referência.', D.source,
-            { confidence: 'baixa', related: { start: prior.start, end: prior.end, snippet: text.slice(prior.start, prior.end) } }));
-        } else { endings[key] = { word: text.slice(a, b), start: a, end: b }; }
+            { confidence: 'baixa', rhymeKind: 'consoante', related: { start: prior.start, end: prior.end, snippet: text.slice(prior.start, prior.end) } }));
+        } else {
+          endings[key] = { word: text.slice(a, b), start: a, end: b };
+          if (aKey && assonants[aKey] && assonants[aKey].word.toLowerCase() !== text.slice(a, b).toLowerCase()) {
+            var aPrior = assonants[aKey];
+            out.push(S.finding('rima', 'PTBR-RIM-002', text, a, b, 'Aproximação vocálica (toante) com “' + aPrior.word + '”.',
+              'As vogais coincidem a partir da tônica estimada (“' + r.assonance + '”), com consoantes diferentes.',
+              'Rimas toantes (assonantes) são recurso recorrente na poesia brasileira e na canção; experimente em voz alta.',
+              'Sem transcrição fonética, timbre aberto/fechado e pronúncia regional podem aproximar ou afastar os sons.',
+              'Comparação vocálica aproximada em terminações com duas ou mais vogais a partir da tônica.', D.source,
+              { confidence: 'baixa', rhymeKind: 'toante', related: { start: aPrior.start, end: aPrior.end, snippet: text.slice(aPrior.start, aPrior.end) } }));
+          } else if (aKey && !assonants[aKey]) {
+            assonants[aKey] = { word: text.slice(a, b), start: a, end: b };
+          }
+        }
         return out.length < cap;
       }); return out;
     } });
@@ -430,12 +473,25 @@
     verbSource: { title: 'Recorte local de concordância; corpus C2 e normativeVerbSupplement.ts de rfmss/escrevaral, main 816ca7e. Regra escolar de haver existencial, existir pessoal e fazer temporal; revisão bibliográfica individual pendente', url: null },
     styleSource: { title: 'Critério descritivo local v1, adaptado de analise-engine.js e voz-estilistica.js do legado. Limiares operacionais, sem validação como medida de qualidade literária', url: null },
     crasePronouns: ['ele', 'ela', 'eles', 'elas', 'você', 'vocês', 'mim', 'ti', 'si', 'nós', 'vós'],
-    craseInfinitives: ['partir', 'ler', 'escrever', 'fazer', 'falar', 'pensar', 'trabalhar', 'estudar', 'caminhar', 'dormir', 'comer', 'viver'],
+    craseInfinitives: [
+      'abrir', 'acabar', 'achar', 'acordar', 'acreditar', 'amar', 'andar', 'aprender', 'brilhar', 'cair',
+      'caminhar', 'cantar', 'chegar', 'chorar', 'começar', 'comer', 'compreender', 'conhecer', 'contar',
+      'continuar', 'correr', 'cortar', 'criar', 'cuidar', 'dar', 'deixar', 'descansar', 'descobrir', 'dizer',
+      'dormir', 'encontrar', 'ensinar', 'entender', 'entrar', 'entregar', 'enviar', 'escrever', 'escutar',
+      'esperar', 'esquecer', 'estar', 'estudar', 'explicar', 'falar', 'fazer', 'fechar', 'ficar', 'fugir',
+      'guardar', 'ir', 'lembrar', 'ler', 'levar', 'morar', 'mostrar', 'narrar', 'nascer', 'observar', 'olhar',
+      'ouvir', 'parar', 'partir', 'passar', 'pensar', 'perceber', 'perder', 'permanecer', 'precisar', 'procurar',
+      'publicar', 'receber', 'revelar', 'revisar', 'saber', 'sair', 'seguir', 'sentir', 'ser', 'sonhar', 'sorrir',
+      'ter', 'terminar', 'trabalhar', 'trazer', 'ver', 'viajar', 'vir', 'visitar', 'viver', 'voltar'
+    ],
+    /* Substantivos estritamente masculinos em expressões frequentes onde não ocorre crase. */
+    craseMasculines: ['pé', 'prazo', 'cavalo', 'lápis', 'óleo', 'bordo', 'gosto', 'tempo', 'ponto', 'rigor', 'sério', 'passo', 'lado', 'modo', 'fogo', 'vento', 'sol', 'mar', 'frio', 'calor'],
     /* Só estes substantivos entram na concordância; nunca deduzir plural pelo sufixo s. */
-    pluralNouns: ['problemas', 'livros', 'cartas', 'pessoas', 'autores', 'autoras', 'escritores', 'escritoras', 'leitores', 'leitoras', 'meninos', 'meninas', 'crianças', 'casas', 'poemas', 'textos', 'palavras', 'páginas', 'capítulos', 'exemplos', 'dúvidas', 'erros', 'motivos', 'razões', 'possibilidades', 'diferenças', 'mudanças', 'reuniões', 'vagas', 'flores', 'notícias', 'perdas', 'livrarias', 'opções'],
-    quantifiers: ['os', 'as', 'uns', 'umas', 'muitos', 'muitas', 'vários', 'várias', 'alguns', 'algumas', 'dois', 'duas', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove', 'dez'],
-    pluralAdjectives: ['novos', 'novas', 'antigos', 'antigas', 'abertos', 'abertas', 'fechados', 'fechadas', 'importantes', 'diferentes'],
-    adjuncts: ['hoje', 'ontem', 'amanhã', 'aqui', 'ali', 'lá', 'na mesa', 'sobre a mesa', 'no texto', 'no livro', 'no manuscrito', 'na sala', 'na cidade', 'na escola', 'na reunião', 'no jardim', 'na biblioteca'],
+    pluralNouns: ['problemas', 'livros', 'cartas', 'pessoas', 'autores', 'autoras', 'escritores', 'escritoras', 'leitores', 'leitoras', 'meninos', 'meninas', 'crianças', 'casas', 'poemas', 'textos', 'palavras', 'páginas', 'capítulos', 'exemplos', 'dúvidas', 'erros', 'motivos', 'razões', 'possibilidades', 'diferenças', 'mudanças', 'reuniões', 'vagas', 'flores', 'notícias', 'perdas', 'livrarias', 'opções', 'histórias', 'sonhos', 'sombras', 'estrelas', 'folhas', 'árvores', 'caminhos', 'segredos', 'memórias', 'vozes', 'janelas', 'portas', 'ruas', 'chaves', 'nuvens', 'tempestades', 'lágrimas', 'soluções', 'ideias', 'versos', 'cadernos', 'notas', 'rascunhos'],
+    quantifiers: ['os', 'as', 'uns', 'umas', 'muitos', 'muitas', 'vários', 'várias', 'alguns', 'algumas', 'poucos', 'poucas', 'outros', 'outras', 'dois', 'duas', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove', 'dez'],
+    pluralAdjectives: ['novos', 'novas', 'antigos', 'antigas', 'abertos', 'abertas', 'fechados', 'fechadas', 'importantes', 'diferentes', 'grandes', 'pequenos', 'pequenas', 'silenciosos', 'silenciosas', 'claros', 'claras', 'escuros', 'escuras'],
+    adjuncts: ['hoje', 'ontem', 'amanhã', 'aqui', 'ali', 'lá', 'na mesa', 'sobre a mesa', 'no texto', 'no livro', 'no manuscrito', 'na sala', 'na cidade', 'na escola', 'na reunião', 'no jardim', 'na biblioteca', 'no caderno', 'na janela', 'na rua', 'na estrada', 'no quarto', 'na oficina', 'no poema', 'no romance'],
+    agreementPrefixes: ['hoje', 'ontem', 'amanhã', 'agora', 'aqui', 'ali', 'lá', 'sempre', 'nunca', 'ainda', 'já', 'mas', 'porém', 'então', 'talvez'],
     haver: { houveram: 'houve', haviam: 'havia', 'haverão': 'haverá', haveriam: 'haveria' },
     existir: { existe: 'existem', existia: 'existiam', 'existirá': 'existirão', existiria: 'existiriam' },
     haverAux: { devem: 'deve', deveriam: 'deveria', podem: 'pode', poderiam: 'poderia' },
@@ -474,9 +530,39 @@
   'use strict';
   var E = root.Escr;
   E.studioData = {
-    version: '1.0.0',
-    source: { title: 'Protocolo descritivo SCRVRL 1.0: catálogo explícito de formas e contagem por linhas; revisão linguística independente pendente.', url: null },
-    adverbs: ['abertamente', 'absolutamente', 'antigamente', 'aparentemente', 'atentamente', 'automaticamente', 'brevemente', 'calmamente', 'certamente', 'claramente', 'completamente', 'cuidadosamente', 'delicadamente', 'dificilmente', 'diretamente', 'docemente', 'especialmente', 'exatamente', 'facilmente', 'felizmente', 'finalmente', 'fortemente', 'francamente', 'frequentemente', 'gentilmente', 'imediatamente', 'infelizmente', 'inteiramente', 'lentamente', 'levemente', 'literalmente', 'naturalmente', 'normalmente', 'novamente', 'pacientemente', 'perfeitamente', 'possivelmente', 'praticamente', 'provavelmente', 'rapidamente', 'raramente', 'realmente', 'recentemente', 'silenciosamente', 'simplesmente', 'somente', 'suavemente', 'totalmente', 'tristemente', 'unicamente'],
+    version: '2.0.0',
+    source: { title: 'Protocolo descritivo SCRVRL 2.0: catálogo explícito de formas em -mente e contagem por linhas de diálogo; revisão linguística independente pendente.', url: null },
+    adverbs: [
+      'abertamente', 'absolutamente', 'abruptamente', 'acaso', 'acidentalmente', 'actualmente', 'atualmente',
+      'admiravelmente', 'afetuosamente', 'alegremente', 'alternadamente', 'amargamente', 'amavelmente', 'amplamente',
+      'angustiosamente', 'ansiosamente', 'antigamente', 'aparentemente', 'apenas', 'apressadamente', 'ardentemente',
+      'atentamente', 'automaticamente', 'baixinho', 'basicamente', 'brevemente', 'bruscamente', 'caladamente',
+      'calmamente', 'carinhosamente', 'certamente', 'claramente', 'completamente', 'constantemente', 'continuamente',
+      'corajosamente', 'corretamente', 'cuidadosamente', 'curiosamente', 'decididamente', 'definitivamente',
+      'delicadamente', 'demasiadamente', 'densamente', 'devidamente', 'diariamente', 'dificilmente', 'diretamente',
+      'discretamente', 'distraidamente', 'docemente', 'dolorosamente', 'efetivamente', 'emocionalmente',
+      'enormemente', 'especialmente', 'espontaneamente', 'essencialmente', 'eternamente', 'eventualmente',
+      'evidentemente', 'exatamente', 'excessivamente', 'exclusivamente', 'expressamente', 'extremamente',
+      'facilmente', 'felizmente', 'fielmente', 'finalmente', 'firmemente', 'fisicamente', 'fortemente', 'francamente',
+      'frequentemente', 'friamente', 'furiosamente', 'generalizadamente', 'generosamente', 'gentilmente',
+      'gradualmente', 'gravemente', 'habitualmente', 'honestamente', 'imediatamente', 'impacientemente',
+      'incessantemente', 'inesperadamente', 'infelizmente', 'infinitamente', 'inicialmente', 'instantaneamente',
+      'inteiramente', 'intensamente', 'intencionalmente', 'internamente', 'intimamente', 'invariavelmente',
+      'involuntariamente', 'justamente', 'lentamente', 'levemente', 'livremente', 'literalmente', 'longamente',
+      'melancolicamente', 'mentalmente', 'meramente', 'misteriosamente', 'modestamente', 'momentaneamente',
+      'mutuamente', 'naturalmente', 'necessariamente', 'nervosamente', 'nitidamente', 'normalmente', 'notavelmente',
+      'novamente', 'obviamente', 'ocasionalmente', 'oficialmente', 'originalmente', 'pacientemente', 'parcialmente',
+      'particularmente', 'pausadamente', 'perfeitamente', 'permanentemente', 'pessoalmente', 'plenamente',
+      'poeticamente', 'possivelmente', 'praticamente', 'precisamente', 'preferencialmente', 'prematuramente',
+      'primeiramente', 'principalmente', 'profundamente', 'prontamente', 'provavelmente', 'puramente', 'rapidamente',
+      'raramente', 'realmente', 'recentemente', 'repentinamente', 'respectivamente', 'rigorosamente', 'secretamente',
+      'seguramente', 'semanalmente', 'sensivelmente', 'separadamente', 'serenamente', 'seriamente', 'severamente',
+      'silenciosamente', 'simplesmente', 'simultaneamente', 'sinceramente', 'sobriamente', 'solenemente',
+      'solitariamente', 'somente', 'suavemente', 'subitamente', 'sucessivamente', 'suficientemente', 'supostamente',
+      'surpreendentemente', 'sutilmente', 'tacitamente', 'tardiamente', 'temporariamente', 'ternamente', 'timidamente',
+      'tipicamente', 'totalmente', 'tranquilamente', 'tristemente', 'ultimamente', 'unicamente', 'urgentemente',
+      'vagamente', 'verdadeiramente', 'visivelmente', 'vivamente', 'voluntariamente'
+    ].filter(function (w) { return /mente$/.test(w); }),
     families: [
       { id: 'fonetica', lenses: ['rima', 'metrica'] },
       { id: 'estilo', lenses: ['expressoes', 'repeticao', 'adverbios'] },
@@ -488,8 +574,8 @@
     ]
   };
   E.lensCatalog.push(
-    { id: 'adverbios', group: 'Escolhas de escrita', minimum: 1, scope: 'Formas em -mente de uma lista explícita. Presença não implica excesso; desconhecidas não são classificadas.' },
-    { id: 'dialogo', group: 'Escolhas de escrita', minimum: 1, scope: 'Proporção de palavras em linhas iniciadas por travessão. É uma aproximação gráfica, não separação semântica entre fala e narração.' }
+    { id: 'adverbios', group: 'Escolhas de escrita', minimum: 1, scope: 'Formas em -mente de uma lista explícita (~180 advérbios reais) e concentração por parágrafo. Presença não implica excesso; desconhecidas não são classificadas.' },
+    { id: 'dialogo', group: 'Escolhas de escrita', minimum: 1, scope: 'Proporção de palavras em linhas iniciadas por travessão (—), meia-risca (–) ou hífen seguido de espaço (- ). É uma aproximação gráfica, não separação semântica entre fala e narração.' }
   );
 }(typeof window !== 'undefined' ? window : this));
 
@@ -794,27 +880,31 @@ SOFTWARE.
 (function (root) {
   'use strict';
   var E = root.Escr, S = E.instruments, R = E.reading, D = E.maturationData;
-  function has(a, v) { return a.indexOf(v) !== -1; }
+  function has(a, v) { return a && a.indexOf(v) !== -1; }
   function get(map, key) { return Object.prototype.hasOwnProperty.call(map, key) ? map[key] : null; }
   function contiguous(text, ts, a, b) {
     for (var i = a + 1; i < b; i += 1) { if (!/^[ \t\u00a0]+$/.test(text.slice(ts[i - 1].end, ts[i].start))) { return false; } }
     return true;
   }
   function crase(text, cap) {
-    var clean = E.protectedText(text), ts = R.tokens(clean), out = [], i, t, next, infinitive, start;
+    var clean = E.protectedText(text), ts = R.tokens(clean), out = [], i, t, next, infinitive, masculine, start, ruleId, reason;
     for (i = 0; i + 1 < ts.length && out.length < cap; i += 1) {
       t = ts[i]; next = ts[i + 1];
       if (!has(['à', 'às'], t.value) || !contiguous(text, ts, i, i + 2)) { continue; }
       infinitive = t.value === 'à' && has(D.craseInfinitives, next.value);
-      if (!infinitive && !has(D.crasePronouns, next.value)) { continue; }
+      masculine = t.value === 'à' && has(D.craseMasculines, next.value);
+      if (!infinitive && !masculine && !has(D.crasePronouns, next.value)) { continue; }
       if (S.contextSilence(text, t.start, next.end)) { continue; }
-      /* Nomes, títulos e rótulos no lugar de pronomes/verbos exigem outra leitura. */
+      /* Nomes, títulos e rótulos no lugar de pronomes/verbos/substantivos exigem outra leitura. */
       if (text.slice(next.start, next.end) !== text.slice(next.start, next.end).toLowerCase()) { continue; }
       start = t.start;
-      out.push(S.finding('crase', infinitive ? 'PTBR-CRA-001' : 'PTBR-CRA-002', text, start, next.end,
-        'Um acento grave para conferir.', 'Há acento grave antes de ' + (infinitive ? 'um infinitivo registrado' : 'um pronome pessoal registrado') + '.',
+      if (infinitive) { ruleId = 'PTBR-CRA-001'; reason = 'um infinitivo registrado'; }
+      else if (masculine) { ruleId = 'PTBR-CRA-003'; reason = 'um substantivo masculino registrado'; }
+      else { ruleId = 'PTBR-CRA-002'; reason = 'um pronome pessoal registrado'; }
+      out.push(S.finding('crase', ruleId, text, start, next.end,
+        'Um acento grave para conferir.', 'Há acento grave antes de ' + reason + '.',
         'Na leitura convencional desse trecho, a referência é “a ' + text.slice(next.start, next.end) + '”.',
-        'Pode ser nome, fala, citação sem marcação ou uso substantivado. A observação não determina sua intenção.',
+        'Pode ser nome, fala, citação sem marcação ou uso substantivado (ou elipse como “à moda de”). A observação não determina sua intenção.',
         'Só examina este encontro local. Não identifica crase obrigatória, facultativa, elipse de à moda de nem regência geral.', D.craseSource,
         { severity: 'aviso', confidence: 'moderada', reference: 'a ' + text.slice(next.start, next.end) }));
     }
@@ -829,29 +919,31 @@ SOFTWARE.
     return i === values.length || has(D.adjuncts, values.slice(i).join(' '));
   }
   function agreement(text, cap) {
-    var clean = E.protectedText(text), slices = R.sentences(text), out = [], i, s, raw, ts, v, replacement, id, kind, end, at;
+    var clean = E.protectedText(text), slices = R.sentences(text), out = [], i, s, raw, ts, v, replacement, id, kind, startIdx, endIdx, at, headIdx;
     for (i = 0; i < slices.length && out.length < cap; i += 1) {
       s = slices[i]; raw = text.slice(s.start, s.end);
       if (raw.length > 1000 || raw !== clean.slice(s.start, s.end) || /^\s*[—–-]/.test(raw)) { continue; }
       ts = R.tokens(raw); if (ts.length < 3 || !/^\s*$/.test(raw.slice(0, ts[0].start)) || !contiguous(raw, ts, 0, ts.length) || !/^[.!?…;\s]*$/.test(raw.slice(ts[ts.length - 1].end))) { continue; }
-      v = ts[0].value; replacement = ''; id = ''; kind = ''; end = 1;
-      if (get(D.haver, v) && nominalTail(ts, 1)) { replacement = get(D.haver, v); id = '001'; kind = 'haver no sentido de existir'; }
-      else if (get(D.existir, v) && nominalTail(ts, 1)) { replacement = get(D.existir, v); id = '002'; kind = 'existir com sujeito plural'; }
-      else if (get(D.haverAux, v) && ts[1].value === 'haver' && nominalTail(ts, 2)) { replacement = get(D.haverAux, v) + ' haver'; id = '003'; kind = 'auxiliar de haver existencial'; end = 2; }
-      else if (get(D.existirAux, v) && ts[1].value === 'existir' && nominalTail(ts, 2)) { replacement = get(D.existirAux, v) + ' existir'; id = '004'; kind = 'auxiliar de existir com sujeito plural'; end = 2; }
+      headIdx = (ts.length >= 4 && has(D.agreementPrefixes, ts[0].value)) ? 1 : 0;
+      v = ts[headIdx].value; replacement = ''; id = ''; kind = ''; startIdx = headIdx; endIdx = headIdx + 1;
+      if (get(D.haver, v) && nominalTail(ts, headIdx + 1)) { replacement = get(D.haver, v); id = '001'; kind = 'haver no sentido de existir'; }
+      else if (get(D.existir, v) && nominalTail(ts, headIdx + 1)) { replacement = get(D.existir, v); id = '002'; kind = 'existir com sujeito plural'; }
+      else if (ts.length > headIdx + 2 && get(D.haverAux, v) && ts[headIdx + 1].value === 'haver' && nominalTail(ts, headIdx + 2)) { replacement = get(D.haverAux, v) + ' haver'; id = '003'; kind = 'auxiliar de haver existencial'; endIdx = headIdx + 2; }
+      else if (ts.length > headIdx + 2 && get(D.existirAux, v) && ts[headIdx + 1].value === 'existir' && nominalTail(ts, headIdx + 2)) { replacement = get(D.existirAux, v) + ' existir'; id = '004'; kind = 'auxiliar de existir com sujeito plural'; endIdx = headIdx + 2; }
       else {
-        at = has(['já', 'agora'], v) ? 1 : 0; v = ts[at].value;
+        at = has(D.agreementPrefixes, ts[0].value) ? 1 : 0;
+        v = ts[at].value;
         if (get(D.fazer, v) && ts.length > at + 4 && (has(D.amounts, ts[at + 1].value) || /^[0-9]+$/.test(ts[at + 1].value)) && has(D.timeUnits, ts[at + 2].value) && ts[at + 3].value === 'que') {
-          replacement = get(D.fazer, v); id = '005'; kind = 'fazer indicando tempo decorrido'; end = at + 1;
+          replacement = get(D.fazer, v); id = '005'; kind = 'fazer indicando tempo decorrido'; startIdx = at; endIdx = at + 1;
         }
       }
       if (!id) { continue; }
-      out.push(S.finding('concordancia', 'PTBR-CON-' + id, text, s.start + ts[id === '005' ? end - 1 : 0].start, s.start + ts[end - 1].end,
+      out.push(S.finding('concordancia', 'PTBR-CON-' + id, text, s.start + ts[startIdx].start, s.start + ts[endIdx - 1].end,
         'Concordância para conferir: “' + replacement + '”.',
         'O trecho cabe no padrão local de ' + kind + '.',
         'Se esse é o sentido pretendido, a forma de referência é “' + replacement + '”.',
         'Fala brasileira, elipse, personificação e usos pessoais de haver podem sustentar outra leitura. Não é uma ordem de correção.',
-        'Recorte de início de frase, vocabulário nominal explícito e complementos delimitados. Não faz concordância geral nem condena ter existencial.', D.verbSource,
+        'Recorte de início de frase (com advérbio/conjunção inicial opcional), vocabulário nominal explícito e complementos delimitados. Não faz concordância geral nem condena ter existencial.', D.verbSource,
         { severity: 'aviso', confidence: 'moderada', reference: replacement }));
     }
     return out;
@@ -1919,7 +2011,7 @@ SOFTWARE.
   pattern('sonhar concordar', 'objeto-indireto-com');
   pattern('pertencer obedecer resistir assistir', 'objeto-indireto-a');
   pattern('dizer saber ver ouvir sentir pensar acreditar descobrir entender compreender perceber notar lembrar esquecer prometer revelar contar explicar imaginar', 'oracao-objetiva-direta');
-  pattern('cantar andar correr sair partir trabalhar chegar terminar dormir acordar sorrir chorar rir cair nascer morrer crescer viver esperar caminhar passear viajar voltar retornar descansar silenciar brilhar florescer escapar fugir entrar descer subir parar navegar passar ficar permanecer', 'sem-complemento');
+  pattern('cantar andar correr sair partir trabalhar chegar terminar dormir acordar sorrir chorar rir cair nascer morrer crescer viver esperar caminhar passear viajar voltar retornar descansar silenciar brilhar florescer escapar fugir entrar descer subir parar navegar passar ficar permanecer morar', 'sem-complemento');
 
   function copy(record) { var out = {}; Object.keys(record).forEach(function (k) { out[k] = record[k]; }); return out; }
   function framesFor(lemma) { return (frames['$' + lemma] || []).map(copy); }
@@ -2779,78 +2871,141 @@ SOFTWARE.
 
 ;
 /* Fonte: ptbr/relativas.js */
-/* Relativas restritivas: recorte explícito, ES5, sem acesso ao editor. */
+/* Relativas restritivas: que-sujeito, que-objeto direto e onde locativo. ES5, sem acesso ao editor. */
 (function (root) {
   'use strict';
-  var E=root.Escr,version='relativas-1';
-  var source={title:'Cunha/Cintra, 7ª ed., 2ª impressão, 2017, pp. 358, 614–618; Bechara, Lições, arquivo recebido, páginas PDF 236–239, 244–246 e 253. Recorte computacional local; não é algoritmo dos autores.',url:null};
-  var limit='Somente artigo + substantivo registrado como sujeito da principal, seguido de uma relativa sem vírgulas com que-sujeito. Predicado relativo intransitivo ou de ligação reconhecido; locuções delimitadas permitidas. Principal inteira também deve ser reconhecida. Não decide que-objeto, integrantes, explicativas, preposições relativas, inversão, coordenação, elipse ou encaixamentos. Ausência de leitura não indica erro.';
-  function span(text,a,b,role){return{start:a,end:b,snippet:text.slice(a,b),role:role};}
-  function one(findings,feature){var found=findings.filter(function(f){return f.feature===feature;});return found.length===1?found[0]:null;}
-  function probe(prefix,predicate){
+  var E = root.Escr, version = 'relativas-2';
+  var source = { title: 'Cunha/Cintra, 7ª ed., 2ª impressão, 2017, pp. 358, 614–618; Bechara, Lições, arquivo recebido, páginas PDF 236–239, 244–246 e 253. Recorte computacional local; não é algoritmo dos autores.', url: null };
+  var limit = 'Somente artigo + substantivo registrado como sujeito da principal, seguido de relativa restritiva sem vírgulas com que-sujeito, que-objeto direto (com sujeito interno explícito) ou onde locativo (antecedente de lugar). Principal inteira também deve ser reconhecida. Não decide explicativas, preposições relativas, cujo, inversão ou encaixamentos. Ausência de leitura não indica erro.';
+  var LOCATIVE_NOUNS = [
+    'casa', 'casas', 'cidade', 'cidades', 'rua', 'ruas', 'sala', 'salas', 'quarto', 'quartos',
+    'jardim', 'jardins', 'praça', 'praças', 'escola', 'escolas', 'biblioteca', 'bibliotecas',
+    'oficina', 'oficinas', 'ilha', 'ilhas', 'praia', 'praias', 'floresta', 'florestas',
+    'estrada', 'estradas', 'ponte', 'pontes', 'estação', 'estações', 'porto', 'portos',
+    'lugar', 'lugares', 'espaço', 'espaços', 'campo', 'campos', 'mundo', 'mundos', 'terra', 'cozinha'
+  ];
+  function span(text, a, b, role) { return { start: a, end: b, snippet: text.slice(a, b), role: role }; }
+  function one(findings, feature) { var found = findings.filter(function (f) { return f.feature === feature; }); return found.length === 1 ? found[0] : null; }
+  function probeSubject(prefix, predicate) {
     /* Cópia de trabalho para testar relações; nunca devolvida como trecho do autor. */
-    var text=prefix+' '+predicate,findings=E.syntaxRelations.analyze(text,100);
-    var subject=one(findings,'Sujeito'),verb=one(findings,'Núcleo verbal')||one(findings,'Verbo de ligação')||one(findings,'Locução verbal');
-    return findings.coverageInfo.constructions===1&&subject&&subject.start===0&&subject.end===prefix.length&&verb?{findings:findings,verb:verb,subject:subject}:null;
+    var text = prefix + ' ' + predicate, findings = E.syntaxRelations.analyze(text, 100);
+    var subject = one(findings, 'Sujeito'), verb = one(findings, 'Núcleo verbal') || one(findings, 'Verbo de ligação') || one(findings, 'Locução verbal');
+    return findings.coverageInfo.constructions === 1 && subject && subject.start === 0 && subject.end === prefix.length && verb ? { findings: findings, verb: verb, subject: subject } : null;
   }
-  function match(text,ts){
-    var i,q=-1,matches=[],n=ts.length;
-    if(n>24||n<5){return null;}
-    for(i=0;i<n;i++){if(ts[i].value==='que'){if(q>=0){return null;}q=i;}}
-    if(q!==2||['o','a','os','as','um','uma','uns','umas'].indexOf(ts[0].value)<0){return null;}
-    var prefix=text.slice(ts[0].start,ts[1].end);
-    for(i=q+2;i<n;i++){
-      var inner=probe(prefix,text.slice(ts[q+1].start,ts[i-1].end));
-      if(!inner){continue;}
-      /* Que + V + SN também pode admitir que-objeto e sujeito posposto.
-       * Não escolher que-sujeito por preferência de ordem neste incremento. */
-      if(inner.findings.some(function(f){return f.feature==='Objeto direto'||f.feature==='Objeto indireto';})){continue;}
-      var outer=probe(prefix,text.slice(ts[i].start,ts[n-1].end));
-      if(!outer){continue;}
-      matches.push({q:q,end:i,inner:inner,outer:outer,prefixLength:prefix.length});
+  function probeObject(innerText, prefix) {
+    var objLower = prefix.toLowerCase();
+    var text = innerText + ' ' + objLower, findings = E.syntaxRelations.analyze(text, 100);
+    if (findings.coverageInfo.constructions !== 1) { return null; }
+    var subject = one(findings, 'Sujeito');
+    var verb = one(findings, 'Núcleo verbal') || one(findings, 'Locução verbal');
+    var obj = one(findings, 'Objeto direto');
+    if (!subject || subject.start !== 0 || !verb || !obj) { return null; }
+    if (obj.start !== innerText.length + 1 || obj.end !== text.length) { return null; }
+    return { findings: findings, verb: verb, subject: subject };
+  }
+  function probeLocative(innerText) {
+    var findings = E.syntaxRelations.analyze(innerText, 100);
+    if (findings.coverageInfo.constructions !== 1) { return null; }
+    var subject = one(findings, 'Sujeito');
+    var verb = one(findings, 'Núcleo verbal') || one(findings, 'Verbo de ligação') || one(findings, 'Locução verbal');
+    if (!subject || subject.start !== 0 || !verb) { return null; }
+    if (findings.some(function (f) { return f.feature === 'Adjunto adverbial'; })) { return null; }
+    return { findings: findings, verb: verb, subject: subject };
+  }
+  function match(text, ts) {
+    var i, q = -1, relWord = '', matches = [], n = ts.length;
+    if (n > 24 || n < 5) { return null; }
+    for (i = 0; i < n; i++) {
+      if (ts[i].value === 'que' || ts[i].value === 'onde') {
+        if (q >= 0) { return null; }
+        q = i; relWord = ts[i].value;
+      }
     }
-    return matches.length===1?matches[0]:null;
+    if (q !== 2 || ['o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas'].indexOf(ts[0].value) < 0) { return null; }
+    var prefix = text.slice(ts[0].start, ts[1].end);
+    for (i = q + 2; i < n; i++) {
+      var outer = probeSubject(prefix, text.slice(ts[i].start, ts[n - 1].end));
+      if (!outer) { continue; }
+      var innerText = text.slice(ts[q + 1].start, ts[i - 1].end);
+      if (relWord === 'que') {
+        /* 1. que-sujeito (sem objeto expresso na relativa para evitar ambiguidade de ordem) */
+        var innerSubj = probeSubject(prefix, innerText);
+        if (innerSubj && !innerSubj.findings.some(function (f) { return f.feature === 'Objeto direto' || f.feature === 'Objeto indireto'; })) {
+          matches.push({ q: q, end: i, kind: 'sujeito', relWord: 'que', inner: innerSubj, outer: outer, prefixLength: prefix.length, innerShift: ts[q + 1].start - prefix.length - 1 });
+        }
+        /* 2. que-objeto direto (sujeito interno explícito + verbo transitivo direto retomando o antecedente) */
+        if (i - (q + 1) >= 2) {
+          var innerObj = probeObject(innerText, prefix);
+          if (innerObj) {
+            matches.push({ q: q, end: i, kind: 'objeto direto', relWord: 'que', inner: innerObj, outer: outer, prefixLength: prefix.length, innerShift: ts[q + 1].start });
+          }
+        }
+      } else if (relWord === 'onde') {
+        /* 3. onde locativo (antecedente de lugar explícito + oração interna completa) */
+        if (LOCATIVE_NOUNS.indexOf(ts[1].value) >= 0 && i - (q + 1) >= 2) {
+          var innerLoc = probeLocative(innerText);
+          if (innerLoc) {
+            matches.push({ q: q, end: i, kind: 'adjunto adverbial de lugar', relWord: 'onde', inner: innerLoc, outer: outer, prefixLength: prefix.length, innerShift: ts[q + 1].start });
+          }
+        }
+      }
+    }
+    return matches.length === 1 ? matches[0] : null;
   }
-  function analyze(text,cap){
-    if(typeof text!=='string'){throw new Error('A análise precisa receber texto.');}
-    cap=typeof cap==='number'&&cap>0?Math.min(100,Math.floor(cap)):100;
-    var cut=text.slice(0,8000),tokens=E.reading.tokens(cut),partial=cut.length<text.length;
-    if(tokens.length>1600){cut=cut.slice(0,tokens[1600].start);partial=true;}
-    var clean=E.protectedText(cut),out=[],unsupported=0,truncated=0,capped=false;
-    E.reading.sentences(cut).forEach(function(segment){
-      var raw=cut.slice(segment.start,segment.end),stop=segment.end,tail=cut.slice(segment.end);
-      var complete=/[\r\n]/.test(tail)||/[.!?…;]$/.test(raw)&&(segment.end<cut.length||/^[\s.!?…;]/.test(text.charAt(cut.length)));
-      if(partial&&/^\s*$/.test(tail)&&!complete){truncated++;return;}
-      if(raw.length>1000||clean.slice(segment.start,segment.end)!==raw){unsupported++;return;}
-      var terminal=raw.match(/[.!?…;]+\s*$/);if(terminal){stop=segment.start+terminal.index;}
-      var ts=E.reading.tokens(cut.slice(segment.start,stop));if(!ts.length){return;}
-      ts.forEach(function(t){t.start+=segment.start;t.end+=segment.start;});
-      var usable=/^\s*$/.test(cut.slice(segment.start,ts[0].start))&&/^\s*$/.test(cut.slice(ts[ts.length-1].end,stop));
-      for(var j=1;j<ts.length;j++){if(!/^[ \t\u00a0]+$/.test(cut.slice(ts[j-1].end,ts[j].start))){usable=false;}}
-      var r=usable&&match(cut,ts);if(!r){unsupported++;return;}
-      if(out.length>=cap){capped=true;return;}
-      var que=ts[r.q],ante=span(text,ts[0].start,ts[1].end,'Antecedente'),head=span(text,ts[1].start,ts[1].end,'Núcleo do antecedente');
-      var innerShift=ts[r.q+1].start-r.prefixLength-1,outerShift=ts[r.end].start-r.prefixLength-1;
-      var iv=r.inner.verb,ov=r.outer.verb,verb=span(text,iv.start+innerShift,iv.end+innerShift,'Verbo da relativa');
-      var mainVerb=span(text,ov.start+outerShift,ov.end+outerShift,'Verbo da principal');
-      var pronoun=span(text,que.start,que.end,'Relativo: sujeito'),end=ts[r.end-1].end;
-      out.push(E.instruments.finding('relativas','PTBR-ORA-001',text,que.start,end,
-        'Oração adjetiva restritiva: uma leitura possível.',
-        '“'+text.slice(que.start,end)+'” delimita o antecedente “'+ante.snippet+'”. Nesta hipótese, “que” retoma “'+head.snippet+'” e é sujeito de “'+verb.snippet+'”.',
-        'O antecedente integra o sujeito da principal, cujo verbo é “'+mainVerb.snippet+'”. A função do relativo foi verificada separadamente dentro da subordinada. Os dois predicados e uma única fronteira foram compatíveis com o recorte.',
+  function analyze(text, cap) {
+    if (typeof text !== 'string') { throw new Error('A análise precisa receber texto.'); }
+    cap = typeof cap === 'number' && cap > 0 ? Math.min(100, Math.floor(cap)) : 100;
+    var cut = text.slice(0, 8000), tokens = E.reading.tokens(cut), partial = cut.length < text.length;
+    if (tokens.length > 1600) { cut = cut.slice(0, tokens[1600].start); partial = true; }
+    var clean = E.protectedText(cut), out = [], unsupported = 0, truncated = 0, capped = false;
+    E.reading.sentences(cut).forEach(function (segment) {
+      var raw = cut.slice(segment.start, segment.end), stop = segment.end, tail = cut.slice(segment.end);
+      var complete = /[\r\n]/.test(tail) || /[.!?…;]$/.test(raw) && (segment.end < cut.length || /^[\s.!?…;]/.test(text.charAt(cut.length)));
+      if (partial && /^\s*$/.test(tail) && !complete) { truncated++; return; }
+      if (raw.length > 1000 || clean.slice(segment.start, segment.end) !== raw) { unsupported++; return; }
+      var terminal = raw.match(/[.!?…;]+\s*$/); if (terminal) { stop = segment.start + terminal.index; }
+      var ts = E.reading.tokens(cut.slice(segment.start, stop)); if (!ts.length) { return; }
+      ts.forEach(function (t) { t.start += segment.start; t.end += segment.start; });
+      var usable = /^\s*$/.test(cut.slice(segment.start, ts[0].start)) && /^\s*$/.test(cut.slice(ts[ts.length - 1].end, stop));
+      for (var j = 1; j < ts.length; j++) { if (!/^[ \t\u00a0]+$/.test(cut.slice(ts[j - 1].end, ts[j].start))) { usable = false; } }
+      var r = usable && match(cut, ts); if (!r) { unsupported++; return; }
+      if (out.length >= cap) { capped = true; return; }
+      var rel = ts[r.q], ante = span(text, ts[0].start, ts[1].end, 'Antecedente'), head = span(text, ts[1].start, ts[1].end, 'Núcleo do antecedente');
+      var outerShift = ts[r.end].start - r.prefixLength - 1;
+      var iv = r.inner.verb, ov = r.outer.verb;
+      var verb = span(text, iv.start + r.innerShift, iv.end + r.innerShift, 'Verbo da relativa');
+      var mainVerb = span(text, ov.start + outerShift, ov.end + outerShift, 'Verbo da principal');
+      var roleTag = r.kind === 'objeto direto' ? 'Relativo: objeto direto' : (r.kind === 'adjunto adverbial de lugar' ? 'Relativo: lugar' : 'Relativo: sujeito');
+      var ruleId = r.kind === 'objeto direto' ? 'PTBR-ORA-002' : (r.kind === 'adjunto adverbial de lugar' ? 'PTBR-ORA-003' : 'PTBR-ORA-001');
+      var pronoun = span(text, rel.start, rel.end, roleTag), end = ts[r.end - 1].end;
+      var obs = r.kind === 'objeto direto'
+        ? '“' + text.slice(rel.start, end) + '” delimita o antecedente “' + ante.snippet + '”. Nesta hipótese, “que” retoma “' + head.snippet + '” e atua como objeto direto de “' + verb.snippet + '”.'
+        : r.kind === 'adjunto adverbial de lugar'
+          ? '“' + text.slice(rel.start, end) + '” delimita o antecedente de lugar “' + ante.snippet + '”. Nesta hipótese, “onde” retoma “' + head.snippet + '” como adjunto adverbial de lugar junto a “' + verb.snippet + '”.'
+          : '“' + text.slice(rel.start, end) + '” delimita o antecedente “' + ante.snippet + '”. Nesta hipótese, “que” retoma “' + head.snippet + '” e é sujeito de “' + verb.snippet + '”.';
+      out.push(E.instruments.finding('relativas', ruleId, text, rel.start, end,
+        'Oração adjetiva restritiva: uma leitura possível.', obs,
+        'O antecedente integra o sujeito da principal, cujo verbo é “' + mainVerb.snippet + '”. A função do relativo foi verificada separadamente dentro da subordinada. Os dois predicados e uma única fronteira foram compatíveis com o recorte.',
         'A leitura restritiva considera o vínculo com o antecedente e a construção sem vírgulas; não corrige a pontuação nem presume a intenção do autor. Outros contextos ou sentidos podem exigir outra análise.',
-        limit,source,{feature:'Oração adjetiva restritiva',analysisStatus:'contextual',relativeFunction:'sujeito',relativeType:'restritiva',nodeId:'rel-'+que.start,parentId:'periodo-'+ts[0].start,
-          head:span(text,que.start,que.end,'Relativo: sujeito'),clause:span(text,ts[0].start,ts[ts.length-1].end,'Período examinado'),components:[pronoun,span(text,verb.start,verb.end,verb.role)],context:[ante,head,verb,mainVerb]}));
+        limit, source, {
+          feature: 'Oração adjetiva restritiva', analysisStatus: 'contextual', relativeFunction: r.kind, relativeType: 'restritiva',
+          nodeId: 'rel-' + rel.start, parentId: 'periodo-' + ts[0].start,
+          head: span(text, rel.start, rel.end, roleTag), clause: span(text, ts[0].start, ts[ts.length - 1].end, 'Período examinado'),
+          components: [pronoun, span(text, verb.start, verb.end, verb.role)], context: [ante, head, verb, mainVerb]
+        }));
     });
-    out.coverageInfo={version:version,scope:{start:0,end:cut.length,total:text.length,partial:partial},work:{characters:cut.length,tokens:Math.min(tokens.length,1600),maxCharacters:8000,maxTokens:1600},
-      relatives:out.length,unsupported:unsupported,truncated:truncated,outputLimited:capped,
-      summary:'Relativas: '+out.length+' ocorrência(s) no recorte inicial; '+unsupported+' segmento(s) sem decisão; '+truncated+' segmento(s) cortado(s). Somente relativas restritivas com que-sujeito e antecedente nominal sujeito da principal. Recorte 0–'+cut.length+' de '+text.length+' unidades UTF-16.'+(partial?' Exame parcial: selecione outro trecho para continuar.':'')+(capped?' Limite de apresentação atingido.':'')};
+    out.coverageInfo = {
+      version: version, scope: { start: 0, end: cut.length, total: text.length, partial: partial },
+      work: { characters: cut.length, tokens: Math.min(tokens.length, 1600), maxCharacters: 8000, maxTokens: 1600 },
+      relatives: out.length, unsupported: unsupported, truncated: truncated, outputLimited: capped,
+      summary: 'Relativas: ' + out.length + ' ocorrência(s) no recorte (que-sujeito, que-objeto direto e onde locativo); ' + unsupported + ' segmento(s) sem decisão; ' + truncated + ' segmento(s) cortado(s). Recorte 0–' + cut.length + ' de ' + text.length + ' unidades UTF-16.' + (partial ? ' Exame parcial: selecione outro trecho para continuar.' : '') + (capped ? ' Limite de apresentação atingido.' : '')
+    };
     return out;
   }
-  E.relativeClauses={version:version,analyze:analyze};
-  (E.extensions=E.extensions||[]).push(function(register){register({id:'relativas',analyze:analyze});});
-  E.lensCatalog.push({id:'relativas',group:'Gramática',minimum:5,scope:limit});
-}(typeof window!=='undefined'?window:this));
+  E.relativeClauses = { version: version, analyze: analyze };
+  (E.extensions = E.extensions || []).push(function (register) { register({ id: 'relativas', analyze: analyze }); });
+  E.lensCatalog.push({ id: 'relativas', group: 'Gramática', minimum: 5, scope: limit });
+}(typeof window !== 'undefined' ? window : this));
 
 ;
 /* Fonte: ptbr/regras-locais.js */
@@ -3004,23 +3159,69 @@ SOFTWARE.
   var E = root.Escr, S = E.instruments, R = E.reading, D = E.maturationData, stop = {};
   D.stopwords.forEach(function (w) { stop['$' + w] = true; });
   function repetition(text, cap) { return E.analyzeLocalRepetition(text, cap); }
-  function rhythm(text) {
-    var clean = E.protectedText(text), slices = R.sentences(text), count = 0, sum = 0, sumSquares = 0, min = Infinity, max = 0, first = null, last = null;
+  function rhythm(text, cap) {
+    var limitCap = typeof cap === 'number' && cap > 0 ? cap : 100;
+    var clean = E.protectedText(text), slices = R.sentences(text), items = [], count = 0, sum = 0, sumSquares = 0, min = Infinity, max = 0, first = null, last = null;
     slices.forEach(function (s) {
       var raw = text.slice(s.start, s.end), n;
       if (!s.closed || clean.slice(s.start, s.end) !== raw) { return; }
       n = R.tokens(raw).length; if (!n) { return; }
       if (!first) { first = s; } last = s; count += 1; sum += n; sumSquares += n * n; min = Math.min(min, n); max = Math.max(max, n);
+      items.push({ start: s.start, end: s.end, words: n });
     });
     if (count < 3) { return []; }
     var mean = sum / count, deviation = Math.sqrt(Math.max(0, sumSquares / count - mean * mean));
-    return [S.finding('ritmo', 'PTBR-RIT-001', text, first.start, first.end,
+    var out = [S.finding('ritmo', 'PTBR-RIT-001', text, first.start, first.end,
       'Ritmo de ' + count + ' frases: de ' + min + ' a ' + max + ' palavras.',
       'Média de ' + mean.toFixed(1) + ' palavras; desvio-padrão de ' + deviation.toFixed(1) + '. Foram contadas ' + sum + ' palavras nas frases disponíveis.',
       'A diferença de extensão mostra uma parte do desenho das pausas. Leia em voz alta para decidir como ela funciona na passagem.',
       'Frases curtas, longas ou do mesmo tamanho podem ser escolhas deliberadas. A contagem não mede clareza, emoção, voz nem qualidade.',
       'Segmentação por pontuação com abreviações conhecidas e números decimais protegidos. Trechos sem fechamento e citações ficam fora. Abreviações não registradas podem mudar a contagem.', D.styleSource,
       { confidence: 'moderada', metrics: { sentences: count, words: sum, shortest: min, longest: max, mean: mean, deviation: deviation }, contextEnd: last.end })];
+
+    /* Destaques descritivos de fôlego: frases longas (>= 35 palavras) */
+    var i;
+    for (i = 0; i < items.length && out.length < limitCap; i += 1) {
+      if (items[i].words >= 35) {
+        out.push(S.finding('ritmo', 'PTBR-RIT-002', text, items[i].start, items[i].end,
+          'Frase extensa com ' + items[i].words + ' palavras.',
+          'Esta frase reúne ' + items[i].words + ' palavras (a média do trecho é ' + mean.toFixed(1) + ').',
+          'Leia em voz alta para observar a respiração, as pausas internas e o peso dessa curva sintática.',
+          'Frases longas são recurso literário legítimo e expressivo; o destaque apenas localiza a extensão sem exigir corte.',
+          'Limiar operacional de 35 palavras em frase fechada e fora de região protegida.', D.styleSource,
+          { confidence: 'alta', metrics: { words: items[i].words, mean: mean } }));
+      }
+    }
+
+    /* Sequências de 3+ frases contíguas com extensão muito parecida (variação <= 2 palavras, >= 4 palavras cada) */
+    i = 0;
+    while (i + 2 < items.length && out.length < limitCap) {
+      if (items[i].words >= 4) {
+        var runMin = items[i].words, runMax = items[i].words, j = i + 1;
+        while (j < items.length && items[j].words >= 4 &&
+            Math.max(runMax, items[j].words) - Math.min(runMin, items[j].words) <= 2) {
+          runMin = Math.min(runMin, items[j].words);
+          runMax = Math.max(runMax, items[j].words);
+          j += 1;
+        }
+        if (j - i >= 3) {
+          var lens = [], k;
+          for (k = i; k < j; k += 1) { lens.push(items[k].words); }
+          out.push(S.finding('ritmo', 'PTBR-RIT-003', text, items[i].start, items[j - 1].end,
+            (j - i) + ' frases seguidas com extensão muito parecida (' + runMin + '–' + runMax + ' palavras).',
+            'Sequência de medidas: ' + lens.join(', ') + ' palavras.',
+            'Alternar frases curtas e longas pode variar o pulso da leitura; manter a simetria também pode ser escolha rítmica.',
+            'Paralelismo e cadência regular são recursos estilísticos frequentes; o destaque é puramente descritivo.',
+            'Identifica sequências contíguas de 3 ou mais frases fechadas com diferença máxima de 2 palavras entre si.', D.styleSource,
+            { confidence: 'alta', metrics: { runLength: j - i, minWords: runMin, maxWords: runMax, lengths: lens } }));
+          i = j;
+          continue;
+        }
+      }
+      i += 1;
+    }
+
+    return out;
   }
   (E.extensions = E.extensions || []).push(function (register) { register({ id: 'repeticao', analyze: repetition }); register({ id: 'ritmo', analyze: rhythm }); });
 }(typeof window !== 'undefined' ? window : this));
@@ -3031,38 +3232,75 @@ SOFTWARE.
   'use strict';
   var E = root.Escr, D = E.studioData, R = E.reading, S = E.instruments, words = {};
   D.adverbs.forEach(function (word) { words['$' + word] = true; });
+
+  function paragraphBounds(text) {
+    var bounds = [], start = 0, re = /\r?\n[ \t]*\r?\n/g, m;
+    while ((m = re.exec(text))) {
+      bounds.push({ start: start, end: m.index });
+      start = m.index + m[0].length;
+    }
+    bounds.push({ start: start, end: text.length });
+    return bounds;
+  }
+  function paragraphOf(bounds, pos) {
+    for (var i = 0; i < bounds.length; i += 1) {
+      if (pos >= bounds[i].start && pos <= bounds[i].end) { return i; }
+    }
+    return 0;
+  }
+
   function adverbs(text, cap) {
-    var ts = R.tokens(E.protectedText(text)), out = [], i, t;
-    for (i = 0; i < ts.length && out.length < cap; i += 1) {
+    var ts = R.tokens(E.protectedText(text)), hits = [], counts = {}, bounds = paragraphBounds(text), out = [], i, t, pIdx;
+    for (i = 0; i < ts.length && hits.length < cap; i += 1) {
       t = ts[i]; if (!words['$' + t.value]) { continue; }
+      pIdx = paragraphOf(bounds, t.start);
+      counts[pIdx] = (counts[pIdx] || 0) + 1;
+      hits.push({ token: t, paragraph: pIdx });
+    }
+    for (i = 0; i < hits.length; i += 1) {
+      t = hits[i].token;
+      var pCount = counts[hits[i].paragraph] || 1;
+      var obs = 'A grafia está no catálogo local de ' + D.adverbs.length + ' formas em -mente.' +
+        (pCount >= 2 ? ' Há ' + pCount + ' formas em -mente neste mesmo parágrafo — vale ouvir a cadência em voz alta.' : '');
       out.push(S.finding('adverbios', 'PTBR-ADV-001', text, t.start, t.end,
         'Uma forma em -mente para observar: “' + text.slice(t.start, t.end) + '”.',
-        'A grafia está no catálogo local de ' + D.adverbs.length + ' formas em -mente.',
+        obs,
         'Observe o que a palavra acrescenta ao gesto, ao tempo ou à voz nesta passagem.',
         'Advérbios podem ser indispensáveis. A presença não indica erro, excesso ou necessidade de corte.',
-        'Não classifica pela terminação sozinha; flexões, nomes próprios e usos inventados podem ficar fora. Código e citações protegidos.', D.source));
+        'Não classifica pela terminação sozinha (palavras como semente ou demente ficam de fora); flexões, nomes próprios e usos inventados podem ficar fora. Código e citações protegidos.', D.source,
+        { metrics: { paragraphCount: pCount } }));
     }
     return out;
   }
+
   function dialogue(text) {
     var clean = E.protectedText(text), line = /[^\r\n]+/g, m, ts, total = 0, marked = 0, lines = 0, markedLines = 0, first = null, excluded = 0;
+    var byMarker = { emDash: 0, enDash: 0, hyphen: 0 };
     while ((m = line.exec(text))) {
       /* Excluir a linha inteira se contiver região protegida: não somar fragmentos como fala. */
       if (clean.slice(m.index, m.index + m[0].length) !== m[0]) { excluded += 1; continue; }
       ts = R.tokens(m[0]); if (!ts.length) { continue; }
       if (!first) { first = { start: m.index + ts[0].start, end: m.index + ts[0].end }; }
       total += ts.length; lines += 1;
-      if (/^[ \t\u00a0]*—/.test(m[0])) { marked += ts.length; markedLines += 1; }
+      if (/^[ \t\u00a0]*—/.test(m[0])) { marked += ts.length; markedLines += 1; byMarker.emDash += 1; }
+      else if (/^[ \t\u00a0]*–/.test(m[0])) { marked += ts.length; markedLines += 1; byMarker.enDash += 1; }
+      else if (/^[ \t\u00a0]*-[ \t\u00a0]+/.test(m[0])) { marked += ts.length; markedLines += 1; byMarker.hyphen += 1; }
     }
     if (!total) { return []; }
+    var markerNotes = [];
+    if (byMarker.emDash) { markerNotes.push(byMarker.emDash + ' com travessão (—)'); }
+    if (byMarker.enDash) { markerNotes.push(byMarker.enDash + ' com meia-risca (–)'); }
+    if (byMarker.hyphen) { markerNotes.push(byMarker.hyphen + ' com hífen (- )'); }
+    var markerSummary = markerNotes.length ? ' Marcas encontradas: ' + markerNotes.join(', ') + '.' : '';
     return [S.finding('dialogo', 'PTBR-DIA-001', text, first.start, first.end,
-      (100 * marked / total).toFixed(1) + '% das palavras disponíveis estão em linhas iniciadas por travessão.',
-      marked + ' de ' + total + ' palavras; ' + markedLines + ' de ' + lines + ' linhas. ' + excluded + ' linhas protegidas excluídas.',
+      (100 * marked / total).toFixed(1) + '% das palavras disponíveis estão em linhas com marca de diálogo.',
+      marked + ' de ' + total + ' palavras; ' + markedLines + ' de ' + lines + ' linhas.' + markerSummary + ' ' + excluded + ' linhas protegidas excluídas.',
       'Use a proporção para comparar o desenho gráfico das falas entre passagens.',
-      'A linha pode conter fala e intervenção do narrador. Travessões também têm outros usos; não há proporção ideal.',
-      'Reconhece apenas — no início da linha. Falas com aspas, continuação sem travessão e outras convenções não são classificadas. O restante não é automaticamente narração.', D.source,
-      { metrics: { totalWords: total, markedLineWords: marked, unmarkedLineWords: total - marked, markedPercent: 100 * marked / total, lines: lines, markedLines: markedLines, excludedLines: excluded }, method: 'linhas-travessao-v1' })];
+      'A linha pode conter fala e intervenção do narrador. Travessões e hífens iniciais também têm outros usos (como listas); não há proporção ideal.',
+      'Reconhece —, – e hífen seguido de espaço (- ) no início da linha. Palavras hifenizadas, falas com aspas e continuações sem marca não são classificadas. O restante não é automaticamente narração.', D.source,
+      { metrics: { totalWords: total, markedLineWords: marked, unmarkedLineWords: total - marked, markedPercent: 100 * marked / total, lines: lines, markedLines: markedLines, excludedLines: excluded, markers: byMarker }, method: 'linhas-travessao-v2' })];
   }
+
   (E.extensions = E.extensions || []).push(function (register) {
     register({ id: 'adverbios', analyze: adverbs }); register({ id: 'dialogo', analyze: dialogue });
   });
