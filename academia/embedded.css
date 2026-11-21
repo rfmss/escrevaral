@@ -40,12 +40,17 @@ button:focus-visible,a:focus-visible { background-color:#ff6b1655 !important; }
 /* ACA-08: o mapa das 23 partes usa a mesma linguagem do restante da Academia.
    O modelo do livro continua sendo o exemplo interativo, com imagens intactas. */
 :root {
-  --paper:#fafbfc; --ink:#202733; --accent:#2463a8;
+  --paper:#cfc3ae; --ink:#1f130b; --accent:#8b5a1e;
   --ink-soft:color-mix(in srgb,var(--ink) 72%,var(--paper));
   --line:color-mix(in srgb,var(--ink) 18%,var(--paper));
   --ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
   --display:var(--ui);
 }
+html,body,.index { scrollbar-width:thin; scrollbar-color:#9e8664 #cfc3ae; }
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:#cfc3ae; }
+::-webkit-scrollbar-thumb { background:#9e8664; border-radius:6px; border:2px solid #cfc3ae; }
+::-webkit-scrollbar-thumb:hover { background:#7f6645; }
 body { background:var(--paper); background-image:none; }
 body::before,body::after,.stage::before,.stage::after,.stage-burst,.mini-legend { display:none; }
 .hero { width:100%; max-width:1400px; padding:22px 24px !important; gap:24px; }
@@ -73,7 +78,7 @@ body::before,body::after,.stage::before,.stage::after,.stage-burst,.mini-legend 
 .caption h2 { color:var(--ink); font:600 20px/1.3 var(--ui); text-transform:none; letter-spacing:-.02em; }
 .caption p { color:var(--ink-soft); font-size:13px; line-height:1.6; font-weight:400; }
 .caption-head,.caption .eyebrow,.caption-count { color:var(--ink-soft); font:500 10px/1.5 var(--ui); }
-@media(prefers-color-scheme:dark) { :root { --paper:#202226; --ink:#ebedf0; --accent:#86baff; } }
+@media(prefers-color-scheme:dark) { :root { --paper:#20150f; --ink:#efe4cf; --accent:#dfb267; } }
 @media(max-width:880px) { .hero,.layout { padding-inline:16px !important; } .index { display:grid; grid-template-columns:1fr 1fr; gap:8px; } .grp { margin:0; } .index-panel { max-height:340px; } }
 @media(max-width:440px) { .index { grid-template-columns:1fr; } }
 @media(forced-colors:active) { .panel,.grp,.stage-panel { border-color:CanvasText; } .index button:focus-visible { text-decoration:underline; } }

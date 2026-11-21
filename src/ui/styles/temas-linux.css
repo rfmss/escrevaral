@@ -82,6 +82,16 @@
     box-shadow: none !important;
   }
 
+  /* Máscara de foco suave e sem degrau lateral de 18px (evita faixa clara / falsa barra no Superfoco) */
+  body[data-view="workspace"] #writing-space .focus-mask {
+    background-image: none !important;
+    opacity: 0.5;
+    right: 4px;
+  }
+  body[data-view="workspace"][data-immersion="true"] #writing-space .focus-mask {
+    right: 0 !important;
+  }
+
   /* Tinta de leitura AAA no manuscrito e títulos */
   body[data-view="workspace"] #manuscrito,
   body[data-view="workspace"] #esc-rich-editor,
@@ -255,9 +265,11 @@
   /* Modo Leitor respira fora do verde do editor (paleta própria estilo jornal em modo-leitor.css) */
 
   /* Barra de rolagem ultradiscreta (2px, quase imperceptível) + totalmente oculta no Superfoco */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: auto;
+  *,
+  #manuscrito,
+  #esc-rich-editor {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(33, 41, 33, 0.22) transparent;
   }
   *::-webkit-scrollbar {
     width: 2px !important;

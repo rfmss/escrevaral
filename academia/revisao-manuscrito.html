@@ -1,6 +1,6 @@
 <!doctype html><html lang="pt-BR"><head>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-jWWMeQp1YNTUl2G+GO0bNwZKD+PBXLuifk8NSA19tWE=' 'sha256-PS5J0/yfmFES+4Aw3y1DPICrLYHFy5N+ijCCIEwZ+Hw=' 'sha256-3fewmK/gLk+wweYDqccN1bp/d5FlJBRyQGjVd+7GcI4='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Revisar o manuscrito</title><style>:root {
-  --paper:#fafbfc; --ink:#202733; --accent:#2463a8;
+  --paper:#cfc3ae; --ink:#1f130b; --accent:#8b5a1e;
   --card:color-mix(in srgb,var(--paper) 97%,var(--ink));
   --soft:color-mix(in srgb,var(--paper) 94%,var(--ink));
   --muted:color-mix(in srgb,var(--ink) 72%,var(--paper));
@@ -104,7 +104,13 @@ h1 { font-size:clamp(1.9rem,3.6vw,3rem); letter-spacing:-.045em; line-height:1.1
 pre { white-space:pre-wrap; overflow-wrap:anywhere; font: .8rem/1.8 ui-monospace,monospace; padding:16px; background:var(--soft); border-radius:4px; }
 .footer { display:flex; justify-content:space-between; gap:16px; padding-block:24px 36px; border-top:1px solid var(--line); font-size:.72rem; color:var(--muted); }
 html[data-comfortable="true"] { font-size:18px; }
-@media(prefers-color-scheme:dark) { :root { --paper:#202226; --ink:#ebedf0; --accent:#86baff; } }
+html,body { scrollbar-width:thin; scrollbar-color:#9e8664 #cfc3ae; }
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:#cfc3ae; }
+::-webkit-scrollbar-thumb { background:#9e8664; border-radius:6px; border:2px solid #cfc3ae; }
+::-webkit-scrollbar-thumb:hover { background:#7f6645; }
+@media(prefers-color-scheme:dark) { html,body { scrollbar-color:#6b5238 #20150f; } ::-webkit-scrollbar-track { background:#20150f; } ::-webkit-scrollbar-thumb { background:#6b5238; border-color:#20150f; } }
+@media(prefers-color-scheme:dark) { :root { --paper:#20150f; --ink:#efe4cf; --accent:#dfb267; } }
 @media(max-width:900px) { .wrap { width:calc(100% - 40px); } .hero { gap:24px; } .route { gap:8px; } .route a { padding:15px 10px; } .route li:not(:last-child):after { width:8px; right:-8px; } .route strong { font-size:1rem; } .cover-example { grid-template-columns:100px 1fr; gap:20px; } .book-cover strong { font-size:20px; } }
 @media(max-width:680px) {
   .wrap { width:calc(100% - 32px); } .hero { grid-template-columns:1fr; padding-block:28px; gap:20px; } .hero-note { justify-self:stretch; max-width:none; padding:12px 16px; } .hero-note>p { font:inherit; margin:8px 0; } .hero-note br { display:none; } .hero-note br:after { content:' '; }

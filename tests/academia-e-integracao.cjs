@@ -163,9 +163,26 @@ for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tom
 assert.ok(buildSrc.includes("'assets/library'"), 'scripts/build.cjs copia assets/library para dist/site/');
 const academiaCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/academia.css'), 'utf8');
 const realGabineteCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/real-gabinete.css'), 'utf8');
+const temasLinuxCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/temas-linux.css'), 'utf8');
+const modoLeitorCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/modo-leitor.css'), 'utf8');
+const cartorioCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/cartorio.css'), 'utf8');
+const embeddedCss = fs.readFileSync(path.join(rootDir, 'academia/embedded.css'), 'utf8');
 assert.ok(!/linear-gradient|radial-gradient/i.test(academiaCss), 'academia.css não deve usar gradientes puros');
 assert.ok(!/linear-gradient|radial-gradient/i.test(realGabineteCss), 'real-gabinete.css não deve usar gradientes puros');
 assert.ok(academiaCss.includes('--esc-ac-chalk-light') && academiaCss.includes('--esc-ac-chalk-dark'), 'academia.css deve aplicar textura granulada de giz/papel');
+assert.ok(academiaCss.includes('#cfc3ae') && !academiaCss.includes('#efe4cd'), 'academia.css calibrada em #cfc3ae sem salto de brilho');
+assert.ok(realGabineteCss.includes('#cfc3ae') && !realGabineteCss.includes('#efe6d5'), 'real-gabinete.css calibrada em #cfc3ae e preservando E-Ink no espaço de trabalho');
+assert.ok(!realGabineteCss.includes('#writing-space'), 'real-gabinete.css não deve alterar o espaço de trabalho E-Ink Sálvia');
+assert.ok(temasLinuxCss.includes('body[data-view="workspace"][data-immersion="true"] #writing-space .focus-mask'), 'temas-linux.css corrige .focus-mask no Superfoco sem degrau lateral');
+assert.ok(modoLeitorCss.includes('--reader-paper: #cfc3ae'), 'modo-leitor.css calibrado em pergaminho Real Gabinete #cfc3ae');
+assert.ok(!/#fffdf9|#f8f5ef/i.test(cartorioCss), 'cartorio.css sem caixas brancas estouradas');
+assert.ok(embeddedCss.includes('--paper:#cfc3ae') && !embeddedCss.includes('#fafbfc'), 'academia/embedded.css calibrado em #cfc3ae');
+assert.ok(!litHtml.includes('--oasis-paper:#c4cfc2') && litHtml.includes('--oasis-paper:#cfc3ae'), 'literatura-mundial.html sem restos do tema verde no leitor Oasis');
+for (const entry of catalog) {
+  const html = fs.readFileSync(path.join(rootDir, 'academia', entry.file), 'utf8');
+  assert.ok(html.includes('#cfc3ae'), 'academia/' + entry.file + ' calibrado em #cfc3ae');
+  assert.ok(!html.includes('--paper:#fafbfc'), 'academia/' + entry.file + ' sem --paper branco antigo');
+}
 bridged.close();
 
-console.log('OK: Academia e Real Gabinete (14 guias + 3 pinturas WebP leves + atmosfera em todas as telas + zero gradientes puros) verificados.');
+console.log('OK: Academia, Real Gabinete calibrado (#cfc3ae) e separação Trabalho (E-Ink Sálvia) vs Estudo (Real Gabinete) verificados.');

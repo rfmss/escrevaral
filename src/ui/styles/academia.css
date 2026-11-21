@@ -5,7 +5,7 @@
   #esc-academy-overlay.esc-academy-overlay {
     /* Tiles SVG vetoriais 84x84 pré-desenhados: granulação seca de giz de cera / papel algodão
      * sem <feTurbulence>, cacheados 1x pelo navegador com custo quase zero de RAM/CPU. */
-    --esc-ac-chalk-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23784f1f' fill-opacity='0.065'%3E%3Ccircle cx='7' cy='11' r='0.9'/%3E%3Ccircle cx='23' cy='6' r='0.7'/%3E%3Ccircle cx='41' cy='15' r='1.1'/%3E%3Ccircle cx='59' cy='8' r='0.8'/%3E%3Ccircle cx='76' cy='19' r='0.9'/%3E%3Ccircle cx='14' cy='29' r='1.1'/%3E%3Ccircle cx='33' cy='25' r='0.7'/%3E%3Ccircle cx='51' cy='32' r='0.9'/%3E%3Ccircle cx='68' cy='28' r='1.0'/%3E%3Ccircle cx='6' cy='47' r='0.8'/%3E%3Ccircle cx='25' cy='43' r='1.0'/%3E%3Ccircle cx='45' cy='50' r='0.7'/%3E%3Ccircle cx='63' cy='46' r='1.1'/%3E%3Ccircle cx='79' cy='53' r='0.8'/%3E%3Ccircle cx='17' cy='64' r='0.9'/%3E%3Ccircle cx='37' cy='69' r='1.1'/%3E%3Ccircle cx='54' cy='62' r='0.7'/%3E%3Ccircle cx='72' cy='71' r='0.9'/%3E%3Ccircle cx='11' cy='79' r='0.8'/%3E%3Ccircle cx='48' cy='80' r='0.9'/%3E%3Ccircle cx='29' cy='77' r='0.6'/%3E%3Ccircle cx='65' cy='79' r='0.7'/%3E%3C/g%3E%3Cg fill='%23fffcf4' fill-opacity='0.34'%3E%3Ccircle cx='16' cy='14' r='1.0'/%3E%3Ccircle cx='47' cy='10' r='0.8'/%3E%3Ccircle cx='71' cy='13' r='1.1'/%3E%3Ccircle cx='9' cy='37' r='0.9'/%3E%3Ccircle cx='39' cy='39' r='1.0'/%3E%3Ccircle cx='74' cy='41' r='0.8'/%3E%3Ccircle cx='21' cy='56' r='1.1'/%3E%3Ccircle cx='58' cy='57' r='0.9'/%3E%3Ccircle cx='32' cy='74' r='0.9'/%3E%3Ccircle cx='78' cy='76' r='1.0'/%3E%3C/g%3E%3Cpath d='M4 18 L12 16 M31 11 L38 13 M62 21 L70 19 M19 36 L27 34 M49 41 L57 39 M8 58 L16 56 M42 66 L50 64 M67 60 L75 58 M24 81 L33 79' stroke='%23855926' stroke-opacity='0.06' stroke-width='0.85' stroke-linecap='round'/%3E%3C/svg%3E");
+    --esc-ac-chalk-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23634118' fill-opacity='0.06'%3E%3Ccircle cx='7' cy='11' r='0.9'/%3E%3Ccircle cx='23' cy='6' r='0.7'/%3E%3Ccircle cx='41' cy='15' r='1.1'/%3E%3Ccircle cx='59' cy='8' r='0.8'/%3E%3Ccircle cx='76' cy='19' r='0.9'/%3E%3Ccircle cx='14' cy='29' r='1.1'/%3E%3Ccircle cx='33' cy='25' r='0.7'/%3E%3Ccircle cx='51' cy='32' r='0.9'/%3E%3Ccircle cx='68' cy='28' r='1.0'/%3E%3Ccircle cx='6' cy='47' r='0.8'/%3E%3Ccircle cx='25' cy='43' r='1.0'/%3E%3Ccircle cx='45' cy='50' r='0.7'/%3E%3Ccircle cx='63' cy='46' r='1.1'/%3E%3Ccircle cx='79' cy='53' r='0.8'/%3E%3Ccircle cx='17' cy='64' r='0.9'/%3E%3Ccircle cx='37' cy='69' r='1.1'/%3E%3Ccircle cx='54' cy='62' r='0.7'/%3E%3Ccircle cx='72' cy='71' r='0.9'/%3E%3Ccircle cx='11' cy='79' r='0.8'/%3E%3Ccircle cx='48' cy='80' r='0.9'/%3E%3Ccircle cx='29' cy='77' r='0.6'/%3E%3Ccircle cx='65' cy='79' r='0.7'/%3E%3C/g%3E%3Cg fill='%23ede2ce' fill-opacity='0.24'%3E%3Ccircle cx='16' cy='14' r='1.0'/%3E%3Ccircle cx='47' cy='10' r='0.8'/%3E%3Ccircle cx='71' cy='13' r='1.1'/%3E%3Ccircle cx='9' cy='37' r='0.9'/%3E%3Ccircle cx='39' cy='39' r='1.0'/%3E%3Ccircle cx='74' cy='41' r='0.8'/%3E%3Ccircle cx='21' cy='56' r='1.1'/%3E%3Ccircle cx='58' cy='57' r='0.9'/%3E%3Ccircle cx='32' cy='74' r='0.9'/%3E%3Ccircle cx='78' cy='76' r='1.0'/%3E%3C/g%3E%3Cpath d='M4 18 L12 16 M31 11 L38 13 M62 21 L70 19 M19 36 L27 34 M49 41 L57 39 M8 58 L16 56 M42 66 L50 64 M67 60 L75 58 M24 81 L33 79' stroke='%23785020' stroke-opacity='0.055' stroke-width='0.85' stroke-linecap='round'/%3E%3C/svg%3E");
     --esc-ac-chalk-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23f4d398' fill-opacity='0.075'%3E%3Ccircle cx='8' cy='10' r='0.9'/%3E%3Ccircle cx='26' cy='7' r='0.7'/%3E%3Ccircle cx='44' cy='14' r='1.1'/%3E%3Ccircle cx='63' cy='9' r='0.8'/%3E%3Ccircle cx='78' cy='18' r='0.9'/%3E%3Ccircle cx='15' cy='28' r='1.0'/%3E%3Ccircle cx='35' cy='24' r='0.7'/%3E%3Ccircle cx='53' cy='31' r='0.9'/%3E%3Ccircle cx='70' cy='27' r='1.1'/%3E%3Ccircle cx='6' cy='46' r='0.8'/%3E%3Ccircle cx='24' cy='43' r='1.0'/%3E%3Ccircle cx='46' cy='49' r='0.7'/%3E%3Ccircle cx='65' cy='45' r='1.0'/%3E%3Ccircle cx='80' cy='54' r='0.8'/%3E%3Ccircle cx='18' cy='65' r='0.9'/%3E%3Ccircle cx='38' cy='68' r='1.1'/%3E%3Ccircle cx='56' cy='61' r='0.7'/%3E%3Ccircle cx='73' cy='72' r='0.9'/%3E%3Ccircle cx='11' cy='79' r='0.8'/%3E%3Ccircle cx='49' cy='80' r='0.9'/%3E%3C/g%3E%3Cg fill='%23120703' fill-opacity='0.22'%3E%3Ccircle cx='17' cy='15' r='1.1'/%3E%3Ccircle cx='36' cy='11' r='0.9'/%3E%3Ccircle cx='55' cy='17' r='1.2'/%3E%3Ccircle cx='72' cy='12' r='0.9'/%3E%3Ccircle cx='9' cy='36' r='1.1'/%3E%3Ccircle cx='29' cy='34' r='0.8'/%3E%3Ccircle cx='47' cy='38' r='1.2'/%3E%3Ccircle cx='66' cy='36' r='0.9'/%3E%3Ccircle cx='19' cy='53' r='1.0'/%3E%3Ccircle cx='41' cy='57' r='1.1'/%3E%3Ccircle cx='60' cy='54' r='0.9'/%3E%3Ccircle cx='77' cy='62' r='1.1'/%3E%3Ccircle cx='13' cy='72' r='1.0'/%3E%3Ccircle cx='31' cy='76' r='1.1'/%3E%3Ccircle cx='63' cy='77' r='1.0'/%3E%3C/g%3E%3Cpath d='M5 19 L14 16 M32 13 L41 11 M61 22 L71 19 M18 39 L28 36 M48 43 L58 40 M7 60 L17 57 M40 67 L50 64 M66 63 L76 60 M23 81 L34 78' stroke='%23f2c878' stroke-opacity='0.065' stroke-width='0.9' stroke-linecap='round'/%3E%3C/svg%3E");
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
@@ -23,7 +23,8 @@
     display: none !important;
   }
 
-  /* Moldura principal de livro iluminado com dupla borda dourada e papel pergaminho granulado (fosco, sem gradiente) */
+  /* Moldura principal de livro iluminado com dupla borda dourada e pergaminho calibrado
+   * (#cfc3ae = mesma luminância descansada do E-Ink Sálvia #c4cfc2, zero salto de brilho nos olhos!) */
   #esc-academy-overlay .esc-academy-list-card {
     position: relative;
     width: 100%;
@@ -31,18 +32,18 @@
     max-height: 92vh;
     display: flex;
     flex-direction: column;
-    background-color: #efe4cd !important;
+    background-color: #cfc3ae !important;
     background-image: var(--esc-ac-chalk-light) !important;
     background-repeat: repeat !important;
     background-size: 84px 84px !important;
-    border: 1.5px solid #a67b38 !important;
+    border: 1.5px solid #9c7233 !important;
     border-radius: 10px;
     box-shadow:
       0 22px 54px rgba(15, 9, 5, 0.55),
-      inset 0 0 0 4px rgba(250, 245, 232, 0.72),
-      inset 0 0 0 5px rgba(166, 123, 56, 0.34);
+      inset 0 0 0 4px rgba(226, 215, 194, 0.52),
+      inset 0 0 0 5px rgba(156, 114, 51, 0.36);
     overflow: hidden;
-    --esc-ornament: rgba(152, 108, 44, 0.65);
+    --esc-ornament: rgba(138, 96, 38, 0.65);
   }
 
   #esc-academy-overlay .esc-bl-frame-gilded {
@@ -51,7 +52,7 @@
   #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner {
     width: 44px;
     height: 44px;
-    color: #a17432;
+    color: #966a2c;
   }
   #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner-tl { top: 9px; left: 9px; }
   #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner-tr { top: 9px; right: 9px; }
@@ -65,7 +66,17 @@
     overflow-x: hidden;
     position: relative;
     z-index: 2;
+    scrollbar-width: thin;
+    scrollbar-color: #9e8664 #cfc3ae;
   }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { width: 10px; }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-track { background: #cfc3ae; }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb {
+    background: #9e8664;
+    border-radius: 6px;
+    border: 2px solid #cfc3ae;
+  }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb:hover { background: #7f6645; }
 
   /* =====================================================================
    * HERO REAL GABINETE: MOGNO FOSCO EM TEXTURA DE GIZ E GALERIAS (2 CAMADAS)
@@ -201,16 +212,16 @@
     padding: 24px 36px 32px;
   }
 
-  /* Cartela iluminada: Ponte Academia ↔ Oficina */
+  /* Cartela iluminada calibrada: Ponte Academia ↔ Oficina (#d8cdb9 = mesmo brilho do E-Ink Sálvia) */
   #esc-academy-overlay .esc-academy-bridge-box {
     position: relative;
     margin: 0 0 18px;
     padding: 16px 20px 18px;
-    background: #faf4e6;
-    border: 1px solid rgba(158, 114, 48, 0.45);
-    border-left: 4px solid #8f5e24;
+    background: #d8cdb9;
+    border: 1px solid rgba(132, 92, 38, 0.42);
+    border-left: 4px solid #8b5a1e;
     border-radius: 8px;
-    box-shadow: 0 3px 12px rgba(46, 28, 14, 0.07);
+    box-shadow: 0 2px 10px rgba(46, 28, 14, 0.08);
   }
 
   #esc-academy-overlay .esc-academy-bridge-head {
@@ -226,8 +237,8 @@
     display: inline-block;
     padding: 3px 11px;
     border-radius: 99px;
-    background: #3d2214;
-    color: #f8eed9;
+    background: #3a2013;
+    color: #f0e4ce;
     font: 700 11px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -236,24 +247,24 @@
   #esc-academy-overlay .esc-academy-resume-btn {
     padding: 5px 13px;
     min-height: 30px;
-    border: 1px solid #9e7130 !important;
+    border: 1px solid #8f6327 !important;
     border-radius: 99px;
-    background: #fffaf0 !important;
-    color: #2c190e !important;
+    background: #dfd5c3 !important;
+    color: #24140b !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
   }
 
   #esc-academy-overlay .esc-academy-resume-btn:hover {
-    background: #3d2214 !important;
-    color: #fbf3e2 !important;
-    border-color: #3d2214 !important;
+    background: #3a2013 !important;
+    color: #f0e4ce !important;
+    border-color: #3a2013 !important;
   }
 
   #esc-academy-overlay .esc-academy-bridge-note {
     margin: 0 0 12px;
     font: italic 14px/1.5 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #4f3623;
+    color: #462f1d;
   }
 
   #esc-academy-overlay .esc-academy-rec-row {
@@ -266,19 +277,19 @@
     flex: 1 1 250px;
     padding: 11px 14px;
     text-align: left;
-    border: 1px solid rgba(152, 108, 44, 0.38) !important;
+    border: 1px solid rgba(132, 92, 38, 0.38) !important;
     border-radius: 7px;
-    background: #fffbf2 !important;
-    color: #24160e !important;
+    background: #dfd5c3 !important;
+    color: #1e120a !important;
     cursor: pointer;
     transition: transform 140ms ease, border-color 140ms ease;
   }
 
   #esc-academy-overlay .esc-academy-rec-btn:hover {
     transform: translateY(-2px);
-    background: #f6ead2 !important;
-    color: #1f120a !important;
-    border-color: #8f5e24 !important;
+    background: #e6dccb !important;
+    color: #180d06 !important;
+    border-color: #8b5a1e !important;
   }
 
   #esc-academy-overlay .esc-academy-rec-btn strong {
@@ -474,22 +485,22 @@
     width: 100%;
     height: 100%;
     padding: 13px 16px;
-    border: 1px solid rgba(148, 106, 46, 0.4) !important;
+    border: 1px solid rgba(132, 92, 38, 0.4) !important;
     border-radius: 8px;
-    background: #faf3e4 !important;
-    color: #24160e !important;
+    background: #d8cdb9 !important;
+    color: #1e120a !important;
     text-align: left;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(42, 24, 12, 0.05);
+    box-shadow: 0 2px 5px rgba(42, 24, 12, 0.06);
     transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
   }
 
   #esc-academy-overlay .esc-academy-item:hover {
     transform: translateY(-2px);
-    border-color: #9c6a27 !important;
-    background: #fffaf0 !important;
-    color: #1c1009 !important;
-    box-shadow: 0 6px 15px rgba(46, 28, 12, 0.12);
+    border-color: #8b5a1e !important;
+    background: #e1d7c4 !important;
+    color: #180d06 !important;
+    box-shadow: 0 6px 14px rgba(46, 28, 12, 0.12);
   }
 
   #esc-academy-overlay .esc-academy-roman {
@@ -523,15 +534,15 @@
   }
 
   /* =====================================================================
-   * MOLDURA DO GUIA ABERTO (IFRAME + BARRA DE AÇÕES EM ÂMBAR/MOGNO)
+   * MOLDURA DO GUIA ABERTO (IFRAME + BARRA DE AÇÕES CALIBRADAS EM #cfc3ae)
    * ===================================================================== */
   #esc-academy-overlay .esc-academy-guide-shell {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: #f5eddc !important;
-    border: 1.5px solid #a67b38 !important;
+    background: #cfc3ae !important;
+    border: 1.5px solid #9c7233 !important;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 22px 54px rgba(15, 9, 5, 0.5);
@@ -543,27 +554,27 @@
     justify-content: space-between;
     gap: 10px;
     padding: 10px 16px;
-    background-color: #ebe0c8 !important;
+    background-color: #c9bca5 !important;
     background-image: var(--esc-ac-chalk-light) !important;
     background-repeat: repeat !important;
     background-size: 84px 84px !important;
-    border-bottom: 1px solid rgba(152, 108, 44, 0.45) !important;
+    border-bottom: 1px solid rgba(132, 92, 38, 0.45) !important;
   }
 
   #esc-academy-overlay .esc-academy-bar button {
     min-height: 32px;
     padding: 5px 12px;
-    border: 1px solid rgba(132, 92, 38, 0.48) !important;
-    background: #fffaf0 !important;
-    color: #26150c !important;
+    border: 1px solid rgba(124, 86, 34, 0.48) !important;
+    background: #dcd1be !important;
+    color: #21130a !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
     border-radius: 6px;
   }
 
   #esc-academy-overlay .esc-academy-bar button:hover {
-    background: #f4e6ca !important;
-    border-color: #8f5e24 !important;
+    background: #e5dbc9 !important;
+    border-color: #8b5a1e !important;
   }
 
   #esc-academy-overlay .esc-academy-bar strong {
@@ -573,7 +584,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     font: 700 15px/1.2 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #26150c;
+    color: #21130a;
   }
 
   #esc-academy-overlay .esc-academy-frame {
@@ -581,7 +592,7 @@
     min-height: 0;
     width: 100%;
     border: 0;
-    background: #fff;
+    background: #cfc3ae;
   }
 
   #esc-academy-overlay .esc-academy-bar-actions {
@@ -596,16 +607,16 @@
     padding: 4px 10px;
     min-height: 30px;
     border-radius: 99px;
-    border: 1px solid rgba(145, 102, 42, 0.45) !important;
-    background: #fffaf0 !important;
-    color: #2b180e !important;
+    border: 1px solid rgba(124, 86, 34, 0.45) !important;
+    background: #dcd1be !important;
+    color: #24140b !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
   }
 
   #esc-academy-overlay .esc-academy-bar .esc-academy-lens-jump:hover {
-    background: #f1e1c0 !important;
-    border-color: #8f5e24 !important;
+    background: #e5dbc9 !important;
+    border-color: #8b5a1e !important;
   }
 
   #esc-academy-overlay .esc-academy-bar .esc-academy-bridge-act {

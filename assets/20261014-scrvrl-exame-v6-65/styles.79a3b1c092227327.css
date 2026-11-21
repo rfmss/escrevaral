@@ -5000,16 +5000,16 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   /* =====================================================================
-   * MODO LEITURA — Edição Impressa (New York Times / The New Yorker)
-   * Mudança real de ares: papel pastel marfim minimalista, zero cara de SaaS
+   * MODO LEITURA — Edição Impressa (Real Gabinete · Pergaminho calibrado L* ~ 79)
+   * Mesmo brilho descansado do E-Ink Sálvia #c4cfc2, zero clarão ao abrir a leitura
    * ===================================================================== */
   .esc-reader {
-    --reader-paper: #f8f5ef;
-    --reader-surface: #efeae0;
-    --reader-ink: #161513;
-    --reader-muted: #6c665d;
-    --reader-line: #dcd5c8;
-    --reader-rule: #22201d;
+    --reader-paper: #cfc3ae;
+    --reader-surface: #c5b8a0;
+    --reader-ink: #1e120a;
+    --reader-muted: #4d3522;
+    --reader-line: #a79272;
+    --reader-rule: #3a2013;
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
     z-index: 3200;
@@ -5027,30 +5027,30 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   .esc-reader[data-palette="linen"] {
-    --reader-paper: #f4ede1;
-    --reader-surface: #eae0cf;
-    --reader-ink: #241f19;
-    --reader-muted: #706558;
-    --reader-line: #ddd1be;
-    --reader-rule: #2e2720;
+    --reader-paper: #d8cdb9;
+    --reader-surface: #cdc1ab;
+    --reader-ink: #1f140b;
+    --reader-muted: #523b26;
+    --reader-line: #ae9b7d;
+    --reader-rule: #3a2013;
   }
 
   .esc-reader[data-palette="mist"] {
-    --reader-paper: #f1f4f3;
-    --reader-surface: #e5eae8;
+    --reader-paper: #c8d0ce;
+    --reader-surface: #bcc5c3;
     --reader-ink: #18201e;
-    --reader-muted: #5d6966;
-    --reader-line: #d4ddda;
+    --reader-muted: #424f4c;
+    --reader-line: #94a19e;
     --reader-rule: #222e2b;
   }
 
   .esc-reader[data-palette="white"] {
-    --reader-paper: #fcfcfa;
-    --reader-surface: #f2f2ee;
-    --reader-ink: #141414;
-    --reader-muted: #636360;
-    --reader-line: #e2e2dc;
-    --reader-rule: #1a1a1a;
+    --reader-paper: #dfdcd4;
+    --reader-surface: #d3cfc6;
+    --reader-ink: #161614;
+    --reader-muted: #4c4b46;
+    --reader-line: #aba79d;
+    --reader-rule: #1e1d1a;
   }
 
   .esc-reader[data-palette="sage"] {
@@ -5063,12 +5063,12 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   .esc-reader[data-palette="night"] {
-    --reader-paper: #191b18;
-    --reader-surface: #232622;
-    --reader-ink: #e4e0d7;
-    --reader-muted: #9e9a90;
-    --reader-line: #31352e;
-    --reader-rule: #c5c0b4;
+    --reader-paper: #1f150f;
+    --reader-surface: #2c1e15;
+    --reader-ink: #efe4cf;
+    --reader-muted: #c2ae8e;
+    --reader-line: #4d3726;
+    --reader-rule: #d9ae62;
   }
 
   .esc-reader-progress {
@@ -5183,6 +5183,15 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     min-height: 0;
     overflow-y: auto;
     padding: 20px 28px 110px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--reader-line) var(--reader-paper);
+  }
+  .esc-reader-viewport::-webkit-scrollbar { width: 8px; }
+  .esc-reader-viewport::-webkit-scrollbar-track { background: var(--reader-paper); }
+  .esc-reader-viewport::-webkit-scrollbar-thumb {
+    background: var(--reader-line);
+    border-radius: 6px;
+    border: 2px solid var(--reader-paper);
   }
 
   .esc-reader-page {
@@ -5634,6 +5643,16 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     box-shadow: none !important;
   }
 
+  /* Máscara de foco suave e sem degrau lateral de 18px (evita faixa clara / falsa barra no Superfoco) */
+  body[data-view="workspace"] #writing-space .focus-mask {
+    background-image: none !important;
+    opacity: 0.5;
+    right: 4px;
+  }
+  body[data-view="workspace"][data-immersion="true"] #writing-space .focus-mask {
+    right: 0 !important;
+  }
+
   /* Tinta de leitura AAA no manuscrito e títulos */
   body[data-view="workspace"] #manuscrito,
   body[data-view="workspace"] #esc-rich-editor,
@@ -5807,9 +5826,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   /* Modo Leitor respira fora do verde do editor (paleta própria estilo jornal em modo-leitor.css) */
 
   /* Barra de rolagem ultradiscreta (2px, quase imperceptível) + totalmente oculta no Superfoco */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: auto;
+  *,
+  #manuscrito,
+  #esc-rich-editor {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(33, 41, 33, 0.22) transparent;
   }
   *::-webkit-scrollbar {
     width: 2px !important;
@@ -7278,9 +7299,9 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     width: 296px;
     max-width: calc(100vw - 32px);
     padding: 14px 16px;
-    background: #d5dfd3;
+    background: #ced8cb;
     color: #1c241c;
-    border: 1px solid rgba(33, 41, 33, 0.14);
+    border: 1px solid rgba(33, 41, 33, 0.18);
     border-radius: 12px;
     box-shadow: 0 10px 28px rgba(24, 34, 24, 0.13);
     font: 13px/1.45 Arial, Helvetica, sans-serif;
@@ -7451,9 +7472,9 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     flex: 1 1 auto;
     min-width: 0;
     padding: 5px 9px;
-    border: 1px solid rgba(33, 41, 33, 0.14);
+    border: 1px solid rgba(33, 41, 33, 0.22);
     border-radius: 7px;
-    background: rgba(255, 255, 255, 0.42);
+    background: #c4cfc2;
     color: #111511;
     font-size: 12px;
   }
@@ -7502,7 +7523,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #esc-academy-overlay.esc-academy-overlay {
     /* Tiles SVG vetoriais 84x84 pré-desenhados: granulação seca de giz de cera / papel algodão
      * sem <feTurbulence>, cacheados 1x pelo navegador com custo quase zero de RAM/CPU. */
-    --esc-ac-chalk-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23784f1f' fill-opacity='0.065'%3E%3Ccircle cx='7' cy='11' r='0.9'/%3E%3Ccircle cx='23' cy='6' r='0.7'/%3E%3Ccircle cx='41' cy='15' r='1.1'/%3E%3Ccircle cx='59' cy='8' r='0.8'/%3E%3Ccircle cx='76' cy='19' r='0.9'/%3E%3Ccircle cx='14' cy='29' r='1.1'/%3E%3Ccircle cx='33' cy='25' r='0.7'/%3E%3Ccircle cx='51' cy='32' r='0.9'/%3E%3Ccircle cx='68' cy='28' r='1.0'/%3E%3Ccircle cx='6' cy='47' r='0.8'/%3E%3Ccircle cx='25' cy='43' r='1.0'/%3E%3Ccircle cx='45' cy='50' r='0.7'/%3E%3Ccircle cx='63' cy='46' r='1.1'/%3E%3Ccircle cx='79' cy='53' r='0.8'/%3E%3Ccircle cx='17' cy='64' r='0.9'/%3E%3Ccircle cx='37' cy='69' r='1.1'/%3E%3Ccircle cx='54' cy='62' r='0.7'/%3E%3Ccircle cx='72' cy='71' r='0.9'/%3E%3Ccircle cx='11' cy='79' r='0.8'/%3E%3Ccircle cx='48' cy='80' r='0.9'/%3E%3Ccircle cx='29' cy='77' r='0.6'/%3E%3Ccircle cx='65' cy='79' r='0.7'/%3E%3C/g%3E%3Cg fill='%23fffcf4' fill-opacity='0.34'%3E%3Ccircle cx='16' cy='14' r='1.0'/%3E%3Ccircle cx='47' cy='10' r='0.8'/%3E%3Ccircle cx='71' cy='13' r='1.1'/%3E%3Ccircle cx='9' cy='37' r='0.9'/%3E%3Ccircle cx='39' cy='39' r='1.0'/%3E%3Ccircle cx='74' cy='41' r='0.8'/%3E%3Ccircle cx='21' cy='56' r='1.1'/%3E%3Ccircle cx='58' cy='57' r='0.9'/%3E%3Ccircle cx='32' cy='74' r='0.9'/%3E%3Ccircle cx='78' cy='76' r='1.0'/%3E%3C/g%3E%3Cpath d='M4 18 L12 16 M31 11 L38 13 M62 21 L70 19 M19 36 L27 34 M49 41 L57 39 M8 58 L16 56 M42 66 L50 64 M67 60 L75 58 M24 81 L33 79' stroke='%23855926' stroke-opacity='0.06' stroke-width='0.85' stroke-linecap='round'/%3E%3C/svg%3E");
+    --esc-ac-chalk-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23634118' fill-opacity='0.06'%3E%3Ccircle cx='7' cy='11' r='0.9'/%3E%3Ccircle cx='23' cy='6' r='0.7'/%3E%3Ccircle cx='41' cy='15' r='1.1'/%3E%3Ccircle cx='59' cy='8' r='0.8'/%3E%3Ccircle cx='76' cy='19' r='0.9'/%3E%3Ccircle cx='14' cy='29' r='1.1'/%3E%3Ccircle cx='33' cy='25' r='0.7'/%3E%3Ccircle cx='51' cy='32' r='0.9'/%3E%3Ccircle cx='68' cy='28' r='1.0'/%3E%3Ccircle cx='6' cy='47' r='0.8'/%3E%3Ccircle cx='25' cy='43' r='1.0'/%3E%3Ccircle cx='45' cy='50' r='0.7'/%3E%3Ccircle cx='63' cy='46' r='1.1'/%3E%3Ccircle cx='79' cy='53' r='0.8'/%3E%3Ccircle cx='17' cy='64' r='0.9'/%3E%3Ccircle cx='37' cy='69' r='1.1'/%3E%3Ccircle cx='54' cy='62' r='0.7'/%3E%3Ccircle cx='72' cy='71' r='0.9'/%3E%3Ccircle cx='11' cy='79' r='0.8'/%3E%3Ccircle cx='48' cy='80' r='0.9'/%3E%3Ccircle cx='29' cy='77' r='0.6'/%3E%3Ccircle cx='65' cy='79' r='0.7'/%3E%3C/g%3E%3Cg fill='%23ede2ce' fill-opacity='0.24'%3E%3Ccircle cx='16' cy='14' r='1.0'/%3E%3Ccircle cx='47' cy='10' r='0.8'/%3E%3Ccircle cx='71' cy='13' r='1.1'/%3E%3Ccircle cx='9' cy='37' r='0.9'/%3E%3Ccircle cx='39' cy='39' r='1.0'/%3E%3Ccircle cx='74' cy='41' r='0.8'/%3E%3Ccircle cx='21' cy='56' r='1.1'/%3E%3Ccircle cx='58' cy='57' r='0.9'/%3E%3Ccircle cx='32' cy='74' r='0.9'/%3E%3Ccircle cx='78' cy='76' r='1.0'/%3E%3C/g%3E%3Cpath d='M4 18 L12 16 M31 11 L38 13 M62 21 L70 19 M19 36 L27 34 M49 41 L57 39 M8 58 L16 56 M42 66 L50 64 M67 60 L75 58 M24 81 L33 79' stroke='%23785020' stroke-opacity='0.055' stroke-width='0.85' stroke-linecap='round'/%3E%3C/svg%3E");
     --esc-ac-chalk-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23f4d398' fill-opacity='0.075'%3E%3Ccircle cx='8' cy='10' r='0.9'/%3E%3Ccircle cx='26' cy='7' r='0.7'/%3E%3Ccircle cx='44' cy='14' r='1.1'/%3E%3Ccircle cx='63' cy='9' r='0.8'/%3E%3Ccircle cx='78' cy='18' r='0.9'/%3E%3Ccircle cx='15' cy='28' r='1.0'/%3E%3Ccircle cx='35' cy='24' r='0.7'/%3E%3Ccircle cx='53' cy='31' r='0.9'/%3E%3Ccircle cx='70' cy='27' r='1.1'/%3E%3Ccircle cx='6' cy='46' r='0.8'/%3E%3Ccircle cx='24' cy='43' r='1.0'/%3E%3Ccircle cx='46' cy='49' r='0.7'/%3E%3Ccircle cx='65' cy='45' r='1.0'/%3E%3Ccircle cx='80' cy='54' r='0.8'/%3E%3Ccircle cx='18' cy='65' r='0.9'/%3E%3Ccircle cx='38' cy='68' r='1.1'/%3E%3Ccircle cx='56' cy='61' r='0.7'/%3E%3Ccircle cx='73' cy='72' r='0.9'/%3E%3Ccircle cx='11' cy='79' r='0.8'/%3E%3Ccircle cx='49' cy='80' r='0.9'/%3E%3C/g%3E%3Cg fill='%23120703' fill-opacity='0.22'%3E%3Ccircle cx='17' cy='15' r='1.1'/%3E%3Ccircle cx='36' cy='11' r='0.9'/%3E%3Ccircle cx='55' cy='17' r='1.2'/%3E%3Ccircle cx='72' cy='12' r='0.9'/%3E%3Ccircle cx='9' cy='36' r='1.1'/%3E%3Ccircle cx='29' cy='34' r='0.8'/%3E%3Ccircle cx='47' cy='38' r='1.2'/%3E%3Ccircle cx='66' cy='36' r='0.9'/%3E%3Ccircle cx='19' cy='53' r='1.0'/%3E%3Ccircle cx='41' cy='57' r='1.1'/%3E%3Ccircle cx='60' cy='54' r='0.9'/%3E%3Ccircle cx='77' cy='62' r='1.1'/%3E%3Ccircle cx='13' cy='72' r='1.0'/%3E%3Ccircle cx='31' cy='76' r='1.1'/%3E%3Ccircle cx='63' cy='77' r='1.0'/%3E%3C/g%3E%3Cpath d='M5 19 L14 16 M32 13 L41 11 M61 22 L71 19 M18 39 L28 36 M48 43 L58 40 M7 60 L17 57 M40 67 L50 64 M66 63 L76 60 M23 81 L34 78' stroke='%23f2c878' stroke-opacity='0.065' stroke-width='0.9' stroke-linecap='round'/%3E%3C/svg%3E");
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
@@ -7520,7 +7541,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     display: none !important;
   }
 
-  /* Moldura principal de livro iluminado com dupla borda dourada e papel pergaminho granulado (fosco, sem gradiente) */
+  /* Moldura principal de livro iluminado com dupla borda dourada e pergaminho calibrado
+   * (#cfc3ae = mesma luminância descansada do E-Ink Sálvia #c4cfc2, zero salto de brilho nos olhos!) */
   #esc-academy-overlay .esc-academy-list-card {
     position: relative;
     width: 100%;
@@ -7528,18 +7550,18 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     max-height: 92vh;
     display: flex;
     flex-direction: column;
-    background-color: #efe4cd !important;
+    background-color: #cfc3ae !important;
     background-image: var(--esc-ac-chalk-light) !important;
     background-repeat: repeat !important;
     background-size: 84px 84px !important;
-    border: 1.5px solid #a67b38 !important;
+    border: 1.5px solid #9c7233 !important;
     border-radius: 10px;
     box-shadow:
       0 22px 54px rgba(15, 9, 5, 0.55),
-      inset 0 0 0 4px rgba(250, 245, 232, 0.72),
-      inset 0 0 0 5px rgba(166, 123, 56, 0.34);
+      inset 0 0 0 4px rgba(226, 215, 194, 0.52),
+      inset 0 0 0 5px rgba(156, 114, 51, 0.36);
     overflow: hidden;
-    --esc-ornament: rgba(152, 108, 44, 0.65);
+    --esc-ornament: rgba(138, 96, 38, 0.65);
   }
 
   #esc-academy-overlay .esc-bl-frame-gilded {
@@ -7548,7 +7570,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner {
     width: 44px;
     height: 44px;
-    color: #a17432;
+    color: #966a2c;
   }
   #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner-tl { top: 9px; left: 9px; }
   #esc-academy-overlay .esc-bl-frame-gilded .esc-bl-corner-tr { top: 9px; right: 9px; }
@@ -7562,7 +7584,17 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     overflow-x: hidden;
     position: relative;
     z-index: 2;
+    scrollbar-width: thin;
+    scrollbar-color: #9e8664 #cfc3ae;
   }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { width: 10px; }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-track { background: #cfc3ae; }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb {
+    background: #9e8664;
+    border-radius: 6px;
+    border: 2px solid #cfc3ae;
+  }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb:hover { background: #7f6645; }
 
   /* =====================================================================
    * HERO REAL GABINETE: MOGNO FOSCO EM TEXTURA DE GIZ E GALERIAS (2 CAMADAS)
@@ -7698,16 +7730,16 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     padding: 24px 36px 32px;
   }
 
-  /* Cartela iluminada: Ponte Academia ↔ Oficina */
+  /* Cartela iluminada calibrada: Ponte Academia ↔ Oficina (#d8cdb9 = mesmo brilho do E-Ink Sálvia) */
   #esc-academy-overlay .esc-academy-bridge-box {
     position: relative;
     margin: 0 0 18px;
     padding: 16px 20px 18px;
-    background: #faf4e6;
-    border: 1px solid rgba(158, 114, 48, 0.45);
-    border-left: 4px solid #8f5e24;
+    background: #d8cdb9;
+    border: 1px solid rgba(132, 92, 38, 0.42);
+    border-left: 4px solid #8b5a1e;
     border-radius: 8px;
-    box-shadow: 0 3px 12px rgba(46, 28, 14, 0.07);
+    box-shadow: 0 2px 10px rgba(46, 28, 14, 0.08);
   }
 
   #esc-academy-overlay .esc-academy-bridge-head {
@@ -7723,8 +7755,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     display: inline-block;
     padding: 3px 11px;
     border-radius: 99px;
-    background: #3d2214;
-    color: #f8eed9;
+    background: #3a2013;
+    color: #f0e4ce;
     font: 700 11px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -7733,24 +7765,24 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #esc-academy-overlay .esc-academy-resume-btn {
     padding: 5px 13px;
     min-height: 30px;
-    border: 1px solid #9e7130 !important;
+    border: 1px solid #8f6327 !important;
     border-radius: 99px;
-    background: #fffaf0 !important;
-    color: #2c190e !important;
+    background: #dfd5c3 !important;
+    color: #24140b !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
   }
 
   #esc-academy-overlay .esc-academy-resume-btn:hover {
-    background: #3d2214 !important;
-    color: #fbf3e2 !important;
-    border-color: #3d2214 !important;
+    background: #3a2013 !important;
+    color: #f0e4ce !important;
+    border-color: #3a2013 !important;
   }
 
   #esc-academy-overlay .esc-academy-bridge-note {
     margin: 0 0 12px;
     font: italic 14px/1.5 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #4f3623;
+    color: #462f1d;
   }
 
   #esc-academy-overlay .esc-academy-rec-row {
@@ -7763,19 +7795,19 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     flex: 1 1 250px;
     padding: 11px 14px;
     text-align: left;
-    border: 1px solid rgba(152, 108, 44, 0.38) !important;
+    border: 1px solid rgba(132, 92, 38, 0.38) !important;
     border-radius: 7px;
-    background: #fffbf2 !important;
-    color: #24160e !important;
+    background: #dfd5c3 !important;
+    color: #1e120a !important;
     cursor: pointer;
     transition: transform 140ms ease, border-color 140ms ease;
   }
 
   #esc-academy-overlay .esc-academy-rec-btn:hover {
     transform: translateY(-2px);
-    background: #f6ead2 !important;
-    color: #1f120a !important;
-    border-color: #8f5e24 !important;
+    background: #e6dccb !important;
+    color: #180d06 !important;
+    border-color: #8b5a1e !important;
   }
 
   #esc-academy-overlay .esc-academy-rec-btn strong {
@@ -7971,22 +8003,22 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     width: 100%;
     height: 100%;
     padding: 13px 16px;
-    border: 1px solid rgba(148, 106, 46, 0.4) !important;
+    border: 1px solid rgba(132, 92, 38, 0.4) !important;
     border-radius: 8px;
-    background: #faf3e4 !important;
-    color: #24160e !important;
+    background: #d8cdb9 !important;
+    color: #1e120a !important;
     text-align: left;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(42, 24, 12, 0.05);
+    box-shadow: 0 2px 5px rgba(42, 24, 12, 0.06);
     transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
   }
 
   #esc-academy-overlay .esc-academy-item:hover {
     transform: translateY(-2px);
-    border-color: #9c6a27 !important;
-    background: #fffaf0 !important;
-    color: #1c1009 !important;
-    box-shadow: 0 6px 15px rgba(46, 28, 12, 0.12);
+    border-color: #8b5a1e !important;
+    background: #e1d7c4 !important;
+    color: #180d06 !important;
+    box-shadow: 0 6px 14px rgba(46, 28, 12, 0.12);
   }
 
   #esc-academy-overlay .esc-academy-roman {
@@ -8020,15 +8052,15 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   /* =====================================================================
-   * MOLDURA DO GUIA ABERTO (IFRAME + BARRA DE AÇÕES EM ÂMBAR/MOGNO)
+   * MOLDURA DO GUIA ABERTO (IFRAME + BARRA DE AÇÕES CALIBRADAS EM #cfc3ae)
    * ===================================================================== */
   #esc-academy-overlay .esc-academy-guide-shell {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: #f5eddc !important;
-    border: 1.5px solid #a67b38 !important;
+    background: #cfc3ae !important;
+    border: 1.5px solid #9c7233 !important;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 22px 54px rgba(15, 9, 5, 0.5);
@@ -8040,27 +8072,27 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     justify-content: space-between;
     gap: 10px;
     padding: 10px 16px;
-    background-color: #ebe0c8 !important;
+    background-color: #c9bca5 !important;
     background-image: var(--esc-ac-chalk-light) !important;
     background-repeat: repeat !important;
     background-size: 84px 84px !important;
-    border-bottom: 1px solid rgba(152, 108, 44, 0.45) !important;
+    border-bottom: 1px solid rgba(132, 92, 38, 0.45) !important;
   }
 
   #esc-academy-overlay .esc-academy-bar button {
     min-height: 32px;
     padding: 5px 12px;
-    border: 1px solid rgba(132, 92, 38, 0.48) !important;
-    background: #fffaf0 !important;
-    color: #26150c !important;
+    border: 1px solid rgba(124, 86, 34, 0.48) !important;
+    background: #dcd1be !important;
+    color: #21130a !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
     border-radius: 6px;
   }
 
   #esc-academy-overlay .esc-academy-bar button:hover {
-    background: #f4e6ca !important;
-    border-color: #8f5e24 !important;
+    background: #e5dbc9 !important;
+    border-color: #8b5a1e !important;
   }
 
   #esc-academy-overlay .esc-academy-bar strong {
@@ -8070,7 +8102,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     text-overflow: ellipsis;
     white-space: nowrap;
     font: 700 15px/1.2 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    color: #26150c;
+    color: #21130a;
   }
 
   #esc-academy-overlay .esc-academy-frame {
@@ -8078,7 +8110,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     min-height: 0;
     width: 100%;
     border: 0;
-    background: #fff;
+    background: #cfc3ae;
   }
 
   #esc-academy-overlay .esc-academy-bar-actions {
@@ -8093,16 +8125,16 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     padding: 4px 10px;
     min-height: 30px;
     border-radius: 99px;
-    border: 1px solid rgba(145, 102, 42, 0.45) !important;
-    background: #fffaf0 !important;
-    color: #2b180e !important;
+    border: 1px solid rgba(124, 86, 34, 0.45) !important;
+    background: #dcd1be !important;
+    color: #24140b !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
   }
 
   #esc-academy-overlay .esc-academy-bar .esc-academy-lens-jump:hover {
-    background: #f1e1c0 !important;
-    border-color: #8f5e24 !important;
+    background: #e5dbc9 !important;
+    border-color: #8b5a1e !important;
   }
 
   #esc-academy-overlay .esc-academy-bar .esc-academy-bridge-act {
@@ -8277,8 +8309,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   .cart-status:not(:empty) {
     padding: 8px 22px;
-    background: rgba(248, 245, 239, 0.65);
-    border-bottom: 1px solid rgba(30, 35, 32, 0.08);
+    background: #ced8cb;
+    border-bottom: 1px solid rgba(30, 35, 32, 0.12);
   }
 
   .cart-scroll {
@@ -8286,6 +8318,15 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     min-height: 0;
     overflow-y: auto;
     padding: 18px 22px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: #8f9e8c #c4cfc2;
+  }
+  .cart-scroll::-webkit-scrollbar { width: 8px; }
+  .cart-scroll::-webkit-scrollbar-track { background: #c4cfc2; }
+  .cart-scroll::-webkit-scrollbar-thumb {
+    background: #8f9e8c;
+    border-radius: 6px;
+    border: 2px solid #c4cfc2;
   }
   .cart-pane[hidden] { display: none !important; }
 
@@ -8298,8 +8339,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     flex-wrap: wrap;
     padding: 12px 16px;
     margin-bottom: 16px;
-    background: rgba(248, 245, 239, 0.68);
-    border: 1px solid rgba(30, 35, 32, 0.12);
+    background: #ced8cb;
+    border: 1px solid rgba(30, 35, 32, 0.16);
     border-radius: 4px;
   }
   .cart-guard-text strong { display: block; font-size: 13.5px; }
@@ -8309,7 +8350,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     padding: 6px 14px;
     border: 1px solid rgba(30, 35, 32, 0.28);
     border-radius: 999px;
-    background: #eef1ea;
+    background: #c4cfc2;
     color: #1e2320;
     font: 600 12px/1.2 Arial, sans-serif;
     cursor: pointer;
@@ -8318,14 +8359,14 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .cart-guard-toggle[aria-pressed="true"] {
     background: #234932;
     border-color: #234932;
-    color: #f8f5ef;
+    color: #e4ede2;
   }
 
-  /* Certificado em papel marfim editorial */
+  /* Certificado em papel de arquivo calibrado (mesmo brilho do E-Ink Sálvia #c4cfc2) */
   .cart-cert {
-    background: #f8f5ef;
-    color: #1e2320;
-    border: 1px solid rgba(30, 35, 32, 0.16);
+    background: #cfd8cc;
+    color: #1a211c;
+    border: 1px solid rgba(30, 35, 32, 0.22);
     border-radius: 4px;
     padding: 28px 32px;
   }
@@ -8359,10 +8400,10 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     letter-spacing: 1px;
     text-transform: uppercase;
   }
-  .cart-stamp-clean { background: #e1efe4; color: #1b4d2b; border: 1px solid #8eb899; }
-  .cart-stamp-warn { background: #f8edd6; color: #6c470b; border: 1px solid #d7b269; }
-  .cart-stamp-danger { background: #f8dfdf; color: #7e1c1c; border: 1px solid #d58989; }
-  .cart-stamp-neutral { background: #e8e6de; color: #474d48; border: 1px solid #bcb9ae; }
+  .cart-stamp-clean { background: #c3d6c5; color: #163d22; border: 1px solid #6e9979; }
+  .cart-stamp-warn { background: #dfd3b8; color: #593907; border: 1px solid #ad8b48; }
+  .cart-stamp-danger { background: #dfcac8; color: #6e1616; border: 1px solid #b56d6d; }
+  .cart-stamp-neutral { background: #ccd3c8; color: #363e37; border: 1px solid #96a194; }
 
   .cart-file-chip {
     font: 600 12px/1.3 "Courier New", Courier, monospace;
@@ -8388,27 +8429,27 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   .cart-metric {
     padding: 10px 12px;
-    background: #fffdf9;
-    border: 1px solid rgba(30, 35, 32, 0.11);
+    background: #d5dfd2;
+    border: 1px solid rgba(30, 35, 32, 0.16);
     border-radius: 3px;
   }
   .cart-metric-k {
     display: block;
     font-size: 11px;
-    color: #5b655d;
+    color: #465248;
     margin-bottom: 2px;
   }
   .cart-metric-v {
     display: block;
     font: 700 16px/1.25 Georgia, serif;
-    color: #1a201c;
+    color: #161d18;
   }
 
   .cart-hash-box {
     padding: 11px 14px;
     margin-bottom: 16px;
-    background: #f1ede4;
-    border: 1px solid rgba(30, 35, 32, 0.12);
+    background: #c7d2c4;
+    border: 1px solid rgba(30, 35, 32, 0.16);
     border-radius: 3px;
   }
   .cart-hash-top {
@@ -8421,24 +8462,24 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .cart-hash-label {
     font: 700 10px/1.2 Arial, sans-serif;
     letter-spacing: 1px;
-    color: #4a544c;
+    color: #3d483f;
   }
   .cart-hash-code {
     display: block;
     font: 12px/1.45 "Courier New", Courier, monospace;
     word-break: break-all;
-    color: #1c241f;
+    color: #151c17;
   }
   .cart-mini-btn {
     padding: 4px 10px;
-    border: 1px solid rgba(30, 35, 32, 0.24);
-    background: #fffdf9;
-    color: #1e2320;
+    border: 1px solid rgba(30, 35, 32, 0.28);
+    background: #d5dfd2;
+    color: #1a211c;
     font: 600 11px/1.2 Arial, sans-serif;
     border-radius: 3px;
     cursor: pointer;
   }
-  .cart-mini-btn:hover { background: #e8e4da; }
+  .cart-mini-btn:hover { background: #c1cdc0; }
 
   .cart-actions {
     display: flex;
@@ -8459,17 +8500,17 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     text-decoration: none;
   }
   .cart-btn-primary {
-    background: #1e2320;
-    color: #f8f5ef;
-    border: 1px solid #1e2320;
+    background: #242d23;
+    color: #e4ede2;
+    border: 1px solid #242d23;
   }
   .cart-btn-primary:hover { background: #313a34; }
   .cart-btn-secondary {
-    background: #fffdf9;
-    color: #1e2320;
-    border: 1px solid rgba(30, 35, 32, 0.26);
+    background: #d5dfd2;
+    color: #1a211c;
+    border: 1px solid rgba(30, 35, 32, 0.28);
   }
-  .cart-btn-secondary:hover { background: #ece8de; }
+  .cart-btn-secondary:hover { background: #c3cfc0; }
   .cart-file-btn { position: relative; overflow: hidden; }
   .cart-file-btn input[type="file"] {
     position: absolute;
@@ -8488,8 +8529,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .cart-doc-list { display: flex; flex-direction: column; gap: 10px; }
   .cart-doc-row {
     padding: 12px 14px;
-    background: #fffdf9;
-    border: 1px solid rgba(30, 35, 32, 0.12);
+    background: #d5dfd2;
+    border: 1px solid rgba(30, 35, 32, 0.16);
     border-left: 3px solid #7f8c81;
     border-radius: 3px;
   }
@@ -8583,29 +8624,29 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .cart-academy-link {
     padding: 4px 10px;
     min-height: 28px;
-    border: 1px solid rgba(132, 99, 46, 0.42);
+    border: 1px solid rgba(132, 99, 46, 0.5);
     border-radius: 2px;
-    background: rgba(255, 252, 244, 0.78);
-    color: #261d17;
+    background: #cfc3ae;
+    color: #21130a;
     font: 600 11.5px/1.2 Arial, Helvetica, sans-serif;
     cursor: pointer;
   }
   .cart-academy-link:hover {
-    background: rgba(235, 224, 198, 0.85);
+    background: #d8cdb9;
   }
 
   /* Área de despejar arquivo (.scrvrl) */
   .cart-dropzone {
     padding: 24px 20px;
     text-align: center;
-    background: rgba(248, 245, 239, 0.78);
-    border: 1.5px dashed rgba(30, 35, 32, 0.28);
+    background: #ced8cb;
+    border: 1.5px dashed rgba(30, 35, 32, 0.32);
     border-radius: 4px;
     margin-bottom: 16px;
     transition: background 0.15s ease, border-color 0.15s ease;
   }
   .cart-dropzone.is-dragover {
-    background: #eef5ec;
+    background: #d8e2d5;
     border-color: #234932;
   }
   .cart-drop-title {
@@ -8629,8 +8670,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .cart-paste-wrap {
     margin-bottom: 16px;
     padding: 12px;
-    background: rgba(248, 245, 239, 0.72);
-    border: 1px solid rgba(30, 35, 32, 0.14);
+    background: #ced8cb;
+    border: 1px solid rgba(30, 35, 32, 0.18);
     border-radius: 4px;
   }
   .cart-paste-wrap textarea {
@@ -8639,17 +8680,17 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     padding: 8px;
     margin-bottom: 8px;
     font: 12px/1.4 "Courier New", Courier, monospace;
-    border: 1px solid rgba(30, 35, 32, 0.2);
-    background: #fffdf9;
-    color: #1e2320;
+    border: 1px solid rgba(30, 35, 32, 0.24);
+    background: #d6dfd3;
+    color: #161d18;
     border-radius: 3px;
   }
 
   .cart-error {
     padding: 12px 14px;
-    background: #f8dfdf;
-    color: #7e1c1c;
-    border: 1px solid #d58989;
+    background: #dfcac8;
+    color: #6e1616;
+    border: 1px solid #b56d6d;
     border-radius: 3px;
     font-size: 13px;
   }
@@ -8805,495 +8846,424 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 }
 
 /* Fonte: src/ui/styles/real-gabinete.css */
-/* Atmosfera Real Gabinete Português de Leitura · Torre da Lembrança em todas as telas do Escrevaral.
- * Superfícies foscas em pergaminho com textura leve de giz/algodão, mogno, ouro envelhecido e
- * ilustrações WebP em guache/giz (zero gradientes puros, custo mínimo de RAM/CPU). */
+/* Dois mundos claros e calibrados no mesmo brilho descansado (L* ~ 80-83):
+ * 1) TRABALHO (criação de textos, Superfoco, máquina de escrever, ferramentas): E-Ink Sálvia #c4cfc2 preservado.
+ * 2) ESTUDO DO OFÍCIO (Academia, 14 guias, Literatura Mundial e Examinar/#oficina):
+ *    Real Gabinete Português de Leitura em pergaminho calibrado (#cfc3ae / #d8cdb9), mogno, ouro envelhecido
+ *    e textura fosca de giz/papel — zero gradientes puros, zero salto de brilho nos olhos. */
 @media screen {
   :root,
   body,
   body[data-esc-theme="eink"] {
-    --esc-rg-chalk-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23784f1f' fill-opacity='0.055'%3E%3Ccircle cx='7' cy='11' r='0.9'/%3E%3Ccircle cx='23' cy='6' r='0.7'/%3E%3Ccircle cx='41' cy='15' r='1.0'/%3E%3Ccircle cx='59' cy='8' r='0.8'/%3E%3Ccircle cx='76' cy='19' r='0.9'/%3E%3Ccircle cx='14' cy='29' r='1.0'/%3E%3Ccircle cx='33' cy='25' r='0.7'/%3E%3Ccircle cx='51' cy='32' r='0.9'/%3E%3Ccircle cx='68' cy='28' r='0.9'/%3E%3Ccircle cx='6' cy='47' r='0.8'/%3E%3Ccircle cx='25' cy='43' r='1.0'/%3E%3Ccircle cx='45' cy='50' r='0.7'/%3E%3Ccircle cx='63' cy='46' r='1.0'/%3E%3Ccircle cx='79' cy='53' r='0.8'/%3E%3Ccircle cx='17' cy='64' r='0.9'/%3E%3Ccircle cx='37' cy='69' r='1.0'/%3E%3Ccircle cx='54' cy='62' r='0.7'/%3E%3Ccircle cx='72' cy='71' r='0.9'/%3E%3Ccircle cx='11' cy='79' r='0.8'/%3E%3Ccircle cx='48' cy='80' r='0.9'/%3E%3C/g%3E%3Cg fill='%23fffcf4' fill-opacity='0.28'%3E%3Ccircle cx='16' cy='14' r='0.9'/%3E%3Ccircle cx='47' cy='10' r='0.8'/%3E%3Ccircle cx='71' cy='13' r='1.0'/%3E%3Ccircle cx='9' cy='37' r='0.8'/%3E%3Ccircle cx='39' cy='39' r='0.9'/%3E%3Ccircle cx='74' cy='41' r='0.8'/%3E%3Ccircle cx='21' cy='56' r='1.0'/%3E%3Ccircle cx='58' cy='57' r='0.8'/%3E%3Ccircle cx='32' cy='74' r='0.8'/%3E%3Ccircle cx='78' cy='76' r='0.9'/%3E%3C/g%3E%3Cpath d='M4 18 L12 16 M31 11 L38 13 M62 21 L70 19 M19 36 L27 34 M49 41 L57 39 M8 58 L16 56 M42 66 L50 64 M67 60 L75 58' stroke='%23855926' stroke-opacity='0.05' stroke-width='0.8' stroke-linecap='round'/%3E%3C/svg%3E");
-    --esc-rg-chalk-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23f4d398' fill-opacity='0.065'%3E%3Ccircle cx='8' cy='10' r='0.9'/%3E%3Ccircle cx='26' cy='7' r='0.7'/%3E%3Ccircle cx='44' cy='14' r='1.0'/%3E%3Ccircle cx='63' cy='9' r='0.8'/%3E%3Ccircle cx='78' cy='18' r='0.9'/%3E%3Ccircle cx='15' cy='28' r='0.9'/%3E%3Ccircle cx='35' cy='24' r='0.7'/%3E%3Ccircle cx='53' cy='31' r='0.9'/%3E%3Ccircle cx='70' cy='27' r='1.0'/%3E%3Ccircle cx='24' cy='43' r='0.9'/%3E%3Ccircle cx='65' cy='45' r='0.9'/%3E%3Ccircle cx='18' cy='65' r='0.9'/%3E%3Ccircle cx='38' cy='68' r='1.0'/%3E%3Ccircle cx='73' cy='72' r='0.9'/%3E%3C/g%3E%3C/svg%3E");
-
-    --esc-bg: #efe6d5;
-    --esc-surface: #efe6d5;
-    --esc-paper: #f3ebdc;
-    --esc-pill: #e5d8c0;
-    --esc-ink: #24160e;
-    --esc-manuscript: #160c06;
-    --esc-muted: #5a402b;
-    --esc-border: #9e7844;
-    --esc-dash: rgba(138, 98, 42, 0.3);
-    --esc-hover: rgba(84, 52, 24, 0.065);
-    --esc-selected: rgba(114, 72, 28, 0.11);
-    --esc-weave-bg: #381f13;
-    --esc-weave-hover: #4b2b1a;
-    --esc-weave-ink: #fbf3e2;
-    --esc-elevated: #e7dbc4;
-    --esc-elevated-hover: #dfd0b5;
-    --esc-line-soft: rgba(138, 98, 42, 0.28);
-    --esc-line-strong: rgba(138, 98, 42, 0.48);
-    --esc-scroll-thumb: #c4ae88;
-    --esc-scroll-hover: #a68b5f;
-    --esc-ornament: rgba(146, 102, 42, 0.52);
+    --esc-rg-chalk-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23634118' fill-opacity='0.06'%3E%3Ccircle cx='7' cy='11' r='0.9'/%3E%3Ccircle cx='23' cy='6' r='0.7'/%3E%3Ccircle cx='41' cy='15' r='1.0'/%3E%3Ccircle cx='59' cy='8' r='0.8'/%3E%3Ccircle cx='76' cy='19' r='0.9'/%3E%3Ccircle cx='14' cy='29' r='1.0'/%3E%3Ccircle cx='33' cy='25' r='0.7'/%3E%3Ccircle cx='51' cy='32' r='0.9'/%3E%3Ccircle cx='68' cy='28' r='0.9'/%3E%3Ccircle cx='6' cy='47' r='0.8'/%3E%3Ccircle cx='25' cy='43' r='1.0'/%3E%3Ccircle cx='45' cy='50' r='0.7'/%3E%3Ccircle cx='63' cy='46' r='1.0'/%3E%3Ccircle cx='79' cy='53' r='0.8'/%3E%3Ccircle cx='17' cy='64' r='0.9'/%3E%3Ccircle cx='37' cy='69' r='1.0'/%3E%3Ccircle cx='54' cy='62' r='0.7'/%3E%3Ccircle cx='72' cy='71' r='0.9'/%3E%3Ccircle cx='11' cy='79' r='0.8'/%3E%3Ccircle cx='48' cy='80' r='0.9'/%3E%3C/g%3E%3Cg fill='%23ede2ce' fill-opacity='0.26'%3E%3Ccircle cx='16' cy='14' r='0.9'/%3E%3Ccircle cx='47' cy='10' r='0.8'/%3E%3Ccircle cx='71' cy='13' r='1.0'/%3E%3Ccircle cx='9' cy='37' r='0.8'/%3E%3Ccircle cx='39' cy='39' r='0.9'/%3E%3Ccircle cx='74' cy='41' r='0.8'/%3E%3Ccircle cx='21' cy='56' r='1.0'/%3E%3Ccircle cx='58' cy='57' r='0.8'/%3E%3Ccircle cx='32' cy='74' r='0.8'/%3E%3Ccircle cx='78' cy='76' r='0.9'/%3E%3C/g%3E%3Cpath d='M4 18 L12 16 M31 11 L38 13 M62 21 L70 19 M19 36 L27 34 M49 41 L57 39 M8 58 L16 56 M42 66 L50 64 M67 60 L75 58' stroke='%23785020' stroke-opacity='0.055' stroke-width='0.8' stroke-linecap='round'/%3E%3C/svg%3E");
+    --esc-rg-chalk-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23e8c88e' fill-opacity='0.065'%3E%3Ccircle cx='8' cy='10' r='0.9'/%3E%3Ccircle cx='26' cy='7' r='0.7'/%3E%3Ccircle cx='44' cy='14' r='1.0'/%3E%3Ccircle cx='63' cy='9' r='0.8'/%3E%3Ccircle cx='78' cy='18' r='0.9'/%3E%3Ccircle cx='15' cy='28' r='0.9'/%3E%3Ccircle cx='35' cy='24' r='0.7'/%3E%3Ccircle cx='53' cy='31' r='0.9'/%3E%3Ccircle cx='70' cy='27' r='1.0'/%3E%3Ccircle cx='24' cy='43' r='0.9'/%3E%3Ccircle cx='65' cy='45' r='0.9'/%3E%3Ccircle cx='18' cy='65' r='0.9'/%3E%3Ccircle cx='38' cy='68' r='1.0'/%3E%3Ccircle cx='73' cy='72' r='0.9'/%3E%3C/g%3E%3C/svg%3E");
   }
 
   /* =====================================================================
-   * 1. PAPEL PERGAMINHO FOSCO EM TODAS AS COLUNAS (ZERO GRADIENTE PURO)
-   * ===================================================================== */
-  html,
-  body,
-  body[data-esc-theme="eink"] {
-    background-color: #efe6d5 !important;
-    background-image: var(--esc-rg-chalk-light) !important;
-    background-repeat: repeat !important;
-    background-size: 84px 84px !important;
-    color: #24160e !important;
-  }
-
-  ::selection,
-  *::selection {
-    background: #381f13 !important;
-    color: #fdf6e7 !important;
-  }
-
-  body[data-view="workspace"] #location-path,
-  body[data-view="workspace"] #esc-workspace,
-  body[data-view="workspace"] #navigation,
-  body[data-view="workspace"] #items-column,
-  body[data-view="workspace"] #esc-items-header,
-  body[data-view="workspace"] #esc-items-list,
-  body[data-view="workspace"] #esc-sonnet-panel,
-  body[data-view="workspace"] #writing-space,
-  body[data-view="workspace"]:not([data-machine="true"]) #writing-space,
-  body[data-view="workspace"][data-machine="true"] #writing-space,
-  body[data-view="workspace"] #writing-space .masthead,
-  body[data-view="workspace"] #writing-space .desk,
-  body[data-view="workspace"] #writing-space .paper,
-  body[data-view="workspace"]:not([data-machine="true"]) #writing-space .paper,
-  body[data-view="workspace"][data-machine="true"] #writing-space .paper,
-  body[data-view="workspace"] #writing-space .focus-mask,
-  body[data-view="workspace"]:not([data-machine="true"]) #writing-space .focus-mask,
-  body[data-view="workspace"][data-machine="true"] #writing-space .focus-mask,
-  body[data-view="workspace"] #writing-space .note-heading,
-  body[data-view="workspace"] #writing-space .writing-toolbar,
-  body[data-view="workspace"] #writing-space .esc-rich-toolbar,
-  body[data-view="workspace"] #writing-space .paper-footer,
-  body[data-view="workspace"] #writing-space .desk-inspector,
-  body[data-view="workspace"] #manuscrito,
-  body[data-view="workspace"] #esc-rich-editor,
-  body[data-view="workspace"] #esc-reference-view,
-  body[data-view="workspace"] .esc-search-wrap,
-  body[data-view="workspace"] #esc-pomodoro-dock,
-  body[data-view="workspace"] .esc-nav-footer,
-  body[data-view="workspace"] .sheet {
-    background-color: #efe6d5 !important;
-    background-image: var(--esc-rg-chalk-light) !important;
-    background-repeat: repeat !important;
-    background-size: 84px 84px !important;
-  }
-
-  /* Folha de escrita com leve destaque de papel marfim limpo e tinta espresso AAA */
-  body[data-view="workspace"] #writing-space .paper,
-  body[data-view="workspace"] #writing-space .note-heading,
-  body[data-view="workspace"] #writing-space .writing-toolbar,
-  body[data-view="workspace"] #writing-space .esc-rich-toolbar,
-  body[data-view="workspace"] #writing-space .paper-footer,
-  body[data-view="workspace"] #writing-space .focus-mask,
-  body[data-view="workspace"] #manuscrito,
-  body[data-view="workspace"] #esc-rich-editor {
-    background-color: #f4ecdd !important;
-  }
-
-  body[data-view="workspace"] #manuscrito,
-  body[data-view="workspace"] #esc-rich-editor,
-  body[data-view="workspace"] #writing-space .title {
-    color: #160c06 !important;
-    caret-color: #6b3f16;
-  }
-
-  /* Divisórias em fio dourado-sépia (toda a mesa respira biblioteca) */
-  body[data-view="workspace"] #location-path {
-    border-bottom: 1px dashed rgba(138, 98, 42, 0.34) !important;
-    color: #4f3520 !important;
-  }
-  body[data-view="workspace"] #navigation,
-  body[data-view="workspace"] #items-column {
-    border-right: 1px dashed rgba(138, 98, 42, 0.32) !important;
-  }
-  body[data-view="workspace"] .esc-nav-brand,
-  body[data-view="workspace"] .esc-new-project-wrap,
-  body[data-view="workspace"] #esc-items-header,
-  body[data-view="workspace"] .esc-search-wrap,
-  body[data-view="workspace"] #writing-space .masthead,
-  body[data-view="workspace"] #writing-space .writing-toolbar,
-  body[data-view="workspace"] #writing-space .esc-rich-toolbar {
-    border-bottom: 1px dashed rgba(138, 98, 42, 0.3) !important;
-  }
-  body[data-view="workspace"] #esc-pomodoro-dock,
-  body[data-view="workspace"] .esc-nav-footer,
-  body[data-view="workspace"] #writing-space .paper-footer {
-    border-top: 1px dashed rgba(138, 98, 42, 0.3) !important;
-  }
-
-  /* Botão principal "+ Novo projeto" em couro mogno com filete dourado */
-  body[data-view="workspace"] #esc-new-project,
-  body[data-view="workspace"] #esc-path-return {
-    background-color: #381f13 !important;
-    background-image: var(--esc-rg-chalk-dark) !important;
-    color: #fbf3e2 !important;
-    border: 1px solid #b5853d !important;
-    outline: 0 !important;
-    border-radius: 5px !important;
-  }
-  body[data-view="workspace"] #esc-new-project:hover,
-  body[data-view="workspace"] #esc-path-return:hover {
-    background-color: #4c2b1a !important;
-    border-color: #e6ba6a !important;
-    color: #fff8eb !important;
-  }
-
-  /* Hover contínuo suave em sépia (nunca cinza frio, nunca quadrado interno) */
-  body[data-view="workspace"] button:hover,
-  body[data-view="workspace"] .file-label:hover {
-    background-color: rgba(84, 52, 24, 0.068);
-  }
-  body[data-view="workspace"] .esc-project-row:hover,
-  body[data-view="workspace"] .esc-folder-item:hover,
-  body[data-view="workspace"] .esc-tree-note:hover,
-  body[data-view="workspace"] .esc-nav-item:hover,
-  body[data-view="workspace"] .esc-item-card:hover {
-    background-color: rgba(114, 72, 28, 0.075) !important;
-  }
-  body[data-view="workspace"] .esc-nav-item[aria-current="true"],
-  body[data-view="workspace"] .esc-item-card.is-selected {
-    background-color: rgba(114, 72, 28, 0.125) !important;
-    border-left: 3px solid #9e6a26 !important;
-  }
-
-  /* Controles ativos em mogno + creme (mantendo .sheet:not(#oficina) intacto) */
-  body[data-view="workspace"] .esc-search-pill,
-  body[data-view="workspace"] #esc-new-note,
-  body[data-view="workspace"] .esc-folder-search-wrap input {
-    background-color: #e7dbc4 !important;
-    border-color: rgba(138, 98, 42, 0.36) !important;
-    color: #24160e !important;
-  }
-  body[data-view="workspace"] #desk-paragraph[aria-pressed="true"],
-  body[data-view="workspace"] #esc-sound-btn[aria-pressed="true"],
-  body[data-view="workspace"] #esc-format-toggle[aria-pressed="true"],
-  body[data-view="workspace"] .esc-switch-track {
-    background-color: #381f13 !important;
-    color: #fbf3e2 !important;
-    border-color: #8f6023 !important;
-  }
-  body[data-view="workspace"] #desk-paragraph[aria-pressed="true"]:hover,
-  body[data-view="workspace"] #esc-sound-btn[aria-pressed="true"]:hover,
-  body[data-view="workspace"] #esc-format-toggle[aria-pressed="true"]:hover {
-    background-color: #4d2c1b !important;
-    color: #fff8eb !important;
-    border-color: #b8883c !important;
-  }
-  body[data-view="workspace"] #esc-open-mesa,
-  body[data-view="workspace"] .esc-nav-tool-btn,
-  body[data-view="workspace"] .esc-nav-item,
-  body[data-view="workspace"] #writing-space .desk-tools button,
-  body[data-view="workspace"] #writing-space .writing-toolbar button {
-    color: #26160d !important;
-  }
-  body[data-view="workspace"] .esc-nav-section-label,
-  body[data-view="workspace"] .eyebrow,
-  body[data-view="workspace"] .manuscript-date,
-  body[data-view="workspace"] .quiet {
-    color: #60442d !important;
-  }
-
-  /* =====================================================================
-   * 2. PORTAL ILUMINADO "ACADEMIA E LITERATURA" NA BARRA LATERAL
-   *    (Miniatura real do Real Gabinete visível já na mesa de escrita!)
+   * 1. PORTAL PARA O MUNDO DE ESTUDO NA BARRA LATERAL DO TRABALHO
+   *    (O espaço de trabalho permanece 100% E-Ink Sálvia #c4cfc2;
+   *     este botão é a porta iluminada do Real Gabinete.)
    * ===================================================================== */
   body[data-view="workspace"] #navigation .esc-academy-card-btn {
     position: relative;
     overflow: hidden;
-    padding: 11px 11px !important;
-    border: 1.5px solid #b5853d !important;
-    border-left: 4px solid #d4a44e !important;
-    border-radius: 7px !important;
+    padding: 10px 11px !important;
+    border: 1.5px solid #9e7334 !important;
+    border-left: 4px solid #c49545 !important;
+    border-radius: 6px !important;
     background-color: #331b10 !important;
     background-image: var(--esc-rg-hero-art, var(--esc-rg-chalk-dark)) !important;
     background-size: cover !important;
     background-position: center 42% !important;
-    color: #fbf3e2 !important;
-    box-shadow: 0 3px 10px rgba(32, 17, 9, 0.18) !important;
+    color: #efe3cc !important;
+    box-shadow: 0 2px 8px rgba(24, 15, 8, 0.16) !important;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn::before {
     content: "";
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    background-color: rgba(25, 13, 7, 0.72);
+    background-color: rgba(25, 13, 7, 0.74);
     pointer-events: none;
     transition: background-color 140ms ease;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn:hover {
-    border-color: #f0ca82 !important;
-    border-left-color: #f0ca82 !important;
+    border-color: #d9ae62 !important;
+    border-left-color: #d9ae62 !important;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::before {
-    background-color: rgba(25, 13, 7, 0.56);
+    background-color: rgba(25, 13, 7, 0.58);
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn > * {
     position: relative;
     z-index: 1;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-ico {
-    color: #f0c675 !important;
+    color: #e6bd70 !important;
     opacity: 1 !important;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-card-text strong {
-    color: #fdf6e7 !important;
+    color: #f2e7d2 !important;
     font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
     text-shadow: 0 1px 4px rgba(10, 5, 2, 0.85);
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-card-text small {
-    color: #ebd6b2 !important;
+    color: #dfcca8 !important;
     text-shadow: 0 1px 3px rgba(10, 5, 2, 0.85);
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-chevron {
-    color: #f0c675 !important;
+    color: #e6bd70 !important;
     opacity: 0.95 !important;
   }
 
   /* =====================================================================
-   * 3. CABEÇALHOS ILUMINADOS DO REAL GABINETE EM TODAS AS TELAS E ABAS
-   *    (Examinar, Universo, Quadro de Giz, Versões, Acervo, Ajustes, Utilidades, Cartório)
+   * 2. MUNDO DE ESTUDO: EXAMINAR (#oficina / #ptbr-dashboard)
+   *    Pergaminho calibrado (#cfc3ae = mesma luminância do E-Ink Sálvia #c4cfc2!),
+   *    cabeçalho pintado do Real Gabinete e zero sobras do verde antigo.
    * ===================================================================== */
-  #oficina > .sheet-heading,
-  #acervo > .sheet-heading,
-  #mesa > .sheet-heading,
-  #lineage-panel > .sheet-heading,
-  #utilidades > .sheet-heading,
-  #story-screen > .finish-heading,
-  #chalkboard .chalk-heading,
-  #esc-cartorio-overlay .esc-cartorio-head {
+  body[data-view="workspace"] #oficina,
+  #oficina,
+  #oficina[data-ptbr-dashboard="true"],
+  body[data-view="workspace"] #oficina[data-ptbr-dashboard="true"] {
+    background-color: #cfc3ae !important;
+    background-image: var(--esc-rg-chalk-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    color: #1e120a !important;
+    border-color: rgba(132, 92, 38, 0.42) !important;
+    scrollbar-width: thin;
+    scrollbar-color: #9e8664 #cfc3ae;
+  }
+
+  #oficina::-webkit-scrollbar,
+  #oficina .ptbr-word-scroll::-webkit-scrollbar {
+    width: 10px;
+    height: 9px;
+  }
+  #oficina::-webkit-scrollbar-track,
+  #oficina .ptbr-word-scroll::-webkit-scrollbar-track {
+    background: #cfc3ae;
+  }
+  #oficina::-webkit-scrollbar-thumb,
+  #oficina .ptbr-word-scroll::-webkit-scrollbar-thumb {
+    background: #9e8664;
+    border-radius: 6px;
+    border: 2px solid #cfc3ae;
+  }
+  #oficina::-webkit-scrollbar-thumb:hover,
+  #oficina .ptbr-word-scroll::-webkit-scrollbar-thumb:hover {
+    background: #7f6645;
+  }
+
+  /* Cabeçalho pintado do Examinar (escrivaninha iluminada com livro aberto, pena e velas) */
+  #oficina > .sheet-heading {
     position: relative;
     overflow: hidden;
     padding: 16px 20px !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 14px !important;
     border-radius: 8px !important;
-    border: 1.5px solid #b5853d !important;
+    border: 1.5px solid #a67b38 !important;
     background-color: #321b10 !important;
-    background-image: var(--esc-rg-hero-art, var(--esc-rg-chalk-dark)) !important;
-    background-size: cover !important;
-    background-position: center 42% !important;
-    color: #fbf3e2 !important;
-    box-shadow: 0 4px 14px rgba(32, 17, 9, 0.16) !important;
-  }
-
-  /* Examinar ganha a mesa de leitura iluminada (livro aberto + pena + velas) */
-  #oficina > .sheet-heading {
     background-image: var(--esc-rg-book-art, var(--esc-rg-chalk-dark)) !important;
+    background-size: cover !important;
     background-position: right center !important;
+    color: #f0e4ce !important;
+    box-shadow: 0 4px 12px rgba(24, 13, 6, 0.18) !important;
   }
-
-  /* Universo e Acervo ganham a alcova do globo armilar e pilhas de clássicos */
-  #story-screen > .finish-heading,
-  #acervo > .sheet-heading {
-    background-image: var(--esc-rg-lit-art, var(--esc-rg-chalk-dark)) !important;
-    background-position: right center !important;
-  }
-
-  #oficina > .sheet-heading::before,
-  #acervo > .sheet-heading::before,
-  #mesa > .sheet-heading::before,
-  #lineage-panel > .sheet-heading::before,
-  #utilidades > .sheet-heading::before,
-  #story-screen > .finish-heading::before,
-  #chalkboard .chalk-heading::before,
-  #esc-cartorio-overlay .esc-cartorio-head::before {
+  #oficina > .sheet-heading::before {
     content: "";
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     background-color: rgba(24, 12, 6, 0.72);
     pointer-events: none;
   }
-
-  #oficina > .sheet-heading > *,
-  #acervo > .sheet-heading > *,
-  #mesa > .sheet-heading > *,
-  #lineage-panel > .sheet-heading > *,
-  #utilidades > .sheet-heading > *,
-  #story-screen > .finish-heading > *,
-  #chalkboard .chalk-heading > *,
-  #esc-cartorio-overlay .esc-cartorio-head > * {
+  #oficina > .sheet-heading > * {
     position: relative;
     z-index: 1;
   }
-
-  #oficina > .sheet-heading .eyebrow,
-  #acervo > .sheet-heading .eyebrow,
-  #mesa > .sheet-heading .eyebrow,
-  #lineage-panel > .sheet-heading small,
-  #story-screen > .finish-heading small,
-  #chalkboard .chalk-heading small,
-  #esc-cartorio-overlay .esc-cartorio-head small {
-    color: #f0ca82 !important;
+  #oficina > .sheet-heading .eyebrow {
+    color: #e8be72 !important;
     letter-spacing: 0.08em;
   }
-
-  #oficina > .sheet-heading h2,
-  #acervo > .sheet-heading h2,
-  #mesa > .sheet-heading h2,
-  #lineage-panel > .sheet-heading h2,
-  #utilidades > .sheet-heading h2,
-  #story-screen > .finish-heading h2,
-  #chalkboard .chalk-heading h2,
-  #esc-cartorio-overlay .esc-cartorio-head h2 {
-    color: #fdf6e7 !important;
+  #oficina > .sheet-heading h2 {
+    color: #f2e7d2 !important;
     font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
     text-shadow: 0 1px 6px rgba(10, 5, 2, 0.75);
   }
-
-  #oficina > .sheet-heading button,
-  #acervo > .sheet-heading button,
-  #mesa > .sheet-heading button,
-  #lineage-panel > .sheet-heading button,
-  #utilidades > .sheet-heading button,
-  #story-screen > .finish-heading button,
-  #chalkboard .chalk-heading button,
-  #esc-cartorio-overlay .esc-cartorio-head button {
-    background-color: rgba(24, 12, 6, 0.78) !important;
-    color: #fbf3e2 !important;
-    border: 1px solid rgba(238, 198, 126, 0.65) !important;
+  #oficina > .sheet-heading button {
+    background-color: rgba(24, 12, 6, 0.8) !important;
+    color: #f0e4ce !important;
+    border: 1px solid rgba(232, 190, 114, 0.65) !important;
     border-radius: 6px !important;
   }
-  #oficina > .sheet-heading button:hover,
-  #acervo > .sheet-heading button:hover,
-  #mesa > .sheet-heading button:hover,
-  #lineage-panel > .sheet-heading button:hover,
-  #utilidades > .sheet-heading button:hover,
-  #story-screen > .finish-heading button:hover,
-  #chalkboard .chalk-heading button:hover,
-  #esc-cartorio-overlay .esc-cartorio-head button:hover {
+  #oficina > .sheet-heading button:hover {
     background-color: #54301b !important;
-    border-color: #f0ca82 !important;
-    color: #fff8eb !important;
+    border-color: #ebd08c !important;
+    color: #f6ecda !important;
   }
 
-  /* =====================================================================
-   * 4. OFICINA (EXAMINAR), ESTANTE, UNIVERSO, CARTÓRIO E BLOQUEIO EM HARMONIA
-   * ===================================================================== */
-  #oficina .ptbr-badge,
-  #oficina .ptbr-aside-kicker,
-  #oficina .ptbr-excerpt-index {
-    background-color: #381f13 !important;
-    color: #fbf3e2 !important;
+  /* Tipografia, divisórias e selos reais de #ptbr-dashboard (zero verde antigo) */
+  #oficina #ptbr-dashboard {
+    color: #1e120a !important;
   }
-  #oficina .ptbr-tab[aria-pressed="true"],
-  #oficina .ptbr-home-lens[aria-pressed="true"],
-  #oficina .ptbr-class-chip[aria-pressed="true"] {
-    background-color: #381f13 !important;
-    color: #fbf3e2 !important;
-    border-color: #b5853d !important;
+  #oficina #ptbr-dashboard .ptbr-title,
+  #oficina #ptbr-dashboard .ptbr-active-note-title,
+  #oficina #ptbr-dashboard .ptbr-reading-selection,
+  #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-obs-title,
+  #oficina #ptbr-dashboard .ptbr-goals strong,
+  #oficina #ptbr-dashboard .ptbr-wheel button > span,
+  #oficina #ptbr-dashboard .ptbr-example-text,
+  #oficina #ptbr-dashboard .ptbr-ctx-line,
+  #oficina #ptbr-dashboard .ptbr-rhyme-line,
+  #oficina #ptbr-dashboard .ptbr-scansion-verse {
+    color: #1e120a !important;
   }
-  #oficina .ptbr-tab,
-  #oficina .ptbr-home-lens,
-  #oficina .ptbr-excerpt,
-  #oficina .ptbr-reading-aside,
-  #oficina .ptbr-example-card,
-  #oficina .ptbr-guide-card {
-    background-color: #faf4e6 !important;
-    border-color: rgba(146, 102, 42, 0.36) !important;
-    color: #24160e !important;
-  }
-  #oficina .ptbr-tab:hover:not([aria-pressed="true"]),
-  #oficina .ptbr-home-lens:hover:not([aria-pressed="true"]),
-  #oficina .ptbr-excerpt:hover:not([aria-pressed="true"]),
-  #oficina .ptbr-example-card:hover {
-    background-color: #fffaf0 !important;
-    border-color: #9e6a26 !important;
-    color: #160c06 !important;
-  }
-  #oficina .ptbr-tab[aria-pressed="true"]:hover,
-  #oficina .ptbr-home-lens[aria-pressed="true"]:hover,
-  #oficina .ptbr-class-chip[aria-pressed="true"]:hover {
-    background-color: #4d2c1b !important;
-    color: #fff8eb !important;
-    border-color: #e6ba6a !important;
-  }
-  #oficina .ptbr-excerpt[aria-pressed="true"],
-  #oficina .ptbr-word[aria-pressed="true"] {
-    border-color: #8f581d !important;
-    background-color: #f7e9cc !important;
+  #oficina #ptbr-dashboard .ptbr-intro,
+  #oficina #ptbr-dashboard .ptbr-active-note-meta,
+  #oficina #ptbr-dashboard .ptbr-goals span,
+  #oficina #ptbr-dashboard .ptbr-lens-description,
+  #oficina #ptbr-dashboard .ptbr-status,
+  #oficina #ptbr-dashboard .ptbr-outcome > p:first-of-type,
+  #oficina #ptbr-dashboard .ptbr-reading-help,
+  #oficina #ptbr-dashboard .ptbr-reading-aside p,
+  #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-evidence p,
+  #oficina #ptbr-dashboard .ptbr-aside-counter,
+  #oficina #ptbr-dashboard .ptbr-nav-counter,
+  #oficina #ptbr-dashboard .ptbr-rhythm-count,
+  #oficina #ptbr-dashboard .ptbr-rhyme-pair,
+  #oficina #ptbr-dashboard .ptbr-examples-sub,
+  #oficina #ptbr-dashboard .ptbr-example-note,
+  #oficina #ptbr-dashboard .ptbr-reading-empty,
+  #oficina #ptbr-dashboard .ptbr-legend,
+  #oficina #ptbr-dashboard .ptbr-empty,
+  #oficina #ptbr-dashboard .ptbr-fragment-original,
+  #oficina #ptbr-dashboard .ptbr-syntax-links,
+  #oficina #ptbr-dashboard .ptbr-punct,
+  #oficina #ptbr-dashboard .ptbr-overline {
+    color: #4a3321 !important;
   }
 
-  /* Estante (#gabinete), Universo (#story-screen), Quadro de Giz (#chalkboard), Cartório e Bloqueio */
-  #story-screen,
-  #chalkboard .chalk-paper,
-  #esc-cartorio-overlay .esc-cartorio-card,
-  .esc-calculator,
-  #app-dialog .app-dialog-card {
-    background-color: #efe6d5 !important;
-    background-image: var(--esc-rg-chalk-light) !important;
-    background-repeat: repeat !important;
-    background-size: 84px 84px !important;
-    border: 1.5px solid #a67b38 !important;
-    color: #24160e !important;
+  #oficina #ptbr-dashboard .ptbr-ribbon,
+  #oficina #ptbr-dashboard .ptbr-reading,
+  #oficina #ptbr-dashboard .ptbr-reading-fragment,
+  #oficina #ptbr-dashboard .ptbr-examples-box,
+  #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-observation,
+  #oficina #ptbr-dashboard .ptbr-aside-nav {
+    border-color: rgba(126, 88, 36, 0.28) !important;
   }
 
-  /* Fundo cinematográfico da Biblioteca na tela de Estante (#gabinete) e Bloqueio (#lock-curtain) */
-  #gabinete .cabinet-workspace,
-  #lock-curtain {
-    background-color: #2b170d !important;
-    background-image: var(--esc-rg-hero-art, var(--esc-rg-chalk-dark)) !important;
-    background-size: cover !important;
-    background-position: center center !important;
+  /* Selos escuros em mogno com texto pergaminho suave (sem branco estourado) */
+  #oficina #ptbr-dashboard .ptbr-active-note-badge,
+  #oficina #ptbr-dashboard .ptbr-reading-aside > .ptbr-overline,
+  #oficina #ptbr-dashboard .ptbr-fragment-number,
+  #oficina #ptbr-dashboard .ptbr-meter-badge,
+  #oficina #ptbr-dashboard .ptbr-rhyme-badge,
+  #oficina #ptbr-dashboard .ptbr-example-theme,
+  #oficina #ptbr-dashboard .ptbr-guide-toggle::before {
+    background-color: #3a2013 !important;
+    color: #f0e4ce !important;
   }
-  #gabinete .cabinet-window,
-  #gabinete .first-run,
-  #lock-curtain .lock-card,
-  #welcome-reception {
-    background-color: #f5eddc !important;
-    background-image: var(--esc-rg-chalk-light) !important;
-    background-repeat: repeat !important;
-    background-size: 84px 84px !important;
-    border: 1.5px solid #a67b38 !important;
-    color: #24160e !important;
-    box-shadow: 0 18px 46px rgba(15, 8, 4, 0.42) !important;
+
+  /* Cartões e botões calibrados em #d8cdb9 (mesma luminância exata do E-Ink Sálvia #c4cfc2!) */
+  #oficina #ptbr-dashboard .ptbr-ribbon-btn,
+  #oficina #ptbr-dashboard .ptbr-goals button,
+  #oficina #ptbr-dashboard .ptbr-wheel button,
+  #oficina #ptbr-dashboard .ptbr-back,
+  #oficina #ptbr-dashboard .ptbr-action,
+  #oficina #ptbr-dashboard .ptbr-reading-aside,
+  #oficina #ptbr-dashboard .ptbr-reading-aside button,
+  #oficina #ptbr-dashboard .ptbr-class-chip,
+  #oficina #ptbr-dashboard .ptbr-nav-pill,
+  #oficina #ptbr-dashboard .ptbr-pill-mode-btn,
+  #oficina #ptbr-dashboard .ptbr-guide-toggle,
+  #oficina #ptbr-dashboard .ptbr-guide-card,
+  #oficina #ptbr-dashboard .ptbr-excerpt,
+  #oficina #ptbr-dashboard .ptbr-example-card,
+  #oficina #ptbr-dashboard .ptbr-example-btn,
+  #oficina #ptbr-dashboard .ptbr-example-banner,
+  #oficina #ptbr-dashboard .ptbr-blank-samples,
+  #oficina #ptbr-dashboard .ptbr-clause-badge,
+  #oficina #ptbr-dashboard .ptbr-syntax-whole {
+    background-color: #d8cdb9 !important;
+    border-color: rgba(126, 88, 36, 0.36) !important;
+    color: #1e120a !important;
   }
-  #gabinete .os-bar,
-  #gabinete .os-footer,
-  #gabinete .window-bar {
-    background-color: #361e11 !important;
-    color: #fbf3e2 !important;
+
+  #oficina #ptbr-dashboard .ptbr-example-card,
+  #oficina #ptbr-dashboard .ptbr-guide-card {
+    border-left: 3px solid #8b5a1e !important;
+  }
+
+  #oficina #ptbr-dashboard .ptbr-signal {
+    background-color: rgba(139, 90, 30, 0.16) !important;
+    color: #5c360c !important;
+  }
+
+  #oficina #ptbr-dashboard .ptbr-reading-aside blockquote {
+    background-color: rgba(235, 224, 204, 0.55) !important;
+    border-left-color: #8b5a1e !important;
+    color: #1e120a !important;
+  }
+
+  #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-evidence,
+  #oficina #ptbr-dashboard .ptbr-term-gloss {
+    background-color: rgba(94, 62, 24, 0.09) !important;
+    color: #362212 !important;
+  }
+
+  /* Hover suave calibrado (sem saltar para branco!) */
+  #oficina #ptbr-dashboard .ptbr-ribbon-btn:hover:not(:disabled):not([aria-current="true"]),
+  #oficina #ptbr-dashboard .ptbr-goals button:hover,
+  #oficina #ptbr-dashboard .ptbr-wheel button:hover:not(:disabled):not([aria-current="true"]),
+  #oficina #ptbr-dashboard .ptbr-back:hover,
+  #oficina #ptbr-dashboard .ptbr-action:hover,
+  #oficina #ptbr-dashboard .ptbr-reading-aside button:hover:not(:disabled):not(.ptbr-btn-primary),
+  #oficina #ptbr-dashboard .ptbr-class-chip:hover:not([aria-pressed="true"]),
+  #oficina #ptbr-dashboard .ptbr-nav-pill:hover:not(:disabled):not([aria-pressed="true"]),
+  #oficina #ptbr-dashboard .ptbr-pill-mode-btn:hover:not([aria-pressed="true"]),
+  #oficina #ptbr-dashboard .ptbr-guide-toggle:hover,
+  #oficina #ptbr-dashboard .ptbr-guide-toggle[aria-expanded="true"],
+  #oficina #ptbr-dashboard .ptbr-excerpt:hover:not([aria-pressed="true"]) {
+    background-color: #e1d7c4 !important;
+    border-color: #8b5a1e !important;
+    color: #180d06 !important;
+  }
+
+  /* Estados ativos / primários em mogno encadernado com texto pergaminho suave */
+  #oficina #ptbr-dashboard .ptbr-ribbon-btn[aria-current="true"],
+  #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"],
+  #oficina #ptbr-dashboard .ptbr-class-chip[aria-pressed="true"],
+  #oficina #ptbr-dashboard .ptbr-nav-pill[aria-pressed="true"],
+  #oficina #ptbr-dashboard .ptbr-pill-mode-btn[aria-pressed="true"],
+  #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-primary,
+  #oficina #ptbr-dashboard .ptbr-example-exit,
+  #oficina #ptbr-dashboard .ptbr-example-btn:hover {
+    background-color: #3a2013 !important;
+    color: #f0e4ce !important;
     border-color: #a67b38 !important;
   }
-  #gabinete .os-bar button,
-  #gabinete .os-footer button,
-  #gabinete .window-bar button {
-    color: #fbf3e2 !important;
+  #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"] > span,
+  #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"] small {
+    color: #f0e4ce !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-ribbon-btn[aria-current="true"]:hover,
+  #oficina #ptbr-dashboard .ptbr-class-chip[aria-pressed="true"]:hover,
+  #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-primary:hover,
+  #oficina #ptbr-dashboard .ptbr-example-exit:hover {
+    background-color: #4f2c1a !important;
+    color: #f5ebd7 !important;
+    border-color: #d9ae62 !important;
   }
 
-  /* =====================================================================
-   * 5. MODO ESCURO EM NOGUEIRA PROFUNDA FOSCA
-   * ===================================================================== */
-  body[data-theme="escuro"],
-  body[data-theme="escuro"] #location-path,
-  body[data-theme="escuro"] #esc-workspace,
-  body[data-theme="escuro"] #navigation,
-  body[data-theme="escuro"] #items-column,
-  body[data-theme="escuro"] #esc-items-header,
-  body[data-theme="escuro"] #esc-items-list,
-  body[data-theme="escuro"] #writing-space,
-  body[data-theme="escuro"] #writing-space .paper,
-  body[data-theme="escuro"] #writing-space .masthead,
-  body[data-theme="escuro"] #writing-space .note-heading,
-  body[data-theme="escuro"] #writing-space .writing-toolbar,
-  body[data-theme="escuro"] #writing-space .paper-footer,
-  body[data-theme="escuro"] #manuscrito,
-  body[data-theme="escuro"] #esc-rich-editor,
-  body[data-theme="escuro"] .sheet {
-    background-color: #1f140e !important;
+  /* Seleção limpa de trecho e palavra em ouro/mogno (sem borda dupla) */
+  #oficina #ptbr-dashboard .ptbr-excerpt[aria-pressed="true"] {
+    background-color: #e3d9c6 !important;
+    color: #180d06 !important;
+    border: 1.5px solid #7a4b1a !important;
+    border-left: 4px solid #7a4b1a !important;
+    outline: none !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-word[aria-pressed="true"],
+  #oficina #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"],
+  #oficina #ptbr-dashboard .ptbr-syntax-whole[aria-pressed="true"] {
+    border-color: #6b3d14 !important;
+    outline: none !important;
+    box-shadow: 0 2px 8px rgba(58, 32, 19, 0.22) !important;
+  }
+  #oficina #ptbr-dashboard [data-reading-support="true"],
+  #oficina #ptbr-dashboard .ptbr-syntax-term[data-syntax-linked="true"] {
+    box-shadow: 0 0 0 2px #8b5a1e !important;
+  }
+
+  /* Arcos de sintaxe e barras rítmicas em âmbar/mogno */
+  #oficina #ptbr-dashboard .ptbr-relation-arcs { color: #6e4117 !important; }
+  #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #e2d8c5 !important; stroke: #8b5a1e !important; }
+  #oficina #ptbr-dashboard .ptbr-arc-label { fill: #26140a !important; }
+  #oficina #ptbr-dashboard .ptbr-proportion-fill,
+  #oficina #ptbr-dashboard .ptbr-rhythm-bar { background-color: #7c4c1c !important; }
+  #oficina #ptbr-dashboard .ptbr-pulse-bar {
+    background-color: rgba(124, 76, 28, 0.16) !important;
+    border-color: rgba(124, 76, 28, 0.36) !important;
+    color: #3c210b !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-word,
+  #oficina #ptbr-dashboard .ptbr-syntax-term {
+    background-color: #d8cdb9;
+    border-color: #8b6c45;
+    color: #1e120a;
+  }
+  #oficina #ptbr-dashboard .ptbr-word[data-reading-state="ambiguo"],
+  #oficina #ptbr-dashboard .ptbr-word[data-reading-state="desconhecido"] {
+    background-color: #ddd2bf !important;
+    border-color: #826745 !important;
+    color: #21140b !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-word-tag,
+  #oficina #ptbr-dashboard .ptbr-metric-chip {
+    background-color: rgba(235, 224, 204, 0.62) !important;
+    border-color: rgba(126, 88, 36, 0.28) !important;
+    color: #24150c !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-example-banner-text {
+    color: #26150c !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-subtle {
+    background-color: transparent !important;
+    border-color: rgba(126, 88, 36, 0.36) !important;
+    color: #4a3321 !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-subtle:hover {
+    background-color: rgba(126, 88, 36, 0.12) !important;
+    color: #1e120a !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-syntax-scope-bar,
+  #oficina #ptbr-dashboard .ptbr-syntax-links,
+  #oficina #ptbr-dashboard .ptbr-empty {
+    border-color: rgba(126, 88, 36, 0.38) !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-proportion-bar {
+    background-color: rgba(94, 62, 24, 0.16) !important;
+  }
+  #oficina #ptbr-dashboard .ptbr-word:focus-visible,
+  #oficina #ptbr-dashboard .ptbr-excerpt:focus-visible,
+  #oficina #ptbr-dashboard .ptbr-syntax-term:focus-visible,
+  #oficina #ptbr-dashboard .ptbr-syntax-whole:focus-visible {
+    outline: 2px solid #8b5a1e !important;
+  }
+
+  /* Modo escuro na ala de estudo (#oficina) em nogueira fosca */
+  body[data-theme="escuro"] #oficina,
+  body[data-theme="escuro"] #oficina[data-ptbr-dashboard="true"] {
+    background-color: #20150f !important;
     background-image: var(--esc-rg-chalk-dark) !important;
-    color: #f2e7d5 !important;
+    color: #efe4cf !important;
+    scrollbar-color: #6b5238 #20150f;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals button,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-card,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-card,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-blank-samples,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner {
+    background-color: #2c1e15 !important;
+    border-color: rgba(212, 166, 92, 0.34) !important;
+    color: #efe4cf !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn[aria-current="true"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip[aria-pressed="true"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill[aria-pressed="true"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn[aria-pressed="true"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-primary,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-fragment-number,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-meter-badge,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhyme-badge,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-theme,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-exit {
+    background-color: #c99a47 !important;
+    color: #1c1008 !important;
+    border-color: #c99a47 !important;
   }
 }
