@@ -1264,7 +1264,7 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  .switch-track:after { top:3px; left:3px; width:15px; height:18px; border:1px solid #65735f; border-radius:1px; background:#cad8c8; box-shadow:inset 0 1px 0 #d8e4d6,0 1px 0 #8c9b8a; transform:none; -webkit-transform:none; }
  .check input:checked + .switch-track { background:#9fad9b; }
  .check input:checked + .switch-track:after { left:22px; background:#212921; transform:none; -webkit-transform:none; box-shadow:inset 0 1px 0 #3d4939; }
- button:active,.scrvrl-action:active { box-shadow:inset 0 1px 2px rgba(33,41,33,.2); }
+ button:active,.scrvrl-action:active { box-shadow:none; }
  button:disabled { cursor:default; }
  #delete-confirm { background:#cad8c8; border:1px solid #65735f; }
  #delete-cancel { background:#d1ded0; }
@@ -5772,19 +5772,35 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     color: inherit;
   }
 
-  /* Botões internos de linhas compostas NUNCA acendem quadrado próprio */
+  /* Botões internos de linhas compostas NUNCA acendem quadrado nem borda/sombra no hover ou clique */
   body[data-view="workspace"] .esc-project-select:hover,
+  body[data-view="workspace"] .esc-project-select:active,
   body[data-view="workspace"] .esc-tree-expand:hover,
+  body[data-view="workspace"] .esc-tree-expand:active,
   body[data-view="workspace"] .esc-project-color-btn:hover,
+  body[data-view="workspace"] .esc-project-color-btn:active,
   body[data-view="workspace"] .esc-tree-toggle:hover,
+  body[data-view="workspace"] .esc-tree-toggle:active,
   body[data-view="workspace"] .esc-tree-open:hover,
+  body[data-view="workspace"] .esc-tree-open:active,
   body[data-view="workspace"] .esc-tree-menu:hover,
+  body[data-view="workspace"] .esc-tree-menu:active,
   body[data-view="workspace"] .esc-item-open:hover,
+  body[data-view="workspace"] .esc-item-open:active,
   body[data-view="workspace"] .esc-brand-btn:hover,
+  body[data-view="workspace"] .esc-brand-btn:active,
   body[data-view="workspace"] #location-path button:hover,
+  body[data-view="workspace"] #location-path button:active,
   body[data-view="workspace"] .esc-filter-toggle:hover,
-  body[data-view="workspace"] #esc-items-search-clear:hover {
+  body[data-view="workspace"] .esc-filter-toggle:active,
+  body[data-view="workspace"] #esc-items-search-clear:hover,
+  body[data-view="workspace"] #esc-items-search-clear:active {
     background: transparent !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+  body[data-view="workspace"] button:active {
+    box-shadow: none !important;
   }
 
   /* Véu contínuo de borda a borda na linha inteira ao passar o mouse */
@@ -6973,9 +6989,12 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-radius: 8px !important;
   }
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-open,
-  body[data-view="workspace"] #items-column #esc-items-list .esc-item-open:hover {
+  body[data-view="workspace"] #items-column #esc-items-list .esc-item-open:hover,
+  body[data-view="workspace"] #items-column #esc-items-list .esc-item-open:active,
+  body[data-view="workspace"] #items-column #esc-items-list .esc-item-open:focus {
     border: 0 !important;
     background: transparent !important;
+    box-shadow: none !important;
     opacity: 1 !important;
   }
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-act {
