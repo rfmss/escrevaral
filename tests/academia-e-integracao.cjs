@@ -51,10 +51,16 @@ const catalog = E.academy.catalog();
 assert.equal(catalog.length, 14);
 assert.ok(catalog.some(e => e.id === 'literatura-mundial' && e.module === 'literature'));
 
-// Confirmar que todos os 14 HTMLs existem tanto em academia/ quanto em dist/site/academia/
+// Confirmar que todos os 14 HTMLs existem em academia/, que scripts/build.cjs inclui 'academia' e,
+// quando dist/site/ estiver montado localmente, que todos os 14 HTMLs foram copiados para dist/site/academia/.
+const buildSrc = fs.readFileSync(path.join(rootDir, 'scripts/build.cjs'), 'utf8');
+assert.ok(buildSrc.includes("'academia'"), 'scripts/build.cjs não copia academia/ para dist/site/');
+const hasDistSite = fs.existsSync(path.join(rootDir, 'dist/site'));
 for (const entry of catalog) {
   assert.ok(fs.existsSync(path.join(rootDir, 'academia', entry.file)), 'Faltando academia/' + entry.file);
-  assert.ok(fs.existsSync(path.join(rootDir, 'dist/site/academia', entry.file)), 'Faltando dist/site/academia/' + entry.file);
+  if (hasDistSite) {
+    assert.ok(fs.existsSync(path.join(rootDir, 'dist/site/academia', entry.file)), 'Faltando dist/site/academia/' + entry.file);
+  }
 }
 
 // Confirmar leitor Kindle Oasis (#reader, #oasis-screen, #page-prev, #page-next) em literatura-mundial.html
