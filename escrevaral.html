@@ -22060,6 +22060,7 @@ SOFTWARE.
           var accent = isDark ? '#c49a58' : (isLit ? '#3a2013' : '#8b5a1e');
           frame.contentWindow.postMessage({
             channel: 'escrevaral-academia-theme',
+            dark: !!isDark,
             colors: { paper: paper, ink: ink, accent: accent },
             comfortable: !!comfortable
           }, '*');
@@ -23494,7 +23495,7 @@ SOFTWARE.
           var paper = isDark ? '#211a14' : '#cfc3ae';
           var ink = isDark ? '#d9cebc' : '#1f130b';
           var accent = isDark ? '#c49a58' : (entryObj && entryObj.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
-          frameEl.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
+          frameEl.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', dark: isDark, colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
         } catch (ignore) {}
       }
 
@@ -23893,7 +23894,7 @@ SOFTWARE.
             var ink = isDark ? '#d9cebc' : '#1f130b';
             var accent = isDark ? '#c49a58' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
             if (frame.contentWindow && frame.contentWindow.postMessage) {
-              frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
+              frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', dark: isDark, colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
             }
           } catch (ignore) {}
         });

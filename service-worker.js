@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-1a037aa2e189";
-const RUNTIME_CACHE = "scrvrl-runtime-1a037aa2e189";
+const CACHE_NAME = "scrvrl-offline-v6-65-3a45095d8acd";
+const RUNTIME_CACHE = "scrvrl-runtime-3a45095d8acd";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -8,8 +8,8 @@ const REQUIRED_ASSETS = [
     "sha256": "d6cd9da15371a34f5b69d5a91a907cf30116c3b496ca45907eed8c1422548e64"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.44fad25f8f658f0f.js",
-    "sha256": "44fad25f8f658f0f9cb85e8e808273dfcf9033b6d371beff850ef1f54142f105"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.8d74a41f808b2184.js",
+    "sha256": "8d74a41f808b2184587962e89465190c5257c8a7f0aabf646f1e462b809b19b0"
   },
   {
     "url": "./assets/20261014-scrvrl-exame-v6-65/styles.309ccb676053f087.css",
@@ -33,9 +33,12 @@ const BUNKER_ASSETS = [
   "./academia/revisao-manuscrito.html",
   "./academia/submissao-editoras.html",
   "./academia/titulo-do-livro.html",
+  "./assets/library/banner-bloqueio.webp",
   "./assets/library/banner-criacao.webp",
+  "./assets/library/banner-lancamento.webp",
   "./assets/library/banner-oficio.webp",
   "./assets/library/banner-publicacao.webp",
+  "./assets/library/banner-titulo.webp",
   "./assets/library/estante-cafe-bistro.webp",
   "./assets/library/estante-livros-outono.webp",
   "./assets/library/estante-trepadeira-outono.webp",
@@ -80,7 +83,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: 'e6c1764b7daad61647cdb4b81156d0f8b1020f8c13a423a22ccb60b641d42dda' });
+    const index = await checkedAsset({ url: './index.html', sha256: 'e985e5796b2bcfd495da03b9aa36ca4857f6993ebfae164a3bcb9dd6ebb39808' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);

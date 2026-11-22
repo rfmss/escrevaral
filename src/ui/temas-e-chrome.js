@@ -64,6 +64,7 @@
           var accent = isDark ? '#c49a58' : (isLit ? '#3a2013' : '#8b5a1e');
           frame.contentWindow.postMessage({
             channel: 'escrevaral-academia-theme',
+            dark: !!isDark,
             colors: { paper: paper, ink: ink, accent: accent },
             comfortable: !!comfortable
           }, '*');

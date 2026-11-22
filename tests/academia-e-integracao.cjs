@@ -157,7 +157,7 @@ assert.equal(findByClass(bridgedModal, 'esc-academy-tome-art').length, 2, '2 ilu
 assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 12, '12 guias editoriais com numeração romana');
 
 // Garantir assets da biblioteca Real Gabinete em WebP + inclusão no build + estética fosca sem gradientes puros
-for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp']) {
+for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp', 'banner-bloqueio.webp', 'banner-titulo.webp', 'banner-lancamento.webp']) {
   assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', imgName)), 'Faltando assets/library/' + imgName);
 }
 assert.ok(buildSrc.includes("'assets/library'"), 'scripts/build.cjs copia assets/library para dist/site/');
@@ -213,8 +213,30 @@ for (const entry of catalog) {
   if (entry.id !== 'objeto-livro' && entry.id !== 'literatura-mundial') {
     assert.ok(html.includes('AFK-REAL-GABINETE-ORNAMENTS-START') && html.includes("img-src 'self' data:;"), 'academia/' + entry.file + ' com ornamentos AFK e banner WebP local');
     assert.ok(!html.includes('@media(prefers-color-scheme:dark)'), 'academia/' + entry.file + ' não deve forçar fundo escuro sobre texto escuro em SO dark');
+    assert.ok(html.includes("root.setAttribute('data-theme'"), 'academia/' + entry.file + ' deve sincronizar data-theme dark/light com o app');
+    const cspM = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)">/);
+    assert.ok(cspM, 'academia/' + entry.file + ' deve declarar meta CSP');
+    const scriptMatches = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+    assert.ok(scriptMatches.length >= 1, 'academia/' + entry.file + ' deve conter scripts inline');
+    const cryptoMod = require('crypto');
+    for (const sm of scriptMatches) {
+      const h = "'sha256-" + cryptoMod.createHash('sha256').update(sm[1], 'utf8').digest('base64') + "'";
+      assert.ok(cspM[1].includes(h), 'academia/' + entry.file + ' CSP deve autorizar exatamente ' + h);
+      new Function(sm[1]);
+    }
   }
 }
+const plHtml = fs.readFileSync(path.join(rootDir, 'academia/primeiras-linhas.html'), 'utf8');
+assert.ok(plHtml.includes('Nonada. Tiros que o senhor ouviu') && plHtml.includes('Existe é homem humano. Travessia.'), 'primeiras-linhas.html com citações verificadas de Grande Sertão: Veredas');
+assert.ok(plHtml.includes('Movimento I · Antes') && plHtml.includes('Movimento II · Depois') && plHtml.includes('contrast-pair'), 'primeiras-linhas.html com layout lado a lado real em Dois Movimentos');
+const chkHtml = fs.readFileSync(path.join(rootDir, 'academia/checklist-lancamento.html'), 'utf8');
+assert.ok(chkHtml.includes('Câmara Brasileira do Livro (CBL)') && !/ISBN gratuito/i.test(chkHtml), 'checklist-lancamento.html com regra vigente da CBL para ISBN');
+const bibHtml = fs.readFileSync(path.join(rootDir, 'academia/biblioteca-escrita.html'), 'utf8');
+assert.ok(bibHtml.includes('Luiz Antonio de Assis Brasil') && bibHtml.includes("id:'orwell', orig:'world'"), 'biblioteca-escrita.html com bibliografia brasileira verificada e Orwell na estante internacional');
+const kdpHtml = fs.readFileSync(path.join(rootDir, 'academia/publicar-kdp.html'), 'utf8');
+assert.ok(kdpHtml.includes('UICLAP') && kdpHtml.includes('Kindle Unlimited'), 'publicar-kdp.html documenta realidade brasileira de e-book + impresso sob demanda');
+const compHtml = fs.readFileSync(path.join(rootDir, 'academia/comparativo-publicacao.html'), 'utf8');
+assert.ok(compHtml.includes('banner-publicacao.webp') && compHtml.includes('ed-table'), 'comparativo-publicacao.html com banner de publicação e tabela comparativa real');
 const swSrc = fs.readFileSync(path.join(rootDir, 'service-worker.js'), 'utf8');
 assert.ok(!swSrc.includes('RUNTIME_CACHE = "scrvrl-runtime-v1"'), 'service-worker.js versiona RUNTIME_CACHE por geração');
 assert.ok(swSrc.includes("name.startsWith('scrvrl-runtime-')"), 'service-worker.js limpa caches runtime antigos na ativação');
