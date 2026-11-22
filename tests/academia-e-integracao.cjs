@@ -237,6 +237,16 @@ assert.ok(chkHtml.includes('Câmara Brasileira do Livro (CBL)') && !/ISBN gratui
 const bibHtml = fs.readFileSync(path.join(rootDir, 'academia/biblioteca-escrita.html'), 'utf8');
 assert.ok(bibHtml.includes('banner-casa-rosas.webp') && bibHtml.includes('Casa das Rosas'), 'biblioteca-escrita.html exibe banner e legenda da Casa das Rosas');
 assert.ok(bibHtml.includes('Luiz Antonio de Assis Brasil') && bibHtml.includes("id:'orwell', orig:'world'"), 'biblioteca-escrita.html com bibliografia brasileira verificada e Orwell na estante internacional');
+const anaHtml = fs.readFileSync(path.join(rootDir, 'academia/anatomia-do-livro.html'), 'utf8');
+assert.ok(anaHtml.includes('O <em>Cortiço</em>') && anaHtml.includes('Aluísio Azevedo') && !anaHtml.includes('A Cartografia'), 'anatomia-do-livro.html exibe a capa e edição de O Cortiço (Aluísio Azevedo)');
+const anaCsp = anaHtml.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)">/);
+assert.ok(anaCsp, 'anatomia-do-livro.html declara meta CSP');
+const cryptoAna = require('crypto');
+for (const sm of anaHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
+  const h = "'sha256-" + cryptoAna.createHash('sha256').update(sm[1], 'utf8').digest('base64') + "'";
+  assert.ok(anaCsp[1].includes(h), 'anatomia-do-livro.html CSP autoriza exatamente ' + h);
+}
+assert.ok(academiaCss.includes('flex-direction: column') && academiaCss.includes('background: transparent;'), 'academia.css centraliza o hero Real Gabinete sem moldura e posiciona a legenda abaixo');
 assert.ok(bibHtml.includes('rg-cover') && bibHtml.includes('Companhia das Letras') && bibHtml.includes('Editora Perspectiva') && bibHtml.includes('Coleção Real Gabinete'), 'biblioteca-escrita.html exibe capas autorais Real Gabinete com créditos editoriais');
 const kdpHtml = fs.readFileSync(path.join(rootDir, 'academia/publicar-kdp.html'), 'utf8');
 assert.ok(kdpHtml.includes('UICLAP') && kdpHtml.includes('Kindle Unlimited'), 'publicar-kdp.html documenta realidade brasileira de e-book + impresso sob demanda');

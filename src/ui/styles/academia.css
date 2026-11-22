@@ -79,24 +79,34 @@
   #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb:hover { background: #7f6645; }
 
   /* =====================================================================
-   * HERO REAL GABINETE: MOGNO FOSCO EM TEXTURA DE GIZ E GALERIAS (2 CAMADAS)
+   * HERO REAL GABINETE: PINTURA LIMPA SEM MOLDURA NO TÍTULO + LEGENDA EMBAIXO
    * ===================================================================== */
   #esc-academy-overlay .esc-academy-hero {
     position: relative;
-    min-height: 232px;
-    padding: 34px 40px 30px;
+    min-height: 248px;
+    padding: 36px 40px 18px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 14px;
     text-align: center;
     overflow: hidden;
-    background-color: #361e11;
+    background-color: #241208;
     background-image: var(--esc-ac-chalk-dark);
     background-repeat: repeat;
     background-size: 84px 84px;
     color: #fbf3e2;
     border-bottom: 2px solid #b8883c;
     box-shadow: inset 0 -10px 0 rgba(22, 11, 6, 0.22);
+  }
+  #esc-academy-overlay .esc-academy-hero::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 2;
+    background-color: rgba(18, 9, 4, 0.34);
+    pointer-events: none;
   }
 
   #esc-academy-overlay .esc-ac-scene {
@@ -153,27 +163,24 @@
     border-color: #f0ca82 !important;
   }
 
-  /* Cartela fosca sobre o centro da pintura para garantir contraste AAA sem esconder a claraboia e as estantes */
+  /* Título centralizado e livre sobre a pintura do Real Gabinete (sem caixa/moldura) */
   #esc-academy-overlay .esc-academy-hero-inner {
     position: relative;
     z-index: 3;
-    max-width: 590px;
-    margin: 0 auto;
-    padding: 16px 28px 18px;
-    border-radius: 9px;
-    background-color: rgba(25, 13, 7, 0.76);
-    background-image: var(--esc-ac-chalk-dark);
-    background-repeat: repeat;
-    background-size: 84px 84px;
-    border: 1px solid rgba(235, 194, 114, 0.45);
-    box-shadow: 0 10px 28px rgba(10, 5, 2, 0.48);
+    max-width: 620px;
+    margin: auto;
+    padding: 4px 12px 2px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
 
   #esc-academy-overlay .esc-academy-crest {
-    width: 68px;
-    height: 42px;
+    width: 64px;
+    height: 38px;
     margin: 0 auto 6px;
-    color: #f0c574;
+    color: #f4cf84;
+    filter: drop-shadow(0 2px 6px rgba(10, 4, 1, 0.85));
   }
   #esc-academy-overlay .esc-academy-crest svg { display: block; width: 100%; height: 100%; }
 
@@ -182,9 +189,9 @@
     padding: 3px 12px;
     margin-bottom: 10px;
     border-radius: 99px;
-    border: 1px solid rgba(240, 197, 116, 0.5);
-    background: rgba(30, 16, 10, 0.6);
-    color: #f2cf88;
+    border: 1px solid rgba(242, 204, 128, 0.56);
+    background: rgba(20, 10, 5, 0.68);
+    color: #f5d694;
     font: 700 10.5px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -192,32 +199,33 @@
 
   #esc-academy-overlay .esc-academy-hero h2 {
     margin: 0 0 8px;
-    font: 700 clamp(24px, 3.2vw, 34px)/1.18 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
+    font: 700 clamp(26px, 3.4vw, 36px)/1.16 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
     letter-spacing: -0.01em;
-    color: #fdf6e7;
-    text-shadow: 0 2px 10px rgba(18, 9, 5, 0.55);
+    color: #fff8eb;
+    text-shadow: 0 2px 14px rgba(10, 4, 1, 0.96), 0 1px 3px rgba(0, 0, 0, 0.92);
   }
 
   #esc-academy-overlay .esc-academy-intro {
     margin: 0 auto;
     max-width: 52ch;
-    font: 400 14px/1.55 var(--esc-font-ui, Arial, Helvetica, sans-serif);
-    color: #ecdcc0;
+    font: 500 14px/1.55 var(--esc-font-ui, Arial, Helvetica, sans-serif);
+    color: #f7ebd4;
+    text-shadow: 0 2px 10px rgba(10, 4, 1, 0.96), 0 1px 2px rgba(0, 0, 0, 0.92);
   }
 
-  /* Legendinha discreta da arquitetura literária brasileira no Hero da Academia */
+  /* Legendinha discreta da arquitetura literária brasileira na base do Hero */
   #esc-academy-overlay .esc-academy-place-caption {
     position: relative;
     z-index: 4;
     display: inline-block;
-    max-width: 92%;
-    margin: 14px auto 0;
-    padding: 4px 12px;
+    max-width: 94%;
+    margin: 2px auto 0;
+    padding: 5px 14px;
     border-radius: 99px;
-    background: rgba(24, 12, 6, 0.72);
-    border: 1px solid rgba(235, 194, 114, 0.36);
-    color: #e6d4b3;
-    font: 400 11px/1.35 var(--esc-font-ui, Arial, Helvetica, sans-serif);
+    background: rgba(20, 10, 5, 0.78);
+    border: 1px solid rgba(235, 194, 114, 0.42);
+    color: #ead9ba;
+    font: 400 11px/1.38 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.01em;
   }
   #esc-academy-overlay .esc-academy-place-caption strong {
