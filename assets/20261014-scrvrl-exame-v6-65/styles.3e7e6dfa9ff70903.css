@@ -5600,6 +5600,10 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-bottom-color: #384238;
     color: #cfd6cb;
   }
+  body[data-theme="escuro"] .esc-machine {
+    -webkit-filter: brightness(0.76) contrast(1.04) saturate(0.88);
+    filter: brightness(0.76) contrast(1.04) saturate(0.88);
+  }
   body[data-theme="escuro"] .esc-writing-btn,
   body[data-theme="escuro"] .esc-writing-icon-btn {
     border-color: #3e4a3e;
