@@ -20,7 +20,7 @@
     return o && typeof o.id === 'string' && /^orig-[a-z0-9-]+$/.test(o.id) && typeof o.name === 'string' && !!name(o.name) && o.name.length <= 120 && /^#[0-9a-f]{6}$/i.test(o.color) && (typeof o.trashed === 'undefined' || typeof o.trashed === 'boolean');
   }
   function create(storage) {
-    var originals = [], books = [], colors = ['#c4cfc2', '#b2826a', '#859480', '#c2a649', '#a39b8b', '#997382'];
+    var originals = [], books = [], colors = ['#6f8e68', '#b86d54', '#5b7c8c', '#c29244', '#8e6173', '#997754'];
     function recover() {
       var raw = storage.getItem(journalKey); if (!raw) { return; }
       var journal = JSON.parse(raw);

@@ -6641,7 +6641,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     padding: 36px 8px 28px !important;
   }
 
-  /* --- CADERNO ILUSTRADO (.notebook-cover = miolo de páginas; .notebook-front = capa com dobradiça) --- */
+  /* --- CADERNO ILUSTRADO (.notebook-cover = miolo de páginas; .notebook-front = capa rígida com dobradiça real) --- */
   #gabinete #notebook-list .notebook-cover {
     position: relative !important;
     display: inline-block !important;
@@ -6653,12 +6653,14 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     overflow: visible !important;
     border: 1.5px solid #262018 !important;
     border-radius: 5px 9px 9px 5px !important;
-    background-color: #dbd3c1 !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208'%3E%3Crect width='146' height='208' fill='%23dbd3c1'/%3E%3Crect x='0' y='0' width='18' height='208' fill='%23b6aa92' fill-opacity='0.55'/%3E%3Cpath d='M124 8v192M128 8v192M132 8v192M136 8v192M140 8v192' stroke='%238c7b60' stroke-opacity='0.48' stroke-width='1'/%3E%3Cpath d='M26 36h90M26 56h90M26 76h84M26 96h90M26 116h78M26 136h88M26 156h82M26 176h70' stroke='%239b8b70' stroke-opacity='0.28' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+    background-color: #dfd7c4 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208'%3E%3Crect width='146' height='208' fill='%23dfd7c4'/%3E%3Crect x='0' y='0' width='16' height='208' fill='%23b5a88e' fill-opacity='0.58'/%3E%3Cpath d='M126 6v196M130 6v196M134 6v196M138 6v196M142 6v196' stroke='%23857357' stroke-opacity='0.5' stroke-width='1'/%3E%3Cpath d='M24 36h94M24 56h94M24 76h86M24 96h94M24 116h80M24 136h90M24 156h84M24 176h72' stroke='%23998769' stroke-opacity='0.3' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") !important;
     background-size: 100% 100% !important;
     box-shadow: 3px 6px 0 rgba(25, 29, 23, 0.22), 0 8px 16px rgba(20, 24, 18, 0.14) !important;
-    perspective: 720px;
-    -webkit-perspective: 720px;
+    perspective: 820px;
+    -webkit-perspective: 820px;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
     transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
@@ -6676,26 +6678,31 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* Capa dianteira encadernada à mão com cantoneiras douradas AFK Journey e costura na lombada */
+  /* Capa dianteira rígida com dobradiça real na lombada esquerda:
+     largura FIXA (nunca altera right/width no hover) para que moldura, cantoneiras e faixa
+     girem em 100% de sincronia como um único corpo rígido sem quebrar a ilusão 3D. */
   #gabinete #notebook-list .notebook-front {
     position: absolute !important;
     top: -1.5px !important;
-    right: 2px !important;
-    bottom: -1.5px !important;
     left: -1.5px !important;
+    right: auto !important;
+    bottom: -1.5px !important;
+    width: calc(100% - 2px) !important;
     border: 1.5px solid #161b15 !important;
     border-radius: 5px 8px 8px 5px !important;
     background-color: #212a21 !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208' fill='none'%3E%3Crect x='0' y='0' width='13' height='208' fill='%23161d16'/%3E%3Cline x1='13.5' y1='0' x2='13.5' y2='208' stroke='%230d120d' stroke-width='1.5'/%3E%3Cline x1='15.5' y1='2' x2='15.5' y2='206' stroke='%234b5c49' stroke-opacity='0.55' stroke-width='1'/%3E%3Cpath d='M6 22v10M6 52v10M6 82v10M6 112v10M6 142v10M6 172v10' stroke='%238c764c' stroke-opacity='0.48' stroke-width='1.2' stroke-linecap='round'/%3E%3Crect x='20' y='9' width='115' height='190' rx='4' stroke='%23c89e52' stroke-opacity='0.28' stroke-width='1'/%3E%3Cpath d='M22 25V12h13M133 25V12h-13M22 183v13h13M133 183v13h-13' stroke='%23d4ab5f' stroke-opacity='0.72' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M27 17l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.78'/%3E%3Cpath d='M127 17l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.78'/%3E%3Cpath d='M27 186l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.78'/%3E%3Cpath d='M127 186l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.78'/%3E%3C/svg%3E") !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208' fill='none'%3E%3Crect x='0' y='0' width='13' height='208' fill='%23161d16'/%3E%3Cline x1='13.5' y1='0' x2='13.5' y2='208' stroke='%230d120d' stroke-width='1.5'/%3E%3Cline x1='15.5' y1='2' x2='15.5' y2='206' stroke='%234b5c49' stroke-opacity='0.55' stroke-width='1'/%3E%3Cpath d='M6 22v10M6 52v10M6 82v10M6 112v10M6 142v10M6 172v10' stroke='%238c764c' stroke-opacity='0.5' stroke-width='1.2' stroke-linecap='round'/%3E%3Crect x='20' y='9' width='115' height='190' rx='4' stroke='%23c89e52' stroke-opacity='0.3' stroke-width='1'/%3E%3Cpath d='M22 25V12h13M133 25V12h-13M22 183v13h13M133 183v13h-13' stroke='%23d4ab5f' stroke-opacity='0.74' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M27 17l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.8'/%3E%3Cpath d='M127 17l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.8'/%3E%3Cpath d='M27 186l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.8'/%3E%3Cpath d='M127 186l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.8'/%3E%3C/svg%3E") !important;
     background-size: 100% 100% !important;
-    box-shadow: 2px 0 5px rgba(10, 14, 10, 0.32) !important;
-    transform-origin: 4px center !important;
-    -webkit-transform-origin: 4px center !important;
-    transform: rotateY(0deg) skewY(0deg);
-    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1), right 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+    box-shadow: 2px 0 5px rgba(10, 14, 10, 0.3) !important;
+    transform-origin: 0% 50% !important;
+    -webkit-transform-origin: 0% 50% !important;
+    transform: rotateY(0deg) !important;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
-  /* Etapa 2 (Hover In / Foco): o caderno levanta um pouco e entreabre a capa revelando as folhas */
+  /* Etapa 2 (Hover In / Foco): o caderno levanta suavemente e a capa gira inteira na lombada */
   #gabinete #notebook-list .notebook-cover:hover,
   #gabinete #notebook-list .notebook-cover:focus-visible {
     transform: translateY(-4px) !important;
@@ -6703,36 +6710,43 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   #gabinete #notebook-list .notebook-cover:hover .notebook-front,
   #gabinete #notebook-list .notebook-cover:focus-visible .notebook-front {
-    right: 11px !important;
-    transform: rotateY(-21deg) skewY(-2deg) !important;
-    box-shadow: 9px 4px 12px rgba(12, 16, 12, 0.38) !important;
+    right: auto !important;
+    width: calc(100% - 2px) !important;
+    transform: rotateY(-24deg) !important;
+    box-shadow: 10px 4px 14px rgba(12, 16, 12, 0.4) !important;
   }
   #gabinete #notebook-list .notebook-cover:hover::after,
   #gabinete #notebook-list .notebook-cover:focus-visible::after {
     transform: translateY(3px) rotate(3deg);
   }
 
-  /* Etapa 3 (Clique / Aberto): abre mais um passo confirmando a ação */
+  /* Etapa 3 (Clique / Aberto): abre mais um passo na mesma dobradiça rígida */
   #gabinete #notebook-list .notebook-cover:active .notebook-front,
   #gabinete #notebook-list .notebook-cover[aria-pressed="true"] .notebook-front {
-    right: 14px !important;
-    transform: rotateY(-27deg) skewY(-2.8deg) !important;
-    box-shadow: 11px 5px 14px rgba(10, 14, 10, 0.44) !important;
+    right: auto !important;
+    width: calc(100% - 2px) !important;
+    transform: rotateY(-34deg) !important;
+    box-shadow: 13px 6px 16px rgba(10, 14, 10, 0.45) !important;
   }
 
-  /* Faixa colorida autoral preservando a cor escolhida pelo escritor + costura editorial */
+  /* Faixa colorida autoral encorpada com contraste automático legível */
   #gabinete .notebook-strap {
     top: 25% !important;
     left: 14px !important;
     right: 0 !important;
     min-height: 54px !important;
     padding: 10px 26px 10px 12px !important;
-    border-top: 1.5px solid rgba(28, 22, 14, 0.55) !important;
-    border-bottom: 1.5px solid rgba(28, 22, 14, 0.55) !important;
-    box-shadow: inset 0 2px 0 rgba(246, 234, 206, 0.28), inset 0 -2px 0 rgba(20, 16, 10, 0.16), 0 2px 4px rgba(10, 12, 10, 0.25);
-    color: #161814 !important;
+    border-top: 1.5px solid rgba(28, 22, 14, 0.58) !important;
+    border-bottom: 1.5px solid rgba(28, 22, 14, 0.58) !important;
+    box-shadow: inset 0 2px 0 rgba(250, 240, 214, 0.26), inset 0 -2px 0 rgba(18, 14, 10, 0.22), 0 2px 4px rgba(10, 12, 10, 0.26);
+    color: #f7f3e8 !important;
+    text-shadow: 0 1px 1px rgba(18, 16, 12, 0.48);
     font: 700 14.5px/1.3 'Noto Serif', Georgia, serif !important;
     letter-spacing: -0.01em !important;
+  }
+  #gabinete .notebook-strap[data-light-strap="true"] {
+    color: #181c16 !important;
+    text-shadow: none;
   }
 
   /* Elástico de fechamento com rebite de latão */
@@ -7003,6 +7017,224 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-color: #3d483d !important;
   }
 
+  /* =========================================================================
+     CONTINUIDADE ESPACIAL: MINIATURAS NO BREADCRUMB + INTERIOR DE GAVETA E CADERNO
+     ========================================================================= */
+  @keyframes esc-spatial-enter {
+    0% { opacity: 0.52; transform: scale(0.978) translateY(8px); }
+    60% { opacity: 0.98; transform: scale(1.002) translateY(-1px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .esc-spatial-enter {
+    animation: esc-spatial-enter 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .esc-spatial-enter { animation: none !important; }
+  }
+
+  /* Marca ESCREVARAL na barra lateral alinhada ao Início/Estante */
+  .esc-brand-stack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.05;
+  }
+  .esc-brand-sub {
+    font: 600 9px/1.15 Arial, Helvetica, sans-serif;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    opacity: 0.68;
+    margin-top: 2px;
+  }
+
+  /* Miniaturas da gaveta e do caderno no breadcrumb (#location-path) */
+  #location-path #path-original,
+  #location-path #path-project[data-has-book="true"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 3px 9px 3px 6px !important;
+    border-radius: 3px !important;
+    border: 1px solid rgba(53, 43, 32, 0.32) !important;
+    background: rgba(214, 206, 188, 0.52) !important;
+  }
+  #location-path #path-original[hidden],
+  #location-path #path-project[hidden] {
+    display: none !important;
+  }
+  #location-path #path-original::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 13px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 13' fill='none'%3E%3Crect x='0.8' y='1' width='16.4' height='11' rx='1.5' fill='%23b4beaa' stroke='%23352b20' stroke-width='1.2'/%3E%3Cpath d='M5.5 6.8C5.5 4.4 7 3.2 9 3.2s3.5 1.2 3.5 3.6H5.5Z' fill='%23c4974a' stroke='%232c2014' stroke-width='0.9'/%3E%3Crect x='4.2' y='8.2' width='9.6' height='2.2' rx='0.6' fill='%23ded7c5' stroke='%236b583e' stroke-width='0.7'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  #location-path #path-project[data-has-book="true"]::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 16px;
+    flex-shrink: 0;
+    border-radius: 1.5px 3px 3px 1.5px;
+    border: 1px solid #1e231c;
+    background-color: var(--esc-crumb-book-color, #6f8e68);
+    box-shadow: inset 3.5px 0 0 #1c241b, inset -2px 0 0 rgba(242, 236, 222, 0.72), 1px 1px 0 rgba(20, 24, 18, 0.22);
+  }
+  body[data-theme="escuro"] #location-path #path-original,
+  body[data-theme="escuro"] #location-path #path-project[data-has-book="true"] {
+    background: rgba(52, 62, 50, 0.65) !important;
+    border-color: rgba(196, 154, 88, 0.42) !important;
+    color: #e4ebe1 !important;
+  }
+
+  /* Interior espacial da Gaveta aberta (#notebook-area[data-drawer-open="true"]) */
+  #gabinete #notebook-area[data-drawer-open="true"] {
+    background: #bac4b4 !important;
+    border: 2px solid #594b39 !important;
+    border-radius: 6px !important;
+    padding: 8px 16px 10px !important;
+    box-shadow: inset 0 6px 18px rgba(33, 28, 20, 0.14), inset 0 0 0 3px rgba(219, 211, 193, 0.35) !important;
+  }
+  #gabinete #notebook-area[data-drawer-open="true"] #original-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    margin: 0 0 8px !important;
+    padding: 6px 11px !important;
+    background: #ced6c5 !important;
+    border: 1.5px solid #6b583e !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 0 1px rgba(246, 239, 224, 0.45), 0 2px 0 rgba(45, 36, 26, 0.14) !important;
+  }
+  #gabinete #original-header[hidden] {
+    display: none !important;
+  }
+  .esc-drawer-identity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .esc-drawer-mini {
+    width: 40px;
+    height: 29px;
+    flex-shrink: 0;
+    display: inline-block;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 32' fill='none'%3E%3Cpolygon points='5,10 10,2 34,2 39,10' fill='%232e251c' stroke='%23251d15' stroke-width='1.2'/%3E%3Crect x='13' y='3.5' width='7' height='7' rx='1' fill='%236f8e68' stroke='%231d231c' stroke-width='1'/%3E%3Crect x='22' y='2.5' width='8' height='8' rx='1' fill='%23b86d54' stroke='%231d231c' stroke-width='1'/%3E%3Crect x='2' y='10' width='40' height='20' rx='2.5' fill='%23b4beaa' stroke='%23352b20' stroke-width='1.5'/%3E%3Cpath d='M15 17.5C15 13.8 17.8 12 22 12s7 1.8 7 5.5H15Z' fill='%23c4974a' stroke='%232c2014' stroke-width='1.1'/%3E%3Crect x='10' y='20.5' width='24' height='6' rx='1' fill='%23ded7c5' stroke='%236b583e' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .esc-drawer-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .esc-context-kicker {
+    font: 700 9px/1.15 Arial, Helvetica, sans-serif;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: #6b5435;
+  }
+  #gabinete #original-title-label {
+    margin: 0 !important;
+    font: 700 17px/1.18 'Noto Serif', Georgia, serif !important;
+    letter-spacing: -0.01em !important;
+    color: #1f1912 !important;
+  }
+  .esc-context-sub {
+    font: 500 11px/1.2 Arial, Helvetica, sans-serif;
+    color: #4b5547;
+    margin-top: 1px;
+  }
+  #gabinete #notebook-area[data-drawer-open="true"] #notebook-hint {
+    margin: 4px 0 6px !important;
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+  #gabinete #notebook-area[data-drawer-open="true"] #notebook-list {
+    padding: 8px 4px 10px !important;
+  }
+  #gabinete #notebook-area[data-drawer-open="true"] #notebook-list .notebook-cover {
+    margin: 2px 24px 14px 0 !important;
+  }
+  @media (max-height: 670px) {
+    #gabinete #notebook-area[data-drawer-open="true"] #notebook-list .notebook-cover {
+      width: 132px !important;
+      height: 184px !important;
+    }
+  }
+  body[data-theme="escuro"] #gabinete #notebook-area[data-drawer-open="true"] {
+    background: #1a2019 !important;
+    border-color: #5b4b38 !important;
+    box-shadow: inset 0 8px 22px rgba(0, 0, 0, 0.36), inset 0 0 0 2px rgba(196, 154, 88, 0.14) !important;
+  }
+  body[data-theme="escuro"] #gabinete #notebook-area[data-drawer-open="true"] #original-header {
+    background: #232a22 !important;
+    border-color: #6b563a !important;
+    box-shadow: inset 0 0 0 1px rgba(217, 206, 188, 0.08) !important;
+  }
+  body[data-theme="escuro"] .esc-context-kicker { color: #c49a58 !important; }
+  body[data-theme="escuro"] #gabinete #original-title-label { color: #e4ebe1 !important; }
+  body[data-theme="escuro"] .esc-context-sub { color: #a7b3a2 !important; }
+
+  /* Interior espacial do Caderno aberto (#cabinet-window[data-scope="notebook"]) */
+  #gabinete #cabinet-window[data-scope="notebook"] {
+    border-left: 10px solid var(--esc-book-color, #6f8e68) !important;
+    box-shadow: inset 3px 0 0 rgba(20, 24, 18, 0.28), 0 10px 28px rgba(18, 22, 16, 0.2) !important;
+  }
+  #gabinete #cabinet-window[data-scope="notebook"] .window-bar {
+    border-top: 3px solid var(--esc-book-color, #6f8e68) !important;
+  }
+  #gabinete #cabinet-window[data-scope="notebook"] .cabinet-heading .os-label {
+    display: block !important;
+    color: #5c4d38 !important;
+    font: 700 10px/1.25 Arial, Helvetica, sans-serif !important;
+    letter-spacing: 1.3px !important;
+    margin: 0 0 3px !important;
+  }
+  body[data-theme="escuro"] #gabinete #cabinet-window[data-scope="notebook"] .cabinet-heading .os-label {
+    color: #c49a58 !important;
+  }
+  .esc-notebook-identity {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .esc-notebook-mini {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 3px 5px 5px 3px;
+    border: 1.5px solid #161b15;
+    background-color: #212a21;
+    box-shadow: inset 7px 0 0 #141a14, 3px 0 0 #dfd7c4, 4px 0 0 #262018, 2px 3px 6px rgba(18, 22, 16, 0.24);
+  }
+  .esc-notebook-mini[hidden] {
+    display: none !important;
+  }
+  .esc-notebook-mini-strap {
+    position: absolute;
+    left: 6px;
+    right: 0;
+    top: 13px;
+    height: 16px;
+    background-color: var(--esc-book-color, #6f8e68);
+    border-top: 1px solid rgba(20, 16, 12, 0.55);
+    border-bottom: 1px solid rgba(20, 16, 12, 0.55);
+  }
+  .esc-notebook-mini::after {
+    content: "";
+    position: absolute;
+    right: 6px;
+    bottom: -7px;
+    width: 7px;
+    height: 8px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 8'%3E%3Cpath d='M0.5 0h6v7.2L3.5 5.2 0.5 7.2Z' fill='%238c3e2b' stroke='%23241812' stroke-width='0.7'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+
   @media (max-width: 760px) {
     #gabinete #notebook-list .notebook-cover {
       width: 120px !important;
@@ -7014,6 +7246,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
       min-height: 124px !important;
       margin: 14px 16px 26px 0 !important;
     }
+    .esc-drawer-mini { width: 34px; height: 24px; }
+    .esc-notebook-mini { width: 30px; height: 40px; }
   }
   #system-bar {
     background: #c4cfc2 !important;
@@ -11035,8 +11269,15 @@ SOFTWARE.
     <div class="cabinet-workspace" id="desktop-surface">
       <section id="notebook-area" aria-label="Suas gavetas e cadernos">
         <div id="original-header" class="cabinet-context" hidden>
-          <p id="original-title-label">GAVETA</p>
-          <div class="original-actions"><button id="original-back">← Gabinete</button><button id="original-more" aria-expanded="false" aria-controls="original-more-menu">Opções da gaveta</button><div id="original-more-menu" class="context-overflow" hidden><button id="original-rename">Renomear gaveta</button><button id="original-export">Exportar gaveta</button><button id="original-trash" aria-label="Mover gaveta para a lixeira">Mover para a lixeira</button></div></div>
+          <div class="esc-drawer-identity">
+            <span class="esc-drawer-mini" aria-hidden="true"></span>
+            <div class="esc-drawer-copy">
+              <span class="esc-context-kicker">Você está dentro da gaveta</span>
+              <p id="original-title-label">GAVETA</p>
+              <span id="original-drawer-sub" class="esc-context-sub"></span>
+            </div>
+          </div>
+          <div class="original-actions"><button id="original-back">← Voltar à Estante</button><button id="original-more" aria-expanded="false" aria-controls="original-more-menu">Opções da gaveta</button><div id="original-more-menu" class="context-overflow" hidden><button id="original-rename">Renomear gaveta</button><button id="original-export">Exportar gaveta</button><button id="original-trash" aria-label="Mover gaveta para a lixeira">Mover para a lixeira</button></div></div>
         </div>
         <div id="desktop-primary-actions"><button id="project-new">+ Novo caderno</button><button id="desktop-organize" aria-expanded="false" aria-controls="desktop-organize-menu">Organizar</button><div id="desktop-organize-menu" class="context-overflow" hidden><button id="original-new">+ Nova gaveta</button></div></div>
         <button id="volume-new" hidden>+ Novo caderno</button>
@@ -11059,7 +11300,7 @@ SOFTWARE.
       <nav class="project-shelf" aria-label="Projetos"><p class="os-label">CADERNOS</p><button id="cabinet-all" class="project-link" aria-pressed="true">Todos os textos</button><div id="cabinet-projects"></div><span id="project-icon-template" hidden=""><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span></nav>
       <main class="cabinet-files"><div class="cabinet-context"><p id="cabinet-context-label">TODOS OS TEXTOS</p><button id="notebook-back">← Mesa de cadernos</button></div>
         <div class="notebook-actions"><button id="notebook-universe" aria-controls="story-screen">Universo</button><button id="notebook-chalkboard" aria-controls="chalkboard">Quadro</button><button id="notebook-more" aria-expanded="false" aria-controls="notebook-more-menu">Mais</button><div id="notebook-more-menu" class="context-overflow" hidden><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg> Mover para a lixeira</button></div></div>
-        <div class="cabinet-heading"><div><p class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div><button id="cabinet-new" class="os-action">+ Novo texto</button></div>
+        <div class="cabinet-heading"><div class="esc-notebook-identity"><span id="esc-notebook-mini" class="esc-notebook-mini" aria-hidden="true" hidden><span id="esc-notebook-mini-strap" class="esc-notebook-mini-strap"></span></span><div><p id="esc-notebook-kicker" class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div></div><button id="cabinet-new" class="os-action">+ Novo texto</button></div>
 
         <button id="cabinet-resume" class="resume-note"><span class="os-label">CONTINUAR ESCREVENDO</span><span id="resume-title">Sem título</span><small id="resume-date">Texto avulso</small></button>
         <div class="files-label"><h2 id="cabinet-list-heading">Textos</h2><span id="cabinet-count">2 textos</span></div>
@@ -11154,9 +11395,9 @@ SOFTWARE.
   <div id="esc-workspace" class="esc-workspace">
   <aside id="navigation" aria-label="Biblioteca e projetos">
     <header class="esc-nav-brand">
-      <button id="esc-open-mesa" type="button" class="esc-brand-btn" title="Abrir mesa de cadernos">
+      <button id="esc-open-mesa" type="button" class="esc-brand-btn" title="Ir ao Início — Estante de gavetas e cadernos">
         <svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg>
-        <span>ESCREVARAL</span>
+        <span class="esc-brand-stack"><span>ESCREVARAL</span><small class="esc-brand-sub">Estante</small></span>
       </button>
     </header>
     <div class="esc-new-project-wrap">
@@ -17055,7 +17296,7 @@ SOFTWARE.
     return o && typeof o.id === 'string' && /^orig-[a-z0-9-]+$/.test(o.id) && typeof o.name === 'string' && !!name(o.name) && o.name.length <= 120 && /^#[0-9a-f]{6}$/i.test(o.color) && (typeof o.trashed === 'undefined' || typeof o.trashed === 'boolean');
   }
   function create(storage) {
-    var originals = [], books = [], colors = ['#c4cfc2', '#b2826a', '#859480', '#c2a649', '#a39b8b', '#997382'];
+    var originals = [], books = [], colors = ['#6f8e68', '#b86d54', '#5b7c8c', '#c29244', '#8e6173', '#997754'];
     function recover() {
       var raw = storage.getItem(journalKey); if (!raw) { return; }
       var journal = JSON.parse(raw);
@@ -18129,12 +18370,12 @@ SOFTWARE.
   root.Escr = root.Escr || {};
 
   var PALETTES = [
-    { id: 'salvia', name: 'Sálvia', color: '#a3b899', paper: '#f0f4ee', edge: '#435439' },
-    { id: 'areia', name: 'Areia', color: '#c2b69d', paper: '#f6f3ed', edge: '#574c35' },
-    { id: 'pessego', name: 'Pêssego', color: '#cfae97', paper: '#f8f1eb', edge: '#634732' },
-    { id: 'rosa', name: 'Rosa', color: '#c5a5a5', paper: '#f7efef', edge: '#5f3c3c' },
+    { id: 'salvia', name: 'Sálvia', color: '#7f9e76', paper: '#edf2ea', edge: '#30432a' },
+    { id: 'areia', name: 'Areia', color: '#b59f7a', paper: '#f4f0e6', edge: '#4e3f27' },
+    { id: 'pessego', name: 'Pêssego', color: '#c28468', paper: '#f6ede6', edge: '#5c3422' },
+    { id: 'rosa', name: 'Rosa', color: '#b37c82', paper: '#f5ebeb', edge: '#572f34' },
     { id: 'lavanda', name: 'Lavanda', color: '#b2a8be', paper: '#f3f1f6', edge: '#4e435b' },
-    { id: 'nevoa', name: 'Névoa', color: '#9eb4b8', paper: '#edf3f4', edge: '#374e53' }
+    { id: 'nevoa', name: 'Névoa', color: '#6f919a', paper: '#e9f0f2', edge: '#2b444b' }
   ];
 
   var DEFAULT_PALETTE = {
@@ -25075,25 +25316,52 @@ SOFTWARE.
       notebooks.update(activeNotebookId, { resume: { noteId: doc.noteId || doc.id, start: manuscript.selectionStart || 0, end: manuscript.selectionEnd || 0, scroll: manuscript.scrollTop || 0, view: cabinetOpen ? 'files' : 'writing' } }); return true;
     } catch (e) { message('O texto está guardado, mas não foi possível guardar a posição no caderno.'); return false; }
   }
+  function isLightHex(hex) {
+    var m = /^#([0-9a-f]{6})$/i.exec(String(hex || ''));
+    if (!m) { return false; }
+    var n = parseInt(m[1], 16);
+    var r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 168;
+  }
+  function pulseSpatialEnter(el) {
+    if (!el || !el.classList) { return; }
+    el.classList.remove('esc-spatial-enter');
+    try { void el.offsetWidth; } catch (ignore) {}
+    el.classList.add('esc-spatial-enter');
+    window.setTimeout(function () {
+      if (el && el.classList) { el.classList.remove('esc-spatial-enter'); }
+    }, 320);
+  }
   function notebookLabels() {
     var book = activeNotebook(), label = book ? book.name : 'Todos os textos';
+    var parentOrig = book && book.originalId && originals ? originals.get(book.originalId) : null;
     text(byId('notebook-window-name'), label); text(byId('os-window-task'), label);
     byId('os-window-task').setAttribute('data-notebook', book ? 'true' : 'false'); byId('os-window-task').setAttribute('title', label);
     if (book) { byId('os-window-task').style.borderLeftColor = book.color; }
+    var cabWin = byId('cabinet-window');
+    if (cabWin && cabWin.style && cabWin.style.setProperty) {
+      cabWin.style.setProperty('--esc-book-color', book ? book.color : '#6f8e68');
+    }
+    var nbMini = byId('esc-notebook-mini'), nbStrap = byId('esc-notebook-mini-strap'), nbKicker = byId('esc-notebook-kicker');
+    if (nbMini) { nbMini.hidden = !book; }
+    if (nbStrap && book) { nbStrap.style.backgroundColor = book.color; }
+    if (nbKicker) {
+      text(nbKicker, book ? (parentOrig ? 'DENTRO DO CADERNO · GAVETA ' + parentOrig.name : 'VOCÊ ESTÁ DENTRO DO CADERNO') : 'GABINETE DE ESCRITA');
+    }
     byId('cabinet-search').placeholder = book ? 'Buscar neste caderno' : 'Buscar em todos os textos';
     byId('cabinet-search').setAttribute('aria-label', byId('cabinet-search').placeholder);
     byId('notebook-rename').hidden = byId('notebook-export').hidden = byId('notebook-trash').hidden = !book;
     byId('notebook-more').hidden = !book; byId('notebook-more-menu').hidden = true; byId('notebook-more').setAttribute('aria-expanded','false');
     byId('start-universe').hidden = byId('start-chalkboard').hidden = byId('start-lineage').hidden = !book;
     byId('export-notebook').disabled = !book;
-    text(byId('notebook-back'), book && book.originalId ? '← Voltar à gaveta' : '← Mesa de cadernos');
+    text(byId('notebook-back'), book && book.originalId ? '← Voltar à gaveta' : '← Voltar à Estante');
     byId('notebook-organization').hidden = !book;
     var parentSelect = byId('notebook-parent'); parentSelect.textContent = '';
     var loose = document.createElement('option'); loose.value = ''; text(loose, 'Na mesa, sem gaveta'); parentSelect.appendChild(loose);
     if (originals) { originals.list().filter(function (o) { return !o.trashed; }).forEach(function (o) { var opt = document.createElement('option'); opt.value = o.id; text(opt, o.name); parentSelect.appendChild(opt); }); }
     parentSelect.value = book ? book.originalId || '' : '';
     byId('cabinet-window').setAttribute('data-scope', book ? 'notebook' : 'all');
-    text(byId('cabinet-context-label'), book ? 'SUAS FOLHAS' : 'CONSULTA · TODOS OS TEXTOS');
+    text(byId('cabinet-context-label'), book ? (parentOrig ? 'DENTRO DO CADERNO · ' + parentOrig.name.toUpperCase() : 'DENTRO DO CADERNO') : 'CONSULTA · TODOS OS TEXTOS');
     byId('cabinet-window').setAttribute('aria-label', book ? 'Caderno aberto: ' + book.name : 'Consulta de todos os textos');
     byId('notebook-universe').hidden = byId('notebook-chalkboard').hidden = !book;
     byId('note-project').textContent = '';
@@ -25119,13 +25387,28 @@ SOFTWARE.
     byId('original-more-menu').hidden = true; byId('original-more').setAttribute('aria-expanded','false');
     byId('notebook-area').setAttribute('data-drawer-open',current?'true':'false');
     text(byId('original-title-label'), current ? current.name : 'GAVETA');
-    byId('notebook-hint').innerHTML = '<span class="pointer-hint">Dê dois cliques aqui para criar um caderno.</span><span class="touch-hint">Toque em + Novo caderno para começar.</span>';
+    var drawerSub = byId('original-drawer-sub');
+    if (drawerSub) {
+      if (current) {
+        var inDrawerBooks = groups[current.id] || [];
+        var inDrawerDocs = 0;
+        inDrawerBooks.forEach(function (bk) { inDrawerDocs += counts[bk.id] || 0; });
+        text(drawerSub, inDrawerBooks.length
+          ? inDrawerBooks.length + (inDrawerBooks.length === 1 ? ' caderno' : ' cadernos') + ' · ' + inDrawerDocs + (inDrawerDocs === 1 ? ' texto guardado aqui' : ' textos guardados aqui')
+          : 'Gaveta vazia — crie seu primeiro caderno aqui dentro');
+      } else {
+        text(drawerSub, '');
+      }
+    }
+    byId('notebook-hint').innerHTML = current
+      ? '<span class="pointer-hint">Esta gaveta guarda os cadernos desta obra. Dê dois cliques aqui para criar um caderno dentro dela.</span><span class="touch-hint">Toque em + Novo caderno para guardar um caderno nesta gaveta.</span>'
+      : '<span class="pointer-hint">Dê dois cliques aqui para criar um caderno.</span><span class="touch-hint">Toque em + Novo caderno para começar.</span>';
     function cover(book) {
       var b = button(list, '', function () { openNotebook(book.id); });
       b.className = 'notebook-cover'; b.setAttribute('title', book.name); b.setAttribute('data-notebook-id', book.id); b.setAttribute('aria-label', 'Abrir caderno ' + book.name);
       b.setAttribute('aria-pressed', activeNotebookId === book.id ? 'true' : 'false');
       var face = document.createElement('span'); face.className = 'notebook-front'; face.setAttribute('aria-hidden', 'true'); b.appendChild(face);
-      var strap = document.createElement('span'); strap.className = 'notebook-strap'; strap.style.backgroundColor = book.color; text(strap, book.name); face.appendChild(strap);
+      var strap = document.createElement('span'); strap.className = 'notebook-strap'; strap.style.backgroundColor = book.color; strap.setAttribute('data-light-strap', isLightHex(book.color) ? 'true' : 'false'); text(strap, book.name); face.appendChild(strap);
       var woven = document.createElement('span'); woven.className = 'woven-tab'; woven.setAttribute('aria-hidden', 'true'); woven.innerHTML = 'ESCREVA<b>RAL</b>'; face.appendChild(woven);
       var elastic = document.createElement('span'); elastic.className = 'notebook-elastic'; elastic.setAttribute('aria-hidden', 'true'); face.appendChild(elastic);
     }
@@ -25158,6 +25441,7 @@ SOFTWARE.
     byId('cabinet-window').hidden = true;
     byId('os-window-task').hidden = true;
     renderNotebooks(); renderReminders(); updatePath(); queueSession();
+    pulseSpatialEnter(byId('notebook-area'));
     return true;
   }
   function closeOriginal() {
@@ -25199,7 +25483,9 @@ SOFTWARE.
       cabinetSelection = { noteId: book.resume.noteId, start: Math.max(0, Math.min(doc.text.length, Number(book.resume.start) || 0)), end: Math.max(0, Math.min(doc.text.length, Number(book.resume.end) || 0)), scroll: Math.max(0, Number(book.resume.scroll) || 0) };
       if (book.resume.view === 'writing') { enterDesk(true); }
     }
-    renderNotebooks(); renderReminders(); notebookLabels(); return true;
+    renderNotebooks(); renderReminders(); notebookLabels();
+    if (cabinetOpen) { pulseSpatialEnter(byId('cabinet-window')); }
+    return true;
   }
   function showNotebookForm(id, target) {
     if (!notebooks) { message('A gravação está indisponível.'); return; }
@@ -25234,6 +25520,7 @@ SOFTWARE.
         } else {
           orig = originals.add(value);
           hideNotebookForm(); openOriginal(orig.id);
+          message('Gaveta “' + orig.name + '” criada — você está dentro dela.');
         }
       } else {
         var book;
@@ -25247,6 +25534,7 @@ SOFTWARE.
           book = notebooks.add(value, activeOriginalId || null);
           hideNotebookForm(); renderNotebooks(); openNotebook(book.id);
           if (workspaceUI) { workspaceUI.selectProject(book.id, ''); }
+          message('Caderno “' + book.name + '” criado — você está dentro dele.');
         }
       }
     } catch (e) { text(byId('project-error'), e.message || 'Não foi possível guardar.'); }
@@ -25909,9 +26197,16 @@ SOFTWARE.
       byId('path-original-separator').hidden = true;
       byId('path-original').hidden = true;
     }
+    var crumbBook = activeNotebook() || (doc && doc.projectId && notebooks ? notebooks.get(doc.projectId) : null);
+    if (crumbBook && !availableBook(crumbBook)) { crumbBook = null; }
+    var locBar = byId('location-path');
+    if (locBar && locBar.style && locBar.style.setProperty) {
+      locBar.style.setProperty('--esc-crumb-book-color', crumbBook && crumbBook.color ? crumbBook.color : '#6f8e68');
+    }
     byId('path-project').hidden = byId('path-project-separator').hidden = project === null;
+    byId('path-project').setAttribute('data-has-book', crumbBook ? 'true' : 'false');
     text(byId('path-project'), project || 'Textos avulsos');
-    byId('path-project').setAttribute('title', project || 'Textos avulsos');
+    byId('path-project').setAttribute('title', crumbBook ? 'Caderno: ' + crumbBook.name : (project || 'Textos avulsos'));
     if (byId('path-folder')) { var hasFolder = !cabinetOpen && !!(doc.folder && doc.folder.length); byId('path-folder').hidden = byId('path-folder-separator').hidden = !hasFolder; text(byId('path-folder'), doc.folder || ''); }
     byId('path-document').hidden = byId('path-document-separator').hidden = cabinetOpen;
     text(byId('path-document'), title.value || 'Sem título');
@@ -25933,16 +26228,40 @@ SOFTWARE.
       if (el) { el.removeAttribute('aria-current'); if (id === currentId) { el.setAttribute('aria-current', 'location'); } }
     });
   }
+  function goHomeToEstante() {
+    if (composing || !persist() || !rememberNotebook()) { return false; }
+    if (!cabinetOpen && !openCabinet(false)) { return false; }
+    closePanels(false);
+    toggleStart(false);
+    activeOriginalId = null;
+    activeNotebookId = null;
+    cabinetProject = null;
+    showingAbout = false;
+    byId('cabinet-window').hidden = true;
+    byId('os-window-task').hidden = true;
+    byId('os-window-task').setAttribute('aria-pressed', 'false');
+    renderNotebooks();
+    renderReminders();
+    updatePath();
+    queueSession();
+    var target = byId('project-new');
+    if (target && !target.hidden) { target.focus(); }
+    byId('notebook-area').scrollTop = 0;
+    byId('desktop-surface').scrollTop = 0;
+    return true;
+  }
   function pathToProjects(all) {
+    if (all) {
+      goHomeToEstante();
+      return;
+    }
     if (cabinetOpen) {
-      if (all) { closeOriginal(); return; }
       var selected = cabinetProject;
       cabinetProject = selected; byId('cabinet-search').value = ''; renderCabinet();
       return;
     }
     if (workspaceUI) {
-      if (all) { workspaceUI.selectLibrary('all'); }
-      else if (doc.projectId) { workspaceUI.selectProject(doc.projectId, doc.folder || ''); }
+      if (doc.projectId) { workspaceUI.selectProject(doc.projectId, doc.folder || ''); }
       else { workspaceUI.selectLibrary('all'); }
     }
   }
@@ -27024,7 +27343,7 @@ SOFTWARE.
       onProjectSelect: function (bookId) {
         if (bookId && notebooks && availableBook(notebooks.get(bookId))) { openNotebook(bookId); }
       },
-      onOpenNotebookTable: function () { openCabinet(false); },
+      onOpenNotebookTable: function () { goHomeToEstante(); },
       trashDoc: function (entry) { trashEntry(entry); },
       restoreDoc: function (entry) {
         if (!archive) { return; }

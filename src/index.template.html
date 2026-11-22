@@ -123,8 +123,15 @@ SOFTWARE.
     <div class="cabinet-workspace" id="desktop-surface">
       <section id="notebook-area" aria-label="Suas gavetas e cadernos">
         <div id="original-header" class="cabinet-context" hidden>
-          <p id="original-title-label">GAVETA</p>
-          <div class="original-actions"><button id="original-back">← Gabinete</button><button id="original-more" aria-expanded="false" aria-controls="original-more-menu">Opções da gaveta</button><div id="original-more-menu" class="context-overflow" hidden><button id="original-rename">Renomear gaveta</button><button id="original-export">Exportar gaveta</button><button id="original-trash" aria-label="Mover gaveta para a lixeira">Mover para a lixeira</button></div></div>
+          <div class="esc-drawer-identity">
+            <span class="esc-drawer-mini" aria-hidden="true"></span>
+            <div class="esc-drawer-copy">
+              <span class="esc-context-kicker">Você está dentro da gaveta</span>
+              <p id="original-title-label">GAVETA</p>
+              <span id="original-drawer-sub" class="esc-context-sub"></span>
+            </div>
+          </div>
+          <div class="original-actions"><button id="original-back">← Voltar à Estante</button><button id="original-more" aria-expanded="false" aria-controls="original-more-menu">Opções da gaveta</button><div id="original-more-menu" class="context-overflow" hidden><button id="original-rename">Renomear gaveta</button><button id="original-export">Exportar gaveta</button><button id="original-trash" aria-label="Mover gaveta para a lixeira">Mover para a lixeira</button></div></div>
         </div>
         <div id="desktop-primary-actions"><button id="project-new">+ Novo caderno</button><button id="desktop-organize" aria-expanded="false" aria-controls="desktop-organize-menu">Organizar</button><div id="desktop-organize-menu" class="context-overflow" hidden><button id="original-new">+ Nova gaveta</button></div></div>
         <button id="volume-new" hidden>+ Novo caderno</button>
@@ -147,7 +154,7 @@ SOFTWARE.
       <nav class="project-shelf" aria-label="Projetos"><p class="os-label">CADERNOS</p><button id="cabinet-all" class="project-link" aria-pressed="true">Todos os textos</button><div id="cabinet-projects"></div><span id="project-icon-template" hidden=""><svg class="os-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M216,74H130L101.73,52.8a14,14,0,0,0-8.4-2.8H40A14,14,0,0,0,26,64V200a14,14,0,0,0,14,14H216.89A13.12,13.12,0,0,0,230,200.89V88A14,14,0,0,0,216,74Zm2,126.89a1.11,1.11,0,0,1-1.11,1.11H40a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H93.33a2,2,0,0,1,1.2.4L124.4,84.8A6,6,0,0,0,128,86h88a2,2,0,0,1,2,2Z"></path></svg></span></nav>
       <main class="cabinet-files"><div class="cabinet-context"><p id="cabinet-context-label">TODOS OS TEXTOS</p><button id="notebook-back">← Mesa de cadernos</button></div>
         <div class="notebook-actions"><button id="notebook-universe" aria-controls="story-screen">Universo</button><button id="notebook-chalkboard" aria-controls="chalkboard">Quadro</button><button id="notebook-more" aria-expanded="false" aria-controls="notebook-more-menu">Mais</button><div id="notebook-more-menu" class="context-overflow" hidden><button id="notebook-rename">Renomear caderno</button><button id="notebook-export">Exportar caderno</button><button id="notebook-trash" aria-label="Mover caderno para a lixeira" title="Mover caderno para a lixeira"><svg class="reminder-trash-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg> Mover para a lixeira</button></div></div>
-        <div class="cabinet-heading"><div><p class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div><button id="cabinet-new" class="os-action">+ Novo texto</button></div>
+        <div class="cabinet-heading"><div class="esc-notebook-identity"><span id="esc-notebook-mini" class="esc-notebook-mini" aria-hidden="true" hidden><span id="esc-notebook-mini-strap" class="esc-notebook-mini-strap"></span></span><div><p id="esc-notebook-kicker" class="os-label">GABINETE DE ESCRITA</p><h1 id="cabinet-heading" tabindex="-1">Seus textos</h1></div></div><button id="cabinet-new" class="os-action">+ Novo texto</button></div>
 
         <button id="cabinet-resume" class="resume-note"><span class="os-label">CONTINUAR ESCREVENDO</span><span id="resume-title">Sem título</span><small id="resume-date">Texto avulso</small></button>
         <div class="files-label"><h2 id="cabinet-list-heading">Textos</h2><span id="cabinet-count">2 textos</span></div>
@@ -242,9 +249,9 @@ SOFTWARE.
   <div id="esc-workspace" class="esc-workspace">
   <aside id="navigation" aria-label="Biblioteca e projetos">
     <header class="esc-nav-brand">
-      <button id="esc-open-mesa" type="button" class="esc-brand-btn" title="Abrir mesa de cadernos">
+      <button id="esc-open-mesa" type="button" class="esc-brand-btn" title="Ir ao Início — Estante de gavetas e cadernos">
         <svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg>
-        <span>ESCREVARAL</span>
+        <span class="esc-brand-stack"><span>ESCREVARAL</span><small class="esc-brand-sub">Estante</small></span>
       </button>
     </header>
     <div class="esc-new-project-wrap">

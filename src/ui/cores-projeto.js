@@ -3,12 +3,12 @@
   root.Escr = root.Escr || {};
 
   var PALETTES = [
-    { id: 'salvia', name: 'Sálvia', color: '#a3b899', paper: '#f0f4ee', edge: '#435439' },
-    { id: 'areia', name: 'Areia', color: '#c2b69d', paper: '#f6f3ed', edge: '#574c35' },
-    { id: 'pessego', name: 'Pêssego', color: '#cfae97', paper: '#f8f1eb', edge: '#634732' },
-    { id: 'rosa', name: 'Rosa', color: '#c5a5a5', paper: '#f7efef', edge: '#5f3c3c' },
+    { id: 'salvia', name: 'Sálvia', color: '#7f9e76', paper: '#edf2ea', edge: '#30432a' },
+    { id: 'areia', name: 'Areia', color: '#b59f7a', paper: '#f4f0e6', edge: '#4e3f27' },
+    { id: 'pessego', name: 'Pêssego', color: '#c28468', paper: '#f6ede6', edge: '#5c3422' },
+    { id: 'rosa', name: 'Rosa', color: '#b37c82', paper: '#f5ebeb', edge: '#572f34' },
     { id: 'lavanda', name: 'Lavanda', color: '#b2a8be', paper: '#f3f1f6', edge: '#4e435b' },
-    { id: 'nevoa', name: 'Névoa', color: '#9eb4b8', paper: '#edf3f4', edge: '#374e53' }
+    { id: 'nevoa', name: 'Névoa', color: '#6f919a', paper: '#e9f0f2', edge: '#2b444b' }
   ];
 
   var DEFAULT_PALETTE = {

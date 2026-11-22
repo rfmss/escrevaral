@@ -188,7 +188,8 @@ const academiaJs = fs.readFileSync(path.join(rootDir, 'src/ui/academia.js'), 'ut
 assert.ok(academiaJs.includes("var paper = isDark ? '#211a14' : '#cfc3ae'"), 'academia.js envia paleta Real Gabinete claro (#cfc3ae) e Nogueira Opaca noturna (#211a14) aos iframes');
 assert.ok(litHtml.includes('--oasis-paper:#1d221d'), 'literatura-mundial.html calibra Kindle Oasis noturno em Ardósia Sálvia Opaca #1d221d');
 assert.ok(temasLinuxCss.includes('--esc-bg: #1d221d') && temasLinuxCss.includes('--esc-manuscript: #d8dfd4'), 'temas-linux.css define Modo Noturno opaco calibrado sem preto/branco puro');
-assert.ok(temasLinuxCss.includes('rotateY(-21deg)') && temasLinuxCss.includes('#gabinete .original-box .box-lid'), 'temas-linux.css anima abertura do caderno e da gaveta na Estante estilo AFK Journey');
+assert.ok(temasLinuxCss.includes('rotateY(-24deg)') && temasLinuxCss.includes('#gabinete .original-box .box-lid'), 'temas-linux.css anima abertura rígida do caderno e da gaveta na Estante estilo AFK Journey');
+assert.ok(temasLinuxCss.includes('.esc-drawer-mini') && temasLinuxCss.includes('.esc-notebook-mini') && temasLinuxCss.includes('#location-path #path-original::before'), 'temas-linux.css provê miniaturas espaciais no breadcrumb e no interior de gavetas/cadernos');
 const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');
 assert.ok(autopubHtml.includes('AFK-REAL-GABINETE-ORNAMENTS-START'), 'autopublicacao-independente.html com ornamentos AFK x Real Gabinete');
 for (const entry of catalog) {

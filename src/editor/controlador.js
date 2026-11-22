@@ -25,25 +25,52 @@
       notebooks.update(activeNotebookId, { resume: { noteId: doc.noteId || doc.id, start: manuscript.selectionStart || 0, end: manuscript.selectionEnd || 0, scroll: manuscript.scrollTop || 0, view: cabinetOpen ? 'files' : 'writing' } }); return true;
     } catch (e) { message('O texto está guardado, mas não foi possível guardar a posição no caderno.'); return false; }
   }
+  function isLightHex(hex) {
+    var m = /^#([0-9a-f]{6})$/i.exec(String(hex || ''));
+    if (!m) { return false; }
+    var n = parseInt(m[1], 16);
+    var r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 168;
+  }
+  function pulseSpatialEnter(el) {
+    if (!el || !el.classList) { return; }
+    el.classList.remove('esc-spatial-enter');
+    try { void el.offsetWidth; } catch (ignore) {}
+    el.classList.add('esc-spatial-enter');
+    window.setTimeout(function () {
+      if (el && el.classList) { el.classList.remove('esc-spatial-enter'); }
+    }, 320);
+  }
   function notebookLabels() {
     var book = activeNotebook(), label = book ? book.name : 'Todos os textos';
+    var parentOrig = book && book.originalId && originals ? originals.get(book.originalId) : null;
     text(byId('notebook-window-name'), label); text(byId('os-window-task'), label);
     byId('os-window-task').setAttribute('data-notebook', book ? 'true' : 'false'); byId('os-window-task').setAttribute('title', label);
     if (book) { byId('os-window-task').style.borderLeftColor = book.color; }
+    var cabWin = byId('cabinet-window');
+    if (cabWin && cabWin.style && cabWin.style.setProperty) {
+      cabWin.style.setProperty('--esc-book-color', book ? book.color : '#6f8e68');
+    }
+    var nbMini = byId('esc-notebook-mini'), nbStrap = byId('esc-notebook-mini-strap'), nbKicker = byId('esc-notebook-kicker');
+    if (nbMini) { nbMini.hidden = !book; }
+    if (nbStrap && book) { nbStrap.style.backgroundColor = book.color; }
+    if (nbKicker) {
+      text(nbKicker, book ? (parentOrig ? 'DENTRO DO CADERNO · GAVETA ' + parentOrig.name : 'VOCÊ ESTÁ DENTRO DO CADERNO') : 'GABINETE DE ESCRITA');
+    }
     byId('cabinet-search').placeholder = book ? 'Buscar neste caderno' : 'Buscar em todos os textos';
     byId('cabinet-search').setAttribute('aria-label', byId('cabinet-search').placeholder);
     byId('notebook-rename').hidden = byId('notebook-export').hidden = byId('notebook-trash').hidden = !book;
     byId('notebook-more').hidden = !book; byId('notebook-more-menu').hidden = true; byId('notebook-more').setAttribute('aria-expanded','false');
     byId('start-universe').hidden = byId('start-chalkboard').hidden = byId('start-lineage').hidden = !book;
     byId('export-notebook').disabled = !book;
-    text(byId('notebook-back'), book && book.originalId ? '← Voltar à gaveta' : '← Mesa de cadernos');
+    text(byId('notebook-back'), book && book.originalId ? '← Voltar à gaveta' : '← Voltar à Estante');
     byId('notebook-organization').hidden = !book;
     var parentSelect = byId('notebook-parent'); parentSelect.textContent = '';
     var loose = document.createElement('option'); loose.value = ''; text(loose, 'Na mesa, sem gaveta'); parentSelect.appendChild(loose);
     if (originals) { originals.list().filter(function (o) { return !o.trashed; }).forEach(function (o) { var opt = document.createElement('option'); opt.value = o.id; text(opt, o.name); parentSelect.appendChild(opt); }); }
     parentSelect.value = book ? book.originalId || '' : '';
     byId('cabinet-window').setAttribute('data-scope', book ? 'notebook' : 'all');
-    text(byId('cabinet-context-label'), book ? 'SUAS FOLHAS' : 'CONSULTA · TODOS OS TEXTOS');
+    text(byId('cabinet-context-label'), book ? (parentOrig ? 'DENTRO DO CADERNO · ' + parentOrig.name.toUpperCase() : 'DENTRO DO CADERNO') : 'CONSULTA · TODOS OS TEXTOS');
     byId('cabinet-window').setAttribute('aria-label', book ? 'Caderno aberto: ' + book.name : 'Consulta de todos os textos');
     byId('notebook-universe').hidden = byId('notebook-chalkboard').hidden = !book;
     byId('note-project').textContent = '';
@@ -69,13 +96,28 @@
     byId('original-more-menu').hidden = true; byId('original-more').setAttribute('aria-expanded','false');
     byId('notebook-area').setAttribute('data-drawer-open',current?'true':'false');
     text(byId('original-title-label'), current ? current.name : 'GAVETA');
-    byId('notebook-hint').innerHTML = '<span class="pointer-hint">Dê dois cliques aqui para criar um caderno.</span><span class="touch-hint">Toque em + Novo caderno para começar.</span>';
+    var drawerSub = byId('original-drawer-sub');
+    if (drawerSub) {
+      if (current) {
+        var inDrawerBooks = groups[current.id] || [];
+        var inDrawerDocs = 0;
+        inDrawerBooks.forEach(function (bk) { inDrawerDocs += counts[bk.id] || 0; });
+        text(drawerSub, inDrawerBooks.length
+          ? inDrawerBooks.length + (inDrawerBooks.length === 1 ? ' caderno' : ' cadernos') + ' · ' + inDrawerDocs + (inDrawerDocs === 1 ? ' texto guardado aqui' : ' textos guardados aqui')
+          : 'Gaveta vazia — crie seu primeiro caderno aqui dentro');
+      } else {
+        text(drawerSub, '');
+      }
+    }
+    byId('notebook-hint').innerHTML = current
+      ? '<span class="pointer-hint">Esta gaveta guarda os cadernos desta obra. Dê dois cliques aqui para criar um caderno dentro dela.</span><span class="touch-hint">Toque em + Novo caderno para guardar um caderno nesta gaveta.</span>'
+      : '<span class="pointer-hint">Dê dois cliques aqui para criar um caderno.</span><span class="touch-hint">Toque em + Novo caderno para começar.</span>';
     function cover(book) {
       var b = button(list, '', function () { openNotebook(book.id); });
       b.className = 'notebook-cover'; b.setAttribute('title', book.name); b.setAttribute('data-notebook-id', book.id); b.setAttribute('aria-label', 'Abrir caderno ' + book.name);
       b.setAttribute('aria-pressed', activeNotebookId === book.id ? 'true' : 'false');
       var face = document.createElement('span'); face.className = 'notebook-front'; face.setAttribute('aria-hidden', 'true'); b.appendChild(face);
-      var strap = document.createElement('span'); strap.className = 'notebook-strap'; strap.style.backgroundColor = book.color; text(strap, book.name); face.appendChild(strap);
+      var strap = document.createElement('span'); strap.className = 'notebook-strap'; strap.style.backgroundColor = book.color; strap.setAttribute('data-light-strap', isLightHex(book.color) ? 'true' : 'false'); text(strap, book.name); face.appendChild(strap);
       var woven = document.createElement('span'); woven.className = 'woven-tab'; woven.setAttribute('aria-hidden', 'true'); woven.innerHTML = 'ESCREVA<b>RAL</b>'; face.appendChild(woven);
       var elastic = document.createElement('span'); elastic.className = 'notebook-elastic'; elastic.setAttribute('aria-hidden', 'true'); face.appendChild(elastic);
     }
@@ -108,6 +150,7 @@
     byId('cabinet-window').hidden = true;
     byId('os-window-task').hidden = true;
     renderNotebooks(); renderReminders(); updatePath(); queueSession();
+    pulseSpatialEnter(byId('notebook-area'));
     return true;
   }
   function closeOriginal() {
@@ -149,7 +192,9 @@
       cabinetSelection = { noteId: book.resume.noteId, start: Math.max(0, Math.min(doc.text.length, Number(book.resume.start) || 0)), end: Math.max(0, Math.min(doc.text.length, Number(book.resume.end) || 0)), scroll: Math.max(0, Number(book.resume.scroll) || 0) };
       if (book.resume.view === 'writing') { enterDesk(true); }
     }
-    renderNotebooks(); renderReminders(); notebookLabels(); return true;
+    renderNotebooks(); renderReminders(); notebookLabels();
+    if (cabinetOpen) { pulseSpatialEnter(byId('cabinet-window')); }
+    return true;
   }
   function showNotebookForm(id, target) {
     if (!notebooks) { message('A gravação está indisponível.'); return; }
@@ -184,6 +229,7 @@
         } else {
           orig = originals.add(value);
           hideNotebookForm(); openOriginal(orig.id);
+          message('Gaveta “' + orig.name + '” criada — você está dentro dela.');
         }
       } else {
         var book;
@@ -197,6 +243,7 @@
           book = notebooks.add(value, activeOriginalId || null);
           hideNotebookForm(); renderNotebooks(); openNotebook(book.id);
           if (workspaceUI) { workspaceUI.selectProject(book.id, ''); }
+          message('Caderno “' + book.name + '” criado — você está dentro dele.');
         }
       }
     } catch (e) { text(byId('project-error'), e.message || 'Não foi possível guardar.'); }
@@ -859,9 +906,16 @@
       byId('path-original-separator').hidden = true;
       byId('path-original').hidden = true;
     }
+    var crumbBook = activeNotebook() || (doc && doc.projectId && notebooks ? notebooks.get(doc.projectId) : null);
+    if (crumbBook && !availableBook(crumbBook)) { crumbBook = null; }
+    var locBar = byId('location-path');
+    if (locBar && locBar.style && locBar.style.setProperty) {
+      locBar.style.setProperty('--esc-crumb-book-color', crumbBook && crumbBook.color ? crumbBook.color : '#6f8e68');
+    }
     byId('path-project').hidden = byId('path-project-separator').hidden = project === null;
+    byId('path-project').setAttribute('data-has-book', crumbBook ? 'true' : 'false');
     text(byId('path-project'), project || 'Textos avulsos');
-    byId('path-project').setAttribute('title', project || 'Textos avulsos');
+    byId('path-project').setAttribute('title', crumbBook ? 'Caderno: ' + crumbBook.name : (project || 'Textos avulsos'));
     if (byId('path-folder')) { var hasFolder = !cabinetOpen && !!(doc.folder && doc.folder.length); byId('path-folder').hidden = byId('path-folder-separator').hidden = !hasFolder; text(byId('path-folder'), doc.folder || ''); }
     byId('path-document').hidden = byId('path-document-separator').hidden = cabinetOpen;
     text(byId('path-document'), title.value || 'Sem título');
@@ -883,16 +937,40 @@
       if (el) { el.removeAttribute('aria-current'); if (id === currentId) { el.setAttribute('aria-current', 'location'); } }
     });
   }
+  function goHomeToEstante() {
+    if (composing || !persist() || !rememberNotebook()) { return false; }
+    if (!cabinetOpen && !openCabinet(false)) { return false; }
+    closePanels(false);
+    toggleStart(false);
+    activeOriginalId = null;
+    activeNotebookId = null;
+    cabinetProject = null;
+    showingAbout = false;
+    byId('cabinet-window').hidden = true;
+    byId('os-window-task').hidden = true;
+    byId('os-window-task').setAttribute('aria-pressed', 'false');
+    renderNotebooks();
+    renderReminders();
+    updatePath();
+    queueSession();
+    var target = byId('project-new');
+    if (target && !target.hidden) { target.focus(); }
+    byId('notebook-area').scrollTop = 0;
+    byId('desktop-surface').scrollTop = 0;
+    return true;
+  }
   function pathToProjects(all) {
+    if (all) {
+      goHomeToEstante();
+      return;
+    }
     if (cabinetOpen) {
-      if (all) { closeOriginal(); return; }
       var selected = cabinetProject;
       cabinetProject = selected; byId('cabinet-search').value = ''; renderCabinet();
       return;
     }
     if (workspaceUI) {
-      if (all) { workspaceUI.selectLibrary('all'); }
-      else if (doc.projectId) { workspaceUI.selectProject(doc.projectId, doc.folder || ''); }
+      if (doc.projectId) { workspaceUI.selectProject(doc.projectId, doc.folder || ''); }
       else { workspaceUI.selectLibrary('all'); }
     }
   }
@@ -1974,7 +2052,7 @@
       onProjectSelect: function (bookId) {
         if (bookId && notebooks && availableBook(notebooks.get(bookId))) { openNotebook(bookId); }
       },
-      onOpenNotebookTable: function () { openCabinet(false); },
+      onOpenNotebookTable: function () { goHomeToEstante(); },
       trashDoc: function (entry) { trashEntry(entry); },
       restoreDoc: function (entry) {
         if (!archive) { return; }
