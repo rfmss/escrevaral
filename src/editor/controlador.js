@@ -546,6 +546,10 @@
     if (composing || activePanel || cabinetOpen || !byId('start-menu').hidden || document.activeElement !== manuscript) { return; }
     var start = manuscript.selectionStart, end = manuscript.selectionEnd;
     if (typeof start !== 'number' || typeof end !== 'number' || end <= start) { copiedSelection = null; dismissedSelection = null; byId('selection-tools').hidden = true; return; }
+    /* Regra do Superfoco: modo foco é exclusivo para escrita fluida; qualquer seleção volta ao Modo Nota */
+    if (immersion) {
+      setImmersion(false, 'selection');
+    }
     if (dismissedSelection && dismissedSelection.documentId === (doc.noteId || doc.id) && dismissedSelection.text === manuscript.value && dismissedSelection.start === start && dismissedSelection.end === end) { return; }
     dismissedSelection = null;
     copiedSelection = { documentId: doc.noteId || doc.id, text: manuscript.value, start: start, end: end };
@@ -789,6 +793,7 @@
   function showPanel(id, toggle, open) {
     dismissSelection();
     if (!open) { if (activePanel === id) { if (id === 'oficina') { analysisRange = null; } closePanels(true); } return; }
+    if (immersion) { setImmersion(false, 'panel'); }
     closePanels(false); collapseTimeline();
     panelTrigger = byId(toggle); activePanel = id; text(byId('panel-status'), '');
     byId(id).hidden = false; byId(toggle).setAttribute('aria-expanded', 'true');

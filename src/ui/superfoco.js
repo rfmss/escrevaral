@@ -290,7 +290,24 @@
         }
         return;
       }
-      if (richEl && !richEl.hidden) { updateRichParagraphFocus(); }
+      if (richEl && !richEl.hidden) {
+        try {
+          if (window.getSelection) {
+            var sel = window.getSelection();
+            if (sel && !sel.isCollapsed && sel.rangeCount && String(sel.toString() || '').length > 0) {
+              var anc = sel.getRangeAt(0).commonAncestorContainer;
+              if (anc === richEl || (richEl.contains && richEl.contains(anc))) {
+                openedAutomatically = false;
+                clearIdle();
+                resetCounter();
+                onClose('selection');
+                return;
+              }
+            }
+          }
+        } catch (ignore) {}
+        updateRichParagraphFocus();
+      }
     }
 
     function syncSwitch() {
@@ -431,12 +448,26 @@
       }
     }
 
+    function exitForNonFluidEdit(reason) {
+      openedAutomatically = false;
+      clearIdle();
+      resetCounter();
+      onClose(reason || 'edit');
+    }
+
     function onInput(ev) {
       if (disposed) { return; }
       if (!isTargetInEditor(ev.target)) { return; }
-      if (getActive()) { armIdle(); syncFlow(); }
-      if (composing || ev.isComposing) { return; }
       var inputType = ev.inputType || '';
+      if (getActive()) {
+        if (inputType && (inputType.indexOf('Paste') >= 0 || inputType.indexOf('history') === 0 || inputType.indexOf('format') === 0 || inputType === 'deleteByCut')) {
+          exitForNonFluidEdit('edit');
+          return;
+        }
+        armIdle();
+        syncFlow();
+      }
+      if (composing || ev.isComposing) { return; }
       if (inputType) {
         if (inputType === 'insertText') {
           var chunk = ev.data || '';
@@ -468,13 +499,25 @@
       if (getActive() && openedAutomatically) { armIdle(); }
     }
     function onKeyDown(ev) {
-      if (getActive() && openedAutomatically) { armIdle(); }
       if (ev.keyCode === 122) { // F11
         ev.preventDefault();
         toggleFullscreen();
         syncBar();
         return;
       }
+      if (getActive() && isTargetInEditor(ev.target)) {
+        /* Atalhos de edição/seleção (Ctrl/Cmd + A/C/X/V/Z/Y/B/I/U) saem do foco para o Modo Nota */
+        if ((ev.ctrlKey || ev.metaKey) && !ev.altKey) {
+          var kc = ev.keyCode;
+          if (kc === 65 || kc === 67 || kc === 88 || kc === 86 || kc === 90 || kc === 89 || kc === 66 || kc === 73 || kc === 85) {
+            exitForNonFluidEdit('edit');
+            return;
+          }
+        }
+        if (openedAutomatically) { armIdle(); }
+        return;
+      }
+      if (getActive() && openedAutomatically) { armIdle(); }
       if (!getActive() && isTargetInEditor(ev.target)) {
         if (ev.ctrlKey || ev.metaKey || ev.altKey || (ev.keyCode >= 33 && ev.keyCode <= 40)) {
           resetCounter();

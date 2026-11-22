@@ -181,6 +181,9 @@ assert.ok(litHtml.includes('--paper:#cfc3ae'), 'literatura-mundial.html linha do
 assert.ok(litHtml.includes('--oasis-paper:#c4cfc2'), 'literatura-mundial.html preserva leitor Kindle Oasis 100% em E-Ink Sálvia #c4cfc2');
 assert.ok(litHtml.includes('button.oasis-key:hover:not(:disabled)'), 'literatura-mundial.html protege destaque hover E-Ink nos botões do Kindle Oasis');
 assert.ok(realGabineteCss.includes('#oficina select'), 'real-gabinete.css estiliza selects/inputs dentro de #oficina em pergaminho (sem verde vazado)');
+assert.ok(realGabineteCss.includes('@keyframes escMagicSweep') && realGabineteCss.includes('clip-path: inset(0 100% 0 0)'), 'real-gabinete.css revela Academia e Literatura em 3 etapas no hover (quieto em repouso)');
+assert.ok(temasLinuxCss.includes('#items-column #esc-items-list > .esc-item-card') && temasLinuxCss.includes('border-radius: 0 !important'), 'temas-linux.css mantém notas retas ponta a ponta na coluna do meio');
+assert.ok(fs.existsSync(path.join(rootDir, 'MANUAL-MOTION.md')), 'MANUAL-MOTION.md documenta a regra das áreas nobres e 3 etapas');
 const academiaJs = fs.readFileSync(path.join(rootDir, 'src/ui/academia.js'), 'utf8');
 assert.ok(academiaJs.includes("var paper = isDark ? '#20150f' : '#cfc3ae'"), 'academia.js envia paleta Real Gabinete #cfc3ae (e não #c4cfc2) aos iframes da Academia');
 const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');

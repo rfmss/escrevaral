@@ -122,6 +122,22 @@ idleT2.fn();
 assert.equal(active, false);
 assert.deepEqual(closeReasons, ['idle']);
 
+// 4b. Regra do Superfoco puro: escrita fluida (Backspace/Enter) permanece; colar/desfazer/Ctrl+A sai para o Modo Nota
+active = true;
+sf.notifyState(true, 'manual');
+doc.emit('input', { target: manuscript, inputType: 'deleteContentBackward', data: null });
+doc.emit('input', { target: manuscript, inputType: 'insertLineBreak', data: null });
+assert.equal(active, true, 'Backspace e Enter mantêm o Superfoco');
+doc.emit('input', { target: manuscript, inputType: 'insertFromPaste', data: 'colado' });
+assert.equal(active, false, 'Colar sai do Superfoco para o Modo Nota');
+assert.equal(closeReasons[closeReasons.length - 1], 'edit');
+
+active = true;
+sf.notifyState(true, 'manual');
+doc.emit('keydown', { target: manuscript, ctrlKey: true, keyCode: 65, preventDefault() {} });
+assert.equal(active, false, 'Ctrl+A sai do Superfoco para o Modo Nota');
+assert.equal(closeReasons[closeReasons.length - 1], 'edit');
+
 // 5. Switch OFF desliga disparo automático e persiste
 switchBtn.dispatch('click');
 assert.equal(sf.preference.get(), false);

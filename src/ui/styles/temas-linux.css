@@ -128,41 +128,59 @@
     border-top: 1px dashed rgba(33, 41, 33, 0.26) !important;
   }
 
-  /* Cor do projeto discreta: apenas filete vertical esquerdo (sem chapar rosa/bege no cabeçalho todo) */
+  /* Cabeçalho da coluna do meio limpo e alinhado sem degrau lateral isolado */
   body[data-view="workspace"] #esc-items-header {
-    border-left: 4px solid var(--esc-project-color, #7c8b78);
+    border-left: 0 !important;
+    padding: 12px 12px 10px !important;
     color: #212921 !important;
   }
 
-  /* Superfícies de entrada / ação secundária em tom Sálvia calmo #b8c5b6 (zero branco!) */
+  /* Botão + Nova nota e campo de busca na mesma família geométrica (radius 3px, calmos em repouso) */
   body[data-view="workspace"] #esc-new-note {
-    background: #b8c5b6 !important;
-    color: #212921 !important;
-    border: 1px solid #7c8b78 !important;
-    border-radius: 2px;
+    background: rgba(33, 41, 33, 0.065) !important;
+    color: #1c241c !important;
+    border: 1px solid rgba(33, 41, 33, 0.24) !important;
+    border-radius: 3px !important;
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease, color 180ms ease;
   }
   body[data-view="workspace"] #esc-new-note:hover {
-    background: #aebcae !important;
+    background: #242d23 !important;
+    color: #e4ede2 !important;
+    border-color: #242d23 !important;
   }
 
   body[data-view="workspace"] .esc-search-pill,
   body[data-view="workspace"] #esc-folder-search {
-    background: #b8c5b6 !important;
-    border: 1px solid #7c8b78 !important;
+    background: rgba(33, 41, 33, 0.05) !important;
+    border: 1px solid rgba(33, 41, 33, 0.22) !important;
     color: #212921 !important;
   }
 
-  /* Botão principal carvão-botânico (+ Novo projeto) */
+  /* Botão + Novo projeto: quieto em repouso (áreas nobres) e desperta em 3 etapas no hover */
   body[data-view="workspace"] #esc-new-project {
-    background: #242d23 !important;
-    color: #d8e4d6 !important;
-    border: 1px dashed #d8e4d6 !important;
-    outline: 2px solid #242d23;
-    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(33, 41, 33, 0.065) !important;
+    color: #1c241c !important;
+    border: 1px solid rgba(33, 41, 33, 0.3) !important;
+    outline: none !important;
+    border-radius: 3px !important;
+    font-weight: 600 !important;
+    transition:
+      background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 200ms ease,
+      border-color 200ms ease,
+      transform 180ms cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
-  body[data-view="workspace"] #esc-new-project:hover {
-    background: #2e382c !important;
-    color: #f0f2e7 !important;
+  body[data-view="workspace"] #esc-new-project:hover,
+  body[data-view="workspace"] #esc-new-project:focus-visible {
+    background: #242d23 !important;
+    color: #e4ede2 !important;
+    border-color: #242d23 !important;
+    transform: translateY(-1px);
+  }
+  body[data-view="workspace"] #esc-new-project:active {
+    transform: translateY(0);
   }
 
   /* Botões das barras de ferramentas e ações: planos sobre o papel, zero fundo cinza/branco misturado */
@@ -183,13 +201,23 @@
     border: 1px solid rgba(33, 41, 33, 0.26);
   }
 
-  /* Estados ativos / pressionados: chapado carvão-botânico fosco (igual App Linux) */
+  /* Estados ativos / pressionados: calmos em repouso (sem tijolo preto gritando acima do texto!) */
   body[data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"],
   body[data-view="workspace"] #writing-space .masthead button[aria-pressed="true"],
   body[data-view="workspace"] #writing-space .masthead button[aria-expanded="true"],
   body[data-view="workspace"] .esc-pomo-btn[aria-pressed="true"] {
+    background: rgba(33, 41, 33, 0.11) !important;
+    color: #111511 !important;
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+    border-bottom: 2px solid #242d23 !important;
+    font-weight: 600 !important;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"]:hover,
+  body[data-view="workspace"] #writing-space .masthead button[aria-pressed="true"]:hover,
+  body[data-view="workspace"] #writing-space .masthead button[aria-expanded="true"]:hover,
+  body[data-view="workspace"] .esc-pomo-btn[aria-pressed="true"]:hover {
     background: #242d23 !important;
-    color: #d8e4d6 !important;
+    color: #e4ede2 !important;
     border-color: #242d23 !important;
   }
 
@@ -415,8 +443,16 @@
   }
   body[data-view="workspace"] #writing-space .desk-tools button[aria-pressed="true"],
   body[data-view="workspace"] #writing-space .desk-tools button[aria-expanded="true"] {
+    background: rgba(33, 41, 33, 0.11) !important;
+    color: #111511 !important;
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+    border-bottom: 2px solid #242d23 !important;
+    font-weight: 600 !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools button[aria-pressed="true"]:hover,
+  body[data-view="workspace"] #writing-space .desk-tools button[aria-expanded="true"]:hover {
     background: #242d23 !important;
-    color: #d8e4d6 !important;
+    color: #e4ede2 !important;
     border-color: #242d23 !important;
   }
   body[data-view="workspace"] #writing-space .desk-tools #esc-superfocus-auto-toggle {
@@ -1400,24 +1436,83 @@
     border-top: 1px solid rgba(33, 41, 33, 0.09) !important;
   }
 
-  /* Coluna de notas (#items-column): cartões limpos sem gaiolas nem botões encaixotados */
+  /* Coluna de notas (#items-column): geometria coerente (controles 3px alinhados, lista reta ponta a ponta) */
+  body[data-view="workspace"] #items-column .esc-search-wrap {
+    padding: 8px 12px !important;
+    border-bottom: 1px solid rgba(33, 41, 33, 0.1) !important;
+  }
   body[data-view="workspace"] #items-column #esc-new-note {
-    border: 0 !important;
-    border-radius: 8px !important;
-    background: rgba(33, 41, 33, 0.075) !important;
+    border: 1px solid rgba(33, 41, 33, 0.24) !important;
+    border-radius: 3px !important;
+    background: rgba(33, 41, 33, 0.065) !important;
+    color: #1c241c !important;
   }
   body[data-view="workspace"] #items-column #esc-new-note:hover {
-    background: rgba(33, 41, 33, 0.14) !important;
+    background: #242d23 !important;
+    color: #e4ede2 !important;
+    border-color: #242d23 !important;
   }
   body[data-view="workspace"] #items-column .esc-search-pill {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 32px !important;
+    padding: 0 3px 0 9px !important;
+    border: 1px solid rgba(33, 41, 33, 0.22) !important;
+    border-radius: 3px !important;
+    background: rgba(33, 41, 33, 0.048) !important;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  body[data-view="workspace"] #items-column .esc-search-pill:focus-within {
+    border-color: rgba(33, 41, 33, 0.46) !important;
+    background: rgba(33, 41, 33, 0.075) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-search {
     border: 0 !important;
-    border-radius: 99px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    min-height: 30px !important;
+    padding: 4px 4px 4px 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font: 400 12.5px/1.3 var(--esc-font-ui, Arial, Helvetica, sans-serif) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-search-clear {
+    position: static !important;
+    width: 22px !important;
+    height: 22px !important;
+    flex-shrink: 0;
+  }
+  body[data-view="workspace"] #items-column .esc-filter-toggle {
+    border-left: 1px solid rgba(33, 41, 33, 0.14) !important;
+    border-radius: 0 2px 2px 0 !important;
+    padding: 4px 8px !important;
+    margin-left: 2px !important;
+    font: 600 11.5px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif) !important;
+    color: #344231 !important;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+  body[data-view="workspace"] #items-column .esc-filter-toggle:hover {
+    color: #111511 !important;
     background: rgba(33, 41, 33, 0.06) !important;
   }
-  body[data-view="workspace"] #items-column #esc-items-list > * {
+  body[data-view="workspace"] #items-column #esc-items-list {
+    padding: 0 !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card {
+    margin: 0 !important;
+    padding: 11px 12px 10px 12px !important;
     border: 0 !important;
-    border-bottom: 1px solid rgba(33, 41, 33, 0.06) !important;
-    border-radius: 8px !important;
+    border-left: 3px solid transparent !important;
+    border-bottom: 1px solid rgba(33, 41, 33, 0.09) !important;
+    border-radius: 0 !important;
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), border-left-color 180ms ease;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card:hover {
+    border-left-color: rgba(33, 41, 33, 0.34) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card.is-selected {
+    border-left: 3px solid #242d23 !important;
+    background: rgba(33, 41, 33, 0.075) !important;
   }
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-open,
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-open:hover,
@@ -1430,42 +1525,55 @@
   }
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-act {
     border: 0 !important;
-    border-radius: 6px !important;
+    border-radius: 3px !important;
     background: transparent !important;
-    opacity: 0.72;
+    opacity: 0.48;
+    transition: opacity 180ms ease, background-color 160ms ease, color 160ms ease;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card:hover .esc-item-act,
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card.is-selected .esc-item-act {
+    opacity: 0.78;
   }
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-act:hover {
     background: rgba(33, 41, 33, 0.09) !important;
-    opacity: 1;
+    opacity: 1 !important;
   }
 
-  /* Barra esquerda (#navigation): botões secundários sem caixas pesadas */
+  /* Barra esquerda (#navigation): micro-motion sutil de 3 etapas e contornos coerentes (3px) */
+  body[data-view="workspace"] #navigation .esc-nav-item,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn,
+  body[data-view="workspace"] #navigation .esc-project-row,
+  body[data-view="workspace"] #navigation .esc-folder-item {
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), color 160ms ease;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-item .esc-ui-ico,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-item:hover .esc-ui-ico,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover .esc-ui-ico {
+    transform: translate3d(2px, 0, 0);
+  }
   body[data-view="workspace"] #navigation .esc-mini-add,
   body[data-view="workspace"] #navigation #esc-pomodoro-dock button {
-    border: 0 !important;
-    border-radius: 6px !important;
-    background: rgba(33, 41, 33, 0.07) !important;
+    border: 1px solid rgba(33, 41, 33, 0.16) !important;
+    border-radius: 3px !important;
+    background: rgba(33, 41, 33, 0.055) !important;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
   }
   body[data-view="workspace"] #navigation .esc-mini-add:hover,
   body[data-view="workspace"] #navigation #esc-pomodoro-dock button:hover {
-    background: rgba(33, 41, 33, 0.14) !important;
+    background: rgba(33, 41, 33, 0.13) !important;
+    border-color: rgba(33, 41, 33, 0.32) !important;
   }
   body[data-view="workspace"] #navigation #esc-pomodoro-dock,
   body[data-view="workspace"] #navigation .esc-nav-footer {
     border-top: 1px solid rgba(33, 41, 33, 0.1) !important;
   }
-  body[data-view="workspace"] #navigation .esc-academy-card-btn {
-    border: 0 !important;
-    border-radius: 9px !important;
-    background: rgba(33, 41, 33, 0.07) !important;
-  }
-  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover {
-    background: rgba(33, 41, 33, 0.13) !important;
-  }
   body[data-view="workspace"] #navigation #esc-folder-search {
-    border: 0 !important;
-    border-radius: 7px !important;
-    background: rgba(33, 41, 33, 0.06) !important;
+    border: 1px solid rgba(33, 41, 33, 0.2) !important;
+    border-radius: 3px !important;
+    background: rgba(33, 41, 33, 0.05) !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1474,8 +1582,13 @@
     .finish-screen,
     #chalkboard,
     #story-screen,
-    .esc-toast {
+    .esc-toast,
+    body[data-view="workspace"] #esc-new-project,
+    body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card,
+    body[data-view="workspace"] #navigation .esc-nav-item .esc-ui-ico,
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
       animation: none !important;
+      transition: none !important;
     }
   }
 }

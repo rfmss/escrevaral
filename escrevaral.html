@@ -5717,41 +5717,59 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-top: 1px dashed rgba(33, 41, 33, 0.26) !important;
   }
 
-  /* Cor do projeto discreta: apenas filete vertical esquerdo (sem chapar rosa/bege no cabeçalho todo) */
+  /* Cabeçalho da coluna do meio limpo e alinhado sem degrau lateral isolado */
   body[data-view="workspace"] #esc-items-header {
-    border-left: 4px solid var(--esc-project-color, #7c8b78);
+    border-left: 0 !important;
+    padding: 12px 12px 10px !important;
     color: #212921 !important;
   }
 
-  /* Superfícies de entrada / ação secundária em tom Sálvia calmo #b8c5b6 (zero branco!) */
+  /* Botão + Nova nota e campo de busca na mesma família geométrica (radius 3px, calmos em repouso) */
   body[data-view="workspace"] #esc-new-note {
-    background: #b8c5b6 !important;
-    color: #212921 !important;
-    border: 1px solid #7c8b78 !important;
-    border-radius: 2px;
+    background: rgba(33, 41, 33, 0.065) !important;
+    color: #1c241c !important;
+    border: 1px solid rgba(33, 41, 33, 0.24) !important;
+    border-radius: 3px !important;
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease, color 180ms ease;
   }
   body[data-view="workspace"] #esc-new-note:hover {
-    background: #aebcae !important;
+    background: #242d23 !important;
+    color: #e4ede2 !important;
+    border-color: #242d23 !important;
   }
 
   body[data-view="workspace"] .esc-search-pill,
   body[data-view="workspace"] #esc-folder-search {
-    background: #b8c5b6 !important;
-    border: 1px solid #7c8b78 !important;
+    background: rgba(33, 41, 33, 0.05) !important;
+    border: 1px solid rgba(33, 41, 33, 0.22) !important;
     color: #212921 !important;
   }
 
-  /* Botão principal carvão-botânico (+ Novo projeto) */
+  /* Botão + Novo projeto: quieto em repouso (áreas nobres) e desperta em 3 etapas no hover */
   body[data-view="workspace"] #esc-new-project {
-    background: #242d23 !important;
-    color: #d8e4d6 !important;
-    border: 1px dashed #d8e4d6 !important;
-    outline: 2px solid #242d23;
-    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(33, 41, 33, 0.065) !important;
+    color: #1c241c !important;
+    border: 1px solid rgba(33, 41, 33, 0.3) !important;
+    outline: none !important;
+    border-radius: 3px !important;
+    font-weight: 600 !important;
+    transition:
+      background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 200ms ease,
+      border-color 200ms ease,
+      transform 180ms cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
-  body[data-view="workspace"] #esc-new-project:hover {
-    background: #2e382c !important;
-    color: #f0f2e7 !important;
+  body[data-view="workspace"] #esc-new-project:hover,
+  body[data-view="workspace"] #esc-new-project:focus-visible {
+    background: #242d23 !important;
+    color: #e4ede2 !important;
+    border-color: #242d23 !important;
+    transform: translateY(-1px);
+  }
+  body[data-view="workspace"] #esc-new-project:active {
+    transform: translateY(0);
   }
 
   /* Botões das barras de ferramentas e ações: planos sobre o papel, zero fundo cinza/branco misturado */
@@ -5772,13 +5790,23 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border: 1px solid rgba(33, 41, 33, 0.26);
   }
 
-  /* Estados ativos / pressionados: chapado carvão-botânico fosco (igual App Linux) */
+  /* Estados ativos / pressionados: calmos em repouso (sem tijolo preto gritando acima do texto!) */
   body[data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"],
   body[data-view="workspace"] #writing-space .masthead button[aria-pressed="true"],
   body[data-view="workspace"] #writing-space .masthead button[aria-expanded="true"],
   body[data-view="workspace"] .esc-pomo-btn[aria-pressed="true"] {
+    background: rgba(33, 41, 33, 0.11) !important;
+    color: #111511 !important;
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+    border-bottom: 2px solid #242d23 !important;
+    font-weight: 600 !important;
+  }
+  body[data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"]:hover,
+  body[data-view="workspace"] #writing-space .masthead button[aria-pressed="true"]:hover,
+  body[data-view="workspace"] #writing-space .masthead button[aria-expanded="true"]:hover,
+  body[data-view="workspace"] .esc-pomo-btn[aria-pressed="true"]:hover {
     background: #242d23 !important;
-    color: #d8e4d6 !important;
+    color: #e4ede2 !important;
     border-color: #242d23 !important;
   }
 
@@ -6004,8 +6032,16 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   body[data-view="workspace"] #writing-space .desk-tools button[aria-pressed="true"],
   body[data-view="workspace"] #writing-space .desk-tools button[aria-expanded="true"] {
+    background: rgba(33, 41, 33, 0.11) !important;
+    color: #111511 !important;
+    border: 1px solid rgba(33, 41, 33, 0.28) !important;
+    border-bottom: 2px solid #242d23 !important;
+    font-weight: 600 !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools button[aria-pressed="true"]:hover,
+  body[data-view="workspace"] #writing-space .desk-tools button[aria-expanded="true"]:hover {
     background: #242d23 !important;
-    color: #d8e4d6 !important;
+    color: #e4ede2 !important;
     border-color: #242d23 !important;
   }
   body[data-view="workspace"] #writing-space .desk-tools #esc-superfocus-auto-toggle {
@@ -6989,24 +7025,83 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-top: 1px solid rgba(33, 41, 33, 0.09) !important;
   }
 
-  /* Coluna de notas (#items-column): cartões limpos sem gaiolas nem botões encaixotados */
+  /* Coluna de notas (#items-column): geometria coerente (controles 3px alinhados, lista reta ponta a ponta) */
+  body[data-view="workspace"] #items-column .esc-search-wrap {
+    padding: 8px 12px !important;
+    border-bottom: 1px solid rgba(33, 41, 33, 0.1) !important;
+  }
   body[data-view="workspace"] #items-column #esc-new-note {
-    border: 0 !important;
-    border-radius: 8px !important;
-    background: rgba(33, 41, 33, 0.075) !important;
+    border: 1px solid rgba(33, 41, 33, 0.24) !important;
+    border-radius: 3px !important;
+    background: rgba(33, 41, 33, 0.065) !important;
+    color: #1c241c !important;
   }
   body[data-view="workspace"] #items-column #esc-new-note:hover {
-    background: rgba(33, 41, 33, 0.14) !important;
+    background: #242d23 !important;
+    color: #e4ede2 !important;
+    border-color: #242d23 !important;
   }
   body[data-view="workspace"] #items-column .esc-search-pill {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 32px !important;
+    padding: 0 3px 0 9px !important;
+    border: 1px solid rgba(33, 41, 33, 0.22) !important;
+    border-radius: 3px !important;
+    background: rgba(33, 41, 33, 0.048) !important;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  body[data-view="workspace"] #items-column .esc-search-pill:focus-within {
+    border-color: rgba(33, 41, 33, 0.46) !important;
+    background: rgba(33, 41, 33, 0.075) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-search {
     border: 0 !important;
-    border-radius: 99px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    min-height: 30px !important;
+    padding: 4px 4px 4px 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font: 400 12.5px/1.3 var(--esc-font-ui, Arial, Helvetica, sans-serif) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-search-clear {
+    position: static !important;
+    width: 22px !important;
+    height: 22px !important;
+    flex-shrink: 0;
+  }
+  body[data-view="workspace"] #items-column .esc-filter-toggle {
+    border-left: 1px solid rgba(33, 41, 33, 0.14) !important;
+    border-radius: 0 2px 2px 0 !important;
+    padding: 4px 8px !important;
+    margin-left: 2px !important;
+    font: 600 11.5px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif) !important;
+    color: #344231 !important;
+    transition: color 160ms ease, background-color 160ms ease;
+  }
+  body[data-view="workspace"] #items-column .esc-filter-toggle:hover {
+    color: #111511 !important;
     background: rgba(33, 41, 33, 0.06) !important;
   }
-  body[data-view="workspace"] #items-column #esc-items-list > * {
+  body[data-view="workspace"] #items-column #esc-items-list {
+    padding: 0 !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card {
+    margin: 0 !important;
+    padding: 11px 12px 10px 12px !important;
     border: 0 !important;
-    border-bottom: 1px solid rgba(33, 41, 33, 0.06) !important;
-    border-radius: 8px !important;
+    border-left: 3px solid transparent !important;
+    border-bottom: 1px solid rgba(33, 41, 33, 0.09) !important;
+    border-radius: 0 !important;
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), border-left-color 180ms ease;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card:hover {
+    border-left-color: rgba(33, 41, 33, 0.34) !important;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card.is-selected {
+    border-left: 3px solid #242d23 !important;
+    background: rgba(33, 41, 33, 0.075) !important;
   }
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-open,
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-open:hover,
@@ -7019,42 +7114,55 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-act {
     border: 0 !important;
-    border-radius: 6px !important;
+    border-radius: 3px !important;
     background: transparent !important;
-    opacity: 0.72;
+    opacity: 0.48;
+    transition: opacity 180ms ease, background-color 160ms ease, color 160ms ease;
+  }
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card:hover .esc-item-act,
+  body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card.is-selected .esc-item-act {
+    opacity: 0.78;
   }
   body[data-view="workspace"] #items-column #esc-items-list .esc-item-act:hover {
     background: rgba(33, 41, 33, 0.09) !important;
-    opacity: 1;
+    opacity: 1 !important;
   }
 
-  /* Barra esquerda (#navigation): botões secundários sem caixas pesadas */
+  /* Barra esquerda (#navigation): micro-motion sutil de 3 etapas e contornos coerentes (3px) */
+  body[data-view="workspace"] #navigation .esc-nav-item,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn,
+  body[data-view="workspace"] #navigation .esc-project-row,
+  body[data-view="workspace"] #navigation .esc-folder-item {
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), color 160ms ease;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-item .esc-ui-ico,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-item:hover .esc-ui-ico,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover .esc-ui-ico {
+    transform: translate3d(2px, 0, 0);
+  }
   body[data-view="workspace"] #navigation .esc-mini-add,
   body[data-view="workspace"] #navigation #esc-pomodoro-dock button {
-    border: 0 !important;
-    border-radius: 6px !important;
-    background: rgba(33, 41, 33, 0.07) !important;
+    border: 1px solid rgba(33, 41, 33, 0.16) !important;
+    border-radius: 3px !important;
+    background: rgba(33, 41, 33, 0.055) !important;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
   }
   body[data-view="workspace"] #navigation .esc-mini-add:hover,
   body[data-view="workspace"] #navigation #esc-pomodoro-dock button:hover {
-    background: rgba(33, 41, 33, 0.14) !important;
+    background: rgba(33, 41, 33, 0.13) !important;
+    border-color: rgba(33, 41, 33, 0.32) !important;
   }
   body[data-view="workspace"] #navigation #esc-pomodoro-dock,
   body[data-view="workspace"] #navigation .esc-nav-footer {
     border-top: 1px solid rgba(33, 41, 33, 0.1) !important;
   }
-  body[data-view="workspace"] #navigation .esc-academy-card-btn {
-    border: 0 !important;
-    border-radius: 9px !important;
-    background: rgba(33, 41, 33, 0.07) !important;
-  }
-  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover {
-    background: rgba(33, 41, 33, 0.13) !important;
-  }
   body[data-view="workspace"] #navigation #esc-folder-search {
-    border: 0 !important;
-    border-radius: 7px !important;
-    background: rgba(33, 41, 33, 0.06) !important;
+    border: 1px solid rgba(33, 41, 33, 0.2) !important;
+    border-radius: 3px !important;
+    background: rgba(33, 41, 33, 0.05) !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -7063,8 +7171,13 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     .finish-screen,
     #chalkboard,
     #story-screen,
-    .esc-toast {
+    .esc-toast,
+    body[data-view="workspace"] #esc-new-project,
+    body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card,
+    body[data-view="workspace"] #navigation .esc-nav-item .esc-ui-ico,
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
       animation: none !important;
+      transition: none !important;
     }
   }
 }
@@ -8965,58 +9078,145 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   /* =====================================================================
    * 1. PORTAL PARA O MUNDO DE ESTUDO NA BARRA LATERAL DO TRABALHO
-   *    (O espaço de trabalho permanece 100% E-Ink Sálvia #c4cfc2;
-   *     este botão é a porta iluminada do Real Gabinete.)
+   *    Regra das Áreas Nobres (MANUAL-MOTION.md):
+   *    - Em repouso (hover off): quieto e integrado ao papel E-Ink Sálvia,
+   *      apenas com um filete bronze sutil anunciando o portal.
+   *    - No hover in (3 etapas): um filete dourado de "toque de mágica"
+   *      cruza o botão (início -> meio -> fim) enquanto a pintura Real
+   *      Gabinete se desenrola da esquerda para a direita.
+   *    - No hover off: recolhe suavemente de volta à quietude E-Ink.
    * ===================================================================== */
+  @keyframes escMagicSweep {
+    0%   { transform: translate3d(-34px, 0, 0); opacity: 0; }
+    45%  { transform: translate3d(96px, 0, 0);  opacity: 0.95; }
+    100% { transform: translate3d(232px, 0, 0); opacity: 0; }
+  }
+
   body[data-view="workspace"] #navigation .esc-academy-card-btn {
     position: relative;
     overflow: hidden;
-    padding: 10px 11px !important;
-    border: 1.5px solid #9e7334 !important;
-    border-left: 4px solid #c49545 !important;
-    border-radius: 6px !important;
-    background-color: #331b10 !important;
-    background-image: var(--esc-rg-hero-art, var(--esc-rg-chalk-dark)) !important;
-    background-size: cover !important;
-    background-position: center 42% !important;
-    color: #efe3cc !important;
-    box-shadow: 0 2px 8px rgba(24, 15, 8, 0.16) !important;
+    padding: 9px 11px !important;
+    border: 1px solid rgba(126, 88, 36, 0.34) !important;
+    border-left: 3px solid rgba(139, 90, 30, 0.68) !important;
+    border-radius: 3px !important;
+    background-color: rgba(33, 41, 33, 0.055) !important;
+    background-image: none !important;
+    color: #1e261e !important;
+    box-shadow: none !important;
+    transition:
+      border-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 220ms ease !important;
   }
+  /* Camada 1: Real Gabinete recolhido à esquerda em repouso; desenrola no hover */
   body[data-view="workspace"] #navigation .esc-academy-card-btn::before {
     content: "";
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    background-color: rgba(25, 13, 7, 0.74);
+    z-index: 0;
+    background-color: #2f180e;
+    background-image: var(--esc-rg-hero-art, var(--esc-rg-chalk-dark));
+    background-size: cover;
+    background-position: center 42%;
+    box-shadow: inset 0 0 0 200px rgba(24, 12, 6, 0.66);
     pointer-events: none;
-    transition: background-color 140ms ease;
+    clip-path: inset(0 100% 0 0);
+    -webkit-clip-path: inset(0 100% 0 0);
+    opacity: 0.25;
+    transition:
+      clip-path 270ms cubic-bezier(0.22, 1, 0.36, 1),
+      -webkit-clip-path 270ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 220ms ease;
   }
-  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover {
-    border-color: #d9ae62 !important;
-    border-left-color: #d9ae62 !important;
-  }
-  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::before {
-    background-color: rgba(25, 13, 7, 0.58);
+  /* Camada 2: Toque de mágica dourado em 3 etapas (início -> meio -> fim) */
+  body[data-view="workspace"] #navigation .esc-academy-card-btn::after {
+    content: "";
+    position: absolute;
+    top: -4px; bottom: -4px; left: 0;
+    width: 30px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 60' preserveAspectRatio='none'%3E%3Crect x='11' y='0' width='8' height='60' fill='%23f2cf88' fill-opacity='0.24'/%3E%3Crect x='14' y='0' width='2' height='60' fill='%23f6dea6' fill-opacity='0.78'/%3E%3Cpath d='M15 22 L16.8 27.6 L22.4 29.4 L16.8 31.2 L15 36.8 L13.2 31.2 L7.6 29.4 L13.2 27.6 Z' fill='%23fae8bd'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+    transform: translate3d(-34px, 0, 0);
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn > * {
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-ico {
-    color: #e6bd70 !important;
-    opacity: 1 !important;
+    color: #6e4b1f !important;
+    opacity: 0.9 !important;
+    transition: color 220ms ease, transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-card-text strong {
-    color: #f2e7d2 !important;
+    color: #1c241c !important;
     font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
-    text-shadow: 0 1px 4px rgba(10, 5, 2, 0.85);
+    text-shadow: none;
+    transition: color 220ms ease, text-shadow 220ms ease;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-card-text small {
-    color: #dfcca8 !important;
-    text-shadow: 0 1px 3px rgba(10, 5, 2, 0.85);
+    color: #455241 !important;
+    text-shadow: none;
+    transition: color 220ms ease, text-shadow 220ms ease;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-chevron {
+    color: #6e4b1f !important;
+    opacity: 0.78 !important;
+    transition: color 220ms ease, transform 240ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
+  }
+
+  /* Estado revelado no Hover In / Foco: Real Gabinete completo */
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover,
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible {
+    border-color: #c99a47 !important;
+    border-left-color: #e6bd70 !important;
+    box-shadow: 0 4px 12px rgba(28, 15, 8, 0.24) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::before,
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible::before {
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::after,
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible::after {
+    animation: escMagicSweep 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover .esc-academy-ico,
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible .esc-academy-ico {
     color: #e6bd70 !important;
-    opacity: 0.95 !important;
+    opacity: 1 !important;
+    transform: translate3d(2px, 0, 0) scale(1.06);
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover .esc-academy-card-text strong,
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible .esc-academy-card-text strong {
+    color: #f4ead6 !important;
+    text-shadow: 0 1px 4px rgba(10, 5, 2, 0.85);
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover .esc-academy-card-text small,
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible .esc-academy-card-text small {
+    color: #e2cfa9 !important;
+    text-shadow: 0 1px 3px rgba(10, 5, 2, 0.85);
+  }
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:hover .esc-academy-chevron,
+  body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible .esc-academy-chevron {
+    color: #e6bd70 !important;
+    opacity: 1 !important;
+    transform: translate3d(3px, 0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body[data-view="workspace"] #navigation .esc-academy-card-btn,
+    body[data-view="workspace"] #navigation .esc-academy-card-btn::before,
+    body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-ico,
+    body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-chevron {
+      transition: none !important;
+    }
+    body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::after,
+    body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible::after {
+      animation: none !important;
+    }
   }
 
   /* =====================================================================
@@ -19339,7 +19539,24 @@ SOFTWARE.
         }
         return;
       }
-      if (richEl && !richEl.hidden) { updateRichParagraphFocus(); }
+      if (richEl && !richEl.hidden) {
+        try {
+          if (window.getSelection) {
+            var sel = window.getSelection();
+            if (sel && !sel.isCollapsed && sel.rangeCount && String(sel.toString() || '').length > 0) {
+              var anc = sel.getRangeAt(0).commonAncestorContainer;
+              if (anc === richEl || (richEl.contains && richEl.contains(anc))) {
+                openedAutomatically = false;
+                clearIdle();
+                resetCounter();
+                onClose('selection');
+                return;
+              }
+            }
+          }
+        } catch (ignore) {}
+        updateRichParagraphFocus();
+      }
     }
 
     function syncSwitch() {
@@ -19480,12 +19697,26 @@ SOFTWARE.
       }
     }
 
+    function exitForNonFluidEdit(reason) {
+      openedAutomatically = false;
+      clearIdle();
+      resetCounter();
+      onClose(reason || 'edit');
+    }
+
     function onInput(ev) {
       if (disposed) { return; }
       if (!isTargetInEditor(ev.target)) { return; }
-      if (getActive()) { armIdle(); syncFlow(); }
-      if (composing || ev.isComposing) { return; }
       var inputType = ev.inputType || '';
+      if (getActive()) {
+        if (inputType && (inputType.indexOf('Paste') >= 0 || inputType.indexOf('history') === 0 || inputType.indexOf('format') === 0 || inputType === 'deleteByCut')) {
+          exitForNonFluidEdit('edit');
+          return;
+        }
+        armIdle();
+        syncFlow();
+      }
+      if (composing || ev.isComposing) { return; }
       if (inputType) {
         if (inputType === 'insertText') {
           var chunk = ev.data || '';
@@ -19517,13 +19748,25 @@ SOFTWARE.
       if (getActive() && openedAutomatically) { armIdle(); }
     }
     function onKeyDown(ev) {
-      if (getActive() && openedAutomatically) { armIdle(); }
       if (ev.keyCode === 122) { // F11
         ev.preventDefault();
         toggleFullscreen();
         syncBar();
         return;
       }
+      if (getActive() && isTargetInEditor(ev.target)) {
+        /* Atalhos de edição/seleção (Ctrl/Cmd + A/C/X/V/Z/Y/B/I/U) saem do foco para o Modo Nota */
+        if ((ev.ctrlKey || ev.metaKey) && !ev.altKey) {
+          var kc = ev.keyCode;
+          if (kc === 65 || kc === 67 || kc === 88 || kc === 86 || kc === 90 || kc === 89 || kc === 66 || kc === 73 || kc === 85) {
+            exitForNonFluidEdit('edit');
+            return;
+          }
+        }
+        if (openedAutomatically) { armIdle(); }
+        return;
+      }
+      if (getActive() && openedAutomatically) { armIdle(); }
       if (!getActive() && isTargetInEditor(ev.target)) {
         if (ev.ctrlKey || ev.metaKey || ev.altKey || (ev.keyCode >= 33 && ev.keyCode <= 40)) {
           resetCounter();
@@ -23897,6 +24140,10 @@ SOFTWARE.
     if (composing || activePanel || cabinetOpen || !byId('start-menu').hidden || document.activeElement !== manuscript) { return; }
     var start = manuscript.selectionStart, end = manuscript.selectionEnd;
     if (typeof start !== 'number' || typeof end !== 'number' || end <= start) { copiedSelection = null; dismissedSelection = null; byId('selection-tools').hidden = true; return; }
+    /* Regra do Superfoco: modo foco é exclusivo para escrita fluida; qualquer seleção volta ao Modo Nota */
+    if (immersion) {
+      setImmersion(false, 'selection');
+    }
     if (dismissedSelection && dismissedSelection.documentId === (doc.noteId || doc.id) && dismissedSelection.text === manuscript.value && dismissedSelection.start === start && dismissedSelection.end === end) { return; }
     dismissedSelection = null;
     copiedSelection = { documentId: doc.noteId || doc.id, text: manuscript.value, start: start, end: end };
@@ -24140,6 +24387,7 @@ SOFTWARE.
   function showPanel(id, toggle, open) {
     dismissSelection();
     if (!open) { if (activePanel === id) { if (id === 'oficina') { analysisRange = null; } closePanels(true); } return; }
+    if (immersion) { setImmersion(false, 'panel'); }
     closePanels(false); collapseTimeline();
     panelTrigger = byId(toggle); activePanel = id; text(byId('panel-status'), '');
     byId(id).hidden = false; byId(toggle).setAttribute('aria-expanded', 'true');
