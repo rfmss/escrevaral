@@ -300,7 +300,7 @@
       if (!checkpoint() || !rememberNotebook()) { return; } var o = activeOriginal(); if (!o) { return; }
       E.dialog.ask({title:'Mover gaveta para a lixeira?',message:'A gaveta “' + o.name + '” irá com seus cadernos. Você poderá restaurar tudo pelo menu Início.',accept:'Mover para a lixeira'},function (ok) {
         if (!ok || activeOriginalId !== o.id || !checkpoint() || !rememberNotebook()) { return; }
-        try { originals.update(o.id, {trashed:true}); activeNotebookId = null; activeOriginalId = null; loadDocument(E.freshDocument()); closeNotebook(); renderNotebooks(); message('Gaveta guardada na lixeira com seus cadernos.'); } catch (e) { message(e.message); }
+        try { originals.update(o.id, {trashed:true}); activeNotebookId = null; activeOriginalId = null; resetToAvailableOrBlank(); closeNotebook(); renderNotebooks(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Gaveta guardada na lixeira com seus cadernos.'); } catch (e) { message(e.message); }
       });
     });
     listen(byId('notebook-parent-save'), 'click', function () {
@@ -331,9 +331,9 @@
     listen(byId('desk-minimize'), 'click', closeNotebook);
     listen(byId('notebook-trash'), 'click', function () {
       if (!checkpoint()) { return; } var b = activeNotebook(); if (!b) { return; }
-      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todos os seus textos. Você poderá restaurá-lo pelo menu Início.',accept:'Mover para a lixeira'},function(ok){
+      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todos os seus textos. Você poderá restaurá-lo inteiro pela Lixeira ou pelo menu Início.',accept:'Mover para a lixeira'},function(ok){
         if (!ok || activeNotebookId !== b.id || !notebooks.get(b.id)) { return; }
-        try { if (!checkpoint() || !rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; loadDocument(E.freshDocument()); closeNotebook(); message('Caderno movido para a lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
+        try { if (!checkpoint() || !rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; resetToAvailableOrBlank(); closeNotebook(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Caderno movido para a lixeira. Você pode restaurar o caderno inteiro pela Lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
       });
     });
     listen(window, 'storage', function (event) { if (event.key === 'escrevaral.astra.notebooks.v1' || event.key === 'escrevaral.astra.originais.v1' || event.key === 'escrevaral.astra.notebooks.transaction.v1') { if (storage.getItem('escrevaral.astra.notebooks.transaction.v1')) { return; } renderNotebooks(); var b = activeNotebook(); if (b) { cabinetProject = b.name; if (doc.projectId === b.id) { doc.project = b.name; } updatePath(); } } });
@@ -740,23 +740,107 @@
       });
     } catch (e) { text(byId('reminder-status'), 'Não foi possível ler os post-its.'); }
   }
+  function isDocumentActiveInArchive(candidate) {
+    if (!candidate) { return false; }
+    if (!archive) { return true; }
+    var stored = archive.get(candidate.id);
+    if (!stored || stored.trashed) { return false; }
+    if (stored.projectId && notebooks && !availableBook(notebooks.get(stored.projectId))) { return false; }
+    return true;
+  }
+  function resetToAvailableOrBlank() {
+    var remaining = archive ? archive.list().documents : [];
+    var next = remaining.length ? remaining[0] : null;
+    cabinetSelection = null;
+    if (next) {
+      loadDocument(next);
+      try { if (storage) { storage.setItem('escrevaral.astra.current', next.id); } } catch (ignore) {}
+    } else {
+      activeNotebookId = null;
+      activeOriginalId = null;
+      cabinetProject = '';
+      loadDocument(E.freshDocument());
+      try { if (storage) { storage.removeItem('escrevaral.astra.current'); } } catch (ignore) {}
+    }
+  }
+  function ensureActiveDocumentStillValid(removedIds, removedProjectId) {
+    if (!doc) { return false; }
+    var curId = doc.id;
+    var curNoteId = doc.noteId || doc.id;
+    var explicitlyRemoved = false;
+    if (removedIds && removedIds.length) {
+      explicitlyRemoved = removedIds.indexOf(curId) !== -1 || removedIds.indexOf(curNoteId) !== -1;
+    }
+    if (!explicitlyRemoved && removedProjectId && doc.projectId === removedProjectId) {
+      explicitlyRemoved = true;
+    }
+    var projectInvalid = !!(doc.projectId && notebooks && !availableBook(notebooks.get(doc.projectId)));
+    var savedButGone = !!doc.revision && !isDocumentActiveInArchive(doc);
+    if (explicitlyRemoved || projectInvalid || savedButGone) {
+      resetToAvailableOrBlank();
+      return true;
+    }
+    if (activeNotebookId && notebooks && !availableBook(notebooks.get(activeNotebookId))) {
+      activeNotebookId = null;
+      cabinetProject = '';
+      updatePath();
+    }
+    return false;
+  }
+  function askIrreversibleDelete(firstStep, secondStep, onConfirm) {
+    E.dialog.ask({
+      title: firstStep.title || 'Excluir definitivamente?',
+      message: firstStep.message,
+      accept: firstStep.accept || 'Continuar exclusão'
+    }, function (okFirst) {
+      if (!okFirst) { return; }
+      E.dialog.ask({
+        title: (secondStep && secondStep.title) || 'Segunda confirmação — ação irreversível',
+        message: (secondStep && secondStep.message) || 'Esta exclusão é definitiva e não pode ser desfeita. O conteúdo não irá para a lixeira. Confirma apagar para sempre?',
+        accept: (secondStep && secondStep.accept) || 'Sim, excluir para sempre'
+      }, function (okSecond) {
+        if (!okSecond) { return; }
+        onConfirm();
+      });
+    });
+  }
   function trashEntry(entry) {
     if (!archive || !persist()) { return; }
     if (entry && entry.locked) { message('Esta folha de referência está protegida contra exclusão.'); return; }
     var isCurrent = entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id);
     try {
       archive.trash(isCurrent ? doc : entry);
-      if (isCurrent) { var next = archive.list().documents[0] || E.freshDocument(); loadDocument(next); cabinetSelection = null; }
-      renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); saveSession();
+      ensureActiveDocumentStillValid([entry.id, entry.noteId || entry.id], null);
+      renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
       if (workspaceUI) { workspaceUI.render(); }
-      message('Movido para a lixeira. Você pode restaurar pela Biblioteca.');
+      message('Movido para a lixeira. Você pode restaurar pela Lixeira.');
     } catch (e) { message('Não foi possível mover para a lixeira. A folha foi preservada.'); }
   }
   function askDelete(entry) {
-    E.dialog.ask({title:'Excluir definitivamente?',message:'“' + (entry.title || 'Sem título') + '” será apagada definitivamente do acervo deste aparelho. Não será possível restaurar esta cópia. Arquivos exportados e versões em outras abas não são apagados.',accept:'Excluir definitivamente'},function(ok){
-      if (!ok) { return; }
-      try { archive.purge(entry); linguisticStore.removeDocument('analysis/'+(entry.projectId||'avulsos')+'/'+(entry.noteId||entry.id)+'/'); renderArchive(); byId('trash-toggle').focus(); message('Cópia excluída definitivamente deste acervo.'); }
-      catch (e) { text(byId('archive-status'),e.message); }
+    if (!archive || !entry) { return; }
+    if (entry.locked) { message('Esta folha de referência está protegida contra exclusão.'); return; }
+    var label = entry.title || 'Sem título';
+    var firstMsg = entry.trashed
+      ? '“' + label + '” será apagada definitivamente da lixeira deste aparelho. Não será possível restaurar esta cópia.'
+      : '“' + label + '” será apagada definitivamente deste aparelho, sem passar pela lixeira. Para poder recuperar depois, use “Lixeira” em vez de excluir.';
+    askIrreversibleDelete({
+      title: 'Excluir definitivamente?',
+      message: firstMsg,
+      accept: 'Continuar exclusão'
+    }, {
+      title: 'Segunda confirmação — exclusão irreversível',
+      message: 'Atenção: “' + label + '” será removida para sempre deste aparelho e não poderá ser recuperada. Arquivos já exportados (.scrvrl) não são apagados. Confirma?',
+      accept: 'Sim, excluir para sempre'
+    }, function () {
+      try {
+        archive.purge(entry);
+        linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/');
+        ensureActiveDocumentStillValid([entry.id, entry.noteId || entry.id], null);
+        renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
+        if (workspaceUI) { workspaceUI.render(); }
+        if (activePanel === 'acervo' && byId('trash-toggle')) { byId('trash-toggle').focus(); }
+        message('Cópia excluída definitivamente deste aparelho.');
+      } catch (e) { text(byId('archive-status'), e.message); }
     });
   }
 
@@ -1001,7 +1085,18 @@
   function loadDocument(next) {
     if(E.ptbrPanelReset){E.ptbrPanelReset();}
     analysisRange = null; copiedSelection = null; byId('selection-tools').hidden = true;
-    doc = next; if (doc.projectId) { activeNotebookId = doc.projectId; cabinetProject = doc.project || ''; var loadedBook = notebooks && notebooks.get(doc.projectId); activeOriginalId = loadedBook ? loadedBook.originalId || null : null; } navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; E.transfer.selectRange(manuscript, 0, 0); growManuscript();
+    doc = next;
+    if (doc.projectId) {
+      activeNotebookId = doc.projectId;
+      cabinetProject = doc.project || '';
+      var loadedBook = notebooks && notebooks.get(doc.projectId);
+      activeOriginalId = loadedBook ? loadedBook.originalId || null : null;
+    } else {
+      activeNotebookId = null;
+      activeOriginalId = null;
+      cabinetProject = '';
+    }
+    navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; E.transfer.selectRange(manuscript, 0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     var isLockedRef = !!(doc.locked || doc.category === 'reference');
@@ -1035,7 +1130,7 @@
       if (trashView) { result.documents = result.documents.filter(function (entry) { return !!entry.trashed; }); }
       else if (activeNotebookId) { result.documents = result.documents.filter(function (entry) { return entry.projectId === activeNotebookId; }); }
       if (trashView && originals) { originals.list().filter(function (o) { return o.trashed; }).forEach(function (o) { var li = document.createElement('li'); paragraph(li, 'Gaveta: ' + o.name); button(li, 'Restaurar gaveta completa', function () { try { originals.update(o.id, {trashed:false}); renderNotebooks(); renderArchive(); message('Gaveta restaurada com seus cadernos.'); } catch (e) { message(e.message); } }); list.appendChild(li); }); }
-      if (trashView && notebooks) { notebooks.list().filter(function (b) { return b.trashed && (!b.originalId || !originals.get(b.originalId).trashed); }).forEach(function (b) { var li = document.createElement('li'); paragraph(li, 'Caderno: ' + b.name); button(li, 'Restaurar caderno completo', function () { try { notebooks.update(b.id, { trashed: false }); renderNotebooks(); renderArchive(); message('Caderno restaurado com todo o conteúdo.'); } catch (e) { message(e.message); } }); list.appendChild(li); }); }
+      if (trashView && notebooks) { notebooks.list().filter(function (b) { return b.trashed && (!b.originalId || !originals.get(b.originalId).trashed); }).forEach(function (b) { var li = document.createElement('li'); paragraph(li, 'Caderno: ' + b.name); button(li, 'Restaurar caderno completo', function () { try { notebooks.update(b.id, { trashed: false }); if (archive) { (archive.list(true).documents || []).filter(function (d) { return d.projectId === b.id && !!d.trashed; }).forEach(function (d) { try { archive.trash(d, false); } catch (ignore) {} }); } renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Caderno restaurado com todo o conteúdo.'); } catch (e) { message(e.message); } }); list.appendChild(li); }); }
       text(byId('acervo-heading'), trashView ? 'Lixeira' : 'Acervo');
       text(byId('trash-toggle'), trashView ? 'Voltar ao acervo' : 'Lixeira'); byId('trash-toggle').setAttribute('aria-pressed', trashView ? 'true' : 'false');
       text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : result.documents.length ? '' : 'Sua primeira folha começa aqui.');
@@ -1858,11 +1953,15 @@
       checkpoint: checkpoint,
       openDoc: function (entry) {
         if (!entry || composing || !persist()) { return; }
+        if (entry.trashed) {
+          message('Este texto está na lixeira. Clique em “Restaurar” para voltar a editá-lo.');
+          return;
+        }
         var isCurrent = entry.id === doc.id;
         if (!isCurrent) {
           try {
             var next = archive && archive.get(entry.id);
-            if (!next) { workspaceUI.render(); message('Esta folha não foi encontrada.'); return; }
+            if (!next || next.trashed) { workspaceUI.render(); message('Esta folha não foi encontrada.'); return; }
             loadDocument(next);
           } catch (e) { message('Não foi possível abrir esta folha.'); return; }
         }
@@ -1895,19 +1994,38 @@
         var trashed = archive.list(true).documents.filter(function (d) { return !!d.trashed; });
         var trashedProjects = notebooks ? notebooks.list().filter(function (b) { return !!b.trashed; }) : [];
         if (!trashed.length && !trashedProjects.length) { return; }
-        E.dialog.ask({
-          title: 'Esvaziar lixeira?',
-          message: 'Remover definitivamente ' + trashed.length + (trashed.length === 1 ? ' item da lixeira?' : ' itens da lixeira?') + ' Não será possível restaurar.',
-          accept: 'Esvaziar lixeira'
-        }, function (ok) {
-          if (!ok) { return; }
-          trashedProjects.forEach(function (bk) { try { notebooks.purge(bk.id); } catch (ignore) {} });
+        var parts = [];
+        if (trashed.length) { parts.push(trashed.length + (trashed.length === 1 ? ' texto' : ' textos')); }
+        if (trashedProjects.length) { parts.push(trashedProjects.length + (trashedProjects.length === 1 ? ' pasta' : ' pastas')); }
+        var summary = parts.join(' e ');
+        askIrreversibleDelete({
+          title: 'Esvaziar lixeira definitivamente?',
+          message: 'Remover definitivamente ' + summary + ' da lixeira? Itens excluídos da lixeira não podem ser recuperados.',
+          accept: 'Continuar exclusão'
+        }, {
+          title: 'Segunda confirmação — ação irreversível',
+          message: 'Atenção: ' + summary + ' serão apagados para sempre deste aparelho. Esta ação não pode ser desfeita. Confirma esvaziar a lixeira?',
+          accept: 'Sim, esvaziar para sempre'
+        }, function () {
+          var removedIds = [];
+          trashed.forEach(function (entry) {
+            removedIds.push(entry.id);
+            if (entry.noteId && entry.noteId !== entry.id) { removedIds.push(entry.noteId); }
+          });
+          trashedProjects.forEach(function (bk) {
+            (archive.list(true).documents || []).filter(function (d) { return d.projectId === bk.id; }).forEach(function (d) {
+              removedIds.push(d.id);
+              try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
+            });
+            try { notebooks.purge(bk.id); } catch (ignore) {}
+          });
           trashed.forEach(function (entry) {
             try { archive.purge(entry); linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/'); } catch (ignore) {}
           });
-          renderArchive(); renderCabinet(); renderTimeline(false);
-          workspaceUI.render();
-          message('Lixeira esvaziada.');
+          ensureActiveDocumentStillValid(removedIds, null);
+          renderNotebooks(); renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
+          if (workspaceUI) { workspaceUI.render(); }
+          message('Lixeira esvaziada definitivamente.');
         });
       },
       updateDocMeta: function (entry, patch) {
@@ -1963,47 +2081,70 @@
         if (!archive || !book) { return; }
         var list = (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; });
         if (!list.length) { message('Não há textos ativos nesta pasta.'); return; }
-        list.forEach(function (d) { try { archive.trash(d, true); } catch (ignore) {} });
-        renderArchive(); renderCabinet(); renderTimeline(false);
+        var removedIds = [];
+        list.forEach(function (d) {
+          removedIds.push(d.id);
+          if (d.noteId && d.noteId !== d.id) { removedIds.push(d.noteId); }
+          try { archive.trash(d, true); } catch (ignore) {}
+        });
+        ensureActiveDocumentStillValid(removedIds, null);
+        renderArchive(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
         if (workspaceUI) { workspaceUI.render(); }
-        message(list.length + (list.length === 1 ? ' texto movido' : ' textos movidos') + ' para a lixeira.');
+        message(list.length + (list.length === 1 ? ' texto movido' : ' textos movidos') + ' para a lixeira. Você pode restaurar pela Lixeira.');
       },
       trashProject: function (book) {
         if (!notebooks || !book) { return; }
         var inside = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; }) : [];
+        var removedIds = [];
         notebooks.update(book.id, { trashed: true });
-        inside.forEach(function (d) { try { archive.trash(d, true); } catch (ignore) {} });
+        inside.forEach(function (d) {
+          removedIds.push(d.id);
+          if (d.noteId && d.noteId !== d.id) { removedIds.push(d.noteId); }
+          try { archive.trash(d, true); } catch (ignore) {}
+        });
         if (activeNotebookId === book.id) { activeNotebookId = null; }
-        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath();
+        ensureActiveDocumentStillValid(removedIds, book.id);
+        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
         if (workspaceUI) { workspaceUI.selectLibrary('all'); }
-        message('Pasta “' + book.name + '” e ' + inside.length + ' texto(s) movidos para a lixeira.');
+        message('Pasta “' + book.name + '” e ' + inside.length + ' texto(s) enviados para a lixeira. Você pode restaurar a pasta inteira pela Lixeira.');
       },
       restoreProject: function (book) {
         if (!notebooks || !book) { return; }
         notebooks.update(book.id, { trashed: false });
         var inside = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !!d.trashed; }) : [];
         inside.forEach(function (d) { try { archive.trash(d, false); } catch (ignore) {} });
-        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false);
+        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
         if (workspaceUI) { workspaceUI.render(); }
-        message('Pasta “' + book.name + '” restaurada com ' + inside.length + ' texto(s).');
+        message('Pasta “' + book.name + '” restaurada inteira com ' + inside.length + ' texto(s).');
       },
       purgeProject: function (book, insideCount) {
         if (!notebooks || !book) { return; }
-        E.dialog.ask({
+        var insideDocs = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }) : [];
+        var count = typeof insideCount === 'number' ? Math.max(insideCount, insideDocs.length) : insideDocs.length;
+        var countLabel = count + (count === 1 ? ' texto associado' : ' textos associados');
+        askIrreversibleDelete({
           title: 'Excluir pasta definitivamente?',
-          message: 'A pasta “' + book.name + '” e ' + insideCount + (insideCount === 1 ? ' texto associado serão removidos' : ' textos associados serão removidos') + ' definitivamente deste aparelho. Não será possível restaurar.',
-          accept: 'Excluir definitivamente'
-        }, function (ok) {
-          if (!ok) { return; }
+          message: 'A pasta “' + book.name + '” e ' + countLabel + ' serão removidos definitivamente deste aparelho. Para poder recuperar a pasta inteira depois, use “Mover pasta para a lixeira”.',
+          accept: 'Continuar exclusão'
+        }, {
+          title: 'Segunda confirmação — exclusão irreversível',
+          message: 'Atenção: a pasta “' + book.name + '” e todo o seu conteúdo (' + countLabel + ') serão apagados para sempre e não poderão ser recuperados. Confirma?',
+          accept: 'Sim, excluir pasta para sempre'
+        }, function () {
+          var removedIds = [];
           if (archive) {
             (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }).forEach(function (d) {
+              removedIds.push(d.id);
+              if (d.noteId && d.noteId !== d.id) { removedIds.push(d.noteId); }
               try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
             });
           }
           notebooks.purge(book.id);
-          renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false);
+          if (activeNotebookId === book.id) { activeNotebookId = null; }
+          ensureActiveDocumentStillValid(removedIds, book.id);
+          renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
           if (workspaceUI) { workspaceUI.render(); }
-          message('Pasta excluída definitivamente.');
+          message('Pasta excluída definitivamente deste aparelho.');
         });
       },
       refreshParent: function () { renderNotebooks(); renderCabinet(); renderTimeline(false); updatePath(); }

@@ -330,9 +330,15 @@
         },
         {
           label: 'Mover pasta para a lixeira',
-          danger: true,
           action: function () {
             if (opts.trashProject) { opts.trashProject(book); }
+          }
+        },
+        {
+          label: 'Excluir pasta definitivamente',
+          danger: true,
+          action: function () {
+            if (opts.purgeProject) { opts.purgeProject(book); }
           }
         }
       ];
@@ -1107,11 +1113,21 @@
 
           var trashBtn = createEl('button', 'esc-item-act', 'Lixeira');
           trashBtn.type = 'button';
+          trashBtn.title = 'Enviar para a lixeira (pode restaurar depois)';
           on(trashBtn, 'click', function (ev) {
             ev.stopPropagation();
             if (opts.trashDoc) { opts.trashDoc(entry); }
           });
           actions.appendChild(trashBtn);
+
+          var directDelBtn = createEl('button', 'esc-item-act is-danger', 'Excluir');
+          directDelBtn.type = 'button';
+          directDelBtn.title = 'Excluir definitivamente (irreversível, pede confirmação dupla)';
+          on(directDelBtn, 'click', function (ev) {
+            ev.stopPropagation();
+            if (opts.purgeDoc) { opts.purgeDoc(entry); }
+          });
+          actions.appendChild(directDelBtn);
         }
         card.appendChild(actions);
         listEl.appendChild(card);

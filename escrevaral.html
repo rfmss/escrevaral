@@ -3731,6 +3731,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   .esc-item-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 6px;
     margin-top: 6px;
   }
@@ -6624,27 +6625,395 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   #gabinete .resume-note,
   #gabinete .desktop-reminder {
-    background: #bcc8ba !important;
-    border: 1px solid rgba(33, 41, 33, 0.28) !important;
-    border-radius: 2px !important;
-    box-shadow: none !important;
+    background: #d3cebd !important;
+    border: 1.5px solid #493f32 !important;
+    border-radius: 3px !important;
+    box-shadow: 2px 4px 0 rgba(33, 30, 22, 0.16) !important;
   }
-  #gabinete .original-box .box-label {
-    background: #cfd9cd !important;
-    border-color: #7c8b78 !important;
-    color: #1c241c !important;
+
+  /* =========================================================================
+     ALMA AFK JOURNEY NA ESTANTE (#gabinete):
+     Cadernos ilustrados que abrem um pouco no hover (3 etapas) +
+     Gavetas que mostram só a frente em repouso e sugerem abertura no hover.
+     Zero gradientes CSS (100% SVG ilustrado inline offline + sombras táteis).
+     ========================================================================= */
+  #gabinete #notebook-list {
+    padding: 36px 8px 28px !important;
+  }
+
+  /* --- CADERNO ILUSTRADO (.notebook-cover = miolo de páginas; .notebook-front = capa com dobradiça) --- */
+  #gabinete #notebook-list .notebook-cover {
+    position: relative !important;
+    display: inline-block !important;
+    vertical-align: top !important;
+    width: 146px !important;
+    height: 208px !important;
+    margin: 6px 28px 34px 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 1.5px solid #262018 !important;
+    border-radius: 5px 9px 9px 5px !important;
+    background-color: #dbd3c1 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208'%3E%3Crect width='146' height='208' fill='%23dbd3c1'/%3E%3Crect x='0' y='0' width='18' height='208' fill='%23b6aa92' fill-opacity='0.55'/%3E%3Cpath d='M124 8v192M128 8v192M132 8v192M136 8v192M140 8v192' stroke='%238c7b60' stroke-opacity='0.48' stroke-width='1'/%3E%3Cpath d='M26 36h90M26 56h90M26 76h84M26 96h90M26 116h78M26 136h88M26 156h82M26 176h70' stroke='%239b8b70' stroke-opacity='0.28' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100% !important;
+    box-shadow: 3px 6px 0 rgba(25, 29, 23, 0.22), 0 8px 16px rgba(20, 24, 18, 0.14) !important;
+    perspective: 720px;
+    -webkit-perspective: 720px;
+    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  /* Fitilho marcador de páginas (seda terracota) espiando sob a base do caderno */
+  #gabinete #notebook-list .notebook-cover::after {
+    content: "";
+    position: absolute;
+    right: 22px;
+    bottom: -14px;
+    width: 14px;
+    height: 18px;
+    z-index: -1;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 18'%3E%3Cpath d='M1 0h12v16.5L7 12.2 1 16.5Z' fill='%238c3e2b' stroke='%23241812' stroke-width='1.1' stroke-linejoin='round'/%3E%3Cline x1='7' y1='1' x2='7' y2='11' stroke='%23d9a86c' stroke-opacity='0.45' stroke-width='0.9'/%3E%3C/svg%3E") center/contain no-repeat;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Capa dianteira encadernada à mão com cantoneiras douradas AFK Journey e costura na lombada */
+  #gabinete #notebook-list .notebook-front {
+    position: absolute !important;
+    top: -1.5px !important;
+    right: 2px !important;
+    bottom: -1.5px !important;
+    left: -1.5px !important;
+    border: 1.5px solid #161b15 !important;
+    border-radius: 5px 8px 8px 5px !important;
+    background-color: #212a21 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208' fill='none'%3E%3Crect x='0' y='0' width='13' height='208' fill='%23161d16'/%3E%3Cline x1='13.5' y1='0' x2='13.5' y2='208' stroke='%230d120d' stroke-width='1.5'/%3E%3Cline x1='15.5' y1='2' x2='15.5' y2='206' stroke='%234b5c49' stroke-opacity='0.55' stroke-width='1'/%3E%3Cpath d='M6 22v10M6 52v10M6 82v10M6 112v10M6 142v10M6 172v10' stroke='%238c764c' stroke-opacity='0.48' stroke-width='1.2' stroke-linecap='round'/%3E%3Crect x='20' y='9' width='115' height='190' rx='4' stroke='%23c89e52' stroke-opacity='0.28' stroke-width='1'/%3E%3Cpath d='M22 25V12h13M133 25V12h-13M22 183v13h13M133 183v13h-13' stroke='%23d4ab5f' stroke-opacity='0.72' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M27 17l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.78'/%3E%3Cpath d='M127 17l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.78'/%3E%3Cpath d='M27 186l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.78'/%3E%3Cpath d='M127 186l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2Z' fill='%23d4ab5f' fill-opacity='0.78'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100% !important;
+    box-shadow: 2px 0 5px rgba(10, 14, 10, 0.32) !important;
+    transform-origin: 4px center !important;
+    -webkit-transform-origin: 4px center !important;
+    transform: rotateY(0deg) skewY(0deg);
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1), right 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  /* Etapa 2 (Hover In / Foco): o caderno levanta um pouco e entreabre a capa revelando as folhas */
+  #gabinete #notebook-list .notebook-cover:hover,
+  #gabinete #notebook-list .notebook-cover:focus-visible {
+    transform: translateY(-4px) !important;
+    box-shadow: 6px 11px 0 rgba(25, 29, 23, 0.2), 0 14px 24px rgba(18, 22, 16, 0.22) !important;
+  }
+  #gabinete #notebook-list .notebook-cover:hover .notebook-front,
+  #gabinete #notebook-list .notebook-cover:focus-visible .notebook-front {
+    right: 11px !important;
+    transform: rotateY(-21deg) skewY(-2deg) !important;
+    box-shadow: 9px 4px 12px rgba(12, 16, 12, 0.38) !important;
+  }
+  #gabinete #notebook-list .notebook-cover:hover::after,
+  #gabinete #notebook-list .notebook-cover:focus-visible::after {
+    transform: translateY(3px) rotate(3deg);
+  }
+
+  /* Etapa 3 (Clique / Aberto): abre mais um passo confirmando a ação */
+  #gabinete #notebook-list .notebook-cover:active .notebook-front,
+  #gabinete #notebook-list .notebook-cover[aria-pressed="true"] .notebook-front {
+    right: 14px !important;
+    transform: rotateY(-27deg) skewY(-2.8deg) !important;
+    box-shadow: 11px 5px 14px rgba(10, 14, 10, 0.44) !important;
+  }
+
+  /* Faixa colorida autoral preservando a cor escolhida pelo escritor + costura editorial */
+  #gabinete .notebook-strap {
+    top: 25% !important;
+    left: 14px !important;
+    right: 0 !important;
+    min-height: 54px !important;
+    padding: 10px 26px 10px 12px !important;
+    border-top: 1.5px solid rgba(28, 22, 14, 0.55) !important;
+    border-bottom: 1.5px solid rgba(28, 22, 14, 0.55) !important;
+    box-shadow: inset 0 2px 0 rgba(246, 234, 206, 0.28), inset 0 -2px 0 rgba(20, 16, 10, 0.16), 0 2px 4px rgba(10, 12, 10, 0.25);
+    color: #161814 !important;
+    font: 700 14.5px/1.3 'Noto Serif', Georgia, serif !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  /* Elástico de fechamento com rebite de latão */
+  #gabinete .notebook-elastic {
+    right: 12px !important;
+    width: 8px !important;
+    background-color: #141914 !important;
+    border-left: 1px solid rgba(212, 171, 95, 0.3) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.45) !important;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  /* Placa ex-libris ESCREVARAL no rodapé da capa */
+  #gabinete .woven-tab {
+    bottom: 18px !important;
+    left: 20px !important;
+    padding: 4px 7px !important;
+    background: #d8d1be !important;
+    color: #241d15 !important;
+    border: 1px solid #9e7d43 !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 0 rgba(12, 14, 10, 0.45), inset 0 0 0 1px rgba(255, 248, 228, 0.35) !important;
+    font: 700 9.5px/1.25 'Courier Prime', monospace !important;
+    letter-spacing: 0.9px !important;
+  }
+
+  /* --- GAVETA ILUSTRADA (.original-box): só a frente em repouso; sugere abertura no hover --- */
+  #gabinete #notebook-list .original-box {
+    position: relative !important;
+    display: inline-block !important;
+    vertical-align: top !important;
+    width: 224px !important;
+    min-height: 136px !important;
+    margin: 18px 28px 34px 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 2px solid #352b20 !important;
+    border-radius: 4px !important;
+    background-color: #b4beaa !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='136' viewBox='0 0 224 136' fill='none'%3E%3Crect x='5' y='5' width='214' height='126' rx='2' stroke='%23594a36' stroke-opacity='0.45' stroke-width='1.2'/%3E%3Cpath d='M12 19h200M16 118h192' stroke='%236c5e49' stroke-opacity='0.18' stroke-width='1'/%3E%3Ccircle cx='12' cy='12' r='2.6' fill='%23b5883e' stroke='%23352b20' stroke-width='1'/%3E%3Ccircle cx='212' cy='12' r='2.6' fill='%23b5883e' stroke='%23352b20' stroke-width='1'/%3E%3Ccircle cx='12' cy='124' r='2.6' fill='%23b5883e' stroke='%23352b20' stroke-width='1'/%3E%3Ccircle cx='212' cy='124' r='2.6' fill='%23b5883e' stroke='%23352b20' stroke-width='1'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100% !important;
+    box-shadow: 0 5px 0 #5b6353, 0 8px 16px rgba(24, 28, 22, 0.18) !important;
+    transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 250ms cubic-bezier(0.22, 1, 0.36, 1), border-color 220ms ease !important;
+  }
+
+  /* Cavidade interna da gaveta (.box-lid): 100% recolhida em repouso ("aparece só a frente dela") */
+  #gabinete .original-box .box-lid {
+    position: absolute !important;
+    left: 6px !important;
+    right: 6px !important;
+    top: -18px !important;
+    height: 20px !important;
+    z-index: -2 !important;
+    pointer-events: none !important;
+    border: 1.5px solid #2c2319 !important;
+    border-bottom: 0 !important;
+    border-radius: 3px 3px 0 0 !important;
+    background-color: #2f261d !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='212' height='20' viewBox='0 0 212 20' fill='none'%3E%3Cpolygon points='0,20 12,2 200,2 212,20' fill='%23282018'/%3E%3Cline x1='12' y1='2' x2='0' y2='20' stroke='%238c724c' stroke-opacity='0.6' stroke-width='1.5'/%3E%3Cline x1='200' y1='2' x2='212' y2='20' stroke='%238c724c' stroke-opacity='0.6' stroke-width='1.5'/%3E%3Cline x1='18' y1='11' x2='194' y2='11' stroke='%23b59b74' stroke-opacity='0.34' stroke-width='1.2'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100% !important;
+    box-shadow: none !important;
+    opacity: 0;
+    transform-origin: bottom center;
+    transform: translateY(18px) scaleY(0.15);
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease !important;
+  }
+
+  /* Lombadas dos cadernos guardados (.drawer-stack): ocultas em repouso, espiam ao abrir no hover */
+  #gabinete .original-box .drawer-stack {
+    position: absolute !important;
+    left: 16px !important;
+    right: 16px !important;
+    top: -32px !important;
+    height: 34px !important;
+    z-index: -1 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), opacity 210ms ease !important;
   }
   #gabinete .original-box .drawer-book-spine {
-    background: #d3ddd0 !important;
-    border-color: #7c8b78 !important;
-    color: #1c241c !important;
+    display: block !important;
+    width: 38px !important;
+    height: 28px !important;
+    border: 1.5px solid #2d241a !important;
+    border-left-width: 4px !important;
+    border-bottom: 0 !important;
+    border-radius: 2px 2px 0 0 !important;
+    background: #d8d1be !important;
+    color: #241d15 !important;
+    font: 600 8px/1.2 Arial, sans-serif !important;
+    padding: 3px 2px 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
-  #gabinete .original-box .drawer-book-spine:nth-child(2) { background: #c9d4c6 !important; }
-  #gabinete .original-box .drawer-book-spine:nth-child(3) { background: #c0cbbd !important; }
-  #gabinete .original-box .drawer-book-spine:nth-child(4) { background: #b7c3b4 !important; }
-  #gabinete .desktop-reminder::before,
+  #gabinete .original-box .drawer-book-spine:nth-child(2) { height: 33px !important; background: #cfc7b2 !important; }
+  #gabinete .original-box .drawer-book-spine:nth-child(3) { height: 25px !important; background: #c9d1c2 !important; }
+  #gabinete .original-box .drawer-book-spine:nth-child(4) { height: 30px !important; background: #d5cbb8 !important; }
+
+  /* Puxador de latão ilustrado estilo fichário de biblioteca (AFK Journey) */
+  #gabinete .original-box .box-pull {
+    position: absolute !important;
+    left: 50% !important;
+    top: 10px !important;
+    width: 58px !important;
+    height: 22px !important;
+    margin: 0 !important;
+    transform: translateX(-50%);
+    border: 0 !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='22' viewBox='0 0 58 22' fill='none'%3E%3Cpath d='M6 19C6 8.5 14.5 2 29 2S52 8.5 52 19H6Z' fill='%23c4974a' stroke='%232c2014' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M13 18C14.5 11.5 20.5 8 29 8s14.5 3.5 16 10H13Z' fill='%232e2216'/%3E%3Cpath d='M12 11.5C15.5 6.8 21.5 4.8 29 4.8s13.5 2 17 6.7' stroke='%23efd699' stroke-opacity='0.78' stroke-width='1.3' stroke-linecap='round'/%3E%3Ccircle cx='10.5' cy='15.5' r='1.7' fill='%238c6324' stroke='%232c2014' stroke-width='0.9'/%3E%3Ccircle cx='47.5' cy='15.5' r='1.7' fill='%238c6324' stroke='%232c2014' stroke-width='0.9'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100% !important;
+    box-shadow: none !important;
+    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  /* Etiqueta de fichário encaixada em moldura de latão */
+  #gabinete .original-box .box-label {
+    position: relative !important;
+    margin: 39px 14px 12px !important;
+    padding: 8px 11px !important;
+    min-height: 62px !important;
+    background: #d9d3c3 !important;
+    border: 1.5px solid #6b583e !important;
+    border-radius: 2px !important;
+    box-shadow: inset 0 0 0 2px rgba(242, 236, 222, 0.55), 0 1px 0 rgba(255, 250, 236, 0.35) !important;
+    color: #1f1912 !important;
+    text-align: left !important;
+  }
+  #gabinete .original-box .box-tag {
+    color: #6b5435 !important;
+    font: 700 9.5px/1.2 Arial, Helvetica, sans-serif !important;
+    letter-spacing: 1.4px !important;
+  }
+  #gabinete .original-box .box-title {
+    font: 700 16px/1.25 'Noto Serif', Georgia, serif !important;
+    color: #1d160e !important;
+  }
+  #gabinete .original-box .box-meta {
+    color: #594b39 !important;
+    font: 500 11px/1.3 Arial, Helvetica, sans-serif !important;
+  }
+
+  /* Hover In da Gaveta (3 etapas): desliza para frente + abre cavidade superior + revela lombadas internas */
+  #gabinete #notebook-list .original-box:hover,
+  #gabinete #notebook-list .original-box:focus-visible {
+    transform: translateY(4px) !important;
+    border-color: #7c5c2e !important;
+    box-shadow: 0 9px 0 #4d5546, 0 16px 26px rgba(18, 22, 16, 0.28) !important;
+  }
+  #gabinete #notebook-list .original-box:hover .box-lid,
+  #gabinete #notebook-list .original-box:focus-visible .box-lid {
+    opacity: 1 !important;
+    transform: translateY(0) scaleY(1) !important;
+  }
+  #gabinete #notebook-list .original-box:hover .drawer-stack,
+  #gabinete #notebook-list .original-box:focus-visible .drawer-stack {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  #gabinete #notebook-list .original-box:hover .box-pull,
+  #gabinete #notebook-list .original-box:focus-visible .box-pull {
+    transform: translateX(-50%) translateY(1px) scale(1.04) !important;
+  }
+  #gabinete #notebook-list .original-box:active {
+    transform: translateY(6px) !important;
+    box-shadow: 0 4px 0 #4d5546, 0 10px 18px rgba(18, 22, 16, 0.24) !important;
+  }
+
+  /* Post-it ilustrado com alfinete de latão */
+  #gabinete .desktop-reminder {
+    position: relative !important;
+    padding-top: 16px !important;
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms ease !important;
+  }
+  #gabinete .desktop-reminder::before {
+    content: "" !important;
+    display: block !important;
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4.2' fill='%23b5883e' stroke='%232e2214' stroke-width='1.1'/%3E%3Ccircle cx='4.8' cy='4.8' r='1.2' fill='%23f0d89e'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
   #gabinete .desktop-reminder::after {
     display: none !important;
+  }
+  #gabinete .desktop-reminder:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 7px 14px rgba(24, 24, 18, 0.2) !important;
+  }
+
+  /* Calibração Noturna Opaca da Estante AFK Journey (Ardósia Sálvia + Nogueira/Latão suave) */
+  body[data-theme="escuro"] #gabinete #notebook-list .notebook-cover {
+    border-color: #111511 !important;
+    background-color: #363026 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208'%3E%3Crect width='146' height='208' fill='%23363026'/%3E%3Crect x='0' y='0' width='18' height='208' fill='%23201b14' fill-opacity='0.65'/%3E%3Cpath d='M124 8v192M128 8v192M132 8v192M136 8v192M140 8v192' stroke='%236c5d46' stroke-opacity='0.5' stroke-width='1'/%3E%3C/svg%3E") !important;
+    box-shadow: 3px 6px 0 rgba(0, 0, 0, 0.36), 0 10px 20px rgba(0, 0, 0, 0.3) !important;
+  }
+  body[data-theme="escuro"] #gabinete #notebook-list .notebook-front {
+    background-color: #252f25 !important;
+    border-color: #3f4b3d !important;
+  }
+  body[data-theme="escuro"] #gabinete .woven-tab {
+    background: #2b241c !important;
+    color: #d9cebc !important;
+    border-color: #8c6e3b !important;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.45) !important;
+  }
+  body[data-theme="escuro"] #gabinete #notebook-list .original-box {
+    border-color: #463a2c !important;
+    background-color: #252c24 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='136' viewBox='0 0 224 136' fill='none'%3E%3Crect x='5' y='5' width='214' height='126' rx='2' stroke='%238c724c' stroke-opacity='0.34' stroke-width='1.2'/%3E%3Ccircle cx='12' cy='12' r='2.6' fill='%23a67d39' stroke='%23181410' stroke-width='1'/%3E%3Ccircle cx='212' cy='12' r='2.6' fill='%23a67d39' stroke='%23181410' stroke-width='1'/%3E%3Ccircle cx='12' cy='124' r='2.6' fill='%23a67d39' stroke='%23181410' stroke-width='1'/%3E%3Ccircle cx='212' cy='124' r='2.6' fill='%23a67d39' stroke='%23181410' stroke-width='1'/%3E%3C/svg%3E") !important;
+    box-shadow: 0 5px 0 #141914, 0 10px 20px rgba(0, 0, 0, 0.36) !important;
+  }
+  body[data-theme="escuro"] #gabinete #notebook-list .original-box:hover,
+  body[data-theme="escuro"] #gabinete #notebook-list .original-box:focus-visible {
+    border-color: #c49a58 !important;
+    box-shadow: 0 9px 0 #141914, 0 16px 26px rgba(0, 0, 0, 0.45) !important;
+  }
+  body[data-theme="escuro"] #gabinete .original-box .box-label {
+    background: #2b241c !important;
+    border-color: #6b563a !important;
+    box-shadow: inset 0 0 0 2px rgba(217, 206, 188, 0.08) !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #gabinete .original-box .box-tag { color: #c49a58 !important; }
+  body[data-theme="escuro"] #gabinete .original-box .box-title { color: #e2d7c5 !important; }
+  body[data-theme="escuro"] #gabinete .original-box .box-meta { color: #a89882 !important; }
+  body[data-theme="escuro"] #gabinete .original-box .drawer-book-spine {
+    background: #332c22 !important;
+    border-color: #544634 !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #gabinete .desktop-reminder {
+    background: #28241d !important;
+    border-color: #5b4d3a !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #gabinete .os-bar,
+  body[data-theme="escuro"] #gabinete #system-bar {
+    background: #191e19 !important;
+    border-color: rgba(207, 214, 203, 0.14) !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #gabinete .os-signature,
+  body[data-theme="escuro"] #gabinete .esc-cabinet-tag { color: #cfd6cb !important; }
+  body[data-theme="escuro"] #gabinete #project-new,
+  body[data-theme="escuro"] #gabinete #desktop-organize,
+  body[data-theme="escuro"] #gabinete #volume-new,
+  body[data-theme="escuro"] #gabinete #reminder-new,
+  body[data-theme="escuro"] #gabinete #original-back,
+  body[data-theme="escuro"] #gabinete #original-more,
+  body[data-theme="escuro"] #gabinete #cabinet-return,
+  body[data-theme="escuro"] #gabinete #os-start {
+    background: #242b24 !important;
+    color: #cfd6cb !important;
+    border-color: #3d483d !important;
+  }
+
+  @media (max-width: 760px) {
+    #gabinete #notebook-list .notebook-cover {
+      width: 120px !important;
+      height: 172px !important;
+      margin: 6px 18px 26px 0 !important;
+    }
+    #gabinete #notebook-list .original-box {
+      width: 192px !important;
+      min-height: 124px !important;
+      margin: 14px 16px 26px 0 !important;
+    }
   }
   #system-bar {
     background: #c4cfc2 !important;
@@ -7595,6 +7964,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-theme="escuro"] #back-writing {
     color: #cfd6cb !important;
     border-color: rgba(207, 214, 203, 0.24) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] .esc-item-act.is-danger,
+  body[data-theme="escuro"] .esc-folder-menu-item.is-danger {
+    color: #e0a399 !important;
+    border-color: rgba(224, 163, 153, 0.42) !important;
   }
   body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button,
   body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button {
@@ -23732,9 +24106,15 @@ SOFTWARE.
         },
         {
           label: 'Mover pasta para a lixeira',
-          danger: true,
           action: function () {
             if (opts.trashProject) { opts.trashProject(book); }
+          }
+        },
+        {
+          label: 'Excluir pasta definitivamente',
+          danger: true,
+          action: function () {
+            if (opts.purgeProject) { opts.purgeProject(book); }
           }
         }
       ];
@@ -24509,11 +24889,21 @@ SOFTWARE.
 
           var trashBtn = createEl('button', 'esc-item-act', 'Lixeira');
           trashBtn.type = 'button';
+          trashBtn.title = 'Enviar para a lixeira (pode restaurar depois)';
           on(trashBtn, 'click', function (ev) {
             ev.stopPropagation();
             if (opts.trashDoc) { opts.trashDoc(entry); }
           });
           actions.appendChild(trashBtn);
+
+          var directDelBtn = createEl('button', 'esc-item-act is-danger', 'Excluir');
+          directDelBtn.type = 'button';
+          directDelBtn.title = 'Excluir definitivamente (irreversível, pede confirmação dupla)';
+          on(directDelBtn, 'click', function (ev) {
+            ev.stopPropagation();
+            if (opts.purgeDoc) { opts.purgeDoc(entry); }
+          });
+          actions.appendChild(directDelBtn);
         }
         card.appendChild(actions);
         listEl.appendChild(card);
@@ -24960,7 +25350,7 @@ SOFTWARE.
       if (!checkpoint() || !rememberNotebook()) { return; } var o = activeOriginal(); if (!o) { return; }
       E.dialog.ask({title:'Mover gaveta para a lixeira?',message:'A gaveta “' + o.name + '” irá com seus cadernos. Você poderá restaurar tudo pelo menu Início.',accept:'Mover para a lixeira'},function (ok) {
         if (!ok || activeOriginalId !== o.id || !checkpoint() || !rememberNotebook()) { return; }
-        try { originals.update(o.id, {trashed:true}); activeNotebookId = null; activeOriginalId = null; loadDocument(E.freshDocument()); closeNotebook(); renderNotebooks(); message('Gaveta guardada na lixeira com seus cadernos.'); } catch (e) { message(e.message); }
+        try { originals.update(o.id, {trashed:true}); activeNotebookId = null; activeOriginalId = null; resetToAvailableOrBlank(); closeNotebook(); renderNotebooks(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Gaveta guardada na lixeira com seus cadernos.'); } catch (e) { message(e.message); }
       });
     });
     listen(byId('notebook-parent-save'), 'click', function () {
@@ -24991,9 +25381,9 @@ SOFTWARE.
     listen(byId('desk-minimize'), 'click', closeNotebook);
     listen(byId('notebook-trash'), 'click', function () {
       if (!checkpoint()) { return; } var b = activeNotebook(); if (!b) { return; }
-      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todos os seus textos. Você poderá restaurá-lo pelo menu Início.',accept:'Mover para a lixeira'},function(ok){
+      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todos os seus textos. Você poderá restaurá-lo inteiro pela Lixeira ou pelo menu Início.',accept:'Mover para a lixeira'},function(ok){
         if (!ok || activeNotebookId !== b.id || !notebooks.get(b.id)) { return; }
-        try { if (!checkpoint() || !rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; loadDocument(E.freshDocument()); closeNotebook(); message('Caderno movido para a lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
+        try { if (!checkpoint() || !rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; resetToAvailableOrBlank(); closeNotebook(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Caderno movido para a lixeira. Você pode restaurar o caderno inteiro pela Lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
       });
     });
     listen(window, 'storage', function (event) { if (event.key === 'escrevaral.astra.notebooks.v1' || event.key === 'escrevaral.astra.originais.v1' || event.key === 'escrevaral.astra.notebooks.transaction.v1') { if (storage.getItem('escrevaral.astra.notebooks.transaction.v1')) { return; } renderNotebooks(); var b = activeNotebook(); if (b) { cabinetProject = b.name; if (doc.projectId === b.id) { doc.project = b.name; } updatePath(); } } });
@@ -25400,23 +25790,107 @@ SOFTWARE.
       });
     } catch (e) { text(byId('reminder-status'), 'Não foi possível ler os post-its.'); }
   }
+  function isDocumentActiveInArchive(candidate) {
+    if (!candidate) { return false; }
+    if (!archive) { return true; }
+    var stored = archive.get(candidate.id);
+    if (!stored || stored.trashed) { return false; }
+    if (stored.projectId && notebooks && !availableBook(notebooks.get(stored.projectId))) { return false; }
+    return true;
+  }
+  function resetToAvailableOrBlank() {
+    var remaining = archive ? archive.list().documents : [];
+    var next = remaining.length ? remaining[0] : null;
+    cabinetSelection = null;
+    if (next) {
+      loadDocument(next);
+      try { if (storage) { storage.setItem('escrevaral.astra.current', next.id); } } catch (ignore) {}
+    } else {
+      activeNotebookId = null;
+      activeOriginalId = null;
+      cabinetProject = '';
+      loadDocument(E.freshDocument());
+      try { if (storage) { storage.removeItem('escrevaral.astra.current'); } } catch (ignore) {}
+    }
+  }
+  function ensureActiveDocumentStillValid(removedIds, removedProjectId) {
+    if (!doc) { return false; }
+    var curId = doc.id;
+    var curNoteId = doc.noteId || doc.id;
+    var explicitlyRemoved = false;
+    if (removedIds && removedIds.length) {
+      explicitlyRemoved = removedIds.indexOf(curId) !== -1 || removedIds.indexOf(curNoteId) !== -1;
+    }
+    if (!explicitlyRemoved && removedProjectId && doc.projectId === removedProjectId) {
+      explicitlyRemoved = true;
+    }
+    var projectInvalid = !!(doc.projectId && notebooks && !availableBook(notebooks.get(doc.projectId)));
+    var savedButGone = !!doc.revision && !isDocumentActiveInArchive(doc);
+    if (explicitlyRemoved || projectInvalid || savedButGone) {
+      resetToAvailableOrBlank();
+      return true;
+    }
+    if (activeNotebookId && notebooks && !availableBook(notebooks.get(activeNotebookId))) {
+      activeNotebookId = null;
+      cabinetProject = '';
+      updatePath();
+    }
+    return false;
+  }
+  function askIrreversibleDelete(firstStep, secondStep, onConfirm) {
+    E.dialog.ask({
+      title: firstStep.title || 'Excluir definitivamente?',
+      message: firstStep.message,
+      accept: firstStep.accept || 'Continuar exclusão'
+    }, function (okFirst) {
+      if (!okFirst) { return; }
+      E.dialog.ask({
+        title: (secondStep && secondStep.title) || 'Segunda confirmação — ação irreversível',
+        message: (secondStep && secondStep.message) || 'Esta exclusão é definitiva e não pode ser desfeita. O conteúdo não irá para a lixeira. Confirma apagar para sempre?',
+        accept: (secondStep && secondStep.accept) || 'Sim, excluir para sempre'
+      }, function (okSecond) {
+        if (!okSecond) { return; }
+        onConfirm();
+      });
+    });
+  }
   function trashEntry(entry) {
     if (!archive || !persist()) { return; }
     if (entry && entry.locked) { message('Esta folha de referência está protegida contra exclusão.'); return; }
     var isCurrent = entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id);
     try {
       archive.trash(isCurrent ? doc : entry);
-      if (isCurrent) { var next = archive.list().documents[0] || E.freshDocument(); loadDocument(next); cabinetSelection = null; }
-      renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); saveSession();
+      ensureActiveDocumentStillValid([entry.id, entry.noteId || entry.id], null);
+      renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
       if (workspaceUI) { workspaceUI.render(); }
-      message('Movido para a lixeira. Você pode restaurar pela Biblioteca.');
+      message('Movido para a lixeira. Você pode restaurar pela Lixeira.');
     } catch (e) { message('Não foi possível mover para a lixeira. A folha foi preservada.'); }
   }
   function askDelete(entry) {
-    E.dialog.ask({title:'Excluir definitivamente?',message:'“' + (entry.title || 'Sem título') + '” será apagada definitivamente do acervo deste aparelho. Não será possível restaurar esta cópia. Arquivos exportados e versões em outras abas não são apagados.',accept:'Excluir definitivamente'},function(ok){
-      if (!ok) { return; }
-      try { archive.purge(entry); linguisticStore.removeDocument('analysis/'+(entry.projectId||'avulsos')+'/'+(entry.noteId||entry.id)+'/'); renderArchive(); byId('trash-toggle').focus(); message('Cópia excluída definitivamente deste acervo.'); }
-      catch (e) { text(byId('archive-status'),e.message); }
+    if (!archive || !entry) { return; }
+    if (entry.locked) { message('Esta folha de referência está protegida contra exclusão.'); return; }
+    var label = entry.title || 'Sem título';
+    var firstMsg = entry.trashed
+      ? '“' + label + '” será apagada definitivamente da lixeira deste aparelho. Não será possível restaurar esta cópia.'
+      : '“' + label + '” será apagada definitivamente deste aparelho, sem passar pela lixeira. Para poder recuperar depois, use “Lixeira” em vez de excluir.';
+    askIrreversibleDelete({
+      title: 'Excluir definitivamente?',
+      message: firstMsg,
+      accept: 'Continuar exclusão'
+    }, {
+      title: 'Segunda confirmação — exclusão irreversível',
+      message: 'Atenção: “' + label + '” será removida para sempre deste aparelho e não poderá ser recuperada. Arquivos já exportados (.scrvrl) não são apagados. Confirma?',
+      accept: 'Sim, excluir para sempre'
+    }, function () {
+      try {
+        archive.purge(entry);
+        linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/');
+        ensureActiveDocumentStillValid([entry.id, entry.noteId || entry.id], null);
+        renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
+        if (workspaceUI) { workspaceUI.render(); }
+        if (activePanel === 'acervo' && byId('trash-toggle')) { byId('trash-toggle').focus(); }
+        message('Cópia excluída definitivamente deste aparelho.');
+      } catch (e) { text(byId('archive-status'), e.message); }
     });
   }
 
@@ -25661,7 +26135,18 @@ SOFTWARE.
   function loadDocument(next) {
     if(E.ptbrPanelReset){E.ptbrPanelReset();}
     analysisRange = null; copiedSelection = null; byId('selection-tools').hidden = true;
-    doc = next; if (doc.projectId) { activeNotebookId = doc.projectId; cabinetProject = doc.project || ''; var loadedBook = notebooks && notebooks.get(doc.projectId); activeOriginalId = loadedBook ? loadedBook.originalId || null : null; } navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; E.transfer.selectRange(manuscript, 0, 0); growManuscript();
+    doc = next;
+    if (doc.projectId) {
+      activeNotebookId = doc.projectId;
+      cabinetProject = doc.project || '';
+      var loadedBook = notebooks && notebooks.get(doc.projectId);
+      activeOriginalId = loadedBook ? loadedBook.originalId || null : null;
+    } else {
+      activeNotebookId = null;
+      activeOriginalId = null;
+      cabinetProject = '';
+    }
+    navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; E.transfer.selectRange(manuscript, 0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     var isLockedRef = !!(doc.locked || doc.category === 'reference');
@@ -25695,7 +26180,7 @@ SOFTWARE.
       if (trashView) { result.documents = result.documents.filter(function (entry) { return !!entry.trashed; }); }
       else if (activeNotebookId) { result.documents = result.documents.filter(function (entry) { return entry.projectId === activeNotebookId; }); }
       if (trashView && originals) { originals.list().filter(function (o) { return o.trashed; }).forEach(function (o) { var li = document.createElement('li'); paragraph(li, 'Gaveta: ' + o.name); button(li, 'Restaurar gaveta completa', function () { try { originals.update(o.id, {trashed:false}); renderNotebooks(); renderArchive(); message('Gaveta restaurada com seus cadernos.'); } catch (e) { message(e.message); } }); list.appendChild(li); }); }
-      if (trashView && notebooks) { notebooks.list().filter(function (b) { return b.trashed && (!b.originalId || !originals.get(b.originalId).trashed); }).forEach(function (b) { var li = document.createElement('li'); paragraph(li, 'Caderno: ' + b.name); button(li, 'Restaurar caderno completo', function () { try { notebooks.update(b.id, { trashed: false }); renderNotebooks(); renderArchive(); message('Caderno restaurado com todo o conteúdo.'); } catch (e) { message(e.message); } }); list.appendChild(li); }); }
+      if (trashView && notebooks) { notebooks.list().filter(function (b) { return b.trashed && (!b.originalId || !originals.get(b.originalId).trashed); }).forEach(function (b) { var li = document.createElement('li'); paragraph(li, 'Caderno: ' + b.name); button(li, 'Restaurar caderno completo', function () { try { notebooks.update(b.id, { trashed: false }); if (archive) { (archive.list(true).documents || []).filter(function (d) { return d.projectId === b.id && !!d.trashed; }).forEach(function (d) { try { archive.trash(d, false); } catch (ignore) {} }); } renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Caderno restaurado com todo o conteúdo.'); } catch (e) { message(e.message); } }); list.appendChild(li); }); }
       text(byId('acervo-heading'), trashView ? 'Lixeira' : 'Acervo');
       text(byId('trash-toggle'), trashView ? 'Voltar ao acervo' : 'Lixeira'); byId('trash-toggle').setAttribute('aria-pressed', trashView ? 'true' : 'false');
       text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : result.documents.length ? '' : 'Sua primeira folha começa aqui.');
@@ -26518,11 +27003,15 @@ SOFTWARE.
       checkpoint: checkpoint,
       openDoc: function (entry) {
         if (!entry || composing || !persist()) { return; }
+        if (entry.trashed) {
+          message('Este texto está na lixeira. Clique em “Restaurar” para voltar a editá-lo.');
+          return;
+        }
         var isCurrent = entry.id === doc.id;
         if (!isCurrent) {
           try {
             var next = archive && archive.get(entry.id);
-            if (!next) { workspaceUI.render(); message('Esta folha não foi encontrada.'); return; }
+            if (!next || next.trashed) { workspaceUI.render(); message('Esta folha não foi encontrada.'); return; }
             loadDocument(next);
           } catch (e) { message('Não foi possível abrir esta folha.'); return; }
         }
@@ -26555,19 +27044,38 @@ SOFTWARE.
         var trashed = archive.list(true).documents.filter(function (d) { return !!d.trashed; });
         var trashedProjects = notebooks ? notebooks.list().filter(function (b) { return !!b.trashed; }) : [];
         if (!trashed.length && !trashedProjects.length) { return; }
-        E.dialog.ask({
-          title: 'Esvaziar lixeira?',
-          message: 'Remover definitivamente ' + trashed.length + (trashed.length === 1 ? ' item da lixeira?' : ' itens da lixeira?') + ' Não será possível restaurar.',
-          accept: 'Esvaziar lixeira'
-        }, function (ok) {
-          if (!ok) { return; }
-          trashedProjects.forEach(function (bk) { try { notebooks.purge(bk.id); } catch (ignore) {} });
+        var parts = [];
+        if (trashed.length) { parts.push(trashed.length + (trashed.length === 1 ? ' texto' : ' textos')); }
+        if (trashedProjects.length) { parts.push(trashedProjects.length + (trashedProjects.length === 1 ? ' pasta' : ' pastas')); }
+        var summary = parts.join(' e ');
+        askIrreversibleDelete({
+          title: 'Esvaziar lixeira definitivamente?',
+          message: 'Remover definitivamente ' + summary + ' da lixeira? Itens excluídos da lixeira não podem ser recuperados.',
+          accept: 'Continuar exclusão'
+        }, {
+          title: 'Segunda confirmação — ação irreversível',
+          message: 'Atenção: ' + summary + ' serão apagados para sempre deste aparelho. Esta ação não pode ser desfeita. Confirma esvaziar a lixeira?',
+          accept: 'Sim, esvaziar para sempre'
+        }, function () {
+          var removedIds = [];
+          trashed.forEach(function (entry) {
+            removedIds.push(entry.id);
+            if (entry.noteId && entry.noteId !== entry.id) { removedIds.push(entry.noteId); }
+          });
+          trashedProjects.forEach(function (bk) {
+            (archive.list(true).documents || []).filter(function (d) { return d.projectId === bk.id; }).forEach(function (d) {
+              removedIds.push(d.id);
+              try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
+            });
+            try { notebooks.purge(bk.id); } catch (ignore) {}
+          });
           trashed.forEach(function (entry) {
             try { archive.purge(entry); linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/'); } catch (ignore) {}
           });
-          renderArchive(); renderCabinet(); renderTimeline(false);
-          workspaceUI.render();
-          message('Lixeira esvaziada.');
+          ensureActiveDocumentStillValid(removedIds, null);
+          renderNotebooks(); renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
+          if (workspaceUI) { workspaceUI.render(); }
+          message('Lixeira esvaziada definitivamente.');
         });
       },
       updateDocMeta: function (entry, patch) {
@@ -26623,47 +27131,70 @@ SOFTWARE.
         if (!archive || !book) { return; }
         var list = (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; });
         if (!list.length) { message('Não há textos ativos nesta pasta.'); return; }
-        list.forEach(function (d) { try { archive.trash(d, true); } catch (ignore) {} });
-        renderArchive(); renderCabinet(); renderTimeline(false);
+        var removedIds = [];
+        list.forEach(function (d) {
+          removedIds.push(d.id);
+          if (d.noteId && d.noteId !== d.id) { removedIds.push(d.noteId); }
+          try { archive.trash(d, true); } catch (ignore) {}
+        });
+        ensureActiveDocumentStillValid(removedIds, null);
+        renderArchive(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
         if (workspaceUI) { workspaceUI.render(); }
-        message(list.length + (list.length === 1 ? ' texto movido' : ' textos movidos') + ' para a lixeira.');
+        message(list.length + (list.length === 1 ? ' texto movido' : ' textos movidos') + ' para a lixeira. Você pode restaurar pela Lixeira.');
       },
       trashProject: function (book) {
         if (!notebooks || !book) { return; }
         var inside = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; }) : [];
+        var removedIds = [];
         notebooks.update(book.id, { trashed: true });
-        inside.forEach(function (d) { try { archive.trash(d, true); } catch (ignore) {} });
+        inside.forEach(function (d) {
+          removedIds.push(d.id);
+          if (d.noteId && d.noteId !== d.id) { removedIds.push(d.noteId); }
+          try { archive.trash(d, true); } catch (ignore) {}
+        });
         if (activeNotebookId === book.id) { activeNotebookId = null; }
-        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath();
+        ensureActiveDocumentStillValid(removedIds, book.id);
+        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
         if (workspaceUI) { workspaceUI.selectLibrary('all'); }
-        message('Pasta “' + book.name + '” e ' + inside.length + ' texto(s) movidos para a lixeira.');
+        message('Pasta “' + book.name + '” e ' + inside.length + ' texto(s) enviados para a lixeira. Você pode restaurar a pasta inteira pela Lixeira.');
       },
       restoreProject: function (book) {
         if (!notebooks || !book) { return; }
         notebooks.update(book.id, { trashed: false });
         var inside = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !!d.trashed; }) : [];
         inside.forEach(function (d) { try { archive.trash(d, false); } catch (ignore) {} });
-        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false);
+        renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
         if (workspaceUI) { workspaceUI.render(); }
-        message('Pasta “' + book.name + '” restaurada com ' + inside.length + ' texto(s).');
+        message('Pasta “' + book.name + '” restaurada inteira com ' + inside.length + ' texto(s).');
       },
       purgeProject: function (book, insideCount) {
         if (!notebooks || !book) { return; }
-        E.dialog.ask({
+        var insideDocs = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }) : [];
+        var count = typeof insideCount === 'number' ? Math.max(insideCount, insideDocs.length) : insideDocs.length;
+        var countLabel = count + (count === 1 ? ' texto associado' : ' textos associados');
+        askIrreversibleDelete({
           title: 'Excluir pasta definitivamente?',
-          message: 'A pasta “' + book.name + '” e ' + insideCount + (insideCount === 1 ? ' texto associado serão removidos' : ' textos associados serão removidos') + ' definitivamente deste aparelho. Não será possível restaurar.',
-          accept: 'Excluir definitivamente'
-        }, function (ok) {
-          if (!ok) { return; }
+          message: 'A pasta “' + book.name + '” e ' + countLabel + ' serão removidos definitivamente deste aparelho. Para poder recuperar a pasta inteira depois, use “Mover pasta para a lixeira”.',
+          accept: 'Continuar exclusão'
+        }, {
+          title: 'Segunda confirmação — exclusão irreversível',
+          message: 'Atenção: a pasta “' + book.name + '” e todo o seu conteúdo (' + countLabel + ') serão apagados para sempre e não poderão ser recuperados. Confirma?',
+          accept: 'Sim, excluir pasta para sempre'
+        }, function () {
+          var removedIds = [];
           if (archive) {
             (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }).forEach(function (d) {
+              removedIds.push(d.id);
+              if (d.noteId && d.noteId !== d.id) { removedIds.push(d.noteId); }
               try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
             });
           }
           notebooks.purge(book.id);
-          renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false);
+          if (activeNotebookId === book.id) { activeNotebookId = null; }
+          ensureActiveDocumentStillValid(removedIds, book.id);
+          renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
           if (workspaceUI) { workspaceUI.render(); }
-          message('Pasta excluída definitivamente.');
+          message('Pasta excluída definitivamente deste aparelho.');
         });
       },
       refreshParent: function () { renderNotebooks(); renderCabinet(); renderTimeline(false); updatePath(); }

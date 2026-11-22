@@ -52,14 +52,35 @@ const matched = E.shortcutsCore.filterDocs(sc, archive.list(true).documents);
 assert.equal(matched.length, 1);
 assert.equal(matched[0].id, n1.id);
 
-// 3. LIX-01: mover pasta para lixeira, restaurar e excluir definitivamente (purge)
+// 3. LIX-01: mover pasta para lixeira (com textos), restaurar pasta inteira e excluir definitivamente (purge)
 books.update(bk.id, { trashed: true });
+archive.trash(n1, true);
+archive.trash(n2, true);
 assert.equal(books.get(bk.id).trashed, true);
+assert.equal(archive.list(false).documents.length, 0);
 books.update(bk.id, { trashed: false });
+archive.trash(n1, false);
+archive.trash(n2, false);
 assert.equal(books.get(bk.id).trashed, false);
+assert.equal(archive.list(false).documents.length, 2);
 books.update(bk.id, { trashed: true });
 assert.equal(books.purge(bk.id), true);
 assert.equal(books.get(bk.id), null);
+
+// 3b. Proteção contra documento órfão e confirmação dupla irreversível no controlador e 3 colunas
+const fs = require('node:fs');
+const path = require('node:path');
+const ctrlSrc = fs.readFileSync(path.join(__dirname, '..', 'src', 'editor', 'controlador.js'), 'utf8');
+const colSrc = fs.readFileSync(path.join(__dirname, '..', 'src', 'ui', 'tres-colunas.js'), 'utf8');
+assert.ok(ctrlSrc.includes('function ensureActiveDocumentStillValid('), 'controlador deve validar documento ativo após exclusões');
+assert.ok(ctrlSrc.includes('function askIrreversibleDelete('), 'controlador deve usar confirmação dupla para exclusões irreversíveis');
+assert.ok(ctrlSrc.includes('Segunda confirmação — ação irreversível') || ctrlSrc.includes('Segunda confirmação — exclusão irreversível'), 'diálogo deve explicitar segunda confirmação irreversível');
+assert.ok(/emptyTrash:[\s\S]{0,2600}ensureActiveDocumentStillValid/.test(ctrlSrc), 'emptyTrash deve limpar documento órfão');
+assert.ok(/trashProject:[\s\S]{0,1200}ensureActiveDocumentStillValid/.test(ctrlSrc), 'trashProject deve limpar documento órfão');
+assert.ok(/purgeProject:[\s\S]{0,2000}askIrreversibleDelete/.test(ctrlSrc), 'purgeProject deve exigir confirmação dupla');
+assert.ok(/function askDelete\(entry\)[\s\S]{0,1200}askIrreversibleDelete/.test(ctrlSrc), 'askDelete deve exigir confirmação dupla');
+assert.ok(colSrc.includes('Excluir pasta definitivamente'), 'menu da pasta deve distinguir lixeira de exclusão definitiva');
+assert.ok(colSrc.includes('Excluir definitivamente (irreversível, pede confirmação dupla)'), 'item deve oferecer exclusão definitiva com aviso de confirmação dupla');
 
 // 4. Remover atalho
 scStore.remove(sc.id);
