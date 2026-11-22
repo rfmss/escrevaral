@@ -193,7 +193,10 @@ assert.ok(temasLinuxCss.includes('.esc-drawer-mini') && temasLinuxCss.includes('
 assert.ok(temasLinuxCss.includes('.esc-cafe-diorama') && temasLinuxCss.includes('.esc-cafe-scene-br'), 'temas-linux.css inclui o diorama parisiense responsivo da Estante');
 assert.equal((temasLinuxCss.match(/DIORAMA PARISIENSE NA ESTANTE/g) || []).length, 1, 'temas-linux.css define o bloco do diorama parisiense uma única vez');
 const builtIndexHtml = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
-assert.ok(builtIndexHtml.includes('id="esc-cafe-diorama"'), 'index.html gerado inclui o diorama parisiense #esc-cafe-diorama na Estante');
+assert.ok(builtIndexHtml.includes('id="esc-cafe-diorama"') && builtIndexHtml.includes('assets/library/estante-cafe-bistro.webp') && builtIndexHtml.includes('assets/library/estante-livros-outono.webp') && builtIndexHtml.includes('assets/library/estante-trepadeira-outono.webp'), 'index.html gerado inclui o diorama AFK Journey em WebP local na Estante');
+for (const dioramaArt of ['estante-cafe-bistro.webp', 'estante-livros-outono.webp', 'estante-trepadeira-outono.webp']) {
+  assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', dioramaArt)), 'assets/library/' + dioramaArt + ' presente para uso offline');
+}
 const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');
 assert.ok(autopubHtml.includes('AFK-REAL-GABINETE-ORNAMENTS-START'), 'autopublicacao-independente.html com ornamentos AFK x Real Gabinete');
 for (const entry of catalog) {

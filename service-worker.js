@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-0b1d762166d6";
-const RUNTIME_CACHE = "scrvrl-runtime-0b1d762166d6";
+const CACHE_NAME = "scrvrl-offline-v6-65-c49ace5a2c59";
+const RUNTIME_CACHE = "scrvrl-runtime-c49ace5a2c59";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -12,8 +12,8 @@ const REQUIRED_ASSETS = [
     "sha256": "775af06b12760a8ebcc7728804a83dae45dd32ba35adf16f7264b5817d429584"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.9dbf656e39f4b872.css",
-    "sha256": "9dbf656e39f4b872f3c9fae3b7195fe9a4ce31c7b71bb87067d126e23bb564df"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.224ff9960d3a4ef6.css",
+    "sha256": "224ff9960d3a4ef6e759038116e16090c111be604c45ef7a78aa08d39e564108"
   }
 ];
 const BUNKER_ASSETS = [
@@ -36,6 +36,9 @@ const BUNKER_ASSETS = [
   "./assets/library/banner-criacao.webp",
   "./assets/library/banner-oficio.webp",
   "./assets/library/banner-publicacao.webp",
+  "./assets/library/estante-cafe-bistro.webp",
+  "./assets/library/estante-livros-outono.webp",
+  "./assets/library/estante-trepadeira-outono.webp",
   "./assets/library/real-gabinete-hero.webp",
   "./assets/library/tome-literatura-mundial.webp",
   "./assets/library/tome-objeto-livro.webp"
@@ -67,7 +70,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: '50ce1adcd4b2606155bd7b7cfe42f5e4fafa4c5b3089deeff3f2bb055f1a1011' });
+    const index = await checkedAsset({ url: './index.html', sha256: 'd17d15ddb26f894727620831d02e680a45a272cb92b21d5b48e5731ad3fc3e01' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);
