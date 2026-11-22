@@ -7235,6 +7235,265 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 8'%3E%3Cpath d='M0.5 0h6v7.2L3.5 5.2 0.5 7.2Z' fill='%238c3e2b' stroke='%23241812' stroke-width='0.7'/%3E%3C/svg%3E") center/contain no-repeat;
   }
 
+  #gabinete #original-title-label::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* =========================================================================
+     DIORAMA PARISIENSE NA ESTANTE (#esc-cafe-diorama):
+     Paredão-mural em Sálvia (boiserie + lambris + trepadeiras fininhas +
+     mesinha de bistrô com duas cadeirinhas, café fumegando e pilha de livros).
+     Somente nesta tela (#gabinete), 100% responsivo, zero gradientes CSS.
+     ========================================================================= */
+  #gabinete #desktop-surface {
+    position: absolute;
+    isolation: isolate;
+  }
+  #gabinete #notebook-area,
+  #gabinete #desktop-reminders {
+    z-index: 2 !important;
+  }
+  @media (min-width: 761px) {
+    /* Alinha o mural de Post-its mais acima para deixar a cena do bistrô respirar no canto inferior direito */
+    #gabinete #desktop-reminders {
+      top: 42px;
+    }
+  }
+  #gabinete #cabinet-window {
+    z-index: 6 !important;
+  }
+  .esc-cafe-diorama {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: opacity 280ms ease;
+  }
+  /* Dentro de uma gaveta aberta, o paredão recua suavemente para dar foco total aos cadernos da gaveta */
+  #gabinete #desktop-surface:has(#notebook-area[data-drawer-open="true"]) .esc-cafe-diorama {
+    opacity: 0.44;
+  }
+  /* Moldura perimetral responsiva estilo parede-mural parisiense (boiserie) */
+  .esc-cafe-frame {
+    position: absolute;
+    inset: 5px 7px 6px;
+    border: 1.5px solid rgba(58, 70, 56, 0.28);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 6px rgba(238, 234, 222, 0.26), inset 0 0 0 7.5px rgba(58, 70, 56, 0.16);
+  }
+  /* Trilho fino superior do mural onde gavetas e cadernos repousam */
+  .esc-cafe-rail {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 14px;
+    height: 2px;
+    background: rgba(68, 80, 65, 0.17);
+    box-shadow: 0 1px 0 rgba(244, 240, 228, 0.38);
+  }
+  /* Lambris baixo (roda-meio parisiense com almofadas discretas) + calçada serena na base */
+  .esc-cafe-wainscot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    height: 52px;
+    background-color: rgba(164, 178, 160, 0.36);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='52' viewBox='0 0 120 52' fill='none'%3E%3Crect x='10' y='11' width='100' height='31' rx='2' stroke='%233d4a3b' stroke-opacity='0.14' stroke-width='1'/%3E%3Crect x='11.5' y='12.5' width='97' height='28' rx='1.5' stroke='%23f4f0e4' stroke-opacity='0.28' stroke-width='0.9'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: left bottom;
+    border-top: 1.5px solid rgba(64, 76, 61, 0.26);
+    box-shadow: inset 0 2px 0 rgba(244, 240, 228, 0.38);
+  }
+  .esc-cafe-paving {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 12px;
+    background: rgba(132, 144, 128, 0.32);
+    border-top: 1px solid rgba(58, 70, 56, 0.24);
+  }
+
+  /* Trepadeiras fininhas nos cantos superiores */
+  @keyframes esc-vine-breeze {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(1deg); }
+  }
+  .esc-cafe-vine {
+    position: absolute;
+    height: auto;
+    opacity: 0.88;
+    animation: esc-vine-breeze 9.5s ease-in-out infinite;
+  }
+  .esc-cafe-vine-tl {
+    top: 5px;
+    left: 7px;
+    width: clamp(86px, 10vw, 134px);
+    transform-origin: top left;
+  }
+  .esc-cafe-vine-tr {
+    top: 5px;
+    right: 7px;
+    width: clamp(134px, 16.5vw, 222px);
+    transform-origin: top right;
+    animation-delay: -3.2s;
+  }
+
+  /* Cenas do diorama ancoradas nos cantos inferiores do paredão */
+  .esc-cafe-scene-bl {
+    position: absolute;
+    left: clamp(16px, 2.4vw, 34px);
+    bottom: 8px;
+    width: clamp(114px, 12.8vw, 168px);
+    height: auto;
+    opacity: 0.9;
+  }
+  .esc-cafe-scene-br {
+    position: absolute;
+    right: clamp(16px, 2.6vw, 38px);
+    bottom: 8px;
+    width: clamp(224px, 26.5vw, 364px);
+    height: auto;
+    opacity: 0.94;
+  }
+
+  /* Vapor lentíssimo da xícara de café */
+  @keyframes esc-cafe-steam-rise {
+    0%, 100% { opacity: 0.22; transform: translateY(1.5px); }
+    50% { opacity: 0.62; transform: translateY(-2px); }
+  }
+  .esc-cafe-steam {
+    stroke: #f0eadc;
+    animation: esc-cafe-steam-rise 4.6s ease-in-out infinite;
+  }
+
+  /* Paleta Diurna (Manhã Parisiense em Sálvia — fosca, calma e poética) */
+  .esc-cafe-diorama .vine-stem { stroke: #3c4d39; }
+  .esc-cafe-diorama .vine-leaf-a { fill: #738e6c; stroke: #364533; stroke-width: 0.9; }
+  .esc-cafe-diorama .vine-leaf-b { fill: #8da585; stroke: #3b4b38; stroke-width: 0.9; }
+  .esc-cafe-diorama .vine-leaf-c { fill: #5f7a5a; stroke: #303f2d; stroke-width: 0.9; }
+  .esc-cafe-diorama .vine-blossom { fill: #efe8d8; stroke: #6f6652; stroke-width: 0.7; }
+  .esc-cafe-diorama .vine-blossom-core { fill: #c69648; }
+  .esc-cafe-diorama .cafe-shadow { fill: rgba(34, 42, 32, 0.16); }
+  .esc-cafe-diorama .cafe-ink { stroke: #2f372d; }
+  .esc-cafe-diorama .cafe-iron { stroke: #2f382e; }
+  .esc-cafe-diorama .cafe-iron-fill { fill: #2f382e; }
+  .esc-cafe-diorama .cafe-brass { stroke: #b88c42; }
+  .esc-cafe-diorama .cafe-brass-fill { fill: #c4974a; }
+  .esc-cafe-diorama .cafe-terracotta { fill: #b86d54; stroke: #40271e; }
+  .esc-cafe-diorama .cafe-terracotta-rim { fill: #c47a60; stroke: #40271e; }
+  .esc-cafe-diorama .cafe-book-1 { fill: #6f8e68; stroke: #293627; }
+  .esc-cafe-diorama .cafe-book-2 { fill: #b86d54; stroke: #3f261d; }
+  .esc-cafe-diorama .cafe-book-3 { fill: #c29244; stroke: #423117; }
+  .esc-cafe-diorama .cafe-win-frame { fill: #9fb09c; stroke: #445341; }
+  .esc-cafe-diorama .cafe-win-glass { fill: #d7dfd2; stroke: #5a6a57; }
+  .esc-cafe-diorama .cafe-win-mullion { stroke: #4d5d4a; }
+  .esc-cafe-diorama .cafe-curtain { fill: rgba(242, 236, 222, 0.66); }
+  .esc-cafe-diorama .cafe-glass-glint { stroke: rgba(248, 246, 238, 0.65); }
+  .esc-cafe-diorama .cafe-sill { fill: #b6c1b1; stroke: #445341; }
+  .esc-cafe-diorama .cafe-awning-base { fill: #e3dcc8; stroke: #3e4a3b; }
+  .esc-cafe-diorama .cafe-awning-stripe { fill: #687f64; }
+  .esc-cafe-diorama .cafe-awning-scallop { fill: none; stroke: #3e4a3b; }
+  .esc-cafe-diorama .cafe-bulb { fill: #eee7d4; }
+  .esc-cafe-diorama .cafe-rattan-frame { stroke: #4b3d2b; }
+  .esc-cafe-diorama .cafe-rattan-inner { stroke: #8c724d; }
+  .esc-cafe-diorama .cafe-seat { fill: #dfd4bb; stroke: #4b3d2b; }
+  .esc-cafe-diorama .cafe-seat-weave { stroke: #a89472; }
+  .esc-cafe-diorama .cafe-table-rim { fill: #c4974a; stroke: #3d2f1a; }
+  .esc-cafe-diorama .cafe-marble { fill: #ebe5d6; stroke: #b4a992; }
+  .esc-cafe-diorama .cafe-porcelain { fill: #f3eee2; stroke: #4c463b; }
+  .esc-cafe-diorama .cafe-table-book { fill: #5b7c8c; stroke: #25343b; }
+  .esc-cafe-diorama .cafe-ribbon { fill: #9c422e; }
+  .esc-cafe-diorama .cafe-glass-vase { fill: rgba(215, 226, 214, 0.72); stroke: #4b5c4a; }
+  .esc-cafe-diorama .esc-night-glow { opacity: 0; transition: opacity 380ms ease; }
+
+  /* Paleta Noturna Opaca (Cafeteria Parisiense à Noite — arandela âmbar acolhedora) */
+  body[data-theme="escuro"] .esc-cafe-frame {
+    border-color: rgba(196, 154, 88, 0.24);
+    box-shadow: inset 0 0 0 6px rgba(14, 18, 14, 0.34), inset 0 0 0 7.5px rgba(196, 154, 88, 0.14);
+  }
+  body[data-theme="escuro"] .esc-cafe-rail {
+    background: rgba(196, 154, 88, 0.16);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+  }
+  body[data-theme="escuro"] .esc-cafe-wainscot {
+    background-color: rgba(18, 23, 18, 0.56);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='52' viewBox='0 0 120 52' fill='none'%3E%3Crect x='10' y='11' width='100' height='31' rx='2' stroke='%23c49a58' stroke-opacity='0.14' stroke-width='1'/%3E%3Crect x='11.5' y='12.5' width='97' height='28' rx='1.5' stroke='%230b0e0b' stroke-opacity='0.36' stroke-width='0.9'/%3E%3C/svg%3E");
+    border-top-color: rgba(196, 154, 88, 0.22);
+    box-shadow: inset 0 2px 0 rgba(217, 206, 188, 0.06);
+  }
+  body[data-theme="escuro"] .esc-cafe-paving {
+    background: rgba(12, 15, 12, 0.62);
+    border-top-color: rgba(196, 154, 88, 0.16);
+  }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-stem { stroke: #556852; }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-leaf-a { fill: #3c503a; stroke: #1e291d; }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-leaf-b { fill: #4d644a; stroke: #222e21; }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-leaf-c { fill: #2f402e; stroke: #182118; }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-blossom { fill: #cfc4ad; stroke: #574e3d; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-shadow { fill: rgba(0, 0, 0, 0.34); }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-ink { stroke: #151a15; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-iron { stroke: #0f130f; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-iron-fill { fill: #0f130f; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-brass { stroke: #a88042; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-brass-fill { fill: #a88042; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-terracotta { fill: #744435; stroke: #281711; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-terracotta-rim { fill: #824d3c; stroke: #281711; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-book-1 { fill: #3f553c; stroke: #182117; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-book-2 { fill: #744435; stroke: #281711; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-book-3 { fill: #8a6830; stroke: #2b200e; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-win-frame { fill: #252e24; stroke: #475445; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-win-glass { fill: #3b3021; stroke: #6a5638; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-win-mullion { stroke: #313b30; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-curtain { fill: rgba(218, 196, 158, 0.24); }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-glass-glint { stroke: rgba(235, 212, 168, 0.22); }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-sill { fill: #262e25; stroke: #465344; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-awning-base { fill: #4a4336; stroke: #1d221c; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-awning-stripe { fill: #2d3b2b; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-awning-scallop { stroke: #1d221c; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-bulb { fill: #f1cb7d; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-rattan-frame { stroke: #8c7049; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-rattan-inner { stroke: #6b5538; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-seat { fill: #5e513d; stroke: #2b2217; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-seat-weave { stroke: #463b2b; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-table-rim { fill: #9c7539; stroke: #261c0f; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-marble { fill: #c6bca8; stroke: #7c705d; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-porcelain { fill: #d8d0bf; stroke: #3a342a; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-table-book { fill: #3f5864; stroke: #192429; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-glass-vase { fill: rgba(164, 180, 164, 0.36); stroke: #6a7d68; }
+  body[data-theme="escuro"] .esc-cafe-diorama .esc-night-glow { opacity: 1; }
+  body[data-theme="escuro"] .esc-cafe-steam { stroke: #d6c5a3; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .esc-cafe-vine,
+    .esc-cafe-steam { animation: none !important; }
+  }
+  @media (max-width: 960px) {
+    .esc-cafe-scene-bl { opacity: 0.62; width: 104px; }
+    .esc-cafe-scene-br { opacity: 0.74; width: 214px; }
+  }
+  @media (max-width: 760px) {
+    .esc-cafe-frame { inset: 2px 2px 4px; }
+    .esc-cafe-wainscot { height: 34px; bottom: 8px; }
+    .esc-cafe-paving { height: 8px; }
+    .esc-cafe-vine-tl { width: 72px; opacity: 0.72; }
+    .esc-cafe-vine-tr { width: 108px; opacity: 0.72; }
+    .esc-cafe-scene-bl { display: none; }
+    .esc-cafe-scene-br { width: 168px; right: 6px; bottom: 4px; opacity: 0.45; }
+  }
+  @media (max-height: 520px) {
+    .esc-cafe-scene-bl,
+    .esc-cafe-scene-br { display: none; }
+  }
+  @media print {
+    .esc-cafe-diorama { display: none !important; }
+  }
+
   @media (max-width: 760px) {
     #gabinete #notebook-list .notebook-cover {
       width: 120px !important;
@@ -11267,6 +11526,165 @@ SOFTWARE.
       <button id="cabinet-settings" class="os-menu">Ajustes</button>
     </header>
     <div class="cabinet-workspace" id="desktop-surface">
+      <div id="esc-cafe-diorama" class="esc-cafe-diorama" aria-hidden="true">
+        <div class="esc-cafe-frame">
+          <span class="esc-cafe-rail"></span>
+          <span class="esc-cafe-wainscot"></span>
+          <span class="esc-cafe-paving"></span>
+        </div>
+        <svg class="esc-cafe-vine esc-cafe-vine-tl" viewBox="0 0 136 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="vine-stem" d="M2 6C24 8 46 13 72 11C94 9 112 6 130 9" stroke-width="1.25" stroke-linecap="round"/>
+          <path class="vine-stem" d="M12 8C9 28 11 48 6 70C5 76 7 82 5 88" stroke-width="1.15" stroke-linecap="round"/>
+          <path class="vine-stem" d="M36 10C34 22 31 32 25 40" stroke-width="0.95" stroke-linecap="round"/>
+          <path class="vine-leaf-a" d="M22 10C18 4 24 0 30 5C29 10 25 11 22 10Z"/>
+          <path class="vine-leaf-b" d="M50 12C48 5 55 2 60 8C58 13 53 14 50 12Z"/>
+          <path class="vine-leaf-a" d="M80 10C80 4 87 2 91 8C87 12 83 13 80 10Z"/>
+          <path class="vine-leaf-c" d="M108 8C111 3 118 3 119 9C115 12 110 11 108 8Z"/>
+          <path class="vine-leaf-b" d="M10 26C17 24 20 30 14 35C10 34 8 30 10 26Z"/>
+          <path class="vine-leaf-a" d="M9 46C3 45 2 52 8 56C12 53 12 49 9 46Z"/>
+          <path class="vine-leaf-c" d="M7 66C14 65 16 71 10 76C6 74 5 70 7 66Z"/>
+          <path class="vine-leaf-a" d="M28 28C35 27 37 33 31 37C27 35 26 31 28 28Z"/>
+          <circle class="vine-blossom" cx="67" cy="10" r="2"/><circle class="vine-blossom-core" cx="67" cy="10" r="0.75"/>
+          <circle class="vine-blossom" cx="15" cy="38" r="1.8"/><circle class="vine-blossom-core" cx="15" cy="38" r="0.65"/>
+        </svg>
+        <svg class="esc-cafe-vine esc-cafe-vine-tr" viewBox="0 0 236 202" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="vine-stem" d="M232 6C204 14 180 26 150 22C122 18 96 9 66 15C46 19 30 26 14 23" stroke-width="1.35" stroke-linecap="round"/>
+          <path class="vine-stem" d="M220 12C210 42 218 74 204 108C194 132 200 158 190 186" stroke-width="1.25" stroke-linecap="round"/>
+          <path class="vine-stem" d="M178 22C168 46 172 72 158 96C150 110 152 126 144 142" stroke-width="1.1" stroke-linecap="round"/>
+          <path class="vine-stem" d="M128 17C122 34 126 50 116 66" stroke-width="0.95" stroke-linecap="round"/>
+          <path class="vine-leaf-a" d="M196 17C192 8 200 3 207 10C206 17 200 19 196 17Z"/>
+          <path class="vine-leaf-b" d="M168 22C164 13 172 9 178 16C176 22 172 24 168 22Z"/>
+          <path class="vine-leaf-a" d="M140 20C138 11 146 8 151 15C148 21 143 22 140 20Z"/>
+          <path class="vine-leaf-c" d="M110 14C110 6 118 4 122 11C118 17 113 17 110 14Z"/>
+          <path class="vine-leaf-b" d="M80 14C78 6 86 4 91 11C88 16 83 17 80 14Z"/>
+          <path class="vine-leaf-a" d="M50 20C48 12 56 10 60 17C57 22 53 23 50 20Z"/>
+          <path class="vine-leaf-c" d="M26 23C23 17 30 14 34 20C32 24 28 25 26 23Z"/>
+          <path class="vine-leaf-b" d="M213 42C203 40 201 49 209 54C215 51 216 46 213 42Z"/>
+          <path class="vine-leaf-a" d="M214 64C223 61 227 69 220 75C214 74 212 69 214 64Z"/>
+          <path class="vine-leaf-c" d="M207 88C197 86 195 95 203 100C209 97 210 92 207 88Z"/>
+          <path class="vine-leaf-b" d="M202 114C211 112 214 120 207 126C201 124 200 119 202 114Z"/>
+          <path class="vine-leaf-a" d="M196 140C187 139 185 147 193 152C198 149 199 144 196 140Z"/>
+          <path class="vine-leaf-c" d="M193 166C201 165 203 173 196 178C191 176 190 171 193 166Z"/>
+          <path class="vine-leaf-a" d="M168 48C159 46 157 54 165 59C170 56 171 52 168 48Z"/>
+          <path class="vine-leaf-b" d="M165 72C174 70 177 78 170 83C165 81 163 76 165 72Z"/>
+          <path class="vine-leaf-c" d="M154 100C145 99 144 107 151 111C156 108 157 104 154 100Z"/>
+          <path class="vine-leaf-a" d="M147 124C155 123 157 130 151 135C146 133 145 128 147 124Z"/>
+          <path class="vine-leaf-b" d="M121 44C113 43 112 50 119 54C123 52 124 47 121 44Z"/>
+          <circle class="vine-blossom" cx="186" cy="29" r="2.3"/><circle class="vine-blossom-core" cx="186" cy="29" r="0.8"/>
+          <circle class="vine-blossom" cx="124" cy="22" r="2"/><circle class="vine-blossom-core" cx="124" cy="22" r="0.7"/>
+          <circle class="vine-blossom" cx="201" cy="104" r="2.1"/><circle class="vine-blossom-core" cx="201" cy="104" r="0.75"/>
+          <circle class="vine-blossom" cx="156" cy="84" r="1.8"/><circle class="vine-blossom-core" cx="156" cy="84" r="0.65"/>
+        </svg>
+        <svg class="esc-cafe-scene-bl" viewBox="0 0 170 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="56" cy="69" rx="46" ry="4" class="cafe-shadow"/>
+          <ellipse cx="124" cy="69" rx="18" ry="3.2" class="cafe-shadow"/>
+          <g class="cafe-books">
+            <rect x="16" y="56" width="76" height="12" rx="2" class="cafe-book-1" stroke-width="1.25"/>
+            <line x1="26" y1="56" x2="26" y2="68" class="cafe-ink" stroke-width="0.9"/><line x1="80" y1="56" x2="80" y2="68" class="cafe-brass" stroke-width="1.15"/>
+            <rect x="22" y="45" width="68" height="11" rx="2" class="cafe-book-2" stroke-width="1.25"/>
+            <line x1="32" y1="45" x2="32" y2="56" class="cafe-brass" stroke-width="1.05"/><line x1="78" y1="45" x2="78" y2="56" class="cafe-ink" stroke-width="0.9"/>
+            <rect x="28" y="35" width="54" height="10" rx="2" class="cafe-book-3" stroke-width="1.25"/>
+            <line x1="38" y1="35" x2="38" y2="45" class="cafe-brass" stroke-width="0.95"/>
+          </g>
+          <g class="cafe-mini-pot">
+            <path d="M112 50h24l-3 18h-18l-3-18Z" class="cafe-terracotta" stroke-width="1.25" stroke-linejoin="round"/>
+            <rect x="109" y="45" width="30" height="5.5" rx="1.5" class="cafe-terracotta-rim" stroke-width="1.25"/>
+            <path class="vine-stem" d="M124 45C123 35 119 29 114 24M124 45C126 34 131 28 136 22M124 45V27" stroke-width="1.15" stroke-linecap="round"/>
+            <path class="vine-leaf-a" d="M114 30C107 27 107 21 114 21C118 24 118 28 114 30Z"/>
+            <path class="vine-leaf-b" d="M134 28C141 25 141 19 134 19C130 22 130 26 134 28Z"/>
+            <path class="vine-leaf-c" d="M124 26C120 19 124 14 129 19C128 24 126 26 124 26Z"/>
+            <path class="vine-leaf-a" d="M119 37C112 36 112 31 118 31C122 33 122 36 119 37Z"/>
+            <path class="vine-leaf-b" d="M130 36C137 35 137 30 131 30C127 32 127 35 130 36Z"/>
+          </g>
+        </svg>
+        <svg class="esc-cafe-scene-br" viewBox="0 0 426 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="esc-lamp-halo" cx="50%" cy="46%" r="54%">
+              <stop offset="0%" stop-color="#e8b863" stop-opacity="0.46"/>
+              <stop offset="55%" stop-color="#c99344" stop-opacity="0.16"/>
+              <stop offset="100%" stop-color="#c99344" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="esc-window-halo" cx="50%" cy="55%" r="58%">
+              <stop offset="0%" stop-color="#e3b15e" stop-opacity="0.34"/>
+              <stop offset="100%" stop-color="#c99344" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <g class="cafe-window-arch">
+            <rect x="252" y="54" width="136" height="146" rx="4" class="cafe-win-frame" stroke-width="1.5"/>
+            <rect x="260" y="62" width="120" height="130" rx="2" class="cafe-win-glass" stroke-width="1.15"/>
+            <ellipse class="esc-night-glow" cx="320" cy="128" rx="84" ry="76" fill="url(#esc-window-halo)"/>
+            <line x1="260" y1="128" x2="380" y2="128" class="cafe-brass" stroke-width="1"/>
+            <path d="M261 128Q274 134 287 128Q300 134 313 128Q327 134 340 128Q353 134 366 128L379 128V191H261Z" class="cafe-curtain"/>
+            <line x1="320" y1="62" x2="320" y2="192" class="cafe-win-mullion" stroke-width="1.25"/>
+            <line x1="260" y1="100" x2="380" y2="100" class="cafe-win-mullion" stroke-width="1.15"/>
+            <line x1="260" y1="148" x2="380" y2="148" class="cafe-win-mullion" stroke-width="1.1"/>
+            <path d="M273 90L291 70M285 93L299 77M334 90L350 72" class="cafe-glass-glint" stroke-width="1.15" stroke-linecap="round"/>
+            <rect x="245" y="192" width="150" height="9" rx="2" class="cafe-sill" stroke-width="1.3"/>
+          </g>
+          <g class="cafe-awning">
+            <line x1="242" y1="58" x2="252" y2="70" class="cafe-iron" stroke-width="1.3" stroke-linecap="round"/>
+            <line x1="398" y1="58" x2="388" y2="70" class="cafe-iron" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M238 58L247 34H393L402 58Z" class="cafe-awning-base" stroke-width="1.3" stroke-linejoin="round"/>
+            <path d="M258 34L251 58H270L275 34ZM292 34L289 58H308L309 34ZM328 34L328 58H347L345 34ZM364 34L367 58H386L380 34Z" class="cafe-awning-stripe"/>
+            <path d="M238 58Q247 66 256 58Q265 66 274 58Q283 66 292 58Q301 66 310 58Q319 66 328 58Q337 66 346 58Q355 66 364 58Q373 66 382 58Q392 66 402 58" class="cafe-awning-scallop" stroke-width="1.3" stroke-linecap="round"/>
+          </g>
+          <g class="cafe-sconce">
+            <ellipse class="esc-night-glow" cx="206" cy="76" rx="74" ry="66" fill="url(#esc-lamp-halo)"/>
+            <rect x="202" y="38" width="8" height="17" rx="3" class="cafe-brass-fill" stroke="#2c2419" stroke-width="1.1"/>
+            <path d="M206 47C206 55 198 57 198 65" class="cafe-iron" stroke-width="1.55" stroke-linecap="round"/>
+            <path d="M189 66C189 61 193 58 198 58C203 58 207 61 207 66Z" class="cafe-brass-fill" stroke="#2c2419" stroke-width="1.1"/>
+            <path d="M192 66C192 72 195 76 198 76C201 76 204 72 204 66Z" class="cafe-bulb" stroke="#2c2419" stroke-width="1"/>
+          </g>
+          <ellipse cx="170" cy="208" rx="116" ry="6.5" class="cafe-shadow"/>
+          <ellipse cx="46" cy="207" rx="25" ry="4.5" class="cafe-shadow"/>
+          <g class="cafe-potted-olive">
+            <path d="M30 174h32l-4 32H34l-4-32Z" class="cafe-terracotta" stroke-width="1.35" stroke-linejoin="round"/>
+            <rect x="26" y="168" width="40" height="7" rx="2" class="cafe-terracotta-rim" stroke-width="1.35"/>
+            <path class="vine-stem" d="M46 168C45 148 42 132 36 118M46 168C48 146 54 130 62 116M46 168C46 152 46 138 48 122" stroke-width="1.35" stroke-linecap="round"/>
+            <path class="vine-leaf-a" d="M37 140C28 136 28 128 37 129C42 132 42 137 37 140Z"/>
+            <path class="vine-leaf-b" d="M34 124C26 119 28 112 36 115C40 118 39 122 34 124Z"/>
+            <path class="vine-leaf-c" d="M54 138C63 134 64 126 55 127C50 130 50 135 54 138Z"/>
+            <path class="vine-leaf-a" d="M60 122C68 118 68 111 60 112C56 115 56 120 60 122Z"/>
+            <path class="vine-leaf-b" d="M47 126C42 117 48 111 53 118C52 123 50 126 47 126Z"/>
+            <path class="vine-leaf-c" d="M40 154C31 152 31 145 39 146C43 149 43 152 40 154Z"/>
+            <path class="vine-leaf-a" d="M52 152C61 150 61 143 53 144C49 147 49 150 52 152Z"/>
+          </g>
+          <g class="cafe-chair-left">
+            <path d="M88 164L82 207M124 164L130 207M94 164L98 201M118 164L115 201" class="cafe-iron" stroke-width="1.95" stroke-linecap="round"/>
+            <path d="M86 187C98 183 114 183 126 187" class="cafe-iron" stroke-width="1.25" stroke-linecap="round"/>
+            <path d="M86 160C84 132 86 110 98 108C110 106 114 124 112 158" class="cafe-rattan-frame" stroke-width="2.35" stroke-linecap="round"/>
+            <path d="M91 158C90 136 92 118 99 116C106 115 108 130 107 156" class="cafe-rattan-inner" stroke-width="1.25" stroke-linecap="round"/>
+            <ellipse cx="106" cy="162" rx="22" ry="6.5" class="cafe-seat" stroke-width="1.45"/>
+            <path d="M91 161h30M94 164h24" class="cafe-seat-weave" stroke-width="0.9"/>
+          </g>
+          <g class="cafe-chair-right">
+            <path d="M214 164L208 207M250 164L256 207M220 164L224 201M244 164L241 201" class="cafe-iron" stroke-width="1.95" stroke-linecap="round"/>
+            <path d="M212 187C224 183 240 183 252 187" class="cafe-iron" stroke-width="1.25" stroke-linecap="round"/>
+            <path d="M252 160C254 132 252 110 240 108C228 106 224 124 226 158" class="cafe-rattan-frame" stroke-width="2.35" stroke-linecap="round"/>
+            <path d="M247 158C248 136 246 118 239 116C232 115 230 130 231 156" class="cafe-rattan-inner" stroke-width="1.25" stroke-linecap="round"/>
+            <ellipse cx="232" cy="162" rx="22" ry="6.5" class="cafe-seat" stroke-width="1.45"/>
+            <path d="M217 161h30M220 164h24" class="cafe-seat-weave" stroke-width="0.9"/>
+          </g>
+          <g class="cafe-table">
+            <line x1="169" y1="146" x2="169" y2="202" class="cafe-iron" stroke-width="3.1" stroke-linecap="round"/>
+            <circle cx="169" cy="172" r="3.4" class="cafe-iron-fill"/>
+            <path d="M169 196C160 198 152 202 146 207M169 196C178 198 186 202 192 207M169 198V208" class="cafe-iron" stroke-width="2.15" stroke-linecap="round"/>
+            <ellipse cx="169" cy="145" rx="44" ry="9.5" class="cafe-table-rim" stroke-width="1.55"/>
+            <ellipse cx="169" cy="143.5" rx="41.5" ry="7.8" class="cafe-marble" stroke-width="1"/>
+            <g class="cafe-props">
+              <ellipse cx="151" cy="143" rx="8.5" ry="2.4" class="cafe-porcelain" stroke-width="1"/>
+              <path d="M145 136h12v5.2C157 143 154.5 144 151 144C147.5 144 145 143 145 141.2Z" class="cafe-porcelain" stroke-width="1.1"/>
+              <path d="M157 137.5C160 137.5 160 141.5 157 141.5" class="cafe-ink" stroke-width="1.1"/>
+              <path class="esc-cafe-steam" d="M149 133C147.5 129.5 151 127 149.5 123.5M153.5 132.5C152 129 155.5 126.5 154 123" stroke-width="1" stroke-linecap="round"/>
+              <rect x="171" y="138.5" width="20" height="5.5" rx="1" class="cafe-table-book" stroke-width="1"/>
+              <path d="M187 144l1 5 2-1.5 2 1.5v-5Z" class="cafe-ribbon"/>
+              <rect x="166.5" y="131" width="4.5" height="8" rx="1.2" class="cafe-glass-vase" stroke-width="0.9"/>
+              <path class="vine-stem" d="M168.7 131C168 126 166 123 165 120M168.7 131C170 126 172 123 173 121" stroke-width="0.9" stroke-linecap="round"/>
+              <circle class="vine-blossom" cx="165" cy="119.5" r="1.8"/><circle class="vine-blossom" cx="173" cy="120.5" r="1.5"/>
+            </g>
+          </g>
+        </svg>
+      </div>
       <section id="notebook-area" aria-label="Suas gavetas e cadernos">
         <div id="original-header" class="cabinet-context" hidden>
           <div class="esc-drawer-identity">

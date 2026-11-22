@@ -1480,6 +1480,265 @@
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 8'%3E%3Cpath d='M0.5 0h6v7.2L3.5 5.2 0.5 7.2Z' fill='%238c3e2b' stroke='%23241812' stroke-width='0.7'/%3E%3C/svg%3E") center/contain no-repeat;
   }
 
+  #gabinete #original-title-label::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* =========================================================================
+     DIORAMA PARISIENSE NA ESTANTE (#esc-cafe-diorama):
+     Paredão-mural em Sálvia (boiserie + lambris + trepadeiras fininhas +
+     mesinha de bistrô com duas cadeirinhas, café fumegando e pilha de livros).
+     Somente nesta tela (#gabinete), 100% responsivo, zero gradientes CSS.
+     ========================================================================= */
+  #gabinete #desktop-surface {
+    position: absolute;
+    isolation: isolate;
+  }
+  #gabinete #notebook-area,
+  #gabinete #desktop-reminders {
+    z-index: 2 !important;
+  }
+  @media (min-width: 761px) {
+    /* Alinha o mural de Post-its mais acima para deixar a cena do bistrô respirar no canto inferior direito */
+    #gabinete #desktop-reminders {
+      top: 42px;
+    }
+  }
+  #gabinete #cabinet-window {
+    z-index: 6 !important;
+  }
+  .esc-cafe-diorama {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: opacity 280ms ease;
+  }
+  /* Dentro de uma gaveta aberta, o paredão recua suavemente para dar foco total aos cadernos da gaveta */
+  #gabinete #desktop-surface:has(#notebook-area[data-drawer-open="true"]) .esc-cafe-diorama {
+    opacity: 0.44;
+  }
+  /* Moldura perimetral responsiva estilo parede-mural parisiense (boiserie) */
+  .esc-cafe-frame {
+    position: absolute;
+    inset: 5px 7px 6px;
+    border: 1.5px solid rgba(58, 70, 56, 0.28);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 6px rgba(238, 234, 222, 0.26), inset 0 0 0 7.5px rgba(58, 70, 56, 0.16);
+  }
+  /* Trilho fino superior do mural onde gavetas e cadernos repousam */
+  .esc-cafe-rail {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 14px;
+    height: 2px;
+    background: rgba(68, 80, 65, 0.17);
+    box-shadow: 0 1px 0 rgba(244, 240, 228, 0.38);
+  }
+  /* Lambris baixo (roda-meio parisiense com almofadas discretas) + calçada serena na base */
+  .esc-cafe-wainscot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    height: 52px;
+    background-color: rgba(164, 178, 160, 0.36);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='52' viewBox='0 0 120 52' fill='none'%3E%3Crect x='10' y='11' width='100' height='31' rx='2' stroke='%233d4a3b' stroke-opacity='0.14' stroke-width='1'/%3E%3Crect x='11.5' y='12.5' width='97' height='28' rx='1.5' stroke='%23f4f0e4' stroke-opacity='0.28' stroke-width='0.9'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: left bottom;
+    border-top: 1.5px solid rgba(64, 76, 61, 0.26);
+    box-shadow: inset 0 2px 0 rgba(244, 240, 228, 0.38);
+  }
+  .esc-cafe-paving {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 12px;
+    background: rgba(132, 144, 128, 0.32);
+    border-top: 1px solid rgba(58, 70, 56, 0.24);
+  }
+
+  /* Trepadeiras fininhas nos cantos superiores */
+  @keyframes esc-vine-breeze {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(1deg); }
+  }
+  .esc-cafe-vine {
+    position: absolute;
+    height: auto;
+    opacity: 0.88;
+    animation: esc-vine-breeze 9.5s ease-in-out infinite;
+  }
+  .esc-cafe-vine-tl {
+    top: 5px;
+    left: 7px;
+    width: clamp(86px, 10vw, 134px);
+    transform-origin: top left;
+  }
+  .esc-cafe-vine-tr {
+    top: 5px;
+    right: 7px;
+    width: clamp(134px, 16.5vw, 222px);
+    transform-origin: top right;
+    animation-delay: -3.2s;
+  }
+
+  /* Cenas do diorama ancoradas nos cantos inferiores do paredão */
+  .esc-cafe-scene-bl {
+    position: absolute;
+    left: clamp(16px, 2.4vw, 34px);
+    bottom: 8px;
+    width: clamp(114px, 12.8vw, 168px);
+    height: auto;
+    opacity: 0.9;
+  }
+  .esc-cafe-scene-br {
+    position: absolute;
+    right: clamp(16px, 2.6vw, 38px);
+    bottom: 8px;
+    width: clamp(224px, 26.5vw, 364px);
+    height: auto;
+    opacity: 0.94;
+  }
+
+  /* Vapor lentíssimo da xícara de café */
+  @keyframes esc-cafe-steam-rise {
+    0%, 100% { opacity: 0.22; transform: translateY(1.5px); }
+    50% { opacity: 0.62; transform: translateY(-2px); }
+  }
+  .esc-cafe-steam {
+    stroke: #f0eadc;
+    animation: esc-cafe-steam-rise 4.6s ease-in-out infinite;
+  }
+
+  /* Paleta Diurna (Manhã Parisiense em Sálvia — fosca, calma e poética) */
+  .esc-cafe-diorama .vine-stem { stroke: #3c4d39; }
+  .esc-cafe-diorama .vine-leaf-a { fill: #738e6c; stroke: #364533; stroke-width: 0.9; }
+  .esc-cafe-diorama .vine-leaf-b { fill: #8da585; stroke: #3b4b38; stroke-width: 0.9; }
+  .esc-cafe-diorama .vine-leaf-c { fill: #5f7a5a; stroke: #303f2d; stroke-width: 0.9; }
+  .esc-cafe-diorama .vine-blossom { fill: #efe8d8; stroke: #6f6652; stroke-width: 0.7; }
+  .esc-cafe-diorama .vine-blossom-core { fill: #c69648; }
+  .esc-cafe-diorama .cafe-shadow { fill: rgba(34, 42, 32, 0.16); }
+  .esc-cafe-diorama .cafe-ink { stroke: #2f372d; }
+  .esc-cafe-diorama .cafe-iron { stroke: #2f382e; }
+  .esc-cafe-diorama .cafe-iron-fill { fill: #2f382e; }
+  .esc-cafe-diorama .cafe-brass { stroke: #b88c42; }
+  .esc-cafe-diorama .cafe-brass-fill { fill: #c4974a; }
+  .esc-cafe-diorama .cafe-terracotta { fill: #b86d54; stroke: #40271e; }
+  .esc-cafe-diorama .cafe-terracotta-rim { fill: #c47a60; stroke: #40271e; }
+  .esc-cafe-diorama .cafe-book-1 { fill: #6f8e68; stroke: #293627; }
+  .esc-cafe-diorama .cafe-book-2 { fill: #b86d54; stroke: #3f261d; }
+  .esc-cafe-diorama .cafe-book-3 { fill: #c29244; stroke: #423117; }
+  .esc-cafe-diorama .cafe-win-frame { fill: #9fb09c; stroke: #445341; }
+  .esc-cafe-diorama .cafe-win-glass { fill: #d7dfd2; stroke: #5a6a57; }
+  .esc-cafe-diorama .cafe-win-mullion { stroke: #4d5d4a; }
+  .esc-cafe-diorama .cafe-curtain { fill: rgba(242, 236, 222, 0.66); }
+  .esc-cafe-diorama .cafe-glass-glint { stroke: rgba(248, 246, 238, 0.65); }
+  .esc-cafe-diorama .cafe-sill { fill: #b6c1b1; stroke: #445341; }
+  .esc-cafe-diorama .cafe-awning-base { fill: #e3dcc8; stroke: #3e4a3b; }
+  .esc-cafe-diorama .cafe-awning-stripe { fill: #687f64; }
+  .esc-cafe-diorama .cafe-awning-scallop { fill: none; stroke: #3e4a3b; }
+  .esc-cafe-diorama .cafe-bulb { fill: #eee7d4; }
+  .esc-cafe-diorama .cafe-rattan-frame { stroke: #4b3d2b; }
+  .esc-cafe-diorama .cafe-rattan-inner { stroke: #8c724d; }
+  .esc-cafe-diorama .cafe-seat { fill: #dfd4bb; stroke: #4b3d2b; }
+  .esc-cafe-diorama .cafe-seat-weave { stroke: #a89472; }
+  .esc-cafe-diorama .cafe-table-rim { fill: #c4974a; stroke: #3d2f1a; }
+  .esc-cafe-diorama .cafe-marble { fill: #ebe5d6; stroke: #b4a992; }
+  .esc-cafe-diorama .cafe-porcelain { fill: #f3eee2; stroke: #4c463b; }
+  .esc-cafe-diorama .cafe-table-book { fill: #5b7c8c; stroke: #25343b; }
+  .esc-cafe-diorama .cafe-ribbon { fill: #9c422e; }
+  .esc-cafe-diorama .cafe-glass-vase { fill: rgba(215, 226, 214, 0.72); stroke: #4b5c4a; }
+  .esc-cafe-diorama .esc-night-glow { opacity: 0; transition: opacity 380ms ease; }
+
+  /* Paleta Noturna Opaca (Cafeteria Parisiense à Noite — arandela âmbar acolhedora) */
+  body[data-theme="escuro"] .esc-cafe-frame {
+    border-color: rgba(196, 154, 88, 0.24);
+    box-shadow: inset 0 0 0 6px rgba(14, 18, 14, 0.34), inset 0 0 0 7.5px rgba(196, 154, 88, 0.14);
+  }
+  body[data-theme="escuro"] .esc-cafe-rail {
+    background: rgba(196, 154, 88, 0.16);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+  }
+  body[data-theme="escuro"] .esc-cafe-wainscot {
+    background-color: rgba(18, 23, 18, 0.56);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='52' viewBox='0 0 120 52' fill='none'%3E%3Crect x='10' y='11' width='100' height='31' rx='2' stroke='%23c49a58' stroke-opacity='0.14' stroke-width='1'/%3E%3Crect x='11.5' y='12.5' width='97' height='28' rx='1.5' stroke='%230b0e0b' stroke-opacity='0.36' stroke-width='0.9'/%3E%3C/svg%3E");
+    border-top-color: rgba(196, 154, 88, 0.22);
+    box-shadow: inset 0 2px 0 rgba(217, 206, 188, 0.06);
+  }
+  body[data-theme="escuro"] .esc-cafe-paving {
+    background: rgba(12, 15, 12, 0.62);
+    border-top-color: rgba(196, 154, 88, 0.16);
+  }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-stem { stroke: #556852; }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-leaf-a { fill: #3c503a; stroke: #1e291d; }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-leaf-b { fill: #4d644a; stroke: #222e21; }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-leaf-c { fill: #2f402e; stroke: #182118; }
+  body[data-theme="escuro"] .esc-cafe-diorama .vine-blossom { fill: #cfc4ad; stroke: #574e3d; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-shadow { fill: rgba(0, 0, 0, 0.34); }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-ink { stroke: #151a15; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-iron { stroke: #0f130f; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-iron-fill { fill: #0f130f; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-brass { stroke: #a88042; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-brass-fill { fill: #a88042; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-terracotta { fill: #744435; stroke: #281711; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-terracotta-rim { fill: #824d3c; stroke: #281711; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-book-1 { fill: #3f553c; stroke: #182117; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-book-2 { fill: #744435; stroke: #281711; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-book-3 { fill: #8a6830; stroke: #2b200e; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-win-frame { fill: #252e24; stroke: #475445; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-win-glass { fill: #3b3021; stroke: #6a5638; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-win-mullion { stroke: #313b30; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-curtain { fill: rgba(218, 196, 158, 0.24); }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-glass-glint { stroke: rgba(235, 212, 168, 0.22); }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-sill { fill: #262e25; stroke: #465344; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-awning-base { fill: #4a4336; stroke: #1d221c; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-awning-stripe { fill: #2d3b2b; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-awning-scallop { stroke: #1d221c; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-bulb { fill: #f1cb7d; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-rattan-frame { stroke: #8c7049; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-rattan-inner { stroke: #6b5538; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-seat { fill: #5e513d; stroke: #2b2217; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-seat-weave { stroke: #463b2b; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-table-rim { fill: #9c7539; stroke: #261c0f; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-marble { fill: #c6bca8; stroke: #7c705d; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-porcelain { fill: #d8d0bf; stroke: #3a342a; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-table-book { fill: #3f5864; stroke: #192429; }
+  body[data-theme="escuro"] .esc-cafe-diorama .cafe-glass-vase { fill: rgba(164, 180, 164, 0.36); stroke: #6a7d68; }
+  body[data-theme="escuro"] .esc-cafe-diorama .esc-night-glow { opacity: 1; }
+  body[data-theme="escuro"] .esc-cafe-steam { stroke: #d6c5a3; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .esc-cafe-vine,
+    .esc-cafe-steam { animation: none !important; }
+  }
+  @media (max-width: 960px) {
+    .esc-cafe-scene-bl { opacity: 0.62; width: 104px; }
+    .esc-cafe-scene-br { opacity: 0.74; width: 214px; }
+  }
+  @media (max-width: 760px) {
+    .esc-cafe-frame { inset: 2px 2px 4px; }
+    .esc-cafe-wainscot { height: 34px; bottom: 8px; }
+    .esc-cafe-paving { height: 8px; }
+    .esc-cafe-vine-tl { width: 72px; opacity: 0.72; }
+    .esc-cafe-vine-tr { width: 108px; opacity: 0.72; }
+    .esc-cafe-scene-bl { display: none; }
+    .esc-cafe-scene-br { width: 168px; right: 6px; bottom: 4px; opacity: 0.45; }
+  }
+  @media (max-height: 520px) {
+    .esc-cafe-scene-bl,
+    .esc-cafe-scene-br { display: none; }
+  }
+  @media print {
+    .esc-cafe-diorama { display: none !important; }
+  }
+
   @media (max-width: 760px) {
     #gabinete #notebook-list .notebook-cover {
       width: 120px !important;

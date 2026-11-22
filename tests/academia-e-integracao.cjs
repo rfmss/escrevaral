@@ -190,6 +190,10 @@ assert.ok(litHtml.includes('--oasis-paper:#1d221d'), 'literatura-mundial.html ca
 assert.ok(temasLinuxCss.includes('--esc-bg: #1d221d') && temasLinuxCss.includes('--esc-manuscript: #d8dfd4'), 'temas-linux.css define Modo Noturno opaco calibrado sem preto/branco puro');
 assert.ok(temasLinuxCss.includes('rotateY(-24deg)') && temasLinuxCss.includes('#gabinete .original-box .box-lid'), 'temas-linux.css anima abertura rígida do caderno e da gaveta na Estante estilo AFK Journey');
 assert.ok(temasLinuxCss.includes('.esc-drawer-mini') && temasLinuxCss.includes('.esc-notebook-mini') && temasLinuxCss.includes('#location-path #path-original::before'), 'temas-linux.css provê miniaturas espaciais no breadcrumb e no interior de gavetas/cadernos');
+assert.ok(temasLinuxCss.includes('.esc-cafe-diorama') && temasLinuxCss.includes('.esc-cafe-scene-br'), 'temas-linux.css inclui o diorama parisiense responsivo da Estante');
+assert.equal((temasLinuxCss.match(/DIORAMA PARISIENSE NA ESTANTE/g) || []).length, 1, 'temas-linux.css define o bloco do diorama parisiense uma única vez');
+const builtIndexHtml = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
+assert.ok(builtIndexHtml.includes('id="esc-cafe-diorama"'), 'index.html gerado inclui o diorama parisiense #esc-cafe-diorama na Estante');
 const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');
 assert.ok(autopubHtml.includes('AFK-REAL-GABINETE-ORNAMENTS-START'), 'autopublicacao-independente.html com ornamentos AFK x Real Gabinete');
 for (const entry of catalog) {
