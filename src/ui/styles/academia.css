@@ -709,15 +709,23 @@
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-box {
     background: #292119;
     border-color: rgba(196, 154, 88, 0.32);
+    box-shadow: inset 0 0 0 3px rgba(217, 206, 188, 0.05), 0 6px 18px rgba(0, 0, 0, 0.28);
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-note { color: #b8a790; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-group { color: #d6be96; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-groups {
+    scrollbar-color: #5b4a39 #211a14;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-track { background: #211a14; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb { background: #5b4a39; border-color: #211a14; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-frame { background: #211a14; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-resume-btn,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item {
     background: #292119 !important;
     color: #d9cebc !important;
     border-color: rgba(196, 154, 88, 0.3) !important;
+    box-shadow: inset 0 0 0 3px rgba(217, 206, 188, 0.04), 0 3px 10px rgba(0, 0, 0, 0.24) !important;
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item:hover,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn:hover,
@@ -730,7 +738,11 @@
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn strong { color: #e2d7c5 !important; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item span,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn span { color: #b5a48c !important; }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman { color: #c49a58; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman {
+    background: #1e1711 !important;
+    border-color: rgba(196, 154, 88, 0.45) !important;
+    color: #d9ba7b !important;
+  }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar {
     background: #261e17 !important;
     border-bottom-color: rgba(196, 154, 88, 0.34) !important;
@@ -790,6 +802,6 @@
   @media (prefers-reduced-motion: reduce) {
     #esc-academy-overlay .esc-ac-layer,
     #esc-academy-overlay .esc-academy-tome,
-    #esc-academy-overlay .esc-academy-item { transition: none !important; }
+    #esc-academy-overlay .esc-academy-item { transition: none !important; transform: none !important; }
   }
 }

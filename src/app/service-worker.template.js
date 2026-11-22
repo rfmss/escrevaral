@@ -36,11 +36,11 @@ self.addEventListener('install', event => {
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);
     // Ícone, logo ENEM e arquivo portátil não impedem o editor de funcionar offline.
-    await Promise.allSettled(['./escrevaral.html', './manifest.webmanifest', './icons/icon.svg', './assets/study/enem-logo.png'].map(p => cache.add(p)));
-    // Pré-cache opcional dos guias da Academia e ilustrações do Real Gabinete para modo bunker.
+    await Promise.all(['./escrevaral.html', './manifest.webmanifest', './icons/icon.svg', './assets/study/enem-logo.png'].map(p => cache.add(p).catch(() => null)));
+    // Pré-cache opcional dos guias da Academia, ilustrações do Real Gabinete e sprites WebP da máquina para modo bunker.
     try {
       const runtime = await caches.open(RUNTIME_CACHE);
-      await Promise.allSettled(BUNKER_ASSETS.map(p => runtime.add(new Request(p, { cache: 'reload' }))));
+      await Promise.all(BUNKER_ASSETS.map(p => runtime.add(new Request(p, { cache: 'reload' })).catch(() => null)));
     } catch (ignore) {}
     await self.skipWaiting();
   })());
@@ -70,7 +70,11 @@ self.addEventListener('fetch', event => {
       if (url.pathname.indexOf(ACADEMIA_PREFIX) === 0) {
         try {
           const fresh = await fetch(event.request);
-          if (fresh && fresh.ok) { try { await runtime.put(event.request, fresh.clone()); } catch (ignore) {} }
+          if (fresh && fresh.ok) {
+            try { await runtime.put(event.request, fresh.clone()); } catch (ignore) {}
+            return fresh;
+          }
+          if (rtCached) return rtCached;
           return fresh;
         } catch (error) {
           if (rtCached) return rtCached;

@@ -153,7 +153,7 @@
       gap: 4px;
     }
     .esc-writing-idle-note,
-    #esc-sf-full {
+    #esc-writing-fullscreen {
       display: none !important;
     }
     .esc-writing-btn,
@@ -252,6 +252,14 @@
     border-left: 1px dashed var(--esc-border, #7c8b78);
     background: #c4cfc2;
     background: var(--esc-bg, #c4cfc2);
+  }
+  @media (max-width: 760px) {
+    body[data-immersion="true"][data-esc-writing-sonnet="true"] #writing-space {
+      padding-right: 0 !important;
+    }
+    body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-sonnet-panel {
+      display: none !important;
+    }
   }
 
   .esc-sound-btn[aria-pressed="true"],

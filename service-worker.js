@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-c49ace5a2c59";
-const RUNTIME_CACHE = "scrvrl-runtime-c49ace5a2c59";
+const CACHE_NAME = "scrvrl-offline-v6-65-1a037aa2e189";
+const RUNTIME_CACHE = "scrvrl-runtime-1a037aa2e189";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -8,12 +8,12 @@ const REQUIRED_ASSETS = [
     "sha256": "d6cd9da15371a34f5b69d5a91a907cf30116c3b496ca45907eed8c1422548e64"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.775af06b12760a8e.js",
-    "sha256": "775af06b12760a8ebcc7728804a83dae45dd32ba35adf16f7264b5817d429584"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.44fad25f8f658f0f.js",
+    "sha256": "44fad25f8f658f0f9cb85e8e808273dfcf9033b6d371beff850ef1f54142f105"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.224ff9960d3a4ef6.css",
-    "sha256": "224ff9960d3a4ef6e759038116e16090c111be604c45ef7a78aa08d39e564108"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.309ccb676053f087.css",
+    "sha256": "309ccb676053f087701c735379fc07c1a7025479876a68c07f5afd0e36f8f0bd"
   }
 ];
 const BUNKER_ASSETS = [
@@ -41,7 +41,17 @@ const BUNKER_ASSETS = [
   "./assets/library/estante-trepadeira-outono.webp",
   "./assets/library/real-gabinete-hero.webp",
   "./assets/library/tome-literatura-mundial.webp",
-  "./assets/library/tome-objeto-livro.webp"
+  "./assets/library/tome-objeto-livro.webp",
+  "./assets/typewriter/typewriter-machine-idle.webp",
+  "./assets/typewriter/typewriter-machine-strike-1.webp",
+  "./assets/typewriter/typewriter-machine-strike-2.webp",
+  "./assets/typewriter/typewriter-machine-strike-3.webp",
+  "./assets/typewriter/typewriter-machine-strike-4.webp",
+  "./assets/typewriter/typewriter-machine-strike-5.webp",
+  "./assets/typewriter/typewriter-machine-strike-6.webp",
+  "./assets/typewriter/typewriter-machine-strike-7.webp",
+  "./assets/typewriter/typewriter-machine-strike-8.webp",
+  "./assets/typewriter/typewriter-machine-strike-9.webp"
 ];
 const scopeURL = new URL('./', self.registration.scope);
 const appPaths = [scopeURL.pathname, new URL('index.html', scopeURL).pathname];
@@ -70,16 +80,16 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: 'd17d15ddb26f894727620831d02e680a45a272cb92b21d5b48e5731ad3fc3e01' });
+    const index = await checkedAsset({ url: './index.html', sha256: 'e6c1764b7daad61647cdb4b81156d0f8b1020f8c13a423a22ccb60b641d42dda' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);
     // Ícone, logo ENEM e arquivo portátil não impedem o editor de funcionar offline.
-    await Promise.allSettled(['./escrevaral.html', './manifest.webmanifest', './icons/icon.svg', './assets/study/enem-logo.png'].map(p => cache.add(p)));
-    // Pré-cache opcional dos guias da Academia e ilustrações do Real Gabinete para modo bunker.
+    await Promise.all(['./escrevaral.html', './manifest.webmanifest', './icons/icon.svg', './assets/study/enem-logo.png'].map(p => cache.add(p).catch(() => null)));
+    // Pré-cache opcional dos guias da Academia, ilustrações do Real Gabinete e sprites WebP da máquina para modo bunker.
     try {
       const runtime = await caches.open(RUNTIME_CACHE);
-      await Promise.allSettled(BUNKER_ASSETS.map(p => runtime.add(new Request(p, { cache: 'reload' }))));
+      await Promise.all(BUNKER_ASSETS.map(p => runtime.add(new Request(p, { cache: 'reload' })).catch(() => null)));
     } catch (ignore) {}
     await self.skipWaiting();
   })());
@@ -109,7 +119,11 @@ self.addEventListener('fetch', event => {
       if (url.pathname.indexOf(ACADEMIA_PREFIX) === 0) {
         try {
           const fresh = await fetch(event.request);
-          if (fresh && fresh.ok) { try { await runtime.put(event.request, fresh.clone()); } catch (ignore) {} }
+          if (fresh && fresh.ok) {
+            try { await runtime.put(event.request, fresh.clone()); } catch (ignore) {}
+            return fresh;
+          }
+          if (rtCached) return rtCached;
           return fresh;
         } catch (error) {
           if (rtCached) return rtCached;

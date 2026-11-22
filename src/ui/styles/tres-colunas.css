@@ -27,11 +27,13 @@
 
   body[data-view="workspace"] #gabinete, body[data-view="workspace"] #system-bar { display: none !important; }
   body[data-view="workspace"] #esc-workspace { display: flex; }
-  body[data-view="gabinete"] #esc-workspace { display: none !important; }
+  body[data-view="gabinete"] #esc-workspace,
+  body[data-view="gabinete"] .esc-mobile-bar,
+  body[data-immersion="true"] .esc-mobile-bar { display: none !important; }
 
   #esc-workspace {
     position: fixed;
-    top: 40px;
+    top: 44px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -606,7 +608,7 @@
 
   /* Coluna 3: Editor / Área de escrita */
   body[data-view="workspace"] .sheet {
-    top: 40px;
+    top: 44px;
     bottom: 44px;
   }
 
@@ -789,42 +791,47 @@
     display: none;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1120px) {
     body[data-view="workspace"] #writing-space .desk-inspector {
       display: none;
     }
     body[data-view="workspace"][data-counts="true"] #writing-space .desk-inspector {
       display: block;
       position: fixed;
-      top: 40px;
-      bottom: 44px;
+      top: 44px;
+      bottom: 0;
       right: 0;
       z-index: 1020;
       background: var(--esc-bg);
     }
   }
+  @media (max-width: 1080px) and (min-width: 761px) {
+    #navigation { width: 206px; min-width: 196px; flex: 0 0 206px; }
+    #items-column { width: 230px; min-width: 214px; flex: 0 0 230px; }
+  }
 
   .notebook-dialog { z-index: 1030; }
 
   @media (max-width: 760px) {
-    .esc-mobile-bar {
+    body[data-view="workspace"] .esc-mobile-bar {
       display: flex;
       position: fixed;
-      top: 40px;
+      top: 44px;
       left: 0;
       right: 0;
-      height: 38px;
+      height: 44px;
       z-index: 950;
       background: var(--esc-surface);
       border-bottom: 1px solid var(--esc-border);
     }
     .esc-mobile-bar button {
       flex: 1 1 0;
+      min-height: 44px;
       border: 0;
       border-bottom: 2px solid transparent;
       background: transparent;
       color: var(--esc-muted, #465347);
-      font: 600 12px/1.2 Arial, sans-serif;
+      font: 600 12.5px/1.2 Arial, sans-serif;
       cursor: pointer;
     }
     .esc-mobile-bar button[aria-current="page"] {
@@ -837,11 +844,11 @@
       display: none !important;
     }
     body[data-view="workspace"][data-counts="true"] #writing-space .desk-inspector {
-      top: 78px;
+      top: 88px;
       bottom: 0;
     }
     body[data-view="workspace"] #esc-workspace {
-      top: 78px;
+      top: 88px;
     }
     body[data-view="workspace"] #navigation,
     body[data-view="workspace"] #items-column,

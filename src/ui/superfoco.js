@@ -280,6 +280,7 @@
       }
     }
 
+    var pointerDown = false;
     function syncFlow() {
       if (!getActive()) {
         if (richEl && richEl.children) {
@@ -297,6 +298,7 @@
             if (sel && !sel.isCollapsed && sel.rangeCount && String(sel.toString() || '').length > 0) {
               var anc = sel.getRangeAt(0).commonAncestorContainer;
               if (anc === richEl || (richEl.contains && richEl.contains(anc))) {
+                if (pointerDown) { return; }
                 openedAutomatically = false;
                 clearIdle();
                 resetCounter();
@@ -498,6 +500,19 @@
     function onActivity() {
       if (getActive() && openedAutomatically) { armIdle(); }
     }
+    function onPointerStart() {
+      pointerDown = true;
+      onActivity();
+    }
+    function onPointerEnd() {
+      if (!pointerDown) { return; }
+      pointerDown = false;
+      if (getActive()) { syncFlow(); }
+    }
+    function onEditorBlur() {
+      composing = false;
+      pointerDown = false;
+    }
     function onKeyDown(ev) {
       if (ev.keyCode === 122) { // F11
         ev.preventDefault();
@@ -530,7 +545,12 @@
       on(document, 'compositionstart', onCompStart, true);
       on(document, 'compositionend', onCompEnd, true);
       on(document, 'keydown', onKeyDown, true);
-      on(document, 'mousedown', onActivity, true);
+      on(document, 'mousedown', onPointerStart, true);
+      on(document, 'touchstart', onPointerStart, true);
+      on(document, 'mouseup', onPointerEnd, true);
+      on(document, 'touchend', onPointerEnd, true);
+      on(document, 'touchcancel', onPointerEnd, true);
+      on(document, 'blur', onEditorBlur, true);
       on(document, 'wheel', onActivity, true);
       on(document, 'selectionchange', syncFlow, false);
       on(document, 'fullscreenchange', syncBar, false);
@@ -556,6 +576,8 @@
       syncFlow: syncFlow,
       notifyState: function (active, reason) {
         if (!active) {
+          composing = false;
+          pointerDown = false;
           openedAutomatically = false;
           clearIdle();
           resetCounter();
@@ -567,6 +589,8 @@
         syncFlow();
       },
       resetDocument: function () {
+        composing = false;
+        pointerDown = false;
         clearIdle();
         resetCounter();
         openedAutomatically = false;

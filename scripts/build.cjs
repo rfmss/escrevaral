@@ -36,11 +36,17 @@ const css=manifest.styles.map(p=>'/* Fonte: '+p+' */\n'+source(p)).join('\n');
 const dir='assets/'+release.assetVersion;
 const assets=[['cofre',cofre,'js'],['app',app,'js'],['styles',css,'css']].map(([id,content,ext])=>({id,path:dir+'/'+id+'.'+hash(content).slice(0,16)+'.'+ext,sha256:hash(content),bytes:Buffer.byteLength(content),content}));
 const template=read('src/index.template.html');
+const dioramaImgs = [
+  '        <img class="esc-cafe-vine esc-cafe-vine-tr" src="assets/library/estante-trepadeira-outono.webp" alt="" decoding="async">',
+  '        <img class="esc-cafe-scene-bl" src="assets/library/estante-livros-outono.webp" alt="" decoding="async">',
+  '        <img class="esc-cafe-scene-br" src="assets/library/estante-cafe-bistro.webp" alt="" decoding="async">'
+].join('\n');
 function render(portable){
  let s=template.replace('{{ASSET_VERSION}}',release.assetVersion)
  .replace('{{DISTRIBUTION_MODE}}',portable?'portable':'site')
  .replace('{{SCRIPT_POLICY}}',portable?"'self' 'unsafe-inline'":"'self'")
  .replace('{{IMG_POLICY}}',portable?"'self' data:":"'self' data: https://escrevaral.goatcounter.com")
+ .replace('{{ESTANTE_DIORAMA_IMGS}}',portable?'':dioramaImgs)
  .replace('{{STYLES}}',()=>portable?'<style>\n'+css+'\n</style>':'<link rel="stylesheet" href="'+assets[2].path+'">')
  .replace('{{SCRIPTS}}',()=>portable?'<script>\n'+cofre+'\n</script>\n<script>\n'+app+'\n</script>':assets.slice(0,2).map(a=>'<script src="'+a.path+'"></script>').join('\n'));
  if(/{{[A-Z_]+}}/.test(s))throw Error('Marcador de build não resolvido');
@@ -50,7 +56,7 @@ const site=render(false),portable=render(true);
 emit('index.html',site);emit('escrevaral.html',portable);
 assets.forEach(a=>emit(a.path,a.content));
 emit('build/assets.json',JSON.stringify({schemaVersion:1,version:release.assetVersion,assets:assets.map(({content,...a})=>a)},null,2)+'\n');
-const bunkerDirs = ['academia', 'assets/library'];
+const bunkerDirs = ['academia', 'assets/library', 'assets/typewriter'];
 const bunkerAssets = [];
 const bunkerHashes = [];
 for (const bDir of bunkerDirs) {
@@ -59,8 +65,9 @@ for (const bDir of bunkerDirs) {
   for (const f of fs.readdirSync(abs).sort()) {
     if (!/\.(html|css|webp|png|svg)$/i.test(f)) continue;
     const rel = bDir + '/' + f;
-    bunkerAssets.push('./' + rel);
     bunkerHashes.push(hash(fs.readFileSync(path.join(root, rel))));
+    if (bDir === 'assets/typewriter' && !/\.webp$/i.test(f)) continue;
+    bunkerAssets.push('./' + rel);
   }
 }
 const generation=hash(assets.map(a=>a.sha256).join('')+site+bunkerHashes.join('')).slice(0,12);

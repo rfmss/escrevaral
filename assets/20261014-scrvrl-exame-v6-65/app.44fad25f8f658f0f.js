@@ -5035,6 +5035,13 @@
     lastCompLen = 0;
   }
 
+  function silence() {
+    if (audioCtx) {
+      try { stopVoice(audioCtx.currentTime || 0); } catch (ignore) {}
+      try { if (audioCtx.state === 'running' && audioCtx.suspend) { audioCtx.suspend(); } } catch (ignore) {}
+    }
+  }
+
   function setEnabled(val, storage, silent) {
     isEnabled = !!val;
     if (storage) {
@@ -5064,6 +5071,7 @@
     PREF_KEY: PREF_KEY,
     KEY_SAMPLES: KEY_SAMPLES,
     play: play,
+    silence: silence,
     unlock: unlock,
     loadBuffers: loadBuffers,
     pickKeySample: pickKeySample,
@@ -5364,9 +5372,25 @@
       }
     }
 
+    function stopEffects() {
+      window.clearTimeout(idleTimer);
+      idleTimer = null;
+      window.clearTimeout(bounceTimer);
+      bounceTimer = null;
+      if (reflowTimer) { clearTimeout(reflowTimer); reflowTimer = null; }
+      try { if (animObj) { animObj.cancel(); } } catch (ignore) {}
+      animObj = null;
+      if (wrap) {
+        wrap.style.webkitTransform = '';
+        wrap.style.transform = '';
+      }
+      setActiveFrame(0);
+    }
+
     function layout() {
       var show = isEnabled && activeFocus && columnEl && document.body;
       if (!show) {
+        stopEffects();
         visible = false;
         anchorY = null;
         if (document.body) {
@@ -5405,6 +5429,10 @@
 
     function strike(kind) {
       if (!visible || !wrap) { return; }
+      if (reducedMotion()) {
+        setActiveFrame(0);
+        return;
+      }
       if (kind === 'return') {
         window.clearTimeout(idleTimer);
         idleTimer = null;
@@ -5417,7 +5445,6 @@
         }, IDLE_TIMEOUT_MS);
       }
 
-      if (reducedMotion()) { return; }
       var spec = kind === 'return' ? CARRIAGE : STRIKE;
       if (typeof wrap.animate === 'function') {
         try { if (animObj) { animObj.cancel(); } } catch (ignore) {}
@@ -5770,6 +5797,7 @@
       }
     }
 
+    var pointerDown = false;
     function syncFlow() {
       if (!getActive()) {
         if (richEl && richEl.children) {
@@ -5787,6 +5815,7 @@
             if (sel && !sel.isCollapsed && sel.rangeCount && String(sel.toString() || '').length > 0) {
               var anc = sel.getRangeAt(0).commonAncestorContainer;
               if (anc === richEl || (richEl.contains && richEl.contains(anc))) {
+                if (pointerDown) { return; }
                 openedAutomatically = false;
                 clearIdle();
                 resetCounter();
@@ -5988,6 +6017,19 @@
     function onActivity() {
       if (getActive() && openedAutomatically) { armIdle(); }
     }
+    function onPointerStart() {
+      pointerDown = true;
+      onActivity();
+    }
+    function onPointerEnd() {
+      if (!pointerDown) { return; }
+      pointerDown = false;
+      if (getActive()) { syncFlow(); }
+    }
+    function onEditorBlur() {
+      composing = false;
+      pointerDown = false;
+    }
     function onKeyDown(ev) {
       if (ev.keyCode === 122) { // F11
         ev.preventDefault();
@@ -6020,7 +6062,12 @@
       on(document, 'compositionstart', onCompStart, true);
       on(document, 'compositionend', onCompEnd, true);
       on(document, 'keydown', onKeyDown, true);
-      on(document, 'mousedown', onActivity, true);
+      on(document, 'mousedown', onPointerStart, true);
+      on(document, 'touchstart', onPointerStart, true);
+      on(document, 'mouseup', onPointerEnd, true);
+      on(document, 'touchend', onPointerEnd, true);
+      on(document, 'touchcancel', onPointerEnd, true);
+      on(document, 'blur', onEditorBlur, true);
       on(document, 'wheel', onActivity, true);
       on(document, 'selectionchange', syncFlow, false);
       on(document, 'fullscreenchange', syncBar, false);
@@ -6046,6 +6093,8 @@
       syncFlow: syncFlow,
       notifyState: function (active, reason) {
         if (!active) {
+          composing = false;
+          pointerDown = false;
           openedAutomatically = false;
           clearIdle();
           resetCounter();
@@ -6057,6 +6106,8 @@
         syncFlow();
       },
       resetDocument: function () {
+        composing = false;
+        pointerDown = false;
         clearIdle();
         resetCounter();
         openedAutomatically = false;
@@ -6160,6 +6211,9 @@
     function applyTheme(name, persistPref) {
       currentTheme = normalizeTheme(name);
       var isDark = currentTheme === 'noturno';
+      if (document.documentElement) {
+        document.documentElement.setAttribute('data-theme', isDark ? 'escuro' : 'claro');
+      }
       if (document.body) {
         document.body.setAttribute('data-esc-theme', currentTheme);
         document.body.setAttribute('data-theme', isDark ? 'escuro' : 'claro');
@@ -6174,6 +6228,7 @@
       if (darkBtn) { darkBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false'); }
       var cycleBtn = document.getElementById && document.getElementById('esc-theme-cycle');
       if (cycleBtn) {
+        cycleBtn.setAttribute('aria-label', 'Modo noturno');
         cycleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
         cycleBtn.setAttribute('title', isDark ? 'Voltar ao Papel S\u00E1lvia claro' : 'Ativar Modo Noturno opaco');
         var lbl = cycleBtn.querySelector ? cycleBtn.querySelector('.esc-theme-label') : null;
@@ -6221,6 +6276,16 @@
         on(fullBtn, 'click', function () {
           if (root.Escr.superfocoCore) { root.Escr.superfocoCore.toggleFullscreen(); }
         });
+      }
+      if (document.querySelectorAll) {
+        var dioramaImgs = document.querySelectorAll('#esc-cafe-diorama img');
+        var di;
+        for (di = 0; di < dioramaImgs.length; di += 1) {
+          (function (imgEl) {
+            on(imgEl, 'error', function () { imgEl.hidden = true; imgEl.style.display = 'none'; });
+            if (imgEl.complete && imgEl.naturalWidth === 0) { imgEl.hidden = true; imgEl.style.display = 'none'; }
+          }(dioramaImgs[di]));
+        }
       }
       on(document, 'keydown', function (ev) {
         if (ev.altKey && ev.shiftKey && !ev.ctrlKey && !ev.metaKey && ev.keyCode === 78) {
@@ -7406,14 +7471,16 @@
     var dome = document.createElement('div');
     dome.className = 'esc-ac-layer esc-ac-layer-dome';
     dome.setAttribute('data-depth', '0.22');
-    var heroImg = document.createElement('img');
-    heroImg.className = 'esc-ac-art-img';
-    heroImg.src = 'assets/library/real-gabinete-hero.webp';
-    heroImg.alt = '';
-    heroImg.setAttribute('aria-hidden', 'true');
-    heroImg.setAttribute('decoding', 'async');
-    on(heroImg, 'error', function () { heroImg.hidden = true; });
-    dome.appendChild(heroImg);
+    if (!isPortableDoc()) {
+      var heroImg = document.createElement('img');
+      heroImg.className = 'esc-ac-art-img';
+      heroImg.src = 'assets/library/real-gabinete-hero.webp';
+      heroImg.alt = '';
+      heroImg.setAttribute('aria-hidden', 'true');
+      heroImg.setAttribute('decoding', 'async');
+      on(heroImg, 'error', function () { heroImg.hidden = true; });
+      dome.appendChild(heroImg);
+    }
     stage.appendChild(dome);
 
     /* Camada 1: Moldura leve em ouro envelhecido com arcos neomanuelinos e estrelas de 4 pontas */
@@ -7560,11 +7627,27 @@
         }
       });
 
+      function postThemeToFrame(frameEl, entryObj) {
+        if (!frameEl || !frameEl.contentWindow || !frameEl.contentWindow.postMessage) { return; }
+        try {
+          var body = document.body;
+          var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
+          var paper = isDark ? '#211a14' : '#cfc3ae';
+          var ink = isDark ? '#d9cebc' : '#1f130b';
+          var accent = isDark ? '#c49a58' : (entryObj && entryObj.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
+          frameEl.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
+        } catch (ignore) {}
+      }
+
       on(window, 'message', function (ev) {
         if (!modalEl || modalEl.hidden || !ev.data || ev.data.channel !== 'escrevaral-academia') { return; }
         if (ev.data.action === 'close') { close(); }
         else if (ev.data.action === 'back') { openList(); }
         else if (ev.data.action === 'open' && ev.data.id) { openGuide(ev.data.id); }
+        else if (ev.data.action === 'theme') {
+          var activeFrame = modalEl.querySelector ? modalEl.querySelector('iframe.esc-academy-frame') : null;
+          postThemeToFrame(activeFrame, activeEntry);
+        }
       });
 
       return modalEl;
@@ -7712,7 +7795,7 @@
           fBtn.className = 'esc-academy-tome';
           fBtn.setAttribute('data-academy-id', entry.id);
           fBtn.setAttribute('data-tome', entry.id);
-          if (meta.art) {
+          if (meta.art && !isPortableDoc()) {
             var fArt = document.createElement('img');
             fArt.className = 'esc-academy-tome-art';
             fArt.src = meta.art;
@@ -8846,12 +8929,32 @@
       try { return opts.notebooks.list(true) || []; } catch (e) { return []; }
     }
 
+    function isOriginalTrashed(origId) {
+      if (!origId || !opts.originals) { return false; }
+      try {
+        var orig = opts.originals.get(origId);
+        return !!(orig && orig.trashed);
+      } catch (e) { return false; }
+    }
+
+    function isBookAvailable(b) {
+      return !!(b && !b.trashed && !isOriginalTrashed(b.originalId));
+    }
+
     function availableBooks() {
-      return allBooks().filter(function (b) { return b && !b.trashed; });
+      return allBooks().filter(isBookAvailable);
     }
 
     function trashedBooks() {
-      return allBooks().filter(function (b) { return b && !!b.trashed; });
+      return allBooks().filter(function (b) { return b && (!!b.trashed || isOriginalTrashed(b.originalId)); });
+    }
+
+    function isDocContainerUnavailable(d) {
+      if (!d || !d.projectId || !opts.notebooks) { return false; }
+      try {
+        var bk = opts.notebooks.get(d.projectId);
+        return !!(bk && !isBookAvailable(bk));
+      } catch (e) { return false; }
     }
 
     function isBookStarred(book) {
@@ -9646,19 +9749,19 @@
       if (state.scope === 'library') {
         if (state.libraryFilter === 'starred') {
           heading = 'Com estrela';
-          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !!d.starred; });
+          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !isDocContainerUnavailable(d) && !!d.starred; });
         } else if (state.libraryFilter === 'untagged') {
           heading = 'Sem pasta';
           filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !d.projectId; });
         } else if (state.libraryFilter === 'archived') {
           heading = 'Arquivados';
-          filtered = docs.filter(function (d) { return !d.trashed && !!d.archived; });
+          filtered = docs.filter(function (d) { return !d.trashed && !isDocContainerUnavailable(d) && !!d.archived; });
         } else if (state.libraryFilter === 'trashed') {
           heading = 'Lixeira';
           filtered = docs.filter(function (d) { return !!d.trashed; });
         } else {
           heading = 'Todos os textos';
-          filtered = docs.filter(function (d) { return !d.trashed && !d.archived; });
+          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !isDocContainerUnavailable(d); });
         }
       }
 
@@ -9703,7 +9806,7 @@
         var fHead = createEl('p', 'esc-trash-group-title', 'Pastas e projetos na lixeira');
         listEl.appendChild(fHead);
         trashFolders.forEach(function (bk) {
-          var insideCount = docs.filter(function (d) { return d.projectId === bk.id && !!d.trashed; }).length;
+          var insideCount = docs.filter(function (d) { return d.projectId === bk.id; }).length;
           var card = createEl('article', 'esc-item-card esc-trashed-folder-card');
           var top = createEl('div', 'esc-item-top');
           top.appendChild(createEl('strong', 'esc-item-title', bk.name));
@@ -9992,7 +10095,7 @@
     if (!m) { return false; }
     var n = parseInt(m[1], 16);
     var r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
-    return (0.299 * r + 0.587 * g + 0.114 * b) > 168;
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 120;
   }
   function pulseSpatialEnter(el) {
     if (!el || !el.classList) { return; }
@@ -10008,7 +10111,7 @@
     var parentOrig = book && book.originalId && originals ? originals.get(book.originalId) : null;
     text(byId('notebook-window-name'), label); text(byId('os-window-task'), label);
     byId('os-window-task').setAttribute('data-notebook', book ? 'true' : 'false'); byId('os-window-task').setAttribute('title', label);
-    if (book) { byId('os-window-task').style.borderLeftColor = book.color; }
+    byId('os-window-task').style.borderLeftColor = book ? book.color : '';
     var cabWin = byId('cabinet-window');
     if (cabWin && cabWin.style && cabWin.style.setProperty) {
       cabWin.style.setProperty('--esc-book-color', book ? book.color : '#6f8e68');
@@ -10017,7 +10120,7 @@
     if (nbMini) { nbMini.hidden = !book; }
     if (nbStrap && book) { nbStrap.style.backgroundColor = book.color; }
     if (nbKicker) {
-      text(nbKicker, book ? (parentOrig ? 'DENTRO DO CADERNO · GAVETA ' + parentOrig.name : 'VOCÊ ESTÁ DENTRO DO CADERNO') : 'GABINETE DE ESCRITA');
+      text(nbKicker, book ? (parentOrig ? 'DENTRO DO CADERNO · GAVETA ' + parentOrig.name.toUpperCase() : 'VOCÊ ESTÁ DENTRO DO CADERNO') : 'GABINETE DE ESCRITA');
     }
     byId('cabinet-search').placeholder = book ? 'Buscar neste caderno' : 'Buscar em todos os textos';
     byId('cabinet-search').setAttribute('aria-label', byId('cabinet-search').placeholder);
@@ -10028,7 +10131,7 @@
     text(byId('notebook-back'), book && book.originalId ? '← Voltar à gaveta' : '← Voltar à Estante');
     byId('notebook-organization').hidden = !book;
     var parentSelect = byId('notebook-parent'); parentSelect.textContent = '';
-    var loose = document.createElement('option'); loose.value = ''; text(loose, 'Na mesa, sem gaveta'); parentSelect.appendChild(loose);
+    var loose = document.createElement('option'); loose.value = ''; text(loose, 'Na Estante, sem gaveta'); parentSelect.appendChild(loose);
     if (originals) { originals.list().filter(function (o) { return !o.trashed; }).forEach(function (o) { var opt = document.createElement('option'); opt.value = o.id; text(opt, o.name); parentSelect.appendChild(opt); }); }
     parentSelect.value = book ? book.originalId || '' : '';
     byId('cabinet-window').setAttribute('data-scope', book ? 'notebook' : 'all');
@@ -10056,7 +10159,8 @@
     byId('desktop-organize-menu').hidden = true; byId('desktop-organize').setAttribute('aria-expanded','false');
     byId('volume-new').hidden = !current;
     byId('original-more-menu').hidden = true; byId('original-more').setAttribute('aria-expanded','false');
-    byId('notebook-area').setAttribute('data-drawer-open',current?'true':'false');
+    byId('notebook-area').setAttribute('data-drawer-open', current ? 'true' : 'false');
+    if (byId('desktop-surface')) { byId('desktop-surface').setAttribute('data-drawer-open', current ? 'true' : 'false'); }
     text(byId('original-title-label'), current ? current.name : 'GAVETA');
     var drawerSub = byId('original-drawer-sub');
     if (drawerSub) {
@@ -10113,6 +10217,9 @@
     byId('os-window-task').hidden = true;
     renderNotebooks(); renderReminders(); updatePath(); queueSession();
     pulseSpatialEnter(byId('notebook-area'));
+    byId('notebook-area').scrollTop = 0; byId('desktop-surface').scrollTop = 0;
+    var focusOrig = byId('volume-new') && !byId('volume-new').hidden ? byId('volume-new') : byId('original-back');
+    if (focusOrig && focusOrig.focus) { focusOrig.focus(); }
     return true;
   }
   function closeOriginal() {
@@ -10175,6 +10282,7 @@
       byId('project-name').value = book ? book.name : '';
     }
     text(byId('notebook-form-heading'), heading);
+    if (byId('project-create')) { text(byId('project-create'), notebookEditing ? 'Salvar' : 'Criar'); }
     text(byId('project-error'), '');
     toggleStart(false); byId('notebook-dialog').hidden = false; byId('project-form').hidden = false; byId('project-name').focus();
   }
@@ -10307,9 +10415,9 @@
     });
     listen(byId('original-trash'), 'click', function () {
       if (!checkpoint() || !rememberNotebook()) { return; } var o = activeOriginal(); if (!o) { return; }
-      E.dialog.ask({title:'Mover gaveta para a lixeira?',message:'A gaveta “' + o.name + '” irá com seus cadernos. Você poderá restaurar tudo pelo menu Início.',accept:'Mover para a lixeira'},function (ok) {
+      E.dialog.ask({title:'Mover gaveta para a lixeira?',message:'A gaveta “' + o.name + '” irá com seus cadernos. Você poderá restaurar tudo pelo Menu → Lixeira.',accept:'Mover para a lixeira'},function (ok) {
         if (!ok || activeOriginalId !== o.id || !checkpoint() || !rememberNotebook()) { return; }
-        try { originals.update(o.id, {trashed:true}); activeNotebookId = null; activeOriginalId = null; resetToAvailableOrBlank(); closeNotebook(); renderNotebooks(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Gaveta guardada na lixeira com seus cadernos.'); } catch (e) { message(e.message); }
+        try { originals.update(o.id, {trashed:true}); activeNotebookId = null; activeOriginalId = null; resetToAvailableOrBlank(); goHomeToEstante(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Gaveta guardada na lixeira com seus cadernos.'); } catch (e) { message(e.message); }
       });
     });
     listen(byId('notebook-parent-save'), 'click', function () {
@@ -10337,12 +10445,28 @@
     listen(byId('notebook-rename'), 'click', function () { showNotebookForm(activeNotebookId, 'volume'); });
     listen(byId('notebook-export'), 'click', function () { exportNotebook(false); });
     listen(byId('export-notebook'), 'click', function () { exportNotebook(false); });
-    listen(byId('desk-minimize'), 'click', closeNotebook);
+    listen(byId('desk-minimize'), 'click', goHomeToEstante);
     listen(byId('notebook-trash'), 'click', function () {
       if (!checkpoint()) { return; } var b = activeNotebook(); if (!b) { return; }
-      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todos os seus textos. Você poderá restaurá-lo inteiro pela Lixeira ou pelo menu Início.',accept:'Mover para a lixeira'},function(ok){
+      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todos os seus textos. Você poderá restaurá-lo inteiro pela Lixeira ou pelo Menu → Lixeira.',accept:'Mover para a lixeira'},function(ok){
         if (!ok || activeNotebookId !== b.id || !notebooks.get(b.id)) { return; }
-        try { if (!checkpoint() || !rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; resetToAvailableOrBlank(); closeNotebook(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Caderno movido para a lixeira. Você pode restaurar o caderno inteiro pela Lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
+        try {
+          if (!checkpoint() || !rememberNotebook()) { return; }
+          var keepOriginalId = b.originalId || null;
+          notebooks.update(b.id, { trashed: true });
+          if (archive) {
+            (archive.list(true).documents || []).filter(function (d) { return d.projectId === b.id && !d.trashed; }).forEach(function (d) {
+              try { archive.trash(d, true); } catch (ignore) {}
+            });
+          }
+          activeNotebookId = null;
+          resetToAvailableOrBlank();
+          activeOriginalId = keepOriginalId;
+          closeNotebook();
+          renderArchive(); renderTimeline(false);
+          if (workspaceUI) { workspaceUI.render(); }
+          message('Caderno movido para a lixeira. Você pode restaurar o caderno inteiro pela Lixeira.');
+        } catch (e) { message('Não foi possível mover o caderno.'); }
       });
     });
     listen(window, 'storage', function (event) { if (event.key === 'escrevaral.astra.notebooks.v1' || event.key === 'escrevaral.astra.originais.v1' || event.key === 'escrevaral.astra.notebooks.transaction.v1') { if (storage.getItem('escrevaral.astra.notebooks.transaction.v1')) { return; } renderNotebooks(); var b = activeNotebook(); if (b) { cabinetProject = b.name; if (doc.projectId === b.id) { doc.project = b.name; } updatePath(); } } });
@@ -10767,7 +10891,7 @@
     } else {
       activeNotebookId = null;
       activeOriginalId = null;
-      cabinetProject = '';
+      cabinetProject = null;
       loadDocument(E.freshDocument());
       try { if (storage) { storage.removeItem('escrevaral.astra.current'); } } catch (ignore) {}
     }
@@ -10791,7 +10915,7 @@
     }
     if (activeNotebookId && notebooks && !availableBook(notebooks.get(activeNotebookId))) {
       activeNotebookId = null;
-      cabinetProject = '';
+      cabinetProject = null;
       updatePath();
     }
     return false;
@@ -10825,41 +10949,74 @@
       message('Movido para a lixeira. Você pode restaurar pela Lixeira.');
     } catch (e) { message('Não foi possível mover para a lixeira. A folha foi preservada.'); }
   }
+  function purgeEntrySafe(entry) {
+    if (!archive || !entry) { return false; }
+    var isCurrent = doc && (entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id));
+    if (isCurrent && dirty) { persist(); }
+    var targetId = isCurrent && doc && doc.id ? doc.id : entry.id;
+    var latest = archive.get(targetId);
+    if (!latest && entry.noteId) {
+      var all = archive.list(true).documents || [];
+      var idx;
+      for (idx = 0; idx < all.length; idx += 1) {
+        if ((all[idx].noteId || all[idx].id) === entry.noteId) { latest = all[idx]; break; }
+      }
+    }
+    if (!latest) { return false; }
+    if (!latest.trashed) {
+      var trashedRes = archive.trash(latest, true);
+      latest = (trashedRes && trashedRes.document) ? trashedRes.document : archive.get(latest.id);
+    }
+    if (!latest) { return false; }
+    archive.purge(latest);
+    linguisticStore.removeDocument('analysis/' + (latest.projectId || 'avulsos') + '/' + (latest.noteId || latest.id) + '/');
+    return true;
+  }
   function askDelete(entry) {
     if (!archive || !entry) { return; }
     if (entry.locked) { message('Esta folha de referência está protegida contra exclusão.'); return; }
-    var label = entry.title || 'Sem título';
+    var isCurrent = doc && (entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id));
+    if (isCurrent && dirty) { persist(); }
+    var label = entry.title || (entry.kind === 'reminder' ? 'Post-it' : 'Sem título');
+    var noun = entry.kind === 'reminder' ? 'O post-it' : 'O texto';
     var firstMsg = entry.trashed
-      ? '“' + label + '” será apagada definitivamente da lixeira deste aparelho. Não será possível restaurar esta cópia.'
-      : '“' + label + '” será apagada definitivamente deste aparelho, sem passar pela lixeira. Para poder recuperar depois, use “Lixeira” em vez de excluir.';
+      ? noun + ' “' + label + '” será apagado definitivamente da lixeira deste aparelho. Não será possível restaurar esta cópia.'
+      : noun + ' “' + label + '” será apagado definitivamente deste aparelho, sem passar pela lixeira. Para poder recuperar depois, use “Lixeira” em vez de excluir.';
     askIrreversibleDelete({
       title: 'Excluir definitivamente?',
       message: firstMsg,
       accept: 'Continuar exclusão'
     }, {
       title: 'Segunda confirmação — exclusão irreversível',
-      message: 'Atenção: “' + label + '” será removida para sempre deste aparelho e não poderá ser recuperada. Arquivos já exportados (.scrvrl) não são apagados. Confirma?',
+      message: 'Atenção: ' + noun.toLowerCase() + ' “' + label + '” será removido para sempre deste aparelho e não poderá ser recuperado. Arquivos já exportados (.scrvrl) não são apagados. Confirma?',
       accept: 'Sim, excluir para sempre'
     }, function () {
       try {
-        archive.purge(entry);
-        linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/');
+        purgeEntrySafe(entry);
         ensureActiveDocumentStillValid([entry.id, entry.noteId || entry.id], null);
         renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
         if (workspaceUI) { workspaceUI.render(); }
         if (activePanel === 'acervo' && byId('trash-toggle')) { byId('trash-toggle').focus(); }
         message('Cópia excluída definitivamente deste aparelho.');
-      } catch (e) { text(byId('archive-status'), e.message); }
+      } catch (e) {
+        text(byId('archive-status'), e.message);
+        message(e.message || 'Não foi possível excluir esta cópia.');
+      }
     });
   }
 
   function updatePath() {
     var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Versões' };
-    var orig = activeOriginal();
-    if (!orig && activeNotebook() && activeNotebook().originalId && originals) {
-      orig = originals.get(activeNotebook().originalId);
+    var crumbBook = cabinetOpen
+      ? (activeNotebook() || null)
+      : (doc && doc.projectId && notebooks ? notebooks.get(doc.projectId) : null);
+    if (crumbBook && !availableBook(crumbBook)) { crumbBook = null; }
+    var orig = cabinetOpen ? activeOriginal() : null;
+    if (!orig && crumbBook && crumbBook.originalId && originals) {
+      orig = originals.get(crumbBook.originalId);
+      if (orig && orig.trashed) { orig = null; }
     }
-    if (orig && (activeOriginalId || project !== null)) {
+    if (orig && (cabinetOpen ? (activeOriginalId || project !== null) : true)) {
       byId('path-original-separator').hidden = false;
       byId('path-original').hidden = false;
       text(byId('path-original'), orig.name);
@@ -10868,8 +11025,6 @@
       byId('path-original-separator').hidden = true;
       byId('path-original').hidden = true;
     }
-    var crumbBook = activeNotebook() || (doc && doc.projectId && notebooks ? notebooks.get(doc.projectId) : null);
-    if (crumbBook && !availableBook(crumbBook)) { crumbBook = null; }
     var locBar = byId('location-path');
     if (locBar && locBar.style && locBar.style.setProperty) {
       locBar.style.setProperty('--esc-crumb-book-color', crumbBook && crumbBook.color ? crumbBook.color : '#6f8e68');
@@ -10882,7 +11037,7 @@
     byId('path-document').hidden = byId('path-document-separator').hidden = cabinetOpen;
     text(byId('path-document'), title.value || 'Sem título');
     byId('path-document').setAttribute('title', title.value || 'Sem título');
-    var showEstanteCrumb = cabinetOpen && !activePanel && project === null && !activeOriginalId;
+    var showEstanteCrumb = cabinetOpen && !activePanel && project === null && !activeOriginalId && (!byId('cabinet-window') || byId('cabinet-window').hidden);
     byId('path-panel').hidden = byId('path-panel-separator').hidden = !activePanel && !showEstanteCrumb;
     text(byId('path-panel'), activePanel ? (activePanel === 'utilidades' ? byId('utility-heading').textContent : activePanel === 'focus-pause' ? 'Pausa' : names[activePanel] || '') : showEstanteCrumb ? 'Estante de cadernos' : '');
     var pathRet = byId('esc-path-return');
@@ -11134,7 +11289,7 @@
     } else {
       activeNotebookId = null;
       activeOriginalId = null;
-      cabinetProject = '';
+      cabinetProject = null;
     }
     navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; E.transfer.selectRange(manuscript, 0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
@@ -11157,6 +11312,8 @@
     if (richUI) { richUI.loadDoc(doc); }
     if (wordCardUI) { wordCardUI.hide(false); }
     if (sonnetUI) { sonnetUI.sync(doc); }
+    if (immersion && isLockedRef) { setImmersion(false, 'locked'); }
+    else if (immersion && visualMachine) { visualMachine.layout(); }
     if (superfocoUI) { superfocoUI.resetDocument(); }
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.'); updatePath();
     renderTimeline(true, null, true); refreshCounts();
@@ -11173,7 +11330,8 @@
       if (trashView && notebooks) { notebooks.list().filter(function (b) { return b.trashed && (!b.originalId || !originals.get(b.originalId).trashed); }).forEach(function (b) { var li = document.createElement('li'); paragraph(li, 'Caderno: ' + b.name); button(li, 'Restaurar caderno completo', function () { try { notebooks.update(b.id, { trashed: false }); if (archive) { (archive.list(true).documents || []).filter(function (d) { return d.projectId === b.id && !!d.trashed; }).forEach(function (d) { try { archive.trash(d, false); } catch (ignore) {} }); } renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Caderno restaurado com todo o conteúdo.'); } catch (e) { message(e.message); } }); list.appendChild(li); }); }
       text(byId('acervo-heading'), trashView ? 'Lixeira' : 'Acervo');
       text(byId('trash-toggle'), trashView ? 'Voltar ao acervo' : 'Lixeira'); byId('trash-toggle').setAttribute('aria-pressed', trashView ? 'true' : 'false');
-      text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : result.documents.length ? '' : 'Sua primeira folha começa aqui.');
+      var hasAnyTrashItem = list.children.length > 0 || result.documents.length > 0;
+      text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : hasAnyTrashItem ? '' : trashView ? 'A lixeira está vazia.' : 'Sua primeira folha começa aqui.');
       result.documents.forEach(function (entry) {
         var li = document.createElement('li');
         if (trashView) {
@@ -11346,6 +11504,10 @@
       });
     } catch (e) { importError(e); }
   }
+  function silenceSound() {
+    if (E.machineSound && E.machineSound.silence) { E.machineSound.silence(); }
+    if (audio) { try { if (audio.suspend) { audio.suspend(); } } catch (ignore) {} }
+  }
   function stopSound() {
     if (E.machineSound) { E.machineSound.setEnabled(false, storage, true); }
     byId('som').checked = false;
@@ -11486,7 +11648,13 @@
     if (result.unreadable) { message('Algumas folhas não puderam ser lidas. Os registros originais permanecem.'); }
   }
   function enterDesk(focusEditor) {
-    if (notebookReady && !activeNotebookId && doc.projectId && notebooks && availableBook(notebooks.get(doc.projectId))) { openNotebook(doc.projectId); }
+    if (notebookReady && !activeNotebookId && doc.projectId && notebooks && availableBook(notebooks.get(doc.projectId))) {
+      var resyncBook = notebooks.get(doc.projectId);
+      activeNotebookId = resyncBook.id;
+      activeOriginalId = resyncBook.originalId || null;
+      cabinetProject = resyncBook.name;
+      notebookLabels();
+    }
     toggleStart(false);
     closePanels(false); collapseTimeline(); desktopDrag = null; cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
     document.body.setAttribute('data-view', 'workspace'); updatePath(); refreshCounts();
@@ -11754,7 +11922,7 @@
     }
   });
 
-  listen(byId('os-files'), 'click', function () { desktopWindow('open'); renderCabinet(); });
+  listen(byId('os-files'), 'click', function () { activeOriginalId = null; desktopWindow('open'); renderCabinet(); updatePath(); });
   listen(byId('os-desk'), 'click', enterDesk);
   listen(byId('os-arrange'), 'click', function () { resetDesktopWindow(); desktopWindow('open'); });
   listen(byId('os-start'), 'click', function () { toggleStart(byId('start-menu').hidden); });
@@ -11850,7 +12018,7 @@
   listen(byId('cabinet-examine'), 'click', function () { enterDesk(); openExaminePanel({ toggle: 'examinar-toggle' }); });
   listen(byId('cabinet-poetry'), 'click', function () { enterDesk(); openExaminePanel({ toggle: 'examinar-toggle', group: 3, legacyLens: 'rima' }); });
   listen(byId('notebook-back'),'click',closeNotebook);
-  listen(byId('cabinet-all'), 'click', function () { if (!checkpoint() || !rememberNotebook()) { return; } activeNotebookId = null; cabinetProject = null; cabinetLimit = 40; byId('cabinet-search').value = ''; showingAbout = false; renderCabinet(); });
+  listen(byId('cabinet-all'), 'click', function () { if (!checkpoint() || !rememberNotebook()) { return; } activeOriginalId = null; activeNotebookId = null; cabinetProject = null; cabinetLimit = 40; byId('cabinet-search').value = ''; showingAbout = false; renderCabinet(); updatePath(); });
   listen(byId('cabinet-more'), 'click', function () { cabinetLimit += 40; renderCabinet(); });
   listen(byId('cabinet-search'), 'input', function () { showingAbout = false; window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; desktopWindow('open', false); renderCabinet(); }, 180); });
   listen(byId('cabinet-clear'), 'click', function () { window.clearTimeout(cabinetTimer); byId('cabinet-search').value = ''; showingAbout = false; renderCabinet(); byId('cabinet-search').focus(); });
@@ -12055,12 +12223,12 @@
           trashedProjects.forEach(function (bk) {
             (archive.list(true).documents || []).filter(function (d) { return d.projectId === bk.id; }).forEach(function (d) {
               removedIds.push(d.id);
-              try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
+              try { purgeEntrySafe(d); } catch (ignore) {}
             });
             try { notebooks.purge(bk.id); } catch (ignore) {}
           });
           trashed.forEach(function (entry) {
-            try { archive.purge(entry); linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/'); } catch (ignore) {}
+            try { purgeEntrySafe(entry); } catch (ignore) {}
           });
           ensureActiveDocumentStillValid(removedIds, null);
           renderNotebooks(); renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
@@ -12119,6 +12287,7 @@
       },
       trashProjectDocs: function (book) {
         if (!archive || !book) { return; }
+        if (dirty) { persist(); }
         var list = (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; });
         if (!list.length) { message('Não há textos ativos nesta pasta.'); return; }
         var removedIds = [];
@@ -12134,6 +12303,7 @@
       },
       trashProject: function (book) {
         if (!notebooks || !book) { return; }
+        if (dirty) { persist(); }
         var inside = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; }) : [];
         var removedIds = [];
         notebooks.update(book.id, { trashed: true });
@@ -12159,6 +12329,7 @@
       },
       purgeProject: function (book, insideCount) {
         if (!notebooks || !book) { return; }
+        if (dirty) { persist(); }
         var insideDocs = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }) : [];
         var count = typeof insideCount === 'number' ? Math.max(insideCount, insideDocs.length) : insideDocs.length;
         var countLabel = count + (count === 1 ? ' texto associado' : ' textos associados');
@@ -12176,7 +12347,7 @@
             (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }).forEach(function (d) {
               removedIds.push(d.id);
               if (d.noteId && d.noteId !== d.id) { removedIds.push(d.noteId); }
-              try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
+              try { purgeEntrySafe(d); } catch (ignore) {}
             });
           }
           notebooks.purge(book.id);
@@ -12329,6 +12500,10 @@
       isSonnetActive: function () { return !!(sonnetUI && sonnetUI.isSonnetDoc && sonnetUI.isSonnetDoc(doc)); },
       isEditable: function () { return !(doc && (doc.locked || doc.category === 'reference')); }
     });
+    if (immersion) {
+      if (visualMachine) { visualMachine.setFocusActive(true); }
+      superfocoUI.notifyState(true, 'manual');
+    }
   }
 
   if (E.mountThemeChrome) {
@@ -12491,25 +12666,24 @@
           if (cabinetOpen) { enterDesk(true); }
           setImmersion(true, 'manual');
         } else if (action === 'focus-title') {
-          if (cabinetOpen) { enterDesk(true); }
+          if (cabinetOpen) { enterDesk(true); } else { closePanels(false); }
           if (title && title.focus) {
             title.focus();
             if (title.select) { title.select(); }
           }
         } else if (action === 'examine-lens' && lensId) {
           if (cabinetOpen) { enterDesk(true); }
-          showPanel('oficina', 'examinar-toggle', true);
-          if (E.ptbrPanelOpen) { E.ptbrPanelOpen({ lens: lensId }); }
+          openExaminePanel({ toggle: 'examinar-toggle', lens: lensId });
         } else if (action === 'examine') {
           if (cabinetOpen) { enterDesk(true); }
-          showPanel('oficina', 'examinar-toggle', true);
+          openExaminePanel({ toggle: 'examinar-toggle' });
         } else if (action === 'calculator') {
           if (cabinetOpen) { enterDesk(true); }
           if (calcUI && calcUI.open) { calcUI.open('paginas', true); }
         } else if (action === 'cartorio') {
           if (cartorioUI && cartorioUI.open) { cartorioUI.open('desk'); }
         } else {
-          if (cabinetOpen) { enterDesk(true); }
+          if (cabinetOpen) { enterDesk(true); } else { closePanels(false); }
           if (richUI && richUI.isRich() && byId('esc-rich-editor')) { byId('esc-rich-editor').focus(); }
           else if (manuscript && manuscript.focus) { manuscript.focus(); }
         }
@@ -12564,7 +12738,7 @@
   E.mountFinish({
     book: activeNotebook, checkpoint: checkpoint, message: message,
     prepare: function(){closePanels(false);toggleStart(false);},
-    prepareLock: function(){toggleStart(false);stopSound();stopMachineStrike();finishMachineFeed();},
+    prepareLock: function(){toggleStart(false);silenceSound();stopMachineStrike();finishMachineFeed();},
     save: function(book){notebooks.update(book.id,{data:book.data});},
     documents: function(){return cabinetDocuments().documents.filter(function(d){return d.projectId===activeNotebookId&&!d.trashed&&d.kind!=='reminder';});},
     open: function(entry){if(!checkpoint()){return;}try{var next=archive.get(entry.id);if(!next||next.trashed||next.projectId!==activeNotebookId){message('Este capítulo não está disponível.');return;}loadDocument(next);cabinetSelection=null;enterDesk(true);}catch(e){message('Não foi possível abrir o capítulo.');}}
@@ -12605,7 +12779,7 @@
     }
   });
 
-  listen(document, 'visibilitychange', function () { if (document.hidden) { if (checkpoint()) { rememberNotebook(); } stopSound(); stopMachineStrike(); finishMachineFeed(); } });
+  listen(document, 'visibilitychange', function () { if (document.hidden) { if (checkpoint()) { rememberNotebook(); } silenceSound(); stopMachineStrike(); finishMachineFeed(); } });
   listen(window, 'pagehide', function () { if (checkpoint()) { rememberNotebook(); } });
   listen(window, 'beforeunload', function (event) { if (!checkpoint()) { event.preventDefault(); event.returnValue = 'Há escrita que não foi guardada.'; } });
 }());

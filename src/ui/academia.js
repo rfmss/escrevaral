@@ -141,14 +141,16 @@
     var dome = document.createElement('div');
     dome.className = 'esc-ac-layer esc-ac-layer-dome';
     dome.setAttribute('data-depth', '0.22');
-    var heroImg = document.createElement('img');
-    heroImg.className = 'esc-ac-art-img';
-    heroImg.src = 'assets/library/real-gabinete-hero.webp';
-    heroImg.alt = '';
-    heroImg.setAttribute('aria-hidden', 'true');
-    heroImg.setAttribute('decoding', 'async');
-    on(heroImg, 'error', function () { heroImg.hidden = true; });
-    dome.appendChild(heroImg);
+    if (!isPortableDoc()) {
+      var heroImg = document.createElement('img');
+      heroImg.className = 'esc-ac-art-img';
+      heroImg.src = 'assets/library/real-gabinete-hero.webp';
+      heroImg.alt = '';
+      heroImg.setAttribute('aria-hidden', 'true');
+      heroImg.setAttribute('decoding', 'async');
+      on(heroImg, 'error', function () { heroImg.hidden = true; });
+      dome.appendChild(heroImg);
+    }
     stage.appendChild(dome);
 
     /* Camada 1: Moldura leve em ouro envelhecido com arcos neomanuelinos e estrelas de 4 pontas */
@@ -295,11 +297,27 @@
         }
       });
 
+      function postThemeToFrame(frameEl, entryObj) {
+        if (!frameEl || !frameEl.contentWindow || !frameEl.contentWindow.postMessage) { return; }
+        try {
+          var body = document.body;
+          var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
+          var paper = isDark ? '#211a14' : '#cfc3ae';
+          var ink = isDark ? '#d9cebc' : '#1f130b';
+          var accent = isDark ? '#c49a58' : (entryObj && entryObj.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
+          frameEl.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
+        } catch (ignore) {}
+      }
+
       on(window, 'message', function (ev) {
         if (!modalEl || modalEl.hidden || !ev.data || ev.data.channel !== 'escrevaral-academia') { return; }
         if (ev.data.action === 'close') { close(); }
         else if (ev.data.action === 'back') { openList(); }
         else if (ev.data.action === 'open' && ev.data.id) { openGuide(ev.data.id); }
+        else if (ev.data.action === 'theme') {
+          var activeFrame = modalEl.querySelector ? modalEl.querySelector('iframe.esc-academy-frame') : null;
+          postThemeToFrame(activeFrame, activeEntry);
+        }
       });
 
       return modalEl;
@@ -447,7 +465,7 @@
           fBtn.className = 'esc-academy-tome';
           fBtn.setAttribute('data-academy-id', entry.id);
           fBtn.setAttribute('data-tome', entry.id);
-          if (meta.art) {
+          if (meta.art && !isPortableDoc()) {
             var fArt = document.createElement('img');
             fArt.className = 'esc-academy-tome-art';
             fArt.src = meta.art;

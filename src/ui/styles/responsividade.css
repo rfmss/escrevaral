@@ -412,9 +412,9 @@ body[data-theme="escuro"] #original-new,body[data-theme="escuro"] #volume-new { 
  .original-box .box-meta { font-size:10px; }
  .original-box .box-pull { margin:8px auto; }
  .desktop-imprint { display:none; }
- .cabinet-window { position:fixed; top:146px !important; bottom:52px !important; height:auto !important; }
+ .cabinet-window { position:fixed; top:44px !important; left:0 !important; right:0 !important; bottom:44px !important; width:auto !important; height:auto !important; }
 }
-@media screen and (max-width:760px) and (max-height:480px) { .cabinet-window { top:92px !important; } }
+@media screen and (max-width:760px) and (max-height:480px) { .cabinet-window { top:44px !important; bottom:44px !important; } }
 
 /* G2: um único contrato para o interruptor; a carcaça não muda de forma. */
 @media screen {

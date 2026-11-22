@@ -197,6 +197,13 @@ assert.ok(builtIndexHtml.includes('id="esc-cafe-diorama"') && builtIndexHtml.inc
 for (const dioramaArt of ['estante-cafe-bistro.webp', 'estante-livros-outono.webp', 'estante-trepadeira-outono.webp']) {
   assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', dioramaArt)), 'assets/library/' + dioramaArt + ' presente para uso offline');
 }
+const builtPortableHtml = fs.readFileSync(path.join(rootDir, 'escrevaral.html'), 'utf8');
+assert.ok(!builtPortableHtml.includes('assets/library/estante-cafe-bistro.webp'), 'escrevaral.html portátil omite <img> externas do diorama para zero ícone quebrado offline');
+const controladorSrc = fs.readFileSync(path.join(rootDir, 'src/editor/controlador.js'), 'utf8');
+assert.ok(controladorSrc.includes('function purgeEntrySafe(') && controladorSrc.includes('function silenceSound('), 'controlador.js protege exclusão direta sem textos órfãos e silencia som sem sobrescrever preferência');
+const tresColCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/tres-colunas.css'), 'utf8');
+assert.ok(tresColCss.includes('body[data-view="gabinete"] .esc-mobile-bar'), 'tres-colunas.css oculta barra mobile na Estante e no Superfoco');
+assert.ok(realGabineteCss.includes('.ptbr-word:not([data-word-class-norm])'), 'real-gabinete.css preserva cores de Morfologia e Sintaxe no Modo Noturno');
 const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');
 assert.ok(autopubHtml.includes('AFK-REAL-GABINETE-ORNAMENTS-START'), 'autopublicacao-independente.html com ornamentos AFK x Real Gabinete');
 for (const entry of catalog) {

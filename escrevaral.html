@@ -415,8 +415,8 @@ body[data-input="keyboard"] .file-label[data-focus="true"] { outline: 2px solid 
 .coverage { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddddd4; font-size: 12px; }
 .notice { padding: 16px; background: #c1ccc0; }
 .sr-only { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); }
-.skip { position: absolute; left: 12px; top: -80px; padding: 14px; background: #ccd5c7; z-index: 30; }
-.skip:focus { top: 10px; }
+.skip { position: fixed; left: 12px; top: -80px; padding: 12px 16px; background: #242d23; color: #f4f0e4; border: 1px solid #8fa38b; border-radius: 3px; z-index: 4000; }
+.skip:focus { top: 6px; outline: 2px solid #d8dfd4; outline-offset: 2px; }
 
 /* Fixed reading frame: manuscript scroll belongs to the editor alone. */
 #writing-space { position: fixed; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; }
@@ -965,7 +965,7 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  .os-tasks button { border: 1px solid #8b9b8c; border-radius: 0; min-height: 30px; font-size: 12px; padding: 5px 12px; margin: 0 8px 0 0; }
  .os-tasks button[aria-pressed="true"] { border-color: #4a544c; background: #c1ccc0; }
  #cabinet-status { margin-left: 12px; margin-right: auto; }
- .cabinet-window[data-maximized="true"] { position: fixed; top: 40px !important; left: 0 !important; right: 0 !important; bottom: 44px !important; width: auto !important; height: auto !important; min-width: 0; }
+ .cabinet-window[data-maximized="true"] { position: fixed; top: 44px !important; left: 0 !important; right: 0 !important; bottom: 44px !important; width: auto !important; height: auto !important; min-width: 0; }
  .cabinet-window[data-maximized="true"] .window-bar { cursor: default; }
  body[data-view="gabinete"] .sheet { left: 50%; right: auto; top: 94px; bottom: 76px; width: 480px; max-width: calc(100% - 32px); margin-left: -240px; border: 1px solid #657367; padding: 24px; }
  body[data-view="gabinete"] .sheet-heading { padding-bottom: 16px; border-bottom-style: solid; }
@@ -2311,9 +2311,9 @@ body[data-theme="escuro"] #original-new,body[data-theme="escuro"] #volume-new { 
  .original-box .box-meta { font-size:10px; }
  .original-box .box-pull { margin:8px auto; }
  .desktop-imprint { display:none; }
- .cabinet-window { position:fixed; top:146px !important; bottom:52px !important; height:auto !important; }
+ .cabinet-window { position:fixed; top:44px !important; left:0 !important; right:0 !important; bottom:44px !important; width:auto !important; height:auto !important; }
 }
-@media screen and (max-width:760px) and (max-height:480px) { .cabinet-window { top:92px !important; } }
+@media screen and (max-width:760px) and (max-height:480px) { .cabinet-window { top:44px !important; bottom:44px !important; } }
 
 /* G2: um único contrato para o interruptor; a carcaça não muda de forma. */
 @media screen {
@@ -3185,11 +3185,13 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   body[data-view="workspace"] #gabinete, body[data-view="workspace"] #system-bar { display: none !important; }
   body[data-view="workspace"] #esc-workspace { display: flex; }
-  body[data-view="gabinete"] #esc-workspace { display: none !important; }
+  body[data-view="gabinete"] #esc-workspace,
+  body[data-view="gabinete"] .esc-mobile-bar,
+  body[data-immersion="true"] .esc-mobile-bar { display: none !important; }
 
   #esc-workspace {
     position: fixed;
-    top: 40px;
+    top: 44px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -3764,7 +3766,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   /* Coluna 3: Editor / Área de escrita */
   body[data-view="workspace"] .sheet {
-    top: 40px;
+    top: 44px;
     bottom: 44px;
   }
 
@@ -3947,42 +3949,47 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     display: none;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1120px) {
     body[data-view="workspace"] #writing-space .desk-inspector {
       display: none;
     }
     body[data-view="workspace"][data-counts="true"] #writing-space .desk-inspector {
       display: block;
       position: fixed;
-      top: 40px;
-      bottom: 44px;
+      top: 44px;
+      bottom: 0;
       right: 0;
       z-index: 1020;
       background: var(--esc-bg);
     }
   }
+  @media (max-width: 1080px) and (min-width: 761px) {
+    #navigation { width: 206px; min-width: 196px; flex: 0 0 206px; }
+    #items-column { width: 230px; min-width: 214px; flex: 0 0 230px; }
+  }
 
   .notebook-dialog { z-index: 1030; }
 
   @media (max-width: 760px) {
-    .esc-mobile-bar {
+    body[data-view="workspace"] .esc-mobile-bar {
       display: flex;
       position: fixed;
-      top: 40px;
+      top: 44px;
       left: 0;
       right: 0;
-      height: 38px;
+      height: 44px;
       z-index: 950;
       background: var(--esc-surface);
       border-bottom: 1px solid var(--esc-border);
     }
     .esc-mobile-bar button {
       flex: 1 1 0;
+      min-height: 44px;
       border: 0;
       border-bottom: 2px solid transparent;
       background: transparent;
       color: var(--esc-muted, #465347);
-      font: 600 12px/1.2 Arial, sans-serif;
+      font: 600 12.5px/1.2 Arial, sans-serif;
       cursor: pointer;
     }
     .esc-mobile-bar button[aria-current="page"] {
@@ -3995,11 +4002,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
       display: none !important;
     }
     body[data-view="workspace"][data-counts="true"] #writing-space .desk-inspector {
-      top: 78px;
+      top: 88px;
       bottom: 0;
     }
     body[data-view="workspace"] #esc-workspace {
-      top: 78px;
+      top: 88px;
     }
     body[data-view="workspace"] #navigation,
     body[data-view="workspace"] #items-column,
@@ -5609,7 +5616,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
       gap: 4px;
     }
     .esc-writing-idle-note,
-    #esc-sf-full {
+    #esc-writing-fullscreen {
       display: none !important;
     }
     .esc-writing-btn,
@@ -5708,6 +5715,14 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-left: 1px dashed var(--esc-border, #7c8b78);
     background: #c4cfc2;
     background: var(--esc-bg, #c4cfc2);
+  }
+  @media (max-width: 760px) {
+    body[data-immersion="true"][data-esc-writing-sonnet="true"] #writing-space {
+      padding-right: 0 !important;
+    }
+    body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-sonnet-panel {
+      display: none !important;
+    }
   }
 
   .esc-sound-btn[aria-pressed="true"],
@@ -5831,7 +5846,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-view="workspace"] .esc-search-wrap,
   body[data-view="workspace"] #esc-pomodoro-dock,
   body[data-view="workspace"] .esc-nav-footer,
-  body[data-view="workspace"] .sheet {
+  body[data-view="workspace"] .sheet:not(#focus-pause) {
     background: #c4cfc2 !important;
     background-color: #c4cfc2 !important;
     box-shadow: none !important;
@@ -6041,8 +6056,16 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     outline: none !important;
   }
   body[data-view="workspace"] button:focus-visible {
-    outline: 1px dashed #242d23 !important;
-    outline-offset: -2px;
+    outline: 2px solid #242d23 !important;
+    outline-offset: 1px;
+  }
+  body[data-theme="escuro"] :focus-visible {
+    outline: 2px solid #c9d8c5 !important;
+    outline-offset: 2px;
+  }
+  body[data-theme="escuro"][data-view="workspace"] button:focus-visible {
+    outline: 2px solid #c9d8c5 !important;
+    outline-offset: 1px;
   }
 
   /* Modo Leitor respira fora do verde do editor (paleta própria estilo jornal em modo-leitor.css) */
@@ -7249,6 +7272,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
      ========================================================================= */
   #gabinete #desktop-surface {
     position: absolute;
+    z-index: 0;
     isolation: isolate;
   }
   #gabinete #notebook-area,
@@ -7256,18 +7280,27 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     z-index: 2 !important;
   }
   @media (min-width: 761px) {
-    /* Recua levemente o mural de Post-its para manter respiro absoluto com a trepadeira (topo-dir) e o bistrô (base-dir) */
+    /* Alinha o mural de Post-its com respiro superior (trepadeira) e inferior (bistrô) */
     #gabinete #desktop-reminders {
-      top: 44px;
+      top: 56px;
       right: 22px;
+      padding-bottom: 150px;
+      box-sizing: border-box;
     }
+  }
+  @media (max-width: 920px) and (min-width: 761px) {
+    #gabinete #desktop-reminders { width: 220px; }
+    #gabinete #notebook-area { right: 256px; }
   }
   #gabinete #cabinet-window {
     z-index: 6 !important;
   }
   .esc-cafe-diorama {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
@@ -7275,14 +7308,17 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     -webkit-user-select: none;
     transition: opacity 280ms ease;
   }
-  /* Dentro de uma gaveta aberta, o paredão recua suavemente para dar foco total aos cadernos da gaveta */
-  #gabinete #desktop-surface:has(#notebook-area[data-drawer-open="true"]) .esc-cafe-diorama {
+  /* Dentro de uma gaveta aberta, o paredão recua suavemente (sem depender de :has) */
+  #gabinete #desktop-surface[data-drawer-open="true"] .esc-cafe-diorama {
     opacity: 0.36;
   }
   /* Moldura arquitetônica AFK Journey (duplo filete latão/pergaminho + cantoneiras sutis) */
   .esc-cafe-frame {
     position: absolute;
-    inset: 6px 8px 6px;
+    top: 6px;
+    right: 8px;
+    bottom: 6px;
+    left: 8px;
     border: 1px solid rgba(72, 62, 46, 0.24);
     border-radius: 5px;
     box-shadow: inset 0 0 0 5px rgba(244, 238, 224, 0.22), inset 0 0 0 6px rgba(154, 122, 66, 0.22);
@@ -7346,6 +7382,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .esc-cafe-vine-tr {
     top: 6px;
     right: 8px;
+    width: 118px;
     width: clamp(92px, 9.8vw, 134px);
     transform-origin: top right;
   }
@@ -7353,8 +7390,10 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   /* Vinhetas pictóricas AFK Journey ancoradas com leveza nos cantos inferiores (proporção contida e acolhedora) */
   .esc-cafe-scene-bl {
     position: absolute;
+    left: 26px;
     left: clamp(20px, 2.4vw, 34px);
     bottom: 9px;
+    width: 102px;
     width: clamp(82px, 8.6vw, 118px);
     height: auto;
     display: block;
@@ -7363,8 +7402,10 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   .esc-cafe-scene-br {
     position: absolute;
+    right: 24px;
     right: clamp(16px, 2.2vw, 32px);
     bottom: 9px;
+    width: 232px;
     width: clamp(180px, 20.5vw, 276px);
     height: auto;
     display: block;
@@ -7415,17 +7456,19 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     .esc-cafe-scene-br { width: 204px; opacity: 0.82; }
   }
   @media (max-width: 760px) {
-    .esc-cafe-frame { inset: 2px 2px 4px; }
+    .esc-cafe-frame { top: 2px; right: 2px; bottom: 4px; left: 2px; }
     .esc-cafe-corner { width: 16px; height: 16px; opacity: 0.4; }
-    .esc-cafe-wainscot { height: 20px; bottom: 6px; }
-    .esc-cafe-paving { height: 6px; }
-    .esc-cafe-vine-tr { width: 82px; opacity: 0.76; }
-    .esc-cafe-scene-bl { display: none; }
-    .esc-cafe-scene-br { width: 152px; right: 8px; bottom: 5px; opacity: 0.52; }
-  }
-  @media (max-height: 520px) {
+    .esc-cafe-wainscot,
+    .esc-cafe-paving,
     .esc-cafe-scene-bl,
     .esc-cafe-scene-br { display: none; }
+    .esc-cafe-vine-tr { width: 82px; opacity: 0.72; }
+  }
+  @media (max-height: 520px) {
+    .esc-cafe-vine-tr,
+    .esc-cafe-scene-bl,
+    .esc-cafe-scene-br { display: none; }
+    #gabinete #desktop-reminders { top: 16px; padding-bottom: 12px; }
   }
   @media print {
     .esc-cafe-diorama { display: none !important; }
@@ -8284,7 +8327,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   body[data-theme="escuro"] input::placeholder,
   body[data-theme="escuro"] textarea::placeholder {
-    color: #7c897a !important;
+    color: #8e9c8c !important;
   }
 
   body[data-theme="escuro"][data-view="workspace"] .esc-nav-brand,
@@ -8407,11 +8450,17 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools #esc-superfocus-auto-toggle {
     border-color: rgba(207, 214, 203, 0.26) !important;
   }
-  body[data-theme="escuro"][data-view="workspace"] button:hover,
-  body[data-theme="escuro"][data-view="workspace"] .file-label:hover,
-  body[data-theme="escuro"][data-view="workspace"] .esc-nav-tool-btn:hover,
-  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button:hover {
+  body[data-theme="escuro"][data-view="workspace"] #esc-workspace .file-label:hover,
+  body[data-theme="escuro"][data-view="workspace"] #esc-workspace .esc-nav-tool-btn:hover,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button:hover,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button:hover {
     background: rgba(207, 214, 203, 0.08) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-project-select:hover,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-tree-expand:hover,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-project-color-btn:hover,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-brand-btn:hover {
+    background: transparent !important;
   }
   body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"],
   body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead button[aria-pressed="true"],
@@ -8439,16 +8488,242 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-theme="escuro"] .sheet:not(#oficina) .actions button,
   body[data-theme="escuro"] .sheet:not(#oficina) .file-label,
   body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice button,
-  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button {
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button,
+  body[data-theme="escuro"] #paste-mode,
+  body[data-theme="escuro"] #trash-current,
+  body[data-theme="escuro"] #note-project-save,
+  body[data-theme="escuro"] #notebook-parent-save,
+  body[data-theme="escuro"] #trash-toggle,
+  body[data-theme="escuro"] .utility-actions button,
+  body[data-theme="escuro"] #calendar-form button,
+  body[data-theme="escuro"] #lineage-mark,
+  body[data-theme="escuro"] #lineage-restore,
+  body[data-theme="escuro"] #new-document,
+  body[data-theme="escuro"] #import-copied {
     background: #242b24 !important;
     color: #cfd6cb !important;
     border-color: #3d483d !important;
   }
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-section h3 {
+    color: #96a393 !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-section,
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row {
+    border-color: rgba(207, 214, 203, 0.14) !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice {
+    background: #191e19 !important;
+    border-color: #3d483d !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .check .switch-track {
+    background: #2a332a !important;
+    border-color: #4b5a4b !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .check input:checked + .switch-track {
+    background: #364536 !important;
+    border-color: #5a725a !important;
+  }
   body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice button[aria-pressed="true"],
-  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button[aria-pressed="true"] {
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button[aria-pressed="true"],
+  body[data-theme="escuro"] #paste-mode[aria-pressed="true"],
+  body[data-theme="escuro"] #trash-toggle[aria-pressed="true"] {
     background: #364536 !important;
     color: #e4ebe1 !important;
     border-color: #5a725a !important;
+  }
+  /* Blindagem completa Modo Noturno: overscroll html, Estante interna, #system-bar, #start-menu, Pausa, Quadro, Dialogs e 3 colunas */
+  html[data-theme="escuro"] {
+    background: #1d221d !important;
+    color-scheme: dark;
+  }
+  body[data-theme="escuro"] #gabinete .cabinet-window,
+  body[data-theme="escuro"] #gabinete .project-shelf {
+    background: #1d221d !important;
+    border-color: rgba(207, 214, 203, 0.16) !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #gabinete .window-bar,
+  body[data-theme="escuro"] #gabinete .first-run {
+    background: #232a23 !important;
+    border-color: rgba(207, 214, 203, 0.16) !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #gabinete .resume-note {
+    background: #252c24 !important;
+    border-color: #465346 !important;
+    color: #d8dfd4 !important;
+    box-shadow: none !important;
+  }
+  body[data-theme="escuro"] #gabinete .os-menu {
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #gabinete .os-menu:hover {
+    background: rgba(207, 214, 203, 0.09) !important;
+  }
+  body[data-theme="escuro"] #system-bar {
+    background: #191e19 !important;
+    border-top-color: rgba(207, 214, 203, 0.16) !important;
+    color: #96a393 !important;
+  }
+  body[data-theme="escuro"] #system-bar #os-start,
+  body[data-theme="escuro"] #system-bar #os-window-task,
+  body[data-theme="escuro"] #system-bar #cabinet-return,
+  body[data-theme="escuro"] #system-bar #screen-lock {
+    background: #242b24 !important;
+    color: #cfd6cb !important;
+    border-color: #3d483d !important;
+  }
+  body[data-theme="escuro"] #system-bar #cabinet-return:hover,
+  body[data-theme="escuro"] #system-bar #os-start:hover {
+    background: #2e372e !important;
+  }
+  body[data-theme="escuro"] #start-menu {
+    background: #1d221d !important;
+    color: #cfd6cb !important;
+    border-color: #3a453a !important;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.45) !important;
+  }
+  body[data-theme="escuro"] #start-menu .start-group-toggle[aria-expanded="true"],
+  body[data-theme="escuro"] #start-menu .start-group-items {
+    background: #242b24 !important;
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] .sheet.focus-pause {
+    background: #1d221d !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] .context-overflow {
+    background: #232a23 !important;
+    color: #cfd6cb !important;
+    border-color: #3c483c !important;
+  }
+  body[data-theme="escuro"] #desktop-organize-menu button:hover,
+  body[data-theme="escuro"] .context-overflow button:hover {
+    background: #2e372e !important;
+    color: #e4ebe1 !important;
+  }
+  body[data-theme="escuro"] .app-dialog-card {
+    border-color: #3d483d !important;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5) !important;
+  }
+  body[data-theme="escuro"] #app-dialog-cancel {
+    border-color: #455245 !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #app-dialog-cancel:hover {
+    background: rgba(207, 214, 203, 0.09) !important;
+  }
+  body[data-theme="escuro"] #chalkboard #chalk-help,
+  body[data-theme="escuro"] #chalkboard .chalk-bottom {
+    color: #96a393;
+  }
+  body[data-theme="escuro"] #chalkboard #chalk-status {
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] #chalkboard .chalk-tools button:hover,
+  body[data-theme="escuro"] #chalkboard .chalk-actions button:hover,
+  body[data-theme="escuro"] #chalkboard .chalk-upload:hover {
+    background: rgba(207, 214, 203, 0.09) !important;
+  }
+  body[data-theme="escuro"] button.esc-back-chip {
+    background: #364536 !important;
+    color: #e4ebe1 !important;
+    border-color: #536953 !important;
+  }
+  body[data-theme="escuro"] .author-keychain {
+    box-shadow: 3px 4px 0 #111511;
+  }
+  body[data-theme="escuro"] .lock-hide-hint {
+    background: #364536 !important;
+    border-color: #536953 !important;
+    color: #e4ebe1 !important;
+  }
+  body[data-theme="escuro"] .esc-toast {
+    background: #2c362c;
+    border-color: #536953;
+    color: #e4ebe1;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+  body[data-theme="escuro"] #esc-empty-trash {
+    background: #3d2424;
+    color: #e2b0ae;
+    border-color: #844b45;
+  }
+  body[data-theme="escuro"] .esc-inline-input,
+  body[data-theme="escuro"] .esc-inline-select {
+    background: #191e19;
+    color: #d8dfd4;
+    border-color: #3d483d;
+  }
+  body[data-theme="escuro"] .esc-shortcut-preview { color: #96a393; }
+  body[data-theme="escuro"] .esc-inline-err,
+  body[data-theme="escuro"] .esc-tpl-error,
+  body[data-theme="escuro"] .esc-reference-delete {
+    color: #e5a9a2;
+    border-color: rgba(229, 169, 162, 0.5);
+  }
+  body[data-theme="escuro"] .esc-item-pin { color: #d6b274; }
+  body[data-theme="escuro"] .esc-filter-badge,
+  body[data-theme="escuro"] .esc-filter-chip[aria-pressed="true"],
+  body[data-theme="escuro"] .esc-reference-badge,
+  body[data-theme="escuro"] #cabinet-new,
+  body[data-theme="escuro"] #project-create,
+  body[data-theme="escuro"] #focus-form button {
+    background: #364536 !important;
+    color: #e4ebe1 !important;
+    border-color: #536953 !important;
+  }
+  body[data-theme="escuro"] input[type="radio"],
+  body[data-theme="escuro"] input[type="checkbox"] {
+    accent-color: #9cb398;
+  }
+  /* Acessibilidade: foco e toque em ações dos cartões e no botão Novo texto */
+  body[data-view="workspace"] .esc-item-card:focus-within .esc-item-act,
+  body[data-view="workspace"] .esc-item-act:focus-visible {
+    opacity: 0.96;
+  }
+  body[data-view="workspace"] #esc-new-note:focus-visible {
+    background: rgba(33, 41, 33, 0.1) !important;
+  }
+  @media (hover: none) {
+    body[data-view="workspace"] .esc-item-act { opacity: 0.86; }
+  }
+  /* Mobile & Touch: barra #location-path sem estouro horizontal + alvos de toque confortáveis */
+  #location-path #path-panel {
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 760px) {
+    #location-path #path-panel { max-width: 28vw; }
+    #location-path .esc-theme-label { display: none; }
+    #location-path .esc-theme-btn { padding: 0 9px !important; min-width: 38px; min-height: 36px; justify-content: center; }
+    #location-path #esc-path-return { padding: 0 9px !important; min-height: 36px; font-size: 11.5px !important; }
+    #chalkboard .chalk-tools button,
+    #chalkboard .chalk-actions button,
+    #chalkboard .chalk-upload { min-height: 40px !important; min-width: 40px; }
+  }
+  @media (max-width: 600px) {
+    #location-path #esc-fullscreen-btn { display: none !important; }
+  }
+  @media (max-width: 760px), (pointer: coarse) {
+    body[data-view="workspace"] #writing-space .desk-tools button,
+    body[data-view="workspace"] #writing-space .writing-toolbar button,
+    body[data-view="workspace"] #writing-space .size-control button,
+    .sheet .close-panel,
+    #system-bar #os-start,
+    #system-bar #cabinet-return,
+    #system-bar #screen-lock,
+    #gabinete #project-new,
+    #gabinete #desktop-organize,
+    #gabinete #reminder-new,
+    #gabinete #original-back,
+    #gabinete #original-more {
+      min-height: 40px !important;
+    }
   }
   body[data-theme="escuro"] .esc-items-filters-panel,
   body[data-theme="escuro"] .esc-folder-menu,
@@ -8535,9 +8810,27 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     body[data-view="workspace"] #esc-new-project,
     body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card,
     body[data-view="workspace"] #navigation .esc-nav-item .esc-ui-ico,
-    body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico,
+    #gabinete #notebook-list .notebook-cover,
+    #gabinete #notebook-list .notebook-front,
+    #gabinete #notebook-list .notebook-cover::after,
+    #gabinete #notebook-list .original-box,
+    #gabinete .original-box .box-lid,
+    #gabinete .original-box .drawer-stack,
+    #gabinete .original-box .box-pull,
+    #gabinete .desktop-reminder {
       animation: none !important;
       transition: none !important;
+    }
+    #gabinete #notebook-list .notebook-cover:hover,
+    #gabinete #notebook-list .notebook-cover:focus-visible,
+    #gabinete #notebook-list .notebook-cover:hover .notebook-front,
+    #gabinete #notebook-list .notebook-cover:focus-visible .notebook-front,
+    #gabinete #notebook-list .notebook-cover:active .notebook-front,
+    #gabinete #notebook-list .original-box:hover,
+    #gabinete #notebook-list .original-box:focus-visible,
+    #gabinete #notebook-list .original-box:active {
+      transform: none !important;
     }
   }
 }
@@ -9814,15 +10107,23 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-box {
     background: #292119;
     border-color: rgba(196, 154, 88, 0.32);
+    box-shadow: inset 0 0 0 3px rgba(217, 206, 188, 0.05), 0 6px 18px rgba(0, 0, 0, 0.28);
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-note { color: #b8a790; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-group { color: #d6be96; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-groups {
+    scrollbar-color: #5b4a39 #211a14;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-track { background: #211a14; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb { background: #5b4a39; border-color: #211a14; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-frame { background: #211a14; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-resume-btn,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item {
     background: #292119 !important;
     color: #d9cebc !important;
     border-color: rgba(196, 154, 88, 0.3) !important;
+    box-shadow: inset 0 0 0 3px rgba(217, 206, 188, 0.04), 0 3px 10px rgba(0, 0, 0, 0.24) !important;
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item:hover,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn:hover,
@@ -9835,7 +10136,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn strong { color: #e2d7c5 !important; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item span,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn span { color: #b5a48c !important; }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman { color: #c49a58; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman {
+    background: #1e1711 !important;
+    border-color: rgba(196, 154, 88, 0.45) !important;
+    color: #d9ba7b !important;
+  }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar {
     background: #261e17 !important;
     border-bottom-color: rgba(196, 154, 88, 0.34) !important;
@@ -9895,7 +10200,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   @media (prefers-reduced-motion: reduce) {
     #esc-academy-overlay .esc-ac-layer,
     #esc-academy-overlay .esc-academy-tome,
-    #esc-academy-overlay .esc-academy-item { transition: none !important; }
+    #esc-academy-overlay .esc-academy-item { transition: none !important; transform: none !important; }
   }
 }
 
@@ -9952,13 +10257,13 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     min-height: 34px;
     padding: 6px 14px;
     border: 1px solid rgba(30, 35, 32, 0.24);
-    background: rgba(255, 255, 255, 0.28);
+    background: #d5dfd2;
     color: inherit;
     font: 600 12px/1.2 Arial, sans-serif;
     border-radius: 3px;
     cursor: pointer;
   }
-  .cart-close:hover { background: rgba(255, 255, 255, 0.55); }
+  .cart-close:hover { background: #c1cdc0; }
 
   .cart-tabs {
     display: flex;
@@ -10424,6 +10729,10 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     background: #232a23;
     border-color: #384238;
   }
+  body[data-theme="escuro"] .cart-dropzone.is-dragover {
+    background: #2a342a;
+    border-color: #7ea387;
+  }
   body[data-theme="escuro"] .cart-guard-toggle {
     background: #2a322a;
     color: #cfd6cb;
@@ -10754,7 +11063,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::after,
   body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible::after {
-    animation: escMagicSweep 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: escMagicSweep 260ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn:hover .esc-academy-ico,
   body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible .esc-academy-ico {
@@ -10785,6 +11094,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-ico,
     body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-chevron {
       transition: none !important;
+      transform: none !important;
     }
     body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::after,
     body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible::after {
@@ -10948,12 +11258,12 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #oficina #ptbr-dashboard .ptbr-action,
   #oficina #ptbr-dashboard .ptbr-reading-aside,
   #oficina #ptbr-dashboard .ptbr-reading-aside button,
-  #oficina #ptbr-dashboard .ptbr-class-chip,
+  #oficina #ptbr-dashboard .ptbr-class-chip:not([data-word-class]),
   #oficina #ptbr-dashboard .ptbr-nav-pill,
   #oficina #ptbr-dashboard .ptbr-pill-mode-btn,
   #oficina #ptbr-dashboard .ptbr-guide-toggle,
   #oficina #ptbr-dashboard .ptbr-guide-card,
-  #oficina #ptbr-dashboard .ptbr-excerpt,
+  #oficina #ptbr-dashboard .ptbr-excerpt:not([data-repeat-group]),
   #oficina #ptbr-dashboard .ptbr-example-card,
   #oficina #ptbr-dashboard .ptbr-example-btn,
   #oficina #ptbr-dashboard .ptbr-example-banner,
@@ -11057,11 +11367,6 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #oficina #ptbr-dashboard .ptbr-arc-head { fill: #5c310e !important; }
   #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #dfd5c2 !important; stroke: #8b5a1e !important; stroke-width: 1.25 !important; }
   #oficina #ptbr-dashboard .ptbr-arc-label { fill: #26140a !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-relation-arcs { color: #d9ae62 !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-origin { fill: #20150f !important; stroke: #d9ae62 !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-head { fill: #e6c67e !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #2c1e15 !important; stroke: #c99a47 !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-label { fill: #f2e7d2 !important; }
   #oficina #ptbr-dashboard .ptbr-proportion-fill,
   #oficina #ptbr-dashboard .ptbr-rhythm-bar { background-color: #7c4c1c !important; }
   #oficina #ptbr-dashboard .ptbr-pulse-bar {
@@ -11268,24 +11573,38 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-action,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip:not([data-word-class]),
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-toggle,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-card,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt:not([data-repeat-group]),
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-card,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-btn,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-blank-samples,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-clause-badge,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-whole,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-term {
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-whole {
     background-color: #292119 !important;
     border-color: rgba(196, 154, 88, 0.32) !important;
     color: #d9cebc !important;
   }
+  /* Preserva 100% da codificação por cores de Morfologia e Sintaxe (incluindo "Só cores") no Modo Noturno */
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word:not([data-word-class-norm]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-term:not([data-syntax-role]) {
+    background-color: #292119;
+    border-color: rgba(196, 154, 88, 0.32);
+    color: #d9cebc;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt[data-repeat-group] {
+    background-color: #292119 !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #oficina .ptbr-word-scroll {
+    scrollbar-color: #5b4a39 #211a14;
+  }
+  body[data-theme="escuro"] #oficina .ptbr-word-scroll::-webkit-scrollbar-track { background: #211a14; }
+  body[data-theme="escuro"] #oficina .ptbr-word-scroll::-webkit-scrollbar-thumb { background: #5b4a39; }
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word[data-reading-state="ambiguo"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word[data-reading-state="desconhecido"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word-tag,
@@ -11312,6 +11631,9 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     border-color: rgba(196, 154, 88, 0.34) !important;
     color: #a89882 !important;
   }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-academy-link:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-btn:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-subtle:hover,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn:hover:not(:disabled):not([aria-current="true"]),
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals button:hover,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button:hover:not(:disabled):not([aria-current="true"]),
@@ -11393,7 +11715,7 @@ SOFTWARE.
 
 </head>
 <body data-theme="claro" data-esc-theme="eink" data-input="pointer" data-viewport="full" data-letter="maquina" data-panel="closed" data-view="workspace" data-nav-collapsed="false" data-lists-collapsed="false" data-mobile-pane="editor">
-<section id="lineage-panel" class="sheet" role="dialog" aria-labelledby="lineage-heading" tabindex="-1" hidden>
+<section id="lineage-panel" class="sheet" role="dialog" aria-modal="true" aria-labelledby="lineage-heading" tabindex="-1" hidden>
  <header class="sheet-heading"><div><small>HISTÓRICO LOCAL · VERSÕES DO TEXTO</small><h2 id="lineage-heading"></h2></div><button id="lineage-close" class="material-key" aria-label="Fechar versões">×</button></header>
  <p id="lineage-book"></p><p id="lineage-status" role="status"></p>
  <button id="lineage-mark">Salvar versão agora</button>
@@ -11410,7 +11732,7 @@ SOFTWARE.
   <div class="chalk-topbar">
    <div class="chalk-tools" role="group" aria-label="Ferramentas do quadro">
     <select id="chalk-pen" aria-label="Tipo de giz"><option value="fino">Fino</option><option value="giz" selected>Giz</option><option value="grosso">Grosso</option></select>
-    <button id="chalk-fino" aria-pressed="false"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg><span>Fino</span></button><button id="chalk-giz" aria-pressed="true"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Giz</span></button><button id="chalk-grosso" aria-pressed="false"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"/></svg><span>Grosso</span></button><button id="chalk-borracha" aria-pressed="false"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg><span>Borracha</span></button><button id="chalk-grid" aria-pressed="false"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg><span>Grade</span></button><button id="chalk-undo"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg><span>Desfazer</span></button><button id="chalk-clear"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg><span>Limpar</span></button>
+    <button id="chalk-fino" aria-pressed="false" aria-label="Traço fino" title="Fino"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg><span>Fino</span></button><button id="chalk-giz" aria-pressed="true" aria-label="Traço giz" title="Giz"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Giz</span></button><button id="chalk-grosso" aria-pressed="false" aria-label="Traço grosso" title="Grosso"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"/></svg><span>Grosso</span></button><button id="chalk-borracha" aria-pressed="false" aria-label="Borracha" title="Borracha"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg><span>Borracha</span></button><button id="chalk-grid" aria-pressed="false" aria-label="Alternar grade" title="Grade"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg><span>Grade</span></button><button id="chalk-undo" aria-label="Desfazer último traço" title="Desfazer"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg><span>Desfazer</span></button><button id="chalk-clear" aria-label="Limpar quadro" title="Limpar"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg><span>Limpar</span></button>
    </div>
    <p id="chalk-help">Rabisque ideias, tramas e conexões visuais do seu projeto.</p>
   </div>
@@ -11473,9 +11795,7 @@ SOFTWARE.
           <span class="esc-cafe-wainscot"></span>
           <span class="esc-cafe-paving"></span>
         </div>
-        <img class="esc-cafe-vine esc-cafe-vine-tr" src="assets/library/estante-trepadeira-outono.webp" alt="" decoding="async">
-        <img class="esc-cafe-scene-bl" src="assets/library/estante-livros-outono.webp" alt="" decoding="async">
-        <img class="esc-cafe-scene-br" src="assets/library/estante-cafe-bistro.webp" alt="" decoding="async">
+        
       </div>
       <section id="notebook-area" aria-label="Suas gavetas e cadernos">
         <div id="original-header" class="cabinet-context" hidden>
@@ -11705,20 +12025,20 @@ SOFTWARE.
           <button id="desk-print" title="Imprimir este texto"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span>Imprimir</span></button>
         </div>
         <div id="esc-rich-toolbar" class="esc-rich-toolbar" role="toolbar" aria-label="Formatação leve" hidden>
-          <button type="button" data-rich-cmd="bold" title="Negrito"><strong>N</strong></button>
-          <button type="button" data-rich-cmd="italic" title="Itálico"><em>I</em></button>
-          <button type="button" data-rich-cmd="underline" title="Sublinhado"><u>S</u></button>
-          <button type="button" data-rich-cmd="strikeThrough" title="Tachado"><s>T</s></button>
-          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H1">H1</button>
-          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H2">H2</button>
-          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H3">H3</button>
-          <button type="button" data-rich-cmd="insertUnorderedList" title="Lista com marcadores">• Lista</button>
-          <button type="button" data-rich-cmd="insertOrderedList" title="Lista numerada">1. Lista</button>
-          <button type="button" data-rich-cmd="checklist" title="Inserir caixa de tarefa">☐ Tarefa</button>
-          <button type="button" data-rich-cmd="formatBlock" data-rich-val="BLOCKQUOTE" title="Citação">“ ”</button>
-          <button type="button" data-rich-cmd="code" title="Bloco de código">&lt;/&gt;</button>
-          <button type="button" data-rich-cmd="hr" title="Linha divisória">―</button>
-          <button type="button" data-rich-cmd="removeFormat" title="Limpar formatação">Limpar</button>
+          <button type="button" data-rich-cmd="bold" aria-label="Negrito" title="Negrito"><strong>N</strong></button>
+          <button type="button" data-rich-cmd="italic" aria-label="Itálico" title="Itálico"><em>I</em></button>
+          <button type="button" data-rich-cmd="underline" aria-label="Sublinhado" title="Sublinhado"><u>S</u></button>
+          <button type="button" data-rich-cmd="strikeThrough" aria-label="Tachado" title="Tachado"><s>T</s></button>
+          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H1" aria-label="Título nível 1" title="Título nível 1">H1</button>
+          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H2" aria-label="Título nível 2" title="Título nível 2">H2</button>
+          <button type="button" data-rich-cmd="formatBlock" data-rich-val="H3" aria-label="Título nível 3" title="Título nível 3">H3</button>
+          <button type="button" data-rich-cmd="insertUnorderedList" aria-label="Lista com marcadores" title="Lista com marcadores">• Lista</button>
+          <button type="button" data-rich-cmd="insertOrderedList" aria-label="Lista numerada" title="Lista numerada">1. Lista</button>
+          <button type="button" data-rich-cmd="checklist" aria-label="Inserir caixa de tarefa" title="Inserir caixa de tarefa">☐ Tarefa</button>
+          <button type="button" data-rich-cmd="formatBlock" data-rich-val="BLOCKQUOTE" aria-label="Citação" title="Citação">“ ”</button>
+          <button type="button" data-rich-cmd="code" aria-label="Bloco de código" title="Bloco de código">&lt;/&gt;</button>
+          <button type="button" data-rich-cmd="hr" aria-label="Linha divisória" title="Linha divisória">―</button>
+          <button type="button" data-rich-cmd="removeFormat" aria-label="Limpar formatação" title="Limpar formatação">Limpar</button>
         </div>
         <label class="sr-only" for="manuscrito">Manuscrito</label>
         <p id="esc-sonnet-editor-hint" class="esc-sonnet-editor-hint" hidden>Escreva seu primeiro verso. Enter começa o próximo.</p>
@@ -11777,7 +12097,7 @@ SOFTWARE.
     </div>
     <div class="setting-section"><h3>Sua escrita</h3>
       <div class="setting-row"><span>Letra do manuscrito</span><div class="theme-choice" role="group" aria-label="Letra do manuscrito"><button id="font-literary" aria-pressed="false">Literária</button><button id="font-typewriter" aria-pressed="true">Máquina</button></div></div>
-      <label class="project-field" for="note-project">Caderno deste texto</label><select id="note-project" class="project-input"></select><button id="note-project-save">Mover para este caderno</button><div id="notebook-organization" hidden><label for="notebook-parent">Gaveta deste caderno</label><select id="notebook-parent"><option value="">Na mesa, sem gaveta</option></select><button id="notebook-parent-save">Guardar organização</button></div><p class="quiet">O texto acompanha o caderno ao exportar.</p>
+      <label class="project-field" for="note-project">Caderno deste texto</label><select id="note-project" class="project-input"></select><button id="note-project-save">Mover para este caderno</button><div id="notebook-organization" hidden><label for="notebook-parent">Gaveta deste caderno</label><select id="notebook-parent"><option value="">Na Estante, sem gaveta</option></select><button id="notebook-parent-save">Guardar organização</button></div><p class="quiet">O texto acompanha o caderno ao exportar.</p>
     </div>
     <div class="setting-section"><h3>Seus textos</h3><button id="paste-mode" aria-pressed="false">Restringir colagem à cópia interna</button><button id="trash-current">Mover este texto para a lixeira</button>
       <div class="actions"><button id="print-document">Imprimir este texto</button><button id="export-text">Baixar este texto <span aria-hidden="true">↓</span></button><button id="export-notebook">Exportar este caderno ↓</button><button id="export-backup">Exportar tudo ↓</button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".scrvrl,.txt,.json,text/plain,application/json"></label></div>
@@ -11849,7 +12169,7 @@ SOFTWARE.
     <button id="reset-dismissed" hidden="">Rever escolhas mantidas</button>
     <p id="analysis-coverage" class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
   </section>
-  <section id="utilidades" class="sheet utilities-sheet" role="dialog" aria-labelledby="utility-heading" tabindex="-1" hidden="">
+  <section id="utilidades" class="sheet utilities-sheet" role="dialog" aria-modal="true" aria-labelledby="utility-heading" tabindex="-1" hidden="">
     <header class="sheet-heading"><h2 id="utility-heading">Pomodoro</h2><button id="utility-close" aria-label="Fechar janela">×</button></header>
     <div id="pomodoro-panel" hidden="">
       <p class="quiet">Um tempo para escrever. Outro para respirar.</p>
@@ -11870,7 +12190,7 @@ SOFTWARE.
       <form id="calendar-form"><label for="calendar-text">Planejar este dia</label><input id="calendar-text" maxlength="500" required="" placeholder="O que quer lembrar?"><label for="calendar-kind" class="sr-only">Tipo de registro</label><select id="calendar-kind"><option value="task" selected="selected">Tarefa</option><option value="note">Nota</option></select><button type="submit" class="scrvrl-action">Adicionar</button></form><p id="calendar-status" role="status"></p><button id="calendar-export">Guardar cópia do calendário</button><label for="calendar-import">Trazer calendário<input id="calendar-import" type="file" accept=".json,application/json"></label>
     </div>
   </section>
-  <section id="focus-pause" class="sheet focus-pause" role="dialog" aria-labelledby="focus-heading" tabindex="-1" hidden="">
+  <section id="focus-pause" class="sheet focus-pause" role="dialog" aria-modal="true" aria-labelledby="focus-heading" tabindex="-1" hidden="">
     <header class="focus-header"><strong class="focus-brand">ESCREVA<span>RAL</span></strong><h2 id="focus-heading">PAUSA CONTEMPLATIVA</h2><button id="focus-close">Voltar ao texto</button></header>
     <div class="focus-center"><div class="focus-clock-shell"><span class="focus-register focus-register-tl" aria-hidden="true">+</span><span class="focus-register focus-register-tr" aria-hidden="true">+</span><span class="focus-register focus-register-bl" aria-hidden="true">+</span><span class="focus-register focus-register-br" aria-hidden="true">+</span><div class="focus-clock" aria-hidden="true"><span id="focus-digit-0" class="focus-digit" data-digit="4"><b class="sd top static-top"><span>4</span></b><b class="sd bottom static-bottom"><span>4</span></b><b class="sd top flap-front"><span>4</span></b><b class="sd bottom flap-back"><span>4</span></b></span><span id="focus-digit-1" class="focus-digit" data-digit="9"><b class="sd top static-top"><span>9</span></b><b class="sd bottom static-bottom"><span>9</span></b><b class="sd top flap-front"><span>9</span></b><b class="sd bottom flap-back"><span>9</span></b></span><span class="focus-colon">:</span><span id="focus-digit-2" class="focus-digit" data-digit="4"><b class="sd top static-top"><span>4</span></b><b class="sd bottom static-bottom"><span>4</span></b><b class="sd top flap-front"><span>4</span></b><b class="sd bottom flap-back"><span>4</span></b></span><span id="focus-digit-3" class="focus-digit" data-digit="2"><b class="sd top static-top"><span>2</span></b><b class="sd bottom static-bottom"><span>2</span></b><b class="sd top flap-front"><span>2</span></b><b class="sd bottom flap-back"><span>2</span></b></span></div><output id="focus-time" class="sr-only">49:42</output></div>
     <p id="focus-status" role="status">Afaste os olhos da tela. A escrita pode esperar.</p>
@@ -20574,6 +20894,13 @@ SOFTWARE.
     lastCompLen = 0;
   }
 
+  function silence() {
+    if (audioCtx) {
+      try { stopVoice(audioCtx.currentTime || 0); } catch (ignore) {}
+      try { if (audioCtx.state === 'running' && audioCtx.suspend) { audioCtx.suspend(); } } catch (ignore) {}
+    }
+  }
+
   function setEnabled(val, storage, silent) {
     isEnabled = !!val;
     if (storage) {
@@ -20603,6 +20930,7 @@ SOFTWARE.
     PREF_KEY: PREF_KEY,
     KEY_SAMPLES: KEY_SAMPLES,
     play: play,
+    silence: silence,
     unlock: unlock,
     loadBuffers: loadBuffers,
     pickKeySample: pickKeySample,
@@ -20903,9 +21231,25 @@ SOFTWARE.
       }
     }
 
+    function stopEffects() {
+      window.clearTimeout(idleTimer);
+      idleTimer = null;
+      window.clearTimeout(bounceTimer);
+      bounceTimer = null;
+      if (reflowTimer) { clearTimeout(reflowTimer); reflowTimer = null; }
+      try { if (animObj) { animObj.cancel(); } } catch (ignore) {}
+      animObj = null;
+      if (wrap) {
+        wrap.style.webkitTransform = '';
+        wrap.style.transform = '';
+      }
+      setActiveFrame(0);
+    }
+
     function layout() {
       var show = isEnabled && activeFocus && columnEl && document.body;
       if (!show) {
+        stopEffects();
         visible = false;
         anchorY = null;
         if (document.body) {
@@ -20944,6 +21288,10 @@ SOFTWARE.
 
     function strike(kind) {
       if (!visible || !wrap) { return; }
+      if (reducedMotion()) {
+        setActiveFrame(0);
+        return;
+      }
       if (kind === 'return') {
         window.clearTimeout(idleTimer);
         idleTimer = null;
@@ -20956,7 +21304,6 @@ SOFTWARE.
         }, IDLE_TIMEOUT_MS);
       }
 
-      if (reducedMotion()) { return; }
       var spec = kind === 'return' ? CARRIAGE : STRIKE;
       if (typeof wrap.animate === 'function') {
         try { if (animObj) { animObj.cancel(); } } catch (ignore) {}
@@ -21309,6 +21656,7 @@ SOFTWARE.
       }
     }
 
+    var pointerDown = false;
     function syncFlow() {
       if (!getActive()) {
         if (richEl && richEl.children) {
@@ -21326,6 +21674,7 @@ SOFTWARE.
             if (sel && !sel.isCollapsed && sel.rangeCount && String(sel.toString() || '').length > 0) {
               var anc = sel.getRangeAt(0).commonAncestorContainer;
               if (anc === richEl || (richEl.contains && richEl.contains(anc))) {
+                if (pointerDown) { return; }
                 openedAutomatically = false;
                 clearIdle();
                 resetCounter();
@@ -21527,6 +21876,19 @@ SOFTWARE.
     function onActivity() {
       if (getActive() && openedAutomatically) { armIdle(); }
     }
+    function onPointerStart() {
+      pointerDown = true;
+      onActivity();
+    }
+    function onPointerEnd() {
+      if (!pointerDown) { return; }
+      pointerDown = false;
+      if (getActive()) { syncFlow(); }
+    }
+    function onEditorBlur() {
+      composing = false;
+      pointerDown = false;
+    }
     function onKeyDown(ev) {
       if (ev.keyCode === 122) { // F11
         ev.preventDefault();
@@ -21559,7 +21921,12 @@ SOFTWARE.
       on(document, 'compositionstart', onCompStart, true);
       on(document, 'compositionend', onCompEnd, true);
       on(document, 'keydown', onKeyDown, true);
-      on(document, 'mousedown', onActivity, true);
+      on(document, 'mousedown', onPointerStart, true);
+      on(document, 'touchstart', onPointerStart, true);
+      on(document, 'mouseup', onPointerEnd, true);
+      on(document, 'touchend', onPointerEnd, true);
+      on(document, 'touchcancel', onPointerEnd, true);
+      on(document, 'blur', onEditorBlur, true);
       on(document, 'wheel', onActivity, true);
       on(document, 'selectionchange', syncFlow, false);
       on(document, 'fullscreenchange', syncBar, false);
@@ -21585,6 +21952,8 @@ SOFTWARE.
       syncFlow: syncFlow,
       notifyState: function (active, reason) {
         if (!active) {
+          composing = false;
+          pointerDown = false;
           openedAutomatically = false;
           clearIdle();
           resetCounter();
@@ -21596,6 +21965,8 @@ SOFTWARE.
         syncFlow();
       },
       resetDocument: function () {
+        composing = false;
+        pointerDown = false;
         clearIdle();
         resetCounter();
         openedAutomatically = false;
@@ -21699,6 +22070,9 @@ SOFTWARE.
     function applyTheme(name, persistPref) {
       currentTheme = normalizeTheme(name);
       var isDark = currentTheme === 'noturno';
+      if (document.documentElement) {
+        document.documentElement.setAttribute('data-theme', isDark ? 'escuro' : 'claro');
+      }
       if (document.body) {
         document.body.setAttribute('data-esc-theme', currentTheme);
         document.body.setAttribute('data-theme', isDark ? 'escuro' : 'claro');
@@ -21713,6 +22087,7 @@ SOFTWARE.
       if (darkBtn) { darkBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false'); }
       var cycleBtn = document.getElementById && document.getElementById('esc-theme-cycle');
       if (cycleBtn) {
+        cycleBtn.setAttribute('aria-label', 'Modo noturno');
         cycleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
         cycleBtn.setAttribute('title', isDark ? 'Voltar ao Papel S\u00E1lvia claro' : 'Ativar Modo Noturno opaco');
         var lbl = cycleBtn.querySelector ? cycleBtn.querySelector('.esc-theme-label') : null;
@@ -21760,6 +22135,16 @@ SOFTWARE.
         on(fullBtn, 'click', function () {
           if (root.Escr.superfocoCore) { root.Escr.superfocoCore.toggleFullscreen(); }
         });
+      }
+      if (document.querySelectorAll) {
+        var dioramaImgs = document.querySelectorAll('#esc-cafe-diorama img');
+        var di;
+        for (di = 0; di < dioramaImgs.length; di += 1) {
+          (function (imgEl) {
+            on(imgEl, 'error', function () { imgEl.hidden = true; imgEl.style.display = 'none'; });
+            if (imgEl.complete && imgEl.naturalWidth === 0) { imgEl.hidden = true; imgEl.style.display = 'none'; }
+          }(dioramaImgs[di]));
+        }
       }
       on(document, 'keydown', function (ev) {
         if (ev.altKey && ev.shiftKey && !ev.ctrlKey && !ev.metaKey && ev.keyCode === 78) {
@@ -22945,14 +23330,16 @@ SOFTWARE.
     var dome = document.createElement('div');
     dome.className = 'esc-ac-layer esc-ac-layer-dome';
     dome.setAttribute('data-depth', '0.22');
-    var heroImg = document.createElement('img');
-    heroImg.className = 'esc-ac-art-img';
-    heroImg.src = 'assets/library/real-gabinete-hero.webp';
-    heroImg.alt = '';
-    heroImg.setAttribute('aria-hidden', 'true');
-    heroImg.setAttribute('decoding', 'async');
-    on(heroImg, 'error', function () { heroImg.hidden = true; });
-    dome.appendChild(heroImg);
+    if (!isPortableDoc()) {
+      var heroImg = document.createElement('img');
+      heroImg.className = 'esc-ac-art-img';
+      heroImg.src = 'assets/library/real-gabinete-hero.webp';
+      heroImg.alt = '';
+      heroImg.setAttribute('aria-hidden', 'true');
+      heroImg.setAttribute('decoding', 'async');
+      on(heroImg, 'error', function () { heroImg.hidden = true; });
+      dome.appendChild(heroImg);
+    }
     stage.appendChild(dome);
 
     /* Camada 1: Moldura leve em ouro envelhecido com arcos neomanuelinos e estrelas de 4 pontas */
@@ -23099,11 +23486,27 @@ SOFTWARE.
         }
       });
 
+      function postThemeToFrame(frameEl, entryObj) {
+        if (!frameEl || !frameEl.contentWindow || !frameEl.contentWindow.postMessage) { return; }
+        try {
+          var body = document.body;
+          var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
+          var paper = isDark ? '#211a14' : '#cfc3ae';
+          var ink = isDark ? '#d9cebc' : '#1f130b';
+          var accent = isDark ? '#c49a58' : (entryObj && entryObj.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
+          frameEl.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
+        } catch (ignore) {}
+      }
+
       on(window, 'message', function (ev) {
         if (!modalEl || modalEl.hidden || !ev.data || ev.data.channel !== 'escrevaral-academia') { return; }
         if (ev.data.action === 'close') { close(); }
         else if (ev.data.action === 'back') { openList(); }
         else if (ev.data.action === 'open' && ev.data.id) { openGuide(ev.data.id); }
+        else if (ev.data.action === 'theme') {
+          var activeFrame = modalEl.querySelector ? modalEl.querySelector('iframe.esc-academy-frame') : null;
+          postThemeToFrame(activeFrame, activeEntry);
+        }
       });
 
       return modalEl;
@@ -23251,7 +23654,7 @@ SOFTWARE.
           fBtn.className = 'esc-academy-tome';
           fBtn.setAttribute('data-academy-id', entry.id);
           fBtn.setAttribute('data-tome', entry.id);
-          if (meta.art) {
+          if (meta.art && !isPortableDoc()) {
             var fArt = document.createElement('img');
             fArt.className = 'esc-academy-tome-art';
             fArt.src = meta.art;
@@ -24385,12 +24788,32 @@ SOFTWARE.
       try { return opts.notebooks.list(true) || []; } catch (e) { return []; }
     }
 
+    function isOriginalTrashed(origId) {
+      if (!origId || !opts.originals) { return false; }
+      try {
+        var orig = opts.originals.get(origId);
+        return !!(orig && orig.trashed);
+      } catch (e) { return false; }
+    }
+
+    function isBookAvailable(b) {
+      return !!(b && !b.trashed && !isOriginalTrashed(b.originalId));
+    }
+
     function availableBooks() {
-      return allBooks().filter(function (b) { return b && !b.trashed; });
+      return allBooks().filter(isBookAvailable);
     }
 
     function trashedBooks() {
-      return allBooks().filter(function (b) { return b && !!b.trashed; });
+      return allBooks().filter(function (b) { return b && (!!b.trashed || isOriginalTrashed(b.originalId)); });
+    }
+
+    function isDocContainerUnavailable(d) {
+      if (!d || !d.projectId || !opts.notebooks) { return false; }
+      try {
+        var bk = opts.notebooks.get(d.projectId);
+        return !!(bk && !isBookAvailable(bk));
+      } catch (e) { return false; }
     }
 
     function isBookStarred(book) {
@@ -25185,19 +25608,19 @@ SOFTWARE.
       if (state.scope === 'library') {
         if (state.libraryFilter === 'starred') {
           heading = 'Com estrela';
-          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !!d.starred; });
+          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !isDocContainerUnavailable(d) && !!d.starred; });
         } else if (state.libraryFilter === 'untagged') {
           heading = 'Sem pasta';
           filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !d.projectId; });
         } else if (state.libraryFilter === 'archived') {
           heading = 'Arquivados';
-          filtered = docs.filter(function (d) { return !d.trashed && !!d.archived; });
+          filtered = docs.filter(function (d) { return !d.trashed && !isDocContainerUnavailable(d) && !!d.archived; });
         } else if (state.libraryFilter === 'trashed') {
           heading = 'Lixeira';
           filtered = docs.filter(function (d) { return !!d.trashed; });
         } else {
           heading = 'Todos os textos';
-          filtered = docs.filter(function (d) { return !d.trashed && !d.archived; });
+          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !isDocContainerUnavailable(d); });
         }
       }
 
@@ -25242,7 +25665,7 @@ SOFTWARE.
         var fHead = createEl('p', 'esc-trash-group-title', 'Pastas e projetos na lixeira');
         listEl.appendChild(fHead);
         trashFolders.forEach(function (bk) {
-          var insideCount = docs.filter(function (d) { return d.projectId === bk.id && !!d.trashed; }).length;
+          var insideCount = docs.filter(function (d) { return d.projectId === bk.id; }).length;
           var card = createEl('article', 'esc-item-card esc-trashed-folder-card');
           var top = createEl('div', 'esc-item-top');
           top.appendChild(createEl('strong', 'esc-item-title', bk.name));
@@ -25531,7 +25954,7 @@ SOFTWARE.
     if (!m) { return false; }
     var n = parseInt(m[1], 16);
     var r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
-    return (0.299 * r + 0.587 * g + 0.114 * b) > 168;
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 120;
   }
   function pulseSpatialEnter(el) {
     if (!el || !el.classList) { return; }
@@ -25547,7 +25970,7 @@ SOFTWARE.
     var parentOrig = book && book.originalId && originals ? originals.get(book.originalId) : null;
     text(byId('notebook-window-name'), label); text(byId('os-window-task'), label);
     byId('os-window-task').setAttribute('data-notebook', book ? 'true' : 'false'); byId('os-window-task').setAttribute('title', label);
-    if (book) { byId('os-window-task').style.borderLeftColor = book.color; }
+    byId('os-window-task').style.borderLeftColor = book ? book.color : '';
     var cabWin = byId('cabinet-window');
     if (cabWin && cabWin.style && cabWin.style.setProperty) {
       cabWin.style.setProperty('--esc-book-color', book ? book.color : '#6f8e68');
@@ -25556,7 +25979,7 @@ SOFTWARE.
     if (nbMini) { nbMini.hidden = !book; }
     if (nbStrap && book) { nbStrap.style.backgroundColor = book.color; }
     if (nbKicker) {
-      text(nbKicker, book ? (parentOrig ? 'DENTRO DO CADERNO · GAVETA ' + parentOrig.name : 'VOCÊ ESTÁ DENTRO DO CADERNO') : 'GABINETE DE ESCRITA');
+      text(nbKicker, book ? (parentOrig ? 'DENTRO DO CADERNO · GAVETA ' + parentOrig.name.toUpperCase() : 'VOCÊ ESTÁ DENTRO DO CADERNO') : 'GABINETE DE ESCRITA');
     }
     byId('cabinet-search').placeholder = book ? 'Buscar neste caderno' : 'Buscar em todos os textos';
     byId('cabinet-search').setAttribute('aria-label', byId('cabinet-search').placeholder);
@@ -25567,7 +25990,7 @@ SOFTWARE.
     text(byId('notebook-back'), book && book.originalId ? '← Voltar à gaveta' : '← Voltar à Estante');
     byId('notebook-organization').hidden = !book;
     var parentSelect = byId('notebook-parent'); parentSelect.textContent = '';
-    var loose = document.createElement('option'); loose.value = ''; text(loose, 'Na mesa, sem gaveta'); parentSelect.appendChild(loose);
+    var loose = document.createElement('option'); loose.value = ''; text(loose, 'Na Estante, sem gaveta'); parentSelect.appendChild(loose);
     if (originals) { originals.list().filter(function (o) { return !o.trashed; }).forEach(function (o) { var opt = document.createElement('option'); opt.value = o.id; text(opt, o.name); parentSelect.appendChild(opt); }); }
     parentSelect.value = book ? book.originalId || '' : '';
     byId('cabinet-window').setAttribute('data-scope', book ? 'notebook' : 'all');
@@ -25595,7 +26018,8 @@ SOFTWARE.
     byId('desktop-organize-menu').hidden = true; byId('desktop-organize').setAttribute('aria-expanded','false');
     byId('volume-new').hidden = !current;
     byId('original-more-menu').hidden = true; byId('original-more').setAttribute('aria-expanded','false');
-    byId('notebook-area').setAttribute('data-drawer-open',current?'true':'false');
+    byId('notebook-area').setAttribute('data-drawer-open', current ? 'true' : 'false');
+    if (byId('desktop-surface')) { byId('desktop-surface').setAttribute('data-drawer-open', current ? 'true' : 'false'); }
     text(byId('original-title-label'), current ? current.name : 'GAVETA');
     var drawerSub = byId('original-drawer-sub');
     if (drawerSub) {
@@ -25652,6 +26076,9 @@ SOFTWARE.
     byId('os-window-task').hidden = true;
     renderNotebooks(); renderReminders(); updatePath(); queueSession();
     pulseSpatialEnter(byId('notebook-area'));
+    byId('notebook-area').scrollTop = 0; byId('desktop-surface').scrollTop = 0;
+    var focusOrig = byId('volume-new') && !byId('volume-new').hidden ? byId('volume-new') : byId('original-back');
+    if (focusOrig && focusOrig.focus) { focusOrig.focus(); }
     return true;
   }
   function closeOriginal() {
@@ -25714,6 +26141,7 @@ SOFTWARE.
       byId('project-name').value = book ? book.name : '';
     }
     text(byId('notebook-form-heading'), heading);
+    if (byId('project-create')) { text(byId('project-create'), notebookEditing ? 'Salvar' : 'Criar'); }
     text(byId('project-error'), '');
     toggleStart(false); byId('notebook-dialog').hidden = false; byId('project-form').hidden = false; byId('project-name').focus();
   }
@@ -25846,9 +26274,9 @@ SOFTWARE.
     });
     listen(byId('original-trash'), 'click', function () {
       if (!checkpoint() || !rememberNotebook()) { return; } var o = activeOriginal(); if (!o) { return; }
-      E.dialog.ask({title:'Mover gaveta para a lixeira?',message:'A gaveta “' + o.name + '” irá com seus cadernos. Você poderá restaurar tudo pelo menu Início.',accept:'Mover para a lixeira'},function (ok) {
+      E.dialog.ask({title:'Mover gaveta para a lixeira?',message:'A gaveta “' + o.name + '” irá com seus cadernos. Você poderá restaurar tudo pelo Menu → Lixeira.',accept:'Mover para a lixeira'},function (ok) {
         if (!ok || activeOriginalId !== o.id || !checkpoint() || !rememberNotebook()) { return; }
-        try { originals.update(o.id, {trashed:true}); activeNotebookId = null; activeOriginalId = null; resetToAvailableOrBlank(); closeNotebook(); renderNotebooks(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Gaveta guardada na lixeira com seus cadernos.'); } catch (e) { message(e.message); }
+        try { originals.update(o.id, {trashed:true}); activeNotebookId = null; activeOriginalId = null; resetToAvailableOrBlank(); goHomeToEstante(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Gaveta guardada na lixeira com seus cadernos.'); } catch (e) { message(e.message); }
       });
     });
     listen(byId('notebook-parent-save'), 'click', function () {
@@ -25876,12 +26304,28 @@ SOFTWARE.
     listen(byId('notebook-rename'), 'click', function () { showNotebookForm(activeNotebookId, 'volume'); });
     listen(byId('notebook-export'), 'click', function () { exportNotebook(false); });
     listen(byId('export-notebook'), 'click', function () { exportNotebook(false); });
-    listen(byId('desk-minimize'), 'click', closeNotebook);
+    listen(byId('desk-minimize'), 'click', goHomeToEstante);
     listen(byId('notebook-trash'), 'click', function () {
       if (!checkpoint()) { return; } var b = activeNotebook(); if (!b) { return; }
-      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todos os seus textos. Você poderá restaurá-lo inteiro pela Lixeira ou pelo menu Início.',accept:'Mover para a lixeira'},function(ok){
+      E.dialog.ask({title:'Mover caderno para a lixeira?',message:'O caderno “' + b.name + '” irá com todos os seus textos. Você poderá restaurá-lo inteiro pela Lixeira ou pelo Menu → Lixeira.',accept:'Mover para a lixeira'},function(ok){
         if (!ok || activeNotebookId !== b.id || !notebooks.get(b.id)) { return; }
-        try { if (!checkpoint() || !rememberNotebook()) { return; } notebooks.update(b.id, { trashed: true }); activeNotebookId = null; resetToAvailableOrBlank(); closeNotebook(); renderArchive(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Caderno movido para a lixeira. Você pode restaurar o caderno inteiro pela Lixeira.'); } catch (e) { message('Não foi possível mover o caderno.'); }
+        try {
+          if (!checkpoint() || !rememberNotebook()) { return; }
+          var keepOriginalId = b.originalId || null;
+          notebooks.update(b.id, { trashed: true });
+          if (archive) {
+            (archive.list(true).documents || []).filter(function (d) { return d.projectId === b.id && !d.trashed; }).forEach(function (d) {
+              try { archive.trash(d, true); } catch (ignore) {}
+            });
+          }
+          activeNotebookId = null;
+          resetToAvailableOrBlank();
+          activeOriginalId = keepOriginalId;
+          closeNotebook();
+          renderArchive(); renderTimeline(false);
+          if (workspaceUI) { workspaceUI.render(); }
+          message('Caderno movido para a lixeira. Você pode restaurar o caderno inteiro pela Lixeira.');
+        } catch (e) { message('Não foi possível mover o caderno.'); }
       });
     });
     listen(window, 'storage', function (event) { if (event.key === 'escrevaral.astra.notebooks.v1' || event.key === 'escrevaral.astra.originais.v1' || event.key === 'escrevaral.astra.notebooks.transaction.v1') { if (storage.getItem('escrevaral.astra.notebooks.transaction.v1')) { return; } renderNotebooks(); var b = activeNotebook(); if (b) { cabinetProject = b.name; if (doc.projectId === b.id) { doc.project = b.name; } updatePath(); } } });
@@ -26306,7 +26750,7 @@ SOFTWARE.
     } else {
       activeNotebookId = null;
       activeOriginalId = null;
-      cabinetProject = '';
+      cabinetProject = null;
       loadDocument(E.freshDocument());
       try { if (storage) { storage.removeItem('escrevaral.astra.current'); } } catch (ignore) {}
     }
@@ -26330,7 +26774,7 @@ SOFTWARE.
     }
     if (activeNotebookId && notebooks && !availableBook(notebooks.get(activeNotebookId))) {
       activeNotebookId = null;
-      cabinetProject = '';
+      cabinetProject = null;
       updatePath();
     }
     return false;
@@ -26364,41 +26808,74 @@ SOFTWARE.
       message('Movido para a lixeira. Você pode restaurar pela Lixeira.');
     } catch (e) { message('Não foi possível mover para a lixeira. A folha foi preservada.'); }
   }
+  function purgeEntrySafe(entry) {
+    if (!archive || !entry) { return false; }
+    var isCurrent = doc && (entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id));
+    if (isCurrent && dirty) { persist(); }
+    var targetId = isCurrent && doc && doc.id ? doc.id : entry.id;
+    var latest = archive.get(targetId);
+    if (!latest && entry.noteId) {
+      var all = archive.list(true).documents || [];
+      var idx;
+      for (idx = 0; idx < all.length; idx += 1) {
+        if ((all[idx].noteId || all[idx].id) === entry.noteId) { latest = all[idx]; break; }
+      }
+    }
+    if (!latest) { return false; }
+    if (!latest.trashed) {
+      var trashedRes = archive.trash(latest, true);
+      latest = (trashedRes && trashedRes.document) ? trashedRes.document : archive.get(latest.id);
+    }
+    if (!latest) { return false; }
+    archive.purge(latest);
+    linguisticStore.removeDocument('analysis/' + (latest.projectId || 'avulsos') + '/' + (latest.noteId || latest.id) + '/');
+    return true;
+  }
   function askDelete(entry) {
     if (!archive || !entry) { return; }
     if (entry.locked) { message('Esta folha de referência está protegida contra exclusão.'); return; }
-    var label = entry.title || 'Sem título';
+    var isCurrent = doc && (entry.id === doc.id || (entry.noteId || entry.id) === (doc.noteId || doc.id));
+    if (isCurrent && dirty) { persist(); }
+    var label = entry.title || (entry.kind === 'reminder' ? 'Post-it' : 'Sem título');
+    var noun = entry.kind === 'reminder' ? 'O post-it' : 'O texto';
     var firstMsg = entry.trashed
-      ? '“' + label + '” será apagada definitivamente da lixeira deste aparelho. Não será possível restaurar esta cópia.'
-      : '“' + label + '” será apagada definitivamente deste aparelho, sem passar pela lixeira. Para poder recuperar depois, use “Lixeira” em vez de excluir.';
+      ? noun + ' “' + label + '” será apagado definitivamente da lixeira deste aparelho. Não será possível restaurar esta cópia.'
+      : noun + ' “' + label + '” será apagado definitivamente deste aparelho, sem passar pela lixeira. Para poder recuperar depois, use “Lixeira” em vez de excluir.';
     askIrreversibleDelete({
       title: 'Excluir definitivamente?',
       message: firstMsg,
       accept: 'Continuar exclusão'
     }, {
       title: 'Segunda confirmação — exclusão irreversível',
-      message: 'Atenção: “' + label + '” será removida para sempre deste aparelho e não poderá ser recuperada. Arquivos já exportados (.scrvrl) não são apagados. Confirma?',
+      message: 'Atenção: ' + noun.toLowerCase() + ' “' + label + '” será removido para sempre deste aparelho e não poderá ser recuperado. Arquivos já exportados (.scrvrl) não são apagados. Confirma?',
       accept: 'Sim, excluir para sempre'
     }, function () {
       try {
-        archive.purge(entry);
-        linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/');
+        purgeEntrySafe(entry);
         ensureActiveDocumentStillValid([entry.id, entry.noteId || entry.id], null);
         renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
         if (workspaceUI) { workspaceUI.render(); }
         if (activePanel === 'acervo' && byId('trash-toggle')) { byId('trash-toggle').focus(); }
         message('Cópia excluída definitivamente deste aparelho.');
-      } catch (e) { text(byId('archive-status'), e.message); }
+      } catch (e) {
+        text(byId('archive-status'), e.message);
+        message(e.message || 'Não foi possível excluir esta cópia.');
+      }
     });
   }
 
   function updatePath() {
     var project = cabinetOpen ? cabinetProject : projectName(doc.project), currentId, names = { oficina: 'Examinar', acervo: 'Acervo', mesa: 'Ajustes', 'lineage-panel':'Versões' };
-    var orig = activeOriginal();
-    if (!orig && activeNotebook() && activeNotebook().originalId && originals) {
-      orig = originals.get(activeNotebook().originalId);
+    var crumbBook = cabinetOpen
+      ? (activeNotebook() || null)
+      : (doc && doc.projectId && notebooks ? notebooks.get(doc.projectId) : null);
+    if (crumbBook && !availableBook(crumbBook)) { crumbBook = null; }
+    var orig = cabinetOpen ? activeOriginal() : null;
+    if (!orig && crumbBook && crumbBook.originalId && originals) {
+      orig = originals.get(crumbBook.originalId);
+      if (orig && orig.trashed) { orig = null; }
     }
-    if (orig && (activeOriginalId || project !== null)) {
+    if (orig && (cabinetOpen ? (activeOriginalId || project !== null) : true)) {
       byId('path-original-separator').hidden = false;
       byId('path-original').hidden = false;
       text(byId('path-original'), orig.name);
@@ -26407,8 +26884,6 @@ SOFTWARE.
       byId('path-original-separator').hidden = true;
       byId('path-original').hidden = true;
     }
-    var crumbBook = activeNotebook() || (doc && doc.projectId && notebooks ? notebooks.get(doc.projectId) : null);
-    if (crumbBook && !availableBook(crumbBook)) { crumbBook = null; }
     var locBar = byId('location-path');
     if (locBar && locBar.style && locBar.style.setProperty) {
       locBar.style.setProperty('--esc-crumb-book-color', crumbBook && crumbBook.color ? crumbBook.color : '#6f8e68');
@@ -26421,7 +26896,7 @@ SOFTWARE.
     byId('path-document').hidden = byId('path-document-separator').hidden = cabinetOpen;
     text(byId('path-document'), title.value || 'Sem título');
     byId('path-document').setAttribute('title', title.value || 'Sem título');
-    var showEstanteCrumb = cabinetOpen && !activePanel && project === null && !activeOriginalId;
+    var showEstanteCrumb = cabinetOpen && !activePanel && project === null && !activeOriginalId && (!byId('cabinet-window') || byId('cabinet-window').hidden);
     byId('path-panel').hidden = byId('path-panel-separator').hidden = !activePanel && !showEstanteCrumb;
     text(byId('path-panel'), activePanel ? (activePanel === 'utilidades' ? byId('utility-heading').textContent : activePanel === 'focus-pause' ? 'Pausa' : names[activePanel] || '') : showEstanteCrumb ? 'Estante de cadernos' : '');
     var pathRet = byId('esc-path-return');
@@ -26673,7 +27148,7 @@ SOFTWARE.
     } else {
       activeNotebookId = null;
       activeOriginalId = null;
-      cabinetProject = '';
+      cabinetProject = null;
     }
     navDay = E.noteDateKey(doc); navMonth = navDay.slice(0, 7); timelineCount = 40; title.value = doc.title; manuscript.value = doc.text; dirty = false; manuscript.scrollTop = 0; E.transfer.selectRange(manuscript, 0, 0); growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
@@ -26696,6 +27171,8 @@ SOFTWARE.
     if (richUI) { richUI.loadDoc(doc); }
     if (wordCardUI) { wordCardUI.hide(false); }
     if (sonnetUI) { sonnetUI.sync(doc); }
+    if (immersion && isLockedRef) { setImmersion(false, 'locked'); }
+    else if (immersion && visualMachine) { visualMachine.layout(); }
     if (superfocoUI) { superfocoUI.resetDocument(); }
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.'); updatePath();
     renderTimeline(true, null, true); refreshCounts();
@@ -26712,7 +27189,8 @@ SOFTWARE.
       if (trashView && notebooks) { notebooks.list().filter(function (b) { return b.trashed && (!b.originalId || !originals.get(b.originalId).trashed); }).forEach(function (b) { var li = document.createElement('li'); paragraph(li, 'Caderno: ' + b.name); button(li, 'Restaurar caderno completo', function () { try { notebooks.update(b.id, { trashed: false }); if (archive) { (archive.list(true).documents || []).filter(function (d) { return d.projectId === b.id && !!d.trashed; }).forEach(function (d) { try { archive.trash(d, false); } catch (ignore) {} }); } renderNotebooks(); renderArchive(); renderCabinet(); renderTimeline(false); if (workspaceUI) { workspaceUI.render(); } message('Caderno restaurado com todo o conteúdo.'); } catch (e) { message(e.message); } }); list.appendChild(li); }); }
       text(byId('acervo-heading'), trashView ? 'Lixeira' : 'Acervo');
       text(byId('trash-toggle'), trashView ? 'Voltar ao acervo' : 'Lixeira'); byId('trash-toggle').setAttribute('aria-pressed', trashView ? 'true' : 'false');
-      text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : result.documents.length ? '' : 'Sua primeira folha começa aqui.');
+      var hasAnyTrashItem = list.children.length > 0 || result.documents.length > 0;
+      text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : hasAnyTrashItem ? '' : trashView ? 'A lixeira está vazia.' : 'Sua primeira folha começa aqui.');
       result.documents.forEach(function (entry) {
         var li = document.createElement('li');
         if (trashView) {
@@ -26885,6 +27363,10 @@ SOFTWARE.
       });
     } catch (e) { importError(e); }
   }
+  function silenceSound() {
+    if (E.machineSound && E.machineSound.silence) { E.machineSound.silence(); }
+    if (audio) { try { if (audio.suspend) { audio.suspend(); } } catch (ignore) {} }
+  }
   function stopSound() {
     if (E.machineSound) { E.machineSound.setEnabled(false, storage, true); }
     byId('som').checked = false;
@@ -27025,7 +27507,13 @@ SOFTWARE.
     if (result.unreadable) { message('Algumas folhas não puderam ser lidas. Os registros originais permanecem.'); }
   }
   function enterDesk(focusEditor) {
-    if (notebookReady && !activeNotebookId && doc.projectId && notebooks && availableBook(notebooks.get(doc.projectId))) { openNotebook(doc.projectId); }
+    if (notebookReady && !activeNotebookId && doc.projectId && notebooks && availableBook(notebooks.get(doc.projectId))) {
+      var resyncBook = notebooks.get(doc.projectId);
+      activeNotebookId = resyncBook.id;
+      activeOriginalId = resyncBook.originalId || null;
+      cabinetProject = resyncBook.name;
+      notebookLabels();
+    }
     toggleStart(false);
     closePanels(false); collapseTimeline(); desktopDrag = null; cabinetOpen = false; byId('gabinete').hidden = true; byId('writing-space').hidden = false;
     document.body.setAttribute('data-view', 'workspace'); updatePath(); refreshCounts();
@@ -27293,7 +27781,7 @@ SOFTWARE.
     }
   });
 
-  listen(byId('os-files'), 'click', function () { desktopWindow('open'); renderCabinet(); });
+  listen(byId('os-files'), 'click', function () { activeOriginalId = null; desktopWindow('open'); renderCabinet(); updatePath(); });
   listen(byId('os-desk'), 'click', enterDesk);
   listen(byId('os-arrange'), 'click', function () { resetDesktopWindow(); desktopWindow('open'); });
   listen(byId('os-start'), 'click', function () { toggleStart(byId('start-menu').hidden); });
@@ -27389,7 +27877,7 @@ SOFTWARE.
   listen(byId('cabinet-examine'), 'click', function () { enterDesk(); openExaminePanel({ toggle: 'examinar-toggle' }); });
   listen(byId('cabinet-poetry'), 'click', function () { enterDesk(); openExaminePanel({ toggle: 'examinar-toggle', group: 3, legacyLens: 'rima' }); });
   listen(byId('notebook-back'),'click',closeNotebook);
-  listen(byId('cabinet-all'), 'click', function () { if (!checkpoint() || !rememberNotebook()) { return; } activeNotebookId = null; cabinetProject = null; cabinetLimit = 40; byId('cabinet-search').value = ''; showingAbout = false; renderCabinet(); });
+  listen(byId('cabinet-all'), 'click', function () { if (!checkpoint() || !rememberNotebook()) { return; } activeOriginalId = null; activeNotebookId = null; cabinetProject = null; cabinetLimit = 40; byId('cabinet-search').value = ''; showingAbout = false; renderCabinet(); updatePath(); });
   listen(byId('cabinet-more'), 'click', function () { cabinetLimit += 40; renderCabinet(); });
   listen(byId('cabinet-search'), 'input', function () { showingAbout = false; window.clearTimeout(cabinetTimer); cabinetTimer = window.setTimeout(function () { cabinetLimit = 40; desktopWindow('open', false); renderCabinet(); }, 180); });
   listen(byId('cabinet-clear'), 'click', function () { window.clearTimeout(cabinetTimer); byId('cabinet-search').value = ''; showingAbout = false; renderCabinet(); byId('cabinet-search').focus(); });
@@ -27594,12 +28082,12 @@ SOFTWARE.
           trashedProjects.forEach(function (bk) {
             (archive.list(true).documents || []).filter(function (d) { return d.projectId === bk.id; }).forEach(function (d) {
               removedIds.push(d.id);
-              try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
+              try { purgeEntrySafe(d); } catch (ignore) {}
             });
             try { notebooks.purge(bk.id); } catch (ignore) {}
           });
           trashed.forEach(function (entry) {
-            try { archive.purge(entry); linguisticStore.removeDocument('analysis/' + (entry.projectId || 'avulsos') + '/' + (entry.noteId || entry.id) + '/'); } catch (ignore) {}
+            try { purgeEntrySafe(entry); } catch (ignore) {}
           });
           ensureActiveDocumentStillValid(removedIds, null);
           renderNotebooks(); renderArchive(); renderReminders(); renderCabinet(); renderTimeline(false); updatePath(); saveSession();
@@ -27658,6 +28146,7 @@ SOFTWARE.
       },
       trashProjectDocs: function (book) {
         if (!archive || !book) { return; }
+        if (dirty) { persist(); }
         var list = (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; });
         if (!list.length) { message('Não há textos ativos nesta pasta.'); return; }
         var removedIds = [];
@@ -27673,6 +28162,7 @@ SOFTWARE.
       },
       trashProject: function (book) {
         if (!notebooks || !book) { return; }
+        if (dirty) { persist(); }
         var inside = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id && !d.trashed; }) : [];
         var removedIds = [];
         notebooks.update(book.id, { trashed: true });
@@ -27698,6 +28188,7 @@ SOFTWARE.
       },
       purgeProject: function (book, insideCount) {
         if (!notebooks || !book) { return; }
+        if (dirty) { persist(); }
         var insideDocs = archive ? (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }) : [];
         var count = typeof insideCount === 'number' ? Math.max(insideCount, insideDocs.length) : insideDocs.length;
         var countLabel = count + (count === 1 ? ' texto associado' : ' textos associados');
@@ -27715,7 +28206,7 @@ SOFTWARE.
             (archive.list(true).documents || []).filter(function (d) { return d.projectId === book.id; }).forEach(function (d) {
               removedIds.push(d.id);
               if (d.noteId && d.noteId !== d.id) { removedIds.push(d.noteId); }
-              try { archive.purge(d); linguisticStore.removeDocument('analysis/' + (d.projectId || 'avulsos') + '/' + (d.noteId || d.id) + '/'); } catch (ignore) {}
+              try { purgeEntrySafe(d); } catch (ignore) {}
             });
           }
           notebooks.purge(book.id);
@@ -27868,6 +28359,10 @@ SOFTWARE.
       isSonnetActive: function () { return !!(sonnetUI && sonnetUI.isSonnetDoc && sonnetUI.isSonnetDoc(doc)); },
       isEditable: function () { return !(doc && (doc.locked || doc.category === 'reference')); }
     });
+    if (immersion) {
+      if (visualMachine) { visualMachine.setFocusActive(true); }
+      superfocoUI.notifyState(true, 'manual');
+    }
   }
 
   if (E.mountThemeChrome) {
@@ -28030,25 +28525,24 @@ SOFTWARE.
           if (cabinetOpen) { enterDesk(true); }
           setImmersion(true, 'manual');
         } else if (action === 'focus-title') {
-          if (cabinetOpen) { enterDesk(true); }
+          if (cabinetOpen) { enterDesk(true); } else { closePanels(false); }
           if (title && title.focus) {
             title.focus();
             if (title.select) { title.select(); }
           }
         } else if (action === 'examine-lens' && lensId) {
           if (cabinetOpen) { enterDesk(true); }
-          showPanel('oficina', 'examinar-toggle', true);
-          if (E.ptbrPanelOpen) { E.ptbrPanelOpen({ lens: lensId }); }
+          openExaminePanel({ toggle: 'examinar-toggle', lens: lensId });
         } else if (action === 'examine') {
           if (cabinetOpen) { enterDesk(true); }
-          showPanel('oficina', 'examinar-toggle', true);
+          openExaminePanel({ toggle: 'examinar-toggle' });
         } else if (action === 'calculator') {
           if (cabinetOpen) { enterDesk(true); }
           if (calcUI && calcUI.open) { calcUI.open('paginas', true); }
         } else if (action === 'cartorio') {
           if (cartorioUI && cartorioUI.open) { cartorioUI.open('desk'); }
         } else {
-          if (cabinetOpen) { enterDesk(true); }
+          if (cabinetOpen) { enterDesk(true); } else { closePanels(false); }
           if (richUI && richUI.isRich() && byId('esc-rich-editor')) { byId('esc-rich-editor').focus(); }
           else if (manuscript && manuscript.focus) { manuscript.focus(); }
         }
@@ -28103,7 +28597,7 @@ SOFTWARE.
   E.mountFinish({
     book: activeNotebook, checkpoint: checkpoint, message: message,
     prepare: function(){closePanels(false);toggleStart(false);},
-    prepareLock: function(){toggleStart(false);stopSound();stopMachineStrike();finishMachineFeed();},
+    prepareLock: function(){toggleStart(false);silenceSound();stopMachineStrike();finishMachineFeed();},
     save: function(book){notebooks.update(book.id,{data:book.data});},
     documents: function(){return cabinetDocuments().documents.filter(function(d){return d.projectId===activeNotebookId&&!d.trashed&&d.kind!=='reminder';});},
     open: function(entry){if(!checkpoint()){return;}try{var next=archive.get(entry.id);if(!next||next.trashed||next.projectId!==activeNotebookId){message('Este capítulo não está disponível.');return;}loadDocument(next);cabinetSelection=null;enterDesk(true);}catch(e){message('Não foi possível abrir o capítulo.');}}
@@ -28144,7 +28638,7 @@ SOFTWARE.
     }
   });
 
-  listen(document, 'visibilitychange', function () { if (document.hidden) { if (checkpoint()) { rememberNotebook(); } stopSound(); stopMachineStrike(); finishMachineFeed(); } });
+  listen(document, 'visibilitychange', function () { if (document.hidden) { if (checkpoint()) { rememberNotebook(); } silenceSound(); stopMachineStrike(); finishMachineFeed(); } });
   listen(window, 'pagehide', function () { if (checkpoint()) { rememberNotebook(); } });
   listen(window, 'beforeunload', function (event) { if (!checkpoint()) { event.preventDefault(); event.returnValue = 'Há escrita que não foi guardada.'; } });
 }());

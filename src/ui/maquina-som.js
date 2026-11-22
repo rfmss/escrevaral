@@ -278,6 +278,13 @@
     lastCompLen = 0;
   }
 
+  function silence() {
+    if (audioCtx) {
+      try { stopVoice(audioCtx.currentTime || 0); } catch (ignore) {}
+      try { if (audioCtx.state === 'running' && audioCtx.suspend) { audioCtx.suspend(); } } catch (ignore) {}
+    }
+  }
+
   function setEnabled(val, storage, silent) {
     isEnabled = !!val;
     if (storage) {
@@ -307,6 +314,7 @@
     PREF_KEY: PREF_KEY,
     KEY_SAMPLES: KEY_SAMPLES,
     play: play,
+    silence: silence,
     unlock: unlock,
     loadBuffers: loadBuffers,
     pickKeySample: pickKeySample,

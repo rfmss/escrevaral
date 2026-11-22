@@ -116,7 +116,7 @@
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::after,
   body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible::after {
-    animation: escMagicSweep 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: escMagicSweep 260ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
   body[data-view="workspace"] #navigation .esc-academy-card-btn:hover .esc-academy-ico,
   body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible .esc-academy-ico {
@@ -147,6 +147,7 @@
     body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-ico,
     body[data-view="workspace"] #navigation .esc-academy-card-btn .esc-academy-chevron {
       transition: none !important;
+      transform: none !important;
     }
     body[data-view="workspace"] #navigation .esc-academy-card-btn:hover::after,
     body[data-view="workspace"] #navigation .esc-academy-card-btn:focus-visible::after {
@@ -310,12 +311,12 @@
   #oficina #ptbr-dashboard .ptbr-action,
   #oficina #ptbr-dashboard .ptbr-reading-aside,
   #oficina #ptbr-dashboard .ptbr-reading-aside button,
-  #oficina #ptbr-dashboard .ptbr-class-chip,
+  #oficina #ptbr-dashboard .ptbr-class-chip:not([data-word-class]),
   #oficina #ptbr-dashboard .ptbr-nav-pill,
   #oficina #ptbr-dashboard .ptbr-pill-mode-btn,
   #oficina #ptbr-dashboard .ptbr-guide-toggle,
   #oficina #ptbr-dashboard .ptbr-guide-card,
-  #oficina #ptbr-dashboard .ptbr-excerpt,
+  #oficina #ptbr-dashboard .ptbr-excerpt:not([data-repeat-group]),
   #oficina #ptbr-dashboard .ptbr-example-card,
   #oficina #ptbr-dashboard .ptbr-example-btn,
   #oficina #ptbr-dashboard .ptbr-example-banner,
@@ -419,11 +420,6 @@
   #oficina #ptbr-dashboard .ptbr-arc-head { fill: #5c310e !important; }
   #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #dfd5c2 !important; stroke: #8b5a1e !important; stroke-width: 1.25 !important; }
   #oficina #ptbr-dashboard .ptbr-arc-label { fill: #26140a !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-relation-arcs { color: #d9ae62 !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-origin { fill: #20150f !important; stroke: #d9ae62 !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-head { fill: #e6c67e !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #2c1e15 !important; stroke: #c99a47 !important; }
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-label { fill: #f2e7d2 !important; }
   #oficina #ptbr-dashboard .ptbr-proportion-fill,
   #oficina #ptbr-dashboard .ptbr-rhythm-bar { background-color: #7c4c1c !important; }
   #oficina #ptbr-dashboard .ptbr-pulse-bar {
@@ -630,24 +626,38 @@
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-action,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip:not([data-word-class]),
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-toggle,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-card,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt:not([data-repeat-group]),
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-card,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-btn,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-blank-samples,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-clause-badge,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-whole,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-term {
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-whole {
     background-color: #292119 !important;
     border-color: rgba(196, 154, 88, 0.32) !important;
     color: #d9cebc !important;
   }
+  /* Preserva 100% da codificação por cores de Morfologia e Sintaxe (incluindo "Só cores") no Modo Noturno */
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word:not([data-word-class-norm]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-term:not([data-syntax-role]) {
+    background-color: #292119;
+    border-color: rgba(196, 154, 88, 0.32);
+    color: #d9cebc;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt[data-repeat-group] {
+    background-color: #292119 !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #oficina .ptbr-word-scroll {
+    scrollbar-color: #5b4a39 #211a14;
+  }
+  body[data-theme="escuro"] #oficina .ptbr-word-scroll::-webkit-scrollbar-track { background: #211a14; }
+  body[data-theme="escuro"] #oficina .ptbr-word-scroll::-webkit-scrollbar-thumb { background: #5b4a39; }
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word[data-reading-state="ambiguo"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word[data-reading-state="desconhecido"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word-tag,
@@ -674,6 +684,9 @@
     border-color: rgba(196, 154, 88, 0.34) !important;
     color: #a89882 !important;
   }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-academy-link:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-btn:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-subtle:hover,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn:hover:not(:disabled):not([aria-current="true"]),
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals button:hover,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button:hover:not(:disabled):not([aria-current="true"]),

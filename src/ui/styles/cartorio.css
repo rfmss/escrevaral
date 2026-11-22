@@ -50,13 +50,13 @@
     min-height: 34px;
     padding: 6px 14px;
     border: 1px solid rgba(30, 35, 32, 0.24);
-    background: rgba(255, 255, 255, 0.28);
+    background: #d5dfd2;
     color: inherit;
     font: 600 12px/1.2 Arial, sans-serif;
     border-radius: 3px;
     cursor: pointer;
   }
-  .cart-close:hover { background: rgba(255, 255, 255, 0.55); }
+  .cart-close:hover { background: #c1cdc0; }
 
   .cart-tabs {
     display: flex;
@@ -521,6 +521,10 @@
   body[data-theme="escuro"] .cart-paste-wrap {
     background: #232a23;
     border-color: #384238;
+  }
+  body[data-theme="escuro"] .cart-dropzone.is-dragover {
+    background: #2a342a;
+    border-color: #7ea387;
   }
   body[data-theme="escuro"] .cart-guard-toggle {
     background: #2a322a;

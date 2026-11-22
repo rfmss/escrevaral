@@ -158,12 +158,32 @@
       try { return opts.notebooks.list(true) || []; } catch (e) { return []; }
     }
 
+    function isOriginalTrashed(origId) {
+      if (!origId || !opts.originals) { return false; }
+      try {
+        var orig = opts.originals.get(origId);
+        return !!(orig && orig.trashed);
+      } catch (e) { return false; }
+    }
+
+    function isBookAvailable(b) {
+      return !!(b && !b.trashed && !isOriginalTrashed(b.originalId));
+    }
+
     function availableBooks() {
-      return allBooks().filter(function (b) { return b && !b.trashed; });
+      return allBooks().filter(isBookAvailable);
     }
 
     function trashedBooks() {
-      return allBooks().filter(function (b) { return b && !!b.trashed; });
+      return allBooks().filter(function (b) { return b && (!!b.trashed || isOriginalTrashed(b.originalId)); });
+    }
+
+    function isDocContainerUnavailable(d) {
+      if (!d || !d.projectId || !opts.notebooks) { return false; }
+      try {
+        var bk = opts.notebooks.get(d.projectId);
+        return !!(bk && !isBookAvailable(bk));
+      } catch (e) { return false; }
     }
 
     function isBookStarred(book) {
@@ -958,19 +978,19 @@
       if (state.scope === 'library') {
         if (state.libraryFilter === 'starred') {
           heading = 'Com estrela';
-          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !!d.starred; });
+          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !isDocContainerUnavailable(d) && !!d.starred; });
         } else if (state.libraryFilter === 'untagged') {
           heading = 'Sem pasta';
           filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !d.projectId; });
         } else if (state.libraryFilter === 'archived') {
           heading = 'Arquivados';
-          filtered = docs.filter(function (d) { return !d.trashed && !!d.archived; });
+          filtered = docs.filter(function (d) { return !d.trashed && !isDocContainerUnavailable(d) && !!d.archived; });
         } else if (state.libraryFilter === 'trashed') {
           heading = 'Lixeira';
           filtered = docs.filter(function (d) { return !!d.trashed; });
         } else {
           heading = 'Todos os textos';
-          filtered = docs.filter(function (d) { return !d.trashed && !d.archived; });
+          filtered = docs.filter(function (d) { return !d.trashed && !d.archived && !isDocContainerUnavailable(d); });
         }
       }
 
@@ -1015,7 +1035,7 @@
         var fHead = createEl('p', 'esc-trash-group-title', 'Pastas e projetos na lixeira');
         listEl.appendChild(fHead);
         trashFolders.forEach(function (bk) {
-          var insideCount = docs.filter(function (d) { return d.projectId === bk.id && !!d.trashed; }).length;
+          var insideCount = docs.filter(function (d) { return d.projectId === bk.id; }).length;
           var card = createEl('article', 'esc-item-card esc-trashed-folder-card');
           var top = createEl('div', 'esc-item-top');
           top.appendChild(createEl('strong', 'esc-item-title', bk.name));

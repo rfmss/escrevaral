@@ -76,7 +76,7 @@
   body[data-view="workspace"] .esc-search-wrap,
   body[data-view="workspace"] #esc-pomodoro-dock,
   body[data-view="workspace"] .esc-nav-footer,
-  body[data-view="workspace"] .sheet {
+  body[data-view="workspace"] .sheet:not(#focus-pause) {
     background: #c4cfc2 !important;
     background-color: #c4cfc2 !important;
     box-shadow: none !important;
@@ -286,8 +286,16 @@
     outline: none !important;
   }
   body[data-view="workspace"] button:focus-visible {
-    outline: 1px dashed #242d23 !important;
-    outline-offset: -2px;
+    outline: 2px solid #242d23 !important;
+    outline-offset: 1px;
+  }
+  body[data-theme="escuro"] :focus-visible {
+    outline: 2px solid #c9d8c5 !important;
+    outline-offset: 2px;
+  }
+  body[data-theme="escuro"][data-view="workspace"] button:focus-visible {
+    outline: 2px solid #c9d8c5 !important;
+    outline-offset: 1px;
   }
 
   /* Modo Leitor respira fora do verde do editor (paleta própria estilo jornal em modo-leitor.css) */
@@ -1494,6 +1502,7 @@
      ========================================================================= */
   #gabinete #desktop-surface {
     position: absolute;
+    z-index: 0;
     isolation: isolate;
   }
   #gabinete #notebook-area,
@@ -1501,18 +1510,27 @@
     z-index: 2 !important;
   }
   @media (min-width: 761px) {
-    /* Recua levemente o mural de Post-its para manter respiro absoluto com a trepadeira (topo-dir) e o bistrô (base-dir) */
+    /* Alinha o mural de Post-its com respiro superior (trepadeira) e inferior (bistrô) */
     #gabinete #desktop-reminders {
-      top: 44px;
+      top: 56px;
       right: 22px;
+      padding-bottom: 150px;
+      box-sizing: border-box;
     }
+  }
+  @media (max-width: 920px) and (min-width: 761px) {
+    #gabinete #desktop-reminders { width: 220px; }
+    #gabinete #notebook-area { right: 256px; }
   }
   #gabinete #cabinet-window {
     z-index: 6 !important;
   }
   .esc-cafe-diorama {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
@@ -1520,14 +1538,17 @@
     -webkit-user-select: none;
     transition: opacity 280ms ease;
   }
-  /* Dentro de uma gaveta aberta, o paredão recua suavemente para dar foco total aos cadernos da gaveta */
-  #gabinete #desktop-surface:has(#notebook-area[data-drawer-open="true"]) .esc-cafe-diorama {
+  /* Dentro de uma gaveta aberta, o paredão recua suavemente (sem depender de :has) */
+  #gabinete #desktop-surface[data-drawer-open="true"] .esc-cafe-diorama {
     opacity: 0.36;
   }
   /* Moldura arquitetônica AFK Journey (duplo filete latão/pergaminho + cantoneiras sutis) */
   .esc-cafe-frame {
     position: absolute;
-    inset: 6px 8px 6px;
+    top: 6px;
+    right: 8px;
+    bottom: 6px;
+    left: 8px;
     border: 1px solid rgba(72, 62, 46, 0.24);
     border-radius: 5px;
     box-shadow: inset 0 0 0 5px rgba(244, 238, 224, 0.22), inset 0 0 0 6px rgba(154, 122, 66, 0.22);
@@ -1591,6 +1612,7 @@
   .esc-cafe-vine-tr {
     top: 6px;
     right: 8px;
+    width: 118px;
     width: clamp(92px, 9.8vw, 134px);
     transform-origin: top right;
   }
@@ -1598,8 +1620,10 @@
   /* Vinhetas pictóricas AFK Journey ancoradas com leveza nos cantos inferiores (proporção contida e acolhedora) */
   .esc-cafe-scene-bl {
     position: absolute;
+    left: 26px;
     left: clamp(20px, 2.4vw, 34px);
     bottom: 9px;
+    width: 102px;
     width: clamp(82px, 8.6vw, 118px);
     height: auto;
     display: block;
@@ -1608,8 +1632,10 @@
   }
   .esc-cafe-scene-br {
     position: absolute;
+    right: 24px;
     right: clamp(16px, 2.2vw, 32px);
     bottom: 9px;
+    width: 232px;
     width: clamp(180px, 20.5vw, 276px);
     height: auto;
     display: block;
@@ -1660,17 +1686,19 @@
     .esc-cafe-scene-br { width: 204px; opacity: 0.82; }
   }
   @media (max-width: 760px) {
-    .esc-cafe-frame { inset: 2px 2px 4px; }
+    .esc-cafe-frame { top: 2px; right: 2px; bottom: 4px; left: 2px; }
     .esc-cafe-corner { width: 16px; height: 16px; opacity: 0.4; }
-    .esc-cafe-wainscot { height: 20px; bottom: 6px; }
-    .esc-cafe-paving { height: 6px; }
-    .esc-cafe-vine-tr { width: 82px; opacity: 0.76; }
-    .esc-cafe-scene-bl { display: none; }
-    .esc-cafe-scene-br { width: 152px; right: 8px; bottom: 5px; opacity: 0.52; }
-  }
-  @media (max-height: 520px) {
+    .esc-cafe-wainscot,
+    .esc-cafe-paving,
     .esc-cafe-scene-bl,
     .esc-cafe-scene-br { display: none; }
+    .esc-cafe-vine-tr { width: 82px; opacity: 0.72; }
+  }
+  @media (max-height: 520px) {
+    .esc-cafe-vine-tr,
+    .esc-cafe-scene-bl,
+    .esc-cafe-scene-br { display: none; }
+    #gabinete #desktop-reminders { top: 16px; padding-bottom: 12px; }
   }
   @media print {
     .esc-cafe-diorama { display: none !important; }
@@ -2529,7 +2557,7 @@
   }
   body[data-theme="escuro"] input::placeholder,
   body[data-theme="escuro"] textarea::placeholder {
-    color: #7c897a !important;
+    color: #8e9c8c !important;
   }
 
   body[data-theme="escuro"][data-view="workspace"] .esc-nav-brand,
@@ -2652,11 +2680,17 @@
   body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools #esc-superfocus-auto-toggle {
     border-color: rgba(207, 214, 203, 0.26) !important;
   }
-  body[data-theme="escuro"][data-view="workspace"] button:hover,
-  body[data-theme="escuro"][data-view="workspace"] .file-label:hover,
-  body[data-theme="escuro"][data-view="workspace"] .esc-nav-tool-btn:hover,
-  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button:hover {
+  body[data-theme="escuro"][data-view="workspace"] #esc-workspace .file-label:hover,
+  body[data-theme="escuro"][data-view="workspace"] #esc-workspace .esc-nav-tool-btn:hover,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button:hover,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button:hover {
     background: rgba(207, 214, 203, 0.08) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-project-select:hover,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-tree-expand:hover,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-project-color-btn:hover,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-brand-btn:hover {
+    background: transparent !important;
   }
   body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"],
   body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead button[aria-pressed="true"],
@@ -2684,16 +2718,242 @@
   body[data-theme="escuro"] .sheet:not(#oficina) .actions button,
   body[data-theme="escuro"] .sheet:not(#oficina) .file-label,
   body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice button,
-  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button {
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button,
+  body[data-theme="escuro"] #paste-mode,
+  body[data-theme="escuro"] #trash-current,
+  body[data-theme="escuro"] #note-project-save,
+  body[data-theme="escuro"] #notebook-parent-save,
+  body[data-theme="escuro"] #trash-toggle,
+  body[data-theme="escuro"] .utility-actions button,
+  body[data-theme="escuro"] #calendar-form button,
+  body[data-theme="escuro"] #lineage-mark,
+  body[data-theme="escuro"] #lineage-restore,
+  body[data-theme="escuro"] #new-document,
+  body[data-theme="escuro"] #import-copied {
     background: #242b24 !important;
     color: #cfd6cb !important;
     border-color: #3d483d !important;
   }
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-section h3 {
+    color: #96a393 !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-section,
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row {
+    border-color: rgba(207, 214, 203, 0.14) !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice {
+    background: #191e19 !important;
+    border-color: #3d483d !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .check .switch-track {
+    background: #2a332a !important;
+    border-color: #4b5a4b !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .check input:checked + .switch-track {
+    background: #364536 !important;
+    border-color: #5a725a !important;
+  }
   body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice button[aria-pressed="true"],
-  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button[aria-pressed="true"] {
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button[aria-pressed="true"],
+  body[data-theme="escuro"] #paste-mode[aria-pressed="true"],
+  body[data-theme="escuro"] #trash-toggle[aria-pressed="true"] {
     background: #364536 !important;
     color: #e4ebe1 !important;
     border-color: #5a725a !important;
+  }
+  /* Blindagem completa Modo Noturno: overscroll html, Estante interna, #system-bar, #start-menu, Pausa, Quadro, Dialogs e 3 colunas */
+  html[data-theme="escuro"] {
+    background: #1d221d !important;
+    color-scheme: dark;
+  }
+  body[data-theme="escuro"] #gabinete .cabinet-window,
+  body[data-theme="escuro"] #gabinete .project-shelf {
+    background: #1d221d !important;
+    border-color: rgba(207, 214, 203, 0.16) !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #gabinete .window-bar,
+  body[data-theme="escuro"] #gabinete .first-run {
+    background: #232a23 !important;
+    border-color: rgba(207, 214, 203, 0.16) !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #gabinete .resume-note {
+    background: #252c24 !important;
+    border-color: #465346 !important;
+    color: #d8dfd4 !important;
+    box-shadow: none !important;
+  }
+  body[data-theme="escuro"] #gabinete .os-menu {
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #gabinete .os-menu:hover {
+    background: rgba(207, 214, 203, 0.09) !important;
+  }
+  body[data-theme="escuro"] #system-bar {
+    background: #191e19 !important;
+    border-top-color: rgba(207, 214, 203, 0.16) !important;
+    color: #96a393 !important;
+  }
+  body[data-theme="escuro"] #system-bar #os-start,
+  body[data-theme="escuro"] #system-bar #os-window-task,
+  body[data-theme="escuro"] #system-bar #cabinet-return,
+  body[data-theme="escuro"] #system-bar #screen-lock {
+    background: #242b24 !important;
+    color: #cfd6cb !important;
+    border-color: #3d483d !important;
+  }
+  body[data-theme="escuro"] #system-bar #cabinet-return:hover,
+  body[data-theme="escuro"] #system-bar #os-start:hover {
+    background: #2e372e !important;
+  }
+  body[data-theme="escuro"] #start-menu {
+    background: #1d221d !important;
+    color: #cfd6cb !important;
+    border-color: #3a453a !important;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.45) !important;
+  }
+  body[data-theme="escuro"] #start-menu .start-group-toggle[aria-expanded="true"],
+  body[data-theme="escuro"] #start-menu .start-group-items {
+    background: #242b24 !important;
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] .sheet.focus-pause {
+    background: #1d221d !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] .context-overflow {
+    background: #232a23 !important;
+    color: #cfd6cb !important;
+    border-color: #3c483c !important;
+  }
+  body[data-theme="escuro"] #desktop-organize-menu button:hover,
+  body[data-theme="escuro"] .context-overflow button:hover {
+    background: #2e372e !important;
+    color: #e4ebe1 !important;
+  }
+  body[data-theme="escuro"] .app-dialog-card {
+    border-color: #3d483d !important;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5) !important;
+  }
+  body[data-theme="escuro"] #app-dialog-cancel {
+    border-color: #455245 !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] #app-dialog-cancel:hover {
+    background: rgba(207, 214, 203, 0.09) !important;
+  }
+  body[data-theme="escuro"] #chalkboard #chalk-help,
+  body[data-theme="escuro"] #chalkboard .chalk-bottom {
+    color: #96a393;
+  }
+  body[data-theme="escuro"] #chalkboard #chalk-status {
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] #chalkboard .chalk-tools button:hover,
+  body[data-theme="escuro"] #chalkboard .chalk-actions button:hover,
+  body[data-theme="escuro"] #chalkboard .chalk-upload:hover {
+    background: rgba(207, 214, 203, 0.09) !important;
+  }
+  body[data-theme="escuro"] button.esc-back-chip {
+    background: #364536 !important;
+    color: #e4ebe1 !important;
+    border-color: #536953 !important;
+  }
+  body[data-theme="escuro"] .author-keychain {
+    box-shadow: 3px 4px 0 #111511;
+  }
+  body[data-theme="escuro"] .lock-hide-hint {
+    background: #364536 !important;
+    border-color: #536953 !important;
+    color: #e4ebe1 !important;
+  }
+  body[data-theme="escuro"] .esc-toast {
+    background: #2c362c;
+    border-color: #536953;
+    color: #e4ebe1;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+  body[data-theme="escuro"] #esc-empty-trash {
+    background: #3d2424;
+    color: #e2b0ae;
+    border-color: #844b45;
+  }
+  body[data-theme="escuro"] .esc-inline-input,
+  body[data-theme="escuro"] .esc-inline-select {
+    background: #191e19;
+    color: #d8dfd4;
+    border-color: #3d483d;
+  }
+  body[data-theme="escuro"] .esc-shortcut-preview { color: #96a393; }
+  body[data-theme="escuro"] .esc-inline-err,
+  body[data-theme="escuro"] .esc-tpl-error,
+  body[data-theme="escuro"] .esc-reference-delete {
+    color: #e5a9a2;
+    border-color: rgba(229, 169, 162, 0.5);
+  }
+  body[data-theme="escuro"] .esc-item-pin { color: #d6b274; }
+  body[data-theme="escuro"] .esc-filter-badge,
+  body[data-theme="escuro"] .esc-filter-chip[aria-pressed="true"],
+  body[data-theme="escuro"] .esc-reference-badge,
+  body[data-theme="escuro"] #cabinet-new,
+  body[data-theme="escuro"] #project-create,
+  body[data-theme="escuro"] #focus-form button {
+    background: #364536 !important;
+    color: #e4ebe1 !important;
+    border-color: #536953 !important;
+  }
+  body[data-theme="escuro"] input[type="radio"],
+  body[data-theme="escuro"] input[type="checkbox"] {
+    accent-color: #9cb398;
+  }
+  /* Acessibilidade: foco e toque em ações dos cartões e no botão Novo texto */
+  body[data-view="workspace"] .esc-item-card:focus-within .esc-item-act,
+  body[data-view="workspace"] .esc-item-act:focus-visible {
+    opacity: 0.96;
+  }
+  body[data-view="workspace"] #esc-new-note:focus-visible {
+    background: rgba(33, 41, 33, 0.1) !important;
+  }
+  @media (hover: none) {
+    body[data-view="workspace"] .esc-item-act { opacity: 0.86; }
+  }
+  /* Mobile & Touch: barra #location-path sem estouro horizontal + alvos de toque confortáveis */
+  #location-path #path-panel {
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 760px) {
+    #location-path #path-panel { max-width: 28vw; }
+    #location-path .esc-theme-label { display: none; }
+    #location-path .esc-theme-btn { padding: 0 9px !important; min-width: 38px; min-height: 36px; justify-content: center; }
+    #location-path #esc-path-return { padding: 0 9px !important; min-height: 36px; font-size: 11.5px !important; }
+    #chalkboard .chalk-tools button,
+    #chalkboard .chalk-actions button,
+    #chalkboard .chalk-upload { min-height: 40px !important; min-width: 40px; }
+  }
+  @media (max-width: 600px) {
+    #location-path #esc-fullscreen-btn { display: none !important; }
+  }
+  @media (max-width: 760px), (pointer: coarse) {
+    body[data-view="workspace"] #writing-space .desk-tools button,
+    body[data-view="workspace"] #writing-space .writing-toolbar button,
+    body[data-view="workspace"] #writing-space .size-control button,
+    .sheet .close-panel,
+    #system-bar #os-start,
+    #system-bar #cabinet-return,
+    #system-bar #screen-lock,
+    #gabinete #project-new,
+    #gabinete #desktop-organize,
+    #gabinete #reminder-new,
+    #gabinete #original-back,
+    #gabinete #original-more {
+      min-height: 40px !important;
+    }
   }
   body[data-theme="escuro"] .esc-items-filters-panel,
   body[data-theme="escuro"] .esc-folder-menu,
@@ -2780,9 +3040,27 @@
     body[data-view="workspace"] #esc-new-project,
     body[data-view="workspace"] #items-column #esc-items-list > .esc-item-card,
     body[data-view="workspace"] #navigation .esc-nav-item .esc-ui-ico,
-    body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico,
+    #gabinete #notebook-list .notebook-cover,
+    #gabinete #notebook-list .notebook-front,
+    #gabinete #notebook-list .notebook-cover::after,
+    #gabinete #notebook-list .original-box,
+    #gabinete .original-box .box-lid,
+    #gabinete .original-box .drawer-stack,
+    #gabinete .original-box .box-pull,
+    #gabinete .desktop-reminder {
       animation: none !important;
       transition: none !important;
+    }
+    #gabinete #notebook-list .notebook-cover:hover,
+    #gabinete #notebook-list .notebook-cover:focus-visible,
+    #gabinete #notebook-list .notebook-cover:hover .notebook-front,
+    #gabinete #notebook-list .notebook-cover:focus-visible .notebook-front,
+    #gabinete #notebook-list .notebook-cover:active .notebook-front,
+    #gabinete #notebook-list .original-box:hover,
+    #gabinete #notebook-list .original-box:focus-visible,
+    #gabinete #notebook-list .original-box:active {
+      transform: none !important;
     }
   }
 }

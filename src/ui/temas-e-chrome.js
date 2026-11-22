@@ -74,6 +74,9 @@
     function applyTheme(name, persistPref) {
       currentTheme = normalizeTheme(name);
       var isDark = currentTheme === 'noturno';
+      if (document.documentElement) {
+        document.documentElement.setAttribute('data-theme', isDark ? 'escuro' : 'claro');
+      }
       if (document.body) {
         document.body.setAttribute('data-esc-theme', currentTheme);
         document.body.setAttribute('data-theme', isDark ? 'escuro' : 'claro');
@@ -88,6 +91,7 @@
       if (darkBtn) { darkBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false'); }
       var cycleBtn = document.getElementById && document.getElementById('esc-theme-cycle');
       if (cycleBtn) {
+        cycleBtn.setAttribute('aria-label', 'Modo noturno');
         cycleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
         cycleBtn.setAttribute('title', isDark ? 'Voltar ao Papel S\u00E1lvia claro' : 'Ativar Modo Noturno opaco');
         var lbl = cycleBtn.querySelector ? cycleBtn.querySelector('.esc-theme-label') : null;
@@ -135,6 +139,16 @@
         on(fullBtn, 'click', function () {
           if (root.Escr.superfocoCore) { root.Escr.superfocoCore.toggleFullscreen(); }
         });
+      }
+      if (document.querySelectorAll) {
+        var dioramaImgs = document.querySelectorAll('#esc-cafe-diorama img');
+        var di;
+        for (di = 0; di < dioramaImgs.length; di += 1) {
+          (function (imgEl) {
+            on(imgEl, 'error', function () { imgEl.hidden = true; imgEl.style.display = 'none'; });
+            if (imgEl.complete && imgEl.naturalWidth === 0) { imgEl.hidden = true; imgEl.style.display = 'none'; }
+          }(dioramaImgs[di]));
+        }
       }
       on(document, 'keydown', function (ev) {
         if (ev.altKey && ev.shiftKey && !ev.ctrlKey && !ev.metaKey && ev.keyCode === 78) {
