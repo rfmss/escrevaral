@@ -127,6 +127,8 @@ body {
 .hero-note .label { color:#f0c675; margin-bottom:6px; }
 .hero-note > p { font:400 1.04rem/1.48 Georgia,serif; color:#f8eed9; margin:0 0 8px; }
 .hero-note .small { color:#dfd0b4; font-size:.76rem; }
+.hero-place { grid-column:1/-1; justify-self:end; max-width:100%; margin:-12px 0 -6px; padding:5px 12px; border-radius:14px; background:rgba(24,12,6,.74); border:1px solid rgba(230,198,126,.38); color:#e4d3b4; font-size:.73rem; line-height:1.38; position:relative; z-index:2; }
+.hero-place strong { color:#f2cf88; font-weight:700; }
 
 /* Cabeçalhos de seção e mapa */
 .section-heading { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding-bottom:10px; margin-bottom:16px; border-bottom:1px solid rgba(139,90,30,.28); }
@@ -363,6 +365,7 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
 @media(max-width:860px) {
   .wrap { width:calc(100% - 36px); }
   .hero { grid-template-columns:1fr; gap:18px; padding:26px 24px; }
+  .hero-place { justify-self:stretch; margin:-4px 0 0; }
   .route { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .panel-cols,.contrast-pair,.clean-grid.cols-3 { grid-template-columns:1fr; }
 }
@@ -411,6 +414,7 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
     <p>Bloqueio não é ausência de ideias; é excesso de julgamento ou uma cena anterior que desviou do que o livro realmente quer dizer.</p>
     <span class="small">Identifique qual trava está ativa hoje antes de forçar a escrita.</span>
   </aside>
+  <p class="hero-place"><strong>✦ Bar Vesúvio e Bataclan · Ilhéus (BA)</strong> — Bares históricos de 1919 no Centro de Ilhéus, cenários de Gabriela, Cravo e Canela (1958), de Jorge Amado.</p>
 </header>
 <nav class="map wrap" id="mapa" aria-label="Mapa do guia">
   <div class="section-heading">

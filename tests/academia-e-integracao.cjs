@@ -157,7 +157,7 @@ assert.equal(findByClass(bridgedModal, 'esc-academy-tome-art').length, 2, '2 ilu
 assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 12, '12 guias editoriais com numeração romana');
 
 // Garantir assets da biblioteca Real Gabinete em WebP + inclusão no build + estética fosca sem gradientes puros
-for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp', 'banner-bloqueio.webp', 'banner-titulo.webp', 'banner-lancamento.webp']) {
+for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp', 'banner-bloqueio.webp', 'banner-titulo.webp', 'banner-lancamento.webp', 'banner-casa-rosas.webp']) {
   assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', imgName)), 'Faltando assets/library/' + imgName);
 }
 assert.ok(buildSrc.includes("'assets/library'"), 'scripts/build.cjs copia assets/library para dist/site/');
@@ -194,11 +194,13 @@ assert.ok(temasLinuxCss.includes('.esc-cafe-diorama') && temasLinuxCss.includes(
 assert.equal((temasLinuxCss.match(/DIORAMA PARISIENSE NA ESTANTE/g) || []).length, 1, 'temas-linux.css define o bloco do diorama parisiense uma única vez');
 const builtIndexHtml = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
 assert.ok(builtIndexHtml.includes('id="esc-cafe-diorama"') && builtIndexHtml.includes('assets/library/estante-cafe-bistro.webp') && builtIndexHtml.includes('assets/library/estante-livros-outono.webp') && builtIndexHtml.includes('assets/library/estante-trepadeira-outono.webp'), 'index.html gerado inclui o diorama AFK Journey em WebP local na Estante');
+assert.ok(builtIndexHtml.includes('esc-cafe-caption') && builtIndexHtml.includes('Casa Velha da Ponte'), 'index.html inclui legenda cultural brasileira da Casa Velha da Ponte na Estante');
 for (const dioramaArt of ['estante-cafe-bistro.webp', 'estante-livros-outono.webp', 'estante-trepadeira-outono.webp']) {
   assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', dioramaArt)), 'assets/library/' + dioramaArt + ' presente para uso offline');
 }
 const builtPortableHtml = fs.readFileSync(path.join(rootDir, 'escrevaral.html'), 'utf8');
-assert.ok(!builtPortableHtml.includes('assets/library/estante-cafe-bistro.webp'), 'escrevaral.html portátil omite <img> externas do diorama para zero ícone quebrado offline');
+assert.ok(!builtPortableHtml.includes('assets/library/estante-cafe-bistro.webp') && !builtPortableHtml.includes('class="esc-cafe-caption"'), 'escrevaral.html portátil omite <img> e legenda do diorama para zero ícone quebrado offline');
+assert.ok(academiaJs.includes('esc-academy-place-caption') && academiaJs.includes('esc-academy-tome-place') && academiaJs.includes('Real Gabinete Português de Leitura') && academiaJs.includes('Biblioteca Brasiliana Mindlin'), 'academia.js exibe legendas culturais brasileiras no hero e nos 2 tomos');
 const controladorSrc = fs.readFileSync(path.join(rootDir, 'src/editor/controlador.js'), 'utf8');
 assert.ok(controladorSrc.includes('function purgeEntrySafe(') && controladorSrc.includes('function silenceSound('), 'controlador.js protege exclusão direta sem textos órfãos e silencia som sem sobrescrever preferência');
 const tresColCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/tres-colunas.css'), 'utf8');
@@ -212,6 +214,7 @@ for (const entry of catalog) {
   assert.ok(!html.includes('--paper:#fafbfc'), 'academia/' + entry.file + ' sem --paper branco antigo');
   if (entry.id !== 'objeto-livro' && entry.id !== 'literatura-mundial') {
     assert.ok(html.includes('AFK-REAL-GABINETE-ORNAMENTS-START') && html.includes("img-src 'self' data:;"), 'academia/' + entry.file + ' com ornamentos AFK e banner WebP local');
+    assert.ok(html.includes('class="hero-place"'), 'academia/' + entry.file + ' inclui legenda cultural brasileira no hero');
     assert.ok(!html.includes('@media(prefers-color-scheme:dark)'), 'academia/' + entry.file + ' não deve forçar fundo escuro sobre texto escuro em SO dark');
     assert.ok(html.includes("root.setAttribute('data-theme'"), 'academia/' + entry.file + ' deve sincronizar data-theme dark/light com o app');
     const cspM = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)">/);
@@ -232,6 +235,7 @@ assert.ok(plHtml.includes('Movimento I · Antes') && plHtml.includes('Movimento 
 const chkHtml = fs.readFileSync(path.join(rootDir, 'academia/checklist-lancamento.html'), 'utf8');
 assert.ok(chkHtml.includes('Câmara Brasileira do Livro (CBL)') && !/ISBN gratuito/i.test(chkHtml), 'checklist-lancamento.html com regra vigente da CBL para ISBN');
 const bibHtml = fs.readFileSync(path.join(rootDir, 'academia/biblioteca-escrita.html'), 'utf8');
+assert.ok(bibHtml.includes('banner-casa-rosas.webp') && bibHtml.includes('Casa das Rosas'), 'biblioteca-escrita.html exibe banner e legenda da Casa das Rosas');
 assert.ok(bibHtml.includes('Luiz Antonio de Assis Brasil') && bibHtml.includes("id:'orwell', orig:'world'"), 'biblioteca-escrita.html com bibliografia brasileira verificada e Orwell na estante internacional');
 assert.ok(bibHtml.includes('rg-cover') && bibHtml.includes('Companhia das Letras') && bibHtml.includes('Editora Perspectiva') && bibHtml.includes('Coleção Real Gabinete'), 'biblioteca-escrita.html exibe capas autorais Real Gabinete com créditos editoriais');
 const kdpHtml = fs.readFileSync(path.join(rootDir, 'academia/publicar-kdp.html'), 'utf8');

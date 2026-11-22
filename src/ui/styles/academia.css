@@ -205,6 +205,26 @@
     color: #ecdcc0;
   }
 
+  /* Legendinha discreta da arquitetura literária brasileira no Hero da Academia */
+  #esc-academy-overlay .esc-academy-place-caption {
+    position: relative;
+    z-index: 4;
+    display: inline-block;
+    max-width: 92%;
+    margin: 14px auto 0;
+    padding: 4px 12px;
+    border-radius: 99px;
+    background: rgba(24, 12, 6, 0.72);
+    border: 1px solid rgba(235, 194, 114, 0.36);
+    color: #e6d4b3;
+    font: 400 11px/1.35 var(--esc-font-ui, Arial, Helvetica, sans-serif);
+    letter-spacing: 0.01em;
+  }
+  #esc-academy-overlay .esc-academy-place-caption strong {
+    color: #f3cf86;
+    font-weight: 700;
+  }
+
   /* =====================================================================
    * CORPO EDITORIAL: PERGAMINHO, MOGNO E CONTRASTE AAA BLINDADO
    * ===================================================================== */
@@ -503,6 +523,18 @@
     font: 700 12.5px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     color: #f4ca78 !important;
     letter-spacing: 0.02em;
+  }
+
+  #esc-academy-overlay .esc-academy-tome-place {
+    display: block;
+    margin-top: 8px;
+    padding-top: 6px;
+    width: 100%;
+    border-top: 1px dashed rgba(240, 198, 117, 0.28);
+    font: 400 10.5px/1.35 var(--esc-font-ui, Arial, Helvetica, sans-serif);
+    color: #e4d1af !important;
+    text-shadow: 0 1px 4px rgba(10, 5, 2, 0.85);
+    opacity: 0.92;
   }
 
   /* Pranchas ornamentadas dos capítulos I–XII (moldura dupla dourada + cantoneira + medalhão romano) */

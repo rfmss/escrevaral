@@ -1634,13 +1634,44 @@
     position: absolute;
     right: 24px;
     right: clamp(16px, 2.2vw, 32px);
-    bottom: 9px;
-    width: 232px;
-    width: clamp(180px, 20.5vw, 276px);
+    bottom: 24px;
+    width: 246px;
+    width: clamp(190px, 21.5vw, 290px);
     height: auto;
     display: block;
-    opacity: 0.94;
-    filter: saturate(0.92) contrast(0.98) drop-shadow(0 3px 5px rgba(34, 28, 20, 0.16));
+    opacity: 0.95;
+    filter: saturate(0.94) contrast(0.99) drop-shadow(0 3px 5px rgba(34, 28, 20, 0.16));
+  }
+  /* Legendinha editorial fofa e discreta da arquitetura literária brasileira na Estante */
+  .esc-cafe-caption {
+    position: absolute;
+    right: 24px;
+    right: clamp(16px, 2.2vw, 32px);
+    bottom: 5px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    max-width: clamp(220px, 34vw, 440px);
+    padding: 2px 9px;
+    border-radius: 99px;
+    background: rgba(196, 207, 194, 0.86);
+    border: 1px solid rgba(58, 72, 56, 0.22);
+    color: #364435;
+    font: 500 10.5px/1.35 var(--esc-font-ui, Arial, Helvetica, sans-serif);
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .esc-cafe-caption strong {
+    font-weight: 700;
+    color: #222e21;
+    flex-shrink: 0;
+  }
+  .esc-cafe-caption span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.88;
   }
 
   /* Modo Noturno Opaco (Crepúsculo Parisiense acolhedor — sem brilho estourado e sem halo branco) */
@@ -1676,6 +1707,14 @@
     opacity: 0.9;
     filter: brightness(0.8) contrast(1.05) saturate(0.94) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.44));
   }
+  body[data-theme="escuro"] .esc-cafe-caption {
+    background: rgba(29, 34, 29, 0.88);
+    border-color: rgba(196, 154, 88, 0.26);
+    color: #a8b4a5;
+  }
+  body[data-theme="escuro"] .esc-cafe-caption strong {
+    color: #dcc38f;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .esc-cafe-vine { animation: none !important; }
@@ -1684,6 +1723,7 @@
     .esc-cafe-vine-tr { width: 102px; }
     .esc-cafe-scene-bl { width: 88px; opacity: 0.72; }
     .esc-cafe-scene-br { width: 204px; opacity: 0.82; }
+    .esc-cafe-caption span { display: none; }
   }
   @media (max-width: 760px) {
     .esc-cafe-frame { top: 2px; right: 2px; bottom: 4px; left: 2px; }
@@ -1691,13 +1731,15 @@
     .esc-cafe-wainscot,
     .esc-cafe-paving,
     .esc-cafe-scene-bl,
-    .esc-cafe-scene-br { display: none; }
+    .esc-cafe-scene-br,
+    .esc-cafe-caption { display: none; }
     .esc-cafe-vine-tr { width: 82px; opacity: 0.72; }
   }
   @media (max-height: 520px) {
     .esc-cafe-vine-tr,
     .esc-cafe-scene-bl,
-    .esc-cafe-scene-br { display: none; }
+    .esc-cafe-scene-br,
+    .esc-cafe-caption { display: none; }
     #gabinete #desktop-reminders { top: 16px; padding-bottom: 12px; }
   }
 

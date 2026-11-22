@@ -371,6 +371,19 @@
       intro.textContent = 'Anatomia do livro, clássicos da literatura mundial e guias editoriais para cada passo da sua obra.';
       heroInner.appendChild(intro);
       hero.appendChild(heroInner);
+
+      if (!isPortableDoc()) {
+        var heroPlace = document.createElement('p');
+        heroPlace.className = 'esc-academy-place-caption';
+        heroPlace.title = 'Real Gabinete Português de Leitura (Rio de Janeiro, RJ) — Fundado em 1837; o salão neomanuelino inaugurado em 1887 abriga um dos maiores acervos de língua portuguesa fora de Portugal.';
+        var hpTitle = document.createElement('strong');
+        hpTitle.textContent = '✦ Real Gabinete Português de Leitura · Rio de Janeiro (RJ)';
+        var hpNote = document.createElement('span');
+        hpNote.textContent = ' — Salão neomanuelino de 1887, guardião de um dos maiores acervos da língua portuguesa.';
+        heroPlace.appendChild(hpTitle);
+        heroPlace.appendChild(hpNote);
+        hero.appendChild(heroPlace);
+      }
       scrollBody.appendChild(hero);
 
       var contentWrap = document.createElement('div');
@@ -439,8 +452,20 @@
       /* Vitrine em destaque: os 2 grandes tomos interativos (Objeto livro + Literatura mundial) */
       var featuredIds = ['objeto-livro', 'literatura-mundial'];
       var featuredMeta = {
-        'objeto-livro': { seal: 'Exploração visual', cta: 'Abrir anatomia →', art: 'assets/library/tome-objeto-livro.webp' },
-        'literatura-mundial': { seal: 'Leitor próprio', cta: 'Entrar na biblioteca →', art: 'assets/library/tome-literatura-mundial.webp' }
+        'objeto-livro': {
+          seal: 'Exploração visual',
+          cta: 'Abrir anatomia →',
+          art: 'assets/library/tome-objeto-livro.webp',
+          place: 'Biblioteca Nacional · Rio de Janeiro (RJ)',
+          placeNote: 'Prédio de 1910 na Cinelândia, maior biblioteca do país.'
+        },
+        'literatura-mundial': {
+          seal: 'Leitor próprio',
+          cta: 'Entrar na biblioteca →',
+          art: 'assets/library/tome-literatura-mundial.webp',
+          place: 'Biblioteca Brasiliana Mindlin · USP, São Paulo (SP)',
+          placeNote: 'Inaugurada em 2013 para guardar obras raras sobre o Brasil.'
+        }
       };
       var featWrap = document.createElement('section');
       featWrap.className = 'esc-academy-featured';
@@ -497,6 +522,13 @@
           fCta.className = 'esc-academy-tome-cta';
           fCta.textContent = meta.cta;
           fBtn.appendChild(fCta);
+          if (meta.place && !isPortableDoc()) {
+            var fPlace = document.createElement('span');
+            fPlace.className = 'esc-academy-tome-place';
+            fPlace.title = meta.place + (meta.placeNote ? ' — ' + meta.placeNote : '');
+            fPlace.textContent = '✦ ' + meta.place + (meta.placeNote ? ' · ' + meta.placeNote : '');
+            fBtn.appendChild(fPlace);
+          }
           on(fBtn, 'click', function () { openGuide(entry.id); });
           featGrid.appendChild(fBtn);
         }(findEntry(featuredIds[fi])));

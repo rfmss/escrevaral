@@ -39,7 +39,8 @@ const template=read('src/index.template.html');
 const dioramaImgs = [
   '        <img class="esc-cafe-vine esc-cafe-vine-tr" src="assets/library/estante-trepadeira-outono.webp" alt="" decoding="async">',
   '        <img class="esc-cafe-scene-bl" src="assets/library/estante-livros-outono.webp" alt="" decoding="async">',
-  '        <img class="esc-cafe-scene-br" src="assets/library/estante-cafe-bistro.webp" alt="" decoding="async">'
+  '        <img class="esc-cafe-scene-br" src="assets/library/estante-cafe-bistro.webp" alt="" decoding="async">',
+  '        <div class="esc-cafe-caption" title="Casa Velha da Ponte (Cidade de Goiás, GO) — Onde nasceu Cora Coralina em 1889, às margens do Rio Vermelho, escrevendo poesia entre a ponte e a cozinha dos doces cristalizados."><strong>&#10022; Casa Velha da Ponte &middot; Cidade de Goi&aacute;s (GO)</strong><span>Casa natal de Cora Coralina (1889), &agrave;s margens do Rio Vermelho.</span></div>'
 ].join('\n');
 function render(portable){
  let s=template.replace('{{ASSET_VERSION}}',release.assetVersion)
