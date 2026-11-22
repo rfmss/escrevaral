@@ -239,6 +239,8 @@ assert.ok(bibHtml.includes('banner-casa-rosas.webp') && bibHtml.includes('Casa d
 assert.ok(bibHtml.includes('Luiz Antonio de Assis Brasil') && bibHtml.includes("id:'orwell', orig:'world'"), 'biblioteca-escrita.html com bibliografia brasileira verificada e Orwell na estante internacional');
 const anaHtml = fs.readFileSync(path.join(rootDir, 'academia/anatomia-do-livro.html'), 'utf8');
 assert.ok(anaHtml.includes('O <em>Cortiço</em>') && anaHtml.includes('Aluísio Azevedo') && !anaHtml.includes('A Cartografia'), 'anatomia-do-livro.html exibe a capa e edição de O Cortiço (Aluísio Azevedo)');
+assert.ok(anaHtml.includes('data:image/jpeg;base64,') && anaHtml.length < 350000, 'anatomia-do-livro.html leve (<350 KB) com retrato otimizado de Aluísio Azevedo');
+assert.ok(anaHtml.includes('function stopActivePageFlip()') && !anaHtml.includes('Se não mudar, clique novamente'), 'anatomia-do-livro.html corrige navegação travada do PageFlip (sem cliques perdidos)');
 const anaCsp = anaHtml.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)">/);
 assert.ok(anaCsp, 'anatomia-do-livro.html declara meta CSP');
 const cryptoAna = require('crypto');
