@@ -103,4 +103,17 @@ const stats = E.readerCore.readingMinutes(Array(420).fill('palavra').join(' '));
 assert.equal(stats.words, 420);
 assert.equal(stats.minutes, 2);
 
-console.log('OK: formatação leve com projeção UTF-16 exata e modo leitura editorial verificados.');
+// 5. Integridade da impressão: bloqueio quando trancado, HTML vivo no modo formatado e parágrafos no texto simples
+const fs = require('node:fs');
+const path = require('node:path');
+const rootDir = path.resolve(__dirname, '..');
+const ctrlSrc = fs.readFileSync(path.join(rootDir, 'src/editor/controlador.js'), 'utf8');
+const baseCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/base.css'), 'utf8');
+const temasCss = fs.readFileSync(path.join(rootDir, 'src/ui/styles/temas-linux.css'), 'utf8');
+assert.ok(ctrlSrc.includes("getAttribute('data-locked') === 'true'") && ctrlSrc.includes('richUI.html()'), 'preparePrint protege gabinete trancado e lê HTML vivo no modo formatado');
+assert.ok(ctrlSrc.includes("ptText.className = 'is-plain'") && ctrlSrc.includes("document.createElement('p')"), 'preparePrint divide texto simples em parágrafos <p> para órfãs/viúvas corretas');
+assert.ok(baseCss.includes('body[data-locked="true"] > #print-sheet { display: none !important; }'), 'base.css impede impressão quando gabinete está trancado');
+assert.ok(baseCss.includes('#print-title[hidden] { display: none !important; }'), 'base.css oculta título vazio na impressão');
+assert.ok(!/@media\s+print\b/.test(temasCss), 'temas-linux.css não contém @media print aninhado morto dentro de @media screen');
+
+console.log('OK: formatação leve com projeção UTF-16 exata, modo leitura editorial e integridade de impressão verificados.');

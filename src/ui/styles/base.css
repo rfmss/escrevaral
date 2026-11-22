@@ -434,17 +434,22 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
 @media print {
  html, body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; color: #000 !important; margin: 0 !important; padding: 0 !important; }
  body > * { display: none !important; }
- #esc-reader-overlay, #esc-academy-overlay { display: none !important; }
- .esc-safety-banner { display: none !important; }
+ #esc-reader-overlay, #esc-academy-overlay, #esc-cartorio-overlay { display: none !important; }
+ .esc-safety-banner, .esc-cafe-diorama { display: none !important; }
  body > #print-sheet { display: block !important; position: static !important; width: auto !important; height: auto !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; font: 11.5pt/1.62 'Noto Serif', Georgia, 'Times New Roman', Times, serif; color: #111 !important; background: #fff !important; text-shadow: none !important; }
- #print-title { font: 700 17pt/1.28 'Noto Serif', Georgia, 'Times New Roman', Times, serif; margin: 0 0 16pt; padding-bottom: 8pt; border-bottom: 0.75pt solid #888; page-break-after: avoid; white-space: pre-wrap; word-wrap: break-word; }
- #print-text { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; text-align: left; orphans: 3; widows: 3; }
+ body[data-locked="true"] > #print-sheet { display: none !important; }
+ #print-title { font: 700 17pt/1.28 'Noto Serif', Georgia, 'Times New Roman', Times, serif; margin: 0 0 16pt; padding-bottom: 8pt; border-bottom: 0.75pt solid #888; page-break-after: avoid; break-after: avoid; white-space: pre-wrap; word-wrap: break-word; }
+ #print-title[hidden] { display: none !important; }
+ #print-text { word-wrap: break-word; overflow-wrap: break-word; text-align: left; }
+ #print-text.is-plain p { margin: 0 0 9pt; white-space: pre-wrap; orphans: 3; widows: 3; }
  #print-text.is-rich { white-space: normal; }
- #print-text.is-rich p { margin: 0 0 9pt; }
- #print-text.is-rich h1 { font-size: 15pt; margin: 14pt 0 7pt; page-break-after: avoid; }
- #print-text.is-rich h2 { font-size: 13.5pt; margin: 12pt 0 6pt; page-break-after: avoid; }
- #print-text.is-rich h3 { font-size: 12pt; margin: 10pt 0 5pt; page-break-after: avoid; }
- #print-text.is-rich blockquote { margin: 8pt 0 8pt 16pt; padding-left: 10pt; border-left: 2pt solid #888; font-style: italic; }
+ #print-text.is-rich p { margin: 0 0 9pt; orphans: 3; widows: 3; }
+ #print-text.is-rich h1 { font-size: 15pt; margin: 14pt 0 7pt; page-break-after: avoid; break-after: avoid; }
+ #print-text.is-rich h2 { font-size: 13.5pt; margin: 12pt 0 6pt; page-break-after: avoid; break-after: avoid; }
+ #print-text.is-rich h3 { font-size: 12pt; margin: 10pt 0 5pt; page-break-after: avoid; break-after: avoid; }
+ #print-text.is-rich blockquote { margin: 8pt 0 8pt 16pt; padding-left: 10pt; border-left: 2pt solid #888; font-style: italic; page-break-inside: avoid; break-inside: avoid; }
+ #print-text.is-rich pre { margin: 8pt 0; padding: 6pt 8pt; border: 0.5pt solid #bbb; font: 9.5pt/1.45 'Courier Prime', 'Courier New', monospace; white-space: pre-wrap; page-break-inside: avoid; break-inside: avoid; }
  #print-text.is-rich ul, #print-text.is-rich ol { margin: 6pt 0 8pt 18pt; padding: 0; }
+ #print-text.is-rich li { orphans: 2; widows: 2; }
  #print-text.is-rich hr { border: 0; border-top: 0.75pt solid #999; margin: 12pt 0; }
 }

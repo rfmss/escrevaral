@@ -1700,9 +1700,6 @@
     .esc-cafe-scene-br { display: none; }
     #gabinete #desktop-reminders { top: 16px; padding-bottom: 12px; }
   }
-  @media print {
-    .esc-cafe-diorama { display: none !important; }
-  }
 
   @media (max-width: 760px) {
     #gabinete #notebook-list .notebook-cover {

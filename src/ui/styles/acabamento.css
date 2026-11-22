@@ -159,4 +159,4 @@
  }
  @media(max-height:480px) { .author-keychain { margin-top:24px; margin-bottom:20px; } }
 }
-@media print { .finish-screen,#screen-lock { display:none !important; } body[data-locked="true"] > * { display:none !important; } }
+@media print { .finish-screen,#screen-lock { display:none !important; } body[data-locked="true"] > *, body[data-locked="true"] > #print-sheet { display:none !important; } }

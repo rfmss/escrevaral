@@ -1197,13 +1197,32 @@
   function leaveImmersion() { if (machineEnabled) { setMachine(false); } else { setImmersion(false); } }
   function preparePrint() {
     var ptTitle = byId('print-title'), ptText = byId('print-text');
-    text(ptTitle, title.value); ptTitle.hidden = !title.value;
-    if (doc && doc.format === 'rich' && doc.richHtml && E.richEditor && E.richEditor.sanitizeHtml) {
+    if (!ptTitle || !ptText) { return; }
+    if (document.body && document.body.getAttribute('data-locked') === 'true') {
+      finishPrint();
+      return;
+    }
+    var cleanTitle = title && typeof title.value === 'string' ? title.value : '';
+    text(ptTitle, cleanTitle);
+    ptTitle.hidden = !cleanTitle;
+    var isRichNow = (richUI && richUI.isRich && richUI.isRich()) || (doc && doc.format === 'rich' && doc.richHtml);
+    if (isRichNow && E.richEditor && E.richEditor.sanitizeHtml) {
+      var liveHtml = (richUI && richUI.isRich && richUI.isRich()) ? richUI.html() : doc.richHtml;
       ptText.className = 'is-rich';
-      ptText.innerHTML = E.richEditor.sanitizeHtml(doc.richHtml);
+      ptText.innerHTML = E.richEditor.sanitizeHtml(liveHtml || '');
     } else {
-      ptText.className = '';
-      text(ptText, manuscript.value);
+      ptText.className = 'is-plain';
+      ptText.textContent = '';
+      var rawText = manuscript && typeof manuscript.value === 'string' ? manuscript.value : '';
+      var blocks = rawText.replace(/\r\n?/g, '\n').split(/\n{2,}/);
+      var bi, blockText, pEl;
+      for (bi = 0; bi < blocks.length; bi += 1) {
+        blockText = blocks[bi].replace(/^\n+|\n+$/g, '');
+        if (!blockText) { continue; }
+        pEl = document.createElement('p');
+        text(pEl, blockText);
+        ptText.appendChild(pEl);
+      }
     }
   }
   function finishPrint() {
@@ -1792,7 +1811,9 @@
   listen(window, 'afterprint', finishPrint);
   if (window.matchMedia) {
     var printMedia = window.matchMedia('print');
-    if (printMedia.addListener) { printMedia.addListener(function (event) { if (event.matches) { preparePrint(); } else { finishPrint(); } }); }
+    var onPrintMediaChange = function (event) { if (event.matches) { preparePrint(); } else { finishPrint(); } };
+    if (printMedia.addEventListener) { printMedia.addEventListener('change', onPrintMediaChange); }
+    else if (printMedia.addListener) { printMedia.addListener(onPrintMediaChange); }
   }
   listen(byId('export-text'), 'click', function () {
     var base = String(title.value || '').replace(/^\s+|\s+$/g, '').replace(/[^A-Za-z0-9À-ÿ_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
@@ -1902,7 +1923,6 @@
   listen(byId('skip-writing'), 'click', function (event) { event.preventDefault(); enterDesk(); });
   listen(byId('back-cabinet'), 'click', function () { openCabinet(false); });
   listen(byId('cabinet-return'), 'click', enterDesk);
-  if (byId('gabinete-back-write')) { listen(byId('gabinete-back-write'), 'click', function () { enterDesk(true); }); }
   if (byId('esc-path-return')) {
     listen(byId('esc-path-return'), 'click', function () {
       if (activePanel) { if (activePanel === 'oficina') { analysisRange = null; } closePanels(true); }
