@@ -358,7 +358,7 @@ SOFTWARE.
           <button id="desk-paragraph" aria-pressed="true" title="Destacar apenas o parágrafo em escrita"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h12"/></svg><span>Parágrafo</span></button>
           <span class="esc-tool-sep esc-sep-end" aria-hidden="true"></span>
           <button id="desk-counts" aria-controls="desk-inspector" aria-expanded="false" title="Ver palavras, caracteres e parágrafos"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg><span>Contagem</span></button>
-          <button id="desk-print" title="Imprimir este texto"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span>Imprimir</span></button>
+          <button id="desk-print" title="Imprimir e paginar (folha ou caderno)"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span>Imprimir</span></button>
         </div>
         <div id="esc-rich-toolbar" class="esc-rich-toolbar" role="toolbar" aria-label="Formatação leve" hidden>
           <button type="button" data-rich-cmd="bold" aria-label="Negrito" title="Negrito"><strong>N</strong></button>
@@ -436,7 +436,7 @@ SOFTWARE.
       <label class="project-field" for="note-project">Caderno deste texto</label><select id="note-project" class="project-input"></select><button id="note-project-save">Mover para este caderno</button><div id="notebook-organization" hidden><label for="notebook-parent">Gaveta deste caderno</label><select id="notebook-parent"><option value="">Na Estante, sem gaveta</option></select><button id="notebook-parent-save">Guardar organização</button></div><p class="quiet">O texto acompanha o caderno ao exportar.</p>
     </div>
     <div class="setting-section"><h3>Seus textos</h3><button id="paste-mode" aria-pressed="false">Restringir colagem à cópia interna</button><button id="trash-current">Mover este texto para a lixeira</button>
-      <div class="actions"><button id="print-document">Imprimir este texto</button><button id="export-text">Baixar este texto <span aria-hidden="true">↓</span></button><button id="export-notebook">Exportar este caderno ↓</button><button id="export-backup">Exportar tudo ↓</button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".scrvrl,.txt,.json,text/plain,application/json"></label></div>
+      <div class="actions"><button id="print-document">Imprimir e paginar</button><button id="export-text">Baixar este texto <span aria-hidden="true">↓</span></button><button id="export-notebook">Exportar este caderno ↓</button><button id="export-backup">Exportar tudo ↓</button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".scrvrl,.txt,.json,text/plain,application/json"></label></div>
       <button id="import-copied" type="button">Trazer conteúdo copiado</button>
       <div id="transfer-box" hidden>
         <p id="transfer-help" class="quiet"></p>

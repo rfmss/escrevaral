@@ -434,7 +434,8 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
 @media print {
  html, body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; color: #000 !important; margin: 0 !important; padding: 0 !important; }
  body > * { display: none !important; }
- #esc-reader-overlay, #esc-academy-overlay, #esc-cartorio-overlay { display: none !important; }
+ #esc-reader-overlay, #esc-academy-overlay { display: none !important; }
+ #esc-cartorio-overlay, #esc-print-overlay { display: none !important; }
  .esc-safety-banner, .esc-cafe-diorama { display: none !important; }
  body > #print-sheet { display: block !important; position: static !important; width: auto !important; height: auto !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; font: 11.5pt/1.62 'Noto Serif', Georgia, 'Times New Roman', Times, serif; color: #111 !important; background: #fff !important; text-shadow: none !important; }
  body[data-locked="true"] > #print-sheet { display: none !important; }

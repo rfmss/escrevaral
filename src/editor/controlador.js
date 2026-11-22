@@ -14,7 +14,7 @@
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   /* A capa é a entrada do projeto; o editor continua compartilhado. */
   var notebooks = null, activeNotebookId = null, notebookEditing = null, notebookReturn = null, notebookReady = false, showingAbout = false, deferredInstallPrompt = null;
-  var originals = null, activeOriginalId = null, formTarget = 'volume', workspaceUI = null, templatesUI = null, sonnetUI = null, richUI = null, readerUI = null, visualMachine = null, superfocoUI = null, themeChromeUI = null, wordCardUI = null, academyUI = null;
+  var originals = null, activeOriginalId = null, formTarget = 'volume', workspaceUI = null, templatesUI = null, sonnetUI = null, richUI = null, readerUI = null, printStudioUI = null, visualMachine = null, superfocoUI = null, themeChromeUI = null, wordCardUI = null, academyUI = null;
   function availableBook(b) { var o = b && b.originalId && originals ? originals.get(b.originalId) : null; return b && !b.trashed && (!b.originalId || (o && !o.trashed)); }
   function activeNotebook() { var b = notebooks && activeNotebookId ? notebooks.get(activeNotebookId) : null; return availableBook(b) ? b : null; }
   function activeOriginal() { return originals && activeOriginalId ? originals.get(activeOriginalId) : null; }
@@ -1197,11 +1197,14 @@
   function leaveImmersion() { if (machineEnabled) { setMachine(false); } else { setImmersion(false); } }
   function preparePrint() {
     var ptTitle = byId('print-title'), ptText = byId('print-text');
-    if (!ptTitle || !ptText) { return; }
     if (document.body && document.body.getAttribute('data-locked') === 'true') {
       finishPrint();
       return;
     }
+    if (printStudioUI && printStudioUI.prepareQuickPrint) {
+      if (printStudioUI.prepareQuickPrint()) { return; }
+    }
+    if (!ptTitle || !ptText) { return; }
     var cleanTitle = title && typeof title.value === 'string' ? title.value : '';
     text(ptTitle, cleanTitle);
     ptTitle.hidden = !cleanTitle;
@@ -1226,8 +1229,13 @@
     }
   }
   function finishPrint() {
+    if (printStudioUI && printStudioUI.finishPrint) {
+      printStudioUI.finishPrint();
+      return;
+    }
     var ptText = byId('print-text');
-    text(byId('print-title'), '');
+    var ptTitle = byId('print-title');
+    if (ptTitle) { text(ptTitle, ''); }
     if (ptText) { ptText.className = ''; ptText.innerHTML = ''; }
   }
   function returnToWriting() { analysisRange = null; if (cabinetOpen) { enterDesk(); } closePanels(false); collapseTimeline(); manuscript.focus(); }
@@ -1804,6 +1812,11 @@
   listen(manuscript, 'pointerdown', unlockAudio);
   listen(manuscript, 'touchstart', unlockAudio);
   listen(byId('print-document'), 'click', function () {
+    if (printStudioUI && printStudioUI.open) {
+      closePanels(false);
+      printStudioUI.open();
+      return;
+    }
     preparePrint();
     if (window.print) { window.print(); } else { message('Use a opção de impressão do navegador.'); }
   });
@@ -1866,6 +1879,7 @@
         (byId('esc-template-modal') && !byId('esc-template-modal').hidden) ||
         (byId('esc-inline-modal') && !byId('esc-inline-modal').hidden) ||
         (byId('esc-reader-overlay') && !byId('esc-reader-overlay').hidden) ||
+        (byId('esc-print-overlay') && !byId('esc-print-overlay').hidden) ||
         (byId('esc-items-filters-panel') && !byId('esc-items-filters-panel').hidden) ||
         (byId('esc-folder-menu') && !byId('esc-folder-menu').hidden) ||
         (byId('esc-color-popover') && !byId('esc-color-popover').hidden);
@@ -2376,6 +2390,48 @@
     }
   }
 
+  if (E.mountPrintStudio) {
+    printStudioUI = E.mountPrintStudio({
+      storage: storage,
+      checkpoint: checkpoint,
+      download: download,
+      message: message,
+      getCurrentDoc: function () {
+        var snap = JSON.parse(JSON.stringify(doc));
+        snap.title = title ? title.value : snap.title;
+        snap.text = manuscript ? manuscript.value : snap.text;
+        if (richUI && richUI.isRich && richUI.isRich()) {
+          snap.format = 'rich';
+          snap.richHtml = richUI.html();
+        }
+        return snap;
+      },
+      getActiveBook: function () {
+        var b = activeNotebook();
+        if (b) { return b; }
+        if (doc && doc.projectId && notebooks) {
+          var fromDoc = notebooks.get(doc.projectId);
+          if (availableBook(fromDoc)) { return fromDoc; }
+        }
+        return null;
+      },
+      getBookDocs: function (book) {
+        if (!book || !archive) { return []; }
+        return (archive.list(false).documents || []).filter(function (d) {
+          return d && d.projectId === book.id && !d.trashed && d.kind !== 'reminder';
+        });
+      },
+      saveBookPrintConfig: function (bookId, cfg) {
+        if (!notebooks || !bookId) { return; }
+        var b = notebooks.get(bookId);
+        if (!b || b.trashed) { return; }
+        var nextData = b.data ? JSON.parse(JSON.stringify(b.data)) : {};
+        nextData.printConfig = cfg;
+        notebooks.update(bookId, { data: nextData });
+      }
+    });
+  }
+
   if (E.mountReaderMode) {
     readerUI = E.mountReaderMode({
       storage: storage,
@@ -2383,6 +2439,10 @@
         if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'objeto-livro'); }
       },
       onPrint: function () {
+        if (printStudioUI && printStudioUI.open) {
+          printStudioUI.open({ scope: 'current' });
+          return;
+        }
         preparePrint();
         if (window.print) { window.print(); } else { message('Use a opção de impressão do navegador.'); }
       }

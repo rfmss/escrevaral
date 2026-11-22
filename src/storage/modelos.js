@@ -8,9 +8,11 @@
       title: '1. Livro de ficção',
       defaultProjectName: 'Meu Romance',
       description: 'Uma história pode começar por uma pessoa, uma cena ou uma ideia. Encontre espaço para desenvolvê-la.',
+      printPreset: 'livro-literario',
       folders: [
         {
           name: '01 · Estrutura',
+          printRole: 'notes',
           notes: [
             {
               title: '01. A história em poucas palavras',
@@ -24,6 +26,7 @@
         },
         {
           name: '02 · Personagens',
+          printRole: 'notes',
           notes: [
             {
               title: '03. Quem está no centro',
@@ -37,6 +40,7 @@
         },
         {
           name: '03 · Universo',
+          printRole: 'notes',
           notes: [
             {
               title: '05. Universo da história',
@@ -46,6 +50,7 @@
         },
         {
           name: '04 · Manuscrito',
+          printRole: 'manuscript',
           notes: [
             {
               title: '06. Capítulo 01',
@@ -63,6 +68,7 @@
         },
         {
           name: '05 · Revisão',
+          printRole: 'notes',
           notes: [
             {
               title: '09. Um novo olhar sobre o livro',
@@ -77,9 +83,11 @@
       title: '2. Livro de não ficção',
       defaultProjectName: 'Meu livro de não ficção',
       description: 'Investigue uma pergunta, conte uma experiência ou compartilhe o que você conhece.',
+      printPreset: 'nao-ficcao',
       folders: [
         {
           name: '01 · Estrutura',
+          printRole: 'notes',
           notes: [
             {
               title: '01. Ideia e leitor',
@@ -89,6 +97,7 @@
         },
         {
           name: '02 · Pesquisa',
+          printRole: 'notes',
           notes: [
             {
               title: '02. Pesquisa e fontes',
@@ -98,6 +107,7 @@
         },
         {
           name: '03 · Manuscrito',
+          printRole: 'manuscript',
           notes: [
             {
               title: '03. Introdução',
@@ -116,9 +126,11 @@
       title: '3. Coletânea',
       defaultProjectName: 'Minha Coletânea',
       description: 'Reúna contos, crônicas ou poemas. As ligações e a ordem podem aparecer depois.',
+      printPreset: 'livro-literario',
       folders: [
         {
           name: '01 · Conceito',
+          printRole: 'notes',
           notes: [
             {
               title: '01. O que aproxima os textos',
@@ -128,6 +140,7 @@
         },
         {
           name: '02 · Ideias',
+          printRole: 'notes',
           notes: [
             {
               title: '02. Ideias e fragmentos',
@@ -137,6 +150,7 @@
         },
         {
           name: '03 · Em escrita',
+          printRole: 'manuscript',
           notes: [
             {
               title: '03. Texto 01',
@@ -151,9 +165,11 @@
       title: '4. Roteiro',
       defaultProjectName: 'Meu Roteiro',
       description: 'Imagine cenas, ações e conversas. Pequenos exemplos ajudam a começar.',
+      printPreset: 'roteiro',
       folders: [
         {
           name: '01 · Estrutura',
+          printRole: 'notes',
           notes: [
             {
               title: '01. A história em cenas',
@@ -163,6 +179,7 @@
         },
         {
           name: '02 · Cenas',
+          printRole: 'manuscript',
           notes: [
             {
               title: '02. Primeiras cenas',
@@ -177,9 +194,11 @@
       title: '5. Texto avulso',
       defaultProjectName: 'Meus textos',
       description: 'Dê espaço a uma observação, pergunta ou lembrança, no tamanho que ela pedir.',
+      printPreset: 'prova-a4',
       folders: [
         {
           name: 'Textos',
+          printRole: 'manuscript',
           notes: [
             {
               title: '01. Novo texto',
@@ -194,9 +213,11 @@
       title: '6. Soneto',
       defaultProjectName: 'Meu soneto',
       description: 'Escreva com métrica e rimas acompanhadas na página, verso a verso, e explore finais semelhantes.',
+      printPreset: 'poesia',
       folders: [
         {
           name: '01 · Preparação',
+          printRole: 'notes',
           notes: [
             {
               title: '01. A ideia e a forma',
@@ -210,6 +231,7 @@
         },
         {
           name: '02 · Poema',
+          printRole: 'manuscript',
           notes: [
             {
               title: '03. Meu soneto',
@@ -221,6 +243,7 @@
         },
         {
           name: '03 · Revisão',
+          printRole: 'notes',
           notes: [
             {
               title: '04. Escansão dos versos',
@@ -235,9 +258,11 @@
       title: '7. Redação do Enem',
       defaultProjectName: 'Minha redação do Enem',
       description: 'Do tema à revisão: organize a tese, desenvolva argumentos e construa sua proposta de intervenção.',
+      printPreset: 'prova-a4',
       folders: [
         {
           name: '01 · Planejamento',
+          printRole: 'notes',
           notes: [
             {
               title: '01. Tema e ponto de vista',
@@ -255,6 +280,7 @@
         },
         {
           name: '02 · Redação',
+          printRole: 'manuscript',
           notes: [
             {
               title: '04. Minha redação',
@@ -264,6 +290,7 @@
         },
         {
           name: '03 · Revisão',
+          printRole: 'notes',
           notes: [
             {
               title: '05. Revisão da redação',
@@ -273,6 +300,7 @@
         },
         {
           name: '04 · Referências',
+          printRole: 'reference',
           notes: [
             {
               title: '06. Referência · Redação nota 1000',
@@ -368,14 +396,19 @@
     var name = String(projectName || '').replace(/^\s+|\s+$/g, '') || tpl.defaultProjectName;
     var book = notebooks.add(name, originalId || null);
 
-    var folderNames = [], i, j;
+    var folderNames = [], manuscriptFolders = [], i, j;
     for (i = 0; i < tpl.folders.length; i += 1) {
       folderNames.push(tpl.folders[i].name);
+      if (tpl.folders[i].printRole === 'manuscript') {
+        manuscriptFolders.push(tpl.folders[i].name);
+      }
     }
 
     var nextData = book.data ? JSON.parse(JSON.stringify(book.data)) : {};
     nextData.template = tpl.id;
     nextData.folders = folderNames;
+    nextData.manuscriptFolders = manuscriptFolders;
+    if (tpl.printPreset) { nextData.printPreset = tpl.printPreset; }
     if (paletteId && root.Escr.projectColors) {
       var pal = root.Escr.projectColors.byId(paletteId);
       if (pal) { nextData.palette = pal.id; book = notebooks.update(book.id, { color: pal.color, data: nextData }); }
@@ -400,7 +433,7 @@
         if (spec.locked) { d.locked = true; }
         if (noteFormat === 'rich' && !spec.locked && spec.category !== 'reference' && spec.role !== 'sonnet') {
           d.format = 'rich';
-          if (root.Escr.richCore && root.Escr.richCore.plainToSafeHtml) { d.richHtml = root.Escr.richCore.plainToSafeHtml(d.text); }
+          if (root.Escr.richEditor && root.Escr.richEditor.plainToSafeHtml) { d.richHtml = root.Escr.richEditor.plainToSafeHtml(d.text); }
         } else {
           d.format = 'plain';
         }
@@ -413,12 +446,31 @@
     return { book: book, notes: createdNotes, firstNote: firstPreferred || createdNotes[0] || null };
   }
 
+  function manuscriptFoldersFor(templateId) {
+    var tpl = findTemplate(templateId);
+    if (!tpl || !tpl.folders) { return []; }
+    var out = [], i;
+    for (i = 0; i < tpl.folders.length; i += 1) {
+      if (tpl.folders[i].printRole === 'manuscript') {
+        out.push(tpl.folders[i].name);
+      }
+    }
+    return out;
+  }
+
+  function printPresetFor(templateId) {
+    var tpl = findTemplate(templateId);
+    return (tpl && tpl.printPreset) ? tpl.printPreset : 'prova-a4';
+  }
+
   root.Escr.templates = {
     list: function () { return TEMPLATES.slice(); },
     find: findTemplate,
     placeholderAt: placeholderAt,
     isPlaceholder: function (val) { return Object.prototype.hasOwnProperty.call(PLACEHOLDER_MAP, val); },
     clearTextareaPlaceholder: clearTextareaPlaceholder,
-    createProject: createProjectFromTemplate
+    createProject: createProjectFromTemplate,
+    manuscriptFoldersFor: manuscriptFoldersFor,
+    printPresetFor: printPresetFor
   };
 }(typeof window !== 'undefined' ? window : this));
