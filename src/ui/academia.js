@@ -58,7 +58,7 @@
     { id: 'submissao-editoras', title: 'Submissão a editoras', group: 'Publicação e carreira', description: 'Guia para preparar manuscrito, sinopse, proposta editorial e abordagem a editoras.', file: 'submissao-editoras.html',
       bridge: { action: 'cartorio', label: 'Abrir Cartório da obra', hint: 'Gere o selo SHA-256 e audite a origem antes de enviar.' } },
     { id: 'comparativo-publicacao', title: 'Comparativo de publicação', group: 'Publicação e carreira', description: 'Guia para comparar publicação independente, tradicional e híbrida.', file: 'comparativo-publicacao.html',
-      bridge: { action: 'cartorio', label: 'Conferir Cartório da obra', hint: 'Revise a certificação de autoria antes de decidir o caminho.' } },
+      bridge: { action: 'cartorio', label: 'Conferir Cartório da obra', hint: 'Revise o selo de origem e integridade (SHA-256) antes de decidir o caminho.' } },
     { id: 'checklist-lancamento', title: 'Checklist de lançamento', group: 'Publicação e carreira', description: 'Guia para conferir manuscrito, capa, ISBN, sinopse e comunicação.', file: 'checklist-lancamento.html',
       bridge: { action: 'cartorio', label: 'Auditar mesa no Cartório', hint: 'Verifique selo e integridade da mesa antes de publicar.' } },
     { id: 'mentalidade-autor-publicado', title: 'Mentalidade de autor', group: 'Publicação e carreira', description: 'Guia para lidar com perfeccionismo, rejeição e continuidade de carreira.', file: 'mentalidade-autor-publicado.html',
@@ -660,24 +660,39 @@
       bar.appendChild(actions);
       shell.appendChild(bar);
 
-      var frame = document.createElement('iframe');
-      frame.className = 'esc-academy-frame';
-      frame.title = entry.title;
-      frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-      on(frame, 'load', function () {
-        try {
-          var body = document.body;
-          var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
-          var paper = isDark ? '#20150f' : '#cfc3ae';
-          var ink = isDark ? '#efe4cf' : '#1f130b';
-          var accent = isDark ? '#dfb267' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
-          if (frame.contentWindow && frame.contentWindow.postMessage) {
-            frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
-          }
-        } catch (ignore) {}
-      });
-      frame.src = 'academia/' + entry.file;
-      shell.appendChild(frame);
+      if (isPortableDoc()) {
+        var portBox = document.createElement('div');
+        portBox.className = 'esc-academy-portable-note';
+        var portH = document.createElement('h3');
+        portH.textContent = entry.title;
+        var portP1 = document.createElement('p');
+        portP1.textContent = 'Você está usando a mesa portátil autocontida (escrevaral.html). Ela traz o editor completo, as lentes de revisão, o Cartório e o Modo Leitura para trabalhar 100% sem internet.';
+        var portP2 = document.createElement('p');
+        portP2.textContent = 'Os 14 guias ilustrados da Academia e Literatura ficam disponíveis na versão instalada do site (escrevaral.com), que também guarda os guias no navegador para leitura offline.';
+        portBox.appendChild(portH);
+        portBox.appendChild(portP1);
+        portBox.appendChild(portP2);
+        shell.appendChild(portBox);
+      } else {
+        var frame = document.createElement('iframe');
+        frame.className = 'esc-academy-frame';
+        frame.title = entry.title;
+        frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+        on(frame, 'load', function () {
+          try {
+            var body = document.body;
+            var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
+            var paper = isDark ? '#20150f' : '#cfc3ae';
+            var ink = isDark ? '#efe4cf' : '#1f130b';
+            var accent = isDark ? '#dfb267' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
+            if (frame.contentWindow && frame.contentWindow.postMessage) {
+              frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
+            }
+          } catch (ignore) {}
+        });
+        frame.src = 'academia/' + entry.file;
+        shell.appendChild(frame);
+      }
 
       modalEl.appendChild(shell);
       modalEl.hidden = false;

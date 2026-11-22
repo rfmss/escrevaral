@@ -50,12 +50,27 @@ const site=render(false),portable=render(true);
 emit('index.html',site);emit('escrevaral.html',portable);
 assets.forEach(a=>emit(a.path,a.content));
 emit('build/assets.json',JSON.stringify({schemaVersion:1,version:release.assetVersion,assets:assets.map(({content,...a})=>a)},null,2)+'\n');
-const generation=hash(assets.map(a=>a.sha256).join('')+site).slice(0,12);
+const bunkerDirs = ['academia', 'assets/library'];
+const bunkerAssets = [];
+const bunkerHashes = [];
+for (const bDir of bunkerDirs) {
+  const abs = path.join(root, bDir);
+  if (!fs.existsSync(abs)) continue;
+  for (const f of fs.readdirSync(abs).sort()) {
+    if (!/\.(html|css|webp|png|svg)$/i.test(f)) continue;
+    const rel = bDir + '/' + f;
+    bunkerAssets.push('./' + rel);
+    bunkerHashes.push(hash(fs.readFileSync(path.join(root, rel))));
+  }
+}
+const generation=hash(assets.map(a=>a.sha256).join('')+site+bunkerHashes.join('')).slice(0,12);
 const sw=read('src/app/service-worker.template.js')
  .replace('{{CACHE_NAME}}',release.cacheName+'-'+generation)
+ .replace('{{GENERATION}}',generation)
  .replace('{{ASSET_VERSION}}',release.assetVersion)
  .replace('{{INDEX_SHA256}}',hash(site))
- .replace('{{ASSETS}}',JSON.stringify(assets.map(a=>({url:'./'+a.path,sha256:a.sha256})),null,2));
+ .replace('{{ASSETS}}',JSON.stringify(assets.map(a=>({url:'./'+a.path,sha256:a.sha256})),null,2))
+ .replace('{{BUNKER_ASSETS}}',JSON.stringify(bunkerAssets,null,2));
 emit('service-worker.js',sw);
 if(check){
  const bad=[];for(const[p,s]of outputs){if(!fs.existsSync(path.join(root,p))||read(p)!==s)bad.push(p);}

@@ -217,6 +217,8 @@
     var showMoreRhymes = false;
     var draftScheme = '';
     var draftError = '';
+    var rhymesOpen = false;
+    var settingsOpen = false;
     var renderTimer = null;
 
     function measureStr(reading) {
@@ -234,10 +236,10 @@
       var cur = normalizeSettings(activeDoc && activeDoc.sonnetSettings);
       var next = { structure: cur.structure, scheme: cur.scheme, target: cur.target, rhythm: cur.rhythm };
       next[key] = val;
-      if (key === 'structure' && next.scheme !== 'Livre' && structureOf(next.scheme) !== val) {
+      if (key === 'structure' && next.scheme !== 'Livre' && SCHEMES.indexOf(next.scheme) !== -1 && structureOf(next.scheme) !== val) {
         next.scheme = val === 'english' ? 'ABAB CDCD EFEF GG' : SCHEMES[0];
       }
-      if (key === 'scheme' && val !== 'Livre') { next.structure = structureOf(val); }
+      if (key === 'scheme' && val !== 'Livre' && SCHEMES.indexOf(val) !== -1) { next.structure = structureOf(val); }
       if (key === 'rhythm' && val !== 'none') { next.target = val === 'alexandrine' ? 12 : 10; }
       if (key === 'target') { next.rhythm = 'none'; }
       draftError = '';
@@ -396,18 +398,20 @@
 
       // Explorar rimas
       var sugDet = createEl('details', 'esc-sonnet-suggestions');
+      if (rhymesOpen) { sugDet.open = true; }
+      on(sugDet, 'toggle', function () { rhymesOpen = !!sugDet.open; });
       var sugSum = createEl('summary', '', 'Explorar rimas');
       sugDet.appendChild(sugSum);
       var targetWord = rhymeQuery || res.suggestionWord;
       if (targetWord) {
         var hits = findRhymesFor(targetWord);
-        sugDet.appendChild(createEl('small', '', 'Próximos de “' + targetWord + '” (PortiLexicon)'));
+        sugDet.appendChild(createEl('small', '', 'Finais próximos de “' + targetWord + '”'));
         var shown = hits.slice(0, showMoreRhymes ? 24 : 6);
         sugDet.appendChild(createEl('p', '', shown.length ? shown.join(' · ') : 'Sem sugestões para esta palavra.'));
         if (hits.length > 6) {
           var moreBtn = createEl('button', 'esc-sonnet-quiet', showMoreRhymes ? 'Ver menos' : 'Mais finais');
           moreBtn.type = 'button';
-          on(moreBtn, 'click', function () { showMoreRhymes = !showMoreRhymes; render(); });
+          on(moreBtn, 'click', function () { rhymesOpen = true; showMoreRhymes = !showMoreRhymes; render(); });
           sugDet.appendChild(moreBtn);
         }
       }
@@ -418,7 +422,7 @@
       qInput.maxLength = 60;
       qInput.placeholder = 'Ex.: amor';
       qInput.value = rhymeQuery;
-      on(qInput, 'change', function () { rhymeQuery = qInput.value.trim(); showMoreRhymes = false; render(); });
+      on(qInput, 'change', function () { rhymesOpen = true; rhymeQuery = qInput.value.trim(); showMoreRhymes = false; render(); });
       qLabel.appendChild(qInput);
       qWrap.appendChild(qLabel);
       sugDet.appendChild(qWrap);
@@ -426,6 +430,8 @@
 
       // Forma do soneto
       var formDet = createEl('details', 'esc-sonnet-settings');
+      if (settingsOpen || draftError) { formDet.open = true; }
+      on(formDet, 'toggle', function () { settingsOpen = !!formDet.open; });
       formDet.appendChild(createEl('summary', '', 'Forma do soneto'));
       var controls = createEl('div', 'esc-sonnet-controls');
 
@@ -437,7 +443,7 @@
         if (settings.structure === pair[0]) { o.selected = true; }
         sStruct.appendChild(o);
       });
-      on(sStruct, 'change', function () { chooseSetting('structure', sStruct.value); });
+      on(sStruct, 'change', function () { settingsOpen = true; chooseSetting('structure', sStruct.value); });
       lStruct.appendChild(sStruct);
       controls.appendChild(lStruct);
 
@@ -445,13 +451,13 @@
       var sScheme = createEl('select');
       var optsList = SCHEMES.slice();
       if (optsList.indexOf(settings.scheme) === -1) { optsList.push(settings.scheme); }
-      optsList.filter(function (sc) { return sc === 'Livre' || structureOf(sc) === settings.structure; }).forEach(function (sc) {
+      optsList.filter(function (sc) { return sc === 'Livre' || sc === settings.scheme || structureOf(sc) === settings.structure; }).forEach(function (sc) {
         var o = createEl('option', '', sc === 'Livre' ? 'Rimas livres' : (SCHEME_NAMES[sc] || 'Personalizado') + ' · ' + sc);
         o.value = sc;
         if (settings.scheme === sc) { o.selected = true; }
         sScheme.appendChild(o);
       });
-      on(sScheme, 'change', function () { chooseSetting('scheme', sScheme.value); });
+      on(sScheme, 'change', function () { settingsOpen = true; chooseSetting('scheme', sScheme.value); });
       lScheme.appendChild(sScheme);
       controls.appendChild(lScheme);
 
@@ -463,7 +469,7 @@
         if (settings.target === pair[0]) { o.selected = true; }
         sTarget.appendChild(o);
       });
-      on(sTarget, 'change', function () { chooseSetting('target', Number(sTarget.value)); });
+      on(sTarget, 'change', function () { settingsOpen = true; chooseSetting('target', Number(sTarget.value)); });
       lTarget.appendChild(sTarget);
       controls.appendChild(lTarget);
 
@@ -475,7 +481,7 @@
         if (settings.rhythm === k) { o.selected = true; }
         sRhythm.appendChild(o);
       });
-      on(sRhythm, 'change', function () { chooseSetting('rhythm', sRhythm.value); });
+      on(sRhythm, 'change', function () { settingsOpen = true; chooseSetting('rhythm', sRhythm.value); });
       lRhythm.appendChild(sRhythm);
       controls.appendChild(lRhythm);
 
@@ -492,6 +498,7 @@
       var cBtn = createEl('button', '', 'Aplicar');
       cBtn.type = 'button';
       on(cBtn, 'click', function () {
+        settingsOpen = true;
         var lettersOnly = String(cInput.value || '').toUpperCase().replace(/\s+/g, '');
         if (!/^[A-N]{14}$/.test(lettersOnly)) {
           draftError = 'Use 14 letras de A a N.';

@@ -481,7 +481,7 @@
       });
       el('p',details(card,'Como ler esta análise'),'ptbr-legend',lens==='morfologia'?'Etiqueta contínua: hipótese contextual. Tracejada: possibilidade no léxico. Sem leitura: fora da cobertura. Arcos pontilhados: apoios, não uma árvore sintática completa.':lens==='sintaxe'?'Os grupos podem se conter: o predicado inclui verbo, clíticos e complementos; adjuntos deslocados, vocativos, apostos e orações reduzidas (gerúndio e ao + infinitivo) aparecem destacados na ordem da frase. Os arcos mostram vínculos da hipótese selecionada; as mesmas relações aparecem por escrito.':'Os trechos pertencem à lente escolhida. Selecione um para consultar a explicação.');
     }
-    if(result.limited){el('p',card,'','O cofre limitou a apresentação aos primeiros 100 apontamentos.');}
+    if(result.limited){el('p',card,'','O exame limitou a apresentação aos primeiros 100 apontamentos.');}
     if(result.coverageInfo){
       el('p',details(card,'Alcance desta análise'),'ptbr-scope',result.coverageInfo.summary);
     }
@@ -502,16 +502,16 @@
     el('h3',card,'','Léxico · '+(result.query||'consulta'));
     function loadP01Senses(emptyFallbackMsg){
       var p01Epoch=++epoch;
-      var p01Wait=el('p',card,'','Consultando o léxico offline completo (P01)…');
-      status.textContent='Consultando o léxico offline completo (P01)…';
+      var p01Wait=el('p',card,'','Consultando o dicionário local completo…');
+      status.textContent='Consultando o dicionário local completo…';
       E.getLexicoP01().lookup(query,function(p01Res){
         if(p01Epoch!==epoch||panel.hidden){return;}
         if(p01Wait.parentNode){p01Wait.parentNode.removeChild(p01Wait);}
         if(!p01Res||p01Res.state!=='found'||!p01Res.entries||!p01Res.entries.length){
           if(emptyFallbackMsg){el('p',card,'',emptyFallbackMsg);}
-          status.textContent='Consulta concluída sem sentidos no léxico local.';return;
+          status.textContent='Consulta concluída sem sentidos no dicionário local.';return;
         }
-        el('p',card,'','Sentidos encontrados no acervo offline completo (P01). A consulta não escolhe qual sentido vale na sua frase.');
+        el('p',card,'','Sentidos encontrados no dicionário offline. A consulta não escolhe qual sentido vale na sua frase.');
         var pi,pe,prow;
         for(pi=0;pi<p01Res.entries.length&&pi<12;pi++){
           pe=p01Res.entries[pi];prow=el('div',card,'ptbr-observation');
@@ -519,8 +519,8 @@
           if(pe.definition){el('p',prow,'',pe.definition);}
           if(pe.synonyms&&pe.synonyms.length){el('p',prow,'','Sinônimos sugeridos pelo acervo: '+pe.synonyms.join(', ')+'.');}
         }
-        el('p',sources,'','Fonte: Léxico offline P01 do Escrevaral (Wikcionário / OpenWordNet-PT · 92 mil formas).');
-        status.textContent='Consulta offline (P01) concluída: '+p01Res.entries.length+' sentido(s) encontrado(s).';
+        el('p',sources,'','Fonte: Dicionário offline do Escrevaral (Wikcionário / OpenWordNet-PT · 92 mil formas).');
+        status.textContent='Consulta offline concluída: '+p01Res.entries.length+' sentido(s) encontrado(s).';
         note.textContent='Consulta 100% offline. Nenhuma palavra do manuscrito foi alterada.';
       });
     }

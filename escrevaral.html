@@ -15,7 +15,7 @@
   <meta name="twitter:description" content="Sua mesa de escrita em português brasileiro. Seus manuscritos ficam no seu aparelho.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; connect-src 'none'; media-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>ESCREVARAL</title>
-  <meta name="theme-color" content="#f5f4ef">
+  <meta name="theme-color" content="#c4cfc2">
   <meta name="asset-version" content="20261014-scrvrl-exame-v6-65">
   <meta name="distribution-mode" content="portable">
   <link rel="manifest" href="manifest.webmanifest">
@@ -368,9 +368,9 @@ body[data-input="keyboard"] #manuscrito:focus { box-shadow: -2px 0 #85867e; }
 .timeline-entry[aria-current="true"] { border-left-color: #4a544c; background: #c1ccc0; }
 .timeline-entry[aria-current="true"] .note-name { font-weight: 600; }
 .timeline-older { width: 100%; text-align: left; font-size: 12px; color: #4a544c; }
-.panel-backdrop { position: fixed; inset: 0; top: 0; right: 0; bottom: 0; left: 0; background: rgba(40,41,37,.13); z-index: 20; }
+.panel-backdrop { position: fixed; inset: 0; top: 0; right: 0; bottom: 0; left: 0; background: rgba(40,41,37,.13); z-index: 1010; }
 body[data-panel="open"] { overflow: hidden; }
-.sheet { position: fixed; z-index: 21; right: 0; top: 0; bottom: 0; width: 440px; max-width: 100%; padding: 34px 32px; overflow-y: auto; overscroll-behavior: contain; background: #ccd5c7; border-left: 1px solid #cecec5; }
+.sheet { position: fixed; z-index: 1020; right: 0; top: 0; bottom: 0; width: 440px; max-width: 100%; padding: 34px 32px; overflow-y: auto; overscroll-behavior: contain; background: #ccd5c7; border-left: 1px solid #cecec5; }
 .sheet:focus { outline: none; }
 .sheet-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 30px; }
 .eyebrow { margin: 0 0 8px; color: #4a544c; font-size: 10px; line-height: 1.5; letter-spacing: 1.7px; }
@@ -704,6 +704,55 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  body[data-machine="true"] #writing-paper, .machine-stamp { -webkit-transform: none !important; transform: none !important; -webkit-transition: none; transition: none; }
 }
 
+/* Aviso persistente de segurança / cópia .scrvrl */
+.esc-safety-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 1040;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  max-width: min(620px, calc(100vw - 24px));
+  padding: 9px 14px;
+  border: 1px solid #7d6d50;
+  border-radius: 3px;
+  background: #d8cdb9;
+  color: #21130a;
+  font: 13px/1.4 Arial, Helvetica, sans-serif;
+  box-shadow: 0 6px 20px rgba(24, 18, 12, 0.22);
+}
+.esc-safety-banner[hidden] { display: none !important; }
+.esc-safety-banner[data-urgent="true"] {
+  border-color: #9e3d2c;
+  background: #e3c8c1;
+  color: #4a120a;
+}
+.esc-safety-action {
+  min-height: 30px;
+  padding: 4px 12px;
+  border: 1px solid rgba(33, 19, 10, 0.4);
+  border-radius: 3px;
+  background: #242d23;
+  color: #eef3ec;
+  font: 600 12px/1.2 Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.esc-safety-dismiss {
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
 /* Impressão independente do textarea, do tema e do estado de foco. */
 #print-sheet { display: none; }
 @page { size: A4; margin: 24mm 25mm; }
@@ -711,9 +760,18 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  html, body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; color: #000 !important; margin: 0 !important; padding: 0 !important; }
  body > * { display: none !important; }
  #esc-reader-overlay, #esc-academy-overlay { display: none !important; }
+ .esc-safety-banner { display: none !important; }
  body > #print-sheet { display: block !important; position: static !important; width: auto !important; height: auto !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; font: 11.5pt/1.62 'Noto Serif', Georgia, 'Times New Roman', Times, serif; color: #111 !important; background: #fff !important; text-shadow: none !important; }
  #print-title { font: 700 17pt/1.28 'Noto Serif', Georgia, 'Times New Roman', Times, serif; margin: 0 0 16pt; padding-bottom: 8pt; border-bottom: 0.75pt solid #888; page-break-after: avoid; white-space: pre-wrap; word-wrap: break-word; }
  #print-text { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; text-align: left; orphans: 3; widows: 3; }
+ #print-text.is-rich { white-space: normal; }
+ #print-text.is-rich p { margin: 0 0 9pt; }
+ #print-text.is-rich h1 { font-size: 15pt; margin: 14pt 0 7pt; page-break-after: avoid; }
+ #print-text.is-rich h2 { font-size: 13.5pt; margin: 12pt 0 6pt; page-break-after: avoid; }
+ #print-text.is-rich h3 { font-size: 12pt; margin: 10pt 0 5pt; page-break-after: avoid; }
+ #print-text.is-rich blockquote { margin: 8pt 0 8pt 16pt; padding-left: 10pt; border-left: 2pt solid #888; font-style: italic; }
+ #print-text.is-rich ul, #print-text.is-rich ol { margin: 6pt 0 8pt 18pt; padding: 0; }
+ #print-text.is-rich hr { border: 0; border-top: 0.75pt solid #999; margin: 12pt 0; }
 }
 
 /* Fonte: src/ui/styles/gabinete.css */
@@ -3069,12 +3127,13 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"],
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"] { border-color:#b8d9c0 !important; }
 
 /* Responsivo */
-@media(max-width:1020px) {
+@media(max-width:1120px) {
  #ptbr-dashboard .ptbr-reading { display:block; }
  #ptbr-dashboard .ptbr-reading-paper { min-width:0; }
  #ptbr-dashboard .ptbr-reading-aside { width:auto; position:static; margin-top:14px; }
 }
 @media(max-width:760px) {
+ #ptbr-dashboard .ptbr-metric-chip { white-space:normal; }
  #oficina[data-ptbr-dashboard="true"],
  body[data-view="workspace"] #oficina[data-ptbr-dashboard="true"] {
    left: 0 !important;
@@ -3897,10 +3956,12 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
       top: 40px;
       bottom: 44px;
       right: 0;
-      z-index: 40;
+      z-index: 1020;
       background: var(--esc-bg);
     }
   }
+
+  .notebook-dialog { z-index: 1030; }
 
   @media (max-width: 760px) {
     .esc-mobile-bar {
@@ -3917,10 +3978,24 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     .esc-mobile-bar button {
       flex: 1 1 0;
       border: 0;
+      border-bottom: 2px solid transparent;
       background: transparent;
-      color: var(--esc-ink);
+      color: var(--esc-muted, #465347);
       font: 600 12px/1.2 Arial, sans-serif;
       cursor: pointer;
+    }
+    .esc-mobile-bar button[aria-current="page"] {
+      color: var(--esc-ink, #1e2320);
+      background: rgba(30, 35, 32, 0.08);
+      border-bottom-color: var(--esc-ink, #1e2320);
+    }
+    body[data-view="workspace"] #esc-nav-toggle,
+    body[data-view="workspace"] #esc-lists-toggle {
+      display: none !important;
+    }
+    body[data-view="workspace"][data-counts="true"] #writing-space .desk-inspector {
+      top: 78px;
+      bottom: 0;
     }
     body[data-view="workspace"] #esc-workspace {
       top: 78px;
@@ -5125,7 +5200,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     padding: 14px 32px 10px;
     border-bottom: 0;
     background: transparent;
-    opacity: 0.48;
+    opacity: 0.86;
     transition: opacity 180ms ease;
   }
 
@@ -5183,6 +5258,30 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   .esc-reader-settings[hidden] {
     display: none !important;
+  }
+
+  .esc-reader-settings-head {
+    flex: 1 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--reader-line);
+    font: 700 12px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--reader-ink);
+  }
+  .esc-reader-settings-head button {
+    min-height: 28px;
+    padding: 3px 10px;
+    border: 1px solid var(--reader-line);
+    border-radius: 6px;
+    background: var(--reader-surface);
+    color: var(--reader-ink);
+    font: 600 11.5px/1.2 Arial, Helvetica, sans-serif;
+    cursor: pointer;
   }
 
   .esc-reader-settings label {
@@ -5313,6 +5412,21 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     letter-spacing: 0.04em;
     color: var(--reader-muted);
   }
+  .esc-reader-end-back {
+    display: inline-block;
+    margin: 14px auto 0;
+    min-height: 36px;
+    padding: 6px 16px;
+    border: 1px solid var(--reader-line);
+    border-radius: 99px;
+    background: var(--reader-surface);
+    color: var(--reader-ink);
+    font: 600 12.5px/1.2 Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
+  .esc-reader-end-back:hover {
+    background: var(--reader-paper);
+  }
 
   .esc-reader-fleuron {
     display: block;
@@ -5330,11 +5444,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   @media (max-width: 680px) {
-    .esc-reader-bar { padding: 10px 16px; opacity: 0.85; }
+    .esc-reader-bar { padding: 10px 14px; opacity: 0.96; gap: 6px 8px; }
     .esc-reader-viewport { padding: 14px 18px 80px; }
     .esc-reader-masthead { grid-template-columns: 1fr; text-align: center; gap: 4px; margin-bottom: 28px; }
     .esc-reader-masthead #esc-reader-project-tag { text-align: center; }
-    .esc-reader-settings { right: 16px; left: 16px; max-width: none; }
+    .esc-reader-settings { position: relative; top: auto; right: auto; left: auto; margin: 0 14px 8px; max-width: none; }
   }
 }
 
@@ -5484,6 +5598,27 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     color: #455241;
     color: var(--esc-muted, #455241);
     margin-right: 8px;
+  }
+
+  @media (max-width: 760px) {
+    .esc-writing-bar {
+      padding: 0 8px;
+      opacity: 0.94;
+      overflow-x: auto;
+      gap: 4px;
+    }
+    .esc-writing-idle-note,
+    #esc-sf-full {
+      display: none !important;
+    }
+    .esc-writing-btn,
+    .esc-writing-icon-btn {
+      margin: 0 2px;
+      padding: 4px 7px;
+      font-size: 11.5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
   }
 
   /* Em Superfoco: esconder chrome normal e usar a barra .esc-writing-bar */
@@ -8418,15 +8553,36 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar strong { color: #f6ead6; }
 
+  #esc-academy-overlay .esc-academy-portable-note {
+    flex: 1 1 auto;
+    padding: 36px 28px;
+    max-width: 620px;
+    margin: 0 auto;
+    color: #21130a;
+    font: 15px/1.7 var(--esc-font-editorial, 'Noto Serif', Georgia, serif);
+  }
+  #esc-academy-overlay .esc-academy-portable-note h3 {
+    margin: 0 0 12px;
+    font: 700 22px/1.25 var(--esc-font-editorial, 'Noto Serif', Georgia, serif);
+  }
+  #esc-academy-overlay .esc-academy-portable-note p {
+    margin: 0 0 12px;
+    color: #4a3420;
+  }
+
   @media (max-width: 760px) {
     #esc-academy-overlay.esc-academy-overlay { padding: 8px; }
     #esc-academy-overlay .esc-academy-hero { padding: 50px 20px 24px; min-height: 200px; }
     #esc-academy-overlay .esc-academy-content { padding: 16px 16px 24px; }
     #esc-academy-overlay .esc-academy-featured-grid,
     #esc-academy-overlay .esc-academy-list { grid-template-columns: 1fr; }
-    #esc-academy-overlay .esc-academy-bar { flex-wrap: wrap; gap: 6px; }
-    #esc-academy-overlay .esc-academy-bar strong { order: -1; flex-basis: 100%; }
-    #esc-academy-overlay .esc-academy-bar-actions { margin-left: auto; flex-wrap: wrap; }
+    #esc-academy-overlay .esc-academy-tome strong,
+    #esc-academy-overlay .esc-academy-tome-desc,
+    #esc-academy-overlay .esc-academy-tome-cta { max-width: 100%; }
+    #esc-academy-overlay .esc-academy-bar { flex-wrap: wrap; gap: 6px; padding: 8px 10px; }
+    #esc-academy-overlay .esc-academy-bar strong { order: -1; flex-basis: 100%; font-size: 14px; }
+    #esc-academy-overlay .esc-academy-bar-actions { margin-left: 0; width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; }
+    #esc-academy-overlay .esc-academy-bar button { white-space: nowrap; flex-shrink: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -8729,6 +8885,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   .cart-btn-secondary:hover { background: #c3cfc0; }
   .cart-file-btn { position: relative; overflow: hidden; }
+  .cart-file-btn:focus-within { outline: 2px solid #242d23; outline-offset: 2px; }
   .cart-file-btn input[type="file"] {
     position: absolute;
     left: -9999px;
@@ -8929,6 +9086,20 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-theme="escuro"] .cart-dropzone {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(228, 235, 226, 0.2);
+  }
+
+  @media (max-width: 760px) {
+    .esc-cartorio-overlay { padding: 8px; }
+    .esc-cartorio-card { max-height: 96vh; }
+    .cart-head { padding: 12px 14px 10px; flex-wrap: wrap; gap: 8px; }
+    .cart-head h2 { font-size: 19px; }
+    .cart-tabs { padding: 8px 14px 0; flex-wrap: wrap; }
+    .cart-tab { padding: 8px 10px; font-size: 12.5px; }
+    .cart-status:not(:empty) { padding: 8px 14px; }
+    .cart-scroll { padding: 12px 14px 20px; }
+    .cart-cert { padding: 16px 14px; }
+    .cart-hash-top { flex-wrap: wrap; }
+    .cart-dropzone { padding: 16px 12px; }
   }
 }
 
@@ -9965,7 +10136,7 @@ SOFTWARE.
           <button id="esc-format-toggle" type="button" aria-pressed="false" title="Alternar entre texto simples e formatado leve"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 4v16M17 4v16M19 4H9.5a4.5 4.5 0 0 0 0 9H13"/></svg><span class="esc-btn-label">Texto simples</span></button>
           <button id="esc-reader-toggle" type="button" title="Abrir em modo leitura editorial"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Leitura</span></button>
           <span class="esc-tool-sep" aria-hidden="true"></span>
-          <button id="esc-synonyms-btn" type="button" title="Consultar sinônimos e definições (P01)"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M9 8h6M9 12h4"/></svg><span>Sinônimos</span></button>
+          <button id="esc-synonyms-btn" type="button" title="Consultar sinônimos e definições"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M9 8h6M9 12h4"/></svg><span>Sinônimos</span></button>
           <button id="esc-sound-btn" type="button" class="esc-sound-btn" aria-pressed="false" title="Som mecânico da máquina"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg><span>Som</span></button>
           <span class="esc-tool-sep" aria-hidden="true"></span>
           <button id="desk-font" title="Alternar entre letra literária e máquina"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg><span class="esc-btn-label">Courier Prime</span></button>
@@ -10000,6 +10171,11 @@ SOFTWARE.
         </div>
         <footer class="paper-footer"><button id="desk-paste" title="Colar o trecho guardado no Escrevaral" hidden>Colar</button>
           <span id="save-status" role="status" aria-live="polite">Guardado neste aparelho.</span>
+          <div id="esc-safety-banner" class="esc-safety-banner" role="alert" hidden>
+            <span id="esc-safety-text"></span>
+            <button id="esc-safety-export" type="button" class="esc-safety-action">Exportar cópia agora</button>
+            <button id="esc-safety-dismiss" type="button" class="esc-safety-dismiss" aria-label="Fechar aviso">&times;</button>
+          </div>
           <div id="post-write-pwa" class="post-write-pwa" hidden>
             <span>Adicione a oficina à tela inicial para abrir direto.</span>
             <button id="post-write-pwa-action" type="button" class="post-write-pwa-action" hidden>Guardar no aparelho</button>
@@ -10034,7 +10210,7 @@ SOFTWARE.
   <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="mesa-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
     <div class="setting-section"><h3>Ambiente</h3>
-      <div class="setting-row"><span>Aparência</span><span class="quiet">Papel digital (E-Ink Sálvia · tema único)</span></div>
+      <div class="setting-row"><span>Aparência</span><span class="quiet">Papel fosco (Sálvia · calibrado para leitura longa)</span></div>
       <div class="setting-row"><span>Leitura confortável</span><button id="esc-reading-toggle" type="button" aria-pressed="false">Ativar</button></div>
       <div class="setting-row" hidden aria-hidden="true"><div class="theme-choice"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
       <div class="setting-row"><span>Máquina antiga (no Superfoco)</span><button id="machine-toggle" aria-pressed="true">Desativar</button></div>
@@ -10051,7 +10227,7 @@ SOFTWARE.
       <button id="import-copied" type="button">Trazer conteúdo copiado</button>
       <div id="transfer-box" hidden>
         <p id="transfer-help" class="quiet"></p>
-        <label for="transfer-name">Nome do arquivo (.txt, .json ou .scrvrl)</label>
+        <label for="transfer-name">Nome do arquivo (.scrvrl ou .txt)</label>
         <input id="transfer-name" class="project-input" type="text" value="copia.scrvrl">
         <label for="transfer-content">Conteúdo da cópia</label>
         <textarea id="transfer-content" rows="8" spellcheck="false"></textarea>
@@ -10060,6 +10236,7 @@ SOFTWARE.
         <button id="transfer-close" type="button">Fechar cópia</button>
       </div>
       <p id="panel-status" class="quiet" role="status" aria-live="polite"></p>
+      <p id="backup-status" class="quiet" role="status" aria-live="polite"></p>
       <p class="quiet">Textos e cópias trazidos viram novos textos. Seu acervo permanece.</p>
       <p class="quiet">Os textos ficam neste navegador, neste aparelho. Guarde uma cópia do acervo para levá-los com você.</p>
     </div>
@@ -10067,11 +10244,11 @@ SOFTWARE.
       <p id="offline-status" class="quiet" role="status" aria-live="polite">Guarde a mesa portátil e uma cópia dos seus textos para escrever sem internet.</p>
       <p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa ↓</a> · <a href="escrevaral.html">Abrir a mesa portátil ↗</a></p>
       <ol class="quiet">
-        <li>Enquanto estiver conectado, guarde a mesa completa. Se o link apenas abrir a página, use “Salvar página” no navegador, quando disponível, e escolha HTML completo.</li>
+        <li>Enquanto estiver conectado, guarde a mesa completa. Se o link apenas abrir a página, use “Salvar página” no navegador, quando disponível, e escolha página completa.</li>
         <li>Em “Seus textos”, use “Exportar tudo”. O arquivo da mesa contém o editor; seus textos viajam na cópia do acervo.</li>
         <li>Abra o arquivo guardado em um navegador. Use “Trazer arquivo” para trazer a cópia do acervo. Seus textos atuais permanecem; a cópia entra como novos textos.</li>
       </ol>
-      <p class="quiet">O site e o arquivo guardado podem ter acervos separados. A abertura de HTML local depende do navegador ou aplicativo escolhido. Se ele não abrir a mesa, volte ao site quando tiver conexão e traga a cópia do acervo.</p>
+      <p class="quiet">O site e o arquivo guardado podem ter acervos separados. A abertura de arquivo local depende do navegador ou aplicativo escolhido. Se ele não abrir a mesa, volte ao site quando tiver conexão e traga a cópia do acervo.</p>
     </div>
     <div class="setting-section"><h3>Atalhos</h3><dl class="shortcuts"><div><dt>Buscar</dt><dd>Ctrl / ⌘ + K</dd></div><div><dt>Examinar</dt><dd>Ctrl / ⌘ + Enter</dd></div><div><dt>Guardar o texto</dt><dd>Ctrl / ⌘ + S</dd></div><div><dt>Fechar painel / sair do foco / voltar ao Gabinete</dt><dd>Esc</dd></div></dl></div>
   </section>
@@ -10123,7 +10300,7 @@ SOFTWARE.
       <p id="pomodoro-state" role="status">Tempo de escrita em andamento.</p>
       <div class="duration-fields"><label for="pomodoro-work">Escrita · minutos<input id="pomodoro-work" type="number" min="1" max="99" value="52" disabled="disabled"></label><label for="pomodoro-break">Pausa · minutos<input id="pomodoro-break" type="number" min="1" max="30" value="6" disabled="disabled"></label></div>
       <div class="utility-actions"><button id="pomodoro-start" class="scrvrl-action" hidden="">Começar a escrever</button><button id="pomodoro-pause">Pausar contagem</button><button id="pomodoro-stop">Encerrar</button></div>
-      <p class="quiet">Ao terminar a escrita, o Focus abre para a pausa. Se o aparelho dormir, o tempo é conferido ao voltar.</p>
+      <p class="quiet">Ao terminar a escrita, a Pausa contemplativa abre automaticamente. Se o aparelho dormir, o tempo é conferido ao voltar.</p>
     </div>
     <div id="calculator-panel" hidden="">
       <form id="calculator-form"><label for="calculator-input">Conta</label><input id="calculator-input" autocomplete="off" maxlength="160" placeholder="Ex.: (12 + 8) ÷ 4"><output id="calculator-result" role="status">0</output><div id="calculator-keys" class="calculator-keys"><button type="button" aria-label="Limpar conta">C</button><button type="button" aria-label="Apagar último caractere">⌫</button><button type="button">(</button><button type="button">)</button><button type="button">7</button><button type="button">8</button><button type="button">9</button><button type="button">÷</button><button type="button">4</button><button type="button">5</button><button type="button">6</button><button type="button">×</button><button type="button">1</button><button type="button">2</button><button type="button">3</button><button type="button">−</button><button type="button">0</button><button type="button">,</button><button type="button">%</button><button type="button">+</button><button type="button">=</button></div><button type="submit" class="sr-only">Calcular</button></form>
@@ -14569,7 +14746,7 @@ SOFTWARE.
   if(root.visualViewport){on(root.visualViewport,'resize',resizeBoard);on(root.visualViewport,'scroll',fit);}
   on(root,'blur',function(){if(active()){end();}});
   on(root,'storage',function(e){if(e.key==='escrevaral.astra.notebooks.v1'&&active()){status('O caderno mudou em outra aba. Feche e reabra o quadro para atualizar; baixe uma cópia se houver traços pendentes.');}});
-  return {flush:flush,isOpen:active};
+  return {open:open,flush:flush,isOpen:active};
  };
 }(window));
 
@@ -15906,7 +16083,7 @@ SOFTWARE.
       }
       payload.notebooks.forEach(function (b) { if (ids[b.id]) { throw new Error('Caderno repetido no pacote.'); } ids[b.id] = true; if (b.data.planner && !E.validPlanner(b.data.planner)) { throw new Error('Calendário inválido no caderno.'); } if (typeof b.data.chalk !== 'undefined' && !E.chalk.valid(b.data.chalk)) { throw new Error('Desenho inválido no caderno.'); } if (typeof b.data.story !== 'undefined' && !E.story.valid(b.data.story)) { throw new Error('Fichas ou cenas inválidas no caderno.'); } });
       payload.documents.forEach(function (d) {
-        if (records[d.id] || (d.projectId && !ids[d.projectId]) || (!d.projectId && (payload.scope !== 'all' || d.kind !== 'reminder'))) { throw new Error('Vínculos incompletos no pacote.'); } records[d.id] = true;
+        if (records[d.id] || (d.projectId && !ids[d.projectId]) || (!d.projectId && payload.scope !== 'all')) { throw new Error('Vínculos incompletos no pacote.'); } records[d.id] = true;
       });
       if (!payload.globals || typeof payload.globals !== 'object' || array(payload.globals) || (payload.scope !== 'all' && Object.keys(payload.globals).length)) { throw new Error('Dados gerais inválidos.'); }
       Object.keys(payload.globals).forEach(function (k) { if (globals.indexOf(k) === -1 || typeof payload.globals[k] !== 'string') { throw new Error('Preferência desconhecida no pacote.'); } });
@@ -17420,6 +17597,8 @@ SOFTWARE.
     var showMoreRhymes = false;
     var draftScheme = '';
     var draftError = '';
+    var rhymesOpen = false;
+    var settingsOpen = false;
     var renderTimer = null;
 
     function measureStr(reading) {
@@ -17437,10 +17616,10 @@ SOFTWARE.
       var cur = normalizeSettings(activeDoc && activeDoc.sonnetSettings);
       var next = { structure: cur.structure, scheme: cur.scheme, target: cur.target, rhythm: cur.rhythm };
       next[key] = val;
-      if (key === 'structure' && next.scheme !== 'Livre' && structureOf(next.scheme) !== val) {
+      if (key === 'structure' && next.scheme !== 'Livre' && SCHEMES.indexOf(next.scheme) !== -1 && structureOf(next.scheme) !== val) {
         next.scheme = val === 'english' ? 'ABAB CDCD EFEF GG' : SCHEMES[0];
       }
-      if (key === 'scheme' && val !== 'Livre') { next.structure = structureOf(val); }
+      if (key === 'scheme' && val !== 'Livre' && SCHEMES.indexOf(val) !== -1) { next.structure = structureOf(val); }
       if (key === 'rhythm' && val !== 'none') { next.target = val === 'alexandrine' ? 12 : 10; }
       if (key === 'target') { next.rhythm = 'none'; }
       draftError = '';
@@ -17599,18 +17778,20 @@ SOFTWARE.
 
       // Explorar rimas
       var sugDet = createEl('details', 'esc-sonnet-suggestions');
+      if (rhymesOpen) { sugDet.open = true; }
+      on(sugDet, 'toggle', function () { rhymesOpen = !!sugDet.open; });
       var sugSum = createEl('summary', '', 'Explorar rimas');
       sugDet.appendChild(sugSum);
       var targetWord = rhymeQuery || res.suggestionWord;
       if (targetWord) {
         var hits = findRhymesFor(targetWord);
-        sugDet.appendChild(createEl('small', '', 'Próximos de “' + targetWord + '” (PortiLexicon)'));
+        sugDet.appendChild(createEl('small', '', 'Finais próximos de “' + targetWord + '”'));
         var shown = hits.slice(0, showMoreRhymes ? 24 : 6);
         sugDet.appendChild(createEl('p', '', shown.length ? shown.join(' · ') : 'Sem sugestões para esta palavra.'));
         if (hits.length > 6) {
           var moreBtn = createEl('button', 'esc-sonnet-quiet', showMoreRhymes ? 'Ver menos' : 'Mais finais');
           moreBtn.type = 'button';
-          on(moreBtn, 'click', function () { showMoreRhymes = !showMoreRhymes; render(); });
+          on(moreBtn, 'click', function () { rhymesOpen = true; showMoreRhymes = !showMoreRhymes; render(); });
           sugDet.appendChild(moreBtn);
         }
       }
@@ -17621,7 +17802,7 @@ SOFTWARE.
       qInput.maxLength = 60;
       qInput.placeholder = 'Ex.: amor';
       qInput.value = rhymeQuery;
-      on(qInput, 'change', function () { rhymeQuery = qInput.value.trim(); showMoreRhymes = false; render(); });
+      on(qInput, 'change', function () { rhymesOpen = true; rhymeQuery = qInput.value.trim(); showMoreRhymes = false; render(); });
       qLabel.appendChild(qInput);
       qWrap.appendChild(qLabel);
       sugDet.appendChild(qWrap);
@@ -17629,6 +17810,8 @@ SOFTWARE.
 
       // Forma do soneto
       var formDet = createEl('details', 'esc-sonnet-settings');
+      if (settingsOpen || draftError) { formDet.open = true; }
+      on(formDet, 'toggle', function () { settingsOpen = !!formDet.open; });
       formDet.appendChild(createEl('summary', '', 'Forma do soneto'));
       var controls = createEl('div', 'esc-sonnet-controls');
 
@@ -17640,7 +17823,7 @@ SOFTWARE.
         if (settings.structure === pair[0]) { o.selected = true; }
         sStruct.appendChild(o);
       });
-      on(sStruct, 'change', function () { chooseSetting('structure', sStruct.value); });
+      on(sStruct, 'change', function () { settingsOpen = true; chooseSetting('structure', sStruct.value); });
       lStruct.appendChild(sStruct);
       controls.appendChild(lStruct);
 
@@ -17648,13 +17831,13 @@ SOFTWARE.
       var sScheme = createEl('select');
       var optsList = SCHEMES.slice();
       if (optsList.indexOf(settings.scheme) === -1) { optsList.push(settings.scheme); }
-      optsList.filter(function (sc) { return sc === 'Livre' || structureOf(sc) === settings.structure; }).forEach(function (sc) {
+      optsList.filter(function (sc) { return sc === 'Livre' || sc === settings.scheme || structureOf(sc) === settings.structure; }).forEach(function (sc) {
         var o = createEl('option', '', sc === 'Livre' ? 'Rimas livres' : (SCHEME_NAMES[sc] || 'Personalizado') + ' · ' + sc);
         o.value = sc;
         if (settings.scheme === sc) { o.selected = true; }
         sScheme.appendChild(o);
       });
-      on(sScheme, 'change', function () { chooseSetting('scheme', sScheme.value); });
+      on(sScheme, 'change', function () { settingsOpen = true; chooseSetting('scheme', sScheme.value); });
       lScheme.appendChild(sScheme);
       controls.appendChild(lScheme);
 
@@ -17666,7 +17849,7 @@ SOFTWARE.
         if (settings.target === pair[0]) { o.selected = true; }
         sTarget.appendChild(o);
       });
-      on(sTarget, 'change', function () { chooseSetting('target', Number(sTarget.value)); });
+      on(sTarget, 'change', function () { settingsOpen = true; chooseSetting('target', Number(sTarget.value)); });
       lTarget.appendChild(sTarget);
       controls.appendChild(lTarget);
 
@@ -17678,7 +17861,7 @@ SOFTWARE.
         if (settings.rhythm === k) { o.selected = true; }
         sRhythm.appendChild(o);
       });
-      on(sRhythm, 'change', function () { chooseSetting('rhythm', sRhythm.value); });
+      on(sRhythm, 'change', function () { settingsOpen = true; chooseSetting('rhythm', sRhythm.value); });
       lRhythm.appendChild(sRhythm);
       controls.appendChild(lRhythm);
 
@@ -17695,6 +17878,7 @@ SOFTWARE.
       var cBtn = createEl('button', '', 'Aplicar');
       cBtn.type = 'button';
       on(cBtn, 'click', function () {
+        settingsOpen = true;
         var lettersOnly = String(cInput.value || '').toUpperCase().replace(/\s+/g, '');
         if (!/^[A-N]{14}$/.test(lettersOnly)) {
           draftError = 'Use 14 letras de A a N.';
@@ -18326,9 +18510,10 @@ SOFTWARE.
           '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Papel e letra</button>' +
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
-          '<label>Papel<select id="esc-reader-palette"><option value="paper">Real Gabinete (Pergaminho)</option><option value="sage">Sálvia E-Ink</option><option value="linen">Pergaminho claro</option><option value="mist">Névoa suave</option><option value="white">Papel fosco</option><option value="night">Nogueira noturna</option></select></label>' +
+          '<div class="esc-reader-settings-head"><strong>Papel e letra</strong><button id="esc-reader-settings-close" type="button" aria-label="Fechar ajustes de leitura">Fechar ×</button></div>' +
+          '<label>Papel<select id="esc-reader-palette"><option value="paper">Real Gabinete (Pergaminho)</option><option value="sage">Sálvia fosco</option><option value="linen">Pergaminho claro</option><option value="mist">Névoa suave</option><option value="white">Papel fosco</option><option value="night">Nogueira noturna</option></select></label>' +
           '<label>Letra<select id="esc-reader-face"><option value="serif">Literária (Serifada)</option><option value="sans">Sem serifa</option></select></label>' +
-          '<label>Tamanho<select id="esc-reader-size"><option value="18">18 px</option><option value="20">20 px</option><option value="21">21 px</option><option value="24">24 px</option><option value="28">28 px</option></select></label>' +
+          '<label>Tamanho<select id="esc-reader-size"><option value="18">Normal (18)</option><option value="20">Confortável (20)</option><option value="21">Editorial (21)</option><option value="24">Grande (24)</option><option value="28">Muito grande (28)</option><option value="32">Extra (32)</option></select></label>' +
           '<label>Entrelinha<select id="esc-reader-leading"><option value="1.6">Compacta</option><option value="1.82">Editorial</option><option value="2">Ampla</option></select></label>' +
           '<label>Pausa de leitura<select id="esc-reader-break"><option value="0">Sem pausa</option><option value="15">A cada 15 min</option><option value="25">A cada 25 min</option><option value="45">A cada 45 min</option></select></label>' +
         '</div>' +
@@ -18370,11 +18555,32 @@ SOFTWARE.
         updateProgress();
       }
 
+      function closeSettings() {
+        settingsOpen = false;
+        var st = byId('esc-reader-settings');
+        var btn = byId('esc-reader-settings-btn');
+        if (st) { st.hidden = true; }
+        if (btn) { btn.setAttribute('aria-expanded', 'false'); }
+      }
       on(byId('esc-reader-close'), 'click', close);
-      on(byId('esc-reader-settings-btn'), 'click', function () {
+      on(byId('esc-reader-settings-btn'), 'click', function (ev) {
+        if (ev && ev.stopPropagation) { ev.stopPropagation(); }
         settingsOpen = !settingsOpen;
         byId('esc-reader-settings').hidden = !settingsOpen;
         this.setAttribute('aria-expanded', settingsOpen ? 'true' : 'false');
+      });
+      on(byId('esc-reader-settings-close'), 'click', function () {
+        closeSettings();
+        var btn = byId('esc-reader-settings-btn');
+        if (btn && btn.focus) { btn.focus(); }
+      });
+      on(overlayEl, 'click', function (ev) {
+        if (!settingsOpen) { return; }
+        var st = byId('esc-reader-settings');
+        var btn = byId('esc-reader-settings-btn');
+        if (st && !st.contains(ev.target) && (!btn || !btn.contains(ev.target))) {
+          closeSettings();
+        }
       });
       on(byId('esc-reader-prev'), 'click', function () { stepPage(-1); });
       on(byId('esc-reader-next'), 'click', function () { stepPage(1); });
@@ -18391,7 +18597,7 @@ SOFTWARE.
       on(byId('esc-reader-resume'), 'click', scheduleBreak);
       on(byId('esc-reader-palette'), 'change', function () { prefs.palette = this.value; applyPrefs(); savePrefs(); });
       on(byId('esc-reader-face'), 'change', function () { prefs.face = this.value; applyPrefs(); savePrefs(); });
-      on(byId('esc-reader-size'), 'change', function () { prefs.size = clamp(this.value, 17, 28, 22); applyPrefs(); savePrefs(); });
+      on(byId('esc-reader-size'), 'change', function () { prefs.size = clamp(this.value, 17, 32, 22); applyPrefs(); savePrefs(); });
       on(byId('esc-reader-leading'), 'change', function () { prefs.leading = clamp(this.value, 1.5, 2.0, 1.7); applyPrefs(); savePrefs(); });
       on(byId('esc-reader-break'), 'change', function () { prefs.breakMin = Number(this.value) || 0; savePrefs(); scheduleBreak(); });
       on(overlayEl, 'keydown', function (ev) {
@@ -18489,6 +18695,12 @@ SOFTWARE.
       var endText = document.createElement('span');
       endText.textContent = 'Fim da leitura · Esc para retornar à edição';
       endMark.appendChild(endText);
+      var endBack = document.createElement('button');
+      endBack.type = 'button';
+      endBack.className = 'esc-reader-end-back';
+      endBack.textContent = '← Voltar à escrita';
+      on(endBack, 'click', close);
+      endMark.appendChild(endBack);
       article.appendChild(endMark);
 
       overlayEl.hidden = false;
@@ -19923,7 +20135,10 @@ SOFTWARE.
         else { document.body.removeAttribute('data-esc-reading'); }
       }
       var btn = document.getElementById && document.getElementById('esc-reading-toggle');
-      if (btn) { btn.setAttribute('aria-pressed', comfortable ? 'true' : 'false'); }
+      if (btn) {
+        btn.setAttribute('aria-pressed', comfortable ? 'true' : 'false');
+        btn.textContent = comfortable ? 'Ativado' : 'Ativar';
+      }
       if (persistPref !== false && storage) {
         try { storage.setItem(READING_KEY, comfortable ? 'true' : 'false'); } catch (ignore) {}
       }
@@ -20394,25 +20609,25 @@ SOFTWARE.
       on(document, 'keydown', function (ev) {
         if (ev.keyCode === 27 && el && !el.hidden) { close(); }
       });
+      on(document, 'mousemove', function (ev) {
+        if (!dragState.active || !el) { return; }
+        el.style.right = 'auto';
+        el.style.left = Math.max(8, Math.min((window.innerWidth || 1000) - 340, ev.clientX - dragState.ox)) + 'px';
+        el.style.top = Math.max(44, Math.min((window.innerHeight || 700) - 120, ev.clientY - dragState.oy)) + 'px';
+      });
+      on(document, 'mouseup', function () { dragState.active = false; });
       return el;
     }
 
+    var dragState = { active: false, ox: 0, oy: 0 };
     function makeDraggable(handle) {
-      var dragging = false, ox = 0, oy = 0;
       on(handle, 'mousedown', function (ev) {
         if (ev.target && ev.target.tagName === 'BUTTON') { return; }
-        dragging = true;
+        dragState.active = true;
         var rect = el.getBoundingClientRect ? el.getBoundingClientRect() : { left: 80, top: 80 };
-        ox = ev.clientX - rect.left;
-        oy = ev.clientY - rect.top;
+        dragState.ox = ev.clientX - rect.left;
+        dragState.oy = ev.clientY - rect.top;
       });
-      on(document, 'mousemove', function (ev) {
-        if (!dragging || !el) { return; }
-        el.style.right = 'auto';
-        el.style.left = Math.max(8, Math.min((window.innerWidth || 1000) - 340, ev.clientX - ox)) + 'px';
-        el.style.top = Math.max(44, Math.min((window.innerHeight || 700) - 120, ev.clientY - oy)) + 'px';
-      });
-      on(document, 'mouseup', function () { dragging = false; });
     }
 
     function compute() {
@@ -20687,7 +20902,7 @@ SOFTWARE.
       header.className = 'esc-palavra-header';
       var title = document.createElement('strong');
       title.className = 'esc-palavra-title';
-      title.textContent = currentState.originalWord;
+      title.textContent = currentState.originalWord || 'Sinônimos';
       var closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.className = 'esc-palavra-icon';
@@ -20704,13 +20919,18 @@ SOFTWARE.
       if (currentState.loading) {
         var waitP = document.createElement('p');
         waitP.className = 'esc-palavra-status';
-        waitP.textContent = 'Consultando léxico PT-BR…';
+        waitP.textContent = 'Consultando dicionário local…';
         content.appendChild(waitP);
+      } else if (currentState.result && currentState.result.state === 'idle') {
+        var idleP = document.createElement('p');
+        idleP.className = 'esc-palavra-status';
+        idleP.textContent = 'Digite uma palavra abaixo ou selecione qualquer palavra no texto.';
+        content.appendChild(idleP);
       } else if (!currentState.result || currentState.result.state !== 'found' || !currentState.result.entries.length) {
         var msgP = document.createElement('p');
         msgP.className = 'esc-palavra-status';
         msgP.textContent = currentState.result && currentState.result.state === 'unavailable'
-          ? 'Pacote P01 indisponível nesta cópia.'
+          ? 'Dicionário de sinônimos indisponível nesta cópia.'
           : 'Palavra fora do recorte de sinônimos; isso não indica erro.';
         content.appendChild(msgP);
       } else {
@@ -20865,7 +21085,7 @@ SOFTWARE.
       if (showSources) {
         var srcBox = document.createElement('p');
         srcBox.className = 'esc-palavra-sources';
-        srcBox.textContent = 'Acervo local P01 (7.661 lemas, 92.148 chaves): Wikcionário em português (CC-BY-SA 4.0), OpenWordNet-PT (CC-BY-SA 4.0) e PortiLexicon-UD (MIT). Consulta 100% offline.';
+        srcBox.textContent = 'Dicionário local do Escrevaral (7.661 verbetes, 92.148 formas): Wikcionário em português (CC-BY-SA 4.0), OpenWordNet-PT (CC-BY-SA 4.0) e PortiLexicon-UD (MIT). Consulta 100% offline.';
         content.appendChild(srcBox);
       }
 
@@ -20873,6 +21093,10 @@ SOFTWARE.
       cardEl.appendChild(content);
       cardEl.hidden = false;
       if (document.body) { document.body.setAttribute('data-esc-consulta-open', 'true'); }
+      if (currentState.result && currentState.result.state === 'idle' && cardEl.querySelector) {
+        var idleInput = cardEl.querySelector('.esc-palavra-search-input');
+        if (idleInput && idleInput.focus) { try { idleInput.focus(); } catch (ignore) {} }
+      }
     }
 
     function inspectSelection() {
@@ -21030,7 +21254,7 @@ SOFTWARE.
     { id: 'submissao-editoras', title: 'Submissão a editoras', group: 'Publicação e carreira', description: 'Guia para preparar manuscrito, sinopse, proposta editorial e abordagem a editoras.', file: 'submissao-editoras.html',
       bridge: { action: 'cartorio', label: 'Abrir Cartório da obra', hint: 'Gere o selo SHA-256 e audite a origem antes de enviar.' } },
     { id: 'comparativo-publicacao', title: 'Comparativo de publicação', group: 'Publicação e carreira', description: 'Guia para comparar publicação independente, tradicional e híbrida.', file: 'comparativo-publicacao.html',
-      bridge: { action: 'cartorio', label: 'Conferir Cartório da obra', hint: 'Revise a certificação de autoria antes de decidir o caminho.' } },
+      bridge: { action: 'cartorio', label: 'Conferir Cartório da obra', hint: 'Revise o selo de origem e integridade (SHA-256) antes de decidir o caminho.' } },
     { id: 'checklist-lancamento', title: 'Checklist de lançamento', group: 'Publicação e carreira', description: 'Guia para conferir manuscrito, capa, ISBN, sinopse e comunicação.', file: 'checklist-lancamento.html',
       bridge: { action: 'cartorio', label: 'Auditar mesa no Cartório', hint: 'Verifique selo e integridade da mesa antes de publicar.' } },
     { id: 'mentalidade-autor-publicado', title: 'Mentalidade de autor', group: 'Publicação e carreira', description: 'Guia para lidar com perfeccionismo, rejeição e continuidade de carreira.', file: 'mentalidade-autor-publicado.html',
@@ -21632,24 +21856,39 @@ SOFTWARE.
       bar.appendChild(actions);
       shell.appendChild(bar);
 
-      var frame = document.createElement('iframe');
-      frame.className = 'esc-academy-frame';
-      frame.title = entry.title;
-      frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-      on(frame, 'load', function () {
-        try {
-          var body = document.body;
-          var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
-          var paper = isDark ? '#20150f' : '#cfc3ae';
-          var ink = isDark ? '#efe4cf' : '#1f130b';
-          var accent = isDark ? '#dfb267' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
-          if (frame.contentWindow && frame.contentWindow.postMessage) {
-            frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
-          }
-        } catch (ignore) {}
-      });
-      frame.src = 'academia/' + entry.file;
-      shell.appendChild(frame);
+      if (isPortableDoc()) {
+        var portBox = document.createElement('div');
+        portBox.className = 'esc-academy-portable-note';
+        var portH = document.createElement('h3');
+        portH.textContent = entry.title;
+        var portP1 = document.createElement('p');
+        portP1.textContent = 'Você está usando a mesa portátil autocontida (escrevaral.html). Ela traz o editor completo, as lentes de revisão, o Cartório e o Modo Leitura para trabalhar 100% sem internet.';
+        var portP2 = document.createElement('p');
+        portP2.textContent = 'Os 14 guias ilustrados da Academia e Literatura ficam disponíveis na versão instalada do site (escrevaral.com), que também guarda os guias no navegador para leitura offline.';
+        portBox.appendChild(portH);
+        portBox.appendChild(portP1);
+        portBox.appendChild(portP2);
+        shell.appendChild(portBox);
+      } else {
+        var frame = document.createElement('iframe');
+        frame.className = 'esc-academy-frame';
+        frame.title = entry.title;
+        frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+        on(frame, 'load', function () {
+          try {
+            var body = document.body;
+            var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
+            var paper = isDark ? '#20150f' : '#cfc3ae';
+            var ink = isDark ? '#efe4cf' : '#1f130b';
+            var accent = isDark ? '#dfb267' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
+            if (frame.contentWindow && frame.contentWindow.postMessage) {
+              frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
+            }
+          } catch (ignore) {}
+        });
+        frame.src = 'academia/' + entry.file;
+        shell.appendChild(frame);
+      }
 
       modalEl.appendChild(shell);
       modalEl.hidden = false;
@@ -21778,12 +22017,16 @@ SOFTWARE.
         '<h1>Certificado de Verificação</h1>' +
         '<p class="sub">Emitido offline pela oficina Escrevaral — conferência criptográfica SHA-256.</p>' +
         '<pre id="cert-pre"></pre>' +
-        '<div class="actions"><button type="button" onclick="window.print()">Imprimir / Salvar em PDF</button></div>' +
+        '<div class="actions"><button id="cert-print-btn" type="button">Imprimir / Salvar em PDF</button></div>' +
         '</div></body></html>'
       );
       doc.close();
       var pre = doc.getElementById('cert-pre');
       if (pre) { pre.textContent = textCert; }
+      var printBtn = doc.getElementById('cert-print-btn');
+      if (printBtn) {
+        on(printBtn, 'click', function () { try { win.print(); } catch (ignore) {} });
+      }
     }
 
     function renderReportCard(container, report, fileName, isLiveDesk) {
@@ -21909,10 +22152,14 @@ SOFTWARE.
 
             if (d.trail && d.trail.length) {
               var details = mk('details', 'cart-trail-details');
-              details.appendChild(mk('summary', '', 'Ver trilha criptográfica (' + d.trail.length + ' elo' + (d.trail.length === 1 ? '' : 's') + ')'));
-              var ol = mk('ol', 'cart-trail-list');
-              var tIdx, item, li;
               var startIdx = Math.max(0, d.trail.length - 12);
+              var trailLabel = d.trail.length > 12
+                ? 'Ver trilha criptográfica (mostrando últimos 12 de ' + d.trail.length + ' elos)'
+                : 'Ver trilha criptográfica (' + d.trail.length + ' elo' + (d.trail.length === 1 ? '' : 's') + ')';
+              details.appendChild(mk('summary', '', trailLabel));
+              var ol = mk('ol', 'cart-trail-list');
+              if (startIdx > 0) { ol.start = startIdx + 1; }
+              var tIdx, item, li;
               for (tIdx = startIdx; tIdx < d.trail.length; tIdx += 1) {
                 item = d.trail[tIdx];
                 li = mk('li', '');
@@ -21970,14 +22217,14 @@ SOFTWARE.
       guardBar.appendChild(guardText);
 
       var restrictedOn = opts.isRestrictedPaste ? !!opts.isRestrictedPaste() : false;
-      var guardBtn = mk('button', 'cart-guard-toggle', restrictedOn ? 'Restrição ativa · ON' : 'Permitindo colagem · OFF');
+      var guardBtn = mk('button', 'cart-guard-toggle', restrictedOn ? 'Restrição ligada' : 'Colagem permitida');
       guardBtn.type = 'button';
       guardBtn.setAttribute('aria-pressed', restrictedOn ? 'true' : 'false');
       on(guardBtn, 'click', function () {
         if (opts.onToggleRestrictedPaste) {
           var next = !!opts.onToggleRestrictedPaste();
           guardBtn.setAttribute('aria-pressed', next ? 'true' : 'false');
-          guardBtn.textContent = next ? 'Restrição ativa · ON' : 'Permitindo colagem · OFF';
+          guardBtn.textContent = next ? 'Restrição ligada' : 'Colagem permitida';
           announce(next ? 'Colagem externa bloqueada. Tudo que você escrever agora fica sob regime puro do Cartório.' : 'Colagem externa permitida (continuará sendo registrada com transparência no Cartório).');
         }
       });
@@ -22021,12 +22268,21 @@ SOFTWARE.
     function handleFile(file) {
       if (!file) { return; }
       if (file.size > 50000000) {
+        if (verifyOutput) {
+          verifyOutput.textContent = '';
+          verifyOutput.appendChild(mk('p', 'cart-error', 'Envie arquivos de até 50 MB.'));
+        }
         announce('Envie arquivos de até 50 MB.');
         return;
       }
       E.transfer.read(file, function (err, content) {
         if (err) {
-          announce(err.message || 'Erro ao ler o arquivo.');
+          var errMsg = err.message || 'Erro ao ler o arquivo.';
+          if (verifyOutput) {
+            verifyOutput.textContent = '';
+            verifyOutput.appendChild(mk('p', 'cart-error', errMsg));
+          }
+          announce(errMsg);
           return;
         }
         runFileVerification(content, file.name);
@@ -22124,7 +22380,7 @@ SOFTWARE.
       fileLabel.appendChild(fileInput);
       dropBtns.appendChild(fileLabel);
 
-      pasteToggleBtn = mk('button', 'cart-btn-secondary', 'Ou colar conteúdo JSON');
+      pasteToggleBtn = mk('button', 'cart-btn-secondary', 'Ou colar texto da cópia (.scrvrl)');
       pasteToggleBtn.type = 'button';
       on(pasteToggleBtn, 'click', function () {
         pasteWrap.hidden = !pasteWrap.hidden;
@@ -22192,8 +22448,10 @@ SOFTWARE.
     function open(initialTab) {
       buildOverlay();
       overlay.hidden = false;
-      setTab(initialTab === 'verify' ? 'verify' : 'desk');
-      if (tabDeskBtn) { tabDeskBtn.focus(); }
+      var targetTab = initialTab === 'verify' ? 'verify' : 'desk';
+      setTab(targetTab);
+      if (targetTab === 'verify' && tabVerifyBtn) { tabVerifyBtn.focus(); }
+      else if (tabDeskBtn) { tabDeskBtn.focus(); }
     }
 
     function close() {
@@ -22484,13 +22742,26 @@ SOFTWARE.
 
     function applyColumnState() {
       if (!document.body) { return; }
+      var activePane = state.mobilePane || 'editor';
       document.body.setAttribute('data-nav-collapsed', state.navCollapsed ? 'true' : 'false');
       document.body.setAttribute('data-lists-collapsed', state.listsCollapsed ? 'true' : 'false');
-      document.body.setAttribute('data-mobile-pane', state.mobilePane || 'editor');
+      document.body.setAttribute('data-mobile-pane', activePane);
       var navBtn = byId('esc-nav-toggle');
       var listBtn = byId('esc-lists-toggle');
       if (navBtn) { navBtn.setAttribute('aria-pressed', state.navCollapsed ? 'true' : 'false'); }
       if (listBtn) { listBtn.setAttribute('aria-pressed', state.listsCollapsed ? 'true' : 'false'); }
+      var mNav = byId('esc-mobile-nav'), mItems = byId('esc-mobile-items'), mEd = byId('esc-mobile-editor');
+      if (mNav) { mNav.setAttribute('aria-current', activePane === 'nav' ? 'page' : 'false'); }
+      if (mItems) { mItems.setAttribute('aria-current', activePane === 'items' ? 'page' : 'false'); }
+      if (mEd) { mEd.setAttribute('aria-current', activePane === 'editor' ? 'page' : 'false'); }
+    }
+
+    function normSearch(value) {
+      var s = String(value || '').replace(/^\s+|\s+$/g, '').toLowerCase();
+      if (s.normalize) {
+        try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch (ignore) {}
+      }
+      return s;
     }
 
     function allDocs() {
@@ -23158,13 +23429,13 @@ SOFTWARE.
         }
       }
 
-      // Projetos e pastas (filtrados por busca de pastas)
-      var fQuery = String(state.folderQuery || '').replace(/^\s+|\s+$/g, '').toLowerCase();
+      // Projetos e pastas (filtrados por busca de pastas, insensível a acentos)
+      var fQuery = normSearch(state.folderQuery);
       var visibleBooks = books.filter(function (bk) {
         if (!fQuery) { return true; }
-        if (String(bk.name || '').toLowerCase().indexOf(fQuery) >= 0) { return true; }
+        if (normSearch(bk.name).indexOf(fQuery) >= 0) { return true; }
         var flds = collectFoldersForBook(bk, docs);
-        return flds.some(function (f) { return f.toLowerCase().indexOf(fQuery) >= 0; });
+        return flds.some(function (f) { return normSearch(f).indexOf(fQuery) >= 0; });
       });
 
       tree.textContent = '';
@@ -23253,8 +23524,9 @@ SOFTWARE.
       var clearBtn = byId('esc-items-search-clear');
       if (!listEl) { return; }
 
-      var query = searchInput ? String(searchInput.value || '').replace(/^\s+|\s+$/g, '').toLowerCase() : '';
-      if (clearBtn) { clearBtn.hidden = !query; }
+      var rawQuery = searchInput ? String(searchInput.value || '').replace(/^\s+|\s+$/g, '') : '';
+      var query = normSearch(rawQuery);
+      if (clearBtn) { clearBtn.hidden = !rawQuery; }
 
       var currentBook = null;
       var i;
@@ -23324,13 +23596,17 @@ SOFTWARE.
 
       if (query) {
         filtered = filtered.filter(function (d) {
-          var hay = ((d.title || '') + ' ' + (d.text || '') + ' ' + (d.folder || '') + ' ' + (d.project || '')).toLowerCase();
+          var hay = normSearch((d.title || '') + ' ' + (d.text || '') + ' ' + (d.folder || '') + ' ' + (d.project || ''));
           return hay.indexOf(query) >= 0;
         });
       }
 
       if (state.sortBy === 'title') {
-        filtered.sort(function (a, b) { return String(a.title || '').localeCompare(String(b.title || ''), 'pt-BR'); });
+        filtered.sort(function (a, b) {
+          var ta = String(a.title || ''), tb = String(b.title || '');
+          try { return ta.localeCompare(tb, 'pt-BR', { numeric: true, sensitivity: 'base' }); }
+          catch (ignore) { return ta.localeCompare(tb, 'pt-BR'); }
+        });
       } else {
         filtered.sort(function (a, b) { return (Date.parse(b.updated || 0) || 0) - (Date.parse(a.updated || 0) || 0); });
       }
@@ -23379,7 +23655,7 @@ SOFTWARE.
       }
 
       if (!filtered.length && !trashFolders.length) {
-        var empty = createEl('p', 'esc-items-empty', query ? 'Nenhum texto encontrado para "' + query + '".' : 'Nenhum texto neste espaço.');
+        var empty = createEl('p', 'esc-items-empty', rawQuery ? 'Nenhum texto encontrado para "' + rawQuery + '".' : 'Nenhum texto neste espaço.');
         listEl.appendChild(empty);
         return;
       }
@@ -23582,6 +23858,13 @@ SOFTWARE.
         render();
       },
       getSelection: function () { return JSON.parse(JSON.stringify(state)); },
+      focusSearch: function () {
+        if (state.listsCollapsed) { state.listsCollapsed = false; saveState(); }
+        state.mobilePane = 'items';
+        applyColumnState();
+        var inp = byId('esc-items-search');
+        if (inp && inp.focus) { inp.focus(); if (inp.select) { inp.select(); } }
+      },
       setMobilePane: function (pane) {
         state.mobilePane = pane || 'editor';
         applyColumnState();
@@ -23795,12 +24078,75 @@ SOFTWARE.
       }
     } catch (e) { text(byId('project-error'), e.message || 'Não foi possível guardar.'); }
   }
+  var BACKUP_KEY = 'escrevaral.backup.last.v1';
+  var WELCOME_KEY = 'escrevaral.welcome.seen.v1';
+  var safetyDismissed = false;
+  var safetyUrgent = false;
+  function updateBackupStatus() {
+    var el = byId('backup-status');
+    if (!el || !storage) { return; }
+    try {
+      var raw = storage.getItem(BACKUP_KEY);
+      if (!raw) {
+        text(el, 'Nenhuma cópia geral (.scrvrl) baixada ainda neste aparelho.');
+      } else {
+        var dt = new Date(raw);
+        text(el, 'Última cópia geral (.scrvrl): ' + (isNaN(dt.getTime()) ? raw : dt.toLocaleDateString('pt-BR') + ' às ' + dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })) + '.');
+      }
+    } catch (ignore) {}
+  }
+  function showSafetyBanner(msg, urgent) {
+    var box = byId('esc-safety-banner'), txt = byId('esc-safety-text'), dis = byId('esc-safety-dismiss');
+    if (!box || !txt) { return; }
+    if (!urgent && (safetyDismissed || safetyUrgent)) { return; }
+    safetyUrgent = !!urgent;
+    text(txt, msg);
+    box.setAttribute('data-urgent', urgent ? 'true' : 'false');
+    if (dis) { dis.hidden = !!urgent; }
+    box.hidden = false;
+  }
+  function hideSafetyBanner(force) {
+    var box = byId('esc-safety-banner');
+    if (!box) { return; }
+    if (safetyUrgent && !force) { return; }
+    safetyUrgent = false;
+    box.hidden = true;
+  }
+  function recordBackupExport() {
+    try { if (storage) { storage.setItem(BACKUP_KEY, new Date().toISOString()); } } catch (ignore) {}
+    safetyDismissed = true;
+    hideSafetyBanner(true);
+    updateBackupStatus();
+  }
+  function checkBackupReminder() {
+    if (safetyDismissed || safetyUrgent || !storage || !archive) { return; }
+    try {
+      var lastRaw = storage.getItem(BACKUP_KEY);
+      var stale = !lastRaw;
+      if (lastRaw) {
+        var ts = Date.parse(lastRaw);
+        stale = !ts || (Date.now() - ts) > 7 * 86400000;
+      }
+      if (!stale) { return; }
+      var docsList = archive.list(false).documents || [];
+      var totalWords = 0, i;
+      for (i = 0; i < docsList.length; i += 1) {
+        if (docsList[i] && docsList[i].kind !== 'reminder' && docsList[i].text) {
+          totalWords += E.countWords(docsList[i].text);
+        }
+      }
+      if (totalWords >= 250) {
+        showSafetyBanner('Você já escreveu ' + totalWords + ' palavras neste aparelho. Guarde uma cópia (.scrvrl) para proteger seus textos.', false);
+      }
+    } catch (ignore) {}
+  }
   function exportNotebook(all) {
     if (!notebooks || composing || (chalkUI && !chalkUI.flush())) { return; }
     try {
       var book = activeNotebook(); if (!all && !book) { throw new Error('Abra o caderno que deseja exportar.'); }
       var payload = notebooks.pack(exportedDocuments(), all ? null : book.id); notebooks.validate(payload);
-      download(JSON.stringify(payload), 'application/json', all ? 'escrevaral-todos.scrvrl' : (book.name.replace(/[^A-Za-z0-9À-ÿ_-]+/g, '-').slice(0, 80) || 'volume') + '.scrvrl');
+      var ok = download(JSON.stringify(payload), 'application/json', all ? 'escrevaral-todos.scrvrl' : (book.name.replace(/[^A-Za-z0-9À-ÿ_-]+/g, '-').slice(0, 80) || 'volume') + '.scrvrl');
+      if (all && ok) { recordBackupExport(); }
     } catch (e) { message(e.message || 'Não foi possível reunir o caderno.'); }
   }
   function notebookStorage() {
@@ -24000,18 +24346,28 @@ SOFTWARE.
     window.clearTimeout(timer);
     if (!dirty) { return true; }
     doc.title = title.value; doc.text = manuscript.value;
-    if (!archive) { message('Sem gravação neste navegador. Baixe uma cópia em Ajustes.'); return false; }
+    if (!archive) {
+      message('Sem gravação neste navegador. Baixe uma cópia em Ajustes.');
+      showSafetyBanner('Sem gravação disponível neste navegador. Seu texto está aberto — exporte uma cópia agora.', true);
+      return false;
+    }
     try {
       var previousId = doc.id, saved = archive.save(doc,forceHistory); doc = saved.document; dirty = false; forceHistory=false;
+      hideSafetyBanner(true);
       message(saved.conflict ? 'Outra versão foi preservada no acervo.' : 'Guardado neste aparelho.');
       try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Só a preferência de abertura falhou. */ }
       if (!byId('acervo').hidden) { renderArchive(); }
       renderTimeline(false, previousId); refreshCounts(); saveSession();
       if (workspaceUI) { workspaceUI.render(); }
       checkPostWritePwa();
+      checkBackupReminder();
       if (E.ptbrPanelSaved) { E.ptbrPanelSaved(saved.conflict); }
       return true;
-    } catch (e) { message('Não foi possível guardar. Seu texto está na folha; baixe uma cópia em Ajustes.'); return false; }
+    } catch (e) {
+      message('Não foi possível guardar. Seu texto está na folha; baixe uma cópia em Ajustes.');
+      showSafetyBanner('Espaço do navegador esgotado ou bloqueado. Seu texto está aberto — exporte uma cópia (.scrvrl) agora.', true);
+      return false;
+    }
   }
   function isStandaloneApp() {
     var standalone = false;
@@ -24503,11 +24859,20 @@ SOFTWARE.
   }
   function leaveImmersion() { if (machineEnabled) { setMachine(false); } else { setImmersion(false); } }
   function preparePrint() {
-    text(byId('print-title'), title.value); byId('print-title').hidden = !title.value;
-    text(byId('print-text'), manuscript.value);
+    var ptTitle = byId('print-title'), ptText = byId('print-text');
+    text(ptTitle, title.value); ptTitle.hidden = !title.value;
+    if (doc && doc.format === 'rich' && doc.richHtml && E.richEditor && E.richEditor.sanitizeHtml) {
+      ptText.className = 'is-rich';
+      ptText.innerHTML = E.richEditor.sanitizeHtml(doc.richHtml);
+    } else {
+      ptText.className = '';
+      text(ptText, manuscript.value);
+    }
   }
   function finishPrint() {
-    text(byId('print-title'), ''); text(byId('print-text'), '');
+    var ptText = byId('print-text');
+    text(byId('print-title'), '');
+    if (ptText) { ptText.className = ''; ptText.innerHTML = ''; }
   }
   function returnToWriting() { analysisRange = null; if (cabinetOpen) { enterDesk(); } closePanels(false); collapseTimeline(); manuscript.focus(); }
   function loadDocument(next) {
@@ -24920,10 +25285,30 @@ SOFTWARE.
     };
     var currentId = storage.getItem('escrevaral.astra.current'), current = currentId ? archive.get(currentId) : null;
     if (!current || current.trashed || current.kind === 'reminder' || (current.projectId && !availableBook(notebooks.get(current.projectId)))) { current = archive.list().documents[0]; }
+    if (!current && !archive.list(true).documents.length && !notebooks.list().length && storage.getItem(WELCOME_KEY) !== '1') {
+      try {
+        var welcomeDoc = E.freshDocument();
+        welcomeDoc.title = 'Comece por aqui — seu gabinete de escrita';
+        welcomeDoc.text =
+          'Seus textos ficam guardados apenas neste aparelho, sem cadastro e sem nuvem. Você pode apagar esta nota ou escrever direto por cima.\n\n' +
+          '• Para começar uma obra organizada (livro, conto, soneto ou diário), clique em “+ Novo projeto” à esquerda. Para escrever solto, use “+ Nova nota”.\n\n' +
+          '• Selecione qualquer palavra no texto para consultar sinônimos, ou clique em “Examinar” para revisar ritmo, repetições, gramática e poesia.\n\n' +
+          '• Como tudo vive neste navegador, guarde uma cópia de segurança de tempos em tempos em Ajustes → “Exportar tudo”.';
+        current = archive.save(welcomeDoc, false).document;
+        storage.setItem(WELCOME_KEY, '1');
+        storage.setItem('escrevaral.astra.current', current.id);
+      } catch (ignore) {}
+    }
     loadDocument(current || E.freshDocument());
+    updateBackupStatus();
     applyTheme(storage.getItem('escrevaral.astra.theme'));
     focusEnabled = storage.getItem('escrevaral.astra.focus') !== 'off'; byId('focus-toggle').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
-  } catch (e) { message('A gravação pode estar indisponível. Seu texto está aberto; baixe uma cópia em Ajustes.'); }
+  } catch (e) {
+    message('A gravação pode estar indisponível. Seu texto está aberto; baixe uma cópia em Ajustes.');
+    showSafetyBanner('A gravação automática parece bloqueada neste navegador (ex.: janela anônima). Baixe uma cópia antes de fechar.', true);
+  }
+  if (byId('esc-safety-export')) { listen(byId('esc-safety-export'), 'click', function () { exportNotebook(true); }); }
+  if (byId('esc-safety-dismiss')) { listen(byId('esc-safety-dismiss'), 'click', function () { safetyDismissed = true; hideSafetyBanner(false); }); }
   renderTimeline(true, null, true); sizeWorkspace();
   listen(window, 'resize', function () { if (byId('cabinet-window').getAttribute('data-maximized') !== 'true') { resetDesktopWindow(); } sizeWorkspace(); });
   listen(window, 'load', sizeWorkspace);
@@ -25048,7 +25433,10 @@ SOFTWARE.
     var printMedia = window.matchMedia('print');
     if (printMedia.addListener) { printMedia.addListener(function (event) { if (event.matches) { preparePrint(); } else { finishPrint(); } }); }
   }
-  listen(byId('export-text'), 'click', function () { download((title.value ? title.value + '\n\n' : '') + manuscript.value, 'text/plain', 'manuscrito.txt'); });
+  listen(byId('export-text'), 'click', function () {
+    var base = String(title.value || '').replace(/^\s+|\s+$/g, '').replace(/[^A-Za-z0-9À-ÿ_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
+    download((title.value ? title.value + '\n\n' : '') + manuscript.value, 'text/plain', (base || 'manuscrito') + '.txt');
+  });
   listen(byId('export-backup'), 'click', function () { exportNotebook(true); });
   listen(byId('import-file'), 'focus', function () { this.parentNode.setAttribute('data-focus', 'true'); });
   listen(byId('import-file'), 'blur', function () { this.parentNode.setAttribute('data-focus', 'false'); });
@@ -25080,7 +25468,12 @@ SOFTWARE.
         else if (!event.shiftKey && (document.activeElement === last || document.activeElement === byId(activePanel))) { event.preventDefault(); first.focus(); }
       }
     }
-    if ((event.ctrlKey || event.metaKey) && code === 75) { event.preventDefault(); closePanels(false); (cabinetOpen ? byId('cabinet-search') : byId('note-search')).focus(); }
+    if ((event.ctrlKey || event.metaKey) && code === 75) {
+      event.preventDefault(); closePanels(false);
+      if (cabinetOpen) { byId('cabinet-search').focus(); }
+      else if (document.body.getAttribute('data-view') === 'workspace' && workspaceUI && workspaceUI.focusSearch) { workspaceUI.focusSearch(); }
+      else { byId('note-search').focus(); }
+    }
     else if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); if (cabinetOpen) { enterDesk(); } openExaminePanel({ toggle: 'examinar-toggle' }); panelTrigger = manuscript; }
     else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
     else if (code === 27 && document.body.getAttribute('data-counts') === 'true') { byId('desk-counts-close').click(); }
@@ -25441,7 +25834,7 @@ SOFTWARE.
         if (!book) { return; }
         activeNotebookId = book.id;
         if (chalkUI && chalkUI.open) { chalkUI.open(); }
-        else if (byId('start-chalk')) { byId('start-chalk').click(); }
+        else if (byId('start-chalkboard')) { byId('start-chalkboard').click(); }
       },
       trashProjectDocs: function (book) {
         if (!archive || !book) { return; }
@@ -25881,7 +26274,17 @@ SOFTWARE.
   E.mountLineage({checkpoint:checkpoint,message:message,document:function(){return JSON.parse(JSON.stringify(doc));},
     show:function(){toggleStart(false);showPanel('lineage-panel','start-lineage',true);},close:function(){closePanels(true);},
     mark:function(){if(!checkpoint()){throw new Error('Guarde a folha antes de criar um marco.');}forceHistory=true;dirty=true;if(!persist()){throw new Error('Não foi possível guardar o marco.');}},
-    restore:function(version){title.value=version.title;manuscript.value=version.text;forceHistory=true;dirty=true;invalidate();if(!persist()){throw new Error('Não foi possível guardar a restauração. O texto escolhido permanece na folha.');}growManuscript();}
+    restore:function(version){
+      title.value=version.title;
+      manuscript.value=version.text;
+      if(doc.format==='rich'&&E.richEditor&&E.richEditor.plainToSafeHtml){
+        doc.richHtml=E.richEditor.plainToSafeHtml(version.text);
+        if(typeof richUI!=='undefined'&&richUI&&richUI.loadDoc){richUI.loadDoc(doc);}
+      }
+      forceHistory=true;dirty=true;invalidate();
+      if(!persist()){throw new Error('Não foi possível guardar a restauração. O texto escolhido permanece na folha.');}
+      growManuscript();
+    }
   });
 
   E.mountUtilities({
@@ -25986,7 +26389,7 @@ SOFTWARE.
     /* Cartela de rótulo centralizada exatamente no eixo horizontal do trilho */
     if (opts.label) {
       var lblText = formatDirectionalLabel(opts.label, x1, x2);
-      var pillW = Math.max(60, lblText.length * 6.5 + 22);
+      var pillW = Math.min(Math.max(48, rowW - 8), Math.max(60, lblText.length * 6.5 + 22));
       var pillX = Math.max(4, Math.min(rowW - pillW - 4, (x1 + x2) / 2 - pillW / 2));
       var pillY = Math.max(2, yTop - 10);
       svgEl('rect', svg, {
@@ -27001,6 +27404,8 @@ SOFTWARE.
           var r = buttons[j].getBoundingClientRect();
           var x2 = r.left - rb.left + r.width / 2;
           var y2 = typeof r.top === 'number' && typeof rb.top === 'number' ? Math.max(18, r.top - rb.top) : 60;
+          buttons[j].setAttribute('data-reading-support', 'true');
+          if (Math.abs(y1 - y2) >= 8) { break; }
           var yAnchor = Math.max(20, Math.min(y1, y2) - 2);
           var topY = Math.max(6, yAnchor - (16 + lane * 10));
           drawArchitecturalArc(svg, {
@@ -27011,7 +27416,6 @@ SOFTWARE.
             rowWidth: rb.width,
             dashed: true
           });
-          buttons[j].setAttribute('data-reading-support', 'true');
           lane++;
           break;
         }
@@ -27634,7 +28038,7 @@ SOFTWARE.
       });
       el('p',details(card,'Como ler esta análise'),'ptbr-legend',lens==='morfologia'?'Etiqueta contínua: hipótese contextual. Tracejada: possibilidade no léxico. Sem leitura: fora da cobertura. Arcos pontilhados: apoios, não uma árvore sintática completa.':lens==='sintaxe'?'Os grupos podem se conter: o predicado inclui verbo, clíticos e complementos; adjuntos deslocados, vocativos, apostos e orações reduzidas (gerúndio e ao + infinitivo) aparecem destacados na ordem da frase. Os arcos mostram vínculos da hipótese selecionada; as mesmas relações aparecem por escrito.':'Os trechos pertencem à lente escolhida. Selecione um para consultar a explicação.');
     }
-    if(result.limited){el('p',card,'','O cofre limitou a apresentação aos primeiros 100 apontamentos.');}
+    if(result.limited){el('p',card,'','O exame limitou a apresentação aos primeiros 100 apontamentos.');}
     if(result.coverageInfo){
       el('p',details(card,'Alcance desta análise'),'ptbr-scope',result.coverageInfo.summary);
     }
@@ -27655,16 +28059,16 @@ SOFTWARE.
     el('h3',card,'','Léxico · '+(result.query||'consulta'));
     function loadP01Senses(emptyFallbackMsg){
       var p01Epoch=++epoch;
-      var p01Wait=el('p',card,'','Consultando o léxico offline completo (P01)…');
-      status.textContent='Consultando o léxico offline completo (P01)…';
+      var p01Wait=el('p',card,'','Consultando o dicionário local completo…');
+      status.textContent='Consultando o dicionário local completo…';
       E.getLexicoP01().lookup(query,function(p01Res){
         if(p01Epoch!==epoch||panel.hidden){return;}
         if(p01Wait.parentNode){p01Wait.parentNode.removeChild(p01Wait);}
         if(!p01Res||p01Res.state!=='found'||!p01Res.entries||!p01Res.entries.length){
           if(emptyFallbackMsg){el('p',card,'',emptyFallbackMsg);}
-          status.textContent='Consulta concluída sem sentidos no léxico local.';return;
+          status.textContent='Consulta concluída sem sentidos no dicionário local.';return;
         }
-        el('p',card,'','Sentidos encontrados no acervo offline completo (P01). A consulta não escolhe qual sentido vale na sua frase.');
+        el('p',card,'','Sentidos encontrados no dicionário offline. A consulta não escolhe qual sentido vale na sua frase.');
         var pi,pe,prow;
         for(pi=0;pi<p01Res.entries.length&&pi<12;pi++){
           pe=p01Res.entries[pi];prow=el('div',card,'ptbr-observation');
@@ -27672,8 +28076,8 @@ SOFTWARE.
           if(pe.definition){el('p',prow,'',pe.definition);}
           if(pe.synonyms&&pe.synonyms.length){el('p',prow,'','Sinônimos sugeridos pelo acervo: '+pe.synonyms.join(', ')+'.');}
         }
-        el('p',sources,'','Fonte: Léxico offline P01 do Escrevaral (Wikcionário / OpenWordNet-PT · 92 mil formas).');
-        status.textContent='Consulta offline (P01) concluída: '+p01Res.entries.length+' sentido(s) encontrado(s).';
+        el('p',sources,'','Fonte: Dicionário offline do Escrevaral (Wikcionário / OpenWordNet-PT · 92 mil formas).');
+        status.textContent='Consulta offline concluída: '+p01Res.entries.length+' sentido(s) encontrado(s).';
         note.textContent='Consulta 100% offline. Nenhuma palavra do manuscrito foi alterada.';
       });
     }

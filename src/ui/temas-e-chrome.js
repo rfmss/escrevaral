@@ -78,7 +78,10 @@
         else { document.body.removeAttribute('data-esc-reading'); }
       }
       var btn = document.getElementById && document.getElementById('esc-reading-toggle');
-      if (btn) { btn.setAttribute('aria-pressed', comfortable ? 'true' : 'false'); }
+      if (btn) {
+        btn.setAttribute('aria-pressed', comfortable ? 'true' : 'false');
+        btn.textContent = comfortable ? 'Ativado' : 'Ativar';
+      }
       if (persistPref !== false && storage) {
         try { storage.setItem(READING_KEY, comfortable ? 'true' : 'false'); } catch (ignore) {}
       }

@@ -43,9 +43,9 @@ body[data-input="keyboard"] #manuscrito:focus { box-shadow: -2px 0 #85867e; }
 .timeline-entry[aria-current="true"] { border-left-color: #4a544c; background: #c1ccc0; }
 .timeline-entry[aria-current="true"] .note-name { font-weight: 600; }
 .timeline-older { width: 100%; text-align: left; font-size: 12px; color: #4a544c; }
-.panel-backdrop { position: fixed; inset: 0; top: 0; right: 0; bottom: 0; left: 0; background: rgba(40,41,37,.13); z-index: 20; }
+.panel-backdrop { position: fixed; inset: 0; top: 0; right: 0; bottom: 0; left: 0; background: rgba(40,41,37,.13); z-index: 1010; }
 body[data-panel="open"] { overflow: hidden; }
-.sheet { position: fixed; z-index: 21; right: 0; top: 0; bottom: 0; width: 440px; max-width: 100%; padding: 34px 32px; overflow-y: auto; overscroll-behavior: contain; background: #ccd5c7; border-left: 1px solid #cecec5; }
+.sheet { position: fixed; z-index: 1020; right: 0; top: 0; bottom: 0; width: 440px; max-width: 100%; padding: 34px 32px; overflow-y: auto; overscroll-behavior: contain; background: #ccd5c7; border-left: 1px solid #cecec5; }
 .sheet:focus { outline: none; }
 .sheet-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 30px; }
 .eyebrow { margin: 0 0 8px; color: #4a544c; font-size: 10px; line-height: 1.5; letter-spacing: 1.7px; }
@@ -379,6 +379,55 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  body[data-machine="true"] #writing-paper, .machine-stamp { -webkit-transform: none !important; transform: none !important; -webkit-transition: none; transition: none; }
 }
 
+/* Aviso persistente de segurança / cópia .scrvrl */
+.esc-safety-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 1040;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  max-width: min(620px, calc(100vw - 24px));
+  padding: 9px 14px;
+  border: 1px solid #7d6d50;
+  border-radius: 3px;
+  background: #d8cdb9;
+  color: #21130a;
+  font: 13px/1.4 Arial, Helvetica, sans-serif;
+  box-shadow: 0 6px 20px rgba(24, 18, 12, 0.22);
+}
+.esc-safety-banner[hidden] { display: none !important; }
+.esc-safety-banner[data-urgent="true"] {
+  border-color: #9e3d2c;
+  background: #e3c8c1;
+  color: #4a120a;
+}
+.esc-safety-action {
+  min-height: 30px;
+  padding: 4px 12px;
+  border: 1px solid rgba(33, 19, 10, 0.4);
+  border-radius: 3px;
+  background: #242d23;
+  color: #eef3ec;
+  font: 600 12px/1.2 Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.esc-safety-dismiss {
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
 /* Impressão independente do textarea, do tema e do estado de foco. */
 #print-sheet { display: none; }
 @page { size: A4; margin: 24mm 25mm; }
@@ -386,7 +435,16 @@ body[data-machine="true"][data-viewport="small"] .machine-stamp { height: 48px; 
  html, body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; color: #000 !important; margin: 0 !important; padding: 0 !important; }
  body > * { display: none !important; }
  #esc-reader-overlay, #esc-academy-overlay { display: none !important; }
+ .esc-safety-banner { display: none !important; }
  body > #print-sheet { display: block !important; position: static !important; width: auto !important; height: auto !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; font: 11.5pt/1.62 'Noto Serif', Georgia, 'Times New Roman', Times, serif; color: #111 !important; background: #fff !important; text-shadow: none !important; }
  #print-title { font: 700 17pt/1.28 'Noto Serif', Georgia, 'Times New Roman', Times, serif; margin: 0 0 16pt; padding-bottom: 8pt; border-bottom: 0.75pt solid #888; page-break-after: avoid; white-space: pre-wrap; word-wrap: break-word; }
  #print-text { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; text-align: left; orphans: 3; widows: 3; }
+ #print-text.is-rich { white-space: normal; }
+ #print-text.is-rich p { margin: 0 0 9pt; }
+ #print-text.is-rich h1 { font-size: 15pt; margin: 14pt 0 7pt; page-break-after: avoid; }
+ #print-text.is-rich h2 { font-size: 13.5pt; margin: 12pt 0 6pt; page-break-after: avoid; }
+ #print-text.is-rich h3 { font-size: 12pt; margin: 10pt 0 5pt; page-break-after: avoid; }
+ #print-text.is-rich blockquote { margin: 8pt 0 8pt 16pt; padding-left: 10pt; border-left: 2pt solid #888; font-style: italic; }
+ #print-text.is-rich ul, #print-text.is-rich ol { margin: 6pt 0 8pt 18pt; padding: 0; }
+ #print-text.is-rich hr { border: 0; border-top: 0.75pt solid #999; margin: 12pt 0; }
 }

@@ -115,8 +115,8 @@ html,body { scrollbar-width:thin; scrollbar-color:#9e8664 #cfc3ae; }
 ::-webkit-scrollbar-track { background:#cfc3ae; }
 ::-webkit-scrollbar-thumb { background:#9e8664; border-radius:6px; border:2px solid #cfc3ae; }
 ::-webkit-scrollbar-thumb:hover { background:#7f6645; }
-@media(prefers-color-scheme:dark) { html,body { scrollbar-color:#6b5238 #20150f; } ::-webkit-scrollbar-track { background:#20150f; } ::-webkit-scrollbar-thumb { background:#6b5238; border-color:#20150f; } }
-@media(prefers-color-scheme:dark) { :root { --paper:#20150f; --ink:#efe4cf; --accent:#dfb267; } }
+html[data-theme="dark"],html[data-theme="dark"] body { scrollbar-color:#6b5238 #20150f; }
+html[data-theme="dark"] { --paper:#20150f; --ink:#efe4cf; --accent:#dfb267; }
 @media(max-width:900px) { .wrap { width:calc(100% - 40px); } .hero { gap:24px; } .route { gap:8px; } .route a { padding:15px 10px; } .route li:not(:last-child):after { width:8px; right:-8px; } .route strong { font-size:1rem; } .cover-example { grid-template-columns:100px 1fr; gap:20px; } .book-cover strong { font-size:20px; } }
 @media(max-width:680px) {
   .wrap { width:calc(100% - 32px); } .hero { grid-template-columns:1fr; padding-block:28px; gap:20px; } .hero-note { justify-self:stretch; max-width:none; padding:12px 16px; } .hero-note>p { font:inherit; margin:8px 0; } .hero-note br { display:none; } .hero-note br:after { content:' '; }
@@ -369,11 +369,13 @@ body {
   position: relative;
   border-top: 1px dashed rgba(139, 90, 30, 0.45) !important;
 }
-@media(prefers-color-scheme:dark) {
-  :root { --afk-card: #2c1e15; --afk-card-hover: #38261b; }
-  .section-heading h2, .route strong, .chapter-head h2, .closing h2, .block h3 { color: #f4ead6; }
-  .example { background: #20150f !important; }
-  .back-map { color: #f0e4ce !important; }
+html[data-theme="dark"] { --afk-card: #2c1e15; --afk-card-hover: #38261b; }
+html[data-theme="dark"] .section-heading h2, html[data-theme="dark"] .route strong, html[data-theme="dark"] .chapter-head h2, html[data-theme="dark"] .closing h2, html[data-theme="dark"] .block h3 { color: #f4ead6; }
+html[data-theme="dark"] .example { background: #20150f !important; }
+html[data-theme="dark"] .back-map { color: #f0e4ce !important; }
+@media(max-width:680px) {
+  .hero { padding: 22px 18px !important; }
+  .route a { grid-template-columns: auto 1fr !important; }
 }
 /* === AFK-REAL-GABINETE-ORNAMENTS-END === */
 </style>

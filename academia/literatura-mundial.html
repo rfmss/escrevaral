@@ -80,10 +80,11 @@ html[data-theme="dark"],html[data-theme="dark"] *{scrollbar-color:#6b5238 #20150
 body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif}
 ::selection{background:#3a2013;color:#f0e4ce}
 button{font:inherit;color:inherit;background:var(--tag-patch);border:1px solid var(--tag-edge);border-radius:2px;padding:6px 12px;cursor:pointer;min-height:34px;text-decoration:none}
-button:hover:not(:disabled),button:focus-visible,summary:focus-visible{background:var(--tag-patch-hover);outline:none;text-decoration:none}
+button:hover:not(:disabled){background:var(--tag-patch-hover);text-decoration:none}
+button:focus-visible,summary:focus-visible{background:var(--tag-patch-hover);outline:2px solid var(--manuscript);outline-offset:2px;text-decoration:none}
 button:disabled{opacity:.4;cursor:default;box-shadow:none!important;transform:none!important}
 button[aria-pressed=true]{background:var(--tag-dark);color:var(--tag-ink);border-color:var(--tag-dark);font-weight:700}
-[tabindex]:focus-visible{outline:none}
+[tabindex]:focus-visible{outline:2px solid var(--manuscript);outline-offset:2px}
 p{margin:0 0 14px}h1,h2,h3{line-height:1.2}h1{font-size:clamp(25px,3vw,38px);letter-spacing:-.035em;font-weight:750;margin:8px 0 14px;color:var(--manuscript)}h2{font-size:19px;margin:28px 0 12px}h3{font-size:17px;margin:8px 0}
 
 /* O percurso ocupa a altura disponível; controles e rolagem ficam juntos. */
@@ -737,12 +738,16 @@ html[data-theme="dark"] #reading-scroll{scrollbar-color:#465449 #1a211c}
 .oasis-grip::before{content:'';position:absolute;top:22px;bottom:22px;left:13px;width:1px;background:#29302c;pointer-events:none}
 .oasis-key{position:relative;width:32px;height:70px;min-height:70px;padding:0;border:0;border-radius:6px;background:transparent;color:#9aa39d;display:grid;place-items:center;cursor:pointer;box-shadow:none}
 .oasis-key::before{content:'';display:block;width:7px;height:56px;border-radius:3px;background:#282e2b;border:1px solid #454e49;box-shadow:-1px 0 0 #111513,1px 0 0 #343b37}
+.oasis-key::after{position:absolute;left:50%;transform:translateX(-50%);font:700 8px/1 Arial,sans-serif;color:#8fa08e;pointer-events:none;opacity:.85}
+#page-prev::after{content:'▲';top:2px}
+#page-next::after{content:'▼';bottom:2px}
 button.oasis-key:hover:not(:disabled),button.oasis-key:focus-visible{background:rgba(196,207,194,.14) !important;border-color:transparent !important;text-decoration:none}
 button.oasis-key:hover::before,button.oasis-key:focus-visible::before{background:#3d4d40;border-color:#c4cfc2;box-shadow:0 0 0 1px rgba(196,207,194,.35)}
 button.oasis-key:focus-visible{outline:1px dashed #c4cfc2;outline-offset:-3px}
 button.oasis-key:active::before{transform:translateX(-1px);background:#253027;box-shadow:none}
 
 @media(max-width:600px){
+  .oasis-screen .reader-bar{flex-wrap:wrap;gap:4px}
   #timeline{padding:12px}
   .intro h1{font-size:21px}
   .toolbar{gap:6px;margin-top:8px}

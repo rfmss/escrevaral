@@ -106,7 +106,7 @@
       header.className = 'esc-palavra-header';
       var title = document.createElement('strong');
       title.className = 'esc-palavra-title';
-      title.textContent = currentState.originalWord;
+      title.textContent = currentState.originalWord || 'Sinônimos';
       var closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.className = 'esc-palavra-icon';
@@ -123,13 +123,18 @@
       if (currentState.loading) {
         var waitP = document.createElement('p');
         waitP.className = 'esc-palavra-status';
-        waitP.textContent = 'Consultando léxico PT-BR…';
+        waitP.textContent = 'Consultando dicionário local…';
         content.appendChild(waitP);
+      } else if (currentState.result && currentState.result.state === 'idle') {
+        var idleP = document.createElement('p');
+        idleP.className = 'esc-palavra-status';
+        idleP.textContent = 'Digite uma palavra abaixo ou selecione qualquer palavra no texto.';
+        content.appendChild(idleP);
       } else if (!currentState.result || currentState.result.state !== 'found' || !currentState.result.entries.length) {
         var msgP = document.createElement('p');
         msgP.className = 'esc-palavra-status';
         msgP.textContent = currentState.result && currentState.result.state === 'unavailable'
-          ? 'Pacote P01 indisponível nesta cópia.'
+          ? 'Dicionário de sinônimos indisponível nesta cópia.'
           : 'Palavra fora do recorte de sinônimos; isso não indica erro.';
         content.appendChild(msgP);
       } else {
@@ -284,7 +289,7 @@
       if (showSources) {
         var srcBox = document.createElement('p');
         srcBox.className = 'esc-palavra-sources';
-        srcBox.textContent = 'Acervo local P01 (7.661 lemas, 92.148 chaves): Wikcionário em português (CC-BY-SA 4.0), OpenWordNet-PT (CC-BY-SA 4.0) e PortiLexicon-UD (MIT). Consulta 100% offline.';
+        srcBox.textContent = 'Dicionário local do Escrevaral (7.661 verbetes, 92.148 formas): Wikcionário em português (CC-BY-SA 4.0), OpenWordNet-PT (CC-BY-SA 4.0) e PortiLexicon-UD (MIT). Consulta 100% offline.';
         content.appendChild(srcBox);
       }
 
@@ -292,6 +297,10 @@
       cardEl.appendChild(content);
       cardEl.hidden = false;
       if (document.body) { document.body.setAttribute('data-esc-consulta-open', 'true'); }
+      if (currentState.result && currentState.result.state === 'idle' && cardEl.querySelector) {
+        var idleInput = cardEl.querySelector('.esc-palavra-search-input');
+        if (idleInput && idleInput.focus) { try { idleInput.focus(); } catch (ignore) {} }
+      }
     }
 
     function inspectSelection() {

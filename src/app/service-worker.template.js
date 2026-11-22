@@ -1,8 +1,9 @@
 /* Gerado: editar src/app/service-worker.template.js. */
 const CACHE_NAME = "{{CACHE_NAME}}";
-const RUNTIME_CACHE = "scrvrl-runtime-v1";
+const RUNTIME_CACHE = "scrvrl-runtime-{{GENERATION}}";
 const ASSET_VERSION = "{{ASSET_VERSION}}";
 const REQUIRED_ASSETS = {{ASSETS}};
+const BUNKER_ASSETS = {{BUNKER_ASSETS}};
 const scopeURL = new URL('./', self.registration.scope);
 const appPaths = [scopeURL.pathname, new URL('index.html', scopeURL).pathname];
 const RUNTIME_PREFIXES = [
@@ -12,6 +13,7 @@ const RUNTIME_PREFIXES = [
   new URL('assets/study/', scopeURL).pathname,
   new URL('assets/library/', scopeURL).pathname
 ];
+const ACADEMIA_PREFIX = new URL('academia/', scopeURL).pathname;
 function isRuntimeCacheable(pathname) {
   for (let i = 0; i < RUNTIME_PREFIXES.length; i += 1) {
     if (pathname.indexOf(RUNTIME_PREFIXES[i]) === 0) return true;
@@ -35,12 +37,22 @@ self.addEventListener('install', event => {
     await cache.put('./index.html', index.clone()); await cache.put('./', index);
     // Ícone, logo ENEM e arquivo portátil não impedem o editor de funcionar offline.
     await Promise.allSettled(['./escrevaral.html', './manifest.webmanifest', './icons/icon.svg', './assets/study/enem-logo.png'].map(p => cache.add(p)));
+    // Pré-cache opcional dos guias da Academia e ilustrações do Real Gabinete para modo bunker.
+    try {
+      const runtime = await caches.open(RUNTIME_CACHE);
+      await Promise.allSettled(BUNKER_ASSETS.map(p => runtime.add(new Request(p, { cache: 'reload' }))));
+    } catch (ignore) {}
     await self.skipWaiting();
   })());
 });
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
-    for (const name of await caches.keys()) if (name.startsWith('scrvrl-offline-') && name !== CACHE_NAME) await caches.delete(name);
+    for (const name of await caches.keys()) {
+      if ((name.startsWith('scrvrl-offline-') && name !== CACHE_NAME) ||
+          (name.startsWith('scrvrl-runtime-') && name !== RUNTIME_CACHE)) {
+        await caches.delete(name);
+      }
+    }
     await self.clients.claim();
   })());
 });
@@ -55,6 +67,16 @@ self.addEventListener('fetch', event => {
     if (isRuntimeCacheable(url.pathname)) {
       const runtime = await caches.open(RUNTIME_CACHE);
       const rtCached = await runtime.match(event.request);
+      if (url.pathname.indexOf(ACADEMIA_PREFIX) === 0) {
+        try {
+          const fresh = await fetch(event.request);
+          if (fresh && fresh.ok) { try { await runtime.put(event.request, fresh.clone()); } catch (ignore) {} }
+          return fresh;
+        } catch (error) {
+          if (rtCached) return rtCached;
+          return new Response('Guia indisponível offline. Abra o Escrevaral conectado uma vez para atualizar o acervo.', { status: 503 });
+        }
+      }
       if (rtCached) return rtCached;
       try {
         const fresh = await fetch(event.request);

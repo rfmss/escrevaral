@@ -62,4 +62,9 @@ for(let fail=1;fail<=packet.documents.length+2;fail++) {
 const interrupted=new Storage(); interrupted.setItem('escrevaral.astra.notebooks.transaction.v1',JSON.stringify({before:[['escrevaral.astra.v1.doc.partial',null]]}));interrupted.setItem('escrevaral.astra.v1.doc.partial','partial');E.createNotebooks(interrupted);assert.equal(interrupted.length,0);
 // Caderno removido conserva conteúdo exportável e pode ser restaurado.
 books.update(oldBook.id,{trashed:true});assert.equal(books.pack(archive.list(true).documents,oldBook.id).documents.length,3);books.update(oldBook.id,{trashed:false});
-console.log('OK: sintaxe; migração; identidade; caderno vazio; pacote completo; ida e volta; autoria; colisões; validação; rollback; recuperação; lixeira.');
+// Nota solta ("Sem pasta", sem projectId) também exporta e valida em pacote geral (.scrvrl).
+let loose=E.freshDocument();loose.title='Nota solta pré-beta';loose.text='Escrita sem pasta ainda.';loose=archive.save(loose).document;
+const allWithLoose=books.pack(archive.list(true).documents,null);
+books.validate(allWithLoose);
+assert.ok(allWithLoose.documents.some(d=>d.id===loose.id),'nota solta incluída e validada em Exportar tudo');
+console.log('OK: sintaxe; migração; identidade; caderno vazio; pacote completo; ida e volta; autoria; colisões; validação; rollback; recuperação; lixeira; nota solta.');

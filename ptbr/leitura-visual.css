@@ -402,12 +402,13 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-word[aria-pressed="true"],
 body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"] { border-color:#b8d9c0 !important; }
 
 /* Responsivo */
-@media(max-width:1020px) {
+@media(max-width:1120px) {
  #ptbr-dashboard .ptbr-reading { display:block; }
  #ptbr-dashboard .ptbr-reading-paper { min-width:0; }
  #ptbr-dashboard .ptbr-reading-aside { width:auto; position:static; margin-top:14px; }
 }
 @media(max-width:760px) {
+ #ptbr-dashboard .ptbr-metric-chip { white-space:normal; }
  #oficina[data-ptbr-dashboard="true"],
  body[data-view="workspace"] #oficina[data-ptbr-dashboard="true"] {
    left: 0 !important;

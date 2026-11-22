@@ -1,12 +1,12 @@
 {
-  "name": "SCRVRL OS — Gabinete de escrita",
-  "short_name": "SCRVRL OS",
+  "name": "Escrevaral — Gabinete de escrita",
+  "short_name": "Escrevaral",
   "description": "Uma mesa de escrita em português brasileiro. Manuscritos no seu aparelho, instrumentos que explicam o que encontram.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f5f4ef",
-  "theme_color": "#f5f4ef",
+  "background_color": "#c4cfc2",
+  "theme_color": "#c4cfc2",
   "lang": "pt-BR",
   "icons": [
     {

@@ -97,12 +97,16 @@
         '<h1>Certificado de Verificação</h1>' +
         '<p class="sub">Emitido offline pela oficina Escrevaral — conferência criptográfica SHA-256.</p>' +
         '<pre id="cert-pre"></pre>' +
-        '<div class="actions"><button type="button" onclick="window.print()">Imprimir / Salvar em PDF</button></div>' +
+        '<div class="actions"><button id="cert-print-btn" type="button">Imprimir / Salvar em PDF</button></div>' +
         '</div></body></html>'
       );
       doc.close();
       var pre = doc.getElementById('cert-pre');
       if (pre) { pre.textContent = textCert; }
+      var printBtn = doc.getElementById('cert-print-btn');
+      if (printBtn) {
+        on(printBtn, 'click', function () { try { win.print(); } catch (ignore) {} });
+      }
     }
 
     function renderReportCard(container, report, fileName, isLiveDesk) {
@@ -228,10 +232,14 @@
 
             if (d.trail && d.trail.length) {
               var details = mk('details', 'cart-trail-details');
-              details.appendChild(mk('summary', '', 'Ver trilha criptográfica (' + d.trail.length + ' elo' + (d.trail.length === 1 ? '' : 's') + ')'));
-              var ol = mk('ol', 'cart-trail-list');
-              var tIdx, item, li;
               var startIdx = Math.max(0, d.trail.length - 12);
+              var trailLabel = d.trail.length > 12
+                ? 'Ver trilha criptográfica (mostrando últimos 12 de ' + d.trail.length + ' elos)'
+                : 'Ver trilha criptográfica (' + d.trail.length + ' elo' + (d.trail.length === 1 ? '' : 's') + ')';
+              details.appendChild(mk('summary', '', trailLabel));
+              var ol = mk('ol', 'cart-trail-list');
+              if (startIdx > 0) { ol.start = startIdx + 1; }
+              var tIdx, item, li;
               for (tIdx = startIdx; tIdx < d.trail.length; tIdx += 1) {
                 item = d.trail[tIdx];
                 li = mk('li', '');
@@ -289,14 +297,14 @@
       guardBar.appendChild(guardText);
 
       var restrictedOn = opts.isRestrictedPaste ? !!opts.isRestrictedPaste() : false;
-      var guardBtn = mk('button', 'cart-guard-toggle', restrictedOn ? 'Restrição ativa · ON' : 'Permitindo colagem · OFF');
+      var guardBtn = mk('button', 'cart-guard-toggle', restrictedOn ? 'Restrição ligada' : 'Colagem permitida');
       guardBtn.type = 'button';
       guardBtn.setAttribute('aria-pressed', restrictedOn ? 'true' : 'false');
       on(guardBtn, 'click', function () {
         if (opts.onToggleRestrictedPaste) {
           var next = !!opts.onToggleRestrictedPaste();
           guardBtn.setAttribute('aria-pressed', next ? 'true' : 'false');
-          guardBtn.textContent = next ? 'Restrição ativa · ON' : 'Permitindo colagem · OFF';
+          guardBtn.textContent = next ? 'Restrição ligada' : 'Colagem permitida';
           announce(next ? 'Colagem externa bloqueada. Tudo que você escrever agora fica sob regime puro do Cartório.' : 'Colagem externa permitida (continuará sendo registrada com transparência no Cartório).');
         }
       });
@@ -340,12 +348,21 @@
     function handleFile(file) {
       if (!file) { return; }
       if (file.size > 50000000) {
+        if (verifyOutput) {
+          verifyOutput.textContent = '';
+          verifyOutput.appendChild(mk('p', 'cart-error', 'Envie arquivos de até 50 MB.'));
+        }
         announce('Envie arquivos de até 50 MB.');
         return;
       }
       E.transfer.read(file, function (err, content) {
         if (err) {
-          announce(err.message || 'Erro ao ler o arquivo.');
+          var errMsg = err.message || 'Erro ao ler o arquivo.';
+          if (verifyOutput) {
+            verifyOutput.textContent = '';
+            verifyOutput.appendChild(mk('p', 'cart-error', errMsg));
+          }
+          announce(errMsg);
           return;
         }
         runFileVerification(content, file.name);
@@ -443,7 +460,7 @@
       fileLabel.appendChild(fileInput);
       dropBtns.appendChild(fileLabel);
 
-      pasteToggleBtn = mk('button', 'cart-btn-secondary', 'Ou colar conteúdo JSON');
+      pasteToggleBtn = mk('button', 'cart-btn-secondary', 'Ou colar texto da cópia (.scrvrl)');
       pasteToggleBtn.type = 'button';
       on(pasteToggleBtn, 'click', function () {
         pasteWrap.hidden = !pasteWrap.hidden;
@@ -511,8 +528,10 @@
     function open(initialTab) {
       buildOverlay();
       overlay.hidden = false;
-      setTab(initialTab === 'verify' ? 'verify' : 'desk');
-      if (tabDeskBtn) { tabDeskBtn.focus(); }
+      var targetTab = initialTab === 'verify' ? 'verify' : 'desk';
+      setTab(targetTab);
+      if (targetTab === 'verify' && tabVerifyBtn) { tabVerifyBtn.focus(); }
+      else if (tabDeskBtn) { tabDeskBtn.focus(); }
     }
 
     function close() {

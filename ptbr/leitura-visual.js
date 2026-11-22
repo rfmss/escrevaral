@@ -79,7 +79,7 @@
     /* Cartela de rótulo centralizada exatamente no eixo horizontal do trilho */
     if (opts.label) {
       var lblText = formatDirectionalLabel(opts.label, x1, x2);
-      var pillW = Math.max(60, lblText.length * 6.5 + 22);
+      var pillW = Math.min(Math.max(48, rowW - 8), Math.max(60, lblText.length * 6.5 + 22));
       var pillX = Math.max(4, Math.min(rowW - pillW - 4, (x1 + x2) / 2 - pillW / 2));
       var pillY = Math.max(2, yTop - 10);
       svgEl('rect', svg, {
@@ -1094,6 +1094,8 @@
           var r = buttons[j].getBoundingClientRect();
           var x2 = r.left - rb.left + r.width / 2;
           var y2 = typeof r.top === 'number' && typeof rb.top === 'number' ? Math.max(18, r.top - rb.top) : 60;
+          buttons[j].setAttribute('data-reading-support', 'true');
+          if (Math.abs(y1 - y2) >= 8) { break; }
           var yAnchor = Math.max(20, Math.min(y1, y2) - 2);
           var topY = Math.max(6, yAnchor - (16 + lane * 10));
           drawArchitecturalArc(svg, {
@@ -1104,7 +1106,6 @@
             rowWidth: rb.width,
             dashed: true
           });
-          buttons[j].setAttribute('data-reading-support', 'true');
           lane++;
           break;
         }

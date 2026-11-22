@@ -109,8 +109,8 @@ html,body { scrollbar-width:thin; scrollbar-color:#9e8664 #cfc3ae; }
 ::-webkit-scrollbar-track { background:#cfc3ae; }
 ::-webkit-scrollbar-thumb { background:#9e8664; border-radius:6px; border:2px solid #cfc3ae; }
 ::-webkit-scrollbar-thumb:hover { background:#7f6645; }
-@media(prefers-color-scheme:dark) { html,body { scrollbar-color:#6b5238 #20150f; } ::-webkit-scrollbar-track { background:#20150f; } ::-webkit-scrollbar-thumb { background:#6b5238; border-color:#20150f; } }
-@media(prefers-color-scheme:dark) { :root { --paper:#20150f; --ink:#efe4cf; --accent:#dfb267; } }
+html[data-theme="dark"],html[data-theme="dark"] body { scrollbar-color:#6b5238 #20150f; }
+html[data-theme="dark"] { --paper:#20150f; --ink:#efe4cf; --accent:#dfb267; }
 @media(max-width:900px) { .wrap { width:calc(100% - 40px); } .hero { gap:24px; } .route { gap:8px; } .route a { padding:15px 10px; } .route li:not(:last-child):after { width:8px; right:-8px; } .route strong { font-size:1rem; } .cover-example { grid-template-columns:100px 1fr; gap:20px; } .book-cover strong { font-size:20px; } }
 @media(max-width:680px) {
   .wrap { width:calc(100% - 32px); } .hero { grid-template-columns:1fr; padding-block:28px; gap:20px; } .hero-note { justify-self:stretch; max-width:none; padding:12px 16px; } .hero-note>p { font:inherit; margin:8px 0; } .hero-note br { display:none; } .hero-note br:after { content:' '; }
@@ -475,11 +475,13 @@ body {
   position: relative;
   border-top: 1px dashed rgba(139, 90, 30, 0.45) !important;
 }
-@media(prefers-color-scheme:dark) {
-  :root { --afk-card: #2c1e15; --afk-card-hover: #38261b; }
-  .section-heading h2, .route strong, .chapter-head h2, .closing h2, .block h3 { color: #f4ead6; }
-  .example { background: #20150f !important; }
-  .back-map { color: #f0e4ce !important; }
+html[data-theme="dark"] { --afk-card: #2c1e15; --afk-card-hover: #38261b; }
+html[data-theme="dark"] .section-heading h2, html[data-theme="dark"] .route strong, html[data-theme="dark"] .chapter-head h2, html[data-theme="dark"] .closing h2, html[data-theme="dark"] .block h3 { color: #f4ead6; }
+html[data-theme="dark"] .example { background: #20150f !important; }
+html[data-theme="dark"] .back-map { color: #f0e4ce !important; }
+@media(max-width:680px) {
+  .hero { padding: 22px 18px !important; }
+  .route a { grid-template-columns: auto 1fr !important; }
 }
 /* === AFK-REAL-GABINETE-ORNAMENTS-END === */
 </style></head><body class="visual-guide legacy-guide"><a class="skip" href="#mapa">Ir para o mapa</a><main><header class="hero wrap compact-hero" id="inicio"><div class="hero-depth" aria-hidden="true"><span>Academia</span></div><div class="hero-copy"><p class="eyebrow">Academia / Escrita e revisão</p><h1>Bloqueio criativo</h1><p class="intro">Encontre uma forma de retomar a escrita.</p></div></header><nav class="map wrap" id="mapa" aria-label="Mapa do assunto"><div class="section-heading"><h2>Entenda de relance</h2><p>Escolha por onde começar.</p></div><ol class="route"><li><a href="#etapa-1"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="magnifying-glass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>01</span><strong>Observe o momento</strong><span>Bloqueio não é uma coisa só</span></a></li><li><a href="#etapa-2"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="pencil-simple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"/></svg>02</span><strong>Técnicas imediatas</strong><span>O que fazer quando a página está em branco</span></a></li><li><a href="#etapa-3"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></svg>03</span><strong>Prevenção</strong><span>Como criar uma rotina que resiste ao bloqueio</span></a></li><li><a href="#etapa-4"><span class="step-no"><svg class="academy-phosphor" width="22" height="22" aria-hidden="true" focusable="false" data-esc-phosphor="pencil-simple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"/></svg>04</span><strong>Exercícios práticos</strong><span>Retome a escrita agora</span></a></li></ol></nav><div class="chapters wrap"><section class="chapter" id="etapa-1"><header class="chapter-head"><span class="chapter-no">01</span><div><h2>Bloqueio não é uma coisa só</h2></div><a class="back-map" href="#mapa">Ver mapa</a></header><aside class="example"><span class="label">Por exemplo</span><p>Você volta à primeira frase toda vez que abre o arquivo. Experimente escrever o próximo parágrafo antes de reler a abertura.</p></aside><div class="legacy-content">

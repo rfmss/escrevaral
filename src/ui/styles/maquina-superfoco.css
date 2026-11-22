@@ -145,6 +145,27 @@
     margin-right: 8px;
   }
 
+  @media (max-width: 760px) {
+    .esc-writing-bar {
+      padding: 0 8px;
+      opacity: 0.94;
+      overflow-x: auto;
+      gap: 4px;
+    }
+    .esc-writing-idle-note,
+    #esc-sf-full {
+      display: none !important;
+    }
+    .esc-writing-btn,
+    .esc-writing-icon-btn {
+      margin: 0 2px;
+      padding: 4px 7px;
+      font-size: 11.5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+  }
+
   /* Em Superfoco: esconder chrome normal e usar a barra .esc-writing-bar */
   body[data-immersion="true"] #location-path,
   body[data-immersion="true"] #leave-focus,

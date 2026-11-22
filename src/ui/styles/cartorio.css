@@ -290,6 +290,7 @@
   }
   .cart-btn-secondary:hover { background: #c3cfc0; }
   .cart-file-btn { position: relative; overflow: hidden; }
+  .cart-file-btn:focus-within { outline: 2px solid #242d23; outline-offset: 2px; }
   .cart-file-btn input[type="file"] {
     position: absolute;
     left: -9999px;
@@ -490,5 +491,19 @@
   body[data-theme="escuro"] .cart-dropzone {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(228, 235, 226, 0.2);
+  }
+
+  @media (max-width: 760px) {
+    .esc-cartorio-overlay { padding: 8px; }
+    .esc-cartorio-card { max-height: 96vh; }
+    .cart-head { padding: 12px 14px 10px; flex-wrap: wrap; gap: 8px; }
+    .cart-head h2 { font-size: 19px; }
+    .cart-tabs { padding: 8px 14px 0; flex-wrap: wrap; }
+    .cart-tab { padding: 8px 10px; font-size: 12.5px; }
+    .cart-status:not(:empty) { padding: 8px 14px; }
+    .cart-scroll { padding: 12px 14px 20px; }
+    .cart-cert { padding: 16px 14px; }
+    .cart-hash-top { flex-wrap: wrap; }
+    .cart-dropzone { padding: 16px 12px; }
   }
 }

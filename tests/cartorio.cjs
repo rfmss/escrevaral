@@ -133,4 +133,10 @@ assert.ok(certText.includes('CARTÓRIO DO ESCREVARAL'));
 assert.ok(certText.includes(cleanVerdict.packageHash));
 assert.ok(certText.includes('Camada 1') && certText.includes('Camada 2'));
 
-console.log('OK: Cartório SHA-256 ES5, cadeia encadeada, colagem externa/bloqueada, determinismo ida/volta e detecção de adulteração.');
+/* 8. Impressão do certificado na UI não usa onclick inline (respeita CSP estrita) */
+const fs = require('node:fs'), path = require('node:path');
+const cartUiSrc = fs.readFileSync(path.join(__dirname, '..', 'src/ui/cartorio.js'), 'utf8');
+assert.ok(!cartUiSrc.includes('onclick="window.print()"'), 'cartorio.js não pode usar onclick inline bloqueado pela CSP');
+assert.ok(cartUiSrc.includes("getElementById('cert-print-btn')"), 'cartorio.js liga botão de impressão via addEventListener');
+
+console.log('OK: Cartório SHA-256 ES5, cadeia encadeada, colagem externa/bloqueada, determinismo ida/volta, detecção de adulteração e impressão compatível com CSP.');

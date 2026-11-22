@@ -154,7 +154,7 @@
       }
       payload.notebooks.forEach(function (b) { if (ids[b.id]) { throw new Error('Caderno repetido no pacote.'); } ids[b.id] = true; if (b.data.planner && !E.validPlanner(b.data.planner)) { throw new Error('Calendário inválido no caderno.'); } if (typeof b.data.chalk !== 'undefined' && !E.chalk.valid(b.data.chalk)) { throw new Error('Desenho inválido no caderno.'); } if (typeof b.data.story !== 'undefined' && !E.story.valid(b.data.story)) { throw new Error('Fichas ou cenas inválidas no caderno.'); } });
       payload.documents.forEach(function (d) {
-        if (records[d.id] || (d.projectId && !ids[d.projectId]) || (!d.projectId && (payload.scope !== 'all' || d.kind !== 'reminder'))) { throw new Error('Vínculos incompletos no pacote.'); } records[d.id] = true;
+        if (records[d.id] || (d.projectId && !ids[d.projectId]) || (!d.projectId && payload.scope !== 'all')) { throw new Error('Vínculos incompletos no pacote.'); } records[d.id] = true;
       });
       if (!payload.globals || typeof payload.globals !== 'object' || array(payload.globals) || (payload.scope !== 'all' && Object.keys(payload.globals).length)) { throw new Error('Dados gerais inválidos.'); }
       Object.keys(payload.globals).forEach(function (k) { if (globals.indexOf(k) === -1 || typeof payload.globals[k] !== 'string') { throw new Error('Preferência desconhecida no pacote.'); } });

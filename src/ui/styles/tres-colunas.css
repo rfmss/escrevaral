@@ -798,10 +798,12 @@
       top: 40px;
       bottom: 44px;
       right: 0;
-      z-index: 40;
+      z-index: 1020;
       background: var(--esc-bg);
     }
   }
+
+  .notebook-dialog { z-index: 1030; }
 
   @media (max-width: 760px) {
     .esc-mobile-bar {
@@ -818,10 +820,24 @@
     .esc-mobile-bar button {
       flex: 1 1 0;
       border: 0;
+      border-bottom: 2px solid transparent;
       background: transparent;
-      color: var(--esc-ink);
+      color: var(--esc-muted, #465347);
       font: 600 12px/1.2 Arial, sans-serif;
       cursor: pointer;
+    }
+    .esc-mobile-bar button[aria-current="page"] {
+      color: var(--esc-ink, #1e2320);
+      background: rgba(30, 35, 32, 0.08);
+      border-bottom-color: var(--esc-ink, #1e2320);
+    }
+    body[data-view="workspace"] #esc-nav-toggle,
+    body[data-view="workspace"] #esc-lists-toggle {
+      display: none !important;
+    }
+    body[data-view="workspace"][data-counts="true"] #writing-space .desk-inspector {
+      top: 78px;
+      bottom: 0;
     }
     body[data-view="workspace"] #esc-workspace {
       top: 78px;

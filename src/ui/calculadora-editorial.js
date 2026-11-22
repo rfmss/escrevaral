@@ -186,25 +186,25 @@
       on(document, 'keydown', function (ev) {
         if (ev.keyCode === 27 && el && !el.hidden) { close(); }
       });
+      on(document, 'mousemove', function (ev) {
+        if (!dragState.active || !el) { return; }
+        el.style.right = 'auto';
+        el.style.left = Math.max(8, Math.min((window.innerWidth || 1000) - 340, ev.clientX - dragState.ox)) + 'px';
+        el.style.top = Math.max(44, Math.min((window.innerHeight || 700) - 120, ev.clientY - dragState.oy)) + 'px';
+      });
+      on(document, 'mouseup', function () { dragState.active = false; });
       return el;
     }
 
+    var dragState = { active: false, ox: 0, oy: 0 };
     function makeDraggable(handle) {
-      var dragging = false, ox = 0, oy = 0;
       on(handle, 'mousedown', function (ev) {
         if (ev.target && ev.target.tagName === 'BUTTON') { return; }
-        dragging = true;
+        dragState.active = true;
         var rect = el.getBoundingClientRect ? el.getBoundingClientRect() : { left: 80, top: 80 };
-        ox = ev.clientX - rect.left;
-        oy = ev.clientY - rect.top;
+        dragState.ox = ev.clientX - rect.left;
+        dragState.oy = ev.clientY - rect.top;
       });
-      on(document, 'mousemove', function (ev) {
-        if (!dragging || !el) { return; }
-        el.style.right = 'auto';
-        el.style.left = Math.max(8, Math.min((window.innerWidth || 1000) - 340, ev.clientX - ox)) + 'px';
-        el.style.top = Math.max(44, Math.min((window.innerHeight || 700) - 120, ev.clientY - oy)) + 'px';
-      });
-      on(document, 'mouseup', function () { dragging = false; });
     }
 
     function compute() {

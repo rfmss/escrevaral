@@ -194,8 +194,16 @@ for (const entry of catalog) {
   assert.ok(!html.includes('--paper:#fafbfc'), 'academia/' + entry.file + ' sem --paper branco antigo');
   if (entry.id !== 'objeto-livro' && entry.id !== 'literatura-mundial') {
     assert.ok(html.includes('AFK-REAL-GABINETE-ORNAMENTS-START') && html.includes("img-src 'self' data:;"), 'academia/' + entry.file + ' com ornamentos AFK e banner WebP local');
+    assert.ok(!html.includes('@media(prefers-color-scheme:dark)'), 'academia/' + entry.file + ' não deve forçar fundo escuro sobre texto escuro em SO dark');
   }
 }
+const swSrc = fs.readFileSync(path.join(rootDir, 'service-worker.js'), 'utf8');
+assert.ok(!swSrc.includes('RUNTIME_CACHE = "scrvrl-runtime-v1"'), 'service-worker.js versiona RUNTIME_CACHE por geração');
+assert.ok(swSrc.includes("name.startsWith('scrvrl-runtime-')"), 'service-worker.js limpa caches runtime antigos na ativação');
+assert.ok(swSrc.includes('./academia/literatura-mundial.html'), 'service-worker.js pré-cacheia guias da Academia no modo bunker');
+const manifestJson = JSON.parse(fs.readFileSync(path.join(rootDir, 'manifest.webmanifest'), 'utf8'));
+assert.equal(manifestJson.theme_color, '#c4cfc2', 'manifest theme_color calibrado em E-Ink Sálvia');
+assert.equal(manifestJson.background_color, '#c4cfc2', 'manifest background_color calibrado em E-Ink Sálvia');
 bridged.close();
 
 console.log('OK: Academia, Real Gabinete calibrado (#cfc3ae) e separação Trabalho (E-Ink Sálvia) vs Estudo (Real Gabinete) verificados.');

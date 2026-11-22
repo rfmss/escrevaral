@@ -128,6 +128,6 @@
   if(root.visualViewport){on(root.visualViewport,'resize',resizeBoard);on(root.visualViewport,'scroll',fit);}
   on(root,'blur',function(){if(active()){end();}});
   on(root,'storage',function(e){if(e.key==='escrevaral.astra.notebooks.v1'&&active()){status('O caderno mudou em outra aba. Feche e reabra o quadro para atualizar; baixe uma cópia se houver traços pendentes.');}});
-  return {flush:flush,isOpen:active};
+  return {open:open,flush:flush,isOpen:active};
  };
 }(window));

@@ -124,9 +124,10 @@
           '<button id="esc-reader-settings-btn" type="button" aria-expanded="false">Papel e letra</button>' +
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
-          '<label>Papel<select id="esc-reader-palette"><option value="paper">Real Gabinete (Pergaminho)</option><option value="sage">Sálvia E-Ink</option><option value="linen">Pergaminho claro</option><option value="mist">Névoa suave</option><option value="white">Papel fosco</option><option value="night">Nogueira noturna</option></select></label>' +
+          '<div class="esc-reader-settings-head"><strong>Papel e letra</strong><button id="esc-reader-settings-close" type="button" aria-label="Fechar ajustes de leitura">Fechar ×</button></div>' +
+          '<label>Papel<select id="esc-reader-palette"><option value="paper">Real Gabinete (Pergaminho)</option><option value="sage">Sálvia fosco</option><option value="linen">Pergaminho claro</option><option value="mist">Névoa suave</option><option value="white">Papel fosco</option><option value="night">Nogueira noturna</option></select></label>' +
           '<label>Letra<select id="esc-reader-face"><option value="serif">Literária (Serifada)</option><option value="sans">Sem serifa</option></select></label>' +
-          '<label>Tamanho<select id="esc-reader-size"><option value="18">18 px</option><option value="20">20 px</option><option value="21">21 px</option><option value="24">24 px</option><option value="28">28 px</option></select></label>' +
+          '<label>Tamanho<select id="esc-reader-size"><option value="18">Normal (18)</option><option value="20">Confortável (20)</option><option value="21">Editorial (21)</option><option value="24">Grande (24)</option><option value="28">Muito grande (28)</option><option value="32">Extra (32)</option></select></label>' +
           '<label>Entrelinha<select id="esc-reader-leading"><option value="1.6">Compacta</option><option value="1.82">Editorial</option><option value="2">Ampla</option></select></label>' +
           '<label>Pausa de leitura<select id="esc-reader-break"><option value="0">Sem pausa</option><option value="15">A cada 15 min</option><option value="25">A cada 25 min</option><option value="45">A cada 45 min</option></select></label>' +
         '</div>' +
@@ -168,11 +169,32 @@
         updateProgress();
       }
 
+      function closeSettings() {
+        settingsOpen = false;
+        var st = byId('esc-reader-settings');
+        var btn = byId('esc-reader-settings-btn');
+        if (st) { st.hidden = true; }
+        if (btn) { btn.setAttribute('aria-expanded', 'false'); }
+      }
       on(byId('esc-reader-close'), 'click', close);
-      on(byId('esc-reader-settings-btn'), 'click', function () {
+      on(byId('esc-reader-settings-btn'), 'click', function (ev) {
+        if (ev && ev.stopPropagation) { ev.stopPropagation(); }
         settingsOpen = !settingsOpen;
         byId('esc-reader-settings').hidden = !settingsOpen;
         this.setAttribute('aria-expanded', settingsOpen ? 'true' : 'false');
+      });
+      on(byId('esc-reader-settings-close'), 'click', function () {
+        closeSettings();
+        var btn = byId('esc-reader-settings-btn');
+        if (btn && btn.focus) { btn.focus(); }
+      });
+      on(overlayEl, 'click', function (ev) {
+        if (!settingsOpen) { return; }
+        var st = byId('esc-reader-settings');
+        var btn = byId('esc-reader-settings-btn');
+        if (st && !st.contains(ev.target) && (!btn || !btn.contains(ev.target))) {
+          closeSettings();
+        }
       });
       on(byId('esc-reader-prev'), 'click', function () { stepPage(-1); });
       on(byId('esc-reader-next'), 'click', function () { stepPage(1); });
@@ -189,7 +211,7 @@
       on(byId('esc-reader-resume'), 'click', scheduleBreak);
       on(byId('esc-reader-palette'), 'change', function () { prefs.palette = this.value; applyPrefs(); savePrefs(); });
       on(byId('esc-reader-face'), 'change', function () { prefs.face = this.value; applyPrefs(); savePrefs(); });
-      on(byId('esc-reader-size'), 'change', function () { prefs.size = clamp(this.value, 17, 28, 22); applyPrefs(); savePrefs(); });
+      on(byId('esc-reader-size'), 'change', function () { prefs.size = clamp(this.value, 17, 32, 22); applyPrefs(); savePrefs(); });
       on(byId('esc-reader-leading'), 'change', function () { prefs.leading = clamp(this.value, 1.5, 2.0, 1.7); applyPrefs(); savePrefs(); });
       on(byId('esc-reader-break'), 'change', function () { prefs.breakMin = Number(this.value) || 0; savePrefs(); scheduleBreak(); });
       on(overlayEl, 'keydown', function (ev) {
@@ -287,6 +309,12 @@
       var endText = document.createElement('span');
       endText.textContent = 'Fim da leitura · Esc para retornar à edição';
       endMark.appendChild(endText);
+      var endBack = document.createElement('button');
+      endBack.type = 'button';
+      endBack.className = 'esc-reader-end-back';
+      endBack.textContent = '← Voltar à escrita';
+      on(endBack, 'click', close);
+      endMark.appendChild(endBack);
       article.appendChild(endMark);
 
       overlayEl.hidden = false;
