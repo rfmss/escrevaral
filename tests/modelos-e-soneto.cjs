@@ -41,7 +41,7 @@ const books = E.createNotebooks(store);
 
 // 1. Criar projeto ENEM e verificar Nota 1000 protegida
 const enem = E.templates.createProject(books, archive, 'redacao-enem', 'Treino Enem', 'areia');
-assert.equal(enem.book.color, '#c2b69d');
+assert.equal(enem.book.color, '#b59f7a');
 assert.equal(enem.book.data.template, 'redacao-enem');
 const refNote = enem.notes.find(n => n.category === 'reference');
 assert.ok(refNote);
