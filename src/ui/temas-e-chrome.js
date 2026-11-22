@@ -1,14 +1,21 @@
-/* Tema único calibrado (Papel digital E-Ink Sálvia #c4cfc2), Leitura confortável, Piscar E-Ink e Tela cheia — ES5 */
+/* Dois modos calibrados por neurociência visual (Papel Sálvia claro #c4cfc2 e Noturno Opaco #1d221d / Nogueira #211a14), Leitura confortável, Piscar E-Ink e Tela cheia — ES5 */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
 
   var THEME_KEY = 'escrevaral.theme.v2';
+  var LEGACY_THEME_KEY = 'escrevaral.astra.theme';
   var READING_KEY = 'escrevaral.reading.comfortable.v1';
-  var LOCKED_THEME = 'eink';
   var LABELS = {
-    eink: 'Papel digital (E-Ink S\u00E1lvia)'
+    eink: 'Papel S\u00E1lvia claro',
+    noturno: 'Noturno opaco'
   };
+
+  function normalizeTheme(name) {
+    var v = String(name || '').toLowerCase();
+    if (v === 'escuro' || v === 'noturno' || v === 'dark') { return 'noturno'; }
+    return 'eink';
+  }
 
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
 
@@ -36,39 +43,63 @@
     opts = opts || {};
     var storage = opts.storage || null;
     var onNewNote = opts.onNewNote || function () {};
-    var currentTheme = LOCKED_THEME;
+    var currentTheme = 'eink';
     var comfortable = false;
 
     try {
       if (storage) {
+        var saved = storage.getItem(THEME_KEY) || storage.getItem(LEGACY_THEME_KEY);
+        if (saved) { currentTheme = normalizeTheme(saved); }
         comfortable = storage.getItem(READING_KEY) === 'true';
       }
     } catch (ignore) {}
 
-    function applyTheme(name, persistPref) {
-      currentTheme = LOCKED_THEME;
-      if (document.body) {
-        document.body.setAttribute('data-esc-theme', LOCKED_THEME);
-        document.body.setAttribute('data-theme', 'claro');
-      }
-      var meta = document.querySelector ? document.querySelector('meta[name="theme-color"]') : null;
-      if (meta) { meta.setAttribute('content', '#c4cfc2'); }
-      var lightBtn = document.getElementById && document.getElementById('theme-light');
-      var darkBtn = document.getElementById && document.getElementById('theme-dark');
-      if (lightBtn) { lightBtn.setAttribute('aria-pressed', 'true'); }
-      if (darkBtn) { darkBtn.setAttribute('aria-pressed', 'false'); }
-      if (persistPref !== false && storage) {
-        try {
-          storage.setItem(THEME_KEY, LOCKED_THEME);
-          storage.setItem('escrevaral.astra.theme', 'claro');
-        } catch (ignore) {}
-      }
+    function syncAcademiaFrames(isDark) {
       try {
         var frame = document.querySelector && document.querySelector('iframe.esc-academy-frame');
         if (frame && frame.contentWindow && frame.contentWindow.postMessage) {
-          frame.contentWindow.postMessage({ channel: 'escrevaral-theme', theme: LOCKED_THEME, dark: false }, '*');
+          var isLit = !!(frame.src && frame.src.indexOf('literatura-mundial') !== -1);
+          var paper = isDark ? '#211a14' : '#cfc3ae';
+          var ink = isDark ? '#d9cebc' : '#1f130b';
+          var accent = isDark ? '#c49a58' : (isLit ? '#3a2013' : '#8b5a1e');
+          frame.contentWindow.postMessage({
+            channel: 'escrevaral-academia-theme',
+            colors: { paper: paper, ink: ink, accent: accent },
+            comfortable: !!comfortable
+          }, '*');
         }
       } catch (ignore) {}
+    }
+
+    function applyTheme(name, persistPref) {
+      currentTheme = normalizeTheme(name);
+      var isDark = currentTheme === 'noturno';
+      if (document.body) {
+        document.body.setAttribute('data-esc-theme', currentTheme);
+        document.body.setAttribute('data-theme', isDark ? 'escuro' : 'claro');
+      }
+      var meta = document.querySelector ? document.querySelector('meta[name="theme-color"]') : null;
+      if (meta) { meta.setAttribute('content', isDark ? '#1d221d' : '#c4cfc2'); }
+      var temaInput = document.getElementById && document.getElementById('tema');
+      if (temaInput) { temaInput.value = isDark ? 'escuro' : 'claro'; }
+      var lightBtn = document.getElementById && document.getElementById('theme-light');
+      var darkBtn = document.getElementById && document.getElementById('theme-dark');
+      if (lightBtn) { lightBtn.setAttribute('aria-pressed', isDark ? 'false' : 'true'); }
+      if (darkBtn) { darkBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false'); }
+      var cycleBtn = document.getElementById && document.getElementById('esc-theme-cycle');
+      if (cycleBtn) {
+        cycleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        cycleBtn.setAttribute('title', isDark ? 'Voltar ao Papel S\u00E1lvia claro' : 'Ativar Modo Noturno opaco');
+        var lbl = cycleBtn.querySelector ? cycleBtn.querySelector('.esc-theme-label') : null;
+        if (lbl) { lbl.textContent = isDark ? 'Diurno' : 'Noturno'; }
+      }
+      if (persistPref !== false && storage) {
+        try {
+          storage.setItem(THEME_KEY, currentTheme);
+          storage.setItem(LEGACY_THEME_KEY, isDark ? 'escuro' : 'claro');
+        } catch (ignore) {}
+      }
+      syncAcademiaFrames(isDark);
     }
 
     function applyReading(onVal, persistPref) {
@@ -85,9 +116,16 @@
       if (persistPref !== false && storage) {
         try { storage.setItem(READING_KEY, comfortable ? 'true' : 'false'); } catch (ignore) {}
       }
+      syncAcademiaFrames(currentTheme === 'noturno');
     }
 
     function bindControls() {
+      var cycleBtn = document.getElementById && document.getElementById('esc-theme-cycle');
+      if (cycleBtn) {
+        on(cycleBtn, 'click', function () {
+          applyTheme(currentTheme === 'noturno' ? 'eink' : 'noturno', true);
+        });
+      }
       var readBtn = document.getElementById && document.getElementById('esc-reading-toggle');
       if (readBtn) {
         on(readBtn, 'click', function () { applyReading(!comfortable, true); });
@@ -106,13 +144,15 @@
       });
     }
 
-    applyTheme(LOCKED_THEME, true);
+    applyTheme(currentTheme, false);
     applyReading(comfortable, false);
     bindControls();
 
     return {
       setTheme: function (name) { applyTheme(name, true); },
+      toggleTheme: function () { applyTheme(currentTheme === 'noturno' ? 'eink' : 'noturno', true); },
       getTheme: function () { return currentTheme; },
+      isDark: function () { return currentTheme === 'noturno'; },
       setComfortable: function (v) { applyReading(v, true); },
       isComfortable: function () { return comfortable; },
       flash: flashEink,

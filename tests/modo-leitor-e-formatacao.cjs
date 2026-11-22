@@ -96,7 +96,7 @@ assert.equal(mapped.endOffset, 10);
 const prefs = E.readerCore.normalizePrefs({ palette: 'night', face: 'sans', size: 40, breakMin: 25 });
 assert.equal(prefs.palette, 'night');
 assert.equal(prefs.face, 'sans');
-assert.equal(prefs.size, 28); // clamp 17..28
+assert.equal(prefs.size, 32); // clamp 17..32
 assert.equal(prefs.breakMin, 25);
 
 const stats = E.readerCore.readingMinutes(Array(420).fill('palavra').join(' '));

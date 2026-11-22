@@ -479,19 +479,114 @@
     color: var(--esc-muted, #4a544c);
   }
 
-  /* Tema escuro */
+  /* Tema escuro opaco calibrado (Ardósia Sálvia Opaca #1d221d / #242b24) */
   body[data-theme="escuro"] .esc-cartorio-card {
-    background: #1f2521;
-    color: #e4ebe2;
-    border-color: rgba(228, 235, 226, 0.18);
+    background: #1d221d;
+    color: #cfd6cb;
+    border-color: #384238;
   }
-  body[data-theme="escuro"] .cart-tab { color: #a7b4a8; }
-  body[data-theme="escuro"] .cart-tab[aria-pressed="true"] { color: #e4ebe2; border-bottom-color: #c4cfc2; }
+  body[data-theme="escuro"] .cart-head,
+  body[data-theme="escuro"] .cart-tabs,
+  body[data-theme="escuro"] .cart-transparency {
+    border-color: rgba(207, 214, 203, 0.14);
+  }
+  body[data-theme="escuro"] .cart-eyebrow,
+  body[data-theme="escuro"] .cart-tab,
+  body[data-theme="escuro"] .cart-guard-text span,
+  body[data-theme="escuro"] .cart-file-chip,
+  body[data-theme="escuro"] .cart-verdict-summary,
+  body[data-theme="escuro"] .cart-metric-k,
+  body[data-theme="escuro"] .cart-hash-label,
+  body[data-theme="escuro"] .cart-section-h,
+  body[data-theme="escuro"] .cart-doc-project,
+  body[data-theme="escuro"] .cart-doc-detail,
+  body[data-theme="escuro"] .cart-doc-stats,
+  body[data-theme="escuro"] .cart-trail-list,
+  body[data-theme="escuro"] .cart-transparency,
+  body[data-theme="escuro"] .cart-drop-sub { color: #96a393; }
+  body[data-theme="escuro"] .cart-tab[aria-pressed="true"] { color: #d8dfd4; border-bottom-color: #9cb398; }
+  body[data-theme="escuro"] .cart-close {
+    background: #242b24;
+    border-color: #3d483d;
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .cart-close:hover { background: #2e372e; }
+  body[data-theme="escuro"] .cart-status { color: #a7c4a3; }
+  body[data-theme="escuro"] .cart-status:not(:empty) { background: #242b24; border-bottom-color: #384238; }
+  body[data-theme="escuro"] .cart-scroll { scrollbar-color: #4a574a #1d221d; }
+  body[data-theme="escuro"] .cart-scroll::-webkit-scrollbar-track { background: #1d221d; }
+  body[data-theme="escuro"] .cart-scroll::-webkit-scrollbar-thumb { background: #4a574a; border-color: #1d221d; }
   body[data-theme="escuro"] .cart-guard-bar,
-  body[data-theme="escuro"] .cart-dropzone {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(228, 235, 226, 0.2);
+  body[data-theme="escuro"] .cart-dropzone,
+  body[data-theme="escuro"] .cart-paste-wrap {
+    background: #232a23;
+    border-color: #384238;
   }
+  body[data-theme="escuro"] .cart-guard-toggle {
+    background: #2a322a;
+    color: #cfd6cb;
+    border-color: #465346;
+  }
+  body[data-theme="escuro"] .cart-guard-toggle[aria-pressed="true"] {
+    background: #33543d;
+    border-color: #547d60;
+    color: #dfe8dc;
+  }
+  body[data-theme="escuro"] .cart-cert {
+    background: #222822;
+    color: #cfd6cb;
+    border-color: #384238;
+  }
+  body[data-theme="escuro"] .cart-cert-mast {
+    border-top-color: #7c8c7a;
+    border-bottom-color: rgba(207, 214, 203, 0.22);
+    color: #96a393;
+  }
+  body[data-theme="escuro"] .cart-verdict-title,
+  body[data-theme="escuro"] .cart-metric-v,
+  body[data-theme="escuro"] .cart-hash-code,
+  body[data-theme="escuro"] .cart-doc-title,
+  body[data-theme="escuro"] .cart-transparency strong { color: #d8dfd4; }
+  body[data-theme="escuro"] .cart-metric,
+  body[data-theme="escuro"] .cart-doc-row {
+    background: #272f27;
+    border-color: #384238;
+  }
+  body[data-theme="escuro"] .cart-hash-box {
+    background: #1b201b;
+    border-color: #384238;
+  }
+  body[data-theme="escuro"] .cart-mini-btn,
+  body[data-theme="escuro"] .cart-btn-secondary {
+    background: #2a332a;
+    color: #cfd6cb;
+    border-color: #455245;
+  }
+  body[data-theme="escuro"] .cart-mini-btn:hover,
+  body[data-theme="escuro"] .cart-btn-secondary:hover { background: #344034; }
+  body[data-theme="escuro"] .cart-btn-primary {
+    background: #384938;
+    color: #e2e9df;
+    border-color: #516851;
+  }
+  body[data-theme="escuro"] .cart-btn-primary:hover { background: #445944; }
+  body[data-theme="escuro"] .cart-trail-details summary { color: #a7bf9f; }
+  body[data-theme="escuro"] .cart-paste-wrap textarea {
+    background: #1b201b;
+    color: #cfd6cb;
+    border-color: #3e4a3e;
+  }
+  body[data-theme="escuro"] .cart-stamp-clean { background: #263a2b; color: #b7d8bd; border-color: #4a7254; }
+  body[data-theme="escuro"] .cart-stamp-warn { background: #3a301e; color: #dfc48e; border-color: #7d6537; }
+  body[data-theme="escuro"] .cart-stamp-danger { background: #3d2424; color: #e2b0ae; border-color: #844b4b; }
+  body[data-theme="escuro"] .cart-stamp-neutral { background: #2a312a; color: #bac4b8; border-color: #4a554a; }
+  body[data-theme="escuro"] .cart-error { background: #3a2323; color: #e5b5b3; border-color: #7a4545; }
+  body[data-theme="escuro"] .cart-academy-link {
+    background: #292119;
+    color: #d9cebc;
+    border-color: rgba(196, 154, 88, 0.44);
+  }
+  body[data-theme="escuro"] .cart-academy-link:hover { background: #362b20; }
 
   @media (max-width: 760px) {
     .esc-cartorio-overlay { padding: 8px; }

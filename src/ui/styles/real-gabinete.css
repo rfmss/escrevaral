@@ -545,48 +545,183 @@
     color: #24150c !important;
   }
 
-  /* Modo escuro na ala de estudo (#oficina) em nogueira fosca */
+  /* Modo escuro na ala de estudo (#oficina) em Nogueira Opaca calibrada por neurociência (zero preto puro, zero branco puro) */
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn {
+    background-color: rgba(207, 214, 203, 0.055) !important;
+    border-color: rgba(196, 154, 88, 0.34) !important;
+    border-left-color: rgba(196, 154, 88, 0.72) !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn .esc-academy-ico,
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn .esc-academy-chevron {
+    color: #c49a58 !important;
+  }
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn .esc-academy-card-text strong {
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn .esc-academy-card-text small {
+    color: #9ea89b !important;
+  }
+
   body[data-theme="escuro"] #oficina,
   body[data-theme="escuro"] #oficina[data-ptbr-dashboard="true"] {
-    background-color: #20150f !important;
+    background-color: #211a14 !important;
     background-image: var(--esc-rg-chalk-dark) !important;
-    color: #efe4cf !important;
-    scrollbar-color: #6b5238 #20150f;
+    color: #d9cebc !important;
+    border-left-color: rgba(196, 154, 88, 0.34) !important;
+    scrollbar-color: #5b4a39 #211a14;
+  }
+  body[data-theme="escuro"] #oficina::-webkit-scrollbar-track { background: #211a14; }
+  body[data-theme="escuro"] #oficina::-webkit-scrollbar-thumb { background: #5b4a39; border-color: #211a14; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-title,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-active-note-title,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-selection,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-obs-title,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals strong,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button > span,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-text,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner-text,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ctx-line,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhyme-line,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-scansion-verse,
+  body[data-theme="escuro"] #oficina .finding h3 {
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-intro,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-active-note-meta,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals span,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-lens-description,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-status,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-outcome > p:first-of-type,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-help,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside p,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-evidence p,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-aside-counter,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-counter,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhythm-count,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhyme-pair,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-examples-sub,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-note,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-empty,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-legend,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-empty,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-fragment-original,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-links,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-punct,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-overline,
+  body[data-theme="escuro"] #oficina .lens-group-label,
+  body[data-theme="escuro"] #oficina .quiet,
+  body[data-theme="escuro"] #oficina .coverage {
+    color: #a89882 !important;
   }
   body[data-theme="escuro"] #oficina select,
+  body[data-theme="escuro"] #oficina select option,
   body[data-theme="escuro"] #oficina input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
   body[data-theme="escuro"] #oficina textarea,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-academy-link {
-    background-color: #2c1e15 !important;
-    border-color: rgba(212, 166, 92, 0.38) !important;
-    color: #efe4cf !important;
-  }
+  body[data-theme="escuro"] #oficina .lenses button,
+  body[data-theme="escuro"] #oficina #reset-dismissed,
+  body[data-theme="escuro"] #oficina .evidence,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-academy-link,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals button,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-back,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-action,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-toggle,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-card,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-card,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-card,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-btn,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-blank-samples,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner {
-    background-color: #2c1e15 !important;
-    border-color: rgba(212, 166, 92, 0.34) !important;
-    color: #efe4cf !important;
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-clause-badge,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-whole,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-term {
+    background-color: #292119 !important;
+    border-color: rgba(196, 154, 88, 0.32) !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word[data-reading-state="ambiguo"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word[data-reading-state="desconhecido"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word-tag,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-metric-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside blockquote,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-evidence,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-term-gloss {
+    background-color: #30261d !important;
+    border-color: rgba(196, 154, 88, 0.3) !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-signal,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pulse-bar {
+    background-color: rgba(196, 154, 88, 0.16) !important;
+    border-color: rgba(196, 154, 88, 0.36) !important;
+    color: #dec18d !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-proportion-fill,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhythm-bar {
+    background-color: #c49a58 !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-subtle {
+    background-color: transparent !important;
+    border-color: rgba(196, 154, 88, 0.34) !important;
+    color: #a89882 !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn:hover:not(:disabled):not([aria-current="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals button:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button:hover:not(:disabled):not([aria-current="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-back:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-action:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button:hover:not(:disabled):not(.ptbr-btn-primary),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip:hover:not([aria-pressed="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill:hover:not(:disabled):not([aria-pressed="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn:hover:not([aria-pressed="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-toggle:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt:hover:not([aria-pressed="true"]),
+  body[data-theme="escuro"] #oficina .lenses button:hover {
+    background-color: #342a20 !important;
+    border-color: #c49a58 !important;
+    color: #e6dccb !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt[aria-pressed="true"] {
+    background-color: #32281f !important;
+    color: #e6dccb !important;
+    border: 1.5px solid #c49a58 !important;
+    border-left: 4px solid #c49a58 !important;
   }
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn[aria-current="true"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip[aria-pressed="true"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill[aria-pressed="true"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn[aria-pressed="true"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-primary,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-active-note-badge,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside > .ptbr-overline,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-fragment-number,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-meter-badge,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhyme-badge,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-theme,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-exit {
-    background-color: #c99a47 !important;
-    color: #1c1008 !important;
-    border-color: #c99a47 !important;
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-exit,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-toggle::before,
+  body[data-theme="escuro"] #oficina .lenses button[aria-pressed="true"] {
+    background-color: #c49a58 !important;
+    color: #1c130c !important;
+    border-color: #c49a58 !important;
   }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"] > span,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"] small {
+    color: #1c130c !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-relation-arcs { color: #c49a58 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-origin { fill: #211a14 !important; stroke: #c49a58 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-head { fill: #d6b274 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #292119 !important; stroke: #c49a58 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-label { fill: #d9cebc !important; }
 }

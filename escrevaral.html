@@ -5166,12 +5166,12 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   .esc-reader[data-palette="night"] {
-    --reader-paper: #1f150f;
-    --reader-surface: #2c1e15;
-    --reader-ink: #efe4cf;
-    --reader-muted: #c2ae8e;
-    --reader-line: #4d3726;
-    --reader-rule: #d9ae62;
+    --reader-paper: #211a14;
+    --reader-surface: #292119;
+    --reader-ink: #d9cebc;
+    --reader-muted: #a89882;
+    --reader-line: #4d3e30;
+    --reader-rule: #c49a58;
   }
 
   .esc-reader-progress {
@@ -5620,6 +5620,32 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
       flex-shrink: 0;
     }
   }
+
+  body[data-theme="escuro"] .esc-writing-bar {
+    background: #1d221d;
+    border-bottom-color: #384238;
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .esc-writing-btn,
+  body[data-theme="escuro"] .esc-writing-icon-btn {
+    border-color: #3e4a3e;
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .esc-writing-btn[aria-pressed="true"],
+  body[data-theme="escuro"] .esc-writing-icon-btn[aria-pressed="true"] {
+    background: #334133;
+    border-color: #506550;
+    color: #e4ebe1;
+  }
+  body[data-theme="escuro"] .esc-writing-idle-note { color: #96a393; }
+  body[data-theme="escuro"] .esc-switch-track {
+    background: #2a332a;
+    border-color: #4b5a4b;
+  }
+  body[data-theme="escuro"] #esc-superfocus-auto-toggle[aria-checked="true"] .esc-switch-track {
+    background: #486148;
+  }
+  body[data-theme="escuro"] .esc-switch-thumb { background: #d8dfd4; }
 
   /* Em Superfoco: esconder chrome normal e usar a barra .esc-writing-bar */
   body[data-immersion="true"] #location-path,
@@ -6227,6 +6253,38 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #location-path #esc-path-return[hidden] {
     display: none !important;
   }
+
+  /* Botão nobre fixo na barra superior para alternar Papel Sálvia claro <-> Modo Noturno opaco */
+  #location-path .esc-theme-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    min-height: 26px !important;
+    padding: 0 9px !important;
+    margin-right: 4px;
+    border: 1px solid rgba(33, 41, 33, 0.24) !important;
+    border-radius: 3px;
+    background: rgba(33, 41, 33, 0.045) !important;
+    color: #212921 !important;
+    font: 600 11.5px/1 Arial, Helvetica, sans-serif !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+  #location-path .esc-theme-btn:hover,
+  #location-path .esc-theme-btn:focus-visible {
+    background: rgba(33, 41, 33, 0.11) !important;
+    border-color: rgba(33, 41, 33, 0.44) !important;
+    text-decoration: none !important;
+  }
+  #location-path .esc-theme-btn .esc-ui-ico {
+    width: 13px;
+    height: 13px;
+  }
+  #location-path .esc-theme-btn .esc-theme-ico-sun { display: none; }
+  body[data-theme="escuro"] #location-path .esc-theme-btn .esc-theme-ico-moon { display: none; }
+  body[data-theme="escuro"] #location-path .esc-theme-btn .esc-theme-ico-sun { display: inline-block; }
 
   /* Toast discreto flutuante */
   .esc-toast {
@@ -7300,6 +7358,365 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     background: rgba(33, 41, 33, 0.05) !important;
   }
 
+  /* =========================================================================
+     MODO NOTURNO OPACO CALIBRADO POR NEUROCIÊNCIA VISUAL
+     Ardósia Sálvia Opaca (#1d221d / #191e19) + tinta pergaminho suave (#cfd6cb / #d8dfd4)
+     - Zero preto puro (#000000) e zero branco puro (#ffffff) para evitar halação/astigmatismo
+     - Baixa emissão azul para conforto circadiano em leitura e escrita noturnas
+     - Paridade exata de luminância com Nogueira Opaca (#211a14) na Academia e Examinar
+     ========================================================================= */
+  body[data-theme="escuro"],
+  body[data-esc-theme="noturno"] {
+    --esc-bg: #1d221d;
+    --esc-surface: #191e19;
+    --esc-paper: #1d221d;
+    --esc-pill: #252d25;
+    --esc-elevated: #242b24;
+    --esc-elevated-hover: #2c352c;
+    --esc-ink: #cfd6cb;
+    --esc-manuscript: #d8dfd4;
+    --esc-muted: #96a393;
+    --esc-border: #384238;
+    --esc-dash: rgba(207, 214, 203, 0.16);
+    --esc-line-soft: rgba(207, 214, 203, 0.14);
+    --esc-line-strong: rgba(207, 214, 203, 0.26);
+    --esc-hover: rgba(207, 214, 203, 0.055);
+    --esc-selected: rgba(207, 214, 203, 0.105);
+    --esc-weave-bg: #364536;
+    --esc-weave-hover: #425442;
+    --esc-weave-ink: #e4ebe1;
+    --esc-scroll-thumb: #455245;
+    --esc-scroll-hover: #5a6a5a;
+    background: #1d221d !important;
+    background-color: #1d221d !important;
+    color: #cfd6cb !important;
+    color-scheme: dark;
+  }
+
+  body[data-theme="escuro"] ::selection,
+  body[data-theme="escuro"] *::selection {
+    background: #3d523d !important;
+    color: #e6ede3 !important;
+  }
+
+  body[data-theme="escuro"] #location-path,
+  body[data-theme="escuro"][data-view="workspace"] #location-path,
+  body[data-theme="escuro"][data-view="workspace"] #esc-workspace,
+  body[data-theme="escuro"][data-view="workspace"] #navigation,
+  body[data-theme="escuro"][data-view="workspace"] #items-column,
+  body[data-theme="escuro"][data-view="workspace"] #esc-items-header,
+  body[data-theme="escuro"][data-view="workspace"] #esc-items-list,
+  body[data-theme="escuro"][data-view="workspace"] #esc-sonnet-panel,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space,
+  body[data-theme="escuro"][data-view="workspace"]:not([data-machine="true"]) #writing-space,
+  body[data-theme="escuro"][data-view="workspace"][data-machine="true"] #writing-space,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .paper,
+  body[data-theme="escuro"][data-view="workspace"]:not([data-machine="true"]) #writing-space .paper,
+  body[data-theme="escuro"][data-view="workspace"][data-machine="true"] #writing-space .paper,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .focus-mask,
+  body[data-theme="escuro"][data-view="workspace"]:not([data-machine="true"]) #writing-space .focus-mask,
+  body[data-theme="escuro"][data-view="workspace"][data-machine="true"] #writing-space .focus-mask,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .note-heading,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .esc-rich-toolbar,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .paper-footer,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-inspector,
+  body[data-theme="escuro"][data-view="workspace"] #manuscrito,
+  body[data-theme="escuro"][data-view="workspace"] #esc-rich-editor,
+  body[data-theme="escuro"][data-view="workspace"] #esc-reference-view,
+  body[data-theme="escuro"][data-view="workspace"] .esc-search-wrap,
+  body[data-theme="escuro"][data-view="workspace"] #esc-pomodoro-dock,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-footer,
+  body[data-theme="escuro"] .sheet:not(#oficina):not(#focus-pause),
+  body[data-theme="escuro"] #gabinete,
+  body[data-theme="escuro"] .finish-screen,
+  body[data-theme="escuro"] #chalkboard,
+  body[data-theme="escuro"] #story-screen,
+  body[data-theme="escuro"] .chalk-paper,
+  body[data-theme="escuro"] .app-dialog-card {
+    background: #1d221d !important;
+    background-color: #1d221d !important;
+    color: #cfd6cb !important;
+    box-shadow: none !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #navigation,
+  body[data-theme="escuro"][data-view="workspace"] #items-column {
+    background: #191e19 !important;
+    background-color: #191e19 !important;
+    border-right-color: rgba(207, 214, 203, 0.12) !important;
+  }
+
+  body[data-theme="escuro"] #location-path {
+    background: #191e19 !important;
+    border-bottom-color: rgba(207, 214, 203, 0.14) !important;
+    color: #9ea89b !important;
+  }
+  body[data-theme="escuro"] #location-path [aria-current="location"] {
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-theme-btn {
+    border-color: rgba(207, 214, 203, 0.24) !important;
+    background: rgba(207, 214, 203, 0.07) !important;
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-theme-btn:hover,
+  body[data-theme="escuro"] #location-path .esc-theme-btn:focus-visible {
+    background: rgba(207, 214, 203, 0.15) !important;
+    border-color: rgba(207, 214, 203, 0.42) !important;
+  }
+  body[data-theme="escuro"] #location-path #esc-path-return {
+    background: #364536 !important;
+    border-color: #4d624d !important;
+    color: #e4ebe1 !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #manuscrito,
+  body[data-theme="escuro"][data-view="workspace"] #esc-rich-editor,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .title {
+    color: #d8dfd4 !important;
+    caret-color: #b7cdb3;
+  }
+  body[data-theme="escuro"] input::placeholder,
+  body[data-theme="escuro"] textarea::placeholder {
+    color: #7c897a !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-brand,
+  body[data-theme="escuro"][data-view="workspace"] .esc-new-project-wrap,
+  body[data-theme="escuro"][data-view="workspace"] #esc-items-header,
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-search-wrap,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .esc-rich-toolbar,
+  body[data-theme="escuro"] .sheet .sheet-heading {
+    border-bottom-color: rgba(207, 214, 203, 0.12) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation #esc-pomodoro-dock,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-footer,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .paper-footer {
+    border-top-color: rgba(207, 214, 203, 0.12) !important;
+  }
+  body[data-theme="escuro"] .esc-tool-sep {
+    border-left-color: rgba(207, 214, 203, 0.2) !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #esc-items-header,
+  body[data-theme="escuro"] .sheet .sheet-heading h2 {
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] .sheet .sheet-heading .eyebrow,
+  body[data-theme="escuro"] .sheet .sheet-heading small,
+  body[data-theme="escuro"] .quiet {
+    color: #96a393 !important;
+  }
+
+  /* Controles calmos em repouso no Modo Noturno (Áreas Nobres) */
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-project,
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-note,
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-new-note {
+    background: rgba(207, 214, 203, 0.065) !important;
+    color: #d8dfd4 !important;
+    border-color: rgba(207, 214, 203, 0.22) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-project:hover,
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-project:focus-visible,
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-note:hover,
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-new-note:hover {
+    background: #364536 !important;
+    color: #e6ede3 !important;
+    border-color: #526852 !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-search-pill,
+  body[data-theme="escuro"][data-view="workspace"] #navigation #esc-folder-search {
+    background: rgba(207, 214, 203, 0.05) !important;
+    border-color: rgba(207, 214, 203, 0.2) !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-search-pill:focus-within {
+    border-color: rgba(207, 214, 203, 0.42) !important;
+    background: rgba(207, 214, 203, 0.08) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-filter-toggle {
+    border-left-color: rgba(207, 214, 203, 0.16) !important;
+    color: #a9b5a6 !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-filter-toggle:hover {
+    color: #e2e9df !important;
+    background: rgba(207, 214, 203, 0.08) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-items-list > .esc-item-card {
+    border-bottom-color: rgba(207, 214, 203, 0.1) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-items-list > .esc-item-card:hover {
+    background: rgba(207, 214, 203, 0.05) !important;
+    border-left-color: rgba(207, 214, 203, 0.34) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-items-list > .esc-item-card.is-selected {
+    background: rgba(207, 214, 203, 0.095) !important;
+    border-left-color: #9cb398 !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] .esc-project-row:hover,
+  body[data-theme="escuro"][data-view="workspace"] .esc-folder-item:hover,
+  body[data-theme="escuro"][data-view="workspace"] .esc-tree-note:hover,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-item:hover {
+    background: rgba(207, 214, 203, 0.055) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] .esc-project-row.is-active,
+  body[data-theme="escuro"][data-view="workspace"] .esc-folder-item[aria-current="true"],
+  body[data-theme="escuro"][data-view="workspace"] .esc-tree-note.is-selected,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-item[aria-current="true"] {
+    background: rgba(207, 214, 203, 0.1) !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead button,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .esc-rich-toolbar button,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-tool-btn,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-footer-btn,
+  body[data-theme="escuro"][data-view="workspace"] .esc-pomo-btn,
+  body[data-theme="escuro"][data-view="workspace"] .esc-mini-add,
+  body[data-theme="escuro"][data-view="workspace"] .esc-item-act,
+  body[data-theme="escuro"] button.material-key,
+  body[data-theme="escuro"] .sheet .close-panel,
+  body[data-theme="escuro"] #mesa-close,
+  body[data-theme="escuro"] #acervo-close,
+  body[data-theme="escuro"] #utility-close,
+  body[data-theme="escuro"] #lineage-close,
+  body[data-theme="escuro"] #back-writing {
+    color: #cfd6cb !important;
+    border-color: rgba(207, 214, 203, 0.24) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button {
+    border-color: transparent !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools #esc-superfocus-auto-toggle {
+    border-color: rgba(207, 214, 203, 0.26) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] button:hover,
+  body[data-theme="escuro"][data-view="workspace"] .file-label:hover,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-tool-btn:hover,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button:hover {
+    background: rgba(207, 214, 203, 0.08) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"],
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead button[aria-pressed="true"],
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead button[aria-expanded="true"],
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button[aria-pressed="true"],
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button[aria-expanded="true"],
+  body[data-theme="escuro"][data-view="workspace"] .esc-pomo-btn[aria-pressed="true"] {
+    background: rgba(207, 214, 203, 0.13) !important;
+    color: #e4ebe1 !important;
+    border: 1px solid rgba(207, 214, 203, 0.28) !important;
+    border-bottom: 2px solid #9cb398 !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-mini-add,
+  body[data-theme="escuro"][data-view="workspace"] #navigation #esc-pomodoro-dock button {
+    border-color: rgba(207, 214, 203, 0.2) !important;
+    background: rgba(207, 214, 203, 0.06) !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) {
+    border-left-color: rgba(207, 214, 203, 0.2) !important;
+    box-shadow: -8px 0 28px rgba(0, 0, 0, 0.45) !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  body[data-theme="escuro"] .sheet:not(#oficina) select,
+  body[data-theme="escuro"] .sheet:not(#oficina) textarea,
+  body[data-theme="escuro"] .sheet:not(#oficina) .actions button,
+  body[data-theme="escuro"] .sheet:not(#oficina) .file-label,
+  body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice button,
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button {
+    background: #242b24 !important;
+    color: #cfd6cb !important;
+    border-color: #3d483d !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice button[aria-pressed="true"],
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button[aria-pressed="true"] {
+    background: #364536 !important;
+    color: #e4ebe1 !important;
+    border-color: #5a725a !important;
+  }
+  body[data-theme="escuro"] .esc-items-filters-panel,
+  body[data-theme="escuro"] .esc-folder-menu,
+  body[data-theme="escuro"] #esc-color-popover,
+  body[data-theme="escuro"] .esc-template-dialog,
+  body[data-theme="escuro"] .notebook-dialog-card {
+    background: #232a23 !important;
+    color: #cfd6cb !important;
+    border-color: #3c483c !important;
+  }
+  body[data-theme="escuro"] .esc-tpl-card {
+    background: #283028;
+    border-color: #3c483c;
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .esc-tpl-card[aria-checked="true"] {
+    background: #334033;
+    border-color: #9cb398;
+    box-shadow: inset 3px 0 0 #9cb398;
+  }
+  body[data-theme="escuro"] .esc-mobile-bar {
+    background: #191e19;
+    border-bottom-color: #384238;
+  }
+  body[data-theme="escuro"] .esc-mobile-bar button[aria-current="page"] {
+    color: #e2e9df;
+    background: rgba(207, 214, 203, 0.1);
+    border-bottom-color: #9cb398;
+  }
+  body[data-theme="escuro"] .chalk-slate { background: #171c17 !important; border-color: #384238 !important; }
+  body[data-theme="escuro"] #chalk-frame { background: #222922 !important; border-color: #384238 !important; }
+  body[data-theme="escuro"] #chalkboard .chalk-tools button,
+  body[data-theme="escuro"] #chalkboard .chalk-actions button,
+  body[data-theme="escuro"] #chalkboard .chalk-upload {
+    color: #cfd6cb !important;
+    border-color: #3e4a3e !important;
+  }
+  body[data-theme="escuro"] #chalkboard .chalk-tools button[aria-pressed="true"],
+  body[data-theme="escuro"] .esc-back-chip,
+  body[data-theme="escuro"] .story-navigation button[aria-pressed="true"],
+  body[data-theme="escuro"] #app-dialog-accept {
+    background: #364536 !important;
+    color: #e4ebe1 !important;
+    border-color: #536953 !important;
+  }
+  body[data-theme="escuro"] .polaroid { background: #242b24 !important; border-color: #3a453a !important; }
+  body[data-theme="escuro"] #story-list[data-mode="chapters"] .story-open,
+  body[data-theme="escuro"] #story-list[data-mode="events"] .polaroid > h3 {
+    background: #1d221d !important;
+    border-color: #3c483c !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] .esc-safety-banner {
+    background: #2b231b;
+    border-color: #6b563c;
+    color: #d9cebc;
+  }
+  body[data-theme="escuro"] .esc-safety-banner[data-urgent="true"] {
+    background: #3a2321;
+    border-color: #8a4b45;
+    color: #e5bdb9;
+  }
+  body[data-theme="escuro"] .esc-rich-editor blockquote { border-left-color: rgba(207, 214, 203, 0.3); }
+  body[data-theme="escuro"] .esc-rich-editor pre { background: rgba(207, 214, 203, 0.08); }
+  body[data-theme="escuro"] *,
+  body[data-theme="escuro"] #manuscrito,
+  body[data-theme="escuro"] #esc-rich-editor {
+    scrollbar-color: rgba(207, 214, 203, 0.22) transparent;
+  }
+  body[data-theme="escuro"] *::-webkit-scrollbar-thumb {
+    background: rgba(207, 214, 203, 0.18) !important;
+  }
+  body[data-theme="escuro"] *::-webkit-scrollbar-thumb:hover {
+    background: rgba(207, 214, 203, 0.34) !important;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sheet:not(#focus-pause),
     #gabinete,
@@ -7575,6 +7992,43 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     padding: 4px 6px !important;
     line-height: 1.25;
   }
+
+  /* Modo Noturno Opaco para Calculadora Editorial e Pomodoro */
+  body[data-theme="escuro"] .esc-calculator {
+    background: #1d221d !important;
+    color: #cfd6cb !important;
+    border-color: #3a453a !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
+  }
+  body[data-theme="escuro"] .esc-calc-head {
+    background: #262f26 !important;
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] .esc-calc-tabs { border-bottom-color: #3a453a; }
+  body[data-theme="escuro"] .esc-calc-tab[aria-selected="true"] { background: #2b342b; color: #e2e9df; }
+  body[data-theme="escuro"] .esc-calc-field input,
+  body[data-theme="escuro"] .esc-pomo-config input {
+    background: #171c17;
+    color: #d8dfd4;
+    border-color: #3d483d;
+  }
+  body[data-theme="escuro"] .esc-calc-key {
+    background: #262e26;
+    color: #cfd6cb;
+    border-color: #3a453a;
+  }
+  body[data-theme="escuro"] .esc-calc-key:hover { background: #313b31; }
+  body[data-theme="escuro"] .esc-calc-submit,
+  body[data-theme="escuro"] .esc-pomo-save {
+    background: #364536;
+    border-color: #4c614c;
+    color: #e2e9df;
+  }
+  body[data-theme="escuro"] .esc-calc-result {
+    background: #242c24;
+    border-color: #465446;
+    color: #d8dfd4;
+  }
 }
 
 /* Fonte: src/ui/styles/cartao-sinonimos.css */
@@ -7798,9 +8252,45 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   body[data-theme="escuro"] .esc-palavra {
-    background: #2b322a;
-    color: #e2e8df;
-    border-color: rgba(226, 232, 223, 0.14);
+    background: #232a23;
+    color: #cfd6cb;
+    border-color: #3a453a;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  }
+  body[data-theme="escuro"] .esc-palavra-header,
+  body[data-theme="escuro"] .esc-palavra-sel-actions,
+  body[data-theme="escuro"] .esc-palavra-tools {
+    border-color: rgba(207, 214, 203, 0.14);
+  }
+  body[data-theme="escuro"] .esc-palavra-class,
+  body[data-theme="escuro"] .esc-palavra-nav,
+  body[data-theme="escuro"] .esc-palavra-status,
+  body[data-theme="escuro"] .esc-palavra-sources {
+    color: #96a393;
+  }
+  body[data-theme="escuro"] .esc-palavra-words button,
+  body[data-theme="escuro"] .esc-palavra-nav button,
+  body[data-theme="escuro"] .esc-palavra-search-btn,
+  body[data-theme="escuro"] .esc-palavra-info-btn {
+    background: rgba(207, 214, 203, 0.1);
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .esc-palavra-words button:hover,
+  body[data-theme="escuro"] .esc-palavra-nav button:hover:not(:disabled),
+  body[data-theme="escuro"] .esc-palavra-search-btn:hover,
+  body[data-theme="escuro"] .esc-palavra-info-btn:hover,
+  body[data-theme="escuro"] .esc-palavra-sel-actions button:hover {
+    background: rgba(207, 214, 203, 0.18);
+  }
+  body[data-theme="escuro"] .esc-palavra-search-input {
+    background: #1b201b;
+    color: #d8dfd4;
+    border-color: #3e4a3e;
+  }
+  body[data-theme="escuro"] .esc-palavra-words button.esc-palavra-undo,
+  body[data-theme="escuro"] .esc-palavra-info-btn[aria-pressed="true"] {
+    background: #3a4c3a;
+    color: #e4ebe1;
   }
 }
 
@@ -8502,56 +8992,65 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     color: #fff8eb !important;
   }
 
-  /* Tema escuro em nogueira fosca com granulação de giz (sem gradientes) */
+  /* Tema escuro em Nogueira Opaca calibrada por neurociência (sem gradientes) */
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-list-card,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-guide-shell {
-    background-color: #1f140e !important;
+    background-color: #211a14 !important;
     background-image: var(--esc-ac-chalk-dark) !important;
     background-repeat: repeat !important;
     background-size: 84px 84px !important;
-    color: #f2e7d5;
-    border-color: rgba(212, 166, 92, 0.52) !important;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.68), inset 0 0 0 4px rgba(255, 240, 210, 0.04);
+    color: #d9cebc;
+    border-color: rgba(196, 154, 88, 0.45) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.58), inset 0 0 0 4px rgba(217, 206, 188, 0.04);
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-box {
-    background: #2b1c14;
-    border-color: rgba(212, 166, 92, 0.36);
+    background: #292119;
+    border-color: rgba(196, 154, 88, 0.32);
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-note { color: #d9c4a4; }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-group { color: #e8cfa4; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-note { color: #b8a790; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-group { color: #d6be96; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-resume-btn,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item {
-    background: #2d1e15 !important;
-    color: #f3e8d6 !important;
-    border-color: rgba(212, 166, 92, 0.32) !important;
+    background: #292119 !important;
+    color: #d9cebc !important;
+    border-color: rgba(196, 154, 88, 0.3) !important;
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item:hover,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn:hover,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-resume-btn:hover {
-    background: #3a261b !important;
-    color: #fff8eb !important;
-    border-color: #dfb267 !important;
+    background: #33291f !important;
+    color: #e6dccb !important;
+    border-color: #c49a58 !important;
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item strong,
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn strong { color: #fbf2e1 !important; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn strong { color: #e2d7c5 !important; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item span,
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn span { color: #d7c3a3 !important; }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman { color: #dfb267; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn span { color: #b5a48c !important; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman { color: #c49a58; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar {
-    background: #261810 !important;
-    border-bottom-color: rgba(212, 166, 92, 0.35) !important;
+    background: #261e17 !important;
+    border-bottom-color: rgba(196, 154, 88, 0.34) !important;
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button {
-    background: #322117 !important;
-    color: #f6ead6 !important;
-    border-color: rgba(212, 166, 92, 0.38) !important;
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar .esc-academy-lens-jump {
+    background: #30261d !important;
+    color: #d9cebc !important;
+    border-color: rgba(196, 154, 88, 0.36) !important;
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button:hover {
-    background: #442d1e !important;
-    border-color: #dfb267 !important;
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button:hover,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar .esc-academy-lens-jump:hover {
+    background: #3d3024 !important;
+    border-color: #c49a58 !important;
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar strong { color: #f6ead6; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar .esc-academy-bridge-act {
+    background: #c49a58 !important;
+    color: #1c130c !important;
+    border-color: #c49a58 !important;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar strong { color: #d9cebc; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-portable-note { color: #d9cebc; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-portable-note p { color: #b5a48c; }
 
   #esc-academy-overlay .esc-academy-portable-note {
     flex: 1 1 auto;
@@ -9074,19 +9573,114 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     color: var(--esc-muted, #4a544c);
   }
 
-  /* Tema escuro */
+  /* Tema escuro opaco calibrado (Ardósia Sálvia Opaca #1d221d / #242b24) */
   body[data-theme="escuro"] .esc-cartorio-card {
-    background: #1f2521;
-    color: #e4ebe2;
-    border-color: rgba(228, 235, 226, 0.18);
+    background: #1d221d;
+    color: #cfd6cb;
+    border-color: #384238;
   }
-  body[data-theme="escuro"] .cart-tab { color: #a7b4a8; }
-  body[data-theme="escuro"] .cart-tab[aria-pressed="true"] { color: #e4ebe2; border-bottom-color: #c4cfc2; }
+  body[data-theme="escuro"] .cart-head,
+  body[data-theme="escuro"] .cart-tabs,
+  body[data-theme="escuro"] .cart-transparency {
+    border-color: rgba(207, 214, 203, 0.14);
+  }
+  body[data-theme="escuro"] .cart-eyebrow,
+  body[data-theme="escuro"] .cart-tab,
+  body[data-theme="escuro"] .cart-guard-text span,
+  body[data-theme="escuro"] .cart-file-chip,
+  body[data-theme="escuro"] .cart-verdict-summary,
+  body[data-theme="escuro"] .cart-metric-k,
+  body[data-theme="escuro"] .cart-hash-label,
+  body[data-theme="escuro"] .cart-section-h,
+  body[data-theme="escuro"] .cart-doc-project,
+  body[data-theme="escuro"] .cart-doc-detail,
+  body[data-theme="escuro"] .cart-doc-stats,
+  body[data-theme="escuro"] .cart-trail-list,
+  body[data-theme="escuro"] .cart-transparency,
+  body[data-theme="escuro"] .cart-drop-sub { color: #96a393; }
+  body[data-theme="escuro"] .cart-tab[aria-pressed="true"] { color: #d8dfd4; border-bottom-color: #9cb398; }
+  body[data-theme="escuro"] .cart-close {
+    background: #242b24;
+    border-color: #3d483d;
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .cart-close:hover { background: #2e372e; }
+  body[data-theme="escuro"] .cart-status { color: #a7c4a3; }
+  body[data-theme="escuro"] .cart-status:not(:empty) { background: #242b24; border-bottom-color: #384238; }
+  body[data-theme="escuro"] .cart-scroll { scrollbar-color: #4a574a #1d221d; }
+  body[data-theme="escuro"] .cart-scroll::-webkit-scrollbar-track { background: #1d221d; }
+  body[data-theme="escuro"] .cart-scroll::-webkit-scrollbar-thumb { background: #4a574a; border-color: #1d221d; }
   body[data-theme="escuro"] .cart-guard-bar,
-  body[data-theme="escuro"] .cart-dropzone {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(228, 235, 226, 0.2);
+  body[data-theme="escuro"] .cart-dropzone,
+  body[data-theme="escuro"] .cart-paste-wrap {
+    background: #232a23;
+    border-color: #384238;
   }
+  body[data-theme="escuro"] .cart-guard-toggle {
+    background: #2a322a;
+    color: #cfd6cb;
+    border-color: #465346;
+  }
+  body[data-theme="escuro"] .cart-guard-toggle[aria-pressed="true"] {
+    background: #33543d;
+    border-color: #547d60;
+    color: #dfe8dc;
+  }
+  body[data-theme="escuro"] .cart-cert {
+    background: #222822;
+    color: #cfd6cb;
+    border-color: #384238;
+  }
+  body[data-theme="escuro"] .cart-cert-mast {
+    border-top-color: #7c8c7a;
+    border-bottom-color: rgba(207, 214, 203, 0.22);
+    color: #96a393;
+  }
+  body[data-theme="escuro"] .cart-verdict-title,
+  body[data-theme="escuro"] .cart-metric-v,
+  body[data-theme="escuro"] .cart-hash-code,
+  body[data-theme="escuro"] .cart-doc-title,
+  body[data-theme="escuro"] .cart-transparency strong { color: #d8dfd4; }
+  body[data-theme="escuro"] .cart-metric,
+  body[data-theme="escuro"] .cart-doc-row {
+    background: #272f27;
+    border-color: #384238;
+  }
+  body[data-theme="escuro"] .cart-hash-box {
+    background: #1b201b;
+    border-color: #384238;
+  }
+  body[data-theme="escuro"] .cart-mini-btn,
+  body[data-theme="escuro"] .cart-btn-secondary {
+    background: #2a332a;
+    color: #cfd6cb;
+    border-color: #455245;
+  }
+  body[data-theme="escuro"] .cart-mini-btn:hover,
+  body[data-theme="escuro"] .cart-btn-secondary:hover { background: #344034; }
+  body[data-theme="escuro"] .cart-btn-primary {
+    background: #384938;
+    color: #e2e9df;
+    border-color: #516851;
+  }
+  body[data-theme="escuro"] .cart-btn-primary:hover { background: #445944; }
+  body[data-theme="escuro"] .cart-trail-details summary { color: #a7bf9f; }
+  body[data-theme="escuro"] .cart-paste-wrap textarea {
+    background: #1b201b;
+    color: #cfd6cb;
+    border-color: #3e4a3e;
+  }
+  body[data-theme="escuro"] .cart-stamp-clean { background: #263a2b; color: #b7d8bd; border-color: #4a7254; }
+  body[data-theme="escuro"] .cart-stamp-warn { background: #3a301e; color: #dfc48e; border-color: #7d6537; }
+  body[data-theme="escuro"] .cart-stamp-danger { background: #3d2424; color: #e2b0ae; border-color: #844b4b; }
+  body[data-theme="escuro"] .cart-stamp-neutral { background: #2a312a; color: #bac4b8; border-color: #4a554a; }
+  body[data-theme="escuro"] .cart-error { background: #3a2323; color: #e5b5b3; border-color: #7a4545; }
+  body[data-theme="escuro"] .cart-academy-link {
+    background: #292119;
+    color: #d9cebc;
+    border-color: rgba(196, 154, 88, 0.44);
+  }
+  body[data-theme="escuro"] .cart-academy-link:hover { background: #362b20; }
 
   @media (max-width: 760px) {
     .esc-cartorio-overlay { padding: 8px; }
@@ -9781,50 +10375,185 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     color: #24150c !important;
   }
 
-  /* Modo escuro na ala de estudo (#oficina) em nogueira fosca */
+  /* Modo escuro na ala de estudo (#oficina) em Nogueira Opaca calibrada por neurociência (zero preto puro, zero branco puro) */
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn {
+    background-color: rgba(207, 214, 203, 0.055) !important;
+    border-color: rgba(196, 154, 88, 0.34) !important;
+    border-left-color: rgba(196, 154, 88, 0.72) !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn .esc-academy-ico,
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn .esc-academy-chevron {
+    color: #c49a58 !important;
+  }
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn .esc-academy-card-text strong {
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #navigation .esc-academy-card-btn .esc-academy-card-text small {
+    color: #9ea89b !important;
+  }
+
   body[data-theme="escuro"] #oficina,
   body[data-theme="escuro"] #oficina[data-ptbr-dashboard="true"] {
-    background-color: #20150f !important;
+    background-color: #211a14 !important;
     background-image: var(--esc-rg-chalk-dark) !important;
-    color: #efe4cf !important;
-    scrollbar-color: #6b5238 #20150f;
+    color: #d9cebc !important;
+    border-left-color: rgba(196, 154, 88, 0.34) !important;
+    scrollbar-color: #5b4a39 #211a14;
+  }
+  body[data-theme="escuro"] #oficina::-webkit-scrollbar-track { background: #211a14; }
+  body[data-theme="escuro"] #oficina::-webkit-scrollbar-thumb { background: #5b4a39; border-color: #211a14; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-title,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-active-note-title,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-selection,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-obs-title,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals strong,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button > span,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-text,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner-text,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ctx-line,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhyme-line,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-scansion-verse,
+  body[data-theme="escuro"] #oficina .finding h3 {
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-intro,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-active-note-meta,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals span,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-lens-description,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-status,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-outcome > p:first-of-type,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-help,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside p,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-evidence p,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-aside-counter,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-counter,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhythm-count,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhyme-pair,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-examples-sub,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-note,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-empty,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-legend,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-empty,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-fragment-original,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-links,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-punct,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-overline,
+  body[data-theme="escuro"] #oficina .lens-group-label,
+  body[data-theme="escuro"] #oficina .quiet,
+  body[data-theme="escuro"] #oficina .coverage {
+    color: #a89882 !important;
   }
   body[data-theme="escuro"] #oficina select,
+  body[data-theme="escuro"] #oficina select option,
   body[data-theme="escuro"] #oficina input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
   body[data-theme="escuro"] #oficina textarea,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-academy-link {
-    background-color: #2c1e15 !important;
-    border-color: rgba(212, 166, 92, 0.38) !important;
-    color: #efe4cf !important;
-  }
+  body[data-theme="escuro"] #oficina .lenses button,
+  body[data-theme="escuro"] #oficina #reset-dismissed,
+  body[data-theme="escuro"] #oficina .evidence,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-academy-link,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals button,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-back,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-action,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-toggle,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-card,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-card,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-card,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-btn,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-blank-samples,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-banner {
-    background-color: #2c1e15 !important;
-    border-color: rgba(212, 166, 92, 0.34) !important;
-    color: #efe4cf !important;
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-clause-badge,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-whole,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-syntax-term {
+    background-color: #292119 !important;
+    border-color: rgba(196, 154, 88, 0.32) !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word[data-reading-state="ambiguo"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word[data-reading-state="desconhecido"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-word-tag,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-metric-chip,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside blockquote,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside .ptbr-evidence,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-term-gloss {
+    background-color: #30261d !important;
+    border-color: rgba(196, 154, 88, 0.3) !important;
+    color: #d9cebc !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-signal,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pulse-bar {
+    background-color: rgba(196, 154, 88, 0.16) !important;
+    border-color: rgba(196, 154, 88, 0.36) !important;
+    color: #dec18d !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-proportion-fill,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhythm-bar {
+    background-color: #c49a58 !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-subtle {
+    background-color: transparent !important;
+    border-color: rgba(196, 154, 88, 0.34) !important;
+    color: #a89882 !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn:hover:not(:disabled):not([aria-current="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-goals button:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button:hover:not(:disabled):not([aria-current="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-back:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-action:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button:hover:not(:disabled):not(.ptbr-btn-primary),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip:hover:not([aria-pressed="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill:hover:not(:disabled):not([aria-pressed="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn:hover:not([aria-pressed="true"]),
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-toggle:hover,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt:hover:not([aria-pressed="true"]),
+  body[data-theme="escuro"] #oficina .lenses button:hover {
+    background-color: #342a20 !important;
+    border-color: #c49a58 !important;
+    color: #e6dccb !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-excerpt[aria-pressed="true"] {
+    background-color: #32281f !important;
+    color: #e6dccb !important;
+    border: 1.5px solid #c49a58 !important;
+    border-left: 4px solid #c49a58 !important;
   }
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-ribbon-btn[aria-current="true"],
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-class-chip[aria-pressed="true"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-nav-pill[aria-pressed="true"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-pill-mode-btn[aria-pressed="true"],
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside button.ptbr-btn-primary,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-active-note-badge,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-reading-aside > .ptbr-overline,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-fragment-number,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-meter-badge,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-rhyme-badge,
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-theme,
-  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-exit {
-    background-color: #c99a47 !important;
-    color: #1c1008 !important;
-    border-color: #c99a47 !important;
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-example-exit,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-guide-toggle::before,
+  body[data-theme="escuro"] #oficina .lenses button[aria-pressed="true"] {
+    background-color: #c49a58 !important;
+    color: #1c130c !important;
+    border-color: #c49a58 !important;
   }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"] > span,
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-wheel button[aria-current="true"] small {
+    color: #1c130c !important;
+  }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-relation-arcs { color: #c49a58 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-origin { fill: #211a14 !important; stroke: #c49a58 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-head { fill: #d6b274 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #292119 !important; stroke: #c49a58 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-label { fill: #d9cebc !important; }
 }
 
 </style>
@@ -9915,7 +10644,7 @@ SOFTWARE.
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-path-return" type="button" class="esc-path-return" hidden>← Voltar à escrita</button><button id="esc-theme-cycle" type="button" hidden aria-hidden="true">Tema</button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
+    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-path-return" type="button" class="esc-path-return" hidden>← Voltar à escrita</button><button id="esc-theme-cycle" type="button" class="esc-theme-btn" aria-pressed="false" title="Alternar entre Papel Sálvia claro e Modo Noturno opaco"><svg class="esc-ui-ico esc-theme-ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="esc-ui-ico esc-theme-ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><span class="esc-theme-label">Noturno</span></button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
   </nav>
   <div id="esc-toast" class="esc-toast" role="status" aria-live="polite" hidden></div>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
@@ -9982,7 +10711,7 @@ SOFTWARE.
             <div class="welcome-pillar-tag">
               <span class="welcome-pillar-code">02 // PRIVACIDADE</span>
               <div class="welcome-pillar-title">Seus textos ficam aqui</div>
-              <p class="welcome-pillar-desc">Textos vivem no armazenamento local. Zero telemetria.</p>
+              <p class="welcome-pillar-desc">Seus textos nunca saem do aparelho; apenas contagem anônima de visitas sem cookies.</p>
             </div>
             <div class="welcome-pillar-tag">
               <span class="welcome-pillar-code">03 // PACTO LIVRE</span>
@@ -10210,9 +10939,8 @@ SOFTWARE.
   <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="mesa-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
     <div class="setting-section"><h3>Ambiente</h3>
-      <div class="setting-row"><span>Aparência</span><span class="quiet">Papel fosco (Sálvia · calibrado para leitura longa)</span></div>
+      <div class="setting-row"><span>Aparência</span><div class="theme-choice" role="group" aria-label="Aparência do gabinete"><button id="theme-light" type="button" aria-pressed="true">Sálvia claro</button><button id="theme-dark" type="button" aria-pressed="false">Noturno opaco</button></div><input type="hidden" id="tema" value="claro"></div>
       <div class="setting-row"><span>Leitura confortável</span><button id="esc-reading-toggle" type="button" aria-pressed="false">Ativar</button></div>
-      <div class="setting-row" hidden aria-hidden="true"><div class="theme-choice"><button id="theme-light" aria-pressed="true">Claro</button><button id="theme-dark" aria-pressed="false">Escuro</button></div><input type="hidden" id="tema" value="claro"></div>
       <div class="setting-row"><span>Máquina antiga (no Superfoco)</span><button id="machine-toggle" aria-pressed="true">Desativar</button></div>
       <div class="setting-row"><span>Destaque de parágrafo</span><button id="focus-toggle" aria-pressed="true">Destacar</button></div>
       <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"><span class="switch-track" aria-hidden="true"><span class="switch-off">Não</span><span class="switch-on">Sim</span></span></label>
@@ -18402,7 +19130,7 @@ SOFTWARE.
     return {
       palette: okPalette ? p.palette : 'paper',
       face: p.face === 'sans' ? 'sans' : 'serif',
-      size: clamp(p.size, 17, 28, 21),
+      size: clamp(p.size, 17, 32, 21),
       leading: clamp(p.leading, 1.5, 2.0, 1.82),
       width: clamp(p.width, 50, 74, 62),
       breakMin: p.breakMin === 15 || p.breakMin === 25 || p.breakMin === 45 ? p.breakMin : 0
@@ -18451,15 +19179,23 @@ SOFTWARE.
       }
     } catch (ignore) {}
 
+    function hasSavedPalette() {
+      try {
+        if (!storage) { return false; }
+        var raw = JSON.parse(storage.getItem(PREFS_KEY) || 'null');
+        return !!(raw && typeof raw.palette === 'string');
+      } catch (ignore) { return false; }
+    }
+
     function savePrefs() {
       try {
         if (storage) { storage.setItem(PREFS_KEY, JSON.stringify(prefs)); }
       } catch (ignore) {}
     }
 
-    function applyPrefs() {
+    function applyPrefs(paletteOverride) {
       if (!overlayEl) { return; }
-      overlayEl.setAttribute('data-palette', prefs.palette);
+      overlayEl.setAttribute('data-palette', paletteOverride || prefs.palette);
       overlayEl.setAttribute('data-face', prefs.face);
       if (overlayEl.style && overlayEl.style.setProperty) {
         overlayEl.style.setProperty('--reader-size', prefs.size + 'px');
@@ -18617,12 +19353,15 @@ SOFTWARE.
     function open(doc) {
       buildOverlay();
       previousFocus = document.activeElement;
-      byId('esc-reader-palette').value = prefs.palette;
+      var appIsDark = !!(document.body && document.body.getAttribute('data-theme') === 'escuro');
+      var effectivePalette = prefs.palette;
+      if (appIsDark && !hasSavedPalette()) { effectivePalette = 'night'; }
+      byId('esc-reader-palette').value = effectivePalette;
       byId('esc-reader-face').value = prefs.face;
       byId('esc-reader-size').value = String(prefs.size);
       byId('esc-reader-leading').value = String(prefs.leading);
       byId('esc-reader-break').value = String(prefs.breakMin);
-      applyPrefs();
+      applyPrefs(effectivePalette);
 
       var text = doc && typeof doc.text === 'string' ? doc.text : '';
       var stats = readingMinutes(text);
@@ -20055,17 +20794,24 @@ SOFTWARE.
 
 ;
 /* Fonte: src/ui/temas-e-chrome.js */
-/* Tema único calibrado (Papel digital E-Ink Sálvia #c4cfc2), Leitura confortável, Piscar E-Ink e Tela cheia — ES5 */
+/* Dois modos calibrados por neurociência visual (Papel Sálvia claro #c4cfc2 e Noturno Opaco #1d221d / Nogueira #211a14), Leitura confortável, Piscar E-Ink e Tela cheia — ES5 */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
 
   var THEME_KEY = 'escrevaral.theme.v2';
+  var LEGACY_THEME_KEY = 'escrevaral.astra.theme';
   var READING_KEY = 'escrevaral.reading.comfortable.v1';
-  var LOCKED_THEME = 'eink';
   var LABELS = {
-    eink: 'Papel digital (E-Ink S\u00E1lvia)'
+    eink: 'Papel S\u00E1lvia claro',
+    noturno: 'Noturno opaco'
   };
+
+  function normalizeTheme(name) {
+    var v = String(name || '').toLowerCase();
+    if (v === 'escuro' || v === 'noturno' || v === 'dark') { return 'noturno'; }
+    return 'eink';
+  }
 
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
 
@@ -20093,39 +20839,63 @@ SOFTWARE.
     opts = opts || {};
     var storage = opts.storage || null;
     var onNewNote = opts.onNewNote || function () {};
-    var currentTheme = LOCKED_THEME;
+    var currentTheme = 'eink';
     var comfortable = false;
 
     try {
       if (storage) {
+        var saved = storage.getItem(THEME_KEY) || storage.getItem(LEGACY_THEME_KEY);
+        if (saved) { currentTheme = normalizeTheme(saved); }
         comfortable = storage.getItem(READING_KEY) === 'true';
       }
     } catch (ignore) {}
 
-    function applyTheme(name, persistPref) {
-      currentTheme = LOCKED_THEME;
-      if (document.body) {
-        document.body.setAttribute('data-esc-theme', LOCKED_THEME);
-        document.body.setAttribute('data-theme', 'claro');
-      }
-      var meta = document.querySelector ? document.querySelector('meta[name="theme-color"]') : null;
-      if (meta) { meta.setAttribute('content', '#c4cfc2'); }
-      var lightBtn = document.getElementById && document.getElementById('theme-light');
-      var darkBtn = document.getElementById && document.getElementById('theme-dark');
-      if (lightBtn) { lightBtn.setAttribute('aria-pressed', 'true'); }
-      if (darkBtn) { darkBtn.setAttribute('aria-pressed', 'false'); }
-      if (persistPref !== false && storage) {
-        try {
-          storage.setItem(THEME_KEY, LOCKED_THEME);
-          storage.setItem('escrevaral.astra.theme', 'claro');
-        } catch (ignore) {}
-      }
+    function syncAcademiaFrames(isDark) {
       try {
         var frame = document.querySelector && document.querySelector('iframe.esc-academy-frame');
         if (frame && frame.contentWindow && frame.contentWindow.postMessage) {
-          frame.contentWindow.postMessage({ channel: 'escrevaral-theme', theme: LOCKED_THEME, dark: false }, '*');
+          var isLit = !!(frame.src && frame.src.indexOf('literatura-mundial') !== -1);
+          var paper = isDark ? '#211a14' : '#cfc3ae';
+          var ink = isDark ? '#d9cebc' : '#1f130b';
+          var accent = isDark ? '#c49a58' : (isLit ? '#3a2013' : '#8b5a1e');
+          frame.contentWindow.postMessage({
+            channel: 'escrevaral-academia-theme',
+            colors: { paper: paper, ink: ink, accent: accent },
+            comfortable: !!comfortable
+          }, '*');
         }
       } catch (ignore) {}
+    }
+
+    function applyTheme(name, persistPref) {
+      currentTheme = normalizeTheme(name);
+      var isDark = currentTheme === 'noturno';
+      if (document.body) {
+        document.body.setAttribute('data-esc-theme', currentTheme);
+        document.body.setAttribute('data-theme', isDark ? 'escuro' : 'claro');
+      }
+      var meta = document.querySelector ? document.querySelector('meta[name="theme-color"]') : null;
+      if (meta) { meta.setAttribute('content', isDark ? '#1d221d' : '#c4cfc2'); }
+      var temaInput = document.getElementById && document.getElementById('tema');
+      if (temaInput) { temaInput.value = isDark ? 'escuro' : 'claro'; }
+      var lightBtn = document.getElementById && document.getElementById('theme-light');
+      var darkBtn = document.getElementById && document.getElementById('theme-dark');
+      if (lightBtn) { lightBtn.setAttribute('aria-pressed', isDark ? 'false' : 'true'); }
+      if (darkBtn) { darkBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false'); }
+      var cycleBtn = document.getElementById && document.getElementById('esc-theme-cycle');
+      if (cycleBtn) {
+        cycleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        cycleBtn.setAttribute('title', isDark ? 'Voltar ao Papel S\u00E1lvia claro' : 'Ativar Modo Noturno opaco');
+        var lbl = cycleBtn.querySelector ? cycleBtn.querySelector('.esc-theme-label') : null;
+        if (lbl) { lbl.textContent = isDark ? 'Diurno' : 'Noturno'; }
+      }
+      if (persistPref !== false && storage) {
+        try {
+          storage.setItem(THEME_KEY, currentTheme);
+          storage.setItem(LEGACY_THEME_KEY, isDark ? 'escuro' : 'claro');
+        } catch (ignore) {}
+      }
+      syncAcademiaFrames(isDark);
     }
 
     function applyReading(onVal, persistPref) {
@@ -20142,9 +20912,16 @@ SOFTWARE.
       if (persistPref !== false && storage) {
         try { storage.setItem(READING_KEY, comfortable ? 'true' : 'false'); } catch (ignore) {}
       }
+      syncAcademiaFrames(currentTheme === 'noturno');
     }
 
     function bindControls() {
+      var cycleBtn = document.getElementById && document.getElementById('esc-theme-cycle');
+      if (cycleBtn) {
+        on(cycleBtn, 'click', function () {
+          applyTheme(currentTheme === 'noturno' ? 'eink' : 'noturno', true);
+        });
+      }
       var readBtn = document.getElementById && document.getElementById('esc-reading-toggle');
       if (readBtn) {
         on(readBtn, 'click', function () { applyReading(!comfortable, true); });
@@ -20163,13 +20940,15 @@ SOFTWARE.
       });
     }
 
-    applyTheme(LOCKED_THEME, true);
+    applyTheme(currentTheme, false);
     applyReading(comfortable, false);
     bindControls();
 
     return {
       setTheme: function (name) { applyTheme(name, true); },
+      toggleTheme: function () { applyTheme(currentTheme === 'noturno' ? 'eink' : 'noturno', true); },
       getTheme: function () { return currentTheme; },
+      isDark: function () { return currentTheme === 'noturno'; },
       setComfortable: function (v) { applyReading(v, true); },
       isComfortable: function () { return comfortable; },
       flash: flashEink,
@@ -21878,9 +22657,9 @@ SOFTWARE.
           try {
             var body = document.body;
             var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
-            var paper = isDark ? '#20150f' : '#cfc3ae';
-            var ink = isDark ? '#efe4cf' : '#1f130b';
-            var accent = isDark ? '#dfb267' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
+            var paper = isDark ? '#211a14' : '#cfc3ae';
+            var ink = isDark ? '#d9cebc' : '#1f130b';
+            var accent = isDark ? '#c49a58' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
             if (frame.contentWindow && frame.contentWindow.postMessage) {
               frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
             }

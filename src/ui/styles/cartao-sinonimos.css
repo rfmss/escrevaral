@@ -218,8 +218,44 @@
   }
 
   body[data-theme="escuro"] .esc-palavra {
-    background: #2b322a;
-    color: #e2e8df;
-    border-color: rgba(226, 232, 223, 0.14);
+    background: #232a23;
+    color: #cfd6cb;
+    border-color: #3a453a;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  }
+  body[data-theme="escuro"] .esc-palavra-header,
+  body[data-theme="escuro"] .esc-palavra-sel-actions,
+  body[data-theme="escuro"] .esc-palavra-tools {
+    border-color: rgba(207, 214, 203, 0.14);
+  }
+  body[data-theme="escuro"] .esc-palavra-class,
+  body[data-theme="escuro"] .esc-palavra-nav,
+  body[data-theme="escuro"] .esc-palavra-status,
+  body[data-theme="escuro"] .esc-palavra-sources {
+    color: #96a393;
+  }
+  body[data-theme="escuro"] .esc-palavra-words button,
+  body[data-theme="escuro"] .esc-palavra-nav button,
+  body[data-theme="escuro"] .esc-palavra-search-btn,
+  body[data-theme="escuro"] .esc-palavra-info-btn {
+    background: rgba(207, 214, 203, 0.1);
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .esc-palavra-words button:hover,
+  body[data-theme="escuro"] .esc-palavra-nav button:hover:not(:disabled),
+  body[data-theme="escuro"] .esc-palavra-search-btn:hover,
+  body[data-theme="escuro"] .esc-palavra-info-btn:hover,
+  body[data-theme="escuro"] .esc-palavra-sel-actions button:hover {
+    background: rgba(207, 214, 203, 0.18);
+  }
+  body[data-theme="escuro"] .esc-palavra-search-input {
+    background: #1b201b;
+    color: #d8dfd4;
+    border-color: #3e4a3e;
+  }
+  body[data-theme="escuro"] .esc-palavra-words button.esc-palavra-undo,
+  body[data-theme="escuro"] .esc-palavra-info-btn[aria-pressed="true"] {
+    background: #3a4c3a;
+    color: #e4ebe1;
   }
 }

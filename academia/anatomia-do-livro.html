@@ -526,30 +526,30 @@ html[data-theme="dark"] { --paper:#20150f; --ink:#efe4cf; --accent:#dfb267; }
  * Transforma o "curso de informática" em sala ilustrada de livro raro.
  * ============================================================================ */
 :root {
-  --gr-paper: #cfc3ae;
-  --gr-paper-deep: #c5b8a0;
-  --gr-card: #d8cdb9;
-  --gr-ink: #21140b;
-  --gr-muted: #523b28;
-  --gr-brass: #8b5e22;
-  --gr-gold: #e6c67e;
-  --gr-gold-soft: rgba(230, 198, 126, 0.52);
-  --gr-crimson: #5c131e;
+  --gr-paper: var(--paper, #cfc3ae);
+  --gr-paper-deep: color-mix(in srgb, var(--paper, #cfc3ae) 92%, var(--ink, #1f130b));
+  --gr-card: color-mix(in srgb, var(--paper, #cfc3ae) 93%, #fff);
+  --gr-ink: var(--ink, #21140b);
+  --gr-muted: color-mix(in srgb, var(--ink, #21140b) 72%, var(--paper, #cfc3ae));
+  --gr-brass: var(--accent, #8b5e22);
+  --gr-gold: #d6b274;
+  --gr-gold-soft: rgba(214, 178, 116, 0.45);
+  --gr-crimson: color-mix(in srgb, var(--accent, #8b5e22) 68%, var(--ink, #21140b));
   --gr-crimson-mid: #400b14;
   --gr-crimson-dark: #210509;
-  --gr-line: rgba(126, 88, 36, 0.34);
-  --gr-line-soft: rgba(126, 88, 36, 0.2);
+  --gr-line: color-mix(in srgb, var(--accent, #8b5e22) 34%, transparent);
+  --gr-line-soft: color-mix(in srgb, var(--accent, #8b5e22) 20%, transparent);
   --book: Georgia, "Times New Roman", serif;
 }
 
 html, body, .index-panel, .index {
   scrollbar-width: thin !important;
-  scrollbar-color: #9e8664 #cfc3ae !important;
+  scrollbar-color: color-mix(in srgb, var(--ink, #21140b) 32%, var(--paper, #cfc3ae)) var(--paper, #cfc3ae) !important;
 }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: #cfc3ae; }
-::-webkit-scrollbar-thumb { background: #9e8664; border-radius: 6px; border: 2px solid #cfc3ae; }
-::-webkit-scrollbar-thumb:hover { background: #7f6645; }
+::-webkit-scrollbar-track { background: var(--paper, #cfc3ae); }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--ink, #21140b) 32%, var(--paper, #cfc3ae)); border-radius: 6px; border: 2px solid var(--paper, #cfc3ae); }
+::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--ink, #21140b) 48%, var(--paper, #cfc3ae)); }
 
 body {
   background: var(--gr-paper) !important;

@@ -166,6 +166,32 @@
     }
   }
 
+  body[data-theme="escuro"] .esc-writing-bar {
+    background: #1d221d;
+    border-bottom-color: #384238;
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .esc-writing-btn,
+  body[data-theme="escuro"] .esc-writing-icon-btn {
+    border-color: #3e4a3e;
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .esc-writing-btn[aria-pressed="true"],
+  body[data-theme="escuro"] .esc-writing-icon-btn[aria-pressed="true"] {
+    background: #334133;
+    border-color: #506550;
+    color: #e4ebe1;
+  }
+  body[data-theme="escuro"] .esc-writing-idle-note { color: #96a393; }
+  body[data-theme="escuro"] .esc-switch-track {
+    background: #2a332a;
+    border-color: #4b5a4b;
+  }
+  body[data-theme="escuro"] #esc-superfocus-auto-toggle[aria-checked="true"] .esc-switch-track {
+    background: #486148;
+  }
+  body[data-theme="escuro"] .esc-switch-thumb { background: #d8dfd4; }
+
   /* Em Superfoco: esconder chrome normal e usar a barra .esc-writing-bar */
   body[data-immersion="true"] #location-path,
   body[data-immersion="true"] #leave-focus,

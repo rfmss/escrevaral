@@ -147,13 +147,25 @@ for (const ch of 'outra frase') {
 }
 assert.equal(openCount, 1, 'não abre com switch OFF');
 
-// 6. Tema único calibrado E-Ink Sálvia + Leitura confortável + Piscar E-Ink
+// 6. Dois modos calibrados por neurociência (Papel Sálvia claro <-> Noturno opaco) + Leitura confortável + Piscar E-Ink
+const cycleBtn = makeEl('button', 'esc-theme-cycle');
+byIdMap['esc-theme-cycle'] = cycleBtn;
 const tc = ctx.Escr.mountThemeChrome({ storage });
 assert.equal(tc.getTheme(), 'eink');
 assert.equal(body.getAttribute('data-esc-theme'), 'eink');
+assert.equal(body.getAttribute('data-theme'), 'claro');
+assert.equal(cycleBtn.getAttribute('aria-pressed'), 'false');
 tc.setTheme('papel');
-assert.equal(tc.getTheme(), 'eink', 'tema permanece travado em E-Ink Sálvia');
-assert.equal(body.getAttribute('data-esc-theme'), 'eink');
+assert.equal(tc.getTheme(), 'eink', 'temas desconhecidos normalizam para Sálvia claro');
+cycleBtn.dispatch('click');
+assert.equal(tc.getTheme(), 'noturno', 'botão fixo alterna para Modo Noturno opaco');
+assert.equal(body.getAttribute('data-esc-theme'), 'noturno');
+assert.equal(body.getAttribute('data-theme'), 'escuro');
+assert.equal(cycleBtn.getAttribute('aria-pressed'), 'true');
+assert.equal(storage.getItem('escrevaral.theme.v2'), 'noturno');
+assert.equal(storage.getItem('escrevaral.astra.theme'), 'escuro');
+tc.toggleTheme();
+assert.equal(tc.getTheme(), 'eink', 'toggleTheme retorna ao Sálvia claro');
 assert.equal(body.getAttribute('data-theme'), 'claro');
 tc.setComfortable(true);
 assert.equal(body.getAttribute('data-esc-reading'), 'comfortable');
@@ -161,4 +173,4 @@ const targetEl = makeEl('div');
 tc.flash(targetEl);
 assert.equal(targetEl.getAttribute('data-eink-flash'), 'true');
 
-console.log('OK: Superfoco automático (2 palavras + 30s + P01 guard + barra + Soneto acoplado) e tema único E-Ink verificados.');
+console.log('OK: Superfoco automático (2 palavras + 30s + P01 guard + barra + Soneto acoplado) e modos Sálvia claro / Noturno opaco verificados.');

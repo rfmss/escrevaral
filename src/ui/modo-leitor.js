@@ -16,7 +16,7 @@
     return {
       palette: okPalette ? p.palette : 'paper',
       face: p.face === 'sans' ? 'sans' : 'serif',
-      size: clamp(p.size, 17, 28, 21),
+      size: clamp(p.size, 17, 32, 21),
       leading: clamp(p.leading, 1.5, 2.0, 1.82),
       width: clamp(p.width, 50, 74, 62),
       breakMin: p.breakMin === 15 || p.breakMin === 25 || p.breakMin === 45 ? p.breakMin : 0
@@ -65,15 +65,23 @@
       }
     } catch (ignore) {}
 
+    function hasSavedPalette() {
+      try {
+        if (!storage) { return false; }
+        var raw = JSON.parse(storage.getItem(PREFS_KEY) || 'null');
+        return !!(raw && typeof raw.palette === 'string');
+      } catch (ignore) { return false; }
+    }
+
     function savePrefs() {
       try {
         if (storage) { storage.setItem(PREFS_KEY, JSON.stringify(prefs)); }
       } catch (ignore) {}
     }
 
-    function applyPrefs() {
+    function applyPrefs(paletteOverride) {
       if (!overlayEl) { return; }
-      overlayEl.setAttribute('data-palette', prefs.palette);
+      overlayEl.setAttribute('data-palette', paletteOverride || prefs.palette);
       overlayEl.setAttribute('data-face', prefs.face);
       if (overlayEl.style && overlayEl.style.setProperty) {
         overlayEl.style.setProperty('--reader-size', prefs.size + 'px');
@@ -231,12 +239,15 @@
     function open(doc) {
       buildOverlay();
       previousFocus = document.activeElement;
-      byId('esc-reader-palette').value = prefs.palette;
+      var appIsDark = !!(document.body && document.body.getAttribute('data-theme') === 'escuro');
+      var effectivePalette = prefs.palette;
+      if (appIsDark && !hasSavedPalette()) { effectivePalette = 'night'; }
+      byId('esc-reader-palette').value = effectivePalette;
       byId('esc-reader-face').value = prefs.face;
       byId('esc-reader-size').value = String(prefs.size);
       byId('esc-reader-leading').value = String(prefs.leading);
       byId('esc-reader-break').value = String(prefs.breakMin);
-      applyPrefs();
+      applyPrefs(effectivePalette);
 
       var text = doc && typeof doc.text === 'string' ? doc.text : '';
       var stats = readingMinutes(text);

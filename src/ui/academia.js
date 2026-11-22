@@ -682,9 +682,9 @@
           try {
             var body = document.body;
             var isDark = !!(body && body.getAttribute('data-theme') === 'escuro');
-            var paper = isDark ? '#20150f' : '#cfc3ae';
-            var ink = isDark ? '#efe4cf' : '#1f130b';
-            var accent = isDark ? '#dfb267' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
+            var paper = isDark ? '#211a14' : '#cfc3ae';
+            var ink = isDark ? '#d9cebc' : '#1f130b';
+            var accent = isDark ? '#c49a58' : (entry.id === 'literatura-mundial' ? '#3a2013' : '#8b5a1e');
             if (frame.contentWindow && frame.contentWindow.postMessage) {
               frame.contentWindow.postMessage({ channel: 'escrevaral-academia-theme', colors: { paper: paper, ink: ink, accent: accent }, comfortable: !!(body && body.getAttribute('data-esc-reading') === 'comfortable') }, '*');
             }

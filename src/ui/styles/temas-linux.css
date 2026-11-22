@@ -504,6 +504,38 @@
     display: none !important;
   }
 
+  /* Botão nobre fixo na barra superior para alternar Papel Sálvia claro <-> Modo Noturno opaco */
+  #location-path .esc-theme-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    min-height: 26px !important;
+    padding: 0 9px !important;
+    margin-right: 4px;
+    border: 1px solid rgba(33, 41, 33, 0.24) !important;
+    border-radius: 3px;
+    background: rgba(33, 41, 33, 0.045) !important;
+    color: #212921 !important;
+    font: 600 11.5px/1 Arial, Helvetica, sans-serif !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+  #location-path .esc-theme-btn:hover,
+  #location-path .esc-theme-btn:focus-visible {
+    background: rgba(33, 41, 33, 0.11) !important;
+    border-color: rgba(33, 41, 33, 0.44) !important;
+    text-decoration: none !important;
+  }
+  #location-path .esc-theme-btn .esc-ui-ico {
+    width: 13px;
+    height: 13px;
+  }
+  #location-path .esc-theme-btn .esc-theme-ico-sun { display: none; }
+  body[data-theme="escuro"] #location-path .esc-theme-btn .esc-theme-ico-moon { display: none; }
+  body[data-theme="escuro"] #location-path .esc-theme-btn .esc-theme-ico-sun { display: inline-block; }
+
   /* Toast discreto flutuante */
   .esc-toast {
     position: fixed;
@@ -1574,6 +1606,365 @@
     border: 1px solid rgba(33, 41, 33, 0.2) !important;
     border-radius: 3px !important;
     background: rgba(33, 41, 33, 0.05) !important;
+  }
+
+  /* =========================================================================
+     MODO NOTURNO OPACO CALIBRADO POR NEUROCIÊNCIA VISUAL
+     Ardósia Sálvia Opaca (#1d221d / #191e19) + tinta pergaminho suave (#cfd6cb / #d8dfd4)
+     - Zero preto puro (#000000) e zero branco puro (#ffffff) para evitar halação/astigmatismo
+     - Baixa emissão azul para conforto circadiano em leitura e escrita noturnas
+     - Paridade exata de luminância com Nogueira Opaca (#211a14) na Academia e Examinar
+     ========================================================================= */
+  body[data-theme="escuro"],
+  body[data-esc-theme="noturno"] {
+    --esc-bg: #1d221d;
+    --esc-surface: #191e19;
+    --esc-paper: #1d221d;
+    --esc-pill: #252d25;
+    --esc-elevated: #242b24;
+    --esc-elevated-hover: #2c352c;
+    --esc-ink: #cfd6cb;
+    --esc-manuscript: #d8dfd4;
+    --esc-muted: #96a393;
+    --esc-border: #384238;
+    --esc-dash: rgba(207, 214, 203, 0.16);
+    --esc-line-soft: rgba(207, 214, 203, 0.14);
+    --esc-line-strong: rgba(207, 214, 203, 0.26);
+    --esc-hover: rgba(207, 214, 203, 0.055);
+    --esc-selected: rgba(207, 214, 203, 0.105);
+    --esc-weave-bg: #364536;
+    --esc-weave-hover: #425442;
+    --esc-weave-ink: #e4ebe1;
+    --esc-scroll-thumb: #455245;
+    --esc-scroll-hover: #5a6a5a;
+    background: #1d221d !important;
+    background-color: #1d221d !important;
+    color: #cfd6cb !important;
+    color-scheme: dark;
+  }
+
+  body[data-theme="escuro"] ::selection,
+  body[data-theme="escuro"] *::selection {
+    background: #3d523d !important;
+    color: #e6ede3 !important;
+  }
+
+  body[data-theme="escuro"] #location-path,
+  body[data-theme="escuro"][data-view="workspace"] #location-path,
+  body[data-theme="escuro"][data-view="workspace"] #esc-workspace,
+  body[data-theme="escuro"][data-view="workspace"] #navigation,
+  body[data-theme="escuro"][data-view="workspace"] #items-column,
+  body[data-theme="escuro"][data-view="workspace"] #esc-items-header,
+  body[data-theme="escuro"][data-view="workspace"] #esc-items-list,
+  body[data-theme="escuro"][data-view="workspace"] #esc-sonnet-panel,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space,
+  body[data-theme="escuro"][data-view="workspace"]:not([data-machine="true"]) #writing-space,
+  body[data-theme="escuro"][data-view="workspace"][data-machine="true"] #writing-space,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .paper,
+  body[data-theme="escuro"][data-view="workspace"]:not([data-machine="true"]) #writing-space .paper,
+  body[data-theme="escuro"][data-view="workspace"][data-machine="true"] #writing-space .paper,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .focus-mask,
+  body[data-theme="escuro"][data-view="workspace"]:not([data-machine="true"]) #writing-space .focus-mask,
+  body[data-theme="escuro"][data-view="workspace"][data-machine="true"] #writing-space .focus-mask,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .note-heading,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .esc-rich-toolbar,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .paper-footer,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-inspector,
+  body[data-theme="escuro"][data-view="workspace"] #manuscrito,
+  body[data-theme="escuro"][data-view="workspace"] #esc-rich-editor,
+  body[data-theme="escuro"][data-view="workspace"] #esc-reference-view,
+  body[data-theme="escuro"][data-view="workspace"] .esc-search-wrap,
+  body[data-theme="escuro"][data-view="workspace"] #esc-pomodoro-dock,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-footer,
+  body[data-theme="escuro"] .sheet:not(#oficina):not(#focus-pause),
+  body[data-theme="escuro"] #gabinete,
+  body[data-theme="escuro"] .finish-screen,
+  body[data-theme="escuro"] #chalkboard,
+  body[data-theme="escuro"] #story-screen,
+  body[data-theme="escuro"] .chalk-paper,
+  body[data-theme="escuro"] .app-dialog-card {
+    background: #1d221d !important;
+    background-color: #1d221d !important;
+    color: #cfd6cb !important;
+    box-shadow: none !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #navigation,
+  body[data-theme="escuro"][data-view="workspace"] #items-column {
+    background: #191e19 !important;
+    background-color: #191e19 !important;
+    border-right-color: rgba(207, 214, 203, 0.12) !important;
+  }
+
+  body[data-theme="escuro"] #location-path {
+    background: #191e19 !important;
+    border-bottom-color: rgba(207, 214, 203, 0.14) !important;
+    color: #9ea89b !important;
+  }
+  body[data-theme="escuro"] #location-path [aria-current="location"] {
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-theme-btn {
+    border-color: rgba(207, 214, 203, 0.24) !important;
+    background: rgba(207, 214, 203, 0.07) !important;
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-theme-btn:hover,
+  body[data-theme="escuro"] #location-path .esc-theme-btn:focus-visible {
+    background: rgba(207, 214, 203, 0.15) !important;
+    border-color: rgba(207, 214, 203, 0.42) !important;
+  }
+  body[data-theme="escuro"] #location-path #esc-path-return {
+    background: #364536 !important;
+    border-color: #4d624d !important;
+    color: #e4ebe1 !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #manuscrito,
+  body[data-theme="escuro"][data-view="workspace"] #esc-rich-editor,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .title {
+    color: #d8dfd4 !important;
+    caret-color: #b7cdb3;
+  }
+  body[data-theme="escuro"] input::placeholder,
+  body[data-theme="escuro"] textarea::placeholder {
+    color: #7c897a !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-brand,
+  body[data-theme="escuro"][data-view="workspace"] .esc-new-project-wrap,
+  body[data-theme="escuro"][data-view="workspace"] #esc-items-header,
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-search-wrap,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .esc-rich-toolbar,
+  body[data-theme="escuro"] .sheet .sheet-heading {
+    border-bottom-color: rgba(207, 214, 203, 0.12) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation #esc-pomodoro-dock,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-footer,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .paper-footer {
+    border-top-color: rgba(207, 214, 203, 0.12) !important;
+  }
+  body[data-theme="escuro"] .esc-tool-sep {
+    border-left-color: rgba(207, 214, 203, 0.2) !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #esc-items-header,
+  body[data-theme="escuro"] .sheet .sheet-heading h2 {
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] .sheet .sheet-heading .eyebrow,
+  body[data-theme="escuro"] .sheet .sheet-heading small,
+  body[data-theme="escuro"] .quiet {
+    color: #96a393 !important;
+  }
+
+  /* Controles calmos em repouso no Modo Noturno (Áreas Nobres) */
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-project,
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-note,
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-new-note {
+    background: rgba(207, 214, 203, 0.065) !important;
+    color: #d8dfd4 !important;
+    border-color: rgba(207, 214, 203, 0.22) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-project:hover,
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-project:focus-visible,
+  body[data-theme="escuro"][data-view="workspace"] #esc-new-note:hover,
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-new-note:hover {
+    background: #364536 !important;
+    color: #e6ede3 !important;
+    border-color: #526852 !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-search-pill,
+  body[data-theme="escuro"][data-view="workspace"] #navigation #esc-folder-search {
+    background: rgba(207, 214, 203, 0.05) !important;
+    border-color: rgba(207, 214, 203, 0.2) !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-search-pill:focus-within {
+    border-color: rgba(207, 214, 203, 0.42) !important;
+    background: rgba(207, 214, 203, 0.08) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-filter-toggle {
+    border-left-color: rgba(207, 214, 203, 0.16) !important;
+    color: #a9b5a6 !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column .esc-filter-toggle:hover {
+    color: #e2e9df !important;
+    background: rgba(207, 214, 203, 0.08) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-items-list > .esc-item-card {
+    border-bottom-color: rgba(207, 214, 203, 0.1) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-items-list > .esc-item-card:hover {
+    background: rgba(207, 214, 203, 0.05) !important;
+    border-left-color: rgba(207, 214, 203, 0.34) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #items-column #esc-items-list > .esc-item-card.is-selected {
+    background: rgba(207, 214, 203, 0.095) !important;
+    border-left-color: #9cb398 !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] .esc-project-row:hover,
+  body[data-theme="escuro"][data-view="workspace"] .esc-folder-item:hover,
+  body[data-theme="escuro"][data-view="workspace"] .esc-tree-note:hover,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-item:hover {
+    background: rgba(207, 214, 203, 0.055) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] .esc-project-row.is-active,
+  body[data-theme="escuro"][data-view="workspace"] .esc-folder-item[aria-current="true"],
+  body[data-theme="escuro"][data-view="workspace"] .esc-tree-note.is-selected,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-item[aria-current="true"] {
+    background: rgba(207, 214, 203, 0.1) !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead button,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .esc-rich-toolbar button,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-tool-btn,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-footer-btn,
+  body[data-theme="escuro"][data-view="workspace"] .esc-pomo-btn,
+  body[data-theme="escuro"][data-view="workspace"] .esc-mini-add,
+  body[data-theme="escuro"][data-view="workspace"] .esc-item-act,
+  body[data-theme="escuro"] button.material-key,
+  body[data-theme="escuro"] .sheet .close-panel,
+  body[data-theme="escuro"] #mesa-close,
+  body[data-theme="escuro"] #acervo-close,
+  body[data-theme="escuro"] #utility-close,
+  body[data-theme="escuro"] #lineage-close,
+  body[data-theme="escuro"] #back-writing {
+    color: #cfd6cb !important;
+    border-color: rgba(207, 214, 203, 0.24) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button {
+    border-color: transparent !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools #esc-superfocus-auto-toggle {
+    border-color: rgba(207, 214, 203, 0.26) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] button:hover,
+  body[data-theme="escuro"][data-view="workspace"] .file-label:hover,
+  body[data-theme="escuro"][data-view="workspace"] .esc-nav-tool-btn:hover,
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button:hover {
+    background: rgba(207, 214, 203, 0.08) !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .writing-toolbar button[aria-pressed="true"],
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead button[aria-pressed="true"],
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .masthead button[aria-expanded="true"],
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button[aria-pressed="true"],
+  body[data-theme="escuro"][data-view="workspace"] #writing-space .desk-tools button[aria-expanded="true"],
+  body[data-theme="escuro"][data-view="workspace"] .esc-pomo-btn[aria-pressed="true"] {
+    background: rgba(207, 214, 203, 0.13) !important;
+    color: #e4ebe1 !important;
+    border: 1px solid rgba(207, 214, 203, 0.28) !important;
+    border-bottom: 2px solid #9cb398 !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-mini-add,
+  body[data-theme="escuro"][data-view="workspace"] #navigation #esc-pomodoro-dock button {
+    border-color: rgba(207, 214, 203, 0.2) !important;
+    background: rgba(207, 214, 203, 0.06) !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) {
+    border-left-color: rgba(207, 214, 203, 0.2) !important;
+    box-shadow: -8px 0 28px rgba(0, 0, 0, 0.45) !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  body[data-theme="escuro"] .sheet:not(#oficina) select,
+  body[data-theme="escuro"] .sheet:not(#oficina) textarea,
+  body[data-theme="escuro"] .sheet:not(#oficina) .actions button,
+  body[data-theme="escuro"] .sheet:not(#oficina) .file-label,
+  body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice button,
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button {
+    background: #242b24 !important;
+    color: #cfd6cb !important;
+    border-color: #3d483d !important;
+  }
+  body[data-theme="escuro"] .sheet:not(#oficina) .theme-choice button[aria-pressed="true"],
+  body[data-theme="escuro"] .sheet:not(#oficina) .setting-row button[aria-pressed="true"] {
+    background: #364536 !important;
+    color: #e4ebe1 !important;
+    border-color: #5a725a !important;
+  }
+  body[data-theme="escuro"] .esc-items-filters-panel,
+  body[data-theme="escuro"] .esc-folder-menu,
+  body[data-theme="escuro"] #esc-color-popover,
+  body[data-theme="escuro"] .esc-template-dialog,
+  body[data-theme="escuro"] .notebook-dialog-card {
+    background: #232a23 !important;
+    color: #cfd6cb !important;
+    border-color: #3c483c !important;
+  }
+  body[data-theme="escuro"] .esc-tpl-card {
+    background: #283028;
+    border-color: #3c483c;
+    color: #cfd6cb;
+  }
+  body[data-theme="escuro"] .esc-tpl-card[aria-checked="true"] {
+    background: #334033;
+    border-color: #9cb398;
+    box-shadow: inset 3px 0 0 #9cb398;
+  }
+  body[data-theme="escuro"] .esc-mobile-bar {
+    background: #191e19;
+    border-bottom-color: #384238;
+  }
+  body[data-theme="escuro"] .esc-mobile-bar button[aria-current="page"] {
+    color: #e2e9df;
+    background: rgba(207, 214, 203, 0.1);
+    border-bottom-color: #9cb398;
+  }
+  body[data-theme="escuro"] .chalk-slate { background: #171c17 !important; border-color: #384238 !important; }
+  body[data-theme="escuro"] #chalk-frame { background: #222922 !important; border-color: #384238 !important; }
+  body[data-theme="escuro"] #chalkboard .chalk-tools button,
+  body[data-theme="escuro"] #chalkboard .chalk-actions button,
+  body[data-theme="escuro"] #chalkboard .chalk-upload {
+    color: #cfd6cb !important;
+    border-color: #3e4a3e !important;
+  }
+  body[data-theme="escuro"] #chalkboard .chalk-tools button[aria-pressed="true"],
+  body[data-theme="escuro"] .esc-back-chip,
+  body[data-theme="escuro"] .story-navigation button[aria-pressed="true"],
+  body[data-theme="escuro"] #app-dialog-accept {
+    background: #364536 !important;
+    color: #e4ebe1 !important;
+    border-color: #536953 !important;
+  }
+  body[data-theme="escuro"] .polaroid { background: #242b24 !important; border-color: #3a453a !important; }
+  body[data-theme="escuro"] #story-list[data-mode="chapters"] .story-open,
+  body[data-theme="escuro"] #story-list[data-mode="events"] .polaroid > h3 {
+    background: #1d221d !important;
+    border-color: #3c483c !important;
+    color: #cfd6cb !important;
+  }
+  body[data-theme="escuro"] .esc-safety-banner {
+    background: #2b231b;
+    border-color: #6b563c;
+    color: #d9cebc;
+  }
+  body[data-theme="escuro"] .esc-safety-banner[data-urgent="true"] {
+    background: #3a2321;
+    border-color: #8a4b45;
+    color: #e5bdb9;
+  }
+  body[data-theme="escuro"] .esc-rich-editor blockquote { border-left-color: rgba(207, 214, 203, 0.3); }
+  body[data-theme="escuro"] .esc-rich-editor pre { background: rgba(207, 214, 203, 0.08); }
+  body[data-theme="escuro"] *,
+  body[data-theme="escuro"] #manuscrito,
+  body[data-theme="escuro"] #esc-rich-editor {
+    scrollbar-color: rgba(207, 214, 203, 0.22) transparent;
+  }
+  body[data-theme="escuro"] *::-webkit-scrollbar-thumb {
+    background: rgba(207, 214, 203, 0.18) !important;
+  }
+  body[data-theme="escuro"] *::-webkit-scrollbar-thumb:hover {
+    background: rgba(207, 214, 203, 0.34) !important;
   }
 
   @media (prefers-reduced-motion: reduce) {

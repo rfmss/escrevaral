@@ -134,12 +134,12 @@
   }
 
   .esc-reader[data-palette="night"] {
-    --reader-paper: #1f150f;
-    --reader-surface: #2c1e15;
-    --reader-ink: #efe4cf;
-    --reader-muted: #c2ae8e;
-    --reader-line: #4d3726;
-    --reader-rule: #d9ae62;
+    --reader-paper: #211a14;
+    --reader-surface: #292119;
+    --reader-ink: #d9cebc;
+    --reader-muted: #a89882;
+    --reader-line: #4d3e30;
+    --reader-rule: #c49a58;
   }
 
   .esc-reader-progress {

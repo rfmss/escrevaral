@@ -185,7 +185,9 @@ assert.ok(realGabineteCss.includes('@keyframes escMagicSweep') && realGabineteCs
 assert.ok(temasLinuxCss.includes('#items-column #esc-items-list > .esc-item-card') && temasLinuxCss.includes('border-radius: 0 !important'), 'temas-linux.css mantém notas retas ponta a ponta na coluna do meio');
 assert.ok(fs.existsSync(path.join(rootDir, 'MANUAL-MOTION.md')), 'MANUAL-MOTION.md documenta a regra das áreas nobres e 3 etapas');
 const academiaJs = fs.readFileSync(path.join(rootDir, 'src/ui/academia.js'), 'utf8');
-assert.ok(academiaJs.includes("var paper = isDark ? '#20150f' : '#cfc3ae'"), 'academia.js envia paleta Real Gabinete #cfc3ae (e não #c4cfc2) aos iframes da Academia');
+assert.ok(academiaJs.includes("var paper = isDark ? '#211a14' : '#cfc3ae'"), 'academia.js envia paleta Real Gabinete claro (#cfc3ae) e Nogueira Opaca noturna (#211a14) aos iframes');
+assert.ok(litHtml.includes('--oasis-paper:#1d221d'), 'literatura-mundial.html calibra Kindle Oasis noturno em Ardósia Sálvia Opaca #1d221d');
+assert.ok(temasLinuxCss.includes('--esc-bg: #1d221d') && temasLinuxCss.includes('--esc-manuscript: #d8dfd4'), 'temas-linux.css define Modo Noturno opaco calibrado sem preto/branco puro');
 const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');
 assert.ok(autopubHtml.includes('AFK-REAL-GABINETE-ORNAMENTS-START'), 'autopublicacao-independente.html com ornamentos AFK x Real Gabinete');
 for (const entry of catalog) {

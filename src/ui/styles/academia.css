@@ -695,56 +695,65 @@
     color: #fff8eb !important;
   }
 
-  /* Tema escuro em nogueira fosca com granulação de giz (sem gradientes) */
+  /* Tema escuro em Nogueira Opaca calibrada por neurociência (sem gradientes) */
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-list-card,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-guide-shell {
-    background-color: #1f140e !important;
+    background-color: #211a14 !important;
     background-image: var(--esc-ac-chalk-dark) !important;
     background-repeat: repeat !important;
     background-size: 84px 84px !important;
-    color: #f2e7d5;
-    border-color: rgba(212, 166, 92, 0.52) !important;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.68), inset 0 0 0 4px rgba(255, 240, 210, 0.04);
+    color: #d9cebc;
+    border-color: rgba(196, 154, 88, 0.45) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.58), inset 0 0 0 4px rgba(217, 206, 188, 0.04);
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-box {
-    background: #2b1c14;
-    border-color: rgba(212, 166, 92, 0.36);
+    background: #292119;
+    border-color: rgba(196, 154, 88, 0.32);
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-note { color: #d9c4a4; }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-group { color: #e8cfa4; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bridge-note { color: #b8a790; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-group { color: #d6be96; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-resume-btn,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item {
-    background: #2d1e15 !important;
-    color: #f3e8d6 !important;
-    border-color: rgba(212, 166, 92, 0.32) !important;
+    background: #292119 !important;
+    color: #d9cebc !important;
+    border-color: rgba(196, 154, 88, 0.3) !important;
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item:hover,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn:hover,
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-resume-btn:hover {
-    background: #3a261b !important;
-    color: #fff8eb !important;
-    border-color: #dfb267 !important;
+    background: #33291f !important;
+    color: #e6dccb !important;
+    border-color: #c49a58 !important;
   }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item strong,
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn strong { color: #fbf2e1 !important; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn strong { color: #e2d7c5 !important; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-item span,
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn span { color: #d7c3a3 !important; }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman { color: #dfb267; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-rec-btn span { color: #b5a48c !important; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-roman { color: #c49a58; }
   body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar {
-    background: #261810 !important;
-    border-bottom-color: rgba(212, 166, 92, 0.35) !important;
+    background: #261e17 !important;
+    border-bottom-color: rgba(196, 154, 88, 0.34) !important;
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button {
-    background: #322117 !important;
-    color: #f6ead6 !important;
-    border-color: rgba(212, 166, 92, 0.38) !important;
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar .esc-academy-lens-jump {
+    background: #30261d !important;
+    color: #d9cebc !important;
+    border-color: rgba(196, 154, 88, 0.36) !important;
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button:hover {
-    background: #442d1e !important;
-    border-color: #dfb267 !important;
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar button:hover,
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar .esc-academy-lens-jump:hover {
+    background: #3d3024 !important;
+    border-color: #c49a58 !important;
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar strong { color: #f6ead6; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar .esc-academy-bridge-act {
+    background: #c49a58 !important;
+    color: #1c130c !important;
+    border-color: #c49a58 !important;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-bar strong { color: #d9cebc; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-portable-note { color: #d9cebc; }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-portable-note p { color: #b5a48c; }
 
   #esc-academy-overlay .esc-academy-portable-note {
     flex: 1 1 auto;

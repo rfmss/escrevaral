@@ -255,4 +255,41 @@
     padding: 4px 6px !important;
     line-height: 1.25;
   }
+
+  /* Modo Noturno Opaco para Calculadora Editorial e Pomodoro */
+  body[data-theme="escuro"] .esc-calculator {
+    background: #1d221d !important;
+    color: #cfd6cb !important;
+    border-color: #3a453a !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
+  }
+  body[data-theme="escuro"] .esc-calc-head {
+    background: #262f26 !important;
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] .esc-calc-tabs { border-bottom-color: #3a453a; }
+  body[data-theme="escuro"] .esc-calc-tab[aria-selected="true"] { background: #2b342b; color: #e2e9df; }
+  body[data-theme="escuro"] .esc-calc-field input,
+  body[data-theme="escuro"] .esc-pomo-config input {
+    background: #171c17;
+    color: #d8dfd4;
+    border-color: #3d483d;
+  }
+  body[data-theme="escuro"] .esc-calc-key {
+    background: #262e26;
+    color: #cfd6cb;
+    border-color: #3a453a;
+  }
+  body[data-theme="escuro"] .esc-calc-key:hover { background: #313b31; }
+  body[data-theme="escuro"] .esc-calc-submit,
+  body[data-theme="escuro"] .esc-pomo-save {
+    background: #364536;
+    border-color: #4c614c;
+    color: #e2e9df;
+  }
+  body[data-theme="escuro"] .esc-calc-result {
+    background: #242c24;
+    border-color: #465446;
+    color: #d8dfd4;
+  }
 }

@@ -238,8 +238,8 @@ html[data-theme="dark"] { --paper:#20150f; --ink:#efe4cf; --accent:#dfb267; }
   --afk-wing: #5c3317;
   --afk-gold: #c99a47;
   --afk-mahogany: #331b10;
-  --afk-card: #d8cdb9;
-  --afk-card-hover: #e1d7c4;
+  --afk-card: color-mix(in srgb, var(--paper, #cfc3ae) 92%, var(--ink, #1f130b));
+  --afk-card-hover: color-mix(in srgb, var(--paper, #cfc3ae) 85%, var(--ink, #1f130b));
   --afk-chalk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23634118' fill-opacity='0.055'%3E%3Ccircle cx='7' cy='11' r='0.9'/%3E%3Ccircle cx='23' cy='6' r='0.7'/%3E%3Ccircle cx='41' cy='15' r='1.0'/%3E%3Ccircle cx='59' cy='8' r='0.8'/%3E%3Ccircle cx='76' cy='19' r='0.9'/%3E%3Ccircle cx='14' cy='29' r='1.0'/%3E%3Ccircle cx='33' cy='25' r='0.7'/%3E%3Ccircle cx='51' cy='32' r='0.9'/%3E%3Ccircle cx='68' cy='28' r='0.9'/%3E%3Ccircle cx='25' cy='43' r='1.0'/%3E%3Ccircle cx='63' cy='46' r='1.0'/%3E%3Ccircle cx='17' cy='64' r='0.9'/%3E%3Ccircle cx='37' cy='69' r='1.0'/%3E%3Ccircle cx='72' cy='71' r='0.9'/%3E%3C/g%3E%3C/svg%3E");
 }
 body {
@@ -335,7 +335,7 @@ body {
   gap: 8px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.15rem;
-  color: #2b160b;
+  color: var(--ink, #2b160b);
 }
 .section-heading h2::before {
   content: "";
@@ -354,7 +354,7 @@ body {
   border-radius: 8px;
   box-shadow:
     0 3px 10px rgba(42, 24, 12, 0.08),
-    inset 0 0 0 3px rgba(207, 195, 174, 0.5),
+    inset 0 0 0 3px color-mix(in srgb, var(--paper, #cfc3ae) 50%, transparent),
     inset 0 0 0 4px rgba(139, 90, 30, 0.16);
   transition: transform 140ms ease, border-color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
 }
@@ -374,7 +374,7 @@ body {
   border-color: var(--afk-wing);
   box-shadow:
     0 8px 18px rgba(42, 24, 12, 0.15),
-    inset 0 0 0 3px rgba(207, 195, 174, 0.48),
+    inset 0 0 0 3px color-mix(in srgb, var(--paper, #cfc3ae) 48%, transparent),
     inset 0 0 0 4px rgba(139, 90, 30, 0.36);
 }
 .step-no {
@@ -387,7 +387,7 @@ body {
   gap: 6px !important;
 }
 .academy-phosphor { width: 15px !important; height: 15px !important; }
-.route strong { font-family: Georgia, "Times New Roman", serif; color: #24130a; }
+.route strong { font-family: Georgia, "Times New Roman", serif; color: var(--ink, #24130a); }
 
 /* Capítulos com varão vitoriano torneado + medalhão heráldico no número */
 .chapter {
@@ -421,7 +421,7 @@ body {
 }
 .chapter-head h2, .closing h2 {
   font-family: Georgia, "Times New Roman", serif;
-  color: #24130a;
+  color: var(--ink, #24130a);
 }
 .back-map {
   border: 1px solid rgba(139, 90, 30, 0.45);
@@ -430,7 +430,7 @@ body {
   padding: 6px 12px !important;
   text-decoration: none;
   font-weight: 600;
-  color: #3a2013 !important;
+  color: var(--ink, #3a2013) !important;
 }
 .back-map:hover {
   background: var(--afk-mahogany);
@@ -444,7 +444,7 @@ body {
   background-color: var(--afk-card) !important;
   border: 1.5px solid rgba(139, 90, 30, 0.4) !important;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(42, 24, 12, 0.07), inset 0 0 0 3px rgba(207, 195, 174, 0.45);
+  box-shadow: 0 3px 10px rgba(42, 24, 12, 0.12), inset 0 0 0 3px color-mix(in srgb, var(--paper, #cfc3ae) 42%, transparent);
 }
 .block::after {
   content: "";
@@ -456,9 +456,9 @@ body {
   pointer-events: none;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M9 2 L10.5 7.5 L16 9 L10.5 10.5 L9 16 L7.5 10.5 L2 9 L7.5 7.5 Z' fill='%238b5a1e' fill-opacity='0.35'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-.block h3 { font-family: Georgia, "Times New Roman", serif; color: #24130a; }
+.block h3 { font-family: Georgia, "Times New Roman", serif; color: var(--ink, #24130a); }
 .example {
-  background: #cfc3ae !important;
+  background: var(--paper, #cfc3ae) !important;
   border: 1px solid rgba(139, 90, 30, 0.28);
   border-left: 3px solid var(--afk-wing) !important;
 }
@@ -468,7 +468,7 @@ body {
   border: 1.5px solid #9c7233 !important;
   box-shadow:
     0 6px 18px rgba(42, 24, 12, 0.1),
-    inset 0 0 0 4px rgba(207, 195, 174, 0.65),
+    inset 0 0 0 4px color-mix(in srgb, var(--paper, #cfc3ae) 52%, transparent),
     inset 0 0 0 5px rgba(156, 114, 51, 0.34);
 }
 .footer {
