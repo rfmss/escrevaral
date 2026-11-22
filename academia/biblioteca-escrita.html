@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/IeO9eHTaYK+YWh1nE3FySH3gThX8GNVGOkaQwF4MIQ=' 'sha256-FLBewObNipYUJKcsXcAlav7jmcaITIPEL5qywcXzlWo='; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/IeO9eHTaYK+YWh1nE3FySH3gThX8GNVGOkaQwF4MIQ=' 'sha256-teaNq8YwsyyPgDFlO5yPCMSz9Zki9B2vk3S56JFZVcU='; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Biblioteca da escrita</title>
@@ -392,12 +392,75 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
   .card,.contrast-pair,.backstage-card { break-inside:avoid; }
 }
 
-.book-card-meta { font-size:.76rem; color:var(--muted); margin-bottom:8px; }
+.book-card { display:grid; grid-template-columns:104px 1fr; gap:16px; align-items:start; }
+.book-card::after { display:none; }
+.rg-cover {
+  position:relative;
+  width:104px;
+  aspect-ratio:2/3;
+  border-radius:3px 6px 6px 3px;
+  padding:10px 9px 9px 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:var(--cov-bg,#3a2318);
+  color:var(--cov-fg,#f4ead6);
+  border:1px solid rgba(201,154,71,.5);
+  box-shadow:
+    inset 7px 0 0 rgba(0,0,0,.22),
+    inset 8px 0 0 rgba(255,236,196,.18),
+    inset 0 0 0 1px rgba(255,236,196,.12),
+    2px 0 0 #e6dcc7,
+    3px 0 0 rgba(31,19,11,.24),
+    4px 6px 14px rgba(24,12,6,.26);
+  overflow:hidden;
+  transition:transform 160ms ease,box-shadow 160ms ease;
+}
+.book-card:hover .rg-cover {
+  transform:translateY(-2px) rotate(-.6deg);
+  box-shadow:
+    inset 7px 0 0 rgba(0,0,0,.22),
+    inset 8px 0 0 rgba(255,236,196,.22),
+    inset 0 0 0 1px rgba(255,236,196,.16),
+    2px 0 0 #e6dcc7,
+    3px 0 0 rgba(31,19,11,.24),
+    6px 10px 18px rgba(24,12,6,.32);
+}
+.rg-cover::before {
+  content:"";
+  position:absolute;
+  inset:5px 5px 5px 11px;
+  border:1px solid var(--cov-gold,rgba(230,198,126,.42));
+  border-radius:2px;
+  pointer-events:none;
+}
+.rg-cover-top { font-size:.54rem; font-weight:700; letter-spacing:.11em; text-transform:uppercase; color:var(--cov-accent,#ebd094); line-height:1.25; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; position:relative; z-index:1; }
+.rg-cover-mid { display:flex; flex-direction:column; align-items:center; text-align:center; gap:5px; position:relative; z-index:1; margin-block:auto; padding-block:4px; }
+.rg-cover-ico { width:20px; height:20px; color:var(--cov-accent,#ebd094); opacity:.92; flex-shrink:0; }
+.rg-cover-title { font-family:Georgia,"Times New Roman",serif; font-size:.73rem; line-height:1.18; font-weight:650; color:var(--cov-fg,#f7efe0); display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.rg-cover-foot { display:flex; justify-content:space-between; align-items:center; gap:4px; padding-top:4px; border-top:1px solid var(--cov-gold,rgba(230,198,126,.34)); font-size:.52rem; letter-spacing:.08em; text-transform:uppercase; color:var(--cov-accent,#ebd094); position:relative; z-index:1; }
+.rg-cover.is-light {
+  box-shadow:
+    inset 7px 0 0 rgba(56,36,18,.14),
+    inset 8px 0 0 rgba(255,255,255,.45),
+    inset 0 0 0 1px rgba(139,90,30,.24),
+    2px 0 0 #d9ceb9,
+    3px 0 0 rgba(31,19,11,.2),
+    4px 6px 14px rgba(24,12,6,.18);
+}
+.book-info { min-width:0; }
+.book-card-meta { font-size:.78rem; font-weight:600; color:var(--ink); margin-bottom:2px; }
+.book-credit { font-size:.72rem; color:var(--muted); margin-bottom:8px; }
 .book-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
 .pill-tag { display:inline-block; font-size:.69rem; font-weight:650; padding:2px 8px; border-radius:99px; background:var(--paper); border:1px solid var(--line); color:var(--muted); }
 .pill-tag.is-br { border-color:var(--afk-gold); color:var(--accent); }
 .dim-intro { padding:14px 16px; border-radius:8px; background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--afk-gold); margin-bottom:14px; font-size:.88rem; }
 .src-pills { display:flex; flex-wrap:wrap; gap:5px; }
+@media(max-width:520px) {
+  .book-card { grid-template-columns:86px 1fr; gap:12px; }
+  .rg-cover { width:86px; padding:8px 7px 7px 12px; }
+  .rg-cover-title { font-size:.66rem; }
+}
 </style>
 </head>
 <body class="visual-guide">
@@ -444,6 +507,7 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
     <button type="button" class="tab-pill" data-bib-filter="estilo">Estilo &amp; Língua</button>
   </div>
   <div class="clean-grid" id="bib-grid"></div>
+  <p class="prose-note" style="margin-top:16px"><strong>Nota editorial:</strong> As miniaturas de capa acima são encadernações autorais criadas para a <em>Coleção Real Gabinete</em> do Escrevaral (100% offline), preservando integralmente os créditos de autoria, editora e ano de cada obra de referência.</p>
 </section>
 
 <section class="tab-panel" id="bib-criterios" data-tab-panel="bib" style="margin-top:20px">
@@ -619,30 +683,49 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
 }());</script>
 <script>(function () {
   'use strict';
-  var BOOKS = [
-    /* BRASIL (10 obras verificadas) */
-    { id:'assis', orig:'br', cat:'oficio', titulo:'Escrever ficção: um manual de criação literária', autor:'Luiz Antonio de Assis Brasil', ano:2019, tags:['Ficção','Oficina BR'], desc:'Nascido de mais de três décadas da Oficina de Criação Literária da PUCRS. O grande manual brasileiro de romance, personagem, ponto de vista e tempo narrativo.' },
-    { id:'candido', orig:'br', cat:'oficio', titulo:'A personagem de ficção', autor:'Antonio Candido, Anatol Rosenfeld, Décio de Almeida Prado e Paulo Emílio Salles Gomes', ano:1968, tags:['Personagem','Crítica BR'], desc:'Clássico indispensável sobre como seres feitos só de palavras ganham densidade, contradição e vida própria na mente do leitor.' },
-    { id:'salles', orig:'br', cat:'oficio', titulo:'Gesto inacabado: processo de criação artística', autor:'Cecília Almeida Salles', ano:1998, tags:['Processo','Crítica Genética'], desc:'Analisa rascunhos, cadernos e rasuras para mostrar a criação como rede em movimento — sem o mito da obra que nasce pronta.' },
-    { id:'clarice', orig:'br', cat:'oficio', titulo:'A descoberta do mundo', autor:'Clarice Lispector', ano:1984, tags:['Voz','Crônicas'], desc:'Crônicas publicadas no Jornal do Brasil onde Clarice pensa em voz alta sobre o risco, o silêncio e a coragem de escrever.' },
-    { id:'bagno', orig:'br', cat:'estilo', titulo:'Preconceito linguístico', autor:'Marcos Bagno', ano:1999, tags:['ptBR vivo','Sociolinguística'], desc:'Desmonta mitos normativos e defende a legitimidade do português brasileiro vivo — antídoto essencial contra a trava gramatical.' },
-    { id:'lima', orig:'br', cat:'oficio', titulo:'Páginas ampliadas: o livro-reportagem como extensão do jornalismo e da literatura', autor:'Edvaldo Pereira Lima', ano:1993, tags:['Não-ficção','Reportagem'], desc:'Referência brasileira sobre a fronteira entre jornalismo literário e ficção: cena, pesquisa de campo, foco narrativo e humanidade.' },
-    { id:'lage', orig:'br', cat:'estilo', titulo:'Linguagem jornalística', autor:'Nilson Lage', ano:1985, tags:['Clareza','Estrutura'], desc:'Rigoroso sobre economia verbal, seleção de fatos e arquitetura de textos informativos em português brasileiro.' },
-    { id:'lajolo', orig:'br', cat:'oficio', titulo:'A formação da leitura no Brasil', autor:'Marisa Lajolo e Regina Zilberman', ano:1996, tags:['Leitor','Mercado BR'], desc:'Situa o escritor dentro da história real dos leitores, das editoras e da circulação de livros no Brasil.' },
-    { id:'estadao', orig:'br', cat:'estilo', titulo:'Manual de Redação e Estilo (Estadão)', autor:'Eduardo Martins', ano:1990, tags:['Norma','Precisão'], desc:'Referência prática de clareza, pontuação e concordância no português escrito contemporâneo.' },
-    { id:'folha', orig:'br', cat:'estilo', titulo:'Manual da Redação (Folha de S.Paulo)', autor:'Folha de S.Paulo', ano:1992, tags:['Conciso','Estilo'], desc:'Manual direto e funcional focado em ordem direta, frase enxuta e corte de burocracia verbal.' },
+  var EMBLEMS = {
+    nib: '<path d="M12 3l6 8-4 10h-4L6 11l6-8zm0 5.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>',
+    mask: '<path d="M4 5h16v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5zm4.5 5a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4zm7 0a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4zM9 15c1.6 1.2 4.4 1.2 6 0"/>',
+    web: '<circle cx="12" cy="12" r="2.2"/><circle cx="5.5" cy="7" r="1.5"/><circle cx="18.5" cy="7" r="1.5"/><circle cx="6.5" cy="18" r="1.5"/><circle cx="17.5" cy="18" r="1.5"/><path d="M7 7.8l3.2 2.7m6.8-2.7l-3.2 2.7M7.8 16.8l2.6-3.1m5.8 3.1l-2.6-3.1"/>',
+    star: '<path d="M12 2.5l2.3 6.8 7.2 2.7-7.2 2.7L12 21.5l-2.3-6.8-7.2-2.7 7.2-2.7L12 2.5z"/>',
+    scales: '<path d="M12 3v18M6 7h12M4 13l2-6 2 6a2.3 2.3 0 01-4 0zm12 0l2-6 2 6a2.3 2.3 0 01-4 0zM9 21h6"/>',
+    compass: '<circle cx="12" cy="12" r="8.5"/><path d="M15.6 8.4l-2.2 5-5 2.2 2.2-5 5-2.2z"/>',
+    columns: '<path d="M4 6h16M5 9v9m4.5-9v9m5-9v9M19 9v9M3.5 19h17"/>',
+    book: '<path d="M3.5 6.5C6.5 5.5 9.5 6 12 7.8 14.5 6 17.5 5.5 20.5 6.5v12c-3-1-6-.5-8.5 1.2-2.5-1.7-5.5-2.2-8.5-1.2v-12zM12 7.8v11.9"/>',
+    press: '<rect x="5" y="4" width="14" height="16" rx="1.5"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    ink: '<path d="M12 3.5c3.2 4.6 5.5 7.4 5.5 10.5a5.5 5.5 0 01-11 0c0-3.1 2.3-5.9 5.5-10.5z"/>',
+    eye: '<path d="M2.5 12s3.6-6 9.5-6 9.5 6 9.5 6-3.6 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.6"/>',
+    sail: '<path d="M12 4v13m0-13l6.5 10.5H12M12 6.5L6.5 14.5H12M4 18.5c2.5 1.4 13.5 1.4 16 0"/>',
+    moon: '<path d="M16.5 14.8A6.8 6.8 0 019.2 7.5a6.8 6.8 0 107.3 7.3z"/>',
+    bird: '<path d="M4 15.5c3-1 5-3.5 7.5-7.5 1.5 2 3.5 3.5 8.5 3.5-2.5 2-4 4.5-7.5 6.5-3 1.5-6 .5-8.5-2.5z"/>',
+    arc: '<path d="M3.5 18.5C7 17 8.5 6.5 12.5 6.5s4.5 10.5 8 12"/>',
+    bars: '<path d="M5 7h10M5 12h14M5 17h8"/>'
+  };
 
-    /* INTERNACIONAL (10 obras verificadas — incluindo Orwell no lugar certo!) */
-    { id:'king', orig:'world', cat:'oficio', titulo:'Sobre a escrita (On Writing)', autor:'Stephen King', ano:2000, tags:['Ofício','Rotina'], desc:'Metade memória, metade caixa de ferramentas: trabalho diário, cortes de 10% na segunda versão, voz ativa e respeito pelo leitor.' },
-    { id:'orwell', orig:'world', cat:'estilo', titulo:'Por que escrevo (Why I Write)', autor:'George Orwell', ano:1946, tags:['Voz','Clareza moral'], desc:'Ensaio luminoso sobre os quatro impulsos de quem escreve e a honestidade da linguagem contra a névoa burocrática.' },
-    { id:'wood', orig:'world', cat:'oficio', titulo:'Como funciona a ficção (How Fiction Works)', autor:'James Wood', ano:2008, tags:['Crítica','Detalhe'], desc:'Estudo afiado sobre discurso indireto livre, ponto de vista, detalhe vivo e o adjetivo como aposta de olhar.' },
-    { id:'leguin', orig:'world', cat:'oficio', titulo:'Steering the Craft', autor:'Ursula K. Le Guin', ano:1998, tags:['Ritmo','Ponto de vista'], desc:'Oficina precisa sobre música da frase, ritmo, pontuação e controle do foco narrativo.' },
-    { id:'gardner', orig:'world', cat:'oficio', titulo:'The Art of Fiction', autor:'John Gardner', ano:1983, tags:['Imersão','Técnica'], desc:'Explica o “sonho ficcional contínuo” e os níveis de distância psíquica entre narrador e personagem.' },
-    { id:'lamott', orig:'world', cat:'oficio', titulo:'Bird by Bird', autor:'Anne Lamott', ano:1994, tags:['Psicologia','Rascunho'], desc:'Defesa bem-humorada e humana dos primeiros rascunhos tortos como passagem inevitável para qualquer texto bom.' },
-    { id:'zinsser', orig:'world', cat:'estilo', titulo:'Como escrever bem (On Writing Well)', autor:'William Zinsser', ano:1976, tags:['Não-ficção','Clareza'], desc:'Os quatro pilares da prosa limpa: clareza, simplicidade, brevidade e humanidade.' },
-    { id:'strunk', orig:'world', cat:'estilo', titulo:'The Elements of Style', autor:'William Strunk Jr. e E. B. White', ano:1959, tags:['Concisão','Clássico'], desc:'Manual minúsculo que consagrou a regra de ouro: omita palavras desnecessárias e prefira o concreto.' },
-    { id:'mckee', orig:'world', cat:'oficio', titulo:'Story', autor:'Robert McKee', ano:1997, tags:['Estrutura','Cena'], desc:'Vocabulário claro para conflito, virada de cena e coerência entre premissa e clímax.' },
-    { id:'klink', orig:'world', cat:'estilo', titulo:'Several Short Sentences About Writing', autor:'Verlyn Klinkenborg', ano:2012, tags:['Frase','Atenção'], desc:'Trata cada frase como unidade soberana: curta, inteira e consciente do seu próprio peso.' }
+  var BOOKS = [
+    /* BRASIL (10 obras verificadas com créditos editoriais) */
+    { id:'assis', orig:'br', cat:'oficio', titulo:'Escrever ficção: um manual de criação literária', capaTitulo:'Escrever Ficção', autor:'Luiz Antonio de Assis Brasil', autorCurto:'Assis Brasil', editora:'Companhia das Letras', ano:2019, bg:'#5c2220', accent:'#efd093', ico:'nib', tags:['Ficção','Oficina BR'], desc:'Nascido de mais de três décadas da Oficina de Criação Literária da PUCRS. O grande manual brasileiro de romance, personagem, ponto de vista e tempo narrativo.' },
+    { id:'candido', orig:'br', cat:'oficio', titulo:'A personagem de ficção', capaTitulo:'A Personagem de Ficção', autor:'Antonio Candido, Anatol Rosenfeld, Décio de Almeida Prado e Paulo Emílio Salles Gomes', autorCurto:'Antonio Candido et al.', editora:'Editora Perspectiva', ano:1968, bg:'#1f3548', accent:'#e7cb8e', ico:'mask', tags:['Personagem','Crítica BR'], desc:'Clássico indispensável sobre como seres feitos só de palavras ganham densidade, contradição e vida própria na mente do leitor.' },
+    { id:'salles', orig:'br', cat:'oficio', titulo:'Gesto inacabado: processo de criação artística', capaTitulo:'Gesto Inacabado', autor:'Cecília Almeida Salles', autorCurto:'Cecília A. Salles', editora:'Annablume (ed. orig.) / Intermeios', ano:1998, bg:'#2d4637', accent:'#e6ca8f', ico:'web', tags:['Processo','Crítica Genética'], desc:'Analisa rascunhos, cadernos e rasuras para mostrar a criação como rede em movimento — sem o mito da obra que nasce pronta.' },
+    { id:'clarice', orig:'br', cat:'oficio', titulo:'A descoberta do mundo', capaTitulo:'A Descoberta do Mundo', autor:'Clarice Lispector', autorCurto:'Clarice Lispector', editora:'Nova Fronteira (1ª ed.) / Rocco', ano:1984, bg:'#3d2342', accent:'#f0d598', ico:'star', tags:['Voz','Crônicas'], desc:'Crônicas publicadas no Jornal do Brasil onde Clarice pensa em voz alta sobre o risco, o silêncio e a coragem de escrever.' },
+    { id:'bagno', orig:'br', cat:'estilo', titulo:'Preconceito linguístico', capaTitulo:'Preconceito Linguístico', autor:'Marcos Bagno', autorCurto:'Marcos Bagno', editora:'Edições Loyola (1ª ed.) / Parábola', ano:1999, bg:'#7d3d23', accent:'#f5dcb0', ico:'scales', tags:['ptBR vivo','Sociolinguística'], desc:'Desmonta mitos normativos e defende a legitimidade do português brasileiro vivo — antídoto essencial contra a trava gramatical.' },
+    { id:'lima', orig:'br', cat:'oficio', titulo:'Páginas ampliadas: o livro-reportagem como extensão do jornalismo e da literatura', capaTitulo:'Páginas Ampliadas', autor:'Edvaldo Pereira Lima', autorCurto:'Edvaldo P. Lima', editora:'Editora da Unicamp (1ª ed.) / Manole', ano:1993, bg:'#1e4449', accent:'#ebd093', ico:'compass', tags:['Não-ficção','Reportagem'], desc:'Referência brasileira sobre a fronteira entre jornalismo literário e ficção: cena, pesquisa de campo, foco narrativo e humanidade.' },
+    { id:'lage', orig:'br', cat:'estilo', titulo:'Linguagem jornalística', capaTitulo:'Linguagem Jornalística', autor:'Nilson Lage', autorCurto:'Nilson Lage', editora:'Editora Ática (Col. Princípios)', ano:1985, bg:'#3b352c', accent:'#e7c989', ico:'press', tags:['Clareza','Estrutura'], desc:'Rigoroso sobre economia verbal, seleção de fatos e arquitetura de textos informativos em português brasileiro.' },
+    { id:'lajolo', orig:'br', cat:'oficio', titulo:'A formação da leitura no Brasil', capaTitulo:'A Formação da Leitura', autor:'Marisa Lajolo e Regina Zilberman', autorCurto:'Lajolo & Zilberman', editora:'Editora Ática', ano:1996, bg:'#4e3622', accent:'#f1d396', ico:'book', tags:['Leitor','Mercado BR'], desc:'Situa o escritor dentro da história real dos leitores, das editoras e da circulação de livros no Brasil.' },
+    { id:'estadao', orig:'br', cat:'estilo', titulo:'Manual de Redação e Estilo (Estadão)', capaTitulo:'Manual de Redação e Estilo', autor:'Eduardo Martins', autorCurto:'Estadão', editora:'O Estado de S. Paulo', ano:1990, bg:'#263340', accent:'#e4c788', ico:'columns', tags:['Norma','Precisão'], desc:'Referência prática de clareza, pontuação e concordância no português escrito contemporâneo.' },
+    { id:'folha', orig:'br', cat:'estilo', titulo:'Manual da Redação (Folha de S.Paulo)', capaTitulo:'Manual da Redação', autor:'Folha de S.Paulo', autorCurto:'Folha de S.Paulo', editora:'Publifolha / Folha de S.Paulo', ano:1992, bg:'#2a2926', accent:'#e8ca8a', ico:'ink', tags:['Conciso','Estilo'], desc:'Manual direto e funcional focado em ordem direta, frase enxuta e corte de burocracia verbal.' },
+
+    /* INTERNACIONAL (10 obras verificadas com créditos editoriais) */
+    { id:'king', orig:'world', cat:'oficio', titulo:'Sobre a escrita (On Writing)', capaTitulo:'Sobre a Escrita', autor:'Stephen King', autorCurto:'Stephen King', editora:'Scribner (orig.) · Ed. BR: Suma', ano:2000, bg:'#4a201b', accent:'#f2d396', ico:'nib', tags:['Ofício','Rotina'], desc:'Metade memória, metade caixa de ferramentas: trabalho diário, cortes de 10% na segunda versão, voz ativa e respeito pelo leitor.' },
+    { id:'orwell', orig:'world', cat:'estilo', titulo:'Por que escrevo (Why I Write)', capaTitulo:'Por que Escrevo', autor:'George Orwell', autorCurto:'George Orwell', editora:'Revista Gangrel (1946) / Penguin', ano:1946, bg:'#8c4a24', accent:'#f7e4bc', ico:'eye', tags:['Voz','Clareza moral'], desc:'Ensaio luminoso sobre os quatro impulsos de quem escreve e a honestidade da linguagem contra a névoa burocrática.' },
+    { id:'wood', orig:'world', cat:'oficio', titulo:'Como funciona a ficção (How Fiction Works)', capaTitulo:'Como Funciona a Ficção', autor:'James Wood', autorCurto:'James Wood', editora:'Farrar, Straus & Giroux · Ed. BR: Cosac Naify / SESI-SP', ano:2008, bg:'#243a33', accent:'#ebd095', ico:'eye', tags:['Crítica','Detalhe'], desc:'Estudo afiado sobre discurso indireto livre, ponto de vista, detalhe vivo e o adjetivo como aposta de olhar.' },
+    { id:'leguin', orig:'world', cat:'oficio', titulo:'Steering the Craft', capaTitulo:'Steering the Craft', autor:'Ursula K. Le Guin', autorCurto:'Ursula K. Le Guin', editora:'The Eighth Mountain Press (1998) / Mariner', ano:1998, bg:'#1d3a4f', accent:'#ebd298', ico:'sail', tags:['Ritmo','Ponto de vista'], desc:'Oficina precisa sobre música da frase, ritmo, pontuação e controle do foco narrativo.' },
+    { id:'gardner', orig:'world', cat:'oficio', titulo:'The Art of Fiction', capaTitulo:'The Art of Fiction', autor:'John Gardner', autorCurto:'John Gardner', editora:'Alfred A. Knopf', ano:1983, bg:'#2c243b', accent:'#e9ce94', ico:'moon', tags:['Imersão','Técnica'], desc:'Explica o “sonho ficcional contínuo” e os níveis de distância psíquica entre narrador e personagem.' },
+    { id:'lamott', orig:'world', cat:'oficio', titulo:'Bird by Bird', capaTitulo:'Bird by Bird', autor:'Anne Lamott', autorCurto:'Anne Lamott', editora:'Pantheon Books', ano:1994, bg:'#3b5241', accent:'#f3dbb0', ico:'bird', tags:['Psicologia','Rascunho'], desc:'Defesa bem-humorada e humana dos primeiros rascunhos tortos como passagem inevitável para qualquer texto bom.' },
+    { id:'zinsser', orig:'world', cat:'estilo', titulo:'Como escrever bem (On Writing Well)', capaTitulo:'Como Escrever Bem', autor:'William Zinsser', autorCurto:'William Zinsser', editora:'Harper & Row · Ed. BR: Três Estrelas / Fósforo', ano:1976, bg:'#5b4423', accent:'#f5deb0', ico:'scales', tags:['Não-ficção','Clareza'], desc:'Os quatro pilares da prosa limpa: clareza, simplicidade, brevidade e humanidade.' },
+    { id:'strunk', orig:'world', cat:'estilo', titulo:'The Elements of Style', capaTitulo:'The Elements of Style', autor:'William Strunk Jr. e E. B. White', autorCurto:'Strunk & White', editora:'Macmillan', ano:1959, bg:'#e3d7be', fg:'#25170e', accent:'#7a4b14', gold:'rgba(122,75,20,.4)', light:true, ico:'columns', tags:['Concisão','Clássico'], desc:'Manual minúsculo que consagrou a regra de ouro: omita palavras desnecessárias e prefira o concreto.' },
+    { id:'mckee', orig:'world', cat:'oficio', titulo:'Story', capaTitulo:'Story', autor:'Robert McKee', autorCurto:'Robert McKee', editora:'ReganBooks / HarperCollins · Ed. BR: Arte & Letra', ano:1997, bg:'#2c211d', accent:'#e6c178', ico:'arc', tags:['Estrutura','Cena'], desc:'Vocabulário claro para conflito, virada de cena e coerência entre premissa e clímax.' },
+    { id:'klink', orig:'world', cat:'estilo', titulo:'Several Short Sentences About Writing', capaTitulo:'Several Short Sentences', autor:'Verlyn Klinkenborg', autorCurto:'V. Klinkenborg', editora:'Alfred A. Knopf', ano:2012, bg:'#493c31', accent:'#efd296', ico:'bars', tags:['Frase','Atenção'], desc:'Trata cada frase como unidade soberana: curta, inteira e consciente do seu próprio peso.' }
   ];
 
   var BOOK_MAP = {};
@@ -720,6 +803,17 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
 
   var grid = document.getElementById('bib-grid');
   var countEl = document.getElementById('bib-count');
+  function renderCover(b) {
+    var style = '--cov-bg:' + b.bg + ';--cov-accent:' + b.accent + ';'
+      + (b.fg ? '--cov-fg:' + b.fg + ';' : '')
+      + (b.gold ? '--cov-gold:' + b.gold + ';' : '');
+    var svg = '<svg class="rg-cover-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (EMBLEMS[b.ico] || EMBLEMS.book) + '</svg>';
+    return '<div class="rg-cover' + (b.light ? ' is-light' : '') + '" style="' + style + '" aria-hidden="true">'
+      + '<span class="rg-cover-top">' + b.autorCurto + '</span>'
+      + '<div class="rg-cover-mid">' + svg + '<strong class="rg-cover-title">' + b.capaTitulo + '</strong></div>'
+      + '<div class="rg-cover-foot"><span>' + (b.orig === 'br' ? 'BR' : 'INT') + '</span><span>' + b.ano + '</span></div>'
+      + '</div>';
+  }
   function renderBooks(filter) {
     var list = BOOKS.filter(function (b) {
       if (filter === 'br') return b.orig === 'br';
@@ -732,12 +826,16 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
     grid.innerHTML = list.map(function (b) {
       var origLabel = b.orig === 'br' ? 'Brasil' : 'Internacional';
       var tags = b.tags.map(function (t) { return '<span class="pill-tag">' + t + '</span>'; }).join('');
-      return '<article class="card">'
+      return '<article class="card book-card">'
+        + renderCover(b)
+        + '<div class="book-info">'
         + '<span class="card-kicker">' + origLabel + ' · ' + b.ano + '</span>'
         + '<h3>' + b.titulo + '</h3>'
         + '<div class="book-card-meta">' + b.autor + '</div>'
+        + '<div class="book-credit">Edição: ' + b.editora + ' (' + b.ano + ')</div>'
         + '<p>' + b.desc + '</p>'
         + '<div class="book-tags"><span class="pill-tag ' + (b.orig === 'br' ? 'is-br' : '') + '">' + origLabel + '</span>' + tags + '</div>'
+        + '</div>'
         + '</article>';
     }).join('');
   }

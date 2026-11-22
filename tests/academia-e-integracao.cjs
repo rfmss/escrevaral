@@ -233,6 +233,7 @@ const chkHtml = fs.readFileSync(path.join(rootDir, 'academia/checklist-lancament
 assert.ok(chkHtml.includes('Câmara Brasileira do Livro (CBL)') && !/ISBN gratuito/i.test(chkHtml), 'checklist-lancamento.html com regra vigente da CBL para ISBN');
 const bibHtml = fs.readFileSync(path.join(rootDir, 'academia/biblioteca-escrita.html'), 'utf8');
 assert.ok(bibHtml.includes('Luiz Antonio de Assis Brasil') && bibHtml.includes("id:'orwell', orig:'world'"), 'biblioteca-escrita.html com bibliografia brasileira verificada e Orwell na estante internacional');
+assert.ok(bibHtml.includes('rg-cover') && bibHtml.includes('Companhia das Letras') && bibHtml.includes('Editora Perspectiva') && bibHtml.includes('Coleção Real Gabinete'), 'biblioteca-escrita.html exibe capas autorais Real Gabinete com créditos editoriais');
 const kdpHtml = fs.readFileSync(path.join(rootDir, 'academia/publicar-kdp.html'), 'utf8');
 assert.ok(kdpHtml.includes('UICLAP') && kdpHtml.includes('Kindle Unlimited'), 'publicar-kdp.html documenta realidade brasileira de e-book + impresso sob demanda');
 const compHtml = fs.readFileSync(path.join(rootDir, 'academia/comparativo-publicacao.html'), 'utf8');
