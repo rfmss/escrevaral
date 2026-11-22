@@ -301,8 +301,10 @@ body[data-view="gabinete"] #oficina[data-ptbr-dashboard="true"] {
 #ptbr-dashboard .ptbr-syntax-term[data-syntax-linked="true"] { box-shadow:0 0 0 2px #244b34; }
 #ptbr-dashboard .ptbr-syntax-head { font:500 var(--esc-text-xs, 11px)/1.35 var(--esc-font-ui, Arial, Helvetica, sans-serif); margin-top:4px; color:inherit; }
 #ptbr-dashboard .ptbr-syntax-links { border-bottom:1px dotted #7c8c78; padding-bottom:10px; font:400 var(--esc-text-sm, 12.5px)/1.45 var(--esc-font-ui, Arial, Helvetica, sans-serif); color:#223022; }
-#ptbr-dashboard .ptbr-arc-pill { fill:#eef3ec; stroke:#2f5940; stroke-width:1.1; }
-#ptbr-dashboard .ptbr-arc-label { font:600 var(--esc-text-xs, 11px)/1 var(--esc-font-ui, Arial, Helvetica, sans-serif); fill:#183021; }
+#ptbr-dashboard .ptbr-arc-origin { fill:#d5dfd2; stroke:currentColor; stroke-width:1.5; }
+#ptbr-dashboard .ptbr-arc-head { fill:currentColor; }
+#ptbr-dashboard .ptbr-arc-pill { fill:#eef3ec; stroke:#2f5940; stroke-width:1.2; }
+#ptbr-dashboard .ptbr-arc-label { font:600 var(--esc-text-xs, 11px)/1 var(--esc-font-ui, Arial, Helvetica, sans-serif); letter-spacing:.015em; fill:#183021; }
 
 /* Tema escuro */
 body[data-theme="escuro"] #oficina[data-ptbr-dashboard="true"],

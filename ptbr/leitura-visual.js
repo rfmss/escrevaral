@@ -17,6 +17,81 @@
     if (parent) { parent.appendChild(n); }
     return n;
   }
+  /* Formata rótulo direcional coerente com a geometria esquerda/direita da seta */
+  function formatDirectionalLabel(raw, x1, x2) {
+    var txt = String(raw || '').replace(/^\s+|\s+$/g, '');
+    if (!txt) { return ''; }
+    var parts = txt.split(/\s*\u2194\s*/);
+    if (parts.length === 2) {
+      txt = x2 >= x1 ? (parts[0] + ' \u2192 ' + parts[1]) : (parts[1] + ' \u2190 ' + parts[0]);
+    }
+    return txt.length > 30 ? (txt.slice(0, 29) + '\u2026') : txt;
+  }
+  /* Desenha conector arquitetônico com saída e chegada verticais (90°), ombros arredondados,
+   * pino duplo de origem, ponta de seta afiada e cartela centralizada sobre o trilho horizontal.
+   * Mantém estritamente 1 <path> por vínculo para preservar o contrato dos testes. */
+  function drawArchitecturalArc(svg, opts) {
+    var x1 = opts.x1, x2 = opts.x2, yAnchor = opts.yAnchor, yTop = opts.yTop;
+    var rowW = opts.rowWidth || 800;
+    var dir = x2 >= x1 ? 1 : -1;
+    var span = Math.abs(x2 - x1);
+    var rise = Math.max(16, yAnchor - yTop);
+    var r = Math.min(13, span / 2.4, Math.max(5, (rise - 8) * 0.45));
+    var d;
+    if (span < 8) {
+      d = 'M ' + x1.toFixed(1) + ' ' + (yAnchor - 3).toFixed(1) + ' L ' + x2.toFixed(1) + ' ' + (yAnchor - 6.2).toFixed(1);
+    } else {
+      d = 'M ' + x1.toFixed(1) + ' ' + (yAnchor - 3).toFixed(1) +
+        ' L ' + x1.toFixed(1) + ' ' + (yTop + r).toFixed(1) +
+        ' Q ' + x1.toFixed(1) + ' ' + yTop.toFixed(1) + ' ' + (x1 + dir * r).toFixed(1) + ' ' + yTop.toFixed(1) +
+        ' L ' + (x2 - dir * r).toFixed(1) + ' ' + yTop.toFixed(1) +
+        ' Q ' + x2.toFixed(1) + ' ' + yTop.toFixed(1) + ' ' + x2.toFixed(1) + ' ' + (yTop + r).toFixed(1) +
+        ' L ' + x2.toFixed(1) + ' ' + (yAnchor - 6.2).toFixed(1);
+    }
+    var pathAttrs = {
+      d: d,
+      fill: 'none',
+      stroke: 'currentColor',
+      'stroke-width': opts.dashed ? '1.5' : '1.75',
+      'stroke-linecap': 'round',
+      'stroke-linejoin': 'round'
+    };
+    if (opts.dashed) { pathAttrs['stroke-dasharray'] = '4 3'; }
+    svgEl('path', svg, pathAttrs);
+
+    /* Pino de origem em anel duplo encostado na borda superior do bloco de partida */
+    svgEl('circle', svg, { cx: x1.toFixed(1), cy: (yAnchor - 2.5).toFixed(1), r: '3.6', 'class': 'ptbr-arc-origin' });
+    svgEl('circle', svg, { cx: x1.toFixed(1), cy: (yAnchor - 2.5).toFixed(1), r: '1.4', fill: 'currentColor' });
+
+    /* Ponta de seta editorial afiada (dardo côncavo 100% alinhado à haste vertical) */
+    var tipY = yAnchor;
+    var wingY = yAnchor - 8.8;
+    var notchY = yAnchor - 6.0;
+    svgEl('polygon', svg, {
+      points: x2.toFixed(1) + ',' + tipY.toFixed(1) + ' ' +
+        (x2 - 4.5).toFixed(1) + ',' + wingY.toFixed(1) + ' ' +
+        x2.toFixed(1) + ',' + notchY.toFixed(1) + ' ' +
+        (x2 + 4.5).toFixed(1) + ',' + wingY.toFixed(1),
+      'class': 'ptbr-arc-head',
+      fill: 'currentColor'
+    });
+
+    /* Cartela de rótulo centralizada exatamente no eixo horizontal do trilho */
+    if (opts.label) {
+      var lblText = formatDirectionalLabel(opts.label, x1, x2);
+      var pillW = Math.max(60, lblText.length * 6.5 + 22);
+      var pillX = Math.max(4, Math.min(rowW - pillW - 4, (x1 + x2) / 2 - pillW / 2));
+      var pillY = Math.max(2, yTop - 10);
+      svgEl('rect', svg, {
+        x: pillX.toFixed(1), y: pillY.toFixed(1), width: pillW.toFixed(1), height: '20', rx: '10',
+        'class': 'ptbr-arc-pill'
+      });
+      svgEl('text', svg, {
+        x: (pillX + pillW / 2).toFixed(1), y: (pillY + 13.8).toFixed(1), 'text-anchor': 'middle',
+        'class': 'ptbr-arc-label'
+      }, lblText);
+    }
+  }
   function valid(s, f) { return f && typeof f.start === 'number' && typeof f.end === 'number' && f.start >= 0 && f.end > f.start && f.end <= s.length && s.slice(f.start, f.end) === f.snippet; }
   var FEATURE_LABELS = {
     adverbios: 'Advérbio em -mente', ortografia: 'Grafia', acentuacao: 'Acentuação',
@@ -452,7 +527,7 @@
       var row = g.row.getBoundingClientRect();
       if (!row.width) { return; }
 
-      /* Coleta e ordena vínculos do menor ao maior vão (empilhamento displaCy limpo, até 6 arcos) */
+      /* Coleta e ordena vínculos do menor ao maior vão (empilhamento arquitetônico limpo, até 6 arcos) */
       var activeEdges = [];
       (active.relations || []).forEach(function (edge) {
         if (edge.from !== active.nodeId && edge.to !== active.nodeId) { return; }
@@ -461,64 +536,47 @@
         var ar = a.button.getBoundingClientRect(), br = b.button.getBoundingClientRect();
         var x1 = ar.left - row.left + ar.width / 2;
         var x2 = br.left - row.left + br.width / 2;
-        activeEdges.push({ edge: edge, x1: x1, x2: x2, span: Math.abs(x2 - x1) });
+        activeEdges.push({ edge: edge, x1: x1, x2: x2, w1: ar.width, w2: br.width, span: Math.abs(x2 - x1) });
       });
       activeEdges.sort(function (u, v) { return u.span - v.span; });
       if (activeEdges.length > 6) { activeEdges = activeEdges.slice(0, 6); }
 
-      var svgH = Math.min(176, Math.max(88, 66 + activeEdges.length * 22));
-      if (g.row.style) { g.row.style.paddingTop = (svgH + 6) + 'px'; }
+      /* Distribui suavemente pontos de saída/chegada quando múltiplas setas compartilham o mesmo bloco */
+      var byFrom = {};
+      activeEdges.forEach(function (item) {
+        var k = '$' + item.edge.from;
+        if (!byFrom[k]) { byFrom[k] = []; }
+        byFrom[k].push(item);
+      });
+      Object.keys(byFrom).forEach(function (k) {
+        var grp = byFrom[k];
+        if (grp.length < 2) { return; }
+        grp.sort(function (u, v) { return u.x2 - v.x2; });
+        var step = Math.min(12, Math.max(6, ((grp[0].w1 || 90) - 32) / Math.max(1, grp.length - 1)));
+        var mid = (grp.length - 1) / 2;
+        grp.forEach(function (item, idx) {
+          item.x1 = item.x1 + (idx - mid) * step;
+        });
+      });
+
+      var tierStep = 28;
+      var svgH = Math.max(72, 34 + activeEdges.length * tierStep);
+      if (g.row.style) { g.row.style.paddingTop = (svgH + 2) + 'px'; }
       g.svg.setAttribute('width', row.width);
       g.svg.setAttribute('height', svgH);
       g.svg.setAttribute('viewBox', '0 0 ' + row.width + ' ' + svgH);
 
-      var yBase = svgH - 8, placedPills = [];
+      var yAnchor = svgH;
       activeEdges.forEach(function (item, lane) {
-        var edge = item.edge, x1 = item.x1, x2 = item.x2;
-        var arch = Math.min(svgH - 22, Math.max(30, item.span * 0.22) + lane * 18);
-        var cy = Math.max(14, yBase - arch);
-        var mx = (x1 + x2) / 2;
-
-        /* 1 <path> por vínculo (preserva contrato de testes) + ponta de seta <polygon> + rótulo sem sobreposição */
-        svgEl('path', g.svg, {
-          d: 'M ' + x1.toFixed(1) + ' ' + yBase + ' Q ' + mx.toFixed(1) + ' ' + cy.toFixed(1) + ' ' + x2.toFixed(1) + ' ' + (yBase - 4),
-          fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round'
+        var yTop = Math.max(14, yAnchor - 30 - lane * tierStep);
+        drawArchitecturalArc(g.svg, {
+          x1: item.x1,
+          x2: item.x2,
+          yAnchor: yAnchor,
+          yTop: yTop,
+          rowWidth: row.width,
+          label: item.edge.label
         });
-        svgEl('polygon', g.svg, {
-          points: x2.toFixed(1) + ',' + yBase + ' ' + (x2 - 4.5).toFixed(1) + ',' + (yBase - 8) + ' ' + (x2 + 4.5).toFixed(1) + ',' + (yBase - 8),
-          fill: 'currentColor'
-        });
-        svgEl('circle', g.svg, { cx: x1.toFixed(1), cy: (yBase - 2).toFixed(1), r: '2.8', fill: 'currentColor' });
-
-        if (edge.label) {
-          var lblText = String(edge.label).slice(0, 26);
-          var apexY = 0.25 * yBase + 0.5 * cy + 0.25 * (yBase - 4);
-          var pillW = Math.max(46, lblText.length * 6.4 + 14);
-          var pillX = Math.max(2, Math.min(row.width - pillW - 2, mx - pillW / 2));
-          var pillY = Math.max(2, apexY - 12);
-          var tries = 0;
-          while (tries < 6) {
-            var collides = false, pi;
-            for (pi = 0; pi < placedPills.length; pi++) {
-              var p = placedPills[pi];
-              if (pillX < p.x2 + 4 && pillX + pillW > p.x1 - 4 && Math.abs(pillY - p.y) < 20) {
-                collides = true; break;
-              }
-            }
-            if (!collides) { break; }
-            pillY = Math.max(2, pillY - 20);
-            tries++;
-          }
-          placedPills.push({ x1: pillX, x2: pillX + pillW, y: pillY });
-          svgEl('rect', g.svg, {
-            x: pillX.toFixed(1), y: pillY.toFixed(1), width: pillW.toFixed(1), height: '18', rx: '9',
-            'class': 'ptbr-arc-pill'
-          });
-          svgEl('text', g.svg, {
-            x: (pillX + pillW / 2).toFixed(1), y: (pillY + 12.5).toFixed(1), 'text-anchor': 'middle',
-            'class': 'ptbr-arc-label'
-          }, lblText);
-        }
       });
     }
 
@@ -674,18 +732,20 @@
       var r = rows[active];
       if (!r || !r.svg || !r.anteBtn || !r.relBtn || !r.row.getBoundingClientRect) { return; }
       var rb = r.row.getBoundingClientRect(); if (!rb.width) { return; }
-      var svgH = 88;
+      var svgH = 72;
+      if (r.row.style) { r.row.style.paddingTop = (svgH + 2) + 'px'; }
       r.svg.setAttribute('width', rb.width); r.svg.setAttribute('height', svgH); r.svg.setAttribute('viewBox', '0 0 ' + rb.width + ' ' + svgH);
       var ar = r.anteBtn.getBoundingClientRect(), rr = r.relBtn.getBoundingClientRect();
-      var xFrom = rr.left - rb.left + rr.width / 2, xTo = ar.left - rb.left + ar.width / 2, yBase = svgH - 8;
-      var mx = (xFrom + xTo) / 2, cy = 22;
-      svgEl('path', r.svg, { d: 'M ' + xFrom.toFixed(1) + ' ' + yBase + ' Q ' + mx.toFixed(1) + ' ' + cy + ' ' + xTo.toFixed(1) + ' ' + (yBase - 4), fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round' });
-      svgEl('polygon', r.svg, { points: xTo.toFixed(1) + ',' + yBase + ' ' + (xTo - 4.5).toFixed(1) + ',' + (yBase - 8) + ' ' + (xTo + 4.5).toFixed(1) + ',' + (yBase - 8), fill: 'currentColor' });
-      svgEl('circle', r.svg, { cx: xFrom.toFixed(1), cy: (yBase - 2).toFixed(1), r: '2.8', fill: 'currentColor' });
+      var xFrom = rr.left - rb.left + rr.width / 2, xTo = ar.left - rb.left + ar.width / 2;
       var lbl = (r.relHead || 'que') + ' retoma antecedente';
-      var pillW = lbl.length * 6.4 + 14, pillX = Math.max(2, Math.min(rb.width - pillW - 2, mx - pillW / 2));
-      svgEl('rect', r.svg, { x: pillX.toFixed(1), y: '18', width: pillW.toFixed(1), height: '18', rx: '9', 'class': 'ptbr-arc-pill' });
-      svgEl('text', r.svg, { x: (pillX + pillW / 2).toFixed(1), y: '30.5', 'text-anchor': 'middle', 'class': 'ptbr-arc-label' }, lbl);
+      drawArchitecturalArc(r.svg, {
+        x1: xFrom,
+        x2: xTo,
+        yAnchor: svgH,
+        yTop: 32,
+        rowWidth: rb.width,
+        label: lbl
+      });
     }
 
     function select(index) {
@@ -1034,10 +1094,15 @@
           var r = buttons[j].getBoundingClientRect();
           var x2 = r.left - rb.left + r.width / 2;
           var y2 = typeof r.top === 'number' && typeof rb.top === 'number' ? Math.max(18, r.top - rb.top) : 60;
-          var topY = Math.min(y1, y2) - (20 + lane * 10);
-          svgEl('path', svg, {
-            d: 'M ' + x.toFixed(1) + ' ' + y1.toFixed(1) + ' Q ' + ((x + x2) / 2).toFixed(1) + ' ' + Math.max(4, topY).toFixed(1) + ' ' + x2.toFixed(1) + ' ' + y2.toFixed(1),
-            fill: 'none', stroke: 'currentColor', 'stroke-width': '1.6', 'stroke-dasharray': '3 3'
+          var yAnchor = Math.max(20, Math.min(y1, y2) - 2);
+          var topY = Math.max(6, yAnchor - (16 + lane * 10));
+          drawArchitecturalArc(svg, {
+            x1: x,
+            x2: x2,
+            yAnchor: yAnchor,
+            yTop: topY,
+            rowWidth: rb.width,
+            dashed: true
           });
           buttons[j].setAttribute('data-reading-support', 'true');
           lane++;

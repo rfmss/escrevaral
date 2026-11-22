@@ -326,10 +326,17 @@
     box-shadow: 0 0 0 2px #8b5a1e !important;
   }
 
-  /* Arcos de sintaxe e barras rítmicas em âmbar/mogno */
-  #oficina #ptbr-dashboard .ptbr-relation-arcs { color: #6e4117 !important; }
-  #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #e2d8c5 !important; stroke: #8b5a1e !important; }
+  /* Conectores arquitetônicos de sintaxe e barras rítmicas em latão/mogno */
+  #oficina #ptbr-dashboard .ptbr-relation-arcs { color: #6b3d14 !important; }
+  #oficina #ptbr-dashboard .ptbr-arc-origin { fill: #cfc3ae !important; stroke: #6b3d14 !important; stroke-width: 1.6 !important; }
+  #oficina #ptbr-dashboard .ptbr-arc-head { fill: #5c310e !important; }
+  #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #dfd5c2 !important; stroke: #8b5a1e !important; stroke-width: 1.25 !important; }
   #oficina #ptbr-dashboard .ptbr-arc-label { fill: #26140a !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-relation-arcs { color: #d9ae62 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-origin { fill: #20150f !important; stroke: #d9ae62 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-head { fill: #e6c67e !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-pill { fill: #2c1e15 !important; stroke: #c99a47 !important; }
+  body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-label { fill: #f2e7d2 !important; }
   #oficina #ptbr-dashboard .ptbr-proportion-fill,
   #oficina #ptbr-dashboard .ptbr-rhythm-bar { background-color: #7c4c1c !important; }
   #oficina #ptbr-dashboard .ptbr-pulse-bar {
