@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-3a45095d8acd";
-const RUNTIME_CACHE = "scrvrl-runtime-3a45095d8acd";
+const CACHE_NAME = "scrvrl-offline-v6-65-792c75ef52ad";
+const RUNTIME_CACHE = "scrvrl-runtime-792c75ef52ad";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
