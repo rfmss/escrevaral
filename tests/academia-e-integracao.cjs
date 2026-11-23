@@ -157,7 +157,7 @@ assert.equal(findByClass(bridgedModal, 'esc-academy-tome-art').length, 2, '2 ilu
 assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 12, '12 guias editoriais com numeração romana');
 
 // Garantir assets da biblioteca Real Gabinete em WebP + inclusão no build + estética fosca sem gradientes puros
-for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp', 'banner-bloqueio.webp', 'banner-titulo.webp', 'banner-lancamento.webp', 'banner-casa-rosas.webp']) {
+for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp', 'banner-bloqueio.webp', 'banner-titulo.webp', 'banner-lancamento.webp', 'banner-casa-rosas.webp', 'banner-abl.webp', 'banner-rui-barbosa.webp', 'banner-graciliano.webp', 'banner-jose-alencar.webp', 'banner-cabaceiras.webp']) {
   assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', imgName)), 'Faltando assets/library/' + imgName);
 }
 assert.ok(buildSrc.includes("'assets/library'"), 'scripts/build.cjs copia assets/library para dist/site/');
@@ -208,6 +208,7 @@ assert.ok(tresColCss.includes('body[data-view="gabinete"] .esc-mobile-bar'), 'tr
 assert.ok(realGabineteCss.includes('.ptbr-word:not([data-word-class-norm])'), 'real-gabinete.css preserva cores de Morfologia e Sintaxe no Modo Noturno');
 const autopubHtml = fs.readFileSync(path.join(rootDir, 'academia/autopublicacao-independente.html'), 'utf8');
 assert.ok(autopubHtml.includes('AFK-REAL-GABINETE-ORNAMENTS-START'), 'autopublicacao-independente.html com ornamentos AFK x Real Gabinete');
+const usedGuideBanners = new Set();
 for (const entry of catalog) {
   const html = fs.readFileSync(path.join(rootDir, 'academia', entry.file), 'utf8');
   assert.ok(html.includes('#cfc3ae'), 'academia/' + entry.file + ' calibrado em #cfc3ae');
@@ -215,6 +216,10 @@ for (const entry of catalog) {
   if (entry.id !== 'objeto-livro' && entry.id !== 'literatura-mundial') {
     assert.ok(html.includes('AFK-REAL-GABINETE-ORNAMENTS-START') && html.includes("img-src 'self' data:;"), 'academia/' + entry.file + ' com ornamentos AFK e banner WebP local');
     assert.ok(html.includes('class="hero-place"'), 'academia/' + entry.file + ' inclui legenda cultural brasileira no hero');
+    const bm = html.match(/background-image:url\("\.\.\/assets\/library\/(banner-[a-z-]+\.webp)"\);/);
+    assert.ok(bm, 'academia/' + entry.file + ' referencia banner WebP local');
+    assert.ok(!usedGuideBanners.has(bm[1]), 'academia/' + entry.file + ' não deve repetir banner (' + bm[1] + ')');
+    usedGuideBanners.add(bm[1]);
     assert.ok(!html.includes('@media(prefers-color-scheme:dark)'), 'academia/' + entry.file + ' não deve forçar fundo escuro sobre texto escuro em SO dark');
     assert.ok(html.includes("root.setAttribute('data-theme'"), 'academia/' + entry.file + ' deve sincronizar data-theme dark/light com o app');
     const cspM = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)">/);

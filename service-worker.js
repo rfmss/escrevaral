@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-3e7834b47e98";
-const RUNTIME_CACHE = "scrvrl-runtime-3e7834b47e98";
+const CACHE_NAME = "scrvrl-offline-v6-65-d2d31754ea74";
+const RUNTIME_CACHE = "scrvrl-runtime-d2d31754ea74";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -33,12 +33,17 @@ const BUNKER_ASSETS = [
   "./academia/revisao-manuscrito.html",
   "./academia/submissao-editoras.html",
   "./academia/titulo-do-livro.html",
+  "./assets/library/banner-abl.webp",
   "./assets/library/banner-bloqueio.webp",
+  "./assets/library/banner-cabaceiras.webp",
   "./assets/library/banner-casa-rosas.webp",
   "./assets/library/banner-criacao.webp",
+  "./assets/library/banner-graciliano.webp",
+  "./assets/library/banner-jose-alencar.webp",
   "./assets/library/banner-lancamento.webp",
   "./assets/library/banner-oficio.webp",
   "./assets/library/banner-publicacao.webp",
+  "./assets/library/banner-rui-barbosa.webp",
   "./assets/library/banner-titulo.webp",
   "./assets/library/estante-cafe-bistro.webp",
   "./assets/library/estante-livros-outono.webp",
