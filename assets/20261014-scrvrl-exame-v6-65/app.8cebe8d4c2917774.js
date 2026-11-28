@@ -11405,25 +11405,40 @@
   function buildRailMarkup() {
     return (
       '<button type="button" class="esc-pino-dot is-up" tabindex="-1" title="Subir um passo">' +
-        '<svg class="esc-pino-tip-svg" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.8 L10.2 6 L6 10.2 L1.8 6 Z"/></svg>' +
+        '<svg class="esc-pino-tip-svg" viewBox="0 0 14 18" aria-hidden="true">' +
+          '<path d="M7 1.6 L9.6 7.4 L7 12.2 L4.4 7.4 Z"/>' +
+          '<path d="M4.2 14.2 H9.8"/>' +
+          '<circle class="esc-pino-bead" cx="7" cy="16.4" r="0.9"/>' +
+        '</svg>' +
       '</button>' +
       '<div class="esc-pino-track">' +
-        '<svg class="esc-pino-thread-svg" viewBox="0 0 28 84" preserveAspectRatio="none" aria-hidden="true">' +
-          '<line class="esc-pino-line" x1="14" y1="2" x2="14" y2="82"/>' +
-          '<line class="esc-pino-tick" x1="10.5" y1="42" x2="17.5" y2="42"/>' +
+        '<svg class="esc-pino-thread-svg" viewBox="0 0 32 92" preserveAspectRatio="none" aria-hidden="true">' +
+          '<line class="esc-pino-line" x1="16" y1="2" x2="16" y2="90"/>' +
+          '<path class="esc-pino-orn" d="M13.5 14 Q16 11.5 18.5 14 M13.5 78 Q16 80.5 18.5 78"/>' +
+          '<circle class="esc-pino-bead" cx="16" cy="21" r="0.95"/>' +
+          '<circle class="esc-pino-bead" cx="16" cy="71" r="0.95"/>' +
+          '<line class="esc-pino-tick" x1="12.5" y1="46" x2="19.5" y2="46"/>' +
         '</svg>' +
         '<div class="esc-pino-handle" title="Arraste para cima ou para baixo para rolar — solte para voltar ao centro">' +
-          '<svg class="esc-pino-node-svg" viewBox="0 0 32 32" aria-hidden="true">' +
-            '<circle class="esc-pino-arc-outer" cx="16" cy="16" r="13.2"/>' +
-            '<circle class="esc-pino-arc-inner" cx="16" cy="16" r="9.0"/>' +
-            '<path class="esc-pino-rays" d="M16 1.5 V4.8 M16 27.2 V30.5 M1.5 16 H4.8 M27.2 16 H30.5"/>' +
-            '<circle class="esc-pino-ring" cx="16" cy="16" r="5.2"/>' +
-            '<path class="esc-pino-core" d="M16 12.2 L19.8 16 L16 19.8 L12.2 16 Z"/>' +
+          '<svg class="esc-pino-node-svg" viewBox="0 0 36 36" aria-hidden="true">' +
+            '<circle class="esc-pino-arc-outer" cx="18" cy="18" r="14.6"/>' +
+            '<circle class="esc-pino-arc-inner" cx="18" cy="18" r="10.4"/>' +
+            '<path class="esc-pino-petals" d="M11.6 11.6 Q14.5 9.2 16 10.6 M24.4 11.6 Q21.5 9.2 20 10.6 M11.6 24.4 Q14.5 26.8 16 25.4 M24.4 24.4 Q21.5 26.8 20 25.4"/>' +
+            '<path class="esc-pino-rays" d="M18 1.4 V5.6 M18 30.4 V34.6 M1.4 18 H5.6 M30.4 18 H34.6"/>' +
+            '<circle class="esc-pino-ring" cx="18" cy="18" r="6.1"/>' +
+            '<path class="esc-pino-lozenge" d="M18 9.8 L21.9 18 L18 26.2 L14.1 18 Z"/>' +
+            '<circle class="esc-pino-core" cx="18" cy="18" r="1.85"/>' +
+            '<circle class="esc-pino-bead" cx="18" cy="11.9" r="0.7"/>' +
+            '<circle class="esc-pino-bead" cx="18" cy="24.1" r="0.7"/>' +
           '</svg>' +
         '</div>' +
       '</div>' +
       '<button type="button" class="esc-pino-dot is-down" tabindex="-1" title="Descer um passo">' +
-        '<svg class="esc-pino-tip-svg" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.8 L10.2 6 L6 10.2 L1.8 6 Z"/></svg>' +
+        '<svg class="esc-pino-tip-svg" viewBox="0 0 14 18" aria-hidden="true">' +
+          '<circle class="esc-pino-bead" cx="7" cy="1.6" r="0.9"/>' +
+          '<path d="M4.2 3.8 H9.8"/>' +
+          '<path d="M7 5.8 L9.6 10.6 L7 16.4 L4.4 10.6 Z"/>' +
+        '</svg>' +
       '</button>' +
       '<span class="esc-pino-readout" hidden></span>'
     );
