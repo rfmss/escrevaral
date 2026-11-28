@@ -16,7 +16,8 @@
       (typeof doc.folder === 'undefined' || (typeof doc.folder === 'string' && doc.folder.length <= 120)) &&
       (typeof doc.role === 'undefined' || (typeof doc.role === 'string' && doc.role.length <= 60)) &&
       (typeof doc.category === 'undefined' || (typeof doc.category === 'string' && doc.category.length <= 40)) &&
-      (typeof doc.sonnetSettings === 'undefined' || isPlainObject(doc.sonnetSettings));
+      (typeof doc.sonnetSettings === 'undefined' || isPlainObject(doc.sonnetSettings)) &&
+      (typeof doc.songSettings === 'undefined' || isPlainObject(doc.songSettings));
   }
   function valid(doc) {
     return doc && validMeta(doc) && (typeof doc.cartorio==='undefined'||(root.Escr.cartorio&&root.Escr.cartorio.validDocLedger(doc.cartorio))) && (typeof doc.lineage==='undefined'||(root.Escr.lineage&&root.Escr.lineage.valid(doc.lineage))) && (typeof doc.linguistics==='undefined'||(doc.linguistics&&doc.linguistics.version===1&&Object.prototype.toString.call(doc.linguistics.records)==='[object Array]'&&doc.linguistics.records.length<=3&&root.Escr.linguistics&&doc.linguistics.records.every(root.Escr.linguistics.valid))) && (typeof doc.projectId === 'undefined' || (typeof doc.projectId === 'string' && /^[a-z0-9-]+$/.test(doc.projectId))) && (typeof doc.trashed === 'undefined' || typeof doc.trashed === 'boolean') && (typeof doc.kind === 'undefined' || doc.kind === 'reminder') && (typeof doc.project === 'undefined' || (typeof doc.project === 'string' && doc.project.length <= 120)) && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && (typeof doc.noteId === 'undefined' || (typeof doc.noteId === 'string' && /^[a-z0-9-]+$/.test(doc.noteId))) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && (typeof doc.created === 'undefined' || (typeof doc.created === 'string' && isFinite(Date.parse(doc.created)))) && (typeof doc.createdApproximate === 'undefined' || typeof doc.createdApproximate === 'boolean') && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
@@ -1851,9 +1852,10 @@
     lines.push('Camada 1 (offline): comprova integridade criptográfica do pacote e da');
     lines.push('cadeia de criação registrada dentro do Escrevaral, incluindo a ausência');
     lines.push('ou ocorrência de colagens externas.');
-    lines.push('Camada 2 (anterioridade jurídica externa): datas locais dependem do');
-    lines.push('relógio do aparelho. Use o código SHA-256 acima para ancoragem externa');
-    lines.push('de data (Biblioteca Nacional, carimbo de tempo ou protocolo editorial).');
+    lines.push('Camada 2 (limites jurídicos e anterioridade externa): datas locais');
+    lines.push('dependem do relógio do aparelho. Este certificado técnico NÃO substitui');
+    lines.push('registro na Biblioteca Nacional, ata notarial nem carimbo de tempo');
+    lines.push('oficial (ICP-Brasil). Use o SHA-256 acima para ancoragem oficial.');
     return lines.join('\n');
   }
 
@@ -2467,6 +2469,47 @@
           ]
         }
       ]
+    },
+    {
+      id: 'cancao',
+      name: '8. Canção / Música',
+      description: 'Oficina de composição com blocos, espelho de cadência entre estrofes, rimas consoantes/toantes, tap tempo e cifras opcionais.',
+      defaultProjectName: 'Minha canção',
+      printPreset: 'poesia',
+      folders: [
+        {
+          name: '01 · Ideia e clima',
+          printRole: 'support',
+          notes: [
+            {
+              title: '01. Tema, andamento e referências',
+              content: '# Ideia da canção\n\n- **Clima / gênero:** « MPB, samba, sertanejo, rock, rap, xote... »\n- **Sentimento central:** « O que esta música quer fazer sentir? »\n- **Imagem ou gancho do refrão:** « Uma frase curta que grude no ouvido »'
+            }
+          ]
+        },
+        {
+          name: '02 · Letra',
+          printRole: 'manuscript',
+          notes: [
+            {
+              title: '02. Letra da canção',
+              role: 'song',
+              songSettings: { bpm: 92, meter: '4/4', showChords: false, internalRhymes: false },
+              content: '[Estrofe 1]\n« Escreva aqui os versos da primeira estrofe »\n\n[Refrão]\n« Escreva aqui o gancho central da música »\n\n[Estrofe 2]\n« A segunda estrofe espelha a cadência da primeira »'
+            }
+          ]
+        },
+        {
+          name: '03 · Ensaio',
+          printRole: 'support',
+          notes: [
+            {
+              title: '03. Notas de voz, respiração e arranjo',
+              content: '# Ensaio e cantabilidade\n\n- [ ] Testei cantar a Estrofe 2 na mesma melodia da Estrofe 1?\n- [ ] O refrão abre espaço para respiração?\n- [ ] As palavras fortes caem nas batidas certas?'
+            }
+          ]
+        }
+      ]
     }
   ];
 
@@ -2587,16 +2630,17 @@
         if (spec.role) { d.role = spec.role; }
         if (spec.category) { d.category = spec.category; }
         if (spec.locked) { d.locked = true; }
-        if (noteFormat === 'rich' && !spec.locked && spec.category !== 'reference' && spec.role !== 'sonnet') {
+        if (noteFormat === 'rich' && !spec.locked && spec.category !== 'reference' && spec.role !== 'sonnet' && spec.role !== 'song') {
           d.format = 'rich';
           if (root.Escr.richEditor && root.Escr.richEditor.plainToSafeHtml) { d.richHtml = root.Escr.richEditor.plainToSafeHtml(d.text); }
         } else {
           d.format = 'plain';
         }
         if (spec.sonnetSettings) { d.sonnetSettings = JSON.parse(JSON.stringify(spec.sonnetSettings)); }
+        if (spec.songSettings) { d.songSettings = JSON.parse(JSON.stringify(spec.songSettings)); }
         var saved = archive.save(d, false).document;
         createdNotes.push(saved);
-        if (spec.role === 'sonnet') { firstPreferred = saved; } else if (!firstPreferred && spec.title.indexOf('01.') === 0) { firstPreferred = saved; }
+        if (spec.role === 'sonnet' || spec.role === 'song') { firstPreferred = saved; } else if (!firstPreferred && spec.title.indexOf('01.') === 0) { firstPreferred = saved; }
       }
     }
     return { book: book, notes: createdNotes, firstNote: firstPreferred || createdNotes[0] || null };
@@ -3056,16 +3100,21 @@
   }
   function download(contents, mime, name, fallback, host) {
     var D = root.document, urlAPI = root.URL || root.webkitURL, url, a;
+    var isBinary = typeof contents !== 'string';
     try {
       if (!root.Blob) { throw new Error('blob'); }
-      var blob = new root.Blob([contents], { type: mime + ';charset=utf-8' });
+      var blobType = isBinary ? mime : (mime + ';charset=utf-8');
+      var blob = new root.Blob([contents], { type: blobType });
       if (root.navigator.msSaveBlob && root.navigator.msSaveBlob(blob, name) !== false) { return true; }
       a = D.createElement('a');
       if (!('download' in a) || !a.click || !urlAPI || !urlAPI.createObjectURL) { throw new Error('download'); }
       url = urlAPI.createObjectURL(blob); a.href = url; a.download = name;
       (host || D.body).appendChild(a); a.click();
       return true;
-    } catch (error) { fallback(contents, name); return false; }
+    } catch (error) {
+      if (!isBinary && typeof fallback === 'function') { fallback(contents, name); }
+      return false;
+    }
     finally {
       if (a && a.parentNode) { a.parentNode.removeChild(a); }
       if (url && urlAPI.revokeObjectURL) { root.setTimeout(function () { urlAPI.revokeObjectURL(url); }, 120000); }
@@ -3085,6 +3134,596 @@
   }
   E.transfer = { selectRange: selectRange, download: download, read: read };
 }(window));
+
+;
+/* Fonte: src/storage/backup-local.js */
+/* Saúde da cópia de segurança e espelho opcional em pasta local (File System Access API).
+ * ES5 estrito, 100% offline, progressivo e sem alterar o manuscrito. */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+
+  var LEGACY_KEY = 'escrevaral.backup.last.v1';
+  var META_KEY = 'escrevaral.backup.meta.v1';
+  var IDB_NAME = 'escrevaral-local-folder';
+  var IDB_STORE = 'handles';
+  var IDB_KEY = 'primary';
+
+  var DAY_MS = 86400000;
+  var WARN_DAYS = 7;
+  var OVERDUE_DAYS = 14;
+  var FIRST_REMINDER_WORDS = 250;
+  var DELTA_REMINDER_WORDS = 1000;
+  var OVERDUE_DELTA_WORDS = 2500;
+
+  function pad2(n) { return n < 10 ? '0' + n : String(n); }
+
+  function localDateKey(dateObj) {
+    var d = dateObj instanceof Date && !isNaN(dateObj.getTime()) ? dateObj : new Date();
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
+  function dailyFilename(dateObj) {
+    return 'escrevaral-' + localDateKey(dateObj) + '.scrvrl';
+  }
+
+  function formatTimestamp(isoStr) {
+    if (!isoStr) { return ''; }
+    var dt = new Date(isoStr);
+    if (isNaN(dt.getTime())) { return String(isoStr); }
+    try {
+      return dt.toLocaleDateString('pt-BR') + ' \u00E0s ' + dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    } catch (ignore) {
+      return dt.getDate() + '/' + pad2(dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + pad2(dt.getHours()) + ':' + pad2(dt.getMinutes());
+    }
+  }
+
+  function emptyMeta() {
+    return {
+      lastBackupAt: '',
+      lastBackupWords: 0,
+      folderName: '',
+      folderSyncedAt: '',
+      folderSyncedWords: 0,
+      folderDailyDate: ''
+    };
+  }
+
+  function readMeta(storage) {
+    var m = emptyMeta();
+    if (!storage) { return m; }
+    try {
+      var raw = storage.getItem(META_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          if (typeof parsed.lastBackupAt === 'string') { m.lastBackupAt = parsed.lastBackupAt; }
+          if (typeof parsed.lastBackupWords === 'number' && isFinite(parsed.lastBackupWords)) { m.lastBackupWords = Math.max(0, parsed.lastBackupWords); }
+          if (typeof parsed.folderName === 'string') { m.folderName = parsed.folderName; }
+          if (typeof parsed.folderSyncedAt === 'string') { m.folderSyncedAt = parsed.folderSyncedAt; }
+          if (typeof parsed.folderSyncedWords === 'number' && isFinite(parsed.folderSyncedWords)) { m.folderSyncedWords = Math.max(0, parsed.folderSyncedWords); }
+          if (typeof parsed.folderDailyDate === 'string') { m.folderDailyDate = parsed.folderDailyDate; }
+        }
+      }
+      if (!m.lastBackupAt) {
+        var legacy = storage.getItem(LEGACY_KEY);
+        if (legacy) { m.lastBackupAt = String(legacy); }
+      }
+    } catch (ignore) {}
+    return m;
+  }
+
+  function writeMeta(storage, patch) {
+    var cur = readMeta(storage);
+    var k;
+    if (patch && typeof patch === 'object') {
+      for (k in patch) {
+        if (Object.prototype.hasOwnProperty.call(patch, k)) {
+          cur[k] = patch[k];
+        }
+      }
+    }
+    if (storage) {
+      try {
+        storage.setItem(META_KEY, JSON.stringify(cur));
+        if (cur.lastBackupAt) {
+          storage.setItem(LEGACY_KEY, cur.lastBackupAt);
+        }
+      } catch (ignore) {}
+    }
+    return cur;
+  }
+
+  function recordExport(storage, totalWords, nowDate) {
+    var d = nowDate instanceof Date && !isNaN(nowDate.getTime()) ? nowDate : new Date();
+    var w = Math.max(0, Number(totalWords) || 0);
+    return writeMeta(storage, {
+      lastBackupAt: d.toISOString(),
+      lastBackupWords: w
+    });
+  }
+
+  function evaluateHealth(meta, totalWords, folderState, nowMs) {
+    var m = meta || emptyMeta();
+    var words = Math.max(0, Number(totalWords) || 0);
+    var now = typeof nowMs === 'number' && isFinite(nowMs) ? nowMs : Date.now();
+    var fState = folderState || 'disconnected';
+
+    var manualTs = m.lastBackupAt ? Date.parse(m.lastBackupAt) : NaN;
+    var folderTs = m.folderSyncedAt ? Date.parse(m.folderSyncedAt) : NaN;
+    var hasManual = !isNaN(manualTs);
+    var hasFolderSync = !isNaN(folderTs);
+
+    /* Considera a salvaguarda mais recente entre cópia manual e pasta local */
+    var bestTs = NaN;
+    var bestWords = 0;
+    if (hasManual && hasFolderSync) {
+      if (folderTs >= manualTs) {
+        bestTs = folderTs;
+        bestWords = m.folderSyncedWords || 0;
+      } else {
+        bestTs = manualTs;
+        bestWords = m.lastBackupWords || 0;
+      }
+    } else if (hasFolderSync) {
+      bestTs = folderTs;
+      bestWords = m.folderSyncedWords || 0;
+    } else if (hasManual) {
+      bestTs = manualTs;
+      bestWords = m.lastBackupWords || 0;
+    }
+
+    var daysSince = isNaN(bestTs) ? null : Math.max(0, Math.floor((now - bestTs) / DAY_MS));
+    var wordsDelta = isNaN(bestTs) ? words : Math.max(0, words - bestWords);
+    var hasFolder = !!(m.folderName && (fState === 'connected' || fState === 'needs-permission'));
+
+    if (fState === 'connected' && m.folderName) {
+      return {
+        level: 'synced',
+        pillLabel: 'Pasta \u00B7 em dia',
+        title: 'Espelho autom\u00E1tico ativo na pasta \u201C' + m.folderName + '\u201D' + (m.folderSyncedAt ? ' (\u00FAltimo espelho: ' + formatTimestamp(m.folderSyncedAt) + ').' : '.'),
+        shouldRemind: false,
+        reminderMessage: '',
+        daysSinceBackup: daysSince,
+        wordsDelta: wordsDelta,
+        hasFolder: true,
+        folderNeedsPermission: false
+      };
+    }
+
+    if (fState === 'needs-permission' && m.folderName) {
+      var needWarn = (daysSince !== null && daysSince >= WARN_DAYS) || wordsDelta >= DELTA_REMINDER_WORDS;
+      return {
+        level: needWarn ? 'gentle' : 'ok',
+        pillLabel: 'Pasta \u00B7 reconectar',
+        title: 'A pasta \u201C' + m.folderName + '\u201D aguarda autoriza\u00E7\u00E3o do navegador para voltar a espelhar automaticamente. Clique para abrir em Ajustes.',
+        shouldRemind: needWarn,
+        reminderMessage: needWarn ? 'A pasta local \u201C' + m.folderName + '\u201D precisa ser reativada em Ajustes, ou baixe uma c\u00F3pia (.scrvrl) agora.' : '',
+        daysSinceBackup: daysSince,
+        wordsDelta: wordsDelta,
+        hasFolder: true,
+        folderNeedsPermission: true
+      };
+    }
+
+    if (isNaN(bestTs)) {
+      if (words >= OVERDUE_DELTA_WORDS) {
+        return {
+          level: 'overdue',
+          pillLabel: 'Guardar c\u00F3pia',
+          title: 'Voc\u00EA j\u00E1 tem ' + words.toLocaleString('pt-BR') + ' palavras apenas neste navegador. Clique para baixar uma c\u00F3pia (.scrvrl) ou conectar uma pasta.',
+          shouldRemind: true,
+          reminderMessage: 'Voc\u00EA j\u00E1 escreveu ' + words.toLocaleString('pt-BR') + ' palavras apenas neste navegador. Guarde uma c\u00F3pia (.scrvrl) para proteger seus textos.',
+          daysSinceBackup: null,
+          wordsDelta: words,
+          hasFolder: false,
+          folderNeedsPermission: false
+        };
+      }
+      if (words >= FIRST_REMINDER_WORDS) {
+        return {
+          level: 'gentle',
+          pillLabel: 'C\u00F3pia recomendada',
+          title: 'Voc\u00EA j\u00E1 tem ' + words.toLocaleString('pt-BR') + ' palavras neste aparelho sem c\u00F3pia externa. Clique para proteger seu acervo.',
+          shouldRemind: true,
+          reminderMessage: 'Voc\u00EA j\u00E1 escreveu ' + words.toLocaleString('pt-BR') + ' palavras neste aparelho. Guarde uma c\u00F3pia (.scrvrl) para proteger seus textos.',
+          daysSinceBackup: null,
+          wordsDelta: words,
+          hasFolder: false,
+          folderNeedsPermission: false
+        };
+      }
+      return {
+        level: 'fresh',
+        pillLabel: 'S\u00F3 neste navegador',
+        title: 'Seus textos ficam salvos neste aparelho. Clique para baixar uma c\u00F3pia (.scrvrl) ou conectar uma pasta local.',
+        shouldRemind: false,
+        reminderMessage: '',
+        daysSinceBackup: null,
+        wordsDelta: words,
+        hasFolder: false,
+        folderNeedsPermission: false
+      };
+    }
+
+    if ((daysSince >= OVERDUE_DAYS && words >= 500) || wordsDelta >= OVERDUE_DELTA_WORDS) {
+      var overMsg = wordsDelta >= OVERDUE_DELTA_WORDS
+        ? 'Voc\u00EA escreveu mais de ' + wordsDelta.toLocaleString('pt-BR') + ' palavras novas desde a \u00FAltima c\u00F3pia. Vale guardar um novo .scrvrl.'
+        : 'Sua \u00FAltima c\u00F3pia geral foi h\u00E1 ' + daysSince + ' dias. Guarde um novo .scrvrl para manter tudo protegido.';
+      return {
+        level: 'overdue',
+        pillLabel: daysSince >= OVERDUE_DAYS ? ('Sem c\u00F3pia h\u00E1 ' + daysSince + 'd') : 'Guardar c\u00F3pia',
+        title: overMsg,
+        shouldRemind: true,
+        reminderMessage: overMsg,
+        daysSinceBackup: daysSince,
+        wordsDelta: wordsDelta,
+        hasFolder: hasFolder,
+        folderNeedsPermission: false
+      };
+    }
+
+    if ((daysSince >= WARN_DAYS && words >= FIRST_REMINDER_WORDS) || wordsDelta >= DELTA_REMINDER_WORDS) {
+      var gentleMsg = wordsDelta >= DELTA_REMINDER_WORDS
+        ? 'Voc\u00EA escreveu ' + wordsDelta.toLocaleString('pt-BR') + ' palavras novas desde a \u00FAltima c\u00F3pia. Que tal guardar um novo .scrvrl?'
+        : 'J\u00E1 faz ' + daysSince + ' dias desde a \u00FAltima c\u00F3pia geral. Guarde um .scrvrl para ficar tranquilo.';
+      return {
+        level: 'gentle',
+        pillLabel: 'C\u00F3pia recomendada',
+        title: gentleMsg,
+        shouldRemind: true,
+        reminderMessage: gentleMsg,
+        daysSinceBackup: daysSince,
+        wordsDelta: wordsDelta,
+        hasFolder: hasFolder,
+        folderNeedsPermission: false
+      };
+    }
+
+    return {
+      level: 'ok',
+      pillLabel: 'C\u00F3pia em dia',
+      title: '\u00DAltima c\u00F3pia registrada em ' + formatTimestamp(new Date(bestTs).toISOString()) + '. Clique para ver op\u00E7\u00F5es de c\u00F3pia e pasta local.',
+      shouldRemind: false,
+      reminderMessage: '',
+      daysSinceBackup: daysSince,
+      wordsDelta: wordsDelta,
+      hasFolder: hasFolder,
+      folderNeedsPermission: false
+    };
+  }
+
+  /* --- Persistência leve de FileSystemDirectoryHandle em IndexedDB --- */
+  function openHandleDb(cb) {
+    if (!root.indexedDB || !root.indexedDB.open) { cb(null); return; }
+    try {
+      var req = root.indexedDB.open(IDB_NAME, 1);
+      req.onupgradeneeded = function () {
+        var db = req.result;
+        if (!db.objectStoreNames.contains(IDB_STORE)) {
+          db.createObjectStore(IDB_STORE);
+        }
+      };
+      req.onsuccess = function () { cb(req.result); };
+      req.onerror = function () { cb(null); };
+    } catch (ignore) {
+      cb(null);
+    }
+  }
+
+  function idbGetHandle(cb) {
+    openHandleDb(function (db) {
+      if (!db) { cb(null); return; }
+      try {
+        var tx = db.transaction(IDB_STORE, 'readonly');
+        var req = tx.objectStore(IDB_STORE).get(IDB_KEY);
+        req.onsuccess = function () { db.close(); cb(req.result || null); };
+        req.onerror = function () { db.close(); cb(null); };
+      } catch (ignore) {
+        try { db.close(); } catch (e2) {}
+        cb(null);
+      }
+    });
+  }
+
+  function idbPutHandle(handle, cb) {
+    openHandleDb(function (db) {
+      if (!db) { if (cb) { cb(false); } return; }
+      try {
+        var tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).put(handle, IDB_KEY);
+        tx.oncomplete = function () { db.close(); if (cb) { cb(true); } };
+        tx.onerror = function () { db.close(); if (cb) { cb(false); } };
+      } catch (ignore) {
+        try { db.close(); } catch (e2) {}
+        if (cb) { cb(false); }
+      }
+    });
+  }
+
+  function idbDeleteHandle(cb) {
+    openHandleDb(function (db) {
+      if (!db) { if (cb) { cb(false); } return; }
+      try {
+        var tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).delete(IDB_KEY);
+        tx.oncomplete = function () { db.close(); if (cb) { cb(true); } };
+        tx.onerror = function () { db.close(); if (cb) { cb(false); } };
+      } catch (ignore) {
+        try { db.close(); } catch (e2) {}
+        if (cb) { cb(false); }
+      }
+    });
+  }
+
+  function writeFileInDir(dirHandle, filename, content, cb) {
+    try {
+      dirHandle.getFileHandle(filename, { create: true }).then(function (fileHandle) {
+        return fileHandle.createWritable().then(function (writable) {
+          return writable.write(content).then(function () {
+            return writable.close();
+          });
+        });
+      }).then(function () {
+        cb(null);
+      }, function (err) {
+        cb(err || new Error('Falha ao gravar arquivo na pasta.'));
+      });
+    } catch (err) {
+      cb(err);
+    }
+  }
+
+  function createFolderBridge(options) {
+    var opts = options || {};
+    var storage = opts.storage || null;
+    var win = opts.window || root;
+    var dirHandle = null;
+    var state = 'disconnected'; /* 'unsupported' | 'disconnected' | 'needs-permission' | 'connected' */
+    var syncing = false;
+
+    function isSupported() {
+      return !!(win && typeof win.showDirectoryPicker === 'function');
+    }
+
+    if (!isSupported()) {
+      state = 'unsupported';
+    }
+
+    function getFolderName() {
+      if (dirHandle && dirHandle.name) { return dirHandle.name; }
+      return readMeta(storage).folderName || '';
+    }
+
+    function restore(cb) {
+      if (!isSupported()) {
+        state = 'unsupported';
+        if (cb) { cb({ state: state, folderName: '' }); }
+        return;
+      }
+      idbGetHandle(function (saved) {
+        if (!saved) {
+          dirHandle = null;
+          state = 'disconnected';
+          if (readMeta(storage).folderName) {
+            writeMeta(storage, { folderName: '' });
+          }
+          if (cb) { cb({ state: state, folderName: '' }); }
+          return;
+        }
+        dirHandle = saved;
+        if (saved.name) { writeMeta(storage, { folderName: saved.name }); }
+        if (typeof saved.queryPermission === 'function') {
+          try {
+            saved.queryPermission({ mode: 'readwrite' }).then(function (perm) {
+              state = perm === 'granted' ? 'connected' : 'needs-permission';
+              if (cb) { cb({ state: state, folderName: getFolderName() }); }
+            }, function () {
+              state = 'needs-permission';
+              if (cb) { cb({ state: state, folderName: getFolderName() }); }
+            });
+            return;
+          } catch (ignore) {}
+        }
+        state = 'needs-permission';
+        if (cb) { cb({ state: state, folderName: getFolderName() }); }
+      });
+    }
+
+    function connect(cb) {
+      if (!isSupported()) {
+        state = 'unsupported';
+        if (cb) { cb(new Error('Este navegador n\u00E3o oferece conex\u00E3o direta com pasta local.'), { state: state }); }
+        return;
+      }
+      try {
+        win.showDirectoryPicker({ id: 'escrevaral-backup', mode: 'readwrite' }).then(function (picked) {
+          if (!picked) {
+            if (cb) { cb(null, { cancelled: true, state: state, folderName: getFolderName() }); }
+            return;
+          }
+          function finishGranted() {
+            dirHandle = picked;
+            state = 'connected';
+            writeMeta(storage, { folderName: picked.name || 'Pasta local' });
+            idbPutHandle(picked, function () {
+              if (cb) { cb(null, { state: state, folderName: getFolderName() }); }
+            });
+          }
+          if (typeof picked.queryPermission === 'function') {
+            picked.queryPermission({ mode: 'readwrite' }).then(function (perm) {
+              if (perm === 'granted') { finishGranted(); return; }
+              if (typeof picked.requestPermission === 'function') {
+                picked.requestPermission({ mode: 'readwrite' }).then(function (reqPerm) {
+                  if (reqPerm === 'granted') { finishGranted(); }
+                  else {
+                    dirHandle = picked;
+                    state = 'needs-permission';
+                    if (cb) { cb(new Error('Permiss\u00E3o de escrita n\u00E3o concedida para a pasta.'), { state: state, folderName: getFolderName() }); }
+                  }
+                }, function (err) {
+                  if (cb) { cb(err || new Error('N\u00E3o foi poss\u00EDvel autorizar a pasta.'), { state: state }); }
+                });
+              } else {
+                finishGranted();
+              }
+            }, finishGranted);
+          } else {
+            finishGranted();
+          }
+        }, function (err) {
+          if (err && (err.name === 'AbortError' || err.name === 'NotAllowedError')) {
+            if (cb) { cb(null, { cancelled: true, state: state, folderName: getFolderName() }); }
+            return;
+          }
+          if (cb) { cb(err || new Error('N\u00E3o foi poss\u00EDvel abrir o seletor de pastas.'), { state: state }); }
+        });
+      } catch (err) {
+        if (cb) { cb(err, { state: state }); }
+      }
+    }
+
+    function reconnect(cb) {
+      if (!dirHandle) { connect(cb); return; }
+      if (typeof dirHandle.requestPermission !== 'function') {
+        state = 'connected';
+        if (cb) { cb(null, { state: state, folderName: getFolderName() }); }
+        return;
+      }
+      try {
+        dirHandle.requestPermission({ mode: 'readwrite' }).then(function (perm) {
+          if (perm === 'granted') {
+            state = 'connected';
+            if (cb) { cb(null, { state: state, folderName: getFolderName() }); }
+          } else {
+            state = 'needs-permission';
+            if (cb) { cb(new Error('Autoriza\u00E7\u00E3o n\u00E3o concedida.'), { state: state, folderName: getFolderName() }); }
+          }
+        }, function (err) {
+          if (err && err.name === 'AbortError') {
+            if (cb) { cb(null, { cancelled: true, state: state, folderName: getFolderName() }); }
+            return;
+          }
+          connect(cb);
+        });
+      } catch (ignore) {
+        connect(cb);
+      }
+    }
+
+    function disconnect(cb) {
+      dirHandle = null;
+      state = isSupported() ? 'disconnected' : 'unsupported';
+      writeMeta(storage, { folderName: '', folderSyncedAt: '', folderSyncedWords: 0, folderDailyDate: '' });
+      idbDeleteHandle(function () {
+        if (cb) { cb({ state: state, folderName: '' }); }
+      });
+    }
+
+    function writeSnapshot(jsonString, totalWords, nowDate, cb) {
+      if (state !== 'connected' || !dirHandle) {
+        if (cb) { cb(new Error('Nenhuma pasta local conectada.')); }
+        return;
+      }
+      if (syncing) {
+        if (cb) { cb(null, { skipped: true }); }
+        return;
+      }
+      syncing = true;
+      var d = nowDate instanceof Date && !isNaN(nowDate.getTime()) ? nowDate : new Date();
+      var todayKey = localDateKey(d);
+      var meta = readMeta(storage);
+      var needsDaily = meta.folderDailyDate !== todayKey;
+
+      writeFileInDir(dirHandle, 'escrevaral-backup-atual.scrvrl', jsonString, function (err) {
+        if (err) {
+          syncing = false;
+          if (err.name === 'NotAllowedError' || err.name === 'SecurityError') {
+            state = 'needs-permission';
+          }
+          if (cb) { cb(err); }
+          return;
+        }
+        function doneAll(dailyWritten) {
+          syncing = false;
+          var w = Math.max(0, Number(totalWords) || 0);
+          var patch = {
+            folderName: getFolderName(),
+            folderSyncedAt: d.toISOString(),
+            folderSyncedWords: w
+          };
+          if (dailyWritten) { patch.folderDailyDate = todayKey; }
+          writeMeta(storage, patch);
+          if (cb) {
+            cb(null, {
+              folderName: patch.folderName,
+              syncedAt: patch.folderSyncedAt,
+              dailyFile: dailyWritten ? dailyFilename(d) : ''
+            });
+          }
+        }
+        if (needsDaily) {
+          writeFileInDir(dirHandle, dailyFilename(d), jsonString, function (dailyErr) {
+            doneAll(!dailyErr);
+          });
+        } else {
+          doneAll(false);
+        }
+      });
+    }
+
+    function checkStoragePersistence(cb) {
+      try {
+        if (win && win.navigator && win.navigator.storage && typeof win.navigator.storage.persisted === 'function') {
+          win.navigator.storage.persisted().then(function (ok) { if (cb) { cb(!!ok); } }, function () { if (cb) { cb(null); } });
+          return;
+        }
+      } catch (ignore) {}
+      if (cb) { cb(null); }
+    }
+
+    function requestStoragePersistence(cb) {
+      try {
+        if (win && win.navigator && win.navigator.storage && typeof win.navigator.storage.persist === 'function') {
+          win.navigator.storage.persist().then(function (ok) { if (cb) { cb(!!ok); } }, function () { if (cb) { cb(false); } });
+          return;
+        }
+      } catch (ignore) {}
+      if (cb) { cb(false); }
+    }
+
+    return {
+      isSupported: isSupported,
+      getState: function () { return state; },
+      getFolderName: getFolderName,
+      restore: restore,
+      connect: connect,
+      reconnect: reconnect,
+      disconnect: disconnect,
+      writeSnapshot: writeSnapshot,
+      checkStoragePersistence: checkStoragePersistence,
+      requestStoragePersistence: requestStoragePersistence
+    };
+  }
+
+  root.Escr.backupGuard = {
+    LEGACY_KEY: LEGACY_KEY,
+    META_KEY: META_KEY,
+    WARN_DAYS: WARN_DAYS,
+    OVERDUE_DAYS: OVERDUE_DAYS,
+    FIRST_REMINDER_WORDS: FIRST_REMINDER_WORDS,
+    DELTA_REMINDER_WORDS: DELTA_REMINDER_WORDS,
+    OVERDUE_DELTA_WORDS: OVERDUE_DELTA_WORDS,
+    localDateKey: localDateKey,
+    dailyFilename: dailyFilename,
+    formatTimestamp: formatTimestamp,
+    readMeta: readMeta,
+    writeMeta: writeMeta,
+    recordExport: recordExport,
+    evaluateHealth: evaluateHealth,
+    createFolderBridge: createFolderBridge
+  };
+}(typeof window !== 'undefined' ? window : this));
 
 ;
 /* Fonte: src/ui/cores-projeto.js */
@@ -3447,7 +4086,269 @@
 }(typeof window !== 'undefined' ? window : this));
 
 ;
+/* Fonte: src/ui/verso-core.js */
+/* Núcleo compartilhado de escansão ao vivo, sinalefas, ritmos e rimas (consoantes + toantes) — ES5 */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+
+  var SCAN_CACHE = {};
+  var SCAN_KEYS = [];
+  var SCAN_CAP = 512;
+
+  var rhymeIndex = null;
+  var assonanceIndex = null;
+
+  var VOWEL_START = /^[hH]?[aáàâãeéêiíoóôõuúüyY]/;
+  var VOWEL_END = /[aáàâãeéêiíoóôõuúüyY]$/;
+
+  function scanLineCached(line) {
+    var poetry = root.Escr.poetry;
+    if (!poetry || typeof line !== 'string') { return null; }
+    var trimmed = line.replace(/^\s+|\s+$/g, '');
+    if (!trimmed) { return null; }
+    var key = '$' + trimmed;
+    if (Object.prototype.hasOwnProperty.call(SCAN_CACHE, key)) {
+      return SCAN_CACHE[key];
+    }
+    var res = poetry.scan(trimmed);
+    SCAN_CACHE[key] = res;
+    SCAN_KEYS.push(key);
+    if (SCAN_KEYS.length > SCAN_CAP) {
+      var old = SCAN_KEYS.shift();
+      delete SCAN_CACHE[old];
+    }
+    return res;
+  }
+
+  function ensureRhymeIndexes() {
+    if (rhymeIndex && assonanceIndex) { return; }
+    rhymeIndex = {};
+    assonanceIndex = {};
+    var lex = root.Escr.portiLexicon;
+    var poetry = root.Escr.poetry;
+    if (!lex || !lex.entries || !poetry) { return; }
+    var keys = Object.keys(lex.entries);
+    var i, w, r, rk, ak;
+    for (i = 0; i < keys.length; i += 1) {
+      w = keys[i];
+      if (w.length < 2 || w.length > 24) { continue; }
+      r = poetry.wordReading(w);
+      if (!r) { continue; }
+      if (r.rhyme) {
+        rk = '$' + r.rhyme;
+        if (!rhymeIndex[rk]) { rhymeIndex[rk] = []; }
+        rhymeIndex[rk].push(w);
+      }
+      if (r.assonance) {
+        ak = '$' + r.assonance;
+        if (!assonanceIndex[ak]) { assonanceIndex[ak] = []; }
+        assonanceIndex[ak].push(w);
+      }
+    }
+  }
+
+  function cleanWord(word) {
+    return String(word || '').replace(/^[^a-záàâãéêíóôõúüç]+|[^a-záàâãéêíóôõúüç]+$/gi, '').toLowerCase();
+  }
+
+  function findRhymes(word, limit) {
+    var poetry = root.Escr.poetry;
+    var cap = limit || 30;
+    if (!poetry || !word) { return { consonant: [], assonant: [] }; }
+    var clean = cleanWord(word);
+    if (!clean) { return { consonant: [], assonant: [] }; }
+    var r = poetry.wordReading(clean);
+    if (!r) { return { consonant: [], assonant: [] }; }
+    ensureRhymeIndexes();
+
+    var cons = [], consSeen = {}, i, w;
+    if (r.rhyme) {
+      var cList = rhymeIndex['$' + r.rhyme] || [];
+      for (i = 0; i < cList.length && cons.length < cap; i += 1) {
+        w = cList[i];
+        if (w !== clean && !consSeen['$' + w]) {
+          consSeen['$' + w] = true;
+          cons.push(w);
+        }
+      }
+    }
+
+    var asso = [];
+    if (r.assonance) {
+      var aList = assonanceIndex['$' + r.assonance] || [];
+      for (i = 0; i < aList.length && asso.length < cap; i += 1) {
+        w = aList[i];
+        if (w !== clean && !consSeen['$' + w]) {
+          asso.push(w);
+        }
+      }
+    }
+    return { consonant: cons, assonant: asso };
+  }
+
+  function rhymeMatchKind(readingA, readingB) {
+    if (!readingA || !readingB) { return 'none'; }
+    if (readingA.rhyme && readingB.rhyme && readingA.rhyme === readingB.rhyme) { return 'consonant'; }
+    if (readingA.assonance && readingB.assonance && readingA.assonance === readingB.assonance) { return 'assonant'; }
+    return 'none';
+  }
+
+  /* Constrói células silábicas numeradas (1..N) com tônicas, pós-tônicas e ligaduras de elisão clicáveis */
+  function buildSyllableCells(scan, elisionOverrides) {
+    if (!scan || !scan.words || !scan.words.length) {
+      return { cells: [], postTonic: [], poeticCount: 0, tonicPositions: [], elisionCount: 0 };
+    }
+    var overrides = elisionOverrides && typeof elisionOverrides === 'object' ? elisionOverrides : {};
+    var raw = [];
+    var postTonic = [];
+    var wi, si, wObj, isLastWord;
+
+    for (wi = 0; wi < scan.words.length; wi += 1) {
+      wObj = scan.words[wi];
+      isLastWord = wi === scan.words.length - 1;
+      for (si = 0; si < wObj.syllables.length; si += 1) {
+        var syl = wObj.syllables[si];
+        if (isLastWord && si > wObj.tonic) {
+          postTonic.push(syl);
+          continue;
+        }
+        var isWordLast = si === wObj.syllables.length - 1;
+        var nextWord = wi + 1 < scan.words.length ? scan.words[wi + 1] : null;
+        var canElide = isWordLast && !!nextWord &&
+          VOWEL_END.test(syl) &&
+          VOWEL_START.test(nextWord.syllables[0] || '') &&
+          !(si === wObj.tonic && wObj.syllables.length === 1 && !/^(e|o|a|ou|ao|que|de|se|me|te|lhe|no|na)$/i.test(wObj.word));
+        raw.push({
+          text: syl,
+          tonic: si === wObj.tonic,
+          wordIndex: wi,
+          wordEnd: isWordLast,
+          canElide: canElide,
+          elisionKey: canElide ? (wi + ':' + si) : ''
+        });
+      }
+    }
+
+    var cells = [];
+    var tonicPositions = [];
+    var elisionCount = 0;
+    var i = 0;
+    while (i < raw.length) {
+      var cur = raw[i];
+      var next = raw[i + 1];
+      if (cur.canElide && next) {
+        elisionCount += 1;
+        /* Por padrão funde sinalefa (como a leitura métrica clássica), mas respeita escolha do poeta */
+        var fused = overrides[cur.elisionKey] !== false;
+        if (fused) {
+          var posF = cells.length + 1;
+          var isTonF = cur.tonic || next.tonic;
+          if (isTonF) { tonicPositions.push(posF); }
+          cells.push({
+            index: posF,
+            text: cur.text,
+            fusedText: next.text,
+            tonic: isTonF,
+            elisionKey: cur.elisionKey,
+            fused: true,
+            canToggleElision: true
+          });
+          i += 2;
+          continue;
+        }
+        var posS = cells.length + 1;
+        if (cur.tonic) { tonicPositions.push(posS); }
+        cells.push({
+          index: posS,
+          text: cur.text,
+          fusedText: '',
+          tonic: cur.tonic,
+          elisionKey: cur.elisionKey,
+          fused: false,
+          canToggleElision: true
+        });
+        i += 1;
+        continue;
+      }
+      var pos = cells.length + 1;
+      if (cur.tonic) { tonicPositions.push(pos); }
+      cells.push({
+        index: pos,
+        text: cur.text,
+        fusedText: '',
+        tonic: cur.tonic,
+        elisionKey: '',
+        fused: false,
+        canToggleElision: false
+      });
+      i += 1;
+    }
+
+    return {
+      cells: cells,
+      postTonic: postTonic,
+      poeticCount: cells.length,
+      tonicPositions: tonicPositions,
+      elisionCount: elisionCount
+    };
+  }
+
+  function expectedSupports(rhythm, target) {
+    if (rhythm === 'heroic') { return [6, 10]; }
+    if (rhythm === 'sapphic') { return [4, 8, 10]; }
+    if (rhythm === 'alexandrine') { return [6, 12]; }
+    return target ? [target] : [];
+  }
+
+  function jumpToLine(textarea, lineIndex) {
+    if (!textarea || typeof textarea.value !== 'string') { return; }
+    var lines = textarea.value.split(/\r?\n/);
+    var pos = 0, i;
+    var idx = Math.max(0, Math.min(lines.length - 1, lineIndex || 0));
+    for (i = 0; i < idx; i += 1) {
+      pos += lines[i].length + 1;
+    }
+    var endPos = pos + (lines[idx] ? lines[idx].length : 0);
+    if (textarea.focus) { textarea.focus(); }
+    if (textarea.setSelectionRange) {
+      textarea.setSelectionRange(endPos, endPos);
+    }
+  }
+
+  function insertWordAtLineEnd(textarea, lineIndex, word) {
+    if (!textarea || textarea.readOnly || textarea.disabled || typeof textarea.value !== 'string' || !word) { return false; }
+    var lines = textarea.value.split(/\r?\n/);
+    var idx = Math.max(0, Math.min(lines.length - 1, lineIndex || 0));
+    var cur = lines[idx] || '';
+    var needsSpace = cur.length > 0 && !/\s$/.test(cur);
+    lines[idx] = cur + (needsSpace ? ' ' : '') + word;
+    var nextVal = lines.join('\n');
+    textarea.value = nextVal;
+    jumpToLine(textarea, idx);
+    try {
+      if (typeof Event === 'function') {
+        textarea.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    } catch (ignore) {}
+    return true;
+  }
+
+  root.Escr.versoCore = {
+    scanLine: scanLineCached,
+    findRhymes: findRhymes,
+    rhymeMatchKind: rhymeMatchKind,
+    buildSyllableCells: buildSyllableCells,
+    expectedSupports: expectedSupports,
+    jumpToLine: jumpToLine,
+    insertWordAtLineEnd: insertWordAtLineEnd,
+    cleanWord: cleanWord
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
 /* Fonte: src/ui/soneto.js */
+/* Assistente Visual Ao Vivo do Soneto (Partitura Silábica, Mapa 14 Versos, Volta e Rimas Consoantes/Toantes) — ES5 */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
@@ -3487,7 +4388,7 @@
     'Que tensão ganha força?',
     'Que som ou detalhe merece ficar?',
     'Prepare a passagem para outro olhar.',
-    'Experimente uma mudança de perspectiva.',
+    'Volta: experimente uma virada de perspectiva.',
     'O que essa mudança permite perceber?',
     'Leve a imagem um pouco além.',
     'Aproxime o poema do seu desfecho.',
@@ -3495,40 +4396,31 @@
     'Encontre o último verso.'
   ];
 
-  var rhymeIndex = null;
+  var RHYME_PALETTE = {
+    A: 'a', B: 'b', C: 'c', D: 'd', E: 'e', F: 'f', G: 'g',
+    H: 'a', I: 'b', J: 'c', K: 'd', L: 'e', M: 'f', N: 'g'
+  };
 
-  function buildRhymeIndex() {
-    if (rhymeIndex) { return rhymeIndex; }
-    rhymeIndex = {};
-    var lex = root.Escr.portiLexicon;
-    var poetry = root.Escr.poetry;
-    if (!lex || !lex.entries || !poetry) { return rhymeIndex; }
-    var keys = Object.keys(lex.entries);
-    var i, w, r, key;
-    for (i = 0; i < keys.length; i += 1) {
-      w = keys[i];
-      if (w.length < 2 || w.length > 24) { continue; }
-      r = poetry.wordReading(w);
-      if (!r || !r.rhyme) { continue; }
-      key = '$' + r.rhyme;
-      if (!rhymeIndex[key]) { rhymeIndex[key] = []; }
-      rhymeIndex[key].push(w);
-    }
-    return rhymeIndex;
-  }
+  function verso() { return root.Escr.versoCore || null; }
 
   function findRhymesFor(word) {
+    var vc = verso();
+    if (vc && vc.findRhymes) {
+      return vc.findRhymes(word, 30).consonant;
+    }
     var poetry = root.Escr.poetry;
-    if (!poetry || !word) { return []; }
+    var lex = root.Escr.portiLexicon;
+    if (!poetry || !lex || !lex.entries || !word) { return []; }
     var clean = String(word).replace(/^[^a-záàâãéêíóôõúüç]+|[^a-záàâãéêíóôõúüç]+$/gi, '').toLowerCase();
     if (!clean) { return []; }
     var r = poetry.wordReading(clean);
     if (!r || !r.rhyme) { return []; }
-    var idx = buildRhymeIndex();
-    var list = idx['$' + r.rhyme] || [];
-    var out = [], i;
-    for (i = 0; i < list.length && out.length < 30; i += 1) {
-      if (list[i] !== clean) { out.push(list[i]); }
+    var keys = Object.keys(lex.entries), out = [], i, w, wr;
+    for (i = 0; i < keys.length && out.length < 30; i += 1) {
+      w = keys[i];
+      if (w === clean || w.length < 2 || w.length > 24) { continue; }
+      wr = poetry.wordReading(w);
+      if (wr && wr.rhyme === r.rhyme) { out.push(w); }
     }
     return out;
   }
@@ -3536,35 +4428,33 @@
   function structureOf(scheme) {
     if (scheme === 'Livre') { return 'italian'; }
     var clean = String(scheme || '').replace(/\s+/g, '');
-    if (clean.indexOf('GG') === 12 || clean.indexOf('EE') === 12 || clean.slice(8, 12) === 'EFEF' || clean.slice(8, 12) === 'CDCD') {
-      if (clean.slice(0, 12) === 'ABABCDCD' + 'EFEF' || clean.slice(0, 12) === 'ABABBCBC' + 'CDCD') {
-        return 'english';
-      }
-    }
-    if (clean === 'ABABCDCD' + 'EFEFGG' || clean === 'ABABBCBC' + 'CDCDEE') { return 'english'; }
+    if (clean === 'ABABCDCDEFEFGG' || clean === 'ABABBCBCCDCDEE') { return 'english'; }
     return 'italian';
   }
 
   function defaultSettings() {
-    return { structure: 'italian', scheme: 'ABBA ABBA CDC DCD', target: 10, rhythm: 'none' };
+    return { structure: 'italian', scheme: 'ABBA ABBA CDC DCD', target: 10, rhythm: 'heroic', elisions: {} };
   }
 
   function normalizeSettings(raw) {
-    var base = defaultSettings();
+    var base = { structure: 'italian', scheme: 'ABBA ABBA CDC DCD', target: 10, rhythm: 'none', elisions: {} };
     if (!raw || typeof raw !== 'object') { return base; }
     if (raw.structure === 'italian' || raw.structure === 'english') { base.structure = raw.structure; }
     if (typeof raw.scheme === 'string' && raw.scheme) { base.scheme = raw.scheme; }
     if (typeof raw.target === 'number' && raw.target >= 2 && raw.target <= 20) { base.target = raw.target; }
     if (typeof raw.rhythm === 'string' && Object.prototype.hasOwnProperty.call(RHYTHMS, raw.rhythm)) { base.rhythm = raw.rhythm; }
+    if (raw.elisions && typeof raw.elisions === 'object') { base.elisions = raw.elisions; }
     return base;
   }
 
   function analyzeText(text, activeLineIdx, settings) {
+    var vc = verso();
     var poetry = root.Escr.poetry;
     var linesRaw = String(text || '').split(/\r?\n/);
     var rows = [];
     var stanzas = [];
     var currentStanza = 0;
+    var letters = settings.scheme === 'Livre' ? '' : String(settings.scheme || '').replace(/\s+/g, '');
     var i, count = 0;
 
     for (i = 0; i < linesRaw.length && rows.length < 200; i += 1) {
@@ -3578,17 +4468,45 @@
       if (isHeading && rows.length === 0) { continue; }
       count += 1;
       currentStanza += 1;
-      var scan = !isPlaceholder && poetry ? poetry.scan(trimmed) : null;
+      var scan = !isPlaceholder ? (vc ? vc.scanLine(trimmed) : (poetry ? poetry.scan(trimmed) : null)) : null;
+      var lineOverrides = (settings.elisions && settings.elisions['v' + count]) || null;
+      var scansion = scan && vc ? vc.buildSyllableCells(scan, lineOverrides) : null;
+      var letter = letters && count <= letters.length ? letters.charAt(count - 1) : '';
       rows.push({
         number: count,
         lineIndex: i,
         text: trimmed,
         placeholder: isPlaceholder,
         reading: scan,
+        scansion: scansion,
+        letter: letter,
+        rhymeState: 'open',
         lastWord: scan && scan.words.length ? scan.words[scan.words.length - 1].word : ''
       });
     }
     if (currentStanza > 0) { stanzas.push(currentStanza); }
+
+    /* Calcula estado das rimas por família (consoante ● / toante ◎ / aberto ○) */
+    var firstByLetter = {};
+    for (i = 0; i < rows.length; i += 1) {
+      var rowI = rows[i];
+      if (!rowI.letter || rowI.placeholder || !rowI.reading) { continue; }
+      var lk = '$' + rowI.letter;
+      if (!firstByLetter[lk]) {
+        firstByLetter[lk] = rowI;
+      } else {
+        var anchor = firstByLetter[lk];
+        var mk = vc ? vc.rhymeMatchKind(rowI.reading, anchor.reading)
+          : (rowI.reading.rhyme && anchor.reading.rhyme && rowI.reading.rhyme === anchor.reading.rhyme ? 'consonant' : 'none');
+        if (mk === 'consonant') {
+          rowI.rhymeState = 'consonant';
+          if (anchor.rhymeState === 'open') { anchor.rhymeState = 'consonant'; }
+        } else if (mk === 'assonant') {
+          rowI.rhymeState = 'assonant';
+          if (anchor.rhymeState === 'open') { anchor.rhymeState = 'assonant'; }
+        }
+      }
+    }
 
     var current = null;
     for (i = 0; i < rows.length; i += 1) {
@@ -3602,23 +4520,29 @@
     }
 
     var rhymeReference = null;
-    var letters = String(settings.scheme || '').replace(/\s+/g, '');
-    if (current && settings.scheme !== 'Livre' && current.number <= letters.length) {
-      var myLetter = letters.charAt(current.number - 1);
+    if (current && current.letter) {
       for (i = 0; i < rows.length; i += 1) {
         if (rows[i].number === current.number) { break; }
-        if (rows[i].number <= letters.length && letters.charAt(rows[i].number - 1) === myLetter && !rows[i].placeholder) {
+        if (rows[i].letter === current.letter && !rows[i].placeholder) {
+          var matchKind = (current.reading && rows[i].reading && vc)
+            ? vc.rhymeMatchKind(current.reading, rows[i].reading)
+            : ((current.reading && rows[i].reading && current.reading.rhyme === rows[i].reading.rhyme) ? 'consonant' : 'none');
           rhymeReference = {
             number: rows[i].number,
             word: rows[i].lastWord,
-            possible: !!(current.reading && rows[i].reading && current.reading.rhyme === rows[i].reading.rhyme)
+            possible: matchKind === 'consonant',
+            matchKind: matchKind
           };
           break;
         }
       }
     }
 
-    var refWord = current && current.lastWord ? current.lastWord : '';
+    /* Sugestão inteligente: prioriza o verso-par (o que o poeta precisa rimar AGORA!) */
+    var refWord = (rhymeReference && rhymeReference.word)
+      ? rhymeReference.word
+      : (current && current.lastWord ? current.lastWord : '');
+
     return {
       written: rows.filter(function (r) { return !r.placeholder; }).length,
       stanzas: stanzas,
@@ -3662,17 +4586,27 @@
     var manuscript = opts.manuscriptEl;
     var activeDoc = null;
     var collapsed = false;
+    var mobileSheetOpen = false;
     var manualLine = null;
+    var lastCursorLine = -1;
+    var composing = false;
     var rhymeQuery = '';
+    var rhymeTab = 'consonant';
     var showMoreRhymes = false;
     var draftScheme = '';
     var draftError = '';
-    var rhymesOpen = false;
     var settingsOpen = false;
     var renderTimer = null;
 
-    function measureStr(reading) {
-      return reading.min === reading.max ? String(reading.max) : reading.min + '–' + reading.max;
+    function syncBodyFlag(active) {
+      if (!document || !document.body) { return; }
+      if (active) {
+        document.body.setAttribute('data-esc-sonnet-open', collapsed ? 'collapsed' : 'open');
+        document.body.setAttribute('data-esc-verse-sheet', mobileSheetOpen ? 'open' : 'closed');
+      } else {
+        document.body.removeAttribute('data-esc-sonnet-open');
+        document.body.removeAttribute('data-esc-verse-sheet');
+      }
     }
 
     function saveSettings(next) {
@@ -3684,7 +4618,7 @@
 
     function chooseSetting(key, val) {
       var cur = normalizeSettings(activeDoc && activeDoc.sonnetSettings);
-      var next = { structure: cur.structure, scheme: cur.scheme, target: cur.target, rhythm: cur.rhythm };
+      var next = { structure: cur.structure, scheme: cur.scheme, target: cur.target, rhythm: cur.rhythm, elisions: cur.elisions || {} };
       next[key] = val;
       if (key === 'structure' && next.scheme !== 'Livre' && SCHEMES.indexOf(next.scheme) !== -1 && structureOf(next.scheme) !== val) {
         next.scheme = val === 'english' ? 'ABAB CDCD EFEF GG' : SCHEMES[0];
@@ -3696,6 +4630,31 @@
       saveSettings(next);
     }
 
+    function toggleElision(verseNum, elisionKey) {
+      var cur = normalizeSettings(activeDoc && activeDoc.sonnetSettings);
+      var map = {};
+      if (cur.elisions) {
+        Object.keys(cur.elisions).forEach(function (k) { map[k] = cur.elisions[k]; });
+      }
+      var vKey = 'v' + verseNum;
+      var vMap = {};
+      if (map[vKey]) {
+        Object.keys(map[vKey]).forEach(function (k) { vMap[k] = map[vKey][k]; });
+      }
+      vMap[elisionKey] = vMap[elisionKey] === false ? true : false;
+      map[vKey] = vMap;
+      saveSettings({ structure: cur.structure, scheme: cur.scheme, target: cur.target, rhythm: cur.rhythm, elisions: map });
+    }
+
+    function measureBadgeText(row, target) {
+      if (!row || row.placeholder || !row.reading) { return { text: '—', tone: 'empty', count: 0 }; }
+      var count = row.scansion ? row.scansion.poeticCount : row.reading.max;
+      var diff = count - target;
+      if (diff === 0) { return { text: count + ' ✓', tone: 'ok', count: count }; }
+      if (row.reading.min <= target && row.reading.max >= target) { return { text: count + ' ~', tone: 'near', count: count }; }
+      return { text: count + (diff > 0 ? ' (+' + diff + ')' : ' (' + diff + ')'), tone: 'off', count: count };
+    }
+
     function render() {
       if (!container) { return; }
       var hintEl = byId('esc-sonnet-editor-hint');
@@ -3703,36 +4662,967 @@
         container.hidden = true;
         if (hintEl) { hintEl.hidden = true; }
         container.textContent = '';
+        syncBodyFlag(false);
         return;
       }
       container.hidden = false;
+      syncBodyFlag(true);
       if (hintEl) {
         var rawTxt = manuscript ? String(manuscript.value || '').replace(/^\s+|\s+$/g, '') : '';
         var hasRealVerse = rawTxt.length > 0 && rawTxt.indexOf('«') !== 0;
         hintEl.hidden = hasRealVerse;
       }
+
+      var vc = verso();
       var settings = normalizeSettings(activeDoc.sonnetSettings);
       var lineIdx = manualLine !== null ? manualLine : cursorLineOf(manuscript);
+      lastCursorLine = lineIdx;
       var res = analyzeText(manuscript ? manuscript.value : activeDoc.text, lineIdx, settings);
       var row = res.current;
-      var r = row ? row.reading : null;
       var stanzaPlan = settings.structure === 'english' ? [4, 4, 4, 2] : [4, 4, 3, 3];
+      var supports = vc ? vc.expectedSupports(settings.rhythm, settings.target) : [settings.target];
+      var badge = measureBadgeText(row, settings.target);
 
       container.textContent = '';
-      var aside = createEl('aside', 'esc-sonnet');
-      aside.setAttribute('aria-label', 'Assistente do soneto');
+      var aside = createEl('aside', 'esc-sonnet esc-sonnet-live');
+      aside.setAttribute('aria-label', 'Partitura ao vivo do soneto');
 
+      /* 1. Faixa-HUD compacta (sempre útil no topo no celular/tablet) */
+      var hud = createEl('div', 'esc-verse-hud');
+      var hudSummary = createEl('div', 'esc-verse-hud-info');
+      var hudTag = createEl('span', 'esc-verse-hud-tag', row ? ('V' + row.number + (row.letter ? ' · ' + row.letter : '')) : 'Soneto');
+      var hudCount = createEl('span', 'esc-verse-hud-count is-' + badge.tone, badge.text + '/' + settings.target);
+      var hudRhyme = createEl('span', 'esc-verse-hud-rhyme', res.rhymeReference ? ('rima: ' + res.rhymeReference.word) : (res.written + '/14 versos'));
+      hudSummary.appendChild(hudTag);
+      hudSummary.appendChild(hudCount);
+      hudSummary.appendChild(hudRhyme);
+      hud.appendChild(hudSummary);
+
+      var hudBtn = createEl('button', 'esc-verse-hud-btn', mobileSheetOpen ? 'Fechar ▴' : 'Partitura ▾');
+      hudBtn.type = 'button';
+      hudBtn.setAttribute('aria-expanded', mobileSheetOpen ? 'true' : 'false');
+      on(hudBtn, 'click', function () {
+        mobileSheetOpen = !mobileSheetOpen;
+        syncBodyFlag(true);
+        render();
+      });
+      hud.appendChild(hudBtn);
+      aside.appendChild(hud);
+
+      /* 2. Cabeçalho editorial desktop */
       var top = createEl('header', 'esc-sonnet-top');
-      var headLeft = createEl('div');
-      headLeft.appendChild(createEl('strong', '', 'Seu soneto'));
-      headLeft.appendChild(createEl('span', 'esc-sonnet-progress', res.written + ' de 14 versos'));
+      var headLeft = createEl('div', 'esc-sonnet-head-left');
+      headLeft.appendChild(createEl('strong', '', 'Soneto ao vivo'));
+      headLeft.appendChild(createEl('span', 'esc-sonnet-progress', res.written + '/14 versos · ' + (settings.structure === 'english' ? 'Inglês' : 'Italiano') + ' · ' + settings.target + ' síl.'));
       top.appendChild(headLeft);
 
-      var toggleBtn = createEl('button', 'esc-sonnet-quiet', collapsed ? 'Mostrar' : 'Recolher');
+      var headActions = createEl('div', 'esc-sonnet-head-actions');
+      var gearBtn = createEl('button', 'esc-sonnet-chip-btn', '⚙ Forma');
+      gearBtn.type = 'button';
+      gearBtn.setAttribute('aria-pressed', settingsOpen ? 'true' : 'false');
+      on(gearBtn, 'click', function () { settingsOpen = !settingsOpen; render(); });
+      headActions.appendChild(gearBtn);
+
+      var toggleBtn = createEl('button', 'esc-sonnet-quiet', collapsed ? 'Abrir' : 'Recolher');
       toggleBtn.type = 'button';
       toggleBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-      on(toggleBtn, 'click', function () { collapsed = !collapsed; render(); });
-      top.appendChild(toggleBtn);
+      on(toggleBtn, 'click', function () { collapsed = !collapsed; syncBodyFlag(true); render(); });
+      headActions.appendChild(toggleBtn);
+      top.appendChild(headActions);
+      aside.appendChild(top);
+
+      /* Barra visual de progresso dos 14 versos */
+      var progTrack = createEl('div', 'esc-sonnet-prog-track');
+      var progFill = createEl('span', 'esc-sonnet-prog-fill');
+      if (progFill.style) { progFill.style.width = Math.min(100, Math.round((res.written / 14) * 100)) + '%'; }
+      progTrack.appendChild(progFill);
+      aside.appendChild(progTrack);
+
+      if (collapsed) {
+        container.appendChild(aside);
+        return;
+      }
+
+      var body = createEl('div', 'esc-sonnet-body');
+
+      /* Gaveta compacta de Forma (recolhida por padrão p/ dar palco à partitura) */
+      if (settingsOpen || draftError) {
+        var formBox = createEl('section', 'esc-sonnet-settings-box');
+        var controls = createEl('div', 'esc-sonnet-controls');
+
+        var lStruct = createEl('label', '', 'Estrutura');
+        var sStruct = createEl('select');
+        [['italian', 'Italiano · 4 / 4 / 3 / 3'], ['english', 'Inglês · 4 / 4 / 4 / 2']].forEach(function (pair) {
+          var o = createEl('option', '', pair[1]); o.value = pair[0];
+          if (settings.structure === pair[0]) { o.selected = true; }
+          sStruct.appendChild(o);
+        });
+        on(sStruct, 'change', function () { chooseSetting('structure', sStruct.value); });
+        lStruct.appendChild(sStruct);
+        controls.appendChild(lStruct);
+
+        var lScheme = createEl('label', '', 'Esquema de rimas');
+        var sScheme = createEl('select');
+        var optsList = SCHEMES.slice();
+        if (optsList.indexOf(settings.scheme) === -1) { optsList.push(settings.scheme); }
+        optsList.filter(function (sc) { return sc === 'Livre' || sc === settings.scheme || structureOf(sc) === settings.structure; }).forEach(function (sc) {
+          var o = createEl('option', '', sc === 'Livre' ? 'Rimas livres' : (SCHEME_NAMES[sc] || 'Personalizado') + ' · ' + sc);
+          o.value = sc;
+          if (settings.scheme === sc) { o.selected = true; }
+          sScheme.appendChild(o);
+        });
+        on(sScheme, 'change', function () { chooseSetting('scheme', sScheme.value); });
+        lScheme.appendChild(sScheme);
+        controls.appendChild(lScheme);
+
+        var lTarget = createEl('label', '', 'Medida');
+        var sTarget = createEl('select');
+        [[10, 'Decassílabo · 10'], [12, 'Alexandrino · 12'], [7, 'Redondilha maior · 7'], [5, 'Redondilha menor · 5']].forEach(function (pair) {
+          var o = createEl('option', '', pair[1]); o.value = String(pair[0]);
+          if (settings.target === pair[0]) { o.selected = true; }
+          sTarget.appendChild(o);
+        });
+        on(sTarget, 'change', function () { chooseSetting('target', Number(sTarget.value)); });
+        lTarget.appendChild(sTarget);
+        controls.appendChild(lTarget);
+
+        var lRhythm = createEl('label', '', 'Ritmo e apoios');
+        var sRhythm = createEl('select');
+        Object.keys(RHYTHMS).forEach(function (k) {
+          var o = createEl('option', '', RHYTHMS[k]); o.value = k;
+          if (settings.rhythm === k) { o.selected = true; }
+          sRhythm.appendChild(o);
+        });
+        on(sRhythm, 'change', function () { chooseSetting('rhythm', sRhythm.value); });
+        lRhythm.appendChild(sRhythm);
+        controls.appendChild(lRhythm);
+
+        var customWrap = createEl('div', 'esc-sonnet-custom');
+        var cLabel = createEl('label', '', 'Esquema personalizado (14 letras A–N)');
+        var cInput = createEl('input');
+        cInput.type = 'text'; cInput.maxLength = 30; cInput.value = draftScheme;
+        cInput.placeholder = settings.structure === 'english' ? 'ABAB BCBC CDCD EE' : 'AABB AABB CDC DCD';
+        on(cInput, 'input', function () { draftScheme = cInput.value; draftError = ''; });
+        cLabel.appendChild(cInput);
+        customWrap.appendChild(cLabel);
+        var cBtn = createEl('button', 'esc-sonnet-chip-btn', 'Aplicar esquema');
+        cBtn.type = 'button';
+        on(cBtn, 'click', function () {
+          var lettersOnly = String(cInput.value || '').toUpperCase().replace(/\s+/g, '');
+          if (!/^[A-N]{14}$/.test(lettersOnly)) {
+            draftError = 'Use 14 letras de A a N.';
+            render();
+            return;
+          }
+          var pos = 0, chunks = [], si3;
+          for (si3 = 0; si3 < stanzaPlan.length; si3 += 1) {
+            chunks.push(lettersOnly.slice(pos, pos + stanzaPlan[si3]));
+            pos += stanzaPlan[si3];
+          }
+          chooseSetting('scheme', chunks.join(' '));
+        });
+        customWrap.appendChild(cBtn);
+        if (draftError) { customWrap.appendChild(createEl('p', 'esc-sonnet-err', draftError)); }
+        controls.appendChild(customWrap);
+
+        formBox.appendChild(controls);
+        body.appendChild(formBox);
+      }
+
+      /* 3. PARTITURA SILÁBICA AO VIVO DO VERSO ATIVO */
+      var curSec = createEl('section', 'esc-sonnet-score-card');
+      var curTop = createEl('div', 'esc-sonnet-current-title');
+      var curBadgeWrap = createEl('div', 'esc-sonnet-cur-left');
+      curBadgeWrap.appendChild(createEl('strong', '', row ? ('Verso ' + row.number) : 'Comece a escrever'));
+      if (row && row.letter) {
+        var letPill = createEl('span', 'esc-rhyme-pill is-fam-' + (RHYME_PALETTE[row.letter] || 'a'), row.letter);
+        curBadgeWrap.appendChild(letPill);
+      }
+      curTop.appendChild(curBadgeWrap);
+      curTop.appendChild(createEl('span', 'esc-sonnet-status-pill is-' + badge.tone, badge.text + ' / ' + settings.target));
+      curSec.appendChild(curTop);
+
+      if (manualLine !== null) {
+        var resumeBtn = createEl('button', 'esc-sonnet-quiet', '← Voltar a acompanhar o cursor');
+        resumeBtn.type = 'button';
+        on(resumeBtn, 'click', function () { manualLine = null; rhymeQuery = ''; showMoreRhymes = false; render(); });
+        curSec.appendChild(resumeBtn);
+      }
+
+      if (row && !row.placeholder && row.scansion && row.scansion.cells.length) {
+        var cellsWrap = createEl('div', 'esc-syl-strip');
+        row.scansion.cells.forEach(function (cell) {
+          var isSupport = supports.indexOf(cell.index) !== -1;
+          var isCaesura = settings.rhythm === 'alexandrine' && cell.index === 7;
+          if (isCaesura) {
+            cellsWrap.appendChild(createEl('span', 'esc-syl-caesura', '│'));
+          }
+          var cellEl = createEl('div', 'esc-syl-cell' +
+            (cell.tonic ? ' is-tonic' : '') +
+            (isSupport ? ' is-support' : '') +
+            (cell.index > settings.target ? ' is-over' : '') +
+            (cell.canToggleElision ? ' is-elidable' : ''));
+
+          if (cell.canToggleElision) {
+            var eBtn = createEl('button', 'esc-syl-txt');
+            eBtn.type = 'button';
+            eBtn.title = cell.fused ? 'Elisão ativa (clique para separar em hiato)' : 'Hiato ativo (clique para fundir em elisão)';
+            eBtn.textContent = cell.fused ? (cell.text + '◡' + cell.fusedText) : cell.text;
+            on(eBtn, 'click', function () { toggleElision(row.number, cell.elisionKey); });
+            cellEl.appendChild(eBtn);
+          } else {
+            cellEl.appendChild(createEl('span', 'esc-syl-txt', cell.text));
+          }
+          cellEl.appendChild(createEl('span', 'esc-syl-num', String(cell.index)));
+          var beatMark = isSupport ? (cell.tonic ? '★' : '☆') : (cell.tonic ? '●' : '○');
+          cellEl.appendChild(createEl('span', 'esc-syl-beat' + (isSupport && cell.tonic ? ' is-hit' : ''), beatMark));
+          cellsWrap.appendChild(cellEl);
+        });
+        if (row.scansion.postTonic.length) {
+          var post = createEl('div', 'esc-syl-cell is-post');
+          post.appendChild(createEl('span', 'esc-syl-txt', '(' + row.scansion.postTonic.join('·') + ')'));
+          post.appendChild(createEl('span', 'esc-syl-num', '—'));
+          post.appendChild(createEl('span', 'esc-syl-beat', '·'));
+          cellsWrap.appendChild(post);
+        }
+        curSec.appendChild(cellsWrap);
+
+        var legendTxt = (settings.rhythm !== 'none' ? RHYTHMS[settings.rhythm] : 'Tônicas em ● · pós-tônicas entre parênteses') +
+          (row.scansion.elisionCount > 0 ? ' · clique em ◡ para alternar elisão/hiato.' : '.');
+        curSec.appendChild(createEl('p', 'esc-sonnet-caption', legendTxt));
+      } else {
+        var guideMsg = row ? (GUIDANCE[row.number - 1] || 'Escreva um verso por linha para acender a partitura.') : GUIDANCE[0];
+        curSec.appendChild(createEl('p', 'esc-sonnet-prompt', guideMsg));
+      }
+
+      if (row && settings.scheme !== 'Livre') {
+        var rLine = createEl('p', 'esc-sonnet-rhyme-line');
+        if (res.rhymeReference) {
+          var statusLbl = res.rhymeReference.matchKind === 'consonant' ? '✓ rima consoante'
+            : res.rhymeReference.matchKind === 'assonant' ? '◎ rima toante'
+            : 'aguardando rima';
+          rLine.textContent = 'Par do verso ' + res.rhymeReference.number + ' (“' + res.rhymeReference.word + '”) · ' + statusLbl;
+        } else {
+          rLine.textContent = 'Verso ' + row.number + ' abre a família de rima ' + (row.letter || '') + '.';
+        }
+        curSec.appendChild(rLine);
+      }
+      body.appendChild(curSec);
+
+      /* 4. MAPA VISUAL DOS 14 VERSOS (4-4-3-3 / 4-4-4-2 + LINHA DA VOLTA) */
+      var mapSec = createEl('section', 'esc-sonnet-map');
+      mapSec.appendChild(createEl('h3', '', 'Mapa dos 14 versos'));
+      var lettersFlat = settings.scheme === 'Livre' ? '' : String(settings.scheme || '').replace(/\s+/g, '');
+      var offset = 0, si2, vi;
+      for (si2 = 0; si2 < stanzaPlan.length; si2 += 1) {
+        /* Indicador clássico da Volta (9º verso italiano / 13º inglês) */
+        if ((settings.structure === 'italian' && offset === 8) || (settings.structure === 'english' && offset === 12)) {
+          var volta = createEl('div', 'esc-sonnet-volta');
+          volta.appendChild(createEl('span', '', settings.structure === 'english' ? '✦ DÍSTICO FINAL (v. 13–14)' : '✦ VOLTA · virada (v. 9)'));
+          mapSec.appendChild(volta);
+        }
+        var size = stanzaPlan[si2];
+        var stLabel = size === 4 ? ('Quarteto ' + (si2 + 1)) : size === 3 ? ('Terceto ' + (si2 - 1)) : 'Dístico';
+        var stBox = createEl('div', 'esc-sonnet-stanza-list');
+        stBox.appendChild(createEl('small', 'esc-sonnet-stanza-lbl', stLabel));
+
+        for (vi = 0; vi < size; vi += 1) {
+          (function (vRow, num) {
+            var expLetter = lettersFlat && num <= lettersFlat.length ? lettersFlat.charAt(num - 1) : '';
+            var fam = RHYME_PALETTE[expLetter] || 'a';
+            var isCur = !!(row && vRow && row.lineIndex === vRow.lineIndex);
+            var mBadge = measureBadgeText(vRow, settings.target);
+            var rowBtn = createEl('button', 'esc-map-row' + (isCur ? ' is-current' : '') + (!vRow || vRow.placeholder ? ' is-empty' : ''));
+            rowBtn.type = 'button';
+            rowBtn.setAttribute('aria-pressed', isCur ? 'true' : 'false');
+
+            rowBtn.appendChild(createEl('span', 'esc-map-num', (num < 10 ? '0' : '') + num));
+            if (expLetter) {
+              var sym = !vRow || vRow.placeholder ? '○' : (vRow.rhymeState === 'consonant' ? '●' : vRow.rhymeState === 'assonant' ? '◎' : '○');
+              rowBtn.appendChild(createEl('span', 'esc-rhyme-pill is-fam-' + fam, expLetter + sym));
+            }
+            var barWrap = createEl('span', 'esc-map-bar');
+            var barFill = createEl('span', 'esc-map-bar-fill is-' + mBadge.tone);
+            var pct = mBadge.count ? Math.min(100, Math.round((mBadge.count / settings.target) * 100)) : 0;
+            if (barFill.style) { barFill.style.width = pct + '%'; }
+            barWrap.appendChild(barFill);
+            rowBtn.appendChild(barWrap);
+
+            rowBtn.appendChild(createEl('span', 'esc-map-count is-' + mBadge.tone, mBadge.count ? String(mBadge.count) : '—'));
+            rowBtn.appendChild(createEl('span', 'esc-map-word', vRow && !vRow.placeholder ? (vRow.lastWord || '…') : ''));
+
+            on(rowBtn, 'click', function () {
+              if (vRow) {
+                manualLine = vRow.lineIndex;
+                rhymeQuery = '';
+                showMoreRhymes = false;
+                if (vc && manuscript) { vc.jumpToLine(manuscript, vRow.lineIndex); }
+                render();
+              }
+            });
+            stBox.appendChild(rowBtn);
+          }(res.rows[offset + vi], offset + vi + 1));
+        }
+        offset += size;
+        mapSec.appendChild(stBox);
+      }
+      body.appendChild(mapSec);
+
+      /* 5. BANDEJA DE RIMAS AO VIVO (Consoantes + Toantes, alvo inteligente no verso-par) */
+      var rSec = createEl('section', 'esc-sonnet-rhyme-tray');
+      var targetWord = rhymeQuery || res.suggestionWord;
+      var rHead = createEl('div', 'esc-rhyme-tray-head');
+      rHead.appendChild(createEl('h3', '', targetWord ? ('Rimas p/ “' + targetWord + '”') : 'Rimas ao vivo'));
+      var rTabs = createEl('div', 'esc-rhyme-tabs');
+      [['consonant', 'Consoantes'], ['assonant', 'Toantes']].forEach(function (pair) {
+        var tb = createEl('button', 'esc-rhyme-tab', pair[1]);
+        tb.type = 'button';
+        tb.setAttribute('aria-pressed', rhymeTab === pair[0] ? 'true' : 'false');
+        on(tb, 'click', function () { rhymeTab = pair[0]; showMoreRhymes = false; render(); });
+        rTabs.appendChild(tb);
+      });
+      rHead.appendChild(rTabs);
+      rSec.appendChild(rHead);
+
+      if (targetWord) {
+        var rhymeData = vc ? vc.findRhymes(targetWord, 30) : { consonant: findRhymesFor(targetWord), assonant: [] };
+        var list = rhymeTab === 'assonant' ? rhymeData.assonant : rhymeData.consonant;
+        var shown = list.slice(0, showMoreRhymes ? 24 : 10);
+        if (shown.length) {
+          var chips = createEl('div', 'esc-rhyme-chips');
+          shown.forEach(function (w) {
+            var ch = createEl('button', 'esc-rhyme-chip', w);
+            ch.type = 'button';
+            ch.title = 'Inserir “' + w + '” no fim do verso';
+            on(ch, 'click', function () {
+              if (vc && manuscript && row) {
+                vc.insertWordAtLineEnd(manuscript, row.lineIndex, w);
+              }
+            });
+            chips.appendChild(ch);
+          });
+          rSec.appendChild(chips);
+          if (list.length > 10) {
+            var moreBtn = createEl('button', 'esc-sonnet-quiet', showMoreRhymes ? 'Ver menos' : ('Ver mais (' + list.length + ')'));
+            moreBtn.type = 'button';
+            on(moreBtn, 'click', function () { showMoreRhymes = !showMoreRhymes; render(); });
+            rSec.appendChild(moreBtn);
+          }
+        } else {
+          rSec.appendChild(createEl('p', 'esc-sonnet-caption', 'Sem sugestões ' + (rhymeTab === 'assonant' ? 'toantes' : 'consoantes') + ' para “' + targetWord + '”.'));
+        }
+      } else {
+        rSec.appendChild(createEl('p', 'esc-sonnet-caption', 'Digite um verso ou busque uma palavra abaixo.'));
+      }
+
+      var qWrap = createEl('div', 'esc-sonnet-search');
+      var qInput = createEl('input');
+      qInput.type = 'search';
+      qInput.maxLength = 60;
+      qInput.placeholder = 'Buscar rimas de outra palavra (ex.: amor)…';
+      qInput.value = rhymeQuery;
+      on(qInput, 'change', function () { rhymeQuery = qInput.value.replace(/^\s+|\s+$/g, ''); showMoreRhymes = false; render(); });
+      qWrap.appendChild(qInput);
+      rSec.appendChild(qWrap);
+      body.appendChild(rSec);
+
+      aside.appendChild(body);
+      container.appendChild(aside);
+    }
+
+    function schedule(delay) {
+      if (composing) { return; }
+      window.clearTimeout(renderTimer);
+      renderTimer = window.setTimeout(render, typeof delay === 'number' ? delay : 75);
+    }
+
+    if (manuscript) {
+      on(manuscript, 'compositionstart', function () { composing = true; });
+      on(manuscript, 'compositionend', function () { composing = false; manualLine = null; schedule(40); });
+      on(manuscript, 'input', function () { if (isSonnetDoc(activeDoc)) { manualLine = null; schedule(75); } });
+      on(manuscript, 'keyup', function () {
+        if (!isSonnetDoc(activeDoc)) { return; }
+        var cur = cursorLineOf(manuscript);
+        if (cur !== lastCursorLine) { manualLine = null; schedule(60); }
+      });
+      on(manuscript, 'mouseup', function () {
+        if (!isSonnetDoc(activeDoc)) { return; }
+        var cur = cursorLineOf(manuscript);
+        if (cur !== lastCursorLine) { manualLine = null; schedule(50); }
+      });
+    }
+
+    if (typeof window !== 'undefined' && window.visualViewport && window.visualViewport.addEventListener) {
+      window.visualViewport.addEventListener('resize', function () {
+        if (mobileSheetOpen && window.visualViewport.height < 480 && document.activeElement === manuscript) {
+          mobileSheetOpen = false;
+          syncBodyFlag(true);
+          render();
+        }
+      }, false);
+    }
+
+    return {
+      sync: function (doc) {
+        activeDoc = doc || null;
+        manualLine = null;
+        lastCursorLine = -1;
+        rhymeQuery = '';
+        showMoreRhymes = false;
+        draftError = '';
+        mobileSheetOpen = false;
+        render();
+      },
+      refresh: render,
+      schedule: function () { if (isSonnetDoc(activeDoc)) { schedule(75); } },
+      isSonnetDoc: isSonnetDoc
+    };
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
+/* Fonte: src/ui/musica.js */
+/* Oficina de Canção / Música (Blocos, Espelho de Cadência, Rimas Consoantes/Toantes/Internas, Tap Tempo, Cifra & Transposição) — ES5 */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+
+  var SHARP_SCALE = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  var FLAT_SCALE = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+  var NOTE_INDEX = {
+    C: 0, 'B#': 0, 'C#': 1, Db: 1, D: 2, 'D#': 3, Eb: 3, E: 4, Fb: 4,
+    F: 5, 'E#': 5, 'F#': 6, Gb: 6, G: 7, 'G#': 8, Ab: 8, A: 9, 'A#': 10, Bb: 10, B: 11, Cb: 11
+  };
+  var CHORD_TOKEN_RE = /^[A-G](#|b)?(?:m|maj|min|dim|aug|sus|add|M|°)?(?:[0-9]+(?:M|\+|°)?)*(?:(?:m|maj|min|dim|aug|sus|add)[0-9]*)*(?:(?:\(|\/)?[0-9#b+M-]+(?:\))?)*(?:\/[A-G](#|b)?)?$/;
+  var INLINE_CHORD_RE = /\[([A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add|M|°)?(?:[0-9]+(?:M|\+|°)?)*(?:(?:m|maj|min|dim|aug|sus|add)[0-9]*)*(?:(?:\(|\/)?[0-9#b+M-]+(?:\))?)*(?:\/[A-G](?:#|b)?)?)\]/g;
+  var SECTION_RE = /^\s*\[([^\]]+)\]\s*$/;
+
+  function verso() { return root.Escr.versoCore || null; }
+
+  function normalizeSongSettings(raw) {
+    var p = raw && typeof raw === 'object' ? raw : {};
+    var bpm = Number(p.bpm);
+    if (!isFinite(bpm) || bpm < 40 || bpm > 200) { bpm = 92; }
+    var meter = p.meter === '3/4' || p.meter === '2/4' || p.meter === '6/8' ? p.meter : '4/4';
+    return {
+      bpm: Math.round(bpm),
+      meter: meter,
+      showChords: !!p.showChords,
+      internalRhymes: !!p.internalRhymes
+    };
+  }
+
+  function isChordLine(line) {
+    var trimmed = String(line || '').replace(/^\s+|\s+$/g, '');
+    if (!trimmed || trimmed.indexOf('[') !== -1) { return false; }
+    var tokens = trimmed.split(/\s+/);
+    if (!tokens.length || tokens.length > 14) { return false; }
+    var i, chordHits = 0;
+    for (i = 0; i < tokens.length; i += 1) {
+      if (tokens[i] === '|' || tokens[i] === '/' || tokens[i] === '-') { continue; }
+      if (!CHORD_TOKEN_RE.test(tokens[i])) { return false; }
+      chordHits += 1;
+    }
+    return chordHits > 0;
+  }
+
+  function stripInlineChords(line) {
+    return String(line || '').replace(INLINE_CHORD_RE, '').replace(/\s{2,}/g, ' ').replace(/^\s+|\s+$/g, '');
+  }
+
+  function transposeNote(note, semitones, preferFlat) {
+    if (!Object.prototype.hasOwnProperty.call(NOTE_INDEX, note)) { return note; }
+    var idx = (NOTE_INDEX[note] + semitones) % 12;
+    if (idx < 0) { idx += 12; }
+    return (preferFlat ? FLAT_SCALE : SHARP_SCALE)[idx];
+  }
+
+  function transposeChord(chord, semitones) {
+    if (!chord || !semitones) { return chord; }
+    var m = /^([A-G](?:#|b)?)(.*?)(?:\/([A-G](?:#|b)?))?$/.exec(chord);
+    if (!m) { return chord; }
+    var preferFlat = (m[1].indexOf('b') !== -1) || semitones < 0;
+    var rootN = transposeNote(m[1], semitones, preferFlat);
+    var bass = m[3] ? ('/' + transposeNote(m[3], semitones, preferFlat)) : '';
+    return rootN + (m[2] || '') + bass;
+  }
+
+  function transposeSongText(text, semitones) {
+    if (!text || !semitones) { return text; }
+    var lines = String(text).split(/\r?\n/);
+    var out = [], i, line;
+    for (i = 0; i < lines.length; i += 1) {
+      line = lines[i];
+      if (isChordLine(line)) {
+        out.push(line.replace(/\S+/g, function (tok) {
+          return CHORD_TOKEN_RE.test(tok) ? transposeChord(tok, semitones) : tok;
+        }));
+      } else if (line.indexOf('[') !== -1) {
+        out.push(line.replace(INLINE_CHORD_RE, function (_, ch) {
+          return '[' + transposeChord(ch, semitones) + ']';
+        }));
+      } else {
+        out.push(line);
+      }
+    }
+    return out.join('\n');
+  }
+
+  function classifySection(label) {
+    var low = String(label || '').toLowerCase();
+    if (low.indexOf('refr') !== -1 || low.indexOf('chorus') !== -1) { return 'chorus'; }
+    if (low.indexOf('pré') !== -1 || low.indexOf('pre') !== -1) { return 'pre'; }
+    if (low.indexOf('ponte') !== -1 || low.indexOf('bridge') !== -1) { return 'bridge'; }
+    if (low.indexOf('intro') !== -1) { return 'intro'; }
+    if (low.indexOf('final') !== -1 || low.indexOf('outro') !== -1 || low.indexOf('coda') !== -1) { return 'outro'; }
+    if (low.indexOf('solo') !== -1) { return 'solo'; }
+    return 'verse';
+  }
+
+  function shortSectionTag(label, kind, idx) {
+    if (kind === 'chorus') { return '★ Refrão'; }
+    if (kind === 'pre') { return 'Pré'; }
+    if (kind === 'bridge') { return 'Ponte'; }
+    if (kind === 'intro') { return 'Intro'; }
+    if (kind === 'outro') { return 'Final'; }
+    if (kind === 'solo') { return 'Solo'; }
+    var m = /\d+/.exec(label);
+    return 'E' + (m ? m[0] : (idx + 1));
+  }
+
+  function findInternalRhymesInLines(lines) {
+    var poetry = root.Escr.poetry;
+    if (!poetry || !lines.length) { return []; }
+    var groups = {}, order = [], i, wi, w, r, key;
+    for (i = 0; i < lines.length; i += 1) {
+      if (!lines[i].reading || !lines[i].reading.words) { continue; }
+      for (wi = 0; wi < lines[i].reading.words.length - 1; wi += 1) {
+        w = lines[i].reading.words[wi].word;
+        if (!w || w.length < 3) { continue; }
+        r = poetry.wordReading(w);
+        if (!r || !r.rhyme || r.rhyme.length < 2) { continue; }
+        key = '$' + r.rhyme;
+        if (!groups[key]) { groups[key] = []; order.push(key); }
+        if (groups[key].indexOf(w) === -1) { groups[key].push(w); }
+      }
+    }
+    var hits = [];
+    for (i = 0; i < order.length; i += 1) {
+      if (groups[order[i]].length >= 2) {
+        hits.push(groups[order[i]].slice(0, 4));
+      }
+    }
+    return hits.slice(0, 6);
+  }
+
+  function parseSong(rawText, activeLineIdx, settings) {
+    var vc = verso();
+    var poetry = root.Escr.poetry;
+    var cfg = normalizeSongSettings(settings);
+    var linesRaw = String(rawText || '').replace(/\r\n?/g, '\n').split('\n');
+    var sections = [];
+    var currentSec = null;
+    var totalSungLines = 0;
+    var chordLinesCount = 0;
+    var i, trimmed, secMatch;
+
+    function ensureDefaultSection(lineIdx) {
+      if (!currentSec) {
+        currentSec = {
+          index: sections.length,
+          label: 'Estrofe 1',
+          kind: 'verse',
+          shortTag: 'E1',
+          startLine: lineIdx,
+          endLine: lineIdx,
+          lines: []
+        };
+        sections.push(currentSec);
+      }
+    }
+
+    for (i = 0; i < linesRaw.length; i += 1) {
+      trimmed = linesRaw[i].replace(/^\s+|\s+$/g, '');
+      if (!trimmed) { continue; }
+      secMatch = SECTION_RE.exec(trimmed);
+      if (secMatch && !CHORD_TOKEN_RE.test(secMatch[1])) {
+        var lbl = secMatch[1].replace(/^\s+|\s+$/g, '');
+        var kind = classifySection(lbl);
+        currentSec = {
+          index: sections.length,
+          label: lbl,
+          kind: kind,
+          shortTag: shortSectionTag(lbl, kind, sections.length),
+          startLine: i,
+          endLine: i,
+          lines: []
+        };
+        sections.push(currentSec);
+        continue;
+      }
+      if (isChordLine(trimmed)) {
+        chordLinesCount += 1;
+        if (currentSec) { currentSec.endLine = i; }
+        continue;
+      }
+      var isPlaceholder = root.Escr.templates && root.Escr.templates.isPlaceholder(trimmed);
+      if (trimmed.indexOf('#') === 0 && !sections.length) { continue; }
+      ensureDefaultSection(i);
+      currentSec.endLine = i;
+
+      var cleanLine = stripInlineChords(trimmed);
+      var hasInlineChords = cleanLine !== trimmed;
+      if (hasInlineChords) { chordLinesCount += 1; }
+      var scan = (!isPlaceholder && cleanLine) ? (vc ? vc.scanLine(cleanLine) : (poetry ? poetry.scan(cleanLine) : null)) : null;
+      var scansion = scan && vc ? vc.buildSyllableCells(scan, null) : null;
+      var count = scansion ? scansion.poeticCount : (scan ? scan.max : 0);
+      if (!isPlaceholder && cleanLine) { totalSungLines += 1; }
+      currentSec.lines.push({
+        lineIndex: i,
+        number: currentSec.lines.length + 1,
+        raw: trimmed,
+        text: cleanLine,
+        placeholder: isPlaceholder,
+        reading: scan,
+        scansion: scansion,
+        syllables: count,
+        lastWord: scan && scan.words.length ? scan.words[scan.words.length - 1].word : ''
+      });
+    }
+
+    /* Descobre a seção ativa pelo cursor */
+    var activeSection = sections[0] || null;
+    var activeLine = null;
+    for (i = 0; i < sections.length; i += 1) {
+      if (activeLineIdx >= sections[i].startLine) {
+        activeSection = sections[i];
+      }
+    }
+    if (activeSection) {
+      for (i = 0; i < activeSection.lines.length; i += 1) {
+        if (activeSection.lines[i].lineIndex === activeLineIdx) {
+          activeLine = activeSection.lines[i];
+          break;
+        }
+      }
+      if (!activeLine && activeSection.lines.length) {
+        for (i = activeSection.lines.length - 1; i >= 0; i -= 1) {
+          if (activeSection.lines[i].lineIndex <= activeLineIdx) {
+            activeLine = activeSection.lines[i];
+            break;
+          }
+        }
+        if (!activeLine) { activeLine = activeSection.lines[0]; }
+      }
+    }
+
+    /* Espelho de cadência: compara seção atual com a primeira seção irmã do mesmo tipo (ex.: Estrofe 2 vs Estrofe 1) */
+    var mirrorSource = null;
+    var mirrorRows = [];
+    if (activeSection) {
+      for (i = 0; i < sections.length; i += 1) {
+        if (sections[i] !== activeSection && sections[i].kind === activeSection.kind && sections[i].lines.some(function (l) { return !l.placeholder; })) {
+          mirrorSource = sections[i];
+          break;
+        }
+      }
+      if (mirrorSource) {
+        var maxLen = Math.max(mirrorSource.lines.length, activeSection.lines.length);
+        for (i = 0; i < maxLen; i += 1) {
+          var refL = mirrorSource.lines[i] || null;
+          var curL = activeSection.lines[i] || null;
+          var refC = refL && !refL.placeholder ? refL.syllables : 0;
+          var curC = curL && !curL.placeholder ? curL.syllables : 0;
+          var diff = (refC && curC) ? (curC - refC) : 0;
+          var tone = (!refC || !curC) ? 'empty' : (Math.abs(diff) <= 1 ? 'ok' : 'off');
+          mirrorRows.push({
+            index: i + 1,
+            refSyllables: refC,
+            curSyllables: curC,
+            diff: diff,
+            tone: tone,
+            refLine: refL,
+            curLine: curL
+          });
+        }
+      }
+    }
+
+    /* Rimas dentro da seção ativa (consoante ● e toante ◎) */
+    var rhymePairs = [];
+    if (activeSection && activeSection.lines.length >= 2) {
+      var aLines = activeSection.lines;
+      for (i = 0; i < aLines.length; i += 1) {
+        if (aLines[i].placeholder || !aLines[i].reading) { continue; }
+        for (var j = i + 1; j < aLines.length; j += 1) {
+          if (aLines[j].placeholder || !aLines[j].reading) { continue; }
+          var mk = vc ? vc.rhymeMatchKind(aLines[i].reading, aLines[j].reading) : 'none';
+          if (mk !== 'none') {
+            rhymePairs.push({
+              aNum: aLines[i].number,
+              aWord: aLines[i].lastWord,
+              bNum: aLines[j].number,
+              bWord: aLines[j].lastWord,
+              kind: mk
+            });
+            break;
+          }
+        }
+      }
+    }
+
+    /* Estimativa de duração cantada (cada linha cantada ~ 2 compassos médios no BPM atual) */
+    var beatsPerBar = cfg.meter === '3/4' ? 3 : cfg.meter === '2/4' ? 2 : cfg.meter === '6/8' ? 6 : 4;
+    var secPerLine = (beatsPerBar * 1.8 / cfg.bpm) * 60;
+    var estSeconds = Math.round(totalSungLines * secPerLine);
+    var estMin = Math.floor(estSeconds / 60);
+    var estRem = estSeconds % 60;
+    var estDuration = totalSungLines ? ('~' + estMin + 'm' + (estRem < 10 ? '0' : '') + estRem) : '0m00';
+
+    var internalRhymes = (cfg.internalRhymes && activeSection) ? findInternalRhymesInLines(activeSection.lines) : [];
+
+    return {
+      sections: sections,
+      activeSection: activeSection,
+      activeLine: activeLine,
+      mirrorSource: mirrorSource,
+      mirrorRows: mirrorRows,
+      rhymePairs: rhymePairs,
+      internalRhymes: internalRhymes,
+      totalSungLines: totalSungLines,
+      hasChords: chordLinesCount > 0,
+      estDuration: estDuration
+    };
+  }
+
+  function isSongDoc(doc) {
+    if (!doc || doc.trashed) { return false; }
+    return doc.role === 'song' || doc.folder === '02 · Letra';
+  }
+
+  function cursorLineOf(el) {
+    if (!el || typeof el.value !== 'string') { return 0; }
+    var pos = typeof el.selectionStart === 'number' ? el.selectionStart : 0;
+    return el.value.slice(0, pos).split(/\r?\n/).length - 1;
+  }
+
+  function byId(id) { return document.getElementById(id); }
+  function on(el, ev, fn) { if (el) { el.addEventListener(ev, fn, false); } }
+  function createEl(tag, className, textValue) {
+    var el = document.createElement(tag);
+    if (className) { el.className = className; }
+    if (typeof textValue === 'string') { el.textContent = textValue; }
+    return el;
+  }
+
+  root.Escr.songCore = {
+    normalizeSettings: normalizeSongSettings,
+    isChordLine: isChordLine,
+    stripInlineChords: stripInlineChords,
+    transposeChord: transposeChord,
+    transposeSongText: transposeSongText,
+    parseSong: parseSong,
+    isSongDoc: isSongDoc
+  };
+
+  root.Escr.mountSongAssistant = function (opts) {
+    var container = byId(opts.containerId || 'esc-song-panel');
+    var manuscript = opts.manuscriptEl;
+    var activeDoc = null;
+    var collapsed = false;
+    var mobileSheetOpen = false;
+    var composing = false;
+    var lastCursorLine = -1;
+    var rhymeQuery = '';
+    var rhymeTab = 'consonant';
+    var renderTimer = null;
+
+    /* Pulso / Metrônomo silencioso por padrão + clique Web Audio opcional */
+    var pulseRunning = false;
+    var pulseSound = false;
+    var pulseBeat = 0;
+    var pulseTimer = null;
+    var audioCtx = null;
+    var tapTimes = [];
+
+    function syncBodyFlag(active) {
+      if (!document || !document.body) { return; }
+      if (active) {
+        document.body.setAttribute('data-esc-song-open', collapsed ? 'collapsed' : 'open');
+        document.body.setAttribute('data-esc-verse-sheet', mobileSheetOpen ? 'open' : 'closed');
+      } else {
+        document.body.removeAttribute('data-esc-song-open');
+        if (!document.body.getAttribute('data-esc-sonnet-open')) {
+          document.body.removeAttribute('data-esc-verse-sheet');
+        }
+      }
+    }
+
+    function playClick(accent) {
+      if (!pulseSound) { return; }
+      try {
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) { return; }
+        if (!audioCtx) { audioCtx = new Ctx(); }
+        if (audioCtx.state === 'suspended' && audioCtx.resume) { audioCtx.resume(); }
+        var now = audioCtx.currentTime;
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(accent ? 980 : 640, now);
+        gain.gain.setValueAtTime(accent ? 0.14 : 0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } catch (ignore) {}
+    }
+
+    function stopPulse() {
+      pulseRunning = false;
+      window.clearInterval(pulseTimer);
+      pulseTimer = null;
+    }
+
+    function updateBeatDots(totalBeats) {
+      if (!container || !container.querySelectorAll) { return; }
+      var dots = container.querySelectorAll('.esc-pulse-dot');
+      for (var i = 0; i < dots.length; i += 1) {
+        dots[i].setAttribute('data-active', (pulseRunning && i === pulseBeat) ? 'true' : 'false');
+      }
+    }
+
+    function startPulse(settings) {
+      stopPulse();
+      pulseRunning = true;
+      pulseBeat = 0;
+      var totalBeats = settings.meter === '3/4' ? 3 : settings.meter === '2/4' ? 2 : settings.meter === '6/8' ? 6 : 4;
+      var ms = Math.max(200, Math.round(60000 / settings.bpm));
+      playClick(true);
+      updateBeatDots(totalBeats);
+      pulseTimer = window.setInterval(function () {
+        if (!isSongDoc(activeDoc)) { stopPulse(); return; }
+        pulseBeat = (pulseBeat + 1) % totalBeats;
+        playClick(pulseBeat === 0);
+        updateBeatDots(totalBeats);
+      }, ms);
+    }
+
+    function saveSettings(next) {
+      if (!activeDoc) { return; }
+      activeDoc.songSettings = next;
+      if (opts.onSaveSettings) { opts.onSaveSettings(next); }
+      if (pulseRunning) { startPulse(next); }
+      render();
+    }
+
+    function insertBlock(kindLabel) {
+      if (!manuscript || manuscript.readOnly || manuscript.disabled) { return; }
+      var text = manuscript.value || '';
+      var label = kindLabel;
+      if (kindLabel === 'Estrofe') {
+        var matches = text.match(/\[Estrofe\s+\d+\]/gi);
+        var nextNum = (matches ? matches.length : 0) + 1;
+        label = 'Estrofe ' + nextNum;
+      }
+      var snippet = (text && !/\n\n$/.test(text) ? (/\n$/.test(text) ? '\n' : '\n\n') : '') + '[' + label + ']\n';
+      var pos = typeof manuscript.selectionStart === 'number' ? manuscript.selectionStart : text.length;
+      manuscript.value = text.slice(0, pos) + snippet + text.slice(pos);
+      var newPos = pos + snippet.length;
+      if (manuscript.focus) { manuscript.focus(); }
+      if (manuscript.setSelectionRange) { manuscript.setSelectionRange(newPos, newPos); }
+      try {
+        if (typeof Event === 'function') { manuscript.dispatchEvent(new Event('input', { bubbles: true })); }
+      } catch (ignore) {}
+      schedule(20);
+    }
+
+    function applyTranspose(semitones) {
+      if (!manuscript || manuscript.readOnly || manuscript.disabled) { return; }
+      var nextVal = transposeSongText(manuscript.value || '', semitones);
+      if (nextVal !== manuscript.value) {
+        manuscript.value = nextVal;
+        try {
+          if (typeof Event === 'function') { manuscript.dispatchEvent(new Event('input', { bubbles: true })); }
+        } catch (ignore) {}
+        render();
+      }
+    }
+
+    function handleTapTempo(settings) {
+      var now = Date.now();
+      if (tapTimes.length && now - tapTimes[tapTimes.length - 1] > 2200) { tapTimes = []; }
+      tapTimes.push(now);
+      if (tapTimes.length > 5) { tapTimes.shift(); }
+      if (tapTimes.length >= 2) {
+        var sum = 0, i;
+        for (i = 1; i < tapTimes.length; i += 1) { sum += tapTimes[i] - tapTimes[i - 1]; }
+        var avg = sum / (tapTimes.length - 1);
+        var bpm = Math.max(40, Math.min(200, Math.round(60000 / avg)));
+        saveSettings({ bpm: bpm, meter: settings.meter, showChords: settings.showChords, internalRhymes: settings.internalRhymes });
+      }
+    }
+
+    function render() {
+      if (!container) { return; }
+      if (!isSongDoc(activeDoc)) {
+        stopPulse();
+        container.hidden = true;
+        container.textContent = '';
+        syncBodyFlag(false);
+        return;
+      }
+      container.hidden = false;
+      syncBodyFlag(true);
+
+      var vc = verso();
+      var settings = normalizeSongSettings(activeDoc.songSettings);
+      var lineIdx = cursorLineOf(manuscript);
+      lastCursorLine = lineIdx;
+      var parsed = parseSong(manuscript ? manuscript.value : activeDoc.text, lineIdx, settings);
+      var curSec = parsed.activeSection;
+      var curLine = parsed.activeLine;
+
+      container.textContent = '';
+      var aside = createEl('aside', 'esc-sonnet esc-song-live');
+      aside.setAttribute('aria-label', 'Oficina de Canção');
+
+      /* 1. Faixa-HUD compacta mobile/tablet */
+      var hud = createEl('div', 'esc-verse-hud');
+      var hudInfo = createEl('div', 'esc-verse-hud-info');
+      hudInfo.appendChild(createEl('span', 'esc-verse-hud-tag', curSec ? curSec.shortTag : 'Canção'));
+      hudInfo.appendChild(createEl('span', 'esc-verse-hud-count is-ok', curLine && curLine.syllables ? (curLine.syllables + ' síl.') : parsed.estDuration));
+      hudInfo.appendChild(createEl('span', 'esc-verse-hud-rhyme', '♩ ' + settings.bpm + ' · ' + settings.meter));
+      hud.appendChild(hudInfo);
+      var hudBtn = createEl('button', 'esc-verse-hud-btn', mobileSheetOpen ? 'Fechar ▴' : 'Música ▾');
+      hudBtn.type = 'button';
+      hudBtn.setAttribute('aria-expanded', mobileSheetOpen ? 'true' : 'false');
+      on(hudBtn, 'click', function () { mobileSheetOpen = !mobileSheetOpen; syncBodyFlag(true); render(); });
+      hud.appendChild(hudBtn);
+      aside.appendChild(hud);
+
+      /* 2. Cabeçalho desktop */
+      var top = createEl('header', 'esc-sonnet-top');
+      var headLeft = createEl('div', 'esc-sonnet-head-left');
+      headLeft.appendChild(createEl('strong', '', 'Oficina de canção'));
+      headLeft.appendChild(createEl('span', 'esc-sonnet-progress', parsed.estDuration + ' est. · ' + parsed.sections.length + (parsed.sections.length === 1 ? ' bloco' : ' blocos') + ' · ' + settings.bpm + ' BPM'));
+      top.appendChild(headLeft);
+
+      var headActs = createEl('div', 'esc-sonnet-head-actions');
+      var chordBtn = createEl('button', 'esc-sonnet-chip-btn', settings.showChords ? 'Cifra ✓' : 'Cifra');
+      chordBtn.type = 'button';
+      chordBtn.setAttribute('aria-pressed', settings.showChords ? 'true' : 'false');
+      on(chordBtn, 'click', function () {
+        saveSettings({ bpm: settings.bpm, meter: settings.meter, showChords: !settings.showChords, internalRhymes: settings.internalRhymes });
+      });
+      headActs.appendChild(chordBtn);
+
+      var toggleBtn = createEl('button', 'esc-sonnet-quiet', collapsed ? 'Abrir' : 'Recolher');
+      toggleBtn.type = 'button';
+      on(toggleBtn, 'click', function () { collapsed = !collapsed; syncBodyFlag(true); render(); });
+      headActs.appendChild(toggleBtn);
+      top.appendChild(headActs);
       aside.appendChild(top);
 
       if (collapsed) {
@@ -3741,260 +5631,709 @@
       }
 
       var body = createEl('div', 'esc-sonnet-body');
-      body.appendChild(createEl('p', 'esc-sonnet-intro', 'Escreva um verso por linha. Acompanhe aqui a medida e as rimas.'));
 
-      // Acompanhamento do verso
-      var curSec = createEl('section', 'esc-sonnet-current');
-      var curTitle = createEl('div', 'esc-sonnet-current-title');
-      curTitle.appendChild(createEl('strong', '', row ? 'Verso ' + row.number : 'Escolha um verso'));
-      curTitle.appendChild(createEl('small', '', manualLine !== null ? 'Em consulta' : 'Verso do cursor'));
-      curSec.appendChild(curTitle);
+      /* 3. Inserir blocos estruturais em 1 clique */
+      var blockBar = createEl('div', 'esc-song-blocks');
+      ['Intro', 'Estrofe', 'Pré-refrão', 'Refrão', 'Ponte', 'Final'].forEach(function (lbl) {
+        var b = createEl('button', 'esc-song-block-btn', '+ ' + lbl);
+        b.type = 'button';
+        on(b, 'click', function () { insertBlock(lbl); });
+        blockBar.appendChild(b);
+      });
+      body.appendChild(blockBar);
 
-      if (manualLine !== null) {
-        var resumeBtn = createEl('button', 'esc-sonnet-quiet', 'Acompanhar o cursor');
-        resumeBtn.type = 'button';
-        on(resumeBtn, 'click', function () { manualLine = null; rhymeQuery = ''; showMoreRhymes = false; render(); });
-        curSec.appendChild(resumeBtn);
+      /* 4. Mapa visual da canção */
+      if (parsed.sections.length) {
+        var mapWrap = createEl('section', 'esc-song-map');
+        mapWrap.appendChild(createEl('h3', '', 'Mapa da canção'));
+        var strip = createEl('div', 'esc-song-map-strip');
+        parsed.sections.forEach(function (sec) {
+          var isCur = curSec === sec;
+          var pill = createEl('button', 'esc-song-sec-pill is-kind-' + sec.kind + (isCur ? ' is-current' : ''), sec.shortTag);
+          pill.type = 'button';
+          pill.title = sec.label + ' (' + sec.lines.length + ' versos)';
+          on(pill, 'click', function () {
+            if (vc && manuscript) { vc.jumpToLine(manuscript, sec.startLine); }
+            schedule(30);
+          });
+          strip.appendChild(pill);
+        });
+        mapWrap.appendChild(strip);
+        body.appendChild(mapWrap);
       }
 
-      if (row) {
-        if (row.placeholder) {
-          curSec.appendChild(createEl('p', 'esc-sonnet-prompt', res.written === 0 ? 'Comece com uma imagem ou pergunta.' : (GUIDANCE[row.number - 1] || 'Continue seu poema.')));
+      /* 5. Espelho de Cadência (Estrofe 2 vs Estrofe 1) OU Escansão do verso ativo */
+      var cadSec = createEl('section', 'esc-sonnet-score-card');
+      if (parsed.mirrorSource && parsed.mirrorRows.length) {
+        cadSec.appendChild(createEl('h3', '', 'Espelho de cadência · ' + curSec.label + ' vs ' + parsed.mirrorSource.label));
+        parsed.mirrorRows.forEach(function (mr) {
+          var isAct = !!(curLine && mr.curLine && curLine.lineIndex === mr.curLine.lineIndex);
+          var rowEl = createEl('div', 'esc-mirror-row' + (isAct ? ' is-current' : ''));
+          rowEl.appendChild(createEl('span', 'esc-map-num', 'v' + mr.index));
+          rowEl.appendChild(createEl('span', 'esc-mirror-counts', (mr.refSyllables || '—') + ' ↔ ' + (mr.curSyllables || '—') + ' síl.'));
+          var statusTxt = mr.tone === 'empty' ? '—' : (mr.tone === 'ok' ? 'OK ✓' : (mr.diff > 0 ? ('+' + mr.diff + ' longa') : (mr.diff + ' curta')));
+          rowEl.appendChild(createEl('span', 'esc-sonnet-status-pill is-' + mr.tone, statusTxt));
+          cadSec.appendChild(rowEl);
+        });
+      } else {
+        cadSec.appendChild(createEl('h3', '', curSec ? ('Cadência · ' + curSec.label) : 'Cadência do verso'));
+        if (curLine && !curLine.placeholder && curLine.scansion && curLine.scansion.cells.length) {
+          var cellsWrap = createEl('div', 'esc-syl-strip');
+          curLine.scansion.cells.forEach(function (cell) {
+            var cEl = createEl('div', 'esc-syl-cell' + (cell.tonic ? ' is-tonic' : ''));
+            cEl.appendChild(createEl('span', 'esc-syl-txt', cell.fused ? (cell.text + '◡' + cell.fusedText) : cell.text));
+            cEl.appendChild(createEl('span', 'esc-syl-num', String(cell.index)));
+            cellsWrap.appendChild(cEl);
+          });
+          cadSec.appendChild(cellsWrap);
+          cadSec.appendChild(createEl('p', 'esc-sonnet-caption', curLine.syllables + ' sílabas cantadas. Adicione outra estrofe para comparar a melodia verso a verso.'));
         } else {
-          curSec.appendChild(createEl('p', 'esc-sonnet-excerpt', row.text));
-          if (r) {
-            var measureBox = createEl('div', 'esc-sonnet-measure');
-            measureBox.appendChild(createEl('span', 'esc-sonnet-caption', 'Contagem estimada'));
-            var big = createEl('strong', '', measureStr(r) + ' ');
-            big.appendChild(createEl('small', '', 'sílabas poéticas'));
-            measureBox.appendChild(big);
-            measureBox.appendChild(createEl('p', '', 'Referência escolhida: ' + settings.target + ' sílabas.'));
-            if (settings.rhythm !== 'none') {
-              measureBox.appendChild(createEl('p', '', RHYTHMS[settings.rhythm]));
-            }
-            curSec.appendChild(measureBox);
+          cadSec.appendChild(createEl('p', 'esc-sonnet-prompt', 'Escreva um verso para medir sílabas cantadas e comparar estrofes.'));
+        }
+      }
+      body.appendChild(cadSec);
 
-            var scansion = createEl('section', 'esc-sonnet-scansion');
-            scansion.appendChild(createEl('h3', '', 'Sílabas e tônicas'));
-            var sylP = createEl('p', 'esc-sonnet-syllables');
-            r.words.forEach(function (word, wi) {
-              if (wi > 0) { sylP.appendChild(document.createTextNode(' / ')); }
-              var wSpan = createEl('span', 'esc-sonnet-word');
-              word.syllables.forEach(function (syl, si) {
-                if (si > 0) { wSpan.appendChild(document.createTextNode('·')); }
-                if (wi === r.words.length - 1 && si > word.tonic) {
-                  wSpan.appendChild(createEl('span', 'esc-sonnet-after-tonic', '(' + syl + ')'));
-                } else if (si === word.tonic) {
-                  wSpan.appendChild(createEl('strong', '', syl));
-                } else {
-                  wSpan.appendChild(document.createTextNode(syl));
-                }
-              });
-              sylP.appendChild(wSpan);
+      /* 6. Modo Cifra & Transposição (opcional) */
+      if (settings.showChords || parsed.hasChords) {
+        var chBox = createEl('section', 'esc-song-chords-box');
+        var chHead = createEl('div', 'esc-rhyme-tray-head');
+        chHead.appendChild(createEl('h3', '', 'Cifras e tom'));
+        var trBtns = createEl('div', 'esc-rhyme-tabs');
+        var downB = createEl('button', 'esc-rhyme-tab', '−½ tom');
+        downB.type = 'button';
+        on(downB, 'click', function () { applyTranspose(-1); });
+        var upB = createEl('button', 'esc-rhyme-tab', '+½ tom');
+        upB.type = 'button';
+        on(upB, 'click', function () { applyTranspose(1); });
+        trBtns.appendChild(downB);
+        trBtns.appendChild(upB);
+        chHead.appendChild(trBtns);
+        chBox.appendChild(chHead);
+        chBox.appendChild(createEl('p', 'esc-sonnet-caption', 'Use [Am7] antes da sílaba ou escreva uma linha só de acordes acima do verso. A contagem silábica ignora cifras automaticamente.'));
+        body.appendChild(chBox);
+      }
+
+      /* 7. Rimas da Seção (Consoantes ●, Toantes ◎ e Rimas Internas) */
+      var rSec = createEl('section', 'esc-sonnet-rhyme-tray');
+      var targetWord = rhymeQuery || (curLine && curLine.lastWord ? curLine.lastWord : '');
+      var rHead = createEl('div', 'esc-rhyme-tray-head');
+      rHead.appendChild(createEl('h3', '', targetWord ? ('Rimas p/ “' + targetWord + '”') : 'Rimas musicais'));
+      var rTabs = createEl('div', 'esc-rhyme-tabs');
+      [['consonant', 'Consoantes'], ['assonant', 'Toantes']].forEach(function (pair) {
+        var tb = createEl('button', 'esc-rhyme-tab', pair[1]);
+        tb.type = 'button';
+        tb.setAttribute('aria-pressed', rhymeTab === pair[0] ? 'true' : 'false');
+        on(tb, 'click', function () { rhymeTab = pair[0]; render(); });
+        rTabs.appendChild(tb);
+      });
+      rHead.appendChild(rTabs);
+      rSec.appendChild(rHead);
+
+      if (parsed.rhymePairs.length) {
+        var pairsBox = createEl('div', 'esc-song-pairs');
+        parsed.rhymePairs.slice(0, 6).forEach(function (rp) {
+          pairsBox.appendChild(createEl('span', 'esc-song-pair-chip',
+            (rp.kind === 'consonant' ? '● ' : '◎ ') + rp.aWord + ' ↔ ' + rp.bWord));
+        });
+        rSec.appendChild(pairsBox);
+      }
+
+      if (targetWord && vc) {
+        var rData = vc.findRhymes(targetWord, 24);
+        var list = rhymeTab === 'assonant' ? rData.assonant : rData.consonant;
+        if (list.length) {
+          var chips = createEl('div', 'esc-rhyme-chips');
+          list.slice(0, 12).forEach(function (w) {
+            var ch = createEl('button', 'esc-rhyme-chip', w);
+            ch.type = 'button';
+            on(ch, 'click', function () {
+              if (manuscript && curLine) { vc.insertWordAtLineEnd(manuscript, curLine.lineIndex, w); }
             });
-            scansion.appendChild(sylP);
-            scansion.appendChild(createEl('p', 'esc-sonnet-caption', 'Tônicas em negrito; finais após a última tônica ficam fora da métrica.'));
-            curSec.appendChild(scansion);
-          } else {
-            curSec.appendChild(createEl('p', '', 'Leia este verso em voz alta para conferir a medida.'));
-          }
-        }
-
-        var rhymeSec = createEl('section', 'esc-sonnet-rhyme');
-        rhymeSec.appendChild(createEl('h3', '', 'Rima deste verso'));
-        var rhymeMsg = settings.scheme === 'Livre'
-          ? 'Rimas livres escolhidas.'
-          : res.rhymeReference
-            ? 'Neste esquema, o verso ' + row.number + ' rima com o verso ' + res.rhymeReference.number + ' (“' + res.rhymeReference.word + '”).'
-            : 'Este verso inicia um grupo de rimas.';
-        rhymeSec.appendChild(createEl('p', '', rhymeMsg));
-        if (res.rhymeReference && r) {
-          rhymeSec.appendChild(createEl('p', 'esc-sonnet-caption', res.rhymeReference.possible ? 'Terminação compatível encontrada.' : 'Confira a sonoridade destes finais em voz alta.'));
-        }
-        curSec.appendChild(rhymeSec);
-      }
-      body.appendChild(curSec);
-
-      // Mapa do poema
-      var mapSec = createEl('section', 'esc-sonnet-map');
-      mapSec.appendChild(createEl('h3', '', 'Mapa do poema'));
-      mapSec.appendChild(createEl('p', 'esc-sonnet-caption', 'Forma · ' + stanzaPlan.join(' / ') + ' versos.'));
-      var stanzasGrid = createEl('div', 'esc-sonnet-stanzas');
-      var offset = 0, si2, vi;
-      for (si2 = 0; si2 < stanzaPlan.length; si2 += 1) {
-        var size = stanzaPlan[si2];
-        var stBox = createEl('div', 'esc-sonnet-stanza');
-        stBox.appendChild(createEl('small', '', 'Estrofe ' + (si2 + 1)));
-        var slots = createEl('div', 'esc-sonnet-slots');
-        for (vi = 0; vi < size; vi += 1) {
-          (function (vRow, num) {
-            if (vRow && !vRow.placeholder) {
-              var slotBtn = createEl('button', '', String(num));
-              slotBtn.type = 'button';
-              slotBtn.setAttribute('aria-pressed', row && row.lineIndex === vRow.lineIndex ? 'true' : 'false');
-              on(slotBtn, 'click', function () { manualLine = vRow.lineIndex; rhymeQuery = ''; showMoreRhymes = false; render(); });
-              slots.appendChild(slotBtn);
-            } else {
-              slots.appendChild(createEl('span', 'esc-sonnet-empty-slot', String(num)));
-            }
-          }(res.rows[offset + vi], offset + vi + 1));
-        }
-        offset += size;
-        stBox.appendChild(slots);
-        stanzasGrid.appendChild(stBox);
-      }
-      mapSec.appendChild(stanzasGrid);
-      body.appendChild(mapSec);
-
-      // Explorar rimas
-      var sugDet = createEl('details', 'esc-sonnet-suggestions');
-      if (rhymesOpen) { sugDet.open = true; }
-      on(sugDet, 'toggle', function () { rhymesOpen = !!sugDet.open; });
-      var sugSum = createEl('summary', '', 'Explorar rimas');
-      sugDet.appendChild(sugSum);
-      var targetWord = rhymeQuery || res.suggestionWord;
-      if (targetWord) {
-        var hits = findRhymesFor(targetWord);
-        sugDet.appendChild(createEl('small', '', 'Finais próximos de “' + targetWord + '”'));
-        var shown = hits.slice(0, showMoreRhymes ? 24 : 6);
-        sugDet.appendChild(createEl('p', '', shown.length ? shown.join(' · ') : 'Sem sugestões para esta palavra.'));
-        if (hits.length > 6) {
-          var moreBtn = createEl('button', 'esc-sonnet-quiet', showMoreRhymes ? 'Ver menos' : 'Mais finais');
-          moreBtn.type = 'button';
-          on(moreBtn, 'click', function () { rhymesOpen = true; showMoreRhymes = !showMoreRhymes; render(); });
-          sugDet.appendChild(moreBtn);
+            chips.appendChild(ch);
+          });
+          rSec.appendChild(chips);
+        } else {
+          rSec.appendChild(createEl('p', 'esc-sonnet-caption', 'Sem sugestões ' + (rhymeTab === 'assonant' ? 'toantes' : 'consoantes') + ' para “' + targetWord + '”.'));
         }
       }
+
+      var intRow = createEl('div', 'esc-song-int-row');
+      var intBtn = createEl('button', 'esc-sonnet-quiet', settings.internalRhymes ? 'Rimas internas ✓' : 'Mostrar rimas internas');
+      intBtn.type = 'button';
+      on(intBtn, 'click', function () {
+        saveSettings({ bpm: settings.bpm, meter: settings.meter, showChords: settings.showChords, internalRhymes: !settings.internalRhymes });
+      });
+      intRow.appendChild(intBtn);
+      rSec.appendChild(intRow);
+      if (settings.internalRhymes) {
+        rSec.appendChild(createEl('p', 'esc-sonnet-caption', parsed.internalRhymes.length
+          ? ('Ecos internos: ' + parsed.internalRhymes.map(function (g) { return g.join(' · '); }).join(' | '))
+          : 'Nenhum eco interno repetido nesta seção ainda.'));
+      }
+
       var qWrap = createEl('div', 'esc-sonnet-search');
-      var qLabel = createEl('label', '', 'Outra palavra de referência');
       var qInput = createEl('input');
-      qInput.type = 'text';
-      qInput.maxLength = 60;
-      qInput.placeholder = 'Ex.: amor';
-      qInput.value = rhymeQuery;
-      on(qInput, 'change', function () { rhymesOpen = true; rhymeQuery = qInput.value.trim(); showMoreRhymes = false; render(); });
-      qLabel.appendChild(qInput);
-      qWrap.appendChild(qLabel);
-      sugDet.appendChild(qWrap);
-      body.appendChild(sugDet);
+      qInput.type = 'search'; qInput.maxLength = 60; qInput.placeholder = 'Buscar rimas (ex.: saudade)…'; qInput.value = rhymeQuery;
+      on(qInput, 'change', function () { rhymeQuery = qInput.value.replace(/^\s+|\s+$/g, ''); render(); });
+      qWrap.appendChild(qInput);
+      rSec.appendChild(qWrap);
+      body.appendChild(rSec);
 
-      // Forma do soneto
-      var formDet = createEl('details', 'esc-sonnet-settings');
-      if (settingsOpen || draftError) { formDet.open = true; }
-      on(formDet, 'toggle', function () { settingsOpen = !!formDet.open; });
-      formDet.appendChild(createEl('summary', '', 'Forma do soneto'));
-      var controls = createEl('div', 'esc-sonnet-controls');
+      /* 8. Pulso Visual Silencioso + Tap Tempo + Metrônomo Web Audio opcional */
+      var pSec = createEl('section', 'esc-song-pulse');
+      pSec.appendChild(createEl('h3', '', 'Pulso e andamento'));
+      var totalBeats = settings.meter === '3/4' ? 3 : settings.meter === '2/4' ? 2 : settings.meter === '6/8' ? 6 : 4;
+      var pulseRow = createEl('div', 'esc-pulse-row');
+      var dotsWrap = createEl('div', 'esc-pulse-dots');
+      for (var bi = 0; bi < totalBeats; bi += 1) {
+        var dot = createEl('span', 'esc-pulse-dot' + (bi === 0 ? ' is-downbeat' : ''));
+        dot.setAttribute('data-active', (pulseRunning && bi === pulseBeat) ? 'true' : 'false');
+        dotsWrap.appendChild(dot);
+      }
+      pulseRow.appendChild(dotsWrap);
 
-      var lStruct = createEl('label', '', 'Estrutura');
-      var sStruct = createEl('select');
-      [['italian', 'Italiano · 4 / 4 / 3 / 3'], ['english', 'Inglês · 4 / 4 / 4 / 2']].forEach(function (pair) {
-        var o = createEl('option', '', pair[1]);
-        o.value = pair[0];
-        if (settings.structure === pair[0]) { o.selected = true; }
-        sStruct.appendChild(o);
+      var bpmCtrl = createEl('div', 'esc-bpm-ctrl');
+      var minusB = createEl('button', 'esc-rhyme-tab', '−');
+      minusB.type = 'button';
+      on(minusB, 'click', function () {
+        saveSettings({ bpm: Math.max(40, settings.bpm - 4), meter: settings.meter, showChords: settings.showChords, internalRhymes: settings.internalRhymes });
       });
-      on(sStruct, 'change', function () { settingsOpen = true; chooseSetting('structure', sStruct.value); });
-      lStruct.appendChild(sStruct);
-      controls.appendChild(lStruct);
-
-      var lScheme = createEl('label', '', 'Esquema de rimas');
-      var sScheme = createEl('select');
-      var optsList = SCHEMES.slice();
-      if (optsList.indexOf(settings.scheme) === -1) { optsList.push(settings.scheme); }
-      optsList.filter(function (sc) { return sc === 'Livre' || sc === settings.scheme || structureOf(sc) === settings.structure; }).forEach(function (sc) {
-        var o = createEl('option', '', sc === 'Livre' ? 'Rimas livres' : (SCHEME_NAMES[sc] || 'Personalizado') + ' · ' + sc);
-        o.value = sc;
-        if (settings.scheme === sc) { o.selected = true; }
-        sScheme.appendChild(o);
+      var bpmLbl = createEl('strong', 'esc-bpm-val', settings.bpm + ' BPM');
+      var plusB = createEl('button', 'esc-rhyme-tab', '+');
+      plusB.type = 'button';
+      on(plusB, 'click', function () {
+        saveSettings({ bpm: Math.min(200, settings.bpm + 4), meter: settings.meter, showChords: settings.showChords, internalRhymes: settings.internalRhymes });
       });
-      on(sScheme, 'change', function () { settingsOpen = true; chooseSetting('scheme', sScheme.value); });
-      lScheme.appendChild(sScheme);
-      controls.appendChild(lScheme);
+      bpmCtrl.appendChild(minusB);
+      bpmCtrl.appendChild(bpmLbl);
+      bpmCtrl.appendChild(plusB);
+      pulseRow.appendChild(bpmCtrl);
+      pSec.appendChild(pulseRow);
 
-      var lTarget = createEl('label', '', 'Medida');
-      var sTarget = createEl('select');
-      [[10, 'Decassílabo · 10'], [12, 'Dodecassílabo · 12'], [7, 'Redondilha maior · 7'], [5, 'Redondilha menor · 5']].forEach(function (pair) {
-        var o = createEl('option', '', pair[1]);
-        o.value = String(pair[0]);
-        if (settings.target === pair[0]) { o.selected = true; }
-        sTarget.appendChild(o);
+      var pActs = createEl('div', 'esc-pulse-actions');
+      var playBtn = createEl('button', 'esc-sonnet-chip-btn', pulseRunning ? 'Parar pulso' : 'Iniciar pulso');
+      playBtn.type = 'button';
+      playBtn.setAttribute('aria-pressed', pulseRunning ? 'true' : 'false');
+      on(playBtn, 'click', function () {
+        if (pulseRunning) { stopPulse(); } else { startPulse(settings); }
+        render();
       });
-      on(sTarget, 'change', function () { settingsOpen = true; chooseSetting('target', Number(sTarget.value)); });
-      lTarget.appendChild(sTarget);
-      controls.appendChild(lTarget);
+      var tapBtn = createEl('button', 'esc-sonnet-chip-btn', 'Marcar (Tap)');
+      tapBtn.type = 'button';
+      on(tapBtn, 'click', function () { handleTapTempo(settings); });
+      var sndBtn = createEl('button', 'esc-sonnet-chip-btn', pulseSound ? '🔊 Som' : '🔇 Visual');
+      sndBtn.type = 'button';
+      sndBtn.setAttribute('aria-pressed', pulseSound ? 'true' : 'false');
+      on(sndBtn, 'click', function () { pulseSound = !pulseSound; render(); });
 
-      var lRhythm = createEl('label', '', 'Ritmo');
-      var sRhythm = createEl('select');
-      Object.keys(RHYTHMS).forEach(function (k) {
-        var o = createEl('option', '', RHYTHMS[k]);
-        o.value = k;
-        if (settings.rhythm === k) { o.selected = true; }
-        sRhythm.appendChild(o);
+      var meterSel = createEl('select', 'esc-meter-sel');
+      meterSel.setAttribute('aria-label', 'Compasso');
+      ['4/4', '3/4', '2/4', '6/8'].forEach(function (mt) {
+        var o = createEl('option', '', mt); o.value = mt;
+        if (settings.meter === mt) { o.selected = true; }
+        meterSel.appendChild(o);
       });
-      on(sRhythm, 'change', function () { settingsOpen = true; chooseSetting('rhythm', sRhythm.value); });
-      lRhythm.appendChild(sRhythm);
-      controls.appendChild(lRhythm);
-
-      var customWrap = createEl('div', 'esc-sonnet-custom');
-      var cLabel = createEl('label', '', 'Personalizar rimas (14 letras A–N)');
-      var cInput = createEl('input');
-      cInput.type = 'text';
-      cInput.maxLength = 30;
-      cInput.value = draftScheme;
-      cInput.placeholder = settings.structure === 'english' ? 'ABAB BCBC CDCD EE' : 'AABB AABB CDC DCD';
-      on(cInput, 'input', function () { draftScheme = cInput.value; draftError = ''; });
-      cLabel.appendChild(cInput);
-      customWrap.appendChild(cLabel);
-      var cBtn = createEl('button', '', 'Aplicar');
-      cBtn.type = 'button';
-      on(cBtn, 'click', function () {
-        settingsOpen = true;
-        var lettersOnly = String(cInput.value || '').toUpperCase().replace(/\s+/g, '');
-        if (!/^[A-N]{14}$/.test(lettersOnly)) {
-          draftError = 'Use 14 letras de A a N.';
-          render();
-          return;
-        }
-        var pos = 0, chunks = [], si3;
-        for (si3 = 0; si3 < stanzaPlan.length; si3 += 1) {
-          chunks.push(lettersOnly.slice(pos, pos + stanzaPlan[si3]));
-          pos += stanzaPlan[si3];
-        }
-        chooseSetting('scheme', chunks.join(' '));
+      on(meterSel, 'change', function () {
+        saveSettings({ bpm: settings.bpm, meter: meterSel.value, showChords: settings.showChords, internalRhymes: settings.internalRhymes });
       });
-      customWrap.appendChild(cBtn);
-      if (draftError) { customWrap.appendChild(createEl('p', '', draftError)); }
-      controls.appendChild(customWrap);
 
-      formDet.appendChild(controls);
-      body.appendChild(formDet);
+      pActs.appendChild(playBtn);
+      pActs.appendChild(tapBtn);
+      pActs.appendChild(sndBtn);
+      pActs.appendChild(meterSel);
+      pSec.appendChild(pActs);
+      body.appendChild(pSec);
 
       aside.appendChild(body);
       container.appendChild(aside);
     }
 
-    function schedule() {
+    function schedule(delay) {
+      if (composing) { return; }
       window.clearTimeout(renderTimer);
-      renderTimer = window.setTimeout(render, 120);
+      renderTimer = window.setTimeout(render, typeof delay === 'number' ? delay : 85);
     }
 
     if (manuscript) {
-      on(manuscript, 'input', function () { manualLine = null; schedule(); });
-      on(manuscript, 'keyup', function () { if (isSonnetDoc(activeDoc)) { manualLine = null; schedule(); } });
-      on(manuscript, 'mouseup', function () { if (isSonnetDoc(activeDoc)) { manualLine = null; schedule(); } });
+      on(manuscript, 'compositionstart', function () { composing = true; });
+      on(manuscript, 'compositionend', function () { composing = false; schedule(40); });
+      on(manuscript, 'input', function () { if (isSongDoc(activeDoc)) { schedule(85); } });
+      on(manuscript, 'keyup', function () {
+        if (!isSongDoc(activeDoc)) { return; }
+        var cur = cursorLineOf(manuscript);
+        if (cur !== lastCursorLine) { schedule(60); }
+      });
+      on(manuscript, 'mouseup', function () {
+        if (!isSongDoc(activeDoc)) { return; }
+        var cur = cursorLineOf(manuscript);
+        if (cur !== lastCursorLine) { schedule(50); }
+      });
     }
 
     return {
       sync: function (doc) {
         activeDoc = doc || null;
-        manualLine = null;
+        if (!isSongDoc(activeDoc)) { stopPulse(); }
+        lastCursorLine = -1;
         rhymeQuery = '';
-        showMoreRhymes = false;
-        draftError = '';
+        mobileSheetOpen = false;
         render();
       },
       refresh: render,
-      isSonnetDoc: isSonnetDoc
+      schedule: function () { if (isSongDoc(activeDoc)) { schedule(85); } },
+      isSongDoc: isSongDoc,
+      stopPulse: stopPulse
+    };
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
+/* Fonte: src/storage/dificuldades-ptbr.js */
+/* Usos da Língua — Dicionário de Dificuldades do Português Brasileiro (120 verbetes curados, 100% offline, ES5).
+ * Princípio editorial: em língua portuguesa não existe "erro" moral, e sim adequação de uso e registro. */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+
+  var MANIFESTO = 'Em português brasileiro não existe “erro” absoluto — existe adequação de uso. Todo brasileiro já é especialista na língua portuguesa: você domina sua gramática desde a infância. O que muda é a roupa da frase conforme o lugar onde ela circula (conversa, diálogo de ficção ou texto formal). Este guia é apenas um cenário organizado para você escolher seu registro com consciência.';
+
+  var CATEGORIES = [
+    { id: 'paronimos', label: 'Parônimos e homônimos' },
+    { id: 'regencia', label: 'Regência na prática' },
+    { id: 'concordancia', label: 'Concordância' },
+    { id: 'crase', label: 'Crase sem decoreba' },
+    { id: 'grafia', label: 'Grafia e hífen' },
+    { id: 'conectivos', label: 'Porquês e conectivos' },
+    { id: 'virgula', label: 'Vírgula e respiração' },
+    { id: 'pronomes', label: 'Pronomes e ritmo' },
+    { id: 'verbos', label: 'Verbos traiçoeiros' }
+  ];
+
+  /* Tupla compacta: [id, titulo, chavesPipe, catIdx, fala, formal, porque, exemploFala, exemploFormal] */
+  var RAW = [
+    /* 0 · Parônimos e homônimos (28) */
+    ['mal-mau','mal / mau','mal|mau|maus|males',0,'Os dois soam iguais no dia a dia.','mal opõe-se a bem (modo/tempo/substantivo); mau opõe-se a bom (qualidade).','Teste de 2 segundos: troque por bem ou bom. Se couber bem, é mal; se couber bom, é mau.','“Dormi mal ontem, tô de mau humor.”','“Ela passou mal na viagem, mas não guardou mau pressentimento.”'],
+    ['mas-mais','mas / mais','mas|mais|mas tambem',0,'Em várias regiões do Brasil, mas e mais têm som quase idêntico.','mas indica contraste (= porém); mais indica quantidade ou intensidade (oposto de menos).','Teste rápido: se der para trocar por porém, escreva mas; se o oposto for menos, escreva mais.','“Queria sair, mas tá chovendo mais forte.”','“Tentou falar baixo, mas a chuva caía ainda mais intensa.”'],
+    ['onde-aonde','onde / aonde','onde|aonde|em que|no qual',0,'Na fala, muita gente usa aonde para tudo porque soa mais caprichado.','onde marca lugar parado (morar, estar, ficar); aonde = a + onde, só com verbo de movimento (ir, chegar, levar).','Se a resposta for “lá”, use onde; se for “para lá”, use aonde. Se não for lugar físico, prefira em que.','“— Aonde você deixou a chave?”','“Não lembrava onde deixara o caderno nem aonde o vento o levara.”'],
+    ['ha-a','há / a (tempo e distância)','ha|a|daqui a|ha anos',0,'Soam iguais, e na conversa trocamos há por tem ou faz.','há (verbo haver) marca tempo passado; a (preposição) marca futuro ou distância.','Teste rápido: tente trocar por faz. Se fizer sentido, escreva há; senão, escreva a.','“Moro aqui tem cinco anos e volto daqui a pouco.”','“Mora nesta rua há cinco anos, a duas quadras do rio; retorna daqui a um mês.”'],
+    ['senao-se-nao','senão / se não','senao|se nao',0,'Têm o mesmo som na fala corrida.','senão junto = caso contrário / a não ser; se não separado = condição (“caso não”).','Tente trocar por “caso contrário” (senão) ou por “caso não” (se não).','“Corre, senão a gente perde o ônibus.”','“Se não chover até as seis, sairemos; senão, ficaremos na varanda.”'],
+    ['afim-a-fim','afim / a fim de','afim|a fim|afins',0,'Na conversa dizemos “tô a fim” para vontade ou interesse.','a fim de (separado) indica finalidade (= para); afim (junto) significa semelhante, com afinidade.','Antes de verbo ou ideia de objetivo, separe (a fim de); falando de afinidade, junte (ideias afins).','“Não tô a fim de sair hoje.”','“Estudaram temas afins a fim de publicar a coletânea juntos.”'],
+    ['acerca-cerca','acerca de / a cerca de / há cerca de','acerca|cerca|ha cerca|a cerca',0,'Os três soam praticamente iguais quando falamos depressa.','acerca de = sobre; a cerca de = a aproximadamente (distância/futuro); há cerca de = faz aproximadamente (passado).','Troque por “sobre” (acerca de), “a quase” (a cerca de) ou “faz quase” (há cerca de).','“A gente conversou sobre o livro faz uns dois anos.”','“Conversaram acerca do romance há cerca de dois anos, a cerca de dez quilômetros dali.”'],
+    ['encontro','ao encontro de / de encontro a','ao encontro|de encontro',0,'No cotidiano, muita gente usa “de encontro” achando que significa “a favor”.','ao encontro de = a favor, em harmonia; de encontro a = contra, em choque.','Pense num carro indo “de encontro ao muro” (batendo contra). Para concordância, vá “ao encontro de”.','“Essa ideia veio bem ao encontro do que eu pensava.”','“A proposta foi ao encontro dos leitores, mas a pressa foi de encontro ao rigor do texto.”'],
+    ['sessao-secao','sessão / seção / cessão','sessao|secao|cessao',0,'As três palavras têm exatamente a mesma pronúncia.','sessão = tempo/reunião/cinema; seção = parte/setor; cessão = ato de ceder/transferir.','Lembre do início: Sessão (Sentar-se numa reunião), Seção (Setor), Cessão (Ceder).','“Fui na sessão das oito e passei na seção de livros.”','“Após a sessão de autógrafos, assinou a cessão de direitos na seção editorial.”'],
+    ['ratificar-retificar','ratificar / retificar','ratificar|retificar',0,'Troca muito frequente porque só muda uma vogal.','ratificar = confirmar; retificar = corrigir.','Lembre de “reto”: retificar é deixar reto (corrigir). Ratificar é bater o martelo confirmando.','“Preciso retificar a data que mandei errada.”','“O conselho ratificou o edital após retificar dois trechos ambíguos.”'],
+    ['eminente-iminente','eminente / iminente','eminente|iminente',0,'Quase idênticas ao ouvido.','eminente = elevado, ilustre; iminente = prestes a acontecer.','Iminente começa com I de Imediato. Eminente vem de Elevado.','“A chuva tava iminente.”','“A eminente escritora encerrou a leitura sob chuva iminente.”'],
+    ['flagrante-fragrante','flagrante / fragrante','flagrante|fragrante',0,'Confusão comum pelo encontro de consoantes.','flagrante = evidente, pego no ato; fragrante = perfumado, aromático.','Fragrante lembra fragrância (perfume). Flagrante lembra flash (flagra).','“O café tava fragrante na cozinha.”','“Havia um contraste flagrante entre a rua cinzenta e o jardim fragrante.”'],
+    ['descricao-discricao','descrição / discrição','descricao|discricao|discreto',0,'Soam muito parecidas na fala rápida.','descrição = ato de descrever; discrição = reserva, ser discreto.','Descrição vem de descrever; discrição vem de discreto.','“Ela fez tudo com muita discrição.”','“A descrição da sala foi feita com notável discrição.”'],
+    ['tras-traz','trás / traz / atrás','tras|traz|atras',0,'Têm exatamente o mesmo som.','traz (com z) é verbo trazer; trás (com s e acento) indica posição posterior (sempre após preposição: por trás, para trás).','Se for ação de trazer algo, use z (traz). Se indicar lugar atrás, use s (trás).','“Traz o caderno que ficou lá atrás.”','“Ele traz boas notícias e deixa a dúvida para trás.”'],
+    ['viagem-viajem','viagem / viajem','viagem|viajem',0,'Pronúncia idêntica.','viagem (com g) é substantivo (“a viagem”); viajem (com j) é verbo viajar (“que eles viajem”).','Se couber “a” ou “uma” antes, é viagem (g); se for ação de pessoas viajando, é viajem (j).','“Boa viagem pra vocês!”','“Espero que viajem em paz e guardem memória desta viagem.”'],
+    ['comprido-cumprido','comprido / cumprido','comprido|cumprido',0,'Na fala do Brasil o o e o u átonos soam iguais.','comprido = longo (comprimento); cumprido = realizado (de cumprir).','Comprido lembra comprimento; cumprido vem de cumprir promessa ou dever.','“O caminho é comprido, mas dever cumprido.”','“O corredor era comprido, e o prazo fora cumprido à risca.”'],
+    ['censo-senso','censo / senso','censo|senso',0,'Pronúncia idêntica.','censo = pesquisa/recenseamento; senso = juízo, sentido (bom senso, senso comum).','Censo tem C de Contagem; Senso tem S de Sentido.','“Faltou bom senso naquela resposta.”','“O censo revelou novos hábitos, e o texto exigiu senso crítico.”'],
+    ['concerto-conserto','concerto / conserto','concerto|conserto',0,'Pronúncia idêntica.','concerto (com c) = apresentação musical / harmonia; conserto (com s) = reparo.','Concerto musical tem C de Canção; conserto tem S de Serviço de reparo.','“Levei o relógio pro conserto antes do concerto.”','“Após o conserto do piano, a sala abriu para o concerto.”'],
+    ['espectador-expectador','espectador / expectador','espectador|expectador',0,'Muitos escrevem com x por associação com expectativa.','espectador (com s) = quem assiste a um espetáculo; expectador (com x) = quem está na expectativa.','Se está assistindo (cinema, teatro, plateia), é espectador (espetáculo).','“O espectador ficou quieto na plateia.”','“Cada espectador acompanhou a cena como um expectador ansioso pelo desfecho.”'],
+    ['soar-suar','soar / suar','soar|suar',0,'O o antes de vogal frequentemente soa como u no português brasileiro.','soar = produzir som; suar = transpirar.','Soar vem de som; suar vem de suor.','“A frase soou estranha, e eu suei pra arrumar.”','“O sino voltou a soar enquanto o ciclista suava na ladeira.”'],
+    ['cauda-calda','cauda / calda','cauda|calda',0,'Em quase todo o Brasil, o L em fim de sílaba tem som de U.','cauda = rabo/extremidade; calda = líquido doce ou espesso.','Calda de pudim tem L de Líquido; cauda de cometa ou animal tem U.','“Bota mais calda de chocolate no bolo.”','“O cometa riscou a noite com longa cauda luminosa.”'],
+    ['cheque-xeque','cheque / xeque','cheque|xeque',0,'Mesmo som na fala.','cheque = ordem bancária; xeque = lance do xadrez (“pôr em xeque”) ou chefe árabe.','Pôr em xeque vem do Xadrez (com X).','“Essa pergunta botou tudo em xeque.”','“A nova carta pôs em xeque a versão oficial.”'],
+    ['emergir-imergir','emergir / imergir','emergir|imergir',0,'Troca comum pela semelhança sonora.','emergir = vir à tona, sair; imergir = mergulhar, afundar.','Imergir = Ir para dentro (mergulhar). Emergir = sair à superfície.','“A lembrança emergiu do nada.”','“Imergiu no manuscrito pela manhã e só emergiu ao entardecer.”'],
+    ['infligir-infringir','infligir / infringir','infligir|infringir',0,'Parecidas no som e no contexto formal.','infligir = aplicar pena/dor; infringir = desrespeitar lei/regra.','Infringir tem R de Regra quebrada. Infligir é aplicar algo a alguém.','“Ele infringiu a regra do jogo.”','“Não infringiu o acordo, mas a pressa lhe infligiu cansaço.”'],
+    ['mandado-mandato','mandado / mandato','mandado|mandato',0,'Confusão clássica em textos jornalísticos.','mandado = ordem judicial; mandato = período de cargo político ou procuração.','Mandado é ordem que alguém manda cumprir; mandato é tempo de governo.','“Cumpriram um mandado de busca.”','“No último ano do mandato, recebeu o mandado judicial.”'],
+    ['peao-piao','peão / pião','peao|piao',0,'E e I átonos soam iguais antes de vogal.','peão = trabalhador rural / peça de xadrez / pedestre; pião = brinquedo que gira.','Pião de rodar começa com PI de Piar/girar; peão vem de pé.','“O menino rodou o pião no quintal.”','“O peão atravessou o tabuleiro sob o olhar do garoto com seu pião.”'],
+    ['absorver-absolver','absorver / absolver','absorver|absolver',0,'Apenas uma letra muda no meio.','absorver = sugar, assimilar; absolver = inocentar, perdoar.','Absolver tem L de Livre (libertar de culpa). Absorver é sugar como esponja.','“O papel absorveu a tinta na hora.”','“O júri absolveu o réu, que demorou a absorver a notícia.”'],
+    ['deferir-diferir','deferir / diferir','deferir|diferir',0,'Confundidas em requerimentos e textos formais.','deferir = aprovar, atender; diferir = ser diferente ou adiar.','Diferir vem de diferente; deferir é conceder um pedido.','“As duas versões diferem muito.”','“A comissão deferiu o pedido, embora os pareceres diferissem nos detalhes.”'],
+
+    /* 1 · Regência na prática (18) */
+    ['assistir','assistir o / assistir ao','assistir|assisti|assistiu',1,'No Brasil inteiro falamos “assisti o filme”, “assisti a novela” — o verbo se comportou como ver.','No sentido de ver/presenciar, a norma formal usa a preposição a (assistir ao filme). Sem preposição (assistir o paciente), significa ajudar.','Na fala de personagem, “assisti o jogo” é naturalíssimo; em prosa formal, “assisti ao jogo” evita ruído editorial.','“— A gente assistiu o último capítulo ontem.”','“Da varanda, assistiu ao pôr do sol enquanto a enfermeira assistia o avô.”'],
+    ['ir-em-a','ir no / ir ao / ir para o','ir no|fui no|vou no|ir ao',1,'“Vou no mercado”, “fui no médico” é o jeito brasileiro mais natural de falar.','Na escrita formal, ir pede a (volta rápida) ou para (permanência): ir ao médico, ir para o Recife.','Em significa estar dentro; a/para indicam movimento. Ótimo usar “fui no” em diálogos; no narrador formal, “fui ao”.','“— Vou no centro resolver isso e já volto.”','“Foi ao centro pela manhã e partiu para a serra no fim do mês.”'],
+    ['chegar-em-a','chegar em / chegar a','chegar em|cheguei em|chegou em|chegar a',1,'“Cheguei em casa”, “chegou no ponto” domina a fala brasileira.','A escrita formal usa chegar a (cheguei a casa, chegou ao bairro).','Em é o lugar onde já estamos; a marca o ponto de chegada. Na fala cotidiana soa natural; no texto formal prefira a.','“— Cheguei em casa molhado de chuva.”','“Chegou à estação antes do primeiro trem.”'],
+    ['preferir','preferir mais do que / preferir a','preferir|prefiro|do que',1,'Na conversa enfatizamos dizendo “prefiro mil vezes café do que chá”.','Na escrita formal, preferir já traz a ideia de “mais” dentro dele: prefiro café a chá (sem “mais” nem “do que”).','Pense que preferir já significa “gostar mais”. Basta ligar os dois termos com a.','“— Prefiro muito mais escrever de manhã do que à noite.”','“Prefere o silêncio da manhã ao burburinho da tarde.”'],
+    ['implicar','implicar em / implicar (acarretar)','implicar|implica',1,'É comum ouvir “isso implica em novos custos”.','No sentido de acarretar/causar, a convenção formal dispensa em: isso implica novos custos. (Usa-se em quando significa envolver-se: implicou-se em confusão.)','Teste: troque por “acarreta”. Você diria “acarreta novos custos”, sem em.','“— Mudar o final implica em reescrever dois capítulos.”','“A revisão profunda implica cortes corajosos.”'],
+    ['esquecer-lembrar','esquecer / lembrar (-se de)','esquecer|esqueci|lembrar|lembrei',1,'Falamos tranquilamente “esqueci do livro” e “lembrei da história”.','Na escrita formal há um par simétrico: sem pronome, sem de (esqueci o livro); com pronome, com de (esqueci-me do livro).','Regra do pacote: ou vai sem os dois (lembrei o nome) ou vai com os dois (lembrei-me do nome).','“— Esqueci do guarda-chuva na sala!”','“Lembrou o endereço antigo; depois lembrou-se da chave sobre a mesa.”'],
+    ['namorar','namorar com / namorar alguém','namorar|namorava',1,'Quase todo brasileiro diz “ela namora com o Pedro”.','Na escrita formal clássica, namorar liga direto ao nome, sem com: ela namora Pedro.','No diálogo cotidiano “namorar com” soa muito mais humano; na prosa formal tradicional, corte o com.','“— Eles namoram faz tempo, ela namora com ele desde a faculdade.”','“Namorou a vizinha durante três verões antes da mudança.”'],
+    ['visar','visar o / visar ao','visar|visa',1,'No dia a dia dizemos “o projeto visa atender leitores”.','No sentido de ter como objetivo, a escrita formal usa visar a (visa ao equilíbrio / visa a atender); sem a significa mirar ou assinar (visar o cheque).','Objetivo = visar a; dar visto ou mirar = visar sem preposição.','“O livro visa ajudar quem começa a escrever.”','“A oficina visa à autonomia do escritor e visou o documento final.”'],
+    ['obedecer','obedecer o / obedecer ao','obedecer|obedece|desobedecer',1,'Na fala é normal dizer “obedeceu o sinal” ou “obedece a mãe”.','Na escrita formal, obedecer e desobedecer pedem a preposição a: obedecer ao sinal, obedecer à mãe.','Lembre que obedecer pede “a quem / a quê” (como responder a alguém).','“— O cachorro não obedeceu o comando.”','“O verso obedeceu à cadência da respiração.”'],
+    ['custar','custar a / eu custei a entender','custar|custei|custa',1,'No Brasil dizemos “custei pra entender” — super expressivo na fala!','Na escrita formal clássica, o sujeito de custar é a ação difícil: custou-me entender (foi difícil para mim entender).','Na fala colocamos a pessoa como sujeito; no formal, a dificuldade é o sujeito (“custou a ela aceitar”).','“— Custei a achar o caderno na bagunça.”','“Custou-lhe encontrar as palavras exatas para a carta.”'],
+    ['simpatizar','simpatizar-se / simpatizar com','simpatizar|antipatizar',1,'Às vezes escapa “eu me simpatizei com ela”.','Na escrita formal, simpatizar e antipatizar não levam pronome reflexivo: simpatizei com ela.','Basta cortar o “me/se”: simpatizei com a ideia.','“— Me simpatizei logo de cara com o livreiro.”','“Simpatizou imediatamente com o tom sereno do romance.”'],
+    ['aspirar','aspirar o / aspirar ao','aspirar|aspira',1,'Raramente diferenciamos na fala.','aspirar (sem a) = respirar/sugar (aspirar o ar); aspirar a = desejar, almejar (aspirar ao prêmio).','Respirar = direto (o ar); desejar um lugar/cargo = com a (ao cargo).','“Aspirou fundo o cheiro de terra molhada.”','“Aspirou o ar da serra enquanto aspirava a uma vida mais calma.”'],
+    ['pagar-perdoar','pagar / perdoar (coisa vs. pessoa)','pagar|perdoar|paguei|perdoou',1,'Falamos “paguei o padeiro” e “perdoei meu amigo” sem estranhamento.','Na escrita formal: paga-se/perdoa-se a coisa (direto) e à pessoa (com a): pagou a conta ao padeiro; perdoou a falha ao amigo.','Coisa = sem preposição; pessoa = com a (pagou ao fornecedor).','“— Já paguei o encanador hoje cedo.”','“Pagou a dívida ao livreiro e perdoou ao irmão o atraso.”'],
+    ['ansioso','ansioso por / para / de','ansioso|ansiosa',1,'Usamos “ansioso pra ver” no cotidiano.','Na escrita formal, aceita por (ansioso por notícias), para (ansioso para partir) e de (ansioso de paz).','Todas as três preposições são bem-vindas; evite apenas excesso de repetição na mesma frase.','“— Tô ansioso pra ler o próximo capítulo.”','“Estava ansiosa por receber as provas do livro.”'],
+    ['morar-residir','morar em / morar à rua','morar|residir|situado',1,'Dizemos sempre “moro na Rua das Flores”.','Na escrita formal, morar, residir e situado pedem em (na Rua das Flores), e não a (“à rua”).','Você mora dentro/na rua (em), nunca “à rua”.','“— Moro na rua da biblioteca.”','“A editora fica situada na Rua do Ouvidor.”'],
+    ['informar-avisar','informar algo a alguém / alguém de algo','informar|avisar|comunicar',1,'Na pressa às vezes juntamos dois complementos iguais (“informei a ele que...” vs “informei ele de...”).','Escolha uma das duas pontes: informar alguma coisa a alguém OU informar alguém de/sobre alguma coisa.','Nunca repita duas preposições nem deixe os dois sem preposição: ou “a ele algo” ou “ele de algo”.','“— Já avisei ele da reunião.”','“Informou aos leitores a nova data” ou “Informou os leitores da nova data.”'],
+    ['chamar','chamar alguém de / chamar a alguém','chamar|chamou',1,'Dizemos “chamei ele de poeta”.','No sentido de apelidar/qualificar, aceita chamar alguém de ou chamar a alguém: chamou-o de mestre / chamou-lhe mestre.','Na escrita contemporânea, “chamar [alguém] de [qualidade]” é claro e elegante.','“— Todo mundo chamava ele de professor.”','“Os vizinhos o chamavam de cronista da praça.”'],
+    ['entregar-domicilio','entregar em domicílio / a domicílio','domicilio|em domicilio|a domicilio',1,'O comércio popularizou “entrega a domicílio”.','Na escrita formal, entregar pede em (onde a entrega acontece): entrega em domicílio.','Compare: ninguém “entrega a casa”, entrega-se na casa (em domicílio).','“— A padaria faz entrega a domicílio.”','“A livraria realiza entregas em domicílio aos sábados.”'],
+
+    /* 2 · Concordância (14) */
+    ['haver-existir','haver (= existir) no singular','haver|havia|haviam|houve|houveram',2,'Na fala, “haviam muitas pessoas” aparece muito porque o ouvido pensa em “muitas pessoas”.','Na escrita formal, haver no sentido de existir é impessoal — fica sempre no singular: havia muitas pessoas, houve motivos.','Teste rápido: se puder trocar por existir, trave o haver no singular (havia, houve, haverá, deve haver).','“— Haviam umas dez cartas em cima da mesa.”','“Havia dez cartas sobre a mesa, e ainda pode haver outras na gaveta.”'],
+    ['existir-concorda','existir concorda com o plural','existir|existe|existem',2,'No cotidiano, é comum ouvir “existe muitas formas” quando o sujeito vem depois do verbo.','Ao contrário de haver, existir tem sujeito e concorda com ele: existem muitas formas, existiam razões.','Inverta a frase: “muitas formas existem”. Fica óbvio que vai para o plural!','“— Existe vários jeitos de começar um romance.”','“Existem vários caminhos para abrir o primeiro capítulo.”'],
+    ['fazer-tempo','fazer (tempo decorrido e clima)','faz|fazem|fazia|faziam',2,'“Fazem dois anos que não vou lá” é super comum na conversa brasileira.','Na escrita formal, fazer indicando tempo passado ou clima fica no singular: faz dois anos, fazia dias frios.','Teste: se der para trocar por há (há dois anos), deixe fazer no singular (faz dois anos).','“— Fazem três meses que comecei este caderno.”','“Faz três meses que o caderno foi aberto; fazia noites frias na serra.”'],
+    ['meio-meia','meio / meia (“meio cansada”)','meio|meia',2,'Na fala às vezes concordamos dizendo “ela tá meia cansada”.','Quando significa “um pouco” (advérbio), meio não varia: ela está meio cansada. Quando significa “metade” (numeral), varia: meia folha, meio-dia e meia (hora).','Teste: troque por “um pouco”. Se couber, fique sempre em meio; se for “metade”, concorde (meia xícara).','“— Ela chegou meia cansada da viagem.”','“Estava meio cansada ao meio-dia e meia, após beber meia xícara de café.”'],
+    ['bastante','bastante / bastantes','bastante|bastantes',2,'Quase sempre usamos bastante no singular para tudo.','Antes de adjetivo/verbo (= muito), não varia (estavam bastante felizes). Antes de substantivo plural (= muitos), pode ir ao plural: bastantes livros.','Teste: troque por “muitos”. Se virar “muitos”, cabe bastantes (ou use muitos para soar mais natural).','“— Tinha bastante livro antigo na estante.”','“Havia bastantes razões para celebrar; todos saíram bastante emocionados.”'],
+    ['anexo-obrigado','anexo / obrigado / mesmo / próprio','anexo|anexa|obrigado|obrigada|mesmo|proprio',2,'No dia a dia às vezes deixamos tudo no masculino neutro.','Na escrita formal, essas palavras concordam com quem falam ou a que se referem: seguem anexas as cartas; muito obrigada (quem diz é mulher); ela mesma escreveu.','Dica: “em anexo” é invariável; já “anexo/anexa” concorda com o documento.','“— Segue anexo as duas folhas que você pediu.”','“Seguem anexas as duas versões; ela mesma revisou e disse muito obrigada.”'],
+    ['menos','menos (nunca “menas”)','menos|menas',2,'“Menas” aparece às vezes na fala por analogia com “poucas”.','Na escrita formal, menos é invariável em qualquer situação: menos pessoas, menos páginas.','Menos nunca muda de roupa — serve para masculino, feminino, singular e plural.','“— Hoje veio menos gente do que ontem.”','“Com menos palavras, a cena ganhou mais força.”'],
+    ['proibido','é proibido / é proibida','proibido|proibida|necessario|bom',2,'Falamos “é proibido entrada” ou “é proibida a entrada” quase sem notar o artigo.','Sem artigo antes do substantivo, fica no masculino neutro: é proibido entrada / água é bom. Com artigo (a), concorda: é proibida a entrada / a água é boa.','Olhe para o artigo “a”: apareceu “a entrada”? Concorde (proibida). Sem artigo? Neutro (proibido).','“— É proibido entrar com mochila.”','“É proibido entrada sem convite; é proibida a entrada após o início da leitura.”'],
+    ['maioria','a maioria dos… (singular ou plural)','maioria|parte dos|grande parte',2,'Os dois jeitos soam bem no ouvido brasileiro.','Quando “a maioria” vem seguida de plural (“a maioria dos leitores”), a escrita formal aceita tanto o singular (preferiu) quanto o plural (preferiram).','Singular destaca o bloco; plural destaca as pessoas. Escolha o que soar melhor no ritmo da frase.','“— A maioria dos amigos gostaram do conto.”','“A maioria dos leitores elogiou o ritmo” ou “A maioria dos leitores elogiaram o ritmo.”'],
+    ['um-dos-que','um dos que (singular ou plural)','um dos que|uma das que',2,'Falamos espontaneamente nos dois números.','Na escrita formal, “um dos escritores que mais viajou / viajaram” aceita os dois — o plural é mais frequente, e o singular destaca exclusividade.','Se quiser dizer que só ele fez aquilo, use singular; se for parte de um grupo que faz, o plural brilha.','“— Ela é uma das autoras que mais escreve aqui.”','“Foi uma das crônicas que mais marcaram aquela edição.”'],
+    ['aluga-se','aluga-se / alugam-se (partícula se)','aluga-se|alugam-se|vende-se|vendem-se',2,'Placas de rua costumam dizer “vende-se casas” no singular.','Quando dá para inverter (“casas são vendidas”), a escrita formal concorda: vendem-se casas, revisam-se textos. Quando há preposição (“precisa-se de revisores”), fica no singular!','Teste da preposição: tem “de/em/a” depois do verbo (precisa-se de)? Singular! Não tem (alugam-se salas)? Plural!','“— Vende-se livros usados na feira.”','“Vendem-se livros raros; precisa-se de novos leitores.”'],
+    ['segue-seguem','segue / seguem (em e-mails e cartas)','segue|seguem',2,'Em e-mails rápidos muita gente abre sempre com “segue os arquivos”.','Como “os arquivos” é o sujeito que segue, a escrita formal concorda: seguem os arquivos, segue o manuscrito.','Inverta mentalmente: “os arquivos seguem”. Fica claro na hora.','“— Segue os capítulos revisados.”','“Seguem os capítulos revisados em formato editorial.”'],
+    ['trata-se','trata-se de (sempre singular)','trata-se|tratam-se',2,'Às vezes aparece “tratam-se de questões sérias” no esforço de caprichar.','Com a preposição de, o verbo tratar fica sempre no singular: trata-se de questões sérias.','Regra da preposição com se: “trata-se de” nunca vai para o plural.','“— Trata-se de dois contos antigos.”','“Trata-se de memórias guardadas em cadernos de papel.”'],
+    ['porcentagem','porcentagem (1% / 40% dos leitores)','porcento|por cento|percentual',2,'Alternamos livremente conforme o que vem depois.','O verbo concorda com o número ou com o termo que o especifica: 1% recusou; 40% dos leitores aprovaram; os 40% da turma preferiram.','Olhe para quem está mais perto e mais forte na frase: “1% dos casos” pode ficar no singular (1%) ou plural (casos).','“— 80% das pessoas gostaram da história.”','“Cerca de 80% dos leitores concluíram o capítulo sem pausa.”'],
+
+    /* 3 · Crase sem decoreba (12) */
+    ['crase-masculino','Crase: o teste do masculino (ao)','crase|ao|teste da crase',3,'Na fala não ouvimos diferença entre a e à.','A crase é a soma da preposição a + artigo feminino a. Se ao trocar a palavra feminina por uma masculina surgir “ao”, há crase!','Teste de 2 segundos: “Fui à livraria” → troque por mercado → “Fui ao mercado”. Deu “ao”? Vai crase!','“— Vou na livraria hoje.”','“Foi à livraria buscar a edição nova.”'],
+    ['crase-verbo','Nunca há crase antes de verbo','a falar|a andar|a partir|crase verbo',3,'Na dúvida, muita gente põe crase antes de verbos como “à partir” ou “à disposição” (este último é substantivo, ok!).','Antes de verbo no infinitivo (falar, andar, partir, escrever), nunca se usa crase: começou a escrever, disposto a ouvir.','Verbo não aceita artigo feminino “a”, então nunca há dois “as” para fundir.','“— Começou a chover forte.”','“Passou a revisar os capítulos a partir de segunda-feira.”'],
+    ['crase-masculina','Crase antes de palavra masculina','a prazo|a pe|a lapis|a mao',3,'Muita gente escreve “à prazo” ou “à pé” por costume visual.','Antes de palavra masculina (prazo, pé, lápis, cavalo, óleo), não há crase: a prazo, a pé, a lápis. (Exceção rara: “à moda de” subentendida, como “bife à milanesa”.)','Teste: palavra masculina nunca pede artigo feminino “a”.','“— Vim a pé escrevendo no celular.”','“Anotou o rascunho a lápis e voltou a pé para casa.”'],
+    ['crase-horas','Crase antes de horas exatas','as 8h|a uma hora|horas|as vezes',3,'No cotidiano escrevemos horas com ou sem acento.','Horas exatas e determinadas levam crase: às 14h, à meia-noite, à uma hora. (Sem crase se houver outra preposição antes: desde as 8h, após as 10h — exceto “até às/as”.)','Troque por “ao meio-dia”: “Chegou ao meio-dia” → “Chegou às 18h”.','“— A leitura começa às oito.”','“O encontro começa às 19h e segue até as 21h.”'],
+    ['crase-lugares','Crase com nomes de lugares (vou a, volto da)','crase lugar|vou a|volto da|a bahia',3,'Nem toda cidade ou estado leva artigo feminino.','Truque clássico imbatível: se você volta DAquele lugar, vai crase (vou à Bahia, volto da Bahia). Se volta DE, sem crase (vou a Brasília, volto de Brasília).','Se o lugar ganhar especificação, volta a ter crase: “vou à Brasília de minha infância”.','“— Vou a Curitiba e depois à Bahia.”','“Viajou a Ouro Preto no inverno e retornou à Bahia em março.”'],
+    ['crase-locucoes','Locuções femininas (às vezes, à toa, à noite)','as vezes|a toa|a noite|a vista|a direita',3,'Às vezes escrevemos “as vezes” sem acento na pressa.','Expressões femininas de tempo, modo e lugar levam crase: às vezes, à noite, à tarde, à direita, à vista, às pressas, à mão. (Atenção: “à toa” tem crase; “à-toa” adjetivo leva hífen.)','O acento ajuda o olho a distinguir “às vezes” (de vez em quando) de “as vezes” (as ocasiões).','“— Às vezes eu escrevo à noite.”','“Às vezes relia à mão o que escrevera à noite.”'],
+    ['crase-facultativa','Os 3 casos de crase facultativa','crase facultativa|ate a|minha|sua',3,'Aqui não existe pressão — os dois modos são corretos!','A crase é opcional antes de: (1) nomes próprios femininos (“escrevi a/à Maria”), (2) possessivos femininos no singular (“entreguei a/à minha irmã”), e (3) depois de “até” (“fui até a/à praça”).','Escolha a versão que soar mais limpa e mantenha o mesmo padrão no texto todo.','“— Entreguei o livro à minha tia.”','“Dedicou o poema a sua avó” ou “Dedicou o poema à sua avó.”'],
+    ['crase-pronomes','Crase antes de pronomes (ela, você, essa)','a ela|a voce|a essa|a mesma',3,'Às vezes colocamos crase em “à ela” ou “à você” achando mais elegante.','Antes de pronomes pessoais (ela, você) e indefinidos (toda, qualquer, uma), não há crase: disse a ela, entregou a você, a cada página.','Exceção: “àquele/àquela/àquilo” fundem a + aquele (“refiro-me àquela carta”).','“— Entreguei a carta a ela ontem.”','“Escreveu a você sem pressa, referindo-se àquela tarde de abril.”'],
+    ['crase-plural','“a” no singular + palavra no plural','a pessoas|as pessoas|a mulheres',3,'Troca muito comum ao revisar frases no plural.','Se o “a” está no singular antes de palavra feminina no plural, NUNCA leva crase: “refiro-me a histórias antigas”. Com artigo plural, sim: “às histórias antigas”.','Regra de ouro: “a” no singular + plural = crase nem a pau!','“— O livro fala a pessoas de todas as idades.”','“Dedicou a obra a escritoras independentes” ou “às escritoras independentes.”'],
+    ['a-partir-de','a partir de (sempre sem crase)','a partir|partir',3,'É uma das crases indevidas mais comuns em textos formais.','Como “partir” é verbo, nunca há crase: a partir de hoje, a partir do capítulo 3.','Viu “partir”? É verbo → sem crase!','“— A partir de amanhã vou escrever todo dia.”','“A partir da terceira revisão, o diálogo ganhou leveza.”'],
+    ['a-respeito-de','a respeito de / em relação a','a respeito|em relacao',3,'“Respeito” é masculino, então “a respeito de” nunca leva crase.','Já “em relação a” pode levar crase se o termo seguinte for feminino com artigo: em relação à capa / em relação ao livro.','Teste do masculino: “em relação ao livro” → “em relação à capa”.','“— Queria falar a respeito da capa.”','“A respeito do prefácio, fez ajustes em relação à versão anterior.”'],
+    ['frente-a','frente a / diante de / face a','frente a|diante de|face a',3,'Usamos muito “frente à” em ensaios e artigos.','Diante de nunca leva crase (usa “de”). Frente a e face a levam crase apenas antes de feminino determinado (frente à crise / frente ao desafio).','Troque por “frente ao desafio” para checar se o feminino pede crase.','“— Diante da folha em branco, respirei fundo.”','“Frente à página em branco, escolheu começar por uma lembrança.”'],
+
+    /* 4 · Grafia, acentos e hífen (12) */
+    ['pode-pode','pode / pôde','pode|pode acento|pode passado',4,'No Brasil pronunciamos igualzinho o presente (póde) e o passado (pôde)? Não — na fala a vogal muda de aberta para fechada!','O acento circunflexo em pôde continua obrigatório após o Acordo Ortográfico para marcar o passado: ontem ele não pôde vir; hoje ele pode.','Presente = pode (sem chapéu). Passado = pôde (com chapéu).','“— Ontem ele não pôde vir, hoje ele pode.”','“Não pôde terminar o capítulo ontem, mas hoje pode concluí-lo.”'],
+    ['por-por','por / pôr','por|por verbo',4,'Mesma pronúncia na maioria das frases.','por (sem acento) é preposição (“pelo caminho, por amor”); pôr (com acento) é o verbo colocar.','Teste rápido: se der para trocar por “colocar”, use o chapéu em pôr.','“— Vou pôr o caderno na mochila por segurança.”','“Decidiu pôr um ponto final por respeito ao ritmo da cena.”'],
+    ['tem-tem','tem / têm e vem / vêm','tem|vem|mantem|contem',4,'Pronúncia igual no singular e no plural.','No presente: ele tem / eles têm; ele vem / eles vêm. Nos derivados (manter, conter, intervir): singular leva agudo (mantém), plural leva circunflexo (mantêm).','Lembre do chapéu duplo do plural: “eles têm”, “elas vêm”, “os livros contêm”.','“— Esse caderno tem notas; aqueles têm poemas.”','“O capítulo contém três cenas; os demais mantêm o mesmo compasso.”'],
+    ['para-acordo','para (sem acento depois do Acordo)','para|para verbo',4,'Quem estudou antes de 2009 ainda lembra de “pára” com acento.','Pelo Acordo Ortográfico vigente, tanto a preposição quanto o verbo parar escrevem-se sem acento: o trem para para embarque.','O contexto resolve tudo — não precisa mais de acento em para.','“— Ele nunca para de escrever!”','“A chuva não para para quem espera na varanda.”'],
+    ['ideia-voo','ideia / estreia / voo / enjoo (sem acento)','ideia|estreia|voo|enjoo|heroi|papeis',4,'Antes do Acordo, levavam acento agudo ou circunflexo.','Ditongos abertos ei/oi em paroxítonas perderam o acento (ideia, plateia, estreia, heroico, joia), assim como oo/ee dobrados (voo, enjoo, leem, veem).','Atenção: oxítonas continuam com acento! (herói, papéis, troféu, anéis).','“— Tive uma ideia boa pra estreia do livro.”','“A ideia nasceu durante o voo; os leitores veem o detalhe na estreia.”'],
+    ['hifen-pratico','Hífen prático: iguais separam, diferentes juntam','hifen|anti|auto|micro|sub|inter',4,'O hífen parece um labirinto, mas 80% dos casos seguem uma regra só!','Com prefixos comuns (auto, anti, contra, extra, infra, inter, micro, semi, super): letras iguais separam com hífen (anti-inflamatório, micro-ondas, inter-regional); vogais diferentes juntam (autoestima, infraestrutura).','Atenção a R e S depois de vogal: dobram sem hífen (antissocial, minissaia, contrarregra)! E antes de H, sempre hífen (anti-herói).','“— Preciso cuidar da minha autoestima.”','“O anti-herói da trama enfrentou um problema anti-inflamatório e antissocial.”'],
+    ['com-certeza','com certeza / de repente / a gente','com certeza|concerteza|de repente|derrepente|a gente|agente',4,'Na fala soam como uma palavra só, por isso às vezes juntamos ao digitar rápido.','Na escrita formal, escrevem-se sempre separados: com certeza, de repente, a gente (= nós; “agente” junto é profissão/quem age).','Pense nos blocos: com + certeza; de + repente; a + gente (nós).','“— De repente a gente termina hoje, com certeza!”','“De repente, a gente percebeu que o agente secreto era o narrador.”'],
+    ['empecilho','empecilho / privilégio / exceção','empecilho|impecilho|privilegio|previlegio|excecao|excessao',4,'Pelo som da fala, trocamos facilmente e/i ou ç/ss nessas palavras.','Grafias de referência: empecilho (com e), privilégio (com i), exceção (com ç), meteorologia, beneficente, reivindicar.','Lembre das famílias: empecilho vem de empeço; privilégio vem de privado; exceção vem de exceto.','“— Não teve nenhum empecilho, foi um privilégio.”','“Sem exceção, cada empecilho virou matéria literária.”'],
+    ['jeito-mexer','jeito / enxergar / mexer / xícara','jeito|enxergar|mexer|xicara|viajar',4,'G/J e X/CH têm o mesmo som na fala.','Grafias de referência: jeito (j), majestade (j), enxergar (x), mexer (x), xícara (x), encher (ch — vem de cheio!).','Dica boa: depois de “en-” quase sempre é X (enxergar, enxada, enxugar) — salvo “encher” e “encharcar” (vêm de cheio e charco).','“— Vou mexer o café na xícara.”','“Deu um jeito de enxergar a rua enquanto mexia a xícara de café.”'],
+    ['a-toa','à toa / à-toa','a toa|atoa',4,'Pronunciamos como uma expressão única.','à toa (separado, com crase, sem hífen) = sem rumo, sem motivo (“andar à toa”); à-toa (com hífen) = sem valor, banal (“um objeto à-toa”).','Andar sem rumo = à toa. Qualidade de algo sem importância = à-toa.','“— Fiquei andando à toa pelo bairro.”','“Passou a tarde à toa, sem se importar com comentários à-toa.”'],
+    ['dia-a-dia','dia a dia (sem hífen)','dia a dia|dia-a-dia',4,'Antigamente “dia-a-dia” levava hífen quando era substantivo.','Depois do Acordo Ortográfico, perdeu o hífen em todos os casos: o dia a dia da oficina, escrevo dia a dia.','Sem hífen também em: fim de semana, sala de jantar, ponto de vista.','“— No dia a dia eu escrevo meia hora.”','“O dia a dia da revisão pede calma e café fresco.”'],
+    ['bem-vindo','bem-vindo / bem-estar / mal-humorado','bem-vindo|bem vindo|bem-estar|mal-humorado',4,'Na pressa muitas vezes omitimos o hífen.','O prefixo bem- quase sempre leva hífen (bem-vindo, bem-estar, bem-feito, bem-humorado); mal- leva hífen antes de vogal ou H (mal-educado, mal-humorado), mas junta antes de consoante (malfeito).','Receber alguém = bem-vindo (com hífen).','“— Seja bem-vindo ao caderno novo!”','“O silêncio trouxe bem-estar ao narrador, antes mal-humorado.”'],
+
+    /* 5 · Os quatro porquês e conectivos (10) */
+    ['porques','Os quatro porquês (por que / porque / por quê / porquê)','por que|porque|por que|porque|porques',5,'Todos têm exatamente o mesmo som na fala!','por que = pergunta ou “pelo qual”; porque = resposta/explicação (“pois”); por quê = fim de frase/antes de pausa; porquê = substantivo (“o motivo”).','Guia de bolso: (1) Pergunta/pelo qual → por que; (2) Explicação → porque; (3) Fim de frase → por quê; (4) Com “o/um” antes → o porquê.','“— Por que você parou? — Porque faltou café!”','“Não sei por que ela partiu nem o porquê da pressa; partiu porque precisava, mas nunca disse por quê.”'],
+    ['tampouco','tampouco / tão pouco','tampouco|tao pouco',5,'Pronúncia praticamente idêntica.','tampouco (junto) = também não; tão pouco (separado) = muito pouco (quantidade).','Troque por “também não” (tampouco) ou por “muito pouco” (tão pouco).','“— Não li o final, tampouco contei pra ninguém.”','“Dormiu tão pouco naquela noite que não abriu o caderno, tampouco respondeu às cartas.”'],
+    ['demais','demais / de mais','demais|de mais',5,'Mesmo som na conversa.','demais (junto) = em excesso / muito / os outros; de mais (separado) = oposto de “de menos”.','Teste do oposto: se der para trocar por “de menos”, separe (nada de mais / nada de menos).','“— Esse capítulo ficou bom demais!”','“Não havia nada de mais na carta, mas ele se preocupou demais.”'],
+    ['devagar','devagar / de vagar','devagar|de vagar',5,'Quase sempre usamos no sentido de lentamente.','devagar (junto) = lentamente; de vagar (separado, raro) = sem pressa, com tempo livre (vagar = ócio).','Para velocidade lenta, escreva sempre junto: devagar.','“— Lê bem devagar pra ouvir o ritmo.”','“Caminhou devagar pela ponte para ouvir o rio.”'],
+    ['embaixo','embaixo / debaixo / em cima','embaixo|debaixo|em cima|encima',5,'Às vezes dá dúvida se “embaixo” e “em cima” seguem a mesma regra — e não seguem!','embaixo e debaixo escrevem-se juntos; em cima escreve-se sempre separado!','Truque visual: embaixo/debaixo ficam juntos; em cima fica separado (como “em baixo” já não se usa).','“— O caderno tá embaixo do livro, em cima da mesa.”','“Guardou o rascunho debaixo do travesseiro e o dicionário em cima da cômoda.”'],
+    ['apesar-embora','apesar de / embora','apesar de|embora|apesar que',5,'Na fala dizemos “apesar que choveu” — muito comum e compreensível.','Na escrita formal, “apesar” pede “de” (apesar de ter chovido / apesar da chuva); antes de verbo conjugado sem “de”, use embora (embora tenha chovido).','Com “de” + infinitivo/substantivo → apesar de. Com verbo conjugado → embora.','“— Apesar que era tarde, a gente continuou.”','“Embora fosse tarde — e apesar do cansaço —, terminou a cena.”'],
+    ['enquanto-no-entanto','enquanto / no entanto','enquanto|no entanto|entretanto',5,'Às vezes usamos “enquanto” para marcar contraste forte.','enquanto marca tempo simultâneo ou contraste paralelo; no entanto / porém / todavia marcam quebra clara de expectativa.','Se duas ações ocorrem ao mesmo tempo, enquanto brilha; se quiser virar a ideia, use mas / no entanto.','“— Enquanto eu escrevia, a chuva caía lá fora.”','“Queria encerrar o conto ali; no entanto, a personagem pediu mais uma página.”'],
+    ['a-medida-que','à medida que / na medida em que','a medida que|na medida em que',5,'É comum misturar as duas e dizer “à medida em que”.','à medida que = proporção gradual (conforme); na medida em que = causa/condição (visto que).','Nunca cruze as duas! Proporção = à medida que (com crase). Causa = na medida em que (sem crase).','“— Conforme eu escrevo, a história vai abrindo.”','“À medida que revisava, o texto clareava, na medida em que cortava excessos.”'],
+    ['ao-inves-em-vez','ao invés de / em vez de','ao inves|em vez',5,'Usamos as duas expressões como se fossem iguais.','em vez de serve para qualquer troca (“em lugar de”); ao invés de pede oposição exata (“ao contrário de”: subiu ao invés de descer).','Na dúvida, “em vez de” funciona sempre — serve para qualquer substituição!','“— Em vez de cortar, eu reescrevi o começo.”','“Em vez de escolher chá, pediu café; e calou-se ao invés de gritar.”'],
+    ['onde-em-que','onde vs. em que (fora de lugar físico)','em que|no qual|na qual|onde',5,'Na fala, usamos “onde” para tempo, situação e conversa (“a época onde...”, “um filme onde...”).','Na escrita formal, onde reserva-se a lugar (físico ou geográfico). Para tempo, livro, situação ou ideia, prefira em que / no qual / na qual.','Pergunte: dá para pôr um alfinete no mapa? Sim → onde. Não → em que.','“— É um momento onde todo mundo fica quieto.”','“Era um momento em que o silêncio dizia mais que o diálogo.”'],
+
+    /* 6 · Vírgula de sentido e respiração (10) */
+    ['virgula-sujeito','Nunca separar sujeito e verbo com vírgula','virgula sujeito|sujeito verbo|virgula',6,'Quando o sujeito é comprido, dá vontade de pôr vírgula para respirar antes do verbo!','Na convenção editorial, não se coloca vírgula única entre o sujeito e o verbo, mesmo quando o sujeito é longo.','Respire na leitura em voz alta, mas só ponha vírgulas ali se houver um comentário intercalado entre DUAS vírgulas.','“O caderno antigo da minha avó, ficou na estante.” (pausa de respiração)','“O caderno antigo da minha avó ficou na estante.” / “O caderno, guardado há anos, ficou na estante.”'],
+    ['virgula-vocativo','Vírgula no vocativo (chamamento)','vocativo|vamos comer criancas',6,'Na conversa a entonação já mostra com quem falamos.','Quando chamamos alguém na frase (vocativo), a vírgula é obrigatória — ela muda totalmente o sentido!','Compare: “Vamos comer, crianças!” (chamando as crianças) vs. “Vamos comer crianças!” (terror!).','“— Olha aqui amigo, lê esse trecho.”','“— Olha aqui, amigo, leia este trecho.”'],
+    ['virgula-aposto','Vírgula no aposto explicativo','aposto|explicacao entre virgulas',6,'Quando abrimos um comentário no meio da frase para explicar quem é alguém.','O aposto explicativo vem isolado por duas vírgulas (ou travessões/parênteses) — como uma janela que abre e fecha.','Se você puder tirar o trecho do meio e a frase continuar inteira, feche as duas vírgulas!','“— Machado de Assis, o autor de Dom Casmurro, escreveu no Rio.”','“Cora Coralina, poeta da Cidade de Goiás, publicou seu primeiro livro aos 75 anos.”'],
+    ['virgula-adversativa','Vírgula antes de mas, porém, contudo','mas virgula|porem|contudo|todavia|entretanto',6,'Na escrita rápida muitas vezes esquecemos a vírgula antes do mas.','Usa-se vírgula antes de conjunções adversativas (mas, porém, contudo, todavia, entretanto). Quando porém/contudo entram no meio da frase, ficam entre vírgulas.','Atenção: “mas” fica sempre no começo da virada (com vírgula antes, não depois).','“— Queria escrever mais mas o sono venceu.”','“Queria escrever mais, mas o sono venceu. O rascunho, porém, ficou salvo.”'],
+    ['virgula-deslocado','Vírgula após tempo ou lugar no início da frase','adjunto deslocado|naquela noite|ontem',6,'Começar a frase pelo cenário (“Naquela tarde de chuva...”) é super comum na literatura.','Quando o adjunto de tempo/lugar/modo é longo e vem no início, a vírgula organiza o cenário. Se for curtíssimo (“Ontem choveu”), a vírgula é opcional.','Expressão longa no começo (3+ palavras) → vírgula. Palavra curta (“Hoje”) → você escolhe pelo ritmo.','“— Naquela tarde quente de dezembro a cidade parou.”','“Naquela tarde quente de dezembro, a cidade inteira parou.”'],
+    ['virgula-antes-e','Vírgula antes do “e” (quando muda o sujeito)','virgula antes de e|sujeitos diferentes',6,'Muita gente aprendeu na escola que “nunca vai vírgula antes de e” — isso é mito!','Vai vírgula antes de “e” quando os sujeitos são diferentes (ajuda a leitura), quando o “e” vale “mas”, ou para dar ritmo literário (polissíndeto).','“A chuva caiu, e a casa silenciou.” — sujeitos diferentes, vírgula super bem-vinda!','“— Ela abriu o caderno e ele passou o café.”','“Ela abriu o caderno, e o vento virou duas folhas sozinho.”'],
+    ['virgula-ou-etc','Vírgula antes de “ou” e “etc.”','virgula etc|etc|virgula ou',6,'Dúvida clássica ao fechar listas.','Com “etc.”, a vírgula antes é facultativa (ambos os usos existem; hoje muitos preferem vírgula). Nunca coloque “e etc.”, pois “et” já significa “e” em latim!','Lembre: “etc.” = “e outras coisas”, então dispensa o “e” antes.','“— Trouxe cadernos, lápis, borrachas e etc.”','“Trouxe cadernos, lápis, borrachas, etc.”'],
+    ['travessao-parenteses','Vírgulas, travessões ou parênteses?','travessao|parenteses|inciso',6,'Os três servem para abrir um comentário dentro da frase — o que muda é o volume de voz.','Vírgulas integram a informação suavemente; travessões dão destaque dramático/literário; parênteses sussurram uma nota à parte.','Escolha como diretor de cena: vírgula (suave), travessão (destaque), parêntese (cochicho).','“— Ele — que nunca chorava — fechou o livro devagar.”','“A carta — escrita a lápis na estação — mudou o rumo da história.”'],
+    ['virgula-enumeracao','Vírgula em listas e enumerações','enumeracao|lista virgula',6,'Separamos itens numa sequência natural.','Separe itens de mesma função por vírgula e feche o último com “e” (sem vírgula antes do “e” na lista simples, salvo para evitar ambiguidade).','Se os itens já tiverem vírgulas internas, use ponto e vírgula (;) entre eles!','“— Na mesa tinha café, pão, caderno e caneta.”','“Sobre a mesa havia café fresco, folhas soltas, um dicionário e a caneta.”'],
+    ['ou-seja','ou seja / isto é / a saber / por exemplo','ou seja|isto e|por exemplo',6,'Expressões de explicação muito usadas em ensaios e crônicas.','Essas expressões explicativas vêm sempre isoladas por vírgulas (antes e depois).','Pense nelas como uma pausa para traduzir o que você acabou de dizer.','“— O app funciona offline ou seja não precisa de internet.”','“O ateliê funciona sem rede, ou seja, seus textos permanecem no aparelho.”'],
+
+    /* 7 · Pronomes e ritmo brasileiro (8) */
+    ['proclise-inicio','“Me diga” vs. “Diga-me” (início de frase)','me diga|diga-me|te amo|proclise|enclise',7,'No português brasileiro falado, começar frase com pronome (“Me empresta”, “Te amo”, “Se cuida”) é a nossa melodia natural!','Na escrita formal tradicional, evita-se abrir período com pronome oblíquo: prefere-se “Diga-me” ou coloca-se um sujeito antes (“Eu te amo”, “Você me conta”).','Em diálogos brasileiros, “Diga-me” pode soar artificial; em cartas formais, colocar “Eu” antes (“Eu me lembro”) resolve com naturalidade!','“— Me conta como termina essa história.”','“Conte-me como termina a história” ou “Você me conta como termina?”'],
+    ['palavras-atrativas','Palavras que puxam o pronome (não me, que se, já lhe)','nao me|que se|ja lhe|nunca me',7,'O brasileiro acerta isso quase sempre de ouvido!','Palavras negativas (não, nunca), pronomes relativos (que, onde), advérbios (já, sempre, ainda) e conjunções (quando, embora) puxam o pronome para antes do verbo: “não me disse”, “o livro que se abriu”.','Confie no seu ouvido brasileiro — aqui a fala e a norma formal andam de mãos dadas!','“— Ele nunca me contou esse segredo.”','“A carta que se perdeu ainda me comove.”'],
+    ['locucao-pronome','Pronome no meio de dois verbos (“vou te contar”)','vou te|posso te|estou te|locucao verbal',7,'“Vou te contar”, “quero te ver”, “estava me lembrando” é a alma do português brasileiro.','Na escrita formal moderna do Brasil, “vou te contar” / “vou lhe dizer” é amplamente aceito; também existem “vou contar-te” e “vou dizer-lhe”.','Só evite hífen errado quando não há enclítico: escreva “vou te dizer” (sem hífen) ou “vou dizer-te”.','“— Vou te mandar a nova versão hoje.”','“Vou lhe enviar a nova versão” ou “Enviarei a nova versão hoje.”'],
+    ['para-eu-para-mim','para eu fazer / para mim','para eu|para mim|pra eu|pra mim',7,'Na fala rápida às vezes sai “pra mim fazer”.','Regra simples: “mim” nunca pratica verbo! Se houver um verbo depois (fazer, ler, escrever), use eu (“para eu ler”). No fim da frase ou sem verbo, use mim (“trouxe para mim”).','Teste de ouro: “Mim não faz nada!” — antes de verbo, sempre “para eu”.','“— Trouxe o livro pra eu ler no trem.”','“Deixou o manuscrito sobre a mesa para mim; deixou-o para eu revisar.”'],
+    ['entre-mim-e-voce','entre mim e você (não “entre eu e você”)','entre mim|entre eu',7,'Como treinamos “para eu”, às vezes exageramos e dizemos “entre eu e você”.','Depois da preposição “entre”, usa-se sempre o pronome tônico mim (e ti): entre mim e você, entre mim e ela.','Não há verbo sendo conjugado por “eu” aqui — é só a preposição “entre” + “mim”.','“— Isso fica entre eu e você.”','“Aquele segredo permaneceu entre mim e você.”'],
+    ['ver-ele-ve-lo','ver ele / vê-lo (objeto direto)','ver ele|ve-lo|encontrei ele|o encontrei',7,'Na conversa brasileira, “vi ele ontem” e “chamei ela” são universais.','Na escrita formal, ele/ela funcionam como sujeito; como objeto, viram o/a/lo/la/no/na: vi-o ontem / eu o vi ontem; encontrei-a na praça.','Dica para soar natural sem formalismo duro: use “eu o vi” ou repita o nome/substantivo (“vi o rapaz”).','“— Vi ela passando na frente da livraria.”','“Eu a vi passar diante da livraria” ou “Vi a escritora passar.”'],
+    ['dar-para-ele','dar para ele / dar-lhe','dar-lhe|lhe|para ele',7,'Na fala dizemos “dei o livro pra ele” e “falei pra ela”.','Na escrita formal, tanto “dei o livro a ele” quanto “dei-lhe o livro” são corretos. Lembre: “lhe” substitui “a ele / a ela” (nunca use “vi-lhe” para ver alguém).','Use “lhe” só quando couber “a ele/ela” (“entreguei-lhe” = entreguei a ela).','“— Contei tudo pra ele ontem.”','“Contou-lhe toda a história” ou “Contou a história a ele.”'],
+    ['este-esse','este / esse / aquele','este|esse|aquele|isto|isso',7,'Na fala usamos quase só “esse/isso” para tudo.','Na escrita formal: este/isto aponta para o que está perto ou vai ser dito agora; esse/isso retoma o que acabou de ser dito; aquele/aquilo aponta para algo distante.','Lembre no texto: “Isto é o que penso: ...” (vai anunciar) vs. “... e isso mudou tudo” (já foi dito).','“— Esse livro aqui na minha mão é ótimo.”','“Este caderno que seguro guarda o começo; esse detalhe que você citou fechou a trama.”'],
+
+    /* 8 · Verbos traiçoeiros (8) */
+    ['ver-vir','quando eu vir / quando eu vier','quando eu vir|quando eu vier|se eu vir|ver|vir',8,'Como “ver” e “vir” se parecem, quase todo mundo diz “quando eu ver ele”.','No futuro do subjuntivo: verbo VER vira vir (“quando eu vir o filme”); verbo VIR vira vier (“quando eu vier para casa”).','Troque por “quando eles...”: “quando eles virem” (ver) vs. “quando eles vierem” (vir).','“— Quando eu ver a capa pronta, te aviso.”','“Quando eu vir a prova impressa e quando você vier à oficina, celebraremos.”'],
+    ['compostos-ter-vir-por','manter, intervir, propor, compor','interveio|interviu|manteve|propos|compus',8,'No cotidiano é comum conjugar “ele interviu” ou “ela mantiu”.','Os verbos compostos copiam 100% o verbo-mãe (ter, vir, pôr): intervir copia vir (interveio, interviesse); manter copia ter (manteve, mantivesse); propor copia pôr (propôs, propuser).','Corte o prefixo mentalmente: se você diz “ele veio”, então é “ele interveio” (nunca interviu)!','“— O editor interviu na hora certa.”','“O editor interveio com calma, manteve a voz do autor e propôs um corte leve.”'],
+    ['trazer','trazer: trouxe, trouxesse, trouxer','trazer|trouxe|trouxesse|trouxer|traze',8,'Na fala às vezes surge “trouce” na escrita ou confusão com “trago”.','Grafias de referência: eu trouxe, se ele trouxesse, quando você trouxer — sempre com X!','Família do trazer no passado: tudo com X (trouxe, trouxemos, trouxeram).','“— Se você trouxer o rascunho, a gente lê.”','“Quando trouxer os cadernos, revisaremos o que ela trouxe ontem.”'],
+    ['houve-houveram','houve (nunca “houveram problemas”)','houve|houveram',8,'No passado, o ouvido puxa “houveram problemas” para combinar com o plural.','Como haver (= existir/acontecer) é impessoal, no passado fica sempre no singular: houve problemas, houve mudanças.','Troque por “aconteceram”: se funcionar, trave o haver em “houve”.','“— Houveram dois atrasos na gráfica.”','“Houve dois atrasos na gráfica, mas o livro chegou a tempo.”'],
+    ['tem-ha','tem gente / há pessoas (ter impessoal)','tem gente|tem muito|ha pessoas',8,'No Brasil, “tem muita gente”, “tinha um livro na mesa” é a marca mais querida da nossa língua falada (e até da literatura moderna — Drummond escreveu “No meio do caminho tinha uma pedra”!).','Em textos muito formais/acadêmicos, costuma-se preferir haver ou existir (“há muitas pessoas”, “havia um livro sobre a mesa”).','Em crônica, poesia e ficção, “tinha uma pedra” tem alma brasileira; em texto oficial/técnico, troque por “havia”.','“— Tinha um caderno aberto em cima da mesa.”','“Havia um caderno aberto sobre a mesa da biblioteca.”'],
+    ['adequar','adequar (como conjugar no presente)','adequar|adequa|adeque',8,'Muitos ficam travados sem saber se dizem “eu adéquo” ou “ele adéqua”.','Na escrita tradicional, adequar é defectivo no presente (só se usam adequamos/adequais); hoje já se encontra “adequa”, mas para soar 100% seguro, use “ajustar”, “adaptar” ou “torna adequado”.','Truque de escritor: se a forma travar a língua, troque por “adapta” ou “ajusta” — fica mais claro!','“— Esse tom se adapta bem à cena.”','“O autor ajustou o ritmo do parágrafo para adequá-lo à leitura em voz alta.”'],
+    ['reaver','reaver (copia o verbo haver)','reaver|reouve|reaveu',8,'Quase sempre dá vontade de dizer “ele reaveu o livro”.','Reaver segue o verbo haver (só existe nas formas em que haver tem a letra V): ele reouve, nós reouvemos, se ele reouvesse.','Se não existe “eu havo”, não existe “eu reavo” — diga “recupero” no presente e “reouve” no passado!','“— Finalmente ele recuperou o caderno perdido.”','“Meses depois, a autora reouve o manuscrito original.”'],
+    ['precaver','precaver-se (como usar sem travar)','precaver|precaveu|previna',8,'Ninguém usa “eu precavo” — soa estranho até no ouvido!','Precaver-se só se conjuga no passado/futuro (precaveu-se, precaver-se) e nas pessoas nós/vós no presente. No presente do singular, use prevenir-se ou acautelar-se.','No presente diga “eu me previno”; no passado, “ela se precaveu” funciona perfeitamente.','“— Eu sempre me previno salvando uma cópia.”','“A escritora precaveu-se exportando uma cópia .scrvrl antes da viagem.”']
+  ];
+
+  function normalizeKey(str) {
+    return String(str || '').toLowerCase()
+      .replace(/[áàâãä]/g, 'a').replace(/[éèêë]/g, 'e').replace(/[íìîï]/g, 'i')
+      .replace(/[óòôõö]/g, 'o').replace(/[úùûü]/g, 'u').replace(/ç/g, 'c')
+      .replace(/[^a-z0-9\s-]/g, ' ').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+  }
+
+  var entries = null;
+  var keyIndex = null;
+
+  function hydrate() {
+    if (entries) { return; }
+    entries = [];
+    keyIndex = {};
+    var i, r, item, keys, k, nk, words, wi;
+    for (i = 0; i < RAW.length; i += 1) {
+      r = RAW[i];
+      keys = String(r[2] || '').split('|');
+      item = {
+        id: r[0],
+        titulo: r[1],
+        chaves: keys,
+        categoria: CATEGORIES[r[3]] ? CATEGORIES[r[3]].id : 'paronimos',
+        categoriaLabel: CATEGORIES[r[3]] ? CATEGORIES[r[3]].label : '',
+        fala: r[4],
+        formal: r[5],
+        porque: r[6],
+        exemploFala: r[7],
+        exemploFormal: r[8],
+        _search: normalizeKey(r[1] + ' ' + r[2] + ' ' + r[4] + ' ' + r[5] + ' ' + r[6])
+      };
+      entries.push(item);
+      for (k = 0; k < keys.length; k += 1) {
+        nk = normalizeKey(keys[k]);
+        if (!nk) { continue; }
+        if (!keyIndex['$' + nk]) { keyIndex['$' + nk] = []; }
+        if (keyIndex['$' + nk].indexOf(item) === -1) { keyIndex['$' + nk].push(item); }
+        words = nk.split(' ');
+        if (words.length === 1 && nk.length >= 2) {
+          /* já indexado */
+        } else {
+          for (wi = 0; wi < words.length; wi += 1) {
+            if (words[wi].length >= 4) {
+              var wk = '$' + words[wi];
+              if (!keyIndex[wk]) { keyIndex[wk] = []; }
+              if (keyIndex[wk].indexOf(item) === -1) { keyIndex[wk].push(item); }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function listAll() {
+    hydrate();
+    return entries.slice();
+  }
+
+  function byIdEntry(id) {
+    hydrate();
+    var i;
+    for (i = 0; i < entries.length; i += 1) {
+      if (entries[i].id === id) { return entries[i]; }
+    }
+    return null;
+  }
+
+  function lookupWord(word) {
+    hydrate();
+    var nk = normalizeKey(word);
+    if (!nk) { return null; }
+    var hits = keyIndex['$' + nk];
+    return (hits && hits.length) ? hits[0] : null;
+  }
+
+  function search(query, categoryId) {
+    hydrate();
+    var q = normalizeKey(query);
+    var cat = categoryId || '';
+    var exact = [], prefix = [], body = [], i, item, tNorm;
+    for (i = 0; i < entries.length; i += 1) {
+      item = entries[i];
+      if (cat && item.categoria !== cat) { continue; }
+      if (!q) { exact.push(item); continue; }
+      tNorm = normalizeKey(item.titulo);
+      if (tNorm === q || (keyIndex['$' + q] && keyIndex['$' + q].indexOf(item) !== -1)) {
+        exact.push(item);
+      } else if (tNorm.indexOf(q) !== -1) {
+        prefix.push(item);
+      } else if (item._search.indexOf(q) !== -1) {
+        body.push(item);
+      }
+    }
+    return exact.concat(prefix, body);
+  }
+
+  root.Escr.dificuldades = {
+    manifesto: MANIFESTO,
+    categories: CATEGORIES,
+    list: listAll,
+    byId: byIdEntry,
+    lookupWord: lookupWord,
+    search: search,
+    normalizeKey: normalizeKey
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
+/* Fonte: src/ui/dificuldades-ptbr.js */
+/* Interface editorial do Guia "Usos da Língua" (Dicionário de Dificuldades PT-BR) — ES5 */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+
+  function byId(id) { return document.getElementById(id); }
+  function on(el, ev, fn) { if (el) { el.addEventListener(ev, fn, false); } }
+  function mk(tag, cls, txt) {
+    var n = document.createElement(tag);
+    if (cls) { n.className = cls; }
+    if (typeof txt === 'string') { n.textContent = txt; }
+    return n;
+  }
+
+  root.Escr.mountUsosLingua = function (opts) {
+    var data = root.Escr.dificuldades;
+    var container = byId((opts && opts.containerId) || 'usos-lingua-body');
+    var activeCat = '';
+    var query = '';
+    var expandedId = '';
+    var manifestoOpen = true;
+
+    function render() {
+      if (!container || !data) { return; }
+      container.textContent = '';
+
+      /* Manifesto acolhedor recolhível */
+      var manBox = mk('div', 'esc-usos-manifesto');
+      var manHead = mk('div', 'esc-usos-manifesto-head');
+      manHead.appendChild(mk('strong', '', 'Não existe “erro” — existe adequação de uso'));
+      var manBtn = mk('button', 'esc-usos-quiet', manifestoOpen ? 'Recolher' : 'Ler manifesto');
+      manBtn.type = 'button';
+      on(manBtn, 'click', function () { manifestoOpen = !manifestoOpen; render(); });
+      manHead.appendChild(manBtn);
+      manBox.appendChild(manHead);
+      if (manifestoOpen) {
+        manBox.appendChild(mk('p', '', data.manifesto));
+      }
+      container.appendChild(manBox);
+
+      /* Busca instantânea */
+      var searchWrap = mk('div', 'esc-usos-search-wrap');
+      var inp = mk('input', 'esc-usos-search');
+      inp.type = 'search';
+      inp.placeholder = 'Busque sua dúvida: mal ou mau, crase, assistir, vírgula, porquês…';
+      inp.value = query;
+      inp.setAttribute('aria-label', 'Buscar dúvida de uso da língua portuguesa');
+      on(inp, 'input', function () {
+        query = inp.value;
+        renderResults();
+      });
+      searchWrap.appendChild(inp);
+      container.appendChild(searchWrap);
+
+      /* Categorias */
+      var catsBar = mk('div', 'esc-usos-cats');
+      catsBar.setAttribute('role', 'group');
+      catsBar.setAttribute('aria-label', 'Categorias de usos da língua');
+      var allBtn = mk('button', 'esc-usos-cat', 'Todas (' + data.list().length + ')');
+      allBtn.type = 'button';
+      allBtn.setAttribute('aria-pressed', !activeCat ? 'true' : 'false');
+      on(allBtn, 'click', function () { activeCat = ''; render(); });
+      catsBar.appendChild(allBtn);
+
+      data.categories.forEach(function (cat) {
+        var b = mk('button', 'esc-usos-cat', cat.label);
+        b.type = 'button';
+        b.setAttribute('aria-pressed', activeCat === cat.id ? 'true' : 'false');
+        on(b, 'click', function () { activeCat = activeCat === cat.id ? '' : cat.id; render(); });
+        catsBar.appendChild(b);
+      });
+      container.appendChild(catsBar);
+
+      var listWrap = mk('div', 'esc-usos-list');
+      listWrap.id = 'esc-usos-results';
+      container.appendChild(listWrap);
+
+      var foot = mk('p', 'esc-usos-foot', 'Seleção curada de ' + data.list().length + ' pontos frequentes do português brasileiro · consulta 100% offline.');
+      container.appendChild(foot);
+
+      renderResults();
+    }
+
+    function renderResults() {
+      var listWrap = byId('esc-usos-results');
+      if (!listWrap || !data) { return; }
+      listWrap.textContent = '';
+      var items = data.search(query, activeCat);
+      if (!items.length) {
+        listWrap.appendChild(mk('p', 'esc-usos-empty', 'Nenhum verbete encontrado para “' + query + '”. Tente buscar por uma palavra-chave simples (ex.: crase, onde, haver, vírgula).'));
+        return;
+      }
+      var cap = query ? items.length : Math.min(items.length, 40);
+      if (expandedId) {
+        items.sort(function (a, b) {
+          if (a.id === expandedId) { return -1; }
+          if (b.id === expandedId) { return 1; }
+          return 0;
+        });
+      }
+      var i;
+      for (i = 0; i < cap; i += 1) {
+        (function (item) {
+          var isOpen = expandedId === item.id || (items.length === 1);
+          var card = mk('article', 'esc-usos-card' + (isOpen ? ' is-open' : ''));
+          var headBtn = mk('button', 'esc-usos-card-head');
+          headBtn.type = 'button';
+          headBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          var titleWrap = mk('span', 'esc-usos-card-titles');
+          titleWrap.appendChild(mk('strong', '', item.titulo));
+          titleWrap.appendChild(mk('small', '', item.categoriaLabel));
+          headBtn.appendChild(titleWrap);
+          headBtn.appendChild(mk('span', 'esc-usos-chev', isOpen ? '▴' : '▾'));
+          on(headBtn, 'click', function () {
+            expandedId = (expandedId === item.id) ? '' : item.id;
+            renderResults();
+          });
+          card.appendChild(headBtn);
+
+          if (isOpen) {
+            var body = mk('div', 'esc-usos-card-body');
+            var b1 = mk('div', 'esc-usos-block');
+            b1.appendChild(mk('span', 'esc-usos-lbl', 'Na fala cotidiana'));
+            b1.appendChild(mk('p', '', item.fala));
+            body.appendChild(b1);
+
+            var b2 = mk('div', 'esc-usos-block');
+            b2.appendChild(mk('span', 'esc-usos-lbl', 'Na escrita formal'));
+            b2.appendChild(mk('p', '', item.formal));
+            body.appendChild(b2);
+
+            var b3 = mk('div', 'esc-usos-block is-why');
+            b3.appendChild(mk('span', 'esc-usos-lbl', 'Por que muda (teste rápido)'));
+            b3.appendChild(mk('p', '', item.porque));
+            body.appendChild(b3);
+
+            var b4 = mk('div', 'esc-usos-examples');
+            b4.appendChild(mk('span', 'esc-usos-lbl', 'Exemplo vivo'));
+            b4.appendChild(mk('p', 'esc-usos-ex-fala', 'Diálogo / fala: ' + item.exemploFala));
+            b4.appendChild(mk('p', 'esc-usos-ex-formal', 'Texto formal: ' + item.exemploFormal));
+            body.appendChild(b4);
+
+            card.appendChild(body);
+          }
+          listWrap.appendChild(card);
+        }(items[i]));
+      }
+      if (!query && items.length > cap) {
+        var moreP = mk('p', 'esc-usos-more-note', 'Mostrando ' + cap + ' de ' + items.length + ' verbetes. Use a busca acima ou filtre por categoria para ver qualquer tema.');
+        listWrap.appendChild(moreP);
+      }
+    }
+
+    function openWith(idOrQuery) {
+      if (!data) { return; }
+      var byIdHit = idOrQuery ? data.byId(idOrQuery) : null;
+      if (byIdHit) {
+        activeCat = '';
+        query = '';
+        expandedId = byIdHit.id;
+      } else if (idOrQuery) {
+        var direct = data.lookupWord(idOrQuery);
+        activeCat = '';
+        query = direct ? '' : String(idOrQuery);
+        expandedId = direct ? direct.id : '';
+      }
+      render();
+      if (opts && typeof opts.onOpenSheet === 'function') {
+        opts.onOpenSheet();
+      }
+    }
+
+    return {
+      render: render,
+      openWith: openWith
     };
   };
 }(typeof window !== 'undefined' ? window : this));
@@ -4460,6 +6799,32 @@
 
   var PREFS_KEY = 'escrevaral.reader.prefs.v1';
 
+  function isPortableDoc() {
+    try {
+      if (typeof document !== 'undefined' && document.querySelector) {
+        var meta = document.querySelector('meta[name="distribution-mode"]');
+        if (meta && meta.getAttribute('content') === 'portable') { return true; }
+      }
+      if (typeof location !== 'undefined' && location.protocol === 'file:') { return true; }
+    } catch (ignore) {}
+    return false;
+  }
+
+  function cssAsset(path) {
+    return ['u', 'rl("', path, '")'].join('');
+  }
+
+  function bindReaderAtmosphere() {
+    try {
+      if (isPortableDoc()) { return; }
+      if (typeof document === 'undefined' || !document.documentElement || !document.documentElement.style) { return; }
+      var st = document.documentElement.style;
+      st.setProperty('--esc-reader-atelier-art', cssAsset('assets/library/reader-atelier.webp'));
+      st.setProperty('--esc-reader-readthru-art', cssAsset('assets/library/reader-readthru.webp'));
+    } catch (ignore) {}
+  }
+  bindReaderAtmosphere();
+
   function clamp(val, min, max, fallback) {
     var n = Number(val);
     if (!isFinite(n)) { return fallback; }
@@ -4468,15 +6833,102 @@
 
   function normalizePrefs(raw) {
     var p = raw && typeof raw === 'object' ? raw : {};
-    var okPalette = p.palette === 'white' || p.palette === 'night' || p.palette === 'linen' || p.palette === 'mist' || p.palette === 'sage';
+    var okPalette = p.palette === 'white' || p.palette === 'night' || p.palette === 'linen' || p.palette === 'mist' || p.palette === 'sage' || p.palette === 'cotton';
     return {
       palette: okPalette ? p.palette : 'paper',
       face: p.face === 'sans' ? 'sans' : 'serif',
       size: clamp(p.size, 17, 32, 21),
       leading: clamp(p.leading, 1.5, 2.0, 1.82),
       width: clamp(p.width, 50, 74, 62),
-      breakMin: p.breakMin === 15 || p.breakMin === 25 || p.breakMin === 45 ? p.breakMin : 0
+      breakMin: p.breakMin === 15 || p.breakMin === 25 || p.breakMin === 45 ? p.breakMin : 0,
+      showScene: p.showScene !== false
     };
+  }
+
+  function isScriptHeading(line) {
+    return /^(INT\.|EXT\.|INT\.\/EXT\.|EXT\.\/INT\.|CENA\s+\d|ATO\s+[IVX\d])/i.test(line);
+  }
+
+  function isCharacterCue(line) {
+    if (!line || line.length < 2 || line.length > 38) { return false; }
+    if (isScriptHeading(line)) { return false; }
+    if (/^[—–\-•*]/.test(line)) { return false; }
+    if (/[.!?;:]$/.test(line) && !/\((V\.O\.|O\.S\.|CONT\.|OFF)\)$/i.test(line)) { return false; }
+    var base = line.replace(/\s*\([^)]*\)\s*$/g, '').replace(/^\s+|\s+$/g, '');
+    if (base.length < 2 || !/[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ]/.test(base)) { return false; }
+    if (/[a-záàâãéêíóôõúç]/.test(base)) { return false; }
+    return base.split(/\s+/).length <= 4;
+  }
+
+  function normalizeSpeaker(line) {
+    return String(line || '').replace(/\s*\([^)]*\)\s*$/g, '').replace(/^\s+|\s+$/g, '');
+  }
+
+  function parseReadThru(rawText) {
+    var text = String(rawText || '').replace(/\r\n?/g, '\n');
+    var lines = text.split('\n');
+    var blocks = [];
+    var charSet = {};
+    var characters = [];
+    var steps = [];
+    var cueCount = 0;
+    var headingCount = 0;
+    var i, trimmed, nextTrimmed;
+
+    for (i = 0; i < lines.length; i += 1) {
+      trimmed = lines[i].replace(/^\s+|\s+$/g, '');
+      if (!trimmed) { continue; }
+      if (isScriptHeading(trimmed)) { headingCount += 1; continue; }
+      nextTrimmed = (lines[i + 1] || '').replace(/^\s+|\s+$/g, '');
+      if (isCharacterCue(trimmed) && nextTrimmed && !isScriptHeading(nextTrimmed)) {
+        cueCount += 1;
+      }
+    }
+
+    var isScript = headingCount >= 1 || cueCount >= 2;
+    if (isScript) {
+      var curSpeaker = '';
+      for (i = 0; i < lines.length; i += 1) {
+        trimmed = lines[i].replace(/^\s+|\s+$/g, '');
+        if (!trimmed) { curSpeaker = ''; continue; }
+        if (isScriptHeading(trimmed)) {
+          curSpeaker = '';
+          blocks.push({ kind: 'heading', text: trimmed, speaker: '', stepIndex: -1 });
+        } else if (!curSpeaker && isCharacterCue(trimmed) && (lines[i + 1] || '').replace(/^\s+|\s+$/g, '')) {
+          curSpeaker = normalizeSpeaker(trimmed);
+          if (curSpeaker && !charSet['$' + curSpeaker]) {
+            charSet['$' + curSpeaker] = true;
+            characters.push(curSpeaker);
+          }
+          blocks.push({ kind: 'character', text: trimmed, speaker: curSpeaker, stepIndex: -1 });
+        } else if (curSpeaker && /^\([^)]+\)$/.test(trimmed)) {
+          blocks.push({ kind: 'parenthetical', text: trimmed, speaker: curSpeaker, stepIndex: -1 });
+        } else if (curSpeaker) {
+          var stepIdx = steps.length;
+          blocks.push({ kind: 'dialogue', text: trimmed, speaker: curSpeaker, stepIndex: stepIdx });
+          steps.push(blocks.length - 1);
+        } else {
+          blocks.push({ kind: 'action', text: trimmed, speaker: '', stepIndex: -1 });
+        }
+      }
+      if (!steps.length) { isScript = false; blocks = []; }
+    }
+
+    if (!isScript) {
+      var dialogueCount = 0;
+      for (i = 0; i < lines.length; i += 1) {
+        trimmed = lines[i].replace(/^\s+|\s+$/g, '');
+        if (!trimmed) { continue; }
+        var isDial = /^[—–\-]\s*\S/.test(trimmed);
+        if (isDial) { dialogueCount += 1; }
+        var sIdx = steps.length;
+        blocks.push({ kind: isDial ? 'prose-dialogue' : 'prose-line', text: trimmed, speaker: isDial ? 'DIÁLOGO' : '', stepIndex: sIdx });
+        steps.push(blocks.length - 1);
+      }
+      return { isScript: false, hasDialogues: dialogueCount > 0, characters: [], blocks: blocks, steps: steps };
+    }
+
+    return { isScript: true, hasDialogues: true, characters: characters, blocks: blocks, steps: steps };
   }
 
   function scrollProgress(scrollTop, scrollHeight, clientHeight) {
@@ -4504,7 +6956,8 @@
   root.Escr.readerCore = {
     normalizePrefs: normalizePrefs,
     readingMinutes: readingMinutes,
-    scrollProgress: scrollProgress
+    scrollProgress: scrollProgress,
+    parseReadThru: parseReadThru
   };
 
   root.Escr.mountReaderMode = function (opts) {
@@ -4514,6 +6967,24 @@
     var breakTimer = null;
     var settingsOpen = false;
     var previousFocus = null;
+    var currentDoc = null;
+    var activeMode = 'ler';
+    var parsedReadThru = null;
+    var selectedSpeaker = '';
+    var onlyDialogues = false;
+    var activeStep = 0;
+    var reviewMarks = [];
+    var popReqToken = 0;
+    var popWord = '';
+    var popMarkEl = null;
+    var lexService = null;
+
+    function getLexService() {
+      if (lexService) { return lexService; }
+      if (root.Escr.getLexicoP01) { lexService = root.Escr.getLexicoP01(); }
+      else if (root.Escr.createLexicoP01) { lexService = root.Escr.createLexicoP01(); }
+      return lexService;
+    }
 
     try {
       if (storage) {
@@ -4539,6 +7010,8 @@
       if (!overlayEl) { return; }
       overlayEl.setAttribute('data-palette', paletteOverride || prefs.palette);
       overlayEl.setAttribute('data-face', prefs.face);
+      overlayEl.setAttribute('data-reader-mode', activeMode);
+      overlayEl.setAttribute('data-show-scene', prefs.showScene ? 'true' : 'false');
       if (overlayEl.style && overlayEl.style.setProperty) {
         overlayEl.style.setProperty('--reader-size', prefs.size + 'px');
         overlayEl.style.setProperty('--reader-leading', String(prefs.leading));
@@ -4567,6 +7040,317 @@
       }, prefs.breakMin * 60000);
     }
 
+    function cleanWordToken(raw) {
+      var s = String(raw || '').replace(/^[^A-Za-zÀ-ÖØ-öø-ÿ]+|[^A-Za-zÀ-ÖØ-öø-ÿ]+$/g, '');
+      if (!s || s.length > 48) { return ''; }
+      if (!/^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[-'’][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/.test(s)) { return ''; }
+      return s;
+    }
+
+    function unwrapTempMark(mark) {
+      if (!mark || !mark.parentNode) { return; }
+      if (mark.getAttribute && mark.getAttribute('data-review-marked') === 'true') {
+        mark.className = 'esc-reader-review-mark';
+        return;
+      }
+      var parent = mark.parentNode;
+      var txt = document.createTextNode(mark.textContent || '');
+      parent.replaceChild(txt, mark);
+      if (parent.normalize) { try { parent.normalize(); } catch (ignore) {} }
+    }
+
+    function closePopover() {
+      popReqToken += 1;
+      var pop = byId('esc-reader-popover');
+      if (pop) {
+        pop.hidden = true;
+        pop.textContent = '';
+      }
+      if (popMarkEl) {
+        unwrapTempMark(popMarkEl);
+        popMarkEl = null;
+      }
+      popWord = '';
+    }
+
+    function updateReviewPill() {
+      var pill = byId('esc-reader-marks-pill');
+      if (!pill) { return; }
+      if (!reviewMarks.length) {
+        pill.hidden = true;
+        pill.textContent = '';
+      } else {
+        pill.hidden = false;
+        pill.textContent = reviewMarks.length + (reviewMarks.length === 1 ? ' marcada' : ' marcadas');
+      }
+    }
+
+    function positionPopover(pop, anchorEl) {
+      if (!pop || !pop.style) { return; }
+      var vw = window.innerWidth || 800;
+      var vh = window.innerHeight || 600;
+      if (vw <= 680 || !anchorEl || !anchorEl.getBoundingClientRect) {
+        pop.setAttribute('data-pos', 'dock');
+        pop.style.left = '';
+        pop.style.top = '';
+        return;
+      }
+      var r = anchorEl.getBoundingClientRect();
+      var popW = Math.min(320, vw - 28);
+      pop.style.width = popW + 'px';
+      pop.style.visibility = 'hidden';
+      pop.hidden = false;
+      var popH = pop.offsetHeight || 190;
+      var above = (r.top - popH - 14) >= 54;
+      var top = above ? (r.top - popH - 12) : Math.min(vh - popH - 14, r.bottom + 12);
+      var centerX = r.left + (r.width / 2);
+      var left = Math.max(14, Math.min(vw - popW - 14, centerX - (popW / 2)));
+      var arrowLeft = Math.max(18, Math.min(popW - 18, centerX - left));
+      pop.setAttribute('data-pos', above ? 'above' : 'below');
+      pop.style.left = Math.round(left) + 'px';
+      pop.style.top = Math.round(Math.max(12, top)) + 'px';
+      if (pop.style.setProperty) { pop.style.setProperty('--pop-arrow-x', Math.round(arrowLeft) + 'px'); }
+      pop.style.visibility = '';
+    }
+
+    function copyTextSafe(str) {
+      try {
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(str);
+          return true;
+        }
+      } catch (ignore) {}
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = str;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        return true;
+      } catch (ignore2) {}
+      return false;
+    }
+
+    function renderWordPopover(word, anchorEl, res, loading) {
+      var pop = byId('esc-reader-popover');
+      if (!pop) { return; }
+      pop.textContent = '';
+
+      var head = document.createElement('div');
+      head.className = 'esc-reader-pop-head';
+      var titleEl = document.createElement('strong');
+      titleEl.className = 'esc-reader-pop-word';
+      titleEl.textContent = word;
+      var closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.className = 'esc-reader-pop-close';
+      closeBtn.setAttribute('aria-label', 'Fechar consulta da palavra');
+      closeBtn.textContent = '×';
+      on(closeBtn, 'click', closePopover);
+      head.appendChild(titleEl);
+      head.appendChild(closeBtn);
+      pop.appendChild(head);
+
+      /* Separação silábica e tônica 100% offline (cofre poético) */
+      if (root.Escr.poetry && root.Escr.poetry.wordReading) {
+        try {
+          var pr = root.Escr.poetry.wordReading(word);
+          if (pr && pr.syllables && pr.syllables.length) {
+            var prosody = document.createElement('p');
+            prosody.className = 'esc-reader-pop-prosody';
+            var sep = document.createElement('span');
+            sep.className = 'esc-reader-pop-syls';
+            for (var si = 0; si < pr.syllables.length; si += 1) {
+              if (si > 0) {
+                var dot = document.createElement('span');
+                dot.className = 'esc-reader-pop-dot';
+                dot.textContent = '·';
+                sep.appendChild(dot);
+              }
+              var sp = document.createElement('span');
+              sp.className = si === pr.tonic ? 'esc-reader-pop-tonic' : 'esc-reader-pop-syl';
+              sp.textContent = pr.syllables[si];
+              sep.appendChild(sp);
+            }
+            prosody.appendChild(sep);
+            pop.appendChild(prosody);
+          }
+        } catch (ignore) {}
+      }
+
+      var body = document.createElement('div');
+      body.className = 'esc-reader-pop-body';
+      if (loading) {
+        var waitP = document.createElement('p');
+        waitP.className = 'esc-reader-pop-meta';
+        waitP.textContent = 'Consultando dicionário local…';
+        body.appendChild(waitP);
+      } else if (!res || res.state !== 'found' || !res.entries || !res.entries.length) {
+        var nf = document.createElement('p');
+        nf.className = 'esc-reader-pop-meta';
+        nf.textContent = 'Palavra fora do recorte de sinônimos; você ainda pode marcá-la para revisar.';
+        body.appendChild(nf);
+      } else {
+        var entry = res.entries[0];
+        if (entry.posLabel || entry.lemma) {
+          var clsP = document.createElement('p');
+          clsP.className = 'esc-reader-pop-class';
+          clsP.textContent = (entry.posLabel || '') + (entry.lemma && entry.lemma !== word.toLowerCase() ? ' · lema: ' + entry.lemma : '');
+          body.appendChild(clsP);
+        }
+        if (entry.definition) {
+          var defP = document.createElement('p');
+          defP.className = 'esc-reader-pop-def';
+          defP.textContent = entry.definition;
+          body.appendChild(defP);
+        }
+        if (entry.synonyms && entry.synonyms.length) {
+          var synWrap = document.createElement('div');
+          synWrap.className = 'esc-reader-pop-syns';
+          entry.synonyms.slice(0, 3).forEach(function (syn) {
+            var sb = document.createElement('button');
+            sb.type = 'button';
+            sb.className = 'esc-reader-pop-syn';
+            sb.textContent = syn;
+            sb.title = 'Copiar sinônimo';
+            on(sb, 'click', function () {
+              copyTextSafe(syn);
+              sb.textContent = 'Copiado ✓';
+              window.setTimeout(function () { if (sb) { sb.textContent = syn; } }, 900);
+            });
+            synWrap.appendChild(sb);
+          });
+          body.appendChild(synWrap);
+        }
+      }
+      pop.appendChild(body);
+
+      /* Barra dupla inspirada no Anexo 4: Marcar p/ revisar | Ir editar */
+      var actions = document.createElement('div');
+      actions.className = 'esc-reader-pop-actions';
+      var isMarked = !!(anchorEl && anchorEl.getAttribute && anchorEl.getAttribute('data-review-marked') === 'true');
+      var markBtn = document.createElement('button');
+      markBtn.type = 'button';
+      markBtn.className = 'esc-reader-pop-act esc-reader-pop-act-mark';
+      markBtn.textContent = isMarked ? 'Desmarcar' : 'Marcar p/ revisar';
+      on(markBtn, 'click', function () {
+        if (!anchorEl) { closePopover(); return; }
+        var nowMarked = anchorEl.getAttribute('data-review-marked') === 'true';
+        if (nowMarked) {
+          anchorEl.removeAttribute('data-review-marked');
+          anchorEl.className = 'esc-reader-tap-mark';
+          reviewMarks = reviewMarks.filter(function (m) { return m.el !== anchorEl; });
+        } else {
+          anchorEl.setAttribute('data-review-marked', 'true');
+          anchorEl.className = 'esc-reader-review-mark is-active';
+          reviewMarks.push({ word: word, el: anchorEl });
+        }
+        updateReviewPill();
+        closePopover();
+      });
+      actions.appendChild(markBtn);
+
+      var editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.className = 'esc-reader-pop-act esc-reader-pop-act-edit';
+      editBtn.textContent = (opts && typeof opts.onJumpToWord === 'function') ? 'Ir editar' : 'Entendi';
+      on(editBtn, 'click', function () {
+        var targetWord = word;
+        closePopover();
+        if (opts && typeof opts.onJumpToWord === 'function') {
+          close();
+          opts.onJumpToWord(targetWord);
+        }
+      });
+      actions.appendChild(editBtn);
+      pop.appendChild(actions);
+
+      pop.hidden = false;
+      positionPopover(pop, anchorEl);
+    }
+
+    function openWordAtMark(word, markEl) {
+      if (popMarkEl && popMarkEl !== markEl) {
+        unwrapTempMark(popMarkEl);
+      }
+      popMarkEl = markEl;
+      popWord = word;
+      var svc = getLexService();
+      if (!svc) {
+        renderWordPopover(word, markEl, null, false);
+        return;
+      }
+      var tok = ++popReqToken;
+      renderWordPopover(word, markEl, null, true);
+      svc.lookup(word, function (res) {
+        if (tok !== popReqToken) { return; }
+        renderWordPopover(word, markEl, res, false);
+      });
+    }
+
+    function handleArticleClick(ev) {
+      if (activeMode !== 'ler') { return; }
+      var target = ev.target;
+      if (!target) { return; }
+      if (target.className && String(target.className).indexOf('esc-reader-review-mark') !== -1) {
+        var existingWord = cleanWordToken(target.textContent);
+        if (existingWord) {
+          target.className = 'esc-reader-review-mark is-active';
+          openWordAtMark(existingWord, target);
+        }
+        return;
+      }
+      var bodyRoot = overlayEl && overlayEl.querySelector ? overlayEl.querySelector('.esc-reader-body') : null;
+      if (!bodyRoot || !bodyRoot.contains || !bodyRoot.contains(target)) { return; }
+
+      var node = null, offset = 0;
+      if (document.caretRangeFromPoint && typeof ev.clientX === 'number') {
+        var cr = document.caretRangeFromPoint(ev.clientX, ev.clientY);
+        if (cr && cr.startContainer && cr.startContainer.nodeType === 3) {
+          node = cr.startContainer;
+          offset = cr.startOffset;
+        }
+      } else if (document.caretPositionFromPoint && typeof ev.clientX === 'number') {
+        var cp = document.caretPositionFromPoint(ev.clientX, ev.clientY);
+        if (cp && cp.offsetNode && cp.offsetNode.nodeType === 3) {
+          node = cp.offsetNode;
+          offset = cp.offset;
+        }
+      }
+      if (!node || !bodyRoot.contains(node)) { return; }
+      var val = node.nodeValue || '';
+      var wordChar = /[A-Za-zÀ-ÖØ-öø-ÿ'-]/;
+      if (offset >= val.length && offset > 0) { offset = val.length - 1; }
+      if (!wordChar.test(val.charAt(offset))) {
+        if (offset > 0 && wordChar.test(val.charAt(offset - 1))) { offset -= 1; }
+        else { closePopover(); return; }
+      }
+      var start = offset, end = offset;
+      while (start > 0 && wordChar.test(val.charAt(start - 1))) { start -= 1; }
+      while (end < val.length && wordChar.test(val.charAt(end))) { end += 1; }
+      var rawWord = val.slice(start, end);
+      var clean = cleanWordToken(rawWord);
+      if (!clean) { closePopover(); return; }
+
+      /* Limpa marca temporária anterior antes de envolver a nova palavra */
+      closePopover();
+      var before = val.slice(0, start);
+      var after = val.slice(end);
+      var parent = node.parentNode;
+      if (!parent) { return; }
+      var mark = document.createElement('mark');
+      mark.className = 'esc-reader-tap-mark';
+      mark.textContent = rawWord;
+      if (before) { parent.insertBefore(document.createTextNode(before), node); }
+      parent.insertBefore(mark, node);
+      if (after) { parent.insertBefore(document.createTextNode(after), node); }
+      parent.removeChild(node);
+      openWordAtMark(clean, mark);
+    }
+
     function buildOverlay() {
       if (overlayEl) { return overlayEl; }
       var sec = document.createElement('section');
@@ -4589,15 +7373,27 @@
         '</header>' +
         '<div id="esc-reader-settings" class="esc-reader-settings" hidden>' +
           '<div class="esc-reader-settings-head"><strong>Papel e letra</strong><button id="esc-reader-settings-close" type="button" aria-label="Fechar ajustes de leitura">Fechar ×</button></div>' +
-          '<label>Papel<select id="esc-reader-palette"><option value="paper">Real Gabinete (Pergaminho)</option><option value="sage">Sálvia fosco</option><option value="linen">Pergaminho claro</option><option value="mist">Névoa suave</option><option value="white">Papel fosco</option><option value="night">Nogueira noturna</option></select></label>' +
+          '<label>Papel<select id="esc-reader-palette"><option value="paper">Real Gabinete (Pergaminho)</option><option value="cotton">Papel algodão (fibras)</option><option value="sage">Sálvia fosco</option><option value="linen">Pergaminho claro</option><option value="mist">Névoa suave</option><option value="white">Papel fosco</option><option value="night">Nogueira noturna</option></select></label>' +
           '<label>Letra<select id="esc-reader-face"><option value="serif">Literária (Serifada)</option><option value="sans">Sem serifa</option></select></label>' +
           '<label>Tamanho<select id="esc-reader-size"><option value="18">Normal (18)</option><option value="20">Confortável (20)</option><option value="21">Editorial (21)</option><option value="24">Grande (24)</option><option value="28">Muito grande (28)</option><option value="32">Extra (32)</option></select></label>' +
           '<label>Entrelinha<select id="esc-reader-leading"><option value="1.6">Compacta</option><option value="1.82">Editorial</option><option value="2">Ampla</option></select></label>' +
+          '<label>Clima visual<select id="esc-reader-scene"><option value="on">Cena ilustrada</option><option value="off">Só papel</option></select></label>' +
           '<label>Pausa de leitura<select id="esc-reader-break"><option value="0">Sem pausa</option><option value="15">A cada 15 min</option><option value="25">A cada 25 min</option><option value="45">A cada 45 min</option></select></label>' +
         '</div>' +
         '<div id="esc-reader-viewport" class="esc-reader-viewport" tabindex="0">' +
           '<div id="esc-reader-page" class="esc-reader-page">' +
             '<div class="esc-reader-masthead"><span id="esc-reader-date"></span><strong class="esc-reader-brand">ESCREVARAL</strong><span id="esc-reader-project-tag"></span></div>' +
+            '<div id="esc-reader-hero" class="esc-reader-hero" aria-hidden="true">' +
+              '<span id="esc-reader-hero-badge" class="esc-reader-hero-badge" hidden>READ-THRU · ENSAIO</span>' +
+            '</div>' +
+            '<div class="esc-reader-pills" role="tablist" aria-label="Modos da página de leitura">' +
+              '<button id="esc-reader-tab-ler" type="button" class="esc-reader-pill" role="tab" aria-selected="true" data-mode="ler">Ler</button>' +
+              '<button id="esc-reader-tab-ensaio" type="button" class="esc-reader-pill" role="tab" aria-selected="false" data-mode="ensaio">Roteiro / Ensaio</button>' +
+              '<span id="esc-reader-time-pill" class="esc-reader-pill-meta"></span>' +
+              '<button id="esc-reader-marks-pill" type="button" class="esc-reader-pill-marks" hidden></button>' +
+            '</div>' +
+            '<p id="esc-reader-hint" class="esc-reader-hint"></p>' +
+            '<div id="esc-reader-ensaio-bar" class="esc-reader-ensaio-bar" hidden></div>' +
             '<article id="esc-reader-article" class="esc-reader-article"></article>' +
           '</div>' +
           '<div id="esc-reader-pause" class="esc-reader-pause" hidden>' +
@@ -4605,7 +7401,8 @@
             '<p>Descanse um instante longe da tela antes de retomar a leitura.</p>' +
             '<button id="esc-reader-resume" type="button">Retomar leitura</button>' +
           '</div>' +
-        '</div>';
+        '</div>' +
+        '<aside id="esc-reader-popover" class="esc-reader-pop" role="dialog" aria-label="Consulta rápida da palavra" hidden></aside>';
       document.body.appendChild(sec);
       if (root.Escr.ornaments && root.Escr.ornaments.attachCorners) {
         root.Escr.ornaments.attachCorners(sec, 'viewport');
@@ -4653,16 +7450,41 @@
         if (btn && btn.focus) { btn.focus(); }
       });
       on(overlayEl, 'click', function (ev) {
-        if (!settingsOpen) { return; }
-        var st = byId('esc-reader-settings');
-        var btn = byId('esc-reader-settings-btn');
-        if (st && !st.contains(ev.target) && (!btn || !btn.contains(ev.target))) {
-          closeSettings();
+        if (settingsOpen) {
+          var st = byId('esc-reader-settings');
+          var btn = byId('esc-reader-settings-btn');
+          if (st && !st.contains(ev.target) && (!btn || !btn.contains(ev.target))) {
+            closeSettings();
+          }
+        }
+        var pop = byId('esc-reader-popover');
+        var art = byId('esc-reader-article');
+        if (pop && !pop.hidden && !pop.contains(ev.target) && (!art || !art.contains(ev.target))) {
+          closePopover();
+        }
+      });
+      on(byId('esc-reader-article'), 'click', handleArticleClick);
+      on(byId('esc-reader-tab-ler'), 'click', function () { switchReaderMode('ler'); });
+      on(byId('esc-reader-tab-ensaio'), 'click', function () { switchReaderMode('ensaio'); });
+      var markCycleIdx = 0;
+      on(byId('esc-reader-marks-pill'), 'click', function () {
+        if (!reviewMarks.length) { return; }
+        var item = reviewMarks[markCycleIdx % reviewMarks.length];
+        markCycleIdx += 1;
+        if (item && item.el && item.el.scrollIntoView) {
+          item.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          openWordAtMark(item.word, item.el);
         }
       });
       on(byId('esc-reader-prev'), 'click', function () { stepPage(-1); });
       on(byId('esc-reader-next'), 'click', function () { stepPage(1); });
-      on(byId('esc-reader-viewport'), 'scroll', updateProgress);
+      on(byId('esc-reader-viewport'), 'scroll', function () {
+        updateProgress();
+        if (popMarkEl) {
+          var pop = byId('esc-reader-popover');
+          if (pop && !pop.hidden) { positionPopover(pop, popMarkEl); }
+        }
+      });
       if (byId('esc-reader-print') && opts && typeof opts.onPrint === 'function') {
         on(byId('esc-reader-print'), 'click', function () { opts.onPrint(); });
       }
@@ -4677,11 +7499,22 @@
       on(byId('esc-reader-face'), 'change', function () { prefs.face = this.value; applyPrefs(); savePrefs(); });
       on(byId('esc-reader-size'), 'change', function () { prefs.size = clamp(this.value, 17, 32, 22); applyPrefs(); savePrefs(); });
       on(byId('esc-reader-leading'), 'change', function () { prefs.leading = clamp(this.value, 1.5, 2.0, 1.7); applyPrefs(); savePrefs(); });
+      on(byId('esc-reader-scene'), 'change', function () { prefs.showScene = this.value !== 'off'; applyPrefs(); savePrefs(); });
       on(byId('esc-reader-break'), 'change', function () { prefs.breakMin = Number(this.value) || 0; savePrefs(); scheduleBreak(); });
       on(overlayEl, 'keydown', function (ev) {
         var tag = ev.target && ev.target.tagName ? String(ev.target.tagName).toUpperCase() : '';
-        if (ev.keyCode === 27) { ev.preventDefault(); ev.stopPropagation(); close(); return; }
+        if (ev.keyCode === 27) {
+          ev.preventDefault(); ev.stopPropagation();
+          var pop = byId('esc-reader-popover');
+          if (pop && !pop.hidden) { closePopover(); return; }
+          close(); return;
+        }
         if (tag === 'SELECT' || tag === 'INPUT' || tag === 'TEXTAREA') { return; }
+        if (activeMode === 'ensaio' && (ev.keyCode === 40 || ev.keyCode === 38)) {
+          ev.preventDefault();
+          stepEnsaio(ev.keyCode === 40 ? 1 : -1);
+          return;
+        }
         if (ev.keyCode === 34 || ev.keyCode === 39) { ev.preventDefault(); stepPage(1); }
         else if (ev.keyCode === 33 || ev.keyCode === 37) { ev.preventDefault(); stepPage(-1); }
         else if (ev.keyCode === 36) { var vpH = byId('esc-reader-viewport'); if (vpH) { ev.preventDefault(); vpH.scrollTop = 0; updateProgress(); } }
@@ -4692,32 +7525,153 @@
       return overlayEl;
     }
 
-    function open(doc) {
-      buildOverlay();
-      previousFocus = document.activeElement;
-      var appIsDark = !!(document.body && document.body.getAttribute('data-theme') === 'escuro');
-      var effectivePalette = prefs.palette;
-      if (appIsDark && !hasSavedPalette()) { effectivePalette = 'night'; }
-      byId('esc-reader-palette').value = effectivePalette;
-      byId('esc-reader-face').value = prefs.face;
-      byId('esc-reader-size').value = String(prefs.size);
-      byId('esc-reader-leading').value = String(prefs.leading);
-      byId('esc-reader-break').value = String(prefs.breakMin);
-      applyPrefs(effectivePalette);
+    function steppableList() {
+      if (!parsedReadThru || !parsedReadThru.steps.length) { return []; }
+      var out = [], k, bIdx, blk;
+      for (k = 0; k < parsedReadThru.steps.length; k += 1) {
+        bIdx = parsedReadThru.steps[k];
+        blk = parsedReadThru.blocks[bIdx];
+        if (!blk) { continue; }
+        if (selectedSpeaker && blk.speaker !== selectedSpeaker) { continue; }
+        if (!parsedReadThru.isScript && onlyDialogues && blk.kind !== 'prose-dialogue') { continue; }
+        out.push(blk.stepIndex);
+      }
+      return out;
+    }
 
-      var text = doc && typeof doc.text === 'string' ? doc.text : '';
+    function applyEnsaioHighlights(scrollToActive) {
+      var art = byId('esc-reader-article');
+      if (!art || !art.querySelectorAll) { return; }
+      var list = steppableList();
+      if (list.length && list.indexOf(activeStep) === -1) { activeStep = list[0]; }
+      var marks = art.querySelectorAll('[data-rt-step]');
+      var activeEl = null;
+      for (var i = 0; i < marks.length; i += 1) {
+        var el = marks[i];
+        var sIdx = Number(el.getAttribute('data-rt-step'));
+        var spk = el.getAttribute('data-rt-speaker') || '';
+        var isCur = list.length && sIdx === activeStep;
+        var isCharHit = !!selectedSpeaker && spk === selectedSpeaker;
+        el.setAttribute('data-rt-active', isCur ? 'true' : 'false');
+        el.setAttribute('data-rt-char-hl', isCharHit ? 'true' : 'false');
+        if (isCur) { activeEl = el; }
+      }
+      var counter = byId('esc-rt-counter');
+      var prevB = byId('esc-rt-prev');
+      var nextB = byId('esc-rt-next');
+      var pos = list.indexOf(activeStep);
+      if (counter) { counter.textContent = list.length ? ('Fala ' + (pos + 1) + ' / ' + list.length) : 'Sem falas'; }
+      if (prevB) { prevB.disabled = pos <= 0; }
+      if (nextB) { nextB.disabled = pos < 0 || pos >= list.length - 1; }
+      if (scrollToActive && activeEl && activeEl.scrollIntoView) {
+        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function stepEnsaio(dir) {
+      var list = steppableList();
+      if (!list.length) { return; }
+      var pos = list.indexOf(activeStep);
+      if (pos < 0) { activeStep = list[0]; }
+      else { activeStep = list[Math.max(0, Math.min(list.length - 1, pos + dir))]; }
+      applyEnsaioHighlights(true);
+    }
+
+    function renderEnsaioControls() {
+      var bar = byId('esc-reader-ensaio-bar');
+      if (!bar) { return; }
+      bar.textContent = '';
+      if (activeMode !== 'ensaio' || !parsedReadThru) {
+        bar.hidden = true;
+        return;
+      }
+      bar.hidden = false;
+
+      if (parsedReadThru.isScript && parsedReadThru.characters.length) {
+        var group = document.createElement('div');
+        group.className = 'esc-rt-chars';
+        var allBtn = document.createElement('button');
+        allBtn.type = 'button';
+        allBtn.className = 'esc-rt-chip';
+        allBtn.textContent = 'Todos';
+        allBtn.setAttribute('aria-pressed', !selectedSpeaker ? 'true' : 'false');
+        on(allBtn, 'click', function () { selectedSpeaker = ''; renderEnsaioControls(); applyEnsaioHighlights(false); });
+        group.appendChild(allBtn);
+
+        parsedReadThru.characters.slice(0, 12).forEach(function (ch) {
+          var cb = document.createElement('button');
+          cb.type = 'button';
+          cb.className = 'esc-rt-chip';
+          cb.textContent = ch;
+          cb.setAttribute('aria-pressed', selectedSpeaker === ch ? 'true' : 'false');
+          on(cb, 'click', function () {
+            selectedSpeaker = selectedSpeaker === ch ? '' : ch;
+            renderEnsaioControls();
+            applyEnsaioHighlights(true);
+          });
+          group.appendChild(cb);
+        });
+        bar.appendChild(group);
+      } else if (!parsedReadThru.isScript && parsedReadThru.hasDialogues) {
+        var fGroup = document.createElement('div');
+        fGroup.className = 'esc-rt-chars';
+        var dBtn = document.createElement('button');
+        dBtn.type = 'button';
+        dBtn.className = 'esc-rt-chip';
+        dBtn.textContent = onlyDialogues ? 'Só diálogos ✓' : 'Filtrar só diálogos';
+        dBtn.setAttribute('aria-pressed', onlyDialogues ? 'true' : 'false');
+        on(dBtn, 'click', function () {
+          onlyDialogues = !onlyDialogues;
+          renderEnsaioControls();
+          applyEnsaioHighlights(true);
+        });
+        fGroup.appendChild(dBtn);
+        bar.appendChild(fGroup);
+      }
+
+      var nav = document.createElement('div');
+      nav.className = 'esc-rt-nav';
+      var prevB = document.createElement('button');
+      prevB.id = 'esc-rt-prev'; prevB.type = 'button'; prevB.className = 'esc-rt-step';
+      prevB.textContent = '← Anterior';
+      on(prevB, 'click', function () { stepEnsaio(-1); });
+      var cnt = document.createElement('span');
+      cnt.id = 'esc-rt-counter'; cnt.className = 'esc-rt-counter';
+      var nextB = document.createElement('button');
+      nextB.id = 'esc-rt-next'; nextB.type = 'button'; nextB.className = 'esc-rt-step';
+      nextB.textContent = 'Próxima →';
+      on(nextB, 'click', function () { stepEnsaio(1); });
+      nav.appendChild(prevB);
+      nav.appendChild(cnt);
+      nav.appendChild(nextB);
+      bar.appendChild(nav);
+    }
+
+    function renderArticleBody() {
+      if (!currentDoc) { return; }
+      var doc = currentDoc;
+      var text = typeof doc.text === 'string' ? doc.text : '';
       var stats = readingMinutes(text);
       var statLine = stats.words + (stats.words === 1 ? ' palavra' : ' palavras') + (stats.minutes ? ' · ' + stats.minutes + ' min de leitura' : '');
-      var statsNode = byId('esc-reader-stats');
-      if (statsNode) {
-        statsNode.setAttribute('data-base-stat', stats.minutes ? (stats.minutes + ' min') : '');
-        statsNode.textContent = stats.minutes ? (stats.minutes + ' min · 0%') : '0%';
-      }
-      if (byId('esc-reader-date')) { byId('esc-reader-date').textContent = formatEditionDate(); }
-      byId('esc-reader-project-tag').textContent = doc && doc.project ? doc.project : 'EDIÇÃO DE LEITURA';
-
       var article = byId('esc-reader-article');
+      if (!article) { return; }
       article.textContent = '';
+
+      var heroBadge = byId('esc-reader-hero-badge');
+      if (heroBadge) { heroBadge.hidden = activeMode !== 'ensaio'; }
+      var tabLer = byId('esc-reader-tab-ler');
+      var tabEns = byId('esc-reader-tab-ensaio');
+      if (tabLer) { tabLer.setAttribute('aria-selected', activeMode === 'ler' ? 'true' : 'false'); }
+      if (tabEns) { tabEns.setAttribute('aria-selected', activeMode === 'ensaio' ? 'true' : 'false'); }
+      var hintEl = byId('esc-reader-hint');
+      if (hintEl) {
+        hintEl.textContent = activeMode === 'ensaio'
+          ? (parsedReadThru && parsedReadThru.isScript
+            ? 'Clique num personagem para acender todas as suas falas ou use ↑/↓ para ensaiar em voz alta.'
+            : 'Use ↑/↓ ou clique em qualquer fala para conduzir a leitura em voz alta linha a linha.')
+          : 'Toque em qualquer palavra da página para ver significado, sílabas e sinônimos offline.';
+      }
+
       var h1 = document.createElement('h1');
       h1.className = 'esc-reader-title';
       h1.textContent = doc && doc.title ? doc.title : 'Sem título';
@@ -4731,35 +7685,73 @@
         article.appendChild(root.Escr.ornaments.createStairRod('left'));
       }
 
-      if (doc && doc.format === 'rich' && doc.richHtml && root.Escr.richEditor) {
-        var richWrap = document.createElement('div');
-        richWrap.className = 'esc-reader-body';
-        richWrap.innerHTML = root.Escr.richEditor.sanitizeHtml(doc.richHtml);
-        article.appendChild(richWrap);
+      if (activeMode === 'ensaio') {
+        var rtWrap = document.createElement('div');
+        rtWrap.className = 'esc-reader-body esc-rt-body' + (parsedReadThru && parsedReadThru.isScript ? ' is-script' : ' is-prose');
+        var blocks = parsedReadThru ? parsedReadThru.blocks : [];
+        if (!blocks.length) {
+          var emp = document.createElement('p');
+          emp.className = 'esc-reader-empty';
+          emp.textContent = 'Folha em branco.';
+          rtWrap.appendChild(emp);
+        } else {
+          blocks.forEach(function (blk) {
+            var p = document.createElement('p');
+            p.className = 'esc-rt-' + blk.kind;
+            if (blk.stepIndex >= 0) {
+              var span = document.createElement('span');
+              span.className = 'esc-rt-hl';
+              span.setAttribute('data-rt-step', String(blk.stepIndex));
+              span.setAttribute('data-rt-speaker', blk.speaker || '');
+              span.setAttribute('data-rt-active', 'false');
+              span.setAttribute('data-rt-char-hl', 'false');
+              span.textContent = blk.text;
+              on(span, 'click', function () {
+                activeStep = blk.stepIndex;
+                applyEnsaioHighlights(false);
+              });
+              p.appendChild(span);
+            } else {
+              p.textContent = blk.text;
+            }
+            rtWrap.appendChild(p);
+          });
+        }
+        article.appendChild(rtWrap);
+        renderEnsaioControls();
+        applyEnsaioHighlights(false);
       } else {
-        var plain = document.createElement('div');
-        plain.className = 'esc-reader-plain esc-reader-body';
-        var blocks = text.replace(/\r\n?/g, '\n').split(/\n{2,}/);
-        var hasDropCap = text.replace(/\s+/g, '').length >= 80;
-        var pIdx = 0, bi, blockText, pEl;
-        for (bi = 0; bi < blocks.length; bi += 1) {
-          blockText = blocks[bi].replace(/^\n+|\n+$/g, '');
-          if (!blockText) { continue; }
-          pEl = document.createElement('p');
-          if (pIdx === 0 && hasDropCap && /^[A-Za-zÀ-ÖØ-öø-ÿ]/.test(blockText)) {
-            pEl.className = 'esc-reader-dropcap';
+        renderEnsaioControls();
+        if (doc && doc.format === 'rich' && doc.richHtml && root.Escr.richEditor) {
+          var richWrap = document.createElement('div');
+          richWrap.className = 'esc-reader-body';
+          richWrap.innerHTML = root.Escr.richEditor.sanitizeHtml(doc.richHtml);
+          article.appendChild(richWrap);
+        } else {
+          var plain = document.createElement('div');
+          plain.className = 'esc-reader-plain esc-reader-body';
+          var pBlocks = text.replace(/\r\n?/g, '\n').split(/\n{2,}/);
+          var hasDropCap = text.replace(/\s+/g, '').length >= 80;
+          var pIdx = 0, bi, blockText, pEl;
+          for (bi = 0; bi < pBlocks.length; bi += 1) {
+            blockText = pBlocks[bi].replace(/^\n+|\n+$/g, '');
+            if (!blockText) { continue; }
+            pEl = document.createElement('p');
+            if (pIdx === 0 && hasDropCap && /^[A-Za-zÀ-ÖØ-öø-ÿ]/.test(blockText)) {
+              pEl.className = 'esc-reader-dropcap';
+            }
+            pEl.textContent = blockText;
+            plain.appendChild(pEl);
+            pIdx += 1;
           }
-          pEl.textContent = blockText;
-          plain.appendChild(pEl);
-          pIdx += 1;
+          if (!pIdx) {
+            pEl = document.createElement('p');
+            pEl.className = 'esc-reader-empty';
+            pEl.textContent = 'Folha em branco.';
+            plain.appendChild(pEl);
+          }
+          article.appendChild(plain);
         }
-        if (!pIdx) {
-          pEl = document.createElement('p');
-          pEl.className = 'esc-reader-empty';
-          pEl.textContent = 'Folha em branco.';
-          plain.appendChild(pEl);
-        }
-        article.appendChild(plain);
       }
 
       var endMark = document.createElement('footer');
@@ -4783,6 +7775,56 @@
       on(endBack, 'click', close);
       endMark.appendChild(endBack);
       article.appendChild(endMark);
+    }
+
+    function switchReaderMode(mode) {
+      closePopover();
+      activeMode = mode === 'ensaio' ? 'ensaio' : 'ler';
+      applyPrefs();
+      renderArticleBody();
+      if (overlayEl && overlayEl._updateProgress) { overlayEl._updateProgress(); }
+    }
+
+    function open(doc) {
+      buildOverlay();
+      closePopover();
+      currentDoc = doc || { title: '', text: '' };
+      reviewMarks = [];
+      updateReviewPill();
+      selectedSpeaker = '';
+      onlyDialogues = false;
+      activeStep = 0;
+      parsedReadThru = parseReadThru(currentDoc.text || '');
+      /* Se o documento for explicitamente um roteiro estruturado, abre pronto no modo Roteiro/Ensaio */
+      activeMode = (parsedReadThru.isScript || currentDoc.template === 'roteiro' || currentDoc.printPreset === 'roteiro') ? 'ensaio' : 'ler';
+
+      previousFocus = document.activeElement;
+      var appIsDark = !!(document.body && document.body.getAttribute('data-theme') === 'escuro');
+      var effectivePalette = prefs.palette;
+      if (appIsDark && !hasSavedPalette()) { effectivePalette = 'night'; }
+      byId('esc-reader-palette').value = effectivePalette;
+      byId('esc-reader-face').value = prefs.face;
+      byId('esc-reader-size').value = String(prefs.size);
+      byId('esc-reader-leading').value = String(prefs.leading);
+      if (byId('esc-reader-scene')) { byId('esc-reader-scene').value = prefs.showScene ? 'on' : 'off'; }
+      byId('esc-reader-break').value = String(prefs.breakMin);
+      applyPrefs(effectivePalette);
+
+      var text = currentDoc && typeof currentDoc.text === 'string' ? currentDoc.text : '';
+      var stats = readingMinutes(text);
+      var statsNode = byId('esc-reader-stats');
+      if (statsNode) {
+        statsNode.setAttribute('data-base-stat', stats.minutes ? (stats.minutes + ' min') : '');
+        statsNode.textContent = stats.minutes ? (stats.minutes + ' min · 0%') : '0%';
+      }
+      var timePill = byId('esc-reader-time-pill');
+      if (timePill) {
+        timePill.textContent = stats.minutes ? (stats.minutes + ' min') : 'Rascunho';
+      }
+      if (byId('esc-reader-date')) { byId('esc-reader-date').textContent = formatEditionDate(); }
+      byId('esc-reader-project-tag').textContent = currentDoc && currentDoc.project ? currentDoc.project : 'EDIÇÃO DE LEITURA';
+
+      renderArticleBody();
 
       overlayEl.hidden = false;
       byId('esc-reader-viewport').scrollTop = 0;
@@ -4792,6 +7834,7 @@
     }
 
     function close() {
+      closePopover();
       stopBreakTimer();
       if (overlayEl) { overlayEl.hidden = true; }
       if (previousFocus && previousFocus.focus) { previousFocus.focus(); }
@@ -6231,6 +9274,33 @@
       }
     }
 
+    function exportEditorial(kind, exportOpts) {
+      if (document.body && document.body.getAttribute('data-locked') === 'true') { return false; }
+      var exporter = root.Escr.editorialExport;
+      if (!exporter || !exporter.buildDocx || !exporter.buildEpub) {
+        if (opts.message) { opts.message('Exporta\u00E7\u00E3o editorial indispon\u00EDvel nesta sess\u00E3o.'); }
+        return false;
+      }
+      if (opts.checkpoint) { opts.checkpoint(); }
+      if (overlayEl && !overlayEl.hidden) {
+        persistConfig();
+      } else {
+        initForContext(exportOpts && exportOpts.scope ? exportOpts.scope : null);
+      }
+      var chapters = collectChapters();
+      var res = kind === 'epub'
+        ? exporter.buildEpub({ config: state.config, chapters: chapters })
+        : exporter.buildDocx({ config: state.config, chapters: chapters });
+      if (opts.download) {
+        var saved = opts.download(res.bytes, res.mime, res.filename);
+        if (saved && opts.message) {
+          var label = kind === 'epub' ? 'E-book (.epub)' : 'Word (.docx)';
+          opts.message(label + ' gerado offline: ' + res.filename + '.');
+        }
+      }
+      return res;
+    }
+
     function buildOverlay() {
       if (overlayEl) { return overlayEl; }
       var sec = document.createElement('section');
@@ -6245,7 +9315,9 @@
           '<header class="esc-print-head">' +
             '<div><span class="ep-eyebrow">ESCREVARAL \u00B7 DIAGRAMA\u00C7\u00C3O E IMPRESS\u00C3O</span><h2 id="esc-print-heading">Imprimir e paginar</h2></div>' +
             '<div class="ep-head-actions">' +
-              '<button id="esc-print-html-btn" type="button" class="ep-btn-secondary" title="Baixar arquivo HTML paginado pronto para PDF, WeasyPrint ou LibreOffice">Baixar HTML paginado</button>' +
+              '<button id="esc-print-docx-btn" type="button" class="ep-btn-secondary" title="Baixar arquivo Word (.docx) pronto para editora, Word, LibreOffice ou Google Docs">Baixar .DOCX</button>' +
+              '<button id="esc-print-epub-btn" type="button" class="ep-btn-secondary" title="Baixar e-book (.epub) pronto para Kindle, UICLAP, Calibre ou Apple Books">Baixar .EPUB</button>' +
+              '<button id="esc-print-html-btn" type="button" class="ep-btn-secondary" title="Baixar arquivo HTML paginado pronto para PDF, WeasyPrint ou LibreOffice">HTML paginado</button>' +
               '<button id="esc-print-go-btn" type="button" class="ep-btn-primary">Imprimir / Salvar PDF</button>' +
               '<button id="esc-print-close" type="button" class="ep-btn-close" aria-label="Fechar est\u00FAdio de impress\u00E3o">\u2190 Voltar</button>' +
             '</div>' +
@@ -6299,7 +9371,16 @@
         else if (opts.message) { opts.message('Use a op\u00E7\u00E3o de impress\u00E3o do navegador.'); }
       });
 
+      on(byId('esc-print-docx-btn'), 'click', function () {
+        exportEditorial('docx');
+      });
+
+      on(byId('esc-print-epub-btn'), 'click', function () {
+        exportEditorial('epub');
+      });
+
       on(byId('esc-print-html-btn'), 'click', function () {
+        if (document.body && document.body.getAttribute('data-locked') === 'true') { return; }
         if (opts.checkpoint) { opts.checkpoint(); }
         persistConfig();
         var chapters = collectChapters();
@@ -6342,8 +9423,1125 @@
       close: close,
       isOpen: function () { return !!(overlayEl && !overlayEl.hidden); },
       prepareQuickPrint: prepareQuickPrint,
-      finishPrint: clearPrintSheet
+      finishPrint: clearPrintSheet,
+      exportDocx: function (exportOpts) { return exportEditorial('docx', exportOpts); },
+      exportEpub: function (exportOpts) { return exportEditorial('epub', exportOpts); }
     };
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
+/* Fonte: src/ui/exportacao-editorial.js */
+/* Exportação editorial 100% offline em ES5 estrito: .DOCX (OOXML) e .EPUB (EPUB 3.0 + NCX).
+ * Construtor ZIP puro (Store / CRC-32 IEEE 802.3), sem servidor e sem alterar o manuscrito. */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+
+  /* --- Codificação UTF-8 pura (compatível com pares substitutos UTF-16 e navegadores antigos) --- */
+  function utf8Bytes(str) {
+    var s = String(str || '');
+    var out = [];
+    var i, code, next, cp;
+    for (i = 0; i < s.length; i += 1) {
+      code = s.charCodeAt(i);
+      if (code >= 0xD800 && code <= 0xDBFF && i + 1 < s.length) {
+        next = s.charCodeAt(i + 1);
+        if (next >= 0xDC00 && next <= 0xDFFF) {
+          cp = ((code - 0xD800) << 10) + (next - 0xDC00) + 0x10000;
+          out.push(0xF0 | (cp >> 18));
+          out.push(0x80 | ((cp >> 12) & 0x3F));
+          out.push(0x80 | ((cp >> 6) & 0x3F));
+          out.push(0x80 | (cp & 0x3F));
+          i += 1;
+          continue;
+        }
+      }
+      if (code < 0x80) {
+        out.push(code);
+      } else if (code < 0x800) {
+        out.push(0xC0 | (code >> 6));
+        out.push(0x80 | (code & 0x3F));
+      } else {
+        out.push(0xE0 | (code >> 12));
+        out.push(0x80 | ((code >> 6) & 0x3F));
+        out.push(0x80 | (code & 0x3F));
+      }
+    }
+    return new Uint8Array(out);
+  }
+
+  /* --- CRC-32 (IEEE 802.3) --- */
+  var CRC_TABLE = (function () {
+    var tbl = new Uint32Array(256);
+    var i, j, c;
+    for (i = 0; i < 256; i += 1) {
+      c = i;
+      for (j = 0; j < 8; j += 1) {
+        c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      }
+      tbl[i] = c >>> 0;
+    }
+    return tbl;
+  }());
+
+  function crc32(bytes) {
+    var crc = 0xFFFFFFFF;
+    var i;
+    for (i = 0; i < bytes.length; i += 1) {
+      crc = CRC_TABLE[(crc ^ bytes[i]) & 0xFF] ^ (crc >>> 8);
+    }
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+  }
+
+  function writeU16(buf, off, val) {
+    buf[off] = val & 0xFF;
+    buf[off + 1] = (val >>> 8) & 0xFF;
+  }
+
+  function writeU32(buf, off, val) {
+    buf[off] = val & 0xFF;
+    buf[off + 1] = (val >>> 8) & 0xFF;
+    buf[off + 2] = (val >>> 16) & 0xFF;
+    buf[off + 3] = (val >>> 24) & 0xFF;
+  }
+
+  function dosTimeDate(dateObj) {
+    var d = dateObj instanceof Date && !isNaN(dateObj.getTime()) ? dateObj : new Date();
+    var year = Math.max(1980, Math.min(2107, d.getFullYear()));
+    var dosTime = ((d.getHours() & 0x1F) << 11) | ((d.getMinutes() & 0x3F) << 5) | ((d.getSeconds() >>> 1) & 0x1F);
+    var dosDate = (((year - 1980) & 0x7F) << 9) | (((d.getMonth() + 1) & 0x0F) << 5) | (d.getDate() & 0x1F);
+    return { time: dosTime, date: dosDate };
+  }
+
+  /* Construtor ZIP (método 0 / Store — exigido para EPUB mimetype e 100% compatível com Word/LibreOffice/KDP) */
+  function buildZip(entries, nowDate) {
+    var td = dosTimeDate(nowDate);
+    var prepared = [];
+    var totalLocal = 0;
+    var totalCentral = 0;
+    var i, item, nameBytes, dataBytes, sum;
+
+    for (i = 0; i < entries.length; i += 1) {
+      item = entries[i];
+      nameBytes = utf8Bytes(item.name);
+      dataBytes = item.data instanceof Uint8Array ? item.data : utf8Bytes(item.data);
+      sum = crc32(dataBytes);
+      prepared.push({
+        name: nameBytes,
+        data: dataBytes,
+        crc: sum,
+        offset: totalLocal
+      });
+      totalLocal += 30 + nameBytes.length + dataBytes.length;
+      totalCentral += 46 + nameBytes.length;
+    }
+
+    var totalSize = totalLocal + totalCentral + 22;
+    var out = new Uint8Array(totalSize);
+    var pos = 0;
+
+    for (i = 0; i < prepared.length; i += 1) {
+      item = prepared[i];
+      var utf8Flag = /[^\x00-\x7F]/.test(entries[i].name) ? 0x0800 : 0;
+      item.utf8Flag = utf8Flag;
+      writeU32(out, pos, 0x04034B50);          /* Local file header signature */
+      writeU16(out, pos + 4, 20);              /* Version needed to extract (2.0) */
+      writeU16(out, pos + 6, utf8Flag);        /* UTF-8 filename flag (0 para ASCII/mimetype) */
+      writeU16(out, pos + 8, 0);               /* Method 0: Store */
+      writeU16(out, pos + 10, td.time);
+      writeU16(out, pos + 12, td.date);
+      writeU32(out, pos + 14, item.crc);
+      writeU32(out, pos + 18, item.data.length);
+      writeU32(out, pos + 22, item.data.length);
+      writeU16(out, pos + 26, item.name.length);
+      writeU16(out, pos + 28, 0);              /* Extra field length = 0 */
+      pos += 30;
+      out.set(item.name, pos);
+      pos += item.name.length;
+      out.set(item.data, pos);
+      pos += item.data.length;
+    }
+
+    var centralOffset = pos;
+    for (i = 0; i < prepared.length; i += 1) {
+      item = prepared[i];
+      writeU32(out, pos, 0x02014B50);          /* Central directory header */
+      writeU16(out, pos + 4, 20);              /* Version made by */
+      writeU16(out, pos + 6, 20);              /* Version needed */
+      writeU16(out, pos + 8, item.utf8Flag);   /* UTF-8 flag */
+      writeU16(out, pos + 10, 0);              /* Store */
+      writeU16(out, pos + 12, td.time);
+      writeU16(out, pos + 14, td.date);
+      writeU32(out, pos + 16, item.crc);
+      writeU32(out, pos + 20, item.data.length);
+      writeU32(out, pos + 24, item.data.length);
+      writeU16(out, pos + 28, item.name.length);
+      writeU16(out, pos + 30, 0);              /* Extra */
+      writeU16(out, pos + 32, 0);              /* Comment */
+      writeU16(out, pos + 34, 0);              /* Disk start */
+      writeU16(out, pos + 36, 0);              /* Internal attrs */
+      writeU32(out, pos + 38, 0);              /* External attrs */
+      writeU32(out, pos + 42, item.offset);
+      pos += 46;
+      out.set(item.name, pos);
+      pos += item.name.length;
+    }
+
+    writeU32(out, pos, 0x06054B50);            /* End of central directory */
+    writeU16(out, pos + 4, 0);
+    writeU16(out, pos + 6, 0);
+    writeU16(out, pos + 8, prepared.length);
+    writeU16(out, pos + 10, prepared.length);
+    writeU32(out, pos + 12, totalCentral);
+    writeU32(out, pos + 16, centralOffset);
+    writeU16(out, pos + 20, 0);
+
+    return out;
+  }
+
+  /* --- Utilitários XML e texto editorial --- */
+  function stripXmlControl(str) {
+    return String(str || '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\uFFFE\uFFFF]/g, '');
+  }
+
+  function escapeXml(str) {
+    return stripXmlControl(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+  }
+
+  function decodeHtmlEntities(str) {
+    return String(str || '').replace(/&(#x[0-9a-fA-F]+|#[0-9]+|[a-zA-Z]+);/g, function (full, ent) {
+      if (ent === 'amp') { return '&'; }
+      if (ent === 'lt') { return '<'; }
+      if (ent === 'gt') { return '>'; }
+      if (ent === 'quot') { return '"'; }
+      if (ent === 'apos' || ent === '#39') { return "'"; }
+      if (ent === 'nbsp') { return '\u00A0'; }
+      if (ent === 'mdash') { return '\u2014'; }
+      if (ent === 'ndash') { return '\u2013'; }
+      if (ent === 'laquo') { return '\u00AB'; }
+      if (ent === 'raquo') { return '\u00BB'; }
+      if (ent === 'middot') { return '\u00B7'; }
+      if (ent === 'hellip') { return '\u2026'; }
+      if (ent === 'ldquo') { return '\u201C'; }
+      if (ent === 'rdquo') { return '\u201D'; }
+      if (ent === 'lsquo') { return '\u2018'; }
+      if (ent === 'rsquo') { return '\u2019'; }
+      if (ent.charAt(0) === '#') {
+        var num = ent.charAt(1) === 'x' || ent.charAt(1) === 'X'
+          ? parseInt(ent.slice(2), 16)
+          : parseInt(ent.slice(1), 10);
+        if (!isNaN(num) && num >= 0 && num <= 0xFFFF) {
+          return String.fromCharCode(num);
+        }
+      }
+      return full;
+    });
+  }
+
+  function safeSlug(str, fallback) {
+    var cleaned = String(str || '')
+      .replace(/^\s+|\s+$/g, '')
+      .replace(/[^A-Za-z0-9\u00C0-\u00FF_-]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 72);
+    return cleaned || fallback || 'manuscrito';
+  }
+
+  function normHeading(s) {
+    return String(s || '')
+      .replace(/^\s+|\s+$/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/[\u2014\u2013\-:]\s*$/, '')
+      .toLowerCase();
+  }
+
+  function stripPlaceholdersText(text, config) {
+    if (!config || !config.stripPlaceholders) { return String(text || ''); }
+    if (root.Escr.printCore && root.Escr.printCore.stripGuidePlaceholders) {
+      return root.Escr.printCore.stripGuidePlaceholders(text || '');
+    }
+    return String(text || '');
+  }
+
+  function pad3(n) {
+    var s = String(n);
+    while (s.length < 3) { s = '0' + s; }
+    return s;
+  }
+
+  function isoTimestamp(dateObj) {
+    var d = dateObj instanceof Date && !isNaN(dateObj.getTime()) ? dateObj : new Date();
+    function p2(n) { return n < 10 ? '0' + n : String(n); }
+    return d.getUTCFullYear() + '-' + p2(d.getUTCMonth() + 1) + '-' + p2(d.getUTCDate()) + 'T' +
+      p2(d.getUTCHours()) + ':' + p2(d.getUTCMinutes()) + ':' + p2(d.getUTCSeconds()) + 'Z';
+  }
+
+  function formatDateLong(dateObj) {
+    var d = dateObj instanceof Date && !isNaN(dateObj.getTime()) ? dateObj : new Date();
+    var months = ['janeiro', 'fevereiro', 'mar\u00E7o', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    return d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
+  }
+
+  function simpleStableUuid(seed) {
+    var h = 2166136261, i, s = String(seed || 'escrevaral');
+    var hex = '';
+    for (i = 0; i < 32; i += 1) {
+      h ^= s.charCodeAt(i % s.length) + i * 31;
+      h = ((h >>> 0) * 16777619) >>> 0;
+      hex += ((h >>> 24) & 0x0F).toString(16);
+    }
+    return 'urn:uuid:' + hex.slice(0, 8) + '-' + hex.slice(8, 12) + '-4' + hex.slice(13, 16) + '-a' + hex.slice(17, 20) + '-' + hex.slice(20, 32);
+  }
+
+  /* --- Parser de Blocos e Runs (Texto simples & Rich HTML leve, sem dependência de DOM) --- */
+  function runsFromPlainText(text) {
+    var lines = String(text || '').split('\n');
+    var runs = [], i;
+    for (i = 0; i < lines.length; i += 1) {
+      if (i > 0) { runs.push({ br: true }); }
+      if (lines[i].length > 0) { runs.push({ text: lines[i] }); }
+    }
+    return runs;
+  }
+
+  function plainTextOfRuns(runs) {
+    var out = '', i;
+    for (i = 0; i < runs.length; i += 1) {
+      if (runs[i].br) { out += '\n'; }
+      else if (runs[i].text) { out += runs[i].text; }
+    }
+    return out;
+  }
+
+  function parsePlainToBlocks(text, config, headingText) {
+    var src = stripPlaceholdersText(text, config);
+    var rawBlocks = src.replace(/\r\n?/g, '\n').split(/\n{2,}/);
+    var blocks = [];
+    var i, block, trimmed, skippedDupH1 = false;
+    var normTitle = normHeading(headingText);
+
+    for (i = 0; i < rawBlocks.length; i += 1) {
+      block = rawBlocks[i].replace(/^\n+|\n+$/g, '');
+      trimmed = block.replace(/^\s+|\s+$/g, '');
+      if (!trimmed) { continue; }
+      if (/^#\s+/.test(trimmed) && trimmed.indexOf('\n') === -1) {
+        var h1Txt = trimmed.replace(/^#\s+/, '').replace(/[\u2014\u2013\-]\s*$/, '').replace(/^\s+|\s+$/g, '');
+        if (!skippedDupH1 && config.dedupeHeading && normTitle && (normHeading(h1Txt) === normTitle || normHeading(h1Txt).indexOf(normTitle) === 0 || normTitle.indexOf(normHeading(h1Txt)) === 0)) {
+          skippedDupH1 = true;
+          continue;
+        }
+        blocks.push({ type: 'h1', runs: [{ text: h1Txt }] });
+        continue;
+      }
+      if (/^##\s+/.test(trimmed) && trimmed.indexOf('\n') === -1) {
+        blocks.push({ type: 'h2', runs: [{ text: trimmed.replace(/^##\s+/, '') }] });
+        continue;
+      }
+      if (/^###\s+/.test(trimmed) && trimmed.indexOf('\n') === -1) {
+        blocks.push({ type: 'h3', runs: [{ text: trimmed.replace(/^###\s+/, '') }] });
+        continue;
+      }
+      if (/^(---+|\*\s*\*\s*\*)$/.test(trimmed)) {
+        blocks.push({ type: 'scene-break', runs: [] });
+        continue;
+      }
+      if (/^>\s+/.test(trimmed)) {
+        blocks.push({ type: 'blockquote', runs: runsFromPlainText(trimmed.replace(/^>\s+/gm, '')) });
+        continue;
+      }
+      blocks.push({ type: 'p', runs: runsFromPlainText(block) });
+    }
+    return blocks;
+  }
+
+  function cloneFmt(fmt) {
+    return {
+      bold: !!fmt.bold,
+      italic: !!fmt.italic,
+      underline: !!fmt.underline,
+      strike: !!fmt.strike,
+      code: !!fmt.code
+    };
+  }
+
+  function parseRichHtmlToBlocks(richHtml, config, headingText) {
+    var html = String(richHtml || '');
+    if (config && config.stripPlaceholders && root.Escr.templates && root.Escr.templates.isPlaceholder) {
+      html = html.replace(/\u00AB[^\u00AB\u00BB<]+\u00BB/g, function (match) {
+        return root.Escr.templates.isPlaceholder(match) ? '' : match;
+      });
+    }
+
+    var blocks = [];
+    var currentBlock = null;
+    var fmtStack = [{ bold: false, italic: false, underline: false, strike: false, code: false }];
+    var listStack = [];
+    var olCounters = [];
+    var bqDepth = 0;
+
+    function curFmt() { return fmtStack[fmtStack.length - 1]; }
+
+    function flushBlock() {
+      if (!currentBlock) { return; }
+      var raw = plainTextOfRuns(currentBlock.runs).replace(/\u00A0/g, ' ').replace(/^\s+|\s+$/g, '');
+      if (raw.length > 0 || currentBlock.type === 'scene-break') {
+        blocks.push(currentBlock);
+      }
+      currentBlock = null;
+    }
+
+    function ensureBlock(type, extra) {
+      if (!currentBlock) {
+        currentBlock = { type: type || 'p', runs: [] };
+        if (extra) {
+          var k;
+          for (k in extra) {
+            if (Object.prototype.hasOwnProperty.call(extra, k)) { currentBlock[k] = extra[k]; }
+          }
+        }
+      }
+    }
+
+    var tokenRe = /(<\/?[a-zA-Z][a-zA-Z0-9]*\b[^>]*>)|([^<]+)/g;
+    var match;
+    while ((match = tokenRe.exec(html)) !== null) {
+      if (match[1]) {
+        var tagRaw = match[1];
+        var isClose = /^<\//.test(tagRaw);
+        var nameMatch = /^<\/?([a-zA-Z][a-zA-Z0-9]*)/.exec(tagRaw);
+        if (!nameMatch) { continue; }
+        var tag = nameMatch[1].toLowerCase();
+
+        if (tag === 'br') {
+          if (currentBlock) { currentBlock.runs.push({ br: true }); }
+          continue;
+        }
+        if (tag === 'hr') {
+          flushBlock();
+          blocks.push({ type: 'scene-break', runs: [] });
+          continue;
+        }
+        if (tag === 'ul' || tag === 'ol') {
+          flushBlock();
+          if (!isClose) {
+            listStack.push(tag);
+            olCounters.push(0);
+          } else {
+            listStack.pop();
+            olCounters.pop();
+          }
+          continue;
+        }
+        if (tag === 'blockquote') {
+          flushBlock();
+          if (!isClose) {
+            bqDepth += 1;
+            ensureBlock('blockquote');
+          } else if (bqDepth > 0) {
+            bqDepth -= 1;
+          }
+          continue;
+        }
+        if (tag === 'p' || tag === 'div' || tag === 'h1' || tag === 'h2' || tag === 'h3' || tag === 'pre' || tag === 'li') {
+          flushBlock();
+          if (!isClose) {
+            if (tag === 'li') {
+              var kind = listStack.length ? listStack[listStack.length - 1] : 'ul';
+              var num = 1;
+              if (kind === 'ol' && olCounters.length) {
+                olCounters[olCounters.length - 1] += 1;
+                num = olCounters[olCounters.length - 1];
+              }
+              ensureBlock('li', { listKind: kind, listIndex: num });
+            } else if ((tag === 'p' || tag === 'div') && bqDepth > 0) {
+              ensureBlock('blockquote');
+            } else {
+              ensureBlock(tag === 'div' ? 'p' : tag);
+            }
+          }
+          continue;
+        }
+        if (tag === 'b' || tag === 'strong' || tag === 'i' || tag === 'em' || tag === 'u' || tag === 's' || tag === 'strike' || tag === 'del' || tag === 'code') {
+          if (!isClose) {
+            var nextF = cloneFmt(curFmt());
+            if (tag === 'b' || tag === 'strong') { nextF.bold = true; }
+            else if (tag === 'i' || tag === 'em') { nextF.italic = true; }
+            else if (tag === 'u') { nextF.underline = true; }
+            else if (tag === 's' || tag === 'strike' || tag === 'del') { nextF.strike = true; }
+            else if (tag === 'code') { nextF.code = true; }
+            fmtStack.push(nextF);
+          } else if (fmtStack.length > 1) {
+            fmtStack.pop();
+          }
+        }
+      } else if (match[2]) {
+        var txt = decodeHtmlEntities(match[2]);
+        if (!currentBlock && !/\S/.test(txt)) { continue; }
+        ensureBlock('p');
+        var f = curFmt();
+        currentBlock.runs.push({
+          text: txt,
+          bold: f.bold,
+          italic: f.italic,
+          underline: f.underline,
+          strike: f.strike,
+          code: f.code
+        });
+      }
+    }
+    flushBlock();
+
+    /* Deduplica H1 inicial se igual ao título do capítulo */
+    if (config && config.dedupeHeading && headingText && blocks.length && blocks[0].type === 'h1') {
+      var normT = normHeading(headingText);
+      var firstH = normHeading(plainTextOfRuns(blocks[0].runs));
+      if (!firstH || firstH === normT || firstH.indexOf(normT) === 0 || normT.indexOf(firstH) === 0) {
+        blocks.shift();
+      }
+    }
+
+    return blocks;
+  }
+
+  function parseDocumentBlocks(docObj, config, headingText) {
+    if (!docObj) { return []; }
+    if (docObj.format === 'rich' && docObj.richHtml) {
+      return parseRichHtmlToBlocks(docObj.richHtml, config, headingText);
+    }
+    return parsePlainToBlocks(docObj.text || '', config, headingText);
+  }
+
+  function resolveConfig(rawConfig) {
+    if (root.Escr.printCore && root.Escr.printCore.normalizeConfig) {
+      return root.Escr.printCore.normalizeConfig(rawConfig || null, '');
+    }
+    var p = rawConfig || {};
+    return {
+      scope: p.scope === 'book' ? 'book' : 'current',
+      format: p.format || '14x21',
+      font: p.font === 'mono' ? 'mono' : 'serif',
+      sizePt: Number(p.sizePt) || 11,
+      leading: Number(p.leading) || 1.48,
+      align: p.align === 'left' ? 'left' : 'justify',
+      indent: p.indent !== false,
+      hyphenate: p.hyphenate !== false,
+      dropCap: !!p.dropCap,
+      mirrorMargins: p.mirrorMargins !== false,
+      gutterMm: Number(p.gutterMm) || 0,
+      pageNumPos: p.pageNumPos || 'bottom-outer',
+      runningHead: !!p.runningHead,
+      chapterBreak: p.chapterBreak !== false,
+      frontMatter: !!p.frontMatter,
+      toc: !!p.toc,
+      colophon: !!p.colophon,
+      stripPlaceholders: p.stripPlaceholders !== false,
+      stripNumericPrefix: p.stripNumericPrefix !== false,
+      dedupeHeading: p.dedupeHeading !== false,
+      bookTitle: p.bookTitle || '',
+      bookSubtitle: p.bookSubtitle || '',
+      authorName: p.authorName || '',
+      editionNote: p.editionNote || '',
+      dedication: p.dedication || ''
+    };
+  }
+
+  function resolveMargins(config) {
+    if (root.Escr.printCore && root.Escr.printCore.formatMargins) {
+      return root.Escr.printCore.formatMargins(config);
+    }
+    return { widthMm: 210, heightMm: 297, topMm: 25, bottomMm: 25, innerMm: 28, outerMm: 25 };
+  }
+
+  function mmToTwips(mm) {
+    return Math.round(Number(mm || 0) * 56.6929133858);
+  }
+
+  function countWordsSimple(str) {
+    if (root.Escr.countManuscript) { return root.Escr.countManuscript(str || '').words || 0; }
+    var m = String(str || '').match(/[A-Za-z\u00C0-\u00FF0-9]+/g);
+    return m ? m.length : 0;
+  }
+
+  /* ============================================================================
+   * 1. GERADOR .DOCX (OOXML — Microsoft Word / LibreOffice Writer / Google Docs)
+   * ============================================================================ */
+  function docxRunXml(run, monoFont) {
+    if (run.br) { return '<w:r><w:br/></w:r>'; }
+    var txt = stripXmlControl(run.text || '');
+    if (!txt) { return ''; }
+    var rPr = [];
+    if (run.bold) { rPr.push('<w:b/>'); }
+    if (run.italic) { rPr.push('<w:i/>'); }
+    if (run.underline) { rPr.push('<w:u w:val="single"/>'); }
+    if (run.strike) { rPr.push('<w:strike/>'); }
+    if (run.code) {
+      rPr.push('<w:rFonts w:ascii="Courier New" w:hAnsi="Courier New" w:cs="Courier New"/>');
+    } else if (monoFont) {
+      rPr.push('<w:rFonts w:ascii="Courier New" w:hAnsi="Courier New" w:cs="Courier New"/>');
+    }
+    var rPrXml = rPr.length ? '<w:rPr>' + rPr.join('') + '</w:rPr>' : '';
+    return '<w:r>' + rPrXml + '<w:t xml:space="preserve">' + escapeXml(txt) + '</w:t></w:r>';
+  }
+
+  function docxRunsXml(runs, monoFont) {
+    var out = [], i, x;
+    for (i = 0; i < runs.length; i += 1) {
+      x = docxRunXml(runs[i], monoFont);
+      if (x) { out.push(x); }
+    }
+    return out.join('');
+  }
+
+  function docxPageBreakXml() {
+    return '<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
+  }
+
+  function buildDocx(payload) {
+    payload = payload || {};
+    var config = resolveConfig(payload.config);
+    var chapters = payload.chapters && payload.chapters.length ? payload.chapters : [{ title: 'Manuscrito', displayTitle: 'Manuscrito', text: '' }];
+    var now = payload.now instanceof Date ? payload.now : new Date();
+    var m = resolveMargins(config);
+    var isMulti = chapters.length > 1 || config.scope === 'book';
+    var mainTitle = config.bookTitle || (chapters[0] && (chapters[0].displayTitle || chapters[0].title)) || 'Manuscrito';
+    var author = config.authorName || '';
+    var fontFace = config.font === 'mono' ? 'Courier New' : 'Georgia';
+    var halfPts = Math.round((config.sizePt || 11) * 2);
+    var lineTwips = Math.round((config.leading || 1.48) * 240);
+    var alignVal = config.align === 'justify' ? 'both' : 'left';
+    var hasHeader = !!config.runningHead && !!(mainTitle || author);
+    var hasFooter = config.pageNumPos !== 'none';
+
+    var totalWords = 0;
+    var bodyParts = [];
+
+    /* Folha de rosto */
+    if (config.frontMatter) {
+      if (author) {
+        bodyParts.push('<w:p><w:pPr><w:pStyle w:val="BookAuthor"/><w:spacing w:before="1800" w:after="480"/></w:pPr><w:r><w:t>' + escapeXml(author.toUpperCase()) + '</w:t></w:r></w:p>');
+      }
+      bodyParts.push('<w:p><w:pPr><w:pStyle w:val="Title"/><w:spacing w:before="' + (author ? '240' : '2200') + '" w:after="240"/></w:pPr><w:r><w:t>' + escapeXml(mainTitle) + '</w:t></w:r></w:p>');
+      if (config.bookSubtitle) {
+        bodyParts.push('<w:p><w:pPr><w:pStyle w:val="Subtitle"/><w:spacing w:after="480"/></w:pPr><w:r><w:t>' + escapeXml(config.bookSubtitle) + '</w:t></w:r></w:p>');
+      }
+      bodyParts.push('<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="1400"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:color w:val="555555"/></w:rPr><w:t>' + escapeXml(config.editionNote || String(now.getFullYear())) + '</w:t></w:r></w:p>');
+      bodyParts.push(docxPageBreakXml());
+
+      if (config.dedication && config.dedication.replace(/^\s+|\s+$/g, '')) {
+        bodyParts.push('<w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="2400"/></w:pPr>' + docxRunsXml(runsFromPlainText(config.dedication).map(function (r) {
+          if (r.br) { return r; }
+          return { text: r.text, italic: true };
+        }), false) + '</w:p>');
+        bodyParts.push(docxPageBreakXml());
+      }
+    }
+
+    /* Sumário editorial (quando multi-capítulo) */
+    if (config.toc && chapters.length > 1) {
+      bodyParts.push('<w:p><w:pPr><w:pStyle w:val="Heading1"/><w:jc w:val="center"/></w:pPr><w:r><w:t>Sum\u00E1rio</w:t></w:r></w:p>');
+      var ti;
+      for (ti = 0; ti < chapters.length; ti += 1) {
+        var tName = chapters[ti].displayTitle || chapters[ti].title || ('Cap\u00EDtulo ' + (ti + 1));
+        bodyParts.push('<w:p><w:pPr><w:spacing w:after="100"/><w:ind w:firstLine="0"/></w:pPr><w:r><w:t>' + escapeXml((ti + 1) + '. ' + tName) + '</w:t></w:r></w:p>');
+      }
+      bodyParts.push(docxPageBreakXml());
+    }
+
+    /* Capítulos e conteúdo */
+    var ci, bi, ch, dispTitle, blocks, blk, prevWasBreakOrHead;
+    for (ci = 0; ci < chapters.length; ci += 1) {
+      ch = chapters[ci];
+      if (ci > 0 && config.chapterBreak) {
+        bodyParts.push(docxPageBreakXml());
+      }
+      dispTitle = ch.displayTitle || ch.title || '';
+      totalWords += countWordsSimple(stripPlaceholdersText(ch.text || '', config));
+
+      if (dispTitle) {
+        if (isMulti && chapters.length > 1) {
+          bodyParts.push('<w:p><w:pPr><w:jc w:val="center"/><w:keepNext/><w:spacing w:before="480" w:after="80"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:color w:val="555555"/></w:rPr><w:t>' + escapeXml(String(ci + 1)) + '</w:t></w:r></w:p>');
+        }
+        bodyParts.push('<w:p><w:pPr><w:pStyle w:val="Heading1"/>' + (isMulti ? '<w:jc w:val="center"/>' : '') + '</w:pPr><w:r><w:t>' + escapeXml(dispTitle) + '</w:t></w:r></w:p>');
+      }
+
+      blocks = parseDocumentBlocks(ch, config, dispTitle);
+      if (!blocks.length) {
+        blocks = [{ type: 'p', runs: [{ text: ' ', italic: true }] }];
+      }
+
+      prevWasBreakOrHead = true;
+      for (bi = 0; bi < blocks.length; bi += 1) {
+        blk = blocks[bi];
+        if (blk.type === 'h1') {
+          bodyParts.push('<w:p><w:pPr><w:pStyle w:val="Heading2"/></w:pPr>' + docxRunsXml(blk.runs, false) + '</w:p>');
+          prevWasBreakOrHead = true;
+        } else if (blk.type === 'h2') {
+          bodyParts.push('<w:p><w:pPr><w:pStyle w:val="Heading2"/></w:pPr>' + docxRunsXml(blk.runs, false) + '</w:p>');
+          prevWasBreakOrHead = true;
+        } else if (blk.type === 'h3') {
+          bodyParts.push('<w:p><w:pPr><w:pStyle w:val="Heading3"/></w:pPr>' + docxRunsXml(blk.runs, false) + '</w:p>');
+          prevWasBreakOrHead = true;
+        } else if (blk.type === 'scene-break') {
+          bodyParts.push('<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="240" w:after="240"/><w:ind w:firstLine="0"/></w:pPr><w:r><w:t>\u2766</w:t></w:r></w:p>');
+          prevWasBreakOrHead = true;
+        } else if (blk.type === 'blockquote') {
+          bodyParts.push('<w:p><w:pPr><w:pStyle w:val="Quote"/></w:pPr>' + docxRunsXml(blk.runs, false) + '</w:p>');
+          prevWasBreakOrHead = true;
+        } else if (blk.type === 'pre') {
+          bodyParts.push('<w:p><w:pPr><w:pStyle w:val="CodeBlock"/></w:pPr>' + docxRunsXml(blk.runs, true) + '</w:p>');
+          prevWasBreakOrHead = true;
+        } else if (blk.type === 'li') {
+          var prefix = blk.listKind === 'ol' ? (String(blk.listIndex || 1) + '. ') : '\u2022 ';
+          bodyParts.push('<w:p><w:pPr><w:ind w:left="480" w:hanging="240"/><w:spacing w:after="80"/></w:pPr><w:r><w:t xml:space="preserve">' + escapeXml(prefix) + '</w:t></w:r>' + docxRunsXml(blk.runs, false) + '</w:p>');
+          prevWasBreakOrHead = false;
+        } else {
+          var pPr = [];
+          if (config.indent) {
+            if (prevWasBreakOrHead) {
+              pPr.push('<w:ind w:firstLine="0"/>');
+            }
+          }
+          bodyParts.push('<w:p>' + (pPr.length ? '<w:pPr>' + pPr.join('') + '</w:pPr>' : '') + docxRunsXml(blk.runs, false) + '</w:p>');
+          prevWasBreakOrHead = false;
+        }
+      }
+    }
+
+    /* Colofão */
+    if (config.colophon) {
+      bodyParts.push(docxPageBreakXml());
+      bodyParts.push('<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="2600" w:after="160"/><w:ind w:firstLine="0"/></w:pPr><w:r><w:t>\u2014 \u2766 \u2014</w:t></w:r></w:p>');
+      bodyParts.push('<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="100"/><w:ind w:firstLine="0"/></w:pPr><w:r><w:rPr><w:b/></w:rPr><w:t>' + escapeXml(mainTitle) + '</w:t></w:r>' + (author ? '<w:r><w:t xml:space="preserve"> \u00B7 ' + escapeXml(author) + '</w:t></w:r>' : '') + '</w:p>');
+      bodyParts.push('<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="80"/><w:ind w:firstLine="0"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/><w:color w:val="555555"/></w:rPr><w:t>' + escapeXml('Preparado no Escrevaral em ' + formatDateLong(now) + ' (' + totalWords.toLocaleString('pt-BR') + ' palavras).') + '</w:t></w:r></w:p>');
+    }
+
+    /* Propriedades de página e seção */
+    var gutterTwips = config.mirrorMargins ? mmToTwips(config.gutterMm || 0) : 0;
+    var leftTwips = mmToTwips((m.innerMm || 25) - (config.mirrorMargins ? (config.gutterMm || 0) : 0));
+    var rightTwips = mmToTwips(m.outerMm || 20);
+    var sectPr = [
+      '<w:sectPr>',
+      hasHeader ? '<w:headerReference w:type="default" r:id="rId2"/>' : '',
+      hasFooter ? '<w:footerReference w:type="default" r:id="rId3"/>' : '',
+      '<w:pgSz w:w="' + mmToTwips(m.widthMm || 210) + '" w:h="' + mmToTwips(m.heightMm || 297) + '"/>',
+      '<w:pgMar w:top="' + mmToTwips(m.topMm || 20) + '" w:right="' + rightTwips + '" w:bottom="' + mmToTwips(m.bottomMm || 20) + '" w:left="' + leftTwips + '" w:header="708" w:footer="708" w:gutter="' + gutterTwips + '"/>',
+      config.frontMatter ? '<w:titlePg/>' : '',
+      '</w:sectPr>'
+    ].join('');
+
+    var documentXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+      '<w:body>' + bodyParts.join('') + sectPr + '</w:body></w:document>';
+
+    var stylesXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">' +
+      '<w:docDefaults>' +
+        '<w:rPrDefault><w:rPr>' +
+          '<w:rFonts w:ascii="' + fontFace + '" w:hAnsi="' + fontFace + '" w:cs="' + fontFace + '"/>' +
+          '<w:sz w:val="' + halfPts + '"/><w:szCs w:val="' + halfPts + '"/>' +
+          '<w:lang w:val="pt-BR"/>' +
+        '</w:rPr></w:rPrDefault>' +
+        '<w:pPrDefault><w:pPr>' +
+          '<w:spacing w:after="' + (config.indent ? '0' : '160') + '" w:line="' + lineTwips + '" w:lineRule="auto"/>' +
+          (config.indent ? '<w:ind w:firstLine="425"/>' : '') +
+          '<w:jc w:val="' + alignVal + '"/>' +
+        '</w:pPr></w:pPrDefault>' +
+      '</w:docDefaults>' +
+      '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:jc w:val="center"/><w:ind w:firstLine="0"/><w:keepNext/></w:pPr><w:rPr><w:b/><w:sz w:val="44"/><w:szCs w:val="44"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Subtitle"><w:name w:val="Subtitle"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:jc w:val="center"/><w:ind w:firstLine="0"/></w:pPr><w:rPr><w:i/><w:color w:val="444444"/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="BookAuthor"><w:name w:val="Book Author"/><w:basedOn w:val="Normal"/><w:pPr><w:jc w:val="center"/><w:ind w:firstLine="0"/></w:pPr><w:rPr><w:color w:val="444444"/><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:keepNext/><w:spacing w:before="360" w:after="240"/><w:ind w:firstLine="0"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/><w:szCs w:val="32"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:keepNext/><w:spacing w:before="260" w:after="140"/><w:ind w:firstLine="0"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Heading3"><w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:keepNext/><w:spacing w:before="200" w:after="100"/><w:ind w:firstLine="0"/><w:outlineLvl w:val="2"/></w:pPr><w:rPr><w:b/><w:i/><w:sz w:val="23"/><w:szCs w:val="23"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Quote"><w:name w:val="Quote"/><w:basedOn w:val="Normal"/><w:pPr><w:ind w:left="567" w:right="284" w:firstLine="0"/><w:spacing w:before="160" w:after="160"/></w:pPr><w:rPr><w:i/><w:color w:val="333333"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="CodeBlock"><w:name w:val="Code Block"/><w:basedOn w:val="Normal"/><w:pPr><w:jc w:val="left"/><w:ind w:left="284" w:firstLine="0"/><w:spacing w:before="140" w:after="140" w:line="260" w:lineRule="auto"/></w:pPr><w:rPr><w:rFonts w:ascii="Courier New" w:hAnsi="Courier New" w:cs="Courier New"/><w:sz w:val="19"/><w:szCs w:val="19"/></w:rPr></w:style>' +
+      '</w:styles>';
+
+    var settingsXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<w:settings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">' +
+      (config.mirrorMargins ? '<w:mirrorMargins/>' : '') +
+      '<w:defaultTabStop w:val="708"/>' +
+      '<w:autoHyphenation w:val="' + (config.hyphenate ? '1' : '0') + '"/>' +
+      '</w:settings>';
+
+    var headerXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<w:hdr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">' +
+      '<w:p><w:pPr><w:jc w:val="right"/><w:ind w:firstLine="0"/></w:pPr><w:r><w:rPr><w:i/><w:sz w:val="17"/><w:color w:val="555555"/></w:rPr><w:t>' +
+      escapeXml(author ? (author + ' \u2014 ' + mainTitle) : mainTitle) +
+      '</w:t></w:r></w:p></w:hdr>';
+
+    var footerAlign = config.pageNumPos === 'bottom-center' ? 'center' : 'right';
+    var footerXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<w:ftr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">' +
+      '<w:p><w:pPr><w:jc w:val="' + footerAlign + '"/><w:ind w:firstLine="0"/></w:pPr>' +
+      '<w:fldSimple w:instr="PAGE"><w:r><w:rPr><w:sz w:val="18"/><w:color w:val="444444"/></w:rPr><w:t>1</w:t></w:r></w:fldSimple>' +
+      '</w:p></w:ftr>';
+
+    var relsList = [
+      '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>',
+      '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/>'
+    ];
+    if (hasHeader) {
+      relsList.push('<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/>');
+    }
+    if (hasFooter) {
+      relsList.push('<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>');
+    }
+
+    var docRelsXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+      relsList.join('') + '</Relationships>';
+
+    var rootRelsXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+      '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>' +
+      '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>' +
+      '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>' +
+      '</Relationships>';
+
+    var contentTypes = [
+      '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+      '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">',
+      '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>',
+      '<Default Extension="xml" ContentType="application/xml"/>',
+      '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>',
+      '<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>',
+      '<Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/>',
+      hasHeader ? '<Override PartName="/word/header1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>' : '',
+      hasFooter ? '<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>' : '',
+      '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>',
+      '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>',
+      '</Types>'
+    ].join('');
+
+    var iso = isoTimestamp(now);
+    var coreXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+      '<dc:title>' + escapeXml(mainTitle) + '</dc:title>' +
+      (author ? '<dc:creator>' + escapeXml(author) + '</dc:creator>' : '') +
+      '<dc:language>pt-BR</dc:language>' +
+      '<dcterms:created xsi:type="dcterms:W3CDTF">' + iso + '</dcterms:created>' +
+      '<dcterms:modified xsi:type="dcterms:W3CDTF">' + iso + '</dcterms:modified>' +
+      '</cp:coreProperties>';
+
+    var appXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">' +
+      '<Application>Escrevaral</Application>' +
+      '<Words>' + totalWords + '</Words>' +
+      '</Properties>';
+
+    var entries = [
+      { name: '[Content_Types].xml', data: contentTypes },
+      { name: '_rels/.rels', data: rootRelsXml },
+      { name: 'docProps/core.xml', data: coreXml },
+      { name: 'docProps/app.xml', data: appXml },
+      { name: 'word/document.xml', data: documentXml },
+      { name: 'word/styles.xml', data: stylesXml },
+      { name: 'word/settings.xml', data: settingsXml },
+      { name: 'word/_rels/document.xml.rels', data: docRelsXml }
+    ];
+    if (hasHeader) { entries.push({ name: 'word/header1.xml', data: headerXml }); }
+    if (hasFooter) { entries.push({ name: 'word/footer1.xml', data: footerXml }); }
+
+    var bytes = buildZip(entries, now);
+    return {
+      bytes: bytes,
+      mime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      filename: safeSlug(mainTitle, 'manuscrito') + '.docx',
+      stats: { chapters: chapters.length, words: totalWords, bytes: bytes.length }
+    };
+  }
+
+  /* ============================================================================
+   * 2. GERADOR .EPUB (EPUB 3.0 + EPUB 2 NCX — KDP / UICLAP / Apple Books / Kobo)
+   * ============================================================================ */
+  function xhtmlRuns(runs) {
+    var out = [], i, r, s;
+    for (i = 0; i < runs.length; i += 1) {
+      r = runs[i];
+      if (r.br) { out.push('<br/>'); continue; }
+      if (!r.text) { continue; }
+      s = escapeXml(r.text);
+      if (r.code) { s = '<code>' + s + '</code>'; }
+      if (r.strike) { s = '<s>' + s + '</s>'; }
+      if (r.underline) { s = '<u>' + s + '</u>'; }
+      if (r.italic) { s = '<em>' + s + '</em>'; }
+      if (r.bold) { s = '<strong>' + s + '</strong>'; }
+      out.push(s);
+    }
+    return out.join('');
+  }
+
+  function epubStyleLink(href) {
+    return '  <' + 'link rel="stylesheet" type="text/css" href="' + href + '"/>\n';
+  }
+
+  function xhtmlDocument(title, bodyHtml) {
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<!DOCTYPE html>\n' +
+      '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="pt-BR" lang="pt-BR">\n' +
+      '<head>\n' +
+      '  <meta charset="utf-8"/>\n' +
+      '  <title>' + escapeXml(title) + '</title>\n' +
+      epubStyleLink('../styles/book.css') +
+      '</head>\n' +
+      '<body>\n' + bodyHtml + '\n</body>\n</html>\n';
+  }
+
+  function epubBlocksToXhtml(blocks, config) {
+    var out = [];
+    var i, blk, inList = '', firstParaDone = false, prevNoIndent = true;
+
+    function closeList() {
+      if (inList) {
+        out.push('</' + inList + '>');
+        inList = '';
+      }
+    }
+
+    for (i = 0; i < blocks.length; i += 1) {
+      blk = blocks[i];
+      if (blk.type === 'li') {
+        var lk = blk.listKind === 'ol' ? 'ol' : 'ul';
+        if (inList && inList !== lk) { closeList(); }
+        if (!inList) { out.push('<' + lk + '>'); inList = lk; }
+        out.push('<li>' + xhtmlRuns(blk.runs) + '</li>');
+        prevNoIndent = true;
+        continue;
+      }
+      closeList();
+      if (blk.type === 'h1') {
+        out.push('<h2>' + xhtmlRuns(blk.runs) + '</h2>');
+        prevNoIndent = true;
+      } else if (blk.type === 'h2') {
+        out.push('<h3>' + xhtmlRuns(blk.runs) + '</h3>');
+        prevNoIndent = true;
+      } else if (blk.type === 'h3') {
+        out.push('<h4>' + xhtmlRuns(blk.runs) + '</h4>');
+        prevNoIndent = true;
+      } else if (blk.type === 'scene-break') {
+        out.push('<p class="scene-break" aria-hidden="true">\u2766</p>');
+        prevNoIndent = true;
+      } else if (blk.type === 'blockquote') {
+        out.push('<blockquote><p>' + xhtmlRuns(blk.runs) + '</p></blockquote>');
+        prevNoIndent = true;
+      } else if (blk.type === 'pre') {
+        out.push('<pre>' + xhtmlRuns(blk.runs) + '</pre>');
+        prevNoIndent = true;
+      } else {
+        var plainTxt = plainTextOfRuns(blk.runs).replace(/^\s+|\s+$/g, '');
+        var cls = '';
+        if (!firstParaDone && config.dropCap && plainTxt.length >= 60 && /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]/.test(plainTxt)) {
+          cls = ' class="first-para dropcap"';
+        } else if (prevNoIndent) {
+          cls = ' class="first-para"';
+        }
+        firstParaDone = true;
+        prevNoIndent = false;
+        out.push('<p' + cls + '>' + xhtmlRuns(blk.runs) + '</p>');
+      }
+    }
+    closeList();
+    if (!out.length) {
+      out.push('<p class="first-para"> </p>');
+    }
+    return out.join('\n');
+  }
+
+  function buildEpubCss(config) {
+    var fontStack = config.font === 'mono'
+      ? "'Courier Prime', 'Courier New', Courier, monospace"
+      : "Georgia, 'Noto Serif', 'Times New Roman', serif";
+    return [
+      '@charset "UTF-8";',
+      'body { font-family: ' + fontStack + '; line-height: ' + (config.leading || 1.48) + '; text-align: ' + (config.align === 'justify' ? 'justify' : 'left') + '; hyphens: ' + (config.hyphenate ? 'auto' : 'none') + '; -webkit-hyphens: ' + (config.hyphenate ? 'auto' : 'none') + '; margin: 0; padding: 0 2%; }',
+      'h1, h2, h3, h4 { text-align: left; page-break-after: avoid; break-after: avoid; hyphens: none; -webkit-hyphens: none; }',
+      '.chapter-head { text-align: center; margin: 2.2em 0 1.8em; page-break-after: avoid; break-after: avoid; }',
+      '.chapter-num { display: block; font-size: 0.85em; letter-spacing: 0.18em; margin-bottom: 0.4em; opacity: 0.72; }',
+      '.chapter-title { text-align: center; font-size: 1.55em; line-height: 1.24; margin: 0; }',
+      config.indent
+        ? 'p { margin: 0; text-indent: 1.5em; orphans: 2; widows: 2; }\np.first-para { text-indent: 0; }'
+        : 'p { margin: 0 0 0.78em; text-indent: 0; orphans: 2; widows: 2; }',
+      'p.dropcap:first-letter { float: left; font-size: 3em; line-height: 0.85; font-weight: bold; padding-right: 0.12em; }',
+      'p.scene-break { text-align: center; text-indent: 0; margin: 1.2em 0; letter-spacing: 0.25em; }',
+      'blockquote { margin: 1em 1.2em; padding-left: 0.8em; border-left: 2px solid currentColor; font-style: italic; }',
+      'blockquote p { text-indent: 0; }',
+      'pre { font-family: monospace; font-size: 0.86em; white-space: pre-wrap; margin: 1em 0; }',
+      'ul, ol { margin: 0.8em 0 0.8em 1.4em; }',
+      '.title-page { text-align: center; margin-top: 22%; }',
+      '.title-page .fp-author { font-size: 1.05em; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2em; text-indent: 0; }',
+      '.title-page .fp-title { text-align: center; font-size: 2em; line-height: 1.18; margin: 0 0 0.5em; }',
+      '.title-page .fp-subtitle { font-size: 1.1em; font-style: italic; margin: 0 0 2em; text-indent: 0; }',
+      '.title-page .fp-rule { width: 32%; margin: 1.5em auto; border: 0; border-top: 1px solid currentColor; opacity: 0.45; }',
+      '.title-page .fp-imprint { font-size: 0.88em; margin-top: 3em; text-indent: 0; opacity: 0.78; }',
+      '.dedication { margin-top: 28%; text-align: right; font-style: italic; }',
+      '.dedication p { text-indent: 0; }',
+      '.colophon { margin-top: 32%; text-align: center; font-size: 0.88em; opacity: 0.82; }',
+      '.colophon p { text-indent: 0; margin: 0 0 0.5em; }'
+    ].join('\n');
+  }
+
+  function buildEpub(payload) {
+    payload = payload || {};
+    var config = resolveConfig(payload.config);
+    var chapters = payload.chapters && payload.chapters.length ? payload.chapters : [{ title: 'Manuscrito', displayTitle: 'Manuscrito', text: '' }];
+    var now = payload.now instanceof Date ? payload.now : new Date();
+    var mainTitle = config.bookTitle || (chapters[0] && (chapters[0].displayTitle || chapters[0].title)) || 'Manuscrito';
+    var author = config.authorName || 'Autor(a)';
+    var bookUid = simpleStableUuid(mainTitle + '|' + author + '|' + chapters.length);
+    var iso = isoTimestamp(now);
+    var isMulti = chapters.length > 1 || config.scope === 'book';
+
+    var entries = [
+      /* EPUB OCF 3.0: mimetype DEVE ser a primeira entrada, sem compressão e sem campo extra */
+      { name: 'mimetype', data: 'application/epub+zip' },
+      {
+        name: 'META-INF/container.xml',
+        data: '<?xml version="1.0" encoding="UTF-8"?>\n' +
+          '<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n' +
+          '  <rootfiles>\n' +
+          '    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>\n' +
+          '  </rootfiles>\n' +
+          '</container>\n'
+      },
+      { name: 'OEBPS/styles/book.css', data: buildEpubCss(config) }
+    ];
+
+    var manifestItems = [
+      '    <item id="css" href="styles/book.css" media-type="text/css"/>',
+      '    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>',
+      '    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>'
+    ];
+    var spineItems = [];
+    var tocLinks = [];
+    var totalWords = 0;
+
+    if (config.frontMatter) {
+      var tpHtml = '<section class="title-page" epub:type="titlepage">' +
+        (config.authorName ? '<p class="fp-author">' + escapeXml(config.authorName) + '</p>' : '') +
+        '<h1 class="fp-title">' + escapeXml(mainTitle) + '</h1>' +
+        (config.bookSubtitle ? '<p class="fp-subtitle">' + escapeXml(config.bookSubtitle) + '</p>' : '') +
+        '<hr class="fp-rule"/>' +
+        '<p class="fp-imprint">' + escapeXml(config.editionNote || String(now.getFullYear())) + '</p>' +
+        '</section>';
+      entries.push({ name: 'OEBPS/text/titlepage.xhtml', data: xhtmlDocument(mainTitle, tpHtml) });
+      manifestItems.push('    <item id="titlepage" href="text/titlepage.xhtml" media-type="application/xhtml+xml"/>');
+      spineItems.push('    <itemref idref="titlepage"/>');
+      tocLinks.push({ href: 'text/titlepage.xhtml', label: 'Folha de rosto' });
+
+      if (config.dedication && config.dedication.replace(/^\s+|\s+$/g, '')) {
+        var dedHtml = '<section class="dedication" epub:type="dedication"><p>' + xhtmlRuns(runsFromPlainText(config.dedication)) + '</p></section>';
+        entries.push({ name: 'OEBPS/text/dedication.xhtml', data: xhtmlDocument('Dedicat\u00F3ria', dedHtml) });
+        manifestItems.push('    <item id="dedication" href="text/dedication.xhtml" media-type="application/xhtml+xml"/>');
+        spineItems.push('    <itemref idref="dedication"/>');
+      }
+    }
+
+    var ci, ch, dispTitle, blocks, fileId, href, bodyXhtml;
+    for (ci = 0; ci < chapters.length; ci += 1) {
+      ch = chapters[ci];
+      dispTitle = ch.displayTitle || ch.title || ('Cap\u00EDtulo ' + (ci + 1));
+      totalWords += countWordsSimple(stripPlaceholdersText(ch.text || '', config));
+      blocks = parseDocumentBlocks(ch, config, dispTitle);
+      fileId = 'ch-' + pad3(ci + 1);
+      href = 'text/' + fileId + '.xhtml';
+      bodyXhtml = '<section epub:type="chapter">\n' +
+        '<header class="chapter-head">' +
+        (isMulti && chapters.length > 1 ? '<span class="chapter-num">' + (ci + 1) + '</span>' : '') +
+        '<h1 class="chapter-title">' + escapeXml(dispTitle) + '</h1></header>\n' +
+        epubBlocksToXhtml(blocks, config) +
+        '\n</section>';
+      entries.push({ name: 'OEBPS/' + href, data: xhtmlDocument(dispTitle, bodyXhtml) });
+      manifestItems.push('    <item id="' + fileId + '" href="' + href + '" media-type="application/xhtml+xml"/>');
+      spineItems.push('    <itemref idref="' + fileId + '"/>');
+      tocLinks.push({ href: href, label: dispTitle });
+    }
+
+    if (config.colophon) {
+      var colHtml = '<section class="colophon" epub:type="colophon">' +
+        '<p>\u2014 \u2766 \u2014</p>' +
+        '<p><strong>' + escapeXml(mainTitle) + '</strong>' + (config.authorName ? ' \u00B7 ' + escapeXml(config.authorName) : '') + '</p>' +
+        '<p>Edi\u00E7\u00E3o digital gerada offline no Escrevaral em ' + escapeXml(formatDateLong(now)) + ' (' + totalWords.toLocaleString('pt-BR') + ' palavras).</p>' +
+        '</section>';
+      entries.push({ name: 'OEBPS/text/colophon.xhtml', data: xhtmlDocument('Colof\u00E3o', colHtml) });
+      manifestItems.push('    <item id="colophon" href="text/colophon.xhtml" media-type="application/xhtml+xml"/>');
+      spineItems.push('    <itemref idref="colophon"/>');
+    }
+
+    /* EPUB 3 Navigation Document (nav.xhtml) */
+    var navItems = [], ncxPoints = [], ni;
+    for (ni = 0; ni < tocLinks.length; ni += 1) {
+      navItems.push('      <li><a href="' + tocLinks[ni].href + '">' + escapeXml(tocLinks[ni].label) + '</a></li>');
+      ncxPoints.push(
+        '    <navPoint id="navPoint-' + (ni + 1) + '" playOrder="' + (ni + 1) + '">\n' +
+        '      <navLabel><text>' + escapeXml(tocLinks[ni].label) + '</text></navLabel>\n' +
+        '      <content src="' + tocLinks[ni].href + '"/>\n' +
+        '    </navPoint>'
+      );
+    }
+
+    var navXhtml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<!DOCTYPE html>\n' +
+      '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="pt-BR" lang="pt-BR">\n' +
+      '<head>\n  <meta charset="utf-8"/>\n  <title>Sum\u00E1rio</title>\n' + epubStyleLink('styles/book.css') + '</head>\n' +
+      '<body>\n  <nav epub:type="toc" id="toc">\n    <h1>Sum\u00E1rio</h1>\n    <ol>\n' +
+      navItems.join('\n') +
+      '\n    </ol>\n  </nav>\n</body>\n</html>\n';
+    entries.push({ name: 'OEBPS/nav.xhtml', data: navXhtml });
+
+    /* EPUB 2 NCX (compatibilidade total com Kindle KDP e leitores clássicos) */
+    var tocNcx = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">\n' +
+      '  <head>\n' +
+      '    <meta name="dtb:uid" content="' + escapeXml(bookUid) + '"/>\n' +
+      '    <meta name="dtb:depth" content="1"/>\n' +
+      '    <meta name="dtb:totalPageCount" content="0"/>\n' +
+      '    <meta name="dtb:maxPageNumber" content="0"/>\n' +
+      '  </head>\n' +
+      '  <docTitle><text>' + escapeXml(mainTitle) + '</text></docTitle>\n' +
+      '  <navMap>\n' + ncxPoints.join('\n') + '\n  </navMap>\n' +
+      '</ncx>\n';
+    entries.push({ name: 'OEBPS/toc.ncx', data: tocNcx });
+
+    /* Package Document (content.opf) */
+    var contentOpf = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="bookid" xml:lang="pt-BR">\n' +
+      '  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">\n' +
+      '    <dc:identifier id="bookid">' + escapeXml(bookUid) + '</dc:identifier>\n' +
+      '    <dc:title>' + escapeXml(mainTitle) + '</dc:title>\n' +
+      '    <dc:creator>' + escapeXml(author) + '</dc:creator>\n' +
+      '    <dc:language>pt-BR</dc:language>\n' +
+      '    <dc:publisher>Escrevaral</dc:publisher>\n' +
+      '    <meta property="dcterms:modified">' + iso + '</meta>\n' +
+      '  </metadata>\n' +
+      '  <manifest>\n' + manifestItems.join('\n') + '\n  </manifest>\n' +
+      '  <spine toc="ncx">\n' + spineItems.join('\n') + '\n  </spine>\n' +
+      '</package>\n';
+    entries.push({ name: 'OEBPS/content.opf', data: contentOpf });
+
+    var bytes = buildZip(entries, now);
+    return {
+      bytes: bytes,
+      mime: 'application/epub+zip',
+      filename: safeSlug(mainTitle, 'livro') + '.epub',
+      stats: { chapters: chapters.length, words: totalWords, bytes: bytes.length }
+    };
+  }
+
+  root.Escr.editorialExport = {
+    utf8Bytes: utf8Bytes,
+    crc32: crc32,
+    buildZip: buildZip,
+    parseDocumentBlocks: parseDocumentBlocks,
+    buildDocx: buildDocx,
+    buildEpub: buildEpub
   };
 }(typeof window !== 'undefined' ? window : this));
 
@@ -6842,20 +11040,40 @@
 
   function computeGeometry(columnWidth, columnLeft, vw, vh, line) {
     if (!columnWidth || !vh) { return null; }
-    var width = Math.min(columnWidth / PLATEN, vw);
-    var height = width * RATIO;
-    var baseSink = height * (6 / 242);
-    var shown = Math.min(height, Math.max(vh * MAX_SHARE, height * MIN_VISIBLE));
-    var center = columnLeft + columnWidth / 2;
-    var left = center - width / 2;
-    var bottom = shown - height - baseSink;
-    var rollerTop = vh - shown + baseSink + height * ROLLER_TOP;
-    var anchorY = rollerTop - line * 2.9;
+    var compact = vw && vw < 900;
+    var width, height, baseSink, shown, left, bottom, rollerTop, anchorY;
+    if (compact) {
+      /* Em celulares e tablets, amplia o carro central para o rolo e as hastes
+       * permanecerem bem visíveis mesmo com tela estreita ou teclado virtual aberto. */
+      var zoomFactor = vw < 560 ? 1.52 : 1.18;
+      width = Math.max(vw * zoomFactor, Math.min(columnWidth / PLATEN, vw * 1.65));
+      height = width * RATIO;
+      baseSink = height * (4 / 242);
+      var minH = vw < 560 ? 108 : 132;
+      var maxShareCompact = vh < 520 ? 0.36 : 0.34;
+      shown = Math.min(height, Math.max(minH, Math.min(vh * maxShareCompact, height * 0.84)));
+      left = (vw - width) / 2;
+      bottom = shown - height - baseSink;
+      rollerTop = vh - shown + baseSink + height * ROLLER_TOP;
+      var lineGap = vh < 520 ? 1.6 : 2.2;
+      anchorY = Math.max(76, rollerTop - line * lineGap);
+    } else {
+      width = Math.min(columnWidth / PLATEN, vw);
+      height = width * RATIO;
+      baseSink = height * (6 / 242);
+      shown = Math.min(height, Math.max(vh * MAX_SHARE, height * MIN_VISIBLE));
+      var center = columnLeft + columnWidth / 2;
+      left = center - width / 2;
+      bottom = shown - height - baseSink;
+      rollerTop = vh - shown + baseSink + height * ROLLER_TOP;
+      anchorY = rollerTop - line * 2.9;
+    }
     return {
       width: width,
       height: height,
       left: left,
       bottom: bottom,
+      shown: shown,
       rollerTop: rollerTop,
       anchorY: anchorY,
       topInset: Math.max(0, anchorY - line / 2)
@@ -6997,25 +11215,29 @@
       }
       buildWrap();
       var rect = columnEl.getBoundingClientRect ? columnEl.getBoundingClientRect() : { width: 700, left: 100 };
-      var vh = window.innerHeight || 720;
-      var vw = window.innerWidth || 1280;
+      var vv = (typeof window !== 'undefined' && window.visualViewport) ? window.visualViewport : null;
+      var layoutVh = (typeof window !== 'undefined' && window.innerHeight) ? window.innerHeight : 720;
+      var vh = (vv && vv.height) ? vv.height : layoutVh;
+      var vw = (vv && vv.width) ? vv.width : ((typeof window !== 'undefined' && window.innerWidth) ? window.innerWidth : 1280);
+      var vvOffsetTop = (vv && typeof vv.offsetTop === 'number') ? vv.offsetTop : 0;
+      var keyboardLift = Math.max(0, layoutVh - (vh + vvOffsetTop));
       var style = window.getComputedStyle ? window.getComputedStyle(columnEl) : null;
       var fontSize = style ? (parseFloat(style.fontSize) || 21) : 21;
       var line = style ? (parseFloat(style.lineHeight) || fontSize * 1.7) : fontSize * 1.7;
-      var geom = computeGeometry(rect.width || 700, rect.left || 0, vw, vh, line);
+      var geom = computeGeometry(rect.width || vw || 700, rect.left || 0, vw, vh, line);
       if (!geom) { return null; }
 
       wrap.style.width = geom.width.toFixed(2) + 'px';
       wrap.style.height = geom.height.toFixed(2) + 'px';
       wrap.style.left = geom.left.toFixed(2) + 'px';
-      wrap.style.bottom = geom.bottom.toFixed(2) + 'px';
+      wrap.style.bottom = (geom.bottom + keyboardLift).toFixed(2) + 'px';
 
-      anchorY = geom.anchorY;
+      anchorY = geom.anchorY + vvOffsetTop;
       visible = true;
       document.body.setAttribute('data-esc-machine', 'on');
       if (document.body.style && document.body.style.setProperty) {
         var colTop = typeof rect.top === 'number' && isFinite(rect.top) ? rect.top : 0;
-        var topInset = Math.max(0, geom.anchorY - colTop - line / 2);
+        var topInset = Math.max(0, anchorY - colTop - line / 2);
         document.body.style.setProperty('--esc-machine-top', topInset.toFixed(1) + 'px');
       }
       return anchorY;
@@ -7081,6 +11303,11 @@
     }
     if (typeof window !== 'undefined' && window.addEventListener) {
       window.addEventListener('resize', layout, false);
+      window.addEventListener('orientationchange', layout, false);
+    }
+    if (typeof window !== 'undefined' && window.visualViewport && window.visualViewport.addEventListener) {
+      window.visualViewport.addEventListener('resize', layout, false);
+      window.visualViewport.addEventListener('scroll', layout, false);
     }
 
     return {
@@ -8818,6 +13045,22 @@
         content.appendChild(srcBox);
       }
 
+      /* Ponte silenciosa com o Guia Usos da Língua (Dicionário de Dificuldades PT-BR) */
+      if (currentState.originalWord && root.Escr.dificuldades && root.Escr.dificuldades.lookupWord && typeof root.Escr.openUsosLingua === 'function') {
+        var usoHit = root.Escr.dificuldades.lookupWord(currentState.originalWord);
+        if (usoHit) {
+          var usoBtn = document.createElement('button');
+          usoBtn.type = 'button';
+          usoBtn.className = 'esc-palavra-uso-link';
+          usoBtn.textContent = 'Usos da língua: ' + usoHit.titulo + ' →';
+          on(usoBtn, 'click', function () {
+            hide(false);
+            root.Escr.openUsosLingua(usoHit.id);
+          });
+          content.appendChild(usoBtn);
+        }
+      }
+
       }
       cardEl.appendChild(content);
       cardEl.hidden = false;
@@ -9964,7 +14207,7 @@
         'Camada 1 (100% offline): a cadeia SHA-256 comprova a integridade do arquivo exportado e a trilha de criação registrada dentro do Escrevaral, distinguindo escrita nativa, colagens externas e importações.'
       ));
       legal.appendChild(mk('p', '',
-        'Camada 2 (anterioridade jurídica externa): as datas provêm do relógio do aparelho. Quando uma editora ou registro jurídico exigir prova independente de data, utilize o código SHA-256 acima para ancoragem externa (Biblioteca Nacional, carimbo de tempo ou protocolo editorial).'
+        'Camada 2 (limites jurídicos e anterioridade externa): as datas provêm do relógio do aparelho. Este certificado técnico NÃO substitui registro de direitos autorais na Biblioteca Nacional, ata notarial em cartório público nem carimbo de tempo oficial (ICP-Brasil). Quando houver exigência legal ou editorial de prova independente de data, utilize o código SHA-256 acima para ancoragem externa.'
       ));
       if (typeof opts.onOpenAcademy === 'function') {
         var studyRow = mk('div', 'cart-academy-bridge');
@@ -11695,7 +15938,7 @@
   var E = window.Escr, vault = E.createVault(E.knowledge), storage = null, archive = null;
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
-  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause', 'lineage-panel'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task', 'start-lineage'];
+  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause', 'lineage-panel', 'sobre', 'usos-lingua'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task', 'start-lineage', 'esc-open-about', 'esc-open-usos'];
   var projectScope = false, readingSize = 21, chalkUI = null, forceHistory=false, linguisticStore=E.createLinguisticStore(), analysisEpoch=0;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, dismissedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, sessionKey = 'escrevaral.astra.session.v1';
@@ -11706,7 +15949,7 @@
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   /* A capa é a entrada do projeto; o editor continua compartilhado. */
   var notebooks = null, activeNotebookId = null, notebookEditing = null, notebookReturn = null, notebookReady = false, showingAbout = false, deferredInstallPrompt = null;
-  var originals = null, activeOriginalId = null, formTarget = 'volume', workspaceUI = null, templatesUI = null, sonnetUI = null, richUI = null, readerUI = null, printStudioUI = null, visualMachine = null, superfocoUI = null, themeChromeUI = null, wordCardUI = null, academyUI = null;
+  var originals = null, activeOriginalId = null, formTarget = 'volume', workspaceUI = null, templatesUI = null, sonnetUI = null, songUI = null, usosUI = null, richUI = null, readerUI = null, printStudioUI = null, visualMachine = null, superfocoUI = null, themeChromeUI = null, wordCardUI = null, academyUI = null;
   function availableBook(b) { var o = b && b.originalId && originals ? originals.get(b.originalId) : null; return b && !b.trashed && (!b.originalId || (o && !o.trashed)); }
   function activeNotebook() { var b = notebooks && activeNotebookId ? notebooks.get(activeNotebookId) : null; return availableBook(b) ? b : null; }
   function activeOriginal() { return originals && activeOriginalId ? originals.get(activeOriginalId) : null; }
@@ -11949,9 +16192,110 @@
   var WELCOME_KEY = 'escrevaral.welcome.seen.v1';
   var safetyDismissed = false;
   var safetyUrgent = false;
+  var folderBridge = (E.backupGuard && E.backupGuard.createFolderBridge) ? E.backupGuard.createFolderBridge({ storage: storage, window: window }) : null;
+  var folderMirrorTimer = 0;
+  var storagePersistedState = null;
+
+  function countArchiveWords() {
+    if (!archive) { return manuscript ? E.countWords(manuscript.value || '') : 0; }
+    try {
+      var docsList = archive.list(false).documents || [];
+      var total = 0, i, curId = doc && doc.id;
+      var sawCurrent = false;
+      for (i = 0; i < docsList.length; i += 1) {
+        var entry = docsList[i];
+        if (!entry || entry.kind === 'reminder') { continue; }
+        if (curId && entry.id === curId && manuscript) {
+          sawCurrent = true;
+          total += E.countWords(manuscript.value || '');
+        } else if (entry.text) {
+          total += E.countWords(entry.text);
+        }
+      }
+      if (!sawCurrent && manuscript && manuscript.value) {
+        total += E.countWords(manuscript.value);
+      }
+      return total;
+    } catch (ignore) { return 0; }
+  }
+
+  function updateFolderUi(meta) {
+    var box = byId('local-folder-box');
+    var st = byId('folder-backup-status');
+    var btnConnect = byId('backup-folder-connect');
+    var btnSync = byId('backup-folder-sync');
+    var btnDisc = byId('backup-folder-disconnect');
+    var persistEl = byId('storage-persist-status');
+    if (!box || !st || !btnConnect) { return; }
+    var fState = folderBridge ? folderBridge.getState() : 'unsupported';
+    var fName = (folderBridge && folderBridge.getFolderName()) || (meta && meta.folderName) || '';
+    var fmtTs = E.backupGuard && E.backupGuard.formatTimestamp ? E.backupGuard.formatTimestamp : function (s) { return s; };
+
+    if (fState === 'unsupported') {
+      text(st, 'Espelho automático em pasta disponível no Chrome e Edge em computador. Aqui, use “Exportar tudo” (.scrvrl) para guardar sua cópia.');
+      btnConnect.hidden = true;
+      if (btnSync) { btnSync.hidden = true; }
+      if (btnDisc) { btnDisc.hidden = true; }
+    } else if (fState === 'connected') {
+      text(st, 'Pasta conectada: “' + (fName || 'Pasta local') + '”' + (meta && meta.folderSyncedAt ? ' · último espelho em ' + fmtTs(meta.folderSyncedAt) + '.' : ' · espelho automático ativo (escrevaral-backup-atual.scrvrl + 1 cópia diária).'));
+      text(btnConnect, 'Trocar pasta');
+      btnConnect.hidden = false;
+      if (btnSync) { btnSync.hidden = false; }
+      if (btnDisc) { btnDisc.hidden = false; }
+    } else if (fState === 'needs-permission') {
+      text(st, 'Pasta lembrada: “' + (fName || 'Pasta local') + '”. Clique em “Reativar pasta” para retomar o espelho automático nesta sessão.');
+      text(btnConnect, 'Reativar pasta');
+      btnConnect.hidden = false;
+      if (btnSync) { btnSync.hidden = true; }
+      if (btnDisc) { btnDisc.hidden = false; }
+    } else {
+      text(st, 'Nenhuma pasta conectada. Opcional: escolha uma pasta no computador para gravar um espelho .scrvrl automático (100% offline, sem nuvem).');
+      text(btnConnect, 'Conectar pasta no computador');
+      btnConnect.hidden = false;
+      if (btnSync) { btnSync.hidden = true; }
+      if (btnDisc) { btnDisc.hidden = true; }
+    }
+
+    if (persistEl) {
+      if (storagePersistedState === true) {
+        text(persistEl, 'Armazenamento persistente ativo neste navegador.');
+      } else if (storagePersistedState === false) {
+        text(persistEl, 'Este navegador pode limpar dados se o disco encher; mantenha cópias .scrvrl ou conecte uma pasta.');
+      } else {
+        text(persistEl, '');
+      }
+    }
+  }
+
   function updateBackupStatus() {
     var el = byId('backup-status');
-    if (!el || !storage) { return; }
+    var pill = byId('esc-backup-pill');
+    var pillLabel = byId('esc-backup-pill-label');
+    var guard = E.backupGuard;
+    var totalWords = countArchiveWords();
+    var fState = folderBridge ? folderBridge.getState() : 'unsupported';
+    var meta = guard ? guard.readMeta(storage) : null;
+
+    if (guard && meta) {
+      var health = guard.evaluateHealth(meta, totalWords, fState);
+      if (pill) {
+        pill.setAttribute('data-health', health.level);
+        pill.title = health.title;
+        if (pillLabel) { text(pillLabel, health.pillLabel); }
+      }
+      if (el) {
+        if (!meta.lastBackupAt) {
+          text(el, 'Nenhuma cópia geral (.scrvrl) baixada ainda neste aparelho (' + totalWords.toLocaleString('pt-BR') + ' palavras no acervo).');
+        } else {
+          var deltaNote = health.wordsDelta > 0 ? ' · +' + health.wordsDelta.toLocaleString('pt-BR') + ' palavras novas' : '';
+          text(el, 'Última cópia geral (.scrvrl): ' + guard.formatTimestamp(meta.lastBackupAt) + deltaNote + '.');
+        }
+      }
+      updateFolderUi(meta);
+      return health;
+    }
+
+    if (!el || !storage) { return null; }
     try {
       var raw = storage.getItem(BACKUP_KEY);
       if (!raw) {
@@ -11961,7 +16305,9 @@
         text(el, 'Última cópia geral (.scrvrl): ' + (isNaN(dt.getTime()) ? raw : dt.toLocaleDateString('pt-BR') + ' às ' + dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })) + '.');
       }
     } catch (ignore) {}
+    return null;
   }
+
   function showSafetyBanner(msg, urgent) {
     var box = byId('esc-safety-banner'), txt = byId('esc-safety-text'), dis = byId('esc-safety-dismiss');
     if (!box || !txt) { return; }
@@ -11980,13 +16326,65 @@
     box.hidden = true;
   }
   function recordBackupExport() {
-    try { if (storage) { storage.setItem(BACKUP_KEY, new Date().toISOString()); } } catch (ignore) {}
+    var totalWords = countArchiveWords();
+    if (E.backupGuard && E.backupGuard.recordExport) {
+      E.backupGuard.recordExport(storage, totalWords);
+    } else {
+      try { if (storage) { storage.setItem(BACKUP_KEY, new Date().toISOString()); } } catch (ignore) {}
+    }
+    if (folderBridge && folderBridge.requestStoragePersistence && storagePersistedState !== true) {
+      folderBridge.requestStoragePersistence(function (ok) {
+        storagePersistedState = ok;
+        updateBackupStatus();
+      });
+    }
     safetyDismissed = true;
     hideSafetyBanner(true);
     updateBackupStatus();
   }
+
+  function runFolderMirror(manual) {
+    if (!folderBridge || folderBridge.getState() !== 'connected') { return; }
+    if (document.body && document.body.getAttribute('data-locked') === 'true') { return; }
+    if (!notebooks || composing || (chalkUI && !chalkUI.flush())) { return; }
+    try {
+      var payload = notebooks.pack(exportedDocuments(), null);
+      notebooks.validate(payload);
+      var totalWords = countArchiveWords();
+      folderBridge.writeSnapshot(JSON.stringify(payload), totalWords, new Date(), function (err, info) {
+        if (err) {
+          updateBackupStatus();
+          if (manual) { message('Não foi possível espelhar na pasta local: ' + (err.message || 'verifique a permissão.')); }
+          return;
+        }
+        if (info && info.skipped) { return; }
+        safetyDismissed = true;
+        hideSafetyBanner(false);
+        updateBackupStatus();
+        if (manual) {
+          message('Espelho gravado na pasta “' + (info.folderName || 'local') + '”' + (info.dailyFile ? ' (+ cópia diária).' : '.'));
+        }
+      });
+    } catch (e) {
+      if (manual) { message(e.message || 'Não foi possível preparar o espelho da pasta.'); }
+    }
+  }
+
+  function scheduleFolderMirror() {
+    if (!folderBridge || folderBridge.getState() !== 'connected') { return; }
+    window.clearTimeout(folderMirrorTimer);
+    folderMirrorTimer = window.setTimeout(function () { runFolderMirror(false); }, 4000);
+  }
+
   function checkBackupReminder() {
+    var health = updateBackupStatus();
     if (safetyDismissed || safetyUrgent || !storage || !archive) { return; }
+    if (health) {
+      if (health.shouldRemind && health.reminderMessage) {
+        showSafetyBanner(health.reminderMessage, false);
+      }
+      return;
+    }
     try {
       var lastRaw = storage.getItem(BACKUP_KEY);
       var stale = !lastRaw;
@@ -11995,13 +16393,7 @@
         stale = !ts || (Date.now() - ts) > 7 * 86400000;
       }
       if (!stale) { return; }
-      var docsList = archive.list(false).documents || [];
-      var totalWords = 0, i;
-      for (i = 0; i < docsList.length; i += 1) {
-        if (docsList[i] && docsList[i].kind !== 'reminder' && docsList[i].text) {
-          totalWords += E.countWords(docsList[i].text);
-        }
-      }
+      var totalWords = countArchiveWords();
       if (totalWords >= 250) {
         showSafetyBanner('Você já escreveu ' + totalWords + ' palavras neste aparelho. Guarde uma cópia (.scrvrl) para proteger seus textos.', false);
       }
@@ -12244,6 +16636,7 @@
       if (workspaceUI) { workspaceUI.render(); }
       checkPostWritePwa();
       checkBackupReminder();
+      scheduleFolderMirror();
       if (E.ptbrPanelSaved) { E.ptbrPanelSaved(saved.conflict); }
       return true;
     } catch (e) {
@@ -12734,7 +17127,7 @@
   }
   function sizePanels(height,topBar,bottomBar) {
     var desktop = window.innerWidth > 760;
-    panelIds.forEach(function(id){var p=byId(id),margin=desktop?0:8,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?560:440;
+    panelIds.forEach(function(id){var p=byId(id),margin=desktop?0:8,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?560:(id==='sobre'||id==='usos-lingua')?560:440;
       p.style.bottom='auto';p.style.top=(topBar+(id==='focus-pause'?0:margin))+'px';
       if(id==='focus-pause'){p.style.height=Math.max(0,height-topBar-bottomBar)+'px';p.style.maxHeight='none';return;}
       p.style.width=(!desktop?Math.max(0,window.innerWidth-margin*2):Math.min(width,Math.max(0,window.innerWidth-margin*2)))+'px';
@@ -12966,6 +17359,7 @@
     if (richUI) { richUI.loadDoc(doc); }
     if (wordCardUI) { wordCardUI.hide(false); }
     if (sonnetUI) { sonnetUI.sync(doc); }
+    if (songUI) { songUI.sync(doc); }
     if (immersion && isLockedRef) { setImmersion(false, 'locked'); }
     else if (immersion && visualMachine) { visualMachine.layout(); }
     if (superfocoUI) { superfocoUI.resetDocument(); }
@@ -13086,8 +17480,15 @@
     byId('transfer-content').focus();
   }
   function download(contents, mime, name, host) {
+    var isBinary = typeof contents !== 'string';
     var saved = E.transfer.download(contents, mime, name, function (value, filename) { showTransfer(value, filename, false); }, host);
-    message(saved ? 'Cópia preparada. Confira o arquivo salvo.' : 'Cópia disponível em Ajustes para selecionar e guardar.');
+    if (saved) {
+      message('Cópia preparada. Confira o arquivo salvo.');
+    } else if (isBinary) {
+      message('Não foi possível iniciar o download neste navegador.');
+    } else {
+      message('Cópia disponível em Ajustes para selecionar e guardar.');
+    }
     return saved;
   }
   function exportedDocuments() {
@@ -13381,6 +17782,13 @@
     }
     loadDocument(current || E.freshDocument());
     updateBackupStatus();
+    if (folderBridge) {
+      folderBridge.restore(function () { updateBackupStatus(); });
+      folderBridge.checkStoragePersistence(function (persisted) {
+        storagePersistedState = persisted;
+        updateBackupStatus();
+      });
+    }
     applyTheme(storage.getItem('escrevaral.astra.theme'));
     focusEnabled = storage.getItem('escrevaral.astra.focus') !== 'off'; byId('focus-toggle').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
   } catch (e) {
@@ -13389,6 +17797,51 @@
   }
   if (byId('esc-safety-export')) { listen(byId('esc-safety-export'), 'click', function () { exportNotebook(true); }); }
   if (byId('esc-safety-dismiss')) { listen(byId('esc-safety-dismiss'), 'click', function () { safetyDismissed = true; hideSafetyBanner(false); }); }
+  if (byId('esc-backup-pill')) {
+    listen(byId('esc-backup-pill'), 'click', function () {
+      showPanel('mesa', 'mesa-toggle', true);
+      var box = byId('local-folder-box');
+      if (box && box.scrollIntoView) { try { box.scrollIntoView({ block: 'center' }); } catch (ignore) {} }
+      var targetBtn = (byId('backup-folder-connect') && !byId('backup-folder-connect').hidden) ? byId('backup-folder-connect') : byId('export-backup');
+      if (targetBtn && targetBtn.focus) { targetBtn.focus(); }
+    });
+  }
+  if (byId('backup-folder-connect')) {
+    listen(byId('backup-folder-connect'), 'click', function () {
+      if (!folderBridge) { return; }
+      if (document.body && document.body.getAttribute('data-locked') === 'true') { return; }
+      var action = folderBridge.getState() === 'needs-permission' ? folderBridge.reconnect : folderBridge.connect;
+      action(function (err, info) {
+        if (err) {
+          message(err.message || 'Não foi possível conectar a pasta local.');
+          updateBackupStatus();
+          return;
+        }
+        if (info && info.cancelled) { return; }
+        updateBackupStatus();
+        if (folderBridge.requestStoragePersistence) {
+          folderBridge.requestStoragePersistence(function (ok) {
+            storagePersistedState = ok;
+            updateBackupStatus();
+          });
+        }
+        runFolderMirror(true);
+      });
+    });
+  }
+  if (byId('backup-folder-sync')) {
+    listen(byId('backup-folder-sync'), 'click', function () { runFolderMirror(true); });
+  }
+  if (byId('backup-folder-disconnect')) {
+    listen(byId('backup-folder-disconnect'), 'click', function () {
+      if (!folderBridge) { return; }
+      folderBridge.disconnect(function () {
+        window.clearTimeout(folderMirrorTimer);
+        updateBackupStatus();
+        message('Pasta local desconectada. Os arquivos já gravados permanecem no seu computador.');
+      });
+    });
+  }
   renderTimeline(true, null, true); sizeWorkspace();
   listen(window, 'resize', function () { if (byId('cabinet-window').getAttribute('data-maximized') !== 'true') { resetDesktopWindow(); } sizeWorkspace(); });
   listen(window, 'load', sizeWorkspace);
@@ -13439,6 +17892,24 @@
   });
   listen(byId('acervo-toggle'), 'click', function () { if (!persist()) { return; } var open = byId('acervo').hidden; showPanel('acervo', 'acervo-toggle', open); if (open) { renderArchive(); } });
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
+  if (byId('esc-open-about')) {
+    listen(byId('esc-open-about'), 'click', function () { showPanel('sobre', 'esc-open-about', byId('sobre').hidden); });
+  }
+  if (byId('open-about-from-settings')) {
+    listen(byId('open-about-from-settings'), 'click', function () { showPanel('sobre', 'esc-open-about', true); });
+  }
+  if (byId('sobre-close')) {
+    listen(byId('sobre-close'), 'click', function () { showPanel('sobre', 'esc-open-about', false); });
+  }
+  if (byId('sobre-open-cartorio')) {
+    listen(byId('sobre-open-cartorio'), 'click', function () {
+      closePanels(false);
+      if (byId('esc-open-cartorio')) { byId('esc-open-cartorio').click(); }
+    });
+  }
+  if (byId('sobre-open-backup')) {
+    listen(byId('sobre-open-backup'), 'click', function () { showPanel('mesa', 'mesa-toggle', true); });
+  }
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; if (open) { openExaminePanel({ toggle: 'examinar-toggle' }); } else { showPanel('oficina', 'examinar-toggle', false); } });
   listen(byId('back-writing'), 'click', returnToWriting);
   function createNewNote(opts) {
@@ -13520,6 +17991,31 @@
     if (printMedia.addEventListener) { printMedia.addEventListener('change', onPrintMediaChange); }
     else if (printMedia.addListener) { printMedia.addListener(onPrintMediaChange); }
   }
+  function triggerEditorialExport(kind) {
+    if (printStudioUI && (kind === 'epub' ? printStudioUI.exportEpub : printStudioUI.exportDocx)) {
+      if (kind === 'epub') { printStudioUI.exportEpub(); } else { printStudioUI.exportDocx(); }
+      return;
+    }
+    if (!E.editorialExport) {
+      message('Exportação editorial indisponível nesta sessão.');
+      return;
+    }
+    var cur = {
+      title: title ? title.value : (doc.title || ''),
+      displayTitle: title ? title.value : (doc.title || ''),
+      text: manuscript ? manuscript.value : (doc.text || ''),
+      format: (richUI && richUI.isRich && richUI.isRich()) ? 'rich' : (doc.format || 'plain'),
+      richHtml: (richUI && richUI.isRich && richUI.isRich()) ? richUI.html() : doc.richHtml
+    };
+    var res = kind === 'epub'
+      ? E.editorialExport.buildEpub({ chapters: [cur] })
+      : E.editorialExport.buildDocx({ chapters: [cur] });
+    if (download(res.bytes, res.mime, res.filename)) {
+      message((kind === 'epub' ? 'E-book (.epub)' : 'Word (.docx)') + ' gerado offline: ' + res.filename + '.');
+    }
+  }
+  listen(byId('export-docx'), 'click', function () { triggerEditorialExport('docx'); });
+  listen(byId('export-epub'), 'click', function () { triggerEditorialExport('epub'); });
   listen(byId('export-text'), 'click', function () {
     var base = String(title.value || '').replace(/^\s+|\s+$/g, '').replace(/[^A-Za-z0-9À-ÿ_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
     download((title.value ? title.value + '\n\n' : '') + manuscript.value, 'text/plain', (base || 'manuscrito') + '.txt');
@@ -14058,6 +18554,38 @@
     sonnetUI.sync(doc);
   }
 
+  if (E.mountSongAssistant) {
+    songUI = E.mountSongAssistant({
+      containerId: 'esc-song-panel',
+      manuscriptEl: manuscript,
+      onSaveSettings: function (nextSettings) {
+        doc.songSettings = nextSettings;
+        dirty = true;
+        persist();
+      }
+    });
+    songUI.sync(doc);
+  }
+
+  if (E.mountUsosLingua) {
+    usosUI = E.mountUsosLingua({
+      containerId: 'usos-lingua-body',
+      onOpenSheet: function () { showPanel('usos-lingua', 'esc-open-usos', true); }
+    });
+    E.openUsosLingua = function (idOrQuery) {
+      usosUI.openWith(idOrQuery || '');
+    };
+    if (byId('esc-open-usos')) {
+      listen(byId('esc-open-usos'), 'click', function () {
+        if (byId('usos-lingua').hidden) { usosUI.openWith(''); }
+        else { showPanel('usos-lingua', 'esc-open-usos', false); }
+      });
+    }
+    if (byId('usos-lingua-close')) {
+      listen(byId('usos-lingua-close'), 'click', function () { showPanel('usos-lingua', 'esc-open-usos', false); });
+    }
+  }
+
   if (E.mountRichEditor) {
     richUI = E.mountRichEditor({
       manuscriptEl: manuscript,
@@ -14065,7 +18593,8 @@
         doc.text = plainText;
         doc.format = 'rich';
         doc.richHtml = safeHtml;
-        if (sonnetUI && sonnetUI.isSonnetDoc(doc)) { sonnetUI.refresh(); }
+        if (sonnetUI && sonnetUI.isSonnetDoc(doc)) { sonnetUI.schedule ? sonnetUI.schedule() : sonnetUI.refresh(); }
+        if (songUI && songUI.isSongDoc(doc)) { songUI.schedule ? songUI.schedule() : songUI.refresh(); }
         changed();
       },
       onFormatChange: function (fmt, html) {
@@ -14129,6 +18658,25 @@
       storage: storage,
       onOpenAcademy: function (guideId) {
         if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'objeto-livro'); }
+      },
+      onJumpToWord: function (word) {
+        if (!word || !manuscript) { return; }
+        var textVal = manuscript.value || '';
+        var esc = String(word).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var rx = new RegExp('(^|[^A-Za-zÀ-ÖØ-öø-ÿ])(' + esc + ')(?=$|[^A-Za-zÀ-ÖØ-öø-ÿ])', 'i');
+        var m = rx.exec(textVal);
+        var idx = m ? (m.index + m[1].length) : textVal.toLowerCase().indexOf(String(word).toLowerCase());
+        if (idx >= 0) {
+          if (richUI && richUI.isRich && richUI.isRich() && richUI.selectPlainRange) {
+            richUI.selectPlainRange(idx, idx + word.length);
+          } else if (E.transfer && E.transfer.selectRange) {
+            E.transfer.selectRange(manuscript, idx, idx + word.length);
+          } else if (manuscript.setSelectionRange) {
+            manuscript.focus();
+            manuscript.setSelectionRange(idx, idx + word.length);
+          }
+          message('Palavra “' + word + '” localizada no manuscrito.');
+        }
       },
       onPrint: function () {
         if (printStudioUI && printStudioUI.open) {
@@ -14204,7 +18752,7 @@
       getMachineEnabled: function () { return visualMachine ? visualMachine.isEnabled() : false; },
       onToggleMachine: function () { setMachine(visualMachine ? !visualMachine.isEnabled() : !machineEnabled); },
       getMachineAnchor: function () { return visualMachine ? visualMachine.anchorY() : null; },
-      isSonnetActive: function () { return !!(sonnetUI && sonnetUI.isSonnetDoc && sonnetUI.isSonnetDoc(doc)); },
+      isSonnetActive: function () { return !!((sonnetUI && sonnetUI.isSonnetDoc && sonnetUI.isSonnetDoc(doc)) || (songUI && songUI.isSongDoc && songUI.isSongDoc(doc))); },
       isEditable: function () { return !(doc && (doc.locked || doc.category === 'reference')); }
     });
     if (immersion) {
@@ -14845,6 +19393,134 @@
     });
   }
 
+  /* Cartão inline compacto (padrão fechado -> aberto dos Anexos 2 e 3):
+   * abre ancorado logo abaixo da marcação clicada, na mesma tonalidade creme, sem empurrar linhas. */
+  function createInlinePeek(box, aside) {
+    var pop = el('div', box, 'ptbr-inline-peek');
+    pop.setAttribute('role', 'region');
+    pop.setAttribute('aria-label', 'Resumo rápido da observação');
+    pop.hidden = true;
+    var activeAnchor = null;
+
+    function hide() {
+      pop.hidden = true;
+      pop.textContent = '';
+      if (activeAnchor) {
+        activeAnchor.setAttribute('data-peek-open', 'false');
+        activeAnchor = null;
+      }
+    }
+
+    function positionAt(anchor) {
+      if (!pop.style || !anchor || !anchor.getBoundingClientRect || !box.getBoundingClientRect) { return; }
+      var br = box.getBoundingClientRect();
+      var ar = anchor.getBoundingClientRect();
+      if (!br || !br.width) { return; }
+      var popW = Math.min(340, Math.max(220, br.width - 16));
+      pop.style.width = popW + 'px';
+      var relTop = (typeof ar.bottom === 'number' && typeof br.top === 'number') ? (ar.bottom - br.top + 6) : 36;
+      var relLeft = (typeof ar.left === 'number' && typeof br.left === 'number') ? (ar.left - br.left) : 0;
+      relLeft = Math.max(4, Math.min(Math.max(4, br.width - popW - 4), relLeft));
+      pop.style.top = Math.round(Math.max(4, relTop)) + 'px';
+      pop.style.left = Math.round(relLeft) + 'px';
+    }
+
+    function show(anchor, info) {
+      if (!anchor || !info) { hide(); return; }
+      if (activeAnchor && activeAnchor !== anchor) {
+        activeAnchor.setAttribute('data-peek-open', 'false');
+      }
+      activeAnchor = anchor;
+      anchor.setAttribute('data-peek-open', 'true');
+      pop.textContent = '';
+
+      var iconEl = el('span', pop, 'ptbr-inline-peek-ico', info.badge || '◆');
+      iconEl.setAttribute('aria-hidden', 'true');
+
+      var body = el('div', pop, 'ptbr-inline-peek-body');
+      el('strong', body, 'ptbr-inline-peek-title', info.title || 'Observação');
+      el('p', body, 'ptbr-inline-peek-summary', info.summary || 'Veja os detalhes desta marcação.');
+      if (info.usoId && typeof E.openUsosLingua === 'function') {
+        var usoBtn = el('button', body, 'ptbr-inline-peek-uso', 'Usos da língua: ' + (info.usoTitle || 'entender este uso') + ' \u2192');
+        usoBtn.type = 'button';
+        usoBtn.style.marginTop = '6px';
+        usoBtn.style.padding = '3px 8px';
+        usoBtn.style.border = '1px solid rgba(40, 48, 38, 0.25)';
+        usoBtn.style.borderRadius = '4px';
+        usoBtn.style.background = 'transparent';
+        usoBtn.style.font = '600 11px/1.3 Inter, Arial, sans-serif';
+        usoBtn.style.cursor = 'pointer';
+        usoBtn.addEventListener('click', function (ev) {
+          if (ev && ev.stopPropagation) { ev.stopPropagation(); }
+          hide();
+          E.openUsosLingua(info.usoId);
+        }, false);
+      }
+
+      var actions = el('div', pop, 'ptbr-inline-peek-actions');
+      var goBtn = el('button', actions, 'ptbr-inline-peek-go', '›');
+      goBtn.type = 'button';
+      goBtn.setAttribute('aria-label', 'Abrir explicação completa');
+      goBtn.title = 'Abrir explicação completa';
+      goBtn.addEventListener('click', function (ev) {
+        if (ev && ev.stopPropagation) { ev.stopPropagation(); }
+        hide();
+        if (aside && aside.scrollIntoView) {
+          aside.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, false);
+
+      var closeBtn = el('button', actions, 'ptbr-inline-peek-close', '×');
+      closeBtn.type = 'button';
+      closeBtn.setAttribute('aria-label', 'Fechar resumo');
+      closeBtn.addEventListener('click', function (ev) {
+        if (ev && ev.stopPropagation) { ev.stopPropagation(); }
+        hide();
+      }, false);
+
+      pop.hidden = false;
+      positionAt(anchor);
+    }
+
+    function onDocKey(ev) {
+      if (ev && ev.keyCode === 27 && !pop.hidden) { hide(); }
+    }
+    function onDocDown(ev) {
+      if (pop.hidden || !ev || !ev.target) { return; }
+      if (pop.contains && pop.contains(ev.target)) { return; }
+      if (activeAnchor && activeAnchor.contains && activeAnchor.contains(ev.target)) { return; }
+      hide();
+    }
+    if (D && D.addEventListener) {
+      D.addEventListener('keydown', onDocKey, false);
+      D.addEventListener('mousedown', onDocDown, false);
+    }
+    return {
+      show: show,
+      hide: hide,
+      destroy: function () {
+        hide();
+        if (D && D.removeEventListener) {
+          D.removeEventListener('keydown', onDocKey, false);
+          D.removeEventListener('mousedown', onDocDown, false);
+        }
+      }
+    };
+  }
+
+  function summaryForFinding(f, fallback) {
+    if (!f) { return fallback || ''; }
+    var text = '';
+    if (f.message) { text = String(f.message); }
+    else if (f.evidence && f.evidence.observation) { text = String(f.evidence.observation); }
+    else if (fallback) { text = String(fallback); }
+    if (f.reference && text.indexOf(f.reference) === -1) {
+      text += (text ? ' · ' : '') + 'Ref.: “' + f.reference + '”';
+    }
+    if (text.length > 140) { text = text.slice(0, 139) + '…'; }
+    return text || 'Clique na seta para ver os detalhes completos.';
+  }
+
   /* 1. Análise sintática frase a frase, em ordem natural, com setas SVG rotuladas (estilo displaCy editorial) */
   function syntaxMap(parent, options) {
     var snapshot = options.snapshot;
@@ -14887,6 +19563,7 @@
     }
 
     var canvas = el('div', main, 'ptbr-reading-canvas'), aside = el('aside', box, 'ptbr-reading-aside');
+    var peek = createInlinePeek(box, aside);
     aside.id = uid; aside.setAttribute('aria-label', 'Explicação da relação selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
     var navList = [];
@@ -14947,7 +19624,7 @@
       if (f.implicitSubject && f.implicitSubject.label) {
         el('span', b, 'ptbr-syntax-head', f.implicitSubject.label);
       }
-      b.addEventListener('click', function () { select(f); }, false);
+      b.addEventListener('click', function () { select(f, true); }, false);
       b.addEventListener('keydown', function (ev) {
         if (ev.keyCode === 39) { if (ev.preventDefault) { ev.preventDefault(); } stepSyntax(1); }
         else if (ev.keyCode === 37) { if (ev.preventDefault) { ev.preventDefault(); } stepSyntax(-1); }
@@ -15075,7 +19752,7 @@
       });
     }
 
-    function select(f) {
+    function select(f, user) {
       if (dead || (options.isCurrent && !options.isCurrent())) { return; }
       active = f;
       Object.keys(buttons).forEach(function (k) {
@@ -15103,16 +19780,23 @@
         if (asideNext) { asideNext.disabled = pos < 0 || pos >= navList.length - 1; }
       }
       options.onSelect(f, details, true);
+      if (user && buttons['$' + f.nodeId]) {
+        peek.show(buttons['$' + f.nodeId].button, {
+          badge: '§',
+          title: f.feature + ' · “' + f.snippet + '”',
+          summary: summaryForFinding(f, sGloss || descriptions[0])
+        });
+      }
       resize();
     }
 
     function resize() { if (!dead) { root.clearTimeout(timer); timer = root.setTimeout(draw, 0); } }
     if (root.addEventListener) { root.addEventListener('resize', resize, false); }
     if (D.fonts && D.fonts.ready) { D.fonts.ready.then(resize); }
-    if (arr.length) { select(arr[0]); }
+    if (arr.length) { select(arr[0], false); }
     return {
-      select: function (i) { if (arr[i]) { select(arr[i]); } },
-      destroy: function () { dead = true; root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } }
+      select: function (i) { if (arr[i]) { select(arr[i], false); } },
+      destroy: function () { dead = true; peek.destroy(); root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } }
     };
   }
 
@@ -15346,6 +20030,7 @@
 
     var canvas = el('div', main, 'ptbr-reading-canvas');
     var aside = el('aside', box, 'ptbr-reading-aside'); aside.id = uid; aside.setAttribute('aria-label', 'Explicação da leitura selecionada');
+    var peek = createInlinePeek(box, aside);
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
     var asidePrev = null, asideNext = null, asideCounter = null;
     if (arr.length > 1) {
@@ -15620,6 +20305,20 @@
       termGloss.hidden = !mGloss;
       updateAsideStepper();
       options.onSelect(arr[index], details, user);
+      if (user && buttons[index]) {
+        var btnEl = buttons[index];
+        var hitAnchor = (btnEl.querySelector && btnEl.querySelector('.ptbr-inline-hit')) || btnEl;
+        var usoHit = (E.dificuldades && typeof E.dificuldades.lookupWord === 'function')
+          ? E.dificuldades.lookupWord(arr[index].snippet)
+          : null;
+        peek.show(hitAnchor, {
+          badge: morph ? '¶' : '◆',
+          title: label(arr[index]) + ' · “' + arr[index].snippet + '”',
+          summary: summaryForFinding(arr[index], mGloss),
+          usoId: usoHit ? usoHit.id : '',
+          usoTitle: usoHit ? usoHit.titulo : ''
+        });
+      }
       root.clearTimeout(timer); timer = root.setTimeout(draw, 0);
     }
 
@@ -15638,7 +20337,7 @@
     if (first >= 0 && arr.length) { select(first, false); }
     return {
       select: select,
-      destroy: function () { dead = true; root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } }
+      destroy: function () { dead = true; peek.destroy(); root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } }
     };
   };
 }(typeof window !== 'undefined' ? window : this));

@@ -3,7 +3,7 @@
   var E = window.Escr, vault = E.createVault(E.knowledge), storage = null, archive = null;
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
-  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause', 'lineage-panel'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task', 'start-lineage'];
+  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa', 'utilidades', 'focus-pause', 'lineage-panel', 'sobre', 'usos-lingua'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle', 'start-pomodoro', 'pomodoro-task', 'start-lineage', 'esc-open-about', 'esc-open-usos'];
   var projectScope = false, readingSize = 21, chalkUI = null, forceHistory=false, linguisticStore=E.createLinguisticStore(), analysisEpoch=0;
   var restrictedPaste = false, internalClipboard = '', copiedSelection = null, dismissedSelection = null, analysisRange = null;
   var trashView = false, sessionReady = false, sessionTimer = null, sessionKey = 'escrevaral.astra.session.v1';
@@ -14,7 +14,7 @@
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   /* A capa é a entrada do projeto; o editor continua compartilhado. */
   var notebooks = null, activeNotebookId = null, notebookEditing = null, notebookReturn = null, notebookReady = false, showingAbout = false, deferredInstallPrompt = null;
-  var originals = null, activeOriginalId = null, formTarget = 'volume', workspaceUI = null, templatesUI = null, sonnetUI = null, richUI = null, readerUI = null, printStudioUI = null, visualMachine = null, superfocoUI = null, themeChromeUI = null, wordCardUI = null, academyUI = null;
+  var originals = null, activeOriginalId = null, formTarget = 'volume', workspaceUI = null, templatesUI = null, sonnetUI = null, songUI = null, usosUI = null, richUI = null, readerUI = null, printStudioUI = null, visualMachine = null, superfocoUI = null, themeChromeUI = null, wordCardUI = null, academyUI = null;
   function availableBook(b) { var o = b && b.originalId && originals ? originals.get(b.originalId) : null; return b && !b.trashed && (!b.originalId || (o && !o.trashed)); }
   function activeNotebook() { var b = notebooks && activeNotebookId ? notebooks.get(activeNotebookId) : null; return availableBook(b) ? b : null; }
   function activeOriginal() { return originals && activeOriginalId ? originals.get(activeOriginalId) : null; }
@@ -257,9 +257,110 @@
   var WELCOME_KEY = 'escrevaral.welcome.seen.v1';
   var safetyDismissed = false;
   var safetyUrgent = false;
+  var folderBridge = (E.backupGuard && E.backupGuard.createFolderBridge) ? E.backupGuard.createFolderBridge({ storage: storage, window: window }) : null;
+  var folderMirrorTimer = 0;
+  var storagePersistedState = null;
+
+  function countArchiveWords() {
+    if (!archive) { return manuscript ? E.countWords(manuscript.value || '') : 0; }
+    try {
+      var docsList = archive.list(false).documents || [];
+      var total = 0, i, curId = doc && doc.id;
+      var sawCurrent = false;
+      for (i = 0; i < docsList.length; i += 1) {
+        var entry = docsList[i];
+        if (!entry || entry.kind === 'reminder') { continue; }
+        if (curId && entry.id === curId && manuscript) {
+          sawCurrent = true;
+          total += E.countWords(manuscript.value || '');
+        } else if (entry.text) {
+          total += E.countWords(entry.text);
+        }
+      }
+      if (!sawCurrent && manuscript && manuscript.value) {
+        total += E.countWords(manuscript.value);
+      }
+      return total;
+    } catch (ignore) { return 0; }
+  }
+
+  function updateFolderUi(meta) {
+    var box = byId('local-folder-box');
+    var st = byId('folder-backup-status');
+    var btnConnect = byId('backup-folder-connect');
+    var btnSync = byId('backup-folder-sync');
+    var btnDisc = byId('backup-folder-disconnect');
+    var persistEl = byId('storage-persist-status');
+    if (!box || !st || !btnConnect) { return; }
+    var fState = folderBridge ? folderBridge.getState() : 'unsupported';
+    var fName = (folderBridge && folderBridge.getFolderName()) || (meta && meta.folderName) || '';
+    var fmtTs = E.backupGuard && E.backupGuard.formatTimestamp ? E.backupGuard.formatTimestamp : function (s) { return s; };
+
+    if (fState === 'unsupported') {
+      text(st, 'Espelho automático em pasta disponível no Chrome e Edge em computador. Aqui, use “Exportar tudo” (.scrvrl) para guardar sua cópia.');
+      btnConnect.hidden = true;
+      if (btnSync) { btnSync.hidden = true; }
+      if (btnDisc) { btnDisc.hidden = true; }
+    } else if (fState === 'connected') {
+      text(st, 'Pasta conectada: “' + (fName || 'Pasta local') + '”' + (meta && meta.folderSyncedAt ? ' · último espelho em ' + fmtTs(meta.folderSyncedAt) + '.' : ' · espelho automático ativo (escrevaral-backup-atual.scrvrl + 1 cópia diária).'));
+      text(btnConnect, 'Trocar pasta');
+      btnConnect.hidden = false;
+      if (btnSync) { btnSync.hidden = false; }
+      if (btnDisc) { btnDisc.hidden = false; }
+    } else if (fState === 'needs-permission') {
+      text(st, 'Pasta lembrada: “' + (fName || 'Pasta local') + '”. Clique em “Reativar pasta” para retomar o espelho automático nesta sessão.');
+      text(btnConnect, 'Reativar pasta');
+      btnConnect.hidden = false;
+      if (btnSync) { btnSync.hidden = true; }
+      if (btnDisc) { btnDisc.hidden = false; }
+    } else {
+      text(st, 'Nenhuma pasta conectada. Opcional: escolha uma pasta no computador para gravar um espelho .scrvrl automático (100% offline, sem nuvem).');
+      text(btnConnect, 'Conectar pasta no computador');
+      btnConnect.hidden = false;
+      if (btnSync) { btnSync.hidden = true; }
+      if (btnDisc) { btnDisc.hidden = true; }
+    }
+
+    if (persistEl) {
+      if (storagePersistedState === true) {
+        text(persistEl, 'Armazenamento persistente ativo neste navegador.');
+      } else if (storagePersistedState === false) {
+        text(persistEl, 'Este navegador pode limpar dados se o disco encher; mantenha cópias .scrvrl ou conecte uma pasta.');
+      } else {
+        text(persistEl, '');
+      }
+    }
+  }
+
   function updateBackupStatus() {
     var el = byId('backup-status');
-    if (!el || !storage) { return; }
+    var pill = byId('esc-backup-pill');
+    var pillLabel = byId('esc-backup-pill-label');
+    var guard = E.backupGuard;
+    var totalWords = countArchiveWords();
+    var fState = folderBridge ? folderBridge.getState() : 'unsupported';
+    var meta = guard ? guard.readMeta(storage) : null;
+
+    if (guard && meta) {
+      var health = guard.evaluateHealth(meta, totalWords, fState);
+      if (pill) {
+        pill.setAttribute('data-health', health.level);
+        pill.title = health.title;
+        if (pillLabel) { text(pillLabel, health.pillLabel); }
+      }
+      if (el) {
+        if (!meta.lastBackupAt) {
+          text(el, 'Nenhuma cópia geral (.scrvrl) baixada ainda neste aparelho (' + totalWords.toLocaleString('pt-BR') + ' palavras no acervo).');
+        } else {
+          var deltaNote = health.wordsDelta > 0 ? ' · +' + health.wordsDelta.toLocaleString('pt-BR') + ' palavras novas' : '';
+          text(el, 'Última cópia geral (.scrvrl): ' + guard.formatTimestamp(meta.lastBackupAt) + deltaNote + '.');
+        }
+      }
+      updateFolderUi(meta);
+      return health;
+    }
+
+    if (!el || !storage) { return null; }
     try {
       var raw = storage.getItem(BACKUP_KEY);
       if (!raw) {
@@ -269,7 +370,9 @@
         text(el, 'Última cópia geral (.scrvrl): ' + (isNaN(dt.getTime()) ? raw : dt.toLocaleDateString('pt-BR') + ' às ' + dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })) + '.');
       }
     } catch (ignore) {}
+    return null;
   }
+
   function showSafetyBanner(msg, urgent) {
     var box = byId('esc-safety-banner'), txt = byId('esc-safety-text'), dis = byId('esc-safety-dismiss');
     if (!box || !txt) { return; }
@@ -288,13 +391,65 @@
     box.hidden = true;
   }
   function recordBackupExport() {
-    try { if (storage) { storage.setItem(BACKUP_KEY, new Date().toISOString()); } } catch (ignore) {}
+    var totalWords = countArchiveWords();
+    if (E.backupGuard && E.backupGuard.recordExport) {
+      E.backupGuard.recordExport(storage, totalWords);
+    } else {
+      try { if (storage) { storage.setItem(BACKUP_KEY, new Date().toISOString()); } } catch (ignore) {}
+    }
+    if (folderBridge && folderBridge.requestStoragePersistence && storagePersistedState !== true) {
+      folderBridge.requestStoragePersistence(function (ok) {
+        storagePersistedState = ok;
+        updateBackupStatus();
+      });
+    }
     safetyDismissed = true;
     hideSafetyBanner(true);
     updateBackupStatus();
   }
+
+  function runFolderMirror(manual) {
+    if (!folderBridge || folderBridge.getState() !== 'connected') { return; }
+    if (document.body && document.body.getAttribute('data-locked') === 'true') { return; }
+    if (!notebooks || composing || (chalkUI && !chalkUI.flush())) { return; }
+    try {
+      var payload = notebooks.pack(exportedDocuments(), null);
+      notebooks.validate(payload);
+      var totalWords = countArchiveWords();
+      folderBridge.writeSnapshot(JSON.stringify(payload), totalWords, new Date(), function (err, info) {
+        if (err) {
+          updateBackupStatus();
+          if (manual) { message('Não foi possível espelhar na pasta local: ' + (err.message || 'verifique a permissão.')); }
+          return;
+        }
+        if (info && info.skipped) { return; }
+        safetyDismissed = true;
+        hideSafetyBanner(false);
+        updateBackupStatus();
+        if (manual) {
+          message('Espelho gravado na pasta “' + (info.folderName || 'local') + '”' + (info.dailyFile ? ' (+ cópia diária).' : '.'));
+        }
+      });
+    } catch (e) {
+      if (manual) { message(e.message || 'Não foi possível preparar o espelho da pasta.'); }
+    }
+  }
+
+  function scheduleFolderMirror() {
+    if (!folderBridge || folderBridge.getState() !== 'connected') { return; }
+    window.clearTimeout(folderMirrorTimer);
+    folderMirrorTimer = window.setTimeout(function () { runFolderMirror(false); }, 4000);
+  }
+
   function checkBackupReminder() {
+    var health = updateBackupStatus();
     if (safetyDismissed || safetyUrgent || !storage || !archive) { return; }
+    if (health) {
+      if (health.shouldRemind && health.reminderMessage) {
+        showSafetyBanner(health.reminderMessage, false);
+      }
+      return;
+    }
     try {
       var lastRaw = storage.getItem(BACKUP_KEY);
       var stale = !lastRaw;
@@ -303,13 +458,7 @@
         stale = !ts || (Date.now() - ts) > 7 * 86400000;
       }
       if (!stale) { return; }
-      var docsList = archive.list(false).documents || [];
-      var totalWords = 0, i;
-      for (i = 0; i < docsList.length; i += 1) {
-        if (docsList[i] && docsList[i].kind !== 'reminder' && docsList[i].text) {
-          totalWords += E.countWords(docsList[i].text);
-        }
-      }
+      var totalWords = countArchiveWords();
       if (totalWords >= 250) {
         showSafetyBanner('Você já escreveu ' + totalWords + ' palavras neste aparelho. Guarde uma cópia (.scrvrl) para proteger seus textos.', false);
       }
@@ -552,6 +701,7 @@
       if (workspaceUI) { workspaceUI.render(); }
       checkPostWritePwa();
       checkBackupReminder();
+      scheduleFolderMirror();
       if (E.ptbrPanelSaved) { E.ptbrPanelSaved(saved.conflict); }
       return true;
     } catch (e) {
@@ -1042,7 +1192,7 @@
   }
   function sizePanels(height,topBar,bottomBar) {
     var desktop = window.innerWidth > 760;
-    panelIds.forEach(function(id){var p=byId(id),margin=desktop?0:8,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?560:440;
+    panelIds.forEach(function(id){var p=byId(id),margin=desktop?0:8,available=Math.max(0,height-topBar-bottomBar-margin*2),width=id==='utilidades'?(p.getAttribute('data-tool')==='calculator'?340:p.getAttribute('data-tool')==='calendar'?420:380):id==='lineage-panel'?560:(id==='sobre'||id==='usos-lingua')?560:440;
       p.style.bottom='auto';p.style.top=(topBar+(id==='focus-pause'?0:margin))+'px';
       if(id==='focus-pause'){p.style.height=Math.max(0,height-topBar-bottomBar)+'px';p.style.maxHeight='none';return;}
       p.style.width=(!desktop?Math.max(0,window.innerWidth-margin*2):Math.min(width,Math.max(0,window.innerWidth-margin*2)))+'px';
@@ -1274,6 +1424,7 @@
     if (richUI) { richUI.loadDoc(doc); }
     if (wordCardUI) { wordCardUI.hide(false); }
     if (sonnetUI) { sonnetUI.sync(doc); }
+    if (songUI) { songUI.sync(doc); }
     if (immersion && isLockedRef) { setImmersion(false, 'locked'); }
     else if (immersion && visualMachine) { visualMachine.layout(); }
     if (superfocoUI) { superfocoUI.resetDocument(); }
@@ -1394,8 +1545,15 @@
     byId('transfer-content').focus();
   }
   function download(contents, mime, name, host) {
+    var isBinary = typeof contents !== 'string';
     var saved = E.transfer.download(contents, mime, name, function (value, filename) { showTransfer(value, filename, false); }, host);
-    message(saved ? 'Cópia preparada. Confira o arquivo salvo.' : 'Cópia disponível em Ajustes para selecionar e guardar.');
+    if (saved) {
+      message('Cópia preparada. Confira o arquivo salvo.');
+    } else if (isBinary) {
+      message('Não foi possível iniciar o download neste navegador.');
+    } else {
+      message('Cópia disponível em Ajustes para selecionar e guardar.');
+    }
     return saved;
   }
   function exportedDocuments() {
@@ -1689,6 +1847,13 @@
     }
     loadDocument(current || E.freshDocument());
     updateBackupStatus();
+    if (folderBridge) {
+      folderBridge.restore(function () { updateBackupStatus(); });
+      folderBridge.checkStoragePersistence(function (persisted) {
+        storagePersistedState = persisted;
+        updateBackupStatus();
+      });
+    }
     applyTheme(storage.getItem('escrevaral.astra.theme'));
     focusEnabled = storage.getItem('escrevaral.astra.focus') !== 'off'; byId('focus-toggle').setAttribute('aria-pressed', focusEnabled ? 'true' : 'false');
   } catch (e) {
@@ -1697,6 +1862,51 @@
   }
   if (byId('esc-safety-export')) { listen(byId('esc-safety-export'), 'click', function () { exportNotebook(true); }); }
   if (byId('esc-safety-dismiss')) { listen(byId('esc-safety-dismiss'), 'click', function () { safetyDismissed = true; hideSafetyBanner(false); }); }
+  if (byId('esc-backup-pill')) {
+    listen(byId('esc-backup-pill'), 'click', function () {
+      showPanel('mesa', 'mesa-toggle', true);
+      var box = byId('local-folder-box');
+      if (box && box.scrollIntoView) { try { box.scrollIntoView({ block: 'center' }); } catch (ignore) {} }
+      var targetBtn = (byId('backup-folder-connect') && !byId('backup-folder-connect').hidden) ? byId('backup-folder-connect') : byId('export-backup');
+      if (targetBtn && targetBtn.focus) { targetBtn.focus(); }
+    });
+  }
+  if (byId('backup-folder-connect')) {
+    listen(byId('backup-folder-connect'), 'click', function () {
+      if (!folderBridge) { return; }
+      if (document.body && document.body.getAttribute('data-locked') === 'true') { return; }
+      var action = folderBridge.getState() === 'needs-permission' ? folderBridge.reconnect : folderBridge.connect;
+      action(function (err, info) {
+        if (err) {
+          message(err.message || 'Não foi possível conectar a pasta local.');
+          updateBackupStatus();
+          return;
+        }
+        if (info && info.cancelled) { return; }
+        updateBackupStatus();
+        if (folderBridge.requestStoragePersistence) {
+          folderBridge.requestStoragePersistence(function (ok) {
+            storagePersistedState = ok;
+            updateBackupStatus();
+          });
+        }
+        runFolderMirror(true);
+      });
+    });
+  }
+  if (byId('backup-folder-sync')) {
+    listen(byId('backup-folder-sync'), 'click', function () { runFolderMirror(true); });
+  }
+  if (byId('backup-folder-disconnect')) {
+    listen(byId('backup-folder-disconnect'), 'click', function () {
+      if (!folderBridge) { return; }
+      folderBridge.disconnect(function () {
+        window.clearTimeout(folderMirrorTimer);
+        updateBackupStatus();
+        message('Pasta local desconectada. Os arquivos já gravados permanecem no seu computador.');
+      });
+    });
+  }
   renderTimeline(true, null, true); sizeWorkspace();
   listen(window, 'resize', function () { if (byId('cabinet-window').getAttribute('data-maximized') !== 'true') { resetDesktopWindow(); } sizeWorkspace(); });
   listen(window, 'load', sizeWorkspace);
@@ -1747,6 +1957,24 @@
   });
   listen(byId('acervo-toggle'), 'click', function () { if (!persist()) { return; } var open = byId('acervo').hidden; showPanel('acervo', 'acervo-toggle', open); if (open) { renderArchive(); } });
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
+  if (byId('esc-open-about')) {
+    listen(byId('esc-open-about'), 'click', function () { showPanel('sobre', 'esc-open-about', byId('sobre').hidden); });
+  }
+  if (byId('open-about-from-settings')) {
+    listen(byId('open-about-from-settings'), 'click', function () { showPanel('sobre', 'esc-open-about', true); });
+  }
+  if (byId('sobre-close')) {
+    listen(byId('sobre-close'), 'click', function () { showPanel('sobre', 'esc-open-about', false); });
+  }
+  if (byId('sobre-open-cartorio')) {
+    listen(byId('sobre-open-cartorio'), 'click', function () {
+      closePanels(false);
+      if (byId('esc-open-cartorio')) { byId('esc-open-cartorio').click(); }
+    });
+  }
+  if (byId('sobre-open-backup')) {
+    listen(byId('sobre-open-backup'), 'click', function () { showPanel('mesa', 'mesa-toggle', true); });
+  }
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; if (open) { openExaminePanel({ toggle: 'examinar-toggle' }); } else { showPanel('oficina', 'examinar-toggle', false); } });
   listen(byId('back-writing'), 'click', returnToWriting);
   function createNewNote(opts) {
@@ -1828,6 +2056,31 @@
     if (printMedia.addEventListener) { printMedia.addEventListener('change', onPrintMediaChange); }
     else if (printMedia.addListener) { printMedia.addListener(onPrintMediaChange); }
   }
+  function triggerEditorialExport(kind) {
+    if (printStudioUI && (kind === 'epub' ? printStudioUI.exportEpub : printStudioUI.exportDocx)) {
+      if (kind === 'epub') { printStudioUI.exportEpub(); } else { printStudioUI.exportDocx(); }
+      return;
+    }
+    if (!E.editorialExport) {
+      message('Exportação editorial indisponível nesta sessão.');
+      return;
+    }
+    var cur = {
+      title: title ? title.value : (doc.title || ''),
+      displayTitle: title ? title.value : (doc.title || ''),
+      text: manuscript ? manuscript.value : (doc.text || ''),
+      format: (richUI && richUI.isRich && richUI.isRich()) ? 'rich' : (doc.format || 'plain'),
+      richHtml: (richUI && richUI.isRich && richUI.isRich()) ? richUI.html() : doc.richHtml
+    };
+    var res = kind === 'epub'
+      ? E.editorialExport.buildEpub({ chapters: [cur] })
+      : E.editorialExport.buildDocx({ chapters: [cur] });
+    if (download(res.bytes, res.mime, res.filename)) {
+      message((kind === 'epub' ? 'E-book (.epub)' : 'Word (.docx)') + ' gerado offline: ' + res.filename + '.');
+    }
+  }
+  listen(byId('export-docx'), 'click', function () { triggerEditorialExport('docx'); });
+  listen(byId('export-epub'), 'click', function () { triggerEditorialExport('epub'); });
   listen(byId('export-text'), 'click', function () {
     var base = String(title.value || '').replace(/^\s+|\s+$/g, '').replace(/[^A-Za-z0-9À-ÿ_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
     download((title.value ? title.value + '\n\n' : '') + manuscript.value, 'text/plain', (base || 'manuscrito') + '.txt');
@@ -2366,6 +2619,38 @@
     sonnetUI.sync(doc);
   }
 
+  if (E.mountSongAssistant) {
+    songUI = E.mountSongAssistant({
+      containerId: 'esc-song-panel',
+      manuscriptEl: manuscript,
+      onSaveSettings: function (nextSettings) {
+        doc.songSettings = nextSettings;
+        dirty = true;
+        persist();
+      }
+    });
+    songUI.sync(doc);
+  }
+
+  if (E.mountUsosLingua) {
+    usosUI = E.mountUsosLingua({
+      containerId: 'usos-lingua-body',
+      onOpenSheet: function () { showPanel('usos-lingua', 'esc-open-usos', true); }
+    });
+    E.openUsosLingua = function (idOrQuery) {
+      usosUI.openWith(idOrQuery || '');
+    };
+    if (byId('esc-open-usos')) {
+      listen(byId('esc-open-usos'), 'click', function () {
+        if (byId('usos-lingua').hidden) { usosUI.openWith(''); }
+        else { showPanel('usos-lingua', 'esc-open-usos', false); }
+      });
+    }
+    if (byId('usos-lingua-close')) {
+      listen(byId('usos-lingua-close'), 'click', function () { showPanel('usos-lingua', 'esc-open-usos', false); });
+    }
+  }
+
   if (E.mountRichEditor) {
     richUI = E.mountRichEditor({
       manuscriptEl: manuscript,
@@ -2373,7 +2658,8 @@
         doc.text = plainText;
         doc.format = 'rich';
         doc.richHtml = safeHtml;
-        if (sonnetUI && sonnetUI.isSonnetDoc(doc)) { sonnetUI.refresh(); }
+        if (sonnetUI && sonnetUI.isSonnetDoc(doc)) { sonnetUI.schedule ? sonnetUI.schedule() : sonnetUI.refresh(); }
+        if (songUI && songUI.isSongDoc(doc)) { songUI.schedule ? songUI.schedule() : songUI.refresh(); }
         changed();
       },
       onFormatChange: function (fmt, html) {
@@ -2437,6 +2723,25 @@
       storage: storage,
       onOpenAcademy: function (guideId) {
         if (academyUI && academyUI.openGuide) { academyUI.openGuide(guideId || 'objeto-livro'); }
+      },
+      onJumpToWord: function (word) {
+        if (!word || !manuscript) { return; }
+        var textVal = manuscript.value || '';
+        var esc = String(word).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var rx = new RegExp('(^|[^A-Za-zÀ-ÖØ-öø-ÿ])(' + esc + ')(?=$|[^A-Za-zÀ-ÖØ-öø-ÿ])', 'i');
+        var m = rx.exec(textVal);
+        var idx = m ? (m.index + m[1].length) : textVal.toLowerCase().indexOf(String(word).toLowerCase());
+        if (idx >= 0) {
+          if (richUI && richUI.isRich && richUI.isRich() && richUI.selectPlainRange) {
+            richUI.selectPlainRange(idx, idx + word.length);
+          } else if (E.transfer && E.transfer.selectRange) {
+            E.transfer.selectRange(manuscript, idx, idx + word.length);
+          } else if (manuscript.setSelectionRange) {
+            manuscript.focus();
+            manuscript.setSelectionRange(idx, idx + word.length);
+          }
+          message('Palavra “' + word + '” localizada no manuscrito.');
+        }
       },
       onPrint: function () {
         if (printStudioUI && printStudioUI.open) {
@@ -2512,7 +2817,7 @@
       getMachineEnabled: function () { return visualMachine ? visualMachine.isEnabled() : false; },
       onToggleMachine: function () { setMachine(visualMachine ? !visualMachine.isEnabled() : !machineEnabled); },
       getMachineAnchor: function () { return visualMachine ? visualMachine.anchorY() : null; },
-      isSonnetActive: function () { return !!(sonnetUI && sonnetUI.isSonnetDoc && sonnetUI.isSonnetDoc(doc)); },
+      isSonnetActive: function () { return !!((sonnetUI && sonnetUI.isSonnetDoc && sonnetUI.isSonnetDoc(doc)) || (songUI && songUI.isSongDoc && songUI.isSongDoc(doc))); },
       isEditable: function () { return !(doc && (doc.locked || doc.category === 'reference')); }
     });
     if (immersion) {

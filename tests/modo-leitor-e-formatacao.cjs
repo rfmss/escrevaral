@@ -92,12 +92,31 @@ assert.equal(mapped.startContainer.nodeValue, 'importante');
 assert.equal(mapped.startOffset, 0);
 assert.equal(mapped.endOffset, 10);
 
-// 4. Preferências e cálculo de tempo no Modo Leitura
+// 4. Preferências e cálculo de tempo no Modo Leitura (inclui Papel Algodão + clima ilustrado)
 const prefs = E.readerCore.normalizePrefs({ palette: 'night', face: 'sans', size: 40, breakMin: 25 });
 assert.equal(prefs.palette, 'night');
 assert.equal(prefs.face, 'sans');
 assert.equal(prefs.size, 32); // clamp 17..32
 assert.equal(prefs.breakMin, 25);
+assert.equal(prefs.showScene, true);
+
+const prefsCotton = E.readerCore.normalizePrefs({ palette: 'cotton', showScene: false });
+assert.equal(prefsCotton.palette, 'cotton');
+assert.equal(prefsCotton.showScene, false);
+
+// 4b. Parser de Roteiro / Ensaio (Read-Thru): roteiro estruturado e prosa com diálogo
+const scriptSample = 'INT. SALA DE ENSAIO - NOITE\n\nJACK\n(baixo)\nSo we got the brain.\n\nANDREW\nNext pick.\n\nJACK\nFinally!';
+const parsedScript = E.readerCore.parseReadThru(scriptSample);
+assert.equal(parsedScript.isScript, true);
+assert.deepEqual(Array.from(parsedScript.characters), ['JACK', 'ANDREW']);
+assert.equal(parsedScript.steps.length, 3);
+assert.equal(parsedScript.blocks.filter(b => b.kind === 'dialogue' && b.speaker === 'JACK').length, 2);
+
+const proseSample = 'A sala ficou quieta.\n— Vamos começar agora?\n— Claro, respondeu ela.';
+const parsedProse = E.readerCore.parseReadThru(proseSample);
+assert.equal(parsedProse.isScript, false);
+assert.equal(parsedProse.hasDialogues, true);
+assert.equal(parsedProse.steps.length, 3);
 
 const stats = E.readerCore.readingMinutes(Array(420).fill('palavra').join(' '));
 assert.equal(stats.words, 420);

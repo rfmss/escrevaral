@@ -54,6 +54,7 @@
   body[data-view="workspace"] #esc-items-header,
   body[data-view="workspace"] #esc-items-list,
   body[data-view="workspace"] #esc-sonnet-panel,
+  body[data-view="workspace"] #esc-song-panel,
   body[data-view="workspace"] #writing-space,
   body[data-view="workspace"]:not([data-machine="true"]) #writing-space,
   body[data-view="workspace"][data-machine="true"] #writing-space,
@@ -2522,6 +2523,7 @@
   body[data-theme="escuro"][data-view="workspace"] #esc-items-header,
   body[data-theme="escuro"][data-view="workspace"] #esc-items-list,
   body[data-theme="escuro"][data-view="workspace"] #esc-sonnet-panel,
+  body[data-theme="escuro"][data-view="workspace"] #esc-song-panel,
   body[data-theme="escuro"][data-view="workspace"] #writing-space,
   body[data-theme="escuro"][data-view="workspace"]:not([data-machine="true"]) #writing-space,
   body[data-theme="escuro"][data-view="workspace"][data-machine="true"] #writing-space,
@@ -3044,6 +3046,29 @@
     background: #1d221d !important;
     border-color: #3c483c !important;
     color: #cfd6cb !important;
+  }
+  #writing-space .paper-footer #save-status { max-width: none; }
+  #writing-space .paper-footer #desk-paste:not([hidden]) ~ .esc-backup-pill { margin-right: 64px; }
+  body[data-theme="escuro"] .esc-backup-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(185, 200, 182, 0.24);
+    color: #b7c2b3;
+  }
+  body[data-theme="escuro"] .esc-backup-pill:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(185, 200, 182, 0.42);
+  }
+  body[data-theme="escuro"] .esc-backup-pill[data-health="synced"] .esc-backup-dot,
+  body[data-theme="escuro"] .esc-backup-pill[data-health="ok"] .esc-backup-dot { background: #7eb385; }
+  body[data-theme="escuro"] .esc-backup-pill[data-health="gentle"] .esc-backup-dot { background: #d6a75a; }
+  body[data-theme="escuro"] .esc-backup-pill[data-health="overdue"] .esc-backup-dot { background: #d87b6c; }
+  body[data-theme="escuro"] .esc-backup-pill[data-health="overdue"] { background: rgba(216, 123, 108, 0.12); border-color: rgba(216, 123, 108, 0.45); }
+  body[data-theme="escuro"] .esc-folder-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: #465446;
+  }
+  body[data-theme="escuro"] .esc-folder-actions button {
+    border-color: #556655;
   }
   body[data-theme="escuro"] .esc-safety-banner {
     background: #2b231b;

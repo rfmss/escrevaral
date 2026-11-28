@@ -350,6 +350,134 @@
     });
   }
 
+  /* Cartão inline compacto (padrão fechado -> aberto dos Anexos 2 e 3):
+   * abre ancorado logo abaixo da marcação clicada, na mesma tonalidade creme, sem empurrar linhas. */
+  function createInlinePeek(box, aside) {
+    var pop = el('div', box, 'ptbr-inline-peek');
+    pop.setAttribute('role', 'region');
+    pop.setAttribute('aria-label', 'Resumo rápido da observação');
+    pop.hidden = true;
+    var activeAnchor = null;
+
+    function hide() {
+      pop.hidden = true;
+      pop.textContent = '';
+      if (activeAnchor) {
+        activeAnchor.setAttribute('data-peek-open', 'false');
+        activeAnchor = null;
+      }
+    }
+
+    function positionAt(anchor) {
+      if (!pop.style || !anchor || !anchor.getBoundingClientRect || !box.getBoundingClientRect) { return; }
+      var br = box.getBoundingClientRect();
+      var ar = anchor.getBoundingClientRect();
+      if (!br || !br.width) { return; }
+      var popW = Math.min(340, Math.max(220, br.width - 16));
+      pop.style.width = popW + 'px';
+      var relTop = (typeof ar.bottom === 'number' && typeof br.top === 'number') ? (ar.bottom - br.top + 6) : 36;
+      var relLeft = (typeof ar.left === 'number' && typeof br.left === 'number') ? (ar.left - br.left) : 0;
+      relLeft = Math.max(4, Math.min(Math.max(4, br.width - popW - 4), relLeft));
+      pop.style.top = Math.round(Math.max(4, relTop)) + 'px';
+      pop.style.left = Math.round(relLeft) + 'px';
+    }
+
+    function show(anchor, info) {
+      if (!anchor || !info) { hide(); return; }
+      if (activeAnchor && activeAnchor !== anchor) {
+        activeAnchor.setAttribute('data-peek-open', 'false');
+      }
+      activeAnchor = anchor;
+      anchor.setAttribute('data-peek-open', 'true');
+      pop.textContent = '';
+
+      var iconEl = el('span', pop, 'ptbr-inline-peek-ico', info.badge || '◆');
+      iconEl.setAttribute('aria-hidden', 'true');
+
+      var body = el('div', pop, 'ptbr-inline-peek-body');
+      el('strong', body, 'ptbr-inline-peek-title', info.title || 'Observação');
+      el('p', body, 'ptbr-inline-peek-summary', info.summary || 'Veja os detalhes desta marcação.');
+      if (info.usoId && typeof E.openUsosLingua === 'function') {
+        var usoBtn = el('button', body, 'ptbr-inline-peek-uso', 'Usos da língua: ' + (info.usoTitle || 'entender este uso') + ' \u2192');
+        usoBtn.type = 'button';
+        usoBtn.style.marginTop = '6px';
+        usoBtn.style.padding = '3px 8px';
+        usoBtn.style.border = '1px solid rgba(40, 48, 38, 0.25)';
+        usoBtn.style.borderRadius = '4px';
+        usoBtn.style.background = 'transparent';
+        usoBtn.style.font = '600 11px/1.3 Inter, Arial, sans-serif';
+        usoBtn.style.cursor = 'pointer';
+        usoBtn.addEventListener('click', function (ev) {
+          if (ev && ev.stopPropagation) { ev.stopPropagation(); }
+          hide();
+          E.openUsosLingua(info.usoId);
+        }, false);
+      }
+
+      var actions = el('div', pop, 'ptbr-inline-peek-actions');
+      var goBtn = el('button', actions, 'ptbr-inline-peek-go', '›');
+      goBtn.type = 'button';
+      goBtn.setAttribute('aria-label', 'Abrir explicação completa');
+      goBtn.title = 'Abrir explicação completa';
+      goBtn.addEventListener('click', function (ev) {
+        if (ev && ev.stopPropagation) { ev.stopPropagation(); }
+        hide();
+        if (aside && aside.scrollIntoView) {
+          aside.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, false);
+
+      var closeBtn = el('button', actions, 'ptbr-inline-peek-close', '×');
+      closeBtn.type = 'button';
+      closeBtn.setAttribute('aria-label', 'Fechar resumo');
+      closeBtn.addEventListener('click', function (ev) {
+        if (ev && ev.stopPropagation) { ev.stopPropagation(); }
+        hide();
+      }, false);
+
+      pop.hidden = false;
+      positionAt(anchor);
+    }
+
+    function onDocKey(ev) {
+      if (ev && ev.keyCode === 27 && !pop.hidden) { hide(); }
+    }
+    function onDocDown(ev) {
+      if (pop.hidden || !ev || !ev.target) { return; }
+      if (pop.contains && pop.contains(ev.target)) { return; }
+      if (activeAnchor && activeAnchor.contains && activeAnchor.contains(ev.target)) { return; }
+      hide();
+    }
+    if (D && D.addEventListener) {
+      D.addEventListener('keydown', onDocKey, false);
+      D.addEventListener('mousedown', onDocDown, false);
+    }
+    return {
+      show: show,
+      hide: hide,
+      destroy: function () {
+        hide();
+        if (D && D.removeEventListener) {
+          D.removeEventListener('keydown', onDocKey, false);
+          D.removeEventListener('mousedown', onDocDown, false);
+        }
+      }
+    };
+  }
+
+  function summaryForFinding(f, fallback) {
+    if (!f) { return fallback || ''; }
+    var text = '';
+    if (f.message) { text = String(f.message); }
+    else if (f.evidence && f.evidence.observation) { text = String(f.evidence.observation); }
+    else if (fallback) { text = String(fallback); }
+    if (f.reference && text.indexOf(f.reference) === -1) {
+      text += (text ? ' · ' : '') + 'Ref.: “' + f.reference + '”';
+    }
+    if (text.length > 140) { text = text.slice(0, 139) + '…'; }
+    return text || 'Clique na seta para ver os detalhes completos.';
+  }
+
   /* 1. Análise sintática frase a frase, em ordem natural, com setas SVG rotuladas (estilo displaCy editorial) */
   function syntaxMap(parent, options) {
     var snapshot = options.snapshot;
@@ -392,6 +520,7 @@
     }
 
     var canvas = el('div', main, 'ptbr-reading-canvas'), aside = el('aside', box, 'ptbr-reading-aside');
+    var peek = createInlinePeek(box, aside);
     aside.id = uid; aside.setAttribute('aria-label', 'Explicação da relação selecionada');
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
     var navList = [];
@@ -452,7 +581,7 @@
       if (f.implicitSubject && f.implicitSubject.label) {
         el('span', b, 'ptbr-syntax-head', f.implicitSubject.label);
       }
-      b.addEventListener('click', function () { select(f); }, false);
+      b.addEventListener('click', function () { select(f, true); }, false);
       b.addEventListener('keydown', function (ev) {
         if (ev.keyCode === 39) { if (ev.preventDefault) { ev.preventDefault(); } stepSyntax(1); }
         else if (ev.keyCode === 37) { if (ev.preventDefault) { ev.preventDefault(); } stepSyntax(-1); }
@@ -580,7 +709,7 @@
       });
     }
 
-    function select(f) {
+    function select(f, user) {
       if (dead || (options.isCurrent && !options.isCurrent())) { return; }
       active = f;
       Object.keys(buttons).forEach(function (k) {
@@ -608,16 +737,23 @@
         if (asideNext) { asideNext.disabled = pos < 0 || pos >= navList.length - 1; }
       }
       options.onSelect(f, details, true);
+      if (user && buttons['$' + f.nodeId]) {
+        peek.show(buttons['$' + f.nodeId].button, {
+          badge: '§',
+          title: f.feature + ' · “' + f.snippet + '”',
+          summary: summaryForFinding(f, sGloss || descriptions[0])
+        });
+      }
       resize();
     }
 
     function resize() { if (!dead) { root.clearTimeout(timer); timer = root.setTimeout(draw, 0); } }
     if (root.addEventListener) { root.addEventListener('resize', resize, false); }
     if (D.fonts && D.fonts.ready) { D.fonts.ready.then(resize); }
-    if (arr.length) { select(arr[0]); }
+    if (arr.length) { select(arr[0], false); }
     return {
-      select: function (i) { if (arr[i]) { select(arr[i]); } },
-      destroy: function () { dead = true; root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } }
+      select: function (i) { if (arr[i]) { select(arr[i], false); } },
+      destroy: function () { dead = true; peek.destroy(); root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } }
     };
   }
 
@@ -851,6 +987,7 @@
 
     var canvas = el('div', main, 'ptbr-reading-canvas');
     var aside = el('aside', box, 'ptbr-reading-aside'); aside.id = uid; aside.setAttribute('aria-label', 'Explicação da leitura selecionada');
+    var peek = createInlinePeek(box, aside);
     el('p', aside, 'ptbr-overline', 'POR DENTRO DO TEXTO');
     var asidePrev = null, asideNext = null, asideCounter = null;
     if (arr.length > 1) {
@@ -1125,6 +1262,20 @@
       termGloss.hidden = !mGloss;
       updateAsideStepper();
       options.onSelect(arr[index], details, user);
+      if (user && buttons[index]) {
+        var btnEl = buttons[index];
+        var hitAnchor = (btnEl.querySelector && btnEl.querySelector('.ptbr-inline-hit')) || btnEl;
+        var usoHit = (E.dificuldades && typeof E.dificuldades.lookupWord === 'function')
+          ? E.dificuldades.lookupWord(arr[index].snippet)
+          : null;
+        peek.show(hitAnchor, {
+          badge: morph ? '¶' : '◆',
+          title: label(arr[index]) + ' · “' + arr[index].snippet + '”',
+          summary: summaryForFinding(arr[index], mGloss),
+          usoId: usoHit ? usoHit.id : '',
+          usoTitle: usoHit ? usoHit.titulo : ''
+        });
+      }
       root.clearTimeout(timer); timer = root.setTimeout(draw, 0);
     }
 
@@ -1143,7 +1294,7 @@
     if (first >= 0 && arr.length) { select(first, false); }
     return {
       select: select,
-      destroy: function () { dead = true; root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } }
+      destroy: function () { dead = true; peek.destroy(); root.clearTimeout(timer); if (root.removeEventListener) { root.removeEventListener('resize', resize, false); } }
     };
   };
 }(typeof window !== 'undefined' ? window : this));

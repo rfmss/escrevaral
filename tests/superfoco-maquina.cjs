@@ -100,9 +100,13 @@ assert.equal(E.machineCore.frameUrl(2, 'png'), 'assets/typewriter/typewriter-mac
 assert.equal(E.machineCore.frameUrl(9, 'webp'), 'assets/typewriter/typewriter-machine-strike-9.webp');
 assert.ok(E.machineCore.makeFallbackSvg(1).startsWith('data:image/svg+xml'));
 
-// 2. Geometria de ancoragem da máquina antiga + shuffle-bag sem padrões repetitivos
+// 2. Geometria de ancoragem da máquina antiga + suporte a celular/tablet e teclado virtual
 const geom = E.machineCore.computeGeometry(680, 300, 1280, 800, 35.7);
 assert.ok(geom && geom.anchorY > 0 && geom.rollerTop > geom.anchorY);
+const geomPhone = E.machineCore.computeGeometry(350, 20, 390, 420, 32);
+assert.ok(geomPhone && geomPhone.width > 390 && geomPhone.shown >= 108 && geomPhone.anchorY >= 76, 'celular com teclado virtual mantém rolo ampliado e âncora visível acima da barra');
+const geomTablet = E.machineCore.computeGeometry(700, 34, 768, 1024, 34);
+assert.ok(geomTablet && geomTablet.width > 768 && geomTablet.shown >= 132 && geomTablet.rollerTop > geomTablet.anchorY, 'tablet retrato mantém objeto da máquina visível e bem proporcionado');
 assert.notEqual(E.machineCore.pickNextStrike(2), 2);
 const bag = E.machineCore.createStrikeBag(9);
 const cycle1 = new Set();

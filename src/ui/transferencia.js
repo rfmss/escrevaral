@@ -16,16 +16,21 @@
   }
   function download(contents, mime, name, fallback, host) {
     var D = root.document, urlAPI = root.URL || root.webkitURL, url, a;
+    var isBinary = typeof contents !== 'string';
     try {
       if (!root.Blob) { throw new Error('blob'); }
-      var blob = new root.Blob([contents], { type: mime + ';charset=utf-8' });
+      var blobType = isBinary ? mime : (mime + ';charset=utf-8');
+      var blob = new root.Blob([contents], { type: blobType });
       if (root.navigator.msSaveBlob && root.navigator.msSaveBlob(blob, name) !== false) { return true; }
       a = D.createElement('a');
       if (!('download' in a) || !a.click || !urlAPI || !urlAPI.createObjectURL) { throw new Error('download'); }
       url = urlAPI.createObjectURL(blob); a.href = url; a.download = name;
       (host || D.body).appendChild(a); a.click();
       return true;
-    } catch (error) { fallback(contents, name); return false; }
+    } catch (error) {
+      if (!isBinary && typeof fallback === 'function') { fallback(contents, name); }
+      return false;
+    }
     finally {
       if (a && a.parentNode) { a.parentNode.removeChild(a); }
       if (url && urlAPI.revokeObjectURL) { root.setTimeout(function () { urlAPI.revokeObjectURL(url); }, 120000); }

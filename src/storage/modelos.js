@@ -311,6 +311,47 @@
           ]
         }
       ]
+    },
+    {
+      id: 'cancao',
+      name: '8. Canção / Música',
+      description: 'Oficina de composição com blocos, espelho de cadência entre estrofes, rimas consoantes/toantes, tap tempo e cifras opcionais.',
+      defaultProjectName: 'Minha canção',
+      printPreset: 'poesia',
+      folders: [
+        {
+          name: '01 · Ideia e clima',
+          printRole: 'support',
+          notes: [
+            {
+              title: '01. Tema, andamento e referências',
+              content: '# Ideia da canção\n\n- **Clima / gênero:** « MPB, samba, sertanejo, rock, rap, xote... »\n- **Sentimento central:** « O que esta música quer fazer sentir? »\n- **Imagem ou gancho do refrão:** « Uma frase curta que grude no ouvido »'
+            }
+          ]
+        },
+        {
+          name: '02 · Letra',
+          printRole: 'manuscript',
+          notes: [
+            {
+              title: '02. Letra da canção',
+              role: 'song',
+              songSettings: { bpm: 92, meter: '4/4', showChords: false, internalRhymes: false },
+              content: '[Estrofe 1]\n« Escreva aqui os versos da primeira estrofe »\n\n[Refrão]\n« Escreva aqui o gancho central da música »\n\n[Estrofe 2]\n« A segunda estrofe espelha a cadência da primeira »'
+            }
+          ]
+        },
+        {
+          name: '03 · Ensaio',
+          printRole: 'support',
+          notes: [
+            {
+              title: '03. Notas de voz, respiração e arranjo',
+              content: '# Ensaio e cantabilidade\n\n- [ ] Testei cantar a Estrofe 2 na mesma melodia da Estrofe 1?\n- [ ] O refrão abre espaço para respiração?\n- [ ] As palavras fortes caem nas batidas certas?'
+            }
+          ]
+        }
+      ]
     }
   ];
 
@@ -431,16 +472,17 @@
         if (spec.role) { d.role = spec.role; }
         if (spec.category) { d.category = spec.category; }
         if (spec.locked) { d.locked = true; }
-        if (noteFormat === 'rich' && !spec.locked && spec.category !== 'reference' && spec.role !== 'sonnet') {
+        if (noteFormat === 'rich' && !spec.locked && spec.category !== 'reference' && spec.role !== 'sonnet' && spec.role !== 'song') {
           d.format = 'rich';
           if (root.Escr.richEditor && root.Escr.richEditor.plainToSafeHtml) { d.richHtml = root.Escr.richEditor.plainToSafeHtml(d.text); }
         } else {
           d.format = 'plain';
         }
         if (spec.sonnetSettings) { d.sonnetSettings = JSON.parse(JSON.stringify(spec.sonnetSettings)); }
+        if (spec.songSettings) { d.songSettings = JSON.parse(JSON.stringify(spec.songSettings)); }
         var saved = archive.save(d, false).document;
         createdNotes.push(saved);
-        if (spec.role === 'sonnet') { firstPreferred = saved; } else if (!firstPreferred && spec.title.indexOf('01.') === 0) { firstPreferred = saved; }
+        if (spec.role === 'sonnet' || spec.role === 'song') { firstPreferred = saved; } else if (!firstPreferred && spec.title.indexOf('01.') === 0) { firstPreferred = saved; }
       }
     }
     return { book: book, notes: createdNotes, firstNote: firstPreferred || createdNotes[0] || null };

@@ -294,9 +294,11 @@ SOFTWARE.
         <button id="esc-open-universe" type="button" class="esc-nav-tool-btn" title="Capítulos, cenas, personagens e cenários"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Universo</span></button>
         <button id="esc-open-lineage" type="button" class="esc-nav-tool-btn" title="Histórico e versões salvas deste texto"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg><span>Versões</span></button>
         <button id="esc-open-cartorio" type="button" class="esc-nav-tool-btn" title="Cartório: selo de criação, colagem restrita e verificação de arquivos .scrvrl"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span>Cartório</span></button>
+        <button id="esc-open-usos" type="button" class="esc-nav-tool-btn" aria-expanded="false" title="Usos da língua: dicionário acolhedor de dificuldades do português brasileiro"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M9 10h6"/><path d="M12 7v6"/></svg><span>Usos da língua</span></button>
         <button id="esc-open-calculator" type="button" class="esc-nav-tool-btn" title="Calculadora editorial de laudas, tempo e orçamento"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg><span>Calculadora</span></button>
         <button id="esc-open-calendar" type="button" class="esc-nav-tool-btn" title="Agenda e planejamento diário de escrita"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Calendário</span></button>
         <button id="esc-open-packages" type="button" class="esc-nav-tool-btn" title="Preferências, exportação e modo offline"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Ajustes</span></button>
+        <button id="esc-open-about" type="button" class="esc-nav-tool-btn" aria-expanded="false" title="Sobre o Escrevaral, privacidade, limites legais do Cartório e licenças"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span>Sobre</span></button>
       </div>
     </footer>
   </aside>
@@ -321,7 +323,6 @@ SOFTWARE.
       <div id="esc-items-filters-panel" class="esc-items-filters-panel" hidden></div>
     </div>
     <div id="esc-items-list" role="region" aria-label="Lista de notas"></div>
-    <section id="esc-sonnet-panel" hidden></section>
   </section>
   <div id="writing-space" style="height: 570px;">
     <div id="selection-tools" class="selection-tools" role="group" aria-label="Trecho selecionado" hidden><span id="clipboard-status" role="status">Trecho selecionado</span><button id="selection-copy" title="Guardar este trecho na cópia interna">Copiar</button><button id="selection-cut">Recortar</button><button id="selection-paste" disabled>Colar</button><button id="selection-examine">Analisar trecho</button><button id="selection-external">Copiar para outro app</button><button id="selection-close" aria-label="Recolher comandos de seleção">×</button></div>
@@ -385,6 +386,7 @@ SOFTWARE.
         </div>
         <footer class="paper-footer"><button id="desk-paste" title="Colar o trecho guardado no Escrevaral" hidden>Colar</button>
           <span id="save-status" role="status" aria-live="polite">Guardado neste aparelho.</span>
+          <button id="esc-backup-pill" type="button" class="esc-backup-pill" data-health="fresh" title="Saúde da cópia de segurança e pasta local — clique para abrir em Ajustes"><span class="esc-backup-dot" aria-hidden="true"></span><span id="esc-backup-pill-label">Só neste navegador</span></button>
           <div id="esc-safety-banner" class="esc-safety-banner" role="alert" hidden>
             <span id="esc-safety-text"></span>
             <button id="esc-safety-export" type="button" class="esc-safety-action">Exportar cópia agora</button>
@@ -413,6 +415,8 @@ SOFTWARE.
       </aside>
     </div>
   </div>
+  <section id="esc-sonnet-panel" class="esc-verse-dock" hidden></section>
+  <section id="esc-song-panel" class="esc-verse-dock" hidden></section>
   </div>
   <div id="machine-shell" class="machine-shell" aria-hidden="true" hidden="" style="height: 654px;">
     <div id="machine-platen" class="machine-stamp" style="transform: translateX(0px);" data-feed="false"></div>
@@ -436,7 +440,7 @@ SOFTWARE.
       <label class="project-field" for="note-project">Caderno deste texto</label><select id="note-project" class="project-input"></select><button id="note-project-save">Mover para este caderno</button><div id="notebook-organization" hidden><label for="notebook-parent">Gaveta deste caderno</label><select id="notebook-parent"><option value="">Na Estante, sem gaveta</option></select><button id="notebook-parent-save">Guardar organização</button></div><p class="quiet">O texto acompanha o caderno ao exportar.</p>
     </div>
     <div class="setting-section"><h3>Seus textos</h3><button id="paste-mode" aria-pressed="false">Restringir colagem à cópia interna</button><button id="trash-current">Mover este texto para a lixeira</button>
-      <div class="actions"><button id="print-document">Imprimir e paginar</button><button id="export-text">Baixar este texto <span aria-hidden="true">↓</span></button><button id="export-notebook">Exportar este caderno ↓</button><button id="export-backup">Exportar tudo ↓</button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".scrvrl,.txt,.json,text/plain,application/json"></label></div>
+      <div class="actions"><button id="print-document">Imprimir e paginar</button><button id="export-docx" type="button">Exportar Word (.docx) <span aria-hidden="true">↓</span></button><button id="export-epub" type="button">Exportar e-book (.epub) <span aria-hidden="true">↓</span></button><button id="export-text">Baixar este texto <span aria-hidden="true">↓</span></button><button id="export-notebook">Exportar este caderno ↓</button><button id="export-backup">Exportar tudo ↓</button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".scrvrl,.txt,.json,text/plain,application/json"></label></div>
       <button id="import-copied" type="button">Trazer conteúdo copiado</button>
       <div id="transfer-box" hidden>
         <p id="transfer-help" class="quiet"></p>
@@ -450,6 +454,16 @@ SOFTWARE.
       </div>
       <p id="panel-status" class="quiet" role="status" aria-live="polite"></p>
       <p id="backup-status" class="quiet" role="status" aria-live="polite"></p>
+      <div id="local-folder-box" class="esc-folder-box">
+        <p class="esc-folder-title">Pasta local no computador (espelho automático)</p>
+        <p id="folder-backup-status" class="quiet" role="status" aria-live="polite">Nenhuma pasta conectada.</p>
+        <div class="esc-folder-actions">
+          <button id="backup-folder-connect" type="button">Conectar pasta no computador</button>
+          <button id="backup-folder-sync" type="button" hidden>Espelhar agora</button>
+          <button id="backup-folder-disconnect" type="button" hidden>Desconectar pasta</button>
+        </div>
+        <p id="storage-persist-status" class="quiet"></p>
+      </div>
       <p class="quiet">Textos e cópias trazidos viram novos textos. Seu acervo permanece.</p>
       <p class="quiet">Os textos ficam neste navegador, neste aparelho. Guarde uma cópia do acervo para levá-los com você.</p>
     </div>
@@ -464,6 +478,46 @@ SOFTWARE.
       <p class="quiet">O site e o arquivo guardado podem ter acervos separados. A abertura de arquivo local depende do navegador ou aplicativo escolhido. Se ele não abrir a mesa, volte ao site quando tiver conexão e traga a cópia do acervo.</p>
     </div>
     <div class="setting-section"><h3>Atalhos</h3><dl class="shortcuts"><div><dt>Buscar</dt><dd>Ctrl / ⌘ + K</dd></div><div><dt>Examinar</dt><dd>Ctrl / ⌘ + Enter</dd></div><div><dt>Guardar o texto</dt><dd>Ctrl / ⌘ + S</dd></div><div><dt>Fechar painel / sair do foco / voltar ao Gabinete</dt><dd>Esc</dd></div></dl></div>
+    <div class="setting-section"><h3>Sobre e transparência</h3>
+      <p class="quiet">Conheça quem faz o Escrevaral, a política de privacidade local-first, os limites legais do Cartório SHA-256 e as licenças dos acervos.</p>
+      <p><button id="open-about-from-settings" type="button">Sobre, privacidade e licenças</button></p>
+    </div>
+  </section>
+  <section id="sobre" class="sheet esc-about-sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="sobre-heading">
+    <div class="sheet-heading"><div><p class="eyebrow">OFICINA LITERÁRIA BRASILEIRA</p><h2 id="sobre-heading">Sobre, Privacidade e Licenças</h2></div><button id="sobre-close" class="close-panel" aria-label="Fechar sobre"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
+    <div class="esc-about-body">
+      <article class="esc-about-card">
+        <h3>Quem faz o Escrevaral</h3>
+        <p>O <strong>Escrevaral</strong> é um ateliê literário brasileiro independente, criado e mantido por <strong>Rafael Mass</strong> desde janeiro de 2025. É gratuito, sem cadastro, sem assinatura e construído para que qualquer pessoa — dos 15 aos 75 anos — escreva, estude, revise e publique com autonomia total.</p>
+        <p class="esc-about-note">Em português brasileiro não existe “erro” moral na fala: todo falante nativo já domina a língua. O Escrevaral existe apenas como um cenário calmo e organizado para construir textos conscientes do seu registro e do seu leitor.</p>
+      </article>
+      <article class="esc-about-card">
+        <h3>Privacidade radical (local-first)</h3>
+        <p>A aplicação opera sob política técnica estrita <code>connect-src 'none'</code>: <strong>nenhum servidor recebe uma única palavra do seu manuscrito</strong>. Todo o acervo fica exclusivamente no seu navegador/aparelho, com exportação aberta em <code>.scrvrl</code>, <code>.docx</code>, <code>.epub</code>, <code>.txt</code> e espelhamento opcional em pasta local.</p>
+        <p class="quiet">Na versão web, há apenas contagem anônima agregada de acessos sem cookies nem perfilamento. Na cópia portátil (<code>escrevaral.html</code>), não há qualquer chamada externa.</p>
+      </article>
+      <article class="esc-about-card esc-about-legal">
+        <h3>Limites jurídicos do Cartório SHA-256</h3>
+        <p><strong>O que o Cartório comprova:</strong> a integridade criptográfica (<code>SHA-256</code>) do arquivo <code>.scrvrl</code> exportado e a trilha local de criação construída dentro do Escrevaral (revisões, toques e distinção entre escrita nativa, colagens externas e importações).</p>
+        <p><strong>O que o Cartório NÃO substitui:</strong> as datas provêm do relógio do aparelho. O certificado técnico emitido offline <strong>não substitui registro de direitos autorais na Biblioteca Nacional, ata notarial em cartório público nem carimbo de tempo oficial (ICP-Brasil)</strong>. Quando houver exigência legal de anterioridade externa, utilize o código <code>SHA-256</code> da obra junto a uma autoridade registradora.</p>
+      </article>
+      <article class="esc-about-card">
+        <h3>Licenças e acervos embarcados</h3>
+        <ul class="esc-about-list">
+          <li><strong>Dicionário e sinônimos offline (P01):</strong> compilação local a partir de <em>Wikcionário em português</em> (CC-BY-SA 4.0), <em>OpenWordNet-PT</em> (CC-BY-SA 4.0) e <em>PortiLexicon-UD</em> (MIT).</li>
+          <li><strong>Tipografia embarcada:</strong> <em>Noto Serif</em>, <em>Courier Prime</em> e <em>Oswald</em> (licença aberta SIL OFL 1.1).</li>
+          <li><strong>Sem dependências de nuvem:</strong> motor linguístico, exportadores <code>.docx</code>/<code>.epub</code>, Cartório e Modo Leitura executam 100% no seu aparelho.</li>
+        </ul>
+      </article>
+      <div class="esc-about-actions">
+        <button id="sobre-open-cartorio" type="button">Abrir Cartório</button>
+        <button id="sobre-open-backup" type="button">Backup e Exportação</button>
+      </div>
+    </div>
+  </section>
+  <section id="usos-lingua" class="sheet esc-usos-sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="usos-lingua-heading">
+    <div class="sheet-heading"><div><p class="eyebrow">PORTUGUÊS BRASILEIRO</p><h2 id="usos-lingua-heading">Usos da língua</h2></div><button id="usos-lingua-close" class="close-panel" aria-label="Fechar Usos da língua"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
+    <div id="usos-lingua-body" class="esc-usos-body"></div>
   </section>
   <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="acervo-heading">
     <div class="sheet-heading"><div><p class="eyebrow">SEUS TEXTOS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>

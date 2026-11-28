@@ -1422,6 +1422,33 @@
       }
     }
 
+    function exportEditorial(kind, exportOpts) {
+      if (document.body && document.body.getAttribute('data-locked') === 'true') { return false; }
+      var exporter = root.Escr.editorialExport;
+      if (!exporter || !exporter.buildDocx || !exporter.buildEpub) {
+        if (opts.message) { opts.message('Exporta\u00E7\u00E3o editorial indispon\u00EDvel nesta sess\u00E3o.'); }
+        return false;
+      }
+      if (opts.checkpoint) { opts.checkpoint(); }
+      if (overlayEl && !overlayEl.hidden) {
+        persistConfig();
+      } else {
+        initForContext(exportOpts && exportOpts.scope ? exportOpts.scope : null);
+      }
+      var chapters = collectChapters();
+      var res = kind === 'epub'
+        ? exporter.buildEpub({ config: state.config, chapters: chapters })
+        : exporter.buildDocx({ config: state.config, chapters: chapters });
+      if (opts.download) {
+        var saved = opts.download(res.bytes, res.mime, res.filename);
+        if (saved && opts.message) {
+          var label = kind === 'epub' ? 'E-book (.epub)' : 'Word (.docx)';
+          opts.message(label + ' gerado offline: ' + res.filename + '.');
+        }
+      }
+      return res;
+    }
+
     function buildOverlay() {
       if (overlayEl) { return overlayEl; }
       var sec = document.createElement('section');
@@ -1436,7 +1463,9 @@
           '<header class="esc-print-head">' +
             '<div><span class="ep-eyebrow">ESCREVARAL \u00B7 DIAGRAMA\u00C7\u00C3O E IMPRESS\u00C3O</span><h2 id="esc-print-heading">Imprimir e paginar</h2></div>' +
             '<div class="ep-head-actions">' +
-              '<button id="esc-print-html-btn" type="button" class="ep-btn-secondary" title="Baixar arquivo HTML paginado pronto para PDF, WeasyPrint ou LibreOffice">Baixar HTML paginado</button>' +
+              '<button id="esc-print-docx-btn" type="button" class="ep-btn-secondary" title="Baixar arquivo Word (.docx) pronto para editora, Word, LibreOffice ou Google Docs">Baixar .DOCX</button>' +
+              '<button id="esc-print-epub-btn" type="button" class="ep-btn-secondary" title="Baixar e-book (.epub) pronto para Kindle, UICLAP, Calibre ou Apple Books">Baixar .EPUB</button>' +
+              '<button id="esc-print-html-btn" type="button" class="ep-btn-secondary" title="Baixar arquivo HTML paginado pronto para PDF, WeasyPrint ou LibreOffice">HTML paginado</button>' +
               '<button id="esc-print-go-btn" type="button" class="ep-btn-primary">Imprimir / Salvar PDF</button>' +
               '<button id="esc-print-close" type="button" class="ep-btn-close" aria-label="Fechar est\u00FAdio de impress\u00E3o">\u2190 Voltar</button>' +
             '</div>' +
@@ -1490,7 +1519,16 @@
         else if (opts.message) { opts.message('Use a op\u00E7\u00E3o de impress\u00E3o do navegador.'); }
       });
 
+      on(byId('esc-print-docx-btn'), 'click', function () {
+        exportEditorial('docx');
+      });
+
+      on(byId('esc-print-epub-btn'), 'click', function () {
+        exportEditorial('epub');
+      });
+
       on(byId('esc-print-html-btn'), 'click', function () {
+        if (document.body && document.body.getAttribute('data-locked') === 'true') { return; }
         if (opts.checkpoint) { opts.checkpoint(); }
         persistConfig();
         var chapters = collectChapters();
@@ -1533,7 +1571,9 @@
       close: close,
       isOpen: function () { return !!(overlayEl && !overlayEl.hidden); },
       prepareQuickPrint: prepareQuickPrint,
-      finishPrint: clearPrintSheet
+      finishPrint: clearPrintSheet,
+      exportDocx: function (exportOpts) { return exportEditorial('docx', exportOpts); },
+      exportEpub: function (exportOpts) { return exportEditorial('epub', exportOpts); }
     };
   };
 }(typeof window !== 'undefined' ? window : this));

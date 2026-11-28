@@ -4,6 +4,10 @@
     display: none;
   }
 
+  body[data-immersion="true"][data-esc-machine="on"] {
+    overflow-x: hidden;
+  }
+
   body[data-immersion="true"][data-esc-machine="on"] > .esc-machine {
     display: block !important;
     position: fixed;
@@ -234,31 +238,38 @@
     opacity: 1;
   }
 
-  /* Soneto acoplado à direita dentro do Superfoco */
+  /* Soneto ou Oficina de Canção acoplados à direita dentro do Superfoco (desktop >= 900px) */
   body[data-immersion="true"][data-esc-writing-sonnet="true"] #writing-space {
-    padding-right: 300px;
+    padding-right: 320px;
     box-sizing: border-box;
   }
-  body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-sonnet-panel {
+  body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-sonnet-panel:not([hidden]),
+  body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-song-panel:not([hidden]) {
     display: block !important;
     position: fixed;
     top: 40px;
     right: 0;
     bottom: 0;
-    width: 296px;
+    width: 316px;
     z-index: 1210 !important;
     overflow-y: auto;
-    border-left: 1px dashed #7c8b78;
     border-left: 1px dashed var(--esc-border, #7c8b78);
-    background: #c4cfc2;
     background: var(--esc-bg, #c4cfc2);
   }
-  @media (max-width: 760px) {
+  @media (max-width: 900px) {
     body[data-immersion="true"][data-esc-writing-sonnet="true"] #writing-space {
       padding-right: 0 !important;
+      padding-top: 38px;
     }
-    body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-sonnet-panel {
-      display: none !important;
+    body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-sonnet-panel:not([hidden]),
+    body[data-immersion="true"][data-esc-writing-sonnet="true"] #esc-song-panel:not([hidden]) {
+      top: 40px;
+      left: 0;
+      right: 0;
+      bottom: auto;
+      width: auto;
+      border-left: 0;
+      border-bottom: 1px solid var(--esc-border, #7c8b78);
     }
   }
 

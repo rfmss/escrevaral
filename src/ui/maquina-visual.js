@@ -115,20 +115,40 @@
 
   function computeGeometry(columnWidth, columnLeft, vw, vh, line) {
     if (!columnWidth || !vh) { return null; }
-    var width = Math.min(columnWidth / PLATEN, vw);
-    var height = width * RATIO;
-    var baseSink = height * (6 / 242);
-    var shown = Math.min(height, Math.max(vh * MAX_SHARE, height * MIN_VISIBLE));
-    var center = columnLeft + columnWidth / 2;
-    var left = center - width / 2;
-    var bottom = shown - height - baseSink;
-    var rollerTop = vh - shown + baseSink + height * ROLLER_TOP;
-    var anchorY = rollerTop - line * 2.9;
+    var compact = vw && vw < 900;
+    var width, height, baseSink, shown, left, bottom, rollerTop, anchorY;
+    if (compact) {
+      /* Em celulares e tablets, amplia o carro central para o rolo e as hastes
+       * permanecerem bem visíveis mesmo com tela estreita ou teclado virtual aberto. */
+      var zoomFactor = vw < 560 ? 1.52 : 1.18;
+      width = Math.max(vw * zoomFactor, Math.min(columnWidth / PLATEN, vw * 1.65));
+      height = width * RATIO;
+      baseSink = height * (4 / 242);
+      var minH = vw < 560 ? 108 : 132;
+      var maxShareCompact = vh < 520 ? 0.36 : 0.34;
+      shown = Math.min(height, Math.max(minH, Math.min(vh * maxShareCompact, height * 0.84)));
+      left = (vw - width) / 2;
+      bottom = shown - height - baseSink;
+      rollerTop = vh - shown + baseSink + height * ROLLER_TOP;
+      var lineGap = vh < 520 ? 1.6 : 2.2;
+      anchorY = Math.max(76, rollerTop - line * lineGap);
+    } else {
+      width = Math.min(columnWidth / PLATEN, vw);
+      height = width * RATIO;
+      baseSink = height * (6 / 242);
+      shown = Math.min(height, Math.max(vh * MAX_SHARE, height * MIN_VISIBLE));
+      var center = columnLeft + columnWidth / 2;
+      left = center - width / 2;
+      bottom = shown - height - baseSink;
+      rollerTop = vh - shown + baseSink + height * ROLLER_TOP;
+      anchorY = rollerTop - line * 2.9;
+    }
     return {
       width: width,
       height: height,
       left: left,
       bottom: bottom,
+      shown: shown,
       rollerTop: rollerTop,
       anchorY: anchorY,
       topInset: Math.max(0, anchorY - line / 2)
@@ -270,25 +290,29 @@
       }
       buildWrap();
       var rect = columnEl.getBoundingClientRect ? columnEl.getBoundingClientRect() : { width: 700, left: 100 };
-      var vh = window.innerHeight || 720;
-      var vw = window.innerWidth || 1280;
+      var vv = (typeof window !== 'undefined' && window.visualViewport) ? window.visualViewport : null;
+      var layoutVh = (typeof window !== 'undefined' && window.innerHeight) ? window.innerHeight : 720;
+      var vh = (vv && vv.height) ? vv.height : layoutVh;
+      var vw = (vv && vv.width) ? vv.width : ((typeof window !== 'undefined' && window.innerWidth) ? window.innerWidth : 1280);
+      var vvOffsetTop = (vv && typeof vv.offsetTop === 'number') ? vv.offsetTop : 0;
+      var keyboardLift = Math.max(0, layoutVh - (vh + vvOffsetTop));
       var style = window.getComputedStyle ? window.getComputedStyle(columnEl) : null;
       var fontSize = style ? (parseFloat(style.fontSize) || 21) : 21;
       var line = style ? (parseFloat(style.lineHeight) || fontSize * 1.7) : fontSize * 1.7;
-      var geom = computeGeometry(rect.width || 700, rect.left || 0, vw, vh, line);
+      var geom = computeGeometry(rect.width || vw || 700, rect.left || 0, vw, vh, line);
       if (!geom) { return null; }
 
       wrap.style.width = geom.width.toFixed(2) + 'px';
       wrap.style.height = geom.height.toFixed(2) + 'px';
       wrap.style.left = geom.left.toFixed(2) + 'px';
-      wrap.style.bottom = geom.bottom.toFixed(2) + 'px';
+      wrap.style.bottom = (geom.bottom + keyboardLift).toFixed(2) + 'px';
 
-      anchorY = geom.anchorY;
+      anchorY = geom.anchorY + vvOffsetTop;
       visible = true;
       document.body.setAttribute('data-esc-machine', 'on');
       if (document.body.style && document.body.style.setProperty) {
         var colTop = typeof rect.top === 'number' && isFinite(rect.top) ? rect.top : 0;
-        var topInset = Math.max(0, geom.anchorY - colTop - line / 2);
+        var topInset = Math.max(0, anchorY - colTop - line / 2);
         document.body.style.setProperty('--esc-machine-top', topInset.toFixed(1) + 'px');
       }
       return anchorY;
@@ -354,6 +378,11 @@
     }
     if (typeof window !== 'undefined' && window.addEventListener) {
       window.addEventListener('resize', layout, false);
+      window.addEventListener('orientationchange', layout, false);
+    }
+    if (typeof window !== 'undefined' && window.visualViewport && window.visualViewport.addEventListener) {
+      window.visualViewport.addEventListener('resize', layout, false);
+      window.visualViewport.addEventListener('scroll', layout, false);
     }
 
     return {

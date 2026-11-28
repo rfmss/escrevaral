@@ -265,7 +265,7 @@
         'Camada 1 (100% offline): a cadeia SHA-256 comprova a integridade do arquivo exportado e a trilha de criação registrada dentro do Escrevaral, distinguindo escrita nativa, colagens externas e importações.'
       ));
       legal.appendChild(mk('p', '',
-        'Camada 2 (anterioridade jurídica externa): as datas provêm do relógio do aparelho. Quando uma editora ou registro jurídico exigir prova independente de data, utilize o código SHA-256 acima para ancoragem externa (Biblioteca Nacional, carimbo de tempo ou protocolo editorial).'
+        'Camada 2 (limites jurídicos e anterioridade externa): as datas provêm do relógio do aparelho. Este certificado técnico NÃO substitui registro de direitos autorais na Biblioteca Nacional, ata notarial em cartório público nem carimbo de tempo oficial (ICP-Brasil). Quando houver exigência legal ou editorial de prova independente de data, utilize o código SHA-256 acima para ancoragem externa.'
       ));
       if (typeof opts.onOpenAcademy === 'function') {
         var studyRow = mk('div', 'cart-academy-bridge');

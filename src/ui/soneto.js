@@ -1,3 +1,4 @@
+/* Assistente Visual Ao Vivo do Soneto (Partitura Silábica, Mapa 14 Versos, Volta e Rimas Consoantes/Toantes) — ES5 */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
@@ -37,7 +38,7 @@
     'Que tensão ganha força?',
     'Que som ou detalhe merece ficar?',
     'Prepare a passagem para outro olhar.',
-    'Experimente uma mudança de perspectiva.',
+    'Volta: experimente uma virada de perspectiva.',
     'O que essa mudança permite perceber?',
     'Leve a imagem um pouco além.',
     'Aproxime o poema do seu desfecho.',
@@ -45,40 +46,31 @@
     'Encontre o último verso.'
   ];
 
-  var rhymeIndex = null;
+  var RHYME_PALETTE = {
+    A: 'a', B: 'b', C: 'c', D: 'd', E: 'e', F: 'f', G: 'g',
+    H: 'a', I: 'b', J: 'c', K: 'd', L: 'e', M: 'f', N: 'g'
+  };
 
-  function buildRhymeIndex() {
-    if (rhymeIndex) { return rhymeIndex; }
-    rhymeIndex = {};
-    var lex = root.Escr.portiLexicon;
-    var poetry = root.Escr.poetry;
-    if (!lex || !lex.entries || !poetry) { return rhymeIndex; }
-    var keys = Object.keys(lex.entries);
-    var i, w, r, key;
-    for (i = 0; i < keys.length; i += 1) {
-      w = keys[i];
-      if (w.length < 2 || w.length > 24) { continue; }
-      r = poetry.wordReading(w);
-      if (!r || !r.rhyme) { continue; }
-      key = '$' + r.rhyme;
-      if (!rhymeIndex[key]) { rhymeIndex[key] = []; }
-      rhymeIndex[key].push(w);
-    }
-    return rhymeIndex;
-  }
+  function verso() { return root.Escr.versoCore || null; }
 
   function findRhymesFor(word) {
+    var vc = verso();
+    if (vc && vc.findRhymes) {
+      return vc.findRhymes(word, 30).consonant;
+    }
     var poetry = root.Escr.poetry;
-    if (!poetry || !word) { return []; }
+    var lex = root.Escr.portiLexicon;
+    if (!poetry || !lex || !lex.entries || !word) { return []; }
     var clean = String(word).replace(/^[^a-záàâãéêíóôõúüç]+|[^a-záàâãéêíóôõúüç]+$/gi, '').toLowerCase();
     if (!clean) { return []; }
     var r = poetry.wordReading(clean);
     if (!r || !r.rhyme) { return []; }
-    var idx = buildRhymeIndex();
-    var list = idx['$' + r.rhyme] || [];
-    var out = [], i;
-    for (i = 0; i < list.length && out.length < 30; i += 1) {
-      if (list[i] !== clean) { out.push(list[i]); }
+    var keys = Object.keys(lex.entries), out = [], i, w, wr;
+    for (i = 0; i < keys.length && out.length < 30; i += 1) {
+      w = keys[i];
+      if (w === clean || w.length < 2 || w.length > 24) { continue; }
+      wr = poetry.wordReading(w);
+      if (wr && wr.rhyme === r.rhyme) { out.push(w); }
     }
     return out;
   }
@@ -86,35 +78,33 @@
   function structureOf(scheme) {
     if (scheme === 'Livre') { return 'italian'; }
     var clean = String(scheme || '').replace(/\s+/g, '');
-    if (clean.indexOf('GG') === 12 || clean.indexOf('EE') === 12 || clean.slice(8, 12) === 'EFEF' || clean.slice(8, 12) === 'CDCD') {
-      if (clean.slice(0, 12) === 'ABABCDCD' + 'EFEF' || clean.slice(0, 12) === 'ABABBCBC' + 'CDCD') {
-        return 'english';
-      }
-    }
-    if (clean === 'ABABCDCD' + 'EFEFGG' || clean === 'ABABBCBC' + 'CDCDEE') { return 'english'; }
+    if (clean === 'ABABCDCDEFEFGG' || clean === 'ABABBCBCCDCDEE') { return 'english'; }
     return 'italian';
   }
 
   function defaultSettings() {
-    return { structure: 'italian', scheme: 'ABBA ABBA CDC DCD', target: 10, rhythm: 'none' };
+    return { structure: 'italian', scheme: 'ABBA ABBA CDC DCD', target: 10, rhythm: 'heroic', elisions: {} };
   }
 
   function normalizeSettings(raw) {
-    var base = defaultSettings();
+    var base = { structure: 'italian', scheme: 'ABBA ABBA CDC DCD', target: 10, rhythm: 'none', elisions: {} };
     if (!raw || typeof raw !== 'object') { return base; }
     if (raw.structure === 'italian' || raw.structure === 'english') { base.structure = raw.structure; }
     if (typeof raw.scheme === 'string' && raw.scheme) { base.scheme = raw.scheme; }
     if (typeof raw.target === 'number' && raw.target >= 2 && raw.target <= 20) { base.target = raw.target; }
     if (typeof raw.rhythm === 'string' && Object.prototype.hasOwnProperty.call(RHYTHMS, raw.rhythm)) { base.rhythm = raw.rhythm; }
+    if (raw.elisions && typeof raw.elisions === 'object') { base.elisions = raw.elisions; }
     return base;
   }
 
   function analyzeText(text, activeLineIdx, settings) {
+    var vc = verso();
     var poetry = root.Escr.poetry;
     var linesRaw = String(text || '').split(/\r?\n/);
     var rows = [];
     var stanzas = [];
     var currentStanza = 0;
+    var letters = settings.scheme === 'Livre' ? '' : String(settings.scheme || '').replace(/\s+/g, '');
     var i, count = 0;
 
     for (i = 0; i < linesRaw.length && rows.length < 200; i += 1) {
@@ -128,17 +118,45 @@
       if (isHeading && rows.length === 0) { continue; }
       count += 1;
       currentStanza += 1;
-      var scan = !isPlaceholder && poetry ? poetry.scan(trimmed) : null;
+      var scan = !isPlaceholder ? (vc ? vc.scanLine(trimmed) : (poetry ? poetry.scan(trimmed) : null)) : null;
+      var lineOverrides = (settings.elisions && settings.elisions['v' + count]) || null;
+      var scansion = scan && vc ? vc.buildSyllableCells(scan, lineOverrides) : null;
+      var letter = letters && count <= letters.length ? letters.charAt(count - 1) : '';
       rows.push({
         number: count,
         lineIndex: i,
         text: trimmed,
         placeholder: isPlaceholder,
         reading: scan,
+        scansion: scansion,
+        letter: letter,
+        rhymeState: 'open',
         lastWord: scan && scan.words.length ? scan.words[scan.words.length - 1].word : ''
       });
     }
     if (currentStanza > 0) { stanzas.push(currentStanza); }
+
+    /* Calcula estado das rimas por família (consoante ● / toante ◎ / aberto ○) */
+    var firstByLetter = {};
+    for (i = 0; i < rows.length; i += 1) {
+      var rowI = rows[i];
+      if (!rowI.letter || rowI.placeholder || !rowI.reading) { continue; }
+      var lk = '$' + rowI.letter;
+      if (!firstByLetter[lk]) {
+        firstByLetter[lk] = rowI;
+      } else {
+        var anchor = firstByLetter[lk];
+        var mk = vc ? vc.rhymeMatchKind(rowI.reading, anchor.reading)
+          : (rowI.reading.rhyme && anchor.reading.rhyme && rowI.reading.rhyme === anchor.reading.rhyme ? 'consonant' : 'none');
+        if (mk === 'consonant') {
+          rowI.rhymeState = 'consonant';
+          if (anchor.rhymeState === 'open') { anchor.rhymeState = 'consonant'; }
+        } else if (mk === 'assonant') {
+          rowI.rhymeState = 'assonant';
+          if (anchor.rhymeState === 'open') { anchor.rhymeState = 'assonant'; }
+        }
+      }
+    }
 
     var current = null;
     for (i = 0; i < rows.length; i += 1) {
@@ -152,23 +170,29 @@
     }
 
     var rhymeReference = null;
-    var letters = String(settings.scheme || '').replace(/\s+/g, '');
-    if (current && settings.scheme !== 'Livre' && current.number <= letters.length) {
-      var myLetter = letters.charAt(current.number - 1);
+    if (current && current.letter) {
       for (i = 0; i < rows.length; i += 1) {
         if (rows[i].number === current.number) { break; }
-        if (rows[i].number <= letters.length && letters.charAt(rows[i].number - 1) === myLetter && !rows[i].placeholder) {
+        if (rows[i].letter === current.letter && !rows[i].placeholder) {
+          var matchKind = (current.reading && rows[i].reading && vc)
+            ? vc.rhymeMatchKind(current.reading, rows[i].reading)
+            : ((current.reading && rows[i].reading && current.reading.rhyme === rows[i].reading.rhyme) ? 'consonant' : 'none');
           rhymeReference = {
             number: rows[i].number,
             word: rows[i].lastWord,
-            possible: !!(current.reading && rows[i].reading && current.reading.rhyme === rows[i].reading.rhyme)
+            possible: matchKind === 'consonant',
+            matchKind: matchKind
           };
           break;
         }
       }
     }
 
-    var refWord = current && current.lastWord ? current.lastWord : '';
+    /* Sugestão inteligente: prioriza o verso-par (o que o poeta precisa rimar AGORA!) */
+    var refWord = (rhymeReference && rhymeReference.word)
+      ? rhymeReference.word
+      : (current && current.lastWord ? current.lastWord : '');
+
     return {
       written: rows.filter(function (r) { return !r.placeholder; }).length,
       stanzas: stanzas,
@@ -212,17 +236,27 @@
     var manuscript = opts.manuscriptEl;
     var activeDoc = null;
     var collapsed = false;
+    var mobileSheetOpen = false;
     var manualLine = null;
+    var lastCursorLine = -1;
+    var composing = false;
     var rhymeQuery = '';
+    var rhymeTab = 'consonant';
     var showMoreRhymes = false;
     var draftScheme = '';
     var draftError = '';
-    var rhymesOpen = false;
     var settingsOpen = false;
     var renderTimer = null;
 
-    function measureStr(reading) {
-      return reading.min === reading.max ? String(reading.max) : reading.min + '–' + reading.max;
+    function syncBodyFlag(active) {
+      if (!document || !document.body) { return; }
+      if (active) {
+        document.body.setAttribute('data-esc-sonnet-open', collapsed ? 'collapsed' : 'open');
+        document.body.setAttribute('data-esc-verse-sheet', mobileSheetOpen ? 'open' : 'closed');
+      } else {
+        document.body.removeAttribute('data-esc-sonnet-open');
+        document.body.removeAttribute('data-esc-verse-sheet');
+      }
     }
 
     function saveSettings(next) {
@@ -234,7 +268,7 @@
 
     function chooseSetting(key, val) {
       var cur = normalizeSettings(activeDoc && activeDoc.sonnetSettings);
-      var next = { structure: cur.structure, scheme: cur.scheme, target: cur.target, rhythm: cur.rhythm };
+      var next = { structure: cur.structure, scheme: cur.scheme, target: cur.target, rhythm: cur.rhythm, elisions: cur.elisions || {} };
       next[key] = val;
       if (key === 'structure' && next.scheme !== 'Livre' && SCHEMES.indexOf(next.scheme) !== -1 && structureOf(next.scheme) !== val) {
         next.scheme = val === 'english' ? 'ABAB CDCD EFEF GG' : SCHEMES[0];
@@ -246,6 +280,31 @@
       saveSettings(next);
     }
 
+    function toggleElision(verseNum, elisionKey) {
+      var cur = normalizeSettings(activeDoc && activeDoc.sonnetSettings);
+      var map = {};
+      if (cur.elisions) {
+        Object.keys(cur.elisions).forEach(function (k) { map[k] = cur.elisions[k]; });
+      }
+      var vKey = 'v' + verseNum;
+      var vMap = {};
+      if (map[vKey]) {
+        Object.keys(map[vKey]).forEach(function (k) { vMap[k] = map[vKey][k]; });
+      }
+      vMap[elisionKey] = vMap[elisionKey] === false ? true : false;
+      map[vKey] = vMap;
+      saveSettings({ structure: cur.structure, scheme: cur.scheme, target: cur.target, rhythm: cur.rhythm, elisions: map });
+    }
+
+    function measureBadgeText(row, target) {
+      if (!row || row.placeholder || !row.reading) { return { text: '—', tone: 'empty', count: 0 }; }
+      var count = row.scansion ? row.scansion.poeticCount : row.reading.max;
+      var diff = count - target;
+      if (diff === 0) { return { text: count + ' ✓', tone: 'ok', count: count }; }
+      if (row.reading.min <= target && row.reading.max >= target) { return { text: count + ' ~', tone: 'near', count: count }; }
+      return { text: count + (diff > 0 ? ' (+' + diff + ')' : ' (' + diff + ')'), tone: 'off', count: count };
+    }
+
     function render() {
       if (!container) { return; }
       var hintEl = byId('esc-sonnet-editor-hint');
@@ -253,37 +312,81 @@
         container.hidden = true;
         if (hintEl) { hintEl.hidden = true; }
         container.textContent = '';
+        syncBodyFlag(false);
         return;
       }
       container.hidden = false;
+      syncBodyFlag(true);
       if (hintEl) {
         var rawTxt = manuscript ? String(manuscript.value || '').replace(/^\s+|\s+$/g, '') : '';
         var hasRealVerse = rawTxt.length > 0 && rawTxt.indexOf('«') !== 0;
         hintEl.hidden = hasRealVerse;
       }
+
+      var vc = verso();
       var settings = normalizeSettings(activeDoc.sonnetSettings);
       var lineIdx = manualLine !== null ? manualLine : cursorLineOf(manuscript);
+      lastCursorLine = lineIdx;
       var res = analyzeText(manuscript ? manuscript.value : activeDoc.text, lineIdx, settings);
       var row = res.current;
-      var r = row ? row.reading : null;
       var stanzaPlan = settings.structure === 'english' ? [4, 4, 4, 2] : [4, 4, 3, 3];
+      var supports = vc ? vc.expectedSupports(settings.rhythm, settings.target) : [settings.target];
+      var badge = measureBadgeText(row, settings.target);
 
       container.textContent = '';
-      var aside = createEl('aside', 'esc-sonnet');
-      aside.setAttribute('aria-label', 'Assistente do soneto');
+      var aside = createEl('aside', 'esc-sonnet esc-sonnet-live');
+      aside.setAttribute('aria-label', 'Partitura ao vivo do soneto');
 
+      /* 1. Faixa-HUD compacta (sempre útil no topo no celular/tablet) */
+      var hud = createEl('div', 'esc-verse-hud');
+      var hudSummary = createEl('div', 'esc-verse-hud-info');
+      var hudTag = createEl('span', 'esc-verse-hud-tag', row ? ('V' + row.number + (row.letter ? ' · ' + row.letter : '')) : 'Soneto');
+      var hudCount = createEl('span', 'esc-verse-hud-count is-' + badge.tone, badge.text + '/' + settings.target);
+      var hudRhyme = createEl('span', 'esc-verse-hud-rhyme', res.rhymeReference ? ('rima: ' + res.rhymeReference.word) : (res.written + '/14 versos'));
+      hudSummary.appendChild(hudTag);
+      hudSummary.appendChild(hudCount);
+      hudSummary.appendChild(hudRhyme);
+      hud.appendChild(hudSummary);
+
+      var hudBtn = createEl('button', 'esc-verse-hud-btn', mobileSheetOpen ? 'Fechar ▴' : 'Partitura ▾');
+      hudBtn.type = 'button';
+      hudBtn.setAttribute('aria-expanded', mobileSheetOpen ? 'true' : 'false');
+      on(hudBtn, 'click', function () {
+        mobileSheetOpen = !mobileSheetOpen;
+        syncBodyFlag(true);
+        render();
+      });
+      hud.appendChild(hudBtn);
+      aside.appendChild(hud);
+
+      /* 2. Cabeçalho editorial desktop */
       var top = createEl('header', 'esc-sonnet-top');
-      var headLeft = createEl('div');
-      headLeft.appendChild(createEl('strong', '', 'Seu soneto'));
-      headLeft.appendChild(createEl('span', 'esc-sonnet-progress', res.written + ' de 14 versos'));
+      var headLeft = createEl('div', 'esc-sonnet-head-left');
+      headLeft.appendChild(createEl('strong', '', 'Soneto ao vivo'));
+      headLeft.appendChild(createEl('span', 'esc-sonnet-progress', res.written + '/14 versos · ' + (settings.structure === 'english' ? 'Inglês' : 'Italiano') + ' · ' + settings.target + ' síl.'));
       top.appendChild(headLeft);
 
-      var toggleBtn = createEl('button', 'esc-sonnet-quiet', collapsed ? 'Mostrar' : 'Recolher');
+      var headActions = createEl('div', 'esc-sonnet-head-actions');
+      var gearBtn = createEl('button', 'esc-sonnet-chip-btn', '⚙ Forma');
+      gearBtn.type = 'button';
+      gearBtn.setAttribute('aria-pressed', settingsOpen ? 'true' : 'false');
+      on(gearBtn, 'click', function () { settingsOpen = !settingsOpen; render(); });
+      headActions.appendChild(gearBtn);
+
+      var toggleBtn = createEl('button', 'esc-sonnet-quiet', collapsed ? 'Abrir' : 'Recolher');
       toggleBtn.type = 'button';
       toggleBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-      on(toggleBtn, 'click', function () { collapsed = !collapsed; render(); });
-      top.appendChild(toggleBtn);
+      on(toggleBtn, 'click', function () { collapsed = !collapsed; syncBodyFlag(true); render(); });
+      headActions.appendChild(toggleBtn);
+      top.appendChild(headActions);
       aside.appendChild(top);
+
+      /* Barra visual de progresso dos 14 versos */
+      var progTrack = createEl('div', 'esc-sonnet-prog-track');
+      var progFill = createEl('span', 'esc-sonnet-prog-fill');
+      if (progFill.style) { progFill.style.width = Math.min(100, Math.round((res.written / 14) * 100)) + '%'; }
+      progTrack.appendChild(progFill);
+      aside.appendChild(progTrack);
 
       if (collapsed) {
         container.appendChild(aside);
@@ -291,259 +394,337 @@
       }
 
       var body = createEl('div', 'esc-sonnet-body');
-      body.appendChild(createEl('p', 'esc-sonnet-intro', 'Escreva um verso por linha. Acompanhe aqui a medida e as rimas.'));
 
-      // Acompanhamento do verso
-      var curSec = createEl('section', 'esc-sonnet-current');
-      var curTitle = createEl('div', 'esc-sonnet-current-title');
-      curTitle.appendChild(createEl('strong', '', row ? 'Verso ' + row.number : 'Escolha um verso'));
-      curTitle.appendChild(createEl('small', '', manualLine !== null ? 'Em consulta' : 'Verso do cursor'));
-      curSec.appendChild(curTitle);
+      /* Gaveta compacta de Forma (recolhida por padrão p/ dar palco à partitura) */
+      if (settingsOpen || draftError) {
+        var formBox = createEl('section', 'esc-sonnet-settings-box');
+        var controls = createEl('div', 'esc-sonnet-controls');
+
+        var lStruct = createEl('label', '', 'Estrutura');
+        var sStruct = createEl('select');
+        [['italian', 'Italiano · 4 / 4 / 3 / 3'], ['english', 'Inglês · 4 / 4 / 4 / 2']].forEach(function (pair) {
+          var o = createEl('option', '', pair[1]); o.value = pair[0];
+          if (settings.structure === pair[0]) { o.selected = true; }
+          sStruct.appendChild(o);
+        });
+        on(sStruct, 'change', function () { chooseSetting('structure', sStruct.value); });
+        lStruct.appendChild(sStruct);
+        controls.appendChild(lStruct);
+
+        var lScheme = createEl('label', '', 'Esquema de rimas');
+        var sScheme = createEl('select');
+        var optsList = SCHEMES.slice();
+        if (optsList.indexOf(settings.scheme) === -1) { optsList.push(settings.scheme); }
+        optsList.filter(function (sc) { return sc === 'Livre' || sc === settings.scheme || structureOf(sc) === settings.structure; }).forEach(function (sc) {
+          var o = createEl('option', '', sc === 'Livre' ? 'Rimas livres' : (SCHEME_NAMES[sc] || 'Personalizado') + ' · ' + sc);
+          o.value = sc;
+          if (settings.scheme === sc) { o.selected = true; }
+          sScheme.appendChild(o);
+        });
+        on(sScheme, 'change', function () { chooseSetting('scheme', sScheme.value); });
+        lScheme.appendChild(sScheme);
+        controls.appendChild(lScheme);
+
+        var lTarget = createEl('label', '', 'Medida');
+        var sTarget = createEl('select');
+        [[10, 'Decassílabo · 10'], [12, 'Alexandrino · 12'], [7, 'Redondilha maior · 7'], [5, 'Redondilha menor · 5']].forEach(function (pair) {
+          var o = createEl('option', '', pair[1]); o.value = String(pair[0]);
+          if (settings.target === pair[0]) { o.selected = true; }
+          sTarget.appendChild(o);
+        });
+        on(sTarget, 'change', function () { chooseSetting('target', Number(sTarget.value)); });
+        lTarget.appendChild(sTarget);
+        controls.appendChild(lTarget);
+
+        var lRhythm = createEl('label', '', 'Ritmo e apoios');
+        var sRhythm = createEl('select');
+        Object.keys(RHYTHMS).forEach(function (k) {
+          var o = createEl('option', '', RHYTHMS[k]); o.value = k;
+          if (settings.rhythm === k) { o.selected = true; }
+          sRhythm.appendChild(o);
+        });
+        on(sRhythm, 'change', function () { chooseSetting('rhythm', sRhythm.value); });
+        lRhythm.appendChild(sRhythm);
+        controls.appendChild(lRhythm);
+
+        var customWrap = createEl('div', 'esc-sonnet-custom');
+        var cLabel = createEl('label', '', 'Esquema personalizado (14 letras A–N)');
+        var cInput = createEl('input');
+        cInput.type = 'text'; cInput.maxLength = 30; cInput.value = draftScheme;
+        cInput.placeholder = settings.structure === 'english' ? 'ABAB BCBC CDCD EE' : 'AABB AABB CDC DCD';
+        on(cInput, 'input', function () { draftScheme = cInput.value; draftError = ''; });
+        cLabel.appendChild(cInput);
+        customWrap.appendChild(cLabel);
+        var cBtn = createEl('button', 'esc-sonnet-chip-btn', 'Aplicar esquema');
+        cBtn.type = 'button';
+        on(cBtn, 'click', function () {
+          var lettersOnly = String(cInput.value || '').toUpperCase().replace(/\s+/g, '');
+          if (!/^[A-N]{14}$/.test(lettersOnly)) {
+            draftError = 'Use 14 letras de A a N.';
+            render();
+            return;
+          }
+          var pos = 0, chunks = [], si3;
+          for (si3 = 0; si3 < stanzaPlan.length; si3 += 1) {
+            chunks.push(lettersOnly.slice(pos, pos + stanzaPlan[si3]));
+            pos += stanzaPlan[si3];
+          }
+          chooseSetting('scheme', chunks.join(' '));
+        });
+        customWrap.appendChild(cBtn);
+        if (draftError) { customWrap.appendChild(createEl('p', 'esc-sonnet-err', draftError)); }
+        controls.appendChild(customWrap);
+
+        formBox.appendChild(controls);
+        body.appendChild(formBox);
+      }
+
+      /* 3. PARTITURA SILÁBICA AO VIVO DO VERSO ATIVO */
+      var curSec = createEl('section', 'esc-sonnet-score-card');
+      var curTop = createEl('div', 'esc-sonnet-current-title');
+      var curBadgeWrap = createEl('div', 'esc-sonnet-cur-left');
+      curBadgeWrap.appendChild(createEl('strong', '', row ? ('Verso ' + row.number) : 'Comece a escrever'));
+      if (row && row.letter) {
+        var letPill = createEl('span', 'esc-rhyme-pill is-fam-' + (RHYME_PALETTE[row.letter] || 'a'), row.letter);
+        curBadgeWrap.appendChild(letPill);
+      }
+      curTop.appendChild(curBadgeWrap);
+      curTop.appendChild(createEl('span', 'esc-sonnet-status-pill is-' + badge.tone, badge.text + ' / ' + settings.target));
+      curSec.appendChild(curTop);
 
       if (manualLine !== null) {
-        var resumeBtn = createEl('button', 'esc-sonnet-quiet', 'Acompanhar o cursor');
+        var resumeBtn = createEl('button', 'esc-sonnet-quiet', '← Voltar a acompanhar o cursor');
         resumeBtn.type = 'button';
         on(resumeBtn, 'click', function () { manualLine = null; rhymeQuery = ''; showMoreRhymes = false; render(); });
         curSec.appendChild(resumeBtn);
       }
 
-      if (row) {
-        if (row.placeholder) {
-          curSec.appendChild(createEl('p', 'esc-sonnet-prompt', res.written === 0 ? 'Comece com uma imagem ou pergunta.' : (GUIDANCE[row.number - 1] || 'Continue seu poema.')));
-        } else {
-          curSec.appendChild(createEl('p', 'esc-sonnet-excerpt', row.text));
-          if (r) {
-            var measureBox = createEl('div', 'esc-sonnet-measure');
-            measureBox.appendChild(createEl('span', 'esc-sonnet-caption', 'Contagem estimada'));
-            var big = createEl('strong', '', measureStr(r) + ' ');
-            big.appendChild(createEl('small', '', 'sílabas poéticas'));
-            measureBox.appendChild(big);
-            measureBox.appendChild(createEl('p', '', 'Referência escolhida: ' + settings.target + ' sílabas.'));
-            if (settings.rhythm !== 'none') {
-              measureBox.appendChild(createEl('p', '', RHYTHMS[settings.rhythm]));
-            }
-            curSec.appendChild(measureBox);
-
-            var scansion = createEl('section', 'esc-sonnet-scansion');
-            scansion.appendChild(createEl('h3', '', 'Sílabas e tônicas'));
-            var sylP = createEl('p', 'esc-sonnet-syllables');
-            r.words.forEach(function (word, wi) {
-              if (wi > 0) { sylP.appendChild(document.createTextNode(' / ')); }
-              var wSpan = createEl('span', 'esc-sonnet-word');
-              word.syllables.forEach(function (syl, si) {
-                if (si > 0) { wSpan.appendChild(document.createTextNode('·')); }
-                if (wi === r.words.length - 1 && si > word.tonic) {
-                  wSpan.appendChild(createEl('span', 'esc-sonnet-after-tonic', '(' + syl + ')'));
-                } else if (si === word.tonic) {
-                  wSpan.appendChild(createEl('strong', '', syl));
-                } else {
-                  wSpan.appendChild(document.createTextNode(syl));
-                }
-              });
-              sylP.appendChild(wSpan);
-            });
-            scansion.appendChild(sylP);
-            scansion.appendChild(createEl('p', 'esc-sonnet-caption', 'Tônicas em negrito; finais após a última tônica ficam fora da métrica.'));
-            curSec.appendChild(scansion);
-          } else {
-            curSec.appendChild(createEl('p', '', 'Leia este verso em voz alta para conferir a medida.'));
+      if (row && !row.placeholder && row.scansion && row.scansion.cells.length) {
+        var cellsWrap = createEl('div', 'esc-syl-strip');
+        row.scansion.cells.forEach(function (cell) {
+          var isSupport = supports.indexOf(cell.index) !== -1;
+          var isCaesura = settings.rhythm === 'alexandrine' && cell.index === 7;
+          if (isCaesura) {
+            cellsWrap.appendChild(createEl('span', 'esc-syl-caesura', '│'));
           }
-        }
+          var cellEl = createEl('div', 'esc-syl-cell' +
+            (cell.tonic ? ' is-tonic' : '') +
+            (isSupport ? ' is-support' : '') +
+            (cell.index > settings.target ? ' is-over' : '') +
+            (cell.canToggleElision ? ' is-elidable' : ''));
 
-        var rhymeSec = createEl('section', 'esc-sonnet-rhyme');
-        rhymeSec.appendChild(createEl('h3', '', 'Rima deste verso'));
-        var rhymeMsg = settings.scheme === 'Livre'
-          ? 'Rimas livres escolhidas.'
-          : res.rhymeReference
-            ? 'Neste esquema, o verso ' + row.number + ' rima com o verso ' + res.rhymeReference.number + ' (“' + res.rhymeReference.word + '”).'
-            : 'Este verso inicia um grupo de rimas.';
-        rhymeSec.appendChild(createEl('p', '', rhymeMsg));
-        if (res.rhymeReference && r) {
-          rhymeSec.appendChild(createEl('p', 'esc-sonnet-caption', res.rhymeReference.possible ? 'Terminação compatível encontrada.' : 'Confira a sonoridade destes finais em voz alta.'));
+          if (cell.canToggleElision) {
+            var eBtn = createEl('button', 'esc-syl-txt');
+            eBtn.type = 'button';
+            eBtn.title = cell.fused ? 'Elisão ativa (clique para separar em hiato)' : 'Hiato ativo (clique para fundir em elisão)';
+            eBtn.textContent = cell.fused ? (cell.text + '◡' + cell.fusedText) : cell.text;
+            on(eBtn, 'click', function () { toggleElision(row.number, cell.elisionKey); });
+            cellEl.appendChild(eBtn);
+          } else {
+            cellEl.appendChild(createEl('span', 'esc-syl-txt', cell.text));
+          }
+          cellEl.appendChild(createEl('span', 'esc-syl-num', String(cell.index)));
+          var beatMark = isSupport ? (cell.tonic ? '★' : '☆') : (cell.tonic ? '●' : '○');
+          cellEl.appendChild(createEl('span', 'esc-syl-beat' + (isSupport && cell.tonic ? ' is-hit' : ''), beatMark));
+          cellsWrap.appendChild(cellEl);
+        });
+        if (row.scansion.postTonic.length) {
+          var post = createEl('div', 'esc-syl-cell is-post');
+          post.appendChild(createEl('span', 'esc-syl-txt', '(' + row.scansion.postTonic.join('·') + ')'));
+          post.appendChild(createEl('span', 'esc-syl-num', '—'));
+          post.appendChild(createEl('span', 'esc-syl-beat', '·'));
+          cellsWrap.appendChild(post);
         }
-        curSec.appendChild(rhymeSec);
+        curSec.appendChild(cellsWrap);
+
+        var legendTxt = (settings.rhythm !== 'none' ? RHYTHMS[settings.rhythm] : 'Tônicas em ● · pós-tônicas entre parênteses') +
+          (row.scansion.elisionCount > 0 ? ' · clique em ◡ para alternar elisão/hiato.' : '.');
+        curSec.appendChild(createEl('p', 'esc-sonnet-caption', legendTxt));
+      } else {
+        var guideMsg = row ? (GUIDANCE[row.number - 1] || 'Escreva um verso por linha para acender a partitura.') : GUIDANCE[0];
+        curSec.appendChild(createEl('p', 'esc-sonnet-prompt', guideMsg));
+      }
+
+      if (row && settings.scheme !== 'Livre') {
+        var rLine = createEl('p', 'esc-sonnet-rhyme-line');
+        if (res.rhymeReference) {
+          var statusLbl = res.rhymeReference.matchKind === 'consonant' ? '✓ rima consoante'
+            : res.rhymeReference.matchKind === 'assonant' ? '◎ rima toante'
+            : 'aguardando rima';
+          rLine.textContent = 'Par do verso ' + res.rhymeReference.number + ' (“' + res.rhymeReference.word + '”) · ' + statusLbl;
+        } else {
+          rLine.textContent = 'Verso ' + row.number + ' abre a família de rima ' + (row.letter || '') + '.';
+        }
+        curSec.appendChild(rLine);
       }
       body.appendChild(curSec);
 
-      // Mapa do poema
+      /* 4. MAPA VISUAL DOS 14 VERSOS (4-4-3-3 / 4-4-4-2 + LINHA DA VOLTA) */
       var mapSec = createEl('section', 'esc-sonnet-map');
-      mapSec.appendChild(createEl('h3', '', 'Mapa do poema'));
-      mapSec.appendChild(createEl('p', 'esc-sonnet-caption', 'Forma · ' + stanzaPlan.join(' / ') + ' versos.'));
-      var stanzasGrid = createEl('div', 'esc-sonnet-stanzas');
+      mapSec.appendChild(createEl('h3', '', 'Mapa dos 14 versos'));
+      var lettersFlat = settings.scheme === 'Livre' ? '' : String(settings.scheme || '').replace(/\s+/g, '');
       var offset = 0, si2, vi;
       for (si2 = 0; si2 < stanzaPlan.length; si2 += 1) {
+        /* Indicador clássico da Volta (9º verso italiano / 13º inglês) */
+        if ((settings.structure === 'italian' && offset === 8) || (settings.structure === 'english' && offset === 12)) {
+          var volta = createEl('div', 'esc-sonnet-volta');
+          volta.appendChild(createEl('span', '', settings.structure === 'english' ? '✦ DÍSTICO FINAL (v. 13–14)' : '✦ VOLTA · virada (v. 9)'));
+          mapSec.appendChild(volta);
+        }
         var size = stanzaPlan[si2];
-        var stBox = createEl('div', 'esc-sonnet-stanza');
-        stBox.appendChild(createEl('small', '', 'Estrofe ' + (si2 + 1)));
-        var slots = createEl('div', 'esc-sonnet-slots');
+        var stLabel = size === 4 ? ('Quarteto ' + (si2 + 1)) : size === 3 ? ('Terceto ' + (si2 - 1)) : 'Dístico';
+        var stBox = createEl('div', 'esc-sonnet-stanza-list');
+        stBox.appendChild(createEl('small', 'esc-sonnet-stanza-lbl', stLabel));
+
         for (vi = 0; vi < size; vi += 1) {
           (function (vRow, num) {
-            if (vRow && !vRow.placeholder) {
-              var slotBtn = createEl('button', '', String(num));
-              slotBtn.type = 'button';
-              slotBtn.setAttribute('aria-pressed', row && row.lineIndex === vRow.lineIndex ? 'true' : 'false');
-              on(slotBtn, 'click', function () { manualLine = vRow.lineIndex; rhymeQuery = ''; showMoreRhymes = false; render(); });
-              slots.appendChild(slotBtn);
-            } else {
-              slots.appendChild(createEl('span', 'esc-sonnet-empty-slot', String(num)));
+            var expLetter = lettersFlat && num <= lettersFlat.length ? lettersFlat.charAt(num - 1) : '';
+            var fam = RHYME_PALETTE[expLetter] || 'a';
+            var isCur = !!(row && vRow && row.lineIndex === vRow.lineIndex);
+            var mBadge = measureBadgeText(vRow, settings.target);
+            var rowBtn = createEl('button', 'esc-map-row' + (isCur ? ' is-current' : '') + (!vRow || vRow.placeholder ? ' is-empty' : ''));
+            rowBtn.type = 'button';
+            rowBtn.setAttribute('aria-pressed', isCur ? 'true' : 'false');
+
+            rowBtn.appendChild(createEl('span', 'esc-map-num', (num < 10 ? '0' : '') + num));
+            if (expLetter) {
+              var sym = !vRow || vRow.placeholder ? '○' : (vRow.rhymeState === 'consonant' ? '●' : vRow.rhymeState === 'assonant' ? '◎' : '○');
+              rowBtn.appendChild(createEl('span', 'esc-rhyme-pill is-fam-' + fam, expLetter + sym));
             }
+            var barWrap = createEl('span', 'esc-map-bar');
+            var barFill = createEl('span', 'esc-map-bar-fill is-' + mBadge.tone);
+            var pct = mBadge.count ? Math.min(100, Math.round((mBadge.count / settings.target) * 100)) : 0;
+            if (barFill.style) { barFill.style.width = pct + '%'; }
+            barWrap.appendChild(barFill);
+            rowBtn.appendChild(barWrap);
+
+            rowBtn.appendChild(createEl('span', 'esc-map-count is-' + mBadge.tone, mBadge.count ? String(mBadge.count) : '—'));
+            rowBtn.appendChild(createEl('span', 'esc-map-word', vRow && !vRow.placeholder ? (vRow.lastWord || '…') : ''));
+
+            on(rowBtn, 'click', function () {
+              if (vRow) {
+                manualLine = vRow.lineIndex;
+                rhymeQuery = '';
+                showMoreRhymes = false;
+                if (vc && manuscript) { vc.jumpToLine(manuscript, vRow.lineIndex); }
+                render();
+              }
+            });
+            stBox.appendChild(rowBtn);
           }(res.rows[offset + vi], offset + vi + 1));
         }
         offset += size;
-        stBox.appendChild(slots);
-        stanzasGrid.appendChild(stBox);
+        mapSec.appendChild(stBox);
       }
-      mapSec.appendChild(stanzasGrid);
       body.appendChild(mapSec);
 
-      // Explorar rimas
-      var sugDet = createEl('details', 'esc-sonnet-suggestions');
-      if (rhymesOpen) { sugDet.open = true; }
-      on(sugDet, 'toggle', function () { rhymesOpen = !!sugDet.open; });
-      var sugSum = createEl('summary', '', 'Explorar rimas');
-      sugDet.appendChild(sugSum);
+      /* 5. BANDEJA DE RIMAS AO VIVO (Consoantes + Toantes, alvo inteligente no verso-par) */
+      var rSec = createEl('section', 'esc-sonnet-rhyme-tray');
       var targetWord = rhymeQuery || res.suggestionWord;
+      var rHead = createEl('div', 'esc-rhyme-tray-head');
+      rHead.appendChild(createEl('h3', '', targetWord ? ('Rimas p/ “' + targetWord + '”') : 'Rimas ao vivo'));
+      var rTabs = createEl('div', 'esc-rhyme-tabs');
+      [['consonant', 'Consoantes'], ['assonant', 'Toantes']].forEach(function (pair) {
+        var tb = createEl('button', 'esc-rhyme-tab', pair[1]);
+        tb.type = 'button';
+        tb.setAttribute('aria-pressed', rhymeTab === pair[0] ? 'true' : 'false');
+        on(tb, 'click', function () { rhymeTab = pair[0]; showMoreRhymes = false; render(); });
+        rTabs.appendChild(tb);
+      });
+      rHead.appendChild(rTabs);
+      rSec.appendChild(rHead);
+
       if (targetWord) {
-        var hits = findRhymesFor(targetWord);
-        sugDet.appendChild(createEl('small', '', 'Finais próximos de “' + targetWord + '”'));
-        var shown = hits.slice(0, showMoreRhymes ? 24 : 6);
-        sugDet.appendChild(createEl('p', '', shown.length ? shown.join(' · ') : 'Sem sugestões para esta palavra.'));
-        if (hits.length > 6) {
-          var moreBtn = createEl('button', 'esc-sonnet-quiet', showMoreRhymes ? 'Ver menos' : 'Mais finais');
-          moreBtn.type = 'button';
-          on(moreBtn, 'click', function () { rhymesOpen = true; showMoreRhymes = !showMoreRhymes; render(); });
-          sugDet.appendChild(moreBtn);
+        var rhymeData = vc ? vc.findRhymes(targetWord, 30) : { consonant: findRhymesFor(targetWord), assonant: [] };
+        var list = rhymeTab === 'assonant' ? rhymeData.assonant : rhymeData.consonant;
+        var shown = list.slice(0, showMoreRhymes ? 24 : 10);
+        if (shown.length) {
+          var chips = createEl('div', 'esc-rhyme-chips');
+          shown.forEach(function (w) {
+            var ch = createEl('button', 'esc-rhyme-chip', w);
+            ch.type = 'button';
+            ch.title = 'Inserir “' + w + '” no fim do verso';
+            on(ch, 'click', function () {
+              if (vc && manuscript && row) {
+                vc.insertWordAtLineEnd(manuscript, row.lineIndex, w);
+              }
+            });
+            chips.appendChild(ch);
+          });
+          rSec.appendChild(chips);
+          if (list.length > 10) {
+            var moreBtn = createEl('button', 'esc-sonnet-quiet', showMoreRhymes ? 'Ver menos' : ('Ver mais (' + list.length + ')'));
+            moreBtn.type = 'button';
+            on(moreBtn, 'click', function () { showMoreRhymes = !showMoreRhymes; render(); });
+            rSec.appendChild(moreBtn);
+          }
+        } else {
+          rSec.appendChild(createEl('p', 'esc-sonnet-caption', 'Sem sugestões ' + (rhymeTab === 'assonant' ? 'toantes' : 'consoantes') + ' para “' + targetWord + '”.'));
         }
+      } else {
+        rSec.appendChild(createEl('p', 'esc-sonnet-caption', 'Digite um verso ou busque uma palavra abaixo.'));
       }
+
       var qWrap = createEl('div', 'esc-sonnet-search');
-      var qLabel = createEl('label', '', 'Outra palavra de referência');
       var qInput = createEl('input');
-      qInput.type = 'text';
+      qInput.type = 'search';
       qInput.maxLength = 60;
-      qInput.placeholder = 'Ex.: amor';
+      qInput.placeholder = 'Buscar rimas de outra palavra (ex.: amor)…';
       qInput.value = rhymeQuery;
-      on(qInput, 'change', function () { rhymesOpen = true; rhymeQuery = qInput.value.trim(); showMoreRhymes = false; render(); });
-      qLabel.appendChild(qInput);
-      qWrap.appendChild(qLabel);
-      sugDet.appendChild(qWrap);
-      body.appendChild(sugDet);
-
-      // Forma do soneto
-      var formDet = createEl('details', 'esc-sonnet-settings');
-      if (settingsOpen || draftError) { formDet.open = true; }
-      on(formDet, 'toggle', function () { settingsOpen = !!formDet.open; });
-      formDet.appendChild(createEl('summary', '', 'Forma do soneto'));
-      var controls = createEl('div', 'esc-sonnet-controls');
-
-      var lStruct = createEl('label', '', 'Estrutura');
-      var sStruct = createEl('select');
-      [['italian', 'Italiano · 4 / 4 / 3 / 3'], ['english', 'Inglês · 4 / 4 / 4 / 2']].forEach(function (pair) {
-        var o = createEl('option', '', pair[1]);
-        o.value = pair[0];
-        if (settings.structure === pair[0]) { o.selected = true; }
-        sStruct.appendChild(o);
-      });
-      on(sStruct, 'change', function () { settingsOpen = true; chooseSetting('structure', sStruct.value); });
-      lStruct.appendChild(sStruct);
-      controls.appendChild(lStruct);
-
-      var lScheme = createEl('label', '', 'Esquema de rimas');
-      var sScheme = createEl('select');
-      var optsList = SCHEMES.slice();
-      if (optsList.indexOf(settings.scheme) === -1) { optsList.push(settings.scheme); }
-      optsList.filter(function (sc) { return sc === 'Livre' || sc === settings.scheme || structureOf(sc) === settings.structure; }).forEach(function (sc) {
-        var o = createEl('option', '', sc === 'Livre' ? 'Rimas livres' : (SCHEME_NAMES[sc] || 'Personalizado') + ' · ' + sc);
-        o.value = sc;
-        if (settings.scheme === sc) { o.selected = true; }
-        sScheme.appendChild(o);
-      });
-      on(sScheme, 'change', function () { settingsOpen = true; chooseSetting('scheme', sScheme.value); });
-      lScheme.appendChild(sScheme);
-      controls.appendChild(lScheme);
-
-      var lTarget = createEl('label', '', 'Medida');
-      var sTarget = createEl('select');
-      [[10, 'Decassílabo · 10'], [12, 'Dodecassílabo · 12'], [7, 'Redondilha maior · 7'], [5, 'Redondilha menor · 5']].forEach(function (pair) {
-        var o = createEl('option', '', pair[1]);
-        o.value = String(pair[0]);
-        if (settings.target === pair[0]) { o.selected = true; }
-        sTarget.appendChild(o);
-      });
-      on(sTarget, 'change', function () { settingsOpen = true; chooseSetting('target', Number(sTarget.value)); });
-      lTarget.appendChild(sTarget);
-      controls.appendChild(lTarget);
-
-      var lRhythm = createEl('label', '', 'Ritmo');
-      var sRhythm = createEl('select');
-      Object.keys(RHYTHMS).forEach(function (k) {
-        var o = createEl('option', '', RHYTHMS[k]);
-        o.value = k;
-        if (settings.rhythm === k) { o.selected = true; }
-        sRhythm.appendChild(o);
-      });
-      on(sRhythm, 'change', function () { settingsOpen = true; chooseSetting('rhythm', sRhythm.value); });
-      lRhythm.appendChild(sRhythm);
-      controls.appendChild(lRhythm);
-
-      var customWrap = createEl('div', 'esc-sonnet-custom');
-      var cLabel = createEl('label', '', 'Personalizar rimas (14 letras A–N)');
-      var cInput = createEl('input');
-      cInput.type = 'text';
-      cInput.maxLength = 30;
-      cInput.value = draftScheme;
-      cInput.placeholder = settings.structure === 'english' ? 'ABAB BCBC CDCD EE' : 'AABB AABB CDC DCD';
-      on(cInput, 'input', function () { draftScheme = cInput.value; draftError = ''; });
-      cLabel.appendChild(cInput);
-      customWrap.appendChild(cLabel);
-      var cBtn = createEl('button', '', 'Aplicar');
-      cBtn.type = 'button';
-      on(cBtn, 'click', function () {
-        settingsOpen = true;
-        var lettersOnly = String(cInput.value || '').toUpperCase().replace(/\s+/g, '');
-        if (!/^[A-N]{14}$/.test(lettersOnly)) {
-          draftError = 'Use 14 letras de A a N.';
-          render();
-          return;
-        }
-        var pos = 0, chunks = [], si3;
-        for (si3 = 0; si3 < stanzaPlan.length; si3 += 1) {
-          chunks.push(lettersOnly.slice(pos, pos + stanzaPlan[si3]));
-          pos += stanzaPlan[si3];
-        }
-        chooseSetting('scheme', chunks.join(' '));
-      });
-      customWrap.appendChild(cBtn);
-      if (draftError) { customWrap.appendChild(createEl('p', '', draftError)); }
-      controls.appendChild(customWrap);
-
-      formDet.appendChild(controls);
-      body.appendChild(formDet);
+      on(qInput, 'change', function () { rhymeQuery = qInput.value.replace(/^\s+|\s+$/g, ''); showMoreRhymes = false; render(); });
+      qWrap.appendChild(qInput);
+      rSec.appendChild(qWrap);
+      body.appendChild(rSec);
 
       aside.appendChild(body);
       container.appendChild(aside);
     }
 
-    function schedule() {
+    function schedule(delay) {
+      if (composing) { return; }
       window.clearTimeout(renderTimer);
-      renderTimer = window.setTimeout(render, 120);
+      renderTimer = window.setTimeout(render, typeof delay === 'number' ? delay : 75);
     }
 
     if (manuscript) {
-      on(manuscript, 'input', function () { manualLine = null; schedule(); });
-      on(manuscript, 'keyup', function () { if (isSonnetDoc(activeDoc)) { manualLine = null; schedule(); } });
-      on(manuscript, 'mouseup', function () { if (isSonnetDoc(activeDoc)) { manualLine = null; schedule(); } });
+      on(manuscript, 'compositionstart', function () { composing = true; });
+      on(manuscript, 'compositionend', function () { composing = false; manualLine = null; schedule(40); });
+      on(manuscript, 'input', function () { if (isSonnetDoc(activeDoc)) { manualLine = null; schedule(75); } });
+      on(manuscript, 'keyup', function () {
+        if (!isSonnetDoc(activeDoc)) { return; }
+        var cur = cursorLineOf(manuscript);
+        if (cur !== lastCursorLine) { manualLine = null; schedule(60); }
+      });
+      on(manuscript, 'mouseup', function () {
+        if (!isSonnetDoc(activeDoc)) { return; }
+        var cur = cursorLineOf(manuscript);
+        if (cur !== lastCursorLine) { manualLine = null; schedule(50); }
+      });
+    }
+
+    if (typeof window !== 'undefined' && window.visualViewport && window.visualViewport.addEventListener) {
+      window.visualViewport.addEventListener('resize', function () {
+        if (mobileSheetOpen && window.visualViewport.height < 480 && document.activeElement === manuscript) {
+          mobileSheetOpen = false;
+          syncBodyFlag(true);
+          render();
+        }
+      }, false);
     }
 
     return {
       sync: function (doc) {
         activeDoc = doc || null;
         manualLine = null;
+        lastCursorLine = -1;
         rhymeQuery = '';
         showMoreRhymes = false;
         draftError = '';
+        mobileSheetOpen = false;
         render();
       },
       refresh: render,
+      schedule: function () { if (isSonnetDoc(activeDoc)) { schedule(75); } },
       isSonnetDoc: isSonnetDoc
     };
   };

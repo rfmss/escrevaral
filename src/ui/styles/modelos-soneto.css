@@ -561,4 +561,393 @@
     padding: 8px 32px 0;
     margin: 0;
   }
+
+  /* =====================================================================
+   * DOCK RESPONSIVO AO VIVO: SONETO VISUAL + OFICINA DE CANÇÃO (Fases 1 e 2)
+   * Fora de #items-column: permanece vivo com Lista recolhida, Superfoco e Celular
+   * ===================================================================== */
+  .esc-verse-dock {
+    flex: 0 0 316px;
+    width: 316px;
+    min-width: 0;
+    height: 100%;
+    overflow-y: auto;
+    border-left: 1px dashed var(--esc-border, #8b9b8c);
+    background: var(--esc-surface, #becab9);
+    color: var(--esc-ink, #1e2320);
+    box-sizing: border-box;
+  }
+  .esc-verse-dock[hidden] { display: none !important; }
+  body[data-esc-sonnet-open="collapsed"] #esc-sonnet-panel,
+  body[data-esc-song-open="collapsed"] #esc-song-panel {
+    flex: 0 0 180px;
+    width: 180px;
+  }
+
+  .esc-verse-hud { display: none; }
+
+  .esc-sonnet-head-left { min-width: 0; }
+  .esc-sonnet-head-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .esc-sonnet-chip-btn {
+    padding: 4px 9px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    border-radius: 99px;
+    background: var(--esc-bg, #c4cfc2);
+    color: inherit;
+    font: 600 11.5px/1.2 Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
+  .esc-sonnet-chip-btn[aria-pressed="true"] {
+    background: var(--esc-ink, #1e2320);
+    color: var(--esc-paper, #ccd5c7);
+    border-color: var(--esc-ink, #1e2320);
+  }
+  .esc-sonnet-prog-track {
+    height: 3px;
+    width: 100%;
+    background: rgba(33, 41, 33, 0.12);
+  }
+  .esc-sonnet-prog-fill {
+    display: block;
+    height: 100%;
+    background: #2f5940;
+    transition: width 140ms ease;
+  }
+
+  .esc-sonnet-settings-box {
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .esc-sonnet-err { color: #7a2020; font-size: 11.5px; margin: 4px 0 0; }
+
+  /* Partitura silábica viva */
+  .esc-sonnet-score-card {
+    padding: 10px 11px;
+    margin-bottom: 10px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    border-radius: 9px;
+    background: var(--esc-paper, #ccd5c7);
+  }
+  .esc-sonnet-cur-left { display: flex; align-items: center; gap: 6px; }
+  .esc-sonnet-status-pill {
+    padding: 2px 8px;
+    border-radius: 99px;
+    font: 700 11px/1.2 Arial, Helvetica, sans-serif;
+    background: rgba(33, 41, 33, 0.1);
+  }
+  .esc-sonnet-status-pill.is-ok { background: #cfe3d3; color: #163d23; }
+  .esc-sonnet-status-pill.is-near { background: #ebe1c2; color: #543c0c; }
+  .esc-sonnet-status-pill.is-off { background: #ecd8cd; color: #692814; }
+
+  .esc-syl-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 4px;
+    margin: 9px 0 7px;
+  }
+  .esc-syl-cell {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 26px;
+    padding: 4px 5px 3px;
+    border: 1px solid rgba(33, 41, 33, 0.22);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.34);
+  }
+  .esc-syl-cell.is-tonic {
+    background: #d8e7da;
+    border-color: #3f6f4e;
+  }
+  .esc-syl-cell.is-support {
+    border-width: 1.5px;
+    border-color: #244b34;
+  }
+  .esc-syl-cell.is-over {
+    background: #eedad1;
+    border-color: #9e5339;
+  }
+  .esc-syl-cell.is-post {
+    opacity: 0.58;
+    border-style: dashed;
+  }
+  .esc-syl-txt {
+    font: 500 13px/1.2 'Noto Serif', Georgia, serif;
+    color: inherit;
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+  button.esc-syl-txt {
+    cursor: pointer;
+    text-decoration: underline dotted;
+    text-underline-offset: 2px;
+  }
+  .esc-syl-cell.is-tonic .esc-syl-txt { font-weight: 700; }
+  .esc-syl-num { font: 600 9.5px/1.2 Arial, Helvetica, sans-serif; color: var(--esc-muted, #4a544c); margin-top: 2px; }
+  .esc-syl-beat { font: 700 10px/1 Arial, Helvetica, sans-serif; color: var(--esc-muted, #4a544c); margin-top: 1px; }
+  .esc-syl-beat.is-hit { color: #245735; }
+  .esc-syl-caesura { align-self: center; font: 700 16px/1 monospace; color: #7a5816; padding: 0 2px; }
+
+  .esc-sonnet-rhyme-line {
+    margin: 6px 0 0;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(33, 41, 33, 0.16);
+    font: 600 12px/1.35 Arial, Helvetica, sans-serif;
+    color: var(--esc-ink, #1e2320);
+  }
+
+  /* Família de cores das rimas (acessível claro/escuro) */
+  .esc-rhyme-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    padding: 1px 6px;
+    border-radius: 5px;
+    font: 700 11px/1.3 Arial, Helvetica, sans-serif;
+    border: 1px solid transparent;
+  }
+  .esc-rhyme-pill.is-fam-a { background: #cfe4d4; border-color: #467a54; color: #153821; }
+  .esc-rhyme-pill.is-fam-b { background: #d2e2ec; border-color: #48748a; color: #143647; }
+  .esc-rhyme-pill.is-fam-c { background: #efe3c4; border-color: #967732; color: #4a3408; }
+  .esc-rhyme-pill.is-fam-d { background: #edd8cf; border-color: #9c5840; color: #541f0e; }
+  .esc-rhyme-pill.is-fam-e { background: #dfe5cf; border-color: #6b7b4c; color: #2c3816; }
+  .esc-rhyme-pill.is-fam-f { background: #e5dcf0; border-color: #775d8c; color: #39234a; }
+  .esc-rhyme-pill.is-fam-g { background: #e5e1d5; border-color: #78725e; color: #332f22; }
+
+  /* Mapa dos 14 versos + linha da Volta */
+  .esc-sonnet-volta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 9px 0 6px;
+    font: 700 10.5px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.06em;
+    color: #6b4e16;
+  }
+  .esc-sonnet-volta::before,
+  .esc-sonnet-volta::after {
+    content: '';
+    flex: 1 1 auto;
+    height: 1px;
+    border-top: 1px dashed rgba(122, 88, 22, 0.55);
+  }
+  .esc-sonnet-stanza-list { margin-bottom: 6px; }
+  .esc-sonnet-stanza-lbl {
+    display: block;
+    font: 700 10.5px/1.2 Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--esc-muted, #4a544c);
+    margin: 4px 0 3px;
+  }
+  .esc-map-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 3px 6px;
+    margin-bottom: 2px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    font: 12px/1.2 Arial, Helvetica, sans-serif;
+  }
+  .esc-map-row:hover { background: rgba(33, 41, 33, 0.07); }
+  .esc-map-row.is-current {
+    background: var(--esc-paper, #ccd5c7);
+    border-color: var(--esc-ink, #1e2320);
+    font-weight: 700;
+  }
+  .esc-map-row.is-empty { opacity: 0.55; }
+  .esc-map-num { font: 600 10.5px/1 monospace; color: var(--esc-muted, #4a544c); width: 18px; flex-shrink: 0; }
+  .esc-map-bar { flex: 1 1 54px; height: 6px; border-radius: 99px; background: rgba(33, 41, 33, 0.13); overflow: hidden; }
+  .esc-map-bar-fill { display: block; height: 100%; border-radius: 99px; background: #467a54; }
+  .esc-map-bar-fill.is-near { background: #967732; }
+  .esc-map-bar-fill.is-off { background: #9c5840; }
+  .esc-map-count { font: 700 11px/1 monospace; width: 20px; text-align: right; flex-shrink: 0; }
+  .esc-map-word { max-width: 78px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: italic 12px/1.2 'Noto Serif', Georgia, serif; color: var(--esc-muted, #4a544c); }
+
+  /* Bandeja de rimas ao vivo */
+  .esc-sonnet-rhyme-tray {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--esc-border, #8b9b8c);
+  }
+  .esc-rhyme-tray-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .esc-rhyme-tray-head h3 { margin: 0 !important; }
+  .esc-rhyme-tabs { display: inline-flex; gap: 4px; }
+  .esc-rhyme-tab {
+    padding: 3px 8px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    border-radius: 99px;
+    background: var(--esc-bg, #c4cfc2);
+    color: inherit;
+    font: 600 11px/1.2 Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
+  .esc-rhyme-tab[aria-pressed="true"] {
+    background: var(--esc-ink, #1e2320);
+    color: var(--esc-paper, #ccd5c7);
+    border-color: var(--esc-ink, #1e2320);
+  }
+  .esc-rhyme-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 6px 0; }
+  .esc-rhyme-chip {
+    padding: 3px 9px;
+    border: 1px solid rgba(33, 41, 33, 0.22);
+    border-radius: 99px;
+    background: var(--esc-paper, #ccd5c7);
+    color: inherit;
+    font: 500 12px/1.2 'Noto Serif', Georgia, serif;
+    cursor: pointer;
+  }
+  .esc-rhyme-chip:hover { background: var(--esc-selected, #b3c2ae); border-color: var(--esc-ink, #1e2320); }
+
+  /* Oficina de Canção (blocos, mapa, espelho, pulso) */
+  .esc-song-blocks { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+  .esc-song-block-btn {
+    padding: 4px 8px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    border-radius: 6px;
+    background: var(--esc-paper, #ccd5c7);
+    color: inherit;
+    font: 600 11px/1.2 Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
+  .esc-song-block-btn:hover { background: var(--esc-selected, #b3c2ae); }
+  .esc-song-map { margin-bottom: 10px; }
+  .esc-song-map-strip { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .esc-song-sec-pill {
+    padding: 4px 9px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    border-radius: 7px;
+    background: var(--esc-paper, #ccd5c7);
+    color: inherit;
+    font: 600 11.5px/1.2 Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
+  .esc-song-sec-pill.is-kind-chorus { background: #efe3c4; border-color: #967732; color: #4a3408; }
+  .esc-song-sec-pill.is-kind-bridge { background: #e5dcf0; border-color: #775d8c; color: #39234a; }
+  .esc-song-sec-pill.is-current { box-shadow: 0 0 0 2px var(--esc-ink, #1e2320); font-weight: 700; }
+
+  .esc-mirror-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+  .esc-mirror-row.is-current { background: rgba(33, 41, 33, 0.08); font-weight: 700; }
+  .esc-mirror-counts { font: 600 11.5px/1.2 monospace; }
+  .esc-song-chords-box,
+  .esc-song-pulse {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--esc-border, #8b9b8c);
+  }
+  .esc-song-pairs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+  .esc-song-pair-chip { padding: 2px 8px; border-radius: 99px; background: rgba(33, 41, 33, 0.08); font-size: 11.5px; }
+  .esc-song-int-row { margin: 4px 0; }
+  .esc-pulse-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 6px 0 8px; }
+  .esc-pulse-dots { display: inline-flex; align-items: center; gap: 6px; }
+  .esc-pulse-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid var(--esc-border, #8b9b8c);
+    background: transparent;
+    transition: transform 80ms ease, background 80ms ease;
+  }
+  .esc-pulse-dot.is-downbeat { width: 14px; height: 14px; border-color: var(--esc-ink, #1e2320); }
+  .esc-pulse-dot[data-active="true"] { background: #2f5940; border-color: #2f5940; transform: scale(1.22); }
+  .esc-bpm-ctrl { display: inline-flex; align-items: center; gap: 6px; }
+  .esc-bpm-val { font: 700 12.5px/1 monospace; }
+  .esc-pulse-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+  .esc-meter-sel {
+    padding: 3px 6px;
+    border: 1px solid var(--esc-border, #8b9b8c);
+    border-radius: 6px;
+    background: var(--esc-bg, #c4cfc2);
+    color: inherit;
+    font: 600 11.5px/1.2 Arial, Helvetica, sans-serif;
+  }
+
+  /* Modo escuro dos docks de Soneto & Canção */
+  body[data-theme="escuro"] .esc-verse-dock { background: #222922; border-color: #3e4b3e; color: #d6dfd4; }
+  body[data-theme="escuro"] .esc-sonnet-score-card,
+  body[data-theme="escuro"] .esc-rhyme-chip,
+  body[data-theme="escuro"] .esc-song-block-btn,
+  body[data-theme="escuro"] .esc-song-sec-pill { background: #1c221c; border-color: #414f41; color: #dce5da; }
+  body[data-theme="escuro"] .esc-syl-cell { background: rgba(255, 255, 255, 0.05); border-color: #465446; }
+  body[data-theme="escuro"] .esc-syl-cell.is-tonic { background: rgba(92, 155, 112, 0.24); border-color: #78b58b; }
+  body[data-theme="escuro"] .esc-syl-cell.is-over { background: rgba(196, 115, 82, 0.25); border-color: #d49377; }
+  body[data-theme="escuro"] .esc-sonnet-status-pill.is-ok { background: rgba(92, 155, 112, 0.25); color: #cdebd6; }
+  body[data-theme="escuro"] .esc-sonnet-status-pill.is-near { background: rgba(191, 158, 76, 0.25); color: #f0e1b6; }
+  body[data-theme="escuro"] .esc-sonnet-status-pill.is-off { background: rgba(196, 115, 82, 0.25); color: #f4d3c3; }
+  body[data-theme="escuro"] .esc-sonnet-volta { color: #d8be84; }
+  body[data-theme="escuro"] .esc-pulse-dot[data-active="true"] { background: #8eb097; border-color: #8eb097; }
+
+  /* Responsividade Tablet & Celular (<= 1080px): Faixa-HUD viva de 36px + Bottom-Sheet sob demanda */
+  @media (max-width: 1080px) {
+    .esc-verse-dock {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto !important;
+      height: auto;
+      max-height: 42px;
+      z-index: 1225;
+      border-left: 0;
+      border-top: 1px solid var(--esc-border, #8b9b8c);
+      box-shadow: 0 -6px 20px rgba(16, 22, 16, 0.16);
+      overflow: hidden;
+    }
+    body[data-esc-verse-sheet="open"] .esc-verse-dock {
+      max-height: 58vh;
+      overflow-y: auto;
+    }
+    .esc-verse-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 12px;
+      min-height: 36px;
+      box-sizing: border-box;
+    }
+    .esc-verse-hud-info { display: flex; align-items: center; gap: 6px; min-width: 0; overflow: hidden; }
+    .esc-verse-hud-tag { font: 700 11.5px/1.2 Arial, Helvetica, sans-serif; padding: 2px 7px; border-radius: 99px; background: var(--esc-ink, #1e2320); color: var(--esc-paper, #ccd5c7); white-space: nowrap; }
+    .esc-verse-hud-count { font: 700 11.5px/1.2 monospace; white-space: nowrap; }
+    .esc-verse-hud-rhyme { font: 500 11.5px/1.2 Arial, Helvetica, sans-serif; color: var(--esc-muted, #4a544c); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .esc-verse-hud-btn {
+      padding: 4px 10px;
+      border: 1px solid var(--esc-border, #8b9b8c);
+      border-radius: 99px;
+      background: var(--esc-paper, #ccd5c7);
+      color: inherit;
+      font: 700 11.5px/1.2 Arial, Helvetica, sans-serif;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .esc-sonnet-top,
+    .esc-sonnet-prog-track { display: none; }
+    body[data-esc-verse-sheet="closed"] .esc-sonnet-body { display: none; }
+  }
 }

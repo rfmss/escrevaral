@@ -27,13 +27,18 @@ for (const marker of [
   '/* Cadernos: dados ES5',
   'var PALETTES =',
   'createProjectFromTemplate',
-  'root.Escr.mountSonnetAssistant'
+  'root.Escr.versoCore =',
+  'root.Escr.mountSonnetAssistant',
+  'root.Escr.songCore =',
+  'root.Escr.dificuldades ='
 ]) {
-  vm.runInContext(scripts.find(s => s.includes(marker)), context);
+  const found = scripts.find(s => s.includes(marker));
+  assert.ok(found, 'Script ausente para marker: ' + marker);
+  vm.runInContext(found, context);
 }
 
 const E = context.Escr;
-assert.equal(E.templates.list().length, 7);
+assert.equal(E.templates.list().length, 8);
 
 const store = createStorage();
 const archive = E.createArchive(store);
@@ -94,4 +99,78 @@ const rhymes = E.sonnetCore.findRhymes('amor');
 assert.ok(Array.isArray(rhymes) && rhymes.length > 0);
 assert.ok(rhymes.some(w => w === 'flor' || w === 'dor'));
 
-console.log('OK: 7 modelos, referência ENEM protegida, placeholders clicáveis e assistente do soneto verificados.');
+// 3b. versoCore: células silábicas, sinalefa clicável e rimas consoantes/toantes
+const scanAmor = E.versoCore.scanLine('Amor é fogo que arde sem se ver');
+const cellsInfo = E.versoCore.buildSyllableCells(scanAmor);
+assert.ok(cellsInfo && cellsInfo.poeticCount === 10);
+assert.ok(Array.isArray(cellsInfo.cells) && cellsInfo.cells.length === 10);
+assert.ok(cellsInfo.cells.some(c => c.tonic));
+const elidableCell = cellsInfo.cells.find(c => c.canToggleElision);
+assert.ok(elidableCell && elidableCell.fused === true);
+const override = {};
+override[elidableCell.elisionKey] = false;
+const cellsUnfused = E.versoCore.buildSyllableCells(scanAmor, override);
+assert.equal(cellsUnfused.poeticCount, cellsInfo.poeticCount + 1);
+
+const rhymeSets = E.versoCore.findRhymes('vida', 12);
+assert.ok(rhymeSets && Array.isArray(rhymeSets.consonant) && Array.isArray(rhymeSets.assonant));
+assert.ok(rhymeSets.consonant.length > 0);
+assert.ok(rhymeSets.assonant.length > 0);
+const toanteCasa = E.versoCore.findRhymes('casa', 12);
+assert.ok(toanteCasa && Array.isArray(toanteCasa.assonant) && toanteCasa.assonant.length > 0);
+
+// 4. Modelo 8: Canção / Música (blocos, espelho de cadência, cifras e transposição)
+const cancao = E.templates.createProject(books, archive, 'cancao', 'Minha Canção', 'salvia');
+const songNote = cancao.notes.find(n => n.role === 'song');
+assert.ok(songNote);
+assert.equal(songNote.folder, '02 · Letra');
+assert.ok(songNote.songSettings && songNote.songSettings.bpm === 92);
+
+const songSample = [
+  '[Estrofe 1]',
+  'Am7           F7M',
+  'Quando a chuva cai na rua vazia',
+  'C             G',
+  'O teu nome acende o meu coração',
+  '',
+  '[Refrão]',
+  '[Am7] Volta pra perto de mim',
+  '[F7M] Deixa a janela se abrir',
+  '',
+  '[Estrofe 2]',
+  'Quando o vento passa pela varanda',
+  'A saudade canta nessa canção'
+].join('\n');
+
+// Cursor na linha 11 (Estrofe 2) para ativar o Espelho de Cadência contra Estrofe 1
+const parsedSong = E.songCore.parseSong(songSample, 11, songNote.songSettings);
+assert.equal(parsedSong.sections.length, 3);
+assert.equal(parsedSong.sections[0].kind, 'verse');
+assert.equal(parsedSong.sections[1].kind, 'chorus');
+assert.equal(parsedSong.sections[2].kind, 'verse');
+// Linhas exclusivas de cifra ("Am7 F7M", "C G") não devem entrar como versos cantados
+assert.equal(parsedSong.sections[0].lines.length, 2);
+// Cifras entre colchetes no refrão devem ser removidas da contagem cantada
+assert.equal(parsedSong.sections[1].lines[0].text, 'Volta pra perto de mim');
+// Espelho de cadência Estrofe 2 vs Estrofe 1 deve comparar linha a linha
+assert.ok(parsedSong.mirrorSource && parsedSong.mirrorSource.label === 'Estrofe 1');
+assert.equal(parsedSong.mirrorRows.length, 2);
+assert.ok(parsedSong.mirrorRows[0].refSyllables > 0 && parsedSong.mirrorRows[0].curSyllables > 0);
+
+const transposed = E.songCore.transposeSongText(songSample, 2);
+assert.ok(transposed.includes('Bm7'));
+assert.ok(transposed.includes('[Bm7] Volta pra perto de mim'));
+assert.ok(transposed.includes('G7M'));
+
+// 5. Guia Usos da Língua (Dicionário de Dificuldades PT-BR)
+assert.equal(E.dificuldades.categories.length, 9);
+assert.equal(E.dificuldades.list().length, 120);
+assert.ok(typeof E.dificuldades.manifesto === 'string' && E.dificuldades.manifesto.includes('adequação de uso'));
+const hitOnde = E.dificuldades.lookupWord('aonde');
+assert.ok(hitOnde && hitOnde.id === 'onde-aonde');
+const hitMal = E.dificuldades.lookupWord('mau');
+assert.ok(hitMal && hitMal.id === 'mal-mau');
+const craseResults = E.dificuldades.search('crase');
+assert.ok(Array.isArray(craseResults) && craseResults.length >= 5);
+
+console.log('OK: 8 modelos, Soneto Visual Ao Vivo, Oficina de Canção/Música e Guia Usos da Língua (120 verbetes PT-BR) verificados.');

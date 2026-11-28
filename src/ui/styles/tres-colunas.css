@@ -599,11 +599,9 @@
     border-color: #9e6b6b;
   }
 
-  #esc-sonnet-panel {
-    border-top: 1px solid var(--esc-border);
+  #esc-sonnet-panel,
+  #esc-song-panel {
     background: var(--esc-paper);
-    max-height: 46%;
-    overflow-y: auto;
   }
 
   /* Coluna 3: Editor / Área de escrita */

@@ -293,6 +293,22 @@
         content.appendChild(srcBox);
       }
 
+      /* Ponte silenciosa com o Guia Usos da Língua (Dicionário de Dificuldades PT-BR) */
+      if (currentState.originalWord && root.Escr.dificuldades && root.Escr.dificuldades.lookupWord && typeof root.Escr.openUsosLingua === 'function') {
+        var usoHit = root.Escr.dificuldades.lookupWord(currentState.originalWord);
+        if (usoHit) {
+          var usoBtn = document.createElement('button');
+          usoBtn.type = 'button';
+          usoBtn.className = 'esc-palavra-uso-link';
+          usoBtn.textContent = 'Usos da língua: ' + usoHit.titulo + ' →';
+          on(usoBtn, 'click', function () {
+            hide(false);
+            root.Escr.openUsosLingua(usoHit.id);
+          });
+          content.appendChild(usoBtn);
+        }
+      }
+
       }
       cardEl.appendChild(content);
       cardEl.hidden = false;

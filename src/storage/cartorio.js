@@ -585,9 +585,10 @@
     lines.push('Camada 1 (offline): comprova integridade criptográfica do pacote e da');
     lines.push('cadeia de criação registrada dentro do Escrevaral, incluindo a ausência');
     lines.push('ou ocorrência de colagens externas.');
-    lines.push('Camada 2 (anterioridade jurídica externa): datas locais dependem do');
-    lines.push('relógio do aparelho. Use o código SHA-256 acima para ancoragem externa');
-    lines.push('de data (Biblioteca Nacional, carimbo de tempo ou protocolo editorial).');
+    lines.push('Camada 2 (limites jurídicos e anterioridade externa): datas locais');
+    lines.push('dependem do relógio do aparelho. Este certificado técnico NÃO substitui');
+    lines.push('registro na Biblioteca Nacional, ata notarial nem carimbo de tempo');
+    lines.push('oficial (ICP-Brasil). Use o SHA-256 acima para ancoragem oficial.');
     return lines.join('\n');
   }
 
