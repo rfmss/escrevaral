@@ -1288,7 +1288,7 @@
     border: 1.5px solid #262018 !important;
     border-radius: 5px 9px 9px 5px !important;
     background-color: #dfd7c4 !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208'%3E%3Crect width='146' height='208' fill='%23dfd7c4'/%3E%3Crect x='0' y='0' width='16' height='208' fill='%23b5a88e' fill-opacity='0.58'/%3E%3Cpath d='M126 6v196M130 6v196M134 6v196M138 6v196M142 6v196' stroke='%23857357' stroke-opacity='0.5' stroke-width='1'/%3E%3Cpath d='M24 36h94M24 56h94M24 76h86M24 96h94M24 116h80M24 136h90M24 156h84M24 176h72' stroke='%23998769' stroke-opacity='0.3' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208'%3E%3Crect width='146' height='208' fill='%23dfd7c4'/%3E%3Crect x='0' y='0' width='15' height='208' fill='%23161d16'/%3E%3Cpath d='M126 6v196M130 6v196M134 6v196M138 6v196M142 6v196' stroke='%23857357' stroke-opacity='0.5' stroke-width='1'/%3E%3Cpath d='M24 36h94M24 56h94M24 76h86M24 96h94M24 116h80M24 136h90M24 156h84M24 176h72' stroke='%23998769' stroke-opacity='0.3' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") !important;
     background-size: 100% 100% !important;
     box-shadow: 3px 6px 0 rgba(25, 29, 23, 0.22), 0 8px 16px rgba(20, 24, 18, 0.14) !important;
     perspective: 820px;
@@ -1317,10 +1317,10 @@
      girem em 100% de sincronia como um único corpo rígido sem quebrar a ilusão 3D. */
   #gabinete #notebook-list .notebook-front {
     position: absolute !important;
-    top: -1.5px !important;
-    left: -1.5px !important;
+    top: -1px !important;
+    left: -1px !important;
     right: auto !important;
-    bottom: -1.5px !important;
+    bottom: -1px !important;
     width: calc(100% - 2px) !important;
     border: 1.5px solid #161b15 !important;
     border-radius: 5px 8px 8px 5px !important;
@@ -1330,7 +1330,7 @@
     box-shadow: 2px 0 5px rgba(10, 14, 10, 0.3) !important;
     transform-origin: 0% 50% !important;
     -webkit-transform-origin: 0% 50% !important;
-    transform: rotateY(0deg) !important;
+    transform: translateZ(2px) rotateY(0deg) !important;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
@@ -1346,7 +1346,7 @@
   #gabinete #notebook-list .notebook-cover:focus-visible .notebook-front {
     right: auto !important;
     width: calc(100% - 2px) !important;
-    transform: rotateY(-24deg) !important;
+    transform: translateZ(2px) rotateY(-22deg) !important;
     box-shadow: 10px 4px 14px rgba(12, 16, 12, 0.4) !important;
   }
   #gabinete #notebook-list .notebook-cover:hover::after,
@@ -1359,7 +1359,7 @@
   #gabinete #notebook-list .notebook-cover[aria-pressed="true"] .notebook-front {
     right: auto !important;
     width: calc(100% - 2px) !important;
-    transform: rotateY(-34deg) !important;
+    transform: translateZ(2px) rotateY(-30deg) !important;
     box-shadow: 13px 6px 16px rgba(10, 14, 10, 0.45) !important;
   }
 
@@ -1393,19 +1393,36 @@
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.35) !important;
   }
 
-  /* Placa ex-libris ESCREVARAL no rodapé da capa */
+  /* Placa ex-libris ESCREVARAL no rodapé da capa (ouro envelhecido Belas Letras × Eternos) */
   #gabinete .woven-tab {
-    bottom: 18px !important;
-    left: 20px !important;
-    padding: 4px 7px !important;
-    background: #d8d1be !important;
-    color: #241d15 !important;
-    border: 1px solid #9e7d43 !important;
-    border-radius: 2px !important;
-    box-shadow: 0 2px 0 rgba(12, 14, 10, 0.45), inset 0 0 0 1px rgba(255, 248, 228, 0.35) !important;
-    font: 700 9.5px/1.25 'Courier Prime', monospace !important;
-    letter-spacing: 0.9px !important;
+    bottom: 17px !important;
+    left: 22px !important;
+    padding: 3px 6px !important;
+    background: rgba(14, 21, 15, 0.8) !important;
+    color: #dfc07b !important;
+    border: 1px solid rgba(212, 171, 95, 0.52) !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 0 0 1px rgba(212, 171, 95, 0.14), 0 1px 3px rgba(8, 12, 9, 0.4) !important;
+    font: 600 7.5px/1.25 var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
   }
+  #gabinete .woven-tab b {
+    border: 0 !important;
+    padding: 0 !important;
+    font-weight: 700 !important;
+    color: #f3d89b !important;
+  }
+  #gabinete .woven-tab::before,
+  #gabinete .woven-tab::after {
+    content: "✦";
+    display: inline-block;
+    font-size: 6.5px;
+    color: rgba(212, 171, 95, 0.74);
+    vertical-align: 0.5px;
+  }
+  #gabinete .woven-tab::before { margin-right: 4px; }
+  #gabinete .woven-tab::after { margin-left: 4px; }
 
   /* --- GAVETA ILUSTRADA (.original-box): só a frente em repouso; sugere abertura no hover --- */
   #gabinete #notebook-list .original-box {
@@ -1587,7 +1604,7 @@
   body[data-theme="escuro"] #gabinete #notebook-list .notebook-cover {
     border-color: #111511 !important;
     background-color: #363026 !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208'%3E%3Crect width='146' height='208' fill='%23363026'/%3E%3Crect x='0' y='0' width='18' height='208' fill='%23201b14' fill-opacity='0.65'/%3E%3Cpath d='M124 8v192M128 8v192M132 8v192M136 8v192M140 8v192' stroke='%236c5d46' stroke-opacity='0.5' stroke-width='1'/%3E%3C/svg%3E") !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='146' height='208' viewBox='0 0 146 208'%3E%3Crect width='146' height='208' fill='%23363026'/%3E%3Crect x='0' y='0' width='15' height='208' fill='%23161d16'/%3E%3Cpath d='M124 8v192M128 8v192M132 8v192M136 8v192M140 8v192' stroke='%236c5d46' stroke-opacity='0.5' stroke-width='1'/%3E%3C/svg%3E") !important;
     box-shadow: 3px 6px 0 rgba(0, 0, 0, 0.36), 0 10px 20px rgba(0, 0, 0, 0.3) !important;
   }
   body[data-theme="escuro"] #gabinete #notebook-list .notebook-front {
@@ -1595,10 +1612,10 @@
     border-color: #3f4b3d !important;
   }
   body[data-theme="escuro"] #gabinete .woven-tab {
-    background: #2b241c !important;
-    color: #d9cebc !important;
-    border-color: #8c6e3b !important;
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.45) !important;
+    background: rgba(14, 21, 15, 0.84) !important;
+    color: #dfc07b !important;
+    border-color: rgba(212, 171, 95, 0.56) !important;
+    box-shadow: inset 0 0 0 1px rgba(212, 171, 95, 0.14), 0 1px 3px rgba(0, 0, 0, 0.48) !important;
   }
   body[data-theme="escuro"] #gabinete #notebook-list .original-box {
     border-color: #463a2c !important;
@@ -2109,8 +2126,8 @@
     display: inline-flex;
     align-items: baseline;
     gap: 6px;
-    max-width: clamp(220px, 42vw, 480px);
-    padding: 3px 10px;
+    max-width: min(calc(100% - 170px), 680px);
+    padding: 3px 11px;
     border-radius: 99px;
     background: rgba(196, 207, 194, 0.92);
     border: 1px solid rgba(58, 72, 56, 0.24);
@@ -2118,8 +2135,6 @@
     font: 500 10.5px/1.35 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.01em;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   .esc-cafe-caption strong {
     font-weight: 700;
@@ -2127,8 +2142,6 @@
     flex-shrink: 0;
   }
   .esc-cafe-caption span {
-    overflow: hidden;
-    text-overflow: ellipsis;
     opacity: 0.88;
   }
 
