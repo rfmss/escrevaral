@@ -6850,8 +6850,12 @@
     return ['u', 'rl("', resolveAssetUrl(path), '")'].join('');
   }
 
-  var HERO_ART_LER = 'assets/library/reader-atelier.webp';
-  var HERO_ART_ENSAIO = 'assets/library/reader-mesa-ensaio.webp';
+  var HERO_ART_LER = 'assets/library/reader-biblioteca-nacional.webp';
+  var HERO_ART_ENSAIO = 'assets/library/reader-cinemateca-acervo.webp';
+  var HERO_PLACE_LER_TITLE = '✦ Salão de Leitura · Biblioteca Nacional do Brasil (Rio de Janeiro, RJ)';
+  var HERO_PLACE_LER_DESC = ' — Inaugurada em 1910, maior acervo bibliográfico da América Latina.';
+  var HERO_PLACE_ENSAIO_TITLE = '✦ Acervo de Roteiros e Películas · Cinemateca Brasileira (São Paulo, SP)';
+  var HERO_PLACE_ENSAIO_DESC = ' — Maior acervo audiovisual da América do Sul, nos galpões históricos da Vila Mariana.';
 
   function bindReaderAtmosphere() {
     try {
@@ -7429,6 +7433,7 @@
               '<div class="esc-reader-hero-filigree" aria-hidden="true"></div>' +
               '<span id="esc-reader-hero-badge" class="esc-reader-hero-badge" hidden>READ-THRU · ENSAIO</span>' +
             '</div>' +
+            (isPortableDoc() ? '' : '<p id="esc-reader-hero-place" class="esc-reader-hero-place"></p>') +
             '<div class="esc-reader-pills" role="tablist" aria-label="Modos da página de leitura">' +
               '<button id="esc-reader-tab-ler" type="button" class="esc-reader-pill" role="tab" aria-selected="true" data-mode="ler">Ler</button>' +
               '<button id="esc-reader-tab-ensaio" type="button" class="esc-reader-pill" role="tab" aria-selected="false" data-mode="ensaio">Roteiro / Ensaio</button>' +
@@ -7718,6 +7723,14 @@
           heroImg.hidden = false;
           heroImg.setAttribute('src', desiredArt);
         }
+      }
+      var heroPlace = byId('esc-reader-hero-place');
+      if (heroPlace) {
+        heroPlace.textContent = '';
+        var hpStrong = document.createElement('strong');
+        hpStrong.textContent = activeMode === 'ensaio' ? HERO_PLACE_ENSAIO_TITLE : HERO_PLACE_LER_TITLE;
+        heroPlace.appendChild(hpStrong);
+        heroPlace.appendChild(document.createTextNode(activeMode === 'ensaio' ? HERO_PLACE_ENSAIO_DESC : HERO_PLACE_LER_DESC));
       }
       var tabLer = byId('esc-reader-tab-ler');
       var tabEns = byId('esc-reader-tab-ensaio');

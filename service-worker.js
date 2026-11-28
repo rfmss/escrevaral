@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-5af8e7b2e5b2";
-const RUNTIME_CACHE = "scrvrl-runtime-5af8e7b2e5b2";
+const CACHE_NAME = "scrvrl-offline-v6-65-541d7796ad21";
+const RUNTIME_CACHE = "scrvrl-runtime-541d7796ad21";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -8,12 +8,12 @@ const REQUIRED_ASSETS = [
     "sha256": "d6cd9da15371a34f5b69d5a91a907cf30116c3b496ca45907eed8c1422548e64"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.8cebe8d4c2917774.js",
-    "sha256": "8cebe8d4c29177747712ad87ad5cec277a5132696b55427bf5f57a126c62a186"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.ec249c1f4355dc51.js",
+    "sha256": "ec249c1f4355dc512edc635a80dee868069ea179d466f34faaaacdf26e122808"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.7f995a85705ca01f.css",
-    "sha256": "7f995a85705ca01f2ab3c85620ccd688db1fd6c2f2e1cd5b8b8a3c75683cedb2"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.8d3836c898bd8003.css",
+    "sha256": "8d3836c898bd8003836cbb6629b0cfa58bc6a86228d38e901092f32eea890608"
   }
 ];
 const BUNKER_ASSETS = [
@@ -54,8 +54,8 @@ const BUNKER_ASSETS = [
   "./assets/library/estante-cafe-bistro.webp",
   "./assets/library/estante-livros-outono.webp",
   "./assets/library/estante-trepadeira-outono.webp",
-  "./assets/library/reader-atelier.webp",
-  "./assets/library/reader-mesa-ensaio.webp",
+  "./assets/library/reader-biblioteca-nacional.webp",
+  "./assets/library/reader-cinemateca-acervo.webp",
   "./assets/library/real-gabinete-hero.webp",
   "./assets/library/tome-literatura-mundial.webp",
   "./assets/library/tome-objeto-livro.webp",
@@ -97,7 +97,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: '8e04cbd936573123b10b0b6ae813983def728b05f55bcde9405ed61b9a2539de' });
+    const index = await checkedAsset({ url: './index.html', sha256: 'bd11ab474f359ad5c0ada19da63edd424b1744d257b258ce55e2f61162f11b97' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);

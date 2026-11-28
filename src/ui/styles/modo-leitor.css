@@ -328,6 +328,7 @@
   .esc-reader-brand {
     font: 700 13px/1 'Noto Serif', Georgia, serif;
     letter-spacing: 0.24em;
+    padding-left: 0.24em;
     color: var(--reader-ink);
     text-align: center;
   }
@@ -428,7 +429,7 @@
     position: relative;
     width: 100%;
     height: 204px;
-    margin: 0 0 20px;
+    margin: 0 0 8px;
     background: transparent;
     border: 0;
     overflow: visible;
@@ -444,7 +445,7 @@
     background-color: #2b2117;
     background-image: var(--esc-reader-atelier-art, linear-gradient(135deg, #2d241b 0%, #4b3a28 52%, #7a6144 100%));
     background-size: cover;
-    background-position: center 46%;
+    background-position: center 62%;
     -webkit-mask-image:
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='white'/%3E%3C/svg%3E"),
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M0 0 H16 V3 A13 13 0 0 1 3 16 H0 Z' fill='white'/%3E%3C/svg%3E"),
@@ -524,7 +525,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 46%;
+    object-position: center 62%;
     display: block;
     z-index: 0;
     pointer-events: none;
@@ -534,13 +535,25 @@
   }
   .esc-reader[data-reader-mode="ensaio"] .esc-reader-hero-cut {
     background-image: var(--esc-reader-readthru-art, linear-gradient(135deg, #2b241c 0%, #4e4232 55%, #7b694e 100%));
-    background-position: center 54%;
+    background-position: center 66%;
   }
   .esc-reader[data-reader-mode="ensaio"] .esc-reader-hero-img {
-    object-position: center 54%;
+    object-position: center 66%;
   }
-  .esc-reader[data-show-scene="false"] .esc-reader-hero {
+  .esc-reader[data-show-scene="false"] .esc-reader-hero,
+  .esc-reader[data-show-scene="false"] .esc-reader-hero-place {
     display: none;
+  }
+  .esc-reader-hero-place {
+    margin: 0 0 18px;
+    text-align: center;
+    font: 400 11.5px/1.45 Arial, Helvetica, sans-serif;
+    color: var(--reader-muted);
+    opacity: 0.84;
+  }
+  .esc-reader-hero-place strong {
+    font-weight: 600;
+    color: var(--reader-ink);
   }
   .esc-reader-hero-badge {
     position: absolute;

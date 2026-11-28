@@ -32,8 +32,8 @@ function isValidPng(buf) {
   const requiredAssets = JSON.parse(reqMatch[1]).map(a => a.url);
   const bunkerAssets = JSON.parse(bunkerMatch[1]);
 
-  assert.ok(bunkerAssets.includes('./assets/library/reader-atelier.webp'), 'reader-atelier.webp fora do BUNKER_ASSETS');
-  assert.ok(bunkerAssets.includes('./assets/library/reader-mesa-ensaio.webp'), 'reader-mesa-ensaio.webp fora do BUNKER_ASSETS');
+  assert.ok(bunkerAssets.includes('./assets/library/reader-biblioteca-nacional.webp'), 'reader-biblioteca-nacional.webp fora do BUNKER_ASSETS');
+  assert.ok(bunkerAssets.includes('./assets/library/reader-cinemateca-acervo.webp'), 'reader-cinemateca-acervo.webp fora do BUNKER_ASSETS');
 
   const allSwAssets = [...requiredAssets, ...bunkerAssets];
   let webpCount = 0;
@@ -104,8 +104,8 @@ function isValidPng(buf) {
   }
 
   const readerPropsGh = runModuleInSite(modoLeitorSrc, 'https://rfmss.github.io/escrevaral/index.html', 'site');
-  assert.equal(readerPropsGh['--esc-reader-atelier-art'], 'url("https://rfmss.github.io/escrevaral/assets/library/reader-atelier.webp")');
-  assert.equal(readerPropsGh['--esc-reader-readthru-art'], 'url("https://rfmss.github.io/escrevaral/assets/library/reader-mesa-ensaio.webp")');
+  assert.equal(readerPropsGh['--esc-reader-atelier-art'], 'url("https://rfmss.github.io/escrevaral/assets/library/reader-biblioteca-nacional.webp")');
+  assert.equal(readerPropsGh['--esc-reader-readthru-art'], 'url("https://rfmss.github.io/escrevaral/assets/library/reader-cinemateca-acervo.webp")');
 
   const acadPropsGh = runModuleInSite(academiaSrc, 'https://rfmss.github.io/escrevaral/', 'site');
   assert.equal(acadPropsGh['--esc-rg-hero-art'], 'url("https://rfmss.github.io/escrevaral/assets/library/real-gabinete-hero.webp")');
@@ -116,8 +116,8 @@ function isValidPng(buf) {
 
   // Conferir que o HTML montado pelo Modo Leitura tem <img> real com src válido
   assert.ok(modoLeitorSrc.includes('id="esc-reader-hero-img"'), 'Modo Leitura deve renderizar <img id="esc-reader-hero-img">');
-  assert.ok(modoLeitorSrc.includes("var HERO_ART_LER = 'assets/library/reader-atelier.webp';"));
-  assert.ok(modoLeitorSrc.includes("var HERO_ART_ENSAIO = 'assets/library/reader-mesa-ensaio.webp';"));
+  assert.ok(modoLeitorSrc.includes("var HERO_ART_LER = 'assets/library/reader-biblioteca-nacional.webp';"));
+  assert.ok(modoLeitorSrc.includes("var HERO_ART_ENSAIO = 'assets/library/reader-cinemateca-acervo.webp';"));
 
   // 5. Subir servidor HTTP local efêmero e verificar HTTP 200 real nas rotas críticas (incluindo novas imagens)
   const server = http.createServer((req, res) => {
@@ -140,8 +140,8 @@ function isValidPng(buf) {
       '/' + assetById('cofre').path,
       '/' + assetById('app').path,
       '/' + cssRel,
-      '/assets/library/reader-atelier.webp',
-      '/assets/library/reader-mesa-ensaio.webp',
+      '/assets/library/reader-biblioteca-nacional.webp',
+      '/assets/library/reader-cinemateca-acervo.webp',
       '/assets/library/real-gabinete-hero.webp',
       '/assets/library/tome-objeto-livro.webp',
       '/assets/library/estante-cafe-bistro.webp',
