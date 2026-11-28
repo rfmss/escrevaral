@@ -8775,7 +8775,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #gabinete #notebook-list .notebook-cover:focus-visible .notebook-front {
     right: auto !important;
     width: calc(100% - 2px) !important;
-    transform: translateZ(2px) rotateY(-22deg) !important;
+    transform: translateZ(2px) rotateY(-24deg) !important;
     box-shadow: 10px 4px 14px rgba(12, 16, 12, 0.4) !important;
   }
   #gabinete #notebook-list .notebook-cover:hover::after,
