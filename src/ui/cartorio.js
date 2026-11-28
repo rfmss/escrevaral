@@ -5,6 +5,16 @@
   var E = root.Escr;
 
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
+  function isPortableDoc() {
+    try {
+      if (typeof document !== 'undefined' && document.querySelector) {
+        var meta = document.querySelector('meta[name="distribution-mode"]');
+        if (meta && meta.getAttribute('content') === 'portable') { return true; }
+      }
+      if (typeof location !== 'undefined' && location.protocol === 'file:') { return true; }
+    } catch (ignore) {}
+    return false;
+  }
   function mk(tag, cls, txt) {
     var el = document.createElement(tag);
     if (cls) { el.className = cls; }
@@ -116,6 +126,18 @@
       var cert = mk('article', 'cart-cert cart-tone-' + tone);
       if (E.ornaments && E.ornaments.attachCorners) {
         E.ornaments.attachCorners(cert, 'subtle');
+      }
+      if (!isPortableDoc()) {
+        var crestWrap = mk('div', 'cart-cert-crest');
+        crestWrap.setAttribute('aria-hidden', 'true');
+        var crestImg = document.createElement('img');
+        crestImg.src = 'assets/library/cartorio-mucha-crest.webp';
+        crestImg.alt = '';
+        crestImg.setAttribute('aria-hidden', 'true');
+        crestImg.setAttribute('decoding', 'async');
+        on(crestImg, 'error', function () { crestWrap.hidden = true; });
+        crestWrap.appendChild(crestImg);
+        cert.appendChild(crestWrap);
       }
       var mast = mk('div', 'cart-cert-mast');
       mast.appendChild(mk('span', '', 'CARTÓRIO DO ESCREVARAL'));

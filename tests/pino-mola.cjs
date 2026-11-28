@@ -49,12 +49,12 @@ assert.ok(temasCss.includes('.esc-pino-scroller::-webkit-scrollbar'), 'CSS ocult
 assert.ok(temasCss.includes('cubic-bezier(0.22, 1.42, 0.36, 1)'), 'Mola elástica de retorno ao centro');
 assert.ok(temasCss.includes('--pino-gold:') && temasCss.includes('.esc-pino-arc-outer'), 'Estética Fio Dourado presente em temas-linux.css');
 
-// 6. Molde vazado arquitetônico no Modo Leitura e nos 3 guias recentes da Academia
+// 6. Moldura Alphonse Mucha × Eternos nos guias da Academia e molde/moldura no Modo Leitura
 const leitorCss = fs.readFileSync(path.join(root, 'src/ui/styles/modo-leitor.css'), 'utf8');
 assert.ok(leitorCss.includes('.esc-reader-hero-cut') && leitorCss.includes('mask-composite: exclude') && leitorCss.includes('.esc-reader-hero-filigree'), 'Banner do Modo Leitura com molde vazado e filigrana dourada');
 for (const g of ['academia/ponto-de-vista-e-voz.html', 'academia/cena-tempo-e-personagem.html', 'academia/poesia-ritmo-e-cancao.html']) {
   const html = fs.readFileSync(path.join(root, g), 'utf8');
-  assert.ok(html.includes('hero-mold') && html.includes('mask-composite:exclude') && html.includes('fio-rail'), g + ' deve usar molde vazado e Fio Dourado');
+  assert.ok(html.includes('hero-mold') && html.includes('academy-mucha-frame.webp') && html.includes('fio-rail'), g + ' deve usar moldura Mucha × Eternos e Fio Dourado');
 }
 
 console.log('OK: Fio Dourado universal (Eternos Jog-Shuttle) + moldes vazados dos banners verificados.');

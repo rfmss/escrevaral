@@ -11805,8 +11805,52 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
   /* =====================================================================
-   * HERO REAL GABINETE: PINTURA LIMPA SEM MOLDURA NO TÍTULO + LEGENDA EMBAIXO
+   * HERO REAL GABINETE: MOLDURA ALPHONSE MUCHA × ETERNOS (LIVRO + PENAS)
    * ===================================================================== */
+  #esc-academy-overlay .esc-academy-hero-wrap {
+    position: relative;
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame {
+    width: min(84%, 780px);
+    margin: 148px auto 112px;
+    overflow: visible;
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-hero {
+    min-height: 228px;
+    padding: 34px 40px 16px;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0 10px 28px rgba(18, 9, 4, 0.3);
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-crest {
+    display: none;
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-ac-layer-hall {
+    opacity: 0.25;
+  }
+  #esc-academy-overlay .esc-academy-hero-mucha {
+    position: absolute;
+    top: -57.73%;
+    bottom: -48.98%;
+    left: -6.89%;
+    right: -6.97%;
+    width: 113.86%;
+    height: 206.71%;
+    max-width: none;
+    z-index: 5;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    filter: drop-shadow(0 4px 10px rgba(24, 15, 7, 0.22));
+  }
+  #esc-academy-overlay .esc-academy-hero-mucha[hidden] {
+    display: none !important;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-hero-mucha {
+    filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.52)) brightness(1.06) contrast(1.04);
+  }
+
   #esc-academy-overlay .esc-academy-hero {
     position: relative;
     min-height: 248px;
@@ -11870,17 +11914,18 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   #esc-academy-overlay .esc-academy-close {
     position: absolute;
-    top: 18px;
+    top: 16px;
     right: 22px;
-    z-index: 6;
+    z-index: 10;
     min-height: 32px;
     padding: 5px 13px;
-    border: 1px solid rgba(238, 198, 126, 0.72) !important;
+    border: 1px solid rgba(181, 133, 61, 0.72) !important;
     border-radius: 99px;
-    background: rgba(24, 12, 6, 0.84) !important;
+    background: rgba(24, 12, 6, 0.86) !important;
     color: #fbf3e2 !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
+    box-shadow: 0 3px 10px rgba(15, 8, 4, 0.28);
   }
 
   #esc-academy-overlay .esc-academy-close:hover {
@@ -12552,6 +12597,32 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
 
   @media (max-width: 760px) {
     #esc-academy-overlay.esc-academy-overlay { padding: 8px; }
+    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame {
+      width: calc(100% - 28px);
+      margin: 60px auto 24px;
+    }
+    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-hero {
+      padding: 28px 18px 20px;
+      min-height: 196px;
+      border: 1.5px solid #b8883c;
+      border-radius: 6px;
+    }
+    #esc-academy-overlay .esc-academy-hero-mucha { display: none; }
+    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -46px;
+      width: min(82%, 248px);
+      height: 54px;
+      transform: translateX(-50%);
+      z-index: 5;
+      pointer-events: none;
+      background-image: var(--esc-of-crown-art, none);
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      background-size: contain;
+    }
     #esc-academy-overlay .esc-academy-hero { padding: 50px 20px 24px; min-height: 200px; }
     #esc-academy-overlay .esc-academy-content { padding: 16px 16px 24px; }
     #esc-academy-overlay .esc-academy-featured-grid,
@@ -12721,7 +12792,25 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     color: #1a211c;
     border: 1px solid rgba(30, 35, 32, 0.22);
     border-radius: 4px;
-    padding: 28px 32px;
+    padding: 22px 32px 28px;
+  }
+  .cart-cert-crest {
+    display: flex;
+    justify-content: center;
+    margin: -4px auto 10px;
+    pointer-events: none;
+    user-select: none;
+  }
+  .cart-cert-crest[hidden] { display: none !important; }
+  .cart-cert-crest img {
+    display: block;
+    width: min(64%, 264px);
+    height: auto;
+    filter: drop-shadow(0 3px 8px rgba(18, 30, 22, 0.2));
+    -webkit-user-drag: none;
+  }
+  body[data-theme="escuro"] .cart-cert-crest img {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.48)) brightness(1.06) contrast(1.04);
   }
   .cart-cert-mast {
     display: flex;
@@ -13509,27 +13598,50 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     background: #7f6645;
   }
 
-  /* Cabeçalho pintado do Examinar (escrivaninha iluminada com livro aberto, pena e velas) */
+  /* Cabeçalho pintado do Examinar (escrivaninha iluminada + coroa pena-de-ouro Mucha + caldeirão ¶) */
   #oficina > .sheet-heading {
     position: relative;
-    overflow: hidden;
+    overflow: visible !important;
+    margin-top: 38px !important;
     padding: 16px 20px !important;
     margin-bottom: 14px !important;
     border-radius: 8px !important;
-    border: 1.5px solid #a67b38 !important;
+    border: 1.5px solid #b58c3e !important;
     background-color: #321b10 !important;
     background-image: var(--esc-rg-book-art, var(--esc-rg-chalk-dark)) !important;
     background-size: cover !important;
     background-position: right center !important;
     color: #f0e4ce !important;
-    box-shadow: 0 4px 12px rgba(24, 13, 6, 0.18) !important;
+    box-shadow:
+      0 5px 14px rgba(24, 13, 6, 0.22),
+      inset 0 0 0 3px rgba(232, 198, 120, 0.14) !important;
   }
   #oficina > .sheet-heading::before {
     content: "";
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
+    border-radius: inherit;
     background-color: rgba(24, 12, 6, 0.72);
     pointer-events: none;
+  }
+  #oficina > .sheet-heading::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -45px;
+    width: min(68%, 222px);
+    height: 50px;
+    transform: translateX(-50%);
+    z-index: 4;
+    pointer-events: none;
+    background-image: var(--esc-of-crown-art, none);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+    filter: drop-shadow(0 2px 6px rgba(20, 11, 5, 0.34));
+  }
+  body[data-theme="escuro"] #oficina > .sheet-heading::after {
+    filter: drop-shadow(0 3px 9px rgba(0, 0, 0, 0.52)) brightness(1.06) contrast(1.04);
   }
   #oficina > .sheet-heading > * {
     position: relative;
@@ -13540,9 +13652,27 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     letter-spacing: 0.08em;
   }
   #oficina > .sheet-heading h2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     color: #f2e7d2 !important;
     font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
     text-shadow: 0 1px 6px rgba(10, 5, 2, 0.75);
+  }
+  #oficina > .sheet-heading h2::before {
+    content: "¶";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(232, 198, 120, 0.65);
+    background: rgba(28, 14, 7, 0.72);
+    color: #f2cf88;
+    font: 700 14px/1 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
+    box-shadow: inset 0 0 0 2px rgba(232, 198, 120, 0.14);
   }
   #oficina > .sheet-heading button {
     background-color: rgba(24, 12, 6, 0.8) !important;
@@ -14182,14 +14312,15 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
       inset 3px 0 0 rgba(181, 140, 62, 0.16) !important;
   }
 
-  /* Cabeçalho nobre Verde Musgo Real + Filigrana dos Eternos */
+  /* Cabeçalho nobre Verde Musgo Real + Filigrana dos Eternos + Coroa Pena-de-Ouro Mucha */
   #usos-lingua > .sheet-heading,
   #sobre > .sheet-heading,
   #lineage-panel > .sheet-heading,
   #utilidades > .sheet-heading,
   #mesa > .sheet-heading {
     position: relative;
-    overflow: hidden;
+    overflow: visible !important;
+    margin-top: 38px !important;
     padding: 16px 20px !important;
     margin-bottom: 16px !important;
     border-radius: 8px !important;
@@ -14204,6 +14335,80 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
       0 5px 16px rgba(13, 24, 17, 0.22),
       inset 0 0 0 3px rgba(232, 198, 120, 0.14) !important;
   }
+  #usos-lingua > .sheet-heading::after,
+  #sobre > .sheet-heading::after,
+  #lineage-panel > .sheet-heading::after,
+  #utilidades > .sheet-heading::after,
+  #mesa > .sheet-heading::after,
+  #story-screen .finish-heading::after,
+  #chalkboard .chalk-heading::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -45px;
+    width: min(68%, 222px);
+    height: 50px;
+    transform: translateX(-50%);
+    z-index: 4;
+    pointer-events: none;
+    background-image: var(--esc-of-crown-art, none);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+    filter: drop-shadow(0 2px 6px rgba(10, 18, 12, 0.32));
+  }
+  body[data-theme="escuro"] #usos-lingua > .sheet-heading::after,
+  body[data-theme="escuro"] #sobre > .sheet-heading::after,
+  body[data-theme="escuro"] #lineage-panel > .sheet-heading::after,
+  body[data-theme="escuro"] #utilidades > .sheet-heading::after,
+  body[data-theme="escuro"] #mesa > .sheet-heading::after,
+  body[data-theme="escuro"] #story-screen .finish-heading::after,
+  body[data-theme="escuro"] #chalkboard .chalk-heading::after {
+    filter: drop-shadow(0 3px 9px rgba(0, 0, 0, 0.52)) brightness(1.06) contrast(1.04);
+  }
+  /* Símbolos literários específicos de cada área da Oficina (§, ❦, ❖, ✦, ⧗, ✧, ✎, ✠) */
+  #usos-lingua > .sheet-heading h2,
+  #sobre > .sheet-heading h2,
+  #lineage-panel > .sheet-heading h2,
+  #utilidades > .sheet-heading h2,
+  #mesa > .sheet-heading h2,
+  #esc-cartorio-overlay .cart-head h2,
+  #story-screen .finish-heading h2,
+  #chalkboard .chalk-heading h2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+  #usos-lingua > .sheet-heading h2::before,
+  #sobre > .sheet-heading h2::before,
+  #lineage-panel > .sheet-heading h2::before,
+  #utilidades > .sheet-heading h2::before,
+  #mesa > .sheet-heading h2::before,
+  #esc-cartorio-overlay .cart-head h2::before,
+  #story-screen .finish-heading h2::before,
+  #chalkboard .chalk-heading h2::before {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(232, 198, 120, 0.62);
+    background: rgba(12, 22, 16, 0.56);
+    color: #f0d38d;
+    font: 700 14px/1 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+    box-shadow: inset 0 0 0 2px rgba(232, 198, 120, 0.14);
+  }
+  #usos-lingua > .sheet-heading h2::before { content: "§"; }
+  #sobre > .sheet-heading h2::before { content: "❦"; }
+  #lineage-panel > .sheet-heading h2::before { content: "❖"; font-size: 13px; }
+  #utilidades > .sheet-heading h2::before { content: "⧗"; font-size: 13px; }
+  #mesa > .sheet-heading h2::before { content: "✦"; font-size: 13px; }
+  #esc-cartorio-overlay .cart-head h2::before { content: "✠"; font-size: 13px; }
+  #story-screen .finish-heading h2::before { content: "✧"; font-size: 14px; }
+  #chalkboard .chalk-heading h2::before { content: "✎"; font-size: 13px; }
   #usos-lingua > .sheet-heading .eyebrow,
   #sobre > .sheet-heading .eyebrow,
   #lineage-panel > .sheet-heading small,
@@ -14529,7 +14734,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #story-screen .finish-heading,
   #chalkboard .chalk-heading {
     position: relative;
-    overflow: hidden;
+    overflow: visible !important;
+    margin-top: 38px !important;
     padding: 14px 20px !important;
     border-radius: 8px !important;
     border: 1.5px solid #b58c3e !important;

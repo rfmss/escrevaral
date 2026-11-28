@@ -194,27 +194,50 @@
     background: #7f6645;
   }
 
-  /* Cabeçalho pintado do Examinar (escrivaninha iluminada com livro aberto, pena e velas) */
+  /* Cabeçalho pintado do Examinar (escrivaninha iluminada + coroa pena-de-ouro Mucha + caldeirão ¶) */
   #oficina > .sheet-heading {
     position: relative;
-    overflow: hidden;
+    overflow: visible !important;
+    margin-top: 38px !important;
     padding: 16px 20px !important;
     margin-bottom: 14px !important;
     border-radius: 8px !important;
-    border: 1.5px solid #a67b38 !important;
+    border: 1.5px solid #b58c3e !important;
     background-color: #321b10 !important;
     background-image: var(--esc-rg-book-art, var(--esc-rg-chalk-dark)) !important;
     background-size: cover !important;
     background-position: right center !important;
     color: #f0e4ce !important;
-    box-shadow: 0 4px 12px rgba(24, 13, 6, 0.18) !important;
+    box-shadow:
+      0 5px 14px rgba(24, 13, 6, 0.22),
+      inset 0 0 0 3px rgba(232, 198, 120, 0.14) !important;
   }
   #oficina > .sheet-heading::before {
     content: "";
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
+    border-radius: inherit;
     background-color: rgba(24, 12, 6, 0.72);
     pointer-events: none;
+  }
+  #oficina > .sheet-heading::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -45px;
+    width: min(68%, 222px);
+    height: 50px;
+    transform: translateX(-50%);
+    z-index: 4;
+    pointer-events: none;
+    background-image: var(--esc-of-crown-art, none);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+    filter: drop-shadow(0 2px 6px rgba(20, 11, 5, 0.34));
+  }
+  body[data-theme="escuro"] #oficina > .sheet-heading::after {
+    filter: drop-shadow(0 3px 9px rgba(0, 0, 0, 0.52)) brightness(1.06) contrast(1.04);
   }
   #oficina > .sheet-heading > * {
     position: relative;
@@ -225,9 +248,27 @@
     letter-spacing: 0.08em;
   }
   #oficina > .sheet-heading h2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     color: #f2e7d2 !important;
     font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
     text-shadow: 0 1px 6px rgba(10, 5, 2, 0.75);
+  }
+  #oficina > .sheet-heading h2::before {
+    content: "¶";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(232, 198, 120, 0.65);
+    background: rgba(28, 14, 7, 0.72);
+    color: #f2cf88;
+    font: 700 14px/1 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
+    box-shadow: inset 0 0 0 2px rgba(232, 198, 120, 0.14);
   }
   #oficina > .sheet-heading button {
     background-color: rgba(24, 12, 6, 0.8) !important;

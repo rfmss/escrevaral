@@ -146,7 +146,25 @@
     color: #1a211c;
     border: 1px solid rgba(30, 35, 32, 0.22);
     border-radius: 4px;
-    padding: 28px 32px;
+    padding: 22px 32px 28px;
+  }
+  .cart-cert-crest {
+    display: flex;
+    justify-content: center;
+    margin: -4px auto 10px;
+    pointer-events: none;
+    user-select: none;
+  }
+  .cart-cert-crest[hidden] { display: none !important; }
+  .cart-cert-crest img {
+    display: block;
+    width: min(64%, 264px);
+    height: auto;
+    filter: drop-shadow(0 3px 8px rgba(18, 30, 22, 0.2));
+    -webkit-user-drag: none;
+  }
+  body[data-theme="escuro"] .cart-cert-crest img {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.48)) brightness(1.06) contrast(1.04);
   }
   .cart-cert-mast {
     display: flex;

@@ -34,6 +34,9 @@
       st.setProperty('--esc-rg-hero-art', cssAsset('assets/library/real-gabinete-hero.webp'));
       st.setProperty('--esc-rg-book-art', cssAsset('assets/library/tome-objeto-livro.webp'));
       st.setProperty('--esc-rg-lit-art', cssAsset('assets/library/tome-literatura-mundial.webp'));
+      st.setProperty('--esc-of-crown-art', cssAsset('assets/library/oficina-mucha-crown.webp'));
+      st.setProperty('--esc-ac-mucha-frame', cssAsset('assets/library/academy-mucha-frame.webp'));
+      st.setProperty('--esc-cart-crest-art', cssAsset('assets/library/cartorio-mucha-crest.webp'));
     } catch (ignore) {}
   }
   bindLibraryAtmosphere();
@@ -363,7 +366,9 @@
       var scrollBody = document.createElement('div');
       scrollBody.className = 'esc-academy-groups';
 
-      /* Hero panorâmico estilo livro ilustrado com 4 camadas parallax */
+      /* Hero panorâmico estilo livro ilustrado com 2 camadas parallax + moldura Alphonse Mucha × Eternos */
+      var heroWrap = document.createElement('div');
+      heroWrap.className = 'esc-academy-hero-wrap';
       var hero = document.createElement('header');
       hero.className = 'esc-academy-hero';
       var sceneInfo = buildHeroScene();
@@ -374,7 +379,7 @@
       closeBtn.className = 'esc-academy-close';
       closeBtn.textContent = '← Voltar · Esc';
       on(closeBtn, 'click', close);
-      hero.appendChild(closeBtn);
+      card.appendChild(closeBtn);
 
       var heroInner = document.createElement('div');
       heroInner.className = 'esc-academy-hero-inner';
@@ -407,7 +412,23 @@
         heroPlace.appendChild(hpNote);
         hero.appendChild(heroPlace);
       }
-      scrollBody.appendChild(hero);
+      heroWrap.appendChild(hero);
+
+      if (!isPortableDoc()) {
+        heroWrap.className += ' has-mucha-frame';
+        var muchaImg = document.createElement('img');
+        muchaImg.className = 'esc-academy-hero-mucha';
+        muchaImg.src = 'assets/library/academy-mucha-frame.webp';
+        muchaImg.alt = '';
+        muchaImg.setAttribute('aria-hidden', 'true');
+        muchaImg.setAttribute('decoding', 'async');
+        on(muchaImg, 'error', function () {
+          muchaImg.hidden = true;
+          heroWrap.className = 'esc-academy-hero-wrap';
+        });
+        heroWrap.appendChild(muchaImg);
+      }
+      scrollBody.appendChild(heroWrap);
 
       var contentWrap = document.createElement('div');
       contentWrap.className = 'esc-academy-content';

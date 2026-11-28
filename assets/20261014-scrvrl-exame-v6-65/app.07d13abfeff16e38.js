@@ -6741,23 +6741,25 @@
     return el;
   }
 
-  /* Cantoneira filigranada inspirada em livros ilustrados / AFK Journey (48x48, espelhável via CSS) */
+  /* Cantoneira filigranada Alphonse Mucha × Eternos (56x56, espelhável via CSS) */
   function createCorner(position) {
     var wrap = document.createElement('span');
     wrap.className = 'esc-bl-corner esc-bl-corner-' + (position || 'tl');
     wrap.setAttribute('aria-hidden', 'true');
     var svg = svgEl('svg', { viewBox: '0 0 56 56', fill: 'none', 'aria-hidden': 'true', focusable: 'false' });
-    /* Moldura dupla em L com recuo delicado */
-    svg.appendChild(svgEl('path', { d: 'M4 52 L4 12 Q4 4 12 4 L52 4', stroke: 'currentColor', 'stroke-width': '1.2', 'stroke-linecap': 'round' }));
-    svg.appendChild(svgEl('path', { d: 'M9 44 L9 15 Q9 9 15 9 L44 9', stroke: 'currentColor', 'stroke-width': '0.75', opacity: '0.72', 'stroke-linecap': 'round' }));
+    /* Dupla haste sinuosa Art Nouveau em L */
+    svg.appendChild(svgEl('path', { d: 'M4 52 C4 34, 4 16, 6 10 C8 6, 10 4, 16 4 L52 4', stroke: 'currentColor', 'stroke-width': '1.15', 'stroke-linecap': 'round' }));
+    svg.appendChild(svgEl('path', { d: 'M8.5 44 C8.5 29, 8.5 16, 10.5 11.5 C12 8.8, 14 8.5, 20 8.5 L44 8.5', stroke: 'currentColor', 'stroke-width': '0.7', opacity: '0.68', 'stroke-linecap': 'round' }));
+    /* Fios orbitais dos Eternos acompanhando a curva do vértice */
+    svg.appendChild(svgEl('path', { d: 'M18 4 C14 14, 14 14, 4 18', stroke: 'currentColor', 'stroke-width': '0.6', opacity: '0.52' }));
+    svg.appendChild(svgEl('path', { d: 'M26 4 C20 13, 13 20, 4 26', stroke: 'currentColor', 'stroke-width': '0.5', opacity: '0.38' }));
     /* Estrela-losango de 4 pontas no vértice (detalhe joia) */
-    svg.appendChild(svgEl('path', { d: 'M15.5 11.5 L17.3 15.5 L21.3 17.3 L17.3 19.1 L15.5 23.1 L13.7 19.1 L9.7 17.3 L13.7 15.5 Z', fill: 'currentColor', opacity: '0.82' }));
-    /* Pequenas volutas botânicas nos terminais */
-    svg.appendChild(svgEl('path', { d: 'M24 4 Q27 9 32 7.5', stroke: 'currentColor', 'stroke-width': '0.9', 'stroke-linecap': 'round' }));
-    svg.appendChild(svgEl('path', { d: 'M4 24 Q9 27 7.5 32', stroke: 'currentColor', 'stroke-width': '0.9', 'stroke-linecap': 'round' }));
-    /* Pontos de arremate nas pontas (estilo varão torneado) */
-    svg.appendChild(svgEl('circle', { cx: '52', cy: '4', r: '1.4', fill: 'currentColor' }));
-    svg.appendChild(svgEl('circle', { cx: '4', cy: '52', r: '1.4', fill: 'currentColor' }));
+    svg.appendChild(svgEl('path', { d: 'M15.5 11.5 L17.3 15.5 L21.3 17.3 L17.3 19.1 L15.5 23.1 L13.7 19.1 L9.7 17.3 L13.7 15.5 Z', fill: 'currentColor', opacity: '0.84' }));
+    /* Volutas botânicas Mucha nos terminais */
+    svg.appendChild(svgEl('path', { d: 'M26 4 C30 9, 34 8.5, 37 5.8 M4 26 C9 30, 8.5 34, 5.8 37', stroke: 'currentColor', 'stroke-width': '0.8', 'stroke-linecap': 'round', opacity: '0.78' }));
+    /* Pontos de arremate nas pontas */
+    svg.appendChild(svgEl('circle', { cx: '52', cy: '4', r: '1.35', fill: 'currentColor' }));
+    svg.appendChild(svgEl('circle', { cx: '4', cy: '52', r: '1.35', fill: 'currentColor' }));
     wrap.appendChild(svg);
     return wrap;
   }
@@ -6776,47 +6778,54 @@
     return frame;
   }
 
-  /* Varão Vitoriano (stair rod): barra finíssima com pináculos torneados nas pontas e losango central */
+  /* Varão Art Nouveau × Eternos (stair rod): hastes esguias com volutas sinuosas e ponta-de-pena central */
   function createStairRod(variant) {
     var wrap = document.createElement('div');
     wrap.className = 'esc-bl-rod' + (variant ? ' esc-bl-rod-' + variant : '');
     wrap.setAttribute('aria-hidden', 'true');
-    var svg = svgEl('svg', { viewBox: '0 0 360 16', preserveAspectRatio: 'xMidYMid meet', fill: 'none', 'aria-hidden': 'true', focusable: 'false' });
-    /* Pináculo esquerdo (bola + anéis torneados) */
-    svg.appendChild(svgEl('circle', { cx: '5', cy: '8', r: '2.5', fill: 'currentColor', opacity: '0.85' }));
-    svg.appendChild(svgEl('path', { d: 'M10 4.8 L10 11.2 M13 5.8 L13 10.2', stroke: 'currentColor', 'stroke-width': '1.1', 'stroke-linecap': 'round' }));
-    /* Haste esquerda */
-    svg.appendChild(svgEl('line', { x1: '13', y1: '8', x2: '158', y2: '8', stroke: 'currentColor', 'stroke-width': '0.95', opacity: '0.78' }));
-    /* Medalhão central (losango + 2 pontos laterais) */
-    svg.appendChild(svgEl('circle', { cx: '165', cy: '8', r: '1.3', fill: 'currentColor', opacity: '0.7' }));
-    svg.appendChild(svgEl('path', { d: 'M180 2.5 L186.5 8 L180 13.5 L173.5 8 Z', stroke: 'currentColor', 'stroke-width': '1.05', fill: 'none' }));
-    svg.appendChild(svgEl('path', { d: 'M180 5.4 L182.6 8 L180 10.6 L177.4 8 Z', fill: 'currentColor', opacity: '0.85' }));
-    svg.appendChild(svgEl('circle', { cx: '195', cy: '8', r: '1.3', fill: 'currentColor', opacity: '0.7' }));
-    /* Haste direita */
-    svg.appendChild(svgEl('line', { x1: '202', y1: '8', x2: '347', y2: '8', stroke: 'currentColor', 'stroke-width': '0.95', opacity: '0.78' }));
+    var svg = svgEl('svg', { viewBox: '0 0 360 18', preserveAspectRatio: 'xMidYMid meet', fill: 'none', 'aria-hidden': 'true', focusable: 'false' });
+    /* Pináculo esquerdo */
+    svg.appendChild(svgEl('circle', { cx: '5', cy: '9', r: '2.2', fill: 'currentColor', opacity: '0.85' }));
+    svg.appendChild(svgEl('path', { d: 'M10 5.5 L10 12.5 M13 6.5 L13 11.5', stroke: 'currentColor', 'stroke-width': '1', 'stroke-linecap': 'round' }));
+    /* Haste esquerda + voluta Mucha */
+    svg.appendChild(svgEl('line', { x1: '13', y1: '9', x2: '154', y2: '9', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.76' }));
+    svg.appendChild(svgEl('path', { d: 'M126 9 C136 3.5, 147 4.2, 157 9 C147 13.8, 136 14.5, 126 9', stroke: 'currentColor', 'stroke-width': '0.65', opacity: '0.54' }));
+    /* Medalhão central (halo orbital + losango ponta-de-pena) */
+    svg.appendChild(svgEl('circle', { cx: '164', cy: '9', r: '1.2', fill: 'currentColor', opacity: '0.72' }));
+    svg.appendChild(svgEl('circle', { cx: '180', cy: '9', r: '7.5', stroke: 'currentColor', 'stroke-width': '0.6', opacity: '0.45' }));
+    svg.appendChild(svgEl('path', { d: 'M180 2.5 L186.5 9 L180 15.5 L173.5 9 Z', stroke: 'currentColor', 'stroke-width': '1', fill: 'none' }));
+    svg.appendChild(svgEl('path', { d: 'M180 5.8 L182.6 9 L180 12.2 L177.4 9 Z', fill: 'currentColor', opacity: '0.86' }));
+    svg.appendChild(svgEl('circle', { cx: '196', cy: '9', r: '1.2', fill: 'currentColor', opacity: '0.72' }));
+    /* Haste direita + voluta Mucha */
+    svg.appendChild(svgEl('path', { d: 'M234 9 C224 3.5, 213 4.2, 203 9 C213 13.8, 224 14.5, 234 9', stroke: 'currentColor', 'stroke-width': '0.65', opacity: '0.54' }));
+    svg.appendChild(svgEl('line', { x1: '206', y1: '9', x2: '347', y2: '9', stroke: 'currentColor', 'stroke-width': '0.9', opacity: '0.76' }));
     /* Pináculo direito */
-    svg.appendChild(svgEl('path', { d: 'M347 5.8 L347 10.2 M350 4.8 L350 11.2', stroke: 'currentColor', 'stroke-width': '1.1', 'stroke-linecap': 'round' }));
-    svg.appendChild(svgEl('circle', { cx: '355', cy: '8', r: '2.5', fill: 'currentColor', opacity: '0.85' }));
+    svg.appendChild(svgEl('path', { d: 'M347 6.5 L347 11.5 M350 5.5 L350 12.5', stroke: 'currentColor', 'stroke-width': '1', 'stroke-linecap': 'round' }));
+    svg.appendChild(svgEl('circle', { cx: '355', cy: '9', r: '2.2', fill: 'currentColor', opacity: '0.85' }));
     wrap.appendChild(svg);
     return wrap;
   }
 
-  /* Colofão de encerramento de capítulo / leitura (ramo tipográfico simétrico) */
+  /* Colofão literário de encerramento (livro aberto + pena + halo Art Nouveau × Eternos) */
   function createColophon() {
     var wrap = document.createElement('div');
     wrap.className = 'esc-bl-colophon';
     wrap.setAttribute('aria-hidden', 'true');
-    var svg = svgEl('svg', { viewBox: '0 0 180 26', fill: 'none', 'aria-hidden': 'true', focusable: 'false' });
-    /* Ramos laterais */
-    svg.appendChild(svgEl('path', { d: 'M18 13 C34 13, 44 6, 62 13 C48 16, 36 17, 18 13 Z', stroke: 'currentColor', 'stroke-width': '0.85', opacity: '0.68' }));
-    svg.appendChild(svgEl('path', { d: 'M162 13 C146 13, 136 6, 118 13 C132 16, 144 17, 162 13 Z', stroke: 'currentColor', 'stroke-width': '0.85', opacity: '0.68' }));
-    svg.appendChild(svgEl('line', { x1: '62', y1: '13', x2: '78', y2: '13', stroke: 'currentColor', 'stroke-width': '0.9' }));
-    svg.appendChild(svgEl('line', { x1: '102', y1: '13', x2: '118', y2: '13', stroke: 'currentColor', 'stroke-width': '0.9' }));
-    /* Estrela central de belas letras */
-    svg.appendChild(svgEl('path', { d: 'M90 3.5 L93 10.2 L99.5 13 L93 15.8 L90 22.5 L87 15.8 L80.5 13 L87 10.2 Z', stroke: 'currentColor', 'stroke-width': '1', fill: 'currentColor', 'fill-opacity': '0.2' }));
-    svg.appendChild(svgEl('circle', { cx: '90', cy: '13', r: '1.6', fill: 'currentColor' }));
-    svg.appendChild(svgEl('circle', { cx: '12', cy: '13', r: '1.4', fill: 'currentColor', opacity: '0.7' }));
-    svg.appendChild(svgEl('circle', { cx: '168', cy: '13', r: '1.4', fill: 'currentColor', opacity: '0.7' }));
+    var svg = svgEl('svg', { viewBox: '0 0 200 32', fill: 'none', 'aria-hidden': 'true', focusable: 'false' });
+    /* Volutas laterais Alphonse Mucha + fios oscilantes Eternos */
+    svg.appendChild(svgEl('path', { d: 'M14 16 C32 16, 44 7, 66 16 C48 20, 34 21, 14 16 Z', stroke: 'currentColor', 'stroke-width': '0.85', opacity: '0.66' }));
+    svg.appendChild(svgEl('path', { d: 'M186 16 C168 16, 156 7, 134 16 C152 20, 166 21, 186 16 Z', stroke: 'currentColor', 'stroke-width': '0.85', opacity: '0.66' }));
+    svg.appendChild(svgEl('path', { d: 'M24 16 C42 9, 56 10, 74 16 M176 16 C158 9, 144 10, 126 16', stroke: 'currentColor', 'stroke-width': '0.55', opacity: '0.45' }));
+    /* Halo orbital central */
+    svg.appendChild(svgEl('circle', { cx: '100', cy: '16', r: '12.5', stroke: 'currentColor', 'stroke-width': '0.7', opacity: '0.52' }));
+    svg.appendChild(svgEl('circle', { cx: '100', cy: '16', r: '9.5', stroke: 'currentColor', 'stroke-width': '0.55', opacity: '0.38' }));
+    /* Silhueta de livro aberto + bico de pena literária ao centro */
+    svg.appendChild(svgEl('path', { d: 'M86 21 C91 18.5, 96 18.5, 100 21 C104 18.5, 109 18.5, 114 21 L114 13 C109 11, 104 11, 100 13.5 C96 11, 91 11, 86 13 Z', stroke: 'currentColor', 'stroke-width': '0.95', fill: 'currentColor', 'fill-opacity': '0.12' }));
+    svg.appendChild(svgEl('path', { d: 'M100 4 L103 11.5 L100 14 L97 11.5 Z', fill: 'currentColor', opacity: '0.88' }));
+    svg.appendChild(svgEl('line', { x1: '100', y1: '13.5', x2: '100', y2: '21', stroke: 'currentColor', 'stroke-width': '0.85' }));
+    /* Estrelas de remate */
+    svg.appendChild(svgEl('circle', { cx: '8', cy: '16', r: '1.3', fill: 'currentColor', opacity: '0.72' }));
+    svg.appendChild(svgEl('circle', { cx: '192', cy: '16', r: '1.3', fill: 'currentColor', opacity: '0.72' }));
     wrap.appendChild(svg);
     return wrap;
   }
@@ -14680,6 +14689,9 @@
       st.setProperty('--esc-rg-hero-art', cssAsset('assets/library/real-gabinete-hero.webp'));
       st.setProperty('--esc-rg-book-art', cssAsset('assets/library/tome-objeto-livro.webp'));
       st.setProperty('--esc-rg-lit-art', cssAsset('assets/library/tome-literatura-mundial.webp'));
+      st.setProperty('--esc-of-crown-art', cssAsset('assets/library/oficina-mucha-crown.webp'));
+      st.setProperty('--esc-ac-mucha-frame', cssAsset('assets/library/academy-mucha-frame.webp'));
+      st.setProperty('--esc-cart-crest-art', cssAsset('assets/library/cartorio-mucha-crest.webp'));
     } catch (ignore) {}
   }
   bindLibraryAtmosphere();
@@ -15009,7 +15021,9 @@
       var scrollBody = document.createElement('div');
       scrollBody.className = 'esc-academy-groups';
 
-      /* Hero panorâmico estilo livro ilustrado com 4 camadas parallax */
+      /* Hero panorâmico estilo livro ilustrado com 2 camadas parallax + moldura Alphonse Mucha × Eternos */
+      var heroWrap = document.createElement('div');
+      heroWrap.className = 'esc-academy-hero-wrap';
       var hero = document.createElement('header');
       hero.className = 'esc-academy-hero';
       var sceneInfo = buildHeroScene();
@@ -15020,7 +15034,7 @@
       closeBtn.className = 'esc-academy-close';
       closeBtn.textContent = '← Voltar · Esc';
       on(closeBtn, 'click', close);
-      hero.appendChild(closeBtn);
+      card.appendChild(closeBtn);
 
       var heroInner = document.createElement('div');
       heroInner.className = 'esc-academy-hero-inner';
@@ -15053,7 +15067,23 @@
         heroPlace.appendChild(hpNote);
         hero.appendChild(heroPlace);
       }
-      scrollBody.appendChild(hero);
+      heroWrap.appendChild(hero);
+
+      if (!isPortableDoc()) {
+        heroWrap.className += ' has-mucha-frame';
+        var muchaImg = document.createElement('img');
+        muchaImg.className = 'esc-academy-hero-mucha';
+        muchaImg.src = 'assets/library/academy-mucha-frame.webp';
+        muchaImg.alt = '';
+        muchaImg.setAttribute('aria-hidden', 'true');
+        muchaImg.setAttribute('decoding', 'async');
+        on(muchaImg, 'error', function () {
+          muchaImg.hidden = true;
+          heroWrap.className = 'esc-academy-hero-wrap';
+        });
+        heroWrap.appendChild(muchaImg);
+      }
+      scrollBody.appendChild(heroWrap);
 
       var contentWrap = document.createElement('div');
       contentWrap.className = 'esc-academy-content';
@@ -15448,6 +15478,16 @@
   var E = root.Escr;
 
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
+  function isPortableDoc() {
+    try {
+      if (typeof document !== 'undefined' && document.querySelector) {
+        var meta = document.querySelector('meta[name="distribution-mode"]');
+        if (meta && meta.getAttribute('content') === 'portable') { return true; }
+      }
+      if (typeof location !== 'undefined' && location.protocol === 'file:') { return true; }
+    } catch (ignore) {}
+    return false;
+  }
   function mk(tag, cls, txt) {
     var el = document.createElement(tag);
     if (cls) { el.className = cls; }
@@ -15559,6 +15599,18 @@
       var cert = mk('article', 'cart-cert cart-tone-' + tone);
       if (E.ornaments && E.ornaments.attachCorners) {
         E.ornaments.attachCorners(cert, 'subtle');
+      }
+      if (!isPortableDoc()) {
+        var crestWrap = mk('div', 'cart-cert-crest');
+        crestWrap.setAttribute('aria-hidden', 'true');
+        var crestImg = document.createElement('img');
+        crestImg.src = 'assets/library/cartorio-mucha-crest.webp';
+        crestImg.alt = '';
+        crestImg.setAttribute('aria-hidden', 'true');
+        crestImg.setAttribute('decoding', 'async');
+        on(crestImg, 'error', function () { crestWrap.hidden = true; });
+        crestWrap.appendChild(crestImg);
+        cert.appendChild(crestWrap);
       }
       var mast = mk('div', 'cart-cert-mast');
       mast.appendChild(mk('span', '', 'CARTÓRIO DO ESCREVARAL'));

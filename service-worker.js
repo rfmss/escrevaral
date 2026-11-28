@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-317e6bab2108";
-const RUNTIME_CACHE = "scrvrl-runtime-317e6bab2108";
+const CACHE_NAME = "scrvrl-offline-v6-65-e39306b80b40";
+const RUNTIME_CACHE = "scrvrl-runtime-e39306b80b40";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -8,12 +8,12 @@ const REQUIRED_ASSETS = [
     "sha256": "d6cd9da15371a34f5b69d5a91a907cf30116c3b496ca45907eed8c1422548e64"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.fa0fd424f237d0d8.js",
-    "sha256": "fa0fd424f237d0d8d5d36d8e9604d1a9d0fb063ed4849267627ab1dfc4e07416"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.07d13abfeff16e38.js",
+    "sha256": "07d13abfeff16e38edf4326a47847c20d87cf17b5f4021e94ef59275dfbb76e3"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.692ded5825521fae.css",
-    "sha256": "692ded5825521fae57d77f6eb566bbb8ffe8dcc7a5767972f47b212537a90a64"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.69746a01ef16e2cc.css",
+    "sha256": "69746a01ef16e2cc621fc22060c6c024f97956ebcf82c85e43c04a0c78e0dd5a"
   }
 ];
 const BUNKER_ASSETS = [
@@ -36,6 +36,7 @@ const BUNKER_ASSETS = [
   "./academia/revisao-manuscrito.html",
   "./academia/submissao-editoras.html",
   "./academia/titulo-do-livro.html",
+  "./assets/library/academy-mucha-frame.webp",
   "./assets/library/banner-abl.webp",
   "./assets/library/banner-bloqueio.webp",
   "./assets/library/banner-cabaceiras.webp",
@@ -51,9 +52,11 @@ const BUNKER_ASSETS = [
   "./assets/library/banner-publicacao.webp",
   "./assets/library/banner-rui-barbosa.webp",
   "./assets/library/banner-titulo.webp",
+  "./assets/library/cartorio-mucha-crest.webp",
   "./assets/library/estante-cafe-bistro.webp",
   "./assets/library/estante-livros-outono.webp",
   "./assets/library/estante-trepadeira-outono.webp",
+  "./assets/library/oficina-mucha-crown.webp",
   "./assets/library/reader-biblioteca-nacional.webp",
   "./assets/library/reader-cinemateca-acervo.webp",
   "./assets/library/reader-mucha-frame.webp",
@@ -98,7 +101,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: '44b0dafe1617942098dede1d6fa5859b3a24787bd91798157ffe846d28a6b316' });
+    const index = await checkedAsset({ url: './index.html', sha256: '64516c7a047d6dfa51f7650cbf9de3acef44f4030f45135961da7fa688d5d6d4' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);

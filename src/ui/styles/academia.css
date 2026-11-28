@@ -72,8 +72,52 @@
   #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
   /* =====================================================================
-   * HERO REAL GABINETE: PINTURA LIMPA SEM MOLDURA NO TÍTULO + LEGENDA EMBAIXO
+   * HERO REAL GABINETE: MOLDURA ALPHONSE MUCHA × ETERNOS (LIVRO + PENAS)
    * ===================================================================== */
+  #esc-academy-overlay .esc-academy-hero-wrap {
+    position: relative;
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame {
+    width: min(84%, 780px);
+    margin: 148px auto 112px;
+    overflow: visible;
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-hero {
+    min-height: 228px;
+    padding: 34px 40px 16px;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0 10px 28px rgba(18, 9, 4, 0.3);
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-crest {
+    display: none;
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-ac-layer-hall {
+    opacity: 0.25;
+  }
+  #esc-academy-overlay .esc-academy-hero-mucha {
+    position: absolute;
+    top: -57.73%;
+    bottom: -48.98%;
+    left: -6.89%;
+    right: -6.97%;
+    width: 113.86%;
+    height: 206.71%;
+    max-width: none;
+    z-index: 5;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    filter: drop-shadow(0 4px 10px rgba(24, 15, 7, 0.22));
+  }
+  #esc-academy-overlay .esc-academy-hero-mucha[hidden] {
+    display: none !important;
+  }
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-hero-mucha {
+    filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.52)) brightness(1.06) contrast(1.04);
+  }
+
   #esc-academy-overlay .esc-academy-hero {
     position: relative;
     min-height: 248px;
@@ -137,17 +181,18 @@
 
   #esc-academy-overlay .esc-academy-close {
     position: absolute;
-    top: 18px;
+    top: 16px;
     right: 22px;
-    z-index: 6;
+    z-index: 10;
     min-height: 32px;
     padding: 5px 13px;
-    border: 1px solid rgba(238, 198, 126, 0.72) !important;
+    border: 1px solid rgba(181, 133, 61, 0.72) !important;
     border-radius: 99px;
-    background: rgba(24, 12, 6, 0.84) !important;
+    background: rgba(24, 12, 6, 0.86) !important;
     color: #fbf3e2 !important;
     font: 600 12px/1.2 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     cursor: pointer;
+    box-shadow: 0 3px 10px rgba(15, 8, 4, 0.28);
   }
 
   #esc-academy-overlay .esc-academy-close:hover {
@@ -819,6 +864,32 @@
 
   @media (max-width: 760px) {
     #esc-academy-overlay.esc-academy-overlay { padding: 8px; }
+    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame {
+      width: calc(100% - 28px);
+      margin: 60px auto 24px;
+    }
+    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-hero {
+      padding: 28px 18px 20px;
+      min-height: 196px;
+      border: 1.5px solid #b8883c;
+      border-radius: 6px;
+    }
+    #esc-academy-overlay .esc-academy-hero-mucha { display: none; }
+    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -46px;
+      width: min(82%, 248px);
+      height: 54px;
+      transform: translateX(-50%);
+      z-index: 5;
+      pointer-events: none;
+      background-image: var(--esc-of-crown-art, none);
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      background-size: contain;
+    }
     #esc-academy-overlay .esc-academy-hero { padding: 50px 20px 24px; min-height: 200px; }
     #esc-academy-overlay .esc-academy-content { padding: 16px 16px 24px; }
     #esc-academy-overlay .esc-academy-featured-grid,
