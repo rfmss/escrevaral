@@ -29,6 +29,7 @@
 
   var HERO_ART_LER = 'assets/library/reader-biblioteca-nacional.webp';
   var HERO_ART_ENSAIO = 'assets/library/reader-cinemateca-acervo.webp';
+  var HERO_MUCHA_FRAME = 'assets/library/reader-mucha-frame.webp';
   var HERO_PLACE_LER_TITLE = '✦ Salão de Leitura · Biblioteca Nacional do Brasil (Rio de Janeiro, RJ)';
   var HERO_PLACE_LER_DESC = ' — Inaugurada em 1910, maior acervo bibliográfico da América Latina.';
   var HERO_PLACE_ENSAIO_TITLE = '✦ Acervo de Roteiros e Películas · Cinemateca Brasileira (São Paulo, SP)';
@@ -603,10 +604,11 @@
         '<div id="esc-reader-viewport" class="esc-reader-viewport" tabindex="0">' +
           '<div id="esc-reader-page" class="esc-reader-page">' +
             '<div class="esc-reader-masthead"><span id="esc-reader-date"></span><strong class="esc-reader-brand">ESCREVARAL</strong><span id="esc-reader-project-tag"></span></div>' +
-            '<div id="esc-reader-hero" class="esc-reader-hero" aria-hidden="true">' +
+            '<div id="esc-reader-hero" class="esc-reader-hero' + (isPortableDoc() ? '' : ' has-mucha-frame') + '" aria-hidden="true">' +
               '<div class="esc-reader-hero-cut">' +
                 (isPortableDoc() ? '' : '<img id="esc-reader-hero-img" class="esc-reader-hero-img" src="' + HERO_ART_LER + '" alt="" decoding="async">') +
               '</div>' +
+              (isPortableDoc() ? '' : '<img id="esc-reader-hero-mucha" class="esc-reader-hero-mucha" src="' + HERO_MUCHA_FRAME + '" alt="" decoding="async">') +
               '<div class="esc-reader-hero-filigree" aria-hidden="true"></div>' +
               '<span id="esc-reader-hero-badge" class="esc-reader-hero-badge" hidden>READ-THRU · ENSAIO</span>' +
             '</div>' +
@@ -638,6 +640,18 @@
       if (heroImgInit) {
         on(heroImgInit, 'error', function () { heroImgInit.hidden = true; });
         on(heroImgInit, 'load', function () { heroImgInit.hidden = false; });
+      }
+      var heroMuchaInit = byId('esc-reader-hero-mucha');
+      var heroWrapInit = byId('esc-reader-hero');
+      if (heroMuchaInit && heroWrapInit) {
+        on(heroMuchaInit, 'error', function () {
+          heroMuchaInit.hidden = true;
+          if (heroWrapInit.classList) { heroWrapInit.classList.remove('has-mucha-frame'); }
+        });
+        on(heroMuchaInit, 'load', function () {
+          heroMuchaInit.hidden = false;
+          if (heroWrapInit.classList) { heroWrapInit.classList.add('has-mucha-frame'); }
+        });
       }
       if (root.Escr.pinoMola && byId('esc-reader-viewport')) {
         root.Escr.pinoMola.attach(byId('esc-reader-viewport'), { hostEl: overlayEl, variant: 'reader' });

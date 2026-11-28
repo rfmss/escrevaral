@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-f0a460c56db0";
-const RUNTIME_CACHE = "scrvrl-runtime-f0a460c56db0";
+const CACHE_NAME = "scrvrl-offline-v6-65-deeef8660ed3";
+const RUNTIME_CACHE = "scrvrl-runtime-deeef8660ed3";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -8,12 +8,12 @@ const REQUIRED_ASSETS = [
     "sha256": "d6cd9da15371a34f5b69d5a91a907cf30116c3b496ca45907eed8c1422548e64"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.e00545efa17538a3.js",
-    "sha256": "e00545efa17538a3bcce83f6cf8f699f98085dea52e8d031bcfb4b33a9d044c5"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.fa0fd424f237d0d8.js",
+    "sha256": "fa0fd424f237d0d8d5d36d8e9604d1a9d0fb063ed4849267627ab1dfc4e07416"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.3d6386d22e93fd29.css",
-    "sha256": "3d6386d22e93fd29761e8d39438f49bd751c9db723d9097de3eb9fc03e0daaf7"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.b81fc15d264bb322.css",
+    "sha256": "b81fc15d264bb3221a1473a6f4d7a1ca293fb71dc1bc1b039b720764840647d6"
   }
 ];
 const BUNKER_ASSETS = [
@@ -56,6 +56,7 @@ const BUNKER_ASSETS = [
   "./assets/library/estante-trepadeira-outono.webp",
   "./assets/library/reader-biblioteca-nacional.webp",
   "./assets/library/reader-cinemateca-acervo.webp",
+  "./assets/library/reader-mucha-frame.webp",
   "./assets/library/real-gabinete-hero.webp",
   "./assets/library/tome-literatura-mundial.webp",
   "./assets/library/tome-objeto-livro.webp",
@@ -97,7 +98,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: '30316978f736d8cd92881474a4b54a57667b183130cd6a5c2a3faba75ecf0e49' });
+    const index = await checkedAsset({ url: './index.html', sha256: 'b266758c94874ec8d63502d4f9635b84905a5ab9ec15cc60e3c4dff37236364d' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);
