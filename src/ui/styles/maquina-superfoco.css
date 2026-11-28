@@ -176,8 +176,8 @@
     color: #cfd6cb;
   }
   body[data-theme="escuro"] .esc-machine {
-    -webkit-filter: brightness(1.18) contrast(1.06) saturate(1.12);
-    filter: brightness(1.18) contrast(1.06) saturate(1.12);
+    -webkit-filter: brightness(0.84) contrast(1.06) saturate(1.06);
+    filter: brightness(0.84) contrast(1.06) saturate(1.06);
   }
   body[data-theme="escuro"] .esc-writing-btn,
   body[data-theme="escuro"] .esc-writing-icon-btn {

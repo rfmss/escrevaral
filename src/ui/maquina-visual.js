@@ -406,10 +406,27 @@
       }
     } catch (ignore) {}
 
-    function assignFrameSources() {
-      var i;
+    function assignFrameSources(ext) {
+      var i, portable = isPortableDoc();
       for (i = 0; i < frames.length; i += 1) {
-        frames[i].src = makeFallbackSvg(i);
+        (function (img, idx) {
+          var fallbackSrc = makeFallbackSvg(idx);
+          if (portable) {
+            img.src = fallbackSrc;
+            return;
+          }
+          var triedPng = ext === 'png';
+          img.onerror = function () {
+            if (!triedPng) {
+              triedPng = true;
+              img.src = frameUrl(idx, 'png', baseUrl);
+            } else {
+              img.onerror = null;
+              img.src = fallbackSrc;
+            }
+          };
+          img.src = frameUrl(idx, ext || 'webp', baseUrl);
+        }(frames[i], i));
       }
     }
 
