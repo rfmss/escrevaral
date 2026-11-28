@@ -1574,14 +1574,75 @@
     if (!found && (current.revision || dirty || current.title || current.text)) { entries.push(current); }
     return entries;
   }
+  function buildImportedDocsFromEditorial(parsed, bookName) {
+    var list = [], i, ch, entry;
+    var chapters = (parsed && parsed.chapters && parsed.chapters.length) ? parsed.chapters : [{ title: parsed.title || 'Texto importado', text: parsed.text || '' }];
+    for (i = 0; i < chapters.length; i += 1) {
+      ch = chapters[i];
+      entry = E.freshDocument();
+      entry.title = String(ch.title || parsed.title || ('Capítulo ' + (i + 1))).slice(0, 140);
+      entry.text = String(ch.text || '');
+      entry.project = bookName;
+      if (E.cartorio) { entry.cartorio = E.cartorio.sealDocument(null, entry, 'imported'); }
+      list.push(entry);
+    }
+    return list;
+  }
   function importFile(file) {
     if (!file) { return; }
     if (file.size > 50000000) { message('Traga pacotes de até 50 MB por vez.'); return; }
     if (!notebooks || !archive || !checkpoint()) { message('A gravação precisa estar disponível para importar um caderno.'); return; }
+    if (/\.docx$/i.test(file.name) && E.editorialImport && E.transfer && E.transfer.readBinary) {
+      E.transfer.readBinary(file, function (error, buf) {
+        if (error) { message(error.message); return; }
+        try {
+          var parsed = E.editorialImport.parseDocxBytes(buf, file.name);
+          var bookLabel = parsed.chapters.length > 1
+            ? parsed.title
+            : (activeNotebook() ? activeNotebook().name + ' — importado' : parsed.title);
+          importDocsArray(buildImportedDocsFromEditorial(parsed, bookLabel));
+        } catch (e) {
+          message((e && e.message ? e.message : 'Não foi possível ler este arquivo .docx.') + ' O acervo anterior foi preservado.');
+        }
+      });
+      return;
+    }
     E.transfer.read(file, function (error, contents) {
       if (error) { message(error.message); return; }
       importContents(contents, file.name, file.type);
     });
+  }
+  function importDocsArray(docs) {
+    var payload = null, converted = [];
+    try {
+      docs = JSON.parse(JSON.stringify(docs));
+      docs.forEach(function (d) {
+        if (d.kind === 'reminder' && !projectName(d.project)) { delete d.projectId; return; }
+        var title = projectName(d.project) || 'Avulsos', book = null;
+        converted.forEach(function (b) { if (b.name === title) { book = b; } });
+        if (!book) { book = { id: 'book-' + E.freshDocument().id, name: title, aliases: [], color: '#c4cfc2', data: {} }; converted.push(book); }
+        d.projectId = book.id; d.project = book.name;
+      });
+      payload = { format: 'escrevaral-cadernos', version: 1, scope: 'all', notebooks: converted, documents: docs, globals: {}, inventory: { notebooks: converted.length, documents: docs.length } };
+      notebooks.validate(payload);
+      var notice = 'Importar ' + payload.notebooks.length + ' caderno(s) e ' + payload.documents.length + ' registro(s)? Cadernos já existentes serão preservados; os repetidos entrarão como cópias.';
+      E.dialog.ask({ title: 'Importar manuscrito?', message: notice, accept: 'Importar' }, function (ok) {
+        if (!ok) { message('Importação cancelada. O acervo anterior foi preservado.'); return; }
+        try {
+          var result = E.installPackage(storage, notebooks, archive, payload, { sessionKey: sessionKey });
+          renderNotebooks(); renderCabinet(); if (workspaceUI) { workspaceUI.render(); }
+          if (result && result.documents && result.documents.length) {
+            var opened = archive.get(result.documents[0]);
+            if (opened) { loadDocument(opened); enterDesk(false); }
+          }
+          message('Importação concluída: ' + payload.documents.length + ' texto(s) trazido(s) sem alterar o acervo anterior.');
+        } catch (err) {
+          message((err && err.message ? err.message : 'Falha ao importar.') + ' O acervo anterior foi preservado.');
+        }
+      });
+    } catch (e) {
+      message((e && e.message ? e.message : 'Arquivo inválido.') + ' O acervo anterior foi preservado.');
+    }
   }
   function importContents(contents, name, type) {
     if (typeof contents !== 'string' || contents.length > 50000000) { message('Traga uma cópia menor, em partes de até 50 milhões de unidades de texto.'); return; }
@@ -1594,11 +1655,17 @@
         if (payload && payload.format === 'escrevaral-astra' && payload.version === 1 && Object.prototype.toString.call(payload.documents) === '[object Array]' && payload.documents.every(E.validDocument)) {
           docs = payload.documents; payload = null;
         }
+      } else if (/\.(md|markdown)$/i.test(name) && E.editorialImport) {
+        var mdParsed = E.editorialImport.parseMarkdown(contents, name);
+        var mdBook = mdParsed.chapters.length > 1
+          ? mdParsed.title
+          : (activeNotebook() ? activeNotebook().name + ' — importado' : mdParsed.title);
+        docs = buildImportedDocsFromEditorial(mdParsed, mdBook);
       } else if (/\.txt$/i.test(name) || type === 'text/plain') {
         var entry = E.freshDocument(); entry.title = name.replace(/\.txt$/i, ''); entry.text = String(contents); entry.project = activeNotebook() ? activeNotebook().name + ' — importado' : 'Texto importado';
         if (E.cartorio) { entry.cartorio = E.cartorio.sealDocument(null, entry, 'imported'); }
         docs = [entry];
-      } else { throw new Error('Traga um caderno .scrvrl, uma cópia .json ou um texto .txt.'); }
+      } else { throw new Error('Traga um caderno .scrvrl, um Word .docx, um Markdown .md, uma cópia .json ou um texto .txt.'); }
       if (docs) {
         docs = JSON.parse(JSON.stringify(docs));
         docs.forEach(function (d) {
@@ -2120,6 +2187,14 @@
         else if (!event.shiftKey && (document.activeElement === last || document.activeElement === byId(activePanel))) { event.preventDefault(); first.focus(); }
       }
     }
+    if ((event.ctrlKey || event.metaKey) && code === 72) {
+      if (!cabinetOpen && findReplaceUI) {
+        event.preventDefault();
+        closePanels(false);
+        findReplaceUI.open();
+      }
+      return;
+    }
     if ((event.ctrlKey || event.metaKey) && code === 75) {
       event.preventDefault(); closePanels(false);
       if (cabinetOpen) { byId('cabinet-search').focus(); }
@@ -2131,6 +2206,7 @@
     else if (code === 27 && document.body.getAttribute('data-counts') === 'true') { byId('desk-counts-close').click(); }
     else if (code === 27) {
       var hasOverlay = (byId('esc-word-card') && !byId('esc-word-card').hidden) ||
+        (byId('esc-find-bar') && !byId('esc-find-bar').hidden) ||
         (byId('esc-academy-overlay') && !byId('esc-academy-overlay').hidden) ||
         (byId('esc-calculator') && !byId('esc-calculator').hidden) ||
         (byId('esc-template-modal') && !byId('esc-template-modal').hidden) ||
@@ -2875,6 +2951,61 @@
       storage: storage,
       onBreakStart: function () { message("Tempo de escrita concluído. Pausa iniciada."); }
     });
+  }
+  var findReplaceUI = null;
+  if (E.mountFindReplace) {
+    findReplaceUI = E.mountFindReplace({
+      hostEl: byId('editor-viewport'),
+      manuscriptEl: manuscript,
+      getText: function () { return manuscript.value || ''; },
+      isReadOnly: function () { return !!(doc && (doc.locked || doc.category === 'reference')) || !!manuscript.readOnly; },
+      onReveal: function (start, end, focusEditor) {
+        if (richUI && richUI.isRich && richUI.isRich()) {
+          richUI.revealRange(start, end);
+          return;
+        }
+        if (focusEditor && manuscript.focus) { manuscript.focus(); }
+        if (manuscript.setSelectionRange) { manuscript.setSelectionRange(start, end); }
+        if (manuscript.scrollHeight && manuscript.value.length) {
+          var ratio = start / manuscript.value.length;
+          manuscript.scrollTop = Math.max(0, Math.round(ratio * manuscript.scrollHeight - (manuscript.clientHeight || 200) * 0.35));
+        }
+        if (typeof positionFocus === 'function') { positionFocus(); }
+      },
+      onReplaceRange: function (start, end, rep) {
+        if (richUI && richUI.isRich && richUI.isRich() && richUI.replaceRange) {
+          var okR = richUI.replaceRange(start, end, rep);
+          if (okR) { schedule(); }
+          return okR;
+        }
+        manuscript.value = E.findReplaceCore.replaceOne(manuscript.value, { start: start, end: end }, rep);
+        schedule();
+        return true;
+      },
+      onReplaceAll: function (nextText) {
+        if (richUI && richUI.isRich && richUI.isRich() && richUI.replaceAllPlain) {
+          richUI.replaceAllPlain(nextText);
+          schedule();
+          return;
+        }
+        manuscript.value = nextText;
+        schedule();
+      },
+      onClose: function () {
+        if (richUI && richUI.isRich && richUI.isRich()) {
+          var rEl = byId('esc-rich-editor');
+          if (rEl && rEl.focus) { rEl.focus(); }
+        } else if (manuscript && manuscript.focus) {
+          manuscript.focus();
+        }
+      }
+    });
+    if (byId('esc-find-btn')) {
+      listen(byId('esc-find-btn'), 'click', function () {
+        if (findReplaceUI.isOpen()) { findReplaceUI.close(); }
+        else { findReplaceUI.open(); }
+      });
+    }
   }
   if (E.mountCalculator) {
     calcUI = E.mountCalculator({

@@ -52,6 +52,15 @@
           { id: 'ritmo', label: 'Ritmo' },
           { id: 'sintaxe', label: 'Sintaxe' }
         ] } },
+    { id: 'cena-tempo-e-personagem', title: 'Cena, tempo e personagem', group: 'Escrita e revisão', description: 'Velocidades do tempo narrativo, virada de cena, subtexto e personagens vivos.', file: 'cena-tempo-e-personagem.html',
+      bridge: { action: 'write', label: 'Voltar à folha e revisar a cena', hint: 'Aplique desejo, obstáculo e virada direto no capítulo atual.' } },
+    { id: 'poesia-ritmo-e-cancao', title: 'Poesia, ritmo e canção', group: 'Escrita e revisão', description: 'Sílaba poética sem trauma, sinalefa, rimas, a Volta do soneto e prosódia na canção.', file: 'poesia-ritmo-e-cancao.html',
+      bridge: { action: 'examine', label: 'Ouvir métrica e rimas na folha', hint: 'Abra o Examinar nas lentes de Rima e Métrica sobre seu poema ou letra.',
+        lenses: [
+          { id: 'rima', label: 'Rima' },
+          { id: 'metrica', label: 'Métrica' },
+          { id: 'ritmo', label: 'Ritmo' }
+        ] } },
     { id: 'titulo-do-livro', title: 'Escolher o título', group: 'Escrita e revisão', description: 'Explore caminhos para dar nome à obra.', file: 'titulo-do-livro.html',
       bridge: { action: 'focus-title', label: 'Editar título da folha', hint: 'Teste títulos direto no cabeçalho do manuscrito.' } },
     { id: 'bloqueio-criativo', title: 'Bloqueio criativo', group: 'Escrita e revisão', description: 'Encontre uma forma de retomar a escrita.', file: 'bloqueio-criativo.html',
@@ -188,7 +197,7 @@
     return { stage: stage, layers: [dome, hall] };
   }
 
-  var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
+  var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII'];
 
   function byId(id) { return document.getElementById(id); }
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }

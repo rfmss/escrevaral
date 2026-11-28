@@ -398,7 +398,10 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
 .chk-bar-track { height:9px; border-radius:99px; background:var(--paper); border:1px solid var(--line); overflow:hidden; margin-top:10px; }
 .chk-bar-fill { height:100%; width:0%; background:var(--afk-gold); transition:width 180ms ease; }
 .chk-card { display:flex; align-items:flex-start; gap:12px; cursor:pointer; }
-.chk-card input { margin-top:4px; width:17px; height:17px; flex-shrink:0; accent-color:var(--accent); }
+.chk-card input[type="checkbox"] { -webkit-appearance:none; appearance:none; margin:3px 0 0; width:18px; height:18px; border-radius:4px; border:1.5px solid rgba(139,90,30,.62); background:var(--paper); display:inline-grid; place-items:center; flex-shrink:0; cursor:pointer; transition:background 140ms ease,border-color 140ms ease; }
+.chk-card input[type="checkbox"]:hover { border-color:var(--accent); background:var(--tint); }
+.chk-card input[type="checkbox"]:checked { background:var(--accent); border-color:var(--accent); }
+.chk-card input[type="checkbox"]:checked::after { content:""; width:9px; height:5px; border-left:2px solid var(--paper); border-bottom:2px solid var(--paper); transform:rotate(-45deg) translate(0.5px,-0.5px); }
 .chk-card.is-done { opacity:.76; border-color:var(--ok); }
 </style>
 </head>

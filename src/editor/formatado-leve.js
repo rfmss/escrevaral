@@ -332,6 +332,22 @@
         sel.addRange(range);
         return true;
       },
+      replaceRange: function (start, end, replacement) {
+        if (!richActive || readOnly || !richEl) { return false; }
+        var range = mapPlainRangeToDom(richEl, start, end);
+        if (!range) { return false; }
+        range.deleteContents();
+        var tn = document.createTextNode(String(replacement || ''));
+        range.insertNode(tn);
+        syncProjection();
+        return true;
+      },
+      replaceAllPlain: function (nextPlain) {
+        if (!richActive || readOnly || !richEl) { return false; }
+        richEl.innerHTML = plainToSafeHtml(String(nextPlain || ''));
+        syncProjection();
+        return true;
+      },
       html: function () {
         return richActive && richEl ? sanitizeHtml(richEl.innerHTML) : '';
       }

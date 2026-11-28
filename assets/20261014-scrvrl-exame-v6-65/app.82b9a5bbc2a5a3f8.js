@@ -3132,7 +3132,19 @@
       reader.readAsText(file, 'UTF-8');
     } catch (error) { finish(error); }
   }
-  E.transfer = { selectRange: selectRange, download: download, read: read };
+  function readBinary(file, done) {
+    var reader, ended = false;
+    function finish(error, value) { if (!ended) { ended = true; done(error, value); } }
+    try {
+      if (!root.FileReader) { throw new Error('Este navegador não lê arquivos binários (.docx).'); }
+      reader = new root.FileReader();
+      reader.onerror = function () { finish(new Error('O arquivo .docx não pôde ser lido. O acervo permanece.')); };
+      reader.onabort = function () { finish(new Error('Leitura cancelada. O acervo permanece.')); };
+      reader.onload = function () { finish(null, reader.result); };
+      reader.readAsArrayBuffer(file);
+    } catch (error) { finish(error); }
+  }
+  E.transfer = { selectRange: selectRange, download: download, read: read, readBinary: readBinary };
 }(window));
 
 ;
@@ -6672,6 +6684,22 @@
         richEl.focus();
         sel.removeAllRanges();
         sel.addRange(range);
+        return true;
+      },
+      replaceRange: function (start, end, replacement) {
+        if (!richActive || readOnly || !richEl) { return false; }
+        var range = mapPlainRangeToDom(richEl, start, end);
+        if (!range) { return false; }
+        range.deleteContents();
+        var tn = document.createTextNode(String(replacement || ''));
+        range.insertNode(tn);
+        syncProjection();
+        return true;
+      },
+      replaceAllPlain: function (nextPlain) {
+        if (!richActive || readOnly || !richEl) { return false; }
+        richEl.innerHTML = plainToSafeHtml(String(nextPlain || ''));
+        syncProjection();
         return true;
       },
       html: function () {
@@ -10572,6 +10600,696 @@
 }(typeof window !== 'undefined' ? window : this));
 
 ;
+/* Fonte: src/storage/importacao-editorial.js */
+/* Importador editorial offline 100% ES5 (.docx OOXML via ZIP+DEFLATE puro, .md e .txt). */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+
+  function utf8Decode(bytes) {
+    if (!bytes || !bytes.length) { return ''; }
+    if (typeof TextDecoder === 'function') {
+      try { return new TextDecoder('utf-8').decode(bytes); } catch (ignore) {}
+    }
+    var out = [], i = 0, len = bytes.length, c, c2, c3, c4, cp;
+    while (i < len) {
+      c = bytes[i++];
+      if (c < 128) { out.push(String.fromCharCode(c)); }
+      else if ((c & 0xe0) === 0xc0 && i < len) {
+        c2 = bytes[i++];
+        out.push(String.fromCharCode(((c & 0x1f) << 6) | (c2 & 0x3f)));
+      } else if ((c & 0xf0) === 0xe0 && i + 1 < len) {
+        c2 = bytes[i++]; c3 = bytes[i++];
+        out.push(String.fromCharCode(((c & 0x0f) << 12) | ((c2 & 0x3f) << 6) | (c3 & 0x3f)));
+      } else if ((c & 0xf8) === 0xf0 && i + 2 < len) {
+        c2 = bytes[i++]; c3 = bytes[i++]; c4 = bytes[i++];
+        cp = (((c & 0x07) << 18) | ((c2 & 0x3f) << 12) | ((c3 & 0x3f) << 6) | (c4 & 0x3f)) - 0x10000;
+        out.push(String.fromCharCode(0xd800 + (cp >> 10), 0xdc00 + (cp & 0x3ff)));
+      }
+    }
+    return out.join('');
+  }
+
+  /* ---- RFC 1951 DEFLATE raw decompressor (ES5 puro, sem dependências externas) ---- */
+  var LEN_BASE = [3,4,5,6,7,8,9,10,11,13,15,17,19,23,27,31,35,43,51,59,67,83,99,115,131,163,195,227,258];
+  var LEN_EXTRA = [0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0];
+  var DIST_BASE = [1,2,3,4,5,7,9,13,17,25,33,49,65,97,129,193,257,385,513,769,1025,1537,2049,3073,4097,6145,8193,12289,16385,24577];
+  var DIST_EXTRA = [0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13];
+  var CL_ORDER = [16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15];
+
+  function buildHuff(lengths, numSyms) {
+    var counts = [], i, len, maxBits = 0;
+    for (i = 0; i <= 15; i += 1) { counts[i] = 0; }
+    for (i = 0; i < numSyms; i += 1) {
+      len = lengths[i] || 0;
+      if (len > 0) {
+        counts[len] += 1;
+        if (len > maxBits) { maxBits = len; }
+      }
+    }
+    var nextCode = [], code = 0;
+    counts[0] = 0;
+    for (i = 1; i <= 15; i += 1) {
+      code = (code + counts[i - 1]) << 1;
+      nextCode[i] = code;
+    }
+    var table = {};
+    for (i = 0; i < numSyms; i += 1) {
+      len = lengths[i] || 0;
+      if (len > 0) {
+        table[(len << 16) | nextCode[len]] = i;
+        nextCode[len] += 1;
+      }
+    }
+    return { table: table, maxBits: maxBits };
+  }
+
+  var FIXED_LIT = null, FIXED_DIST = null;
+  function ensureFixedTables() {
+    if (FIXED_LIT) { return; }
+    var ll = [], dl = [], i;
+    for (i = 0; i <= 143; i += 1) { ll[i] = 8; }
+    for (i = 144; i <= 255; i += 1) { ll[i] = 9; }
+    for (i = 256; i <= 279; i += 1) { ll[i] = 7; }
+    for (i = 280; i <= 287; i += 1) { ll[i] = 8; }
+    for (i = 0; i < 32; i += 1) { dl[i] = 5; }
+    FIXED_LIT = buildHuff(ll, 288);
+    FIXED_DIST = buildHuff(dl, 32);
+  }
+
+  function inflateRaw(src) {
+    var pos = 0, bitBuf = 0, bitCnt = 0;
+    var out = [];
+    var srcLen = src.length;
+
+    function readBits(n) {
+      while (bitCnt < n) {
+        if (pos >= srcLen) { throw new Error('Fluxo DEFLATE truncado.'); }
+        bitBuf |= (src[pos++] << bitCnt);
+        bitCnt += 8;
+      }
+      var val = bitBuf & ((1 << n) - 1);
+      bitBuf >>>= n;
+      bitCnt -= n;
+      return val;
+    }
+
+    function decodeSym(huff) {
+      var code = 0, len, key;
+      for (len = 1; len <= huff.maxBits; len += 1) {
+        code = (code << 1) | readBits(1);
+        key = (len << 16) | code;
+        if (Object.prototype.hasOwnProperty.call(huff.table, key)) {
+          return huff.table[key];
+        }
+      }
+      throw new Error('Código Huffman inválido no arquivo .docx.');
+    }
+
+    var bfinal = 0, btype, i, sym, distSym, length, dist, start;
+    while (!bfinal) {
+      bfinal = readBits(1);
+      btype = readBits(2);
+      if (btype === 0) {
+        bitBuf = 0; bitCnt = 0;
+        if (pos + 4 > srcLen) { throw new Error('Bloco ZIP inválido.'); }
+        var blen = src[pos] | (src[pos + 1] << 8);
+        pos += 4;
+        if (pos + blen > srcLen) { throw new Error('Bloco ZIP truncado.'); }
+        for (i = 0; i < blen; i += 1) { out.push(src[pos++]); }
+      } else if (btype === 1 || btype === 2) {
+        var litHuff, distHuff;
+        if (btype === 1) {
+          ensureFixedTables();
+          litHuff = FIXED_LIT;
+          distHuff = FIXED_DIST;
+        } else {
+          var hlit = readBits(5) + 257;
+          var hdist = readBits(5) + 1;
+          var hclen = readBits(4) + 4;
+          var clLens = [];
+          for (i = 0; i < 19; i += 1) { clLens[i] = 0; }
+          for (i = 0; i < hclen; i += 1) { clLens[CL_ORDER[i]] = readBits(3); }
+          var clHuff = buildHuff(clLens, 19);
+          var allLens = [], total = hlit + hdist, rep, prev;
+          while (allLens.length < total) {
+            sym = decodeSym(clHuff);
+            if (sym < 16) {
+              allLens.push(sym);
+            } else if (sym === 16) {
+              rep = readBits(2) + 3;
+              prev = allLens.length ? allLens[allLens.length - 1] : 0;
+              for (i = 0; i < rep; i += 1) { allLens.push(prev); }
+            } else if (sym === 17) {
+              rep = readBits(3) + 3;
+              for (i = 0; i < rep; i += 1) { allLens.push(0); }
+            } else if (sym === 18) {
+              rep = readBits(7) + 11;
+              for (i = 0; i < rep; i += 1) { allLens.push(0); }
+            }
+          }
+          litHuff = buildHuff(allLens.slice(0, hlit), hlit);
+          distHuff = buildHuff(allLens.slice(hlit, hlit + hdist), hdist);
+        }
+        while (true) {
+          sym = decodeSym(litHuff);
+          if (sym < 256) {
+            out.push(sym);
+          } else if (sym === 256) {
+            break;
+          } else {
+            var li = sym - 257;
+            if (li < 0 || li >= LEN_BASE.length) { throw new Error('Comprimento DEFLATE inválido.'); }
+            length = LEN_BASE[li] + (LEN_EXTRA[li] ? readBits(LEN_EXTRA[li]) : 0);
+            distSym = decodeSym(distHuff);
+            if (distSym < 0 || distSym >= DIST_BASE.length) { throw new Error('Distância DEFLATE inválida.'); }
+            dist = DIST_BASE[distSym] + (DIST_EXTRA[distSym] ? readBits(DIST_EXTRA[distSym]) : 0);
+            start = out.length - dist;
+            if (start < 0) { throw new Error('Referência DEFLATE fora dos limites.'); }
+            for (i = 0; i < length; i += 1) {
+              out.push(out[start + i]);
+            }
+          }
+        }
+      } else {
+        throw new Error('Tipo de bloco DEFLATE não suportado.');
+      }
+    }
+    return new Uint8Array(out);
+  }
+
+  function u16(b, o) { return b[o] | (b[o + 1] << 8); }
+  function u32(b, o) { return (b[o] | (b[o + 1] << 8) | (b[o + 2] << 16) | (b[o + 3] << 24)) >>> 0; }
+
+  function readZipEntry(bytes, targetName) {
+    if (!bytes || bytes.length < 22) { throw new Error('Arquivo .docx inválido ou corrompido.'); }
+    var eocd = -1, minPos = Math.max(0, bytes.length - 65557), i;
+    for (i = bytes.length - 22; i >= minPos; i -= 1) {
+      if (bytes[i] === 0x50 && bytes[i + 1] === 0x4b && bytes[i + 2] === 0x05 && bytes[i + 3] === 0x06) {
+        eocd = i; break;
+      }
+    }
+    if (eocd < 0) { throw new Error('O arquivo não possui estrutura ZIP válida (.docx).'); }
+    var cdSize = u32(bytes, eocd + 12);
+    var cdOff = u32(bytes, eocd + 16);
+    var end = Math.min(bytes.length, cdOff + cdSize);
+    var p = cdOff;
+    while (p + 46 <= end) {
+      if (u32(bytes, p) !== 0x02014b50) { break; }
+      var method = u16(bytes, p + 10);
+      var compSize = u32(bytes, p + 20);
+      var nameLen = u16(bytes, p + 28);
+      var extraLen = u16(bytes, p + 30);
+      var commentLen = u16(bytes, p + 32);
+      var localOff = u32(bytes, p + 42);
+      var name = utf8Decode(bytes.subarray(p + 46, p + 46 + nameLen));
+      if (name === targetName) {
+        if (u32(bytes, localOff) !== 0x04034b50) { throw new Error('Cabeçalho local ZIP inválido.'); }
+        var lNameLen = u16(bytes, localOff + 26);
+        var lExtraLen = u16(bytes, localOff + 28);
+        var dataStart = localOff + 30 + lNameLen + lExtraLen;
+        var raw = bytes.subarray(dataStart, dataStart + compSize);
+        if (method === 0) { return raw; }
+        if (method === 8) { return inflateRaw(raw); }
+        throw new Error('Método de compressão ZIP não suportado (' + method + ').');
+      }
+      p += 46 + nameLen + extraLen + commentLen;
+    }
+    return null;
+  }
+
+  function decodeXmlEntities(str) {
+    return String(str || '').replace(/&(#x[0-9a-fA-F]+|#[0-9]+|amp|lt|gt|quot|apos);/g, function (_, ent) {
+      if (ent === 'amp') { return '&'; }
+      if (ent === 'lt') { return '<'; }
+      if (ent === 'gt') { return '>'; }
+      if (ent === 'quot') { return '"'; }
+      if (ent === 'apos') { return "'"; }
+      if (ent.charAt(0) === '#') {
+        var code = ent.charAt(1) === 'x' || ent.charAt(1) === 'X'
+          ? parseInt(ent.slice(2), 16)
+          : parseInt(ent.slice(1), 10);
+        if (isFinite(code) && code > 0) {
+          if (code <= 0xffff) { return String.fromCharCode(code); }
+          code -= 0x10000;
+          return String.fromCharCode(0xd800 + (code >> 10), 0xdc00 + (code & 0x3ff));
+        }
+      }
+      return '';
+    });
+  }
+
+  function cleanFilenameTitle(name) {
+    return String(name || 'Manuscrito importado')
+      .replace(/^.*[\\/]/, '')
+      .replace(/\.(docx|md|markdown|txt)$/i, '')
+      .replace(/[_-]+/g, ' ')
+      .replace(/^\s+|\s+$/g, '') || 'Manuscrito importado';
+  }
+
+  function parseWordXml(xml, fallbackTitle) {
+    var paragraphs = [];
+    var pRe = /<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g;
+    var m;
+    while ((m = pRe.exec(xml)) !== null) {
+      var body = m[1];
+      var styleM = /<w:pStyle\b[^>]*w:val="([^"]+)"/i.exec(body);
+      var styleVal = styleM ? styleM[1] : '';
+      var isHeading = /^(Heading[12]|Title|T[ií]tulo\s*[12]?|Subtitle|Subt[ií]tulo)$/i.test(styleVal);
+
+      var parts = [];
+      var tokRe = /<w:t\b[^>]*>([\s\S]*?)<\/w:t>|<w:tab\b[^>]*\/>|<w:br\b[^>]*\/>|<w:cr\b[^>]*\/>/g;
+      var tm;
+      while ((tm = tokRe.exec(body)) !== null) {
+        if (tm[1] !== undefined) {
+          parts.push(decodeXmlEntities(tm[1]));
+        } else if (tm[0].indexOf('w:tab') !== -1) {
+          parts.push('    ');
+        } else {
+          parts.push('\n');
+        }
+      }
+      var line = parts.join('').replace(/\r\n?/g, '\n');
+      paragraphs.push({ text: line, heading: isHeading && !!line.replace(/^\s+|\s+$/g, '') });
+    }
+
+    var headingCount = 0, i;
+    for (i = 0; i < paragraphs.length; i += 1) {
+      if (paragraphs[i].heading) { headingCount += 1; }
+    }
+
+    var baseTitle = cleanFilenameTitle(fallbackTitle);
+    var chapters = [];
+    if (headingCount >= 2) {
+      var cur = null;
+      for (i = 0; i < paragraphs.length; i += 1) {
+        if (paragraphs[i].heading) {
+          if (cur && (cur.lines.length || cur.title)) {
+            chapters.push({ title: cur.title, text: cur.lines.join('\n\n').replace(/^\n+|\n+$/g, '') });
+          }
+          cur = { title: paragraphs[i].text.replace(/^\s+|\s+$/g, ''), lines: [] };
+        } else {
+          var t = paragraphs[i].text.replace(/\s+$/g, '');
+          if (!cur) {
+            if (t) { cur = { title: baseTitle, lines: [t] }; }
+          } else if (t) {
+            cur.lines.push(t);
+          }
+        }
+      }
+      if (cur && (cur.lines.length || cur.title)) {
+        chapters.push({ title: cur.title, text: cur.lines.join('\n\n').replace(/^\n+|\n+$/g, '') });
+      }
+    }
+
+    var flatLines = [];
+    var firstHeadingTitle = '';
+    for (i = 0; i < paragraphs.length; i += 1) {
+      var txt = paragraphs[i].text.replace(/\s+$/g, '');
+      if (!firstHeadingTitle && paragraphs[i].heading && i === 0) {
+        firstHeadingTitle = txt.replace(/^\s+|\s+$/g, '');
+        continue;
+      }
+      if (txt) { flatLines.push(txt); }
+    }
+
+    var unifiedTitle = firstHeadingTitle || baseTitle;
+    var unifiedText = flatLines.join('\n\n').replace(/^\n+|\n+$/g, '');
+    if (!chapters.length) {
+      chapters.push({ title: unifiedTitle, text: unifiedText });
+    }
+
+    return {
+      title: unifiedTitle,
+      text: unifiedText,
+      chapters: chapters,
+      sourceFormat: 'docx'
+    };
+  }
+
+  function parseDocxBytes(bufferOrBytes, filename) {
+    var bytes = bufferOrBytes instanceof Uint8Array
+      ? bufferOrBytes
+      : new Uint8Array(bufferOrBytes);
+    var xmlBytes = readZipEntry(bytes, 'word/document.xml');
+    if (!xmlBytes) {
+      throw new Error('Não encontrei word/document.xml neste arquivo .docx.');
+    }
+    var xml = utf8Decode(xmlBytes);
+    return parseWordXml(xml, filename);
+  }
+
+  function stripInlineMarkdown(line) {
+    return String(line || '')
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/(\*\*|__)(.*?)\1/g, '$2')
+      .replace(/(\*|_)(.*?)\1/g, '$2')
+      .replace(/~~(.*?)~~/g, '$1')
+      .replace(/`([^`]+)`/g, '$1');
+  }
+
+  function parseMarkdown(rawText, filename) {
+    var text = String(rawText || '').replace(/\r\n?/g, '\n');
+    /* Remove frontmatter YAML se houver */
+    text = text.replace(/^---\n[\s\S]*?\n---\n*/, '');
+    var lines = text.split('\n');
+    var baseTitle = cleanFilenameTitle(filename);
+    var headingCount = 0, i;
+    for (i = 0; i < lines.length; i += 1) {
+      if (/^#{1,2}\s+\S/.test(lines[i])) { headingCount += 1; }
+    }
+
+    var chapters = [];
+    if (headingCount >= 2) {
+      var cur = null;
+      for (i = 0; i < lines.length; i += 1) {
+        var hm = /^#{1,2}\s+(.+)$/.exec(lines[i]);
+        if (hm) {
+          if (cur) {
+            chapters.push({ title: cur.title, text: cur.lines.join('\n').replace(/^\n+|\n+$/g, '') });
+          }
+          cur = { title: stripInlineMarkdown(hm[1]).replace(/^\s+|\s+$/g, ''), lines: [] };
+        } else {
+          var cleanL = stripInlineMarkdown(lines[i].replace(/^#{3,6}\s+/, ''));
+          if (!cur) {
+            if (cleanL.replace(/^\s+|\s+$/g, '')) { cur = { title: baseTitle, lines: [cleanL] }; }
+          } else {
+            cur.lines.push(cleanL);
+          }
+        }
+      }
+      if (cur) {
+        chapters.push({ title: cur.title, text: cur.lines.join('\n').replace(/^\n+|\n+$/g, '') });
+      }
+    }
+
+    var docTitle = baseTitle;
+    var bodyLines = [];
+    for (i = 0; i < lines.length; i += 1) {
+      if (i === 0 && /^#\s+(.+)$/.test(lines[i])) {
+        docTitle = stripInlineMarkdown(lines[i].replace(/^#\s+/, '')).replace(/^\s+|\s+$/g, '');
+        continue;
+      }
+      bodyLines.push(stripInlineMarkdown(lines[i].replace(/^#{1,6}\s+/, '')));
+    }
+    var unified = bodyLines.join('\n').replace(/^\n+|\n+$/g, '');
+    if (!chapters.length) {
+      chapters.push({ title: docTitle, text: unified });
+    }
+    return {
+      title: docTitle,
+      text: unified,
+      chapters: chapters,
+      sourceFormat: 'markdown'
+    };
+  }
+
+  root.Escr.editorialImport = {
+    inflateRaw: inflateRaw,
+    readZipEntry: readZipEntry,
+    parseWordXml: parseWordXml,
+    parseDocxBytes: parseDocxBytes,
+    parseMarkdown: parseMarkdown,
+    cleanFilenameTitle: cleanFilenameTitle
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
+/* Fonte: src/ui/localizar-substituir.js */
+/* Localizar e substituir dentro do manuscrito (texto simples e formatado leve) — ES5 */
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+
+  var WORD_CHAR = /[A-Za-z0-9À-ÖØ-öø-ÿ_]/;
+
+  function isWordBoundary(text, pos) {
+    if (pos <= 0 || pos >= text.length) { return true; }
+    var before = WORD_CHAR.test(text.charAt(pos - 1));
+    var after = WORD_CHAR.test(text.charAt(pos));
+    return before !== after;
+  }
+
+  function findMatches(text, query, opts) {
+    var src = String(text || '');
+    var needle = String(query || '');
+    if (!needle) { return []; }
+    var caseSensitive = !!(opts && opts.caseSensitive);
+    var wholeWord = !!(opts && opts.wholeWord);
+    var hay = caseSensitive ? src : src.toLowerCase();
+    var q = caseSensitive ? needle : needle.toLowerCase();
+    var out = [];
+    var idx = 0, step = Math.max(1, q.length);
+
+    while (idx <= hay.length - q.length) {
+      var found = hay.indexOf(q, idx);
+      if (found === -1) { break; }
+      var end = found + q.length;
+      if (!wholeWord || (isWordBoundary(src, found) && isWordBoundary(src, end))) {
+        out.push({ start: found, end: end });
+      }
+      idx = found + step;
+    }
+    return out;
+  }
+
+  function replaceOne(text, match, replacement) {
+    var src = String(text || '');
+    if (!match || typeof match.start !== 'number' || typeof match.end !== 'number') { return src; }
+    if (match.start < 0 || match.end < match.start || match.end > src.length) { return src; }
+    return src.slice(0, match.start) + String(replacement || '') + src.slice(match.end);
+  }
+
+  function replaceAll(text, query, replacement, opts) {
+    var src = String(text || '');
+    var matches = findMatches(src, query, opts);
+    if (!matches.length) { return { text: src, count: 0 }; }
+    var rep = String(replacement || '');
+    var out = [], cursor = 0, i;
+    for (i = 0; i < matches.length; i += 1) {
+      out.push(src.slice(cursor, matches[i].start));
+      out.push(rep);
+      cursor = matches[i].end;
+    }
+    out.push(src.slice(cursor));
+    return { text: out.join(''), count: matches.length };
+  }
+
+  root.Escr.findReplaceCore = {
+    findMatches: findMatches,
+    replaceOne: replaceOne,
+    replaceAll: replaceAll
+  };
+
+  root.Escr.mountFindReplace = function (opts) {
+    var host = opts && opts.hostEl;
+    var manuscript = opts && opts.manuscriptEl;
+    if (!host || !manuscript) { return null; }
+
+    var bar = document.createElement('div');
+    bar.id = 'esc-find-bar';
+    bar.className = 'esc-find-bar';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Localizar e substituir no texto');
+    bar.hidden = true;
+    bar.innerHTML =
+      '<div class="esc-find-row">' +
+        '<input id="esc-find-input" class="esc-find-input" type="search" placeholder="Localizar no texto..." autocomplete="off" spellcheck="false" aria-label="Localizar">' +
+        '<span id="esc-find-count" class="esc-find-count" aria-live="polite">0 / 0</span>' +
+        '<button id="esc-find-case" type="button" class="esc-find-opt" aria-pressed="false" title="Diferenciar maiúsculas e minúsculas">Aa</button>' +
+        '<button id="esc-find-word" type="button" class="esc-find-opt" aria-pressed="false" title="Somente palavra inteira">ab</button>' +
+        '<button id="esc-find-prev" type="button" class="esc-find-nav" aria-label="Ocorrência anterior" title="Anterior (Shift+Enter)">↑</button>' +
+        '<button id="esc-find-next" type="button" class="esc-find-nav" aria-label="Próxima ocorrência" title="Próxima (Enter)">↓</button>' +
+        '<button id="esc-find-close" type="button" class="esc-find-close" aria-label="Fechar localizar">×</button>' +
+      '</div>' +
+      '<div class="esc-find-row esc-replace-row">' +
+        '<input id="esc-replace-input" class="esc-find-input" type="text" placeholder="Substituir por..." autocomplete="off" spellcheck="false" aria-label="Substituir por">' +
+        '<button id="esc-replace-one" type="button" class="esc-find-act">Substituir</button>' +
+        '<button id="esc-replace-all" type="button" class="esc-find-act">Todas</button>' +
+        '<span id="esc-find-feedback" class="esc-find-feedback" role="status" aria-live="polite"></span>' +
+      '</div>';
+
+    if (host.parentNode) {
+      host.parentNode.insertBefore(bar, host);
+    }
+
+    var findInput = bar.querySelector('#esc-find-input');
+    var replaceInput = bar.querySelector('#esc-replace-input');
+    var countEl = bar.querySelector('#esc-find-count');
+    var feedbackEl = bar.querySelector('#esc-find-feedback');
+    var btnCase = bar.querySelector('#esc-find-case');
+    var btnWord = bar.querySelector('#esc-find-word');
+    var btnPrev = bar.querySelector('#esc-find-prev');
+    var btnNext = bar.querySelector('#esc-find-next');
+    var btnClose = bar.querySelector('#esc-find-close');
+    var btnOne = bar.querySelector('#esc-replace-one');
+    var btnAll = bar.querySelector('#esc-replace-all');
+
+    var matches = [];
+    var currentIdx = -1;
+    var caseSensitive = false;
+    var wholeWord = false;
+
+    function getText() {
+      if (opts.getText) { return String(opts.getText() || ''); }
+      return manuscript.value || '';
+    }
+
+    function isReadOnly() {
+      return !!(opts.isReadOnly && opts.isReadOnly()) || !!manuscript.readOnly;
+    }
+
+    function syncReadOnly() {
+      var ro = isReadOnly();
+      if (replaceInput) { replaceInput.disabled = ro; }
+      if (btnOne) { btnOne.disabled = ro || !matches.length; }
+      if (btnAll) { btnAll.disabled = ro || !matches.length; }
+    }
+
+    function highlightCurrent(focusEditor) {
+      if (!matches.length || currentIdx < 0 || currentIdx >= matches.length) {
+        countEl.textContent = findInput.value ? '0 / 0' : '0 / 0';
+        syncReadOnly();
+        return;
+      }
+      var m = matches[currentIdx];
+      countEl.textContent = (currentIdx + 1) + ' / ' + matches.length;
+      if (opts.onReveal) {
+        opts.onReveal(m.start, m.end, !!focusEditor);
+      } else if (manuscript.setSelectionRange) {
+        if (focusEditor && manuscript.focus) { manuscript.focus(); }
+        manuscript.setSelectionRange(m.start, m.end);
+      }
+      syncReadOnly();
+    }
+
+    function refresh(keepNearPos) {
+      var q = findInput.value || '';
+      matches = findMatches(getText(), q, { caseSensitive: caseSensitive, wholeWord: wholeWord });
+      if (!matches.length) {
+        currentIdx = -1;
+        countEl.textContent = q ? '0 / 0' : '0 / 0';
+        syncReadOnly();
+        return;
+      }
+      if (typeof keepNearPos === 'number') {
+        currentIdx = 0;
+        for (var i = 0; i < matches.length; i += 1) {
+          if (matches[i].start >= keepNearPos) { currentIdx = i; break; }
+        }
+      } else if (currentIdx < 0 || currentIdx >= matches.length) {
+        currentIdx = 0;
+      }
+      highlightCurrent(false);
+    }
+
+    function step(dir) {
+      if (!matches.length) { refresh(); if (!matches.length) { return; } }
+      currentIdx = (currentIdx + dir + matches.length) % matches.length;
+      highlightCurrent(false);
+    }
+
+    function doReplaceOne() {
+      if (isReadOnly() || !matches.length || currentIdx < 0) { return; }
+      var m = matches[currentIdx];
+      var rep = replaceInput.value || '';
+      var ok = false;
+      if (opts.onReplaceRange) {
+        ok = opts.onReplaceRange(m.start, m.end, rep);
+      } else {
+        manuscript.value = replaceOne(manuscript.value, m, rep);
+        ok = true;
+      }
+      if (ok) {
+        feedbackEl.textContent = '1 substituição feita.';
+        refresh(m.start + rep.length);
+      }
+    }
+
+    function doReplaceAll() {
+      if (isReadOnly() || !matches.length) { return; }
+      var q = findInput.value || '';
+      var rep = replaceInput.value || '';
+      var total = matches.length;
+      var run = function (confirmed) {
+        if (!confirmed) { return; }
+        var res = replaceAll(getText(), q, rep, { caseSensitive: caseSensitive, wholeWord: wholeWord });
+        if (!res.count) { return; }
+        if (opts.onReplaceAll) {
+          opts.onReplaceAll(res.text, res.count);
+        } else {
+          manuscript.value = res.text;
+        }
+        feedbackEl.textContent = res.count + (res.count === 1 ? ' substituição feita.' : ' substituições feitas.');
+        refresh(0);
+      };
+      if (root.Escr.dialog && root.Escr.dialog.ask && total > 1) {
+        root.Escr.dialog.ask({
+          title: 'Substituir todas as ocorrências?',
+          message: 'Trocar ' + total + ' ocorrências de “' + q + '” por “' + rep + '” nesta folha?',
+          accept: 'Substituir todas'
+        }, run);
+      } else {
+        run(true);
+      }
+    }
+
+    function open(initialQuery) {
+      bar.hidden = false;
+      feedbackEl.textContent = '';
+      if (typeof initialQuery === 'string' && initialQuery) {
+        findInput.value = initialQuery;
+      } else if (!findInput.value && manuscript && typeof manuscript.selectionStart === 'number' && manuscript.selectionEnd > manuscript.selectionStart) {
+        var sel = manuscript.value.slice(manuscript.selectionStart, manuscript.selectionEnd);
+        if (sel.length <= 60 && sel.indexOf('\n') === -1) { findInput.value = sel; }
+      }
+      refresh(manuscript ? (manuscript.selectionStart || 0) : 0);
+      findInput.focus();
+      if (findInput.select) { findInput.select(); }
+    }
+
+    function close() {
+      bar.hidden = true;
+      feedbackEl.textContent = '';
+      if (opts.onClose) { opts.onClose(); }
+    }
+
+    findInput.addEventListener('input', function () { feedbackEl.textContent = ''; refresh(); }, false);
+    findInput.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.keyCode === 13) { ev.preventDefault(); step(ev.shiftKey ? -1 : 1); }
+      else if (ev.key === 'Escape' || ev.keyCode === 27) { ev.preventDefault(); close(); }
+    }, false);
+    replaceInput.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.keyCode === 13) { ev.preventDefault(); doReplaceOne(); }
+      else if (ev.key === 'Escape' || ev.keyCode === 27) { ev.preventDefault(); close(); }
+    }, false);
+    btnCase.addEventListener('click', function () {
+      caseSensitive = !caseSensitive;
+      btnCase.setAttribute('aria-pressed', caseSensitive ? 'true' : 'false');
+      refresh();
+    }, false);
+    btnWord.addEventListener('click', function () {
+      wholeWord = !wholeWord;
+      btnWord.setAttribute('aria-pressed', wholeWord ? 'true' : 'false');
+      refresh();
+    }, false);
+    btnPrev.addEventListener('click', function () { step(-1); }, false);
+    btnNext.addEventListener('click', function () { step(1); }, false);
+    btnClose.addEventListener('click', close, false);
+    btnOne.addEventListener('click', doReplaceOne, false);
+    btnAll.addEventListener('click', doReplaceAll, false);
+
+    return {
+      open: open,
+      close: close,
+      isOpen: function () { return !bar.hidden; },
+      refresh: refresh
+    };
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+;
 /* Fonte: src/ui/maquina-som.js */
 (function (root) {
   'use strict';
@@ -13246,6 +13964,15 @@
           { id: 'ritmo', label: 'Ritmo' },
           { id: 'sintaxe', label: 'Sintaxe' }
         ] } },
+    { id: 'cena-tempo-e-personagem', title: 'Cena, tempo e personagem', group: 'Escrita e revisão', description: 'Velocidades do tempo narrativo, virada de cena, subtexto e personagens vivos.', file: 'cena-tempo-e-personagem.html',
+      bridge: { action: 'write', label: 'Voltar à folha e revisar a cena', hint: 'Aplique desejo, obstáculo e virada direto no capítulo atual.' } },
+    { id: 'poesia-ritmo-e-cancao', title: 'Poesia, ritmo e canção', group: 'Escrita e revisão', description: 'Sílaba poética sem trauma, sinalefa, rimas, a Volta do soneto e prosódia na canção.', file: 'poesia-ritmo-e-cancao.html',
+      bridge: { action: 'examine', label: 'Ouvir métrica e rimas na folha', hint: 'Abra o Examinar nas lentes de Rima e Métrica sobre seu poema ou letra.',
+        lenses: [
+          { id: 'rima', label: 'Rima' },
+          { id: 'metrica', label: 'Métrica' },
+          { id: 'ritmo', label: 'Ritmo' }
+        ] } },
     { id: 'titulo-do-livro', title: 'Escolher o título', group: 'Escrita e revisão', description: 'Explore caminhos para dar nome à obra.', file: 'titulo-do-livro.html',
       bridge: { action: 'focus-title', label: 'Editar título da folha', hint: 'Teste títulos direto no cabeçalho do manuscrito.' } },
     { id: 'bloqueio-criativo', title: 'Bloqueio criativo', group: 'Escrita e revisão', description: 'Encontre uma forma de retomar a escrita.', file: 'bloqueio-criativo.html',
@@ -13382,7 +14109,7 @@
     return { stage: stage, layers: [dome, hall] };
   }
 
-  var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
+  var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII'];
 
   function byId(id) { return document.getElementById(id); }
   function on(el, ev, fn) { if (el && el.addEventListener) { el.addEventListener(ev, fn, false); } }
@@ -17549,14 +18276,75 @@
     if (!found && (current.revision || dirty || current.title || current.text)) { entries.push(current); }
     return entries;
   }
+  function buildImportedDocsFromEditorial(parsed, bookName) {
+    var list = [], i, ch, entry;
+    var chapters = (parsed && parsed.chapters && parsed.chapters.length) ? parsed.chapters : [{ title: parsed.title || 'Texto importado', text: parsed.text || '' }];
+    for (i = 0; i < chapters.length; i += 1) {
+      ch = chapters[i];
+      entry = E.freshDocument();
+      entry.title = String(ch.title || parsed.title || ('Capítulo ' + (i + 1))).slice(0, 140);
+      entry.text = String(ch.text || '');
+      entry.project = bookName;
+      if (E.cartorio) { entry.cartorio = E.cartorio.sealDocument(null, entry, 'imported'); }
+      list.push(entry);
+    }
+    return list;
+  }
   function importFile(file) {
     if (!file) { return; }
     if (file.size > 50000000) { message('Traga pacotes de até 50 MB por vez.'); return; }
     if (!notebooks || !archive || !checkpoint()) { message('A gravação precisa estar disponível para importar um caderno.'); return; }
+    if (/\.docx$/i.test(file.name) && E.editorialImport && E.transfer && E.transfer.readBinary) {
+      E.transfer.readBinary(file, function (error, buf) {
+        if (error) { message(error.message); return; }
+        try {
+          var parsed = E.editorialImport.parseDocxBytes(buf, file.name);
+          var bookLabel = parsed.chapters.length > 1
+            ? parsed.title
+            : (activeNotebook() ? activeNotebook().name + ' — importado' : parsed.title);
+          importDocsArray(buildImportedDocsFromEditorial(parsed, bookLabel));
+        } catch (e) {
+          message((e && e.message ? e.message : 'Não foi possível ler este arquivo .docx.') + ' O acervo anterior foi preservado.');
+        }
+      });
+      return;
+    }
     E.transfer.read(file, function (error, contents) {
       if (error) { message(error.message); return; }
       importContents(contents, file.name, file.type);
     });
+  }
+  function importDocsArray(docs) {
+    var payload = null, converted = [];
+    try {
+      docs = JSON.parse(JSON.stringify(docs));
+      docs.forEach(function (d) {
+        if (d.kind === 'reminder' && !projectName(d.project)) { delete d.projectId; return; }
+        var title = projectName(d.project) || 'Avulsos', book = null;
+        converted.forEach(function (b) { if (b.name === title) { book = b; } });
+        if (!book) { book = { id: 'book-' + E.freshDocument().id, name: title, aliases: [], color: '#c4cfc2', data: {} }; converted.push(book); }
+        d.projectId = book.id; d.project = book.name;
+      });
+      payload = { format: 'escrevaral-cadernos', version: 1, scope: 'all', notebooks: converted, documents: docs, globals: {}, inventory: { notebooks: converted.length, documents: docs.length } };
+      notebooks.validate(payload);
+      var notice = 'Importar ' + payload.notebooks.length + ' caderno(s) e ' + payload.documents.length + ' registro(s)? Cadernos já existentes serão preservados; os repetidos entrarão como cópias.';
+      E.dialog.ask({ title: 'Importar manuscrito?', message: notice, accept: 'Importar' }, function (ok) {
+        if (!ok) { message('Importação cancelada. O acervo anterior foi preservado.'); return; }
+        try {
+          var result = E.installPackage(storage, notebooks, archive, payload, { sessionKey: sessionKey });
+          renderNotebooks(); renderCabinet(); if (workspaceUI) { workspaceUI.render(); }
+          if (result && result.documents && result.documents.length) {
+            var opened = archive.get(result.documents[0]);
+            if (opened) { loadDocument(opened); enterDesk(false); }
+          }
+          message('Importação concluída: ' + payload.documents.length + ' texto(s) trazido(s) sem alterar o acervo anterior.');
+        } catch (err) {
+          message((err && err.message ? err.message : 'Falha ao importar.') + ' O acervo anterior foi preservado.');
+        }
+      });
+    } catch (e) {
+      message((e && e.message ? e.message : 'Arquivo inválido.') + ' O acervo anterior foi preservado.');
+    }
   }
   function importContents(contents, name, type) {
     if (typeof contents !== 'string' || contents.length > 50000000) { message('Traga uma cópia menor, em partes de até 50 milhões de unidades de texto.'); return; }
@@ -17569,11 +18357,17 @@
         if (payload && payload.format === 'escrevaral-astra' && payload.version === 1 && Object.prototype.toString.call(payload.documents) === '[object Array]' && payload.documents.every(E.validDocument)) {
           docs = payload.documents; payload = null;
         }
+      } else if (/\.(md|markdown)$/i.test(name) && E.editorialImport) {
+        var mdParsed = E.editorialImport.parseMarkdown(contents, name);
+        var mdBook = mdParsed.chapters.length > 1
+          ? mdParsed.title
+          : (activeNotebook() ? activeNotebook().name + ' — importado' : mdParsed.title);
+        docs = buildImportedDocsFromEditorial(mdParsed, mdBook);
       } else if (/\.txt$/i.test(name) || type === 'text/plain') {
         var entry = E.freshDocument(); entry.title = name.replace(/\.txt$/i, ''); entry.text = String(contents); entry.project = activeNotebook() ? activeNotebook().name + ' — importado' : 'Texto importado';
         if (E.cartorio) { entry.cartorio = E.cartorio.sealDocument(null, entry, 'imported'); }
         docs = [entry];
-      } else { throw new Error('Traga um caderno .scrvrl, uma cópia .json ou um texto .txt.'); }
+      } else { throw new Error('Traga um caderno .scrvrl, um Word .docx, um Markdown .md, uma cópia .json ou um texto .txt.'); }
       if (docs) {
         docs = JSON.parse(JSON.stringify(docs));
         docs.forEach(function (d) {
@@ -18095,6 +18889,14 @@
         else if (!event.shiftKey && (document.activeElement === last || document.activeElement === byId(activePanel))) { event.preventDefault(); first.focus(); }
       }
     }
+    if ((event.ctrlKey || event.metaKey) && code === 72) {
+      if (!cabinetOpen && findReplaceUI) {
+        event.preventDefault();
+        closePanels(false);
+        findReplaceUI.open();
+      }
+      return;
+    }
     if ((event.ctrlKey || event.metaKey) && code === 75) {
       event.preventDefault(); closePanels(false);
       if (cabinetOpen) { byId('cabinet-search').focus(); }
@@ -18106,6 +18908,7 @@
     else if (code === 27 && document.body.getAttribute('data-counts') === 'true') { byId('desk-counts-close').click(); }
     else if (code === 27) {
       var hasOverlay = (byId('esc-word-card') && !byId('esc-word-card').hidden) ||
+        (byId('esc-find-bar') && !byId('esc-find-bar').hidden) ||
         (byId('esc-academy-overlay') && !byId('esc-academy-overlay').hidden) ||
         (byId('esc-calculator') && !byId('esc-calculator').hidden) ||
         (byId('esc-template-modal') && !byId('esc-template-modal').hidden) ||
@@ -18850,6 +19653,61 @@
       storage: storage,
       onBreakStart: function () { message("Tempo de escrita concluído. Pausa iniciada."); }
     });
+  }
+  var findReplaceUI = null;
+  if (E.mountFindReplace) {
+    findReplaceUI = E.mountFindReplace({
+      hostEl: byId('editor-viewport'),
+      manuscriptEl: manuscript,
+      getText: function () { return manuscript.value || ''; },
+      isReadOnly: function () { return !!(doc && (doc.locked || doc.category === 'reference')) || !!manuscript.readOnly; },
+      onReveal: function (start, end, focusEditor) {
+        if (richUI && richUI.isRich && richUI.isRich()) {
+          richUI.revealRange(start, end);
+          return;
+        }
+        if (focusEditor && manuscript.focus) { manuscript.focus(); }
+        if (manuscript.setSelectionRange) { manuscript.setSelectionRange(start, end); }
+        if (manuscript.scrollHeight && manuscript.value.length) {
+          var ratio = start / manuscript.value.length;
+          manuscript.scrollTop = Math.max(0, Math.round(ratio * manuscript.scrollHeight - (manuscript.clientHeight || 200) * 0.35));
+        }
+        if (typeof positionFocus === 'function') { positionFocus(); }
+      },
+      onReplaceRange: function (start, end, rep) {
+        if (richUI && richUI.isRich && richUI.isRich() && richUI.replaceRange) {
+          var okR = richUI.replaceRange(start, end, rep);
+          if (okR) { schedule(); }
+          return okR;
+        }
+        manuscript.value = E.findReplaceCore.replaceOne(manuscript.value, { start: start, end: end }, rep);
+        schedule();
+        return true;
+      },
+      onReplaceAll: function (nextText) {
+        if (richUI && richUI.isRich && richUI.isRich() && richUI.replaceAllPlain) {
+          richUI.replaceAllPlain(nextText);
+          schedule();
+          return;
+        }
+        manuscript.value = nextText;
+        schedule();
+      },
+      onClose: function () {
+        if (richUI && richUI.isRich && richUI.isRich()) {
+          var rEl = byId('esc-rich-editor');
+          if (rEl && rEl.focus) { rEl.focus(); }
+        } else if (manuscript && manuscript.focus) {
+          manuscript.focus();
+        }
+      }
+    });
+    if (byId('esc-find-btn')) {
+      listen(byId('esc-find-btn'), 'click', function () {
+        if (findReplaceUI.isOpen()) { findReplaceUI.close(); }
+        else { findReplaceUI.open(); }
+      });
+    }
   }
   if (E.mountCalculator) {
     calcUI = E.mountCalculator({

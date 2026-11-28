@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-9969384c901d";
-const RUNTIME_CACHE = "scrvrl-runtime-9969384c901d";
+const CACHE_NAME = "scrvrl-offline-v6-65-95d8d553be6c";
+const RUNTIME_CACHE = "scrvrl-runtime-95d8d553be6c";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -8,12 +8,12 @@ const REQUIRED_ASSETS = [
     "sha256": "d6cd9da15371a34f5b69d5a91a907cf30116c3b496ca45907eed8c1422548e64"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.9f83b85ce827e899.js",
-    "sha256": "9f83b85ce827e899f1d6893852b5b1bec51afc4c37ddc74015ef24c24e4970ed"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.82b9a5bbc2a5a3f8.js",
+    "sha256": "82b9a5bbc2a5a3f8e341634956deed67941bb197a6245f990c9c2864408c47ea"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.1bfa455943ed0cd7.css",
-    "sha256": "1bfa455943ed0cd7e39030ad2b086bb2994881d03cb3e4a78532fb934ac85959"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/styles.16af41ae30f3b5bb.css",
+    "sha256": "16af41ae30f3b5bbd6037f2e82c2a1214a062068d25580d64f841a95c42c8262"
   }
 ];
 const BUNKER_ASSETS = [
@@ -21,6 +21,7 @@ const BUNKER_ASSETS = [
   "./academia/autopublicacao-independente.html",
   "./academia/biblioteca-escrita.html",
   "./academia/bloqueio-criativo.html",
+  "./academia/cena-tempo-e-personagem.html",
   "./academia/checklist-lancamento.html",
   "./academia/comparativo-publicacao.html",
   "./academia/embedded.css",
@@ -28,6 +29,7 @@ const BUNKER_ASSETS = [
   "./academia/literatura-mundial.html",
   "./academia/mapa-lancamento-editorial.html",
   "./academia/mentalidade-autor-publicado.html",
+  "./academia/poesia-ritmo-e-cancao.html",
   "./academia/ponto-de-vista-e-voz.html",
   "./academia/primeiras-linhas.html",
   "./academia/publicar-kdp.html",
@@ -38,11 +40,13 @@ const BUNKER_ASSETS = [
   "./assets/library/banner-bloqueio.webp",
   "./assets/library/banner-cabaceiras.webp",
   "./assets/library/banner-casa-rosas.webp",
+  "./assets/library/banner-cena-tempo.webp",
   "./assets/library/banner-criacao.webp",
   "./assets/library/banner-graciliano.webp",
   "./assets/library/banner-jose-alencar.webp",
   "./assets/library/banner-lancamento.webp",
   "./assets/library/banner-oficio.webp",
+  "./assets/library/banner-poesia-cancao.webp",
   "./assets/library/banner-ponto-de-vista.webp",
   "./assets/library/banner-publicacao.webp",
   "./assets/library/banner-rui-barbosa.webp",
@@ -93,7 +97,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: 'af8ccf88765f6af2f9b91b768c565d6a0f0b5e2d7512234c7aacaa999a01b89b' });
+    const index = await checkedAsset({ url: './index.html', sha256: '40a515dd6fc75f6506e1ced75357eff52fd1ea40de5b3b4a38af08d046de709d' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);

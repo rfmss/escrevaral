@@ -564,6 +564,25 @@ body[data-theme="escuro"] .esc-usos-block.is-why { background: rgba(207, 165, 86
 body[data-theme="escuro"] .esc-usos-lbl { color: #9bc0a4; }
 body[data-theme="escuro"] .esc-palavra-uso-link { border-color: rgba(142, 176, 151, 0.36); background: rgba(142, 176, 151, 0.12); }
 
+/* Barra compacta de Localizar e substituir (#esc-find-bar) */
+.esc-find-bar { display: flex; flex-direction: column; gap: 6px; padding: 8px 14px; margin: 6px 0 4px; border: 1px solid rgba(33, 41, 33, 0.22); border-radius: 7px; background: rgba(188, 200, 185, 0.72); color: #1e261e; font: 400 12.5px/1.3 Arial, Helvetica, sans-serif; }
+.esc-find-bar[hidden] { display: none !important; }
+.esc-find-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.esc-find-input { flex: 1 1 170px; min-width: 120px; min-height: 30px; padding: 4px 9px; border: 1px solid rgba(33, 41, 33, 0.26); border-radius: 5px; background: #ccd5c7; color: #1a221a; font: 400 13px/1.3 Arial, Helvetica, sans-serif; }
+.esc-find-input:focus { outline: 2px solid #2d3e2d; outline-offset: 0; }
+.esc-find-count { min-width: 44px; text-align: center; font: 600 11.5px/1 Arial, sans-serif; color: #465344; font-variant-numeric: tabular-nums; }
+.esc-find-opt, .esc-find-nav, .esc-find-close, .esc-find-act { min-height: 30px; padding: 0 9px; border: 1px solid rgba(33, 41, 33, 0.24); border-radius: 5px; background: rgba(33, 41, 33, 0.05); color: #1e261e; font: 600 12px/1 Arial, sans-serif; cursor: pointer; }
+.esc-find-opt:hover, .esc-find-nav:hover, .esc-find-close:hover, .esc-find-act:hover:not(:disabled) { background: rgba(33, 41, 33, 0.12); }
+.esc-find-opt[aria-pressed="true"] { background: #242d23; color: #e4ede2; border-color: #242d23; }
+.esc-find-act:disabled { opacity: 0.42; cursor: default; }
+.esc-find-close { min-width: 30px; font-size: 16px; }
+.esc-find-feedback { font-size: 11.5px; color: #364935; margin-left: 4px; }
+body[data-theme="escuro"] .esc-find-bar { background: #252d25; border-color: #3f4d3f; color: #d8dfd4; }
+body[data-theme="escuro"] .esc-find-input { background: #1d221d; border-color: #465546; color: #e2e8df; }
+body[data-theme="escuro"] .esc-find-count, body[data-theme="escuro"] .esc-find-feedback { color: #a4b3a1; }
+body[data-theme="escuro"] .esc-find-opt, body[data-theme="escuro"] .esc-find-nav, body[data-theme="escuro"] .esc-find-close, body[data-theme="escuro"] .esc-find-act { background: rgba(255, 255, 255, 0.06); border-color: #465546; color: #d8dfd4; }
+body[data-theme="escuro"] .esc-find-opt[aria-pressed="true"] { background: #8eb097; color: #141e17; border-color: #8eb097; }
+
 /* Impressão independente do textarea, do tema e do estado de foco. */
 #print-sheet { display: none; }
 @page { size: A4; margin: 24mm 25mm; }

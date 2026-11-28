@@ -48,5 +48,17 @@
       reader.readAsText(file, 'UTF-8');
     } catch (error) { finish(error); }
   }
-  E.transfer = { selectRange: selectRange, download: download, read: read };
+  function readBinary(file, done) {
+    var reader, ended = false;
+    function finish(error, value) { if (!ended) { ended = true; done(error, value); } }
+    try {
+      if (!root.FileReader) { throw new Error('Este navegador não lê arquivos binários (.docx).'); }
+      reader = new root.FileReader();
+      reader.onerror = function () { finish(new Error('O arquivo .docx não pôde ser lido. O acervo permanece.')); };
+      reader.onabort = function () { finish(new Error('Leitura cancelada. O acervo permanece.')); };
+      reader.onload = function () { finish(null, reader.result); };
+      reader.readAsArrayBuffer(file);
+    } catch (error) { finish(error); }
+  }
+  E.transfer = { selectRange: selectRange, download: download, read: read, readBinary: readBinary };
 }(window));
