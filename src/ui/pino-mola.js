@@ -166,8 +166,10 @@
     }
 
     var rail = document.createElement('div');
+    var isCompact = !!(cfg.compact || (scrollEl.closest && scrollEl.closest('#navigation')));
     var cls = 'esc-pino-rail' + (cfg.variant ? (' is-' + cfg.variant) : '');
     if (isFloating) { cls += ' is-floating'; }
+    if (isCompact) { cls += ' is-compact'; }
     if (cfg.warm || isWarmSurface(scrollEl)) { cls += ' is-warm'; }
     rail.className = cls;
     rail.setAttribute('aria-hidden', 'true');
@@ -249,7 +251,8 @@
           canScroll = false;
         } else {
           var midY = Math.round((visTop + visBot) / 2);
-          var leftX = Math.round(Math.min(vw - 28, r.right - 26));
+          var rightPad = isCompact ? 20 : 28;
+          var leftX = Math.round(Math.min(vw - 28, r.right - rightPad));
           rail.style.left = Math.max(4, leftX) + 'px';
           rail.style.top = midY + 'px';
           rail.style.right = 'auto';

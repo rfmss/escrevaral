@@ -1112,7 +1112,11 @@
     }
     var locBar = byId('location-path');
     if (locBar && locBar.style && locBar.style.setProperty) {
-      locBar.style.setProperty('--esc-crumb-book-color', crumbBook && crumbBook.color ? crumbBook.color : '#6f8e68');
+      var crumbDot = crumbBook && crumbBook.color ? String(crumbBook.color).trim() : '';
+      if (!crumbDot || crumbDot.toLowerCase() === '#c4cfc2' || crumbDot.toLowerCase() === '#6f8e68') {
+        crumbDot = '#96702d';
+      }
+      locBar.style.setProperty('--esc-crumb-book-color', crumbDot);
     }
     byId('path-project').hidden = byId('path-project-separator').hidden = project === null;
     byId('path-project').setAttribute('data-has-book', crumbBook ? 'true' : 'false');

@@ -3436,7 +3436,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .esc-nav-scroll {
     flex: 1 1 auto;
     overflow-y: auto;
-    padding: 8px 0;
+    padding: 8px 22px 12px 0;
   }
 
   .esc-nav-section-label {
@@ -7229,8 +7229,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     color: #cfd6cb;
   }
   body[data-theme="escuro"] .esc-machine {
-    -webkit-filter: brightness(0.76) contrast(1.04) saturate(0.88);
-    filter: brightness(0.76) contrast(1.04) saturate(0.88);
+    -webkit-filter: brightness(1.18) contrast(1.06) saturate(1.12);
+    filter: brightness(1.18) contrast(1.06) saturate(1.12);
   }
   body[data-theme="escuro"] .esc-writing-btn,
   body[data-theme="escuro"] .esc-writing-icon-btn {
@@ -8246,6 +8246,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     position: fixed;
     z-index: 2660;
   }
+  .esc-pino-rail.is-compact {
+    width: 22px;
+    transform: translateY(-50%) scale(0.84);
+    transform-origin: center center;
+  }
   .esc-pino-rail:hover,
   .esc-pino-rail.is-active {
     opacity: 0.98;
@@ -9047,9 +9052,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     margin-top: 2px;
   }
 
-  /* Breadcrumb da gaveta e do caderno (#location-path) — pílula discreta e harmoniosa com o Sálvia */
-  #location-path #path-original,
-  #location-path #path-project[data-has-book="true"] {
+  /* Breadcrumb da gaveta e do caderno (#location-path) — sem borda no caderno, só bolinha discreta que se destaca */
+  #location-path #path-original {
     display: inline-flex !important;
     align-items: center !important;
     gap: 7px !important;
@@ -9062,10 +9066,26 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     color: #1e261e !important;
     font-weight: 500 !important;
   }
-  #location-path #path-original:hover,
-  #location-path #path-project[data-has-book="true"]:hover {
+  #location-path #path-project[data-has-book="true"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    min-height: 26px !important;
+    height: 26px !important;
+    padding: 0 4px !important;
+    border-radius: 4px !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1e261e !important;
+    font-weight: 500 !important;
+  }
+  #location-path #path-original:hover {
     background: rgba(33, 41, 33, 0.11) !important;
     border-color: rgba(33, 41, 33, 0.28) !important;
+  }
+  #location-path #path-project[data-has-book="true"]:hover {
+    background: rgba(33, 41, 33, 0.07) !important;
+    border: 0 !important;
   }
   #location-path #path-original[hidden],
   #location-path #path-project[hidden] {
@@ -9083,17 +9103,27 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #location-path #path-project[data-has-book="true"]::before {
     content: "";
     display: inline-block;
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     flex-shrink: 0;
     border-radius: 50%;
-    border: 1px solid rgba(28, 35, 28, 0.34);
-    background-color: var(--esc-crumb-book-color, #6f8e68);
-    box-shadow: none;
+    border: 0;
+    background-color: var(--esc-crumb-book-color, #96702d);
+    box-shadow: inset 0 0 0 1px rgba(34, 24, 10, 0.16);
   }
-  body[data-theme="escuro"] #location-path #path-original,
-  body[data-theme="escuro"] #location-path #path-project[data-has-book="true"] {
+  body[data-theme="escuro"] #location-path #path-original {
     background: rgba(207, 214, 203, 0.08) !important;
+    border-color: rgba(207, 214, 203, 0.2) !important;
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] #location-path #path-project[data-has-book="true"] {
+    background: transparent !important;
+    border: 0 !important;
+    color: #d8dfd4 !important;
+  }
+  body[data-theme="escuro"] #location-path #path-project[data-has-book="true"]:hover {
+    background: rgba(207, 214, 203, 0.08) !important;
+  }
     border-color: rgba(207, 214, 203, 0.2) !important;
     color: #e4ebe1 !important;
   }
