@@ -1,0 +1,677 @@
+/* Reino da Oficina — Verde Musgo Profundo + Fios Dourados dos Eternos (estética AFK Journey / medieval místico).
+ * Terceira instância visual do Escrevaral (fora da folha de produção textual E-Ink e da Academia Real Gabinete):
+ * superfícies foscas de musgo calibrado + ouro envelhecido + filigrana geométrica celestial, quieto em repouso na mesa. */
+@media screen {
+  :root,
+  body,
+  body[data-esc-theme="eink"] {
+    /* Granulação fosca de papel-musgo botânico (SVG 84x84 ultraleve, zero <feTurbulence>) */
+    --esc-of-grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%231d3224' fill-opacity='0.055'%3E%3Ccircle cx='8' cy='12' r='0.9'/%3E%3Ccircle cx='25' cy='7' r='0.7'/%3E%3Ccircle cx='43' cy='16' r='1.0'/%3E%3Ccircle cx='61' cy='9' r='0.8'/%3E%3Ccircle cx='77' cy='20' r='0.9'/%3E%3Ccircle cx='15' cy='31' r='1.0'/%3E%3Ccircle cx='35' cy='26' r='0.7'/%3E%3Ccircle cx='52' cy='33' r='0.9'/%3E%3Ccircle cx='69' cy='29' r='0.9'/%3E%3Ccircle cx='7' cy='48' r='0.8'/%3E%3Ccircle cx='26' cy='44' r='1.0'/%3E%3Ccircle cx='46' cy='51' r='0.7'/%3E%3Ccircle cx='64' cy='47' r='1.0'/%3E%3Ccircle cx='79' cy='54' r='0.8'/%3E%3Ccircle cx='18' cy='66' r='0.9'/%3E%3Ccircle cx='38' cy='70' r='1.0'/%3E%3Ccircle cx='55' cy='63' r='0.7'/%3E%3Ccircle cx='73' cy='72' r='0.9'/%3E%3C/g%3E%3Cg fill='%23b58c3e' fill-opacity='0.075'%3E%3Ccircle cx='17' cy='15' r='0.8'/%3E%3Ccircle cx='48' cy='11' r='0.7'/%3E%3Ccircle cx='71' cy='14' r='0.9'/%3E%3Ccircle cx='11' cy='39' r='0.8'/%3E%3Ccircle cx='41' cy='40' r='0.8'/%3E%3Ccircle cx='74' cy='42' r='0.7'/%3E%3Ccircle cx='22' cy='57' r='0.9'/%3E%3Ccircle cx='59' cy='58' r='0.8'/%3E%3Ccircle cx='33' cy='75' r='0.8'/%3E%3C/g%3E%3Cpath d='M5 19 L13 17 M32 12 L39 14 M62 22 L70 20 M19 37 L27 35 M49 42 L57 40 M9 59 L17 57 M43 67 L51 65' stroke='%239a7630' stroke-opacity='0.05' stroke-width='0.8' stroke-linecap='round'/%3E%3C/svg%3E");
+    --esc-of-grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23e8c678' fill-opacity='0.07'%3E%3Ccircle cx='9' cy='11' r='0.9'/%3E%3Ccircle cx='27' cy='8' r='0.7'/%3E%3Ccircle cx='45' cy='15' r='1.0'/%3E%3Ccircle cx='63' cy='10' r='0.8'/%3E%3Ccircle cx='78' cy='19' r='0.9'/%3E%3Ccircle cx='16' cy='29' r='0.9'/%3E%3Ccircle cx='36' cy='25' r='0.7'/%3E%3Ccircle cx='54' cy='32' r='0.9'/%3E%3Ccircle cx='70' cy='28' r='1.0'/%3E%3Ccircle cx='25' cy='44' r='0.9'/%3E%3Ccircle cx='65' cy='46' r='0.9'/%3E%3Ccircle cx='19' cy='66' r='0.9'/%3E%3Ccircle cx='39' cy='69' r='1.0'/%3E%3Ccircle cx='73' cy='73' r='0.9'/%3E%3C/g%3E%3C/svg%3E");
+    /* Filigrana geométrica dos Eternos (astrolábio fino + losangos celestiais em fio dourado) */
+    --esc-of-eternos-banner: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 120' preserveAspectRatio='xMaxYMid slice'%3E%3Cg fill='none' stroke='%23e8c678' stroke-linecap='round'%3E%3Ccircle cx='348' cy='60' r='52' stroke-opacity='0.26' stroke-width='0.9'/%3E%3Ccircle cx='348' cy='60' r='38' stroke-opacity='0.18' stroke-width='0.7' stroke-dasharray='3 4'/%3E%3Ccircle cx='348' cy='60' r='22' stroke-opacity='0.34' stroke-width='0.85'/%3E%3Ccircle cx='348' cy='60' r='74' stroke-opacity='0.13' stroke-width='0.75'/%3E%3Cpath d='M256 60 H420 M348 2 V118' stroke-opacity='0.16' stroke-width='0.7'/%3E%3Cpath d='M348 26 L360 60 L348 94 L336 60 Z' stroke-opacity='0.36' stroke-width='0.95'/%3E%3Cpath d='M314 60 L348 48 L382 60 L348 72 Z' stroke-opacity='0.3' stroke-width='0.85'/%3E%3Cpath d='M18 106 H276 M296 106 L304 98 L312 106 L304 114 Z' stroke-opacity='0.22' stroke-width='0.8'/%3E%3Cpath d='M286 24 L290 32 L298 36 L290 40 L286 48 L282 40 L274 36 L282 32 Z' fill='%23f2d590' fill-opacity='0.34' stroke='none'/%3E%3Ccircle cx='348' cy='60' r='3' fill='%23f2d590' fill-opacity='0.52' stroke='none'/%3E%3Ccircle cx='296' cy='60' r='1.8' fill='%23e8c678' fill-opacity='0.44' stroke='none'/%3E%3Ccircle cx='400' cy='60' r='1.8' fill='%23e8c678' fill-opacity='0.44' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    --esc-of-eternos-sweep: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 40' preserveAspectRatio='none'%3E%3Crect x='11' y='0' width='6' height='40' fill='%23f2cf88' fill-opacity='0.22'/%3E%3Crect x='13.2' y='0' width='1.6' height='40' fill='%23fae2a8' fill-opacity='0.76'/%3E%3Cpath d='M14 14 L15.4 18.6 L20 20 L15.4 21.4 L14 26 L12.6 21.4 L8 20 L12.6 18.6 Z' fill='%23fff0c9'/%3E%3C/svg%3E");
+    --esc-of-rod-gold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 12' preserveAspectRatio='xMidYMid meet'%3E%3Cg fill='none' stroke='%23b58c3e' stroke-linecap='round'%3E%3Cline x1='4' y1='6' x2='96' y2='6' stroke-opacity='0.55' stroke-width='0.9'/%3E%3Cline x1='124' y1='6' x2='216' y2='6' stroke-opacity='0.55' stroke-width='0.9'/%3E%3Cpath d='M110 1.5 L116 6 L110 10.5 L104 6 Z' stroke-opacity='0.88' stroke-width='1' fill='%23e6c37a' fill-opacity='0.34'/%3E%3Ccircle cx='98' cy='6' r='1.3' fill='%23b58c3e' fill-opacity='0.7' stroke='none'/%3E%3Ccircle cx='122' cy='6' r='1.3' fill='%23b58c3e' fill-opacity='0.7' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  @keyframes escOficinaSweep {
+    0%   { transform: translate3d(-30px, 0, 0); opacity: 0; }
+    48%  { transform: translate3d(52px, 0, 0); opacity: 0.92; }
+    100% { transform: translate3d(130px, 0, 0); opacity: 0; }
+  }
+
+  /* =========================================================================
+   * 1. PORTAL DA OFICINA NA BARRA LATERAL (quieto em repouso, desperta no hover)
+   * ========================================================================= */
+  body[data-view="workspace"] #navigation .esc-oficina-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 7px 2px 4px !important;
+    padding: 0 !important;
+    color: #3a4c3e !important;
+    letter-spacing: 0.14em !important;
+  }
+  body[data-view="workspace"] #navigation .esc-oficina-label::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 0.8 L7.5 4.5 L11.2 6 L7.5 7.5 L6 11.2 L4.5 7.5 L0.8 6 L4.5 4.5 Z' fill='%239e7834'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  body[data-view="workspace"] #navigation .esc-oficina-label::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background: rgba(154, 118, 52, 0.36);
+  }
+
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+    transition:
+      background-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 180ms ease,
+      box-shadow 200ms ease !important;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn::after {
+    content: "";
+    position: absolute;
+    top: -2px; bottom: -2px; left: 0;
+    width: 26px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    background: var(--esc-of-eternos-sweep) center/100% 100% no-repeat;
+    transform: translate3d(-30px, 0, 0);
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn > * {
+    position: relative;
+    z-index: 2;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+    color: #36523f;
+    transition: color 180ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+  }
+  /* Hover / Ativo: desperta o musgo real + ouro dos Eternos */
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn[aria-expanded="true"] {
+    background-color: #1c2f23 !important;
+    color: #f2ebd8 !important;
+    border-color: #b58c3e !important;
+    box-shadow:
+      0 2px 8px rgba(15, 28, 20, 0.24),
+      inset 0 0 0 1px rgba(232, 198, 120, 0.16) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover::after,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible::after {
+    animation: escOficinaSweep 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover .esc-ui-ico,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible .esc-ui-ico,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn[aria-expanded="true"] .esc-ui-ico {
+    color: #e8c574 !important;
+    opacity: 1 !important;
+    transform: translate3d(1px, 0, 0) scale(1.06);
+  }
+
+  /* =========================================================================
+   * 2. INSTÂNCIAS DA OFICINA (Gavetas: Usos da língua, Versões, Sobre,
+   *    Calendário/Pomodoro, Ajustes) — Verde Musgo Calibrado + Ouro Eternos
+   * ========================================================================= */
+  body[data-view="workspace"] #usos-lingua,
+  body[data-view="workspace"] #sobre,
+  body[data-view="workspace"] #lineage-panel,
+  body[data-view="workspace"] #utilidades,
+  body[data-view="workspace"] #mesa,
+  #usos-lingua,
+  #sobre,
+  #lineage-panel,
+  #utilidades,
+  #mesa {
+    background-color: #c2cdc0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    color: #17231b !important;
+    border-left: 1.5px solid #9d7936 !important;
+    box-shadow:
+      -10px 0 32px rgba(14, 26, 19, 0.2),
+      inset 3px 0 0 rgba(181, 140, 62, 0.16) !important;
+  }
+
+  /* Cabeçalho nobre Verde Musgo Real + Filigrana dos Eternos */
+  #usos-lingua > .sheet-heading,
+  #sobre > .sheet-heading,
+  #lineage-panel > .sheet-heading,
+  #utilidades > .sheet-heading,
+  #mesa > .sheet-heading {
+    position: relative;
+    overflow: hidden;
+    padding: 16px 20px !important;
+    margin-bottom: 16px !important;
+    border-radius: 8px !important;
+    border: 1.5px solid #b58c3e !important;
+    background-color: #1b2d22 !important;
+    background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
+    background-repeat: no-repeat, repeat !important;
+    background-position: right center, 0 0 !important;
+    background-size: auto 100%, 84px 84px !important;
+    color: #f2ebd9 !important;
+    box-shadow:
+      0 5px 16px rgba(13, 24, 17, 0.22),
+      inset 0 0 0 3px rgba(232, 198, 120, 0.14) !important;
+  }
+  #usos-lingua > .sheet-heading .eyebrow,
+  #sobre > .sheet-heading .eyebrow,
+  #lineage-panel > .sheet-heading small,
+  #mesa > .sheet-heading .eyebrow {
+    color: #e8c678 !important;
+    letter-spacing: 0.12em !important;
+    font-weight: 700 !important;
+  }
+  #usos-lingua > .sheet-heading h2,
+  #sobre > .sheet-heading h2,
+  #lineage-panel > .sheet-heading h2,
+  #utilidades > .sheet-heading h2,
+  #mesa > .sheet-heading h2 {
+    color: #f4eedf !important;
+    font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 4px rgba(8, 16, 11, 0.65);
+  }
+  #usos-lingua > .sheet-heading button,
+  #sobre > .sheet-heading button,
+  #lineage-panel > .sheet-heading button,
+  #utilidades > .sheet-heading button,
+  #mesa > .sheet-heading button {
+    background-color: rgba(16, 28, 21, 0.78) !important;
+    color: #f2ebd9 !important;
+    border: 1px solid rgba(232, 198, 120, 0.58) !important;
+    border-radius: 6px !important;
+  }
+  #usos-lingua > .sheet-heading button:hover,
+  #sobre > .sheet-heading button:hover,
+  #lineage-panel > .sheet-heading button:hover,
+  #utilidades > .sheet-heading button:hover,
+  #mesa > .sheet-heading button:hover {
+    background-color: #284232 !important;
+    border-color: #f0d38d !important;
+    color: #faf4e6 !important;
+  }
+
+  /* =========================================================================
+   * 3. USOS DA LÍNGUA (#usos-lingua) — Grimório Acolhedor Verde Musgo & Ouro
+   * ========================================================================= */
+  #usos-lingua .esc-usos-manifesto {
+    position: relative;
+    padding: 14px 16px 15px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(157, 121, 54, 0.45) !important;
+    border-left: 3.5px solid #9e7834 !important;
+    background-color: #ccd7c9 !important;
+    box-shadow:
+      0 2px 8px rgba(17, 30, 22, 0.07),
+      inset 0 0 0 2px rgba(232, 198, 120, 0.14);
+  }
+  #usos-lingua .esc-usos-manifesto-head strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font: 700 14.5px/1.3 var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+    color: #182b20 !important;
+  }
+  #usos-lingua .esc-usos-manifesto-head strong::before {
+    content: "";
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 0.8 L8.8 5.2 L13.2 7 L8.8 8.8 L7 13.2 L5.2 8.8 L0.8 7 L5.2 5.2 Z' fill='%239e7834'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  #usos-lingua .esc-usos-manifesto-body {
+    margin-top: 9px;
+    padding-top: 9px;
+    border-top: 1px dashed rgba(154, 118, 52, 0.36);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  #usos-lingua .esc-usos-manifesto-body p {
+    margin: 0 !important;
+    font: 400 13.2px/1.58 Arial, Helvetica, sans-serif !important;
+    color: #1c2c22 !important;
+  }
+  #usos-lingua .esc-usos-quiet {
+    color: #6b501d !important;
+    text-decoration: none !important;
+    border: 1px solid rgba(154, 118, 52, 0.42) !important;
+    border-radius: 99px;
+    min-height: 28px !important;
+    padding: 4px 12px !important;
+    font-size: 11.5px !important;
+    background: rgba(232, 198, 120, 0.16) !important;
+    opacity: 1 !important;
+    flex-shrink: 0;
+  }
+  #usos-lingua .esc-usos-quiet:hover {
+    background: #1b2d22 !important;
+    color: #f0e6cc !important;
+    border-color: #b58c3e !important;
+  }
+
+  #usos-lingua .esc-usos-search {
+    background-color: #d3ddd0 !important;
+    border: 1px solid rgba(154, 118, 52, 0.46) !important;
+    border-radius: 7px !important;
+    color: #17231b !important;
+    box-shadow: inset 0 1px 2px rgba(17, 30, 22, 0.06);
+  }
+  #usos-lingua .esc-usos-search:focus {
+    outline: none;
+    border-color: #9e7834 !important;
+    box-shadow: 0 0 0 2px rgba(181, 140, 62, 0.25);
+  }
+
+  #usos-lingua .esc-usos-cat {
+    background-color: #ced8cb !important;
+    border: 1px solid rgba(154, 118, 52, 0.36) !important;
+    color: #1d2f24 !important;
+    border-radius: 99px !important;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+  }
+  #usos-lingua .esc-usos-cat:hover {
+    background-color: #243b2d !important;
+    border-color: #c49a4c !important;
+    color: #f2ebd8 !important;
+  }
+  #usos-lingua .esc-usos-cat[aria-pressed="true"] {
+    background-color: #1b2d22 !important;
+    color: #f0e3c2 !important;
+    border-color: #b58c3e !important;
+    box-shadow: inset 0 0 0 1px rgba(232, 198, 120, 0.24);
+  }
+
+  #usos-lingua .esc-usos-card {
+    background-color: #ced9cb !important;
+    border: 1px solid rgba(154, 118, 52, 0.32) !important;
+    border-radius: 8px !important;
+    transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+  }
+  #usos-lingua .esc-usos-card:hover {
+    border-color: rgba(157, 121, 54, 0.62) !important;
+  }
+  #usos-lingua .esc-usos-card.is-open {
+    background-color: #d6e0d2 !important;
+    border: 1.5px solid #a68038 !important;
+    border-left: 4px solid #1b2d22 !important;
+    box-shadow: 0 4px 14px rgba(15, 28, 20, 0.11);
+  }
+  #usos-lingua .esc-usos-card-titles strong {
+    color: #16261c !important;
+  }
+  #usos-lingua .esc-usos-card-titles small {
+    color: #7c5c22 !important;
+    opacity: 0.92 !important;
+  }
+  #usos-lingua .esc-usos-chev {
+    color: #8f6b28 !important;
+    opacity: 1 !important;
+  }
+  #usos-lingua .esc-usos-card-body {
+    border-top: 1px dashed rgba(154, 118, 52, 0.36) !important;
+    padding-top: 10px !important;
+  }
+  #usos-lingua .esc-usos-lbl {
+    color: #21402e !important;
+    letter-spacing: 0.08em !important;
+  }
+  #usos-lingua .esc-usos-block.is-why {
+    background-color: rgba(214, 180, 108, 0.24) !important;
+    border: 1px solid rgba(157, 121, 54, 0.38);
+    border-left: 3px solid #a68038;
+    border-radius: 6px !important;
+    padding: 9px 11px !important;
+  }
+  #usos-lingua .esc-usos-block.is-why .esc-usos-lbl {
+    color: #76551a !important;
+  }
+  #usos-lingua .esc-usos-examples {
+    border-top: 1px dotted rgba(154, 118, 52, 0.42) !important;
+    padding-top: 8px !important;
+  }
+  #usos-lingua .esc-usos-ex-formal {
+    color: #16261c !important;
+  }
+
+  /* =========================================================================
+   * 4. CARTÓRIO, SOBRE, VERSÕES, CALCULADORA, CALENDÁRIO, AJUSTES, UNIVERSO E GIZ
+   * ========================================================================= */
+  #esc-cartorio-overlay {
+    background: rgba(14, 24, 18, 0.68) !important;
+  }
+  #esc-cartorio-overlay .esc-cartorio-card {
+    background-color: #c3cec0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    border: 1.5px solid #a68038 !important;
+    border-radius: 10px !important;
+    box-shadow:
+      0 22px 54px rgba(10, 20, 14, 0.5),
+      inset 0 0 0 4px rgba(218, 226, 214, 0.42),
+      inset 0 0 0 5px rgba(166, 128, 56, 0.36) !important;
+  }
+  #esc-cartorio-overlay .cart-head {
+    position: relative;
+    overflow: hidden;
+    background-color: #1b2d22 !important;
+    background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
+    background-repeat: no-repeat, repeat !important;
+    background-position: right center, 0 0 !important;
+    background-size: auto 100%, 84px 84px !important;
+    border-bottom: 1.5px solid #b58c3e !important;
+    color: #f2ebd9 !important;
+  }
+  #esc-cartorio-overlay .cart-eyebrow {
+    color: #e8c678 !important;
+  }
+  #esc-cartorio-overlay .cart-head h2 {
+    color: #f4eedf !important;
+    text-shadow: 0 1px 4px rgba(8, 16, 11, 0.65);
+  }
+  #esc-cartorio-overlay .cart-close {
+    background: rgba(16, 28, 21, 0.78) !important;
+    color: #f2ebd9 !important;
+    border: 1px solid rgba(232, 198, 120, 0.58) !important;
+    border-radius: 6px !important;
+  }
+  #esc-cartorio-overlay .cart-close:hover {
+    background: #284232 !important;
+    border-color: #f0d38d !important;
+  }
+  #esc-cartorio-overlay .cart-tabs {
+    background: rgba(27, 45, 34, 0.06);
+    border-bottom-color: rgba(154, 118, 52, 0.32) !important;
+  }
+  #esc-cartorio-overlay .cart-tab[aria-pressed="true"] {
+    color: #182b20 !important;
+    border-bottom-color: #a68038 !important;
+  }
+  #esc-cartorio-overlay .cart-guard-bar,
+  #esc-cartorio-overlay .cart-cert {
+    background-color: #cfd9cb !important;
+    border-color: rgba(154, 118, 52, 0.42) !important;
+  }
+
+  /* Cartões internos de Sobre, Ajustes, Versões e Utilidades */
+  #sobre .esc-about-card,
+  #mesa .setting-section,
+  #lineage-panel #lineage-list li,
+  #utilidades .calendar-table {
+    background-color: #ced9cb !important;
+    border: 1px solid rgba(154, 118, 52, 0.34) !important;
+    border-radius: 8px !important;
+  }
+  #mesa .setting-section {
+    padding: 12px 14px !important;
+    margin-bottom: 12px !important;
+  }
+  #mesa .setting-section h3,
+  #sobre .esc-about-card h3 {
+    color: #1b3123 !important;
+    font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+  }
+  #sobre .esc-about-note {
+    border-left-color: #9e7834 !important;
+    background: rgba(27, 45, 34, 0.075) !important;
+  }
+  #sobre .esc-about-legal {
+    border-color: rgba(157, 121, 54, 0.5) !important;
+    background-color: rgba(214, 180, 108, 0.2) !important;
+  }
+  #sobre .esc-about-actions button,
+  #lineage-panel #lineage-mark,
+  #lineage-panel #lineage-restore {
+    background-color: #1b2d22 !important;
+    color: #f2ebd8 !important;
+    border: 1px solid #b58c3e !important;
+    border-radius: 6px !important;
+  }
+  #sobre .esc-about-actions button:hover,
+  #lineage-panel #lineage-mark:hover,
+  #lineage-panel #lineage-restore:hover {
+    background-color: #274031 !important;
+    border-color: #e8c678 !important;
+  }
+
+  /* Calculadora Editorial flutuante */
+  .esc-calculator {
+    background-color: #c3cec0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    border: 1.5px solid #a68038 !important;
+    border-radius: 8px !important;
+    box-shadow:
+      0 14px 36px rgba(12, 24, 17, 0.34),
+      inset 0 0 0 2px rgba(232, 198, 120, 0.18) !important;
+    overflow: hidden;
+  }
+  .esc-calculator .esc-calc-head {
+    background-color: #1b2d22 !important;
+    background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
+    background-repeat: no-repeat, repeat !important;
+    background-position: right center, 0 0 !important;
+    background-size: auto 100%, 84px 84px !important;
+    color: #f3ecda !important;
+    border-bottom: 1.5px solid #b58c3e !important;
+  }
+  .esc-calculator .esc-calc-tabs {
+    border-bottom-color: rgba(154, 118, 52, 0.36) !important;
+    background: rgba(27, 45, 34, 0.06);
+  }
+  .esc-calculator .esc-calc-tab[aria-selected="true"] {
+    background: #1b2d22 !important;
+    color: #f0e3c2 !important;
+  }
+
+  /* Universo da obra (#story-screen) e moldura do Quadro de giz (#chalkboard) */
+  #story-screen {
+    background-color: #c2cdc0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    color: #17231b !important;
+  }
+  #story-screen .finish-heading,
+  #chalkboard .chalk-heading {
+    position: relative;
+    overflow: hidden;
+    padding: 14px 20px !important;
+    border-radius: 8px !important;
+    border: 1.5px solid #b58c3e !important;
+    background-color: #1b2d22 !important;
+    background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
+    background-repeat: no-repeat, repeat !important;
+    background-position: right center, 0 0 !important;
+    background-size: auto 100%, 84px 84px !important;
+    color: #f2ebd9 !important;
+    box-shadow: 0 4px 14px rgba(12, 24, 17, 0.22);
+  }
+  #story-screen .finish-heading small,
+  #chalkboard .chalk-heading small {
+    color: #e8c678 !important;
+  }
+  #story-screen .finish-heading h2,
+  #chalkboard .chalk-heading h2 {
+    color: #f4eedf !important;
+    font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+  }
+  #story-screen #story-close,
+  #chalkboard #chalk-close {
+    background-color: rgba(16, 28, 21, 0.8) !important;
+    color: #f2ebd9 !important;
+    border: 1px solid rgba(232, 198, 120, 0.6) !important;
+    box-shadow: none !important;
+  }
+  #story-screen #story-close:hover,
+  #chalkboard #chalk-close:hover {
+    background-color: #284232 !important;
+    border-color: #f0d38d !important;
+  }
+  #story-screen .story-navigation button[aria-pressed="true"] {
+    background-color: #1b2d22 !important;
+    color: #f0e3c2 !important;
+    border-bottom: 2px solid #b58c3e !important;
+  }
+  #story-screen .polaroid {
+    background-color: #d2dcd0 !important;
+    border-color: rgba(154, 118, 52, 0.48) !important;
+    box-shadow: 3px 4px 0 rgba(27, 45, 34, 0.16) !important;
+  }
+  #chalkboard .chalk-paper {
+    background-color: #c2cdc0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    border: 1.5px solid rgba(157, 121, 54, 0.56) !important;
+  }
+
+  /* =========================================================================
+   * 5. MODO NOTURNO DA OFICINA — Floresta Verde Musgo Profundo + Ouro Luminoso
+   * ========================================================================= */
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-oficina-label {
+    color: #c8b27c !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-oficina-label::after {
+    background: rgba(214, 178, 102, 0.28);
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+    color: #9cb8a2;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-tool-btn:hover,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-tool-btn[aria-expanded="true"] {
+    background-color: #192b20 !important;
+    color: #f2e8cf !important;
+    border-color: #c9a152 !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #usos-lingua,
+  body[data-theme="escuro"][data-view="workspace"] #sobre,
+  body[data-theme="escuro"][data-view="workspace"] #lineage-panel,
+  body[data-theme="escuro"][data-view="workspace"] #utilidades,
+  body[data-theme="escuro"][data-view="workspace"] #mesa,
+  body[data-theme="escuro"] #usos-lingua,
+  body[data-theme="escuro"] #sobre,
+  body[data-theme="escuro"] #lineage-panel,
+  body[data-theme="escuro"] #utilidades,
+  body[data-theme="escuro"] #mesa,
+  body[data-theme="escuro"] #story-screen,
+  body[data-theme="escuro"] #chalkboard .chalk-paper,
+  body[data-theme="escuro"] #esc-cartorio-overlay .esc-cartorio-card,
+  body[data-theme="escuro"] .esc-calculator {
+    background-color: #152119 !important;
+    background-image: var(--esc-of-grain-dark) !important;
+    color: #dce4da !important;
+    border-color: rgba(204, 166, 94, 0.45) !important;
+  }
+
+  body[data-theme="escuro"] #usos-lingua > .sheet-heading,
+  body[data-theme="escuro"] #sobre > .sheet-heading,
+  body[data-theme="escuro"] #lineage-panel > .sheet-heading,
+  body[data-theme="escuro"] #utilidades > .sheet-heading,
+  body[data-theme="escuro"] #mesa > .sheet-heading,
+  body[data-theme="escuro"] #esc-cartorio-overlay .cart-head,
+  body[data-theme="escuro"] .esc-calculator .esc-calc-head,
+  body[data-theme="escuro"] #story-screen .finish-heading,
+  body[data-theme="escuro"] #chalkboard .chalk-heading {
+    background-color: #0e1812 !important;
+    border-color: #c9a152 !important;
+    color: #f3ecda !important;
+  }
+
+  body[data-theme="escuro"] #usos-lingua .esc-usos-manifesto {
+    background-color: #1b2b21 !important;
+    border-color: rgba(204, 166, 94, 0.36) !important;
+    border-left-color: #d4af64 !important;
+    box-shadow: inset 0 0 0 1px rgba(232, 198, 120, 0.1);
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-manifesto-head strong {
+    color: #f0e4c6 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-manifesto-body p {
+    color: #d5dfd3 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-quiet {
+    color: #e6c67d !important;
+    border-color: rgba(214, 178, 102, 0.4) !important;
+    background: rgba(214, 178, 102, 0.1) !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-search {
+    background-color: #111b15 !important;
+    border-color: rgba(204, 166, 94, 0.38) !important;
+    color: #e3ebe1 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-cat {
+    background-color: #1b2a20 !important;
+    border-color: rgba(204, 166, 94, 0.3) !important;
+    color: #d5dfd3 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-cat:hover {
+    background-color: #24382b !important;
+    border-color: #d4af64 !important;
+    color: #f2e8cf !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-cat[aria-pressed="true"] {
+    background-color: #c9a152 !important;
+    color: #111c15 !important;
+    border-color: #e4c47d !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-card {
+    background-color: #1b2920 !important;
+    border-color: rgba(204, 166, 94, 0.24) !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-card.is-open {
+    background-color: #203126 !important;
+    border-color: #c9a152 !important;
+    border-left-color: #e6c67d !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-card-titles strong,
+  body[data-theme="escuro"] #usos-lingua .esc-usos-ex-formal {
+    color: #eef3ec !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-card-titles small,
+  body[data-theme="escuro"] #usos-lingua .esc-usos-chev {
+    color: #dfbe78 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-lbl {
+    color: #9fc9ab !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-block.is-why {
+    background-color: rgba(209, 170, 92, 0.14) !important;
+    border-color: rgba(209, 170, 92, 0.34);
+    border-left-color: #d4af64;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-block.is-why .esc-usos-lbl {
+    color: #e6c67d !important;
+  }
+
+  body[data-theme="escuro"] #sobre .esc-about-card,
+  body[data-theme="escuro"] #mesa .setting-section,
+  body[data-theme="escuro"] #lineage-panel #lineage-list li,
+  body[data-theme="escuro"] #esc-cartorio-overlay .cart-guard-bar,
+  body[data-theme="escuro"] #esc-cartorio-overlay .cart-cert,
+  body[data-theme="escuro"] #story-screen .polaroid {
+    background-color: #1b2a20 !important;
+    border-color: rgba(204, 166, 94, 0.28) !important;
+    color: #dce4da !important;
+  }
+  body[data-theme="escuro"] #mesa .setting-section h3,
+  body[data-theme="escuro"] #sobre .esc-about-card h3 {
+    color: #f0e4c6 !important;
+  }
+  body[data-theme="escuro"] #esc-cartorio-overlay .cart-tab[aria-pressed="true"] {
+    color: #f0e4c6 !important;
+    border-bottom-color: #d4af64 !important;
+  }
+
+  /* Redução de movimento respeitada */
+  @media (prefers-reduced-motion: reduce) {
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn,
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+      transition: none !important;
+      transform: none !important;
+    }
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover::after,
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible::after {
+      animation: none !important;
+    }
+  }
+}

@@ -27,14 +27,20 @@
       /* Manifesto acolhedor recolhível */
       var manBox = mk('div', 'esc-usos-manifesto');
       var manHead = mk('div', 'esc-usos-manifesto-head');
-      manHead.appendChild(mk('strong', '', 'Não existe “erro” — existe adequação de uso'));
+      manHead.appendChild(mk('strong', '', 'Zero preconceito — tudo é adequação de uso'));
       var manBtn = mk('button', 'esc-usos-quiet', manifestoOpen ? 'Recolher' : 'Ler manifesto');
       manBtn.type = 'button';
       on(manBtn, 'click', function () { manifestoOpen = !manifestoOpen; render(); });
       manHead.appendChild(manBtn);
       manBox.appendChild(manHead);
       if (manifestoOpen) {
-        manBox.appendChild(mk('p', '', data.manifesto));
+        var manBody = mk('div', 'esc-usos-manifesto-body');
+        var paras = String(data.manifesto || '').split('\n\n');
+        var pi;
+        for (pi = 0; pi < paras.length; pi += 1) {
+          if (paras[pi]) { manBody.appendChild(mk('p', '', paras[pi])); }
+        }
+        manBox.appendChild(manBody);
       }
       container.appendChild(manBox);
 
@@ -120,24 +126,24 @@
           if (isOpen) {
             var body = mk('div', 'esc-usos-card-body');
             var b1 = mk('div', 'esc-usos-block');
-            b1.appendChild(mk('span', 'esc-usos-lbl', 'Na fala cotidiana'));
-            b1.appendChild(mk('p', '', item.fala));
+            b1.appendChild(mk('span', 'esc-usos-lbl', 'Na fala e na escrita livre'));
+            b1.appendChild(mk('p', '', item.livre || item.fala));
             body.appendChild(b1);
 
             var b2 = mk('div', 'esc-usos-block');
-            b2.appendChild(mk('span', 'esc-usos-lbl', 'Na escrita formal'));
-            b2.appendChild(mk('p', '', item.formal));
+            b2.appendChild(mk('span', 'esc-usos-lbl', 'Em ambientes monitorados (acordo escrito)'));
+            b2.appendChild(mk('p', '', item.monitorado || item.formal));
             body.appendChild(b2);
 
             var b3 = mk('div', 'esc-usos-block is-why');
-            b3.appendChild(mk('span', 'esc-usos-lbl', 'Por que muda (teste rápido)'));
+            b3.appendChild(mk('span', 'esc-usos-lbl', 'Como pegar o jeito (regra clara)'));
             b3.appendChild(mk('p', '', item.porque));
             body.appendChild(b3);
 
             var b4 = mk('div', 'esc-usos-examples');
             b4.appendChild(mk('span', 'esc-usos-lbl', 'Exemplo vivo'));
-            b4.appendChild(mk('p', 'esc-usos-ex-fala', 'Diálogo / fala: ' + item.exemploFala));
-            b4.appendChild(mk('p', 'esc-usos-ex-formal', 'Texto formal: ' + item.exemploFormal));
+            b4.appendChild(mk('p', 'esc-usos-ex-fala', 'Fala / escrita livre: ' + (item.exemploLivre || item.exemploFala)));
+            b4.appendChild(mk('p', 'esc-usos-ex-formal', 'Documento monitorado: ' + (item.exemploMonitorado || item.exemploFormal)));
             body.appendChild(b4);
 
             card.appendChild(body);

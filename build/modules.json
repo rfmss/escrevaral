@@ -209,6 +209,7 @@
     "src/ui/styles/academia.css",
     "src/ui/styles/cartorio.css",
     "src/ui/styles/ornamentos.css",
-    "src/ui/styles/real-gabinete.css"
+    "src/ui/styles/real-gabinete.css",
+    "src/ui/styles/oficina-musgo.css"
   ]
 }

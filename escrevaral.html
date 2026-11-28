@@ -14035,6 +14035,685 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-theme="escuro"] #oficina #ptbr-dashboard .ptbr-arc-label { fill: #d9cebc !important; }
 }
 
+/* Fonte: src/ui/styles/oficina-musgo.css */
+/* Reino da Oficina — Verde Musgo Profundo + Fios Dourados dos Eternos (estética AFK Journey / medieval místico).
+ * Terceira instância visual do Escrevaral (fora da folha de produção textual E-Ink e da Academia Real Gabinete):
+ * superfícies foscas de musgo calibrado + ouro envelhecido + filigrana geométrica celestial, quieto em repouso na mesa. */
+@media screen {
+  :root,
+  body,
+  body[data-esc-theme="eink"] {
+    /* Granulação fosca de papel-musgo botânico (SVG 84x84 ultraleve, zero <feTurbulence>) */
+    --esc-of-grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%231d3224' fill-opacity='0.055'%3E%3Ccircle cx='8' cy='12' r='0.9'/%3E%3Ccircle cx='25' cy='7' r='0.7'/%3E%3Ccircle cx='43' cy='16' r='1.0'/%3E%3Ccircle cx='61' cy='9' r='0.8'/%3E%3Ccircle cx='77' cy='20' r='0.9'/%3E%3Ccircle cx='15' cy='31' r='1.0'/%3E%3Ccircle cx='35' cy='26' r='0.7'/%3E%3Ccircle cx='52' cy='33' r='0.9'/%3E%3Ccircle cx='69' cy='29' r='0.9'/%3E%3Ccircle cx='7' cy='48' r='0.8'/%3E%3Ccircle cx='26' cy='44' r='1.0'/%3E%3Ccircle cx='46' cy='51' r='0.7'/%3E%3Ccircle cx='64' cy='47' r='1.0'/%3E%3Ccircle cx='79' cy='54' r='0.8'/%3E%3Ccircle cx='18' cy='66' r='0.9'/%3E%3Ccircle cx='38' cy='70' r='1.0'/%3E%3Ccircle cx='55' cy='63' r='0.7'/%3E%3Ccircle cx='73' cy='72' r='0.9'/%3E%3C/g%3E%3Cg fill='%23b58c3e' fill-opacity='0.075'%3E%3Ccircle cx='17' cy='15' r='0.8'/%3E%3Ccircle cx='48' cy='11' r='0.7'/%3E%3Ccircle cx='71' cy='14' r='0.9'/%3E%3Ccircle cx='11' cy='39' r='0.8'/%3E%3Ccircle cx='41' cy='40' r='0.8'/%3E%3Ccircle cx='74' cy='42' r='0.7'/%3E%3Ccircle cx='22' cy='57' r='0.9'/%3E%3Ccircle cx='59' cy='58' r='0.8'/%3E%3Ccircle cx='33' cy='75' r='0.8'/%3E%3C/g%3E%3Cpath d='M5 19 L13 17 M32 12 L39 14 M62 22 L70 20 M19 37 L27 35 M49 42 L57 40 M9 59 L17 57 M43 67 L51 65' stroke='%239a7630' stroke-opacity='0.05' stroke-width='0.8' stroke-linecap='round'/%3E%3C/svg%3E");
+    --esc-of-grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='%23e8c678' fill-opacity='0.07'%3E%3Ccircle cx='9' cy='11' r='0.9'/%3E%3Ccircle cx='27' cy='8' r='0.7'/%3E%3Ccircle cx='45' cy='15' r='1.0'/%3E%3Ccircle cx='63' cy='10' r='0.8'/%3E%3Ccircle cx='78' cy='19' r='0.9'/%3E%3Ccircle cx='16' cy='29' r='0.9'/%3E%3Ccircle cx='36' cy='25' r='0.7'/%3E%3Ccircle cx='54' cy='32' r='0.9'/%3E%3Ccircle cx='70' cy='28' r='1.0'/%3E%3Ccircle cx='25' cy='44' r='0.9'/%3E%3Ccircle cx='65' cy='46' r='0.9'/%3E%3Ccircle cx='19' cy='66' r='0.9'/%3E%3Ccircle cx='39' cy='69' r='1.0'/%3E%3Ccircle cx='73' cy='73' r='0.9'/%3E%3C/g%3E%3C/svg%3E");
+    /* Filigrana geométrica dos Eternos (astrolábio fino + losangos celestiais em fio dourado) */
+    --esc-of-eternos-banner: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 120' preserveAspectRatio='xMaxYMid slice'%3E%3Cg fill='none' stroke='%23e8c678' stroke-linecap='round'%3E%3Ccircle cx='348' cy='60' r='52' stroke-opacity='0.26' stroke-width='0.9'/%3E%3Ccircle cx='348' cy='60' r='38' stroke-opacity='0.18' stroke-width='0.7' stroke-dasharray='3 4'/%3E%3Ccircle cx='348' cy='60' r='22' stroke-opacity='0.34' stroke-width='0.85'/%3E%3Ccircle cx='348' cy='60' r='74' stroke-opacity='0.13' stroke-width='0.75'/%3E%3Cpath d='M256 60 H420 M348 2 V118' stroke-opacity='0.16' stroke-width='0.7'/%3E%3Cpath d='M348 26 L360 60 L348 94 L336 60 Z' stroke-opacity='0.36' stroke-width='0.95'/%3E%3Cpath d='M314 60 L348 48 L382 60 L348 72 Z' stroke-opacity='0.3' stroke-width='0.85'/%3E%3Cpath d='M18 106 H276 M296 106 L304 98 L312 106 L304 114 Z' stroke-opacity='0.22' stroke-width='0.8'/%3E%3Cpath d='M286 24 L290 32 L298 36 L290 40 L286 48 L282 40 L274 36 L282 32 Z' fill='%23f2d590' fill-opacity='0.34' stroke='none'/%3E%3Ccircle cx='348' cy='60' r='3' fill='%23f2d590' fill-opacity='0.52' stroke='none'/%3E%3Ccircle cx='296' cy='60' r='1.8' fill='%23e8c678' fill-opacity='0.44' stroke='none'/%3E%3Ccircle cx='400' cy='60' r='1.8' fill='%23e8c678' fill-opacity='0.44' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    --esc-of-eternos-sweep: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 40' preserveAspectRatio='none'%3E%3Crect x='11' y='0' width='6' height='40' fill='%23f2cf88' fill-opacity='0.22'/%3E%3Crect x='13.2' y='0' width='1.6' height='40' fill='%23fae2a8' fill-opacity='0.76'/%3E%3Cpath d='M14 14 L15.4 18.6 L20 20 L15.4 21.4 L14 26 L12.6 21.4 L8 20 L12.6 18.6 Z' fill='%23fff0c9'/%3E%3C/svg%3E");
+    --esc-of-rod-gold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 12' preserveAspectRatio='xMidYMid meet'%3E%3Cg fill='none' stroke='%23b58c3e' stroke-linecap='round'%3E%3Cline x1='4' y1='6' x2='96' y2='6' stroke-opacity='0.55' stroke-width='0.9'/%3E%3Cline x1='124' y1='6' x2='216' y2='6' stroke-opacity='0.55' stroke-width='0.9'/%3E%3Cpath d='M110 1.5 L116 6 L110 10.5 L104 6 Z' stroke-opacity='0.88' stroke-width='1' fill='%23e6c37a' fill-opacity='0.34'/%3E%3Ccircle cx='98' cy='6' r='1.3' fill='%23b58c3e' fill-opacity='0.7' stroke='none'/%3E%3Ccircle cx='122' cy='6' r='1.3' fill='%23b58c3e' fill-opacity='0.7' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  @keyframes escOficinaSweep {
+    0%   { transform: translate3d(-30px, 0, 0); opacity: 0; }
+    48%  { transform: translate3d(52px, 0, 0); opacity: 0.92; }
+    100% { transform: translate3d(130px, 0, 0); opacity: 0; }
+  }
+
+  /* =========================================================================
+   * 1. PORTAL DA OFICINA NA BARRA LATERAL (quieto em repouso, desperta no hover)
+   * ========================================================================= */
+  body[data-view="workspace"] #navigation .esc-oficina-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 7px 2px 4px !important;
+    padding: 0 !important;
+    color: #3a4c3e !important;
+    letter-spacing: 0.14em !important;
+  }
+  body[data-view="workspace"] #navigation .esc-oficina-label::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 0.8 L7.5 4.5 L11.2 6 L7.5 7.5 L6 11.2 L4.5 7.5 L0.8 6 L4.5 4.5 Z' fill='%239e7834'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  body[data-view="workspace"] #navigation .esc-oficina-label::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background: rgba(154, 118, 52, 0.36);
+  }
+
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+    transition:
+      background-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 180ms ease,
+      box-shadow 200ms ease !important;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn::after {
+    content: "";
+    position: absolute;
+    top: -2px; bottom: -2px; left: 0;
+    width: 26px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    background: var(--esc-of-eternos-sweep) center/100% 100% no-repeat;
+    transform: translate3d(-30px, 0, 0);
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn > * {
+    position: relative;
+    z-index: 2;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+    color: #36523f;
+    transition: color 180ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+  }
+  /* Hover / Ativo: desperta o musgo real + ouro dos Eternos */
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn[aria-expanded="true"] {
+    background-color: #1c2f23 !important;
+    color: #f2ebd8 !important;
+    border-color: #b58c3e !important;
+    box-shadow:
+      0 2px 8px rgba(15, 28, 20, 0.24),
+      inset 0 0 0 1px rgba(232, 198, 120, 0.16) !important;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover::after,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible::after {
+    animation: escOficinaSweep 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover .esc-ui-ico,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible .esc-ui-ico,
+  body[data-view="workspace"] #navigation .esc-nav-tool-btn[aria-expanded="true"] .esc-ui-ico {
+    color: #e8c574 !important;
+    opacity: 1 !important;
+    transform: translate3d(1px, 0, 0) scale(1.06);
+  }
+
+  /* =========================================================================
+   * 2. INSTÂNCIAS DA OFICINA (Gavetas: Usos da língua, Versões, Sobre,
+   *    Calendário/Pomodoro, Ajustes) — Verde Musgo Calibrado + Ouro Eternos
+   * ========================================================================= */
+  body[data-view="workspace"] #usos-lingua,
+  body[data-view="workspace"] #sobre,
+  body[data-view="workspace"] #lineage-panel,
+  body[data-view="workspace"] #utilidades,
+  body[data-view="workspace"] #mesa,
+  #usos-lingua,
+  #sobre,
+  #lineage-panel,
+  #utilidades,
+  #mesa {
+    background-color: #c2cdc0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    color: #17231b !important;
+    border-left: 1.5px solid #9d7936 !important;
+    box-shadow:
+      -10px 0 32px rgba(14, 26, 19, 0.2),
+      inset 3px 0 0 rgba(181, 140, 62, 0.16) !important;
+  }
+
+  /* Cabeçalho nobre Verde Musgo Real + Filigrana dos Eternos */
+  #usos-lingua > .sheet-heading,
+  #sobre > .sheet-heading,
+  #lineage-panel > .sheet-heading,
+  #utilidades > .sheet-heading,
+  #mesa > .sheet-heading {
+    position: relative;
+    overflow: hidden;
+    padding: 16px 20px !important;
+    margin-bottom: 16px !important;
+    border-radius: 8px !important;
+    border: 1.5px solid #b58c3e !important;
+    background-color: #1b2d22 !important;
+    background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
+    background-repeat: no-repeat, repeat !important;
+    background-position: right center, 0 0 !important;
+    background-size: auto 100%, 84px 84px !important;
+    color: #f2ebd9 !important;
+    box-shadow:
+      0 5px 16px rgba(13, 24, 17, 0.22),
+      inset 0 0 0 3px rgba(232, 198, 120, 0.14) !important;
+  }
+  #usos-lingua > .sheet-heading .eyebrow,
+  #sobre > .sheet-heading .eyebrow,
+  #lineage-panel > .sheet-heading small,
+  #mesa > .sheet-heading .eyebrow {
+    color: #e8c678 !important;
+    letter-spacing: 0.12em !important;
+    font-weight: 700 !important;
+  }
+  #usos-lingua > .sheet-heading h2,
+  #sobre > .sheet-heading h2,
+  #lineage-panel > .sheet-heading h2,
+  #utilidades > .sheet-heading h2,
+  #mesa > .sheet-heading h2 {
+    color: #f4eedf !important;
+    font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 4px rgba(8, 16, 11, 0.65);
+  }
+  #usos-lingua > .sheet-heading button,
+  #sobre > .sheet-heading button,
+  #lineage-panel > .sheet-heading button,
+  #utilidades > .sheet-heading button,
+  #mesa > .sheet-heading button {
+    background-color: rgba(16, 28, 21, 0.78) !important;
+    color: #f2ebd9 !important;
+    border: 1px solid rgba(232, 198, 120, 0.58) !important;
+    border-radius: 6px !important;
+  }
+  #usos-lingua > .sheet-heading button:hover,
+  #sobre > .sheet-heading button:hover,
+  #lineage-panel > .sheet-heading button:hover,
+  #utilidades > .sheet-heading button:hover,
+  #mesa > .sheet-heading button:hover {
+    background-color: #284232 !important;
+    border-color: #f0d38d !important;
+    color: #faf4e6 !important;
+  }
+
+  /* =========================================================================
+   * 3. USOS DA LÍNGUA (#usos-lingua) — Grimório Acolhedor Verde Musgo & Ouro
+   * ========================================================================= */
+  #usos-lingua .esc-usos-manifesto {
+    position: relative;
+    padding: 14px 16px 15px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(157, 121, 54, 0.45) !important;
+    border-left: 3.5px solid #9e7834 !important;
+    background-color: #ccd7c9 !important;
+    box-shadow:
+      0 2px 8px rgba(17, 30, 22, 0.07),
+      inset 0 0 0 2px rgba(232, 198, 120, 0.14);
+  }
+  #usos-lingua .esc-usos-manifesto-head strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font: 700 14.5px/1.3 var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+    color: #182b20 !important;
+  }
+  #usos-lingua .esc-usos-manifesto-head strong::before {
+    content: "";
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 0.8 L8.8 5.2 L13.2 7 L8.8 8.8 L7 13.2 L5.2 8.8 L0.8 7 L5.2 5.2 Z' fill='%239e7834'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  #usos-lingua .esc-usos-manifesto-body {
+    margin-top: 9px;
+    padding-top: 9px;
+    border-top: 1px dashed rgba(154, 118, 52, 0.36);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  #usos-lingua .esc-usos-manifesto-body p {
+    margin: 0 !important;
+    font: 400 13.2px/1.58 Arial, Helvetica, sans-serif !important;
+    color: #1c2c22 !important;
+  }
+  #usos-lingua .esc-usos-quiet {
+    color: #6b501d !important;
+    text-decoration: none !important;
+    border: 1px solid rgba(154, 118, 52, 0.42) !important;
+    border-radius: 99px;
+    min-height: 28px !important;
+    padding: 4px 12px !important;
+    font-size: 11.5px !important;
+    background: rgba(232, 198, 120, 0.16) !important;
+    opacity: 1 !important;
+    flex-shrink: 0;
+  }
+  #usos-lingua .esc-usos-quiet:hover {
+    background: #1b2d22 !important;
+    color: #f0e6cc !important;
+    border-color: #b58c3e !important;
+  }
+
+  #usos-lingua .esc-usos-search {
+    background-color: #d3ddd0 !important;
+    border: 1px solid rgba(154, 118, 52, 0.46) !important;
+    border-radius: 7px !important;
+    color: #17231b !important;
+    box-shadow: inset 0 1px 2px rgba(17, 30, 22, 0.06);
+  }
+  #usos-lingua .esc-usos-search:focus {
+    outline: none;
+    border-color: #9e7834 !important;
+    box-shadow: 0 0 0 2px rgba(181, 140, 62, 0.25);
+  }
+
+  #usos-lingua .esc-usos-cat {
+    background-color: #ced8cb !important;
+    border: 1px solid rgba(154, 118, 52, 0.36) !important;
+    color: #1d2f24 !important;
+    border-radius: 99px !important;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+  }
+  #usos-lingua .esc-usos-cat:hover {
+    background-color: #243b2d !important;
+    border-color: #c49a4c !important;
+    color: #f2ebd8 !important;
+  }
+  #usos-lingua .esc-usos-cat[aria-pressed="true"] {
+    background-color: #1b2d22 !important;
+    color: #f0e3c2 !important;
+    border-color: #b58c3e !important;
+    box-shadow: inset 0 0 0 1px rgba(232, 198, 120, 0.24);
+  }
+
+  #usos-lingua .esc-usos-card {
+    background-color: #ced9cb !important;
+    border: 1px solid rgba(154, 118, 52, 0.32) !important;
+    border-radius: 8px !important;
+    transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+  }
+  #usos-lingua .esc-usos-card:hover {
+    border-color: rgba(157, 121, 54, 0.62) !important;
+  }
+  #usos-lingua .esc-usos-card.is-open {
+    background-color: #d6e0d2 !important;
+    border: 1.5px solid #a68038 !important;
+    border-left: 4px solid #1b2d22 !important;
+    box-shadow: 0 4px 14px rgba(15, 28, 20, 0.11);
+  }
+  #usos-lingua .esc-usos-card-titles strong {
+    color: #16261c !important;
+  }
+  #usos-lingua .esc-usos-card-titles small {
+    color: #7c5c22 !important;
+    opacity: 0.92 !important;
+  }
+  #usos-lingua .esc-usos-chev {
+    color: #8f6b28 !important;
+    opacity: 1 !important;
+  }
+  #usos-lingua .esc-usos-card-body {
+    border-top: 1px dashed rgba(154, 118, 52, 0.36) !important;
+    padding-top: 10px !important;
+  }
+  #usos-lingua .esc-usos-lbl {
+    color: #21402e !important;
+    letter-spacing: 0.08em !important;
+  }
+  #usos-lingua .esc-usos-block.is-why {
+    background-color: rgba(214, 180, 108, 0.24) !important;
+    border: 1px solid rgba(157, 121, 54, 0.38);
+    border-left: 3px solid #a68038;
+    border-radius: 6px !important;
+    padding: 9px 11px !important;
+  }
+  #usos-lingua .esc-usos-block.is-why .esc-usos-lbl {
+    color: #76551a !important;
+  }
+  #usos-lingua .esc-usos-examples {
+    border-top: 1px dotted rgba(154, 118, 52, 0.42) !important;
+    padding-top: 8px !important;
+  }
+  #usos-lingua .esc-usos-ex-formal {
+    color: #16261c !important;
+  }
+
+  /* =========================================================================
+   * 4. CARTÓRIO, SOBRE, VERSÕES, CALCULADORA, CALENDÁRIO, AJUSTES, UNIVERSO E GIZ
+   * ========================================================================= */
+  #esc-cartorio-overlay {
+    background: rgba(14, 24, 18, 0.68) !important;
+  }
+  #esc-cartorio-overlay .esc-cartorio-card {
+    background-color: #c3cec0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    border: 1.5px solid #a68038 !important;
+    border-radius: 10px !important;
+    box-shadow:
+      0 22px 54px rgba(10, 20, 14, 0.5),
+      inset 0 0 0 4px rgba(218, 226, 214, 0.42),
+      inset 0 0 0 5px rgba(166, 128, 56, 0.36) !important;
+  }
+  #esc-cartorio-overlay .cart-head {
+    position: relative;
+    overflow: hidden;
+    background-color: #1b2d22 !important;
+    background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
+    background-repeat: no-repeat, repeat !important;
+    background-position: right center, 0 0 !important;
+    background-size: auto 100%, 84px 84px !important;
+    border-bottom: 1.5px solid #b58c3e !important;
+    color: #f2ebd9 !important;
+  }
+  #esc-cartorio-overlay .cart-eyebrow {
+    color: #e8c678 !important;
+  }
+  #esc-cartorio-overlay .cart-head h2 {
+    color: #f4eedf !important;
+    text-shadow: 0 1px 4px rgba(8, 16, 11, 0.65);
+  }
+  #esc-cartorio-overlay .cart-close {
+    background: rgba(16, 28, 21, 0.78) !important;
+    color: #f2ebd9 !important;
+    border: 1px solid rgba(232, 198, 120, 0.58) !important;
+    border-radius: 6px !important;
+  }
+  #esc-cartorio-overlay .cart-close:hover {
+    background: #284232 !important;
+    border-color: #f0d38d !important;
+  }
+  #esc-cartorio-overlay .cart-tabs {
+    background: rgba(27, 45, 34, 0.06);
+    border-bottom-color: rgba(154, 118, 52, 0.32) !important;
+  }
+  #esc-cartorio-overlay .cart-tab[aria-pressed="true"] {
+    color: #182b20 !important;
+    border-bottom-color: #a68038 !important;
+  }
+  #esc-cartorio-overlay .cart-guard-bar,
+  #esc-cartorio-overlay .cart-cert {
+    background-color: #cfd9cb !important;
+    border-color: rgba(154, 118, 52, 0.42) !important;
+  }
+
+  /* Cartões internos de Sobre, Ajustes, Versões e Utilidades */
+  #sobre .esc-about-card,
+  #mesa .setting-section,
+  #lineage-panel #lineage-list li,
+  #utilidades .calendar-table {
+    background-color: #ced9cb !important;
+    border: 1px solid rgba(154, 118, 52, 0.34) !important;
+    border-radius: 8px !important;
+  }
+  #mesa .setting-section {
+    padding: 12px 14px !important;
+    margin-bottom: 12px !important;
+  }
+  #mesa .setting-section h3,
+  #sobre .esc-about-card h3 {
+    color: #1b3123 !important;
+    font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+  }
+  #sobre .esc-about-note {
+    border-left-color: #9e7834 !important;
+    background: rgba(27, 45, 34, 0.075) !important;
+  }
+  #sobre .esc-about-legal {
+    border-color: rgba(157, 121, 54, 0.5) !important;
+    background-color: rgba(214, 180, 108, 0.2) !important;
+  }
+  #sobre .esc-about-actions button,
+  #lineage-panel #lineage-mark,
+  #lineage-panel #lineage-restore {
+    background-color: #1b2d22 !important;
+    color: #f2ebd8 !important;
+    border: 1px solid #b58c3e !important;
+    border-radius: 6px !important;
+  }
+  #sobre .esc-about-actions button:hover,
+  #lineage-panel #lineage-mark:hover,
+  #lineage-panel #lineage-restore:hover {
+    background-color: #274031 !important;
+    border-color: #e8c678 !important;
+  }
+
+  /* Calculadora Editorial flutuante */
+  .esc-calculator {
+    background-color: #c3cec0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    border: 1.5px solid #a68038 !important;
+    border-radius: 8px !important;
+    box-shadow:
+      0 14px 36px rgba(12, 24, 17, 0.34),
+      inset 0 0 0 2px rgba(232, 198, 120, 0.18) !important;
+    overflow: hidden;
+  }
+  .esc-calculator .esc-calc-head {
+    background-color: #1b2d22 !important;
+    background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
+    background-repeat: no-repeat, repeat !important;
+    background-position: right center, 0 0 !important;
+    background-size: auto 100%, 84px 84px !important;
+    color: #f3ecda !important;
+    border-bottom: 1.5px solid #b58c3e !important;
+  }
+  .esc-calculator .esc-calc-tabs {
+    border-bottom-color: rgba(154, 118, 52, 0.36) !important;
+    background: rgba(27, 45, 34, 0.06);
+  }
+  .esc-calculator .esc-calc-tab[aria-selected="true"] {
+    background: #1b2d22 !important;
+    color: #f0e3c2 !important;
+  }
+
+  /* Universo da obra (#story-screen) e moldura do Quadro de giz (#chalkboard) */
+  #story-screen {
+    background-color: #c2cdc0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    color: #17231b !important;
+  }
+  #story-screen .finish-heading,
+  #chalkboard .chalk-heading {
+    position: relative;
+    overflow: hidden;
+    padding: 14px 20px !important;
+    border-radius: 8px !important;
+    border: 1.5px solid #b58c3e !important;
+    background-color: #1b2d22 !important;
+    background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
+    background-repeat: no-repeat, repeat !important;
+    background-position: right center, 0 0 !important;
+    background-size: auto 100%, 84px 84px !important;
+    color: #f2ebd9 !important;
+    box-shadow: 0 4px 14px rgba(12, 24, 17, 0.22);
+  }
+  #story-screen .finish-heading small,
+  #chalkboard .chalk-heading small {
+    color: #e8c678 !important;
+  }
+  #story-screen .finish-heading h2,
+  #chalkboard .chalk-heading h2 {
+    color: #f4eedf !important;
+    font-family: var(--esc-font-serif, 'Noto Serif', Georgia, serif) !important;
+  }
+  #story-screen #story-close,
+  #chalkboard #chalk-close {
+    background-color: rgba(16, 28, 21, 0.8) !important;
+    color: #f2ebd9 !important;
+    border: 1px solid rgba(232, 198, 120, 0.6) !important;
+    box-shadow: none !important;
+  }
+  #story-screen #story-close:hover,
+  #chalkboard #chalk-close:hover {
+    background-color: #284232 !important;
+    border-color: #f0d38d !important;
+  }
+  #story-screen .story-navigation button[aria-pressed="true"] {
+    background-color: #1b2d22 !important;
+    color: #f0e3c2 !important;
+    border-bottom: 2px solid #b58c3e !important;
+  }
+  #story-screen .polaroid {
+    background-color: #d2dcd0 !important;
+    border-color: rgba(154, 118, 52, 0.48) !important;
+    box-shadow: 3px 4px 0 rgba(27, 45, 34, 0.16) !important;
+  }
+  #chalkboard .chalk-paper {
+    background-color: #c2cdc0 !important;
+    background-image: var(--esc-of-grain-light) !important;
+    background-repeat: repeat !important;
+    background-size: 84px 84px !important;
+    border: 1.5px solid rgba(157, 121, 54, 0.56) !important;
+  }
+
+  /* =========================================================================
+   * 5. MODO NOTURNO DA OFICINA — Floresta Verde Musgo Profundo + Ouro Luminoso
+   * ========================================================================= */
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-oficina-label {
+    color: #c8b27c !important;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-oficina-label::after {
+    background: rgba(214, 178, 102, 0.28);
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+    color: #9cb8a2;
+  }
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-tool-btn:hover,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible,
+  body[data-theme="escuro"][data-view="workspace"] #navigation .esc-nav-tool-btn[aria-expanded="true"] {
+    background-color: #192b20 !important;
+    color: #f2e8cf !important;
+    border-color: #c9a152 !important;
+  }
+
+  body[data-theme="escuro"][data-view="workspace"] #usos-lingua,
+  body[data-theme="escuro"][data-view="workspace"] #sobre,
+  body[data-theme="escuro"][data-view="workspace"] #lineage-panel,
+  body[data-theme="escuro"][data-view="workspace"] #utilidades,
+  body[data-theme="escuro"][data-view="workspace"] #mesa,
+  body[data-theme="escuro"] #usos-lingua,
+  body[data-theme="escuro"] #sobre,
+  body[data-theme="escuro"] #lineage-panel,
+  body[data-theme="escuro"] #utilidades,
+  body[data-theme="escuro"] #mesa,
+  body[data-theme="escuro"] #story-screen,
+  body[data-theme="escuro"] #chalkboard .chalk-paper,
+  body[data-theme="escuro"] #esc-cartorio-overlay .esc-cartorio-card,
+  body[data-theme="escuro"] .esc-calculator {
+    background-color: #152119 !important;
+    background-image: var(--esc-of-grain-dark) !important;
+    color: #dce4da !important;
+    border-color: rgba(204, 166, 94, 0.45) !important;
+  }
+
+  body[data-theme="escuro"] #usos-lingua > .sheet-heading,
+  body[data-theme="escuro"] #sobre > .sheet-heading,
+  body[data-theme="escuro"] #lineage-panel > .sheet-heading,
+  body[data-theme="escuro"] #utilidades > .sheet-heading,
+  body[data-theme="escuro"] #mesa > .sheet-heading,
+  body[data-theme="escuro"] #esc-cartorio-overlay .cart-head,
+  body[data-theme="escuro"] .esc-calculator .esc-calc-head,
+  body[data-theme="escuro"] #story-screen .finish-heading,
+  body[data-theme="escuro"] #chalkboard .chalk-heading {
+    background-color: #0e1812 !important;
+    border-color: #c9a152 !important;
+    color: #f3ecda !important;
+  }
+
+  body[data-theme="escuro"] #usos-lingua .esc-usos-manifesto {
+    background-color: #1b2b21 !important;
+    border-color: rgba(204, 166, 94, 0.36) !important;
+    border-left-color: #d4af64 !important;
+    box-shadow: inset 0 0 0 1px rgba(232, 198, 120, 0.1);
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-manifesto-head strong {
+    color: #f0e4c6 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-manifesto-body p {
+    color: #d5dfd3 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-quiet {
+    color: #e6c67d !important;
+    border-color: rgba(214, 178, 102, 0.4) !important;
+    background: rgba(214, 178, 102, 0.1) !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-search {
+    background-color: #111b15 !important;
+    border-color: rgba(204, 166, 94, 0.38) !important;
+    color: #e3ebe1 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-cat {
+    background-color: #1b2a20 !important;
+    border-color: rgba(204, 166, 94, 0.3) !important;
+    color: #d5dfd3 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-cat:hover {
+    background-color: #24382b !important;
+    border-color: #d4af64 !important;
+    color: #f2e8cf !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-cat[aria-pressed="true"] {
+    background-color: #c9a152 !important;
+    color: #111c15 !important;
+    border-color: #e4c47d !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-card {
+    background-color: #1b2920 !important;
+    border-color: rgba(204, 166, 94, 0.24) !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-card.is-open {
+    background-color: #203126 !important;
+    border-color: #c9a152 !important;
+    border-left-color: #e6c67d !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-card-titles strong,
+  body[data-theme="escuro"] #usos-lingua .esc-usos-ex-formal {
+    color: #eef3ec !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-card-titles small,
+  body[data-theme="escuro"] #usos-lingua .esc-usos-chev {
+    color: #dfbe78 !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-lbl {
+    color: #9fc9ab !important;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-block.is-why {
+    background-color: rgba(209, 170, 92, 0.14) !important;
+    border-color: rgba(209, 170, 92, 0.34);
+    border-left-color: #d4af64;
+  }
+  body[data-theme="escuro"] #usos-lingua .esc-usos-block.is-why .esc-usos-lbl {
+    color: #e6c67d !important;
+  }
+
+  body[data-theme="escuro"] #sobre .esc-about-card,
+  body[data-theme="escuro"] #mesa .setting-section,
+  body[data-theme="escuro"] #lineage-panel #lineage-list li,
+  body[data-theme="escuro"] #esc-cartorio-overlay .cart-guard-bar,
+  body[data-theme="escuro"] #esc-cartorio-overlay .cart-cert,
+  body[data-theme="escuro"] #story-screen .polaroid {
+    background-color: #1b2a20 !important;
+    border-color: rgba(204, 166, 94, 0.28) !important;
+    color: #dce4da !important;
+  }
+  body[data-theme="escuro"] #mesa .setting-section h3,
+  body[data-theme="escuro"] #sobre .esc-about-card h3 {
+    color: #f0e4c6 !important;
+  }
+  body[data-theme="escuro"] #esc-cartorio-overlay .cart-tab[aria-pressed="true"] {
+    color: #f0e4c6 !important;
+    border-bottom-color: #d4af64 !important;
+  }
+
+  /* Redução de movimento respeitada */
+  @media (prefers-reduced-motion: reduce) {
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn,
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn .esc-ui-ico {
+      transition: none !important;
+      transform: none !important;
+    }
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn:hover::after,
+    body[data-view="workspace"] #navigation .esc-nav-tool-btn:focus-visible::after {
+      animation: none !important;
+    }
+  }
+}
+
 </style>
 
 <!-- Ícones Phosphor, SVGs oficiais Light, https://github.com/phosphor-icons/core
@@ -14531,7 +15210,7 @@ SOFTWARE.
     </div>
   </section>
   <section id="usos-lingua" class="sheet esc-usos-sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="usos-lingua-heading">
-    <div class="sheet-heading"><div><p class="eyebrow">PORTUGUÊS BRASILEIRO</p><h2 id="usos-lingua-heading">Usos da língua</h2></div><button id="usos-lingua-close" class="close-panel" aria-label="Fechar Usos da língua"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
+    <div class="sheet-heading"><div><p class="eyebrow">OFICINA · PORTUGUÊS BRASILEIRO</p><h2 id="usos-lingua-heading">Usos da língua</h2></div><button id="usos-lingua-close" class="close-panel" aria-label="Fechar Usos da língua"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div>
     <div id="usos-lingua-body" class="esc-usos-body"></div>
   </section>
   <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden="" aria-labelledby="acervo-heading">
@@ -24166,12 +24845,12 @@ SOFTWARE.
 ;
 /* Fonte: src/storage/dificuldades-ptbr.js */
 /* Usos da Língua — Dicionário de Dificuldades do Português Brasileiro (120 verbetes curados, 100% offline, ES5).
- * Princípio editorial: em língua portuguesa não existe "erro" moral, e sim adequação de uso e registro. */
+ * Princípio editorial: zero preconceito linguístico; distinção prática entre fala/escrita livre e ambientes monitorados. */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
 
-  var MANIFESTO = 'Em português brasileiro não existe “erro” absoluto — existe adequação de uso. Todo brasileiro já é especialista na língua portuguesa: você domina sua gramática desde a infância. O que muda é a roupa da frase conforme o lugar onde ela circula (conversa, diálogo de ficção ou texto formal). Este guia é apenas um cenário organizado para você escolher seu registro com consciência.';
+  var MANIFESTO = 'Em português brasileiro não existe “erro” moral nem motivo para vergonha — existe adequação de uso ao lugar onde o texto vai circular. Todo brasileiro já domina a língua desde a infância.\n\nAssim como na fala, na escrita também existe diferença de terreno: se o veículo não é monitorado — um bilhete na geladeira, uma mensagem rápida, uma anotação pessoal —, você pode escrever de forma livre. Se a mensagem passou, a comunicação foi 100% estabelecida.\n\nJá em ambientes, veículos e documentos monitorados (redações, contratos, ofícios, livros submetidos a editoras, textos institucionais), entra em cena o acordo oficial da língua portuguesa escrita: um combinado prático para todo mundo se entender sem ruído. E na literatura, até mestres como Guimarães Rosa escolhem desvios propositais para criar música, ritmo e verdade.\n\nNo fundo, tudo isso é um jogo de regras claras, super prático de pegar o jeito. Aqui é um espaço de acolhimento e zero preconceito: sempre que você quiser dominar o acordo escrito para acertar em documentos monitorados — ou decidir conscientemente quando quebrá-lo —, o Escrevaral está ao seu lado.';
 
   var CATEGORIES = [
     { id: 'paronimos', label: 'Parônimos e homônimos' },
@@ -24185,12 +24864,12 @@ SOFTWARE.
     { id: 'verbos', label: 'Verbos traiçoeiros' }
   ];
 
-  /* Tupla compacta: [id, titulo, chavesPipe, catIdx, fala, formal, porque, exemploFala, exemploFormal] */
+  /* Tupla compacta: [id, titulo, chavesPipe, catIdx, livre, monitorado, truque, exemploLivre, exemploMonitorado] */
   var RAW = [
     /* 0 · Parônimos e homônimos (28) */
-    ['mal-mau','mal / mau','mal|mau|maus|males',0,'Os dois soam iguais no dia a dia.','mal opõe-se a bem (modo/tempo/substantivo); mau opõe-se a bom (qualidade).','Teste de 2 segundos: troque por bem ou bom. Se couber bem, é mal; se couber bom, é mau.','“Dormi mal ontem, tô de mau humor.”','“Ela passou mal na viagem, mas não guardou mau pressentimento.”'],
-    ['mas-mais','mas / mais','mas|mais|mas tambem',0,'Em várias regiões do Brasil, mas e mais têm som quase idêntico.','mas indica contraste (= porém); mais indica quantidade ou intensidade (oposto de menos).','Teste rápido: se der para trocar por porém, escreva mas; se o oposto for menos, escreva mais.','“Queria sair, mas tá chovendo mais forte.”','“Tentou falar baixo, mas a chuva caía ainda mais intensa.”'],
-    ['onde-aonde','onde / aonde','onde|aonde|em que|no qual',0,'Na fala, muita gente usa aonde para tudo porque soa mais caprichado.','onde marca lugar parado (morar, estar, ficar); aonde = a + onde, só com verbo de movimento (ir, chegar, levar).','Se a resposta for “lá”, use onde; se for “para lá”, use aonde. Se não for lugar físico, prefira em que.','“— Aonde você deixou a chave?”','“Não lembrava onde deixara o caderno nem aonde o vento o levara.”'],
+    ['mal-mau','mal / mau','mal|mau|maus|males',0,'Os dois saem com o mesmíssimo som no Brasil (o L no fim vira U na fala). Por isso, num bilhete rápido ou mensagem, é super comum tropeçar — ninguém deixa de entender!','No acordo escrito para documentos monitorados: mal é o contrário de bem (modo/tempo); mau é o contrário de bom (qualidade de alguém ou algo).','Truque de 2 segundos (sem decoreba): troque a palavra por bem ou bom. Se couber bem, escreva mal (ambos têm E/L no compasso: bem ↔ mal); se couber bom, escreva mau (bom ↔ mau).','“Dormi mal ontem, tô de mau humor.”','“Ela passou mal na viagem, mas não guardou mau pressentimento.”'],
+    ['mas-mais','mas / mais','mas|mais|mas tambem',0,'Em boa parte do Brasil pronunciamos o S final chiado ou com um “i” natural — então mas e mais soam gêmeos no ouvido. Não é descuido: é a música da nossa fala.','No acordo escrito monitorado: mas vira a frase (= porém, contudo); mais soma quantidade ou força (oposto de menos).','Regra de bolso: tente trocar por “porém”. Funcionou? É mas (curto). O oposto na frase é “menos”? É mais (com i de inteiro/incremento).','“Queria sair, mas tá chovendo mais forte.”','“Tentou falar baixo, mas a chuva caía ainda mais intensa.”'],
+    ['onde-aonde','onde / aonde','onde|aonde|em que|no qual',0,'Na fala e na escrita livre, muita gente usa aonde para tudo justamente porque soa caprichado — ironicamente, nasce da vontade de falar bonito!','No acordo escrito monitorado: onde marca lugar parado (morar, estar, ficar); aonde = a + onde, só quando o verbo pede movimento (ir, chegar, levar).','Imagine o GPS: se a resposta é “lá” (parado), use onde. Se a resposta é “para lá” (indo), use aonde. E se nem for lugar no mapa, prefira em que.','“— Aonde você deixou a chave?”','“Não lembrava onde deixara o caderno nem aonde o vento o levara.”'],
     ['ha-a','há / a (tempo e distância)','ha|a|daqui a|ha anos',0,'Soam iguais, e na conversa trocamos há por tem ou faz.','há (verbo haver) marca tempo passado; a (preposição) marca futuro ou distância.','Teste rápido: tente trocar por faz. Se fizer sentido, escreva há; senão, escreva a.','“Moro aqui tem cinco anos e volto daqui a pouco.”','“Mora nesta rua há cinco anos, a duas quadras do rio; retorna daqui a um mês.”'],
     ['senao-se-nao','senão / se não','senao|se nao',0,'Têm o mesmo som na fala corrida.','senão junto = caso contrário / a não ser; se não separado = condição (“caso não”).','Tente trocar por “caso contrário” (senão) ou por “caso não” (se não).','“Corre, senão a gente perde o ônibus.”','“Se não chover até as seis, sairemos; senão, ficaremos na varanda.”'],
     ['afim-a-fim','afim / a fim de','afim|a fim|afins',0,'Na conversa dizemos “tô a fim” para vontade ou interesse.','a fim de (separado) indica finalidade (= para); afim (junto) significa semelhante, com afinidade.','Antes de verbo ou ideia de objetivo, separe (a fim de); falando de afinidade, junte (ideias afins).','“Não tô a fim de sair hoje.”','“Estudaram temas afins a fim de publicar a coletânea juntos.”'],
@@ -24211,45 +24890,45 @@ SOFTWARE.
     ['cauda-calda','cauda / calda','cauda|calda',0,'Em quase todo o Brasil, o L em fim de sílaba tem som de U.','cauda = rabo/extremidade; calda = líquido doce ou espesso.','Calda de pudim tem L de Líquido; cauda de cometa ou animal tem U.','“Bota mais calda de chocolate no bolo.”','“O cometa riscou a noite com longa cauda luminosa.”'],
     ['cheque-xeque','cheque / xeque','cheque|xeque',0,'Mesmo som na fala.','cheque = ordem bancária; xeque = lance do xadrez (“pôr em xeque”) ou chefe árabe.','Pôr em xeque vem do Xadrez (com X).','“Essa pergunta botou tudo em xeque.”','“A nova carta pôs em xeque a versão oficial.”'],
     ['emergir-imergir','emergir / imergir','emergir|imergir',0,'Troca comum pela semelhança sonora.','emergir = vir à tona, sair; imergir = mergulhar, afundar.','Imergir = Ir para dentro (mergulhar). Emergir = sair à superfície.','“A lembrança emergiu do nada.”','“Imergiu no manuscrito pela manhã e só emergiu ao entardecer.”'],
-    ['infligir-infringir','infligir / infringir','infligir|infringir',0,'Parecidas no som e no contexto formal.','infligir = aplicar pena/dor; infringir = desrespeitar lei/regra.','Infringir tem R de Regra quebrada. Infligir é aplicar algo a alguém.','“Ele infringiu a regra do jogo.”','“Não infringiu o acordo, mas a pressa lhe infligiu cansaço.”'],
+    ['infligir-infringir','infligir / infringir','infligir|infringir',0,'Parecidas no som e muito presentes em textos jurídicos e monitorados.','infligir = aplicar pena/dor; infringir = desrespeitar lei/regra.','Infringir tem R de Regra quebrada. Infligir é aplicar algo a alguém.','“Ele infringiu a regra do jogo.”','“Não infringiu o acordo, mas a pressa lhe infligiu cansaço.”'],
     ['mandado-mandato','mandado / mandato','mandado|mandato',0,'Confusão clássica em textos jornalísticos.','mandado = ordem judicial; mandato = período de cargo político ou procuração.','Mandado é ordem que alguém manda cumprir; mandato é tempo de governo.','“Cumpriram um mandado de busca.”','“No último ano do mandato, recebeu o mandado judicial.”'],
     ['peao-piao','peão / pião','peao|piao',0,'E e I átonos soam iguais antes de vogal.','peão = trabalhador rural / peça de xadrez / pedestre; pião = brinquedo que gira.','Pião de rodar começa com PI de Piar/girar; peão vem de pé.','“O menino rodou o pião no quintal.”','“O peão atravessou o tabuleiro sob o olhar do garoto com seu pião.”'],
     ['absorver-absolver','absorver / absolver','absorver|absolver',0,'Apenas uma letra muda no meio.','absorver = sugar, assimilar; absolver = inocentar, perdoar.','Absolver tem L de Livre (libertar de culpa). Absorver é sugar como esponja.','“O papel absorveu a tinta na hora.”','“O júri absolveu o réu, que demorou a absorver a notícia.”'],
-    ['deferir-diferir','deferir / diferir','deferir|diferir',0,'Confundidas em requerimentos e textos formais.','deferir = aprovar, atender; diferir = ser diferente ou adiar.','Diferir vem de diferente; deferir é conceder um pedido.','“As duas versões diferem muito.”','“A comissão deferiu o pedido, embora os pareceres diferissem nos detalhes.”'],
+    ['deferir-diferir','deferir / diferir','deferir|diferir',0,'Confundidas em requerimentos e documentos monitorados.','deferir = aprovar, atender; diferir = ser diferente ou adiar.','Diferir vem de diferente; deferir é conceder um pedido.','“As duas versões diferem muito.”','“A comissão deferiu o pedido, embora os pareceres diferissem nos detalhes.”'],
 
     /* 1 · Regência na prática (18) */
-    ['assistir','assistir o / assistir ao','assistir|assisti|assistiu',1,'No Brasil inteiro falamos “assisti o filme”, “assisti a novela” — o verbo se comportou como ver.','No sentido de ver/presenciar, a norma formal usa a preposição a (assistir ao filme). Sem preposição (assistir o paciente), significa ajudar.','Na fala de personagem, “assisti o jogo” é naturalíssimo; em prosa formal, “assisti ao jogo” evita ruído editorial.','“— A gente assistiu o último capítulo ontem.”','“Da varanda, assistiu ao pôr do sol enquanto a enfermeira assistia o avô.”'],
-    ['ir-em-a','ir no / ir ao / ir para o','ir no|fui no|vou no|ir ao',1,'“Vou no mercado”, “fui no médico” é o jeito brasileiro mais natural de falar.','Na escrita formal, ir pede a (volta rápida) ou para (permanência): ir ao médico, ir para o Recife.','Em significa estar dentro; a/para indicam movimento. Ótimo usar “fui no” em diálogos; no narrador formal, “fui ao”.','“— Vou no centro resolver isso e já volto.”','“Foi ao centro pela manhã e partiu para a serra no fim do mês.”'],
-    ['chegar-em-a','chegar em / chegar a','chegar em|cheguei em|chegou em|chegar a',1,'“Cheguei em casa”, “chegou no ponto” domina a fala brasileira.','A escrita formal usa chegar a (cheguei a casa, chegou ao bairro).','Em é o lugar onde já estamos; a marca o ponto de chegada. Na fala cotidiana soa natural; no texto formal prefira a.','“— Cheguei em casa molhado de chuva.”','“Chegou à estação antes do primeiro trem.”'],
-    ['preferir','preferir mais do que / preferir a','preferir|prefiro|do que',1,'Na conversa enfatizamos dizendo “prefiro mil vezes café do que chá”.','Na escrita formal, preferir já traz a ideia de “mais” dentro dele: prefiro café a chá (sem “mais” nem “do que”).','Pense que preferir já significa “gostar mais”. Basta ligar os dois termos com a.','“— Prefiro muito mais escrever de manhã do que à noite.”','“Prefere o silêncio da manhã ao burburinho da tarde.”'],
-    ['implicar','implicar em / implicar (acarretar)','implicar|implica',1,'É comum ouvir “isso implica em novos custos”.','No sentido de acarretar/causar, a convenção formal dispensa em: isso implica novos custos. (Usa-se em quando significa envolver-se: implicou-se em confusão.)','Teste: troque por “acarreta”. Você diria “acarreta novos custos”, sem em.','“— Mudar o final implica em reescrever dois capítulos.”','“A revisão profunda implica cortes corajosos.”'],
-    ['esquecer-lembrar','esquecer / lembrar (-se de)','esquecer|esqueci|lembrar|lembrei',1,'Falamos tranquilamente “esqueci do livro” e “lembrei da história”.','Na escrita formal há um par simétrico: sem pronome, sem de (esqueci o livro); com pronome, com de (esqueci-me do livro).','Regra do pacote: ou vai sem os dois (lembrei o nome) ou vai com os dois (lembrei-me do nome).','“— Esqueci do guarda-chuva na sala!”','“Lembrou o endereço antigo; depois lembrou-se da chave sobre a mesa.”'],
-    ['namorar','namorar com / namorar alguém','namorar|namorava',1,'Quase todo brasileiro diz “ela namora com o Pedro”.','Na escrita formal clássica, namorar liga direto ao nome, sem com: ela namora Pedro.','No diálogo cotidiano “namorar com” soa muito mais humano; na prosa formal tradicional, corte o com.','“— Eles namoram faz tempo, ela namora com ele desde a faculdade.”','“Namorou a vizinha durante três verões antes da mudança.”'],
-    ['visar','visar o / visar ao','visar|visa',1,'No dia a dia dizemos “o projeto visa atender leitores”.','No sentido de ter como objetivo, a escrita formal usa visar a (visa ao equilíbrio / visa a atender); sem a significa mirar ou assinar (visar o cheque).','Objetivo = visar a; dar visto ou mirar = visar sem preposição.','“O livro visa ajudar quem começa a escrever.”','“A oficina visa à autonomia do escritor e visou o documento final.”'],
-    ['obedecer','obedecer o / obedecer ao','obedecer|obedece|desobedecer',1,'Na fala é normal dizer “obedeceu o sinal” ou “obedece a mãe”.','Na escrita formal, obedecer e desobedecer pedem a preposição a: obedecer ao sinal, obedecer à mãe.','Lembre que obedecer pede “a quem / a quê” (como responder a alguém).','“— O cachorro não obedeceu o comando.”','“O verso obedeceu à cadência da respiração.”'],
-    ['custar','custar a / eu custei a entender','custar|custei|custa',1,'No Brasil dizemos “custei pra entender” — super expressivo na fala!','Na escrita formal clássica, o sujeito de custar é a ação difícil: custou-me entender (foi difícil para mim entender).','Na fala colocamos a pessoa como sujeito; no formal, a dificuldade é o sujeito (“custou a ela aceitar”).','“— Custei a achar o caderno na bagunça.”','“Custou-lhe encontrar as palavras exatas para a carta.”'],
-    ['simpatizar','simpatizar-se / simpatizar com','simpatizar|antipatizar',1,'Às vezes escapa “eu me simpatizei com ela”.','Na escrita formal, simpatizar e antipatizar não levam pronome reflexivo: simpatizei com ela.','Basta cortar o “me/se”: simpatizei com a ideia.','“— Me simpatizei logo de cara com o livreiro.”','“Simpatizou imediatamente com o tom sereno do romance.”'],
+    ['assistir','assistir o / assistir ao','assistir|assisti|assistiu',1,'No Brasil inteiro falamos “assisti o filme”, “assisti a novela” — e faz todo sentido: o cérebro tratou assistir do mesmo jeito que o verbo “ver”. Na fala e na escrita livre, comunica perfeitamente!','Em documentos e ambientes monitorados, o acordo escrito diferencia: assistir com a (assistir ao filme) = ver/presenciar; assistir sem a (assistir o paciente) = ajudar/cuidar.','Pense em dois verbos com a mesma roupa: assistir AO jogo (= ficar na plateia) vs. assistir O paciente (= dar assistência). Em diálogo de personagem, “assisti o jogo” soa vivo; em texto monitorado, coloque o “a”.','“— A gente assistiu o último capítulo ontem.”','“Da varanda, assistiu ao pôr do sol enquanto a enfermeira assistia o avô.”'],
+    ['ir-em-a','ir no / ir ao / ir para o','ir no|fui no|vou no|ir ao',1,'“Vou no mercado”, “fui no médico” é a marca natural do português brasileiro falado — até quem escreve teses diz assim no dia a dia.','No acordo escrito para ambientes monitorados, ir usa a (ida e volta rápida) ou para (permanência): ir ao médico, ir para o Recife.','Visual simples: “em” (= no/na) desenha você já dentro do lugar; “a/para” desenha a flecha do caminho até lá. Em diálogo ou bilhete, “fui no” é naturalíssimo; em documento monitorado, troque pela flecha (“fui ao”).','“— Vou no centro resolver isso e já volto.”','“Foi ao centro pela manhã e partiu para a serra no fim do mês.”'],
+    ['chegar-em-a','chegar em / chegar a','chegar em|cheguei em|chegou em|chegar a',1,'“Cheguei em casa”, “chegou no ponto” domina o país inteiro — nosso ouvido pensa no destino onde já pisamos.','Em ambientes monitorados, o acordo escrito pede chegar a (cheguei a casa, chegou ao bairro, chegou à estação).','Mesma lógica da flecha de “ir”: na fala usamos “em” sem ruído algum; quando o veículo é monitorado, basta trocar “no/na” por “ao/à”.','“— Cheguei em casa molhado de chuva.”','“Chegou à estação antes do primeiro trem.”'],
+    ['preferir','preferir mais do que / preferir a','preferir|prefiro|do que',1,'Na conversa colocamos força emocional dizendo “prefiro mil vezes café do que chá” — funciona como um megafone de ênfase!','No acordo escrito monitorado, preferir já carrega o “mais” dentro dele: prefiro café a chá (sem “mais” nem “do que”).','Pense no verbo como uma balança pronta: preferir já vale “gostar mais”. Basta ligar os dois lados com a: prefiro A a B.','“— Prefiro muito mais escrever de manhã do que à noite.”','“Prefere o silêncio da manhã ao burburinho da tarde.”'],
+    ['implicar','implicar em / implicar (acarretar)','implicar|implica',1,'É comum ouvir “isso implica em novos custos”.','No sentido de acarretar/causar, o acordo escrito dispensa o em: isso implica novos custos. (Usa-se em quando significa envolver-se: implicou-se em confusão.)','Teste de 2 segundos: troque por “acarreta”. Você diria “acarreta novos custos”, direto, sem em.','“— Mudar o final implica em reescrever dois capítulos.”','“A revisão profunda implica cortes corajosos.”'],
+    ['esquecer-lembrar','esquecer / lembrar (-se de)','esquecer|esqueci|lembrar|lembrei',1,'Falamos tranquilamente “esqueci do livro” e “lembrei da história” — o português brasileiro simplificou o caminho e todo mundo entende na hora.','Em documentos monitorados, o acordo escrito funciona como um par de sapatos: ou vai sem pronome e sem de (esqueci o livro), ou vai com os dois juntos (esqueci-me do livro).','Regra do pacote fechado: nenhum dos dois (lembrei o nome) OU os dois juntos (lembrei-me do nome). Se faltar só um pé do par, em texto monitorado costuma chamar atenção.','“— Esqueci do guarda-chuva na sala!”','“Lembrou o endereço antigo; depois lembrou-se da chave sobre a mesa.”'],
+    ['namorar','namorar com / namorar alguém','namorar|namorava',1,'Quase todo brasileiro diz “ela namora com o Pedro” — o “com” transmite justamente a ideia de parceria, de estar junto.','No acordo escrito mais tradicional para textos monitorados, namorar liga direto ao nome, sem com: ela namora Pedro.','Em diálogo ou crônica, “namorar com” soa humano e caloroso; num texto monitorado mais clássico, basta tirar o “com”.','“— Eles namoram faz tempo, ela namora com ele desde a faculdade.”','“Namorou a vizinha durante três verões antes da mudança.”'],
+    ['visar','visar o / visar ao','visar|visa',1,'No dia a dia dizemos “o projeto visa atender leitores”.','No sentido de ter como objetivo, o acordo escrito monitorado usa visar a (visa ao equilíbrio / visa a atender); sem a significa mirar ou assinar (visar o cheque).','Objetivo = visar a; dar visto ou mirar = visar sem preposição.','“O livro visa ajudar quem começa a escrever.”','“A oficina visa à autonomia do escritor e visou o documento final.”'],
+    ['obedecer','obedecer o / obedecer ao','obedecer|obedece|desobedecer',1,'Na fala é normal dizer “obedeceu o sinal” ou “obedece a mãe”.','Em ambientes monitorados, obedecer e desobedecer pedem a preposição a: obedecer ao sinal, obedecer à mãe.','Lembre que obedecer pede “a quem / a quê” (igual responder a alguém).','“— O cachorro não obedeceu o comando.”','“O verso obedeceu à cadência da respiração.”'],
+    ['custar','custar a / eu custei a entender','custar|custei|custa',1,'No Brasil dizemos “custei pra entender” — super expressivo e direto na fala e na escrita livre!','No acordo escrito clássico de documentos monitorados, quem “custa” é a tarefa difícil, não a pessoa: custou-me entender (= foi difícil para mim entender).','Na fala a pessoa é protagonista (“eu custei”); no documento monitorado, a dificuldade vira sujeito (“custou a ela aceitar”). Na literatura brasileira moderna, porém, os dois jeitos aparecem!','“— Custei a achar o caderno na bagunça.”','“Custou-lhe encontrar as palavras exatas para a carta.”'],
+    ['simpatizar','simpatizar-se / simpatizar com','simpatizar|antipatizar',1,'Às vezes escapa “eu me simpatizei com ela” por analogia com “eu me encantei”.','No acordo escrito monitorado, simpatizar e antipatizar não levam pronome reflexivo: simpatizei com ela.','Truque simples: basta cortar o “me/se” — simpatizei com a ideia.','“— Me simpatizei logo de cara com o livreiro.”','“Simpatizou imediatamente com o tom sereno do romance.”'],
     ['aspirar','aspirar o / aspirar ao','aspirar|aspira',1,'Raramente diferenciamos na fala.','aspirar (sem a) = respirar/sugar (aspirar o ar); aspirar a = desejar, almejar (aspirar ao prêmio).','Respirar = direto (o ar); desejar um lugar/cargo = com a (ao cargo).','“Aspirou fundo o cheiro de terra molhada.”','“Aspirou o ar da serra enquanto aspirava a uma vida mais calma.”'],
-    ['pagar-perdoar','pagar / perdoar (coisa vs. pessoa)','pagar|perdoar|paguei|perdoou',1,'Falamos “paguei o padeiro” e “perdoei meu amigo” sem estranhamento.','Na escrita formal: paga-se/perdoa-se a coisa (direto) e à pessoa (com a): pagou a conta ao padeiro; perdoou a falha ao amigo.','Coisa = sem preposição; pessoa = com a (pagou ao fornecedor).','“— Já paguei o encanador hoje cedo.”','“Pagou a dívida ao livreiro e perdoou ao irmão o atraso.”'],
-    ['ansioso','ansioso por / para / de','ansioso|ansiosa',1,'Usamos “ansioso pra ver” no cotidiano.','Na escrita formal, aceita por (ansioso por notícias), para (ansioso para partir) e de (ansioso de paz).','Todas as três preposições são bem-vindas; evite apenas excesso de repetição na mesma frase.','“— Tô ansioso pra ler o próximo capítulo.”','“Estava ansiosa por receber as provas do livro.”'],
-    ['morar-residir','morar em / morar à rua','morar|residir|situado',1,'Dizemos sempre “moro na Rua das Flores”.','Na escrita formal, morar, residir e situado pedem em (na Rua das Flores), e não a (“à rua”).','Você mora dentro/na rua (em), nunca “à rua”.','“— Moro na rua da biblioteca.”','“A editora fica situada na Rua do Ouvidor.”'],
+    ['pagar-perdoar','pagar / perdoar (coisa vs. pessoa)','pagar|perdoar|paguei|perdoou',1,'Falamos “paguei o padeiro” e “perdoei meu amigo” sem nenhum estranhamento.','No acordo escrito monitorado: paga-se/perdoa-se a coisa direto e à pessoa com a — pagou a conta ao padeiro; perdoou a falha ao amigo.','Atalho mental: coisa = sem preposição; pessoa = com a (pagou ao fornecedor).','“— Já paguei o encanador hoje cedo.”','“Pagou a dívida ao livreiro e perdoou ao irmão o atraso.”'],
+    ['ansioso','ansioso por / para / de','ansioso|ansiosa',1,'Usamos “ansioso pra ver” no cotidiano.','No acordo escrito, aceita por (ansioso por notícias), para (ansioso para partir) e de (ansioso de paz).','Todas as três preposições são bem-vindas; evite apenas excesso de repetição na mesma frase.','“— Tô ansioso pra ler o próximo capítulo.”','“Estava ansiosa por receber as provas do livro.”'],
+    ['morar-residir','morar em / morar à rua','morar|residir|situado',1,'Dizemos sempre “moro na Rua das Flores” — e aqui a fala já acerta em cheio!','No acordo escrito monitorado, morar, residir e situado pedem em (na Rua das Flores), e não a (“à rua”).','Você mora dentro/na rua (em), nunca “à rua”. Curiosamente, “à rua” é um exagero que muita gente faz tentando parecer solene!','“— Moro na rua da biblioteca.”','“A editora fica situada na Rua do Ouvidor.”'],
     ['informar-avisar','informar algo a alguém / alguém de algo','informar|avisar|comunicar',1,'Na pressa às vezes juntamos dois complementos iguais (“informei a ele que...” vs “informei ele de...”).','Escolha uma das duas pontes: informar alguma coisa a alguém OU informar alguém de/sobre alguma coisa.','Nunca repita duas preposições nem deixe os dois sem preposição: ou “a ele algo” ou “ele de algo”.','“— Já avisei ele da reunião.”','“Informou aos leitores a nova data” ou “Informou os leitores da nova data.”'],
     ['chamar','chamar alguém de / chamar a alguém','chamar|chamou',1,'Dizemos “chamei ele de poeta”.','No sentido de apelidar/qualificar, aceita chamar alguém de ou chamar a alguém: chamou-o de mestre / chamou-lhe mestre.','Na escrita contemporânea, “chamar [alguém] de [qualidade]” é claro e elegante.','“— Todo mundo chamava ele de professor.”','“Os vizinhos o chamavam de cronista da praça.”'],
-    ['entregar-domicilio','entregar em domicílio / a domicílio','domicilio|em domicilio|a domicilio',1,'O comércio popularizou “entrega a domicílio”.','Na escrita formal, entregar pede em (onde a entrega acontece): entrega em domicílio.','Compare: ninguém “entrega a casa”, entrega-se na casa (em domicílio).','“— A padaria faz entrega a domicílio.”','“A livraria realiza entregas em domicílio aos sábados.”'],
+    ['entregar-domicilio','entregar em domicílio / a domicílio','domicilio|em domicilio|a domicilio',1,'O comércio popularizou “entrega a domicílio”.','No acordo escrito monitorado, entregar pede em (onde a entrega acontece): entrega em domicílio.','Compare: ninguém “entrega a casa”, entrega-se na casa (em domicílio).','“— A padaria faz entrega a domicílio.”','“A livraria realiza entregas em domicílio aos sábados.”'],
 
     /* 2 · Concordância (14) */
-    ['haver-existir','haver (= existir) no singular','haver|havia|haviam|houve|houveram',2,'Na fala, “haviam muitas pessoas” aparece muito porque o ouvido pensa em “muitas pessoas”.','Na escrita formal, haver no sentido de existir é impessoal — fica sempre no singular: havia muitas pessoas, houve motivos.','Teste rápido: se puder trocar por existir, trave o haver no singular (havia, houve, haverá, deve haver).','“— Haviam umas dez cartas em cima da mesa.”','“Havia dez cartas sobre a mesa, e ainda pode haver outras na gaveta.”'],
-    ['existir-concorda','existir concorda com o plural','existir|existe|existem',2,'No cotidiano, é comum ouvir “existe muitas formas” quando o sujeito vem depois do verbo.','Ao contrário de haver, existir tem sujeito e concorda com ele: existem muitas formas, existiam razões.','Inverta a frase: “muitas formas existem”. Fica óbvio que vai para o plural!','“— Existe vários jeitos de começar um romance.”','“Existem vários caminhos para abrir o primeiro capítulo.”'],
-    ['fazer-tempo','fazer (tempo decorrido e clima)','faz|fazem|fazia|faziam',2,'“Fazem dois anos que não vou lá” é super comum na conversa brasileira.','Na escrita formal, fazer indicando tempo passado ou clima fica no singular: faz dois anos, fazia dias frios.','Teste: se der para trocar por há (há dois anos), deixe fazer no singular (faz dois anos).','“— Fazem três meses que comecei este caderno.”','“Faz três meses que o caderno foi aberto; fazia noites frias na serra.”'],
-    ['meio-meia','meio / meia (“meio cansada”)','meio|meia',2,'Na fala às vezes concordamos dizendo “ela tá meia cansada”.','Quando significa “um pouco” (advérbio), meio não varia: ela está meio cansada. Quando significa “metade” (numeral), varia: meia folha, meio-dia e meia (hora).','Teste: troque por “um pouco”. Se couber, fique sempre em meio; se for “metade”, concorde (meia xícara).','“— Ela chegou meia cansada da viagem.”','“Estava meio cansada ao meio-dia e meia, após beber meia xícara de café.”'],
+    ['haver-existir','haver (= existir) no singular','haver|havia|haviam|houve|houveram',2,'Na fala e na escrita livre, “haviam muitas pessoas” sai naturalmente porque o cérebro vê “muitas pessoas” no plural e quer combinar tudo! É lógica pura, não falta de estudo.','Em documentos monitorados, o acordo escrito trata haver (= existir) como verbo sem sujeito — por isso ele trava sempre no singular: havia muitas pessoas, houve motivos.','Truque de 2 segundos: troque mentalmente por “existir”. Coube? Então congele o haver no singular (havia, houve, haverá, deve haver).','“— Haviam umas dez cartas em cima da mesa.”','“Havia dez cartas sobre a mesa, e ainda pode haver outras na gaveta.”'],
+    ['existir-concorda','existir concorda com o plural','existir|existe|existem',2,'No cotidiano, falamos muito “existe vários jeitos” porque o verbo vem antes e ainda não chegamos no plural lá na frente.','Diferente de haver, existir tem sujeito real — no acordo escrito, concorda com ele: existem muitas formas, existiam razões.','Inverta a frase na cabeça: “vários jeitos existem”. Na hora fica óbvio que vai para o plural!','“— Existe vários jeitos de começar um romance.”','“Existem vários caminhos para abrir o primeiro capítulo.”'],
+    ['fazer-tempo','fazer (tempo decorrido e clima)','faz|fazem|fazia|faziam',2,'“Fazem dois anos que não vou lá” é um clássico da fala brasileira — porque o ouvido escuta “dois anos” e puxa o plural.','Em ambientes monitorados, o acordo escrito deixa fazer no singular quando marca tempo passado ou clima: faz dois anos, fazia dias frios.','Teste instantâneo: deu para trocar por “há” (“há dois anos”)? Então trave fazer no singular: faz dois anos!','“— Fazem três meses que comecei este caderno.”','“Faz três meses que o caderno foi aberto; fazia noites frias na serra.”'],
+    ['meio-meia','meio / meia (“meio cansada”)','meio|meia',2,'Na fala muita gente diz “ela tá meia cansada” — e sofre preconceito bobo por isso! O ouvido simplesmente puxou a rima feminina de “cansada”.','No acordo escrito monitorado: quando vale “um pouco”, meio não muda (ela está meio cansada). Quando vale “metade”, concorda (meia folha, meio-dia e meia hora).','Teste imbatível: troque por “um pouco”. “Ela está um pouco cansada” funcionou? Então é meio (invariável). Só vira meia quando é literalmente metade (meia xícara)!','“— Ela chegou meia cansada da viagem.”','“Estava meio cansada ao meio-dia e meia, após beber meia xícara de café.”'],
     ['bastante','bastante / bastantes','bastante|bastantes',2,'Quase sempre usamos bastante no singular para tudo.','Antes de adjetivo/verbo (= muito), não varia (estavam bastante felizes). Antes de substantivo plural (= muitos), pode ir ao plural: bastantes livros.','Teste: troque por “muitos”. Se virar “muitos”, cabe bastantes (ou use muitos para soar mais natural).','“— Tinha bastante livro antigo na estante.”','“Havia bastantes razões para celebrar; todos saíram bastante emocionados.”'],
-    ['anexo-obrigado','anexo / obrigado / mesmo / próprio','anexo|anexa|obrigado|obrigada|mesmo|proprio',2,'No dia a dia às vezes deixamos tudo no masculino neutro.','Na escrita formal, essas palavras concordam com quem falam ou a que se referem: seguem anexas as cartas; muito obrigada (quem diz é mulher); ela mesma escreveu.','Dica: “em anexo” é invariável; já “anexo/anexa” concorda com o documento.','“— Segue anexo as duas folhas que você pediu.”','“Seguem anexas as duas versões; ela mesma revisou e disse muito obrigada.”'],
-    ['menos','menos (nunca “menas”)','menos|menas',2,'“Menas” aparece às vezes na fala por analogia com “poucas”.','Na escrita formal, menos é invariável em qualquer situação: menos pessoas, menos páginas.','Menos nunca muda de roupa — serve para masculino, feminino, singular e plural.','“— Hoje veio menos gente do que ontem.”','“Com menos palavras, a cena ganhou mais força.”'],
+    ['anexo-obrigado','anexo / obrigado / mesmo / próprio','anexo|anexa|obrigado|obrigada|mesmo|proprio',2,'No dia a dia às vezes deixamos tudo no masculino neutro.','Em documentos monitorados, essas palavras concordam com quem falam ou a que se referem: seguem anexas as cartas; muito obrigada (quem diz é mulher); ela mesma escreveu.','Dica prática: “em anexo” é invariável e resolve sem erro; já “anexo/anexa” concorda com o documento.','“— Segue anexo as duas folhas que você pediu.”','“Seguem anexas as duas versões; ela mesma revisou e disse muito obrigada.”'],
+    ['menos','menos (nunca “menas”)','menos|menas',2,'“Menas” aparece na fala porque nosso cérebro aplica a mesma lógica de “pouco/pouca” e “muito/muita” — é uma generalização inteligente da criança e do falante! Infelizmente, virou um dos maiores alvos de preconceito linguístico.','No acordo escrito monitorado, menos é invariável em qualquer situação: menos pessoas, menos páginas, menos dúvidas.','Pense em “menos” como uma peça fixa de xadrez que nunca troca de roupa: serve para masculino, feminino, singular e plural.','“— Hoje veio menos gente do que ontem.”','“Com menos palavras, a cena ganhou mais força.”'],
     ['proibido','é proibido / é proibida','proibido|proibida|necessario|bom',2,'Falamos “é proibido entrada” ou “é proibida a entrada” quase sem notar o artigo.','Sem artigo antes do substantivo, fica no masculino neutro: é proibido entrada / água é bom. Com artigo (a), concorda: é proibida a entrada / a água é boa.','Olhe para o artigo “a”: apareceu “a entrada”? Concorde (proibida). Sem artigo? Neutro (proibido).','“— É proibido entrar com mochila.”','“É proibido entrada sem convite; é proibida a entrada após o início da leitura.”'],
-    ['maioria','a maioria dos… (singular ou plural)','maioria|parte dos|grande parte',2,'Os dois jeitos soam bem no ouvido brasileiro.','Quando “a maioria” vem seguida de plural (“a maioria dos leitores”), a escrita formal aceita tanto o singular (preferiu) quanto o plural (preferiram).','Singular destaca o bloco; plural destaca as pessoas. Escolha o que soar melhor no ritmo da frase.','“— A maioria dos amigos gostaram do conto.”','“A maioria dos leitores elogiou o ritmo” ou “A maioria dos leitores elogiaram o ritmo.”'],
-    ['um-dos-que','um dos que (singular ou plural)','um dos que|uma das que',2,'Falamos espontaneamente nos dois números.','Na escrita formal, “um dos escritores que mais viajou / viajaram” aceita os dois — o plural é mais frequente, e o singular destaca exclusividade.','Se quiser dizer que só ele fez aquilo, use singular; se for parte de um grupo que faz, o plural brilha.','“— Ela é uma das autoras que mais escreve aqui.”','“Foi uma das crônicas que mais marcaram aquela edição.”'],
-    ['aluga-se','aluga-se / alugam-se (partícula se)','aluga-se|alugam-se|vende-se|vendem-se',2,'Placas de rua costumam dizer “vende-se casas” no singular.','Quando dá para inverter (“casas são vendidas”), a escrita formal concorda: vendem-se casas, revisam-se textos. Quando há preposição (“precisa-se de revisores”), fica no singular!','Teste da preposição: tem “de/em/a” depois do verbo (precisa-se de)? Singular! Não tem (alugam-se salas)? Plural!','“— Vende-se livros usados na feira.”','“Vendem-se livros raros; precisa-se de novos leitores.”'],
-    ['segue-seguem','segue / seguem (em e-mails e cartas)','segue|seguem',2,'Em e-mails rápidos muita gente abre sempre com “segue os arquivos”.','Como “os arquivos” é o sujeito que segue, a escrita formal concorda: seguem os arquivos, segue o manuscrito.','Inverta mentalmente: “os arquivos seguem”. Fica claro na hora.','“— Segue os capítulos revisados.”','“Seguem os capítulos revisados em formato editorial.”'],
+    ['maioria','a maioria dos… (singular ou plural)','maioria|parte dos|grande parte',2,'Os dois jeitos soam bem no ouvido brasileiro.','Quando “a maioria” vem seguida de plural (“a maioria dos leitores”), o acordo escrito aceita tanto o singular (preferiu) quanto o plural (preferiram).','Singular destaca o bloco; plural destaca as pessoas. Escolha o que soar melhor no ritmo da frase.','“— A maioria dos amigos gostaram do conto.”','“A maioria dos leitores elogiou o ritmo” ou “A maioria dos leitores elogiaram o ritmo.”'],
+    ['um-dos-que','um dos que (singular ou plural)','um dos que|uma das que',2,'Falamos espontaneamente nos dois números.','Em textos monitorados, “um dos escritores que mais viajou / viajaram” aceita os dois — o plural é mais frequente, e o singular destaca exclusividade.','Se quiser dizer que só ele fez aquilo, use singular; se for parte de um grupo que faz, o plural brilha.','“— Ela é uma das autoras que mais escreve aqui.”','“Foi uma das crônicas que mais marcaram aquela edição.”'],
+    ['aluga-se','aluga-se / alugam-se (partícula se)','aluga-se|alugam-se|vende-se|vendem-se',2,'Placas de rua do país todo dizem “vende-se casas” — e todo mundo entende na hora que tem casa à venda!','Em documentos monitorados, quando dá para inverter (“casas são vendidas”), o verbo vai ao plural: vendem-se casas, revisam-se textos. Quando há preposição (“precisa-se de revisores”), trava no singular!','Teste da preposição: tem “de/em/a” colado depois do verbo (precisa-se DE)? Singular! Não tem (alugam-se salas)? Plural!','“— Vende-se livros usados na feira.”','“Vendem-se livros raros; precisa-se de novos leitores.”'],
+    ['segue-seguem','segue / seguem (em e-mails e cartas)','segue|seguem',2,'Em e-mails rápidos muita gente abre sempre com “segue os arquivos”.','Como “os arquivos” é o sujeito que segue, em documentos monitorados o verbo concorda: seguem os arquivos, segue o manuscrito.','Inverta mentalmente: “os arquivos seguem”. Fica claro na hora.','“— Segue os capítulos revisados.”','“Seguem os capítulos revisados em formato editorial.”'],
     ['trata-se','trata-se de (sempre singular)','trata-se|tratam-se',2,'Às vezes aparece “tratam-se de questões sérias” no esforço de caprichar.','Com a preposição de, o verbo tratar fica sempre no singular: trata-se de questões sérias.','Regra da preposição com se: “trata-se de” nunca vai para o plural.','“— Trata-se de dois contos antigos.”','“Trata-se de memórias guardadas em cadernos de papel.”'],
     ['porcentagem','porcentagem (1% / 40% dos leitores)','porcento|por cento|percentual',2,'Alternamos livremente conforme o que vem depois.','O verbo concorda com o número ou com o termo que o especifica: 1% recusou; 40% dos leitores aprovaram; os 40% da turma preferiram.','Olhe para quem está mais perto e mais forte na frase: “1% dos casos” pode ficar no singular (1%) ou plural (casos).','“— 80% das pessoas gostaram da história.”','“Cerca de 80% dos leitores concluíram o capítulo sem pausa.”'],
 
@@ -24263,7 +24942,7 @@ SOFTWARE.
     ['crase-facultativa','Os 3 casos de crase facultativa','crase facultativa|ate a|minha|sua',3,'Aqui não existe pressão — os dois modos são corretos!','A crase é opcional antes de: (1) nomes próprios femininos (“escrevi a/à Maria”), (2) possessivos femininos no singular (“entreguei a/à minha irmã”), e (3) depois de “até” (“fui até a/à praça”).','Escolha a versão que soar mais limpa e mantenha o mesmo padrão no texto todo.','“— Entreguei o livro à minha tia.”','“Dedicou o poema a sua avó” ou “Dedicou o poema à sua avó.”'],
     ['crase-pronomes','Crase antes de pronomes (ela, você, essa)','a ela|a voce|a essa|a mesma',3,'Às vezes colocamos crase em “à ela” ou “à você” achando mais elegante.','Antes de pronomes pessoais (ela, você) e indefinidos (toda, qualquer, uma), não há crase: disse a ela, entregou a você, a cada página.','Exceção: “àquele/àquela/àquilo” fundem a + aquele (“refiro-me àquela carta”).','“— Entreguei a carta a ela ontem.”','“Escreveu a você sem pressa, referindo-se àquela tarde de abril.”'],
     ['crase-plural','“a” no singular + palavra no plural','a pessoas|as pessoas|a mulheres',3,'Troca muito comum ao revisar frases no plural.','Se o “a” está no singular antes de palavra feminina no plural, NUNCA leva crase: “refiro-me a histórias antigas”. Com artigo plural, sim: “às histórias antigas”.','Regra de ouro: “a” no singular + plural = crase nem a pau!','“— O livro fala a pessoas de todas as idades.”','“Dedicou a obra a escritoras independentes” ou “às escritoras independentes.”'],
-    ['a-partir-de','a partir de (sempre sem crase)','a partir|partir',3,'É uma das crases indevidas mais comuns em textos formais.','Como “partir” é verbo, nunca há crase: a partir de hoje, a partir do capítulo 3.','Viu “partir”? É verbo → sem crase!','“— A partir de amanhã vou escrever todo dia.”','“A partir da terceira revisão, o diálogo ganhou leveza.”'],
+    ['a-partir-de','a partir de (sempre sem crase)','a partir|partir',3,'É uma das crases indevidas mais comuns em documentos monitorados — nasce da vontade de caprichar!','Como “partir” é verbo, nunca há crase: a partir de hoje, a partir do capítulo 3.','Viu “partir”? É verbo → verbo não aceita artigo feminino, logo nunca leva crase!','“— A partir de amanhã vou escrever todo dia.”','“A partir da terceira revisão, o diálogo ganhou leveza.”'],
     ['a-respeito-de','a respeito de / em relação a','a respeito|em relacao',3,'“Respeito” é masculino, então “a respeito de” nunca leva crase.','Já “em relação a” pode levar crase se o termo seguinte for feminino com artigo: em relação à capa / em relação ao livro.','Teste do masculino: “em relação ao livro” → “em relação à capa”.','“— Queria falar a respeito da capa.”','“A respeito do prefácio, fez ajustes em relação à versão anterior.”'],
     ['frente-a','frente a / diante de / face a','frente a|diante de|face a',3,'Usamos muito “frente à” em ensaios e artigos.','Diante de nunca leva crase (usa “de”). Frente a e face a levam crase apenas antes de feminino determinado (frente à crise / frente ao desafio).','Troque por “frente ao desafio” para checar se o feminino pede crase.','“— Diante da folha em branco, respirei fundo.”','“Frente à página em branco, escolheu começar por uma lembrança.”'],
 
@@ -24274,7 +24953,7 @@ SOFTWARE.
     ['para-acordo','para (sem acento depois do Acordo)','para|para verbo',4,'Quem estudou antes de 2009 ainda lembra de “pára” com acento.','Pelo Acordo Ortográfico vigente, tanto a preposição quanto o verbo parar escrevem-se sem acento: o trem para para embarque.','O contexto resolve tudo — não precisa mais de acento em para.','“— Ele nunca para de escrever!”','“A chuva não para para quem espera na varanda.”'],
     ['ideia-voo','ideia / estreia / voo / enjoo (sem acento)','ideia|estreia|voo|enjoo|heroi|papeis',4,'Antes do Acordo, levavam acento agudo ou circunflexo.','Ditongos abertos ei/oi em paroxítonas perderam o acento (ideia, plateia, estreia, heroico, joia), assim como oo/ee dobrados (voo, enjoo, leem, veem).','Atenção: oxítonas continuam com acento! (herói, papéis, troféu, anéis).','“— Tive uma ideia boa pra estreia do livro.”','“A ideia nasceu durante o voo; os leitores veem o detalhe na estreia.”'],
     ['hifen-pratico','Hífen prático: iguais separam, diferentes juntam','hifen|anti|auto|micro|sub|inter',4,'O hífen parece um labirinto, mas 80% dos casos seguem uma regra só!','Com prefixos comuns (auto, anti, contra, extra, infra, inter, micro, semi, super): letras iguais separam com hífen (anti-inflamatório, micro-ondas, inter-regional); vogais diferentes juntam (autoestima, infraestrutura).','Atenção a R e S depois de vogal: dobram sem hífen (antissocial, minissaia, contrarregra)! E antes de H, sempre hífen (anti-herói).','“— Preciso cuidar da minha autoestima.”','“O anti-herói da trama enfrentou um problema anti-inflamatório e antissocial.”'],
-    ['com-certeza','com certeza / de repente / a gente','com certeza|concerteza|de repente|derrepente|a gente|agente',4,'Na fala soam como uma palavra só, por isso às vezes juntamos ao digitar rápido.','Na escrita formal, escrevem-se sempre separados: com certeza, de repente, a gente (= nós; “agente” junto é profissão/quem age).','Pense nos blocos: com + certeza; de + repente; a + gente (nós).','“— De repente a gente termina hoje, com certeza!”','“De repente, a gente percebeu que o agente secreto era o narrador.”'],
+    ['com-certeza','com certeza / de repente / a gente','com certeza|concerteza|de repente|derrepente|a gente|agente',4,'Na fala pronunciamos tudo num bloco só, então num bilhete ou mensagem sai junto sem esforço — e a mensagem passa inteirinha.','No acordo escrito para documentos monitorados, escrevem-se sempre separados: com certeza, de repente, a gente (= nós; “agente” junto é quem age ou profissão).','Pense nos blocos que montam o sentido: com + certeza; de + repente; a + gente (= nós).','“— De repente a gente termina hoje, com certeza!”','“De repente, a gente percebeu que o agente secreto era o narrador.”'],
     ['empecilho','empecilho / privilégio / exceção','empecilho|impecilho|privilegio|previlegio|excecao|excessao',4,'Pelo som da fala, trocamos facilmente e/i ou ç/ss nessas palavras.','Grafias de referência: empecilho (com e), privilégio (com i), exceção (com ç), meteorologia, beneficente, reivindicar.','Lembre das famílias: empecilho vem de empeço; privilégio vem de privado; exceção vem de exceto.','“— Não teve nenhum empecilho, foi um privilégio.”','“Sem exceção, cada empecilho virou matéria literária.”'],
     ['jeito-mexer','jeito / enxergar / mexer / xícara','jeito|enxergar|mexer|xicara|viajar',4,'G/J e X/CH têm o mesmo som na fala.','Grafias de referência: jeito (j), majestade (j), enxergar (x), mexer (x), xícara (x), encher (ch — vem de cheio!).','Dica boa: depois de “en-” quase sempre é X (enxergar, enxada, enxugar) — salvo “encher” e “encharcar” (vêm de cheio e charco).','“— Vou mexer o café na xícara.”','“Deu um jeito de enxergar a rua enquanto mexia a xícara de café.”'],
     ['a-toa','à toa / à-toa','a toa|atoa',4,'Pronunciamos como uma expressão única.','à toa (separado, com crase, sem hífen) = sem rumo, sem motivo (“andar à toa”); à-toa (com hífen) = sem valor, banal (“um objeto à-toa”).','Andar sem rumo = à toa. Qualidade de algo sem importância = à-toa.','“— Fiquei andando à toa pelo bairro.”','“Passou a tarde à toa, sem se importar com comentários à-toa.”'],
@@ -24287,11 +24966,11 @@ SOFTWARE.
     ['demais','demais / de mais','demais|de mais',5,'Mesmo som na conversa.','demais (junto) = em excesso / muito / os outros; de mais (separado) = oposto de “de menos”.','Teste do oposto: se der para trocar por “de menos”, separe (nada de mais / nada de menos).','“— Esse capítulo ficou bom demais!”','“Não havia nada de mais na carta, mas ele se preocupou demais.”'],
     ['devagar','devagar / de vagar','devagar|de vagar',5,'Quase sempre usamos no sentido de lentamente.','devagar (junto) = lentamente; de vagar (separado, raro) = sem pressa, com tempo livre (vagar = ócio).','Para velocidade lenta, escreva sempre junto: devagar.','“— Lê bem devagar pra ouvir o ritmo.”','“Caminhou devagar pela ponte para ouvir o rio.”'],
     ['embaixo','embaixo / debaixo / em cima','embaixo|debaixo|em cima|encima',5,'Às vezes dá dúvida se “embaixo” e “em cima” seguem a mesma regra — e não seguem!','embaixo e debaixo escrevem-se juntos; em cima escreve-se sempre separado!','Truque visual: embaixo/debaixo ficam juntos; em cima fica separado (como “em baixo” já não se usa).','“— O caderno tá embaixo do livro, em cima da mesa.”','“Guardou o rascunho debaixo do travesseiro e o dicionário em cima da cômoda.”'],
-    ['apesar-embora','apesar de / embora','apesar de|embora|apesar que',5,'Na fala dizemos “apesar que choveu” — muito comum e compreensível.','Na escrita formal, “apesar” pede “de” (apesar de ter chovido / apesar da chuva); antes de verbo conjugado sem “de”, use embora (embora tenha chovido).','Com “de” + infinitivo/substantivo → apesar de. Com verbo conjugado → embora.','“— Apesar que era tarde, a gente continuou.”','“Embora fosse tarde — e apesar do cansaço —, terminou a cena.”'],
+    ['apesar-embora','apesar de / embora','apesar de|embora|apesar que',5,'Na fala e na escrita livre dizemos “apesar que choveu” — muito comum e 100% compreensível.','Em ambientes monitorados, “apesar” pede “de” (apesar de ter chovido / apesar da chuva); antes de verbo conjugado sem “de”, use embora (embora tenha chovido).','Atalho rápido: com “de” + infinitivo/substantivo → apesar de. Com verbo conjugado → embora.','“— Apesar que era tarde, a gente continuou.”','“Embora fosse tarde — e apesar do cansaço —, terminou a cena.”'],
     ['enquanto-no-entanto','enquanto / no entanto','enquanto|no entanto|entretanto',5,'Às vezes usamos “enquanto” para marcar contraste forte.','enquanto marca tempo simultâneo ou contraste paralelo; no entanto / porém / todavia marcam quebra clara de expectativa.','Se duas ações ocorrem ao mesmo tempo, enquanto brilha; se quiser virar a ideia, use mas / no entanto.','“— Enquanto eu escrevia, a chuva caía lá fora.”','“Queria encerrar o conto ali; no entanto, a personagem pediu mais uma página.”'],
     ['a-medida-que','à medida que / na medida em que','a medida que|na medida em que',5,'É comum misturar as duas e dizer “à medida em que”.','à medida que = proporção gradual (conforme); na medida em que = causa/condição (visto que).','Nunca cruze as duas! Proporção = à medida que (com crase). Causa = na medida em que (sem crase).','“— Conforme eu escrevo, a história vai abrindo.”','“À medida que revisava, o texto clareava, na medida em que cortava excessos.”'],
     ['ao-inves-em-vez','ao invés de / em vez de','ao inves|em vez',5,'Usamos as duas expressões como se fossem iguais.','em vez de serve para qualquer troca (“em lugar de”); ao invés de pede oposição exata (“ao contrário de”: subiu ao invés de descer).','Na dúvida, “em vez de” funciona sempre — serve para qualquer substituição!','“— Em vez de cortar, eu reescrevi o começo.”','“Em vez de escolher chá, pediu café; e calou-se ao invés de gritar.”'],
-    ['onde-em-que','onde vs. em que (fora de lugar físico)','em que|no qual|na qual|onde',5,'Na fala, usamos “onde” para tempo, situação e conversa (“a época onde...”, “um filme onde...”).','Na escrita formal, onde reserva-se a lugar (físico ou geográfico). Para tempo, livro, situação ou ideia, prefira em que / no qual / na qual.','Pergunte: dá para pôr um alfinete no mapa? Sim → onde. Não → em que.','“— É um momento onde todo mundo fica quieto.”','“Era um momento em que o silêncio dizia mais que o diálogo.”'],
+    ['onde-em-que','onde vs. em que (fora de lugar físico)','em que|no qual|na qual|onde',5,'Na fala, usamos “onde” como coringa para tempo, filme e conversa (“a época onde...”, “um livro onde...”).','No acordo escrito monitorado, onde reserva-se a lugar (físico ou geográfico). Para tempo, livro, situação ou ideia, prefira em que / no qual / na qual.','Teste do mapa: dá para fincar um alfinete num mapa? Sim → onde. Não → em que.','“— É um momento onde todo mundo fica quieto.”','“Era um momento em que o silêncio dizia mais que o diálogo.”'],
 
     /* 6 · Vírgula de sentido e respiração (10) */
     ['virgula-sujeito','Nunca separar sujeito e verbo com vírgula','virgula sujeito|sujeito verbo|virgula',6,'Quando o sujeito é comprido, dá vontade de pôr vírgula para respirar antes do verbo!','Na convenção editorial, não se coloca vírgula única entre o sujeito e o verbo, mesmo quando o sujeito é longo.','Respire na leitura em voz alta, mas só ponha vírgulas ali se houver um comentário intercalado entre DUAS vírgulas.','“O caderno antigo da minha avó, ficou na estante.” (pausa de respiração)','“O caderno antigo da minha avó ficou na estante.” / “O caderno, guardado há anos, ficou na estante.”'],
@@ -24306,21 +24985,21 @@ SOFTWARE.
     ['ou-seja','ou seja / isto é / a saber / por exemplo','ou seja|isto e|por exemplo',6,'Expressões de explicação muito usadas em ensaios e crônicas.','Essas expressões explicativas vêm sempre isoladas por vírgulas (antes e depois).','Pense nelas como uma pausa para traduzir o que você acabou de dizer.','“— O app funciona offline ou seja não precisa de internet.”','“O ateliê funciona sem rede, ou seja, seus textos permanecem no aparelho.”'],
 
     /* 7 · Pronomes e ritmo brasileiro (8) */
-    ['proclise-inicio','“Me diga” vs. “Diga-me” (início de frase)','me diga|diga-me|te amo|proclise|enclise',7,'No português brasileiro falado, começar frase com pronome (“Me empresta”, “Te amo”, “Se cuida”) é a nossa melodia natural!','Na escrita formal tradicional, evita-se abrir período com pronome oblíquo: prefere-se “Diga-me” ou coloca-se um sujeito antes (“Eu te amo”, “Você me conta”).','Em diálogos brasileiros, “Diga-me” pode soar artificial; em cartas formais, colocar “Eu” antes (“Eu me lembro”) resolve com naturalidade!','“— Me conta como termina essa história.”','“Conte-me como termina a história” ou “Você me conta como termina?”'],
-    ['palavras-atrativas','Palavras que puxam o pronome (não me, que se, já lhe)','nao me|que se|ja lhe|nunca me',7,'O brasileiro acerta isso quase sempre de ouvido!','Palavras negativas (não, nunca), pronomes relativos (que, onde), advérbios (já, sempre, ainda) e conjunções (quando, embora) puxam o pronome para antes do verbo: “não me disse”, “o livro que se abriu”.','Confie no seu ouvido brasileiro — aqui a fala e a norma formal andam de mãos dadas!','“— Ele nunca me contou esse segredo.”','“A carta que se perdeu ainda me comove.”'],
-    ['locucao-pronome','Pronome no meio de dois verbos (“vou te contar”)','vou te|posso te|estou te|locucao verbal',7,'“Vou te contar”, “quero te ver”, “estava me lembrando” é a alma do português brasileiro.','Na escrita formal moderna do Brasil, “vou te contar” / “vou lhe dizer” é amplamente aceito; também existem “vou contar-te” e “vou dizer-lhe”.','Só evite hífen errado quando não há enclítico: escreva “vou te dizer” (sem hífen) ou “vou dizer-te”.','“— Vou te mandar a nova versão hoje.”','“Vou lhe enviar a nova versão” ou “Enviarei a nova versão hoje.”'],
-    ['para-eu-para-mim','para eu fazer / para mim','para eu|para mim|pra eu|pra mim',7,'Na fala rápida às vezes sai “pra mim fazer”.','Regra simples: “mim” nunca pratica verbo! Se houver um verbo depois (fazer, ler, escrever), use eu (“para eu ler”). No fim da frase ou sem verbo, use mim (“trouxe para mim”).','Teste de ouro: “Mim não faz nada!” — antes de verbo, sempre “para eu”.','“— Trouxe o livro pra eu ler no trem.”','“Deixou o manuscrito sobre a mesa para mim; deixou-o para eu revisar.”'],
-    ['entre-mim-e-voce','entre mim e você (não “entre eu e você”)','entre mim|entre eu',7,'Como treinamos “para eu”, às vezes exageramos e dizemos “entre eu e você”.','Depois da preposição “entre”, usa-se sempre o pronome tônico mim (e ti): entre mim e você, entre mim e ela.','Não há verbo sendo conjugado por “eu” aqui — é só a preposição “entre” + “mim”.','“— Isso fica entre eu e você.”','“Aquele segredo permaneceu entre mim e você.”'],
-    ['ver-ele-ve-lo','ver ele / vê-lo (objeto direto)','ver ele|ve-lo|encontrei ele|o encontrei',7,'Na conversa brasileira, “vi ele ontem” e “chamei ela” são universais.','Na escrita formal, ele/ela funcionam como sujeito; como objeto, viram o/a/lo/la/no/na: vi-o ontem / eu o vi ontem; encontrei-a na praça.','Dica para soar natural sem formalismo duro: use “eu o vi” ou repita o nome/substantivo (“vi o rapaz”).','“— Vi ela passando na frente da livraria.”','“Eu a vi passar diante da livraria” ou “Vi a escritora passar.”'],
-    ['dar-para-ele','dar para ele / dar-lhe','dar-lhe|lhe|para ele',7,'Na fala dizemos “dei o livro pra ele” e “falei pra ela”.','Na escrita formal, tanto “dei o livro a ele” quanto “dei-lhe o livro” são corretos. Lembre: “lhe” substitui “a ele / a ela” (nunca use “vi-lhe” para ver alguém).','Use “lhe” só quando couber “a ele/ela” (“entreguei-lhe” = entreguei a ela).','“— Contei tudo pra ele ontem.”','“Contou-lhe toda a história” ou “Contou a história a ele.”'],
-    ['este-esse','este / esse / aquele','este|esse|aquele|isto|isso',7,'Na fala usamos quase só “esse/isso” para tudo.','Na escrita formal: este/isto aponta para o que está perto ou vai ser dito agora; esse/isso retoma o que acabou de ser dito; aquele/aquilo aponta para algo distante.','Lembre no texto: “Isto é o que penso: ...” (vai anunciar) vs. “... e isso mudou tudo” (já foi dito).','“— Esse livro aqui na minha mão é ótimo.”','“Este caderno que seguro guarda o começo; esse detalhe que você citou fechou a trama.”'],
+    ['proclise-inicio','“Me diga” vs. “Diga-me” (início de frase)','me diga|diga-me|te amo|proclise|enclise',7,'No português brasileiro falado e na escrita livre, começar frase com pronome (“Me empresta”, “Te amo”, “Se cuida”) é a melodia natural do país — até Oswald de Andrade virou isso em poema (“Dê-me um cigarro / Diz a gramática…”)!','Em documentos monitorados tradicionais, evita-se abrir período com pronome oblíquo: usa-se “Diga-me” ou coloca-se um sujeito antes (“Eu te amo”, “Você me conta”).','Truque de ouro para soar brasileiro e elegante num documento monitorado: basta pôr “Eu” ou “Você” antes (“Eu me lembro”, “Você me envia?”) — resolve sem engessar a frase!','“— Me conta como termina essa história.”','“Conte-me como termina a história” ou “Você me conta como termina?”'],
+    ['palavras-atrativas','Palavras que puxam o pronome (não me, que se, já lhe)','nao me|que se|ja lhe|nunca me',7,'O brasileiro acerta isso quase sempre de ouvido!','Palavras negativas (não, nunca), pronomes relativos (que, onde), advérbios (já, sempre, ainda) e conjunções (quando, embora) puxam o pronome para antes do verbo: “não me disse”, “o livro que se abriu”.','Confie no seu ouvido brasileiro — aqui a fala e o acordo escrito andam de mãos dadas!','“— Ele nunca me contou esse segredo.”','“A carta que se perdeu ainda me comove.”'],
+    ['locucao-pronome','Pronome no meio de dois verbos (“vou te contar”)','vou te|posso te|estou te|locucao verbal',7,'“Vou te contar”, “quero te ver”, “estava me lembrando” é a alma do português brasileiro.','No acordo escrito moderno do Brasil, “vou te contar” / “vou lhe dizer” é amplamente aceito; também existem “vou contar-te” e “vou dizer-lhe”.','Só evite hífen errado quando o pronome fica solto no meio: escreva “vou te dizer” (sem hífen) ou “vou dizer-te”.','“— Vou te mandar a nova versão hoje.”','“Vou lhe enviar a nova versão” ou “Enviarei a nova versão hoje.”'],
+    ['para-eu-para-mim','para eu fazer / para mim','para eu|para mim|pra eu|pra mim',7,'Na fala rápida às vezes sai “pra mim fazer” — outro alvo injusto de preconceito! O cérebro apenas ouviu a preposição “para” e puxou “mim” (como em “para mim”).','No acordo escrito monitorado, “mim” nunca conjuga verbo! Se vem um verbo depois (fazer, ler, escrever), use eu (“para eu ler”). Sem verbo depois, use mim (“trouxe para mim”).','Regra de 1 segundo: olhe depois da palavra. Tem ação/verbo logo à frente? Só “eu” faz ação (“para eu ler”). Acabou ali? “para mim”.','“— Trouxe o livro pra eu ler no trem.”','“Deixou o manuscrito sobre a mesa para mim; deixou-o para eu revisar.”'],
+    ['entre-mim-e-voce','entre mim e você (não “entre eu e você”)','entre mim|entre eu',7,'Como muita gente decorou “para eu”, acaba exagerando e dizendo “entre eu e você” — de novo, nasce da vontade de acertar!','No acordo escrito monitorado, depois da preposição “entre” usa-se sempre o pronome tônico mim (e ti): entre mim e você, entre mim e ela.','Cheque se há verbo sendo praticado por “eu”: não há! É apenas a preposição “entre” ligando duas pessoas → entre mim e você.','“— Isso fica entre eu e você.”','“Aquele segredo permaneceu entre mim e você.”'],
+    ['ver-ele-ve-lo','ver ele / vê-lo (objeto direto)','ver ele|ve-lo|encontrei ele|o encontrei',7,'Na conversa brasileira e na escrita livre, “vi ele ontem” e “chamei ela” são universais — e até grandes cronistas usam em diálogos para dar verdade à voz.','Em documentos monitorados, ele/ela atuam como sujeito; como objeto direto, viram o/a/lo/la/no/na: vi-o ontem / eu o vi ontem; encontrei-a na praça.','Truque para soar natural sem rigidez artificial: coloque “eu o vi” (mais leve que “vi-o”) ou repita o nome/substantivo (“vi o rapaz”).','“— Vi ela passando na frente da livraria.”','“Eu a vi passar diante da livraria” ou “Vi a escritora passar.”'],
+    ['dar-para-ele','dar para ele / dar-lhe','dar-lhe|lhe|para ele',7,'Na fala dizemos “dei o livro pra ele” e “falei pra ela”.','No acordo escrito monitorado, tanto “dei o livro a ele” quanto “dei-lhe o livro” funcionam. Lembre: “lhe” substitui “a ele / a ela” (nunca use “vi-lhe” para ver alguém).','Use “lhe” só quando couber “a ele/ela” (“entreguei-lhe” = entreguei a ela).','“— Contei tudo pra ele ontem.”','“Contou-lhe toda a história” ou “Contou a história a ele.”'],
+    ['este-esse','este / esse / aquele','este|esse|aquele|isto|isso',7,'Na fala usamos quase só “esse/isso” para tudo — e o contexto resolve 100%.','Em documentos monitorados: este/isto aponta para o que está perto ou vai ser dito agora; esse/isso retoma o que acabou de ser dito; aquele/aquilo aponta para algo distante.','Pense em setas no texto: “Isto é o que penso: …” (seta para a frente) vs. “… e isso mudou tudo” (seta para trás).','“— Esse livro aqui na minha mão é ótimo.”','“Este caderno que seguro guarda o começo; esse detalhe que você citou fechou a trama.”'],
 
     /* 8 · Verbos traiçoeiros (8) */
-    ['ver-vir','quando eu vir / quando eu vier','quando eu vir|quando eu vier|se eu vir|ver|vir',8,'Como “ver” e “vir” se parecem, quase todo mundo diz “quando eu ver ele”.','No futuro do subjuntivo: verbo VER vira vir (“quando eu vir o filme”); verbo VIR vira vier (“quando eu vier para casa”).','Troque por “quando eles...”: “quando eles virem” (ver) vs. “quando eles vierem” (vir).','“— Quando eu ver a capa pronta, te aviso.”','“Quando eu vir a prova impressa e quando você vier à oficina, celebraremos.”'],
-    ['compostos-ter-vir-por','manter, intervir, propor, compor','interveio|interviu|manteve|propos|compus',8,'No cotidiano é comum conjugar “ele interviu” ou “ela mantiu”.','Os verbos compostos copiam 100% o verbo-mãe (ter, vir, pôr): intervir copia vir (interveio, interviesse); manter copia ter (manteve, mantivesse); propor copia pôr (propôs, propuser).','Corte o prefixo mentalmente: se você diz “ele veio”, então é “ele interveio” (nunca interviu)!','“— O editor interviu na hora certa.”','“O editor interveio com calma, manteve a voz do autor e propôs um corte leve.”'],
-    ['trazer','trazer: trouxe, trouxesse, trouxer','trazer|trouxe|trouxesse|trouxer|traze',8,'Na fala às vezes surge “trouce” na escrita ou confusão com “trago”.','Grafias de referência: eu trouxe, se ele trouxesse, quando você trouxer — sempre com X!','Família do trazer no passado: tudo com X (trouxe, trouxemos, trouxeram).','“— Se você trouxer o rascunho, a gente lê.”','“Quando trouxer os cadernos, revisaremos o que ela trouxe ontem.”'],
-    ['houve-houveram','houve (nunca “houveram problemas”)','houve|houveram',8,'No passado, o ouvido puxa “houveram problemas” para combinar com o plural.','Como haver (= existir/acontecer) é impessoal, no passado fica sempre no singular: houve problemas, houve mudanças.','Troque por “aconteceram”: se funcionar, trave o haver em “houve”.','“— Houveram dois atrasos na gráfica.”','“Houve dois atrasos na gráfica, mas o livro chegou a tempo.”'],
-    ['tem-ha','tem gente / há pessoas (ter impessoal)','tem gente|tem muito|ha pessoas',8,'No Brasil, “tem muita gente”, “tinha um livro na mesa” é a marca mais querida da nossa língua falada (e até da literatura moderna — Drummond escreveu “No meio do caminho tinha uma pedra”!).','Em textos muito formais/acadêmicos, costuma-se preferir haver ou existir (“há muitas pessoas”, “havia um livro sobre a mesa”).','Em crônica, poesia e ficção, “tinha uma pedra” tem alma brasileira; em texto oficial/técnico, troque por “havia”.','“— Tinha um caderno aberto em cima da mesa.”','“Havia um caderno aberto sobre a mesa da biblioteca.”'],
+    ['ver-vir','quando eu vir / quando eu vier','quando eu vir|quando eu vier|se eu vir|ver|vir',8,'Como “ver” e “vir” são quase gêmeos, quase todo brasileiro diz “quando eu ver ele” — o cérebro só está mantendo a cara do verbo “ver” para ficar claro!','No acordo escrito monitorado (futuro do subjuntivo): o verbo VER vira vir (“quando eu vir o filme”); o verbo VIR vira vier (“quando eu vier para casa”).','Teste de 2 segundos: passe mentalmente para “quando eles…”. Você já sabe falar “quando eles virem” (ver) e “quando eles vierem” (vir)! Corte o “em” final → vir / vier!','“— Quando eu ver a capa pronta, te aviso.”','“Quando eu vir a prova impressa e quando você vier à oficina, celebraremos.”'],
+    ['compostos-ter-vir-por','manter, intervir, propor, compor','interveio|interviu|manteve|propos|compus',8,'No cotidiano é muito comum dizer “ele interviu” ou “ela mantiu” — o cérebro apenas aplicou o padrão regular de verbos em -ir/-er.','No acordo escrito monitorado, verbos compostos copiam 100% o verbo-mãe (ter, vir, pôr): intervir copia vir (interveio, interviesse); manter copia ter (manteve, mantivesse); propor copia pôr (propôs, propuser).','Truque da tesoura: corte o começo da palavra! Se você nunca diz “ele viu” para chegar (diz “ele veio”), então é “ele interveio” (nunca interviu)!','“— O editor interviu na hora certa.”','“O editor interveio com calma, manteve a voz do autor e propôs um corte leve.”'],
+    ['trazer','trazer: trouxe, trouxesse, trouxer','trazer|trouxe|trouxesse|trouxer|traze',8,'Na escrita livre às vezes escapa “trouce” pelo som de SS — perfeitamente compreensível num bilhete.','No acordo escrito monitorado, toda a família do passado de trazer usa X: eu trouxe, se ele trouxesse, quando você trouxer.','Família do trazer no passado: tudo com X (trouxe, trouxemos, trouxeram).','“— Se você trouxer o rascunho, a gente lê.”','“Quando trouxer os cadernos, revisaremos o que ela trouxe ontem.”'],
+    ['houve-houveram','houve (nunca “houveram problemas”)','houve|houveram',8,'No passado, o ouvido puxa “houveram problemas” para combinar com o plural — é um movimento super natural da mente!','No acordo escrito monitorado, haver (= existir/acontecer) fica sempre no singular: houve problemas, houve mudanças.','Troque por “aconteceram”: se funcionar, congele o haver em “houve”.','“— Houveram dois atrasos na gráfica.”','“Houve dois atrasos na gráfica, mas o livro chegou a tempo.”'],
+    ['tem-ha','tem gente / há pessoas (ter impessoal)','tem gente|tem muito|ha pessoas',8,'No Brasil, “tem muita gente” e “tinha um livro na mesa” são a marca mais querida da nossa língua viva — e Drummond eternizou isso no verso “No meio do caminho tinha uma pedra”!','Em documentos monitorados (ofícios, artigos acadêmicos, textos institucionais), o acordo escrito costuma preferir haver ou existir (“há muitas pessoas”, “havia um livro sobre a mesa”).','Em crônica, poesia, diálogo e escrita livre, “tinha uma pedra” tem alma brasileira; em documento monitorado, basta trocar por “havia”.','“— Tinha um caderno aberto em cima da mesa.”','“Havia um caderno aberto sobre a mesa da biblioteca.”'],
     ['adequar','adequar (como conjugar no presente)','adequar|adequa|adeque',8,'Muitos ficam travados sem saber se dizem “eu adéquo” ou “ele adéqua”.','Na escrita tradicional, adequar é defectivo no presente (só se usam adequamos/adequais); hoje já se encontra “adequa”, mas para soar 100% seguro, use “ajustar”, “adaptar” ou “torna adequado”.','Truque de escritor: se a forma travar a língua, troque por “adapta” ou “ajusta” — fica mais claro!','“— Esse tom se adapta bem à cena.”','“O autor ajustou o ritmo do parágrafo para adequá-lo à leitura em voz alta.”'],
     ['reaver','reaver (copia o verbo haver)','reaver|reouve|reaveu',8,'Quase sempre dá vontade de dizer “ele reaveu o livro”.','Reaver segue o verbo haver (só existe nas formas em que haver tem a letra V): ele reouve, nós reouvemos, se ele reouvesse.','Se não existe “eu havo”, não existe “eu reavo” — diga “recupero” no presente e “reouve” no passado!','“— Finalmente ele recuperou o caderno perdido.”','“Meses depois, a autora reouve o manuscrito original.”'],
     ['precaver','precaver-se (como usar sem travar)','precaver|precaveu|previna',8,'Ninguém usa “eu precavo” — soa estranho até no ouvido!','Precaver-se só se conjuga no passado/futuro (precaveu-se, precaver-se) e nas pessoas nós/vós no presente. No presente do singular, use prevenir-se ou acautelar-se.','No presente diga “eu me previno”; no passado, “ela se precaveu” funciona perfeitamente.','“— Eu sempre me previno salvando uma cópia.”','“A escritora precaveu-se exportando uma cópia .scrvrl antes da viagem.”']
@@ -24351,10 +25030,14 @@ SOFTWARE.
         categoria: CATEGORIES[r[3]] ? CATEGORIES[r[3]].id : 'paronimos',
         categoriaLabel: CATEGORIES[r[3]] ? CATEGORIES[r[3]].label : '',
         fala: r[4],
+        livre: r[4],
         formal: r[5],
+        monitorado: r[5],
         porque: r[6],
         exemploFala: r[7],
+        exemploLivre: r[7],
         exemploFormal: r[8],
+        exemploMonitorado: r[8],
         _search: normalizeKey(r[1] + ' ' + r[2] + ' ' + r[4] + ' ' + r[5] + ' ' + r[6])
       };
       entries.push(item);
@@ -24464,14 +25147,20 @@ SOFTWARE.
       /* Manifesto acolhedor recolhível */
       var manBox = mk('div', 'esc-usos-manifesto');
       var manHead = mk('div', 'esc-usos-manifesto-head');
-      manHead.appendChild(mk('strong', '', 'Não existe “erro” — existe adequação de uso'));
+      manHead.appendChild(mk('strong', '', 'Zero preconceito — tudo é adequação de uso'));
       var manBtn = mk('button', 'esc-usos-quiet', manifestoOpen ? 'Recolher' : 'Ler manifesto');
       manBtn.type = 'button';
       on(manBtn, 'click', function () { manifestoOpen = !manifestoOpen; render(); });
       manHead.appendChild(manBtn);
       manBox.appendChild(manHead);
       if (manifestoOpen) {
-        manBox.appendChild(mk('p', '', data.manifesto));
+        var manBody = mk('div', 'esc-usos-manifesto-body');
+        var paras = String(data.manifesto || '').split('\n\n');
+        var pi;
+        for (pi = 0; pi < paras.length; pi += 1) {
+          if (paras[pi]) { manBody.appendChild(mk('p', '', paras[pi])); }
+        }
+        manBox.appendChild(manBody);
       }
       container.appendChild(manBox);
 
@@ -24557,24 +25246,24 @@ SOFTWARE.
           if (isOpen) {
             var body = mk('div', 'esc-usos-card-body');
             var b1 = mk('div', 'esc-usos-block');
-            b1.appendChild(mk('span', 'esc-usos-lbl', 'Na fala cotidiana'));
-            b1.appendChild(mk('p', '', item.fala));
+            b1.appendChild(mk('span', 'esc-usos-lbl', 'Na fala e na escrita livre'));
+            b1.appendChild(mk('p', '', item.livre || item.fala));
             body.appendChild(b1);
 
             var b2 = mk('div', 'esc-usos-block');
-            b2.appendChild(mk('span', 'esc-usos-lbl', 'Na escrita formal'));
-            b2.appendChild(mk('p', '', item.formal));
+            b2.appendChild(mk('span', 'esc-usos-lbl', 'Em ambientes monitorados (acordo escrito)'));
+            b2.appendChild(mk('p', '', item.monitorado || item.formal));
             body.appendChild(b2);
 
             var b3 = mk('div', 'esc-usos-block is-why');
-            b3.appendChild(mk('span', 'esc-usos-lbl', 'Por que muda (teste rápido)'));
+            b3.appendChild(mk('span', 'esc-usos-lbl', 'Como pegar o jeito (regra clara)'));
             b3.appendChild(mk('p', '', item.porque));
             body.appendChild(b3);
 
             var b4 = mk('div', 'esc-usos-examples');
             b4.appendChild(mk('span', 'esc-usos-lbl', 'Exemplo vivo'));
-            b4.appendChild(mk('p', 'esc-usos-ex-fala', 'Diálogo / fala: ' + item.exemploFala));
-            b4.appendChild(mk('p', 'esc-usos-ex-formal', 'Texto formal: ' + item.exemploFormal));
+            b4.appendChild(mk('p', 'esc-usos-ex-fala', 'Fala / escrita livre: ' + (item.exemploLivre || item.exemploFala)));
+            b4.appendChild(mk('p', 'esc-usos-ex-formal', 'Documento monitorado: ' + (item.exemploMonitorado || item.exemploFormal)));
             body.appendChild(b4);
 
             card.appendChild(body);
@@ -29675,7 +30364,11 @@ SOFTWARE.
       el.closest('#esc-cartorio-overlay') ||
       el.closest('#esc-print-overlay') ||
       el.closest('#oficina') ||
-      el.closest('#usos-lingua')
+      el.closest('#usos-lingua') ||
+      el.closest('#sobre') ||
+      el.closest('#lineage-panel') ||
+      el.closest('#mesa') ||
+      el.closest('#utilidades')
     );
   }
 

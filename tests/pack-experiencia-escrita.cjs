@@ -58,6 +58,7 @@ const readerDoc = {
     });
     return n;
   },
+  createTextNode(txt) { return { nodeType: 3, textContent: String(txt || '') }; },
   getElementById(id) { return rNodes[id] || null; }
 };
 readerCtx.document = readerDoc;

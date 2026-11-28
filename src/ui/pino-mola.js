@@ -98,7 +98,11 @@
       el.closest('#esc-cartorio-overlay') ||
       el.closest('#esc-print-overlay') ||
       el.closest('#oficina') ||
-      el.closest('#usos-lingua')
+      el.closest('#usos-lingua') ||
+      el.closest('#sobre') ||
+      el.closest('#lineage-panel') ||
+      el.closest('#mesa') ||
+      el.closest('#utilidades')
     );
   }
 
