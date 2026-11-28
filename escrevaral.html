@@ -3984,18 +3984,20 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     left: auto;
     right: auto;
     top: auto;
-    width: auto;
+    width: 100%;
     max-width: none;
+    min-width: 0;
+    box-sizing: border-box;
     margin: 0;
     height: auto;
-    min-height: 48px;
+    min-height: 44px;
     padding: 6px 20px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 8px;
-    border-bottom: 1px dotted var(--esc-border);
+    border-bottom: 1px solid rgba(33, 41, 33, 0.1);
     background: transparent;
   }
 
@@ -4026,8 +4028,17 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     top: auto;
     right: auto;
     display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
     gap: 4px;
+  }
+
+  body[data-view="workspace"] #writing-space .desk-tools #desk-minimize {
+    margin-right: auto;
   }
 
   body[data-view="workspace"] #writing-space .desk {
@@ -4184,6 +4195,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
       background: rgba(30, 35, 32, 0.08);
       border-bottom-color: var(--esc-ink, #1e2320);
     }
+    body[data-view="workspace"] .esc-pane-toggles,
+    body[data-view="workspace"] .esc-pane-sep,
     body[data-view="workspace"] #esc-nav-toggle,
     body[data-view="workspace"] #esc-lists-toggle {
       display: none !important;
@@ -10182,9 +10195,12 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   body[data-view="workspace"] #items-column {
     border-right: 1px solid rgba(33, 41, 33, 0.1) !important;
   }
-  body[data-view="workspace"] #writing-space .desk-tools,
+  body[data-view="workspace"] #writing-space .masthead,
   body[data-view="workspace"] #writing-space .writing-toolbar {
     border-bottom: 1px solid rgba(33, 41, 33, 0.09) !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools {
+    border-bottom: 0 !important;
   }
   body[data-view="workspace"] #writing-space .paper-footer {
     border-top: 1px solid rgba(33, 41, 33, 0.09) !important;
@@ -10985,6 +11001,119 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   body[data-theme="escuro"] *::-webkit-scrollbar-thumb:hover {
     background: rgba(207, 214, 203, 0.34) !important;
+  }
+
+  /* Controles de painéis (Projetos e Notas) ancorados na barra global — padrão Apple Notes / Notion / VS Code */
+  body:not([data-view="workspace"]) #location-path .esc-pane-toggles,
+  body:not([data-view="workspace"]) #location-path .esc-pane-sep {
+    display: none !important;
+  }
+  #location-path .esc-pane-toggles {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    margin-right: 4px;
+    border-radius: 5px;
+    background: rgba(33, 41, 33, 0.065);
+    border: 1px solid rgba(33, 41, 33, 0.14);
+    flex-shrink: 0;
+  }
+  #location-path .esc-pane-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-width: none !important;
+    padding: 0 8px !important;
+    border: 1px solid transparent !important;
+    border-radius: 3px !important;
+    background: #d2dcd0 !important;
+    color: #182018 !important;
+    font: 600 11.5px/1 Arial, Helvetica, sans-serif !important;
+    box-shadow: 0 1px 1px rgba(33, 41, 33, 0.08);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease, opacity 120ms ease;
+  }
+  #location-path .esc-pane-btn:hover,
+  #location-path .esc-pane-btn:focus-visible {
+    background: #dce5da !important;
+    border-color: rgba(33, 41, 33, 0.24) !important;
+    text-decoration: none !important;
+  }
+  #location-path .esc-pane-btn:focus:not(:focus-visible) {
+    outline: none !important;
+  }
+  #location-path .esc-pane-btn .esc-pane-ico {
+    width: 14px;
+    height: 14px;
+    opacity: 0.92;
+  }
+  #location-path .esc-pane-btn .esc-pane-fill {
+    fill: currentColor;
+    stroke: none;
+    opacity: 0.28;
+    transition: opacity 120ms ease;
+  }
+  /* Coluna oculta (aria-pressed="true"): botão recolhido/vazado, pronto para reabrir */
+  #location-path .esc-pane-btn[aria-pressed="true"] {
+    background: transparent !important;
+    color: #546154 !important;
+    border-color: transparent !important;
+    box-shadow: none;
+    font-weight: 500 !important;
+  }
+  #location-path .esc-pane-btn[aria-pressed="true"] .esc-pane-fill {
+    opacity: 0;
+  }
+  #location-path .esc-pane-btn[aria-pressed="true"]:hover,
+  #location-path .esc-pane-btn[aria-pressed="true"]:focus-visible {
+    background: rgba(33, 41, 33, 0.08) !important;
+    color: #182018 !important;
+    text-decoration: none !important;
+  }
+  #location-path .esc-pane-sep {
+    display: inline-block;
+    width: 1px;
+    height: 16px;
+    margin: 0 6px 0 4px;
+    background: rgba(33, 41, 33, 0.16);
+    flex-shrink: 0;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-toggles {
+    background: rgba(207, 214, 203, 0.06);
+    border-color: rgba(207, 214, 203, 0.14);
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-btn {
+    background: #2c362c !important;
+    color: #e2e9df !important;
+    border-color: rgba(207, 214, 203, 0.16) !important;
+    box-shadow: none;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-btn:hover,
+  body[data-theme="escuro"] #location-path .esc-pane-btn:focus-visible {
+    background: #364336 !important;
+    border-color: rgba(207, 214, 203, 0.3) !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-btn[aria-pressed="true"] {
+    background: transparent !important;
+    color: #8b9788 !important;
+    border-color: transparent !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-btn[aria-pressed="true"]:hover,
+  body[data-theme="escuro"] #location-path .esc-pane-btn[aria-pressed="true"]:focus-visible {
+    background: rgba(207, 214, 203, 0.09) !important;
+    color: #d8dfd4 !important;
+    text-decoration: none !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-sep {
+    background: rgba(207, 214, 203, 0.16);
+  }
+  @media (max-width: 960px) and (min-width: 761px) {
+    #location-path .esc-pane-btn span { display: none; }
+    #location-path .esc-pane-btn { padding: 0 7px !important; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -13994,7 +14123,7 @@ SOFTWARE.
   <a id="skip-writing" class="skip" href="#manuscrito">Ir ao manuscrito</a>
   <noscript><p class="notice">Ative o JavaScript para abrir seus cadernos e escrever. O aplicativo precisa dele para acessar os dados deste aparelho.</p></noscript>
   <nav id="location-path" class="location-path" aria-label="Você está aqui">
-    <button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-path-return" type="button" class="esc-path-return" hidden>← Voltar à escrita</button><button id="esc-theme-cycle" type="button" class="esc-theme-btn" aria-pressed="false" title="Alternar entre Papel Sálvia claro e Modo Noturno opaco"><svg class="esc-ui-ico esc-theme-ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="esc-ui-ico esc-theme-ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><span class="esc-theme-label">Noturno</span></button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
+    <span class="esc-pane-toggles" role="group" aria-label="Colunas do espaço"><button id="esc-nav-toggle" type="button" class="esc-pane-btn" aria-pressed="false" title="Ocultar coluna de projetos"><svg class="esc-ui-ico esc-pane-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><rect class="esc-pane-fill" x="4" y="5" width="5.2" height="14" rx="1"/><path d="M9.5 4v16"/></svg><span>Projetos</span></button><button id="esc-lists-toggle" type="button" class="esc-pane-btn" aria-pressed="false" title="Ocultar lista de notas"><svg class="esc-ui-ico esc-pane-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><rect class="esc-pane-fill" x="4" y="5" width="7" height="14" rx="1"/><path d="M11 4v16M6 8.5h3M6 12h3M6 15.5h2"/></svg><span>Notas</span></button></span><span class="esc-pane-sep" aria-hidden="true"></span><button id="path-home" hidden>SCRVRL OS</button><button id="path-projects" aria-current="location">Início</button><span id="path-original-separator" aria-hidden="true" hidden="">/</span><button id="path-original" hidden=""></button><span id="path-project-separator" aria-hidden="true" hidden="">/</span><button id="path-project" title="Textos avulsos" hidden="">Textos avulsos</button><span id="path-folder-separator" aria-hidden="true" hidden="">/</span><button id="path-folder" hidden=""></button><span id="path-document-separator" aria-hidden="true" hidden="">/</span><button id="path-document" title="Sem título" hidden="">Sem título</button><span id="path-panel-separator" aria-hidden="true" hidden="">/</span><span id="path-panel" hidden=""></span><span class="esc-chrome-spacer" aria-hidden="true" style="margin-left:auto"></span><button id="esc-path-return" type="button" class="esc-path-return" hidden>← Voltar à escrita</button><button id="esc-theme-cycle" type="button" class="esc-theme-btn" aria-pressed="false" title="Alternar entre Papel Sálvia claro e Modo Noturno opaco"><svg class="esc-ui-ico esc-theme-ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="esc-ui-ico esc-theme-ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><span class="esc-theme-label">Noturno</span></button><button id="esc-fullscreen-btn" type="button" title="Tela cheia (F11)">Tela cheia</button>
   </nav>
   <div id="esc-toast" class="esc-toast" role="status" aria-live="polite" hidden></div>
   <section id="gabinete" aria-labelledby="cabinet-heading" style="height: 570px;">
@@ -14214,7 +14343,8 @@ SOFTWARE.
       <button id="back-cabinet" class="brand-signature" aria-label="Escrevaral — voltar aos textos do caderno"><svg class="escrevaral-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 591 496" aria-hidden="true" focusable="false"><path fill="currentColor" d="m2.48 386.67l587.68 7.76-0.71 53.59-587.67-7.76zm101.17-374.5v483.64h-44.11v-483.64zm-103.65 281.16l586.76-33.61 3.07 53.51-586.77 33.61zm2.26-131.5l587.59 12.67-1.15 53.59-587.59-12.68zm-2.03-95.95l586.15-43.06 3.93 53.45-586.15 43.06zm521.66-65.87v483.64h-44.1v-483.64z"/></svg><strong>ESCREVA<span>RAL</span></strong><small>ESCRITA COM INTENÇÃO</small></button>
       <div class="global-search"><label class="sr-only" for="note-search">Buscar neste caderno</label><input id="note-search" type="search" placeholder="Buscar neste caderno" autocomplete="off" spellcheck="false"><button id="clear-search" aria-label="Limpar busca" hidden="">×</button></div>
       <nav class="desk-tools" aria-label="Mesa">
-        <button id="esc-nav-toggle" type="button" aria-pressed="false" title="Recolher ou abrir coluna de projetos"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg><span>Barra</span></button><button id="esc-lists-toggle" type="button" aria-pressed="false" title="Recolher ou abrir lista de notas"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>Lista</span></button><button id="desk-minimize" title="Abrir estante visual de cadernos, gavetas e post-its" aria-label="Estante de cadernos"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg><span>Estante</span></button><span class="esc-tool-sep" aria-hidden="true"></span><button id="immersion-toggle" aria-pressed="false" title="Abrir Superfoco (Esc volta ao aplicativo)"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg><span>Superfoco</span></button><button id="esc-superfocus-auto-toggle" type="button" role="switch" aria-checked="true" title="ON: abre na segunda palavra e sai após 30 s sem atividade. OFF: entrada e saída manuais.">Auto<span class="esc-switch-track" aria-hidden="true"><span class="esc-switch-thumb"></span></span><span class="esc-switch-state">ON</span></button><span class="esc-tool-sep" aria-hidden="true"></span>
+        <button id="desk-minimize" title="Abrir estante visual de cadernos, gavetas e post-its" aria-label="Estante de cadernos"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg><span>Estante</span></button>
+        <button id="immersion-toggle" aria-pressed="false" title="Abrir Superfoco (Esc volta ao aplicativo)"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg><span>Superfoco</span></button><button id="esc-superfocus-auto-toggle" type="button" role="switch" aria-checked="true" title="ON: abre na segunda palavra e sai após 30 s sem atividade. OFF: entrada e saída manuais.">Auto<span class="esc-switch-track" aria-hidden="true"><span class="esc-switch-thumb"></span></span><span class="esc-switch-state">ON</span></button><span class="esc-tool-sep" aria-hidden="true"></span>
         <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina" title="Revisar gramática, estilo, ritmo e poesia"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span>Examinar</span></button>
         <button id="desk-export" title="Baixar este texto"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg><span>Baixar</span></button>
         <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo" title="Abrir acervo e lixeira"><svg class="esc-ui-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/></svg><span>Acervo</span></button>
@@ -34360,8 +34490,14 @@ SOFTWARE.
       document.body.setAttribute('data-mobile-pane', activePane);
       var navBtn = byId('esc-nav-toggle');
       var listBtn = byId('esc-lists-toggle');
-      if (navBtn) { navBtn.setAttribute('aria-pressed', state.navCollapsed ? 'true' : 'false'); }
-      if (listBtn) { listBtn.setAttribute('aria-pressed', state.listsCollapsed ? 'true' : 'false'); }
+      if (navBtn) {
+        navBtn.setAttribute('aria-pressed', state.navCollapsed ? 'true' : 'false');
+        navBtn.title = state.navCollapsed ? 'Mostrar coluna de projetos' : 'Ocultar coluna de projetos';
+      }
+      if (listBtn) {
+        listBtn.setAttribute('aria-pressed', state.listsCollapsed ? 'true' : 'false');
+        listBtn.title = state.listsCollapsed ? 'Mostrar lista de notas' : 'Ocultar lista de notas';
+      }
       var mNav = byId('esc-mobile-nav'), mItems = byId('esc-mobile-items'), mEd = byId('esc-mobile-editor');
       if (mNav) { mNav.setAttribute('aria-current', activePane === 'nav' ? 'page' : 'false'); }
       if (mItems) { mItems.setAttribute('aria-current', activePane === 'items' ? 'page' : 'false'); }
@@ -37709,7 +37845,7 @@ SOFTWARE.
         var controls = byId(activePanel).querySelectorAll('button, input, textarea, select, a[href], [tabindex="0"]'), focusable = [], j;
         for (j = 0; j < controls.length; j += 1) { if (!controls[j].disabled && !controls[j].hidden && controls[j].getClientRects().length) { focusable.push(controls[j]); } }
         var paths = byId('location-path').querySelectorAll('button'), pathControls = [];
-        for (j = 0; j < paths.length; j += 1) { if (!paths[j].hidden) { pathControls.push(paths[j]); } }
+        for (j = 0; j < paths.length; j += 1) { if (!paths[j].hidden && (!paths[j].getClientRects || paths[j].getClientRects().length)) { pathControls.push(paths[j]); } }
         focusable = pathControls.concat(focusable); focusable.push(byId('os-start'));
         var first = focusable[0], last = focusable[focusable.length - 1];
         if (!first) { event.preventDefault(); byId(activePanel).focus(); }

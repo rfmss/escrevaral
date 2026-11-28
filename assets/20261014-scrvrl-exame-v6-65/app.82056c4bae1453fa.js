@@ -16226,8 +16226,14 @@
       document.body.setAttribute('data-mobile-pane', activePane);
       var navBtn = byId('esc-nav-toggle');
       var listBtn = byId('esc-lists-toggle');
-      if (navBtn) { navBtn.setAttribute('aria-pressed', state.navCollapsed ? 'true' : 'false'); }
-      if (listBtn) { listBtn.setAttribute('aria-pressed', state.listsCollapsed ? 'true' : 'false'); }
+      if (navBtn) {
+        navBtn.setAttribute('aria-pressed', state.navCollapsed ? 'true' : 'false');
+        navBtn.title = state.navCollapsed ? 'Mostrar coluna de projetos' : 'Ocultar coluna de projetos';
+      }
+      if (listBtn) {
+        listBtn.setAttribute('aria-pressed', state.listsCollapsed ? 'true' : 'false');
+        listBtn.title = state.listsCollapsed ? 'Mostrar lista de notas' : 'Ocultar lista de notas';
+      }
       var mNav = byId('esc-mobile-nav'), mItems = byId('esc-mobile-items'), mEd = byId('esc-mobile-editor');
       if (mNav) { mNav.setAttribute('aria-current', activePane === 'nav' ? 'page' : 'false'); }
       if (mItems) { mItems.setAttribute('aria-current', activePane === 'items' ? 'page' : 'false'); }
@@ -19575,7 +19581,7 @@
         var controls = byId(activePanel).querySelectorAll('button, input, textarea, select, a[href], [tabindex="0"]'), focusable = [], j;
         for (j = 0; j < controls.length; j += 1) { if (!controls[j].disabled && !controls[j].hidden && controls[j].getClientRects().length) { focusable.push(controls[j]); } }
         var paths = byId('location-path').querySelectorAll('button'), pathControls = [];
-        for (j = 0; j < paths.length; j += 1) { if (!paths[j].hidden) { pathControls.push(paths[j]); } }
+        for (j = 0; j < paths.length; j += 1) { if (!paths[j].hidden && (!paths[j].getClientRects || paths[j].getClientRects().length)) { pathControls.push(paths[j]); } }
         focusable = pathControls.concat(focusable); focusable.push(byId('os-start'));
         var first = focusable[0], last = focusable[focusable.length - 1];
         if (!first) { event.preventDefault(); byId(activePanel).focus(); }

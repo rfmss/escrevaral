@@ -637,18 +637,20 @@
     left: auto;
     right: auto;
     top: auto;
-    width: auto;
+    width: 100%;
     max-width: none;
+    min-width: 0;
+    box-sizing: border-box;
     margin: 0;
     height: auto;
-    min-height: 48px;
+    min-height: 44px;
     padding: 6px 20px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 8px;
-    border-bottom: 1px dotted var(--esc-border);
+    border-bottom: 1px solid rgba(33, 41, 33, 0.1);
     background: transparent;
   }
 
@@ -679,8 +681,17 @@
     top: auto;
     right: auto;
     display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
     gap: 4px;
+  }
+
+  body[data-view="workspace"] #writing-space .desk-tools #desk-minimize {
+    margin-right: auto;
   }
 
   body[data-view="workspace"] #writing-space .desk {
@@ -837,6 +848,8 @@
       background: rgba(30, 35, 32, 0.08);
       border-bottom-color: var(--esc-ink, #1e2320);
     }
+    body[data-view="workspace"] .esc-pane-toggles,
+    body[data-view="workspace"] .esc-pane-sep,
     body[data-view="workspace"] #esc-nav-toggle,
     body[data-view="workspace"] #esc-lists-toggle {
       display: none !important;

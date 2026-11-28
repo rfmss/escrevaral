@@ -2785,9 +2785,12 @@
   body[data-view="workspace"] #items-column {
     border-right: 1px solid rgba(33, 41, 33, 0.1) !important;
   }
-  body[data-view="workspace"] #writing-space .desk-tools,
+  body[data-view="workspace"] #writing-space .masthead,
   body[data-view="workspace"] #writing-space .writing-toolbar {
     border-bottom: 1px solid rgba(33, 41, 33, 0.09) !important;
+  }
+  body[data-view="workspace"] #writing-space .desk-tools {
+    border-bottom: 0 !important;
   }
   body[data-view="workspace"] #writing-space .paper-footer {
     border-top: 1px solid rgba(33, 41, 33, 0.09) !important;
@@ -3588,6 +3591,119 @@
   }
   body[data-theme="escuro"] *::-webkit-scrollbar-thumb:hover {
     background: rgba(207, 214, 203, 0.34) !important;
+  }
+
+  /* Controles de painéis (Projetos e Notas) ancorados na barra global — padrão Apple Notes / Notion / VS Code */
+  body:not([data-view="workspace"]) #location-path .esc-pane-toggles,
+  body:not([data-view="workspace"]) #location-path .esc-pane-sep {
+    display: none !important;
+  }
+  #location-path .esc-pane-toggles {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    margin-right: 4px;
+    border-radius: 5px;
+    background: rgba(33, 41, 33, 0.065);
+    border: 1px solid rgba(33, 41, 33, 0.14);
+    flex-shrink: 0;
+  }
+  #location-path .esc-pane-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-width: none !important;
+    padding: 0 8px !important;
+    border: 1px solid transparent !important;
+    border-radius: 3px !important;
+    background: #d2dcd0 !important;
+    color: #182018 !important;
+    font: 600 11.5px/1 Arial, Helvetica, sans-serif !important;
+    box-shadow: 0 1px 1px rgba(33, 41, 33, 0.08);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease, opacity 120ms ease;
+  }
+  #location-path .esc-pane-btn:hover,
+  #location-path .esc-pane-btn:focus-visible {
+    background: #dce5da !important;
+    border-color: rgba(33, 41, 33, 0.24) !important;
+    text-decoration: none !important;
+  }
+  #location-path .esc-pane-btn:focus:not(:focus-visible) {
+    outline: none !important;
+  }
+  #location-path .esc-pane-btn .esc-pane-ico {
+    width: 14px;
+    height: 14px;
+    opacity: 0.92;
+  }
+  #location-path .esc-pane-btn .esc-pane-fill {
+    fill: currentColor;
+    stroke: none;
+    opacity: 0.28;
+    transition: opacity 120ms ease;
+  }
+  /* Coluna oculta (aria-pressed="true"): botão recolhido/vazado, pronto para reabrir */
+  #location-path .esc-pane-btn[aria-pressed="true"] {
+    background: transparent !important;
+    color: #546154 !important;
+    border-color: transparent !important;
+    box-shadow: none;
+    font-weight: 500 !important;
+  }
+  #location-path .esc-pane-btn[aria-pressed="true"] .esc-pane-fill {
+    opacity: 0;
+  }
+  #location-path .esc-pane-btn[aria-pressed="true"]:hover,
+  #location-path .esc-pane-btn[aria-pressed="true"]:focus-visible {
+    background: rgba(33, 41, 33, 0.08) !important;
+    color: #182018 !important;
+    text-decoration: none !important;
+  }
+  #location-path .esc-pane-sep {
+    display: inline-block;
+    width: 1px;
+    height: 16px;
+    margin: 0 6px 0 4px;
+    background: rgba(33, 41, 33, 0.16);
+    flex-shrink: 0;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-toggles {
+    background: rgba(207, 214, 203, 0.06);
+    border-color: rgba(207, 214, 203, 0.14);
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-btn {
+    background: #2c362c !important;
+    color: #e2e9df !important;
+    border-color: rgba(207, 214, 203, 0.16) !important;
+    box-shadow: none;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-btn:hover,
+  body[data-theme="escuro"] #location-path .esc-pane-btn:focus-visible {
+    background: #364336 !important;
+    border-color: rgba(207, 214, 203, 0.3) !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-btn[aria-pressed="true"] {
+    background: transparent !important;
+    color: #8b9788 !important;
+    border-color: transparent !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-btn[aria-pressed="true"]:hover,
+  body[data-theme="escuro"] #location-path .esc-pane-btn[aria-pressed="true"]:focus-visible {
+    background: rgba(207, 214, 203, 0.09) !important;
+    color: #d8dfd4 !important;
+    text-decoration: none !important;
+  }
+  body[data-theme="escuro"] #location-path .esc-pane-sep {
+    background: rgba(207, 214, 203, 0.16);
+  }
+  @media (max-width: 960px) and (min-width: 761px) {
+    #location-path .esc-pane-btn span { display: none; }
+    #location-path .esc-pane-btn { padding: 0 7px !important; }
   }
 
   @media (prefers-reduced-motion: reduce) {

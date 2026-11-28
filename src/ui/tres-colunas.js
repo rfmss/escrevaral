@@ -129,8 +129,14 @@
       document.body.setAttribute('data-mobile-pane', activePane);
       var navBtn = byId('esc-nav-toggle');
       var listBtn = byId('esc-lists-toggle');
-      if (navBtn) { navBtn.setAttribute('aria-pressed', state.navCollapsed ? 'true' : 'false'); }
-      if (listBtn) { listBtn.setAttribute('aria-pressed', state.listsCollapsed ? 'true' : 'false'); }
+      if (navBtn) {
+        navBtn.setAttribute('aria-pressed', state.navCollapsed ? 'true' : 'false');
+        navBtn.title = state.navCollapsed ? 'Mostrar coluna de projetos' : 'Ocultar coluna de projetos';
+      }
+      if (listBtn) {
+        listBtn.setAttribute('aria-pressed', state.listsCollapsed ? 'true' : 'false');
+        listBtn.title = state.listsCollapsed ? 'Mostrar lista de notas' : 'Ocultar lista de notas';
+      }
       var mNav = byId('esc-mobile-nav'), mItems = byId('esc-mobile-items'), mEd = byId('esc-mobile-editor');
       if (mNav) { mNav.setAttribute('aria-current', activePane === 'nav' ? 'page' : 'false'); }
       if (mItems) { mItems.setAttribute('aria-current', activePane === 'items' ? 'page' : 'false'); }
