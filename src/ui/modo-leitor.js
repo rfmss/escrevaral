@@ -28,7 +28,7 @@
   }
 
   var HERO_ART_LER = 'assets/library/reader-atelier.webp';
-  var HERO_ART_ENSAIO = 'assets/library/reader-readthru.webp';
+  var HERO_ART_ENSAIO = 'assets/library/reader-mesa-ensaio.webp';
 
   function bindReaderAtmosphere() {
     try {

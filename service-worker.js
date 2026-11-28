@@ -1,6 +1,6 @@
 /* Gerado: editar src/app/service-worker.template.js. */
-const CACHE_NAME = "scrvrl-offline-v6-65-328a722f7a80";
-const RUNTIME_CACHE = "scrvrl-runtime-328a722f7a80";
+const CACHE_NAME = "scrvrl-offline-v6-65-0f8c3921b3c5";
+const RUNTIME_CACHE = "scrvrl-runtime-0f8c3921b3c5";
 const ASSET_VERSION = "20261014-scrvrl-exame-v6-65";
 const REQUIRED_ASSETS = [
   {
@@ -8,8 +8,8 @@ const REQUIRED_ASSETS = [
     "sha256": "d6cd9da15371a34f5b69d5a91a907cf30116c3b496ca45907eed8c1422548e64"
   },
   {
-    "url": "./assets/20261014-scrvrl-exame-v6-65/app.9cf6bbe36107908f.js",
-    "sha256": "9cf6bbe36107908f31ce3c16c83fc301a0fe81bd6ea908557428cc956dc91b2e"
+    "url": "./assets/20261014-scrvrl-exame-v6-65/app.85de05750093ce5d.js",
+    "sha256": "85de05750093ce5da5550390eb8d4c7a070430ada68b2ff224effbd42d594048"
   },
   {
     "url": "./assets/20261014-scrvrl-exame-v6-65/styles.1bfa455943ed0cd7.css",
@@ -49,7 +49,7 @@ const BUNKER_ASSETS = [
   "./assets/library/estante-livros-outono.webp",
   "./assets/library/estante-trepadeira-outono.webp",
   "./assets/library/reader-atelier.webp",
-  "./assets/library/reader-readthru.webp",
+  "./assets/library/reader-mesa-ensaio.webp",
   "./assets/library/real-gabinete-hero.webp",
   "./assets/library/tome-literatura-mundial.webp",
   "./assets/library/tome-objeto-livro.webp",
@@ -91,7 +91,7 @@ async function checkedAsset(asset) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const index = await checkedAsset({ url: './index.html', sha256: '6c1a3a18781e17556325b5a127ad46ed814ffd15a54db7a26576cf04a0bda9b7' });
+    const index = await checkedAsset({ url: './index.html', sha256: '286eab6eab2e446f4f6c4e098dad09568f8bf21ec54ccb116215e81f82295c2a' });
     if (!index.ok || (await index.clone().text()).indexOf('content="' + ASSET_VERSION + '"') < 0) throw new Error('Documento de outra versão');
     await Promise.all(REQUIRED_ASSETS.map(async asset => cache.put(asset.url, await checkedAsset(asset))));
     await cache.put('./index.html', index.clone()); await cache.put('./', index);
