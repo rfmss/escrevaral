@@ -631,6 +631,9 @@
         on(heroImgInit, 'error', function () { heroImgInit.hidden = true; });
         on(heroImgInit, 'load', function () { heroImgInit.hidden = false; });
       }
+      if (root.Escr.pinoMola && byId('esc-reader-viewport')) {
+        root.Escr.pinoMola.attach(byId('esc-reader-viewport'), { hostEl: overlayEl, variant: 'reader' });
+      }
 
       function updateProgress() {
         var vp = byId('esc-reader-viewport');
@@ -1059,6 +1062,7 @@
 
       overlayEl.hidden = false;
       byId('esc-reader-viewport').scrollTop = 0;
+      if (root.Escr.pinoMola) { window.setTimeout(root.Escr.pinoMola.refreshAll, 40); }
       if (overlayEl._updateProgress) { overlayEl._updateProgress(); }
       scheduleBreak();
       byId('esc-reader-close').focus();

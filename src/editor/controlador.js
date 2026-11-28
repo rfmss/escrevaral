@@ -1868,6 +1868,7 @@
     cabinetOpen = true; byId('writing-space').hidden = true; byId('gabinete').hidden = false;
     byId('leave-focus').hidden = true; document.body.setAttribute('data-view', 'gabinete');
     sizeWorkspace();
+    if (E.pinoMola) { window.setTimeout(E.pinoMola.refreshAll, 50); }
     if (doc.projectId && !activeNotebookId && availableBook(notebooks.get(doc.projectId))) { activeNotebookId = doc.projectId; }
     if (activeNotebookId) { var openedBook = notebooks.get(activeNotebookId); if (openedBook) { cabinetProject = openedBook.name; } }
     desktopWindow('open', false); renderCabinet(); if (!initial) { byId('cabinet-heading').focus(); } return true;
@@ -3006,6 +3007,13 @@
         else { findReplaceUI.open(); }
       });
     }
+  }
+  if (E.pinoMola) {
+    E.pinoMola.attach(byId('notebook-area'), { hostEl: byId('desktop-surface'), variant: 'shelf' });
+    E.pinoMola.attach(byId('desktop-reminders'), { hostEl: byId('desktop-surface'), variant: 'reminders' });
+    E.pinoMola.attach(byId('esc-items-list'), { hostEl: byId('items-column') });
+    E.pinoMola.attach(manuscript, { hostEl: byId('editor-viewport') });
+    E.pinoMola.attach(byId('esc-rich-editor'), { hostEl: byId('editor-viewport') });
   }
   if (E.mountCalculator) {
     calcUI = E.mountCalculator({
