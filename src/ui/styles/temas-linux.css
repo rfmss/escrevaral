@@ -1752,7 +1752,6 @@
   }
   body[data-theme="escuro"] #location-path #path-project[data-has-book="true"]:hover {
     background: rgba(207, 214, 203, 0.08) !important;
-  }
     border-color: rgba(207, 214, 203, 0.2) !important;
     color: #e4ebe1 !important;
   }

@@ -11566,9 +11566,25 @@
       }, 950);
     }
 
+    function isBlockedByOverlay(el) {
+      if (!document.querySelectorAll) { return false; }
+      try {
+        var overlays = document.querySelectorAll('.finish-screen:not([hidden]), #esc-academy-overlay:not([hidden]), #esc-cartorio-overlay:not([hidden]), #esc-reader-overlay:not([hidden]), #app-dialog:not([hidden])');
+        var i, ov;
+        for (i = 0; i < overlays.length; i += 1) {
+          ov = overlays[i];
+          if (ov && ov !== el && (!ov.contains || !ov.contains(el))) {
+            return true;
+          }
+        }
+      } catch (ignore) {}
+      return false;
+    }
+
     function isElementVisible(el) {
       if (!el || el.hidden) { return false; }
       if (document.body && !document.body.contains(el)) { return false; }
+      if (isFloating && isBlockedByOverlay(el)) { return false; }
       if (el.getBoundingClientRect) {
         var r = el.getBoundingClientRect();
         if (r.width < 36 || r.height < 64) { return false; }

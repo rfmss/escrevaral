@@ -9207,7 +9207,6 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   body[data-theme="escuro"] #location-path #path-project[data-has-book="true"]:hover {
     background: rgba(207, 214, 203, 0.08) !important;
-  }
     border-color: rgba(207, 214, 203, 0.2) !important;
     color: #e4ebe1 !important;
   }
@@ -14439,6 +14438,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #sobre > .sheet-heading .eyebrow,
   #lineage-panel > .sheet-heading small,
   #mesa > .sheet-heading .eyebrow {
+    display: block;
+    margin-bottom: 3px;
     color: #e8c678 !important;
     letter-spacing: 0.12em !important;
     font-weight: 700 !important;
@@ -14775,7 +14776,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   #story-screen .finish-heading small,
   #chalkboard .chalk-heading small {
+    display: block;
+    margin-bottom: 4px;
     color: #e8c678 !important;
+    letter-spacing: 0.12em;
+    font-weight: 700;
   }
   #story-screen .finish-heading h2,
   #chalkboard .chalk-heading h2 {
@@ -30760,9 +30765,25 @@ SOFTWARE.
       }, 950);
     }
 
+    function isBlockedByOverlay(el) {
+      if (!document.querySelectorAll) { return false; }
+      try {
+        var overlays = document.querySelectorAll('.finish-screen:not([hidden]), #esc-academy-overlay:not([hidden]), #esc-cartorio-overlay:not([hidden]), #esc-reader-overlay:not([hidden]), #app-dialog:not([hidden])');
+        var i, ov;
+        for (i = 0; i < overlays.length; i += 1) {
+          ov = overlays[i];
+          if (ov && ov !== el && (!ov.contains || !ov.contains(el))) {
+            return true;
+          }
+        }
+      } catch (ignore) {}
+      return false;
+    }
+
     function isElementVisible(el) {
       if (!el || el.hidden) { return false; }
       if (document.body && !document.body.contains(el)) { return false; }
+      if (isFloating && isBlockedByOverlay(el)) { return false; }
       if (el.getBoundingClientRect) {
         var r = el.getBoundingClientRect();
         if (r.width < 36 || r.height < 64) { return false; }

@@ -9181,7 +9181,6 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   body[data-theme="escuro"] #location-path #path-project[data-has-book="true"]:hover {
     background: rgba(207, 214, 203, 0.08) !important;
-  }
     border-color: rgba(207, 214, 203, 0.2) !important;
     color: #e4ebe1 !important;
   }
@@ -14413,6 +14412,8 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   #sobre > .sheet-heading .eyebrow,
   #lineage-panel > .sheet-heading small,
   #mesa > .sheet-heading .eyebrow {
+    display: block;
+    margin-bottom: 3px;
     color: #e8c678 !important;
     letter-spacing: 0.12em !important;
     font-weight: 700 !important;
@@ -14749,7 +14750,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   #story-screen .finish-heading small,
   #chalkboard .chalk-heading small {
+    display: block;
+    margin-bottom: 4px;
     color: #e8c678 !important;
+    letter-spacing: 0.12em;
+    font-weight: 700;
   }
   #story-screen .finish-heading h2,
   #chalkboard .chalk-heading h2 {

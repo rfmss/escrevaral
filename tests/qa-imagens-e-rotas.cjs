@@ -53,6 +53,14 @@ function isValidPng(buf) {
   assert.ok(webpCount >= 20, 'Esperava ao menos 20 arquivos WebP no bunker, encontrei ' + webpCount);
 
   // 2. Verificar que o CSS compilado em assets/<ver>/styles.*.css NÃO possui url() relativa quebrada
+  //    e que todos os módulos CSS possuem chaves { } balanceadas (evita quebra silenciosa do módulo seguinte).
+  const modsMeta = JSON.parse(read('build/modules.json'));
+  for (const styleRel of (modsMeta.styles || [])) {
+    const cleanCss = read(styleRel).replace(/\/\*[\s\S]*?\*\//g, '');
+    const opens = (cleanCss.match(/\{/g) || []).length;
+    const closes = (cleanCss.match(/\}/g) || []).length;
+    assert.equal(opens, closes, 'Chaves CSS desbalanceadas em ' + styleRel + ' (' + opens + ' abertas vs ' + closes + ' fechadas)');
+  }
   const assetsMeta = JSON.parse(read('build/assets.json'));
   const assetById = id => assetsMeta.assets.find(a => a.id === id);
   const cssRel = assetById('styles').path;
