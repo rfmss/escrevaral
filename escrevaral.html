@@ -30904,6 +30904,13 @@ SOFTWARE.
       bridge: { action: 'write', label: 'Voltar à folha para escrever', hint: 'Leve o ritmo da leitura de volta para a bancada.' } },
     { id: 'primeiras-linhas', title: 'Começar um livro', group: 'Escrita e revisão', description: 'Da primeira linha ao primeiro capítulo.', file: 'primeiras-linhas.html',
       bridge: { action: 'superfoco', label: 'Começar na folha (Superfoco)', hint: 'Limpe a mesa e escreva a primeira linha.' } },
+    { id: 'ponto-de-vista-e-voz', title: 'Ponto de vista, voz e discurso', group: 'Escrita e revisão', description: 'Quem vê, quem fala, discursos direto/indireto/livre, rupturas e como não oscilar.', file: 'ponto-de-vista-e-voz.html',
+      bridge: { action: 'examine', label: 'Checar diálogos e ritmo na folha', hint: 'Abra o Examinar nas lentes de Diálogo e Ritmo sobre o seu texto.',
+        lenses: [
+          { id: 'dialogo', label: 'Diálogo' },
+          { id: 'ritmo', label: 'Ritmo' },
+          { id: 'sintaxe', label: 'Sintaxe' }
+        ] } },
     { id: 'titulo-do-livro', title: 'Escolher o título', group: 'Escrita e revisão', description: 'Explore caminhos para dar nome à obra.', file: 'titulo-do-livro.html',
       bridge: { action: 'focus-title', label: 'Editar título da folha', hint: 'Teste títulos direto no cabeçalho do manuscrito.' } },
     { id: 'bloqueio-criativo', title: 'Bloqueio criativo', group: 'Escrita e revisão', description: 'Encontre uma forma de retomar a escrita.', file: 'bloqueio-criativo.html',

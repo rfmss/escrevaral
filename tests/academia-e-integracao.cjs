@@ -48,8 +48,9 @@ vm.runInContext(scripts.find(s => s.includes('root.Escr.mountAcademy =')), conte
 const E = context.Escr;
 
 const catalog = E.academy.catalog();
-assert.equal(catalog.length, 14);
+assert.equal(catalog.length, 15);
 assert.ok(catalog.some(e => e.id === 'literatura-mundial' && e.module === 'literature'));
+assert.ok(catalog.some(e => e.id === 'ponto-de-vista-e-voz' && e.file === 'ponto-de-vista-e-voz.html'));
 
 // Confirmar que todos os 14 HTMLs existem em academia/, que scripts/build.cjs inclui 'academia' e,
 // quando dist/site/ estiver montado localmente, que todos os 14 HTMLs foram copiados para dist/site/academia/.
@@ -154,10 +155,10 @@ assert.equal(findByClass(bridgedModal, 'esc-ac-mote').length, 0, 'zero partícul
 assert.equal(findByClass(bridgedModal, 'esc-ac-art-img').length, 1, 'ilustração panorâmica Real Gabinete no hero');
 assert.equal(findByClass(bridgedModal, 'esc-academy-tome').length, 2, '2 tomos em destaque (Objeto livro e Literatura mundial)');
 assert.equal(findByClass(bridgedModal, 'esc-academy-tome-art').length, 2, '2 ilustrações pintadas nos tomos em destaque');
-assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 12, '12 guias editoriais com numeração romana');
+assert.equal(findByClass(bridgedModal, 'esc-academy-item').length, 13, '13 guias editoriais com numeração romana');
 
 // Garantir assets da biblioteca Real Gabinete em WebP + inclusão no build + estética fosca sem gradientes puros
-for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp', 'banner-bloqueio.webp', 'banner-titulo.webp', 'banner-lancamento.webp', 'banner-casa-rosas.webp', 'banner-abl.webp', 'banner-rui-barbosa.webp', 'banner-graciliano.webp', 'banner-jose-alencar.webp', 'banner-cabaceiras.webp']) {
+for (const imgName of ['real-gabinete-hero.webp', 'tome-objeto-livro.webp', 'tome-literatura-mundial.webp', 'banner-criacao.webp', 'banner-oficio.webp', 'banner-publicacao.webp', 'banner-bloqueio.webp', 'banner-titulo.webp', 'banner-lancamento.webp', 'banner-casa-rosas.webp', 'banner-abl.webp', 'banner-rui-barbosa.webp', 'banner-graciliano.webp', 'banner-jose-alencar.webp', 'banner-cabaceiras.webp', 'banner-ponto-de-vista.webp']) {
   assert.ok(fs.existsSync(path.join(rootDir, 'assets/library', imgName)), 'Faltando assets/library/' + imgName);
 }
 assert.ok(buildSrc.includes("'assets/library'"), 'scripts/build.cjs copia assets/library para dist/site/');
@@ -259,6 +260,9 @@ const kdpHtml = fs.readFileSync(path.join(rootDir, 'academia/publicar-kdp.html')
 assert.ok(kdpHtml.includes('UICLAP') && kdpHtml.includes('Kindle Unlimited'), 'publicar-kdp.html documenta realidade brasileira de e-book + impresso sob demanda');
 const compHtml = fs.readFileSync(path.join(rootDir, 'academia/comparativo-publicacao.html'), 'utf8');
 assert.ok(compHtml.includes('banner-publicacao.webp') && compHtml.includes('ed-table'), 'comparativo-publicacao.html com banner de publicação e tabela comparativa real');
+const pdvHtml = fs.readFileSync(path.join(rootDir, 'academia/ponto-de-vista-e-voz.html'), 'utf8');
+assert.ok(pdvHtml.includes('banner-ponto-de-vista.webp') && pdvHtml.includes('Sobrado de Clarice Lispector'), 'ponto-de-vista-e-voz.html exibe banner e legenda do Sobrado de Clarice Lispector (Recife, PE)');
+assert.ok(pdvHtml.includes('automação psicossomática') && pdvHtml.includes('fluxo-poema') && pdvHtml.includes('Discurso Indireto Livre') && pdvHtml.includes('Gérard Genette'), 'ponto-de-vista-e-voz.html cobre rupturas inaugurais, discursos e narratologia');
 const swSrc = fs.readFileSync(path.join(rootDir, 'service-worker.js'), 'utf8');
 assert.ok(!swSrc.includes('RUNTIME_CACHE = "scrvrl-runtime-v1"'), 'service-worker.js versiona RUNTIME_CACHE por geração');
 assert.ok(swSrc.includes("name.startsWith('scrvrl-runtime-')"), 'service-worker.js limpa caches runtime antigos na ativação');
