@@ -3014,6 +3014,7 @@
     E.pinoMola.attach(byId('esc-items-list'), { hostEl: byId('items-column') });
     E.pinoMola.attach(manuscript, { hostEl: byId('editor-viewport') });
     E.pinoMola.attach(byId('esc-rich-editor'), { hostEl: byId('editor-viewport') });
+    if (E.pinoMola.watchAll) { E.pinoMola.watchAll(); }
   }
   if (E.mountCalculator) {
     calcUI = E.mountCalculator({

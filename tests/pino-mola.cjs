@@ -1,4 +1,4 @@
-/* Testes do Pino-Mola (Spring Jog-Shuttle) — física de gesto, velocidade elástica e CSS.
+/* Testes do Fio Dourado / Pino-Mola (Spring Jog-Shuttle) + Moldes Vazados dos banners.
  * Executar: node tests/pino-mola.cjs */
 'use strict';
 const assert = require('node:assert/strict');
@@ -42,9 +42,19 @@ assert.equal(core.progressLabel(300, 1000, 400), '50%');
 assert.equal(core.progressLabel(600, 1000, 400), 'Fim');
 assert.equal(core.progressLabel(0, 400, 400), '');
 
-// 5. CSS oculta barras nativas feias nos containers do Pino-Mola
+// 5. Fio Dourado geométrico (inspiração Eternos) + cobertura universal + ocultação de barras nativas
+assert.ok(src.includes('esc-pino-node-svg') && src.includes('esc-pino-arc-outer') && src.includes('watchAll'), 'Fio Dourado geométrico e observador universal');
 const temasCss = fs.readFileSync(path.join(root, 'src/ui/styles/temas-linux.css'), 'utf8');
 assert.ok(temasCss.includes('.esc-pino-scroller::-webkit-scrollbar'), 'CSS oculta webkit-scrollbar');
 assert.ok(temasCss.includes('cubic-bezier(0.22, 1.42, 0.36, 1)'), 'Mola elástica de retorno ao centro');
+assert.ok(temasCss.includes('--pino-gold:') && temasCss.includes('.esc-pino-arc-outer'), 'Estética Fio Dourado presente em temas-linux.css');
 
-console.log('OK: Pino-Mola (física Jog-Shuttle, aceno por gesto, retorno elástico e ocultação de barra nativa) verificado.');
+// 6. Molde vazado arquitetônico no Modo Leitura e nos 3 guias recentes da Academia
+const leitorCss = fs.readFileSync(path.join(root, 'src/ui/styles/modo-leitor.css'), 'utf8');
+assert.ok(leitorCss.includes('.esc-reader-hero-cut') && leitorCss.includes('mask-composite: exclude') && leitorCss.includes('.esc-reader-hero-filigree'), 'Banner do Modo Leitura com molde vazado e filigrana dourada');
+for (const g of ['academia/ponto-de-vista-e-voz.html', 'academia/cena-tempo-e-personagem.html', 'academia/poesia-ritmo-e-cancao.html']) {
+  const html = fs.readFileSync(path.join(root, g), 'utf8');
+  assert.ok(html.includes('hero-mold') && html.includes('mask-composite:exclude') && html.includes('fio-rail'), g + ' deve usar molde vazado e Fio Dourado');
+}
+
+console.log('OK: Fio Dourado universal (Eternos Jog-Shuttle) + moldes vazados dos banners verificados.');

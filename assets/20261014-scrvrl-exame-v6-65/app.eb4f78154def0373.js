@@ -7423,7 +7423,10 @@
           '<div id="esc-reader-page" class="esc-reader-page">' +
             '<div class="esc-reader-masthead"><span id="esc-reader-date"></span><strong class="esc-reader-brand">ESCREVARAL</strong><span id="esc-reader-project-tag"></span></div>' +
             '<div id="esc-reader-hero" class="esc-reader-hero" aria-hidden="true">' +
-              (isPortableDoc() ? '' : '<img id="esc-reader-hero-img" class="esc-reader-hero-img" src="' + HERO_ART_LER + '" alt="" decoding="async">') +
+              '<div class="esc-reader-hero-cut">' +
+                (isPortableDoc() ? '' : '<img id="esc-reader-hero-img" class="esc-reader-hero-img" src="' + HERO_ART_LER + '" alt="" decoding="async">') +
+              '</div>' +
+              '<div class="esc-reader-hero-filigree" aria-hidden="true"></div>' +
               '<span id="esc-reader-hero-badge" class="esc-reader-hero-badge" hidden>READ-THRU · ENSAIO</span>' +
             '</div>' +
             '<div class="esc-reader-pills" role="tablist" aria-label="Modos da página de leitura">' +
@@ -11295,7 +11298,7 @@
 
 ;
 /* Fonte: src/ui/pino-mola.js */
-/* Pino-Mola (Spring Jog-Shuttle) — indicador e alavanca elástica de rolagem por gesto (ES5, 0 dependências). */
+/* Fio Dourado / Pino-Mola (Spring Jog-Shuttle) — marca registrada de rolagem elástica por gesto (ES5, 0 dependências). */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
@@ -11322,7 +11325,7 @@
     return d > 0 ? pxPerFrame : -pxPerFrame;
   }
 
-  /* Deflexão visual do pino ao receber rolagem passiva (rodinha/touch) antes de voltar ao centro. */
+  /* Deflexão visual do nó dourado ao receber rolagem passiva (rodinha/touch) antes de voltar ao centro. */
   function gestureDeflection(deltaScroll) {
     var d = Number(deltaScroll) || 0;
     if (!d) { return 0; }
@@ -11349,38 +11352,112 @@
   };
 
   var instances = [];
+  var floatingLayer = null;
+  var watching = false;
+  var refreshTimer = null;
+
+  var UNIVERSAL_SELECTORS = [
+    '#navigation .esc-nav-scroll',
+    '#esc-sonnet-panel',
+    '#esc-song-panel',
+    '#desk-inspector',
+    '#mesa',
+    '#acervo',
+    '#oficina',
+    '#sobre',
+    '#usos-lingua',
+    '#lineage-panel',
+    '#timeline-list',
+    '#start-menu',
+    '#esc-academy-overlay .esc-academy-groups',
+    '#esc-cartorio-overlay .cart-scroll',
+    '#esc-print-controls',
+    '#esc-print-preview-wrap',
+    '#esc-template-modal .esc-template-body'
+  ];
+
+  function ensureFloatingLayer() {
+    if (typeof document === 'undefined' || !document.body) { return null; }
+    if (floatingLayer && document.body.contains(floatingLayer)) { return floatingLayer; }
+    floatingLayer = document.getElementById('esc-pino-floating-layer');
+    if (!floatingLayer) {
+      floatingLayer = document.createElement('div');
+      floatingLayer.id = 'esc-pino-floating-layer';
+      floatingLayer.className = 'esc-pino-floating-layer';
+      floatingLayer.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(floatingLayer);
+    }
+    return floatingLayer;
+  }
+
+  function isWarmSurface(el) {
+    if (!el || !el.closest) { return false; }
+    return !!(
+      el.closest('#esc-reader-overlay') ||
+      el.closest('#esc-academy-overlay') ||
+      el.closest('#esc-cartorio-overlay') ||
+      el.closest('#esc-print-overlay') ||
+      el.closest('#oficina') ||
+      el.closest('#usos-lingua')
+    );
+  }
+
+  function buildRailMarkup() {
+    return (
+      '<button type="button" class="esc-pino-dot is-up" tabindex="-1" title="Subir um passo">' +
+        '<svg class="esc-pino-tip-svg" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.8 L10.2 6 L6 10.2 L1.8 6 Z"/></svg>' +
+      '</button>' +
+      '<div class="esc-pino-track">' +
+        '<svg class="esc-pino-thread-svg" viewBox="0 0 28 84" preserveAspectRatio="none" aria-hidden="true">' +
+          '<line class="esc-pino-line" x1="14" y1="2" x2="14" y2="82"/>' +
+          '<line class="esc-pino-tick" x1="10.5" y1="42" x2="17.5" y2="42"/>' +
+        '</svg>' +
+        '<div class="esc-pino-handle" title="Arraste para cima ou para baixo para rolar — solte para voltar ao centro">' +
+          '<svg class="esc-pino-node-svg" viewBox="0 0 32 32" aria-hidden="true">' +
+            '<circle class="esc-pino-arc-outer" cx="16" cy="16" r="13.2"/>' +
+            '<circle class="esc-pino-arc-inner" cx="16" cy="16" r="9.0"/>' +
+            '<path class="esc-pino-rays" d="M16 1.5 V4.8 M16 27.2 V30.5 M1.5 16 H4.8 M27.2 16 H30.5"/>' +
+            '<circle class="esc-pino-ring" cx="16" cy="16" r="5.2"/>' +
+            '<path class="esc-pino-core" d="M16 12.2 L19.8 16 L16 19.8 L12.2 16 Z"/>' +
+          '</svg>' +
+        '</div>' +
+      '</div>' +
+      '<button type="button" class="esc-pino-dot is-down" tabindex="-1" title="Descer um passo">' +
+        '<svg class="esc-pino-tip-svg" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.8 L10.2 6 L6 10.2 L1.8 6 Z"/></svg>' +
+      '</button>' +
+      '<span class="esc-pino-readout" hidden></span>'
+    );
+  }
 
   function attach(scrollEl, opts) {
     if (!scrollEl || typeof document === 'undefined') { return null; }
     if (scrollEl.getAttribute && scrollEl.getAttribute('data-pino-attached') === 'true') { return null; }
     var cfg = opts && typeof opts === 'object' ? opts : {};
-    var hostEl = cfg.hostEl || scrollEl.parentNode;
+    var isFloating = !cfg.hostEl || !!cfg.floating;
+    var hostEl = isFloating ? ensureFloatingLayer() : cfg.hostEl;
     if (!hostEl) { return null; }
 
     scrollEl.setAttribute('data-pino-attached', 'true');
     if (scrollEl.classList) { scrollEl.classList.add('esc-pino-scroller'); }
 
-    /* Garante posicionamento relativo no host sem quebrar position:fixed/absolute existentes */
-    try {
-      var cs = root.getComputedStyle ? root.getComputedStyle(hostEl) : null;
-      if (cs && cs.position === 'static' && hostEl.style) {
-        hostEl.style.position = 'relative';
-      }
-    } catch (ignore) {}
+    if (!isFloating) {
+      /* Garante posicionamento relativo no host sem quebrar position:fixed/absolute existentes */
+      try {
+        var cs = root.getComputedStyle ? root.getComputedStyle(hostEl) : null;
+        if (cs && cs.position === 'static' && hostEl.style) {
+          hostEl.style.position = 'relative';
+        }
+      } catch (ignore) {}
+    }
 
     var rail = document.createElement('div');
-    rail.className = 'esc-pino-rail' + (cfg.variant ? (' is-' + cfg.variant) : '');
+    var cls = 'esc-pino-rail' + (cfg.variant ? (' is-' + cfg.variant) : '');
+    if (isFloating) { cls += ' is-floating'; }
+    if (cfg.warm || isWarmSurface(scrollEl)) { cls += ' is-warm'; }
+    rail.className = cls;
     rail.setAttribute('aria-hidden', 'true');
     rail.hidden = true;
-    rail.innerHTML =
-      '<button type="button" class="esc-pino-dot is-up" tabindex="-1" title="Subir um passo">·</button>' +
-      '<div class="esc-pino-track">' +
-        '<div class="esc-pino-handle" title="Arraste para cima ou para baixo para rolar — solte para voltar ao centro">' +
-          '<span class="esc-pino-grip"></span>' +
-        '</div>' +
-      '</div>' +
-      '<button type="button" class="esc-pino-dot is-down" tabindex="-1" title="Descer um passo">·</button>' +
-      '<span class="esc-pino-readout" hidden></span>';
+    rail.innerHTML = buildRailMarkup();
 
     hostEl.appendChild(rail);
 
@@ -11422,10 +11499,47 @@
       }, 950);
     }
 
+    function isElementVisible(el) {
+      if (!el || el.hidden) { return false; }
+      if (document.body && !document.body.contains(el)) { return false; }
+      if (el.getBoundingClientRect) {
+        var r = el.getBoundingClientRect();
+        if (r.width < 36 || r.height < 64) { return false; }
+        var vw = root.innerWidth || 1280;
+        var vh = root.innerHeight || 800;
+        if (r.bottom <= 4 || r.top >= vh - 4 || r.right <= 4 || r.left >= vw - 4) { return false; }
+      }
+      try {
+        var st = root.getComputedStyle ? root.getComputedStyle(el) : null;
+        if (st && (st.display === 'none' || st.visibility === 'hidden' || st.opacity === '0')) { return false; }
+      } catch (ignore) {}
+      return true;
+    }
+
     function syncVisibility() {
       if (dead) { return; }
-      var hiddenParent = !!(scrollEl.hidden || (scrollEl.offsetParent === null && (!scrollEl.getClientRects || !scrollEl.getClientRects().length)));
-      var canScroll = !hiddenParent && hasOverflow(scrollEl.scrollHeight, scrollEl.clientHeight);
+      if (document.body && !document.body.contains(scrollEl)) {
+        inst.destroy();
+        return;
+      }
+      var visible = isElementVisible(scrollEl);
+      var canScroll = visible && hasOverflow(scrollEl.scrollHeight, scrollEl.clientHeight);
+      if (canScroll && isFloating && scrollEl.getBoundingClientRect) {
+        var r = scrollEl.getBoundingClientRect();
+        var vw = root.innerWidth || 1280;
+        var vh = root.innerHeight || 800;
+        var visTop = Math.max(8, r.top);
+        var visBot = Math.min(vh - 8, r.bottom);
+        if (visBot - visTop < 72) {
+          canScroll = false;
+        } else {
+          var midY = Math.round((visTop + visBot) / 2);
+          var leftX = Math.round(Math.min(vw - 28, r.right - 26));
+          rail.style.left = Math.max(4, leftX) + 'px';
+          rail.style.top = midY + 'px';
+          rail.style.right = 'auto';
+        }
+      }
       rail.hidden = !canScroll;
       if (!canScroll && dragging) { stopDrag(); }
     }
@@ -11537,8 +11651,10 @@
     }
 
     var inst = {
+      el: scrollEl,
       refresh: syncVisibility,
       destroy: function () {
+        if (dead) { return; }
         dead = true;
         stopDrag();
         root.clearTimeout(springTimer);
@@ -11548,6 +11664,8 @@
         scrollEl.removeEventListener('input', syncVisibility, false);
         if (rail.parentNode) { rail.parentNode.removeChild(rail); }
         scrollEl.removeAttribute('data-pino-attached');
+        var idx = instances.indexOf(inst);
+        if (idx >= 0) { instances.splice(idx, 1); }
       }
     };
     instances.push(inst);
@@ -11555,19 +11673,83 @@
     return inst;
   }
 
+  function scanKnownScrollers() {
+    if (typeof document === 'undefined' || !document.querySelectorAll) { return; }
+    var i, j, list;
+    for (i = 0; i < UNIVERSAL_SELECTORS.length; i += 1) {
+      list = document.querySelectorAll(UNIVERSAL_SELECTORS[i]);
+      for (j = 0; j < list.length; j += 1) {
+        if (list[j] && list[j].getAttribute('data-pino-attached') !== 'true') {
+          attach(list[j], { floating: true });
+        }
+      }
+    }
+  }
+
   function refreshAll() {
-    for (var i = 0; i < instances.length; i += 1) {
-      instances[i].refresh();
+    scanKnownScrollers();
+    for (var i = instances.length - 1; i >= 0; i -= 1) {
+      if (instances[i]) { instances[i].refresh(); }
+    }
+  }
+
+  function scheduleRefresh() {
+    if (refreshTimer) { return; }
+    refreshTimer = root.setTimeout(function () {
+      refreshTimer = null;
+      refreshAll();
+    }, 80);
+  }
+
+  function watchAll() {
+    if (watching || typeof document === 'undefined') { return; }
+    watching = true;
+    scanKnownScrollers();
+
+    /* Qualquer container rolável acionado no app ganha o Fio Dourado na hora */
+    document.addEventListener('scroll', function (ev) {
+      var target = ev && ev.target;
+      if (!target || target === document || target === document.documentElement || target === document.body) { return; }
+      if (!target.getAttribute || target.getAttribute('data-pino-attached') === 'true') { return; }
+      if (target.closest && target.closest('#esc-pino-floating-layer')) { return; }
+      if (!hasOverflow(target.scrollHeight, target.clientHeight)) { return; }
+      try {
+        var st = root.getComputedStyle ? root.getComputedStyle(target) : null;
+        if (st && (st.overflowY === 'auto' || st.overflowY === 'scroll')) {
+          attach(target, { floating: true });
+        }
+      } catch (ignore) {}
+    }, true);
+
+    if (typeof root.MutationObserver === 'function' && document.body) {
+      try {
+        var mo = new root.MutationObserver(function (mutations) {
+          for (var i = 0; i < mutations.length; i += 1) {
+            var t = mutations[i].target;
+            if (t && t.id === 'esc-pino-floating-layer') { continue; }
+            if (t && t.closest && t.closest('#esc-pino-floating-layer')) { continue; }
+            scheduleRefresh();
+            return;
+          }
+        });
+        mo.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['hidden', 'data-view', 'data-panel', 'data-immersion', 'data-theme']
+        });
+      } catch (ignore) {}
     }
   }
 
   if (root.addEventListener) {
-    root.addEventListener('resize', refreshAll, false);
+    root.addEventListener('resize', scheduleRefresh, false);
   }
 
   root.Escr.pinoMola = {
     attach: attach,
-    refreshAll: refreshAll
+    refreshAll: refreshAll,
+    watchAll: watchAll
   };
 }(typeof window !== 'undefined' ? window : this));
 
@@ -19998,6 +20180,7 @@
     E.pinoMola.attach(byId('esc-items-list'), { hostEl: byId('items-column') });
     E.pinoMola.attach(manuscript, { hostEl: byId('editor-viewport') });
     E.pinoMola.attach(byId('esc-rich-editor'), { hostEl: byId('editor-viewport') });
+    if (E.pinoMola.watchAll) { E.pinoMola.watchAll(); }
   }
   if (E.mountCalculator) {
     calcUI = E.mountCalculator({

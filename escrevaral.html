@@ -5381,22 +5381,22 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .esc-rhyme-pill.is-fam-f { background: #e5dcf0; border-color: #775d8c; color: #39234a; }
   .esc-rhyme-pill.is-fam-g { background: #e5e1d5; border-color: #78725e; color: #332f22; }
 
-  /* Mapa dos 14 versos + linha da Volta */
+  /* Mapa dos 14 versos + linha da Volta (fio dourado discreto) */
   .esc-sonnet-volta {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 9px 0 6px;
+    margin: 10px 0 7px;
     font: 700 10.5px/1.2 Arial, Helvetica, sans-serif;
-    letter-spacing: 0.06em;
-    color: #6b4e16;
+    letter-spacing: 0.08em;
+    color: #8c6322;
   }
   .esc-sonnet-volta::before,
   .esc-sonnet-volta::after {
     content: '';
     flex: 1 1 auto;
     height: 1px;
-    border-top: 1px dashed rgba(122, 88, 22, 0.55);
+    background: rgba(154, 113, 44, 0.42);
   }
   .esc-sonnet-stanza-list { margin-bottom: 6px; }
   .esc-sonnet-stanza-lbl {
@@ -5907,16 +5907,10 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     min-height: 0;
     overflow-y: auto;
     padding: 20px 28px 110px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--reader-line) var(--reader-paper);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .esc-reader-viewport::-webkit-scrollbar { width: 8px; }
-  .esc-reader-viewport::-webkit-scrollbar-track { background: var(--reader-paper); }
-  .esc-reader-viewport::-webkit-scrollbar-thumb {
-    background: var(--reader-line);
-    border-radius: 6px;
-    border: 2px solid var(--reader-paper);
-  }
+  .esc-reader-viewport::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
   .esc-reader-page {
     width: 100%;
@@ -6030,8 +6024,11 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     margin-bottom: 10px;
     font: 16px/1 Georgia, serif;
     letter-spacing: 0.25em;
-    color: var(--reader-muted);
-    opacity: 0.72;
+    color: #9a712c;
+    opacity: 0.84;
+  }
+  .esc-reader[data-palette="night"] .esc-reader-fleuron {
+    color: #d8b36a;
   }
 
   .esc-reader-pause {
@@ -6041,20 +6038,88 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
 
   /* =====================================================================
-   * MODO LEITURA VIVA (Anexo 4) + ROTEIRO / ENSAIO READ-THRU (Anexo 1)
+   * MODO LEITURA VIVA + ROTEIRO / ENSAIO — MOLDE VAZADO ARQUITETÔNICO
    * ===================================================================== */
   .esc-reader-hero {
     position: relative;
     width: 100%;
-    height: 196px;
-    margin: 0 0 18px;
-    border-radius: 10px;
+    height: 206px;
+    margin: 0 0 20px;
+    background: transparent;
+    border: 0;
+    overflow: visible;
+    filter: drop-shadow(0 6px 14px rgba(34, 22, 12, 0.14));
+  }
+  .esc-reader-hero-cut {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     overflow: hidden;
     background-color: #2b2117;
     background-image: var(--esc-reader-atelier-art, linear-gradient(135deg, #2d241b 0%, #4b3a28 52%, #7a6144 100%));
     background-size: cover;
     background-position: center 46%;
-    border: 1px solid rgba(58, 32, 19, 0.16);
+    -webkit-mask-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M0 0 H34 V5 A29 29 0 0 1 5 34 H0 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M34 0 H0 V5 A29 29 0 0 0 29 34 H34 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M0 34 H34 V29 A29 29 0 0 0 5 0 H0 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M34 34 H0 V29 A29 29 0 0 1 29 0 H34 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='14' viewBox='0 0 96 14'%3E%3Cpath d='M0 0 H96 C74 0 64 12 48 12 C32 12 22 0 0 0 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='14' viewBox='0 0 96 14'%3E%3Cpath d='M0 14 H96 C74 14 64 2 48 2 C32 2 22 14 0 14 Z' fill='white'/%3E%3C/svg%3E");
+    mask-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M0 0 H34 V5 A29 29 0 0 1 5 34 H0 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M34 0 H0 V5 A29 29 0 0 0 29 34 H34 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M0 34 H34 V29 A29 29 0 0 0 5 0 H0 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M34 34 H0 V29 A29 29 0 0 1 29 0 H34 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='14' viewBox='0 0 96 14'%3E%3Cpath d='M0 0 H96 C74 0 64 12 48 12 C32 12 22 0 0 0 Z' fill='white'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='14' viewBox='0 0 96 14'%3E%3Cpath d='M0 14 H96 C74 14 64 2 48 2 C32 2 22 14 0 14 Z' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-position: 0 0, 0 0, 100% 0, 0 100%, 100% 100%, 50% 0, 50% 100%;
+    mask-position: 0 0, 0 0, 100% 0, 0 100%, 100% 100%, 50% 0, 50% 100%;
+    -webkit-mask-size: 100% 100%, 34px 34px, 34px 34px, 34px 34px, 34px 34px, 96px 14px, 96px 14px;
+    mask-size: 100% 100%, 34px 34px, 34px 34px, 34px 34px, 34px 34px, 96px 14px, 96px 14px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .esc-reader-hero-filigree {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: none;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34' fill='none'%3E%3Cpath d='M34 0.8 V5 A29 29 0 0 1 5 34 H0.8' stroke='%23b5893a' stroke-width='1.2'/%3E%3Cpath d='M24 3 A22 22 0 0 1 3 24' stroke='%23b5893a' stroke-opacity='0.35' stroke-width='0.8'/%3E%3Cpath d='M11 6.2 L12.2 9.8 L15.8 11 L12.2 12.2 L11 15.8 L9.8 12.2 L6.2 11 L9.8 9.8 Z' fill='%23b5893a' fill-opacity='0.86'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34' fill='none'%3E%3Cpath d='M0 0.8 V5 A29 29 0 0 0 29 34 H33.2' stroke='%23b5893a' stroke-width='1.2'/%3E%3Cpath d='M10 3 A22 22 0 0 0 31 24' stroke='%23b5893a' stroke-opacity='0.35' stroke-width='0.8'/%3E%3Cpath d='M23 6.2 L24.2 9.8 L27.8 11 L24.2 12.2 L23 15.8 L21.8 12.2 L18.2 11 L21.8 9.8 Z' fill='%23b5893a' fill-opacity='0.86'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34' fill='none'%3E%3Cpath d='M34 33.2 V29 A29 29 0 0 0 5 0 H0.8' stroke='%23b5893a' stroke-width='1.2'/%3E%3Cpath d='M24 31 A22 22 0 0 0 3 10' stroke='%23b5893a' stroke-opacity='0.35' stroke-width='0.8'/%3E%3Cpath d='M11 18.2 L12.2 21.8 L15.8 23 L12.2 24.2 L11 27.8 L9.8 24.2 L6.2 23 L9.8 21.8 Z' fill='%23b5893a' fill-opacity='0.86'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34' fill='none'%3E%3Cpath d='M0 33.2 V29 A29 29 0 0 1 29 0 H33.2' stroke='%23b5893a' stroke-width='1.2'/%3E%3Cpath d='M10 31 A22 22 0 0 1 31 10' stroke='%23b5893a' stroke-opacity='0.35' stroke-width='0.8'/%3E%3Cpath d='M23 18.2 L24.2 21.8 L27.8 23 L24.2 24.2 L23 27.8 L21.8 24.2 L18.2 23 L21.8 21.8 Z' fill='%23b5893a' fill-opacity='0.86'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='14' viewBox='0 0 96 14' fill='none'%3E%3Cpath d='M0 0.8 C22 0.8 32 12.2 48 12.2 C64 12.2 74 0.8 96 0.8' stroke='%23b5893a' stroke-width='1.15'/%3E%3Cpath d='M48 1.5 L51.4 4.9 L48 8.3 L44.6 4.9 Z' fill='%23b5893a' fill-opacity='0.88'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='14' viewBox='0 0 96 14' fill='none'%3E%3Cpath d='M0 13.2 C22 13.2 32 1.8 48 1.8 C64 1.8 74 13.2 96 13.2' stroke='%23b5893a' stroke-width='1.15'/%3E%3Cpath d='M48 5.7 L51.4 9.1 L48 12.5 L44.6 9.1 Z' fill='%23b5893a' fill-opacity='0.88'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='2' height='2' fill='%23b5893a' fill-opacity='0.78'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='2' height='2' fill='%23b5893a' fill-opacity='0.78'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='2' height='2' fill='%23b5893a' fill-opacity='0.78'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='2' height='2' fill='%23b5893a' fill-opacity='0.78'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='2' height='2' fill='%23b5893a' fill-opacity='0.78'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='2' height='2' fill='%23b5893a' fill-opacity='0.78'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position:
+      0 0, 100% 0, 0 100%, 100% 100%,
+      50% 0, 50% 100%,
+      34px 0, right 34px top 0,
+      34px 100%, right 34px bottom 0,
+      0 34px, 100% 34px;
+    background-size:
+      34px 34px, 34px 34px, 34px 34px, 34px 34px,
+      96px 14px, 96px 14px,
+      calc(50% - 82px) 1px, calc(50% - 82px) 1px,
+      calc(50% - 82px) 1px, calc(50% - 82px) 1px,
+      1px calc(100% - 68px), 1px calc(100% - 68px);
   }
   .esc-reader-hero-img {
     position: absolute;
@@ -6071,7 +6136,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   .esc-reader-hero-img[hidden] {
     display: none !important;
   }
-  .esc-reader[data-reader-mode="ensaio"] .esc-reader-hero {
+  .esc-reader[data-reader-mode="ensaio"] .esc-reader-hero-cut {
     background-image: var(--esc-reader-readthru-art, linear-gradient(135deg, #2b241c 0%, #4e4232 55%, #7b694e 100%));
     background-position: center 54%;
   }
@@ -6083,12 +6148,13 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   .esc-reader-hero-badge {
     position: absolute;
-    left: 16px;
+    left: 44px;
     bottom: 14px;
-    z-index: 2;
+    z-index: 3;
     padding: 5px 12px;
     border-radius: 4px;
     background: rgba(20, 16, 12, 0.88);
+    border: 1px solid rgba(216, 179, 106, 0.42);
     color: #f3e9d6;
     font: 700 11.5px/1.2 'Courier Prime', 'Courier New', monospace;
     letter-spacing: 0.14em;
@@ -8108,177 +8174,294 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
   }
   #gabinete #notebook-area::-webkit-scrollbar,
   #gabinete #desktop-reminders::-webkit-scrollbar,
-  .esc-pino-scroller::-webkit-scrollbar {
+  .esc-pino-scroller::-webkit-scrollbar,
+  .sheet::-webkit-scrollbar,
+  #navigation .esc-nav-scroll::-webkit-scrollbar,
+  #esc-sonnet-panel::-webkit-scrollbar,
+  #esc-song-panel::-webkit-scrollbar,
+  #desk-inspector::-webkit-scrollbar,
+  #timeline-list::-webkit-scrollbar,
+  #start-menu::-webkit-scrollbar,
+  #esc-cartorio-overlay .cart-scroll::-webkit-scrollbar,
+  #esc-print-controls::-webkit-scrollbar,
+  #esc-print-preview-wrap::-webkit-scrollbar,
+  #esc-template-modal .esc-template-body::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
   }
   #gabinete #desktop-reminders,
-  .esc-pino-scroller {
+  .esc-pino-scroller,
+  .sheet,
+  #navigation .esc-nav-scroll,
+  #esc-sonnet-panel,
+  #esc-song-panel,
+  #desk-inspector,
+  #timeline-list,
+  #start-menu,
+  #esc-cartorio-overlay .cart-scroll,
+  #esc-print-controls,
+  #esc-print-preview-wrap,
+  #esc-template-modal .esc-template-body {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
   }
   #gabinete #notebook-list {
     min-height: 0 !important;
   }
-  /* Pino-Mola (Spring Jog-Shuttle) — haste elástica centralizada que acena no gesto e volta ao centro */
+  /* Fio Dourado (marca registrada Escrevaral — inspiração geométrica Eternos, quieto em repouso) */
+  .esc-pino-floating-layer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2650;
+    pointer-events: none;
+  }
   .esc-pino-rail {
+    --pino-gold: #9a712c;
+    --pino-gold-bright: #bd9042;
+    --pino-gold-line: rgba(154, 113, 44, 0.34);
+    --pino-gold-glow: rgba(189, 144, 66, 0.24);
+    --pino-pill-bg: #231a12;
+    --pino-pill-ink: #edd294;
     position: absolute;
     top: 50%;
-    right: 6px;
+    right: 4px;
     transform: translateY(-50%);
-    z-index: 12;
+    z-index: 16;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    width: 24px;
-    padding: 6px 0;
+    gap: 2px;
+    width: 28px;
+    padding: 4px 0;
     pointer-events: auto;
     user-select: none;
     -webkit-user-select: none;
-    opacity: 0.42;
-    transition: opacity 220ms ease;
+    opacity: 0.52;
+    transition: opacity 240ms ease;
+  }
+  .esc-pino-rail.is-floating {
+    position: fixed;
+    z-index: 2660;
   }
   .esc-pino-rail:hover,
   .esc-pino-rail.is-active {
-    opacity: 0.96;
+    opacity: 0.98;
   }
   .esc-pino-rail[hidden] {
     display: none !important;
   }
   .esc-pino-rail.is-shelf {
-    right: 304px;
+    right: 302px;
   }
   .esc-pino-rail.is-reminders {
-    right: 10px;
+    right: 8px;
   }
   .esc-pino-rail.is-reader {
-    right: 14px;
+    right: 12px;
   }
   .esc-pino-dot {
-    width: 18px;
+    width: 20px;
     height: 16px;
     min-height: 16px !important;
     padding: 0 !important;
     border: 0 !important;
     background: transparent !important;
-    color: #465344 !important;
-    font: 700 14px/1 Arial, sans-serif !important;
     cursor: pointer;
-    opacity: 0.55;
+    opacity: 0.62;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 150ms ease, transform 150ms ease;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+  .esc-pino-tip-svg {
+    width: 9px;
+    height: 9px;
+    display: block;
+    fill: none;
+    stroke: var(--pino-gold);
+    stroke-width: 1.25;
   }
   .esc-pino-dot:hover {
     opacity: 1;
-    transform: scale(1.25);
+    transform: scale(1.22);
+  }
+  .esc-pino-dot:hover .esc-pino-tip-svg {
+    fill: var(--pino-gold-bright);
+    stroke: var(--pino-gold-bright);
   }
   .esc-pino-track {
     position: relative;
-    width: 14px;
-    height: 62px;
+    width: 28px;
+    height: 84px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .esc-pino-track::before {
-    content: "";
+  .esc-pino-thread-svg {
     position: absolute;
-    top: 4px;
-    bottom: 4px;
-    left: 50%;
-    width: 1px;
-    margin-left: -0.5px;
-    background: rgba(42, 54, 41, 0.18);
-    border-radius: 1px;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 84px;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .esc-pino-line {
+    stroke: var(--pino-gold-line);
+    stroke-width: 1.1;
+    transition: stroke 220ms ease;
+  }
+  .esc-pino-tick {
+    stroke: var(--pino-gold);
+    stroke-width: 1;
+    opacity: 0.45;
+  }
+  .esc-pino-rail:hover .esc-pino-line,
+  .esc-pino-rail.is-active .esc-pino-line {
+    stroke: var(--pino-gold-bright);
   }
   .esc-pino-handle {
     position: relative;
-    width: 8px;
-    height: 30px;
-    border-radius: 99px;
-    background: #3d4b3b;
-    border: 1px solid rgba(25, 34, 24, 0.32);
-    box-shadow: 0 2px 6px rgba(24, 32, 24, 0.18);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: transparent;
+    border: 0;
     cursor: grab;
     display: flex;
     align-items: center;
     justify-content: center;
     will-change: transform;
-    transition: transform 340ms cubic-bezier(0.22, 1.42, 0.36, 1), background-color 160ms ease, width 140ms ease;
-  }
-  .esc-pino-handle:hover {
-    width: 10px;
-    background: #242d23;
+    transition: transform 360ms cubic-bezier(0.22, 1.42, 0.36, 1);
   }
   .esc-pino-handle.is-dragging {
     cursor: grabbing;
-    width: 10px;
-    background: #242d23;
     transition: none;
   }
-  .esc-pino-grip {
-    width: 4px;
-    height: 8px;
-    border-top: 1px solid rgba(228, 237, 226, 0.65);
-    border-bottom: 1px solid rgba(228, 237, 226, 0.65);
+  .esc-pino-node-svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+    overflow: visible;
     pointer-events: none;
+  }
+  .esc-pino-arc-outer,
+  .esc-pino-arc-inner,
+  .esc-pino-rays {
+    fill: none;
+    stroke: var(--pino-gold-bright);
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0.48) rotate(-18deg);
+    transition: opacity 240ms ease, transform 280ms cubic-bezier(0.22, 1.28, 0.36, 1);
+  }
+  .esc-pino-arc-outer {
+    stroke-width: 0.95;
+    stroke-dasharray: 18 10 9 10;
+  }
+  .esc-pino-arc-inner {
+    stroke-width: 0.9;
+    stroke-dasharray: 11 7;
+    transform: scale(0.55) rotate(18deg);
+  }
+  .esc-pino-rays {
+    stroke-width: 1;
+    stroke-linecap: round;
+  }
+  .esc-pino-ring {
+    fill: none;
+    stroke: var(--pino-gold);
+    stroke-width: 1.15;
+    transition: stroke 200ms ease, filter 200ms ease;
+  }
+  .esc-pino-core {
+    fill: var(--pino-gold);
+    transition: fill 200ms ease, transform 220ms ease;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .esc-pino-rail:hover .esc-pino-arc-outer,
+  .esc-pino-rail.is-active .esc-pino-arc-outer,
+  .esc-pino-handle.is-dragging .esc-pino-arc-outer {
+    opacity: 0.88;
+    transform: scale(1) rotate(0deg);
+  }
+  .esc-pino-rail:hover .esc-pino-arc-inner,
+  .esc-pino-rail.is-active .esc-pino-arc-inner,
+  .esc-pino-handle.is-dragging .esc-pino-arc-inner {
+    opacity: 0.72;
+    transform: scale(1) rotate(0deg);
+  }
+  .esc-pino-rail:hover .esc-pino-rays,
+  .esc-pino-rail.is-active .esc-pino-rays,
+  .esc-pino-handle.is-dragging .esc-pino-rays {
+    opacity: 0.82;
+    transform: scale(1) rotate(0deg);
+  }
+  .esc-pino-rail:hover .esc-pino-ring,
+  .esc-pino-rail.is-active .esc-pino-ring,
+  .esc-pino-handle.is-dragging .esc-pino-ring {
+    stroke: var(--pino-gold-bright);
+    filter: drop-shadow(0 0 3px var(--pino-gold-glow));
+  }
+  .esc-pino-rail:hover .esc-pino-core,
+  .esc-pino-rail.is-active .esc-pino-core,
+  .esc-pino-handle.is-dragging .esc-pino-core {
+    fill: var(--pino-gold-bright);
+    transform: scale(1.1);
   }
   .esc-pino-readout {
     position: absolute;
-    right: 24px;
+    right: 30px;
     top: 50%;
     transform: translateY(-50%);
-    padding: 2px 7px;
+    padding: 2px 8px;
     border-radius: 99px;
-    background: #242d23;
-    color: #e4ede2;
+    background: var(--pino-pill-bg);
+    color: var(--pino-pill-ink);
+    border: 1px solid rgba(216, 179, 106, 0.48);
     font: 600 10.5px/1.3 Arial, sans-serif;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     white-space: nowrap;
     pointer-events: none;
-    box-shadow: 0 2px 8px rgba(18, 24, 18, 0.18);
+    box-shadow: 0 2px 8px rgba(18, 12, 6, 0.22);
   }
   .esc-pino-readout[hidden] {
     display: none !important;
   }
-  body[data-theme="escuro"] .esc-pino-track::before {
-    background: rgba(207, 214, 203, 0.18);
+  body[data-theme="escuro"] .esc-pino-rail,
+  .esc-reader[data-palette="night"] .esc-pino-rail {
+    --pino-gold: #cfa659;
+    --pino-gold-bright: #f0d394;
+    --pino-gold-line: rgba(216, 179, 106, 0.36);
+    --pino-gold-glow: rgba(240, 211, 148, 0.34);
+    --pino-pill-bg: #241b13;
+    --pino-pill-ink: #f3dca4;
   }
-  body[data-theme="escuro"] .esc-pino-dot {
-    color: #a6b4a3 !important;
+  .esc-pino-rail.is-warm,
+  .esc-reader .esc-pino-rail {
+    --pino-gold: #8d6120;
+    --pino-gold-bright: #b68432;
+    --pino-gold-line: rgba(141, 97, 32, 0.36);
+    --pino-gold-glow: rgba(182, 132, 50, 0.28);
   }
-  body[data-theme="escuro"] .esc-pino-handle {
-    background: #8eb097;
-    border-color: rgba(20, 28, 20, 0.45);
-  }
-  body[data-theme="escuro"] .esc-pino-handle:hover,
-  body[data-theme="escuro"] .esc-pino-handle.is-dragging {
-    background: #b2cfb9;
-  }
-  body[data-theme="escuro"] .esc-pino-grip {
-    border-color: rgba(24, 34, 24, 0.6);
-  }
-  body[data-theme="escuro"] .esc-pino-readout {
-    background: #d8e4d6;
-    color: #192019;
-  }
-  .esc-reader .esc-pino-handle {
-    background: var(--reader-rule, #3a2013);
-    border-color: rgba(58, 32, 19, 0.35);
-  }
-  .esc-reader .esc-pino-dot {
-    color: var(--reader-muted, #4d3522) !important;
-  }
-  .esc-reader .esc-pino-readout {
-    background: var(--reader-rule, #3a2013);
-    color: var(--reader-paper, #cfc3ae);
+  body[data-theme="escuro"] .esc-pino-rail.is-warm,
+  .esc-reader[data-palette="night"] .esc-pino-rail.is-warm {
+    --pino-gold: #d4ad62;
+    --pino-gold-bright: #f3d79b;
+    --pino-gold-line: rgba(212, 173, 98, 0.38);
+    --pino-gold-glow: rgba(243, 215, 155, 0.32);
   }
   @media (prefers-reduced-motion: reduce) {
-    .esc-pino-handle { transition: none !important; }
+    .esc-pino-handle,
+    .esc-pino-arc-outer,
+    .esc-pino-arc-inner,
+    .esc-pino-rays { transition: none !important; }
   }
   @media (max-width: 760px) {
     .esc-pino-rail.is-shelf { right: 6px; }
@@ -11376,17 +11559,10 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     overflow-x: hidden;
     position: relative;
     z-index: 2;
-    scrollbar-width: thin;
-    scrollbar-color: #9e8664 #cfc3ae;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { width: 10px; }
-  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-track { background: #cfc3ae; }
-  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb {
-    background: #9e8664;
-    border-radius: 6px;
-    border: 2px solid #cfc3ae;
-  }
-  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb:hover { background: #7f6645; }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
   /* =====================================================================
    * HERO REAL GABINETE: PINTURA LIMPA SEM MOLDURA NO TÍTULO + LEGENDA EMBAIXO
@@ -25289,7 +25465,10 @@ SOFTWARE.
           '<div id="esc-reader-page" class="esc-reader-page">' +
             '<div class="esc-reader-masthead"><span id="esc-reader-date"></span><strong class="esc-reader-brand">ESCREVARAL</strong><span id="esc-reader-project-tag"></span></div>' +
             '<div id="esc-reader-hero" class="esc-reader-hero" aria-hidden="true">' +
-              (isPortableDoc() ? '' : '<img id="esc-reader-hero-img" class="esc-reader-hero-img" src="' + HERO_ART_LER + '" alt="" decoding="async">') +
+              '<div class="esc-reader-hero-cut">' +
+                (isPortableDoc() ? '' : '<img id="esc-reader-hero-img" class="esc-reader-hero-img" src="' + HERO_ART_LER + '" alt="" decoding="async">') +
+              '</div>' +
+              '<div class="esc-reader-hero-filigree" aria-hidden="true"></div>' +
               '<span id="esc-reader-hero-badge" class="esc-reader-hero-badge" hidden>READ-THRU · ENSAIO</span>' +
             '</div>' +
             '<div class="esc-reader-pills" role="tablist" aria-label="Modos da página de leitura">' +
@@ -29161,7 +29340,7 @@ SOFTWARE.
 
 ;
 /* Fonte: src/ui/pino-mola.js */
-/* Pino-Mola (Spring Jog-Shuttle) — indicador e alavanca elástica de rolagem por gesto (ES5, 0 dependências). */
+/* Fio Dourado / Pino-Mola (Spring Jog-Shuttle) — marca registrada de rolagem elástica por gesto (ES5, 0 dependências). */
 (function (root) {
   'use strict';
   root.Escr = root.Escr || {};
@@ -29188,7 +29367,7 @@ SOFTWARE.
     return d > 0 ? pxPerFrame : -pxPerFrame;
   }
 
-  /* Deflexão visual do pino ao receber rolagem passiva (rodinha/touch) antes de voltar ao centro. */
+  /* Deflexão visual do nó dourado ao receber rolagem passiva (rodinha/touch) antes de voltar ao centro. */
   function gestureDeflection(deltaScroll) {
     var d = Number(deltaScroll) || 0;
     if (!d) { return 0; }
@@ -29215,38 +29394,112 @@ SOFTWARE.
   };
 
   var instances = [];
+  var floatingLayer = null;
+  var watching = false;
+  var refreshTimer = null;
+
+  var UNIVERSAL_SELECTORS = [
+    '#navigation .esc-nav-scroll',
+    '#esc-sonnet-panel',
+    '#esc-song-panel',
+    '#desk-inspector',
+    '#mesa',
+    '#acervo',
+    '#oficina',
+    '#sobre',
+    '#usos-lingua',
+    '#lineage-panel',
+    '#timeline-list',
+    '#start-menu',
+    '#esc-academy-overlay .esc-academy-groups',
+    '#esc-cartorio-overlay .cart-scroll',
+    '#esc-print-controls',
+    '#esc-print-preview-wrap',
+    '#esc-template-modal .esc-template-body'
+  ];
+
+  function ensureFloatingLayer() {
+    if (typeof document === 'undefined' || !document.body) { return null; }
+    if (floatingLayer && document.body.contains(floatingLayer)) { return floatingLayer; }
+    floatingLayer = document.getElementById('esc-pino-floating-layer');
+    if (!floatingLayer) {
+      floatingLayer = document.createElement('div');
+      floatingLayer.id = 'esc-pino-floating-layer';
+      floatingLayer.className = 'esc-pino-floating-layer';
+      floatingLayer.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(floatingLayer);
+    }
+    return floatingLayer;
+  }
+
+  function isWarmSurface(el) {
+    if (!el || !el.closest) { return false; }
+    return !!(
+      el.closest('#esc-reader-overlay') ||
+      el.closest('#esc-academy-overlay') ||
+      el.closest('#esc-cartorio-overlay') ||
+      el.closest('#esc-print-overlay') ||
+      el.closest('#oficina') ||
+      el.closest('#usos-lingua')
+    );
+  }
+
+  function buildRailMarkup() {
+    return (
+      '<button type="button" class="esc-pino-dot is-up" tabindex="-1" title="Subir um passo">' +
+        '<svg class="esc-pino-tip-svg" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.8 L10.2 6 L6 10.2 L1.8 6 Z"/></svg>' +
+      '</button>' +
+      '<div class="esc-pino-track">' +
+        '<svg class="esc-pino-thread-svg" viewBox="0 0 28 84" preserveAspectRatio="none" aria-hidden="true">' +
+          '<line class="esc-pino-line" x1="14" y1="2" x2="14" y2="82"/>' +
+          '<line class="esc-pino-tick" x1="10.5" y1="42" x2="17.5" y2="42"/>' +
+        '</svg>' +
+        '<div class="esc-pino-handle" title="Arraste para cima ou para baixo para rolar — solte para voltar ao centro">' +
+          '<svg class="esc-pino-node-svg" viewBox="0 0 32 32" aria-hidden="true">' +
+            '<circle class="esc-pino-arc-outer" cx="16" cy="16" r="13.2"/>' +
+            '<circle class="esc-pino-arc-inner" cx="16" cy="16" r="9.0"/>' +
+            '<path class="esc-pino-rays" d="M16 1.5 V4.8 M16 27.2 V30.5 M1.5 16 H4.8 M27.2 16 H30.5"/>' +
+            '<circle class="esc-pino-ring" cx="16" cy="16" r="5.2"/>' +
+            '<path class="esc-pino-core" d="M16 12.2 L19.8 16 L16 19.8 L12.2 16 Z"/>' +
+          '</svg>' +
+        '</div>' +
+      '</div>' +
+      '<button type="button" class="esc-pino-dot is-down" tabindex="-1" title="Descer um passo">' +
+        '<svg class="esc-pino-tip-svg" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.8 L10.2 6 L6 10.2 L1.8 6 Z"/></svg>' +
+      '</button>' +
+      '<span class="esc-pino-readout" hidden></span>'
+    );
+  }
 
   function attach(scrollEl, opts) {
     if (!scrollEl || typeof document === 'undefined') { return null; }
     if (scrollEl.getAttribute && scrollEl.getAttribute('data-pino-attached') === 'true') { return null; }
     var cfg = opts && typeof opts === 'object' ? opts : {};
-    var hostEl = cfg.hostEl || scrollEl.parentNode;
+    var isFloating = !cfg.hostEl || !!cfg.floating;
+    var hostEl = isFloating ? ensureFloatingLayer() : cfg.hostEl;
     if (!hostEl) { return null; }
 
     scrollEl.setAttribute('data-pino-attached', 'true');
     if (scrollEl.classList) { scrollEl.classList.add('esc-pino-scroller'); }
 
-    /* Garante posicionamento relativo no host sem quebrar position:fixed/absolute existentes */
-    try {
-      var cs = root.getComputedStyle ? root.getComputedStyle(hostEl) : null;
-      if (cs && cs.position === 'static' && hostEl.style) {
-        hostEl.style.position = 'relative';
-      }
-    } catch (ignore) {}
+    if (!isFloating) {
+      /* Garante posicionamento relativo no host sem quebrar position:fixed/absolute existentes */
+      try {
+        var cs = root.getComputedStyle ? root.getComputedStyle(hostEl) : null;
+        if (cs && cs.position === 'static' && hostEl.style) {
+          hostEl.style.position = 'relative';
+        }
+      } catch (ignore) {}
+    }
 
     var rail = document.createElement('div');
-    rail.className = 'esc-pino-rail' + (cfg.variant ? (' is-' + cfg.variant) : '');
+    var cls = 'esc-pino-rail' + (cfg.variant ? (' is-' + cfg.variant) : '');
+    if (isFloating) { cls += ' is-floating'; }
+    if (cfg.warm || isWarmSurface(scrollEl)) { cls += ' is-warm'; }
+    rail.className = cls;
     rail.setAttribute('aria-hidden', 'true');
     rail.hidden = true;
-    rail.innerHTML =
-      '<button type="button" class="esc-pino-dot is-up" tabindex="-1" title="Subir um passo">·</button>' +
-      '<div class="esc-pino-track">' +
-        '<div class="esc-pino-handle" title="Arraste para cima ou para baixo para rolar — solte para voltar ao centro">' +
-          '<span class="esc-pino-grip"></span>' +
-        '</div>' +
-      '</div>' +
-      '<button type="button" class="esc-pino-dot is-down" tabindex="-1" title="Descer um passo">·</button>' +
-      '<span class="esc-pino-readout" hidden></span>';
+    rail.innerHTML = buildRailMarkup();
 
     hostEl.appendChild(rail);
 
@@ -29288,10 +29541,47 @@ SOFTWARE.
       }, 950);
     }
 
+    function isElementVisible(el) {
+      if (!el || el.hidden) { return false; }
+      if (document.body && !document.body.contains(el)) { return false; }
+      if (el.getBoundingClientRect) {
+        var r = el.getBoundingClientRect();
+        if (r.width < 36 || r.height < 64) { return false; }
+        var vw = root.innerWidth || 1280;
+        var vh = root.innerHeight || 800;
+        if (r.bottom <= 4 || r.top >= vh - 4 || r.right <= 4 || r.left >= vw - 4) { return false; }
+      }
+      try {
+        var st = root.getComputedStyle ? root.getComputedStyle(el) : null;
+        if (st && (st.display === 'none' || st.visibility === 'hidden' || st.opacity === '0')) { return false; }
+      } catch (ignore) {}
+      return true;
+    }
+
     function syncVisibility() {
       if (dead) { return; }
-      var hiddenParent = !!(scrollEl.hidden || (scrollEl.offsetParent === null && (!scrollEl.getClientRects || !scrollEl.getClientRects().length)));
-      var canScroll = !hiddenParent && hasOverflow(scrollEl.scrollHeight, scrollEl.clientHeight);
+      if (document.body && !document.body.contains(scrollEl)) {
+        inst.destroy();
+        return;
+      }
+      var visible = isElementVisible(scrollEl);
+      var canScroll = visible && hasOverflow(scrollEl.scrollHeight, scrollEl.clientHeight);
+      if (canScroll && isFloating && scrollEl.getBoundingClientRect) {
+        var r = scrollEl.getBoundingClientRect();
+        var vw = root.innerWidth || 1280;
+        var vh = root.innerHeight || 800;
+        var visTop = Math.max(8, r.top);
+        var visBot = Math.min(vh - 8, r.bottom);
+        if (visBot - visTop < 72) {
+          canScroll = false;
+        } else {
+          var midY = Math.round((visTop + visBot) / 2);
+          var leftX = Math.round(Math.min(vw - 28, r.right - 26));
+          rail.style.left = Math.max(4, leftX) + 'px';
+          rail.style.top = midY + 'px';
+          rail.style.right = 'auto';
+        }
+      }
       rail.hidden = !canScroll;
       if (!canScroll && dragging) { stopDrag(); }
     }
@@ -29403,8 +29693,10 @@ SOFTWARE.
     }
 
     var inst = {
+      el: scrollEl,
       refresh: syncVisibility,
       destroy: function () {
+        if (dead) { return; }
         dead = true;
         stopDrag();
         root.clearTimeout(springTimer);
@@ -29414,6 +29706,8 @@ SOFTWARE.
         scrollEl.removeEventListener('input', syncVisibility, false);
         if (rail.parentNode) { rail.parentNode.removeChild(rail); }
         scrollEl.removeAttribute('data-pino-attached');
+        var idx = instances.indexOf(inst);
+        if (idx >= 0) { instances.splice(idx, 1); }
       }
     };
     instances.push(inst);
@@ -29421,19 +29715,83 @@ SOFTWARE.
     return inst;
   }
 
+  function scanKnownScrollers() {
+    if (typeof document === 'undefined' || !document.querySelectorAll) { return; }
+    var i, j, list;
+    for (i = 0; i < UNIVERSAL_SELECTORS.length; i += 1) {
+      list = document.querySelectorAll(UNIVERSAL_SELECTORS[i]);
+      for (j = 0; j < list.length; j += 1) {
+        if (list[j] && list[j].getAttribute('data-pino-attached') !== 'true') {
+          attach(list[j], { floating: true });
+        }
+      }
+    }
+  }
+
   function refreshAll() {
-    for (var i = 0; i < instances.length; i += 1) {
-      instances[i].refresh();
+    scanKnownScrollers();
+    for (var i = instances.length - 1; i >= 0; i -= 1) {
+      if (instances[i]) { instances[i].refresh(); }
+    }
+  }
+
+  function scheduleRefresh() {
+    if (refreshTimer) { return; }
+    refreshTimer = root.setTimeout(function () {
+      refreshTimer = null;
+      refreshAll();
+    }, 80);
+  }
+
+  function watchAll() {
+    if (watching || typeof document === 'undefined') { return; }
+    watching = true;
+    scanKnownScrollers();
+
+    /* Qualquer container rolável acionado no app ganha o Fio Dourado na hora */
+    document.addEventListener('scroll', function (ev) {
+      var target = ev && ev.target;
+      if (!target || target === document || target === document.documentElement || target === document.body) { return; }
+      if (!target.getAttribute || target.getAttribute('data-pino-attached') === 'true') { return; }
+      if (target.closest && target.closest('#esc-pino-floating-layer')) { return; }
+      if (!hasOverflow(target.scrollHeight, target.clientHeight)) { return; }
+      try {
+        var st = root.getComputedStyle ? root.getComputedStyle(target) : null;
+        if (st && (st.overflowY === 'auto' || st.overflowY === 'scroll')) {
+          attach(target, { floating: true });
+        }
+      } catch (ignore) {}
+    }, true);
+
+    if (typeof root.MutationObserver === 'function' && document.body) {
+      try {
+        var mo = new root.MutationObserver(function (mutations) {
+          for (var i = 0; i < mutations.length; i += 1) {
+            var t = mutations[i].target;
+            if (t && t.id === 'esc-pino-floating-layer') { continue; }
+            if (t && t.closest && t.closest('#esc-pino-floating-layer')) { continue; }
+            scheduleRefresh();
+            return;
+          }
+        });
+        mo.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['hidden', 'data-view', 'data-panel', 'data-immersion', 'data-theme']
+        });
+      } catch (ignore) {}
     }
   }
 
   if (root.addEventListener) {
-    root.addEventListener('resize', refreshAll, false);
+    root.addEventListener('resize', scheduleRefresh, false);
   }
 
   root.Escr.pinoMola = {
     attach: attach,
-    refreshAll: refreshAll
+    refreshAll: refreshAll,
+    watchAll: watchAll
   };
 }(typeof window !== 'undefined' ? window : this));
 
@@ -37864,6 +38222,7 @@ SOFTWARE.
     E.pinoMola.attach(byId('esc-items-list'), { hostEl: byId('items-column') });
     E.pinoMola.attach(manuscript, { hostEl: byId('editor-viewport') });
     E.pinoMola.attach(byId('esc-rich-editor'), { hostEl: byId('editor-viewport') });
+    if (E.pinoMola.watchAll) { E.pinoMola.watchAll(); }
   }
   if (E.mountCalculator) {
     calcUI = E.mountCalculator({

@@ -802,177 +802,294 @@
   }
   #gabinete #notebook-area::-webkit-scrollbar,
   #gabinete #desktop-reminders::-webkit-scrollbar,
-  .esc-pino-scroller::-webkit-scrollbar {
+  .esc-pino-scroller::-webkit-scrollbar,
+  .sheet::-webkit-scrollbar,
+  #navigation .esc-nav-scroll::-webkit-scrollbar,
+  #esc-sonnet-panel::-webkit-scrollbar,
+  #esc-song-panel::-webkit-scrollbar,
+  #desk-inspector::-webkit-scrollbar,
+  #timeline-list::-webkit-scrollbar,
+  #start-menu::-webkit-scrollbar,
+  #esc-cartorio-overlay .cart-scroll::-webkit-scrollbar,
+  #esc-print-controls::-webkit-scrollbar,
+  #esc-print-preview-wrap::-webkit-scrollbar,
+  #esc-template-modal .esc-template-body::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
   }
   #gabinete #desktop-reminders,
-  .esc-pino-scroller {
+  .esc-pino-scroller,
+  .sheet,
+  #navigation .esc-nav-scroll,
+  #esc-sonnet-panel,
+  #esc-song-panel,
+  #desk-inspector,
+  #timeline-list,
+  #start-menu,
+  #esc-cartorio-overlay .cart-scroll,
+  #esc-print-controls,
+  #esc-print-preview-wrap,
+  #esc-template-modal .esc-template-body {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
   }
   #gabinete #notebook-list {
     min-height: 0 !important;
   }
-  /* Pino-Mola (Spring Jog-Shuttle) — haste elástica centralizada que acena no gesto e volta ao centro */
+  /* Fio Dourado (marca registrada Escrevaral — inspiração geométrica Eternos, quieto em repouso) */
+  .esc-pino-floating-layer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2650;
+    pointer-events: none;
+  }
   .esc-pino-rail {
+    --pino-gold: #9a712c;
+    --pino-gold-bright: #bd9042;
+    --pino-gold-line: rgba(154, 113, 44, 0.34);
+    --pino-gold-glow: rgba(189, 144, 66, 0.24);
+    --pino-pill-bg: #231a12;
+    --pino-pill-ink: #edd294;
     position: absolute;
     top: 50%;
-    right: 6px;
+    right: 4px;
     transform: translateY(-50%);
-    z-index: 12;
+    z-index: 16;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    width: 24px;
-    padding: 6px 0;
+    gap: 2px;
+    width: 28px;
+    padding: 4px 0;
     pointer-events: auto;
     user-select: none;
     -webkit-user-select: none;
-    opacity: 0.42;
-    transition: opacity 220ms ease;
+    opacity: 0.52;
+    transition: opacity 240ms ease;
+  }
+  .esc-pino-rail.is-floating {
+    position: fixed;
+    z-index: 2660;
   }
   .esc-pino-rail:hover,
   .esc-pino-rail.is-active {
-    opacity: 0.96;
+    opacity: 0.98;
   }
   .esc-pino-rail[hidden] {
     display: none !important;
   }
   .esc-pino-rail.is-shelf {
-    right: 304px;
+    right: 302px;
   }
   .esc-pino-rail.is-reminders {
-    right: 10px;
+    right: 8px;
   }
   .esc-pino-rail.is-reader {
-    right: 14px;
+    right: 12px;
   }
   .esc-pino-dot {
-    width: 18px;
+    width: 20px;
     height: 16px;
     min-height: 16px !important;
     padding: 0 !important;
     border: 0 !important;
     background: transparent !important;
-    color: #465344 !important;
-    font: 700 14px/1 Arial, sans-serif !important;
     cursor: pointer;
-    opacity: 0.55;
+    opacity: 0.62;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 150ms ease, transform 150ms ease;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+  .esc-pino-tip-svg {
+    width: 9px;
+    height: 9px;
+    display: block;
+    fill: none;
+    stroke: var(--pino-gold);
+    stroke-width: 1.25;
   }
   .esc-pino-dot:hover {
     opacity: 1;
-    transform: scale(1.25);
+    transform: scale(1.22);
+  }
+  .esc-pino-dot:hover .esc-pino-tip-svg {
+    fill: var(--pino-gold-bright);
+    stroke: var(--pino-gold-bright);
   }
   .esc-pino-track {
     position: relative;
-    width: 14px;
-    height: 62px;
+    width: 28px;
+    height: 84px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .esc-pino-track::before {
-    content: "";
+  .esc-pino-thread-svg {
     position: absolute;
-    top: 4px;
-    bottom: 4px;
-    left: 50%;
-    width: 1px;
-    margin-left: -0.5px;
-    background: rgba(42, 54, 41, 0.18);
-    border-radius: 1px;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 84px;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .esc-pino-line {
+    stroke: var(--pino-gold-line);
+    stroke-width: 1.1;
+    transition: stroke 220ms ease;
+  }
+  .esc-pino-tick {
+    stroke: var(--pino-gold);
+    stroke-width: 1;
+    opacity: 0.45;
+  }
+  .esc-pino-rail:hover .esc-pino-line,
+  .esc-pino-rail.is-active .esc-pino-line {
+    stroke: var(--pino-gold-bright);
   }
   .esc-pino-handle {
     position: relative;
-    width: 8px;
-    height: 30px;
-    border-radius: 99px;
-    background: #3d4b3b;
-    border: 1px solid rgba(25, 34, 24, 0.32);
-    box-shadow: 0 2px 6px rgba(24, 32, 24, 0.18);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: transparent;
+    border: 0;
     cursor: grab;
     display: flex;
     align-items: center;
     justify-content: center;
     will-change: transform;
-    transition: transform 340ms cubic-bezier(0.22, 1.42, 0.36, 1), background-color 160ms ease, width 140ms ease;
-  }
-  .esc-pino-handle:hover {
-    width: 10px;
-    background: #242d23;
+    transition: transform 360ms cubic-bezier(0.22, 1.42, 0.36, 1);
   }
   .esc-pino-handle.is-dragging {
     cursor: grabbing;
-    width: 10px;
-    background: #242d23;
     transition: none;
   }
-  .esc-pino-grip {
-    width: 4px;
-    height: 8px;
-    border-top: 1px solid rgba(228, 237, 226, 0.65);
-    border-bottom: 1px solid rgba(228, 237, 226, 0.65);
+  .esc-pino-node-svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+    overflow: visible;
     pointer-events: none;
+  }
+  .esc-pino-arc-outer,
+  .esc-pino-arc-inner,
+  .esc-pino-rays {
+    fill: none;
+    stroke: var(--pino-gold-bright);
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0.48) rotate(-18deg);
+    transition: opacity 240ms ease, transform 280ms cubic-bezier(0.22, 1.28, 0.36, 1);
+  }
+  .esc-pino-arc-outer {
+    stroke-width: 0.95;
+    stroke-dasharray: 18 10 9 10;
+  }
+  .esc-pino-arc-inner {
+    stroke-width: 0.9;
+    stroke-dasharray: 11 7;
+    transform: scale(0.55) rotate(18deg);
+  }
+  .esc-pino-rays {
+    stroke-width: 1;
+    stroke-linecap: round;
+  }
+  .esc-pino-ring {
+    fill: none;
+    stroke: var(--pino-gold);
+    stroke-width: 1.15;
+    transition: stroke 200ms ease, filter 200ms ease;
+  }
+  .esc-pino-core {
+    fill: var(--pino-gold);
+    transition: fill 200ms ease, transform 220ms ease;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .esc-pino-rail:hover .esc-pino-arc-outer,
+  .esc-pino-rail.is-active .esc-pino-arc-outer,
+  .esc-pino-handle.is-dragging .esc-pino-arc-outer {
+    opacity: 0.88;
+    transform: scale(1) rotate(0deg);
+  }
+  .esc-pino-rail:hover .esc-pino-arc-inner,
+  .esc-pino-rail.is-active .esc-pino-arc-inner,
+  .esc-pino-handle.is-dragging .esc-pino-arc-inner {
+    opacity: 0.72;
+    transform: scale(1) rotate(0deg);
+  }
+  .esc-pino-rail:hover .esc-pino-rays,
+  .esc-pino-rail.is-active .esc-pino-rays,
+  .esc-pino-handle.is-dragging .esc-pino-rays {
+    opacity: 0.82;
+    transform: scale(1) rotate(0deg);
+  }
+  .esc-pino-rail:hover .esc-pino-ring,
+  .esc-pino-rail.is-active .esc-pino-ring,
+  .esc-pino-handle.is-dragging .esc-pino-ring {
+    stroke: var(--pino-gold-bright);
+    filter: drop-shadow(0 0 3px var(--pino-gold-glow));
+  }
+  .esc-pino-rail:hover .esc-pino-core,
+  .esc-pino-rail.is-active .esc-pino-core,
+  .esc-pino-handle.is-dragging .esc-pino-core {
+    fill: var(--pino-gold-bright);
+    transform: scale(1.1);
   }
   .esc-pino-readout {
     position: absolute;
-    right: 24px;
+    right: 30px;
     top: 50%;
     transform: translateY(-50%);
-    padding: 2px 7px;
+    padding: 2px 8px;
     border-radius: 99px;
-    background: #242d23;
-    color: #e4ede2;
+    background: var(--pino-pill-bg);
+    color: var(--pino-pill-ink);
+    border: 1px solid rgba(216, 179, 106, 0.48);
     font: 600 10.5px/1.3 Arial, sans-serif;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     white-space: nowrap;
     pointer-events: none;
-    box-shadow: 0 2px 8px rgba(18, 24, 18, 0.18);
+    box-shadow: 0 2px 8px rgba(18, 12, 6, 0.22);
   }
   .esc-pino-readout[hidden] {
     display: none !important;
   }
-  body[data-theme="escuro"] .esc-pino-track::before {
-    background: rgba(207, 214, 203, 0.18);
+  body[data-theme="escuro"] .esc-pino-rail,
+  .esc-reader[data-palette="night"] .esc-pino-rail {
+    --pino-gold: #cfa659;
+    --pino-gold-bright: #f0d394;
+    --pino-gold-line: rgba(216, 179, 106, 0.36);
+    --pino-gold-glow: rgba(240, 211, 148, 0.34);
+    --pino-pill-bg: #241b13;
+    --pino-pill-ink: #f3dca4;
   }
-  body[data-theme="escuro"] .esc-pino-dot {
-    color: #a6b4a3 !important;
+  .esc-pino-rail.is-warm,
+  .esc-reader .esc-pino-rail {
+    --pino-gold: #8d6120;
+    --pino-gold-bright: #b68432;
+    --pino-gold-line: rgba(141, 97, 32, 0.36);
+    --pino-gold-glow: rgba(182, 132, 50, 0.28);
   }
-  body[data-theme="escuro"] .esc-pino-handle {
-    background: #8eb097;
-    border-color: rgba(20, 28, 20, 0.45);
-  }
-  body[data-theme="escuro"] .esc-pino-handle:hover,
-  body[data-theme="escuro"] .esc-pino-handle.is-dragging {
-    background: #b2cfb9;
-  }
-  body[data-theme="escuro"] .esc-pino-grip {
-    border-color: rgba(24, 34, 24, 0.6);
-  }
-  body[data-theme="escuro"] .esc-pino-readout {
-    background: #d8e4d6;
-    color: #192019;
-  }
-  .esc-reader .esc-pino-handle {
-    background: var(--reader-rule, #3a2013);
-    border-color: rgba(58, 32, 19, 0.35);
-  }
-  .esc-reader .esc-pino-dot {
-    color: var(--reader-muted, #4d3522) !important;
-  }
-  .esc-reader .esc-pino-readout {
-    background: var(--reader-rule, #3a2013);
-    color: var(--reader-paper, #cfc3ae);
+  body[data-theme="escuro"] .esc-pino-rail.is-warm,
+  .esc-reader[data-palette="night"] .esc-pino-rail.is-warm {
+    --pino-gold: #d4ad62;
+    --pino-gold-bright: #f3d79b;
+    --pino-gold-line: rgba(212, 173, 98, 0.38);
+    --pino-gold-glow: rgba(243, 215, 155, 0.32);
   }
   @media (prefers-reduced-motion: reduce) {
-    .esc-pino-handle { transition: none !important; }
+    .esc-pino-handle,
+    .esc-pino-arc-outer,
+    .esc-pino-arc-inner,
+    .esc-pino-rays { transition: none !important; }
   }
   @media (max-width: 760px) {
     .esc-pino-rail.is-shelf { right: 6px; }

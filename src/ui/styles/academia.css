@@ -66,17 +66,10 @@
     overflow-x: hidden;
     position: relative;
     z-index: 2;
-    scrollbar-width: thin;
-    scrollbar-color: #9e8664 #cfc3ae;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { width: 10px; }
-  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-track { background: #cfc3ae; }
-  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb {
-    background: #9e8664;
-    border-radius: 6px;
-    border: 2px solid #cfc3ae;
-  }
-  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar-thumb:hover { background: #7f6645; }
+  #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
   /* =====================================================================
    * HERO REAL GABINETE: PINTURA LIMPA SEM MOLDURA NO TÍTULO + LEGENDA EMBAIXO

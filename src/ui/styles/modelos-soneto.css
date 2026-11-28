@@ -720,22 +720,22 @@
   .esc-rhyme-pill.is-fam-f { background: #e5dcf0; border-color: #775d8c; color: #39234a; }
   .esc-rhyme-pill.is-fam-g { background: #e5e1d5; border-color: #78725e; color: #332f22; }
 
-  /* Mapa dos 14 versos + linha da Volta */
+  /* Mapa dos 14 versos + linha da Volta (fio dourado discreto) */
   .esc-sonnet-volta {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 9px 0 6px;
+    margin: 10px 0 7px;
     font: 700 10.5px/1.2 Arial, Helvetica, sans-serif;
-    letter-spacing: 0.06em;
-    color: #6b4e16;
+    letter-spacing: 0.08em;
+    color: #8c6322;
   }
   .esc-sonnet-volta::before,
   .esc-sonnet-volta::after {
     content: '';
     flex: 1 1 auto;
     height: 1px;
-    border-top: 1px dashed rgba(122, 88, 22, 0.55);
+    background: rgba(154, 113, 44, 0.42);
   }
   .esc-sonnet-stanza-list { margin-bottom: 6px; }
   .esc-sonnet-stanza-lbl {

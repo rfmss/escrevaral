@@ -600,7 +600,10 @@
           '<div id="esc-reader-page" class="esc-reader-page">' +
             '<div class="esc-reader-masthead"><span id="esc-reader-date"></span><strong class="esc-reader-brand">ESCREVARAL</strong><span id="esc-reader-project-tag"></span></div>' +
             '<div id="esc-reader-hero" class="esc-reader-hero" aria-hidden="true">' +
-              (isPortableDoc() ? '' : '<img id="esc-reader-hero-img" class="esc-reader-hero-img" src="' + HERO_ART_LER + '" alt="" decoding="async">') +
+              '<div class="esc-reader-hero-cut">' +
+                (isPortableDoc() ? '' : '<img id="esc-reader-hero-img" class="esc-reader-hero-img" src="' + HERO_ART_LER + '" alt="" decoding="async">') +
+              '</div>' +
+              '<div class="esc-reader-hero-filigree" aria-hidden="true"></div>' +
               '<span id="esc-reader-hero-badge" class="esc-reader-hero-badge" hidden>READ-THRU · ENSAIO</span>' +
             '</div>' +
             '<div class="esc-reader-pills" role="tablist" aria-label="Modos da página de leitura">' +
