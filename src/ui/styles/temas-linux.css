@@ -777,11 +777,37 @@
 
   /* 4. Dissolução total da Estante de cadernos (#gabinete) no Papel Digital E-Ink */
   #gabinete {
+    top: 44px !important;
+    bottom: 44px !important;
+    height: auto !important;
     background: #c4cfc2 !important;
     background-image: none !important;
     color: #212921 !important;
     outline: 0 !important;
     animation: escScreenFade 130ms ease-out;
+  }
+  #gabinete #desktop-surface {
+    top: 66px !important;
+    bottom: 8px !important;
+    left: 24px !important;
+    right: 24px !important;
+  }
+  #gabinete #notebook-area {
+    top: 26px !important;
+    left: 16px !important;
+    padding: 8px 20px 36px 24px !important;
+  }
+  #gabinete #desktop-primary-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+  }
+  #gabinete #notebook-hint {
+    margin: 8px 0 14px !important;
+    font-size: 13px !important;
+    color: #465344 !important;
   }
   #gabinete .desktop-imprint {
     display: none !important;
@@ -823,23 +849,38 @@
   #gabinete #original-back,
   #gabinete #original-more {
     min-height: 36px !important;
-    padding: 6px 12px !important;
-    border: 1px solid rgba(33, 41, 33, 0.32) !important;
-    border-radius: 2px !important;
-    background: #b8c5b6 !important;
-    color: #212921 !important;
+    padding: 7px 14px !important;
+    border: 1px solid rgba(33, 41, 33, 0.24) !important;
+    border-radius: 5px !important;
+    background: rgba(33, 41, 33, 0.055) !important;
+    color: #1e261e !important;
     box-shadow: none !important;
-    font: 500 13px/1.2 Arial, Helvetica, sans-serif !important;
+    font: 600 13px/1.2 Arial, Helvetica, sans-serif !important;
+    letter-spacing: 0.01em;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  #gabinete #project-new {
+    background: #242d23 !important;
+    border-color: #242d23 !important;
+    color: #e4ede2 !important;
+  }
+  #gabinete #project-new:hover {
+    background: #2f3b2e !important;
+    border-color: #2f3b2e !important;
+    color: #f2f7f0 !important;
   }
   #gabinete .os-menu {
     background: transparent !important;
     border-color: transparent !important;
+    font-weight: 500 !important;
   }
   #gabinete .os-menu:hover,
-  #gabinete #project-new:hover,
   #gabinete #desktop-organize:hover,
-  #gabinete #reminder-new:hover {
-    background: rgba(33, 41, 33, 0.08) !important;
+  #gabinete #reminder-new:hover,
+  #gabinete #original-back:hover,
+  #gabinete #original-more:hover {
+    background: rgba(33, 41, 33, 0.11) !important;
+    border-color: rgba(33, 41, 33, 0.36) !important;
   }
   .esc-cabinet-return-top,
   #gabinete #first-run-write {
@@ -1301,16 +1342,25 @@
     margin-top: 2px;
   }
 
-  /* Miniaturas da gaveta e do caderno no breadcrumb (#location-path) */
+  /* Breadcrumb da gaveta e do caderno (#location-path) — pílula discreta e harmoniosa com o Sálvia */
   #location-path #path-original,
   #location-path #path-project[data-has-book="true"] {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 6px !important;
-    padding: 3px 9px 3px 6px !important;
-    border-radius: 3px !important;
-    border: 1px solid rgba(53, 43, 32, 0.32) !important;
-    background: rgba(214, 206, 188, 0.52) !important;
+    gap: 7px !important;
+    min-height: 26px !important;
+    height: 26px !important;
+    padding: 0 10px 0 8px !important;
+    border-radius: 99px !important;
+    border: 1px solid rgba(33, 41, 33, 0.16) !important;
+    background: rgba(33, 41, 33, 0.055) !important;
+    color: #1e261e !important;
+    font-weight: 500 !important;
+  }
+  #location-path #path-original:hover,
+  #location-path #path-project[data-has-book="true"]:hover {
+    background: rgba(33, 41, 33, 0.11) !important;
+    border-color: rgba(33, 41, 33, 0.28) !important;
   }
   #location-path #path-original[hidden],
   #location-path #path-project[hidden] {
@@ -1319,8 +1369,8 @@
   #location-path #path-original::before {
     content: "";
     display: inline-block;
-    width: 18px;
-    height: 13px;
+    width: 14px;
+    height: 11px;
     flex-shrink: 0;
     border-radius: 2px;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 13' fill='none'%3E%3Crect x='0.8' y='1' width='16.4' height='11' rx='1.5' fill='%23b4beaa' stroke='%23352b20' stroke-width='1.2'/%3E%3Cpath d='M5.5 6.8C5.5 4.4 7 3.2 9 3.2s3.5 1.2 3.5 3.6H5.5Z' fill='%23c4974a' stroke='%232c2014' stroke-width='0.9'/%3E%3Crect x='4.2' y='8.2' width='9.6' height='2.2' rx='0.6' fill='%23ded7c5' stroke='%236b583e' stroke-width='0.7'/%3E%3C/svg%3E") center/contain no-repeat;
@@ -1328,19 +1378,61 @@
   #location-path #path-project[data-has-book="true"]::before {
     content: "";
     display: inline-block;
-    width: 13px;
-    height: 16px;
+    width: 8px;
+    height: 8px;
     flex-shrink: 0;
-    border-radius: 1.5px 3px 3px 1.5px;
-    border: 1px solid #1e231c;
+    border-radius: 50%;
+    border: 1px solid rgba(28, 35, 28, 0.34);
     background-color: var(--esc-crumb-book-color, #6f8e68);
-    box-shadow: inset 3.5px 0 0 #1c241b, inset -2px 0 0 rgba(242, 236, 222, 0.72), 1px 1px 0 rgba(20, 24, 18, 0.22);
+    box-shadow: none;
   }
   body[data-theme="escuro"] #location-path #path-original,
   body[data-theme="escuro"] #location-path #path-project[data-has-book="true"] {
-    background: rgba(52, 62, 50, 0.65) !important;
-    border-color: rgba(196, 154, 88, 0.42) !important;
+    background: rgba(207, 214, 203, 0.08) !important;
+    border-color: rgba(207, 214, 203, 0.2) !important;
     color: #e4ebe1 !important;
+  }
+  body[data-theme="escuro"] #location-path #path-project[data-has-book="true"]::before {
+    border-color: rgba(235, 240, 232, 0.4);
+  }
+
+  /* Correção do botão fechar (×) do painel Olhar do texto (.desk-inspector) */
+  .desk-inspector .inspector-heading {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+  .desk-inspector #desk-counts-close {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: center !important;
+    font: 500 18px/1 Arial, Helvetica, sans-serif !important;
+    border: 1px solid rgba(33, 41, 33, 0.22) !important;
+    border-radius: 5px !important;
+    background: rgba(33, 41, 33, 0.04) !important;
+    color: inherit !important;
+    cursor: pointer !important;
+  }
+  .desk-inspector #desk-counts-close:hover {
+    background: rgba(33, 41, 33, 0.12) !important;
+    border-color: rgba(33, 41, 33, 0.38) !important;
+  }
+  body[data-theme="escuro"] .desk-inspector #desk-counts-close {
+    border-color: rgba(207, 214, 203, 0.24) !important;
+    background: rgba(207, 214, 203, 0.06) !important;
+  }
+  body[data-theme="escuro"] .desk-inspector #desk-counts-close:hover {
+    background: rgba(207, 214, 203, 0.16) !important;
   }
 
   /* Interior espacial da Gaveta aberta (#notebook-area[data-drawer-open="true"]) */
@@ -1511,11 +1603,11 @@
     z-index: 2 !important;
   }
   @media (min-width: 761px) {
-    /* Alinha o mural de Post-its com respiro superior (trepadeira) e inferior (bistrô) */
+    /* Alinha o mural de Post-its com o ritmo dos botões da esquerda e respiro da trepadeira + casa */
     #gabinete #desktop-reminders {
-      top: 56px;
-      right: 22px;
-      padding-bottom: 150px;
+      top: 34px;
+      right: 26px;
+      padding-bottom: 168px;
       box-sizing: border-box;
     }
   }
@@ -1623,9 +1715,9 @@
     position: absolute;
     left: 26px;
     left: clamp(20px, 2.4vw, 34px);
-    bottom: 9px;
-    width: 102px;
-    width: clamp(82px, 8.6vw, 118px);
+    bottom: 12px;
+    width: 96px;
+    width: clamp(74px, min(8vw, 15vh), 112px);
     height: auto;
     display: block;
     opacity: 0.92;
@@ -1634,10 +1726,10 @@
   .esc-cafe-scene-br {
     position: absolute;
     right: 24px;
-    right: clamp(16px, 2.2vw, 32px);
-    bottom: 24px;
-    width: 246px;
-    width: clamp(190px, 21.5vw, 290px);
+    right: clamp(18px, 2.2vw, 32px);
+    bottom: 36px;
+    width: 220px;
+    width: clamp(150px, min(20vw, 32vh), 258px);
     height: auto;
     display: block;
     opacity: 0.95;
@@ -1647,16 +1739,17 @@
   .esc-cafe-caption {
     position: absolute;
     right: 24px;
-    right: clamp(16px, 2.2vw, 32px);
-    bottom: 5px;
+    right: clamp(18px, 2.2vw, 32px);
+    bottom: 11px;
+    z-index: 1;
     display: inline-flex;
     align-items: baseline;
     gap: 6px;
-    max-width: clamp(220px, 34vw, 440px);
-    padding: 2px 9px;
+    max-width: clamp(220px, 42vw, 480px);
+    padding: 3px 10px;
     border-radius: 99px;
-    background: rgba(196, 207, 194, 0.86);
-    border: 1px solid rgba(58, 72, 56, 0.22);
+    background: rgba(196, 207, 194, 0.92);
+    border: 1px solid rgba(58, 72, 56, 0.24);
     color: #364435;
     font: 500 10.5px/1.35 var(--esc-font-ui, Arial, Helvetica, sans-serif);
     letter-spacing: 0.01em;
@@ -1736,7 +1829,7 @@
     .esc-cafe-caption { display: none; }
     .esc-cafe-vine-tr { width: 82px; opacity: 0.72; }
   }
-  @media (max-height: 520px) {
+  @media (max-height: 430px) {
     .esc-cafe-vine-tr,
     .esc-cafe-scene-bl,
     .esc-cafe-scene-br,
@@ -1764,17 +1857,18 @@
     color: #455241 !important;
     height: 44px !important;
     min-height: 44px !important;
+    padding: 0 24px !important;
   }
   #system-bar #os-start,
   #system-bar #os-window-task,
   #system-bar #cabinet-return,
   #system-bar #screen-lock {
-    min-height: 32px !important;
-    height: 32px !important;
-    padding: 0 10px !important;
-    border: 1px solid rgba(33, 41, 33, 0.3) !important;
-    border-radius: 2px !important;
-    background: transparent !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    padding: 0 12px !important;
+    border: 1px solid rgba(33, 41, 33, 0.26) !important;
+    border-radius: 5px !important;
+    background: rgba(33, 41, 33, 0.04) !important;
     color: #212921 !important;
     box-shadow: none !important;
     font: 500 12px/1 Arial, Helvetica, sans-serif !important;
@@ -2826,8 +2920,45 @@
     color: #d8dfd4 !important;
     box-shadow: none !important;
   }
+  body[data-theme="escuro"] #gabinete #project-new {
+    background: #d8e4d6 !important;
+    border-color: #d8e4d6 !important;
+    color: #192019 !important;
+  }
+  body[data-theme="escuro"] #gabinete #project-new:hover {
+    background: #e8f1e6 !important;
+    border-color: #e8f1e6 !important;
+  }
+  body[data-theme="escuro"] #gabinete #desktop-organize,
+  body[data-theme="escuro"] #gabinete #reminder-new,
+  body[data-theme="escuro"] #gabinete #original-back,
+  body[data-theme="escuro"] #gabinete #original-more {
+    background: rgba(207, 214, 203, 0.08) !important;
+    border-color: rgba(207, 214, 203, 0.24) !important;
+    color: #d8e4d6 !important;
+  }
+  body[data-theme="escuro"] #gabinete #notebook-hint {
+    color: #a6b4a3 !important;
+  }
   body[data-theme="escuro"] #gabinete .os-menu {
     color: #cfd6cb !important;
+  }
+  @media (max-width: 760px) {
+    #gabinete #desktop-surface {
+      top: 114px !important;
+      left: 12px !important;
+      right: 12px !important;
+      bottom: 6px !important;
+    }
+    #gabinete #notebook-area {
+      top: 10px !important;
+      left: 4px !important;
+      right: 4px !important;
+      padding: 6px 10px 24px !important;
+    }
+    #system-bar {
+      padding: 0 12px !important;
+    }
   }
   body[data-theme="escuro"] #gabinete .os-menu:hover {
     background: rgba(207, 214, 203, 0.09) !important;

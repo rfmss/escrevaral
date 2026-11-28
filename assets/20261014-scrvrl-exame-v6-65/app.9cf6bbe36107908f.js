@@ -17148,10 +17148,13 @@
     var area = byId('writing-space');
     if (area.style && window.innerHeight) {
       var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-      area.style.height = Math.max(0, height - byId('location-path').offsetHeight - byId('system-bar').offsetHeight) + 'px'; byId('gabinete').style.height = Math.max(0, height - byId('location-path').offsetHeight - byId('system-bar').offsetHeight) + 'px';
+      var topBar = byId('location-path').offsetHeight || 44;
+      var bottomBar = byId('system-bar').offsetHeight || 0;
+      var cabinetBottomBar = bottomBar || 44;
+      area.style.height = Math.max(0, height - topBar - bottomBar) + 'px';
+      byId('gabinete').style.height = Math.max(0, height - topBar - cabinetBottomBar) + 'px';
       byId('machine-shell').style.height = height + 'px';
-      var topBar=byId('location-path').offsetHeight,bottomBar=byId('system-bar').offsetHeight;
-      sizePanels(height,topBar,bottomBar);
+      sizePanels(height, topBar, bottomBar);
       document.body.setAttribute('data-viewport', height < 360 ? 'small' : height < 480 ? 'compact' : 'full');
       var browser = byId('note-browser');
       if (browser.style) { browser.style.height = window.innerWidth <= 760 && height < 480 ? Math.max(84, height - 108) + 'px' : ''; }
@@ -17765,6 +17768,7 @@
     cancelTypewriter(); closePanels(false); collapseTimeline();
     cabinetOpen = true; byId('writing-space').hidden = true; byId('gabinete').hidden = false;
     byId('leave-focus').hidden = true; document.body.setAttribute('data-view', 'gabinete');
+    sizeWorkspace();
     if (doc.projectId && !activeNotebookId && availableBook(notebooks.get(doc.projectId))) { activeNotebookId = doc.projectId; }
     if (activeNotebookId) { var openedBook = notebooks.get(activeNotebookId); if (openedBook) { cabinetProject = openedBook.name; } }
     desktopWindow('open', false); renderCabinet(); if (!initial) { byId('cabinet-heading').focus(); } return true;
