@@ -54,7 +54,7 @@ const leitorCss = fs.readFileSync(path.join(root, 'src/ui/styles/modo-leitor.css
 assert.ok(leitorCss.includes('.esc-reader-hero-cut') && leitorCss.includes('mask-composite: exclude') && leitorCss.includes('.esc-reader-hero-filigree'), 'Banner do Modo Leitura com molde vazado e filigrana dourada');
 for (const g of ['academia/ponto-de-vista-e-voz.html', 'academia/cena-tempo-e-personagem.html', 'academia/poesia-ritmo-e-cancao.html']) {
   const html = fs.readFileSync(path.join(root, g), 'utf8');
-  assert.ok(html.includes('hero-mold') && html.includes('academy-mucha-frame.webp') && html.includes('fio-rail'), g + ' deve usar moldura Mucha × Eternos e Fio Dourado');
+  assert.ok(html.includes('hero-mold') && html.includes('academy-mucha-crest.webp') && html.includes('fio-rail'), g + ' deve usar diadema discreto Mucha × Eternos e Fio Dourado');
 }
 
 console.log('OK: Fio Dourado universal (Eternos Jog-Shuttle) + moldes vazados dos banners verificados.');

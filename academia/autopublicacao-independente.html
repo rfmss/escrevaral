@@ -105,32 +105,31 @@ body {
   background-size:84px 84px;
 }
 
-/* Prancha iluminada com moldura Alphonse Mucha × Eternos (livro aberto + penas cruzadas) */
+/* Prancha iluminada com detalhe discreto Alphonse Mucha × Eternos (livro aberto + penas cruzadas) */
 .hero-mold {
   position:relative;
-  width:min(940px,calc(100% - 136px));
-  margin-top:186px;
-  margin-bottom:164px;
+  margin-top:48px;
+  margin-bottom:24px;
   overflow:visible;
 }
 .hero {
   display:grid;
   grid-template-columns:1.35fr 1fr;
-  gap:28px;
+  gap:26px;
   align-items:end;
   position:relative;
   isolation:isolate;
   margin:0;
-  padding:34px 40px 26px;
-  border-radius:3px;
-  border:0;
+  padding:30px 36px 24px;
+  border-radius:8px;
+  border:1.5px solid rgba(196,151,70,.78);
   background-color:var(--afk-mahogany);
   background-image:url("../assets/library/banner-graciliano.webp");
   background-size:cover;
   background-position:right center;
   color:#f4ead6;
   overflow:hidden;
-  box-shadow:0 10px 28px rgba(24,12,6,.28);
+  box-shadow:0 8px 22px rgba(24,12,6,.22),inset 0 0 0 3px rgba(24,12,6,.42),inset 0 0 0 4px rgba(212,168,92,.26);
 }
 .hero::before {
   content:"";
@@ -143,17 +142,19 @@ body {
 .hero-mold::after {
   content:"";
   position:absolute;
-  top:-57.73%;
-  bottom:-48.98%;
-  left:-6.89%;
-  right:-6.97%;
+  left:50%;
+  top:-41px;
+  width:198px;
+  height:53px;
+  transform:translateX(-50%);
   z-index:3;
   pointer-events:none;
-  background:url("../assets/library/academy-mucha-frame.webp") center/100% 100% no-repeat;
-  filter:drop-shadow(0 4px 10px rgba(24,15,7,.22));
+  opacity:.94;
+  background:url("../assets/library/academy-mucha-crest.webp") center/contain no-repeat;
+  filter:drop-shadow(0 2px 6px rgba(24,15,7,.22));
 }
 html[data-theme="dark"] .hero-mold::after {
-  filter:drop-shadow(0 5px 14px rgba(0,0,0,.52)) brightness(1.06) contrast(1.04);
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.48)) brightness(1.06) contrast(1.04);
 }
 .hero-copy,.hero-note { position:relative; z-index:2; }
 .hero .eyebrow { display:inline-block; padding:3px 11px; border-radius:99px; border:1px solid rgba(230,198,126,.55); background:rgba(24,12,6,.62); color:#f2cf88; letter-spacing:.12em; }
@@ -402,9 +403,9 @@ html[data-theme="dark"] .contrast-col.is-before .contrast-tag { background:rgba(
 /* Responsividade limpa sem conflito de breakpoints */
 @media(max-width:860px) {
   .wrap { width:calc(100% - 36px); }
-  .hero-mold { width:calc(100% - 36px); margin-top:58px; margin-bottom:28px; }
-  .hero { grid-template-columns:1fr; gap:18px; padding:26px 24px; border:1.5px solid #c49746; border-radius:6px; }
-  .hero-mold::after { top:-46px; bottom:auto; left:50%; right:auto; width:min(82%,248px); height:52px; transform:translateX(-50%); background:url("../assets/library/oficina-mucha-crown.webp") center bottom/contain no-repeat; }
+  .hero-mold { margin-top:42px; margin-bottom:22px; }
+  .hero { grid-template-columns:1fr; gap:18px; padding:24px 22px; }
+  .hero-mold::after { width:160px; height:43px; top:-33px; }
   .hero-place { justify-self:stretch; margin:-4px 0 0; }
   .route { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .panel-cols,.contrast-pair,.clean-grid.cols-3 { grid-template-columns:1fr; }

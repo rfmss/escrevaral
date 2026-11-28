@@ -72,50 +72,59 @@
   #esc-academy-overlay .esc-academy-groups::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
   /* =====================================================================
-   * HERO REAL GABINETE: MOLDURA ALPHONSE MUCHA × ETERNOS (LIVRO + PENAS)
+   * HERO REAL GABINETE: DETALHE DISCRETO ALPHONSE MUCHA × ETERNOS (LIVRO + PENAS)
    * ===================================================================== */
   #esc-academy-overlay .esc-academy-hero-wrap {
     position: relative;
   }
-  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame {
-    width: min(84%, 780px);
-    margin: 148px auto 112px;
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-crest {
+    margin: 48px 36px 0;
     overflow: visible;
   }
-  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-hero {
-    min-height: 228px;
-    padding: 34px 40px 16px;
-    border: 0;
-    border-radius: 3px;
-    box-shadow: 0 10px 28px rgba(18, 9, 4, 0.3);
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-crest .esc-academy-hero {
+    min-height: 178px;
+    padding: 24px 32px 14px;
+    gap: 10px;
+    border: 1.5px solid rgba(184, 136, 60, 0.85);
+    border-radius: 7px;
+    box-shadow:
+      0 8px 22px rgba(18, 9, 4, 0.24),
+      inset 0 0 0 3px rgba(24, 12, 6, 0.44),
+      inset 0 0 0 4px rgba(212, 168, 92, 0.28);
   }
-  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-crest {
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-crest .esc-academy-crest {
     display: none;
   }
-  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-ac-layer-hall {
-    opacity: 0.25;
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-crest .esc-academy-hero h2 {
+    font-size: clamp(24px, 2.9vw, 31px);
+    margin-bottom: 5px;
   }
-  #esc-academy-overlay .esc-academy-hero-mucha {
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-crest .esc-academy-hero-kicker {
+    margin-bottom: 6px;
+  }
+  #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-crest .esc-ac-layer-hall {
+    opacity: 0.3;
+  }
+  #esc-academy-overlay .esc-academy-hero-crest-img {
     position: absolute;
-    top: -57.73%;
-    bottom: -48.98%;
-    left: -6.89%;
-    right: -6.97%;
-    width: 113.86%;
-    height: 206.71%;
-    max-width: none;
+    left: 50%;
+    top: -41px;
+    width: 196px;
+    height: auto;
+    transform: translateX(-50%);
     z-index: 5;
     display: block;
     pointer-events: none;
     user-select: none;
     -webkit-user-drag: none;
-    filter: drop-shadow(0 4px 10px rgba(24, 15, 7, 0.22));
+    opacity: 0.94;
+    filter: drop-shadow(0 2px 6px rgba(24, 15, 7, 0.22));
   }
-  #esc-academy-overlay .esc-academy-hero-mucha[hidden] {
+  #esc-academy-overlay .esc-academy-hero-crest-img[hidden] {
     display: none !important;
   }
-  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-hero-mucha {
-    filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.52)) brightness(1.06) contrast(1.04);
+  body[data-theme="escuro"] #esc-academy-overlay .esc-academy-hero-crest-img {
+    filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.48)) brightness(1.06) contrast(1.04);
   }
 
   #esc-academy-overlay .esc-academy-hero {
@@ -864,31 +873,16 @@
 
   @media (max-width: 760px) {
     #esc-academy-overlay.esc-academy-overlay { padding: 8px; }
-    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame {
-      width: calc(100% - 28px);
-      margin: 60px auto 24px;
+    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-crest {
+      margin: 42px 14px 0;
     }
-    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame .esc-academy-hero {
-      padding: 28px 18px 20px;
-      min-height: 196px;
-      border: 1.5px solid #b8883c;
-      border-radius: 6px;
+    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-crest .esc-academy-hero {
+      padding: 24px 16px 16px;
+      min-height: 168px;
     }
-    #esc-academy-overlay .esc-academy-hero-mucha { display: none; }
-    #esc-academy-overlay .esc-academy-hero-wrap.has-mucha-frame::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: -46px;
-      width: min(82%, 248px);
-      height: 54px;
-      transform: translateX(-50%);
-      z-index: 5;
-      pointer-events: none;
-      background-image: var(--esc-of-crown-art, none);
-      background-repeat: no-repeat;
-      background-position: center bottom;
-      background-size: contain;
+    #esc-academy-overlay .esc-academy-hero-crest-img {
+      width: 156px;
+      top: -33px;
     }
     #esc-academy-overlay .esc-academy-hero { padding: 50px 20px 24px; min-height: 200px; }
     #esc-academy-overlay .esc-academy-content { padding: 16px 16px 24px; }

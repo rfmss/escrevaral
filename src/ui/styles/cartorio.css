@@ -151,16 +151,17 @@
   .cart-cert-crest {
     display: flex;
     justify-content: center;
-    margin: -4px auto 10px;
+    margin: -4px auto 6px;
     pointer-events: none;
     user-select: none;
   }
   .cart-cert-crest[hidden] { display: none !important; }
   .cart-cert-crest img {
     display: block;
-    width: min(64%, 264px);
+    width: min(44%, 172px);
     height: auto;
-    filter: drop-shadow(0 3px 8px rgba(18, 30, 22, 0.2));
+    opacity: 0.94;
+    filter: drop-shadow(0 2px 6px rgba(18, 30, 22, 0.18));
     -webkit-user-drag: none;
   }
   body[data-theme="escuro"] .cart-cert-crest img {

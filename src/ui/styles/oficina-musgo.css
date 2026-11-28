@@ -125,7 +125,7 @@
       inset 3px 0 0 rgba(181, 140, 62, 0.16) !important;
   }
 
-  /* Cabeçalho nobre Verde Musgo Real + Filigrana dos Eternos + Coroa Pena-de-Ouro Mucha */
+  /* Cabeçalho nobre Verde Musgo Real + Filigrana dos Eternos + Coroa Pena-de-Ouro discreta */
   #usos-lingua > .sheet-heading,
   #sobre > .sheet-heading,
   #lineage-panel > .sheet-heading,
@@ -133,11 +133,11 @@
   #mesa > .sheet-heading {
     position: relative;
     overflow: visible !important;
-    margin-top: 38px !important;
-    padding: 16px 20px !important;
-    margin-bottom: 16px !important;
+    margin-top: 24px !important;
+    padding: 14px 18px !important;
+    margin-bottom: 14px !important;
     border-radius: 8px !important;
-    border: 1.5px solid #b58c3e !important;
+    border: 1.5px solid rgba(181, 140, 62, 0.82) !important;
     background-color: #1b2d22 !important;
     background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
     background-repeat: no-repeat, repeat !important;
@@ -145,8 +145,8 @@
     background-size: auto 100%, 84px 84px !important;
     color: #f2ebd9 !important;
     box-shadow:
-      0 5px 16px rgba(13, 24, 17, 0.22),
-      inset 0 0 0 3px rgba(232, 198, 120, 0.14) !important;
+      0 4px 12px rgba(13, 24, 17, 0.2),
+      inset 0 0 0 2px rgba(232, 198, 120, 0.12) !important;
   }
   #usos-lingua > .sheet-heading::after,
   #sobre > .sheet-heading::after,
@@ -158,17 +158,18 @@
     content: "";
     position: absolute;
     left: 50%;
-    top: -45px;
-    width: min(68%, 222px);
-    height: 50px;
+    top: -31px;
+    width: min(46%, 148px);
+    height: 34px;
     transform: translateX(-50%);
     z-index: 4;
     pointer-events: none;
+    opacity: 0.9;
     background-image: var(--esc-of-crown-art, none);
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: contain;
-    filter: drop-shadow(0 2px 6px rgba(10, 18, 12, 0.32));
+    filter: drop-shadow(0 1px 4px rgba(10, 18, 12, 0.28));
   }
   body[data-theme="escuro"] #usos-lingua > .sheet-heading::after,
   body[data-theme="escuro"] #sobre > .sheet-heading::after,
@@ -177,9 +178,9 @@
   body[data-theme="escuro"] #mesa > .sheet-heading::after,
   body[data-theme="escuro"] #story-screen .finish-heading::after,
   body[data-theme="escuro"] #chalkboard .chalk-heading::after {
-    filter: drop-shadow(0 3px 9px rgba(0, 0, 0, 0.52)) brightness(1.06) contrast(1.04);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45)) brightness(1.06) contrast(1.04);
   }
-  /* Símbolos literários específicos de cada área da Oficina (§, ❦, ❖, ✦, ⧗, ✧, ✎, ✠) */
+  /* Símbolos literários discretos de cada área da Oficina (§, ❦, ❖, ✦, ⧗, ✧, ✎, ✠) */
   #usos-lingua > .sheet-heading h2,
   #sobre > .sheet-heading h2,
   #lineage-panel > .sheet-heading h2,
@@ -190,7 +191,7 @@
   #chalkboard .chalk-heading h2 {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
+    gap: 8px;
   }
   #usos-lingua > .sheet-heading h2::before,
   #sobre > .sheet-heading h2::before,
@@ -203,16 +204,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
     border-radius: 50%;
-    border: 1px solid rgba(232, 198, 120, 0.62);
-    background: rgba(12, 22, 16, 0.56);
-    color: #f0d38d;
-    font: 700 14px/1 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-    box-shadow: inset 0 0 0 2px rgba(232, 198, 120, 0.14);
+    border: 1px solid rgba(232, 198, 120, 0.48);
+    background: rgba(12, 22, 16, 0.48);
+    color: #e8c678;
+    font: 700 12.5px/1 var(--esc-font-serif, 'Noto Serif', Georgia, serif);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   }
   #usos-lingua > .sheet-heading h2::before { content: "§"; }
   #sobre > .sheet-heading h2::before { content: "❦"; }
@@ -550,17 +550,17 @@
   #chalkboard .chalk-heading {
     position: relative;
     overflow: visible !important;
-    margin-top: 38px !important;
-    padding: 14px 20px !important;
+    margin-top: 24px !important;
+    padding: 13px 18px !important;
     border-radius: 8px !important;
-    border: 1.5px solid #b58c3e !important;
+    border: 1.5px solid rgba(181, 140, 62, 0.82) !important;
     background-color: #1b2d22 !important;
     background-image: var(--esc-of-eternos-banner), var(--esc-of-grain-dark) !important;
     background-repeat: no-repeat, repeat !important;
     background-position: right center, 0 0 !important;
     background-size: auto 100%, 84px 84px !important;
     color: #f2ebd9 !important;
-    box-shadow: 0 4px 14px rgba(12, 24, 17, 0.22);
+    box-shadow: 0 4px 12px rgba(12, 24, 17, 0.2);
   }
   #story-screen .finish-heading small,
   #chalkboard .chalk-heading small {

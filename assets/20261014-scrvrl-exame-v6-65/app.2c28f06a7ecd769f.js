@@ -14706,7 +14706,7 @@
       st.setProperty('--esc-rg-book-art', cssAsset('assets/library/tome-objeto-livro.webp'));
       st.setProperty('--esc-rg-lit-art', cssAsset('assets/library/tome-literatura-mundial.webp'));
       st.setProperty('--esc-of-crown-art', cssAsset('assets/library/oficina-mucha-crown.webp'));
-      st.setProperty('--esc-ac-mucha-frame', cssAsset('assets/library/academy-mucha-frame.webp'));
+      st.setProperty('--esc-ac-mucha-crest', cssAsset('assets/library/academy-mucha-crest.webp'));
       st.setProperty('--esc-cart-crest-art', cssAsset('assets/library/cartorio-mucha-crest.webp'));
     } catch (ignore) {}
   }
@@ -15086,10 +15086,10 @@
       heroWrap.appendChild(hero);
 
       if (!isPortableDoc()) {
-        heroWrap.className += ' has-mucha-frame';
+        heroWrap.className += ' has-mucha-crest';
         var muchaImg = document.createElement('img');
-        muchaImg.className = 'esc-academy-hero-mucha';
-        muchaImg.src = 'assets/library/academy-mucha-frame.webp';
+        muchaImg.className = 'esc-academy-hero-crest-img';
+        muchaImg.src = 'assets/library/academy-mucha-crest.webp';
         muchaImg.alt = '';
         muchaImg.setAttribute('aria-hidden', 'true');
         muchaImg.setAttribute('decoding', 'async');

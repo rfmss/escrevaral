@@ -534,12 +534,12 @@
     display: none !important;
   }
 
-  /* Camada Moldura Alphonse Mucha × Textura Eternos / AFK Journey (meio-termo esguio, foto protagonista) */
+  /* Camada Moldura Alphonse Mucha × Textura Eternos / AFK Journey (vinheta discreta, texto protagonista) */
   .esc-reader-hero.has-mucha-frame {
-    width: min(90%, 656px);
+    width: min(76%, 496px);
     height: auto;
     aspect-ratio: 1162 / 351;
-    margin: 98px auto 58px;
+    margin: 72px auto 30px;
     filter: none;
   }
   .esc-reader-hero.has-mucha-frame .esc-reader-hero-cut {
