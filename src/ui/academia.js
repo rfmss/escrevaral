@@ -15,9 +15,16 @@
     return false;
   }
 
-  /* Aplica as pinturas WebP do Real Gabinete em modo site (sem quebrar o portátil autocontido). */
+  /* Aplica as pinturas WebP do Real Gabinete em modo site (sem quebrar o portátil autocontido).
+   * Resolve contra location.href para que var(--esc-rg-*-art) avaliado dentro de assets/<ver>/styles.css não dê 404. */
   function cssAsset(path) {
-    return ['u', 'rl("', path, '")'].join('');
+    var resolved = path;
+    try {
+      if (typeof URL === 'function' && typeof location !== 'undefined' && location && location.href) {
+        resolved = new URL(path, location.href).href;
+      }
+    } catch (ignore) {}
+    return ['u', 'rl("', resolved, '")'].join('');
   }
   function bindLibraryAtmosphere() {
     try {

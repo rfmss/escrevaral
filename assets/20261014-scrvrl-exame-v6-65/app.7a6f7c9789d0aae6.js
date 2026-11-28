@@ -6805,22 +6805,33 @@
         var meta = document.querySelector('meta[name="distribution-mode"]');
         if (meta && meta.getAttribute('content') === 'portable') { return true; }
       }
-      if (typeof location !== 'undefined' && location.protocol === 'file:') { return true; }
     } catch (ignore) {}
     return false;
   }
 
-  function cssAsset(path) {
-    return ['u', 'rl("', path, '")'].join('');
+  function resolveAssetUrl(path) {
+    try {
+      if (typeof URL === 'function' && typeof location !== 'undefined' && location && location.href) {
+        return new URL(path, location.href).href;
+      }
+    } catch (ignore) {}
+    return path;
   }
+
+  function cssAsset(path) {
+    return ['u', 'rl("', resolveAssetUrl(path), '")'].join('');
+  }
+
+  var HERO_ART_LER = 'assets/library/reader-atelier.webp';
+  var HERO_ART_ENSAIO = 'assets/library/reader-readthru.webp';
 
   function bindReaderAtmosphere() {
     try {
       if (isPortableDoc()) { return; }
       if (typeof document === 'undefined' || !document.documentElement || !document.documentElement.style) { return; }
       var st = document.documentElement.style;
-      st.setProperty('--esc-reader-atelier-art', cssAsset('assets/library/reader-atelier.webp'));
-      st.setProperty('--esc-reader-readthru-art', cssAsset('assets/library/reader-readthru.webp'));
+      st.setProperty('--esc-reader-atelier-art', cssAsset(HERO_ART_LER));
+      st.setProperty('--esc-reader-readthru-art', cssAsset(HERO_ART_ENSAIO));
     } catch (ignore) {}
   }
   bindReaderAtmosphere();
@@ -7384,6 +7395,7 @@
           '<div id="esc-reader-page" class="esc-reader-page">' +
             '<div class="esc-reader-masthead"><span id="esc-reader-date"></span><strong class="esc-reader-brand">ESCREVARAL</strong><span id="esc-reader-project-tag"></span></div>' +
             '<div id="esc-reader-hero" class="esc-reader-hero" aria-hidden="true">' +
+              (isPortableDoc() ? '' : '<img id="esc-reader-hero-img" class="esc-reader-hero-img" src="' + HERO_ART_LER + '" alt="" decoding="async">') +
               '<span id="esc-reader-hero-badge" class="esc-reader-hero-badge" hidden>READ-THRU · ENSAIO</span>' +
             '</div>' +
             '<div class="esc-reader-pills" role="tablist" aria-label="Modos da página de leitura">' +
@@ -7408,6 +7420,12 @@
         root.Escr.ornaments.attachCorners(sec, 'viewport');
       }
       overlayEl = sec;
+
+      var heroImgInit = byId('esc-reader-hero-img');
+      if (heroImgInit) {
+        on(heroImgInit, 'error', function () { heroImgInit.hidden = true; });
+        on(heroImgInit, 'load', function () { heroImgInit.hidden = false; });
+      }
 
       function updateProgress() {
         var vp = byId('esc-reader-viewport');
@@ -7659,6 +7677,14 @@
 
       var heroBadge = byId('esc-reader-hero-badge');
       if (heroBadge) { heroBadge.hidden = activeMode !== 'ensaio'; }
+      var heroImg = byId('esc-reader-hero-img');
+      if (heroImg) {
+        var desiredArt = activeMode === 'ensaio' ? HERO_ART_ENSAIO : HERO_ART_LER;
+        if (heroImg.getAttribute('src') !== desiredArt) {
+          heroImg.hidden = false;
+          heroImg.setAttribute('src', desiredArt);
+        }
+      }
       var tabLer = byId('esc-reader-tab-ler');
       var tabEns = byId('esc-reader-tab-ensaio');
       if (tabLer) { tabLer.setAttribute('aria-selected', activeMode === 'ler' ? 'true' : 'false'); }
@@ -13183,9 +13209,16 @@
     return false;
   }
 
-  /* Aplica as pinturas WebP do Real Gabinete em modo site (sem quebrar o portátil autocontido). */
+  /* Aplica as pinturas WebP do Real Gabinete em modo site (sem quebrar o portátil autocontido).
+   * Resolve contra location.href para que var(--esc-rg-*-art) avaliado dentro de assets/<ver>/styles.css não dê 404. */
   function cssAsset(path) {
-    return ['u', 'rl("', path, '")'].join('');
+    var resolved = path;
+    try {
+      if (typeof URL === 'function' && typeof location !== 'undefined' && location && location.href) {
+        resolved = new URL(path, location.href).href;
+      }
+    } catch (ignore) {}
+    return ['u', 'rl("', resolved, '")'].join('');
   }
   function bindLibraryAtmosphere() {
     try {

@@ -6013,11 +6013,43 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     background-position: center 46%;
     border: 1px solid var(--reader-line);
   }
+  .esc-reader-hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 46%;
+    display: block;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .esc-reader-hero-img[hidden] {
+    display: none !important;
+  }
+  .esc-reader-hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(22, 16, 10, 0.06) 0%, rgba(22, 16, 10, 0.16) 62%, var(--reader-paper) 100%);
+  }
   .esc-reader[data-reader-mode="ensaio"] .esc-reader-hero {
     background-image:
       linear-gradient(180deg, rgba(22, 16, 10, 0.06) 0%, rgba(22, 16, 10, 0.22) 68%, var(--reader-paper) 100%),
       var(--esc-reader-readthru-art, linear-gradient(135deg, #2b241c 0%, #4e4232 55%, #7b694e 100%));
     background-position: center 36%;
+  }
+  .esc-reader[data-reader-mode="ensaio"] .esc-reader-hero-img {
+    object-position: center 36%;
+  }
+  .esc-reader[data-reader-mode="ensaio"] .esc-reader-hero::after {
+    background: linear-gradient(180deg, rgba(22, 16, 10, 0.05) 0%, rgba(22, 16, 10, 0.22) 68%, var(--reader-paper) 100%);
   }
   .esc-reader[data-show-scene="false"] .esc-reader-hero {
     display: none;
@@ -6026,6 +6058,7 @@ body[data-theme="escuro"] #ptbr-dashboard .ptbr-syntax-term[aria-pressed="true"]
     position: absolute;
     left: 16px;
     bottom: 14px;
+    z-index: 2;
     padding: 5px 12px;
     border-radius: 4px;
     background: rgba(20, 16, 12, 0.88);
